@@ -84,10 +84,7 @@ Web interface: `localhost:8080`
 
 Pre-installed plugins:
 
-- [oasis-workflow](https://www.oasisworkflow.com/)
-- [wordpress-importer](https://wordpress.org/plugins/wordpress-importer/)
-- [wp-mail-smtp](https://wordpress.org/plugins/wp-mail-smtp/)
-- [wp-rest-api-v2-menus](https://wordpress.org/plugins/wp-rest-api-v2-menus/)
+- [two-factor](https://wordpress.org/plugins/two-factor/)
 
 ### Installing
 

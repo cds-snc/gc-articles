@@ -1,0 +1,4 @@
+# ignore installed plugins, add wildcard exception for our custom plugins
+/*
+!.gitignore
+!cds-*

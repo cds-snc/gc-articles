@@ -5,7 +5,7 @@
     "deploy-plugin": "./deploy/plugin",
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",
-    "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && npm run build",
+    "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build",
     "import": "node ./import/import.js"
   },
   "devDependencies": {

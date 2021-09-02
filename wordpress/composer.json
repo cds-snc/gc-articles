@@ -1,0 +1,29 @@
+{
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "require": {
+    "wpackagist-plugin/two-factor": "^0.7.0"
+  },
+  "require-dev": {
+    "pestphp/pest": "^1.16",
+    "10up/wp_mock": "0.4.2"
+  },
+  "extra": {
+    "installer-paths": {
+      "wp-content/mu-plugins/{$name}/": [
+        "wpackagist-plugin/two-factor"
+      ]
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "cd wp-content/themes/cds-default && composer install",
+      "cd wp-content/mu-plugins/cds-base && composer install"
+    ],
+    "make-pot": "wp i18n make-pot --domain=cds-snc wp-content/themes/cds-default wp-content/themes/cds-default/languages/cds-snc.pot"
+  }
+}

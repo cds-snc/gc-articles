@@ -1,0 +1,145 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: db
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_ROOT_PASSWORD=${WORDPRESS_DB_PASSWORD}
+      - MYSQL_USER=${WORDPRESS_DB_USER}
+      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
+    volumes:
+      - dbdata:/var/lib/mysql
+    command: '--default-authentication-plugin=mysql_native_password'
+    networks:
+      - app-network
+    cap_add:
+      - SYS_NICE  # CAP_SYS_NICE
+
+  wordpress:
+    depends_on:
+      - db
+    build:
+      dockerfile: Dockerfile
+      context: ./wordpress/docker
+    container_name: wordpress
+    restart: always
+    ports:
+      - 80:80
+    env_file: .env
+    environment:
+      WORDPRESS_CONFIG_EXTRA: |
+        /* Multisite */
+        define('WP_ALLOW_MULTISITE', true );
+        define('MULTISITE', true);
+        define('SUBDOMAIN_INSTALL', false);
+        define('DOMAIN_CURRENT_SITE', 'localhost');
+        define('PATH_CURRENT_SITE', '/');
+        define('SITE_ID_CURRENT_SITE', 1);
+        define('BLOG_ID_CURRENT_SITE', 1);
+    volumes:
+      - wordpress:/var/www/html
+      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./wordpress/.htaccess-multisite:/var/www/html/.htaccess
+      - ./wordpress/docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./wordpress/docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+      - ./wordpress/docker/php/conf.d/upload_max_filesize.ini:/usr/local/etc/php/conf.d/uplaod_max_filesize.ini
+    networks:
+      - app-network
+
+  mailhog:
+    image: mailhog/mailhog
+    ports: 
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
+    networks:
+      - app-network
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - app-network
+
+  composer:
+    restart: 'no'
+    image: composer/composer:latest
+    command: install
+    volumes:
+      - ./wordpress:/app
+
+  wp-install:
+    depends_on:
+      - db
+      - wordpress
+    image: wordpress:cli-php8.0
+    env_file: .env
+    environment:
+      WORDPRESS_CONFIG_EXTRA: |
+        /* Multisite */
+        define('WP_ALLOW_MULTISITE', true );
+        define('MULTISITE', true);
+        define('SUBDOMAIN_INSTALL', false);
+        define('DOMAIN_CURRENT_SITE', 'localhost');
+        define('PATH_CURRENT_SITE', '/');
+        define('SITE_ID_CURRENT_SITE', 1);
+        define('BLOG_ID_CURRENT_SITE', 1);
+    command: >
+      /bin/bash -c '
+      /wait-for-it.sh db:3306;
+      wp core multisite-install --path="/var/www/html" --url="localhost" --title="CDS Wordpress Base" --admin_user=${ADMIN_USER} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL};
+      wp option update permalink_structure "/%postname%/";
+      wp theme enable cds-default --activate;
+      '
+    volumes:
+      - wordpress:/var/www/html
+      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./wait-for-it.sh:/wait-for-it.sh
+    networks:
+      - app-network
+
+  cli:
+    container_name: cli
+    depends_on:
+      - db
+      - wordpress
+    build: 
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    env_file: .env
+    environment:
+      WORDPRESS_CONFIG_EXTRA: |
+        /* Multisite */
+        define('WP_ALLOW_MULTISITE', true );
+        define('MULTISITE', true);
+        define('SUBDOMAIN_INSTALL', false);
+        define('DOMAIN_CURRENT_SITE', 'localhost');
+        define('PATH_CURRENT_SITE', '/');
+        define('SITE_ID_CURRENT_SITE', 1);
+        define('BLOG_ID_CURRENT_SITE', 1);
+    volumes:
+      - wordpress:/var/www/html
+      - ./wordpress/wp-content:/var/www/html/wp-content
+      - ./:/home/default/project
+      - ~/.ssh:/home/default/.ssh
+      - ~/.gitconfig:/home/default/.gitconfig
+    restart: unless-stopped
+    networks:
+      - app-network
+
+volumes:
+  wordpress:
+  dbdata:
+
+networks:
+  app-network:
+    driver: bridge

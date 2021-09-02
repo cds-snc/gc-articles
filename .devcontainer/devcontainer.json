@@ -1,0 +1,22 @@
+{
+	"name": "WordPress",
+
+	"dockerComposeFile": "../docker-compose.yml",
+	"service": "cli",
+
+	// Uncomment the appropriate line depending on plugin vs theme development.
+	// This should match the active volume mount in docker-compose.yml
+	"workspaceFolder": "/home/default/project",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"php.suggest.basic": false // avoids duplicate autocomplete
+	},
+
+	// Add the IDs of any extensions you want installed.
+	"extensions": [
+		"felixfbecker.php-pack",
+		"wordpresstoolbox.wordpress-toolbox",
+		"johnbillion.vscode-wordpress-hooks"
+	]
+}

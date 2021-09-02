@@ -1,0 +1,42 @@
+{
+  "name": "cds-base",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CDS-SNC base plugin",
+  "author": "Tim Arney",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "WordPress",
+    "block"
+  ],
+  "homepage": "https://github.com/cds-snc/platform-mvp",
+  "repository": "git+https://github.com/cds-snc/platform-mvp.git",
+  "bugs": {
+    "url": "https://github.com/cds-snc/platform-mvp/issues"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "@wordpress/block-editor": "^7.0.0",
+    "@wordpress/blocks": "^11.0.0",
+    "@wordpress/i18n": "^4.2.1",
+    "@wordpress/components": "^15.0.0"
+  },
+  "devDependencies": {
+    "@wordpress/env": "^4.1.0",
+    "@wordpress/scripts": "^9.0.0",
+    "cypress": "^8.1.0",
+    "@cypress/snapshot": "^2.1.7",
+    "cypress-wp-test-utils": "^0.3.0",
+    "cypress-xpath": "^1.6.2"
+  },
+  "scripts": {
+    "build": "wp-scripts build src/index.js",
+    "wp-env:init": "wp-env start",
+    "wp-env": "wp-env",
+    "update-translations": "scripts/translations/extract-messages.sh && scripts/translations/update-translation-files.sh && scripts/translations/compile-translation-files.sh",
+    "packages-update": "wp-scripts packages-update",
+    "start": "wp-scripts start",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open"
+  }
+}

@@ -1,0 +1,13 @@
+/* hide on profile page */
+
+/*
+ Note: nickname is a WP required field so it is not fully removed just hidden
+ */
+.hidden,
+.user-nickname-wrap,
+.user-rich-editing-wrap,
+.user-syntax-highlighting-wrap,
+.user-comment-shortcuts-wrap,
+.user-admin-bar-front-wrap {
+    display: none;
+}

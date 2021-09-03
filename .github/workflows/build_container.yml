@@ -1,0 +1,21 @@
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build container
+        working-directory: ./
+        run: |
+          docker build \
+          --build-arg git_sha=$GITHUB_SHA \
+          -t platform-mvp/ircc:$GITHUB_SHA \
+          -t platform-mvp/ircc:latest \
+          -f ./wordpress/docker/production.Dockerfile .

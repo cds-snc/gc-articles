@@ -122,9 +122,7 @@ class ProfileCleaner
         *--------------------------------------------*/
         $rows = $crawler->filter('.two-factor-methods-table tbody tr')->reduce(
             static function ($node, $j) {
-                if (ProfileCleaner::contains($node->html(), 'Email')) {
-                    return true;
-                }
+                
 
                 if (ProfileCleaner::contains($node->html(), 'Backup Verification Codes')) {
                     return true;
@@ -154,3 +152,11 @@ if (is_admin()) {
     remove_action('personal_options', 'wpml_show_user_options');
     remove_action('personal_options_update', ['SitePress','save_user_options']);
 }
+
+function cds_login_redirect( $redirect_to, $request, $user ) {
+    $redirect_to =  admin_url()."admin.php?page=cds_notify_send";
+    return $redirect_to;
+}
+
+add_filter( 'login_redirect', 'cds_login_redirect', 10, 3 );
+//

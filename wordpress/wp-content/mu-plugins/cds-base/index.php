@@ -28,26 +28,35 @@ require_once __DIR__ . '/subscriptions/index.php';
 
 require_once __DIR__ . '/email/NotifyTemplateSender.php';
 
+if (is_multisite()) {
+    define('MU_PLUGIN_URL', network_site_url('/wp-content/mu-plugins', 'relative'));
+} else {
+    define('MU_PLUGIN_URL', content_url('/mu-plugins'));
+}
+
 function cds_plugin_images_url($filename)
 {
     return plugin_dir_url(__FILE__) . 'images/' . $filename;
 }
 
+
 function cds_base_style_admin(): void
 {
+
     if (is_super_admin()) {
         return;
     }
+
     // add stylesheet to the wp admin
     wp_enqueue_style(
         'cds-base-style',
         plugin_dir_url(__FILE__) . 'css/admin.css',
         [],
-        1,
+        '1.0.4',
     );
 }
 
-add_action('admin_head', 'cds_base_style_admin');
+add_action('admin_enqueue_scripts', 'cds_base_style_admin');
 
 function cds_base_js_admin(): void
 {
@@ -59,7 +68,7 @@ function cds_base_js_admin(): void
         'blog-customizer',
         plugins_url('js/admin.js', __FILE__),
         ['jquery'],
-        '1.0.0',
+        '1.0.3',
         true,
     );
 }

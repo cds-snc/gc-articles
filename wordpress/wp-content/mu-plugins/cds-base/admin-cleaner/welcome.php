@@ -9,7 +9,7 @@ function cds_dashboard_widget(): void
 
 function cds_text_handler(): void
 {
-    _e('<a href=/wp-admin/post-new.php#">Create Article</a>', 'cds');
+    _e('<a href=/wp-admin/admin.php?page=cds_notify_send>Send Template</a>', 'cds');
 }
 
 add_action('wp_dashboard_setup', 'cds_dashboard_widget');

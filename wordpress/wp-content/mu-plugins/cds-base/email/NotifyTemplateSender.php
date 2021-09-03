@@ -22,12 +22,14 @@ class NotifyTemplateSender
 
     public static function add_menu(): void
     {
+        // add_menu_page( 'Info', 'Info', 'manage_options', 'LINK', '', 'dashicons-admin-page', 10 );
         add_menu_page(
-            __('Send Template'),
-            __('Send Notify Template'),
-            'activate_plugins',
+            __('Send Notify Template', "cds-snc"),
+            __('Notify', "cds-snc"),
+            'level_0',
             self::$admin_page,
             ['NotifyTemplateSender', 'render_form'],
+            'dashicons-email'
         );
 
         NotifySettings::add_menu();
@@ -36,27 +38,27 @@ class NotifyTemplateSender
     public static function notice_success(): void
     {
         ?>
-        <div class="notice notice-success is-dismissible">
-            <p><?php _e('Sent', 'cds-snc'); ?></p>
-        </div>
+      <div class="notice notice-success is-dismissible">
+        <p><?php _e('Sent', 'cds-snc'); ?></p>
+      </div>
         <?php
     }
 
     public static function notice_data_fail(): void
     {
         ?>
-        <div class="notice notice-error is-dismissible">
-            <p><?php _e('Template ID is required', 'cds-snc'); ?></p>
-        </div>
+      <div class="notice notice-error is-dismissible">
+        <p><?php _e('Template ID is required', 'cds-snc'); ?></p>
+      </div>
         <?php
     }
 
     public static function notice_fail(): void
     {
         ?>
-        <div class="notice notice-error is-dismissible">
-            <p><?php _e('Failed', 'cds-snc'); ?></p>
-        </div>
+      <div class="notice notice-error is-dismissible">
+        <p><?php _e('Failed', 'cds-snc'); ?></p>
+      </div>
         <?php
     }
 
@@ -90,74 +92,72 @@ class NotifyTemplateSender
         }
         ?>
 
-        <div class="wrap">
-            <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-            <form id="email-sender" method="post" action="<?php echo $action; ?>">
-                <input type="hidden" name="page" value="<?php echo $_REQUEST[
-                    'page'
-                ]; ?>"/>
-                <table class="form-table" role="presentation">
-                    <tbody>
-                    <!-- Template ID -->
-                    <tr>
-                        <th scope="row"><label for="template_id"><?php _e(
-                            'Template ID',
-                        ); ?></label></th>
-                        <td><input type="text" class="regular-text" name="template_id" value=""/></td>
-                    </tr>
-                    <!-- List ID -->
-                    <tr>
-                        <th scope="row"><label for="list_id"><?php _e(
-                            'List ID',
-                        ); ?></label></th>
-                        <td>
-                            <select name="list_id" id="list_id">
-                                <?php try {
-                                    $data = get_option('list_values');
-                                    $data = preg_replace(
-                                        '/[ \t]+/',
-                                        ' ',
-                                        preg_replace('/[\r\n]+/', "\n", $data),
-                                    );
-                                    $data = json_decode($data, true);
+      <div class="wrap">
+        <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+        <form id="email-sender" method="post" action="<?php echo $action; ?>">
+          <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+          <table class="form-table" role="presentation">
+            <tbody>
+            <!-- Template ID -->
+            <tr>
+              <th scope="row"><label for="template_id"><?php _e(
+                          'Template ID',
+                      ); ?></label></th>
+              <td><input type="text" class="regular-text" name="template_id" value="" /></td>
+            </tr>
+            <!-- List ID -->
+            <tr>
+              <th scope="row"><label for="list_id"><?php _e(
+                          'List ID',
+                      ); ?></label></th>
+              <td>
+                <select name="list_id" id="list_id">
+                    <?php try {
+                        $data = get_option('list_values');
+                        $data = preg_replace(
+                            '/[ \t]+/',
+                            ' ',
+                            preg_replace('/[\r\n]+/', "\n", $data),
+                        );
+                        $data = json_decode($data, true);
 
-                                    if (empty($data)) {
-                                        throw new ErrorException(
-                                            'unable to parse data',
-                                        );
-                                    }
+                        if (empty($data)) {
+                            throw new ErrorException(
+                                'unable to parse data',
+                            );
+                        }
 
-                                    echo '<option value="">' .
-                                        __('Select a list') .
-                                        '</option>';
+                        echo '<option value="">' .
+                            __('Select a list') .
+                            '</option>';
 
-                                    foreach ($data as &$value) {
-                                        echo '<option value="' .
-                                            $value['id'] .
-                                            '-' .
-                                            $value['type'] .
-                                            '">' .
-                                            $value['label'] .
-                                            '</option>';
-                                    }
-                                } catch (Exception $e) {
-                                    echo '<option value="">' .
-                                        __('No lists found', 'cds-snc') .
-                                        '</option>';
-                                } ?>
+                        foreach ($data as &$value) {
+                            echo '<option value="' .
+                                $value['id'] .
+                                '-' .
+                                $value['type'] .
+                                '">' .
+                                $value['label'] .
+                                '</option>';
+                        }
+                    } catch (Exception $e) {
+                        echo '<option value="">' .
+                            __('No lists found', 'cds-snc') .
+                            '</option>';
+                    } ?>
 
-                            </select>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <!-- Submit -->
-                <?php
-                wp_nonce_field('acme-settings-save', 'acme-custom-message');
-                submit_button('Send');?>
-            </form>
-            </table>
-        </div>
+                </select>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- Submit -->
+            <?php
+            wp_nonce_field('acme-settings-save', 'acme-custom-message');
+            submit_button('Send'); ?>
+        </form>
+        </table>
+      </div>
         <?php
     }
 

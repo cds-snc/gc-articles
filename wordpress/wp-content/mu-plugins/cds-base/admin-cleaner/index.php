@@ -5,10 +5,10 @@ declare(strict_types=1);
 require_once __DIR__ . '/util.php';
 require_once __DIR__ . '/wp-mail-smtp.php';
 require_once __DIR__ . '/clean-login.php';
-require_once __DIR__ . '/post-rename.php';
 require_once __DIR__ . '/notices.php';
 require_once __DIR__ . '/profile.php';
 require_once __DIR__ . '/welcome.php';
+require_once __DIR__ . '/roles.php';
 
 /*--------------------------------------------*
  * Menu Pages
@@ -104,6 +104,14 @@ function remove_from_admin_bar($wp_admin_bar): void
         'id' => 'my-account',
         'title' => $newtext,
     ]);
+
+    $wp_admin_bar->add_node([
+        'id' => 'cds-home',
+        'title'  => '<div class="ab-item"><span class="ab-icon"></span>'.__( 'Canadian Digital Service', 'cds-snc' ).'</div>',
+        'href' => "http://google.ca",
+    ]);
+
+    $wp_admin_bar->remove_menu('my-sites');
 }
 
 add_action('admin_bar_menu', 'remove_from_admin_bar', 2147483647);
@@ -135,3 +143,4 @@ function cds_remove_help_tab(): void
 }
 
 add_action('admin_head', 'cds_remove_help_tab');
+

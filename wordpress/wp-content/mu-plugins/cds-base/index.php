@@ -25,6 +25,7 @@ if (!defined('BASE_PLUGIN_NAME')) {
 
 require_once __DIR__ . '/admin-cleaner/index.php';
 require_once __DIR__ . '/subscriptions/index.php';
+require_once __DIR__ . '/login/actions.php';
 
 require_once __DIR__ . '/email/NotifyTemplateSender.php';
 

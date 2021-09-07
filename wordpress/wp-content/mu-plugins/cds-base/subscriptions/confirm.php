@@ -3,7 +3,7 @@
 use NotifyMailer\CDS\NotifyMailer;
 use Ramsey\Uuid\Uuid;
 
-require_once __DIR__ . '/../email/NotifyClient.php';
+require_once __DIR__ . '/../notify/NotifyClient.php';
 
 function cds_subscriptions_send_confirmation_email($data): WP_REST_Response
 {

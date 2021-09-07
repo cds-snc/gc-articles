@@ -3,13 +3,14 @@
 declare(strict_types=1);
 
 use GuzzleHttp\Client;
-use NotifyClient\CDS\NotifyClient;
 
 require_once __DIR__ . '/NotifySettings.php';
 
 add_action('admin_menu', ['NotifyTemplateSender', 'add_menu']);
 
 add_action('rest_api_init', ['NotifyTemplateSender', 'setup_endpoints']);
+
+const MINUTE_IN_SECONDS = 60;
 
 class NotifyTemplateSender
 {
@@ -22,7 +23,6 @@ class NotifyTemplateSender
 
     public static function add_menu(): void
     {
-        // add_menu_page( 'Info', 'Info', 'manage_options', 'LINK', '', 'dashicons-admin-page', 10 );
         add_menu_page(
             __('Send Notify Template', "cds-snc"),
             __('Notify', "cds-snc"),
@@ -44,7 +44,7 @@ class NotifyTemplateSender
         <?php
     }
 
-    public static function notice_data_fail(): void
+    public static function notice_template_fail(): void
     {
         ?>
       <div class="notice notice-error is-dismissible">
@@ -53,11 +53,20 @@ class NotifyTemplateSender
         <?php
     }
 
+    public static function notice_list_id_fail(): void
+    {
+        ?>
+      <div class="notice notice-error is-dismissible">
+        <p><?php _e('List ID failed to parse', 'cds-snc'); ?></p>
+      </div>
+        <?php
+    }
+
     public static function notice_fail(): void
     {
         ?>
       <div class="notice notice-error is-dismissible">
-        <p><?php _e('Failed', 'cds-snc'); ?></p>
+        <p><?php _e('Failed to send', 'cds-snc'); ?></p>
       </div>
         <?php
     }
@@ -78,7 +87,14 @@ class NotifyTemplateSender
                     // no template ID
                     add_action('admin_notices', [
                         self::class,
-                        'notice_data_fail',
+                        'notice_template_fail',
+                    ]);
+                    break;
+                case 418:
+                    // invalid list Ids
+                    add_action('admin_notices', [
+                        self::class,
+                        'notice_list_id_fail',
                     ]);
                     break;
                 case 500:
@@ -162,7 +178,7 @@ class NotifyTemplateSender
 
     public static function process_send($data): void
     {
-        $base_redirect =
+       $base_redirect =
             get_admin_url() . 'admin.php?page=' . self::$admin_page;
 
         try {
@@ -173,8 +189,13 @@ class NotifyTemplateSender
                 exit();
             }
 
-            // @todo - validate data
             $parts = explode('-', $data['list_id']);
+
+            if (!is_array($parts) || count($parts) !== 2) {
+                wp_redirect($base_redirect . '&status=418');
+                exit();
+            }
+
             $list_id = $parts[0];
             $list_type = $parts[1];
 
@@ -188,84 +209,25 @@ class NotifyTemplateSender
                         $list_type,
                         'WP Bulk send',
                     );
-                    break;
-                case 'wp_forms':
-                    $result = self::send_internal(
-                        $template_id,
-                        $list_id,
-                        $list_type,
-                        'WP Bulk send',
-                    );
+
             }
 
             // @todo ensure the status we're retuning is correct
             wp_redirect($base_redirect . '&status=200');
             exit();
         } catch (Exception $e) {
+            //
+            $datetime = new DateTime();
+
+            $datetime->setTimezone(new DateTimeZone('UTC'));
+
+            $logEntry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+
+            // log to default error_log destination
+            error_log($logEntry);
+
             wp_redirect($base_redirect . '&status=500');
             exit();
-        }
-    }
-
-    /**
-     * Get subscribers by $formId
-     * @param $formId
-     * @return array
-     */
-    public static function get_subscribers($formId): array
-    {
-        global $wpdb;
-
-        // get all "confirmed" entries (subscriptions) for this form_id
-        $entries = $wpdb->get_results(
-            $wpdb->prepare(
-                "
-                SELECT fields, subscription_id 
-                FROM {$wpdb->prefix}wpforms_entries
-                WHERE form_id = %s
-                AND confirmed = 1
-            ",
-                $formId,
-            ),
-        );
-
-        $subscribers = [];
-
-        foreach ($entries as $entry) {
-            $aEntry = json_decode($entry->fields, true);
-
-            foreach ($aEntry as $item) {
-                if ($item['type'] == 'email') {
-                    array_push($subscribers, [
-                        'email' => $item['value'],
-                        'subscription_id' => $entry->subscription_id,
-                    ]);
-                }
-            }
-        }
-
-        return array_unique($subscribers, SORT_REGULAR);
-    }
-
-    public static function send_internal($templateId, $formId, $type): void
-    {
-        $notifyMailer = new NotifyClient();
-        $subscribers = self::get_subscribers($formId);
-
-        foreach ($subscribers as $subscriber) {
-            if ($type == 'email') {
-                // @TODO: get this from subscriptions/unsubscribe
-                $base_url = get_site_url();
-                $unsubscribe_link = "{$base_url}/wp-json/lists/unsubscribe/{$subscriber['subscription_id']}";
-
-                $notifyMailer->sendMail($subscriber['email'], $templateId, [
-                    'unsubscribe_link' => $unsubscribe_link,
-                ]);
-            }
-            // @TODO: send sms
-            if ($type == 'sms') {
-                // send sms
-            }
         }
     }
 

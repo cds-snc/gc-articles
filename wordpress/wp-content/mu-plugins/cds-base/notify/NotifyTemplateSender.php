@@ -10,8 +10,6 @@ add_action('admin_menu', ['NotifyTemplateSender', 'add_menu']);
 
 add_action('rest_api_init', ['NotifyTemplateSender', 'setup_endpoints']);
 
-const MINUTE_IN_SECONDS = 60;
-
 class NotifyTemplateSender
 {
     public static $admin_page = 'cds_notify_send';
@@ -64,9 +62,12 @@ class NotifyTemplateSender
 
     public static function notice_fail(): void
     {
+        $message = get_transient('api_response');
+        delete_transient('api_response');
         ?>
       <div class="notice notice-error is-dismissible">
         <p><?php _e('Failed to send', 'cds-snc'); ?></p>
+        <p><?php _e($message, 'cds-snc'); ?></p>
       </div>
         <?php
     }
@@ -217,14 +218,23 @@ class NotifyTemplateSender
             exit();
         } catch (Exception $e) {
             //
-            $datetime = new DateTime();
 
-            $datetime->setTimezone(new DateTimeZone('UTC'));
+            if ($e->hasResponse()) {
+                $exception = (string) $e->getResponse()->getBody();
+                $exceptions = json_decode($exception);
 
-            $logEntry = $datetime->format('Y/m/d H:i:s') . ' ' . $e;
+                $errors = "";
 
-            // log to default error_log destination
-            error_log($logEntry);
+                foreach($exceptions->detail as $error) {
+                  $errors = $errors . $error->loc[1] . ': ' . $error->msg . '<br>';
+                }
+
+                set_transient('api_response', $errors);
+
+                error_log($exception, $e->getCode());
+            } else {
+                error_log($e->getMessage(), 503);
+            }
 
             wp_redirect($base_redirect . '&status=500');
             exit();

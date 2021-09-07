@@ -21,6 +21,7 @@ FROM wordpress:5.8.0-php8.0-apache
 WORKDIR /var/www/html
 
 COPY --from=buildjs /app/wordpress/wp-content ./wp-content
+COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
 COPY ./wordpress/composer.json ./
 COPY ./wordpress/composer.lock ./

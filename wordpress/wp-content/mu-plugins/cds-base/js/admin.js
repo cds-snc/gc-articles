@@ -1,9 +1,15 @@
 (function($) {
+  $('#name + table').remove();
 
-    // $ Works! You can test it with next line if you like
-    // console.log($);
+  const handleSubmit = async function(e) {
+    e.preventDefault();
+    let confirmed = await CDS.confirmSend();
+    if (confirmed) {
+      $("#email_sender").off('submit', handleSubmit);
+      $('#cds-send-notify-template').trigger("click");
+      $('#cds-send-notify-template').hide();
+    }
+  };
 
-    // $("h2:contains('Personal Options')").remove();
-    $("#name + table").remove();
-
-})( jQuery );
+  $('#email_sender').on('submit', handleSubmit);
+})(jQuery);

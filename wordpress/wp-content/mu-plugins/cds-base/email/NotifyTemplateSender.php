@@ -94,7 +94,7 @@ class NotifyTemplateSender
 
       <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-        <form id="email-sender" method="post" action="<?php echo $action; ?>">
+        <form id="email_sender" name="email_sender" method="post" action="<?php echo $action; ?>">
           <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
           <table class="form-table" role="presentation">
             <tbody>
@@ -153,8 +153,7 @@ class NotifyTemplateSender
           </table>
           <!-- Submit -->
             <?php
-            wp_nonce_field('acme-settings-save', 'acme-custom-message');
-            submit_button('Send'); ?>
+            submit_button(__('Send template to list', 'cds-snc'), "primary", "submit", true, ['id' => "cds-send-notify-template"]); ?>
         </form>
         </table>
       </div>

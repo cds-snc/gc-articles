@@ -65,9 +65,9 @@ function cds_base_js_admin(): void
     }
     // add stylesheet to the wp admin
     wp_enqueue_script(
-        'blog-customizer',
+        'cds-admin-js',
         plugins_url('js/admin.js', __FILE__),
-        ['jquery'],
+        ['jquery', 'cds-snc-blocks'],
         '1.0.3',
         true,
     );
@@ -97,7 +97,7 @@ function cds_register_block(): void
     $asset_file = include plugin_dir_path(__FILE__) . 'build/index.asset.php';
 
     wp_register_script(
-        'cds-snc',
+        'cds-snc-blocks',
         plugins_url('build/index.js', __FILE__),
         $asset_file['dependencies'],
         $asset_file['version'],

@@ -17,7 +17,7 @@ class NotifyClient
 
     private function setupClient(): \Alphagov\Notifications\Client
     {
-        $NOTIFY_API_KEY = $_ENV['NOTIFY_API_KEY'];
+        $NOTIFY_API_KEY = getenv('NOTIFY_API_KEY');
         return new \Alphagov\Notifications\Client([
             'baseUrl' => "https://api.notification.canada.ca",
             'apiKey' => $NOTIFY_API_KEY,

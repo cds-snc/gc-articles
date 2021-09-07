@@ -234,7 +234,7 @@ class NotifyTemplateSender
     public static function send($template_id, $list_id, $template_type, $ref)
     {
         $client = new Client([]);
-        $endpoint = $_ENV['LIST_MANAGER_ENDPOINT'];
+        $endpoint = getenv('LIST_MANAGER_ENDPOINT');
 
         return $client->request('POST', $endpoint . '/send', [
             'json' => [

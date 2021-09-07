@@ -108,7 +108,7 @@ function remove_from_admin_bar($wp_admin_bar): void
     $wp_admin_bar->add_node([
         'id' => 'cds-home',
         'title'  => '<div class="ab-item"><span class="ab-icon"></span>'.__( 'Canadian Digital Service', 'cds-snc' ).'</div>',
-        'href' => "http://google.ca",
+        'href' => "https://digital.canada.ca",
     ]);
 
     $wp_admin_bar->remove_menu('my-sites');

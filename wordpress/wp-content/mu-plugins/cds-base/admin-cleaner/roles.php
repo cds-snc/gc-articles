@@ -145,16 +145,15 @@ function cds_reset_roles($role)
         $default_roles['display_name'][$role],
         $default_roles[$role],
     );
-} //
+}
 
-remove_role('administrator');
-remove_role('editor');
-remove_role('author');
-remove_role('contributor');
-remove_role('subscriber');
-cds_reset_roles('ircc');
-
-
-// myblogs_allblogs_options
-echo apply_filters( 'myblogs_options', '', $user_blog );
-
+function cds_base_activate()
+{
+    remove_role('administrator');
+    remove_role('editor');
+    remove_role('author');
+    remove_role('contributor');
+    remove_role('subscriber');
+    cds_reset_roles('ircc');
+}
+register_activation_hook(__FILE__, 'cds_base_activate');

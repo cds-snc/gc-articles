@@ -110,6 +110,12 @@ dist
 
 # Terraform
 .terragrunt-cache
+.terraform
+.terraform.lock.hcl
+*.tfstate
+
+# Python
+__pycache__/
 
 *.pem
 

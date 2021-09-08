@@ -19,21 +19,21 @@ function cds_prev_next_links(): void
     $next_id = $next_post->ID;
     $next_permalink = get_permalink($next_id); ?>
 
-    <nav class="mrgn-tp-xl">
-        <h2 class="wb-inv"> <?php _e('Document navigation', 'cds-snc'); ?> </h2>
-        <ul class="pager">
-            <li class="next">
-                <a id="<?php echo $prev_id ?>" href="<?php echo $next_permalink; ?>"><?php _e(
-        'Next blog post',
-        'cds-snc'
-    ); ?> &nbsp;»</a>
-            </li>
-            <li class="previous">
-                <a id="<?php echo $next_id ?>" href="<?php echo $prev_permalink; ?>"
-                   rel="prev">«&nbsp;<?php _e('Previous blog post', 'cds-snc'); ?></a>
-            </li>
-        </ul>
-    </nav>
+  <nav class="mrgn-tp-xl">
+    <h2 class="wb-inv"> <?php _e('Document navigation', 'cds-snc'); ?> </h2>
+    <ul class="pager">
+      <li class="next">
+        <a id="<?php echo $prev_id ?>" href="<?php echo $next_permalink; ?>"><?php _e(
+                'Next blog post',
+                'cds-snc'
+            ); ?> &nbsp;»</a>
+      </li>
+      <li class="previous">
+        <a id="<?php echo $next_id ?>" href="<?php echo $prev_permalink; ?>"
+           rel="prev">«&nbsp;<?php _e('Previous blog post', 'cds-snc'); ?></a>
+      </li>
+    </ul>
+  </nav>
 
     <?php
 }
@@ -67,7 +67,7 @@ function cds_the_posts_navigation($args = []): void
     // Don't print empty markup if there's only one page.
     if ($GLOBALS['wp_query']->max_num_pages > 1) {
         // Make sure the nav element has an aria-label attribute: fallback to the screen reader text.
-        if (! empty($args['screen_reader_text']) && empty($args['aria_label'])) {
+        if (!empty($args['screen_reader_text']) && empty($args['aria_label'])) {
             $args['aria_label'] = $args['screen_reader_text'];
         }
 
@@ -101,9 +101,36 @@ function cds_the_posts_navigation($args = []): void
 
 /* https://wet-boew.github.io/GCWeb/sites/breadcrumbs/breadcrumbs-en.html */
 
+function custom_field_breadcrumb(): string
+{
+    global $wp_query;
+    $list_items = get_post_meta($wp_query->post->ID, 'breadcrumb', true);
+    wp_reset_query();
+
+    if (!$list_items) {
+        return "";
+    }
+
+    $output = '<nav id="wb-bc" property="breadcrumb">';
+    $output .= '<div class="container">';
+    $output .= '<h2><?php _e("You are here:"); ?></h2>';
+    $output .= '<ol class="breadcrumb">';
+    $output .= $list_items;
+    $output .= '</ol>';
+    $output .= '</div>';
+    $output .= '</nav>';
+
+    return $output;
+}
+
 function cds_breadcrumb($sep = ''): string
 {
-    if (! function_exists('yoast_breadcrumb')) {
+    $breadcrumb = custom_field_breadcrumb();
+    if ($breadcrumb !== "") {
+        return $breadcrumb;
+    }
+
+    if (!function_exists('yoast_breadcrumb')) {
         return '';
     }
 
@@ -164,7 +191,7 @@ function language_switcher()
         if (1 < count($languages)) {
             foreach ($languages as $language) {
                 $text = get_language_text($language['translated_name']);
-                if (! $language['active']) {
+                if (!$language['active']) {
                     $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . $language['url'] . '">';
                     $link .= '<span class="hidden-xs">' . $text['full'] . '</span>';
                     $link .= '<abbr title="' . $text['full'] . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';

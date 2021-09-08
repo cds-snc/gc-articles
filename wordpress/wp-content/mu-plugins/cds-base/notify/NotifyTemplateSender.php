@@ -243,7 +243,12 @@ class NotifyTemplateSender
 
     public static function send($template_id, $list_id, $template_type, $ref)
     {
-        $client = new Client([]);
+        $client = new Client([
+          'headers' => [
+            "Authorization" => getenv('LIST_MANAGER_API_KEY')
+          ]
+        ]);
+
         $endpoint = getenv('LIST_MANAGER_ENDPOINT');
 
         return $client->request('POST', $endpoint . '/send', [

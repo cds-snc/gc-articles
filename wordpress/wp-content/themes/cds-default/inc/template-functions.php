@@ -181,7 +181,34 @@ function get_active_language(): string
         }
     }
 
-    return 'en';
+    try {
+        $locale = get_locale();
+        $pieces = explode("_", $locale);
+        return $pieces[0];
+    } catch (Exception $e) {
+        return "en";
+    }
+}
+
+function language_switcher_output($languages)
+{
+    $langs = [];
+
+    foreach ($languages as $language) {
+        $text = get_language_text($language['translated_name']);
+        if (!$language['active']) {
+            $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . $language['url'] . '">';
+            $link .= '<span class="hidden-xs">' . $text['full'] . '</span>';
+            $link .= '<abbr title="' . $text['full'] . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';
+            $link .= $text['abbr'];
+            $link .= '</abbr>';
+            $link .= '</a>';
+
+            $langs[] = $link;
+        }
+    }
+
+    return $langs;
 }
 
 function language_switcher()
@@ -189,19 +216,7 @@ function language_switcher()
     if (function_exists('icl_get_languages')) {
         $languages = apply_filters('wpml_active_languages', null, 'orderby=id&order=desc');
         if (1 < count($languages)) {
-            foreach ($languages as $language) {
-                $text = get_language_text($language['translated_name']);
-                if (!$language['active']) {
-                    $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . $language['url'] . '">';
-                    $link .= '<span class="hidden-xs">' . $text['full'] . '</span>';
-                    $link .= '<abbr title="' . $text['full'] . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';
-                    $link .= $text['abbr'];
-                    $link .= '</abbr>';
-                    $link .= '</a>';
-
-                    $langs[] = $link;
-                }
-            }
+            $langs = language_switcher_output($languages);
             return join(', ', $langs);
         }
     }

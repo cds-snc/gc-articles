@@ -47,12 +47,12 @@ function filter_navigation_markup_template($template, $class)
 function cds_body_classes(array $classes): array
 {
     // Adds a class of hfeed to non-singular pages.
-    if (! is_singular()) {
+    if (!is_singular()) {
         $classes[] = 'hfeed';
     }
 
     // Adds a class of no-sidebar when there is no sidebar present.
-    if (! is_active_sidebar('sidebar-1')) {
+    if (!is_active_sidebar('sidebar-1')) {
         $classes[] = 'no-sidebar';
     }
 
@@ -60,3 +60,17 @@ function cds_body_classes(array $classes): array
 }
 
 add_filter('body_class', 'cds_body_classes');
+
+function define_locale($locale)
+{
+    global $wp_query;
+    $custom_locale = get_post_meta($wp_query->post->ID, 'locale', true);
+
+    if ($custom_locale) {
+        return $custom_locale;
+    }
+
+    return $locale;
+}
+
+add_filter('locale', 'define_locale', 700);

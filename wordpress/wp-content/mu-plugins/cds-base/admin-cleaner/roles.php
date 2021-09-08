@@ -149,11 +149,16 @@ function cds_reset_roles($role)
 
 function cds_base_activate()
 {
-    remove_role('administrator');
-    remove_role('editor');
-    remove_role('author');
-    remove_role('contributor');
-    remove_role('subscriber');
-    cds_reset_roles('ircc');
+    // run once
+    if (get_option('cds_base_activated') == false) {
+        remove_role('administrator');
+        remove_role('editor');
+        remove_role('author');
+        remove_role('contributor');
+        remove_role('subscriber');
+        cds_reset_roles('ircc');
+        add_option('cds_base_activated', true);
+    }
 }
-register_activation_hook(__FILE__, 'cds_base_activate');
+
+cds_base_activate();

@@ -151,7 +151,7 @@ class NotifyTemplateSender
                         foreach ($data as &$value) {
                             echo '<option value="' .
                                 $value['id'] .
-                                '-' .
+                                '~' .
                                 $value['type'] .
                                 '">' .
                                 $value['label'] .
@@ -190,7 +190,7 @@ class NotifyTemplateSender
                 exit();
             }
 
-            $parts = explode('-', $data['list_id']);
+            $parts = explode('~', $data['list_id']);
 
             if (!is_array($parts) || count($parts) !== 2) {
                 wp_redirect($base_redirect . '&status=418');

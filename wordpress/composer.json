@@ -10,7 +10,8 @@
   },
   "require-dev": {
     "pestphp/pest": "^1.16",
-    "10up/wp_mock": "0.4.2"
+    "10up/wp_mock": "0.4.2",
+    "mockery/mockery": "^1.4"
   },
   "extra": {
     "installer-paths": {

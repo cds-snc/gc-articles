@@ -194,30 +194,68 @@ function language_switcher_output($languages)
 {
     $langs = [];
 
-    foreach ($languages as $language) {
-        $text = get_language_text($language['translated_name']);
-        if (!$language['active']) {
-            $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . $language['url'] . '">';
-            $link .= '<span class="hidden-xs">' . $text['full'] . '</span>';
-            $link .= '<abbr title="' . $text['full'] . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';
-            $link .= $text['abbr'];
-            $link .= '</abbr>';
-            $link .= '</a>';
+    try {
 
-            $langs[] = $link;
+        foreach ($languages as $language) {
+            $text = get_language_text($language['translated_name']);
+            if (!$language['active']) {
+                $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . $language['url'] . '">';
+                $link .= '<span class="hidden-xs">' . $text['full'] . '</span>';
+                $link .= '<abbr title="' . $text['full'] . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';
+                $link .= $text['abbr'];
+                $link .= '</abbr>';
+                $link .= '</a>';
+
+                $langs[] = $link;
+            }
         }
+
+    } catch (Exception $e) {
+        //noop
     }
 
     return $langs;
 }
 
-function language_switcher()
+function manual_language_switcher(): string
 {
+    global $wp_query;
+
+    $output = "";
+
+    $custom_language_switcher = get_post_meta($wp_query->post->ID, 'locale_switch_link', true);
+
+    // format: {"active":false,"translated_name":"English","url":"/"}
+    if ($custom_language_switcher) {
+        $custom_language_switcher = json_decode($custom_language_switcher);
+        $custom_language_switcher = (array)$custom_language_switcher;
+        $output = language_switcher_output([$custom_language_switcher]);
+
+        if (count($output) >= 1 && $output[0]) {
+            return (string)$output[0];
+        } else {
+            $output = "";
+        }
+    }
+
+    return $output;
+}
+
+function language_switcher(): string
+{
+    $output = manual_language_switcher();
+
+    if ($output != "") {
+        return $output;
+    }
+
     if (function_exists('icl_get_languages')) {
         $languages = apply_filters('wpml_active_languages', null, 'orderby=id&order=desc');
-        if (1 < count($languages)) {
+        if ($languages && 1 < count($languages)) {
             $langs = language_switcher_output($languages);
             return join(', ', $langs);
         }
     }
+
+    return "";
 }

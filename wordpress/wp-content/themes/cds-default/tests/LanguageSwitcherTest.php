@@ -76,12 +76,61 @@ class LanguageSwitcherTest extends \WP_Mock\Tools\TestCase
             ->reply($langs);
 
         \WP_Mock::passthruFunction("icl_get_languages");
+        global $wp_query;
+        $wp_query = new stdClass;
+        $wp_query->post = new stdClass;
+        $wp_query->post->ID = 1;
+
+        \WP_Mock::userFunction('get_post_meta', array(
+            'times' => 1,
+            'args' => array(1, 'locale_switch_link', true),
+            'return' => false
+        ));
 
         $nav = language_switcher();
 
         expect($this->containsString($nav, $langs["fr"]["url"]))->toBeTrue();
         expect(
             $this->containsString($nav, $langs["fr"]["native_name"])
+        )->toBeTrue();
+    }
+
+    public function test_manual_language_switcher_noop()
+    {
+        global $wp_query;
+        $wp_query = new stdClass;
+        $wp_query->post = new stdClass;
+        $wp_query->post->ID = 1;
+
+        \WP_Mock::userFunction('get_post_meta', array(
+            'times' => 1,
+            'args' => array(1, 'locale_switch_link', true),
+            'return' => '{}' // test "incorrect data"
+        ));
+
+        $nav = language_switcher();
+
+        expect($nav)->toEqual("");
+    }
+
+    public function test_manual_language_switcher()
+    {
+        global $wp_query;
+        $wp_query = new stdClass;
+        $wp_query->post = new stdClass;
+        $wp_query->post->ID = 1;
+
+        \WP_Mock::userFunction('get_post_meta', array(
+            'times' => 1,
+            'args' => array(1, 'locale_switch_link', true),
+            'return' => '{"active":false,"translated_name":"English","url":"http//:test.com"}'
+        ));
+
+        $nav = language_switcher();
+
+        expect($this->containsString($nav, "http//:test.com"))->toBeTrue();
+        expect(
+            $this->containsString($nav, 'English')
         )->toBeTrue();
     }
 }

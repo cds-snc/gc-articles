@@ -19,7 +19,7 @@ remote_state {
   }
   config = {
     encrypt        = true
-    bucket         = "cds-aws-wordpress-fargate-${local.vars.inputs.env}-tf"
+    bucket         = "platform-mvp-ircc-${local.vars.inputs.env}-tfstate"
     dynamodb_table = "terraform-state-lock-dynamo"
     region         = "ca-central-1"
     key            = "${path_relative_to_include()}/terraform.tfstate"

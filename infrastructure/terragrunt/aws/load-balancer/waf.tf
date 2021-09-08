@@ -1,3 +1,10 @@
+locals {
+  # Rules that must be excluded from the AWSManagedRulesCommonRuleSet for WordPress to work
+  wpadmin_rules         = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH"]
+  file_upload_rules     = ["SizeRestrictions_BODY", "CrossSiteScripting_BODY"]
+  common_excluded_rules = var.allow_wordpress_uploads ? concat(local.wpadmin_rules, local.file_upload_rules) : local.wpadmin_rules
+}
+
 #
 # CloudFront access control
 #
@@ -25,25 +32,11 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         name        = "AWSManagedRulesCommonRuleSet"
         vendor_name = "AWS"
 
-        # These break WordPress admin
-        excluded_rule {
-          name = "GenericRFI_QUERYARGUMENTS"
-        }
-
-        excluded_rule {
-          name = "GenericRFI_BODY"
-        }
-
-        excluded_rule {
-          name = "GenericRFI_URIPATH"
-        }
-
-        excluded_rule {
-          name = "SizeRestrictions_BODY"
-        }
-
-        excluded_rule {
-          name = "CrossSiteScripting_BODY"
+        dynamic "excluded_rule" {
+          for_each = local.common_excluded_rules
+          content {
+            name = excluded_rule.value
+          }
         }
       }
     }

@@ -74,7 +74,7 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_waf_blocked_requests_percent"
 
       dimensions = {
         Rule   = "ALL"
-        Region = var.region
+        Region = "us-east-1"
         WebACL = var.cloudfront_waf_web_acl_name
       }
     }
@@ -90,7 +90,7 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_waf_blocked_requests_percent"
 
       dimensions = {
         Rule   = "ALL"
-        Region = var.region
+        Region = "us-east-1"
         WebACL = var.cloudfront_waf_web_acl_name
       }
     }

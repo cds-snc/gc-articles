@@ -1,3 +1,8 @@
+variable "allow_wordpress_uploads" {
+  description = "Should WordPress media uploads be allowed.  This controls rule exclusions from the WAF AWSManagedRulesCommonRuleSet."
+  type        = bool
+}
+
 variable "cloudfront_custom_header_name" {
   description = "Custom header name added by CloudFront.  Used to block direct user requests to the ALB."
   type        = string

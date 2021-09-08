@@ -64,11 +64,18 @@ add_filter('body_class', 'cds_body_classes');
 function define_locale($locale)
 {
     global $wp_query;
-    $custom_locale = get_post_meta($wp_query->post->ID, 'locale', true);
 
-    if ($custom_locale) {
-        return $custom_locale;
+    try {
+        $custom_locale = get_post_meta($wp_query->post->ID, 'locale', true);
+
+        if ($custom_locale) {
+            return $custom_locale;
+        }
+
+    } catch (Exception $e) {
+        // noop
     }
+
 
     return $locale;
 }

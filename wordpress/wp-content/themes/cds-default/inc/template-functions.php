@@ -211,6 +211,7 @@ function language_switcher_output($languages)
         }
 
     } catch (Exception $e) {
+        error_log("language_switcher:" . $e->getMessage());
         //noop
     }
 
@@ -224,6 +225,7 @@ function manual_language_switcher(): string
     $output = "";
 
     $custom_language_switcher = get_post_meta($wp_query->post->ID, 'locale_switch_link', true);
+    error_log("language_switcher:" . $custom_language_switcher);
 
     // format: {"active":false,"translated_name":"English","url":"/"}
     if ($custom_language_switcher) {
@@ -234,6 +236,7 @@ function manual_language_switcher(): string
         if (count($output) >= 1 && $output[0]) {
             return (string)$output[0];
         } else {
+            error_log("language_switcher: failed to parse");
             $output = "";
         }
     }
@@ -257,5 +260,6 @@ function language_switcher(): string
         }
     }
 
+    error_log("language_switcher: not found");
     return "";
 }

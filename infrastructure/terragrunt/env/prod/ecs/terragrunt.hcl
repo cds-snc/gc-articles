@@ -60,7 +60,7 @@ inputs = {
 
   wordpress_repository_arn = dependency.ecr.outputs.wordpress_repository_arn
   wordpress_image          = dependency.ecr.outputs.wordpress_repository_url
-  wordpress_image_tag      = "538b323855e489fa91a78ba615ec965235e0dbab"
+  wordpress_image_tag      = "e298111a2c8145bdf2b46cf3a2e3cad65bb8710a"
 
   database_host_secret_arn         = dependency.database.outputs.database_host_secret_arn
   database_name_secret_arn         = dependency.database.outputs.database_name_secret_arn

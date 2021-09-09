@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-08-24T13:13:33+00:00\n"
+"POT-Creation-Date: 2021-09-09T16:01:14+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: cds-snc\n"
@@ -24,30 +24,30 @@ msgstr ""
 msgid "Most Used Categories"
 msgstr ""
 
-#: functions.php:76
+#: functions.php:74
 msgid "Primary"
 msgstr ""
 
-#: header.php:40
+#: header.php:38
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:72
-#: header.php:84
+#: header.php:71
+#: header.php:89
 msgid "Search"
 msgstr ""
 
-#: header.php:76
-#: header.php:78
+#: header.php:75
+#: header.php:80
 msgid "Search Canada.ca"
 msgstr ""
 
-#: header.php:95
-#: header.php:97
+#: header.php:101
+#: header.php:106
 msgid "Menu"
 msgstr ""
 
-#: header.php:97
+#: header.php:103
 msgid "Main"
 msgstr ""
 

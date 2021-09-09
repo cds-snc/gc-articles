@@ -34,12 +34,9 @@ if (!function_exists('cds_setup')) {
      */
     function load_translations(): void
     {
-        $domain = 'cds-snc';
-        $locale = apply_filters('theme_locale', determine_locale(), $domain);
-        $mo = $domain . '-' . $locale . '.mo';
-        load_textdomain(
-            $domain,
-            get_template_directory() . '/languages/' . $mo,
+        $loaded = load_theme_textdomain(
+            'cds-snc',
+            get_template_directory() . '/languages',
         );
     }
 
@@ -99,6 +96,9 @@ add_action('after_setup_theme', 'cds_setup');
 function cds_scripts(): void
 {
     wp_enqueue_style('cds-style', get_stylesheet_uri(), [], _S_VERSION);
+
+    wp_enqueue_script('main', get_template_directory_uri().'/js/main.js', ['jquery'], '1.0.3', true,
+    );
 }
 
 add_action('wp_enqueue_scripts', 'cds_scripts');

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-24T13:13:33+00:00\n"
-"PO-Revision-Date: 2021-08-24 09:18-0400\n"
+"POT-Creation-Date: 2021-09-09T16:01:14+00:00\n"
+"PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -28,27 +28,27 @@ msgstr ""
 msgid "Most Used Categories"
 msgstr ""
 
-#: functions.php:76
+#: functions.php:74
 msgid "Primary"
 msgstr ""
 
-#: header.php:40
+#: header.php:38
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:72 header.php:84
+#: header.php:71 header.php:89
 msgid "Search"
 msgstr "Recherche"
 
-#: header.php:76 header.php:78
+#: header.php:75 header.php:80
 msgid "Search Canada.ca"
 msgstr "Rechercher dans Canada.ca"
 
-#: header.php:95 header.php:97
+#: header.php:101 header.php:106
 msgid "Menu"
 msgstr ""
 
-#: header.php:97
+#: header.php:103
 msgid "Main"
 msgstr ""
 

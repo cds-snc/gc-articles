@@ -61,27 +61,76 @@ function cds_body_classes(array $classes): array
 
 add_filter('body_class', 'cds_body_classes');
 
+function get_current_page_ID(): int
+{
+    if(is_admin()){
+        return 0;
+    }
+
+    global $wpdb;
+    $actual_link = rtrim($_SERVER['REQUEST_URI'], '/');
+    $parts = explode('/', $actual_link);
+
+    if (empty($parts)) {
+        return 0;
+    }
+
+    // note: this code will fail for the 'root' or 'homepage' as it doesn't have a slug
+    $slug = end($parts);
+
+    if (empty($slug)) {
+        return 0;
+    }
+
+    if (!$query = wp_cache_get($slug.'_'._S_VERSION)) {
+        $query = $wpdb->prepare(
+            "SELECT ID FROM {$wpdb->posts} 
+                        WHERE 
+                            `post_status` = %s
+                        AND
+                            `post_name` = %s
+                        AND
+                            TRIM(`post_name`) <> ''
+                        LIMIT 1",
+            'publish',
+            sanitize_title($slug)
+        );
+
+        // cache the query
+        wp_cache_set($slug.'_'._S_VERSION, $query, '', 3600);
+    }
+
+    $post_id = $wpdb->get_var($query);
+
+    if ($post_id) {
+        return absint($post_id);
+    }
+
+    return 0;
+}
+
 function define_locale($locale)
 {
-    global $wp_query;
 
     try {
+        $page_id = get_current_page_ID();
 
-        if (!$wp_query || !$wp_query->post) {
-            return $locale;
-        }
-        $custom_locale = get_post_meta($wp_query->post->ID, 'locale', true);
+        if ($page_id) {
 
-        if ($custom_locale) {
-            return $custom_locale;
+            $custom_locale = get_post_meta($page_id, 'locale', true);
+            $page_id . " " . $custom_locale;
+            if ($custom_locale) {
+                return $custom_locale;
+            }
+
         }
+
 
     } catch (Exception $e) {
         // noop
     }
 
-
     return $locale;
 }
 
-add_filter('locale', 'define_locale', 700);
+add_filter('locale', 'define_locale', 10);

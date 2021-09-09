@@ -16,7 +16,7 @@ require_once __DIR__ . '/inc/template-filters.php';
 
 if (!defined('_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_S_VERSION', '1.0.2');
+    define('_S_VERSION', '1.0.3');
 }
 
 if (!defined('THEME_NAMESPACE')) {
@@ -97,7 +97,7 @@ function cds_scripts(): void
 {
     wp_enqueue_style('cds-style', get_stylesheet_uri(), [], _S_VERSION);
 
-    wp_enqueue_script('main', get_template_directory_uri().'/js/main.js', ['jquery'], '1.0.3', true,
+    wp_enqueue_script('cds-main', get_template_directory_uri().'/js/main.js', ['jquery'], _S_VERSION, true,
     );
 }
 

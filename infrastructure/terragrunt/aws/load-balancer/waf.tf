@@ -159,6 +159,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   # TODO: request WAF capacity unit increase when this moves to production AWS account
+  # TODO: add known bad IPs rule
   #   rule {
   #     name     = "WordpressRateLimit"
   #     priority = 101
@@ -245,7 +246,25 @@ resource "aws_wafv2_web_acl" "wordpress_waf_alb" {
   }
 }
 
+#
+# WAF association
+#
 resource "aws_wafv2_web_acl_association" "wordpress_waf_alb" {
   resource_arn = aws_lb.wordpress.arn
   web_acl_arn  = aws_wafv2_web_acl.wordpress_waf_alb.arn
+}
+
+#
+# WAF logging
+#
+resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_cloudfront" {
+  provider = aws.us-east-1
+
+  log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs_us_east.arn]
+  resource_arn            = aws_wafv2_web_acl.wordpress_waf.arn
+}
+
+resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_alb" {
+  log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs.arn]
+  resource_arn            = aws_wafv2_web_acl.wordpress_waf_alb.arn
 }

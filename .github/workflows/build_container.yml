@@ -1,8 +1,10 @@
-name: Build and deploy
+name: Build container
 
 on:
-  push:
-    branches: [main]
+  pull_request:
+
+env:
+  DOCKER_BUILDKIT: 1
 
 jobs:
   build-container:
@@ -12,10 +14,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build container
-        working-directory: ./
         run: |
           docker build \
           --build-arg git_sha=$GITHUB_SHA \
           -t platform-mvp/ircc:$GITHUB_SHA \
-          -t platform-mvp/ircc:latest \
           -f ./wordpress/docker/production.Dockerfile .

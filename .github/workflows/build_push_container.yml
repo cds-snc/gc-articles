@@ -1,0 +1,47 @@
+name: Build and push container
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DOCKER_BUILDKIT: 1
+  REPO_NAME: platform/wordpress
+  PROD_ECR_REGISTRY: 514867032726.dkr.ecr.ca-central-1.amazonaws.com
+
+jobs:
+  build-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        id: aws-creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build container
+        run: |
+          docker build \
+          --build-arg git_sha=$GITHUB_SHA \
+          -t ${{ env.PROD_ECR_REGISTRY }}/${{ env.REPO_NAME }}:$GITHUB_SHA \
+          -t ${{ env.PROD_ECR_REGISTRY }}/${{ env.REPO_NAME }}:latest \
+          -f ./wordpress/docker/production.Dockerfile .
+
+      - name: Push containers to ECR
+        run: |
+          docker push ${{ env.PROD_ECR_REGISTRY }}/${{ env.REPO_NAME }}:$GITHUB_SHA
+          docker push ${{ env.PROD_ECR_REGISTRY }}/${{ env.REPO_NAME }}:latest
+
+      - name: Logout of ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}

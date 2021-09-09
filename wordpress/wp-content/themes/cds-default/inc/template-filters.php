@@ -66,6 +66,10 @@ function define_locale($locale)
     global $wp_query;
 
     try {
+
+        if (!$wp_query || !$wp_query->post) {
+            return $locale;
+        }
         $custom_locale = get_post_meta($wp_query->post->ID, 'locale', true);
 
         if ($custom_locale) {

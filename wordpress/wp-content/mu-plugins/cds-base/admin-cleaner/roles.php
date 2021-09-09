@@ -128,6 +128,7 @@ function cds_reset_roles($role)
         'ircc' => [
             'read' => 1,
             'level_0' => 1,
+            'delete_posts' => 1,
         ],
         'display_name' => [
             'administrator' => 'Administrator',
@@ -150,7 +151,7 @@ function cds_reset_roles($role)
 function cds_base_activate()
 {
     // run once
-    if (get_option('cds_base_activated') == false && is_blog_installed()) {
+    if (get_option('cds_base_activated_v1.0.0') == false && is_blog_installed()) {
         remove_role('administrator');
         remove_role('editor');
         remove_role('author');

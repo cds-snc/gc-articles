@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 class NotifySettings extends NotifyTemplateSender
 {
-    public static $admin_page = 'cds_notify_send';
+    public static string $admin_page = 'cds_notify_send';
 
     public function __construct()
     {
-        global $status, $page;
     }
 
     public static function add_menu(): void

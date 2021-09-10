@@ -129,6 +129,12 @@ variable "rds_swap_usage_maximum" {
   type        = number
 }
 
+variable "slack_webhook_url" {
+  description = "Incoming Slack webhook used to post alarm state changes"
+  type        = string
+  sensitive   = true
+}
+
 variable "wordpress_failed_login_maximum" {
   description = "Maximum number of failed WordPress login attempts in a 1 minute period"
   type        = string

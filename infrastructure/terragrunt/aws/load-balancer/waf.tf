@@ -158,29 +158,49 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
   }
 
-  # TODO: request WAF capacity unit increase when this moves to production AWS account
-  # TODO: add known bad IPs rule
-  #   rule {
-  #     name     = "WordpressRateLimit"
-  #     priority = 101
+  rule {
+    name     = "AWSManagedRulesAmazonIpReputationList"
+    priority = 7
 
-  #     action {
-  #       block {}
-  #     }
+    override_action {
+      none {}
+    }
 
-  #     statement {
-  #       rate_based_statement {
-  #         limit              = 10000
-  #         aggregate_key_type = "IP"
-  #       }
-  #     }
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesAmazonIpReputationList"
+        vendor_name = "AWS"
+      }
+    }
 
-  #     visibility_config {
-  #       cloudwatch_metrics_enabled = true
-  #       metric_name                = "WordpressRateLimit"
-  #       sampled_requests_enabled   = true
-  #     }
-  #   }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesAmazonIpReputationList"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "WordpressRateLimit"
+    priority = 101
+
+    action {
+      block {}
+    }
+
+    statement {
+      rate_based_statement {
+        limit              = 10000
+        aggregate_key_type = "IP"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "WordpressRateLimit"
+      sampled_requests_enabled   = true
+    }
+  }
 
   visibility_config {
     cloudwatch_metrics_enabled = true

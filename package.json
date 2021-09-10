@@ -3,6 +3,8 @@
   "type": "module",
   "scripts": {
     "deploy-plugin": "./deploy/plugin",
+    "pre-release": "node  ./scripts/bump-release.js --version your_version",
+    "infra-release": "node  ./scripts/bump-release.js --commit your_pre-release_sha",
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",
     "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build",
@@ -18,5 +20,9 @@
     "eslint-plugin-promise": "^5.1.0",
     "prettier": "^2.3.2",
     "showdown": "^1.9.1"
+  },
+  "dependencies": {
+    "replace-in-file": "^6.2.0",
+    "yargs": "^17.1.1"
   }
 }

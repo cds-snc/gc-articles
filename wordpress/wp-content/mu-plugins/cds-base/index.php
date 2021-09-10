@@ -8,7 +8,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name: CDS-SNC Base
  * Plugin URI: https://github.com/cds-snc/platform-mvp
  * Description: Custom Block setup and other overrides
- * Version: 1.0.0
+ * Version: 1.0.5
  * Author: Tim Arney
  *
  * @package cds-snc-base
@@ -18,6 +18,10 @@ defined('ABSPATH') || exit();
 
 if (!defined('BASE_PLUGIN_NAME')) {
     define('BASE_PLUGIN_NAME', 'cds-base');
+}
+
+if (!defined('BASE_PLUGIN_NAME')) {
+    define('BASE_PLUGIN_NAME_VERSION', '1.0.5');
 }
 
 require_once __DIR__ . '/admin-cleaner/index.php';
@@ -51,7 +55,7 @@ function cds_base_style_admin(): void
         'cds-base-style',
         plugin_dir_url(__FILE__) . 'css/admin.css',
         [],
-        '1.0.4',
+        BASE_PLUGIN_NAME_VERSION,
     );
 }
 
@@ -67,7 +71,7 @@ function cds_base_js_admin(): void
         'cds-admin-js',
         plugins_url('js/admin.js', __FILE__),
         ['jquery', 'cds-snc-blocks'],
-        '1.0.3',
+        BASE_PLUGIN_NAME_VERSION,
         true,
     );
 }

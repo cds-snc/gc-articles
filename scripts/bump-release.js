@@ -50,8 +50,8 @@ const updateWordPressPluginVersion = async (version) => {
 
 try {
 
-    if (!argv.commit && !argv.version_num) {
-        throw new Error("missing --commit or --version argument")
+    if (!argv.version_tag && !argv.version_num) {
+        throw new Error("missing --version_tag or --version_num argument")
     }
 
     if (argv.version_num) {
@@ -62,10 +62,10 @@ try {
         await updateWordPressPluginVersion(version);
     }
 
-    if (argv.commit) {
-        const commit = argv.commit;
-        // pass the commit sha from the "version" commit here
-        await updateTerragruntHcl(commit);
+    if (argv.version_tag) {
+        const version_tag = argv.version_tag;
+        // pass the github release tag
+        await updateTerragruntHcl(version_tag);
     }
 }
 catch (error) {

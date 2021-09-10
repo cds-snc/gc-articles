@@ -100,3 +100,28 @@ When creating a custom plugin or theme, you should prefix the folder name with `
 
 ### Theme translation 
 See: https://github.com/cds-snc/platform-mvp/pull/95#issuecomment-904688973
+
+
+### Deployments 
+
+1) Bump the version #
+
+```bash
+node  ./scripts/bump-release.js --version_num 1.0.X
+```
+
+> This should automatcially update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711)
+
+2) Create a PR and note the merge commit #
+
+
+
+3) Update the deployment docker image `commit`
+
+```bash
+node  ./scripts/bump-release.js --commit merge-commit-sha
+```
+
+4) Create a PR with the updated [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/pull/53/files) file  
+
+The automated deployment will happen after your PR is merged

@@ -112,16 +112,19 @@ node  ./scripts/bump-release.js --version_num 1.0.X
 
 > This should automatcially update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711)
 
-2) Create a PR and note the merge commit #
+2) Create a PR, merge ...
+
+3) Create a Github release tagged as the vesion number i.e. [v1.0.6](https://github.com/cds-snc/platform-mvp-ircc/releases/tag/v1.0.6)
 
 
-
-3) Update the deployment docker image `commit`
+3) Update the deployment docker image `version_tag`
 
 ```bash
-node  ./scripts/bump-release.js --commit merge-commit-sha
+node  ./scripts/bump-release.js --version_tag v1.0.X
 ```
 
-4) Create a PR with the updated [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/pull/53/files) file  
+> This should automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file  
+
+4) Create a PR, merge ...
 
 The automated deployment will happen after your PR is merged

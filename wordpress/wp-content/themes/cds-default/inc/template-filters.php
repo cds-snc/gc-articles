@@ -137,3 +137,4 @@ add_filter('locale', 'define_locale', 10);
 
 add_filter('gutenberg_can_edit_post', '__return_true', 5);
 add_filter('use_block_editor_for_post', '__return_true', 5);
+add_filter( 'user_can_richedit' , '__return_true', 50 );

@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "deploy-plugin": "./deploy/plugin",
-    "pre-release": "node  ./scripts/bump-release.js --version your_version",
+    "pre-release": "node  ./scripts/bump-release.js --version_num your_version",
     "infra-release": "node  ./scripts/bump-release.js --commit your_pre-release_sha",
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",

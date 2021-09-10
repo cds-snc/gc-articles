@@ -13,6 +13,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_cpu_utilization" {
 
   alarm_description = "High ECS CPU utilization over 4 minutes"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     ClusterName = var.ecs_cluster_name
@@ -32,6 +33,7 @@ resource "aws_cloudwatch_metric_alarm" "ecs_memory_utilization" {
 
   alarm_description = "High Wordpress ECS memory utilization over 4 minutes"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     ClusterName = var.ecs_cluster_name
@@ -64,4 +66,5 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_failed_login" {
 
   alarm_description = "High number of failed Wordpress login attempts in a 1 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 }

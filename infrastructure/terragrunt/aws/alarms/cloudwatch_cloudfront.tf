@@ -15,6 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_5xx_response" {
 
   alarm_description = "Monitors for high CloudFront 5xx responses in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning_us_east.arn]
+  ok_actions        = [aws_sns_topic.alert_warning_us_east.arn]
 
   dimensions = {
     DistributionId = var.cloudfront_distribution_id
@@ -36,6 +37,7 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_4xx_response" {
 
   alarm_description = "Monitors for high CloudFront 4xx responses in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning_us_east.arn]
+  ok_actions        = [aws_sns_topic.alert_warning_us_east.arn]
 
   dimensions = {
     DistributionId = var.cloudfront_distribution_id
@@ -56,6 +58,7 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_waf_blocked_requests_percent"
 
   alarm_description = "More than 5% of requests being blocked in 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning_us_east.arn]
+  ok_actions        = [aws_sns_topic.alert_warning_us_east.arn]
 
   metric_query {
     id          = "blocked_request_percent"

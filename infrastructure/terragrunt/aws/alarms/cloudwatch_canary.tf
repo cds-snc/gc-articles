@@ -14,6 +14,7 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_canary_healthcheck" {
 
   alarm_description = "Monitors for failing synthetic canary health checks"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     CanaryName = aws_synthetics_canary.wordpress.name

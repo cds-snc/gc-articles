@@ -19,9 +19,9 @@ def cloudwatch_notification(message, region):
     "color": states[message['NewStateValue']],
     "fallback": "Alarm {} triggered".format(message['AlarmName']),
     "fields": [
-      { "title": "Alarm Name", "value": message['AlarmName'], "short": True },
-      { "title": "Alarm Description", "value": message['AlarmDescription'], "short": False},
-      { "title": "Alarm reason", "value": message['NewStateReason'], "short": False},
+      { "title": "Name", "value": message['AlarmName'], "short": True },
+      { "title": "Description", "value": message['AlarmDescription'], "short": False},
+      { "title": "Reason", "value": message['NewStateReason'], "short": False},
       { "title": "Old State", "value": message['OldStateValue'], "short": True },
       { "title": "Current State", "value": message['NewStateValue'], "short": True },
       {
@@ -58,6 +58,7 @@ def default_notification(subject, message):
 
 # Send a message to a slack channel
 def notify_slack(subject, message, region):
+  project_name = os.environ['PROJECT_NAME']
   slack_url = os.environ['SLACK_WEBHOOK_URL']
   payload = {
     "attachments": []
@@ -71,7 +72,7 @@ def notify_slack(subject, message, region):
 
   if "AlarmName" in message:
     notification = cloudwatch_notification(message, region)
-    payload['text'] = "AWS CloudWatch notification - " + message["AlarmName"]
+    payload['text'] = project_name + " CloudWatch"
     payload['attachments'].append(notification)
   elif "attachments" in message or "text" in message:
     payload = {**payload, **message}

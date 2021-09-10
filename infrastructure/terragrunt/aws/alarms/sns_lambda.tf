@@ -19,6 +19,7 @@ resource "aws_lambda_function" "notify_slack" {
   environment {
     variables = {
       SLACK_WEBHOOK_URL = var.slack_webhook_url
+      PROJECT_NAME      = "WordPress"
       LOG_EVENTS        = "True"
     }
   }
@@ -48,7 +49,7 @@ resource "aws_lambda_permission" "notify_slack" {
 }
 
 resource "aws_lambda_permission" "notify_slack_us_east" {
-  statement_id  = "AllowExecutionFromSNS"
+  statement_id  = "AllowExecutionFromSNSUsEast"
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.notify_slack.function_name
   principal     = "sns.amazonaws.com"

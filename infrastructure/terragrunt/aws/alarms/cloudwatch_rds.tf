@@ -13,6 +13,7 @@ resource "aws_cloudwatch_metric_alarm" "rds_cpu_utilization_writer" {
 
   alarm_description = "CPU utilization for RDS cluster writer in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     DBClusterIdentifier = var.rds_cluster_id
@@ -32,6 +33,7 @@ resource "aws_cloudwatch_metric_alarm" "rds_cpu_utilization_reader" {
 
   alarm_description = "CPU utilization for RDS cluster reader in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     DBClusterIdentifier = var.rds_cluster_id
@@ -51,6 +53,7 @@ resource "aws_cloudwatch_metric_alarm" "rds_aurora_replica_lag" {
 
   alarm_description = "Replica lag (milliseconds) for RDS cluster reader in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     DBClusterIdentifier = var.rds_cluster_id
@@ -70,6 +73,7 @@ resource "aws_cloudwatch_metric_alarm" "rds_swap_usage_writer" {
 
   alarm_description = "Maximum swap usage (Bytes) for RDS cluster writer in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     DBClusterIdentifier = var.rds_cluster_id
@@ -89,6 +93,7 @@ resource "aws_cloudwatch_metric_alarm" "rds_swap_usage_reader" {
 
   alarm_description = "Maximum swap usage (Bytes) for RDS cluster reader in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     DBClusterIdentifier = var.rds_cluster_id
@@ -108,6 +113,7 @@ resource "aws_cloudwatch_metric_alarm" "rds_freeable_memory_writer" {
 
   alarm_description = "Minimum freeable memory (Bytes) for RDS cluster writer in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     DBClusterIdentifier = var.rds_cluster_id
@@ -127,6 +133,7 @@ resource "aws_cloudwatch_metric_alarm" "rds_freeable_memory_reader" {
 
   alarm_description = "Freeable memory (Bytes) for RDS cluster reader in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     DBClusterIdentifier = var.rds_cluster_id

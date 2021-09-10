@@ -13,6 +13,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_ddos" {
 
   alarm_description = "DDoS detection for ALB"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
     ResourceArn = var.alb_arn
@@ -33,6 +34,7 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_ddos" {
 
   alarm_description = "DDoS detection for CloudFront"
   alarm_actions     = [aws_sns_topic.alert_warning_us_east.arn]
+  ok_actions        = [aws_sns_topic.alert_warning_us_east.arn]
 
   dimensions = {
     ResourceArn = var.cloudfront_arn
@@ -53,6 +55,7 @@ resource "aws_cloudwatch_metric_alarm" "route53_ddos" {
 
   alarm_description = "DDoS detection for Route53"
   alarm_actions     = [aws_sns_topic.alert_warning_us_east.arn]
+  ok_actions        = [aws_sns_topic.alert_warning_us_east.arn]
 
   dimensions = {
     ResourceArn = "arn:aws:route53:::hostedzone/${var.hosted_zone_id}"

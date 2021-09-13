@@ -89,6 +89,17 @@ resource "aws_vpc_endpoint" "monitoring" {
   subnet_ids = module.wordpress_vpc.private_subnet_ids
 }
 
+resource "aws_vpc_endpoint" "sns" {
+  vpc_id              = module.wordpress_vpc.vpc_id
+  vpc_endpoint_type   = "Interface"
+  service_name        = "com.amazonaws.${var.region}.sns"
+  private_dns_enabled = true
+  security_group_ids = [
+    aws_security_group.vpc_endpoint.id,
+  ]
+  subnet_ids = module.wordpress_vpc.private_subnet_ids
+}
+
 resource "aws_vpc_endpoint" "efs" {
   count = var.enable_efs ? 1 : 0
 

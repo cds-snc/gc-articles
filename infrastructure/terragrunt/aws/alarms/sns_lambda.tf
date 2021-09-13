@@ -2,8 +2,10 @@
 # Lambda: post notifications to Slack
 #
 resource "aws_lambda_function" "notify_slack" {
-  # checkov:skip=CKV_AWS_115:No function-level concurrent execution limit required
-  # checkov:skip=CKV_AWS_116:No Dead Letter Queue required
+  # checkov:skip=CKV_AWS_50: X-ray tracing not required for this function
+  # checkov:skip=CKV_AWS_115: No function-level concurrent execution limit required
+  # checkov:skip=CKV_AWS_116: No Dead Letter Queue required
+
   function_name = "notify_slack"
   description   = "Lambda function to post CloudWatch alarm notifications to a Slack channel."
 
@@ -15,6 +17,11 @@ resource "aws_lambda_function" "notify_slack" {
 
   role             = aws_iam_role.notify_slack_lambda.arn
   source_code_hash = filebase64sha256(data.archive_file.notify_slack.output_path)
+
+  vpc_config {
+    security_group_ids = [var.sns_lambda_security_group_id]
+    subnet_ids         = var.sns_lambda_private_subnet_ids
+  }
 
   environment {
     variables = {

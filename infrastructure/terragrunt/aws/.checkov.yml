@@ -1,0 +1,8 @@
+# Config for checkov Terraform static analysis
+
+skip-check:
+  - CKV_AWS_136 # ECR encryption with default KMS key is acceptable
+  - CKV_AWS_145 # S3 encryption with default KMS key is acceptable
+  - CKV_AWS_149 # SecretManager encryption with default KMS key is acceptable
+  - CKV_AWS_158 # CloudWatch log group encryption with default KMS key is acceptable
+  - CKV_AWS_173 # Lambda environment variable encryption with default KMS key is acceptable

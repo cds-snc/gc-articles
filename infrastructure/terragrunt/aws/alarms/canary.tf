@@ -40,11 +40,13 @@ data "archive_file" "wordpress_canary" {
 
 #
 # S3 bucket for canary artifacts
-#
+# TODO: switch to cds-snc S3 module
 resource "aws_s3_bucket" "synthetic_artifacts" {
 
-  # tfsec:ignore:AWS077 Don't need to version these as they expire and are ephemeral
-  # tfsec:ignore:AWS002 Logging not required on ephemeral data
+  # checkov:skip=CKV_AWS_18: Access logging not required for ephemeral data
+  # checkov:skip=CKV_AWS_21: Verioning not needed for ephemeral data
+  # checkov:skip=CKV_AWS_52: MFA delete not needed for ephemeral data
+  # checkov:skip=CKV_AWS_144: Cross-region replication not needed for ephemeral data
 
   bucket = "platform-mvp-synthetic-canary-${var.env}"
   acl    = "private"

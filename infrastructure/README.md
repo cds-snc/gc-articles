@@ -18,10 +18,9 @@ Host the IRCC WordPress site in an Amazon Elastic Container Service (ECS) Fargat
 
 After starting the [VS Code devcontainer](https://code.visualstudio.com/docs/remote/containers):
 ```sh
-# Export AWS credentials
-cd terragrunt/env/prod
-terragrunt run-all plan
-terragrunt run-all apply
+# Export your AWS credentials
+make plan
+make apply
 ```
 
 ## Environment variables

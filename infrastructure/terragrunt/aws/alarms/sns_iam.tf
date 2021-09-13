@@ -14,6 +14,11 @@ resource "aws_iam_role_policy_attachment" "notify_slack_lambda" {
   policy_arn = aws_iam_policy.notify_slack_lambda.arn
 }
 
+resource "aws_iam_role_policy_attachment" "notify_slack_lambda_vpc" {
+  role       = aws_iam_role.notify_slack_lambda.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole"
+}
+
 data "aws_iam_policy_document" "lambda_assume_policy" {
   statement {
     effect = "Allow"

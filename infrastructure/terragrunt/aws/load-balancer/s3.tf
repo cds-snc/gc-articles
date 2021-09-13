@@ -1,9 +1,10 @@
+#
+# CloudFront logs
+# TODO: switch to the cds-snc S3 module
 resource "aws_s3_bucket" "cloudfront_logs" {
-
   # checkov:skip=CKV_AWS_18:access logging not required for ephemeral data
   # checkov:skip=CKV_AWS_21:verioning not needed for ephemeral data
   # checkov:skip=CKV_AWS_52:MFA delete not needed for ephemeral data
-  # checkov:skip=CKV_AWS_145:encryption with default S3 service key is acceptable
   # checkov:skip=CKV_AWS_144:cross-region replication not needed for ephemeral data
 
   bucket = "wordpress-fargate-${var.env}-cloudfront-logs"
@@ -38,4 +39,78 @@ resource "aws_s3_bucket_public_access_block" "cloudfront_logs" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
+}
+
+#
+# Load balancer logs
+#
+module "wordpress_lb_logs" {
+  source            = "github.com/cds-snc/terraform-modules?ref=v0.0.33//S3"
+  bucket_name       = "platform-ircc-${var.env}-lb-logs"
+  billing_tag_value = var.billing_tag_value
+
+  lifecycle_rule = [
+    {
+      id      = "expire"
+      enabled = true
+      expiration = {
+        days = 30
+      }
+    }
+  ]
+}
+
+resource "aws_s3_bucket_policy" "wordpress_lb_logs" {
+  bucket = module.wordpress_lb_logs.s3_bucket_id
+  policy = data.aws_iam_policy_document.wordpress_lb_logs.json
+}
+
+data "aws_elb_service_account" "main" {}
+data "aws_iam_policy_document" "wordpress_lb_logs" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:PutObject"
+    ]
+    resources = [
+      "${module.wordpress_lb_logs.s3_bucket_arn}/*"
+    ]
+    principals {
+      type        = "AWS"
+      identifiers = [data.aws_elb_service_account.main.arn]
+    }
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:PutObject"
+    ]
+    resources = [
+      "${module.wordpress_lb_logs.s3_bucket_arn}/*"
+    ]
+    principals {
+      type        = "Service"
+      identifiers = ["delivery.logs.amazonaws.com"]
+    }
+    condition {
+      test     = "StringEquals"
+      variable = "s3:x-amz-acl"
+      values   = ["bucket-owner-full-control"]
+    }
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:GetBucketAcl"
+    ]
+    resources = [
+      module.wordpress_lb_logs.s3_bucket_arn
+    ]
+    principals {
+      type        = "Service"
+      identifiers = ["delivery.logs.amazonaws.com"]
+    }
+  }
 }

@@ -2,10 +2,20 @@ resource "aws_lb" "wordpress" {
   name               = "wordpress"
   internal           = false
   load_balancer_type = "application"
+
+  drop_invalid_header_fields = true
+  enable_deletion_protection = true
+
   security_groups = [
     var.load_balancer_security_group_id
   ]
   subnets = var.public_subnet_ids
+
+  access_logs {
+    bucket  = module.wordpress_lb_logs.s3_bucket_id
+    prefix  = "wordpress"
+    enabled = true
+  }
 
   tags = {
     Name                  = "wordpress"

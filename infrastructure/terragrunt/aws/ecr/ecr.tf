@@ -1,5 +1,4 @@
 resource "aws_ecr_repository" "wordpress" {
-  # checkov:skip=CKV_AWS_136:Using default service key for encryption is acceptable    
   name                 = "platform/wordpress"
   image_tag_mutability = "IMMUTABLE"
 

@@ -1,4 +1,5 @@
 resource "aws_efs_file_system" "wordpress" {
+  # checkov:skip=CKV2_AWS_18: Automated EFS backups are enabled using aws_efs_backup_policy.wordpress resource 
   count = var.enable_efs ? 1 : 0
 
   encrypted = true

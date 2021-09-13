@@ -3,7 +3,17 @@ include {
 }
 
 dependencies {
-  paths = ["../hosted-zone", "../load-balancer", "../database", "../ecs"]
+  paths = ["../network", "../hosted-zone", "../load-balancer", "../database", "../ecs"]
+}
+
+dependency "network" {
+  config_path = "../network"
+
+  mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs = {
+    private_subnet_ids           = ""
+    sns_lambda_security_group_id = ""
+  }
 }
 
 dependency "hosted-zone" {
@@ -83,6 +93,9 @@ inputs = {
   rds_cpu_maxiumum               = 80
   rds_freeable_memory_minimum    = 64000000
   rds_swap_usage_maximum         = 256000000
+
+  sns_lambda_private_subnet_ids = dependency.network.outputs.private_subnet_ids
+  sns_lambda_security_group_id  = dependency.network.outputs.sns_lambda_security_group_id
 
   wordpress_failed_login_maximum = "50"
   wordpress_log_group_name       = dependency.ecs.outputs.ecs_cloudfront_log_group_name

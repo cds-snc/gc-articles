@@ -16,7 +16,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_5xx_response" {
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
-    "LoadBalancer" = var.alb_arn
+    "LoadBalancer" = var.alb_arn_suffix
   }
 }
 
@@ -35,8 +35,8 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_4xx_response" {
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
-    "TargetGroup"  = var.alb_target_group_arn
-    "LoadBalancer" = var.alb_arn
+    "TargetGroup"  = var.alb_target_group_arn_suffix
+    "LoadBalancer" = var.alb_arn_suffix
   }
 }
 
@@ -55,8 +55,8 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_5xx_response" {
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
-    "TargetGroup"  = var.alb_target_group_arn
-    "LoadBalancer" = var.alb_arn
+    "TargetGroup"  = var.alb_target_group_arn_suffix
+    "LoadBalancer" = var.alb_arn_suffix
   }
 }
 
@@ -75,8 +75,8 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_response_time_average" {
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
-    "TargetGroup"  = var.alb_target_group_arn
-    "LoadBalancer" = var.alb_arn
+    "TargetGroup"  = var.alb_target_group_arn_suffix
+    "LoadBalancer" = var.alb_arn_suffix
   }
 }
 
@@ -95,7 +95,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_unhealthy_host" {
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 
   dimensions = {
-    "TargetGroup"  = var.alb_target_group_arn
-    "LoadBalancer" = var.alb_arn
+    "TargetGroup"  = var.alb_target_group_arn_suffix
+    "LoadBalancer" = var.alb_arn_suffix
   }
 }

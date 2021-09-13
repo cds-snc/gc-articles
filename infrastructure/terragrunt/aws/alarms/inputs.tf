@@ -3,8 +3,13 @@ variable "alb_arn" {
   type        = string
 }
 
-variable "alb_target_group_arn" {
-  description = "ALB target group ARN to monitor"
+variable "alb_arn_suffix" {
+  description = "ALB ARN suffix to monitor"
+  type        = string
+}
+
+variable "alb_target_group_arn_suffix" {
+  description = "ALB target group ARN suffix to monitor"
   type        = string
 }
 

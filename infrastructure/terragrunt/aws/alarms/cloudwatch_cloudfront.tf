@@ -54,9 +54,9 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_waf_blocked_requests_percent"
   alarm_name          = "WAFBlockedRequestsPercent"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
-  threshold           = "5"
+  threshold           = "10"
 
-  alarm_description = "More than 5% of requests being blocked in 5 minute period"
+  alarm_description = "More than 10% of requests being blocked in 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning_us_east.arn]
   ok_actions        = [aws_sns_topic.alert_warning_us_east.arn]
 
@@ -77,7 +77,6 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_waf_blocked_requests_percent"
 
       dimensions = {
         Rule   = "ALL"
-        Region = "us-east-1"
         WebACL = var.cloudfront_waf_web_acl_name
       }
     }
@@ -93,7 +92,6 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_waf_blocked_requests_percent"
 
       dimensions = {
         Rule   = "ALL"
-        Region = "us-east-1"
         WebACL = var.cloudfront_waf_web_acl_name
       }
     }

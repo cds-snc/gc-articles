@@ -2,8 +2,16 @@ output "alb_arn" {
   value = aws_lb.wordpress.arn
 }
 
+output "alb_arn_suffix" {
+  value = aws_lb.wordpress.arn_suffix
+}
+
 output "alb_target_group_arn" {
   value = aws_lb_target_group.wordpress.arn
+}
+
+output "alb_target_group_arn_suffix" {
+  value = aws_lb_target_group.wordpress.arn_suffix
 }
 
 output "cloudfront_arn" {

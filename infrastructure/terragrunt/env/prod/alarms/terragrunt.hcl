@@ -31,7 +31,8 @@ dependency "load-balancer" {
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
   mock_outputs = {
     alb_arn                     = ""
-    alb_target_group_arn        = ""
+    alb_arn_suffix              = ""
+    alb_target_group_arn_suffix = ""
     cloudfront_arn              = ""
     cloudfront_distribution_id  = ""
     cloudfront_waf_web_acl_name = ""
@@ -61,9 +62,10 @@ dependency "ecs" {
 
 inputs = {
   alb_arn         = dependency.load-balancer.outputs.alb_arn
+  alb_arn_suffix  = dependency.load-balancer.outputs.alb_arn_suffix
   alb_5xx_maximum = 100
 
-  alb_target_group_arn                     = dependency.load-balancer.outputs.alb_target_group_arn
+  alb_target_group_arn_suffix              = dependency.load-balancer.outputs.alb_target_group_arn_suffix
   alb_target_response_time_average_maximum = 2
   alb_target_5xx_maximum                   = 100
   alb_target_4xx_maximum                   = 100

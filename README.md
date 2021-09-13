@@ -107,8 +107,10 @@ See: https://github.com/cds-snc/platform-mvp/pull/95#issuecomment-904688973
 1) Bump the version #
 
 ```bash
-node  ./scripts/bump-release.js --version_num 1.0.X
+npm run prepare-release
 ```
+
+Select `Bump version`
 
 > This should automatcially update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711)
 
@@ -117,11 +119,20 @@ node  ./scripts/bump-release.js --version_num 1.0.X
 3) Create a Github release tagged as the vesion number i.e. [v1.0.6](https://github.com/cds-snc/platform-mvp-ircc/releases/tag/v1.0.6)
 
 
+This can be done using the [GitHub CLI](https://cli.github.com)
+
+```
+gh release create v1.0.6 --notes "bugfix release"
+```
+
+
 3) Update the deployment docker image `version_tag`
 
 ```bash
-node  ./scripts/bump-release.js --version_tag v1.0.X
+npm run prepare-release
 ```
+
+Select `Update docker image`
 
 > This should automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file  
 

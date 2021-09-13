@@ -1,10 +1,10 @@
 {
   "name": "platform-mvp",
   "type": "module",
+  "version": "1.0.6",
   "scripts": {
     "deploy-plugin": "./deploy/plugin",
-    "pre-release": "node  ./scripts/bump-release.js --version_num your_version",
-    "infra-release": "node  ./scripts/bump-release.js --commit your_pre-release_sha",
+    "prepare-release": "node  ./scripts/prepare-release.js",
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",
     "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build",
@@ -22,7 +22,9 @@
     "showdown": "^1.9.1"
   },
   "dependencies": {
+    "inquirer": "^8.1.2",
     "replace-in-file": "^6.2.0",
+    "shelljs": "^0.8.4",
     "yargs": "^17.1.1"
   }
 }

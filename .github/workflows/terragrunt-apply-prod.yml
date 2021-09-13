@@ -5,7 +5,10 @@ on:
     branches:
       - main
     paths:
-      - "infrastructure/terragrunt/**"
+      - "infrastructure/terragrunt/aws/**"
+      - "infrastructure/terragrunt/env/prod/**"
+      - "infrastructure/terragrunt/env/common/**"
+      - "infrastructure/terragrunt/env/terragrunt.hcl"
       - ".github/workflows/terragrunt-apply-prod.yml"
 
 env:

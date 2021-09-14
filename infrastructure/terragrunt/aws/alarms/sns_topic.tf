@@ -21,6 +21,26 @@ resource "aws_sns_topic" "alert_warning_us_east" {
   }
 }
 
+resource "aws_sns_topic" "alert_observe" {
+  name              = "alert-observe"
+  kms_master_key_id = aws_kms_key.sns_cloudwatch.id
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
+resource "aws_sns_topic" "alert_observe_us_east" {
+  provider = aws.us-east-1
+
+  name              = "alert-observe"
+  kms_master_key_id = aws_kms_key.sns_cloudwatch_us_east.id
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
 #
 # SNS: subscriptions
 #

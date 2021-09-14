@@ -104,6 +104,9 @@ function cds_the_posts_navigation($args = []): void
 function custom_field_breadcrumb(): string
 {
     global $wp_query;
+
+    if(!$wp_query || !$wp_query->post) return "";
+
     $list_items = get_post_meta($wp_query->post->ID, 'breadcrumb', true);
     wp_reset_query();
 
@@ -223,6 +226,8 @@ function manual_language_switcher(): string
     global $wp_query;
 
     $output = "";
+
+    if(!$wp_query || !$wp_query->post) return $output;
 
     $custom_language_switcher = get_post_meta($wp_query->post->ID, 'locale_switch_link', true);
     error_log("language_switcher:" . $custom_language_switcher);

@@ -25,8 +25,8 @@ resource "aws_lb" "wordpress" {
 
 resource "aws_lb_target_group" "wordpress" {
   name_prefix          = "wp"
-  port                 = 80
-  protocol             = "HTTP"
+  port                 = 443
+  protocol             = "HTTPS"
   target_type          = "ip"
   deregistration_delay = 30
   vpc_id               = var.vpc_id
@@ -34,6 +34,8 @@ resource "aws_lb_target_group" "wordpress" {
   health_check {
     enabled             = true
     interval            = 10
+    port                = 443
+    protocol            = "HTTPS"
     path                = "/"
     matcher             = "200-399"
     timeout             = 5

@@ -8,30 +8,13 @@ module "wordpress_vpc" {
   high_availability = true
   enable_flow_log   = true
 
+  allow_https_request_out          = true
+  allow_https_request_out_response = true
+  allow_https_request_in           = true
+  allow_https_request_in_response  = true
+
   billing_tag_key   = var.billing_tag_key
   billing_tag_value = var.billing_tag_value
-}
-
-resource "aws_network_acl_rule" "allow_all_ingress" {
-  network_acl_id = module.wordpress_vpc.main_nacl_id
-  rule_number    = 100
-  egress         = false
-  protocol       = "-1"
-  rule_action    = "allow"
-  cidr_block     = "0.0.0.0/0"
-  from_port      = 0
-  to_port        = 0
-}
-
-resource "aws_network_acl_rule" "allow_all_egress" {
-  network_acl_id = module.wordpress_vpc.main_nacl_id
-  rule_number    = 101
-  egress         = true
-  protocol       = "-1"
-  rule_action    = "allow"
-  cidr_block     = "0.0.0.0/0"
-  from_port      = 0
-  to_port        = 0
 }
 
 resource "aws_vpc_endpoint" "ecr-dkr" {

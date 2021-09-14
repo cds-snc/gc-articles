@@ -104,6 +104,8 @@ See: https://github.com/cds-snc/platform-mvp/pull/95#issuecomment-904688973
 
 ### Deployments 
 
+**NOTE** You will need to have [GitHub CLI](https://cli.github.com) installed to complete the following steps
+
 1) Bump the version #
 
 ```bash
@@ -116,17 +118,7 @@ Select `Bump version`
 
 2) Create a PR, merge ...
 
-3) Create a Github release tagged as the vesion number i.e. [v1.0.6](https://github.com/cds-snc/platform-mvp-ircc/releases/tag/v1.0.6)
-
-
-This can be done using the [GitHub CLI](https://cli.github.com)
-
-```
-gh release create v1.0.6 --notes "bugfix release"
-```
-
-
-3) Update the deployment docker image `version_tag`
+3) Update the deployment docker image
 
 ```bash
 npm run prepare-release
@@ -134,7 +126,9 @@ npm run prepare-release
 
 Select `Update docker image`
 
-> This should automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file  
+> This should automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file
+
+**NOTE** This step will run a github cli command to create a release and tag on Github
 
 4) Create a PR, merge ...
 

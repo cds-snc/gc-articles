@@ -6,7 +6,8 @@
     }
   ],
   "require": {
-    "wpackagist-plugin/two-factor": "^0.7.0"
+    "wpackagist-plugin/two-factor": "^0.7.0",
+    "wpackagist-plugin/wps-hide-login": "^1.8"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",
@@ -16,7 +17,8 @@
   "extra": {
     "installer-paths": {
       "wp-content/mu-plugins/{$name}/": [
-        "wpackagist-plugin/two-factor"
+        "wpackagist-plugin/two-factor",
+        "wpackagist-plugin/wps-hide-login"
       ]
     }
   },

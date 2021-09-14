@@ -9,6 +9,9 @@ RewriteRule ^index\.php$ - [L]
 # add a trailing slash to /wp-admin
 RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
 
+RewriteCond %{REQUEST_URI} wp-login.php
+RewriteRule ^ /404 [L]
+
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]

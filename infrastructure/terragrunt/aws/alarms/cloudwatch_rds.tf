@@ -61,46 +61,6 @@ resource "aws_cloudwatch_metric_alarm" "rds_aurora_replica_lag" {
   }
 }
 
-resource "aws_cloudwatch_metric_alarm" "rds_swap_usage_writer" {
-  alarm_name          = "RdsSwapUsageWriter"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "1"
-  metric_name         = "SwapUsage"
-  namespace           = "AWS/RDS"
-  period              = "300"
-  statistic           = "Maximum"
-  threshold           = var.rds_swap_usage_maximum
-
-  alarm_description = "Maximum swap usage (Bytes) for RDS cluster writer in a 5 minute period"
-  alarm_actions     = [aws_sns_topic.alert_warning.arn]
-  ok_actions        = [aws_sns_topic.alert_warning.arn]
-
-  dimensions = {
-    DBClusterIdentifier = var.rds_cluster_id
-    Role                = "WRITER"
-  }
-}
-
-resource "aws_cloudwatch_metric_alarm" "rds_swap_usage_reader" {
-  alarm_name          = "RdsSwapUsageReader"
-  comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "1"
-  metric_name         = "SwapUsage"
-  namespace           = "AWS/RDS"
-  period              = "300"
-  statistic           = "Maximum"
-  threshold           = var.rds_swap_usage_maximum
-
-  alarm_description = "Maximum swap usage (Bytes) for RDS cluster reader in a 5 minute period"
-  alarm_actions     = [aws_sns_topic.alert_warning.arn]
-  ok_actions        = [aws_sns_topic.alert_warning.arn]
-
-  dimensions = {
-    DBClusterIdentifier = var.rds_cluster_id
-    Role                = "READER"
-  }
-}
-
 resource "aws_cloudwatch_metric_alarm" "rds_freeable_memory_writer" {
   alarm_name          = "RdsFreeableMemoryWriter"
   comparison_operator = "LessThanThreshold"

@@ -129,11 +129,6 @@ variable "rds_freeable_memory_minimum" {
   type        = number
 }
 
-variable "rds_swap_usage_maximum" {
-  description = "RDS cluster instance maximum threshold of swap usage (Bytes)"
-  type        = number
-}
-
 variable "slack_webhook_url" {
   description = "Incoming Slack webhook used to post alarm state changes"
   type        = string

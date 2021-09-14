@@ -94,7 +94,6 @@ inputs = {
   rds_aurora_replica_lag_maximum = 2000
   rds_cpu_maxiumum               = 80
   rds_freeable_memory_minimum    = 64000000
-  rds_swap_usage_maximum         = 256000000
 
   sns_lambda_private_subnet_ids = dependency.network.outputs.private_subnet_ids
   sns_lambda_security_group_id  = dependency.network.outputs.sns_lambda_security_group_id

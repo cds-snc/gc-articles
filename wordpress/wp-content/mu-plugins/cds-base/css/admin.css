@@ -49,3 +49,8 @@
     -moz-osx-font-smoothing: grayscale
 }
 .dashicon-Maple_Leaf:before{content:'\0041';}
+
+/* Hide WPS Hide Login "nag" text */
+.wp-admin div#whl_settings {
+    display: none;
+}

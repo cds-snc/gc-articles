@@ -43,8 +43,10 @@ jobs:
       - name: Build container
         run: |
           docker build \
-          --build-arg git_sha=$GITHUB_SHA \
-          -t ${{ env.PROD_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }} \
+          --build-arg git_sha="$GITHUB_SHA" \
+          --build-arg APACHE_KEY="${{ secrets.PROD_WORDPRESS_APACHE_KEY }}" \
+          --build-arg APACHE_CERT="${{ secrets.PROD_WORDPRESS_APACHE_CERT }}" \
+          -t "${{ env.PROD_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
           -f ./wordpress/docker/production.Dockerfile .
 
       - name: Push containers to ECR

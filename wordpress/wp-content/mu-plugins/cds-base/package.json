@@ -32,11 +32,11 @@
   },
   "scripts": {
     "build": "wp-scripts build src/index.js",
+    "start": "wp-scripts start src/index.js",
     "wp-env:init": "wp-env start",
     "wp-env": "wp-env",
     "update-translations": "scripts/translations/extract-messages.sh && scripts/translations/update-translation-files.sh && scripts/translations/compile-translation-files.sh",
     "packages-update": "wp-scripts packages-update",
-    "start": "wp-scripts start",
     "cy:run": "cypress run",
     "cy:open": "cypress open"
   }

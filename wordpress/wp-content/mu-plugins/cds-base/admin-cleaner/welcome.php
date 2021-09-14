@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 function cds_dashboard_widget(): void
 {
-    wp_add_dashboard_widget('cds_welcome_widget', __('Welcome', 'cds'), 'cds_text_handler');
+    wp_add_dashboard_widget(
+        'cds_notify_widget',
+        __('Notify', 'cds'),
+        'cds_notify_panel_handler',
+    );
 }
 
-function cds_text_handler(): void
+function cds_notify_panel_handler(): void
 {
-    _e('<a href=/wp-admin/admin.php?page=cds_notify_send>Send Template</a>', 'cds');
+    echo '<div id="notify-panel"></div><script>CDS.renderNotifyPanel();</script>';
 }
 
 add_action('wp_dashboard_setup', 'cds_dashboard_widget');

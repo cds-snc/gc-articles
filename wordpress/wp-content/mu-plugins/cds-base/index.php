@@ -29,8 +29,6 @@ require_once __DIR__ . '/subscriptions/index.php';
 require_once __DIR__ . '/notify/NotifyTemplateSender.php';
 require_once __DIR__ . '/login/actions.php';
 
-
-
 if (is_multisite()) {
     define('MU_PLUGIN_URL', network_site_url('/wp-content/mu-plugins', 'relative'));
 } else {
@@ -63,14 +61,11 @@ add_action('admin_enqueue_scripts', 'cds_base_style_admin');
 
 function cds_base_js_admin(): void
 {
-    if (is_super_admin()) {
-        return;
-    }
     // add stylesheet to the wp admin
     wp_enqueue_script(
         'cds-admin-js',
         plugins_url('js/admin.js', __FILE__),
-        ['jquery', 'cds-snc-blocks'],
+        ['jquery', 'cds-snc-admin-js'],
         BASE_PLUGIN_NAME_VERSION,
         true,
     );
@@ -94,13 +89,13 @@ function cds_textdomain(): void
  *
  * Passes translations to JavaScript.
  */
-function cds_register_block(): void
+function cds_admin_js(): void
 {
     // automatically load dependencies and version
     $asset_file = include plugin_dir_path(__FILE__) . 'build/index.asset.php';
 
     wp_register_script(
-        'cds-snc-blocks',
+        'cds-snc-admin-js',
         plugins_url('build/index.js', __FILE__),
         $asset_file['dependencies'],
         $asset_file['version'],
@@ -142,4 +137,4 @@ function cds_register_block(): void
     }
 }
 
-add_action('init', 'cds_register_block');
+add_action('init', 'cds_admin_js');

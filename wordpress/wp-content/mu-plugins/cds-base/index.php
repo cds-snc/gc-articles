@@ -44,13 +44,21 @@ function cds_plugin_images_url($filename)
 function cds_base_style_admin(): void
 {
 
+    // add stylesheet to the wp admin
+    wp_enqueue_style(
+        'cds-base-style-main',
+        plugin_dir_url(__FILE__) . 'css/main.css',
+        [],
+        BASE_PLUGIN_NAME_VERSION,
+    );
+    
     if (is_super_admin()) {
         return;
     }
 
     // add stylesheet to the wp admin
     wp_enqueue_style(
-        'cds-base-style',
+        'cds-base-style-admin',
         plugin_dir_url(__FILE__) . 'css/admin.css',
         [],
         BASE_PLUGIN_NAME_VERSION,
@@ -66,7 +74,7 @@ function cds_base_js_admin(): void
         'cds-admin-js',
         plugins_url('js/admin.js', __FILE__),
         ['jquery', 'cds-snc-admin-js'],
-        BASE_PLUGIN_NAME_VERSION,
+        BASE_PLUGIN_NAME_VERSION."1",
         true,
     );
 }
@@ -99,6 +107,13 @@ function cds_admin_js(): void
         plugins_url('build/index.js', __FILE__),
         $asset_file['dependencies'],
         $asset_file['version'],
+    );
+
+    wp_localize_script("cds-snc-admin-js", "CDS_VARS", array(
+        "rest_url" => esc_url_raw(rest_url()),
+        "rest_nonce" => wp_create_nonce("wp_rest"),
+        "notify_list_ids" => NotifyTemplateSender::parse_json_options(get_option('list_values'))
+        )
     );
 
     /* blocks */

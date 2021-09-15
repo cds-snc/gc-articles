@@ -113,11 +113,58 @@ class NotifyTemplateSender
         ]);
     }
 
+    public static function parse_json_options($data)
+    {
+        $data = preg_replace(
+            '/[ \t]+/',
+            ' ',
+            preg_replace('/[\r\n]+/', "\n", $data),
+        );
+
+        return json_decode($data, true);
+
+        if (empty($data)) {
+            return [];
+        }
+    }
+
+    public static function process_list_counts()
+    {
+        try {
+            $client = new Client([
+                'headers' => [
+                    "Authorization" => getenv('LIST_MANAGER_API_KEY')
+                ]
+            ]);
+
+            $endpoint = getenv('LIST_MANAGER_ENDPOINT');
+
+            $service_id = getenv('LIST_MANAGER_SERVICE_ID');
+
+            $response = $client->request('GET',
+                $endpoint . '/lists/'.$service_id.'/subscriber-count');
+
+            return new WP_REST_Response(json_decode($response->getBody()->getContents()));
+        } catch (Exception $e) {
+            return new WP_REST_Response([]);
+        }
+
+
+    }
+
     public static function register_endpoints(): void
     {
         register_rest_route('wp-notify/v1', '/bulk', [
             'methods' => 'POST',
             'callback' => [self::class, 'process_send'],
+            'permission_callback' => function () {
+                return current_user_can('delete_posts');
+            }
+        ]);
+
+        register_rest_route('wp-notify/v1', '/list_counts', [
+            'methods' => 'GET',
+            'callback' => [self::class, 'process_list_counts'],
             'permission_callback' => function () {
                 return current_user_can('delete_posts');
             }
@@ -146,7 +193,7 @@ class NotifyTemplateSender
             Notices::handle_notice($_GET['status']);
         }
 
-        FormHelpers::render();
+        FormHelpers::render(self::parse_json_options(get_option('list_values')));
 
     }
 }

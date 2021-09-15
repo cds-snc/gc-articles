@@ -113,6 +113,19 @@ class NotifyTemplateSender
         ]);
     }
 
+    public static function parse_service_ids_from_env()
+    {  
+        $str = getenv('LIST_MANAGER_SERVICE_IDS');
+        $arr = explode(',', $str);
+
+        for($i=0; $i < count($arr ); $i++){
+            $key_value = explode('~', $arr [$i]);
+            $service_ids[$key_value [0]] = $key_value [1];
+        }
+
+        return $service_ids;
+    }
+
     public static function parse_json_options($data)
     {
         $data = preg_replace(

@@ -16,22 +16,32 @@ function cds_prev_next_links(): void
     $prev_id = $prev_post->ID;
     $prev_permalink = get_permalink($prev_id);
     $next_post = get_next_post();
-    $next_id = $next_post->ID;
-    $next_permalink = get_permalink($next_id); ?>
+    $next_id = false;
+    if($next_post && $next_post->ID){
+        $next_id = $next_post->ID;
+        $next_permalink = get_permalink($next_id); 
+    }
+    
+    ?>
 
   <nav class="mrgn-tp-xl">
     <h2 class="wb-inv"> <?php _e('Document navigation', 'cds-snc'); ?> </h2>
     <ul class="pager">
+      <?php if($prev_id): ?>
       <li class="next">
         <a id="<?php echo $prev_id ?>" href="<?php echo $next_permalink; ?>"><?php _e(
                 'Next blog post',
                 'cds-snc'
             ); ?> &nbsp;»</a>
       </li>
+      <?php endif; ?>
+
+      <?php if($next_id): ?>
       <li class="previous">
         <a id="<?php echo $next_id ?>" href="<?php echo $prev_permalink; ?>"
            rel="prev">«&nbsp;<?php _e('Previous blog post', 'cds-snc'); ?></a>
       </li>
+      <?php endif; ?>
     </ul>
   </nav>
 

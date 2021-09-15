@@ -15,7 +15,7 @@ function cds_date_block($block_content, $block)
     try {
         $dom = new Dom();
         $dom->loadStr($block_content);
-        $time = $dom->find('time');
+        $time = $dom->find('time');    
 
         if ($time && $time[0] && is_array($time[0] || is_string($time[0]))) {
             return str_replace($time[0], '[' . $time[0] . ']', $block_content);

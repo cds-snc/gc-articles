@@ -22,6 +22,15 @@ resource "aws_secretsmanager_secret_version" "list_manager_endpoint" {
   secret_string = var.list_manager_endpoint
 }
 
+resource "aws_secretsmanager_secret" "list_manager_service_id" {
+  name = "list_manager_service_id_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "list_manager_service_id" {
+  secret_id     = aws_secretsmanager_secret.list_manager_service_id.id
+  secret_string = var.list_manager_service_id
+}
+
 resource "aws_secretsmanager_secret" "notify_api_key" {
   name = "notify_api_key_${random_string.random.result}"
 }

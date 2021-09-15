@@ -54,6 +54,12 @@ variable "list_manager_endpoint" {
   sensitive   = true
 }
 
+variable "list_manager_service_id" {
+  description = "Platform ListManager endpoint ID to get subscriber counts"
+  type        = string
+  sensitive   = true
+}
+
 variable "notify_api_key" {
   description = "API key used for Notify request auth"
   type        = string

@@ -10,6 +10,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_5xx_response" {
   period              = "300"
   statistic           = "Sum"
   threshold           = var.alb_5xx_maximum
+  treat_missing_data  = "notBreaching"
 
   alarm_description = "Sum of 5xx response from the ALB in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
@@ -29,6 +30,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_4xx_response" {
   period              = "300"
   statistic           = "Sum"
   threshold           = var.alb_target_4xx_maximum
+  treat_missing_data  = "notBreaching"
 
   alarm_description = "Sum of 4xx response from the ALB target group in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
@@ -49,6 +51,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_5xx_response" {
   period              = "300"
   statistic           = "Sum"
   threshold           = var.alb_target_5xx_maximum
+  treat_missing_data  = "notBreaching"
 
   alarm_description = "Sum of 5xx response from the ALB target group in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
@@ -69,6 +72,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_response_time_average" {
   period              = "300"
   statistic           = "Average"
   threshold           = var.alb_target_response_time_average_maximum
+  treat_missing_data  = "notBreaching"
 
   alarm_description = "Average response time (seconds) for the ALB target group to receive a response in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
@@ -89,6 +93,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_unhealthy_host" {
   period              = "300"
   statistic           = "Maximum"
   threshold           = "0"
+  treat_missing_data  = "notBreaching"
 
   alarm_description = "Unhealthy ALB target group hosts in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]

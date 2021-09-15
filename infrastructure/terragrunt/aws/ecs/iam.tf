@@ -79,6 +79,7 @@ data "aws_iam_policy_document" "wordpress_ecs_task_get_secret_value" {
       var.database_password_secret_arn,
       aws_secretsmanager_secret_version.list_manager_api_key.arn,
       aws_secretsmanager_secret_version.list_manager_endpoint.arn,
+      aws_secretsmanager_secret_version.list_manager_service_id.arn,
       aws_secretsmanager_secret_version.notify_api_key.arn,
       aws_secretsmanager_secret_version.wordpress_auth_key.arn,
       aws_secretsmanager_secret_version.wordpress_secure_auth_key.arn,

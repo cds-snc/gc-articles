@@ -71,7 +71,7 @@ inputs = {
   alb_target_4xx_maximum                   = 100
 
   canary_healthcheck_url_eng = "https://ircc.digital.canada.ca/"
-  canary_healthcheck_url_fra = "https://ircc.digital.canada.ca/wp-login.php"
+  canary_healthcheck_url_fra = "https://ircc.digital.canada.ca/"
 
   cloudfront_arn              = dependency.load-balancer.outputs.cloudfront_arn
   cloudfront_distribution_id  = dependency.load-balancer.outputs.cloudfront_distribution_id

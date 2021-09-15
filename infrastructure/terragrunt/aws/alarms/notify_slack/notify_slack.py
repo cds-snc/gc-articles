@@ -60,6 +60,8 @@ def default_notification(subject, message):
 def notify_slack(subject, message, region):
   project_name = os.environ['PROJECT_NAME']
   slack_url = os.environ['SLACK_WEBHOOK_URL']
+  icons = {'OK': ':green:', 'INSUFFICIENT_DATA': ':grey_question:', 'ALARM': ':red:'}
+
   payload = {
     "attachments": []
   }
@@ -72,7 +74,8 @@ def notify_slack(subject, message, region):
 
   if "AlarmName" in message:
     notification = cloudwatch_notification(message, region)
-    payload['text'] = project_name + " CloudWatch"
+    state = message['NewStateValue']
+    payload['text'] = f"{icons[state]} *{state}* {project_name}"
     payload['attachments'].append(notification)
   elif "attachments" in message or "text" in message:
     payload = {**payload, **message}

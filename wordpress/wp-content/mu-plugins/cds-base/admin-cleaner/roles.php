@@ -1,4 +1,9 @@
 <?php
+
+use CDS\Utils;
+
+require_once __DIR__.'/../vendor/autoload.php';
+
 function cds_reset_roles($role)
 {
     $default_roles = [
@@ -150,16 +155,17 @@ function cds_reset_roles($role)
 
 function cds_base_activate()
 {
-    // run once
-    if (get_option('cds_base_activated_v1.0.0') == false && is_blog_installed()) {
-        remove_role('administrator');
-        remove_role('editor');
-        remove_role('author');
-        remove_role('contributor');
-        remove_role('subscriber');
-        cds_reset_roles('ircc');
-        add_option('cds_base_activated', true);
-    }
+
+    Utils::check_option_callback('cds_base_activated', '1.0', function() {
+        if (is_blog_installed()) {
+            remove_role('administrator');
+            remove_role('editor');
+            remove_role('author');
+            remove_role('contributor');
+            remove_role('subscriber');
+            cds_reset_roles('ircc');
+        }
+    });
 }
 
 cds_base_activate();

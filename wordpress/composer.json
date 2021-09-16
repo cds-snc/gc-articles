@@ -27,6 +27,10 @@
       "cd wp-content/themes/cds-default && composer install",
       "cd wp-content/mu-plugins/cds-base && composer install"
     ],
+    "post-update-cmd": [
+      "cd wp-content/themes/cds-default && composer update",
+      "cd wp-content/mu-plugins/cds-base && composer update"
+    ],
     "make-pot": "wp i18n make-pot --domain=cds-snc wp-content/themes/cds-default wp-content/themes/cds-default/languages/cds-snc.pot"
   }
 }

@@ -2,7 +2,7 @@
     "name": "cds-snc/base",
     "autoload": {
         "psr-4": {
-            "CdsSnc\\Base\\": "src/"
+            "CDS\\": "classes/"
         }
     },
     "require": {
@@ -10,6 +10,8 @@
         "wa72/htmlpagedom": "^2.0",
         "php-http/guzzle6-adapter": "^2.0",
         "alphagov/notifications-php-client": "^3.2",
-        "ramsey/uuid": "^4.2"
+        "ramsey/uuid": "^4.2",
+        "ua-parser/uap-php": "^3.9",
+        "nesbot/carbon": "^2.53"
     }
 }

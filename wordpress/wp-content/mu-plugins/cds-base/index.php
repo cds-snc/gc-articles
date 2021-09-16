@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/vendor/autoload.php';
+use CDS\Modules\Setup;
+
+require __DIR__.'/vendor/autoload.php';
 
 /**
  * Plugin Name: CDS-SNC Base
@@ -153,3 +155,5 @@ function cds_admin_js(): void
 }
 
 add_action('init', 'cds_admin_js');
+
+$setupComponents = new Setup();

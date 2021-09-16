@@ -24,6 +24,7 @@ env:
   TF_VAR_list_manager_api_key: ${{ secrets.PROD_LIST_MANAGER_API_KEY }}
   TF_VAR_list_manager_endpoint: ${{ secrets.PROD_LIST_MANAGER_ENDPOINT }}
   TF_VAR_list_manager_service_id: ${{ secrets.PROD_LIST_MANAGER_SERVICE_ID }}
+  TF_VAR_list_manager_notify_services: ${{ secrets.PROD_LIST_MANAGER_NOTIFY_SERVICES }}
   TF_VAR_notify_api_key: ${{ secrets.PROD_NOTIFY_API_KEY }}
   TF_VAR_slack_webhook_url: ${{ secrets.PROD_SLACK_WEBHOOK_URL }}
   TF_VAR_wordpress_auth_key: ${{ secrets.PROD_WORDPRESS_AUTH_KEY }}

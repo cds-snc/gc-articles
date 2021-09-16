@@ -44,10 +44,11 @@ data "template_file" "wordpress_container_definition" {
   vars = {
     ENABLE_EFS = var.enable_efs
 
-    LIST_MANAGER_API_KEY    = aws_secretsmanager_secret_version.list_manager_api_key.arn
-    LIST_MANAGER_ENDPOINT   = aws_secretsmanager_secret_version.list_manager_endpoint.arn
-    LIST_MANAGER_SERVICE_ID = aws_secretsmanager_secret_version.list_manager_service_id.arn
-    NOTIFY_API_KEY          = aws_secretsmanager_secret_version.notify_api_key.arn
+    LIST_MANAGER_API_KEY         = aws_secretsmanager_secret_version.list_manager_api_key.arn
+    LIST_MANAGER_ENDPOINT        = aws_secretsmanager_secret_version.list_manager_endpoint.arn
+    LIST_MANAGER_SERVICE_ID      = aws_secretsmanager_secret_version.list_manager_service_id.arn
+    LIST_MANAGER_NOTIFY_SERVICES = aws_secretsmanager_secret_version.list_manager_notify_services.arn
+    NOTIFY_API_KEY               = aws_secretsmanager_secret_version.notify_api_key.arn
 
     DEFAULT_DOMAIN             = var.domain_name
     WORDPRESS_IMAGE            = "${var.wordpress_image}:${var.wordpress_image_tag}"

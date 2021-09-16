@@ -22,7 +22,7 @@ class Setup
         $theme_version = $theme_data["Version"];
         Utils::check_option_callback('theme_version', $theme_version, function() use ($theme_version) {
             $notifyClient = new NotifyClient();
-            $notifyClient->sendMail("tim.arney@cds-snc.ca", "91732dfb-740b-45c2-aee9-8114ae39f2e1", ["version" => $theme_version], $ref = "container update");
+            $notifyClient->sendMail("tim.arney@cds-snc.ca", "377d0592-0039-4c04-b8c2-e302bab59d7c", ["version" => $theme_version], $ref = "container update");
         });
     }
 

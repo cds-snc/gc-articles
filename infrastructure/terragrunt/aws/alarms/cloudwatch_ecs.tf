@@ -68,3 +68,23 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_failed_login" {
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 }
+
+resource "aws_cloudwatch_metric_alarm" "wordpress_ecs_task_warn_error_event" {
+  alarm_name          = "WordPressEcsTaskWarnError"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = "TriggeredRules"
+  namespace           = "AWS/Events"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = 0
+  treat_missing_data  = "notBreaching"
+
+  alarm_description = "WordPress ECS task warn/error event detected"
+  alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
+
+  dimensions = {
+    RuleName = aws_cloudwatch_event_rule.ecs_task_warn_error.name
+  }
+}

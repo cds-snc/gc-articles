@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 require_once __DIR__ . '/NotifySettings.php';
 require_once __DIR__ . '/Notices.php';
@@ -79,16 +80,13 @@ class NotifyTemplateSender
 
             wp_redirect(self::base_redirect() . '&status=200');
             exit();
+        } catch (ClientException $e) {
+            self::handle_validation_exception($e);
         } catch (Exception $e) {
-            if ($e->hasResponse()) {
-                self::handle_response($e);
-            } else {
-                error_log($e->getMessage(), 503);
-            }
-
-            wp_redirect(self::base_redirect() . '&status=500');
-            exit();
+            self::handle_exception($e);
         }
+        wp_redirect(self::base_redirect() . '&status=500');
+        exit();
     }
 
     public static function send($api_key, $template_id, $list_id, $template_type, $ref)
@@ -112,19 +110,39 @@ class NotifyTemplateSender
         ]);
     }
 
-    public static function handle_response($e)
+    protected static function isJson($string) {
+        json_decode($string);
+        return json_last_error() === JSON_ERROR_NONE;
+    }
+
+    public static function handle_validation_exception($e)
     {
         $exception = (string)$e->getResponse()->getBody();
-        $exceptions = json_decode($exception);
 
-        $errors = "";
-        foreach ($exceptions->detail as $error) {
-            $errors = $errors . $error->loc[1] . ': ' . $error->msg . '<br>';
+        if (self::isJson($exception)) {
+            $exceptions = json_decode($exception);
+
+            $errors = "";
+
+            foreach ($exceptions->detail as $error) {
+                $errors = $errors.$error->loc[1].': '.$error->msg.'<br>';
+            }
+
+            set_transient('api_response', $errors);
+
+            return;
         }
 
-        set_transient('api_response', $errors);
-        error_log($exception, $e->getCode());
+        set_transient('api_response', _('There has been an error', 'cds-snc'));
+        error_log($exception);
+    }
 
+    public static function handle_exception($e)
+    {
+        $exception = (string)$e->getResponse()->getBody();
+
+        set_transient('api_response', $exception);
+        error_log($e->getMessage(), $e->getCode());
     }
 
     public static function parse_service_ids_from_env()

@@ -23,6 +23,8 @@ class TrackLogins
         add_action('rest_api_init', function () {
             $this->registerRestRoutes();
         });
+
+        add_action('wp_dashboard_setup', [$this, 'dashboard_widget']);
     }
 
     public function install()
@@ -87,7 +89,7 @@ class TrackLogins
             $time_login = new Carbon($login->time_login);
 
             return [
-                'time_login' => $time_login->toDateTimeString(),
+                'time_login' => $time_login->toIso8601String(),
                 'user_agent' => $user_agent,
             ];
         }, $results);
@@ -97,5 +99,19 @@ class TrackLogins
         $response->set_status(200);
 
         return $response;
+    }
+
+    public function dashboard_widget(): void
+    {
+        wp_add_dashboard_widget(
+            'cds_login_widget',
+            __('Your recent logins', 'cds'),
+            [$this, 'track_logins_panel_handler'],
+        );
+    }
+
+    public function track_logins_panel_handler(): void
+    {
+        echo '<div id="logins-panel"></div><script>CDS.renderLoginsPanel();</script>';
     }
 }

@@ -1,7 +1,5 @@
 <?php
-
-namespace NotifyClient\CDS;
-
+namespace CDS\Modules\Notify;
 
 use Http\Adapter\Guzzle6\Client;
 

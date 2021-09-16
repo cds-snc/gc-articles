@@ -20,6 +20,12 @@ const updateWordPressThemeVersion = async (version) => {
     from: new RegExp("_S_VERSION',.*", 'i'),
     to: `_S_VERSION', '${version}');`,
   });
+
+  await replaceContent({
+    files: 'wordpress/wp-content/themes/cds-default/style.css',
+    from: new RegExp("Version:.*", 'i'),
+    to: `Version: ${version}`,
+  });
 }
 
 const updateWordPressPluginVersion = async (version) => {

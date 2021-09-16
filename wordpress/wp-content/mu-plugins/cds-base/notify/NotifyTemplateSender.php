@@ -27,10 +27,22 @@ class NotifyTemplateSender
         return get_admin_url() . 'admin.php?page=' . self::$admin_page;
     }
 
+    public static function find_api_key($service_id): string
+    {
+        $service_ids = self::parse_service_ids_from_env();
+        $api_key = "";
+        foreach ($service_ids as $key => $value) {
+            if (trim($service_id) == trim($key)) {
+                $api_key = $value;
+            }
+        }
+        return $api_key;
+    }
 
     public static function validate($data): array
     {
         $template_id = $data['template_id'];
+        $api_key = self::find_api_key($data['service_id']);
 
         if (empty($template_id)) {
             wp_redirect(self::base_redirect() . '&status=400');
@@ -47,22 +59,7 @@ class NotifyTemplateSender
         $list_id = $parts[0];
         $list_type = $parts[1];
 
-        return ['template_id' => $template_id, 'list_id' => $list_id, 'list_type' => $list_type];
-
-    }
-
-    public static function handle_response($e)
-    {
-        $exception = (string)$e->getResponse()->getBody();
-        $exceptions = json_decode($exception);
-
-        $errors = "";
-        foreach ($exceptions->detail as $error) {
-            $errors = $errors . $error->loc[1] . ': ' . $error->msg . '<br>';
-        }
-
-        set_transient('api_response', $errors);
-        error_log($exception, $e->getCode());
+        return ['api_key' => $api_key, 'template_id' => $template_id, 'list_id' => $list_id, 'list_type' => $list_type];
 
     }
 
@@ -73,6 +70,7 @@ class NotifyTemplateSender
             $sanitized = self::validate($data);
 
             self::send(
+                $sanitized['api_key'],
                 $sanitized['template_id'],
                 $sanitized['list_id'],
                 $sanitized['list_type'],
@@ -93,7 +91,7 @@ class NotifyTemplateSender
         }
     }
 
-    public static function send($template_id, $list_id, $template_type, $ref)
+    public static function send($api_key, $template_id, $list_id, $template_type, $ref)
     {
         $client = new Client([
             'headers' => [
@@ -105,6 +103,7 @@ class NotifyTemplateSender
 
         return $client->request('POST', $endpoint . '/send', [
             'json' => [
+                'service_api_key' => $api_key,
                 'template_id' => $template_id,
                 'list_id' => $list_id,
                 'template_type' => $template_type,
@@ -113,12 +112,28 @@ class NotifyTemplateSender
         ]);
     }
 
-    public static function parse_service_ids_from_env()
-    {  
-        $str = getenv('LIST_MANAGER_SERVICE_IDS');
-        $arr = explode(',', $str);
+    public static function handle_response($e)
+    {
+        $exception = (string)$e->getResponse()->getBody();
+        $exceptions = json_decode($exception);
 
-        for($i=0; $i < count($arr ); $i++){
+        $errors = "";
+        foreach ($exceptions->detail as $error) {
+            $errors = $errors . $error->loc[1] . ': ' . $error->msg . '<br>';
+        }
+
+        set_transient('api_response', $errors);
+        error_log($exception, $e->getCode());
+
+    }
+
+    public static function parse_service_ids_from_env()
+    {
+        $str = getenv('LIST_MANAGER_NOTIFY_SERVICES');
+        $arr = explode(',', $str);
+        $service_ids = [];
+
+        for ($i = 0; $i < count($arr); $i++) {
             $key_value = explode('~', $arr [$i]);
             $service_ids[$key_value [0]] = $key_value [1];
         }
@@ -128,6 +143,10 @@ class NotifyTemplateSender
 
     public static function parse_json_options($data)
     {
+        if (empty($data)) {
+            return [];
+        }
+
         $data = preg_replace(
             '/[ \t]+/',
             ' ',
@@ -135,10 +154,6 @@ class NotifyTemplateSender
         );
 
         return json_decode($data, true);
-
-        if (empty($data)) {
-            return [];
-        }
     }
 
     public static function process_list_counts()
@@ -155,13 +170,12 @@ class NotifyTemplateSender
             $service_id = getenv('LIST_MANAGER_SERVICE_ID');
 
             $response = $client->request('GET',
-                $endpoint . '/lists/'.$service_id.'/subscriber-count');
+                $endpoint . '/lists/' . $service_id . '/subscriber-count');
 
             return new WP_REST_Response(json_decode($response->getBody()->getContents()));
         } catch (Exception $e) {
             return new WP_REST_Response([]);
         }
-
 
     }
 
@@ -201,12 +215,14 @@ class NotifyTemplateSender
 
     public static function render_form(): void
     {
-
         if (isset($_GET['status'])) {
             Notices::handle_notice($_GET['status']);
         }
 
-        FormHelpers::render(self::parse_json_options(get_option('list_values')));
+        FormHelpers::render([
+            "service_ids" => self::parse_service_ids_from_env(),
+            "list_values" => self::parse_json_options(get_option('list_values'))
+        ]);
 
     }
 }

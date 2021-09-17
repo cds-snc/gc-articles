@@ -28,7 +28,6 @@ if ( ! defined('BASE_PLUGIN_NAME_VERSION')) {
 
 require_once __DIR__.'/subscriptions/index.php';
 require_once __DIR__.'/notify/NotifyTemplateSender.php';
-require_once __DIR__.'/login/actions.php';
 
 if (is_multisite()) {
     define('MU_PLUGIN_URL', network_site_url('/wp-content/mu-plugins', 'relative'));

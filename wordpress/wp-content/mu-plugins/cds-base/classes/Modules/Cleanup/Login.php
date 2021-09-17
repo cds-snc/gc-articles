@@ -11,6 +11,7 @@ class Login
         add_filter('login_headertext', [$this, 'customizeLoginHeadertext']);
         add_action('login_head', [$this, 'favicon']);
         add_action('admin_head', [$this, 'favicon']);
+        add_action('wp_login_failed', [$this, 'loginFailed']);
 
         add_filter('login_redirect', [$this, 'loginRedirect'], 10, 3);
     }
@@ -63,5 +64,10 @@ class Login
         $redirect_to = admin_url()."admin.php?page=cds_notify_send";
 
         return $redirect_to;
+    }
+
+    function loginFailed($username)
+    {
+        error_log("LOGIN FAILED: user $username: authentication failure for \"".admin_url()."\"");
     }
 }

@@ -75,7 +75,13 @@ class FormHelpers
         </form>
 
         <div id="notify-panel"></div>
-        <script>CDS.Notify.renderPanel({ 'sendTemplateLink': false });</script>
+
+        <?php 
+        $data = "CDS.Notify.renderPanel({ 'sendTemplateLink': false });";
+        wp_add_inline_script('cds-snc-admin-js', $data, 'after' );
+        ?>
+
+        
       </div>
         <?php
     }

@@ -16,6 +16,7 @@ use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
 use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
+use CDS\Modules\Blocks\Blocks;
 use CDS\Utils;
 
 class Setup
@@ -26,6 +27,7 @@ class Setup
         $this->checkVersion();
         $this->setupTrackLogins();
         $this->setupNotifyTemplateSender();
+        $this->setupBlocks();
         
         // @TODO: subscriptions not tested since refactor
         // $this->setupSubscriptions();
@@ -69,6 +71,12 @@ class Setup
         new SendTemplateDashboardPanel();
     }
 
+
+    public function setupBlocks()
+    {
+        new Blocks();
+    }
+  
     public function setupSubscriptions()
     {
         new SetupSubscriptions();

@@ -111,6 +111,8 @@ class TrackLogins
 
     public function trackLoginsPanelHandler(): void
     {
-        echo '<div id="logins-panel"></div><script>CDS.renderLoginsPanel();</script>';
+        echo '<div id="logins-panel"></div>';
+        $data = 'CDS.renderLoginsPanel();';
+        wp_add_inline_script('cds-snc-admin-js', $data, 'after' );
     }
 }

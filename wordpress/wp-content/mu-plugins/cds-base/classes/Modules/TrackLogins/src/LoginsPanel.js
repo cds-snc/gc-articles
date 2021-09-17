@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { __ } from "@wordpress/i18n";
-import { getData } from './dashboard';
+import { getData } from 'Notify/NotifyPanel';
 
 CDS_VARS = window.CDS_VARS;
 

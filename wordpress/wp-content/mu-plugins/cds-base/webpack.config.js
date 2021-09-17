@@ -10,6 +10,8 @@ module.exports = {
     resolve: {
         alias: {
             Notify: path.resolve(__dirname, 'classes/Modules/Notify/src'),
+            Blocks: path.resolve(__dirname, 'classes/Modules/Blocks/src'),
+            TrackLogins: path.resolve(__dirname, 'classes/Modules/TrackLogins/src'),
         }
     }
 

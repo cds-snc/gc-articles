@@ -66,20 +66,6 @@ function cds_base_style_admin(): void
 
 add_action('admin_enqueue_scripts', 'cds_base_style_admin');
 
-function cds_base_js_admin(): void
-{
-    // add stylesheet to the wp admin
-    wp_enqueue_script(
-        'cds-admin-js',
-        plugins_url('js/admin.js', __FILE__),
-        ['jquery', 'cds-snc-admin-js'],
-        BASE_PLUGIN_NAME_VERSION."1",
-        true,
-    );
-}
-
-add_action('admin_enqueue_scripts', 'cds_base_js_admin');
-
 /**
  * Load all translations for our plugin from the MO file.
  */
@@ -90,22 +76,17 @@ function cds_textdomain(): void
     load_plugin_textdomain('cds-snc', false, basename(__DIR__).'/languages');
 }
 
-/**
- * Registers all block assets so that they can be enqueued through Gutenberg in
- * the corresponding context.
- *
- * Passes translations to JavaScript.
- */
 function cds_admin_js(): void
 {
     // automatically load dependencies and version
     $asset_file = include plugin_dir_path(__FILE__).'build/index.asset.php';
 
-    wp_register_script(
+    wp_enqueue_script(
         'cds-snc-admin-js',
         plugins_url('build/index.js', __FILE__),
         $asset_file['dependencies'],
         $asset_file['version'],
+        true,
     );
 
     wp_localize_script("cds-snc-admin-js", "CDS_VARS", array(
@@ -114,43 +95,8 @@ function cds_admin_js(): void
             "notify_list_ids" => NotifyTemplateSender::parse_json_options(get_option('list_values'))
         )
     );
-
-    /* blocks */
-
-    register_block_type('cds-snc/expander', [
-        'editor_script' => 'cds-snc',
-    ]);
-
-    register_block_type('cds-snc/alert', [
-        'editor_script' => 'cds-snc',
-    ]);
-
-    /* table styles */
-    register_block_style('core/table', [
-        'name'  => 'bordered-table',
-        'label' => 'Bordered Table',
-    ]);
-
-    register_block_style('core/table', [
-        'name'  => 'filterable',
-        'label' => 'Filterable Table',
-    ]);
-
-    register_block_style('core/table', [
-        'name'  => 'responsive-cards',
-        'label' => 'Responsive Cards Table',
-    ]);
-
-    if (function_exists('wp_set_script_translations')) {
-        /**
-         * May be extended to wp_set_script_translations( 'my-handle', 'my-domain',
-         * plugin_dir_path( MY_PLUGIN ) . 'languages' ) ). For details see
-         * https://make.wordpress.org/core/2018/11/09/new-javascript-i18n-support-in-wordpress/
-         */
-        wp_set_script_translations('cds-snc-base', 'cds-snc');
-    }
 }
 
-add_action('init', 'cds_admin_js');
+add_action('admin_enqueue_scripts', 'cds_admin_js');
 
 $setupComponents = new Setup();

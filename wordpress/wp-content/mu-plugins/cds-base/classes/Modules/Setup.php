@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules;
 
 use CDS\Modules\Cleanup\Login as CleanupLogin;
+use CDS\Modules\Cleanup\Menus as CleanupMenus;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
@@ -25,13 +26,14 @@ class Setup
     {
         new CleanupRoles();
         new CleanupLogin();
+        new CleanupMenus();
     }
 
     public function checkVersion()
     {
         $theme_data    = wp_get_theme();
         $theme_version = $theme_data["Version"];
-        
+
         Utils::check_option_callback('theme_version', $theme_version, function () use ($theme_version) {
             $notifyClient = new NotifyClient();
             $notifyClient->sendMail("tim.arney@cds-snc.ca", "377d0592-0039-4c04-b8c2-e302bab59d7c",

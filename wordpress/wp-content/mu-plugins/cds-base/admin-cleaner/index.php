@@ -3,45 +3,9 @@
 declare(strict_types=1);
 
 require_once __DIR__.'/util.php';
-require_once __DIR__.'/wp-mail-smtp.php';
 require_once __DIR__.'/notices.php';
 require_once __DIR__.'/profile.php';
 
-/*--------------------------------------------*
- * Menu Pages
- *--------------------------------------------*/
-
-function remove_menu_pages(): void
-{
-    if (super_admin()) {
-        return;
-    }
-
-    global $menu, $submenu;
-
-    /* add items to keep here */
-    $allowed = [
-        __('Pages'),
-        __('Posts'),
-        __('Articles', 'cds'),
-        __('Users'),
-        __('WPForms'),
-    ];
-
-    //  __('Settings'), __('Appearance')
-    // http://localhost/wp-admin/options-reading.php
-    end($menu);
-    while (prev($menu)) {
-        $value = explode(' ', $menu[key($menu)][0]);
-        if ( ! in_array($value[0] !== null ? $value[0] : '', $allowed)) {
-            unset($menu[key($menu)]);
-        }
-    }
-
-    hide_wp_mail_smtp_menus();
-}
-
-add_action('admin_menu', 'remove_menu_pages', 2147483647);
 
 /*--------------------------------------------*
  * Dashboard

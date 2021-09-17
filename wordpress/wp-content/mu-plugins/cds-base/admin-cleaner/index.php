@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/util.php';
-require_once __DIR__ . '/wp-mail-smtp.php';
-require_once __DIR__ . '/notices.php';
-require_once __DIR__ . '/profile.php';
-require_once __DIR__ . '/welcome.php';
+require_once __DIR__.'/util.php';
+require_once __DIR__.'/wp-mail-smtp.php';
+require_once __DIR__.'/notices.php';
+require_once __DIR__.'/profile.php';
 
 /*--------------------------------------------*
  * Menu Pages
@@ -34,7 +33,7 @@ function remove_menu_pages(): void
     end($menu);
     while (prev($menu)) {
         $value = explode(' ', $menu[key($menu)][0]);
-        if (!in_array($value[0] !== null ? $value[0] : '', $allowed)) {
+        if ( ! in_array($value[0] !== null ? $value[0] : '', $allowed)) {
             unset($menu[key($menu)]);
         }
     }
@@ -97,16 +96,17 @@ function remove_from_admin_bar($wp_admin_bar): void
 
     /* remove "Howdy" from admin bar */
     $my_account = $wp_admin_bar->get_node('my-account');
-    $newtext = str_replace('Howdy,', '', $my_account->title);
+    $newtext    = str_replace('Howdy,', '', $my_account->title);
     $wp_admin_bar->add_node([
-        'id' => 'my-account',
+        'id'    => 'my-account',
         'title' => $newtext,
     ]);
 
     $wp_admin_bar->add_node([
-        'id' => 'cds-home',
-        'title'  => '<div class="ab-item"><span class="ab-icon"></span>'.__( 'Canadian Digital Service', 'cds-snc' ).'</div>',
-        'href' => "https://digital.canada.ca",
+        'id'    => 'cds-home',
+        'title' => '<div class="ab-item"><span class="ab-icon"></span>'.__('Canadian Digital Service',
+                'cds-snc').'</div>',
+        'href'  => "https://digital.canada.ca",
     ]);
 
     $wp_admin_bar->remove_menu('my-sites');

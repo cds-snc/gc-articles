@@ -1,4 +1,4 @@
-import { NotifyPanel, findListById, getData } from "./NotifyPanel"
+import { NotifyPanel, findListById, getData } from "Notify/NotifyPanel"
 import { LoginsPanel } from "./LoginsPanel";
 
 const { render } = wp.element;

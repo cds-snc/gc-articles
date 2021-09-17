@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace CDS\Modules;
 
+use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
+use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
 use CDS\Modules\Cleanup\Login as CleanupLogin;
 use CDS\Modules\Cleanup\Menus as CleanupMenus;
+use CDS\Modules\Cleanup\Misc as CleanupMisc;
+use CDS\Modules\Cleanup\Notices as CleanupNotices;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
@@ -27,6 +31,10 @@ class Setup
         new CleanupRoles();
         new CleanupLogin();
         new CleanupMenus();
+        new CleanupDashboard();
+        new CleanupNotices();
+        new CleanupAdminBar();
+        new CleanupMisc();
     }
 
     public function checkVersion()

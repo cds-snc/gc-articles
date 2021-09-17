@@ -2,44 +2,24 @@
 
 declare(strict_types=1);
 
+namespace CDS\Modules\Cleanup;
+
+use CDS\Utils;
 use Wa72\HtmlPageDom\HtmlPage;
 
-add_action('personal_options', ['ProfileCleaner', 'start']);
-
-add_filter('additional_capabilities_display', 'remove_additional_capabilities_func');
-
-function remove_additional_capabilities_func(): bool
+class Profile
 {
-    return false;
-}
-
-add_action('wpml_user_profile_options', ['ProfileCleaner', 'wpml_options']);
-
-class ProfileCleaner
-{
-    /**
-     * Utility method to search text within a string
-     */
-    public static function contains($haystack, $needle): bool
+    public function __construct()
     {
-        if (strpos($haystack, $needle) !== false) {
-            return true;
-        }
+        add_action('personal_options', [$this, 'start']);
+        add_filter('additional_capabilities_display', [$this, 'remove_additional_capabilities_func']);
+        add_action('wpml_user_profile_options', [$this, 'wpml_options']);
 
-        return false;
-    }
-
-    /**
-     * Called on 'personal_options'.
-     */
-    public static function start(): void
-    {
-        if (is_super_admin()) {
-            return;
+        if (is_admin()) {
+            remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
+            remove_action('personal_options', 'wpml_show_user_options');
+            remove_action('personal_options_update', ['SitePress', 'save_user_options']);
         }
-        $action = (IS_PROFILE_PAGE ? 'show' : 'edit') . '_user_profile';
-        add_action($action, [self::class, 'stop']);
-        ob_start();
     }
 
     /**
@@ -58,10 +38,11 @@ class ProfileCleaner
         $headings = $crawler->filter('h2')->reduce(
             static function ($node, $j) {
                 $remove = ['Personal Options', 'Name', 'Contact Info', 'About Yourself', 'Yoast SEO settings'];
-                $id = strtolower(str_replace(' ', '_', $node->html()));
+                $id     = strtolower(str_replace(' ', '_', $node->html()));
 
                 if (in_array($node->html(), $remove)) {
                     $node->setAttribute('id', $id);
+
                     return true;
                 }
 
@@ -108,7 +89,7 @@ class ProfileCleaner
         ];
 
         foreach ($contact_info as $contact) {
-            $crawler->filter('.user-' . $contact . '-wrap')->remove();
+            $crawler->filter('.user-'.$contact.'-wrap')->remove();
         }
 
         /*--------------------------------------------*
@@ -122,13 +103,13 @@ class ProfileCleaner
         *--------------------------------------------*/
         $rows = $crawler->filter('.two-factor-methods-table tbody tr')->reduce(
             static function ($node, $j) {
-                
 
-                if (ProfileCleaner::contains($node->html(), 'Backup Verification Codes')) {
+
+                if (Utils::str_contains($node->html(), 'Backup Verification Codes')) {
                     return true;
                 }
 
-                if (ProfileCleaner::contains($node->html(), 'Dummy Method')) {
+                if (Utils::str_contains($node->html(), 'Dummy Method')) {
                     return true;
                 }
 
@@ -141,22 +122,26 @@ class ProfileCleaner
         echo $crawler->save();
     }
 
-    public static function wpml_options($userId): void
+    /**
+     * Called on 'personal_options'.
+     */
+    public function start(): void
+    {
+        if (is_super_admin()) {
+            return;
+        }
+        $action = (IS_PROFILE_PAGE ? 'show' : 'edit').'_user_profile';
+        add_action($action, [$this, 'stop']);
+        ob_start();
+    }
+
+    public function remove_additional_capabilities_func(): bool
+    {
+        return false;
+    }
+
+    public function wpml_options($userId): void
     {
         echo '<input type="hidden" id="icl_show_hidden_languages" name="icl_show_hidden_languages" type="checkbox" value="1">';
     }
 }
-
-if (is_admin()) {
-    remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
-    remove_action('personal_options', 'wpml_show_user_options');
-    remove_action('personal_options_update', ['SitePress','save_user_options']);
-}
-
-function cds_login_redirect( $redirect_to, $request, $user ) {
-    $redirect_to =  admin_url()."admin.php?page=cds_notify_send";
-    return $redirect_to;
-}
-
-add_filter( 'login_redirect', 'cds_login_redirect', 10, 3 );
-//

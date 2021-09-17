@@ -2,7 +2,8 @@
 
 namespace CDS;
 
-class Utils {
+class Utils
+{
     public static function check_option_callback($option, $value, $callback, $save = true)
     {
         if ($old = get_option($option) != $value) {
@@ -16,10 +17,19 @@ class Utils {
 
     public static function add_or_update_option($option, $value): void
     {
-        if(get_option($option)){
+        if (get_option($option)) {
             update_option($option, $value);
         }
 
         add_option($option, $value);
+    }
+
+    public static function str_contains($haystack, $needle): bool
+    {
+        if (strpos($haystack, $needle) !== false) {
+            return true;
+        }
+
+        return false;
     }
 }

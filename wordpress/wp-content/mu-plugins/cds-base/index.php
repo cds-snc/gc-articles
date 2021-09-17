@@ -18,18 +18,17 @@ require __DIR__.'/vendor/autoload.php';
 
 defined('ABSPATH') || exit();
 
-if (!defined('BASE_PLUGIN_NAME')) {
+if ( ! defined('BASE_PLUGIN_NAME')) {
     define('BASE_PLUGIN_NAME', 'cds-base');
 }
 
-if (!defined('BASE_PLUGIN_NAME_VERSION')) {
+if ( ! defined('BASE_PLUGIN_NAME_VERSION')) {
     define('BASE_PLUGIN_NAME_VERSION', '1.1.0');
 }
 
-require_once __DIR__ . '/admin-cleaner/index.php';
-require_once __DIR__ . '/subscriptions/index.php';
-require_once __DIR__ . '/notify/NotifyTemplateSender.php';
-require_once __DIR__ . '/login/actions.php';
+require_once __DIR__.'/subscriptions/index.php';
+require_once __DIR__.'/notify/NotifyTemplateSender.php';
+require_once __DIR__.'/login/actions.php';
 
 if (is_multisite()) {
     define('MU_PLUGIN_URL', network_site_url('/wp-content/mu-plugins', 'relative'));
@@ -39,7 +38,7 @@ if (is_multisite()) {
 
 function cds_plugin_images_url($filename)
 {
-    return plugin_dir_url(__FILE__) . 'images/' . $filename;
+    return plugin_dir_url(__FILE__).'images/'.$filename;
 }
 
 
@@ -49,11 +48,11 @@ function cds_base_style_admin(): void
     // add stylesheet to the wp admin
     wp_enqueue_style(
         'cds-base-style-main',
-        plugin_dir_url(__FILE__) . 'css/main.css',
+        plugin_dir_url(__FILE__).'css/main.css',
         [],
         BASE_PLUGIN_NAME_VERSION,
     );
-    
+
     if (is_super_admin()) {
         return;
     }
@@ -61,7 +60,7 @@ function cds_base_style_admin(): void
     // add stylesheet to the wp admin
     wp_enqueue_style(
         'cds-base-style-admin',
-        plugin_dir_url(__FILE__) . 'css/admin.css',
+        plugin_dir_url(__FILE__).'css/admin.css',
         [],
         BASE_PLUGIN_NAME_VERSION,
     );
@@ -90,7 +89,7 @@ add_action('init', 'cds_textdomain');
 
 function cds_textdomain(): void
 {
-    load_plugin_textdomain('cds-snc', false, basename(__DIR__) . '/languages');
+    load_plugin_textdomain('cds-snc', false, basename(__DIR__).'/languages');
 }
 
 /**
@@ -102,7 +101,7 @@ function cds_textdomain(): void
 function cds_admin_js(): void
 {
     // automatically load dependencies and version
-    $asset_file = include plugin_dir_path(__FILE__) . 'build/index.asset.php';
+    $asset_file = include plugin_dir_path(__FILE__).'build/index.asset.php';
 
     wp_register_script(
         'cds-snc-admin-js',
@@ -112,9 +111,9 @@ function cds_admin_js(): void
     );
 
     wp_localize_script("cds-snc-admin-js", "CDS_VARS", array(
-        "rest_url" => esc_url_raw(rest_url()),
-        "rest_nonce" => wp_create_nonce("wp_rest"),
-        "notify_list_ids" => NotifyTemplateSender::parse_json_options(get_option('list_values'))
+            "rest_url"        => esc_url_raw(rest_url()),
+            "rest_nonce"      => wp_create_nonce("wp_rest"),
+            "notify_list_ids" => NotifyTemplateSender::parse_json_options(get_option('list_values'))
         )
     );
 
@@ -130,17 +129,17 @@ function cds_admin_js(): void
 
     /* table styles */
     register_block_style('core/table', [
-        'name' => 'bordered-table',
+        'name'  => 'bordered-table',
         'label' => 'Bordered Table',
     ]);
 
     register_block_style('core/table', [
-        'name' => 'filterable',
+        'name'  => 'filterable',
         'label' => 'Filterable Table',
     ]);
 
     register_block_style('core/table', [
-        'name' => 'responsive-cards',
+        'name'  => 'responsive-cards',
         'label' => 'Responsive Cards Table',
     ]);
 

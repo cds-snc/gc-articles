@@ -21,7 +21,7 @@ class AdminBar
 
     public function removeFromAdminBar($wp_admin_bar): void
     {
-        if (super_admin()) {
+        if (is_super_admin()) {
             return;
         }
 

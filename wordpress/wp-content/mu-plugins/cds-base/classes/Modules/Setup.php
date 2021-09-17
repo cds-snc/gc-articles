@@ -14,6 +14,7 @@ use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
+use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Utils;
 
@@ -25,6 +26,9 @@ class Setup
         $this->checkVersion();
         $this->setupTrackLogins();
         $this->setupNotifyTemplateSender();
+        
+        // @TODO: subscriptions not tested since refactor
+        // $this->setupSubscriptions();
     }
 
     public function cleanup()
@@ -63,5 +67,10 @@ class Setup
     public function setupNotifyTemplateSender()
     {
         new SendTemplateDashboardPanel();
+    }
+
+    public function setupSubscriptions()
+    {
+        new SetupSubscriptions();
     }
 }

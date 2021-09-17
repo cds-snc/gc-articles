@@ -26,7 +26,6 @@ if ( ! defined('BASE_PLUGIN_NAME_VERSION')) {
     define('BASE_PLUGIN_NAME_VERSION', '1.1.0');
 }
 
-require_once __DIR__.'/subscriptions/index.php';
 require_once __DIR__.'/notify/NotifyTemplateSender.php';
 
 if (is_multisite()) {

@@ -30,28 +30,37 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
     forwarded_values {
       query_string = true
-      headers      = ["Host", "Origin"]
+      headers      = ["Host", "Options"]
       cookies {
-        forward = "all"
+        forward = "whitelist"
+        whitelisted_names = [
+          "comment_author_*",
+          "comment_author_email_*",
+          "comment_author_url_*",
+          "wordpress_*",
+          "wordpress_logged_in_*",
+          "wordpress_test_cookie",
+          "wp-settings-*"
+        ]
       }
     }
 
     viewer_protocol_policy = "redirect-to-https"
-    min_ttl                = 0
-    default_ttl            = 300
+    min_ttl                = 1
+    default_ttl            = 86400
     max_ttl                = 31536000
     compress               = true
   }
 
   ordered_cache_behavior {
-    path_pattern     = "/wp-login.php"
+    path_pattern     = "/login"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_lb.wordpress.name
 
     forwarded_values {
       query_string = true
-      headers      = ["Host", "Origin"]
+      headers      = ["Host", "Origin", "User-Agent"]
       cookies {
         forward = "all"
       }
@@ -72,7 +81,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
     forwarded_values {
       query_string = true
-      headers      = ["Host", "Origin"]
+      headers      = ["Host", "Origin", "User-Agent"]
       cookies {
         forward = "all"
       }

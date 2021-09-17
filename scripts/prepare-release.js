@@ -1,6 +1,13 @@
 import inquirer from 'inquirer';
 import { updateVersion, updateTerragruntHcl } from './util/update-files.js';
 import { createTaggedRelease } from './util/tag-files.js';
+import {
+    gitCreateVersionBranch,
+    gitAddVersionFiles,
+    gitCommitVersionFiles,
+    gitPushVersionFiles,
+    ghVersionPullRequest
+} from "./util/git.js";
 
 const inputVersionNumber = async () => {
     const question = {
@@ -47,7 +54,13 @@ const inputReleaseTag = async () => {
         ]);
 
         if (answer.action === 'Bump version (1.x.x)') {
-            await updateVersion(await inputVersionNumber())
+            const version = await inputVersionNumber();
+            await gitCreateVersionBranch(version);
+            await updateVersion(version);
+            await gitAddVersionFiles();
+            await gitCommitVersionFiles(version);
+            await gitPushVersionFiles(version);
+            await ghVersionPullRequest(version);
         } else {
             const { tag, notes } = await inputReleaseTag()
             await updateTerragruntHcl(tag);

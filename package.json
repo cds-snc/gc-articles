@@ -4,7 +4,8 @@
   "version": "1.1.0",
   "scripts": {
     "deploy-plugin": "./deploy/plugin",
-    "prepare-release": "node  ./scripts/prepare-release.js",
+    "prepare-release": "node ./scripts/prepare-release.js",
+    "check-version": "node ./scripts/check-for-version.js",
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",
     "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build",
@@ -19,12 +20,12 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "prettier": "^2.3.2",
-    "showdown": "^1.9.1"
-  },
-  "dependencies": {
+    "showdown": "^1.9.1",
+    "cheerio": "^1.0.0-rc.10",
+    "request-promise": "^0.4.1",
     "inquirer": "^8.1.2",
     "replace-in-file": "^6.2.0",
-    "shelljs": "^0.8.4",
-    "yargs": "^17.1.1"
-  }
+    "shelljs": "^0.8.4"
+  },
+  "dependencies": {}
 }

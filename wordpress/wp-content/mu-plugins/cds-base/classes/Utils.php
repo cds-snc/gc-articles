@@ -2,8 +2,6 @@
 
 namespace CDS;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-
 class Utils {
     public static function check_option_callback($option, $value, $callback, $save = true)
     {

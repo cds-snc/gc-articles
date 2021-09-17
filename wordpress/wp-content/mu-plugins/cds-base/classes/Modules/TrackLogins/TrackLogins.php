@@ -2,8 +2,6 @@
 
 namespace CDS\Modules\TrackLogins;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
-
 use UAParser\Parser;
 use Carbon\Carbon;
 

@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/util.php';
 require_once __DIR__ . '/wp-mail-smtp.php';
-require_once __DIR__ . '/clean-login.php';
 require_once __DIR__ . '/notices.php';
 require_once __DIR__ . '/profile.php';
 require_once __DIR__ . '/welcome.php';
-require_once __DIR__ . '/roles.php';
 
 /*--------------------------------------------*
  * Menu Pages

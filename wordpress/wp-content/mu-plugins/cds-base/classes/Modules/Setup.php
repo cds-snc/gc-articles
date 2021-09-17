@@ -2,8 +2,8 @@
 
 namespace CDS\Modules;
 
-require_once __DIR__ . '/../../vendor/autoload.php';
-
+use CDS\Modules\Cleanup\Login as CleanupLogin;
+use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Utils;
 use CDS\Modules\Notify\NotifyClient;
@@ -12,6 +12,7 @@ class Setup
 {
     public function __construct()
     {
+        $this->cleanup();
         $this->check_version();
         $this->setup_track_logins();
     }
@@ -33,5 +34,11 @@ class Setup
         Utils::check_option_callback('cds_track_logins_installed', '1.0', function() use ($trackLogins) {
             $trackLogins->install();
         });
+    }
+
+    public function cleanup()
+    {
+        new CleanupRoles();
+        new CleanupLogin();
     }
 }

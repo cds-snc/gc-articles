@@ -44,7 +44,7 @@ class Setup
         $theme_data    = wp_get_theme();
         $theme_version = $theme_data["Version"];
 
-        Utils::check_option_callback('theme_version', $theme_version, function () use ($theme_version) {
+        Utils::checkOptionCallback('theme_version', $theme_version, function () use ($theme_version) {
             $notifyClient = new NotifyClient();
             $notifyClient->sendMail("tim.arney@cds-snc.ca", "377d0592-0039-4c04-b8c2-e302bab59d7c",
                 ["version" => $theme_version], $ref = "container update");
@@ -55,7 +55,7 @@ class Setup
     {
         $trackLogins = new TrackLogins();
 
-        Utils::check_option_callback('cds_track_logins_installed', '1.0', function () use ($trackLogins) {
+        Utils::checkOptionCallback('cds_track_logins_installed', '1.0', function () use ($trackLogins) {
             $trackLogins->install();
         });
     }

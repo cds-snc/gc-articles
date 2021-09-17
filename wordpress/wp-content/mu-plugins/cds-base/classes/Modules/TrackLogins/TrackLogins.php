@@ -2,8 +2,9 @@
 
 namespace CDS\Modules\TrackLogins;
 
-use UAParser\Parser;
 use Carbon\Carbon;
+use UAParser\Parser;
+use WP_REST_Response;
 
 class TrackLogins
 {
@@ -13,7 +14,7 @@ class TrackLogins
     public function __construct()
     {
         global $wpdb;
-        $this->wpdb = $wpdb;
+        $this->wpdb      = $wpdb;
         $this->tableName = $this->wpdb->prefix.'userlogins';
 
         add_action('wp_login', [$this, 'logUserLogin'], 10, 2);
@@ -22,7 +23,18 @@ class TrackLogins
             $this->registerRestRoutes();
         });
 
-        add_action('wp_dashboard_setup', [$this, 'dashboard_widget']);
+        add_action('wp_dashboard_setup', [$this, 'dashboardWidget']);
+    }
+
+    public function registerRestRoutes()
+    {
+        register_rest_route('user', '/logins', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'getUserLogins'],
+            'permission_callback' => function () {
+                return current_user_can('delete_posts');
+            }
+        ]);
     }
 
     public function install()
@@ -43,7 +55,7 @@ class TrackLogins
 
     public function uninstall()
     {
-        $this->wpdb->query( "DROP TABLE IF EXISTS $this->tableName" );
+        $this->wpdb->query("DROP TABLE IF EXISTS $this->tableName");
     }
 
     public function logUserLogin($user_login, $user)
@@ -51,27 +63,16 @@ class TrackLogins
         $data = [
             'user_agent' => $_SERVER['HTTP_USER_AGENT'],
             'time_login' => current_time('mysql', 1),
-            'user_id' => $user->id
+            'user_id'    => $user->id
         ];
 
         $this->wpdb->insert($this->tableName, $data);
     }
 
-    public function registerRestRoutes()
-    {
-        register_rest_route('user', '/logins', [
-            'methods'  => 'GET',
-            'callback' => [$this, 'getUserLogins'],
-            'permission_callback' => function () {
-                return current_user_can('delete_posts');
-            }
-        ]);
-    }
-
-    public function getUserLogins(): \WP_REST_Response
+    public function getUserLogins(): WP_REST_Response
     {
         $current_user_id = get_current_user_id();
-        $parser = Parser::create();
+        $parser          = Parser::create();
 
         $results = $this->wpdb->get_results(
             $this->wpdb->prepare("
@@ -81,9 +82,9 @@ class TrackLogins
                 ORDER BY time_login DESC LIMIT 3", $current_user_id)
         );
 
-        $results = array_map(function($login) use ($parser) {
-            $parsed = $parser->parse($login->user_agent);
-            $user_agent = $parsed->os->family . ' | ' . $parsed->ua->family;
+        $results = array_map(function ($login) use ($parser) {
+            $parsed     = $parser->parse($login->user_agent);
+            $user_agent = $parsed->os->family.' | '.$parsed->ua->family;
             $time_login = new Carbon($login->time_login);
 
             return [
@@ -92,23 +93,23 @@ class TrackLogins
             ];
         }, $results);
 
-        $response = new \WP_REST_Response($results);
+        $response = new WP_REST_Response($results);
 
         $response->set_status(200);
 
         return $response;
     }
 
-    public function dashboard_widget(): void
+    public function dashboardWidget(): void
     {
         wp_add_dashboard_widget(
             'cds_login_widget',
             __('Your recent logins', 'cds'),
-            [$this, 'track_logins_panel_handler'],
+            [$this, 'trackLoginsPanelHandler'],
         );
     }
 
-    public function track_logins_panel_handler(): void
+    public function trackLoginsPanelHandler(): void
     {
         echo '<div id="logins-panel"></div><script>CDS.renderLoginsPanel();</script>';
     }

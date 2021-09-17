@@ -105,11 +105,11 @@ class Profile
             static function ($node, $j) {
 
 
-                if (Utils::str_contains($node->html(), 'Backup Verification Codes')) {
+                if (Utils::strContains($node->html(), 'Backup Verification Codes')) {
                     return true;
                 }
 
-                if (Utils::str_contains($node->html(), 'Dummy Method')) {
+                if (Utils::strContains($node->html(), 'Dummy Method')) {
                     return true;
                 }
 

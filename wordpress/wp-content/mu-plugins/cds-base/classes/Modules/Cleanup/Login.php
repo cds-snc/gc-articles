@@ -6,16 +6,16 @@ class Login
 {
     public function __construct()
     {
-        add_action('login_enqueue_scripts', [$this, 'cds_login_logo']);
-        add_filter('login_headerurl', [$this, 'cds_login_logo_url']);
-        add_filter('login_headertext', [$this, 'cds_customize_login_headertext']);
-        add_action('login_head', [$this, 'cds_favicon']);
-        add_action('admin_head', [$this, 'cds_favicon']);
+        add_action('login_enqueue_scripts', [$this, 'loginLogo']);
+        add_filter('login_headerurl', [$this, 'loginLogoUrl']);
+        add_filter('login_headertext', [$this, 'customizeLoginHeadertext']);
+        add_action('login_head', [$this, 'favicon']);
+        add_action('admin_head', [$this, 'favicon']);
 
-        add_filter('login_redirect', [$this, 'cdsLoginRedirect'], 10, 3);
+        add_filter('login_redirect', [$this, 'loginRedirect'], 10, 3);
     }
 
-    public function cds_login_logo(): void
+    public function loginLogo(): void
     { ?>
       <style type="text/css">
           body.login div#login h1 a {
@@ -42,23 +42,23 @@ class Login
       </style>
     <?php }
 
-    public function cds_login_logo_url()
+    public function loginLogoUrl(): string
     {
         return home_url();
     }
 
-    public function cds_customize_login_headertext($headertext)
+    public function customizeLoginHeadertext($headertext): string
     {
         return esc_html__('Canadian Digital Service', 'cds');
     }
 
-    public function cds_favicon(): void
+    public function favicon(): void
     {
         $favicon_url = cds_plugin_images_url('favicon.ico');
         echo '<link rel="shortcut icon" href="'.$favicon_url.'" />';
     }
 
-    function cdsLoginRedirect($redirect_to, $request, $user)
+    function loginRedirect($redirect_to, $request, $user): string
     {
         $redirect_to = admin_url()."admin.php?page=cds_notify_send";
 

@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * The main template file
  *
@@ -14,6 +12,8 @@ declare(strict_types=1);
  *
  * @package cds-default
  */
+
+declare(strict_types=1);
 
 get_header();
 ?>

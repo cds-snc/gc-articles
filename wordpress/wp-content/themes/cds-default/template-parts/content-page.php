@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Template part for displaying page content in page.php
  *
@@ -9,6 +7,8 @@ declare(strict_types=1);
  *
  * @package cds-default
  */
+
+declare(strict_types=1);
 
 ?>
 
@@ -34,21 +34,21 @@ declare(strict_types=1);
         <footer class="entry-footer">
             <?php
             edit_post_link(
-            sprintf(
-                wp_kses(
+                sprintf(
+                    wp_kses(
                         /* translators: %s: Name of current post. Only visible to screen readers */
                         __('Edit <span class="screen-reader-text">%s</span>', 'cds-snc'),
-                    [
+                        [
                             'span' => [
                                 'class' => [],
                             ],
                         ]
+                    ),
+                    wp_kses_post(get_the_title())
                 ),
-                wp_kses_post(get_the_title())
-            ),
-            '<span class="edit-link">',
-            '</span>'
-        );
+                '<span class="edit-link">',
+                '</span>'
+            );
             ?>
         </footer><!-- .entry-footer -->
     <?php } ?>

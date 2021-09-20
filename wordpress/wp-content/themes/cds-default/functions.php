@@ -98,8 +98,7 @@ function cds_scripts(): void
 {
     wp_enqueue_style('cds-style', get_stylesheet_uri(), [], _S_VERSION);
 
-    wp_enqueue_script('cds-main', get_template_directory_uri().'/js/main.js', ['jquery'], _S_VERSION, true,
-    );
+    wp_enqueue_script('cds-main', get_template_directory_uri() . '/js/main.js', ['jquery'], _S_VERSION, true);
 }
 
 add_action('wp_enqueue_scripts', 'cds_scripts');

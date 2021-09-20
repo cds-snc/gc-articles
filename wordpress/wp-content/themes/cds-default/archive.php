@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * The template for displaying archive pages
  *
@@ -10,13 +8,14 @@ declare(strict_types=1);
  * @package cds-default
  */
 
+declare(strict_types=1);
+
 get_header();
 ?>
 
     <main property="mainContentOfPage" class="archive container" resource="#wb-main" typeof="WebPageElement">
 
         <?php if (have_posts()) { ?>
-
             <header class="page-header">
                 <?php
                 the_archive_title('<h1 class="page-title">', '</h1>');
@@ -38,7 +37,6 @@ get_header();
             }
 
             cds_the_posts_navigation();
-
         } else {
             get_template_part('template-parts/content', 'none');
         }

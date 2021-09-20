@@ -6,32 +6,32 @@ namespace CDS\Modules\Notify;
 
 class Notices
 {
-    public static function handle_notice($status): void
+    public static function handleNotice($status): void
     {
 
         switch ($_GET['status']) {
             case 200:
                 add_action('admin_notices', [
                     self::class,
-                    'notice_success',
+                    'noticeSuccess',
                 ]);
                 break;
             case 400:
                 // no template ID
                 add_action('admin_notices', [
                     self::class,
-                    'notice_template_fail',
+                    'noticeTemplateFail',
                 ]);
                 break;
             case 418:
                 // invalid list Ids
                 add_action('admin_notices', [
                     self::class,
-                    'notice_list_id_fail',
+                    'noticeListIdFail',
                 ]);
                 break;
             case 500:
-                add_action('admin_notices', [self::class, 'notice_fail']);
+                add_action('admin_notices', [self::class, 'noticeFail']);
                 break;
             default:
                 echo '';
@@ -40,7 +40,7 @@ class Notices
         do_action('admin_notices');
     }
 
-    public static function notice_success(): void
+    public static function noticeSuccess(): void
     {
         ?>
       <div class="notice notice-success is-dismissible">
@@ -49,7 +49,7 @@ class Notices
         <?php
     }
 
-    public static function notice_template_fail(): void
+    public static function noticeTemplateFail(): void
     {
         ?>
       <div class="notice notice-error is-dismissible">
@@ -58,7 +58,7 @@ class Notices
         <?php
     }
 
-    public static function notice_list_id_fail(): void
+    public static function noticeListIdFail(): void
     {
         ?>
       <div class="notice notice-error is-dismissible">
@@ -67,7 +67,7 @@ class Notices
         <?php
     }
 
-    public static function notice_fail(): void
+    public static function noticeFail(): void
     {
         $message = get_transient('api_response');
         delete_transient('api_response');

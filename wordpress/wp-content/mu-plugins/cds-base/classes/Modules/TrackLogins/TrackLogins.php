@@ -15,7 +15,7 @@ class TrackLogins
     {
         global $wpdb;
         $this->wpdb      = $wpdb;
-        $this->tableName = $this->wpdb->prefix.'userlogins';
+        $this->tableName = $this->wpdb->prefix . 'userlogins';
 
         add_action('wp_login', [$this, 'logUserLogin'], 10, 2);
 
@@ -49,7 +49,7 @@ class TrackLogins
             PRIMARY KEY  (id)
         ) $charset_collate;";
 
-        require_once(ABSPATH.'wp-admin/includes/upgrade.php');
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
         dbDelta($sql);
     }
 
@@ -84,7 +84,7 @@ class TrackLogins
 
         $results = array_map(function ($login) use ($parser) {
             $parsed     = $parser->parse($login->user_agent);
-            $user_agent = $parsed->os->family.' | '.$parsed->ua->family;
+            $user_agent = $parsed->os->family . ' | ' . $parsed->ua->family;
             $time_login = new Carbon($login->time_login);
 
             return [
@@ -113,6 +113,6 @@ class TrackLogins
     {
         echo '<div id="logins-panel"></div>';
         $data = 'CDS.renderLoginsPanel();';
-        wp_add_inline_script('cds-snc-admin-js', $data, 'after' );
+        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
     }
 }

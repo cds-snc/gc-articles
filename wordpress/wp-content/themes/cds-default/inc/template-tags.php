@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Custom template tags for this theme
  *
@@ -9,6 +7,8 @@ declare(strict_types=1);
  *
  * @package cds-default
  */
+
+declare(strict_types=1);
 
 if (! function_exists('cds_posted_on')) {
     /**
@@ -60,7 +60,7 @@ if (! function_exists('cds_entry_footer')) {
             $pId = get_the_ID();
             /* translators: used between list items, there is a space after the comma */
             // $categories_list = get_the_category_list(esc_html__(', ', 'cds-snc'));
-            echo "<ul class='list-inline'>".cds_category_links($pId).'</ul>';
+            echo "<ul class='list-inline'>" . cds_category_links($pId) . '</ul>';
         }
 
         // edit_post_link(
@@ -102,22 +102,21 @@ if (! function_exists('cds_post_thumbnail')) {
                 <?php the_post_thumbnail('full', ['class' => 'img-responsive full-width']); ?>
             </div><!-- .post-thumbnail -->
 
-        <?php
+            <?php
         } else { ?>
-
             <a class="post-thumbnail" href="<?php the_permalink(); ?>" aria-hidden="true" tabindex="-1">
                 <?php
                     the_post_thumbnail(
-                'post-thumbnail',
-                [
-                    'alt' => the_title_attribute(
+                        'post-thumbnail',
                         [
+                        'alt' => the_title_attribute(
+                            [
                             'echo' => false,
+                            ]
+                        ),
+                        'class' => 'img-responsive thumbnail',
                         ]
-                    ),
-                    'class' => 'img-responsive thumbnail',
-                ]
-            );
+                    );
                 ?>
             </a>
 

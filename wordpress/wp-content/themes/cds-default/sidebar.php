@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * The sidebar containing the main widget area
  *
@@ -9,6 +7,8 @@ declare(strict_types=1);
  *
  * @package cds-default
  */
+
+declare(strict_types=1);
 
 if (! is_active_sidebar('sidebar-1')) {
     return;

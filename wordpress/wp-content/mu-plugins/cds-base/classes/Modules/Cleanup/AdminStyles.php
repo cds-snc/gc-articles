@@ -11,15 +11,16 @@ class AdminStyles
         add_action('admin_enqueue_scripts', [$this, 'enqueueStyles'], 99);
     }
 
-    public function enqueueStyles(){
-        
+    public function enqueueStyles()
+    {
+
         if (is_super_admin()) {
             return;
         }
         // add stylesheet to the wp admin
         wp_enqueue_style(
             'cds-base-style-admin',
-            plugin_dir_url(__FILE__).'css/admin.css',
+            plugin_dir_url(__FILE__) . 'css/admin.css',
             [],
             BASE_PLUGIN_NAME_VERSION,
         );

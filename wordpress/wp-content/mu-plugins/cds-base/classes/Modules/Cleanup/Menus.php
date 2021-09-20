@@ -34,7 +34,7 @@ class Menus
         end($menu);
         while (prev($menu)) {
             $value = explode(' ', $menu[key($menu)][0]);
-            if ( ! in_array($value[0] !== null ? $value[0] : '', $allowed)) {
+            if (! in_array($value[0] !== null ? $value[0] : '', $allowed)) {
                 unset($menu[key($menu)]);
             }
         }

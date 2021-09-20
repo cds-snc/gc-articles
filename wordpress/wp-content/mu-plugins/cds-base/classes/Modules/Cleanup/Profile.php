@@ -12,8 +12,8 @@ class Profile
     public function __construct()
     {
         add_action('personal_options', [$this, 'start']);
-        add_filter('additional_capabilities_display', [$this, 'remove_additional_capabilities_func']);
-        add_action('wpml_user_profile_options', [$this, 'wpml_options']);
+        add_filter('additional_capabilities_display', [$this, 'removeAdditionalCapabilitiesFunc']);
+        add_action('wpml_user_profile_options', [$this, 'wpmlOptions']);
 
         if (is_admin()) {
             remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
@@ -89,7 +89,7 @@ class Profile
         ];
 
         foreach ($contact_info as $contact) {
-            $crawler->filter('.user-'.$contact.'-wrap')->remove();
+            $crawler->filter('.user-' . $contact . '-wrap')->remove();
         }
 
         /*--------------------------------------------*
@@ -130,17 +130,17 @@ class Profile
         if (is_super_admin()) {
             return;
         }
-        $action = (IS_PROFILE_PAGE ? 'show' : 'edit').'_user_profile';
+        $action = (IS_PROFILE_PAGE ? 'show' : 'edit') . '_user_profile';
         add_action($action, [$this, 'stop']);
         ob_start();
     }
 
-    public function remove_additional_capabilities_func(): bool
+    public function removeAdditionalCapabilitiesFunc(): bool
     {
         return false;
     }
 
-    public function wpml_options($userId): void
+    public function wpmlOptions($userId): void
     {
         echo '<input type="hidden" id="icl_show_hidden_languages" name="icl_show_hidden_languages" type="checkbox" value="1">';
     }

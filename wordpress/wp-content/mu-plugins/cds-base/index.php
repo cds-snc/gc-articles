@@ -1,12 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
-require __DIR__.'/vendor/autoload.php';
-
-use CDS\Modules\Notify\NotifyTemplateSender;
-use CDS\Modules\Setup;
-
 /**
  * Plugin Name: CDS-SNC Base
  * Plugin URI: https://github.com/cds-snc/platform-mvp
@@ -17,13 +10,20 @@ use CDS\Modules\Setup;
  * @package cds-snc-base
  */
 
+declare(strict_types=1);
+
+require __DIR__ . '/vendor/autoload.php';
+
+use CDS\Modules\Notify\NotifyTemplateSender;
+use CDS\Modules\Setup;
+
 defined('ABSPATH') || exit();
 
-if ( ! defined('BASE_PLUGIN_NAME')) {
+if (! defined('BASE_PLUGIN_NAME')) {
     define('BASE_PLUGIN_NAME', 'cds-base');
 }
 
-if ( ! defined('BASE_PLUGIN_NAME_VERSION')) {
+if (! defined('BASE_PLUGIN_NAME_VERSION')) {
     define('BASE_PLUGIN_NAME_VERSION', '1.2.0');
 }
 
@@ -35,7 +35,7 @@ if (is_multisite()) {
 
 function cds_plugin_images_url($filename)
 {
-    return plugin_dir_url(__FILE__).'images/'.$filename;
+    return plugin_dir_url(__FILE__) . 'images/' . $filename;
 }
 
 /**
@@ -45,13 +45,13 @@ add_action('init', 'cds_textdomain');
 
 function cds_textdomain(): void
 {
-    load_plugin_textdomain('cds-snc', false, basename(__DIR__).'/languages');
+    load_plugin_textdomain('cds-snc', false, basename(__DIR__) . '/languages');
 }
 
 function cds_admin_js(): void
 {
     // automatically load dependencies and version
-    $asset_file = include plugin_dir_path(__FILE__).'build/index.asset.php';
+    $asset_file = include plugin_dir_path(__FILE__) . 'build/index.asset.php';
 
     wp_enqueue_script(
         'cds-snc-admin-js',
@@ -64,9 +64,8 @@ function cds_admin_js(): void
     wp_localize_script("cds-snc-admin-js", "CDS_VARS", array(
             "rest_url"        => esc_url_raw(rest_url()),
             "rest_nonce"      => wp_create_nonce("wp_rest"),
-            "notify_list_ids" => NotifyTemplateSender::parse_json_options(get_option('list_values'))
-        )
-    );
+            "notify_list_ids" => NotifyTemplateSender::parseJsonOptions(get_option('list_values'))
+        ));
 }
 
 add_action('admin_enqueue_scripts', 'cds_admin_js');

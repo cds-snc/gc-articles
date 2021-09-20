@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace CDS\Modules;
+
 use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
 use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
@@ -29,7 +30,7 @@ class Setup
         $this->setupTrackLogins();
         $this->setupNotifyTemplateSender();
         $this->setupBlocks();
-        
+
         // @TODO: subscriptions not tested since refactor
         // $this->setupSubscriptions();
     }
@@ -54,8 +55,12 @@ class Setup
 
         Utils::checkOptionCallback('theme_version', $theme_version, function () use ($theme_version) {
             $notifyClient = new NotifyClient();
-            $notifyClient->sendMail("tim.arney@cds-snc.ca", "377d0592-0039-4c04-b8c2-e302bab59d7c",
-                ["version" => $theme_version], $ref = "container update");
+            $notifyClient->sendMail(
+                "tim.arney@cds-snc.ca",
+                "377d0592-0039-4c04-b8c2-e302bab59d7c",
+                ["version" => $theme_version],
+                $ref = "container update"
+            );
         });
     }
 
@@ -79,7 +84,7 @@ class Setup
     {
         new Blocks();
     }
-  
+
     public function setupSubscriptions()
     {
         new SetupSubscriptions();

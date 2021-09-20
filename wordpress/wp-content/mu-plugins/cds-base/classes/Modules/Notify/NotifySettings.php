@@ -10,29 +10,29 @@ class NotifySettings
 
     public function __construct()
     {
-        add_action('admin_menu', [$this, 'register_submenu_page']);
-        add_action('admin_init', [$this, 'register_settings']);
+        add_action('admin_menu', [$this, 'registerSubmenuPage']);
+        add_action('admin_init', [$this, 'registerSettings']);
     }
 
-    public function register_submenu_page()
+    public function registerSubmenuPage()
     {
         add_submenu_page(
             $this->admin_page,
             __('Settings'),
             __('Settings'),
             'activate_plugins',
-            $this->admin_page.'_settings',
-            [$this, 'render_settings'],
+            $this->admin_page . '_settings',
+            [$this, 'renderSettings'],
         );
     }
 
-    public function register_settings(): void
+    public function registerSettings(): void
     {
         register_setting('cds-settings-group', 'sender_type');
         register_setting('cds-settings-group', 'list_values');
     }
 
-    public function render_settings(): void
+    public function renderSettings(): void
     {
         ?>
       <div class="wrap">
@@ -44,10 +44,9 @@ class NotifySettings
           <table class="form-table">
             <!-- Sender Type -->
             <tr valign="top">
-              <th scope="row"><?php _e(
-                      'Sender Type',
-                      'cds-snc',
-                  ); ?></th>
+              <th scope="row">
+                  <?php _e('Sender Type', 'cds-snc'); ?>
+              </th>
               <td>
                   <?php $current_val = esc_attr(
                       get_option('sender_type'),
@@ -59,7 +58,7 @@ class NotifySettings
                         'value' => 'list_manager',
                         'label' => $label,
                     ];
-                    echo $this->render_select_option(
+                    echo $this->renderSelectOption(
                         $data,
                         $current_val,
                     );
@@ -69,7 +68,7 @@ class NotifySettings
                         'value' => 'wp_forms',
                         'label' => $label,
                     ];
-                    echo $this->render_select_option(
+                    echo $this->renderSelectOption(
                         $data,
                         $current_val,
                     );
@@ -80,19 +79,16 @@ class NotifySettings
 
             <!-- Sender Type -->
             <tr valign="top">
-              <th scope="row"><?php _e(
-                      'List Values JSON',
-                      'cds-snc',
-                  ); ?></th>
+              <th scope="row">
+                  <?php _e('List Values JSON', 'cds-snc'); ?>
+              </th>
               <td>
                   <?php $val = esc_attr(get_option('list_values')); ?>
                 <textarea name="list_values" rows="4" cols="50"><?php echo $val; ?></textarea>
 
-                <p class="description" id="new-admin-email-description"><?php _e(
-                        'Format',
-                        'cds-snc',
-                    ); ?>:
-                <pre>[{"id":"123", "type":"email", "label":"my-list"}]</pre>
+                <p class="description" id="new-admin-email-description">
+                    <?php _e('Format', 'cds-snc'); ?>:
+                    <pre>[{"id":"123", "type":"email", "label":"my-list"}]</pre>
                 </p>
               </td>
             </tr>
@@ -103,10 +99,10 @@ class NotifySettings
         <?php
     }
 
-    public function render_select_option($data, $current_val): string
+    public function renderSelectOption($data, $current_val): string
     {
         $str = '<option ';
-        $str .= 'value="'.$data['value'].'"';
+        $str .= 'value="' . $data['value'] . '"';
 
         if ($data['value'] == $current_val) {
             $str .= 'selected="selected"';

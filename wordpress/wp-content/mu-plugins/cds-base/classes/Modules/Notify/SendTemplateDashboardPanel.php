@@ -24,6 +24,6 @@ class SendTemplateDashboardPanel
     {
         echo '<div id="notify-panel"></div>';
         $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :true});';
-        wp_add_inline_script('cds-snc-admin-js', $data, 'after' );
+        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
     }
 }

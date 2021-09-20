@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * The template for displaying the footer
  *
@@ -11,6 +9,8 @@ declare(strict_types=1);
  *
  * @package cds-default
  */
+
+declare(strict_types=1);
 
 ?>
 

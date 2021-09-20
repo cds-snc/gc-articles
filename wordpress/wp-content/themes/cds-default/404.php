@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * The template for displaying 404 pages (not found)
  *
@@ -10,21 +8,23 @@ declare(strict_types=1);
  * @package cds-default
  */
 
+declare(strict_types=1);
+
 get_header();
 ?>
  <main id="error-404 not-found" property="mainContentOfPage" class="index container" resource="#wb-main" typeof="WebPageElement"> 
         
             <header class="page-header">
                 <h1 class="page-title"><?php esc_html_e(
-    'Page not found.',
-    'cds-snc',
+                    'Page not found.',
+                    'cds-snc',
 ); ?></h1>
             </header><!-- .page-header -->
 
             
                 <p><?php esc_html_e(
-    'It looks like nothing was found at this location.',
-    'cds-snc',
+                    'It looks like nothing was found at this location.',
+                    'cds-snc',
 ); ?></p>
             
       

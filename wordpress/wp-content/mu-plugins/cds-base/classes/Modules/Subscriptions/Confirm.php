@@ -91,11 +91,11 @@ class Confirm
     {
         $errors = [];
 
-        if ( ! isset($data['email'])) {
+        if (! isset($data['email'])) {
             array_push($errors, 'Email required');
         }
 
-        if ( ! isset($data['form_id'])) {
+        if (! isset($data['form_id'])) {
             array_push($errors, 'Form ID required');
         }
 

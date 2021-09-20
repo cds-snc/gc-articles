@@ -15,7 +15,7 @@ function cds_date_block($block_content, $block)
     try {
         $dom = new Dom();
         $dom->loadStr($block_content);
-        $time = $dom->find('time');    
+        $time = $dom->find('time');
 
         if ($time && $time[0] && is_array($time[0] || is_string($time[0]))) {
             return str_replace($time[0], '[' . $time[0] . ']', $block_content);
@@ -63,7 +63,7 @@ add_filter('body_class', 'cds_body_classes');
 
 function get_current_page_ID(): int
 {
-    if(is_admin()){
+    if (is_admin()) {
         return 0;
     }
 
@@ -82,7 +82,7 @@ function get_current_page_ID(): int
         return 0;
     }
 
-    if (!$query = wp_cache_get($slug.'_'._S_VERSION)) {
+    if (!$query = wp_cache_get($slug . '_' . _S_VERSION)) {
         $query = $wpdb->prepare(
             "SELECT ID FROM {$wpdb->posts} 
                         WHERE 
@@ -97,7 +97,7 @@ function get_current_page_ID(): int
         );
 
         // cache the query
-        wp_cache_set($slug.'_'._S_VERSION, $query, '', 3600);
+        wp_cache_set($slug . '_' . _S_VERSION, $query, '', 3600);
     }
 
     $post_id = $wpdb->get_var($query);
@@ -116,16 +116,12 @@ function define_locale($locale)
         $page_id = get_current_page_ID();
 
         if ($page_id) {
-
             $custom_locale = get_post_meta($page_id, 'locale', true);
             $page_id . " " . $custom_locale;
             if ($custom_locale) {
                 return $custom_locale;
             }
-
         }
-
-
     } catch (Exception $e) {
         // noop
     }
@@ -137,4 +133,4 @@ add_filter('locale', 'define_locale', 10);
 
 add_filter('gutenberg_can_edit_post', '__return_true', 5);
 add_filter('use_block_editor_for_post', '__return_true', 5);
-add_filter( 'user_can_richedit' , '__return_true', 50 );
+add_filter('user_can_richedit', '__return_true', 50);

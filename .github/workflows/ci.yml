@@ -36,4 +36,4 @@ jobs:
           php-version: 8.0
           tools: phpcs, cs2pr
       - name: Run PHP Code Sniffer
-        run: phpcs wordpress --standard=PSR12 --ignore=vendor,tests,*.css,*.js | cs2pr
+        run: phpcs wordpress -n --standard=PSR12 --ignore=vendor,tests,*.css,*.js

@@ -17,26 +17,26 @@ function cds_prev_next_links(): void
     $prev_permalink = get_permalink($prev_id);
     $next_post = get_next_post();
     $next_id = false;
-    if($next_post && $next_post->ID){
+    if ($next_post && $next_post->ID) {
         $next_id = $next_post->ID;
-        $next_permalink = get_permalink($next_id); 
-    }
-    
-    ?>
+        $next_permalink = get_permalink($next_id);
+    } ?>
 
   <nav class="mrgn-tp-xl">
     <h2 class="wb-inv"> <?php _e('Document navigation', 'cds-snc'); ?> </h2>
     <ul class="pager">
-      <?php if($prev_id): ?>
+      <?php if ($prev_id) : ?>
       <li class="next">
-        <a id="<?php echo $prev_id ?>" href="<?php echo $next_permalink; ?>"><?php _e(
+        <a id="<?php echo $prev_id ?>" href="<?php echo $next_permalink; ?>">
+            <?php _e(
                 'Next blog post',
                 'cds-snc'
-            ); ?> &nbsp;»</a>
+            ); ?>
+          &nbsp;»</a>
       </li>
       <?php endif; ?>
 
-      <?php if($next_id): ?>
+      <?php if ($next_id) : ?>
       <li class="previous">
         <a id="<?php echo $next_id ?>" href="<?php echo $prev_permalink; ?>"
            rel="prev">«&nbsp;<?php _e('Previous blog post', 'cds-snc'); ?></a>
@@ -115,7 +115,9 @@ function custom_field_breadcrumb(): string
 {
     global $wp_query;
 
-    if(!$wp_query || !$wp_query->post) return "";
+    if (!$wp_query || !$wp_query->post) {
+        return "";
+    }
 
     $list_items = get_post_meta($wp_query->post->ID, 'breadcrumb', true);
     wp_reset_query();
@@ -208,7 +210,6 @@ function language_switcher_output($languages)
     $langs = [];
 
     try {
-
         foreach ($languages as $language) {
             $text = get_language_text($language['translated_name']);
             if (!$language['active']) {
@@ -222,7 +223,6 @@ function language_switcher_output($languages)
                 $langs[] = $link;
             }
         }
-
     } catch (Exception $e) {
         error_log("language_switcher:" . $e->getMessage());
         //noop
@@ -237,7 +237,9 @@ function manual_language_switcher(): string
 
     $output = "";
 
-    if(!$wp_query || !$wp_query->post) return $output;
+    if (!$wp_query || !$wp_query->post) {
+        return $output;
+    }
 
     $custom_language_switcher = get_post_meta($wp_query->post->ID, 'locale_switch_link', true);
     error_log("language_switcher:" . $custom_language_switcher);

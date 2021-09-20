@@ -17,7 +17,8 @@ class Login
     }
 
     public function loginLogo(): void
-    { ?>
+    {
+        ?>
       <style type="text/css">
           body.login div#login h1 a {
               background-image: url(<?php echo cds_plugin_images_url('site-login-logo.svg'); ?>);
@@ -56,18 +57,18 @@ class Login
     public function favicon(): void
     {
         $favicon_url = cds_plugin_images_url('favicon.ico');
-        echo '<link rel="shortcut icon" href="'.$favicon_url.'" />';
+        echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
     }
 
-    function loginRedirect($redirect_to, $request, $user): string
+    public function loginRedirect($redirect_to, $request, $user): string
     {
-        $redirect_to = admin_url()."admin.php?page=cds_notify_send";
+        $redirect_to = admin_url() . "admin.php?page=cds_notify_send";
 
         return $redirect_to;
     }
 
-    function loginFailed($username)
+    public function loginFailed($username)
     {
-        error_log("LOGIN FAILED: user $username: authentication failure for \"".admin_url()."\"");
+        error_log("LOGIN FAILED: user $username: authentication failure for \"" . admin_url() . "\"");
     }
 }

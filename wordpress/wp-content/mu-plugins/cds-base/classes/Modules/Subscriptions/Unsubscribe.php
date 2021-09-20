@@ -32,7 +32,7 @@ class Unsubscribe
     {
         $subscription_id = $data['subscription_id'];
 
-        if ($this->do_unsubscribe($subscription_id)) {
+        if ($this->doUnsubscribe($subscription_id)) {
             $response = new WP_REST_Response([
                 'status' => 'Success',
             ]);
@@ -51,7 +51,7 @@ class Unsubscribe
         return $response;
     }
 
-    public function do_unsubscribe($subscription_id): bool
+    public function doUnsubscribe($subscription_id): bool
     {
         global $wpdb;
 
@@ -118,11 +118,11 @@ class Unsubscribe
     {
         $errors = [];
 
-        if ( ! isset($data['email'])) {
+        if (! isset($data['email'])) {
             array_push($errors, 'Email required');
         }
 
-        if ( ! isset($data['form_id'])) {
+        if (! isset($data['form_id'])) {
             array_push($errors, 'Form ID required');
         }
 

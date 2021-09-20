@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The base configuration for WordPress
  *
@@ -25,7 +26,7 @@
 
 // a helper function to lookup "env_FILE", "env", then fallback
 if (!function_exists('getenv_docker')) {
-    // https://github.com/docker-library/wordpress/issues/588 (WP-CLI will load this file 2x)
+// https://github.com/docker-library/wordpress/issues/588 (WP-CLI will load this file 2x)
     function getenv_docker($env, $default)
     {
         if ($fileEnv = getenv($env . '_FILE')) {
@@ -38,18 +39,16 @@ if (!function_exists('getenv_docker')) {
             }
         }
     }
+
 }
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define('DB_NAME', getenv_docker('WORDPRESS_DB_NAME', 'wordpress'));
-
 /** MySQL database username */
 define('DB_USER', getenv_docker('WORDPRESS_DB_USER', 'example username'));
-
 /** MySQL database password */
 define('DB_PASSWORD', getenv_docker('WORDPRESS_DB_PASSWORD', 'example password'));
-
 /**
  * Docker image fallback values above are sourced from the official WordPress installation wizard:
  * https://github.com/WordPress/WordPress/blob/f9cc35ebad82753e9c86de322ea5c76a9001c7e2/wp-admin/setup-config.php#L216-L230
@@ -58,13 +57,10 @@ define('DB_PASSWORD', getenv_docker('WORDPRESS_DB_PASSWORD', 'example password')
 
 /** MySQL hostname */
 define('DB_HOST', getenv_docker('WORDPRESS_DB_HOST', 'mysql'));
-
 /** Database charset to use in creating database tables. */
 define('DB_CHARSET', getenv_docker('WORDPRESS_DB_CHARSET', 'utf8'));
-
 /** The database collate type. Don't change this if in doubt. */
 define('DB_COLLATE', getenv_docker('WORDPRESS_DB_COLLATE', ''));
-
 /**#@+
  * Authentication unique keys and salts.
  *
@@ -95,7 +91,6 @@ define('NONCE_SALT', getenv_docker('WORDPRESS_NONCE_SALT', '37e2ee5dc8c485fb67f0
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'wp_');
-
 /**
  * For developers: WordPress debugging mode.
  *
@@ -109,11 +104,8 @@ $table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'wp_');
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
 define('WP_DEBUG', !!getenv_docker('WORDPRESS_DEBUG', ''));
-
 define('WP_DEBUG_DISPLAY', !!getenv_docker('WORDPRESS_DEBUG_DISPLAY', 0));
-
 @ini_set('display_errors', WP_DEBUG_DISPLAY);
-
 /* Add any custom values between this line and the "stop editing" line. */
 
 // If we're behind a proxy server and using HTTPS, we need to alert WordPress of that fact
@@ -135,7 +127,6 @@ define('DOMAIN_CURRENT_SITE', getenv_docker('DEFAULT_DOMAIN', 'localhost'));
 define('PATH_CURRENT_SITE', '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
-
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */

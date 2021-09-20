@@ -1,4 +1,5 @@
 <?php
+
 namespace CDS\Modules\Notify;
 
 use Alphagov\Notifications\Exception\NotifyException;
@@ -20,7 +21,7 @@ class NotifyClient
         return new \Alphagov\Notifications\Client([
             'baseUrl' => "https://api.notification.canada.ca",
             'apiKey' => $NOTIFY_API_KEY,
-            'httpClient' => new Client
+            'httpClient' => new Client()
         ]);
     }
 

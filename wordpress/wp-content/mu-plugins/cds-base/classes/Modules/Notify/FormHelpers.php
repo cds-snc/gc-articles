@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Notify;
 
+use Exception;
+
 class FormHelpers
 {
     public static function render($data)
     {
-        $action = get_home_url().'/wp-json/wp-notify/v1/bulk'; ?>
+        $action = get_home_url() . '/wp-json/wp-notify/v1/bulk'; ?>
       <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
         <form id="email_sender" name="email_sender" method="post" action="<?php echo $action; ?>">
@@ -19,15 +21,15 @@ class FormHelpers
             <!-- Service ID -->
             <tr>
               <th scope="row">
-                <label for="list_id"><?php _e('Service ID',); ?></label>
+                <label for="list_id"><?php _e('Service ID', 'cds-snc'); ?></label>
               </th>
               <td>
                 <select name="service_id" id="service_id">
                     <?php try {
-                        self::render_service_id_options($data["service_ids"]);
+                        self::renderServiceIdOptions($data["service_ids"]);
                     } catch (Exception $e) {
-                        echo '<option value="">'.
-                             __('No service ids found', 'cds-snc').
+                        echo '<option value="">' .
+                             __('No service ids found', 'cds-snc') .
                              '</option>';
                     } ?>
                 </select>
@@ -37,7 +39,7 @@ class FormHelpers
             <!-- Template ID -->
             <tr>
               <th scope="row">
-                <label for="template_id"><?php _e('Template ID',); ?></label>
+                <label for="template_id"><?php _e('Template ID', 'cds-snc'); ?></label>
               </th>
               <td>
                 <input type="text" class="regular-text" name="template_id" value="" />
@@ -52,10 +54,10 @@ class FormHelpers
               <td>
                 <select name="list_id" id="list_id">
                     <?php try {
-                        self::render_list_options($data["list_values"]);
+                        self::renderListOptions($data["list_values"]);
                     } catch (Exception $e) {
-                        echo '<option value="">'.
-                             __('No lists found', 'cds-snc').
+                        echo '<option value="">' .
+                             __('No lists found', 'cds-snc') .
                              '</option>';
                     } ?>
                 </select>
@@ -76,40 +78,40 @@ class FormHelpers
 
         <div id="notify-panel"></div>
 
-        <?php 
-        $data = "CDS.Notify.renderPanel({ 'sendTemplateLink': false });";
-        wp_add_inline_script('cds-snc-admin-js', $data, 'after' );
-        ?>
+          <?php
+            $data = "CDS.Notify.renderPanel({ 'sendTemplateLink': false });";
+            wp_add_inline_script('cds-snc-admin-js', $data, 'after');
+            ?>
 
-        
+
       </div>
         <?php
     }
 
-    public static function render_service_id_options($data)
+    public static function renderServiceIdOptions($data)
     {
-        echo '<option value="">'.__('Select a service name').'</option>';
+        echo '<option value="">' . __('Select a service name') . '</option>';
 
         foreach ($data as $key => $value) {
-            echo '<option value="'.
-                 trim($key).
-                 '">'.
-                 trim($key).
+            echo '<option value="' .
+                 trim($key) .
+                 '">' .
+                 trim($key) .
                  '</option>';
         }
     }
 
-    public static function render_list_options($data)
+    public static function renderListOptions($data)
     {
-        echo '<option value="">'.__('Select a list').'</option>';
+        echo '<option value="">' . __('Select a list') . '</option>';
 
         foreach ($data as &$value) {
-            echo '<option value="'.
-                 $value['id'].
-                 '~'.
-                 $value['type'].
-                 '">'.
-                 $value['label'].
+            echo '<option value="' .
+                 $value['id'] .
+                 '~' .
+                 $value['type'] .
+                 '">' .
+                 $value['label'] .
                  '</option>';
         }
     }

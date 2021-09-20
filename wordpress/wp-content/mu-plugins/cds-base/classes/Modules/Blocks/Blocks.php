@@ -1,10 +1,12 @@
 <?php
+
 namespace CDS\Modules\Blocks;
+
 class Blocks
 {
-    
+
     protected $version;
-    
+
     public function __construct()
     {
         $this->register();
@@ -12,7 +14,8 @@ class Blocks
         add_action('admin_enqueue_scripts', [$this, 'addStyles'], 10, 2);
     }
 
-    public function register(){
+    public function register()
+    {
         /* blocks */
         register_block_type('cds-snc/expander', [
             'editor_script' => 'cds-snc',
@@ -48,7 +51,8 @@ class Blocks
         }
     }
 
-    public function addStyles(){
+    public function addStyles()
+    {
         // add stylesheet to the wp admin
         wp_enqueue_style(
             'cds-base-block-alert',

@@ -1,6 +1,5 @@
 <?php
 
-declare(strict_types=1)
 /**
  * The header for our theme
  *
@@ -10,6 +9,9 @@ declare(strict_types=1)
  *
  * @package cds-default
  */
+
+declare(strict_types=1);
+
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
@@ -36,9 +38,9 @@ declare(strict_types=1)
 <?php wp_body_open(); ?>
 
 <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e(
-        'Skip to content',
-        'cds-snc',
-    ); ?></a>
+    'Skip to content',
+    'cds-snc',
+); ?></a>
 <header>
   <div id="wb-bnr" class="container">
     <div class="row">
@@ -73,23 +75,23 @@ declare(strict_types=1)
               role="search">
           <div class="form-group wb-srch-qry">
             <label for="wb-srch-q" class="wb-inv"><?php _e(
-                    'Search Canada.ca',
-                    'cds-snc',
-                ); ?></label>
-            <input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search"
-                   value="" size="34" maxlength="170" placeholder="<?php _e(
                 'Search Canada.ca',
                 'cds-snc',
-            ); ?>">
+            ); ?></label>
+            <input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search"
+                   value="" size="34" maxlength="170" placeholder="<?php _e(
+                       'Search Canada.ca',
+                       'cds-snc',
+                   ); ?>">
             <datalist id="wb-srch-q-ac">
             </datalist>
           </div>
           <div class="form-group submit">
             <button type="submit" id="wb-srch-sub" class="btn btn-primary btn-small" name="wb-srch-sub">
               <span class="glyphicon-search glyphicon"></span><span class="wb-inv"><?php _e(
-                        'Search',
-                        'cds-snc',
-                    ); ?></span></button>
+                  'Search',
+                  'cds-snc',
+              ); ?></span></button>
           </div>
         </form>
       </section>
@@ -101,17 +103,17 @@ declare(strict_types=1)
       <h2 class="wb-inv"><?php _e('Menu', 'cds-snc'); ?></h2>
       <button type="button" aria-haspopup="true" aria-expanded="false"><span
           class="wb-inv"><?php _e(
-                  'Main',
-                  'cds-snc',
-              ); ?> </span><?php _e('Menu', 'cds-snc'); ?> <span
+              'Main',
+              'cds-snc',
+          ); ?> </span><?php _e('Menu', 'cds-snc'); ?> <span
           class="expicon glyphicon glyphicon-chevron-down"></span></button>
       <ul role="menu" aria-orientation="vertical">
           <?php // pulls in menu items from Canada.ca endpoint
-          echo file_get_contents(
-              'https://www.canada.ca/content/dam/canada/sitemenu/sitemenu-v2-' .
-              get_active_language() .
-              '.html',
-          ); ?>
+            echo file_get_contents(
+                'https://www.canada.ca/content/dam/canada/sitemenu/sitemenu-v2-' .
+                get_active_language() .
+                '.html',
+            ); ?>
       </ul>
     </div>
   </nav>

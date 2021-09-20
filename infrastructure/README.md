@@ -14,15 +14,6 @@ Host the IRCC WordPress site in an Amazon Elastic Container Service (ECS) Fargat
 1. ECS WordPress tasks communicate with database through an RDS Proxy (performs connection pooling and management).
 1. ECS WordPress tasks have an Elastic File System (EFS) mounted for shared file access (optional).
 
-## Build
-
-After starting the [VS Code devcontainer](https://code.visualstudio.com/docs/remote/containers):
-```sh
-# Export your AWS credentials
-make plan
-make apply
-```
-
 ## Environment variables
 
 The following Terraform variables are required:
@@ -33,6 +24,8 @@ The following Terraform variables are required:
 * `database_password`: Root database user's password
 * `list_manager_api_key`: API key used for Platform ListManager request auth
 * `list_manager_endpoint`: Platform ListManager API endpoint
+* `list_manager_notify_services`: Platform ListManager service names and API keys for sending templates
+* `list_manager_service_id`: Platform ListManager endpoint ID to get subscriber counts
 * `notify_api_key`: API key used for Notify request auth
 * `slack_webhook_url`: Slack incoming webhook to post SNS notifications to
 
@@ -45,3 +38,29 @@ WordPress [generated secret keys](https://api.wordpress.org/secret-key/1.1/salt/
 * `wordpress_secure_auth_salt`
 * `wordpress_logged_in_salt`
 * `wordpress_nonce_salt`
+
+## Environment setup
+
+A guide on how to setup a new AWS account's infrastructure.
+
+### Domain
+While in `infrastructure/terragrunt/env/${ENV_NAME}`:
+
+1. terragrunt apply `hosted-zone`
+2. In the `SRE Tools` AWS account, create a nameserver (NS) record to subdomain delegate to the new hosted zone.  
+
+### Remaining infrastructure
+While in `infrastructure/terragrunt/env/${ENV_NAME}`:
+
+2. terragrunt apply `network`
+3. terragrunt apply `load-balancer`
+4. terragrunt apply `database`
+4. terragrunt apply `ecr`
+5. Push latest WordPress docker image to new ECR.
+6. terragrunt apply `ecs`
+7. terragrunt apply `alarms`
+
+### Populate database
+:warning: This step is required because the [wp-config.php](../wordpress/wp-config.php#L132) file bundled in the Docker image expects a base WordPress site already installed.
+1. [Setup a VPN connection](https://docs.google.com/document/d/1uFZ2josUt9-3fbohwauR8n2ACzel5wNqHtEgN8xepvE/edit).  As part of this, you will need to temporarily open the VPC Network ACLs to allow all inbound and outbound traffic.
+2. Get a database dump with the new site's domain set and load it.

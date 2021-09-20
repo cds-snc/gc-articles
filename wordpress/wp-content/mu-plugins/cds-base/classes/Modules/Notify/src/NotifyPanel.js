@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { __ } from "@wordpress/i18n";
+import { Spinner } from 'Spinner/Spinner';
 
 CDS_VARS = window.CDS_VARS;
 
@@ -54,14 +55,7 @@ const NotifyIcon = () => {
 
 const NotifyLists = ({ listCounts, isLoading }) => {
     if (isLoading) return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-            <div className="lds-ellipsis">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
+        <Spinner />
     )
 
     if (listCounts < 1) {

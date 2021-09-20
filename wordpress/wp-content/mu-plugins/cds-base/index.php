@@ -38,21 +38,6 @@ function cds_plugin_images_url($filename)
     return plugin_dir_url(__FILE__).'images/'.$filename;
 }
 
-
-function cds_base_style_admin(): void
-{
-
-    // add stylesheet to the wp admin
-    wp_enqueue_style(
-        'cds-base-style-main',
-        plugin_dir_url(__FILE__).'css/main.css',
-        [],
-        BASE_PLUGIN_NAME_VERSION,
-    );
-}
-
-add_action('admin_enqueue_scripts', 'cds_base_style_admin');
-
 /**
  * Load all translations for our plugin from the MO file.
  */

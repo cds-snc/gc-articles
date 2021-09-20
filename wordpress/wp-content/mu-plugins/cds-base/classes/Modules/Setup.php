@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 namespace CDS\Modules;
-
+use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
 use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
 use CDS\Modules\Cleanup\Login as CleanupLogin;
@@ -42,6 +42,7 @@ class Setup
         new CleanupDashboard();
         new CleanupNotices();
         new CleanupAdminBar();
+        new CleanupAdminStyles();
         new CleanupMisc();
         new CleanupProfile();
     }

@@ -49,18 +49,6 @@ function cds_base_style_admin(): void
         [],
         BASE_PLUGIN_NAME_VERSION,
     );
-
-    if (is_super_admin()) {
-        return;
-    }
-
-    // add stylesheet to the wp admin
-    wp_enqueue_style(
-        'cds-base-style-admin',
-        plugin_dir_url(__FILE__).'css/admin.css',
-        [],
-        BASE_PLUGIN_NAME_VERSION,
-    );
 }
 
 add_action('admin_enqueue_scripts', 'cds_base_style_admin');

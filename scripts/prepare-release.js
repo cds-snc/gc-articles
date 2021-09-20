@@ -1,3 +1,4 @@
+import yargs from "yargs";
 import inquirer from 'inquirer';
 import { updateVersion, updateTerragruntHcl } from './util/update-files.js';
 import { createTaggedRelease } from './util/tag-files.js';
@@ -6,8 +7,15 @@ import {
     gitAddVersionFiles,
     gitCommitVersionFiles,
     gitPushVersionFiles,
-    ghVersionPullRequest
+    ghVersionPullRequest,
+    gitCreateReleaseBranch,
+    gitAddReleaseFiles,
+    gitCommitReleaseFiles,
+    gitPushReleaseFiles,
+    ghReleasePullRequest
 } from "./util/git.js";
+
+const argv = yargs(process.argv.slice(2)).argv;
 
 const inputVersionNumber = async () => {
     const question = {
@@ -32,8 +40,7 @@ const inputReleaseTag = async () => {
             name: 'notes',
             message: "Release notes i.e. bug fixes",
         }
-    ]
-
+    ];
 
     const answer = await inquirer.prompt(questions);
     return { tag: answer.tag, notes: answer.notes };
@@ -41,19 +48,7 @@ const inputReleaseTag = async () => {
 
 (async () => {
     try {
-        const answer = await inquirer.prompt([
-            {
-                type: 'list',
-                name: 'action',
-                message: 'What do you want to do?',
-                choices: [
-                    'Bump version (1.x.x)',
-                    'Update docker image (v1.x.x)',
-                ],
-            }
-        ]);
-
-        if (answer.action === 'Bump version (1.x.x)') {
+        if (argv.version_num) {
             const version = await inputVersionNumber();
             await gitCreateVersionBranch(version);
             await updateVersion(version);
@@ -61,9 +56,16 @@ const inputReleaseTag = async () => {
             await gitCommitVersionFiles(version);
             await gitPushVersionFiles(version);
             await ghVersionPullRequest(version);
-        } else {
-            const { tag, notes } = await inputReleaseTag()
+        }
+
+        if (argv.tag) {
+            const { tag, notes } = await inputReleaseTag();
+            await gitCreateReleaseBranch(tag);
             await updateTerragruntHcl(tag);
+            await gitAddReleaseFiles();
+            await gitCommitReleaseFiles(tag);
+            await gitPushReleaseFiles(tag);
+            await ghReleasePullRequest(tag, notes);
             createTaggedRelease(tag, notes);
         }
 
@@ -77,4 +79,5 @@ const inputReleaseTag = async () => {
         console.error(`\n${error.message}`);
         console.log("\n------------------\n");
     }
+
 })();

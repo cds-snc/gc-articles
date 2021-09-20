@@ -23,10 +23,10 @@
     "sweetalert2": "^11.1.5"
   },
   "devDependencies": {
+    "@cypress/snapshot": "^2.1.7",
     "@wordpress/env": "^4.1.1",
     "@wordpress/scripts": "^18.0.1",
     "cypress": "^8.4.0",
-    "@cypress/snapshot": "^2.1.7",
     "cypress-wp-test-utils": "^0.3.0",
     "cypress-xpath": "^1.6.2"
   },

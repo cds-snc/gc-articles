@@ -109,27 +109,26 @@ See: https://github.com/cds-snc/platform-mvp/pull/95#issuecomment-904688973
 1) Bump the version #
 
 ```bash
-npm run prepare-release
+npm run update-version
 ```
 
-Select `Bump version`
+> This should automatically update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711)
 
-> This should automatcially update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711)
+2) Visit Github and check the Pull Request that was created
 
-2) Create a PR, merge ...
+<hr>
 
-3) Update the deployment docker image
+1) Create and tag a release
 
 ```bash
-npm run prepare-release
+npm run tag-release
 ```
-
-Select `Update docker image`
 
 > This should automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file
 
+2) Visit Github and check the Pull Request that was created
+
 **NOTE** This step will run a github cli command to create a release and tag on Github
 
-4) Create a PR, merge ...
 
 The automated deployment will happen after your PR is merged

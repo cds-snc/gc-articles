@@ -1,13 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
+namespace CDS\Modules\Notify;
+
 class Notices
 {
-
-    public function __construct()
-    {
-
-    }
-
     public static function handle_notice($status): void
     {
 
@@ -80,6 +78,4 @@ class Notices
       </div>
         <?php
     }
-
-
 }

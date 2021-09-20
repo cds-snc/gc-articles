@@ -1,14 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+namespace CDS\Modules\Notify;
+
 class FormHelpers
 {
-    public function __construct()
-    {
-    }
-
     public static function render($data)
     {
-      $action = get_home_url() . '/wp-json/wp-notify/v1/bulk'; ?>
+        $action = get_home_url().'/wp-json/wp-notify/v1/bulk'; ?>
       <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
         <form id="email_sender" name="email_sender" method="post" action="<?php echo $action; ?>">
@@ -26,9 +26,9 @@ class FormHelpers
                     <?php try {
                         self::render_service_id_options($data["service_ids"]);
                     } catch (Exception $e) {
-                        echo '<option value="">' .
-                            __('No service ids found', 'cds-snc') .
-                            '</option>';
+                        echo '<option value="">'.
+                             __('No service ids found', 'cds-snc').
+                             '</option>';
                     } ?>
                 </select>
               </td>
@@ -54,9 +54,9 @@ class FormHelpers
                     <?php try {
                         self::render_list_options($data["list_values"]);
                     } catch (Exception $e) {
-                        echo '<option value="">' .
-                            __('No lists found', 'cds-snc') .
-                            '</option>';
+                        echo '<option value="">'.
+                             __('No lists found', 'cds-snc').
+                             '</option>';
                     } ?>
                 </select>
               </td>
@@ -88,29 +88,29 @@ class FormHelpers
 
     public static function render_service_id_options($data)
     {
-        echo '<option value="">' . __('Select a service name') . '</option>';
+        echo '<option value="">'.__('Select a service name').'</option>';
 
         foreach ($data as $key => $value) {
-            echo '<option value="' .
-                trim($key) .
-                '">' .
-                trim($key) .
-                '</option>';
+            echo '<option value="'.
+                 trim($key).
+                 '">'.
+                 trim($key).
+                 '</option>';
         }
     }
 
     public static function render_list_options($data)
     {
-        echo '<option value="">' . __('Select a list') . '</option>';
+        echo '<option value="">'.__('Select a list').'</option>';
 
         foreach ($data as &$value) {
-            echo '<option value="' .
-                $value['id'] .
-                '~' .
-                $value['type'] .
-                '">' .
-                $value['label'] .
-                '</option>';
+            echo '<option value="'.
+                 $value['id'].
+                 '~'.
+                 $value['type'].
+                 '">'.
+                 $value['label'].
+                 '</option>';
         }
     }
 }

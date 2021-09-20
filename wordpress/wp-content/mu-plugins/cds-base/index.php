@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-use CDS\Modules\Setup;
-
 require __DIR__.'/vendor/autoload.php';
+
+use CDS\Modules\Notify\NotifyTemplateSender;
+use CDS\Modules\Setup;
 
 /**
  * Plugin Name: CDS-SNC Base
@@ -25,8 +26,6 @@ if ( ! defined('BASE_PLUGIN_NAME')) {
 if ( ! defined('BASE_PLUGIN_NAME_VERSION')) {
     define('BASE_PLUGIN_NAME_VERSION', '1.2.0');
 }
-
-require_once __DIR__.'/notify/NotifyTemplateSender.php';
 
 if (is_multisite()) {
     define('MU_PLUGIN_URL', network_site_url('/wp-content/mu-plugins', 'relative'));

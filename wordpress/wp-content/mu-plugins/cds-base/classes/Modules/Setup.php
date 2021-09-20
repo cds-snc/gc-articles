@@ -14,6 +14,7 @@ use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
+use CDS\Modules\Notify\Setup as SetupNotify;
 use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\Blocks\Blocks;
@@ -69,6 +70,7 @@ class Setup
     public function setupNotifyTemplateSender()
     {
         new SendTemplateDashboardPanel();
+        new SetupNotify();
     }
 
 

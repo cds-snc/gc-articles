@@ -41,34 +41,6 @@ resource "aws_sns_topic" "alert_observe_us_east" {
   }
 }
 
-resource "aws_sns_topic" "cloudwatch_events" {
-  name              = "cloudwatch-events"
-  kms_master_key_id = aws_kms_key.sns_cloudwatch.id
-
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
-}
-
-resource "aws_sns_topic_policy" "cloudwatch_events" {
-  arn    = aws_sns_topic.cloudwatch_events.arn
-  policy = data.aws_iam_policy_document.cloudwatch_events.json
-}
-
-data "aws_iam_policy_document" "cloudwatch_events" {
-  statement {
-    effect  = "Allow"
-    actions = ["SNS:Publish"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["events.amazonaws.com"]
-    }
-
-    resources = [aws_sns_topic.cloudwatch_events.arn]
-  }
-}
-
 #
 # SNS: subscriptions
 #

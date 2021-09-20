@@ -11,9 +11,10 @@ dependency "network" {
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
   mock_outputs = {
-    ecs_service_security_group_id = ""
-    efs_security_group_id         = ""
-    private_subnet_ids            = [""]
+    ecs_events_lambda_security_group_id = ""
+    ecs_service_security_group_id       = ""
+    efs_security_group_id               = ""
+    private_subnet_ids                  = [""]
   }
 }
 
@@ -54,9 +55,10 @@ inputs = {
   alb_target_group_arn = dependency.load-balancer.outputs.alb_target_group_arn
   domain_name          = dependency.load-balancer.outputs.domain_name
 
-  ecs_service_security_group_id = dependency.network.outputs.ecs_service_security_group_id
-  efs_security_group_id         = dependency.network.outputs.efs_security_group_id
-  private_subnet_ids            = dependency.network.outputs.private_subnet_ids
+  ecs_events_lambda_security_group_id = dependency.network.outputs.ecs_events_lambda_security_group_id
+  ecs_service_security_group_id       = dependency.network.outputs.ecs_service_security_group_id
+  efs_security_group_id               = dependency.network.outputs.efs_security_group_id
+  private_subnet_ids                  = dependency.network.outputs.private_subnet_ids
 
   wordpress_repository_arn = dependency.ecr.outputs.wordpress_repository_arn
   wordpress_image          = dependency.ecr.outputs.wordpress_repository_url

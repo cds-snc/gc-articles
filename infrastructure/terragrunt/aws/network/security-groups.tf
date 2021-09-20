@@ -186,3 +186,34 @@ resource "aws_security_group_rule" "sns_lambda_vpc_endpoint_ingress" {
   security_group_id        = aws_security_group.sns_lambda.id
   source_security_group_id = aws_security_group.vpc_endpoint.id
 }
+
+resource "aws_security_group" "ecs_events_lambda" {
+  # checkov:skip=CKV2_AWS_5: False positive, attached in the "ecs" module.
+  name        = "ecs_events_lambda"
+  description = "ECS Lambda - ingress/egress for VPC endpoints"
+  vpc_id      = module.wordpress_vpc.vpc_id
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+}
+
+resource "aws_security_group_rule" "ecs_events_lambda_vpc_endpoint_ingress" {
+  description              = "Security group rule for ECS Events Lambda ingress from VPC endpoints"
+  type                     = "ingress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.ecs_events_lambda.id
+  source_security_group_id = aws_security_group.vpc_endpoint.id
+}
+
+resource "aws_security_group_rule" "ecs_events_lambda_vpc_endpoint_egress" {
+  description              = "Security group rule for ECS Events Lambda egress to VPC endpoints"
+  type                     = "egress"
+  from_port                = 443
+  to_port                  = 443
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.vpc_endpoint.id
+  source_security_group_id = aws_security_group.ecs_events_lambda.id
+}

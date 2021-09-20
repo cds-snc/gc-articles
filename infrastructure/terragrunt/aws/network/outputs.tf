@@ -2,6 +2,10 @@ output "load_balancer_security_group_id" {
   value = aws_security_group.wordpress_load_balancer.id
 }
 
+output "ecs_events_lambda_security_group_id" {
+  value = aws_security_group.ecs_events_lambda.id
+}
+
 output "ecs_service_security_group_id" {
   value = aws_security_group.wordpress_ecs.id
 }

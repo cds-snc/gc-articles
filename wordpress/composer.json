@@ -12,7 +12,8 @@
   "require-dev": {
     "pestphp/pest": "^1.16",
     "10up/wp_mock": "0.4.2",
-    "mockery/mockery": "^1.4"
+    "mockery/mockery": "^1.4",
+    "squizlabs/php_codesniffer": "^3.6"
   },
   "extra": {
     "installer-paths": {

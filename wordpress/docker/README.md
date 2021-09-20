@@ -13,13 +13,11 @@ openssl req -x509 -nodes \
     -out self-signed.crt
 
 # Set required variables
-export GITHUB_SHA="$(git rev-parse HEAD)"
 export APACHE_KEY="$(cat self-signed.key)"
 export APACHE_CERT="$(cat self-signed.crt)"
 
 # Build the Docker image
 docker build \
-    --build-arg git_sha="$GITHUB_SHA" \
     --build-arg APACHE_KEY="$APACHE_KEY" \
     --build-arg APACHE_CERT="$APACHE_CERT" \
     -t platform-mvp/ircc:"$GITHUB_SHA" \

@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - ".dockerignore"
+      - ".github/workflows/build_push_container.yml"
+      - "wordpress/**"
   release:
     types:
       - created
@@ -35,10 +39,10 @@ jobs:
       - name: Docker image tag
         run: |
           if [[ $GITHUB_EVENT_NAME == "release" ]]; then
-              echo "IMAGE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+            echo "IMAGE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           else
-              echo "IMAGE_TAG=${GITHUB_SHA}" >> $GITHUB_ENV
-          fi        
+            echo "IMAGE_TAG=sha-${GITHUB_SHA}" >> $GITHUB_ENV
+          fi
 
       - name: Build container
         run: |

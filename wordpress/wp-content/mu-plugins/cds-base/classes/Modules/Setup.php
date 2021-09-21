@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CDS\Modules;
 
+use CDS\Modules\Cleanup\Articles as CleanupPosts;
 use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
 use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
@@ -37,6 +38,7 @@ class Setup
 
     public function cleanup()
     {
+        new CleanupPosts();
         new CleanupRoles();
         new CleanupLogin();
         new CleanupMenus();

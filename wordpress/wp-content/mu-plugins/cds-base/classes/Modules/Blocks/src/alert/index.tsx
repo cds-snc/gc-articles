@@ -1,4 +1,5 @@
 // https://wet-boew.github.io/wet-boew/docs/ref/collapsible-alerts/collapsible-alerts-en.html
+import * as React from 'react';
 import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 import {
@@ -35,7 +36,6 @@ registerBlockType("cds-snc/alert", {
   title: __("Alert", "cds-snc"),
   icon: "info-outline",
   category: "layout",
-  example: {},
   attributes: {
     content: {
       type: "string",
@@ -87,8 +87,8 @@ registerBlockType("cds-snc/alert", {
 
     return (
       <section>
-        <details class={`alert ${attributes.alertType}`} open="open">
-          <summary class="h3">
+        <details className={`alert ${attributes.alertType}`} open={true}>
+          <summary className="h3">
             <h3>{attributes.title}</h3>
           </summary>
           <RichText.Content

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 import { useBlockProps, RichText } from "@wordpress/block-editor";
@@ -6,7 +7,6 @@ registerBlockType("cds-snc/expander", {
   title: __("Expander", "cds-snc"),
   icon: "megaphone",
   category: "layout",
-  example: {},
   attributes: {
     content: {
       type: "string",

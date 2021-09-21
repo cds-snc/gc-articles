@@ -1,19 +1,33 @@
-const path = require('path');
-const defaults = require("@wordpress/scripts/config/webpack.config");
+const path = require("path");
+const defaultConfig = require("@wordpress/scripts/config/webpack.config");
 
 module.exports = {
-    ...defaults,
-    externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
-    },
-    resolve: {
-        alias: {
-            Spinner: path.resolve(__dirname, 'classes/Modules/Spinner/src'),
-            Notify: path.resolve(__dirname, 'classes/Modules/Notify/src'),
-            Blocks: path.resolve(__dirname, 'classes/Modules/Blocks/src'),
-            TrackLogins: path.resolve(__dirname, 'classes/Modules/TrackLogins/src'),
-        }
-    }
+	...defaultConfig,
+	externals: {
+		"react": "React",
+		"react-dom": "ReactDOM"
+	},
+	entry: "./src/index.tsx",
+	module: {
+		...defaultConfig.module,
+		rules: [
+			{
+				test: /\.tsx?$/,
+				use: "ts-loader",
+				exclude: /node_modules/,
+			},
+			...defaultConfig.module.rules,
+		],
+	},
 
+	resolve: {
+		...defaultConfig.resolve,
+		extensions: [".tsx", ".ts", "js", "jsx"],
+	},
+
+	output: {
+		...defaultConfig.output,
+		filename: "index.js",
+		path: path.resolve(__dirname, "build"),
+	},
 };

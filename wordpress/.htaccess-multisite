@@ -6,6 +6,9 @@ RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 RewriteBase /
 RewriteRule ^index\.php$ - [L]
 
+RewriteCond %{QUERY_STRING} ^$
+RewriteRule ^se\-connecter\-sign\-in$ /sign-in-se-connecter? [R=301,L]
+
 # add a trailing slash to /wp-admin
 RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
 

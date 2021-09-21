@@ -13,14 +13,17 @@ const scrapeHtml = async (timer = 0) => {
 
     return new Promise(async (resolve, reject) => {
         try {
-            const html = await rp(url, {
+
+            const requestUrl = `${url}?v=${encodeURI(timer).replace(':', '')}`
+
+            const html = await rp(requestUrl, {
                 headers: {
-                    'User-Agent': 'Request-Promise'
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'
                 },
             });
             const $ = cheerio.load(html);
             const version = $('#version').text();
-            console.log(`${timer} - ${url} => found version: ${version}`);
+            console.log(`${timer} - ${requestUrl} => found version: ${version}`);
             resolve(version)
         } catch (e) {
             reject(e)

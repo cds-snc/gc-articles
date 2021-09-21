@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace CDS\Modules;
 
-use CDS\Modules\Cleanup\Articles as CleanupPosts;
-use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
+use CDS\Modules\Blocks\Blocks;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
+use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
 use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
 use CDS\Modules\Cleanup\Login as CleanupLogin;
 use CDS\Modules\Cleanup\Menus as CleanupMenus;
@@ -19,7 +19,6 @@ use CDS\Modules\Notify\SendTemplateDashboardPanel;
 use CDS\Modules\Notify\Setup as SetupNotify;
 use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
-use CDS\Modules\Blocks\Blocks;
 use CDS\Utils;
 
 class Setup
@@ -38,7 +37,7 @@ class Setup
 
     public function cleanup()
     {
-        new CleanupPosts();
+        // new CleanupPosts();
         new CleanupRoles();
         new CleanupLogin();
         new CleanupMenus();

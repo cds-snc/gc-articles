@@ -13,7 +13,7 @@ class FormHelpers
         $action = get_home_url() . '/wp-json/wp-notify/v1/bulk'; ?>
       <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-        <form id="email_sender" name="email_sender" method="post" action="<?php echo $action; ?>">
+        <form id="notify_template_sender_form" name="notify_template_sender_form" method="post" action="<?php echo $action; ?>">
             <?php wp_nonce_field('wp_rest', '_wpnonce'); ?>
           <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
           <table class="form-table" role="presentation">
@@ -70,9 +70,9 @@ class FormHelpers
             <?php submit_button(
                 __('Send template to list', 'cds-snc'),
                 'primary',
-                'submit',
+                'notify-send-template',
                 true,
-                ['id' => 'cds-send-notify-template'],
+                ['id' => 'notify-send-template'],
             ); ?>
         </form>
 

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
+import { NotifySendTemplateHandler } from './NotifySendTemplateHandler.js';
 import { __ } from "@wordpress/i18n";
 import { Spinner } from 'Spinner/Spinner';
 
-CDS_VARS = window.CDS_VARS;
+const CDS_VARS = window.CDS_VARS || {};
 
 const requestHeaders = new Headers();
 requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
@@ -32,12 +33,12 @@ const matchCountToList = (listCounts) => {
 
     listDetails.forEach(list => {
         const obj = findListById(listCounts, list.id);
-        let count = 0
+        let subscriber_count = 0
         if (obj) {
-            count = obj.subscriber_count;
+            subscriber_count = obj.subscriber_count;
         }
 
-        data.push({ ...list, count });
+        data.push({ ...list, list_id: list.id, subscriber_count });
     });
 
     return data;
@@ -63,7 +64,7 @@ const NotifyLists = ({ listCounts, isLoading }) => {
     }
 
     const rows = listCounts.map((list) => {
-        return <tr><td>{list.label}</td><td>{list.count}</td></tr>
+        return <tr><td>{list.label}</td><td>{list.subscriber_count}</td></tr>
     })
     return (
         <table className="wp-list-table widefat">
@@ -81,14 +82,18 @@ const NotifyLists = ({ listCounts, isLoading }) => {
 
 export const NotifyPanel = ({ sendTemplateLink = false }) => {
     const [isLoading, setIsLoading] = useState(true);
-    const [listCounts, setListCounts] = useState('');
+    const [listCounts, setListCounts] = useState([]);
 
-    useEffect(async () => {
-        const response = await getData("wp-notify/v1/list_counts");
-        setIsLoading(false)
-        if (response.length >= 1) {
-            setListCounts(await matchCountToList(response));
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await getData("wp-notify/v1/list_counts");
+            setIsLoading(false)
+            if (response.length >= 1) {
+                setListCounts(await matchCountToList(response));
+            }
         }
+
+        fetchData();
     }, [])
 
     const text = __("Send Template", "cds-snc");
@@ -117,6 +122,7 @@ export const NotifyPanel = ({ sendTemplateLink = false }) => {
             <div>
                 <NotifyLists listCounts={listCounts} isLoading={isLoading} />
             </div>
+            {listCounts && listCounts.length >= 1 && <NotifySendTemplateHandler listCounts={listCounts} />}
         </div>
     )
 }

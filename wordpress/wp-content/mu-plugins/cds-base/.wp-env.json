@@ -2,5 +2,8 @@
   "plugins": [
     ".",
     "Wordpress/two-factor"
+  ],
+  "themes": [
+    "../../themes/cds-default"
   ]
 }

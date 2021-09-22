@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Cleanup;
 
-use CDS\Utils;
 use Wa72\HtmlPageDom\HtmlPage;
 
 class Profile
@@ -97,27 +96,6 @@ class Profile
          *--------------------------------------------*/
 
         $crawler->filter('.yoast-settings')->remove();
-
-        /*--------------------------------------------*
-        * Two-Factor Options
-        *--------------------------------------------*/
-        $rows = $crawler->filter('.two-factor-methods-table tbody tr')->reduce(
-            static function ($node, $j) {
-
-
-                if (Utils::strContains($node->html(), 'Backup Verification Codes')) {
-                    return true;
-                }
-
-                if (Utils::strContains($node->html(), 'Dummy Method')) {
-                    return true;
-                }
-
-                return false;
-            }
-        );
-
-        $rows->remove();
 
         echo $crawler->save();
     }

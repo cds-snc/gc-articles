@@ -19,6 +19,7 @@ use CDS\Modules\Notify\SendTemplateDashboardPanel;
 use CDS\Modules\Notify\Setup as SetupNotify;
 use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
+use CDS\Modules\TwoFactor\TwoFactor;
 use CDS\Utils;
 
 class Setup
@@ -47,6 +48,7 @@ class Setup
         new CleanupAdminStyles();
         new CleanupMisc();
         new CleanupProfile();
+        new TwoFactor();
     }
 
     public function checkVersion()

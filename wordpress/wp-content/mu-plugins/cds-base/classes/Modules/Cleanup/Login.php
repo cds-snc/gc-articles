@@ -62,8 +62,7 @@ class Login
 
     public function loginRedirect($redirect_to, $request, $user): string
     {
-        $redirect_to = admin_url() . "admin.php?page=cds_notify_send";
-
+        $redirect_to = admin_url() . '/index.php';
         return $redirect_to;
     }
 

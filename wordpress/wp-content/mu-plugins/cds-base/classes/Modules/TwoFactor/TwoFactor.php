@@ -36,7 +36,8 @@ class TwoFactor
 
     public function dashboardWidget(): void
     {
-        if (!$this->twoFactorEnabled) {
+
+        if (class_exists('Two_Factor_Core') && !$this->twoFactorEnabled) {
             wp_add_dashboard_widget(
                 'cds_2fa_widget',
                 __('Two factor authentication', 'cds-snc'),

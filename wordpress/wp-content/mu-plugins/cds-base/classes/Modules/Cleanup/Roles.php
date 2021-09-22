@@ -8,13 +8,16 @@ class Roles
 {
     public function __construct()
     {
-        $port = $_SERVER['SERVER_PORT'];
-        if ($port == 8888 || $port == 8889) {
-            // ensure the administrator role exists for wp-env
-            // wp-env uses (Username: admin, Password: password).
-            // https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/#quick-tldr-instructions
-            $this->cleanupRoles('administrator');
-            return;
+        if (isset($_SERVER) && isset($_SERVER['SERVER_PORT'])) {
+            $port = $_SERVER['SERVER_PORT'];
+
+            if ($port == 8888 || $port == 8889) {
+                // ensure the administrator role exists for wp-env
+                // wp-env uses (Username: admin, Password: password).
+                // https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/#quick-tldr-instructions
+                $this->cleanupRoles('administrator');
+                return;
+            }
         }
 
         Utils::checkOptionCallback('cds_base_activated', '1.0', function () {

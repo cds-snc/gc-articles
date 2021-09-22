@@ -1,0 +1,17 @@
+[
+  {
+    "id": "fb26a6b5-57aa-4cc2-85fe-3053ed344fe8",
+    "type": "email",
+    "label": "My List"
+  },
+  {
+    "id": "vdf7d370-71c2-48ad-9d59-4e2f7b9b828a",
+    "type": "email",
+    "label": "Another List"
+  },
+  {
+    "id": "qdf7d370-71c2-48ad-9d59-4e2f7b9b828a",
+    "type": "email",
+    "label": "One more"
+  }
+]

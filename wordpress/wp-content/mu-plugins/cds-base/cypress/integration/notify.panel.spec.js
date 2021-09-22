@@ -21,6 +21,14 @@ describe('Notify Panel', () => {
 
     it('Can view Notify Panel on dashboard', () => {
         cy.visitDashboard();
-        cy.get('#notify-panel-container a').should('have.text', 'Send Template')
+        cy.get('#notify-panel-container a').should('have.text', 'Send Template');
+
+        cy.get('.label-my-list').should('have.text', 'My List');
+        cy.get('.subscriber-count-my-list').should('have.text', '3');
+
+        cy.get('.label-another-list').should('have.text', 'Another List');
+        cy.get('.subscriber-count-another-list').should('have.text', '2');
+
+        cy.get('.subscriber-count-one-more').should('have.text', '0');
     });
 });

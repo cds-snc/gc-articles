@@ -10,6 +10,18 @@ const CDS_VARS = window.CDS_VARS || {};
 const requestHeaders = new Headers();
 requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
 
+export const slugify = (...args: (string | number)[]): string => {
+  const value = args.join(' ');
+
+  return value
+    .normalize('NFD') // split an accented letter in the base letter and the acent
+    .replace(/[\u0300-\u036f]/g, '') // remove all previously split accents
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9 ]/g, '') // remove all chars not letters, numbers and spaces (to be replaced)
+    .replace(/\s+/g, '-'); // separator
+};
+
 export const getData = async (endpoint: string) => {
   const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
     method: 'GET',
@@ -87,10 +99,11 @@ const NotifyLists = ({
   }
 
   const rows = listCounts.map((list) => {
+    const id = slugify(list.label);
     return (
       <tr>
-        <td>{list.label}</td>
-        <td>{list.subscriber_count}</td>
+        <td className={`label-${id}`}>{list.label}</td>
+        <td className={`subscriber-count-${id}`}>{list.subscriber_count}</td>
       </tr>
     );
   });

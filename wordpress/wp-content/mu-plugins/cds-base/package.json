@@ -43,8 +43,12 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack --watch",
-    "wp-env:init": "wp-env start",
     "wp-env": "wp-env",
+    "wp-env:init": "wp-env start",
+    "wp-env:stop": "wp-env stop",
+    "wp-env:debug": "wp-env start --debug",
+    "wp-env:clean" : "wp-env clean all",
+    "wp-env:destroy": "wp-env destroy",
     "update-translations": "scripts/translations/extract-messages.sh && scripts/translations/update-translation-files.sh && scripts/translations/compile-translation-files.sh",
     "packages-update": "wp-scripts packages-update",
     "cy:run": "cypress run",

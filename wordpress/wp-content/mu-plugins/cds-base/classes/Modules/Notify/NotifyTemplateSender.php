@@ -18,7 +18,7 @@ class NotifyTemplateSender
     public function __construct(FormHelpers $formHelpers, Notices $notices)
     {
         $this->formHelpers = $formHelpers;
-        $this->notices     = $notices;
+        $this->notices = $notices;
 
         add_action('admin_menu', [$this, 'addMenu']);
         add_action('rest_api_init', [$this, 'registerEndpoints']);
@@ -51,16 +51,16 @@ class NotifyTemplateSender
     public function registerEndpoints(): void
     {
         register_rest_route('wp-notify/v1', '/bulk', [
-            'methods'             => 'POST',
-            'callback'            => [$this, 'processSend'],
+            'methods' => 'POST',
+            'callback' => [$this, 'processSend'],
             'permission_callback' => function () {
                 return current_user_can('delete_posts');
             }
         ]);
 
         register_rest_route('wp-notify/v1', '/list_counts', [
-            'methods'             => 'GET',
-            'callback'            => [$this, 'processListCounts'],
+            'methods' => 'GET',
+            'callback' => [$this, 'processListCounts'],
             'permission_callback' => function () {
                 return current_user_can('delete_posts');
             }
@@ -109,7 +109,7 @@ class NotifyTemplateSender
     public function validate($data): array
     {
         $template_id = $data['template_id'];
-        $api_key     = $this->findApiKey($data['service_id']);
+        $api_key = $this->findApiKey($data['service_id']);
 
         if (empty($template_id)) {
             wp_redirect($this->baseRedirect() . '&status=400');
@@ -118,12 +118,12 @@ class NotifyTemplateSender
 
         $parts = explode('~', $data['list_id']);
 
-        if (! is_array($parts) || count($parts) !== 2) {
+        if (!is_array($parts) || count($parts) !== 2) {
             wp_redirect($this->baseRedirect() . '&status=418');
             exit();
         }
 
-        $list_id   = $parts[0];
+        $list_id = $parts[0];
         $list_type = $parts[1];
 
         return ['api_key' => $api_key, 'template_id' => $template_id, 'list_id' => $list_id, 'list_type' => $list_type];
@@ -132,7 +132,7 @@ class NotifyTemplateSender
     public function findApiKey($service_id): string
     {
         $service_ids = $this->parseServiceIdsFromEnv();
-        $api_key     = "";
+        $api_key = "";
         foreach ($service_ids as $key => $value) {
             if (trim($service_id) == trim($key)) {
                 $api_key = $value;
@@ -144,12 +144,17 @@ class NotifyTemplateSender
 
     public function parseServiceIdsFromEnv(): array
     {
-        $str         = getenv('LIST_MANAGER_NOTIFY_SERVICES');
-        $arr         = explode(',', $str);
+        $str = getenv('LIST_MANAGER_NOTIFY_SERVICES');
+
+        if (!$str) {
+            return [];
+        }
+
+        $arr = explode(',', $str);
         $service_ids = [];
 
         for ($i = 0; $i < count($arr); $i++) {
-            $key_value                   = explode('~', $arr [$i]);
+            $key_value = explode('~', $arr [$i]);
             $service_ids[$key_value [0]] = $key_value [1];
         }
 
@@ -174,10 +179,10 @@ class NotifyTemplateSender
         return $client->request('POST', $endpoint . '/send', [
             'json' => [
                 'service_api_key' => $api_key,
-                'template_id'     => $template_id,
-                'list_id'         => $list_id,
-                'template_type'   => $template_type,
-                'job_name'        => $ref,
+                'template_id' => $template_id,
+                'list_id' => $list_id,
+                'template_type' => $template_type,
+                'job_name' => $ref,
             ],
         ]);
     }

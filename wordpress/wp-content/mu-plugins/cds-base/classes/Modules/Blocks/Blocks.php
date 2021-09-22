@@ -9,8 +9,8 @@ class Blocks
 
     public function __construct()
     {
-        $this->register();
         $this->version = "1.0.0";
+        add_action('admin_enqueue_scripts', [$this, 'register'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'addStyles'], 10, 2);
     }
 

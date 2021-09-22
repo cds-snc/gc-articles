@@ -63,7 +63,7 @@ class TrackLogins
         $data = [
             'user_agent' => $_SERVER['HTTP_USER_AGENT'],
             'time_login' => current_time('mysql', 1),
-            'user_id'    => $user->id
+            'user_id'    => $user->ID
         ];
 
         $this->wpdb->insert($this->tableName, $data);

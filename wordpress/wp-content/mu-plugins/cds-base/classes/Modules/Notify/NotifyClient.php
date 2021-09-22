@@ -4,6 +4,7 @@ namespace CDS\Modules\Notify;
 
 use Alphagov\Notifications\Exception\NotifyException;
 use Http\Adapter\Guzzle6\Client;
+use Http\Client\Exception;
 
 class NotifyClient
 {
@@ -15,18 +16,33 @@ class NotifyClient
         $this->notifyClient = $this->setupClient();
     }
 
-    private function setupClient(): \Alphagov\Notifications\Client
+    private function setupClient(): ?\Alphagov\Notifications\Client
     {
-        $NOTIFY_API_KEY = getenv('NOTIFY_API_KEY');
-        return new \Alphagov\Notifications\Client([
-            'baseUrl' => "https://api.notification.canada.ca",
-            'apiKey' => $NOTIFY_API_KEY,
-            'httpClient' => new Client()
-        ]);
+        try {
+            $NOTIFY_API_KEY = getenv('NOTIFY_API_KEY');
+
+            if (!$NOTIFY_API_KEY) {
+                return null;
+            }
+
+            return new \Alphagov\Notifications\Client([
+                'baseUrl' => "https://api.notification.canada.ca",
+                'apiKey' => $NOTIFY_API_KEY,
+                'httpClient' => new Client()
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return null;
+        }
     }
 
     public function sendMail($emailTo, $templateId, $data = [], $ref = "")
     {
+        if (!$this->notifyClient) {
+            error_log("notifyClient doesn't exist");
+            return false;
+        }
+
         try {
             $response = $this->notifyClient->sendEmail(
                 $emailTo,

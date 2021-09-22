@@ -42,10 +42,10 @@ const Logins = ({
       <thead>
         <tr>
           <th>
-            <strong>{__('Date', 'cds-snc')}</strong>
+            <strong className="login-date">{__('Date', 'cds-snc')}</strong>
           </th>
           <th>
-            <strong>{__('User agent', 'cds-snc')}</strong>
+            <strong className="login-userAgent">{__('User agent', 'cds-snc')}</strong>
           </th>
         </tr>
       </thead>

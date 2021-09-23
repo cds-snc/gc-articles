@@ -3,6 +3,10 @@
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
 describe('Notify Panel', () => {
+    before(() => {
+        cy.exec('npm run wp-env:test:setup')
+    });
+
     beforeEach(() => {
         cy.intercept(
             {
@@ -21,6 +25,7 @@ describe('Notify Panel', () => {
 
     it('Can view Notify Panel on dashboard', () => {
         cy.visitDashboard();
+        cy.screenshot();
         cy.get('#notify-panel-container a').should('have.text', 'Send Template');
 
         cy.get('.label-my-list').should('have.text', 'My List');

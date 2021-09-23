@@ -21,6 +21,7 @@ describe('Track Login Panel', () => {
 
     it('Can view Track Login Panel on dashboard', () => {
         cy.visitDashboard();
+        cy.screenshot();
         cy.get('#logins-panel-container .login-date').should('have.text', 'Date');
         cy.get('#logins-panel-container .login-userAgent').should('have.text', 'User agent');
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)

@@ -3,6 +3,10 @@
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
 describe('Notify Template Sender', () => {
+    before(() => {
+        cy.exec('npm run wp-env:test:setup')
+    });
+
     beforeEach(() => {
         cy.intercept(
             {
@@ -36,6 +40,7 @@ describe('Notify Template Sender', () => {
 
     it('Send Notify Template', () => {
         cy.visitNotify();
+        cy.screenshot();
         cy.get('h1').should('have.text', 'Send Notify Template');
 
         cy.get('select#list_id').select('One more');

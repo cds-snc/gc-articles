@@ -44,7 +44,7 @@
     "build": "webpack",
     "start": "webpack --watch",
     "wp-env": "wp-env",
-    "wp-env:init": "wp-env start && npm run wp-env:test:setup",
+    "wp-env:init": "wp-env start",
     "wp-env:test:setup": "sh ./cypress/test-setup/setup.sh",
     "wp-env:stop": "wp-env stop",
     "wp-env:debug": "wp-env start --debug",
@@ -52,7 +52,7 @@
     "wp-env:destroy": "wp-env destroy",
     "update-translations": "scripts/translations/extract-messages.sh && scripts/translations/update-translation-files.sh && scripts/translations/compile-translation-files.sh",
     "packages-update": "wp-scripts packages-update",
-    "cy:run": "cypress run",
+    "cy:run": "cypress run --record",
     "cy:open": "cypress open"
   }
 }

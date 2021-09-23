@@ -2,5 +2,14 @@
   "plugins": [
     ".",
     "Wordpress/two-factor"
-  ]
+  ],
+  "themes": [
+    "../../themes/cds-default"
+  ],
+  "phpVersion": "8.0",
+  "config": {
+    "WP_DEBUG": 1,
+    "WORDPRESS_DEBUG_DISPLAY": 1,
+    "WP_DEBUG_DISPLAY": 1
+  }
 }

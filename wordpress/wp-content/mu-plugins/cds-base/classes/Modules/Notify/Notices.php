@@ -44,7 +44,7 @@ class Notices
     {
         ?>
       <div class="notice notice-success is-dismissible">
-        <p><?php _e('Sent', 'cds-snc'); ?></p>
+        <p class="notice-sent"><?php _e('Sent', 'cds-snc'); ?></p>
       </div>
         <?php
     }
@@ -53,7 +53,7 @@ class Notices
     {
         ?>
       <div class="notice notice-error is-dismissible">
-        <p><?php _e('Template ID is required', 'cds-snc'); ?></p>
+        <p class="notice-template-id"><?php _e('Template ID is required', 'cds-snc'); ?></p>
       </div>
         <?php
     }
@@ -62,7 +62,7 @@ class Notices
     {
         ?>
       <div class="notice notice-error is-dismissible">
-        <p><?php _e('List ID failed to parse', 'cds-snc'); ?></p>
+        <p class="notice-list-parse-failed"><?php _e('List ID failed to parse', 'cds-snc'); ?></p>
       </div>
         <?php
     }
@@ -74,7 +74,7 @@ class Notices
         ?>
       <div class="notice notice-error is-dismissible">
         <p><?php _e('Failed to send', 'cds-snc'); ?></p>
-        <p><?php _e($message, 'cds-snc'); ?></p>
+        <p class="notice-error"><?php _e($message, 'cds-snc'); ?></p>
       </div>
         <?php
     }

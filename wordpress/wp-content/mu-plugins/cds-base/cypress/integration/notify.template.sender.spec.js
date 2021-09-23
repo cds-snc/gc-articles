@@ -27,10 +27,14 @@ describe('Notify Template Sender', () => {
             }
         ).as('bulkSender');
 
+        cy.intercept('POST', 'http://localhost:8889/wp-json/wp-notify/v1/bulk', (req) => {
+            req.redirect("/wp-admin/admin.php?page=cds_notify_send&status=200");
+        }).as('bulkSender');
+
         cy.loginUser();
     });
 
-    it('Can send Notify Template', () => {
+    it('Send Notify Template', () => {
         cy.visitNotify();
         cy.get('h1').should('have.text', 'Send Notify Template');
 
@@ -50,6 +54,6 @@ describe('Notify Template Sender', () => {
         cy.get('#swal2-html-container').contains('This list has 3 subscribers');
         cy.get('.swal2-confirm').click();
         cy.wait('@bulkSender');
-        cy.get('body').should('have.text', 'it worked!');
+        cy.get('.notice-sent').should('have.text', 'Sent');
     });
 });

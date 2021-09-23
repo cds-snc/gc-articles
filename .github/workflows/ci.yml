@@ -21,12 +21,18 @@ jobs:
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.0
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
       - run: cd wordpress && composer install --prefer-dist --no-progress --no-suggest
       - run: npm install
-      - run: cd wordpress/wp-content/mu-plugins/cds-base && npm run wp-env:init
-      - run: cd wordpress/wp-content/mu-plugins/cds-base && npm run cy:run
+      - run: npm run wp-env:init
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          record: true
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   php-tests:
     runs-on: ubuntu-latest
     name: PHP Pest tests

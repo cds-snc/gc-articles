@@ -7,5 +7,6 @@
 		"openMode": 0
 	},
 	"projectId": "rv8iqi",
-	"chromeWebSecurity": false
+	"chromeWebSecurity": false,
+	"pluginsFile": false
 }

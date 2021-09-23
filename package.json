@@ -10,7 +10,16 @@
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",
     "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build",
-    "import": "node ./import/import.js"
+    "import": "node ./import/import.js",
+    "wp-env": "wp-env",
+    "wp-env:init": "wp-env start",
+    "wp-env:test:setup": "sh cypress/test-setup/setup.sh",
+    "wp-env:stop": "wp-env stop",
+    "wp-env:debug": "wp-env start --debug",
+    "wp-env:clean" : "wp-env clean all",
+    "wp-env:destroy": "wp-env destroy",
+    "cy:run": "cypress run --record",
+    "cy:open": "cypress open"
   },
   "devDependencies": {
     "@prettier/plugin-php": "^0.17.3",
@@ -27,6 +36,11 @@
     "request-promise": "^0.4.1",
     "shelljs": "^0.8.4",
     "showdown": "^1.9.1",
-    "yargs": "^17.1.1"
+    "yargs": "^17.1.1",
+    "cypress": "^8.4.1",
+    "cypress-wp-test-utils": "^0.3.0",
+    "cypress-xpath": "^1.6.2",
+    "@cypress/snapshot": "^2.1.7",
+    "@wordpress/env": "^4.1.1"
   }
 }

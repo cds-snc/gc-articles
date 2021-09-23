@@ -1,10 +1,10 @@
 {
   "plugins": [
-    ".",
+    "./wordpress/wp-content/mu-plugins/cds-base",
     "Wordpress/two-factor"
   ],
   "themes": [
-    "../../themes/cds-default"
+    "./wordpress/wp-content/themes/cds-default"
   ],
   "phpVersion": "8.0",
   "config": {

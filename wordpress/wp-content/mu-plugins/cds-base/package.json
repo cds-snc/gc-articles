@@ -24,17 +24,13 @@
     "sweetalert2": "^11.1.5"
   },
   "devDependencies": {
-    "@cypress/snapshot": "^2.1.7",
+
     "@types/classnames": "^2.2.10",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/wordpress__blocks": "^6.4.7",
-    "@wordpress/env": "^4.1.1",
     "@wordpress/scripts": "^18.0.1",
-    "cypress": "^8.4.1",
-    "cypress-wp-test-utils": "^0.3.0",
-    "cypress-xpath": "^1.6.2",
     "ts-loader": "^9.2.6",
     "typescript": "~4.4.3",
     "webpack": "^5.53.0",
@@ -43,16 +39,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack --watch",
-    "wp-env": "wp-env",
-    "wp-env:init": "wp-env start",
-    "wp-env:test:setup": "sh ./cypress/test-setup/setup.sh",
-    "wp-env:stop": "wp-env stop",
-    "wp-env:debug": "wp-env start --debug",
-    "wp-env:clean" : "wp-env clean all",
-    "wp-env:destroy": "wp-env destroy",
     "update-translations": "scripts/translations/extract-messages.sh && scripts/translations/update-translation-files.sh && scripts/translations/compile-translation-files.sh",
-    "packages-update": "wp-scripts packages-update",
-    "cy:run": "cypress run --record",
-    "cy:open": "cypress open"
+    "packages-update": "wp-scripts packages-update"
   }
 }

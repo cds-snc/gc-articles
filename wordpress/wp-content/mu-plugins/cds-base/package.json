@@ -32,7 +32,7 @@
     "@types/wordpress__blocks": "^6.4.7",
     "@wordpress/env": "^4.1.1",
     "@wordpress/scripts": "^18.0.1",
-    "cypress": "^8.4.0",
+    "cypress": "^8.4.1",
     "cypress-wp-test-utils": "^0.3.0",
     "cypress-xpath": "^1.6.2",
     "ts-loader": "^9.2.6",

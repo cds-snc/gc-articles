@@ -7,12 +7,14 @@ namespace CDS\Modules\Notify;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use InvalidArgumentException;
+use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
 
 class NotifyTemplateSender
 {
-    protected $formHelpers;
-    protected $notices;
+    protected FormHelpers $formHelpers;
+    protected Notices $notices;
     protected string $admin_page = 'cds_notify_send';
 
     public function __construct(FormHelpers $formHelpers, Notices $notices)
@@ -77,8 +79,6 @@ class NotifyTemplateSender
             [$this, 'renderForm'],
             'dashicons-email'
         );
-
-        // @TODO: NotifySettings::add_menu();
     }
 
     public function processSend($data): void
@@ -106,7 +106,12 @@ class NotifyTemplateSender
         exit();
     }
 
-    public function validate($data): array
+    #[ArrayShape([
+        'api_key' => "string",
+        'template_id' => "mixed",
+        'list_id' => "mixed|string",
+        'list_type' => "mixed|string"
+    ])] public function validate($data): array
     {
         $template_id = $data['template_id'];
         $api_key = $this->findApiKey($data['service_id']);
@@ -142,23 +147,25 @@ class NotifyTemplateSender
         return $api_key;
     }
 
-    public function parseServiceIdsFromEnv(): array
+    public function parseServiceIdsFromEnv($serviceIdData): array
     {
-        $str = getenv('LIST_MANAGER_NOTIFY_SERVICES');
-
-        if (!$str) {
-            return [];
+        if (!$serviceIdData) {
+            throw new InvalidArgumentException('No service data');
         }
 
-        $arr = explode(',', $str);
-        $service_ids = [];
+        try {
+            $arr = explode(',', $serviceIdData);
+            $service_ids = [];
 
-        for ($i = 0; $i < count($arr); $i++) {
-            $key_value = explode('~', $arr [$i]);
-            $service_ids[$key_value [0]] = $key_value [1];
+            for ($i = 0; $i < count($arr); $i++) {
+                $key_value = explode('~', $arr [$i]);
+                $service_ids[$key_value [0]] = $key_value [1];
+            }
+
+            return $service_ids;
+        } catch (Exception $exception) {
+            throw new InvalidArgumentException($exception->getMessage());
         }
-
-        return $service_ids;
     }
 
     public function baseRedirect(): string
@@ -230,16 +237,32 @@ class NotifyTemplateSender
             $this->notices->handleNotice($_GET['status']);
         }
 
+        $serviceIdData = getenv('LIST_MANAGER_NOTIFY_SERVICES');
+
+        $listValues = [];
+        $serviceIds = [];
+
+        try {
+            $serviceIds = $this->parseServiceIdsFromEnv($serviceIdData);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+        try {
+            $listValues = self::parseJsonOptions(get_option('list_values'));
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+        }
+
         FormHelpers::render([
-            "service_ids" => $this->parseServiceIdsFromEnv(),
-            "list_values" => self::parseJsonOptions(get_option('list_values'))
+            "service_ids" => $serviceIds,
+            "list_values" => $listValues
         ]);
     }
 
     public static function parseJsonOptions($data)
     {
         if (empty($data)) {
-            return [];
+            throw new InvalidArgumentException('No list data');
         }
 
         $data = preg_replace(

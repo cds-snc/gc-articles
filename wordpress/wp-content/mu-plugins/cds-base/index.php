@@ -19,11 +19,11 @@ use CDS\Modules\Setup;
 
 defined('ABSPATH') || exit();
 
-if (! defined('BASE_PLUGIN_NAME')) {
+if (!defined('BASE_PLUGIN_NAME')) {
     define('BASE_PLUGIN_NAME', 'cds-base');
 }
 
-if (! defined('BASE_PLUGIN_NAME_VERSION')) {
+if (!defined('BASE_PLUGIN_NAME_VERSION')) {
     define('BASE_PLUGIN_NAME_VERSION', '1.3.1');
 }
 
@@ -61,11 +61,18 @@ function cds_admin_js(): void
         true,
     );
 
+    $notifyListIds = [];
+    try {
+        $notifyListIds = NotifyTemplateSender::parseJsonOptions(get_option('list_values'));
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+    }
+
     wp_localize_script("cds-snc-admin-js", "CDS_VARS", array(
-            "rest_url"        => esc_url_raw(rest_url()),
-            "rest_nonce"      => wp_create_nonce("wp_rest"),
-            "notify_list_ids" => NotifyTemplateSender::parseJsonOptions(get_option('list_values'))
-        ));
+        "rest_url" => esc_url_raw(rest_url()),
+        "rest_nonce" => wp_create_nonce("wp_rest"),
+        "notify_list_ids" => $notifyListIds
+    ));
 }
 
 add_action('admin_enqueue_scripts', 'cds_admin_js');

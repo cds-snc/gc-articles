@@ -130,5 +130,6 @@ npm run tag-release
 
 **NOTE** This step will run a github cli command to create a release and tag on Github
 
+The automated deployment will happen after your PR is merged.
 
-The automated deployment will happen after your PR is merged
+> Important the tagged i.e. v1.x.x container needs to finish building before the tag release PR is merged.  You can check via the Github actions tab

@@ -1,3 +1,3 @@
-export const delay = (ms = 10000) => {
+export const delay = (ms = 1000) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 }

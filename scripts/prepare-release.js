@@ -1,7 +1,7 @@
 import yargs from "yargs";
 import inquirer from 'inquirer';
 import { updateVersion, updateTerragruntHcl } from './util/update-files.js';
-import { createTaggedRelease } from './util/tag-files.js';
+import { createTaggedRelease, getVersionTag } from './util/tag-files.js';
 import {
     gitCreateVersionBranch,
     gitAddVersionFiles,
@@ -12,7 +12,8 @@ import {
     gitAddReleaseFiles,
     gitCommitReleaseFiles,
     gitPushReleaseFiles,
-    ghReleasePullRequest
+    ghReleasePullRequest,
+    gitCheckoutMain
 } from "./util/git.js";
 
 const argv = yargs(process.argv.slice(2)).argv;
@@ -29,12 +30,7 @@ const inputVersionNumber = async () => {
 }
 
 const inputReleaseTag = async () => {
-    const questions = [
-        {
-            type: 'input',
-            name: 'tag',
-            message: "Release tag (v1.x.x)",
-        },
+    const question = [
         {
             type: 'input',
             name: 'notes',
@@ -42,8 +38,8 @@ const inputReleaseTag = async () => {
         }
     ];
 
-    const answer = await inquirer.prompt(questions);
-    return { tag: answer.tag, notes: answer.notes };
+    const answer = await inquirer.prompt(question);
+    return { tag: await getVersionTag(), notes: answer.notes };
 }
 
 (async () => {
@@ -56,6 +52,7 @@ const inputReleaseTag = async () => {
             await gitCommitVersionFiles(version);
             await gitPushVersionFiles(version);
             await ghVersionPullRequest(version);
+            await gitCheckoutMain();
         }
 
         if (argv.tag) {
@@ -67,6 +64,7 @@ const inputReleaseTag = async () => {
             await gitPushReleaseFiles(tag);
             await ghReleasePullRequest(tag, notes);
             createTaggedRelease(tag, notes);
+            await gitCheckoutMain();
         }
 
         console.log("\n---- Success ----\n");

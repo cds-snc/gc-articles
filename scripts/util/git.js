@@ -25,7 +25,7 @@ export const gitCommitVersionFiles = async (version) => {
         shell.exit(1);
     }
 
-    await delay();
+    await delay(5000);
 }
 
 export const gitPushVersionFiles = async (version) => {
@@ -34,7 +34,7 @@ export const gitPushVersionFiles = async (version) => {
         shell.exit(1);
     }
 
-    await delay();
+    await delay(5000);
 }
 
 export const ghVersionPullRequest = async (version) => {
@@ -52,7 +52,7 @@ export const gitCreateReleaseBranch = async (tag) => {
         shell.exit(1);
     }
 
-    await delay();
+    await delay(5000);
 }
 
 export const gitAddReleaseFiles = async () => {
@@ -85,6 +85,15 @@ export const gitPushReleaseFiles = async (tag) => {
 export const ghReleasePullRequest = async (tag, notes) => {
     if (shell.exec(`gh pr create --title "Release ${tag}" --body "${notes}"`).code !== 0) {
         shell.echo('Error: failed to create release pull request');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+
+export const gitCheckoutMain = async () => {
+    if (shell.exec(`git checkout main`).code !== 0) {
+        shell.echo('Error: failed to checkout main');
         shell.exit(1);
     }
 

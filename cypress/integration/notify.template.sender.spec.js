@@ -31,7 +31,8 @@ describe('Notify Template Sender', () => {
           }
         ).as('bulkSender');
 
-        cy.intercept('POST', 'http://localhost:8889/wp-json/wp-notify/v1/bulk', (req) => {
+        const host = Cypress.config().baseUrl;
+        cy.intercept('POST', host + '/wp-json/wp-notify/v1/bulk', (req) => {
             req.redirect("/wp-admin/admin.php?page=cds_notify_send&status=200");
         }).as('bulkSender');
 

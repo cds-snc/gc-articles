@@ -8,18 +8,17 @@ class Login
     {
         add_action('login_enqueue_scripts', [$this, 'loginLogo']);
         add_filter('login_headerurl', [$this, 'loginLogoUrl']);
-        add_filter('login_headertext', [$this, 'customizeLoginHeadertext']);
+        add_filter('login_headertext', [$this, 'customizeLoginHeaderText']);
         add_action('login_head', [$this, 'favicon']);
         add_action('admin_head', [$this, 'favicon']);
         add_action('wp_login_failed', [$this, 'loginFailed']);
-
         add_filter('login_redirect', [$this, 'loginRedirect'], 10, 3);
     }
 
     public function loginLogo(): void
     {
         ?>
-      <style type="text/css">
+      <style>
           body.login div#login h1 a {
               background-image: url(<?php echo cds_plugin_images_url('site-login-logo.svg'); ?>);
               width: 300px;
@@ -39,8 +38,6 @@ class Login
               background-color: #eee;
               background-color: rgba(238, 238, 238, var(--bg-opacity));
           }
-
-
       </style>
     <?php }
 
@@ -49,9 +46,9 @@ class Login
         return home_url();
     }
 
-    public function customizeLoginHeadertext($headertext): string
+    public function customizeLoginHeaderText(): string
     {
-        return esc_html__('Canadian Digital Service', 'cds');
+        return esc_html__('Canadian Digital Service', 'cds-snc');
     }
 
     public function favicon(): void
@@ -60,13 +57,12 @@ class Login
         echo '<link rel="shortcut icon" href="' . $favicon_url . '" />';
     }
 
-    public function loginRedirect($redirect_to, $request, $user): string
+    public function loginRedirect(): string
     {
-        $redirect_to = admin_url() . '/index.php';
-        return $redirect_to;
+        return admin_url() . 'index.php';
     }
 
-    public function loginFailed($username)
+    public function loginFailed($username): void
     {
         error_log("LOGIN FAILED: user $username: authentication failure for \"" . admin_url() . "\"");
     }

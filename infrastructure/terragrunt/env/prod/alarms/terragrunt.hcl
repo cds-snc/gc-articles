@@ -55,6 +55,7 @@ dependency "ecs" {
   mock_outputs = {
     ecs_cloudfront_log_group_name = ""
     ecs_cluster_name              = ""
+    ecs_event_log_group_name      = ""
     ecs_service_name              = ""
     efs_id                        = ""
   }
@@ -63,11 +64,11 @@ dependency "ecs" {
 inputs = {
   alb_arn         = dependency.load-balancer.outputs.alb_arn
   alb_arn_suffix  = dependency.load-balancer.outputs.alb_arn_suffix
-  alb_5xx_maximum = 100
+  alb_5xx_maximum = 0
 
   alb_target_group_arn_suffix              = dependency.load-balancer.outputs.alb_target_group_arn_suffix
   alb_target_response_time_average_maximum = 2
-  alb_target_5xx_maximum                   = 100
+  alb_target_5xx_maximum                   = 0
   alb_target_4xx_maximum                   = 100
 
   canary_healthcheck_url_eng = "https://ircc.digital.canada.ca/"
@@ -76,13 +77,14 @@ inputs = {
   cloudfront_arn              = dependency.load-balancer.outputs.cloudfront_arn
   cloudfront_distribution_id  = dependency.load-balancer.outputs.cloudfront_distribution_id
   cloudfront_waf_web_acl_name = dependency.load-balancer.outputs.cloudfront_waf_web_acl_name
-  cloudfront_5xx_maximum      = 100
+  cloudfront_5xx_maximum      = 0
   cloudfront_4xx_maximum      = 100
 
-  ecs_cluster_name   = dependency.ecs.outputs.ecs_cluster_name
-  ecs_service_name   = dependency.ecs.outputs.ecs_service_name
-  ecs_cpu_maximum    = 50
-  ecs_memory_maximum = 50
+  ecs_cluster_name         = dependency.ecs.outputs.ecs_cluster_name
+  ecs_event_log_group_name = dependency.ecs.outputs.ecs_event_log_group_name
+  ecs_service_name         = dependency.ecs.outputs.ecs_service_name
+  ecs_cpu_maximum          = 50
+  ecs_memory_maximum       = 50
 
   efs_id                   = dependency.ecs.outputs.efs_id
   efs_burst_credit_balance = "192000000000"

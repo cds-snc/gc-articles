@@ -54,9 +54,9 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_waf_blocked_requests_percent"
   alarm_name          = "WAFBlockedRequestsPercent"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "1"
-  threshold           = "10"
+  threshold           = "50"
 
-  alarm_description = "More than 10% of requests being blocked in 5 minute period"
+  alarm_description = "More than 50% of requests being blocked in 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning_us_east.arn]
   ok_actions        = [aws_sns_topic.alert_warning_us_east.arn]
 

@@ -58,7 +58,8 @@ While in `infrastructure/terragrunt/env/${ENV_NAME}`:
 4. terragrunt apply `ecr`
 5. Push latest WordPress docker image to new ECR.
 6. terragrunt apply `ecs`
-7. terragrunt apply `alarms`
+7. Subscribe the account to [AWS Shield Advanced](https://docs.aws.amazon.com/waf/latest/developerguide/enable-ddos-prem.html) ($3,000 fee is paid once for all org accounts).
+8. terragrunt apply `alarms`
 
 ### Populate database
 :warning: This step is required because the [wp-config.php](../wordpress/wp-config.php#L132) file bundled in the Docker image expects a base WordPress site already installed.

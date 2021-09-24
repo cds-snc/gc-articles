@@ -68,3 +68,31 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_failed_login" {
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 }
+
+resource "aws_cloudwatch_log_metric_filter" "wordpress_ecs_warn_error_event" {
+  name           = "WordPressEcsWarningEvent"
+  pattern        = "{ ($.detail.eventType = \"WARN\") || ($.detail.eventType = \"ERROR\") }"
+  log_group_name = var.ecs_event_log_group_name
+
+  metric_transformation {
+    name          = "WordPressEcsWarnErrorEvent"
+    namespace     = "WordPress"
+    value         = "1"
+    default_value = "0"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "wordpress_ecs_warn_error_event" {
+  alarm_name          = "WordPressEcsWarnErrorEvent"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.wordpress_ecs_warn_error_event.name
+  namespace           = "WordPress"
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "0"
+
+  alarm_description = "WordPress ECS warning or error event detected"
+  alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
+}

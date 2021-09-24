@@ -10,6 +10,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_ddos" {
   period              = "60"
   statistic           = "Sum"
   threshold           = "0"
+  treat_missing_data  = "notBreaching"
 
   alarm_description = "DDoS detection for ALB"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]

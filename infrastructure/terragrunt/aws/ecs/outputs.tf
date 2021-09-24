@@ -6,6 +6,10 @@ output "ecs_cluster_name" {
   value = aws_ecs_cluster.wordpress.name
 }
 
+output "ecs_event_log_group_name" {
+  value = aws_cloudwatch_log_group.ecs_events.name
+}
+
 output "ecs_service_name" {
   value = aws_ecs_service.wordpress_service.name
 }

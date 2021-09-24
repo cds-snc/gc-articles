@@ -74,7 +74,12 @@ variable "ecs_cpu_maximum" {
 }
 
 variable "ecs_memory_maximum" {
-  description = "number threshold of memory use by the WordPress ECS service"
+  description = "Maximum threshold of memory use by the WordPress ECS service"
+  type        = string
+}
+
+variable "ecs_event_log_group_name" {
+  description = "Name of the CloudWatch log group the ECS events are written to"
   type        = string
 }
 

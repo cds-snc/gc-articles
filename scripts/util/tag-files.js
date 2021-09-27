@@ -6,7 +6,7 @@ export const getVersionTag = async (fileName = "VERSION") => {
     try {
         const file = path.join(path.dirname("."), fileName);
         const version = await fs.promises.readFile(file, 'utf8')
-        return `v${version}`;
+        return `v${version}`.replace(/(\r\n|\n|\r)/gm, "").trim();
     }
     catch (err) {
         console.log(err)

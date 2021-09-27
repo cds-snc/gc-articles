@@ -40,7 +40,7 @@ class Setup
 
     public function cleanup()
     {
-        new CleanupPosts();
+        // new CleanupPosts();
         new CleanupSites();
         new CleanupRoles();
         new CleanupLogin();

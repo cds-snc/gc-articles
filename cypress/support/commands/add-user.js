@@ -11,7 +11,6 @@ Cypress.Commands.add('addUser', (userName, password, roleText) => {
   cy.get('.pw-checkbox').check();
   cy.get('#role').select(roleText);
   cy.get('form#createuser').submit();
-  cy.get('#wp-admin-bar-top-secondary').trigger('mouseover');
   cy.get('#wp-admin-bar-logout a').click({force: true});
 });
 

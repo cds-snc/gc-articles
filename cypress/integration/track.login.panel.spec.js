@@ -27,3 +27,35 @@ describe('Track Login Panel', () => {
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)
     });
 });
+
+describe('Track Login Panel captures logins', () => {
+    before(() => {
+        cy.exec('npm run wp-env:clean')
+    });
+
+    it('On first Login display only one login', () => {
+        cy.loginUser();
+        cy.visitDashboard();
+        cy.screenshot();
+        cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 1)
+    })
+
+    it('On second Login display two logins', () => {
+        cy.loginUser();
+        cy.visitDashboard();
+        cy.screenshot();
+        cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 2)
+    })
+
+    it('On third and subsequent Login display three logins', () => {
+        cy.loginUser();
+        cy.visitDashboard();
+        cy.screenshot();
+        cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)
+
+        cy.loginUser();
+        cy.visitDashboard();
+        cy.screenshot();
+        cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)
+    })
+})

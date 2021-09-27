@@ -26,11 +26,16 @@ describe('User', () => {
       'upload.php',
       'themes.php',
       'tools.php',
-      'general.php'];
+      'options-general.php'
+    ];
 
     pages.forEach((page) => {
-      cy.visit(`wp-admin/${page}`);
-      cy.get(".wp-die-message").should("have.text", "Sorry, you are not allowed to access this page.")
+      cy.request({
+        url: `wp-admin/${page}`,
+        failOnStatusCode: false
+      }).should((response) => {
+        expect(response.status).to.eq(403);
+      })
     })
 
   });

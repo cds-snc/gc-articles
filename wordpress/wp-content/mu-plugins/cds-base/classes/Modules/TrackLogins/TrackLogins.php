@@ -17,11 +17,14 @@ class TrackLogins
         $this->wpdb      = $wpdb;
         $this->tableName = $this->wpdb->prefix . 'userlogins';
 
+        $this->addActions();
+    }
+
+    public function addActions()
+    {
         add_action('wp_login', [$this, 'logUserLogin'], 10, 2);
 
-        add_action('rest_api_init', function () {
-            $this->registerRestRoutes();
-        });
+        add_action('rest_api_init', [$this, 'registerRestRoutes']);
 
         add_action('wp_dashboard_setup', [$this, 'dashboardWidget']);
     }
@@ -61,12 +64,17 @@ class TrackLogins
     public function logUserLogin($user_login, $user)
     {
         $data = [
-            'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+            'user_agent' => $this->getUserAgent(),
             'time_login' => current_time('mysql', 1),
             'user_id'    => $user->ID
         ];
 
         $this->wpdb->insert($this->tableName, $data);
+    }
+
+    protected function getUserAgent(): string
+    {
+        return $_SERVER['HTTP_USER_AGENT'];
     }
 
     public function getUserLogins(): WP_REST_Response

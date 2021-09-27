@@ -13,7 +13,8 @@
     "pestphp/pest": "^1.16",
     "10up/wp_mock": "0.4.2",
     "mockery/mockery": "^1.4",
-    "squizlabs/php_codesniffer": "^3.6"
+    "squizlabs/php_codesniffer": "^3.6",
+    "pestphp/pest-plugin-mock": "^1.0"
   },
   "extra": {
     "installer-paths": {
@@ -33,5 +34,10 @@
       "cd wp-content/mu-plugins/cds-base && composer update"
     ],
     "make-pot": "wp i18n make-pot --domain=cds-snc wp-content/themes/cds-default wp-content/themes/cds-default/languages/cds-snc.pot"
+  },
+  "autoload": {
+    "psr-4": {
+      "CDS\\": "wp-content/mu-plugins/cds-base/classes/"
+    }
   }
 }

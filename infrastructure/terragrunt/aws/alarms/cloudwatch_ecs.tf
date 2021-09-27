@@ -71,7 +71,7 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_failed_login" {
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_ecs_warn_error_event" {
   name           = "WordPressEcsWarningEvent"
-  pattern        = "{ ($.detail.eventType = \"WARN\") || ($.detail.eventType = \"ERROR\") }"
+  pattern        = "?Warn ?Error"
   log_group_name = var.ecs_event_log_group_name
 
   metric_transformation {

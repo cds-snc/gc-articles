@@ -19,7 +19,7 @@ Docker-compose and VS Code Remote Container environment featuring:
 
 ## Config
 
-Copy the .env.example file to .env and customize as necessary (you might not need to change anything)
+Copy the `.env.example` file to `.env` and customize as necessary (you shouldn't need to change anything)
 
 ```
 cp .env.example .env
@@ -27,17 +27,10 @@ cp .env.example .env
 
 ## Usage
 
-To start, clone the repo and then run NPM install:
+To start, clone the repo and then bring up the environment using docker-compose:
 
 ```
 git clone git@github.com:cds-snc/platform-mvp.git
-cd platform-mvp
-npm i
-```
-
-Then you can bring up the environment using docker-compose:
-
-```
 docker-compose up
 ```
 
@@ -58,12 +51,12 @@ Alternatively, you can open the project in VS Code Remote Containers:
 Either way, once the environment is up, the site will be available on `localhost`:
 
 - Visit `localhost` to see your new WordPress install
-- Visit `localhost/wp-admin` to see the admin interface
+- Visit `localhost/login` to see the admin interface
 
 Wordpress will be installed with some pre-configured plugins and themes, and will be configured as a multi-site install. There will also be a default administrator account, with the following credentials:
 
-username: admin
-password: secret
+username: `admin`
+password: `secret`
 
 ## Useful services
 
@@ -79,6 +72,9 @@ SMTP interface: `mailhog:1025`
 Web admin for MySQL database.
 
 Web interface: `localhost:8080`
+
+username: `dbuser`
+password: `secret`
 
 ## Plugins and Themes
 

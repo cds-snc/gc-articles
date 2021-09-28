@@ -13,7 +13,8 @@ import {
     gitCommitReleaseFiles,
     gitPushReleaseFiles,
     ghReleasePullRequest,
-    gitCheckoutMain
+    gitCheckoutMain,
+    gitPullLatestFromMain,
 } from "./util/git.js";
 
 const argv = yargs(process.argv.slice(2)).argv;
@@ -56,6 +57,7 @@ const inputReleaseTag = async () => {
         }
 
         if (argv.tag) {
+            await gitPullLatestFromMain();
             const { tag, notes } = await inputReleaseTag();
             await gitCreateReleaseBranch(tag);
             await updateTerragruntHcl(tag);

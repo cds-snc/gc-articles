@@ -100,3 +100,12 @@ export const gitCheckoutMain = async () => {
     await delay();
 }
 
+export const gitPullLatestFromMain = async () => {
+    if (shell.exec(`git pull origin main`).code !== 0) {
+        shell.echo('Error: failed to pull latest from main');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+

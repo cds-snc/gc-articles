@@ -3,7 +3,7 @@ include {
 }
 
 inputs = {
-  zone_name = "platform-ircc.cdssandbox.xyz"
+  zone_name = "articles.cdssandbox.xyz"
 }
 
 terraform {

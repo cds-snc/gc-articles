@@ -15,7 +15,7 @@ on:
 env:
   DOCKER_BUILDKIT: 1
   REPO_NAME: platform/wordpress
-  PROD_ECR_REGISTRY: 514867032726.dkr.ecr.ca-central-1.amazonaws.com
+  STAGING_ECR_REGISTRY: 729164266357.dkr.ecr.ca-central-1.amazonaws.com
 
 jobs:
   build-push-container:
@@ -28,8 +28,8 @@ jobs:
         id: aws-creds
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-access-key-id: ${{ secrets.STAGING_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.STAGING_AWS_SECRET_ACCESS_KEY }}
           aws-region: ca-central-1
 
       - name: Login to ECR
@@ -48,14 +48,14 @@ jobs:
         run: |
           docker build \
           --build-arg git_sha="$GITHUB_SHA" \
-          --build-arg APACHE_KEY="${{ secrets.PROD_WORDPRESS_APACHE_KEY }}" \
-          --build-arg APACHE_CERT="${{ secrets.PROD_WORDPRESS_APACHE_CERT }}" \
-          -t "${{ env.PROD_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
+          --build-arg APACHE_KEY="${{ secrets.STAGING_WORDPRESS_APACHE_KEY }}" \
+          --build-arg APACHE_CERT="${{ secrets.STAGING_WORDPRESS_APACHE_CERT }}" \
+          -t "${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
           -f ./wordpress/docker/production.Dockerfile .
 
       - name: Push containers to ECR
         run: |
-          docker push ${{ env.PROD_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
+          docker push ${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
 
       - name: Logout of ECR
         if: always()

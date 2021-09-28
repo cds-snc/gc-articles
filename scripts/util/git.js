@@ -109,3 +109,12 @@ export const gitPullLatestFromMain = async () => {
     await delay();
 }
 
+export const gitCheckClean = async () => {
+    if (shell.exec(`[[ -z $(git status -s) ]]`).code !== 0) {
+        shell.echo('Error: you have local changes you should stash or commit');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+

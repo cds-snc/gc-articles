@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Cleanup;
 
-class Articles
+class PostsToArticles
 {
     public function __construct()
     {
@@ -15,8 +15,13 @@ class Articles
     public function changePostLabel(): void
     {
         try {
+            if (!current_user_can("edit_posts")) {
+                return;
+            }
+
             global $menu;
             global $submenu;
+
             $menu[5][0] = __('Articles', 'cds-snc');
             $submenu['edit.php'][5][0] = __('Articles', 'cds-snc');
             $submenu['edit.php'][10][0] = __('Add Article', 'cds-snc');
@@ -29,6 +34,10 @@ class Articles
     public function changePostObject(): void
     {
         try {
+            if (!current_user_can("edit_posts")) {
+                return;
+            }
+
             global $wp_post_types;
             $labels = &$wp_post_types['post']->labels;
             $labels->name = __('Articles', 'cds-snc');

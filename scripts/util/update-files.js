@@ -68,7 +68,7 @@ export const updateVersion = async (version) => {
 export const updateTerragruntHcl = async (tag) => {
   // update wordpress_image_tag
   await replaceContent({
-    files: 'infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl',
+    files: 'infrastructure/terragrunt/env/staging/ecs/terragrunt.hcl',
     from: new RegExp('wordpress_image_tag.*', 'i'),
     to: `wordpress_image_tag      = "${tag}"`,
   });

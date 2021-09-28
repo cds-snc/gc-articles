@@ -4,7 +4,7 @@
 
 Docker-compose and VS Code Remote Container environment featuring:
 
-- mysql5.7
+- mariadb (instead of mysql)
 - wordpress (wordpress/apache)
 - wp-cli & composer (devcontainer)
 - mailhog (fake mail)

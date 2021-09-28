@@ -1,13 +1,13 @@
-name: "Terragrunt plan PROD"
+name: "Terragrunt plan STAGING"
 
 on:
   pull_request:
     paths:
       - "infrastructure/terragrunt/aws/**"
-      - "infrastructure/terragrunt/env/prod/**"
+      - "infrastructure/terragrunt/env/staging/**"
       - "infrastructure/terragrunt/env/common/**"
       - "infrastructure/terragrunt/env/terragrunt.hcl"
-      - ".github/workflows/terragrunt-plan-prod.yml"
+      - ".github/workflows/terragrunt-plan-staging.yml"
 
 env:
   AWS_REGION: ca-central-1
@@ -38,7 +38,7 @@ env:
 
 jobs:
 
-  terragrunt-plan-prod:
+  terragrunt-plan-staging:
     runs-on: ubuntu-latest
     steps:
 
@@ -63,40 +63,40 @@ jobs:
         with:
           filters: |
             common:
-              - '.github/workflows/terragrunt-plan-prod.yml'
+              - '.github/workflows/terragrunt-plan-staging.yml'
               - 'infrastructure/terragrunt/env/common/**'
               - 'infrastructure/terragrunt/env/terragrunt.hcl'
-              - 'infrastructure/terragrunt/env/prod/env_vars.hcl'          
+              - 'infrastructure/terragrunt/env/staging/env_vars.hcl'
             alarms:
               - 'infrastructure/terragrunt/aws/alarms/**'
-              - 'infrastructure/terragrunt/env/prod/alarms/**'
+              - 'infrastructure/terragrunt/env/staging/alarms/**'
             database:
               - 'infrastructure/terragrunt/aws/database/**'
-              - 'infrastructure/terragrunt/env/prod/database/**'
+              - 'infrastructure/terragrunt/env/staging/database/**'
             ecr:
               - 'infrastructure/terragrunt/aws/ecr/**'
-              - 'infrastructure/terragrunt/env/prod/ecr/**'
+              - 'infrastructure/terragrunt/env/staging/ecr/**'
             ecs:
               - 'infrastructure/terragrunt/aws/ecs/**'
-              - 'infrastructure/terragrunt/env/prod/ecs/**'
+              - 'infrastructure/terragrunt/env/staging/ecs/**'
             hosted-zone:
               - 'infrastructure/terragrunt/aws/hosted-zone/**'
-              - 'infrastructure/terragrunt/env/prod/hosted-zone/**'
+              - 'infrastructure/terragrunt/env/staging/hosted-zone/**'
             load-balancer:
               - 'infrastructure/terragrunt/aws/load-balancer/**'
-              - 'infrastructure/terragrunt/env/prod/load-balancer/**'
+              - 'infrastructure/terragrunt/env/staging/load-balancer/**'
             network:
               - 'infrastructure/terragrunt/aws/network/**'
-              - 'infrastructure/terragrunt/env/prod/network/**'
+              - 'infrastructure/terragrunt/env/staging/network/**'
 
       # No dependencies
       - name: Terragrunt plan network
         if: ${{ steps.filter.outputs.network == 'true' || steps.filter.outputs.common == 'true' }}
         uses: cds-snc/terraform-plan@v1
         with:
-          directory: "infrastructure/terragrunt/env/prod/network"
+          directory: "infrastructure/terragrunt/env/staging/network"
           comment-delete: "true"
-          comment-title: "Prod: network"
+          comment-title: "Staging: network"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
 
@@ -104,9 +104,9 @@ jobs:
         if: ${{ steps.filter.outputs.hosted-zone == 'true' || steps.filter.outputs.common == 'true' }}
         uses: cds-snc/terraform-plan@v1
         with:
-          directory: "infrastructure/terragrunt/env/prod/hosted-zone"
+          directory: "infrastructure/terragrunt/env/staging/hosted-zone"
           comment-delete: "true"
-          comment-title: "Prod: hosted-zone"
+          comment-title: "Staging: hosted-zone"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
 
@@ -114,9 +114,9 @@ jobs:
         if: ${{ steps.filter.outputs.ecr == 'true' || steps.filter.outputs.common == 'true' }}
         uses: cds-snc/terraform-plan@v1
         with:
-          directory: "infrastructure/terragrunt/env/prod/ecr"
+          directory: "infrastructure/terragrunt/env/staging/ecr"
           comment-delete: "true"
-          comment-title: "Prod: ecr"
+          comment-title: "Staging: ecr"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
 
@@ -125,9 +125,9 @@ jobs:
         if: ${{ steps.filter.outputs.database == 'true' || steps.filter.outputs.common == 'true' }}
         uses: cds-snc/terraform-plan@v1
         with:
-          directory: "infrastructure/terragrunt/env/prod/database"
+          directory: "infrastructure/terragrunt/env/staging/database"
           comment-delete: "true"
-          comment-title: "Prod: database"
+          comment-title: "Staging: database"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
 
@@ -135,9 +135,9 @@ jobs:
         if: ${{ steps.filter.outputs.load-balancer == 'true' || steps.filter.outputs.common == 'true' }}
         uses: cds-snc/terraform-plan@v1
         with:
-          directory: "infrastructure/terragrunt/env/prod/load-balancer"
+          directory: "infrastructure/terragrunt/env/staging/load-balancer"
           comment-delete: "true"
-          comment-title: "Prod: load-balancer"
+          comment-title: "Staging: load-balancer"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
 
@@ -146,9 +146,9 @@ jobs:
         if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
         uses: cds-snc/terraform-plan@v1
         with:
-          directory: "infrastructure/terragrunt/env/prod/ecs"
+          directory: "infrastructure/terragrunt/env/staging/ecs"
           comment-delete: "true"
-          comment-title: "Prod: ecs"
+          comment-title: "Staging: ecs"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
 
@@ -157,8 +157,8 @@ jobs:
         if: ${{ steps.filter.outputs.alarms == 'true' || steps.filter.outputs.common == 'true' }}
         uses: cds-snc/terraform-plan@v1
         with:
-          directory: "infrastructure/terragrunt/env/prod/alarms"
+          directory: "infrastructure/terragrunt/env/staging/alarms"
           comment-delete: "true"
-          comment-title: "Prod: alarms"
+          comment-title: "Staging: alarms"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"

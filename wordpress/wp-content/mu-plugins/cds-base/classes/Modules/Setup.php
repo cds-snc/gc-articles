@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules;
 
-use CDS\Modules\Cleanup\Articles as CleanupPosts;
-use CDS\Modules\Cleanup\Collections as CleanupSites;
+use CDS\Modules\Cleanup\PostsToArticles;
+use CDS\Modules\Cleanup\SitesToCollections;
 use CDS\Modules\Blocks\Blocks;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
 use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
@@ -40,8 +40,8 @@ class Setup
 
     public function cleanup()
     {
-        // new CleanupPosts();
-        new CleanupSites();
+        new SitesToCollections();
+        new PostsToArticles();
         new CleanupRoles();
         new CleanupLogin();
         new CleanupMenus();

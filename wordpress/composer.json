@@ -33,7 +33,14 @@
       "cd wp-content/themes/cds-default && composer update",
       "cd wp-content/mu-plugins/cds-base && composer update"
     ],
-    "make-pot": "wp i18n make-pot --domain=cds-snc wp-content/themes/cds-default wp-content/themes/cds-default/languages/cds-snc.pot"
+    "prepare-translations": [
+      "cd wp-content/themes/cds-default && composer prepare-translations",
+      "cd wp-content/mu-plugins/cds-base && composer prepare-translations"
+    ],
+    "compile-translations": [
+      "cd wp-content/themes/cds-default && composer compile-translations",
+      "cd wp-content/mu-plugins/cds-base && composer compile-translations"
+    ]
   },
   "autoload": {
     "psr-4": {

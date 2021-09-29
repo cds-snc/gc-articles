@@ -14,7 +14,8 @@ RUN apk add sudo --no-cache \
     npm \
     zsh \
     zsh-autosuggestions \
-    zsh-syntax-highlighting
+    zsh-syntax-highlighting \
+    gettext
 
 # Create non-root default user
 ARG USER=default

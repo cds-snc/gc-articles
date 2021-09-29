@@ -4,13 +4,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CDS-SNC Base 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
+"POT-Creation-Date: 2021-09-29T14:59:04+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-09-29T15:22:49+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: cds-snc\n"
 
@@ -30,10 +31,9 @@ msgstr ""
 msgid "Tim Arney"
 msgstr ""
 
-#: classes/Modules/Cleanup/AdminBar.php:49
-#: classes/Modules/Cleanup/Login.php:51
+#: classes/Modules/Cleanup/AdminBar.php:49 classes/Modules/Cleanup/Login.php:51
 msgid "Canadian Digital Service"
-msgstr ""
+msgstr "Service numérique canadien"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:25
 #: classes/Modules/Cleanup/PostsToArticles.php:26
@@ -43,7 +43,7 @@ msgstr ""
 #: classes/Modules/Cleanup/PostsToArticles.php:54
 #: classes/Modules/Cleanup/PostsToArticles.php:55
 msgid "Articles"
-msgstr ""
+msgstr "Articles"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:27
 #: classes/Modules/Cleanup/PostsToArticles.php:45
@@ -155,8 +155,7 @@ msgstr ""
 msgid "Two factor authentication"
 msgstr ""
 
-#: classes/Modules/TwoFactor/TwoFactor.php:54
-#: build/index.js:3207
+#: classes/Modules/TwoFactor/TwoFactor.php:54 build/index.js:3207
 #: build/index.js:3172
 msgid "Warning"
 msgstr ""
@@ -165,109 +164,84 @@ msgstr ""
 msgid "This can be configured on your <a href=\"%s\">User Profile</a>."
 msgstr ""
 
-#: build/index.js:23
-#: classes/Modules/Notify/src/util.js:7
-#: build/index.js:7
+#: build/index.js:23 classes/Modules/Notify/src/util.js:7 build/index.js:7
 msgid "Are you sure you want to send?"
 msgstr ""
 
-#: build/index.js:24
-#: classes/Modules/Notify/src/util.js:8
-#: build/index.js:8
+#: build/index.js:24 classes/Modules/Notify/src/util.js:8 build/index.js:8
 msgid "You won't be able to revert this!"
 msgstr ""
 
-#: build/index.js:29
-#: classes/Modules/Notify/src/util.js:13
-#: build/index.js:13
+#: build/index.js:29 classes/Modules/Notify/src/util.js:13 build/index.js:13
 msgid "Yes, send it!"
 msgstr ""
 
-#: build/index.js:3201
-#: build/index.js:3166
+#: build/index.js:3201 build/index.js:3166
 msgid "Settings"
 msgstr ""
 
-#: build/index.js:3204
-#: build/index.js:3169
+#: build/index.js:3204 build/index.js:3169
 msgid "Alert Type"
 msgstr ""
 
-#: build/index.js:3205
-#: build/index.js:3170
+#: build/index.js:3205 build/index.js:3170
 msgid "Info"
 msgstr ""
 
-#: build/index.js:3206
-#: build/index.js:3171
+#: build/index.js:3206 build/index.js:3171
 msgid "Success"
 msgstr ""
 
-#: build/index.js:3208
-#: build/index.js:3173
+#: build/index.js:3208 build/index.js:3173
 msgid "Danger"
 msgstr ""
 
-#: build/index.js:3212
-#: build/index.js:3177
+#: build/index.js:3212 build/index.js:3177
 msgid "Alert"
 msgstr ""
 
-#: build/index.js:3238
-#: build/index.js:3302
-#: build/index.js:3203
+#: build/index.js:3238 build/index.js:3302 build/index.js:3203
 #: build/index.js:3257
 msgid "Title"
 msgstr ""
 
-#: build/index.js:3242
-#: build/index.js:3306
-#: build/index.js:3207
+#: build/index.js:3242 build/index.js:3306 build/index.js:3207
 #: build/index.js:3261
 msgid "Summary"
 msgstr ""
 
-#: build/index.js:3283
-#: build/index.js:3238
+#: build/index.js:3283 build/index.js:3238
 msgid "Expander"
 msgstr ""
 
-#: build/index.js:3464
-#: build/index.js:3409
+#: build/index.js:3464 build/index.js:3409
 msgid "List Name"
 msgstr ""
 
-#: build/index.js:3466
-#: build/index.js:3411
+#: build/index.js:3466 build/index.js:3411
 msgid "Subscriber Count"
 msgstr ""
 
-#: build/index.js:3494
-#: build/index.js:3439
+#: build/index.js:3494 build/index.js:3439
 msgid "Send Template"
 msgstr ""
 
-#: build/index.js:3578
-#: build/index.js:3513
+#: build/index.js:3578 build/index.js:3513
 msgid "This list has "
 msgstr ""
 
-#: build/index.js:3580
-#: build/index.js:3515
+#: build/index.js:3580 build/index.js:3515
 msgid " subscribers.  "
 msgstr ""
 
-#: build/index.js:3581
-#: build/index.js:3516
+#: build/index.js:3581 build/index.js:3516
 msgid "You won't be able to revert this"
 msgstr ""
 
-#: build/index.js:3760
-#: build/index.js:3675
+#: build/index.js:3760 build/index.js:3675
 msgid "Date"
 msgstr ""
 
-#: build/index.js:3762
-#: build/index.js:3677
+#: build/index.js:3762 build/index.js:3677
 msgid "User agent"
 msgstr ""

@@ -25,9 +25,18 @@
         "wp-cli/i18n-command": "^2.2.5"
     },
     "scripts": {
-        "lint:wpcs": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
-        "lint:php": "@php ./vendor/bin/parallel-lint --exclude .git --exclude vendor .",
-        "make-pot": "wp i18n make-pot --domain=cds-snc . languages/cds-snc.pot"
+        "make-pot": "wp i18n make-pot --domain=cds-snc . languages/cds-snc.pot",
+        "merge-po": "msgmerge -U ./languages/fr_FR.po ./languages/cds-snc.pot",
+        "compile-mo": "msgfmt -o ./languages/fr_FR.mo ./languages/fr_FR.po",
+        "compile-json": "wp i18n make-json ./languages/fr_FR.po --no-purge",
+        "compile-translations": [
+            "@compile-mo",
+            "@compile-json"
+        ],
+        "prepare-translations": [
+            "@make-pot",
+            "@merge-po"
+        ]
     },
     "support": {
         "issues": "https://github.com/Automattic/_s/issues",

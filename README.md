@@ -113,6 +113,7 @@ Both the `cds-base` plugin and `cds-default` theme include these scripts and the
 also scripts in the base `wordpress`-folder level composer.json that will recursively call each of the theme and plugin
 scripts.
 
+#### Translatable strings
 When working with theme or plugin files, create translatable strings by following the 
 [WordPress documentation](https://codex.wordpress.org/I18n_for_WordPress_Developers#Strings_for_Translation) on the
 subject, making sure to set the `domain` as `cds-snc`. In short, you will probably use syntax like the following:

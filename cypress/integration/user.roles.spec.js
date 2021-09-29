@@ -16,10 +16,8 @@ const allowedPages200 = [
 // user should not be able to access these pages
 // defaults for "GC Editor"
 const blockedPages403 = [
-    // 'edit-comments.php',
     'upload.php',
     'themes.php',
-    'tools.php',
     'options-general.php'
 ];
 
@@ -58,7 +56,6 @@ describe('User - GC Editor', () => {
     });
 
 });
-
 
 describe('User - GC Admin', () => {
     before(() => {

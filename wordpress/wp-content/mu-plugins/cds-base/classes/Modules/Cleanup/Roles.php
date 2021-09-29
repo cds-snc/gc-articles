@@ -20,7 +20,7 @@ class Roles
             }
         }
 
-        Utils::checkOptionCallback('cds_base_activated', '1.0.4', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.0.6', function () {
             if (is_blog_installed()) {
                 remove_role('administrator');
                 remove_role('editor');
@@ -170,14 +170,9 @@ class Roles
                 'publish_posts' => 1,
                 'edit_pages' => 1,
                 'read' => 1,
-                'level_7' => 1,
-                'level_6' => 1,
-                'level_5' => 1,
-                'level_4' => 1,
-                'level_3' => 1,
-                'level_2' => 1,
                 'level_1' => 1,
                 'level_0' => 1,
+                'moderate_comments' => 0,
                 'delete_posts' => 1,
                 'delete_others_posts' => 1,
                 'delete_published_posts' => 1,
@@ -206,6 +201,7 @@ class Roles
                 'level_2' => 1,
                 'level_1' => 1,
                 'level_0' => 1,
+                'moderate_comments' => 0,
                 'delete_posts' => 1,
                 'delete_others_posts' => 1,
                 'delete_published_posts' => 1,

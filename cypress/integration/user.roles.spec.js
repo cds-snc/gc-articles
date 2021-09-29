@@ -21,12 +21,6 @@ const blockedPages403 = [
     'options-general.php'
 ];
 
-const blockedPages500 = [
-    'user-edit.php?user_id=1',
-];
-
-
-
 const checkPages = (pages, status) => {
     pages.forEach((page) => {
         cy.request({
@@ -52,7 +46,6 @@ describe('User - GC Editor', () => {
         cy.loginUser('gceditor', 'secret');
         checkPages(allowedPages200, 200);
         checkPages([...blockedPages403, 'users.php'], 403);
-        checkPages(blockedPages500, 500);
     });
 
 });

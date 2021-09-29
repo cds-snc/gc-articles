@@ -158,7 +158,7 @@ At this point, you will likely have a bunch of local changes in the `languages` 
 - `cds-snc.pot`
 - `fr_FR.mo`
 - `fr_FR.po`
-- one or more `fr_FR-xxx.json` files (* IF any strings appear in .js files)
+- one or more `fr_FR-xxx.json` files (* IF any strings appear in javascript files)
 
 All of these files should be committed along with the rest of your PR.
 

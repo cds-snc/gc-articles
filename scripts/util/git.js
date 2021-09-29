@@ -118,3 +118,12 @@ export const gitCheckClean = async () => {
     await delay();
 }
 
+export const gitCheckMain = async () => {
+    if (shell.exec('[[ $(git rev-parse --abbrev-ref HEAD) = "main" ]]').code !== 0) {
+        shell.echo('Error: you should be on main branch when creating/tagging a release');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+

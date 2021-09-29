@@ -20,7 +20,7 @@ class Roles
             }
         }
 
-        Utils::checkOptionCallback('cds_base_activated', '1.0.6', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.0.7', function () {
             if (is_blog_installed()) {
                 remove_role('administrator');
                 remove_role('editor');
@@ -196,6 +196,7 @@ class Roles
                 'create_users' => 1,
                 'remove_users' => 1,
                 'add_users' => 1,
+                'promote_users' => 1,
                 'read' => 1,
                 'level_1' => 1,
                 'level_0' => 1,

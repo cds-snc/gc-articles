@@ -54,3 +54,58 @@
 .wp-admin div#whl_settings {
     display: none;
 }
+
+/* Update the font sizes */
+
+.postbox .inside h2, .wrap [class$=icon32]+h2, .wrap h1, .wrap>h2:first-child {
+    font-size: 30px;
+}
+
+h2, h3 {
+    font-size: 1.6em;
+}
+
+.row-title  /* row headings are important for some reason */ {
+    font-size: 16px !important;
+}
+
+#dashboard-widgets h3, #dashboard-widgets h4, #dashboard_quick_press .drafts h2, /* dashboard widgets headings */
+#adminmenu .wp-submenu-head, #adminmenu a.menu-top, /* side menu links */
+.form-table, .form-table td, .form-table td p, .form-table th, /* settings menu fields */
+.wp-core-ui select, input, textarea, /* form components */
+.wp-core-ui .button, .wp-core-ui .button-primary, .wp-core-ui .button-secondary, /* buttons */
+.widefat tfoot td, .widefat th, .widefat thead td, td.column-title strong, td.plugin-title strong, /* headings for table pages */
+#customize-controls h3, /* customizer buttons */
+p
+ {
+    font-size: 16px;
+}
+
+body,
+#wpadminbar *, /* Top admin menu */
+#adminmenu .wp-submenu a, /* side menu sub links */
+.form-wrap p, .form-table td p.description, p.help, span.description, /* descriptions settings pages */
+.subsubsub, /* filters on table pages */
+.widefat td, .widefat td ol, .widefat td p, .widefat td ul, .plugin-version-author-uri, /* rows for table pages */
+.row-actions, .plugins .row-actions, /* on-hover row actions for table pages */
+.wrap .add-new-h2, .wrap .add-new-h2:active, .wrap .page-title-action, .wrap .page-title-action:active, /* "Add page" button */
+.wp-filter, /* "search" label beside search bars */
+#customize-controls .control-section-themes .accordion-section-title span.customize-action, #customize-controls .customize-section-title span.customize-action, .control-panel-themes .accordion-section-title span.customize-action, #customize-controls .customize-info .preview-notice, /* customizer subheadings */
+.metabox-holder .postbox>h3, .metabox-holder .stuffbox>h3, .metabox-holder h2.hndle, .metabox-holder h3.hndle, /* dashboard box headings */
+code
+  {
+    font-size: 14.5px;
+}
+
+#wpadminbar {
+    height: 36px; /* increase admin bar height because it is fixed, not related to text size */
+}
+
+.wp-core-ui select,
+input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week] {
+    line-height: 2.15384615; /* match line height for selects and inputs to button line heights */
+}
+
+.tablenav {
+    height: auto; /* add space under the filters above tables */
+}

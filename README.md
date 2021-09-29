@@ -99,7 +99,7 @@ Note: when starting up the devcontainer or docker-compose, `composer install` is
 When creating a custom plugin or theme, you should prefix the folder name with `cds-`. This will ensure the code is included in git and code quality scans.
 
 ### Translations 
-WordPress uses gettext to manage and compile translation files. We have added a couple composer scripts/commands to
+WordPress uses gettext to manage and compile translation files. We have added a couple composer scripts to
 simplify working with the various commands and steps.
 
 If you prefer to run these commands from your host environment, you'll need to make sure you have 

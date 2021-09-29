@@ -20,14 +20,19 @@ class Roles
             }
         }
 
-        Utils::checkOptionCallback('cds_base_activated', '1.0', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.0.6', function () {
             if (is_blog_installed()) {
                 remove_role('administrator');
                 remove_role('editor');
                 remove_role('author');
                 remove_role('contributor');
                 remove_role('subscriber');
-                $this->cleanupRoles('ircc');
+                remove_role('gceditor');
+                remove_role('gcadmin');
+                // the ircc role should be removed in the next version update (leaving to cleanup current db)
+                remove_role('ircc');
+                $this->cleanupRoles('gceditor');
+                $this->cleanupRoles('gcadmin');
             }
         });
     }
@@ -158,10 +163,63 @@ class Roles
                 'read' => 1,
                 'level_0' => 1,
             ],
-            'ircc' => [
+            'gceditor' => [
                 'read' => 1,
+                'level_1' => 1,
                 'level_0' => 1,
+                'moderate_comments' => 0,
+                'edit_posts' => 1,
+                'edit_others_posts' => 1,
+                'edit_published_posts' => 1,
+                'publish_posts' => 1,
                 'delete_posts' => 1,
+                'delete_others_posts' => 1,
+                'delete_published_posts' => 1,
+                'delete_private_posts' => 1,
+                'edit_private_posts' => 1,
+                'read_private_posts' => 1,
+                'edit_pages' => 1,
+                'delete_private_pages' => 1,
+                'edit_private_pages' => 1,
+                'read_private_pages' => 1,
+                'edit_others_pages' => 1,
+                'edit_published_pages' => 1,
+                'publish_pages' => 1,
+                'delete_pages' => 1,
+                'delete_others_pages' => 1,
+                'delete_published_pages' => 1,
+            ],
+            'gcadmin' => [
+                'edit_users' => 1,
+                'list_users' => 1,
+                'delete_users' => 1,
+                'create_users' => 1,
+                'remove_users' => 1,
+                'add_users' => 1,
+                'read' => 1,
+                'level_1' => 1,
+                'level_0' => 1,
+                'moderate_comments' => 0,
+                'edit_posts' => 1,
+                'edit_others_posts' => 1,
+                'edit_published_posts' => 1,
+                'publish_posts' => 1,
+                'delete_posts' => 1,
+                'delete_others_posts' => 1,
+                'delete_published_posts' => 1,
+                'delete_private_posts' => 1,
+                'edit_private_posts' => 1,
+                'read_private_posts' => 1,
+                'edit_pages' => 1,
+                'delete_private_pages' => 1,
+                'edit_private_pages' => 1,
+                'read_private_pages' => 1,
+                'edit_others_pages' => 1,
+                'edit_published_pages' => 1,
+                'publish_pages' => 1,
+                'delete_pages' => 1,
+                'delete_others_pages' => 1,
+                'delete_published_pages' => 1,
             ],
             'display_name' => [
                 'administrator' => 'Administrator',
@@ -169,7 +227,8 @@ class Roles
                 'author' => 'Author',
                 'contributor' => 'Contributor',
                 'subscriber' => 'Subscriber',
-                'ircc' => 'IRCC',
+                'gceditor' => 'GC Editor',
+                'gcadmin' => 'GC Admin'
             ],
         ];
 

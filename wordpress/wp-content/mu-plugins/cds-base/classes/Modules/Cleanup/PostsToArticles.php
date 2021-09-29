@@ -8,27 +8,7 @@ class PostsToArticles
 {
     public function __construct()
     {
-        add_action('admin_menu', [$this, 'changePostLabel'], 99);
         add_action('init', [$this, 'changePostObject'], 99);
-    }
-
-    public function changePostLabel(): void
-    {
-        try {
-            if (!current_user_can("edit_posts")) {
-                return;
-            }
-
-            global $menu;
-            global $submenu;
-
-            $menu[5][0] = __('Articles', 'cds-snc');
-            $submenu['edit.php'][5][0] = __('Articles', 'cds-snc');
-            $submenu['edit.php'][10][0] = __('Add Article', 'cds-snc');
-            $submenu['edit.php'][16][0] = __('Article Tags', 'cds-snc');
-        } catch (Exception $e) {
-            error_log("post menu not found");
-        }
     }
 
     public function changePostObject(): void

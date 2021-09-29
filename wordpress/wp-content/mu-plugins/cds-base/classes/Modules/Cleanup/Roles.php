@@ -29,6 +29,8 @@ class Roles
                 remove_role('subscriber');
                 remove_role('gceditor');
                 remove_role('gcadmin');
+                // the ircc role should be removed in the next version update (leaving to cleanup current db)
+                remove_role('ircc');
                 $this->cleanupRoles('gceditor');
                 $this->cleanupRoles('gcadmin');
             }

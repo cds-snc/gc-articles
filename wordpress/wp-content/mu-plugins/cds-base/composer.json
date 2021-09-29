@@ -13,5 +13,17 @@
         "ramsey/uuid": "^4.2",
         "ua-parser/uap-php": "^3.9",
         "nesbot/carbon": "^2.53"
+    },
+    "require-dev": {
+        "wp-cli/i18n-command": "^2.2.5"
+    },
+    "scripts": {
+        "make-pot": "wp i18n make-pot --domain=cds-snc . languages/cds-snc.pot",
+        "merge-po": "msgmerge -U ./languages/fr_FR.po ./languages/cds-snc.pot",
+        "compile-translations": "msgfmt -o ./languages/fr_FR.mo ./languages/fr_FR.po",
+        "prepare-translations": [
+            "@make-pot",
+            "@merge-po"
+        ]
     }
 }

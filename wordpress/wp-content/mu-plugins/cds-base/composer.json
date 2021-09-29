@@ -20,7 +20,12 @@
     "scripts": {
         "make-pot": "wp i18n make-pot --domain=cds-snc . languages/cds-snc.pot",
         "merge-po": "msgmerge -U ./languages/fr_FR.po ./languages/cds-snc.pot",
-        "compile-translations": "msgfmt -o ./languages/fr_FR.mo ./languages/fr_FR.po",
+        "compile-mo": "msgfmt -o ./languages/fr_FR.mo ./languages/fr_FR.po",
+        "compile-json": "wp i18n make-json ./languages/fr_FR.po --no-purge",
+        "compile-translations": [
+            "@compile-mo",
+            "@compile-json"
+        ],
         "prepare-translations": [
             "@make-pot",
             "@merge-po"

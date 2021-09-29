@@ -98,9 +98,61 @@ Note: when starting up the devcontainer or docker-compose, `composer install` is
 
 When creating a custom plugin or theme, you should prefix the folder name with `cds-`. This will ensure the code is included in git and code quality scans.
 
-### Theme translation 
-See: https://github.com/cds-snc/platform-mvp/pull/95#issuecomment-904688973
+### Translations 
+WordPress uses gettext to manage and compile translation files. We have added a couple composer scripts/commands to
+simplify working with the various commands and steps.
 
+Each of our custom `cds-base` plugin and `cds-default` theme include these scripts and they work the same way. There are
+also scripts in the base `wordpress`-folder level composer.json that will recursively call each of the theme and plugin
+scripts.
+
+When working with theme or plugin files, create translatable strings by following the 
+[WordPress documentation](https://codex.wordpress.org/I18n_for_WordPress_Developers#Strings_for_Translation) on the
+subject, making sure to set the `domain` as `cds-snc`. In short, you will probably use syntax like the following:
+
+```
+__( 'Hello, dear user!', 'cds-snc' );
+```
+or
+```
+_e( 'Your Ad here', 'cds-snc' );
+```
+
+In order to translate these strings and make them available to Wordpress, you will go through the following steps:
+
+1. Prepare translation files
+
+You will execute this command in the `cds-base` plugin folder, the `cds-default` theme folder, or at the root `wordpress`
+folder, depending on scope/context.
+
+```sh
+composer prepare-translations
+```
+
+This will scan the plugin or theme files and update the `cds-snc.pot` file which captures all the translatable strings,
+and then merge any updates into the `fr_FR.po` file which is where translations are added.
+
+2. Add translated strings
+
+At this point, you should add any French translations to that .po file as described in the 
+[WordPress documentation](https://developer.wordpress.org/plugins/internationalization/localization/#manually).
+
+3. Compile translations
+
+Once translatable strings have been merged to the .po file, and translations have been added, you need to compile the
+translations into a format that WordPress can read with the second command:
+
+```sh
+composer compile-translations
+```
+
+At this point, you will likely have a bunch of local changes in the `languages` folder: 
+- `cds-snc.pot`
+- `fr_FR.mo`
+- `fr_FR.po`
+- one or more `fr_FR-xxx.json` files
+
+All of these files should be committed along with the rest of your PR.
 
 ### Deployments 
 

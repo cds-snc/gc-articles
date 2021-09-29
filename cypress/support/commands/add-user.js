@@ -1,7 +1,9 @@
 
 
-Cypress.Commands.add('addUser', (userName, password, roleText) => {
-  cy.loginUser();
+Cypress.Commands.add('addUser', (userName, password, roleText, autoLogin = true) => {
+  if (autoLogin) {
+    cy.loginUser();
+  }
   cy.visit("/wp-admin/user-new.php");
   cy.get('#user_login').type(userName);
   cy.get('#email').type(`${userName}@example.com`);
@@ -11,6 +13,6 @@ Cypress.Commands.add('addUser', (userName, password, roleText) => {
   cy.get('.pw-checkbox').check();
   cy.get('#role').select(roleText);
   cy.get('form#createuser').submit();
-  cy.get('#wp-admin-bar-logout a').click({force: true});
+  cy.get('#wp-admin-bar-logout a').click({ force: true });
 });
 

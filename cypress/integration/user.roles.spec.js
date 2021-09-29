@@ -21,6 +21,12 @@ const blockedPages403 = [
     'options-general.php'
 ];
 
+const blockedPages500 = [
+    'user-edit.php?user_id=1',
+];
+
+
+
 const checkPages = (pages, status) => {
     pages.forEach((page) => {
         cy.request({
@@ -46,6 +52,7 @@ describe('User - GC Editor', () => {
         cy.loginUser('gceditor', 'secret');
         checkPages(allowedPages200, 200);
         checkPages([...blockedPages403, 'users.php'], 403);
+        checkPages(blockedPages500, 500);
     });
 
 });
@@ -59,11 +66,10 @@ describe('User - GC Admin', () => {
         cy.exec('npm run wp-env:clean');
     });
 
-    it('GC Editor login & page access', () => {
+    it('GC Admin login & page access', () => {
         cy.addUser('gcadmin', 'secret', 'GC Admin');
         cy.loginUser('gcadmin', 'secret');
         checkPages([...allowedPages200, 'users.php'], 200);
         checkPages(blockedPages403, 403);
-        checkPages(blockedPages500, 500);
     });
 });

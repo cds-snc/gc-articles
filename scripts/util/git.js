@@ -100,3 +100,30 @@ export const gitCheckoutMain = async () => {
     await delay();
 }
 
+export const gitPullLatestFromMain = async () => {
+    if (shell.exec(`git pull origin main`).code !== 0) {
+        shell.echo('Error: failed to pull latest from main');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+
+export const gitCheckClean = async () => {
+    if (shell.exec(`[[ -z $(git status -s) ]]`).code !== 0) {
+        shell.echo('Error: you have local changes you should stash or commit');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+
+export const gitCheckMain = async () => {
+    if (shell.exec('[[ $(git rev-parse --abbrev-ref HEAD) = "main" ]]').code !== 0) {
+        shell.echo('Error: you should be on main branch when creating/tagging a release');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+

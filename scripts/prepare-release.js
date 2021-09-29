@@ -13,7 +13,10 @@ import {
     gitCommitReleaseFiles,
     gitPushReleaseFiles,
     ghReleasePullRequest,
-    gitCheckoutMain
+    gitCheckoutMain,
+    gitPullLatestFromMain,
+    gitCheckClean,
+    gitCheckMain,
 } from "./util/git.js";
 
 const argv = yargs(process.argv.slice(2)).argv;
@@ -45,6 +48,8 @@ const inputReleaseTag = async () => {
 (async () => {
     try {
         if (argv.version_num) {
+            await gitCheckMain();
+            await gitCheckClean();
             const version = await inputVersionNumber();
             await gitCreateVersionBranch(version);
             await updateVersion(version);
@@ -56,6 +61,9 @@ const inputReleaseTag = async () => {
         }
 
         if (argv.tag) {
+            await gitCheckMain();
+            await gitCheckClean();
+            await gitPullLatestFromMain();
             const { tag, notes } = await inputReleaseTag();
             await gitCreateReleaseBranch(tag);
             await updateTerragruntHcl(tag);

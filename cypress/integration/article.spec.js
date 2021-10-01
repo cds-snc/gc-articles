@@ -2,16 +2,21 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-const addArticle = (text) => {
+const addArticle = async (text) => {
     cy.visit("/wp-admin/post-new.php");
     cy.setPostContent(text);
     cy.wait(1000);
     cy.get("body").type('{cmd}s');
     cy.wait(1000);
-    cy.get(".editor-post-preview").invoke('attr', 'href').then((href) => {
-        cy.visit(href);
-        cy.get(".entry-content").contains(text);
-    });
+
+    return new Promise((resolve, reject) => {
+        cy.get(".editor-post-preview").invoke('attr', 'href').then((href) => {
+            cy.visit(href);
+            resolve(cy.get(".entry-content").contains(text));
+        });
+    })
+
+
 }
 
 describe('Add Article', () => {
@@ -21,12 +26,14 @@ describe('Add Article', () => {
     it('GC Admin can add an article', async () => {
         cy.addUser('gcadmin', 'secret', 'GC Admin');
         cy.loginUser('gcadmin', 'secret');
-        addArticle("Hello from GC Admin");
+        const text = "Hello from GC Editor";
+        await addArticle(text);
     });
 
     it('GC Editor can add an article', async () => {
         cy.addUser('gceditor', 'secret', 'GC Editor');
         cy.loginUser('gceditor', 'secret');
-        addArticle("Hello from GC Editor");
+        const text = "Hello from GC Admin";
+        await addArticle(text);
     });
 });

@@ -11,29 +11,38 @@ const addArticle = async (text) => {
 
     return new Promise((resolve, reject) => {
         cy.get(".editor-post-preview").invoke('attr', 'href').then((href) => {
-            cy.visit(href);
-            resolve(cy.get(".entry-content").contains(text));
+            resolve(href);
         });
     })
 
 
 }
 
-describe('Add Article', () => {
+describe('Add Article Admin', () => {
     beforeEach(() => {
     });
 
     it('GC Admin can add an article', async () => {
         cy.addUser('gcadmin', 'secret', 'GC Admin');
         cy.loginUser('gcadmin', 'secret');
-        const text = "Hello from GC Editor";
-        await addArticle(text);
+        const text = "Hello from GC Admin";
+        const href = await addArticle(text);
+        cy.visit(href);
+        cy.get(".entry-content p").contains(text);
+    });
+});
+
+describe('Add Article as GC Editor', () => {
+    beforeEach(() => {
     });
 
     it('GC Editor can add an article', async () => {
         cy.addUser('gceditor', 'secret', 'GC Editor');
         cy.loginUser('gceditor', 'secret');
-        const text = "Hello from GC Admin";
-        await addArticle(text);
+        const text = "Hello from GC Editor";
+        const href = await addArticle(text);
+        cy.visit(href);
+        cy.get(".entry-content p").contains(text);
     });
 });
+

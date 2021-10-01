@@ -12,9 +12,8 @@ class Setup
 
         new NotifySettings();
 
-        error_log("HELLOOOOO " . $this->isNotifyConfigured());
         if ($this->isNotifyConfigured()) {
-            include __DIR__.'/includes/wp-mail-notify-api.php';
+            include __DIR__ . '/includes/wp-mail-notify-api.php';
         }
     }
 

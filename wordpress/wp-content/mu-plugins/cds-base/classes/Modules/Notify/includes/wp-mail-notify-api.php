@@ -16,5 +16,7 @@ if (!function_exists('wp_mail')) {
                 "message" => $message
             ],
         );
+
+        return true;
     }
 }

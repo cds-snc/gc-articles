@@ -11,5 +11,15 @@ class Setup
         new NotifyTemplateSender(new FormHelpers(), new Notices());
 
         new NotifySettings();
+
+        error_log("HELLOOOOO " . $this->isNotifyConfigured());
+        if ($this->isNotifyConfigured()) {
+            include __DIR__.'/includes/wp-mail-notify-api.php';
+        }
+    }
+
+    protected function isNotifyConfigured(): bool
+    {
+        return getenv('NOTIFY_API_KEY') && getenv('NOTIFY_GENERIC_TEMPLATE_ID');
     }
 }

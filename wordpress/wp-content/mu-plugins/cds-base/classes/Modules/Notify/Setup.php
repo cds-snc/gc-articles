@@ -19,6 +19,6 @@ class Setup
 
     protected function isNotifyConfigured(): bool
     {
-        return getenv('NOTIFY_API_KEY') && getenv('NOTIFY_GENERIC_TEMPLATE_ID');
+        return getenv('NOTIFY_API_KEY');
     }
 }

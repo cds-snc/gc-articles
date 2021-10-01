@@ -40,21 +40,14 @@ class NotifyClient
     {
         if (!$this->notifyClient) {
             error_log("notifyClient doesn't exist");
-            return false;
+            throw new NotifyException("Notify client doesn't exist");
         }
 
-        try {
-            $response = $this->notifyClient->sendEmail(
-                $emailTo,
-                $templateId,
-                $data,
-                $ref
-            );
-        } catch (NotifyException $e) {
-            error_log($e->getMessage());
-            return false;
-        }
-
-        return true;
+        $this->notifyClient->sendEmail(
+            $emailTo,
+            $templateId,
+            $data,
+            $ref
+        );
     }
 }

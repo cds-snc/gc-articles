@@ -8,7 +8,7 @@ if (!function_exists('wp_mail')) {
         $templateId = getenv('NOTIFY_GENERIC_TEMPLATE_ID') ?: '40454604-8702-4eeb-9b38-1ed3104fb960';
         $notifyClient = new NotifyClient();
 
-        $notifyClient->sendMail(
+        return $notifyClient->sendMail(
             $to,
             $templateId,
             [
@@ -16,7 +16,5 @@ if (!function_exists('wp_mail')) {
                 "message" => $message
             ],
         );
-
-        return true;
     }
 }

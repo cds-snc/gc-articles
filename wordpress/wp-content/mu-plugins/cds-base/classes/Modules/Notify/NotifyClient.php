@@ -51,7 +51,10 @@ class NotifyClient
                 $ref
             );
         } catch (NotifyException $e) {
-            echo $e->getMessage();
+            error_log($e->getMessage());
+            return false;
         }
+
+        return true;
     }
 }

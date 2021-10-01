@@ -25,8 +25,6 @@ const blockedPages500 = [
     'user-edit.php?user_id=1',
 ];
 
-
-
 const checkPages = (pages, status) => {
     pages.forEach((page) => {
         cy.request({
@@ -50,6 +48,7 @@ describe('User - GC Editor', () => {
     it('GC Editor login & page access', () => {
         cy.addUser('gceditor', 'secret', 'GC Editor');
         cy.loginUser('gceditor', 'secret');
+        cy.screenshot();
         checkPages(allowedPages200, 200);
         checkPages([...blockedPages403, 'users.php'], 403);
         checkPages(blockedPages500, 500);
@@ -69,6 +68,7 @@ describe('User - GC Admin', () => {
     it('GC Admin login & page access', () => {
         cy.addUser('gcadmin', 'secret', 'GC Admin');
         cy.loginUser('gcadmin', 'secret');
+        cy.screenshot();
         checkPages([...allowedPages200, 'users.php'], 200);
         checkPages(blockedPages403, 403);
     });

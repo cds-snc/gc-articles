@@ -4,6 +4,14 @@ Cypress.Commands.add('addUser', (userName, password, roleText, autoLogin = true)
   if (autoLogin) {
     cy.loginUser();
   }
+
+
+  cy.visit("/wp-admin/users.php");
+  if (cy.get("#the-list").contains(userName)) {
+    cy.get('#wp-admin-bar-logout a').click({ force: true });
+    return;
+  }
+
   cy.visit("/wp-admin/user-new.php");
   cy.get('#user_login').type(userName);
   cy.get('#email').type(`${userName}@example.com`);

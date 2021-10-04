@@ -20,5 +20,12 @@ class AdminStyles
             [],
             BASE_PLUGIN_NAME_VERSION,
         );
+
+        wp_enqueue_style(
+            'cds-base-style-admin-wet',
+            plugin_dir_url(__FILE__) . 'css/admin-wet.css',
+            [],
+            BASE_PLUGIN_NAME_VERSION,
+        );
     }
 }

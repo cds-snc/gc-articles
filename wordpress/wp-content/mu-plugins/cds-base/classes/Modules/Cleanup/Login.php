@@ -19,12 +19,16 @@ class Login
     {
         ?>
       <style>
+          .login *, .login form label, .login form .button.button-large {
+              font-size: 16px;
+          }
+
           body.login div#login h1 a {
               background-image: url(<?php echo cds_plugin_images_url('site-login-logo.svg'); ?>);
               width: 300px;
               height: 59px;
               background-size: contain;
-              margin-bottom: 10px;
+              margin-bottom: 20px;
           }
 
           .wp-core-ui .button-primary, .wp-core-ui .button-primary:focus {

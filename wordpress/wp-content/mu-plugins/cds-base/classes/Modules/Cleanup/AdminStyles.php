@@ -13,10 +13,6 @@ class AdminStyles
 
     public function enqueueStyles()
     {
-
-        if (is_super_admin()) {
-            return;
-        }
         // add stylesheet to the wp admin
         wp_enqueue_style(
             'cds-base-style-admin',

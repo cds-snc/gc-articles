@@ -22,6 +22,7 @@ use CDS\Modules\Notify\Setup as SetupNotify;
 use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\TwoFactor\TwoFactor;
+use CDS\Modules\Subscribe\Setup as SubscriptionForm;
 use CDS\Utils;
 
 class Setup
@@ -52,6 +53,7 @@ class Setup
         new CleanupMisc();
         new CleanupProfile();
         new TwoFactor();
+        new SubscriptionForm();
     }
 
     public function checkVersion()

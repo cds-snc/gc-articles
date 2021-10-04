@@ -6,7 +6,6 @@ import {render} from '@wordpress/element';
 import {LoginsPanel} from '../classes/Modules/TrackLogins/src/LoginsPanel';
 import {NotifyPanel} from '../classes/Modules/Notify/src/NotifyPanel';
 import {List} from '../classes/Modules/Notify/src/Types';
-import {handleSubscribe} from "../classes/Modules/Subscribe/src/handler"
 
 declare global {
     interface Window {

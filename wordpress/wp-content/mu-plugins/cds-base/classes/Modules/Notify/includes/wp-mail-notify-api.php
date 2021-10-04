@@ -22,7 +22,7 @@ if (!function_exists('wp_mail')) {
         } catch (\Alphagov\Notifications\Exception\NotifyException $e) {
             error_log("[Notify] " . $e->getMessage());
 
-            FlashMessage::queue_flash_message(
+            FlashMessage::queueFlashMessage(
                 "There was an error sending the email :" . $e->getMessage(), 'error'
             );
 

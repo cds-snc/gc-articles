@@ -65,10 +65,10 @@ class Setup
 
             $endpoint = getenv('LIST_MANAGER_ENDPOINT');
 
-            $client->request('POST', $endpoint . '/subscription', [
+            $response = $client->request('POST', $endpoint . '/subscription', [
                 'json' => [
                     "email" => $email,
-                    "list_id" => 'list_id_here'
+                    "list_id" => 'ce14a753-904e-450a-a70c-808d6d69e05c'
                 ]
             ]);
 

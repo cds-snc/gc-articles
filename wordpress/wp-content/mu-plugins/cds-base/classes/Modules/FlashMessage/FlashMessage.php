@@ -5,17 +5,21 @@ declare(strict_types=1);
 namespace CDS\Modules\FlashMessage;
 
 /**
- * Flash messages
+ * Flash message
  * Adapted from: https://github.com/dgrundel/wp-flash-messages
  * Queue flash messages for display on next page load. Messages are displayed as admin_notices and immediately
- * cleared.
+ * cleared. This module uses PHP sessions to store messages, and as such you should probably use wp-native-php-sessions
+ * plugin for this all to work properly in a distributed environment.
  */
 class FlashMessage
 {
+    const WP_FLASH_MESSAGES = 'wp_flash_messages';
+
     public function __construct()
     {
-        add_action('admin_notices', [$this, 'showFlashMessages'], 1001);
-        add_action('network_admin_notices', [$this, 'showFlashMessages'], 1001);
+        session_start(); // @TODO: not sure if this belongs here
+        add_action('admin_notices', [$this, 'showFlashMessages'], 10);
+        add_action('network_admin_notices', [$this, 'showFlashMessages'], 10);
     }
 
     /**
@@ -34,10 +38,10 @@ class FlashMessage
             $class = $default_class;
         }
 
-        $flash_messages = maybe_unserialize(get_option('wp_flash_messages', []));
+        $flash_messages = maybe_unserialize(self::getMessages());
         $flash_messages[$class][] = $message;
 
-        update_option('wp_flash_messages', $flash_messages);
+        self::updateMessages($flash_messages);
     }
 
     /**
@@ -45,7 +49,8 @@ class FlashMessage
      */
     public static function showFlashMessages()
     {
-        $flash_messages = maybe_unserialize(get_option('wp_flash_messages', ''));
+        // get serialized messages from session and unserialize
+        $flash_messages = maybe_unserialize(self::getMessages());
 
         if (is_array($flash_messages)) {
             foreach ($flash_messages as $class => $messages) {
@@ -56,6 +61,21 @@ class FlashMessage
         }
 
         // clear flash messages after display
-        delete_option('wp_flash_messages');
+        self::clearMessages();
+    }
+
+    protected static function getMessages()
+    {
+        return $_SESSION[self::WP_FLASH_MESSAGES] ?? [];
+    }
+
+    protected static function updateMessages($messages)
+    {
+        $_SESSION[self::WP_FLASH_MESSAGES] = serialize($messages);
+    }
+
+    protected static function clearMessages()
+    {
+        unset($_SESSION[self::WP_FLASH_MESSAGES]);
     }
 }

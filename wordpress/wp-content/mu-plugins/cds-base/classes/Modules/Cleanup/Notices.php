@@ -22,7 +22,6 @@ class Notices
                 echo 'My notice';
             });
             */
-
         }, 1000);
     }
 }

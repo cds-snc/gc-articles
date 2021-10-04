@@ -16,6 +16,7 @@ use CDS\Modules\Cleanup\Misc as CleanupMisc;
 use CDS\Modules\Cleanup\Notices as CleanupNotices;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
+use CDS\Modules\FlashMessage\FlashMessage;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
 use CDS\Modules\Notify\Setup as SetupNotify;
@@ -52,6 +53,7 @@ class Setup
         new CleanupMisc();
         new CleanupProfile();
         new TwoFactor();
+        new FlashMessage();
     }
 
     public function checkVersion()

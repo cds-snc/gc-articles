@@ -1,5 +1,6 @@
 <?php
 
+use CDS\Modules\FlashMessage\FlashMessage;
 use CDS\Modules\Notify\NotifyClient;
 
 if (!function_exists('wp_mail')) {
@@ -19,20 +20,15 @@ if (!function_exists('wp_mail')) {
                 ],
             );
         } catch (\Alphagov\Notifications\Exception\NotifyException $e) {
-            error_log("Huzzah " . $e->getMessage());
+            error_log("[Notify] " . $e->getMessage());
 
-            wp_die("There was an error sending the email");
-            add_action('admin_notices', function() {
-                return '<div class="notice notice-success is-dismissible">
-                                <p class="notice-sent">There was an error</p>
-                        </div>';
-            });
-
-            return new WP_Error(
-                'email_failed',
-                __( 'The email could not be sent. Possible reason: your host may have disabled the function.' )
+            FlashMessage::queue_flash_message(
+                "There was an error sending the email :" . $e->getMessage(), 'error'
             );
+
+            return false;
         }
         return true;
     }
 }
+

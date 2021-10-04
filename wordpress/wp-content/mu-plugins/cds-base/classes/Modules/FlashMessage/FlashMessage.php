@@ -12,7 +12,8 @@ namespace CDS\Modules\FlashMessage;
  */
 class FlashMessage
 {
-    public function __construct() {
+    public function __construct()
+    {
         add_action('admin_notices', [$this, 'showFlashMessages'], 1001);
         add_action('network_admin_notices', [$this, 'showFlashMessages'], 1001);
     }
@@ -22,13 +23,16 @@ class FlashMessage
      * @param  string  $class
      * Push Flash messages onto an Options array
      */
-    public static function queueFlashMessage($message, $class = '') {
+    public static function queueFlashMessage($message, $class = '')
+    {
         $default_allowed_classes = ['error', 'updated'];
 
         $allowed_classes = apply_filters('flash_messages_allowed_classes', $default_allowed_classes);
         $default_class = apply_filters('flash_messages_default_class', 'updated');
 
-        if(!in_array($class, $allowed_classes)) $class = $default_class;
+        if (!in_array($class, $allowed_classes)) {
+            $class = $default_class;
+        }
 
         $flash_messages = maybe_unserialize(get_option('wp_flash_messages', []));
         $flash_messages[$class][] = $message;
@@ -39,12 +43,13 @@ class FlashMessage
     /**
      * Display Flash messages
      */
-    public static function showFlashMessages() {
+    public static function showFlashMessages()
+    {
         $flash_messages = maybe_unserialize(get_option('wp_flash_messages', ''));
 
-        if(is_array($flash_messages)) {
-            foreach($flash_messages as $class => $messages) {
-                foreach($messages as $message) {
+        if (is_array($flash_messages)) {
+            foreach ($flash_messages as $class => $messages) {
+                foreach ($messages as $message) {
                     ?><div class="<?php echo $class; ?>"><p><?php echo $message; ?></p></div><?php
                 }
             }

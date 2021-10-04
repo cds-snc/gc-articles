@@ -8,6 +8,8 @@ class Setup
 {
     public function __construct()
     {
+        add_action('wp_enqueue_scripts', [$this, 'subscribe']);
+
         /*
          * Note - if testing with WP ENV
          * https://wordpress.org/support/topic/wp-env-with-gutenber-doesnt-have-a-rest-api/
@@ -25,6 +27,16 @@ class Setup
         new SubscriptionForm();
     }
 
+    public function subscribe()
+    {
+        wp_enqueue_script('cds-subscribe', plugin_dir_url(__FILE__) . '/src/handler.js', ['jquery'], "1.0.0", true);
+
+        wp_localize_script("cds-subscribe", "CDS_VARS", array(
+            "rest_url" => esc_url_raw(rest_url()),
+            "rest_nonce" => wp_create_nonce("wp_rest"),
+        ));
+    }
+
     public function confirmSubscription()
     {
         if (!isset($_POST['list_manager'])) {
@@ -32,12 +44,16 @@ class Setup
         }
 
         if (!wp_verify_nonce($_POST['list_manager'], 'list_manager_nonce_action')) {
-            return json_encode(["error" => "failed to verify"]);
+            return json_encode(["error" => __("failed to verify", "cds-snc")]);
+        }
+
+        if(!isset($_POST["email"]) || $_POST["email"] === ""){
+            return json_encode(["error" => __("invalid email", "cds-snc")]);
         }
 
         if (isset($_POST['list_manager'])) {
             // @todo send to list manager API
-            return json_encode(["success" => "all good"]);
+            return json_encode(["success" => __("all good", "cds-snc")]);
         }
 
     }

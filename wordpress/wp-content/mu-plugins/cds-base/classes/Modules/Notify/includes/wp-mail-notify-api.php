@@ -11,7 +11,6 @@ if (!function_exists('wp_mail')) {
 
         try {
             $notifyClient->sendMail(
-
                 $to,
                 $templateId,
                 [
@@ -23,7 +22,8 @@ if (!function_exists('wp_mail')) {
             error_log("[Notify] " . $e->getMessage());
 
             FlashMessage::queueFlashMessage(
-                "There was an error sending the email :" . $e->getMessage(), 'error'
+                "There was an error sending the email :" . $e->getMessage(),
+                'error'
             );
 
             return false;
@@ -31,4 +31,3 @@ if (!function_exists('wp_mail')) {
         return true;
     }
 }
-

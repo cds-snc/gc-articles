@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Subscribe;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
 class Setup
 {
     public function __construct()
@@ -47,14 +50,34 @@ class Setup
             return json_encode(["error" => __("failed to verify", "cds-snc")]);
         }
 
-        if(!isset($_POST["email"]) || $_POST["email"] === ""){
+        if (!isset($_POST["email"]) || $_POST["email"] === "") {
             return json_encode(["error" => __("invalid email", "cds-snc")]);
         }
 
-        if (isset($_POST['list_manager'])) {
-            // @todo send to list manager API
-            return json_encode(["success" => __("all good", "cds-snc")]);
+        $email = $_POST["email"];
+
+        try {
+            $client = new Client([
+                'headers' => [
+                    "Authorization" => getenv('LIST_MANAGER_API_KEY')
+                ]
+            ]);
+
+            $endpoint = getenv('LIST_MANAGER_ENDPOINT');
+
+            $client->request('POST', $endpoint . '/subscription', [
+                'json' => [
+                    "email" => $email,
+                    "list_id" => 'list_id_here'
+                ]
+            ]);
+
+            return json_encode(["success" => __("all good your on the list", "cds-snc")]);
+
+        } catch (Exception $exception) {
+            return json_encode(["error" => __("api call failed", "cds-snc")]);
         }
+
 
     }
 }

@@ -4,7 +4,7 @@ import { addArticle } from "./util";
 
 describe('Add Article as GC Editor', () => {
     it('GC Editor can add an article', async () => {
-        cy.addUser('gceditor', 'secret', 'GC Editor');
+        cy.addUser('gceditor', 'secret', 'gceditor');
         cy.loginUser('gceditor', 'secret');
         const text = "Hello from GC Editor";
         const href = await addArticle(text);

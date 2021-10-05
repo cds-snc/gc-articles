@@ -53,6 +53,8 @@ describe('Track Login Panel captures logins', () => {
         cy.screenshot();
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)
 
+        cy.clearCookies();
+
         cy.login();
         cy.visitDashboard();
         cy.screenshot();

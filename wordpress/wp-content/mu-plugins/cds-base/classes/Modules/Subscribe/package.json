@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production postcss sass/app.scss -o css/styles.css"
+    "build": "cross-env NODE_ENV=production postcss sass/app.scss -o template/css/styles.css"
   },
   "author": "",
   "license": "ISC",

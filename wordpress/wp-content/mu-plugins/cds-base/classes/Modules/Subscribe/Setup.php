@@ -39,7 +39,7 @@ class Setup
             "rest_nonce" => wp_create_nonce("wp_rest"),
         ));
 
-        wp_enqueue_style('cds-subscribe-css', plugin_dir_url(__FILE__) . 'css/styles.css', null, "1.0.0");
+        wp_enqueue_style('cds-subscribe-css', plugin_dir_url(__FILE__) . 'template/css/styles.css', null, "1.0.0");
     }
 
     protected function isJson($string): bool

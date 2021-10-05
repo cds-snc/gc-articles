@@ -1,7 +1,10 @@
 const { colors } = require("tailwindcss/defaultTheme");
 
 module.exports = {
-    important: '.gc-form-wrapper' ,
+    important: '.gc-form-wrapper',
+    corePlugins: {
+        container: false,
+    },
     theme: {
         extend: {
             width: {

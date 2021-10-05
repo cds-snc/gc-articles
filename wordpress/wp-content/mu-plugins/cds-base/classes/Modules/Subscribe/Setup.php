@@ -68,7 +68,6 @@ class Setup
         }
 
         return __("Internal server error", "cds-snc");
-
     }
 
     protected function subscribe(string $email): array
@@ -90,7 +89,6 @@ class Setup
             ]);
 
             return ["success" => __("Thanks for subscribing", "cds-snc")];
-
         } catch (ClientException $exception) {
             $error = $this->handleException($exception);
             return ["error" => $error];
@@ -111,7 +109,7 @@ class Setup
             return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
         }
 
-        return json_encode(["success"=> "nice"]);
+        return json_encode(["success" => "nice"]);
 
         return json_encode($this->subscribe($_POST["email"]));
     }

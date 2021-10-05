@@ -13,7 +13,6 @@ use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
 use CDS\Modules\Cleanup\Login as CleanupLogin;
 use CDS\Modules\Cleanup\Menus as CleanupMenus;
 use CDS\Modules\Cleanup\Misc as CleanupMisc;
-use CDS\Modules\Cleanup\Notices as CleanupNotices;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\FlashMessage\FlashMessage;
@@ -47,7 +46,6 @@ class Setup
         new CleanupLogin();
         new CleanupMenus();
         new CleanupDashboard();
-        new CleanupNotices();
         new CleanupAdminBar();
         new CleanupAdminStyles();
         new CleanupMisc();

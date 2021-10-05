@@ -109,8 +109,6 @@ class Setup
             return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
         }
 
-        return json_encode(["success" => "nice"]);
-
         return json_encode($this->subscribe($_POST["email"]));
     }
 }

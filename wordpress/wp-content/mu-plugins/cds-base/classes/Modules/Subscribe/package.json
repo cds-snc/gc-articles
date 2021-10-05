@@ -1,0 +1,26 @@
+{
+  "name": "cds-wp-form",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env NODE_ENV=production postcss sass/app.scss -o css/styles.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^10.3.1",
+    "cross-env": "^7.0.3",
+    "cssnano": "^5.0.7",
+    "postcss": "^8.3.6",
+    "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.2",
+    "postcss-nesting": "^8.0.1",
+    "tailwindcss": "^2.2.6"
+  },
+  "dependencies": {
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^6.7.0",
+    "precss": "^4.0.0"
+  }
+}

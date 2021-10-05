@@ -38,6 +38,8 @@ class Setup
             "rest_url" => esc_url_raw(rest_url()),
             "rest_nonce" => wp_create_nonce("wp_rest"),
         ));
+
+        wp_enqueue_style('cds-subscribe-css',plugin_dir_url(__FILE__).'css/styles.css', null, "1.0.0" );
     }
 
     public function confirmSubscription()
@@ -68,7 +70,7 @@ class Setup
             $response = $client->request('POST', $endpoint . '/subscription', [
                 'json' => [
                     "email" => $email,
-                    "list_id" => 'ce14a753-904e-450a-a70c-808d6d69e05c'
+                    "list_id" => '0c188973-efab-4e8e-8b09-b165e98c66cf'
                 ]
             ]);
 

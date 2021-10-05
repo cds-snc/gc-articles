@@ -20,16 +20,24 @@ class SubscriptionForm
     {
         ob_start();
         ?>
-        <form id="subscribe-form" method="POST" action="/wp-json/subscribe/v1/process">
-            <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
-            <p>
-                <label>
-                    <?php _e("Enter your email:", "cds-snc"); ?>
-                    <input type="text" name="email" value=""/>
-                </label>
-            </p>
-            <button type="submit" id="subscribe-submit"><?php _e("Subscribe", "cds-snc"); ?></button>
-        </form>
+        <div class="gc-form-wrapper">
+            <form id="subscribe-form" method="POST" action="/wp-json/subscribe/v1/process">
+                <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
+                <div class="focus-group">
+                    <label class="gc-label required">
+                        <?php _e("Enter your email:", "cds-snc"); ?>
+                        <span data-testid="asterisk" aria-hidden="true">*</span
+                        ><i class="visually-hidden">Required Field</i></label>
+                    <input class="gc-input-text" type="text" name="email" value=""/>
+
+                </div>
+                <div class="buttons">
+                    <button class="gc-button gc-button" type="submit" id="subscribe-submit">
+                        <?php _e("Subscribe", "cds-snc"); ?>
+                    </button>
+                </div>
+            </form>
+        </div>
         <?php
         $form = ob_get_contents();
         ob_end_clean();

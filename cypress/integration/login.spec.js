@@ -6,7 +6,7 @@ describe('Login', () => {
   it('Can view styled login page', () => {
     const host = Cypress.config().baseUrl;
 
-    cy.visit("/wp-login.php");
+    cy.visit("/login");
     cy.screenshot();
     cy.get("#login h1 a").should("have.text", "Canadian Digital Service");
     cy.get('#login h1 a').should('have.css', 'background-image', 'url("'+host+'/wp-content/plugins/cds-base/images/site-login-logo.svg")')

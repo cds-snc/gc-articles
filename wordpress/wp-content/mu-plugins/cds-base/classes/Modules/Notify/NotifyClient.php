@@ -40,7 +40,7 @@ class NotifyClient
     {
         if (!$this->notifyClient) {
             error_log("notifyClient doesn't exist");
-            throw new NotifyException("Notify client doesn't exist");
+            return false;
         }
 
         $this->notifyClient->sendEmail(

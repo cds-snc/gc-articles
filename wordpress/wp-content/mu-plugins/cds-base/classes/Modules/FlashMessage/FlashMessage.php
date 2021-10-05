@@ -17,7 +17,9 @@ class FlashMessage
 
     public function __construct()
     {
-        session_start(); // @TODO: not sure if this belongs here
+        if(!isset($_SESSION)) {
+            session_start();
+        }
         add_action('admin_notices', [$this, 'showFlashMessages'], 10);
         add_action('network_admin_notices', [$this, 'showFlashMessages'], 10);
     }

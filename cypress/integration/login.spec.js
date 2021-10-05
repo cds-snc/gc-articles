@@ -14,14 +14,14 @@ describe('Login', () => {
   });
 
   it('Login redirect to dashboard', () => {
-    cy.loginUser();
+    cy.login();
     const host = Cypress.config().baseUrl;
     const url = cy.url()
     cy.url().should('eq', `${host}/wp-admin/index.php`)
   });
 
   it('Can view styled dashboard', () => {
-    cy.loginUser();
+    cy.login();
 
     cy.get("body").should("have.css", "font-size", "14.5px"); // body font-size increased to 14.5
     cy.get("#wpadminbar").should("have.css", "height", "36px"); // admin bar height increased to 36

@@ -36,7 +36,7 @@ describe('Notify Template Sender', () => {
             req.redirect("/wp-admin/admin.php?page=cds_notify_send&status=200");
         }).as('bulkSender');
 
-        cy.loginUser();
+        cy.login();
     });
 
     it('Send Notify Template', () => {

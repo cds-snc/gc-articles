@@ -20,7 +20,7 @@ describe('Notify Panel', () => {
             ]
         ).as('getListCounts');
 
-        cy.loginUser();
+        cy.login();
     });
 
     it('Can view Notify Panel on dashboard', () => {

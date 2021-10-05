@@ -11,7 +11,7 @@ describe('Notify Panel', () => {
         cy.intercept(
             {
                 method: 'GET',
-                url: 'index.php?rest_route=/wp-notify/v1/list_counts',
+                url: '/wp-json/wp-notify/v1/list_counts',
             },
             [
                 { "list_id": "fb26a6b5-57aa-4cc2-85fe-3053ed344fe8", "subscriber_count": 3 },

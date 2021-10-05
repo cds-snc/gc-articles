@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3915b09470bb136c2e6eb78f435ad86c",
+    "content-hash": "b72990484556ef912efe6a19d54f7c32",
     "packages": [
         {
             "name": "composer/installers",
@@ -166,6 +166,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/two-factor/"
+        },
+        {
+            "name": "wpackagist-plugin/wp-bootstrap-blocks",
+            "version": "3.3.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wp-bootstrap-blocks/",
+                "reference": "tags/3.3.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wp-bootstrap-blocks.3.3.2.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0 || ~2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wp-bootstrap-blocks/"
         },
         {
             "name": "wpackagist-plugin/wp-native-php-sessions",

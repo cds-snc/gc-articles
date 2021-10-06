@@ -23,7 +23,7 @@ jobs:
           php-version: 8.0
 
       - name: Add Composer auth credentials
-        run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
+        run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/wordpress/auth.json
 
       - run: cd wordpress && composer install --prefer-dist --no-progress --no-suggest
       - run: npm install
@@ -47,8 +47,8 @@ jobs:
           php-version: 8.0
 
       - name: Add Composer auth credentials
-        run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/auth.json
-        
+        run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/wordpress/auth.json
+
       - run: cd wordpress && composer install --prefer-dist --no-progress --no-suggest
       - run: cd wordpress && ./vendor/bin/pest
   phpcs:

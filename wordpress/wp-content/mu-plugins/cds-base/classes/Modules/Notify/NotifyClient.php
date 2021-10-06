@@ -39,19 +39,15 @@ class NotifyClient
     public function sendMail($emailTo, $templateId, $data = [], $ref = "")
     {
         if (!$this->notifyClient) {
-            error_log("notifyClient doesn't exist");
+            error_log("[NOTIFY] NotifyClient doesn't exist");
             return false;
         }
 
-        try {
-            $response = $this->notifyClient->sendEmail(
-                $emailTo,
-                $templateId,
-                $data,
-                $ref
-            );
-        } catch (NotifyException $e) {
-            echo $e->getMessage();
-        }
+        $this->notifyClient->sendEmail(
+            $emailTo,
+            $templateId,
+            $data,
+            $ref
+        );
     }
 }

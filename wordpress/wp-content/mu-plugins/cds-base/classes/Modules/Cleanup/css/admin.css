@@ -101,6 +101,10 @@ code
     height: 36px; /* increase admin bar height because it is fixed, not related to text size */
 }
 
+#wpadminbar .quicklinks a {
+    height: auto; /* admin bar links are the same size as admin bar */
+}
+
 .wp-core-ui select,
 input[type=date], input[type=datetime-local], input[type=datetime], input[type=email], input[type=month], input[type=number], input[type=password], input[type=search], input[type=tel], input[type=text], input[type=time], input[type=url], input[type=week] {
     line-height: 2.15384615; /* match line height for selects and inputs to button line heights */

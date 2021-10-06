@@ -9,7 +9,7 @@ const millisToMinutesAndSeconds = (ms) => {
 }
 
 const scrapeHtml = async (timer = 0) => {
-    const url = 'https://ircc.digital.canada.ca';
+    const url = 'https://articles.cdssandbox.xyz';
 
     return new Promise(async (resolve, reject) => {
         try {
@@ -40,7 +40,7 @@ const versionMatch = (currentVersion, version) => {
 }
 
 const checkForVersion = async (version) => {
-    const checkInterval = 60000; // time between checks
+    const checkInterval = 10000; // time between checks (10 seconds)
     const clearTimer = () => {
         console.log("stop checks")
         clearInterval(timer);

@@ -7,7 +7,9 @@
   ],
   "require": {
     "wpackagist-plugin/two-factor": "^0.7.0",
-    "wpackagist-plugin/wps-hide-login": "^1.8"
+    "wpackagist-plugin/wps-hide-login": "^1.8",
+    "wpackagist-plugin/wp-native-php-sessions": "^1.2",
+    "wpackagist-plugin/wp-bootstrap-blocks":"3.3.2"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",
@@ -20,7 +22,9 @@
     "installer-paths": {
       "wp-content/mu-plugins/{$name}/": [
         "wpackagist-plugin/two-factor",
-        "wpackagist-plugin/wps-hide-login"
+        "wpackagist-plugin/wps-hide-login",
+        "wpackagist-plugin/wp-native-php-sessions",
+        "wpackagist-plugin/wp-bootstrap-blocks"
       ]
     }
   },

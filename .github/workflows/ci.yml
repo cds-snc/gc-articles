@@ -34,7 +34,7 @@ jobs:
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Github token to allow access to the private Composer dependency repo
-          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.COMPOSER_AUTH}}"} }'
+          COMPOSER_TOKEN: ${{ secrets.COMPOSER_AUTH }}
   php-tests:
     runs-on: ubuntu-latest
     name: PHP Pest tests
@@ -46,7 +46,7 @@ jobs:
       - run: cd wordpress && composer install --prefer-dist --no-progress --no-suggest
       - run: cd wordpress && ./vendor/bin/pest
         env:
-          COMPOSER_AUTH: '{"github-oauth": {"github.com": "${{secrets.COMPOSER_AUTH}}"} }'
+          COMPOSER_TOKEN: ${{ secrets.COMPOSER_AUTH }}
   phpcs:
     runs-on: ubuntu-latest
     name: Code quality

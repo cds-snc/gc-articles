@@ -23,6 +23,7 @@ use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\TwoFactor\TwoFactor;
 use CDS\Modules\Subscribe\Setup as SubscriptionForm;
+use CDS\Modules\Meta\Favicon;
 use CDS\Utils;
 
 class Setup
@@ -34,6 +35,7 @@ class Setup
         $this->setupTrackLogins();
         $this->setupNotifyTemplateSender();
         $this->setupBlocks();
+        $this->setupMeta();
 
         // @TODO: subscriptions not tested since refactor
         // $this->setupSubscriptions();
@@ -91,6 +93,11 @@ class Setup
     public function setupBlocks()
     {
         new Blocks();
+    }
+
+    public function setupMeta()
+    {
+        new Favicon();
     }
 
     public function setupSubscriptions()

@@ -53,7 +53,7 @@ variable "list_manager_api_key" {
 }
 
 variable "list_manager_notify_services" {
-  description = "Platform ListManager service names and API keys for sending templates v1"
+  description = "Platform ListManager service names and API keys for sending templates v2"
   type        = string
   sensitive   = true
 }

@@ -84,7 +84,8 @@ class Setup
             $response = $client->request('POST', $endpoint . '/subscription', [
                 'json' => [
                     "email" => $email,
-                    "list_id" => '0c188973-efab-4e8e-8b09-b165e98c66cf'
+                    "list_id" => '0c188973-efab-4e8e-8b09-b165e98c66cf',
+                    "service_api_key" => getenv('NOTIFY_API_KEY')
                 ]
             ]);
 

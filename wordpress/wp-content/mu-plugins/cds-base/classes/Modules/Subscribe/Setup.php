@@ -6,6 +6,7 @@ namespace CDS\Modules\Subscribe;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\RequestException;
 
 class Setup
 {
@@ -93,6 +94,8 @@ class Setup
         } catch (ClientException $exception) {
             $error = $this->handleException($exception);
             return ["error" => $error];
+        }catch(RequestException  $exception){
+            return ["error" => __("Internal server error", "cds-snc")];
         }
     }
 

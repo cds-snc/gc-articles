@@ -3,13 +3,27 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "wpml/sitepress-multilingual-cms",
+        "version": "4.4.12",
+        "type": "wordpress-plugin",
+        "source": {
+          "url": "git@github.com:cds-snc/sitepress-multilingual-cms.git",
+          "type": "git",
+          "reference": "v4.4.12"
+        }
+      }
     }
   ],
   "require": {
     "wpackagist-plugin/two-factor": "^0.7.0",
     "wpackagist-plugin/wps-hide-login": "^1.8",
     "wpackagist-plugin/wp-native-php-sessions": "^1.2",
-    "wpackagist-plugin/wp-bootstrap-blocks":"3.3.2"
+    "wpackagist-plugin/wp-bootstrap-blocks":"3.3.2",
+    "wpml/sitepress-multilingual-cms": "4.4.12"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

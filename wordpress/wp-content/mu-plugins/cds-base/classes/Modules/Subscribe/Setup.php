@@ -91,11 +91,10 @@ class Setup
             ]);
 
             return ["success" => __("Thanks for subscribing", "cds-snc")];
-
         } catch (ClientException $exception) {
             $error = $this->handleException($exception);
             return ["error" => $error];
-        } catch(RequestException  $exception){
+        } catch (RequestException  $exception) {
             return ["error" => __("Internal server error", "cds-snc")];
         }
     }

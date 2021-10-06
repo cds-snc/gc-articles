@@ -19,6 +19,7 @@ describe('Articles', () => {
     cy.get(".dashicons-admin-post").next().should('have.text', "Articles");
     cy.get("#menu-posts li a").eq(1).should('have.text', "Add Article");
     cy.get("#menu-posts li a").eq(3).should('have.text', "Tags");
+    cy.get("#wp-admin-bar-new-post").should('have.text', 'Article')
   });
 
 });

@@ -24,6 +24,7 @@ use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\TwoFactor\TwoFactor;
 use CDS\Modules\Subscribe\Setup as SubscriptionForm;
 use CDS\Modules\Meta\Favicon;
+use CDS\Modules\Meta\MetaTags;
 use CDS\Utils;
 
 class Setup
@@ -98,6 +99,7 @@ class Setup
     public function setupMeta()
     {
         new Favicon();
+        new MetaTags();
     }
 
     public function setupSubscriptions()

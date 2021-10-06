@@ -47,10 +47,10 @@ class AdminBar
         $wp_admin_bar->add_node([
             'id'    => 'cds-home',
             'title' => '<div class="ab-item"><span class="ab-icon"></span>' . __(
-                'Canadian Digital Service',
+                'GC Articles',
                 'cds-snc'
             ) . '</div>',
-            'href'  => "https://digital.canada.ca",
+            'href'  => admin_url(),
         ]);
 
         $wp_admin_bar->remove_menu('my-sites');

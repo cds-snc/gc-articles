@@ -82,7 +82,7 @@ class Setup
 
             $endpoint = getenv('LIST_MANAGER_ENDPOINT');
 
-            $response = $client->request('POST', $endpoint . '/subscription', [
+            $client->request('POST', $endpoint . '/subscription', [
                 'json' => [
                     "email" => $email,
                     "list_id" => '0c188973-efab-4e8e-8b09-b165e98c66cf',
@@ -91,10 +91,11 @@ class Setup
             ]);
 
             return ["success" => __("Thanks for subscribing", "cds-snc")];
+
         } catch (ClientException $exception) {
             $error = $this->handleException($exception);
             return ["error" => $error];
-        }catch(RequestException  $exception){
+        } catch(RequestException  $exception){
             return ["error" => __("Internal server error", "cds-snc")];
         }
     }

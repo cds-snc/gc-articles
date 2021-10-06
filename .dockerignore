@@ -1,3 +1,4 @@
 vendor
 node_modules
 infrastructure
+auth.json

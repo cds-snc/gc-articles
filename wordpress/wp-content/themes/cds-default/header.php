@@ -25,8 +25,6 @@ declare(strict_types=1);
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
         crossorigin="anonymous"
   ></link>
-    <?php $cds_description = get_bloginfo('description', 'display'); ?>
-  <meta name="description" content="<?php echo $cds_description; ?>">
   <noscript>
     <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/wet-boew/css/noscript.min.css" />
   </noscript>

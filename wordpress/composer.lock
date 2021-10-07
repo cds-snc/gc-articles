@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b72990484556ef912efe6a19d54f7c32",
+    "content-hash": "02ca89d2731430179b7aca454f7ee443",
     "packages": [
         {
             "name": "composer/installers",
@@ -220,6 +220,16 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wps-hide-login/"
+        },
+        {
+            "name": "wpml/sitepress-multilingual-cms",
+            "version": "4.4.12",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:cds-snc/sitepress-multilingual-cms.git",
+                "reference": "v4.4.12"
+            },
+            "type": "wordpress-plugin"
         }
     ],
     "packages-dev": [

@@ -16,7 +16,7 @@ describe('Track Login Panel', () => {
           ]
         ).as('getListCounts');
 
-        cy.loginUser();
+        cy.login();
     });
 
     it('Can view Track Login Panel on dashboard', () => {
@@ -34,26 +34,28 @@ describe('Track Login Panel captures logins', () => {
     });
 
     it('On first Login display only one login', () => {
-        cy.loginUser();
+        cy.login();
         cy.visitDashboard();
         cy.screenshot();
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 1)
     })
 
     it('On second Login display two logins', () => {
-        cy.loginUser();
+        cy.login();
         cy.visitDashboard();
         cy.screenshot();
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 2)
     })
 
     it('On third and subsequent Login display three logins', () => {
-        cy.loginUser();
+        cy.login();
         cy.visitDashboard();
         cy.screenshot();
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)
 
-        cy.loginUser();
+        cy.clearCookies();
+
+        cy.login();
         cy.visitDashboard();
         cy.screenshot();
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)

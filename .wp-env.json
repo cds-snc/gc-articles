@@ -1,11 +1,11 @@
 {
-  "plugins": [
-    "./wordpress/wp-content/mu-plugins/cds-base",
-    "Wordpress/two-factor"
-  ],
   "themes": [
     "./wordpress/wp-content/themes/cds-default"
   ],
+  "mappings": {
+    "wp-content/mu-plugins": "./wordpress/wp-content/mu-plugins",
+    "wp-content/plugins": "./wordpress/wp-content/plugins"
+  },
   "phpVersion": "8.0",
   "config": {
     "WP_DEBUG": 1,

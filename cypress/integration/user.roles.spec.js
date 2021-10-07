@@ -43,7 +43,7 @@ describe('User - GC Editor', () => {
 
     it('GC Editor login & page access', () => {
 
-        cy.loginUser('gceditor', 'secret');
+        cy.login('gceditor', 'secret');
         cy.screenshot();
         checkPages(allowedPages200, 200);
         checkPages([...blockedPages403, 'users.php'], 403);
@@ -58,7 +58,7 @@ describe('User - GC Admin', () => {
     });
 
     it('GC Admin login & page access', () => {
-        cy.loginUser('gcadmin', 'secret');
+        cy.login('gcadmin', 'secret');
         cy.screenshot();
         checkPages([...allowedPages200, 'users.php'], 200);
         checkPages(blockedPages403, 403);

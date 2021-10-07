@@ -4,7 +4,7 @@ const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
 describe('Two Factor Panel', () => {
     beforeEach(() => {
-        cy.loginUser();
+        cy.login();
     });
 
     after(() => {

@@ -12,7 +12,7 @@ describe('Collections', () => {
   });
 
   it('Sites are renamed to Collections', () => {
-    cy.loginUser();
+    cy.login();
     cy.visitDashboard();
     cy.get('#wp-admin-bar-view-site a').first().should('have.text', "Visit Collection");
     cy.get(".welcome-panel-column .button-hero").first().should('have.text', "Customize Your Collection");

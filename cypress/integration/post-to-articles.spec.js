@@ -12,7 +12,7 @@ describe('Articles', () => {
   });
 
   it('Posts are renamed to Articles', () => {
-    cy.loginUser();
+    cy.login();
     cy.visit("wp-admin/edit.php");
     cy.get('h1').contains("Articles");
     cy.get("a.page-title-action").first().should('have.text', "Add Article");

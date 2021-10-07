@@ -6,6 +6,7 @@ namespace CDS\Utils;
 
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Str;
+
 use function add_option;
 use function update_option;
 
@@ -26,9 +27,9 @@ class EncryptedOption
 
     public function get($option, $default = false)
     {
-        $encrypted =  get_option( $option, $default );
+        $encrypted =  get_option($option, $default);
 
-        if ( $encrypted === $default ){
+        if ($encrypted === $default) {
             return $default;
         }
 

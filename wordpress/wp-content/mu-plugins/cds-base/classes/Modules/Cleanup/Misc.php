@@ -11,9 +11,9 @@ class Misc
         add_filter('admin_footer_text', '__return_false');
         add_filter('screen_options_show_screen', [$this, 'removeScreenOptions']);
         add_action('admin_head', [$this, 'removeHelpTab']);
-        
-        add_filter('post_row_actions',[$this, 'removeQuickEdit'],10,1);
-        add_filter('page_row_actions',[$this, 'removeQuickEdit'],10,1);
+
+        add_filter('post_row_actions', [$this, 'removeQuickEdit'], 10, 1);
+        add_filter('page_row_actions', [$this, 'removeQuickEdit'], 10, 1);
     }
 
     public function removeScreenOptions()
@@ -27,7 +27,8 @@ class Misc
         $screen->remove_help_tabs();
     }
 
-    public function removeQuickEdit( $actions ) {
+    public function removeQuickEdit($actions)
+    {
         unset($actions['inline hide-if-no-js']);
         return $actions;
     }

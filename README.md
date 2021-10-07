@@ -81,8 +81,13 @@ password: `secret`
 Pre-installed plugins:
 
 - [two-factor](https://wordpress.org/plugins/two-factor/)
+- [wp-bootstrap-blocks](https://wordpress.org/plugins/wp-bootstrap-blocks/)
+- [wp-native-php-sessions](https://en-ca.wordpress.org/plugins/wp-native-php-sessions/)
+- [wps-hide-login](https://en-ca.wordpress.org/plugins/wps-hide-login/)
+- [wpml](https://wpml.org/)
 
-### Installing
+
+### Installing Plugins
 
 This project is configured to use [Composer](https://getcomposer.org/) to manage [WordPress Themes and Plugins](https://www.smashingmagazine.com/2019/03/composer-wordpress/).
 
@@ -94,7 +99,19 @@ Note: when starting up the devcontainer or docker-compose, `composer install` is
 
 When creating a custom plugin or theme, you should prefix the folder name with `cds-`. This will ensure the code is included in git and code quality scans.
 
-### Translations 
+### About WPML
+
+WPML is a paid/private plugin that doesn't support composer-based installs. As such, we we had to mirror the plugin 
+code in our own [private plugin repository](https://github.com/cds-snc/sitepress-multilingual-cms). We will need to 
+manually monitor for updates and update our private mirror, process TBD.
+
+Once activated for the network, the plugin needs to be configured for each site. You can do this by visiting the WPML 
+link in the sidebar. You will need an "activation key" which will require authorization to the vendor website.
+
+Currently we are only using the WPML core plugin component, not the String Translation, Media Translation, or 
+Translation Management components.
+
+## Translations 
 WordPress uses gettext to manage and compile translation files. We have added a couple composer scripts to
 simplify working with the various commands and steps.
 
@@ -109,7 +126,7 @@ Both the `cds-base` plugin and `cds-default` theme include these scripts and the
 also scripts in the base `wordpress`-folder level composer.json that will recursively call each of the theme and plugin
 scripts.
 
-#### Translatable strings
+### Translatable strings
 When working with theme or plugin files, create translatable strings by following the 
 [WordPress documentation](https://codex.wordpress.org/I18n_for_WordPress_Developers#Strings_for_Translation) on the
 subject, making sure to set the `domain` as `cds-snc`. In short, you will probably use syntax like the following:
@@ -158,7 +175,7 @@ At this point, you will likely have a bunch of local changes in the `languages` 
 
 All of these files should be committed along with the rest of your PR.
 
-### Deployments 
+## Deployments 
 
 **NOTE** You will need to have [GitHub CLI](https://cli.github.com) installed to complete the following steps
 

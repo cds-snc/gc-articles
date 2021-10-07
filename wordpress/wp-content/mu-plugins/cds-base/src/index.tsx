@@ -1,11 +1,11 @@
-import * as React from 'react';
+import * as React from "react";
 
-import '../classes/Modules/Blocks/src/expander';
-import '../classes/Modules/Blocks/src/alert';
-import { render } from '@wordpress/element';
-import { LoginsPanel } from '../classes/Modules/TrackLogins/src/LoginsPanel';
-import { NotifyPanel } from '../classes/Modules/Notify/src/NotifyPanel';
-import { List } from '../classes/Modules/Notify/src/Types';
+import "../classes/Modules/Blocks/src/expander";
+import "../classes/Modules/Blocks/src/alert";
+import { render } from "@wordpress/element";
+import { LoginsPanel } from "../classes/Modules/TrackLogins/src/LoginsPanel";
+import { NotifyPanel } from "../classes/Modules/Notify/src/NotifyPanel";
+import { List } from "../classes/Modules/Notify/src/Types";
 
 declare global {
   interface Window {
@@ -28,7 +28,7 @@ declare global {
 }
 
 export const renderLoginsPanel = () => {
-  render(<LoginsPanel />, document.getElementById('logins-panel'));
+  render(<LoginsPanel />, document.getElementById("logins-panel"));
 };
 
 export const renderNotifyPanel = ({
@@ -38,7 +38,7 @@ export const renderNotifyPanel = ({
 }) => {
   render(
     <NotifyPanel sendTemplateLink={sendTemplateLink} />,
-    document.getElementById('notify-panel')
+    document.getElementById("notify-panel")
   );
 };
 

@@ -1,0 +1,463 @@
+.gc-form-wrapper {
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(50%) !important;
+    clip-path: inset(50%) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  @supports not (display: grid) {
+    input {
+      border: 1px solid #000;
+    }
+  }
+
+  .gc-fieldset ul {
+    @apply mb-14;
+  }
+
+  .gc-alert,
+  .gc-error-message {
+    @apply md:text-small_base text-base py-0 w-full text-red-700 mb-2;
+  }
+
+  .gc-error-message + .gc-input-text,
+  .gc-error-message + .gc-textarea {
+    @apply border-red-700;
+  }
+
+  .gc-alert {
+    @apply py-8 px-12 mb-14 w-5/6 xl:w-full;
+    &.gc-alert--validation,
+    &.gc-alert--error {
+      @apply border-2 border-red-default;
+
+      &:focus {
+        box-shadow: inset 0 0 0 2px #b10e1e;
+        @apply outline-none;
+      }
+
+      &:focus-within {
+        box-shadow: inset 0 0 0 2px #b10e1e;
+        @apply outline-none;
+      }
+    }
+
+    &.gc-alert--success {
+      @apply bg-green-100;
+    }
+
+    .gc-alert__body {
+      @apply text-black-default;
+      h3 {
+        @apply mb-5 text-red-default;
+      }
+
+      ol {
+        @apply list-inside;
+
+        li {
+          @apply mb-2;
+        }
+      }
+    }
+  }
+
+  .gc-ordered-list {
+    @apply ml-0 font-normal;
+
+    .gc-error-link {
+      @apply ml-2 text-blue-900;
+
+      &:focus {
+        box-shadow: 4px 0 0 0 #303fc3, -4px 0 0 0 #303fc3;
+        @apply bg-blue-focus text-white-default;
+      }
+
+      &:active {
+        box-shadow: 4px 0 0 0 #1b2736, -4px 0 0 0 #1b2736;
+        @apply underline bg-blue-active text-white-default;
+      }
+    }
+  }
+
+  .gc-dropdown {
+    background-image: url("../public/img/arrow-down.svg");
+    @apply md:w-full w-1/2 md:text-small_base text-base text-gray-700 block border-2 border-black-form py-3 pl-5 pr-10 mt-2 mb-14 appearance-none bg-no-repeat bg-center-right-15px;
+
+    &:focus {
+      @apply outline-none border-blue-focus shadow-input;
+    }
+  }
+
+  .gc-p {
+    @apply md:text-small_p text-p mb-10 w-full;
+  }
+
+  .gc-description {
+    @apply md:text-small_sm text-gray-text mb-3 text-sm w-3/4 xl:w-full;
+  }
+
+  .gc-h1 {
+    @apply md:text-small_h1 md:mb-10 border-b-2 border-red-default text-h1 font-bold pb-2 mb-16;
+  }
+
+  .gc-h2 {
+    @apply md:text-small_h2 font-bold text-h2 pb-6;
+  }
+
+  .gc-richText {
+    p {
+      @extend .gc-p;
+    }
+    h1 {
+      @extend .gc-h1;
+    }
+    h2 {
+      @extend .gc-h2;
+    }
+    h3 {
+      @extend .gc-h3;
+    }
+    h4 {
+      @extend .gc-section-header;
+    }
+
+    ul,
+    ol {
+      @apply mb-10;
+    }
+
+    a:visited {
+      @apply text-purple-default;
+    }
+
+    a {
+      @apply underline text-blue-dark hover:text-blue-hover;
+    }
+
+    a:focus {
+      outline: none;
+      box-shadow: 4px 0 0 0 #303fc3, -4px 0 0 0 #303fc3;
+      @apply bg-blue-focus text-white-default;
+    }
+
+    a:active {
+      box-shadow: 4px 0 0 0 #1b2736, -4px 0 0 0 #1b2736;
+      @apply underline bg-blue-active text-white-default;
+    }
+  }
+
+  .gc-item-row {
+    @apply border-t-2 pt-16 pb-3 px-0 bg-white-default mt-0 border-black-form;
+
+    h3 {
+      @apply md:text-small_h3 font-bold text-h3 pb-0 mb-10;
+    }
+  }
+
+  .gc-form {
+    @apply max-w-prose;
+  }
+
+  .gc-form-group {
+    @apply mb-0;
+
+    .gc-input-radio:last-of-type,
+    .gc-input-checkbox:last-of-type {
+      @apply md:mb-10 mb-14 pb-0;
+    }
+  }
+
+  .gc-h3 {
+    @apply sm:text-small_h3 font-bold text-h3 pb-0 mb-6;
+  }
+
+  .gc-section-header {
+    @apply md:text-small_h2 font-bold text-h2 mb-16 mt-12 p-6 bg-gray-background;
+  }
+
+  .gc-legend {
+    @apply md:text-small_h2 text-h2 mb-14 font-bold;
+  }
+
+  .gc-button {
+    @apply md:w-full md:text-small_base cursor-pointer border-b-4 border-gray-900 py-3 px-5 mr-2 m-0 font-bold text-base no-underline text-gray-50 bg-green-default outline-none w-60;
+
+    &:hover {
+      @apply bg-green-darker;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 2px white;
+      outline: solid 2px #303fc3;
+      outline-offset: 2px;
+      @apply bg-blue-focus;
+    }
+
+    &:active {
+      box-shadow: 0 0 0 2px white;
+      outline: solid 2px #1b2736;
+      outline-offset: 2px;
+      @apply bg-blue-active;
+    }
+  }
+
+  .gc-button--secondary {
+    @apply bg-gray-200 border-1 border-gray-400 text-black-default font-bold py-2 px-6 rounded-lg mb-14;
+    &:hover {
+      @apply bg-gray-300;
+    }
+  }
+  .gc-button--destructive {
+    @apply bg-red-destructive;
+    &:hover {
+      @apply bg-red-hover;
+    }
+  }
+
+  .gc-label {
+    @apply md:text-small_base block mb-2 text-base font-bold w-3/4 xl:w-full;
+    &.required > span {
+      @apply text-red-700;
+      content: " *";
+    }
+  }
+
+  .gc-plain-text {
+    @apply w-full my-5;
+  }
+
+  .gc-textarea {
+    @apply md:text-small_base md:w-full text-base text-gray-700 border-solid block border-2 border-black-form py-3 px-2 mt-2 mb-14 w-3/4 h-40;
+    &.full-height {
+      @apply h-auto;
+    }
+
+    &:focus {
+      @apply outline-none border-blue-focus shadow-input;
+    }
+  }
+
+  .focus-group:focus-within {
+    .gc-label,
+    .gc-description {
+      @apply text-blue-focus;
+    }
+  }
+
+  .gc-input-text {
+    border: solid 2px black;
+    @apply md:w-full md:text-small_base text-base text-gray-700 border-2 py-3 px-2 mt-2 mb-14 w-96;
+
+    &:focus {
+      @apply outline-none border-blue-focus shadow-input;
+    }
+  }
+
+  .gc-input-checkbox {
+    @apply block;
+
+    .gc-input-checkbox__input {
+      background-repeat: round;
+      @apply md:mr-4 mr-6 absolute w-10 h-10 bg-white-default border-2 border-transparent;
+      & + .gc-checkbox-label {
+        @apply relative cursor-pointer p-0;
+      }
+
+      &:focus {
+        @apply outline-none;
+      }
+
+      &:focus + .gc-checkbox-label {
+        span {
+          @apply text-blue-focus;
+        }
+      }
+
+      &:focus + .gc-checkbox-label:before {
+        @apply outline-none border-4 border-blue-focus;
+      }
+
+      & + .gc-checkbox-label:before {
+        content: "";
+        @apply md:mr-4 mr-6 inline-block w-10 h-10 bg-white-default border-2 border-black-form;
+      }
+
+      &:checked + .gc-checkbox-label:after {
+        background-repeat: no-repeat;
+        content: "";
+        background-image: url("../public/img/checkmark.svg");
+        @apply absolute w-6 h-6 left-2;
+      }
+
+      &:focus + .gc-checkbox-label:after {
+        background-image: url("../public/img/blue-checkmark.svg");
+      }
+    }
+  }
+
+  .gc-input-radio,
+  .gc-input-checkbox {
+    @apply flex pt-3 pb-1 px-0 items-center;
+  }
+
+  .gc-radio-label,
+  .gc-checkbox-label {
+    @apply md:text-small_base block font-normal text-base flex items-center;
+
+    .checkbox-label-text,
+    .radio-label-text {
+      @apply xxs:w-cr-label-fold xs:w-cr-label-5s sm:w-cr-label-6s md:w-cr-label-duo md:mt-10px lg:w-cr-label-ipad xl:w-cr-label-1025 w-cr-label-desktop mt-2;
+    }
+  }
+
+  .gc-radio__input {
+    @apply md:mr-4 mr-6 absolute w-10 h-10 bg-white-default border-transparent;
+    & + .gc-radio-label {
+      @apply relative cursor-pointer p-0;
+    }
+
+    &:focus {
+      @apply outline-none;
+    }
+
+    &:focus + .gc-radio-label {
+      span {
+        @apply text-blue-focus;
+      }
+    }
+
+    &:focus + .gc-radio-label:before {
+      @apply outline-none border-4 border-blue-focus;
+    }
+
+    & + .gc-radio-label:before {
+      content: "";
+      @apply md:mr-4 mr-6 inline-block w-10 h-10 bg-white-default border-2 border-black-form rounded-full;
+    }
+
+    &:checked + .gc-radio-label:after {
+      content: "";
+      background-image: url("../public/img/black-circle.svg");
+      @apply absolute w-5 h-5;
+      left: 6px;
+    }
+
+    &:focus + .gc-radio-label:after {
+      background-image: url("../public/img/blue-circle.svg");
+    }
+  }
+
+  .gc-file-input {
+    @apply w-full md:text-small_base text-base text-gray-700 py-3 pr-2 mt-2 mb-14;
+    &:focus {
+      @apply outline-none border-blue-focus shadow-input;
+    }
+
+    &.is-disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  .gc-file-input-upload-button {
+    @apply bg-gray-200 border-1 border-gray-400 text-black-default font-bold py-2 px-6 rounded-lg mb-14 text-center inline-block;
+    @apply md:w-full md:text-small_base cursor-pointer border-b-4 py-3 px-5 mr-2 m-0 text-base no-underline outline-none relative;
+
+    &:focus-within {
+      box-shadow: 0 0 0 2px white;
+      outline: solid 2px #303fc3;
+      outline-offset: 2px;
+      @apply bg-gray-300;
+    }
+
+    &:active {
+      box-shadow: 0 0 0 2px white;
+      outline: solid 2px #1b2736;
+      outline-offset: 2px;
+    }
+    &:hover {
+      @apply bg-gray-300;
+    }
+  }
+
+  /**
+ * Don't want to use the 'standard' method
+ * for visually hiding the native file upload
+ * with CSS, because setting the form control
+ * to 1px height/width will cause VoiceOver to
+ * inaccurately announce the state of the
+ * form control (e.g. VO will not announce
+ * whether there are files selected or not.)
+ */
+  .gc-file-input [type="file"] {
+    font-size: 0.1px;
+    left: 0;
+    top: 0;
+    @apply absolute opacity-0 w-full h-full;
+  }
+
+  .gc-file-input-file-selected {
+    @apply inline-block;
+  }
+
+  .page-preview-form,
+  .page-en-preview-form,
+  .page-fr-preview-form {
+    .gc-h1::before {
+      content: "[Preview/Prévisualisation]";
+      @apply mb-10 block font-bold text-green-700;
+    }
+    .gc-button[type="submit"] {
+      display: none;
+    }
+  }
+
+  .validation-message {
+    @apply text-red-500;
+  }
+
+  .gc-form-confirmation {
+    p {
+      @apply text-base md:text-small_p;
+    }
+  }
+
+  .confirmation-content {
+    @apply relative;
+  }
+
+  .confirmation-list {
+    @apply list-inside mb-10;
+  }
+
+  .gc-confirmation-banner {
+    @apply bg-gray-200 py-16 px-20 mb-10 w-5/6 xl:w-full md:py-10 md:px-10;
+
+    h2 {
+      @apply text-h2 mb-6 md:text-small_h2;
+    }
+
+    p:first-of-type {
+      @apply mb-5 md:text-small_p;
+    }
+
+    p:last-of-type {
+      @apply font-bold md:text-small_p;
+    }
+  }
+}
+
+input {
+  -moz-appearance: none !important;
+  -webkit-appearance: none !important;
+  -o-appearance: none !important;
+}

@@ -136,7 +136,8 @@ class NotifyTemplateSender
 
     public function findApiKey($service_id): string
     {
-        $service_ids = $this->parseServiceIdsFromEnv();
+        $serviceIdData = getenv('LIST_MANAGER_NOTIFY_SERVICES');
+        $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
             if (trim($service_id) == trim($key)) {

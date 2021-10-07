@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the CDS-SNC Base plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS-SNC Base 1.3.3\n"
+"Project-Id-Version: CDS-SNC Base 1.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-09-29T15:22:49+00:00\n"
+"POT-Creation-Date: 2021-10-07T16:16:40+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: cds-snc\n"
@@ -31,51 +31,50 @@ msgid "Tim Arney"
 msgstr ""
 
 #: classes/Modules/Cleanup/AdminBar.php:49
-#: classes/Modules/Cleanup/Login.php:51
+msgid "GC Articles"
+msgstr ""
+
+#: classes/Modules/Cleanup/Login.php:55
 msgid "Canadian Digital Service"
+msgstr ""
+
+#: classes/Modules/Cleanup/PostsToArticles.php:23
+#: classes/Modules/Cleanup/PostsToArticles.php:34
+msgid "Articles"
+msgstr ""
+
+#: classes/Modules/Cleanup/PostsToArticles.php:24
+#: classes/Modules/Cleanup/PostsToArticles.php:28
+#: classes/Modules/Cleanup/PostsToArticles.php:35
+msgid "Article"
 msgstr ""
 
 #: classes/Modules/Cleanup/PostsToArticles.php:25
 #: classes/Modules/Cleanup/PostsToArticles.php:26
-#: classes/Modules/Cleanup/PostsToArticles.php:43
-#: classes/Modules/Cleanup/PostsToArticles.php:44
-#: classes/Modules/Cleanup/PostsToArticles.php:48
-#: classes/Modules/Cleanup/PostsToArticles.php:54
-#: classes/Modules/Cleanup/PostsToArticles.php:55
-msgid "Articles"
-msgstr ""
-
-#: classes/Modules/Cleanup/PostsToArticles.php:27
-#: classes/Modules/Cleanup/PostsToArticles.php:45
-#: classes/Modules/Cleanup/PostsToArticles.php:46
 msgid "Add Article"
 msgstr ""
 
-#: classes/Modules/Cleanup/PostsToArticles.php:28
-msgid "Article Tags"
-msgstr ""
-
-#: classes/Modules/Cleanup/PostsToArticles.php:47
+#: classes/Modules/Cleanup/PostsToArticles.php:27
 msgid "Edit Article"
 msgstr ""
 
-#: classes/Modules/Cleanup/PostsToArticles.php:49
-msgid "View Articles"
+#: classes/Modules/Cleanup/PostsToArticles.php:29
+msgid "View Article"
 msgstr ""
 
-#: classes/Modules/Cleanup/PostsToArticles.php:50
+#: classes/Modules/Cleanup/PostsToArticles.php:30
 msgid "Search Articles"
 msgstr ""
 
-#: classes/Modules/Cleanup/PostsToArticles.php:51
+#: classes/Modules/Cleanup/PostsToArticles.php:31
 msgid "No Articles found"
 msgstr ""
 
-#: classes/Modules/Cleanup/PostsToArticles.php:52
+#: classes/Modules/Cleanup/PostsToArticles.php:32
 msgid "No Articles found in Trash"
 msgstr ""
 
-#: classes/Modules/Cleanup/PostsToArticles.php:53
+#: classes/Modules/Cleanup/PostsToArticles.php:33
 msgid "All Articles"
 msgstr ""
 
@@ -147,8 +146,37 @@ msgstr ""
 msgid "Notify"
 msgstr ""
 
-#: classes/Modules/Notify/NotifyTemplateSender.php:215
+#: classes/Modules/Notify/NotifyTemplateSender.php:216
 msgid "There has been an error"
+msgstr ""
+
+#: classes/Modules/Subscribe/Setup.php:71
+#: classes/Modules/Subscribe/Setup.php:98
+msgid "Internal server error"
+msgstr ""
+
+#: classes/Modules/Subscribe/Setup.php:93
+msgid "Thanks for subscribing"
+msgstr ""
+
+#: classes/Modules/Subscribe/Setup.php:105
+msgid "400 Bad Request"
+msgstr ""
+
+#: classes/Modules/Subscribe/Setup.php:109
+msgid "401 Unauthorized"
+msgstr ""
+
+#: classes/Modules/Subscribe/Setup.php:113
+msgid "Please complete the required field to continue"
+msgstr ""
+
+#: classes/Modules/Subscribe/SubscriptionForm.php:28
+msgid "Enter your email:"
+msgstr ""
+
+#: classes/Modules/Subscribe/SubscriptionForm.php:36
+msgid "Subscribe"
 msgstr ""
 
 #: classes/Modules/TwoFactor/TwoFactor.php:43

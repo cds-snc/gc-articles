@@ -7,9 +7,15 @@ describe('Add Article as GC Editor', () => {
         cy.addUser('gceditor', 'secret', 'gceditor');
         cy.login('gceditor', 'secret');
         const text = "Hello from GC Editor";
-        const href = await addArticle(text);
-        cy.visit(href);
+        addArticle(text)
+
+        cy.get('a.editor-post-preview').should($a => {
+            expect($a.attr('href'), 'href').to.contain('preview=true')
+        }).invoke('attr', 'href').then(href => {
+            cy.visit(href);
+        });
+
         cy.get(".entry-content p").contains(text);
+        cy.get("meta[name='description']").should("have.attr", "content", text);
     });
 });
-

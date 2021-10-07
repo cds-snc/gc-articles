@@ -21,13 +21,14 @@ class AdminBar
 
     public function removeFromAdminBar($wp_admin_bar): void
     {
+        $wp_admin_bar->remove_node('new-content');
+
         if (is_super_admin()) {
             return;
         }
 
         $wp_admin_bar->remove_node('updates');
         $wp_admin_bar->remove_node('comments');
-        $wp_admin_bar->remove_node('new-content');
         $wp_admin_bar->remove_node('wp-logo');
         $wp_admin_bar->remove_node('site-name');
         $wp_admin_bar->remove_node('customize');

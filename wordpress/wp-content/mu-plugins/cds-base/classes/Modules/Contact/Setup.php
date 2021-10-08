@@ -71,7 +71,8 @@ class Setup
             return json_encode(["error" => __("401 Unauthorized", "cds-snc")]);
         }
 
-        if ((!isset($_POST["message"]) || $_POST["message"] === "")
+        if (
+            (!isset($_POST["message"]) || $_POST["message"] === "")
             || (!isset($_POST['contact-type']) || $_POST['contact-type'] === "")
             || (!isset($_POST['email']) || $_POST['email'] === "")
         ) {

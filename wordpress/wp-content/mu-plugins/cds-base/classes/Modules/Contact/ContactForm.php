@@ -25,7 +25,7 @@ class ContactForm
                     class="gc-radio__input"
                     id="<?php echo $id; ?>"
                     type="radio"
-                    required=""
+                    required
                     value="<?php echo $id; ?>"
             />
             <label class="gc-radio-label" for="<?php echo $id; ?>"
@@ -85,7 +85,7 @@ class ContactForm
                         <input type="email" class="gc-input-text" id="email" required autocomplete="email"
                                placeholder="" name="email" value="">
                     </div>
-                    <label data-testid="description" class="gc-label required" id="contact-label">
+                    <label data-testid="description" class="gc-label required" id="contact-label" for="message">
                         <?php echo $label; ?>
                     </label>
                     <textarea
@@ -108,22 +108,25 @@ class ContactForm
                 $current_url = home_url(add_query_arg(array(), $wp->request));
                 ?>
                 <form id="contact-form-step-1" method="POST" action="<?php echo $current_url; ?>">
-                    <div class="focus-group">
-                        <?php $this->radioField("contact-type", "request-site", __("Request a site", "cds-snc")); ?>
-                        <?php $this->radioField("contact-type", "ask-a-question", __("Ask a question", "cds-snc")); ?>
-                        <?php $this->radioField(
-                            "contact-type",
-                            "get-technical-support",
-                            __("Get technical support", "cds-snc")
-                        ); ?>
-                        <?php $this->radioField("contact-type", "give-feedback", __("Give feedback", "cds-snc")); ?>
-                        <?php $this->radioField(
-                            "contact-type",
-                            "set-up-a-demo-to-learn-more-about-GC-Articles",
-                            __("Set up a demo to learn more about GC Articles", "cds-snc")
-                        ); ?>
-                        <?php $this->radioField("contact-type", "other", __("Other", "cds-snc")); ?>
-                    </div>
+                    <fieldset>
+                        <div class="focus-group">
+                            <?php $this->radioField("contact-type", "request-site", __("Request a site", "cds-snc")); ?>
+                            <?php $this->radioField("contact-type", "ask-a-question",
+                                __("Ask a question", "cds-snc")); ?>
+                            <?php $this->radioField(
+                                "contact-type",
+                                "get-technical-support",
+                                __("Get technical support", "cds-snc")
+                            ); ?>
+                            <?php $this->radioField("contact-type", "give-feedback", __("Give feedback", "cds-snc")); ?>
+                            <?php $this->radioField(
+                                "contact-type",
+                                "set-up-a-demo-to-learn-more-about-GC-Articles",
+                                __("Set up a demo to learn more about GC Articles", "cds-snc")
+                            ); ?>
+                            <?php $this->radioField("contact-type", "other", __("Other", "cds-snc")); ?>
+                        </div>
+                    </fieldset>
                     <div class="buttons">
                         <button class="gc-button gc-button" type="submit" id="continue-submit">
                             <?php _e("Continue", "cds-snc"); ?>

@@ -72,16 +72,23 @@ class ContactForm
                 ?>
                 <form id="contact-form" method="POST" action="/wp-json/contact/v1/process">
                     <h2><?php echo $heading; ?></h2>
-                    <?php wp_nonce_field('contact_form_nonce_action', 'contact_form'); ?>
+                    <?php wp_nonce_field('contact_form_nonce_action', 'contact'); ?>
                     <input type="hidden" name="contact-type" value="<?php echo $contactType; ?>"/>
-                    <p data-testid="description" class="gc-label required" id="contact-label">
+                    <div class="focus-group">
+                        <label class="gc-label required" for="email" id="email-label">
+                            <?php _e("Email", "cds-snc"); ?>
+                        </label>
+                        <input type="email" class="gc-input-text" id="email" required autocomplete="email"
+                               placeholder="" name="email" value="">
+                    </div>
+                    <label data-testid="description" class="gc-label required" id="contact-label">
                         <?php echo $label; ?>
-                    </p>
+                    </label>
                     <textarea
                             data-testid="textarea"
                             class="gc-textarea"
                             id="message"
-                            required=""
+                            required
                             aria-describedby="contact-label"
                             placeholder=""
                             name="message"

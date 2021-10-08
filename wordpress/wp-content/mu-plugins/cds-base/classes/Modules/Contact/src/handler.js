@@ -19,7 +19,7 @@
 
                 if (parsedData && parsedData["error"]) {
                     var errorEl = '<p data-testid="errorMessage" class="gc-error-message" role="alert">' + parsedData["error"] + '</p>'
-                    $(errorEl).insertAfter('#cds-email');
+                    $(errorEl).insertAfter('#contact');
                 }
 
                 if (parsedData && parsedData["success"]) {

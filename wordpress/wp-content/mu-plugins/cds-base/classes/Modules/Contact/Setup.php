@@ -42,14 +42,14 @@ class Setup
         ));
     }
 
-    protected function sendEmail(string $message, string $contactType): array
+    protected function sendEmail(string $email, string $message, string $contactType): array
     {
         try {
-
             $notifyMailer = new NotifyClient();
-            $email = 'tim.arney@cds-snc.ca';
+            $to = 'tim.arney@cds-snc.ca';
             $notifyTemplateId = "125002c5-cf95-4eec-a6c8-f97eda56550a";
-            $notifyMailer->sendMail($email, $notifyTemplateId, [
+            $notifyMailer->sendMail($to, $notifyTemplateId, [
+                'email' => $email,
                 'contact-type' => $contactType,
                 'message' => $message
             ]);
@@ -63,18 +63,21 @@ class Setup
 
     public function confirmSend(): string
     {
-        if (!isset($_POST['contact_form'])) {
+        if (!isset($_POST['contact'])) {
             return json_encode(["error" => __("400 Bad Request", "cds-snc")]);
         }
 
-        if (!wp_verify_nonce($_POST['contact_form'], 'contact_form_nonce_action')) {
+        if (!wp_verify_nonce($_POST['contact'], 'contact_form_nonce_action')) {
             return json_encode(["error" => __("401 Unauthorized", "cds-snc")]);
         }
 
-        if ((!isset($_POST["message"]) || $_POST["message"] === "") || (!isset($_POST['contact-type']) || $_POST['contact-type'] === "")) {
+        if ((!isset($_POST["message"]) || $_POST["message"] === "")
+            || (!isset($_POST['contact-type']) || $_POST['contact-type'] === "")
+            || (!isset($_POST['email']) || $_POST['email'] === "")
+        ) {
             return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
         }
 
-        return json_encode($this->sendEmail($_POST["message"], $_POST["contact-type"]));
+        return json_encode($this->sendEmail($_POST["email"], $_POST["message"], $_POST["contact-type"]));
     }
 }

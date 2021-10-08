@@ -44,20 +44,36 @@ class ContactForm
         <div class="gc-form-wrapper">
             <?php
             if (isset($_POST['contact-type'])) {
-                $type = $_POST['contact-type'];
+                $contactType = $_POST['contact-type'];
                 $heading = "";
                 $label = "";
-                switch ($type) {
+                switch ($contactType) {
                     case 'ask-a-question':
                         $heading = __("Ask a question", "cds-snc");
                         $label = __("Your question", "cds-snc");
                         break;
+                    case 'get-technical-support':
+                        $heading = __("Get technical support", "cds-snc");
+                        $label = __("Describe the problem.", "cds-snc");
+                        break;
+                    case 'give-feedback':
+                        $heading = __("Give feedback", "cds-snc");
+                        $label = __("How can we do better?", "cds-snc");
+                        break;
+                    case 'set-up-a-demo-to-learn-more-about-GC-Notify':
+                        $heading = __("Set up a demo to learn more about GC Notify", "cds-snc");
+                        $label = __("Your contact information", "cds-snc");
+                        break;
+                    case 'other':
+                        $heading = __("Tell us more", "cds-snc");
+                        $label = __("Your message", "cds-snc");
+                        break;
                 }
-
                 ?>
                 <form id="contact-form" method="POST" action="/wp-json/contact/v1/process">
                     <h2><?php echo $heading; ?></h2>
                     <?php wp_nonce_field('contact_form_nonce_action', 'contact_form'); ?>
+                    <input type="hidden" name="contact-type" value="<?php echo $contactType; ?>"/>
                     <p data-testid="description" class="gc-label required" id="contact-label">
                         <?php echo $label; ?>
                     </p>
@@ -70,7 +86,6 @@ class ContactForm
                             placeholder=""
                             name="message"
                     ></textarea>
-
                     <div class="buttons">
                         <button class="gc-button gc-button" type="submit" id="submit">
                             <?php _e("Submit", "cds-snc"); ?>

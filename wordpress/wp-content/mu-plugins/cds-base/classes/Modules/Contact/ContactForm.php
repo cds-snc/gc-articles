@@ -111,11 +111,17 @@ class ContactForm
                     <div class="focus-group">
                         <?php $this->radioField("contact-type", "request-site", __("Request a site", "cds-snc")); ?>
                         <?php $this->radioField("contact-type", "ask-a-question", __("Ask a question", "cds-snc")); ?>
-                        <?php $this->radioField("contact-type", "get-technical-support",
-                            __("Get technical support", "cds-snc")); ?>
+                        <?php $this->radioField(
+                            "contact-type",
+                            "get-technical-support",
+                            __("Get technical support", "cds-snc")
+                        ); ?>
                         <?php $this->radioField("contact-type", "give-feedback", __("Give feedback", "cds-snc")); ?>
-                        <?php $this->radioField("contact-type", "set-up-a-demo-to-learn-more-about-GC-Articles",
-                            __("Set up a demo to learn more about GC Articles", "cds-snc")); ?>
+                        <?php $this->radioField(
+                            "contact-type",
+                            "set-up-a-demo-to-learn-more-about-GC-Articles",
+                            __("Set up a demo to learn more about GC Articles", "cds-snc")
+                        ); ?>
                         <?php $this->radioField("contact-type", "other", __("Other", "cds-snc")); ?>
                     </div>
                     <div class="buttons">

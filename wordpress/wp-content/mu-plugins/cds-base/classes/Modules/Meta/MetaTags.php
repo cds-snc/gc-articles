@@ -35,24 +35,26 @@ class MetaTags
     }
 
     // return complete sentences instead of arbitrarily cutting the content to a given character length
-    public function getMetaFromContent($text = ""): string {
-        if(strlen($text) < self::APPROX_META_DESCRIPTION_LENGTH) {
+    public function getMetaFromContent($text = ""): string
+    {
+        if (strlen($text) < self::APPROX_META_DESCRIPTION_LENGTH) {
             return $text; // return strings less than 150 characters
         }
 
         $text_arr = explode(". ", $text);
-        return $this->_getMeta($text_arr); // pass in array of sentences
+        return $this->getMeta($text_arr); // pass in array of sentences
     }
 
-    private function _getMeta($text_arr = [], $description = ''): string {
+    private function getMeta($text_arr = [], $description = ''): string
+    {
         // if empty, set to first element in array. if not empty, append next element of array
         $description = empty(($description)) ? array_shift($text_arr) : $description . ". " . array_shift($text_arr);
 
-        if(strlen($description) > self::APPROX_META_DESCRIPTION_LENGTH) {
+        if (strlen($description) > self::APPROX_META_DESCRIPTION_LENGTH) {
             // if over 150 characters, return string
-            return str_ends_with($description , '.') ? $description : $description . '.';
+            return str_ends_with($description, '.') ? $description : $description . '.';
         }
 
-        return $this->_getMeta($text_arr, $description);
+        return $this->getMeta($text_arr, $description);
     }
 }

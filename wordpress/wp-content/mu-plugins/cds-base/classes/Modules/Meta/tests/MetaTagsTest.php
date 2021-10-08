@@ -2,7 +2,6 @@
 
 use CDS\Modules\Meta\MetaTags;
 
-
 class TestMetaTags extends PHPUnit\Framework\TestCase
 {
     private $desc1 = 'This string is 29 characters.';
@@ -13,33 +12,38 @@ class TestMetaTags extends PHPUnit\Framework\TestCase
 
     private $meta;
 
-    public function setUp() : void {
+    public function setUp(): void
+    {
         $this->meta = new MetaTags();
-      }
-     
-      public function tearDown() : void  {
-        $this->meta = null;
-      }
-     
+    }
 
-    public function test_short_string_is_returned() {
+    public function tearDown(): void
+    {
+        $this->meta = null;
+    }
+
+    public function testShortStringIsReturned()
+    {
         expect($this->meta->getMetaFromContent($this->desc1))->toEqual($this->desc1);
     }
 
-    public function test_longer_strings_are_shortened() {
+    public function testLongerStringsAreReturned()
+    {
         expect($this->meta->getMetaFromContent($this->desc2))->toEqual(substr($this->desc2, 0, 154));
     }
 
-    public function test_one_long_sentence_is_returned() {
+    public function testSingleLongSentenceIsReturned()
+    {
         expect($this->meta->getMetaFromContent($this->desc3))->toEqual($this->desc3);
     }
 
-    public function test_second_long_sentence_is_returned() {
+    public function testSecondLongSentenceIsReturned()
+    {
         expect($this->meta->getMetaFromContent($this->desc4))->toEqual($this->desc4);
     }
 
-    public function test_first_long_sentence_is_returned() {
+    public function testFirstLongSentenceIsReturned()
+    {
         expect($this->meta->getMetaFromContent($this->desc5))->toEqual($this->desc3);
     }
-
 }

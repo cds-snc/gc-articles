@@ -45,15 +45,15 @@ class Setup
     protected function sendEmail(string $message, string $contactType): array
     {
         try {
-            /*
+
             $notifyMailer = new NotifyClient();
-            $email = '';
-            $notifyTemplateId = "";
+            $email = 'tim.arney@cds-snc.ca';
+            $notifyTemplateId = "125002c5-cf95-4eec-a6c8-f97eda56550a";
             $notifyMailer->sendMail($email, $notifyTemplateId, [
-                'contact_type' => $contactType,
+                'contact-type' => $contactType,
                 'message' => $message
             ]);
-            */
+
             return ["success" => __("Thanks for the message", "cds-snc")];
         } catch (Exception $exception) {
             error_log($exception->getMessage());

@@ -9,7 +9,7 @@ class Blocks
 
     public function __construct()
     {
-        $this->version = "1.0.0";
+        $this->version = "1.0.1";
         add_action('admin_enqueue_scripts', [$this, 'register'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'addStyles'], 10, 2);
     }
@@ -57,6 +57,13 @@ class Blocks
         wp_enqueue_style(
             'cds-base-block-alert',
             plugin_dir_url(__FILE__) . 'src/alert/alert.css',
+            [],
+            $this->version,
+        );
+
+        wp_enqueue_style(
+            'cds-base-editor-styles',
+            plugin_dir_url(__FILE__) . 'src/editor-styles/editor.css',
             [],
             $this->version,
         );

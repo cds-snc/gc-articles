@@ -1,0 +1,23 @@
+.editor-post-title, .editor-post-title__input{
+    font-size: 1.0em;
+    font-family: Lato,sans-serif;
+    font-weight: 500 !important;;
+    margin-top: 10px;
+    margin-bottom: 0 !important;
+    padding-bottom:0 !important;
+  }
+  
+  .editor-post-title::after, .editor-post-title__input::after {
+    border-bottom: 6px solid #af3c43;
+    content: "";
+    display: block;
+    padding-bottom: 8px;
+    width: 80px;
+  }
+  
+  p{
+    font-family: "Noto Sans", sans-serif !important;
+    font-size: 20px !important;
+    line-height:33px !important;
+    color: #555 !important;
+  }

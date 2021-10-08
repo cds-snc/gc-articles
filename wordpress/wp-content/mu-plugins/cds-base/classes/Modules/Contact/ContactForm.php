@@ -1,0 +1,109 @@
+<?php
+
+declare(strict_types=1);
+
+namespace CDS\Modules\Contact;
+
+class ContactForm
+{
+    public function __construct()
+    {
+        add_action('init', [$this, 'register']);
+    }
+
+    public function register()
+    {
+        add_shortcode('contact-form', [$this, 'render']);
+    }
+
+    public function radioField($name, $id, $value): void
+    {
+        ?>
+        <div class="gc-input-radio">
+            <input
+                    name="<?php echo $name; ?>"
+                    class="gc-radio__input"
+                    id="<?php echo $id; ?>"
+                    type="radio"
+                    required=""
+                    value="<?php echo $id; ?>"
+            />
+            <label class="gc-radio-label" for="<?php echo $id; ?>"
+            ><span class="radio-label-text"><?php echo $value; ?></span>
+            </label
+            >
+        </div>
+        <?php
+    }
+
+    public function render($atts, $content = null): string
+    {
+        global $wp;
+        ob_start();
+        ?>
+        <div class="gc-form-wrapper">
+            <?php
+            if (isset($_POST['contact-type'])) {
+                $type = $_POST['contact-type'];
+                $heading = "";
+                $label = "";
+                switch ($type) {
+                    case 'ask-a-question':
+                        $heading = __("Ask a question", "cds-snc");
+                        $label = __("Your question", "cds-snc");
+                        break;
+                }
+
+                ?>
+                <form id="contact-form" method="POST" action="/wp-json/contact/v1/process">
+                    <h2><?php echo $heading; ?></h2>
+                    <?php wp_nonce_field('contact_form_nonce_action', 'contact_form'); ?>
+                    <p data-testid="description" class="gc-label required" id="contact-label">
+                        <?php echo $label; ?>
+                    </p>
+                    <textarea
+                            data-testid="textarea"
+                            class="gc-textarea"
+                            id="message"
+                            required=""
+                            aria-describedby="contact-label"
+                            placeholder=""
+                            name="message"
+                    ></textarea>
+
+                    <div class="buttons">
+                        <button class="gc-button gc-button" type="submit" id="submit">
+                            <?php _e("Submit", "cds-snc"); ?>
+                        </button>
+                    </div>
+                </form>
+                <?php
+            } else {
+                $current_url = home_url(add_query_arg(array(), $wp->request));
+                ?>
+                <form id="contact-form-step-1" method="POST" action="<?php echo $current_url; ?>">
+                    <div class="focus-group">
+                        <?php $this->radioField("contact-type", "ask-a-question", __("Ask a question", "cds-snc")); ?>
+                        <?php $this->radioField("contact-type", "get-technical-support",
+                            __("Get technical support", "cds-snc")); ?>
+                        <?php $this->radioField("contact-type", "give-feedback", __("Give feedback", "cds-snc")); ?>
+                        <?php $this->radioField("contact-type", "set-up-a-demo-to-learn-more-about-GC-Notify",
+                            __("Set up a demo to learn more about GC Notify", "cds-snc")); ?>
+                        <?php $this->radioField("contact-type", "other", __("Other", "cds-snc")); ?>
+                    </div>
+                    <div class="buttons">
+                        <button class="gc-button gc-button" type="submit" id="continue-submit">
+                            <?php _e("Continue", "cds-snc"); ?>
+                        </button>
+                    </div>
+                </form>
+                <?php
+            }
+            ?>
+        </div>
+        <?php
+        $form = ob_get_contents();
+        ob_end_clean();
+        return $form;
+    }
+}

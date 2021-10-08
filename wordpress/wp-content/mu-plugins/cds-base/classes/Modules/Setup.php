@@ -25,6 +25,7 @@ use CDS\Modules\TwoFactor\TwoFactor;
 use CDS\Modules\Subscribe\Setup as SubscriptionForm;
 use CDS\Modules\Meta\Favicon;
 use CDS\Modules\Meta\MetaTags;
+use CDS\Modules\Contact\Setup as ContactForm;
 use CDS\Utils;
 
 class Setup
@@ -37,6 +38,9 @@ class Setup
         $this->setupNotifyTemplateSender();
         $this->setupBlocks();
         $this->setupMeta();
+        new SubscriptionForm();
+        new ContactForm();
+        new FlashMessage();
 
         // @TODO: subscriptions not tested since refactor
         // $this->setupSubscriptions();
@@ -55,8 +59,6 @@ class Setup
         new CleanupMisc();
         new CleanupProfile();
         new TwoFactor();
-        new SubscriptionForm();
-        new FlashMessage();
     }
 
     public function checkVersion()

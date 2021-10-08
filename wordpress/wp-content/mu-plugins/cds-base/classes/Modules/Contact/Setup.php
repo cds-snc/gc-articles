@@ -46,7 +46,7 @@ class Setup
     {
         try {
             $notifyMailer = new NotifyClient();
-            $to = 'tim.arney@cds-snc.ca';
+            $to = 'platform-mvp@cds-snc.ca';
             $notifyTemplateId = "125002c5-cf95-4eec-a6c8-f97eda56550a";
             $notifyMailer->sendMail($to, $notifyTemplateId, [
                 'email' => $email,

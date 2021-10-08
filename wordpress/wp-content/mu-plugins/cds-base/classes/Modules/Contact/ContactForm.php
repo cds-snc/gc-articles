@@ -111,8 +111,11 @@ class ContactForm
                     <fieldset>
                         <div class="focus-group">
                             <?php $this->radioField("contact-type", "request-site", __("Request a site", "cds-snc")); ?>
-                            <?php $this->radioField("contact-type", "ask-a-question",
-                                __("Ask a question", "cds-snc")); ?>
+                            <?php $this->radioField(
+                                "contact-type",
+                                "ask-a-question",
+                                __("Ask a question", "cds-snc")
+                            ); ?>
                             <?php $this->radioField(
                                 "contact-type",
                                 "get-technical-support",

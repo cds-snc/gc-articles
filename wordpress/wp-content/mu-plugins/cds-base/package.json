@@ -21,7 +21,7 @@
     "@wordpress/components": "^17.0.0",
     "@wordpress/element": "^4.0.1",
     "@wordpress/i18n": "^4.2.2",
-    "sweetalert2": "^11.1.5"
+    "sweetalert2": "^11.1.6"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.10",

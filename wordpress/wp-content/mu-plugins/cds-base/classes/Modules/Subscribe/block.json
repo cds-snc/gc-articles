@@ -1,0 +1,11 @@
+{
+	"apiVersion": 2,
+	"name": "cds/subscribe",
+	"title": "Subscribe Form",
+	"description": "Add subscription form",
+	"category": "widgets",
+	"icon": "embed-generic",
+	"keywords": [],
+	"textdomain": "cds-snc",
+	"editorScript": "file:./js/dist/index.js"
+}

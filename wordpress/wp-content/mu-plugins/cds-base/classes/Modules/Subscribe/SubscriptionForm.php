@@ -16,7 +16,7 @@ class SubscriptionForm
         add_shortcode('subscribe', [$this, 'render']);
     }
 
-    public function render($atts, $content = null): string
+    public function render(): string
     {
         ob_start();
         ?>

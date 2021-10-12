@@ -67,5 +67,19 @@ class Blocks
             [],
             $this->version,
         );
+
+        wp_enqueue_style(
+            'cds-base-editor-fonts',
+            'https://fonts.googleapis.com/css?family=Noto+Sans',
+            [],
+            $this->version,
+        );
+
+        wp_enqueue_style(
+            'cds-base-editor-fonts',
+            'https://fonts.googleapis.com/css2?family=Lato:500',
+            [],
+            $this->version,
+        );
     }
 }

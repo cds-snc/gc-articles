@@ -52,7 +52,8 @@ class Blocks
         }
     }
 
-    public function editorStyles(){
+    public function editorStyles()
+    {
 
         wp_enqueue_style(
             'cds-base-editor-styles',
@@ -74,7 +75,6 @@ class Blocks
             [],
             $this->version,
         );
-
     }
 
     public function addStyles()

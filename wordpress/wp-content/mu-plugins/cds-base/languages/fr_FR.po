@@ -17,24 +17,24 @@ msgstr ""
 
 #. Plugin Name of the plugin
 msgid "CDS-SNC Base"
-msgstr ""
+msgstr "SNC-CDS Base"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/cds-snc/platform-mvp"
-msgstr ""
+msgstr "https://github.com/cds-snc/platform-mvp"
 
 #. Description of the plugin
 msgid "Custom Block setup and other overrides"
-msgstr ""
+msgstr "Configuration des blocs personnalisés et autres contrôles"
 
 #. Author of the plugin
 msgid "Tim Arney"
-msgstr ""
+msgstr "Tim Arney"
 
 #: classes/Modules/Cleanup/AdminBar.php:49
 #, fuzzy
 msgid "GC Articles"
-msgstr "Articles"
+msgstr "Les Articles GC"
 
 #: classes/Modules/Cleanup/Login.php:55
 msgid "Canadian Digital Service"
@@ -43,237 +43,237 @@ msgstr "Service numérique canadien"
 #: classes/Modules/Cleanup/PostsToArticles.php:23
 #: classes/Modules/Cleanup/PostsToArticles.php:34
 msgid "Articles"
-msgstr "Articles"
+msgstr "Les Articles"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:24
 #: classes/Modules/Cleanup/PostsToArticles.php:28
 #: classes/Modules/Cleanup/PostsToArticles.php:35
 #, fuzzy
 msgid "Article"
-msgstr "Articles"
+msgstr "Les Articles"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:25
 #: classes/Modules/Cleanup/PostsToArticles.php:26
 msgid "Add Article"
-msgstr ""
+msgstr "Ajouter un article"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:27
 msgid "Edit Article"
-msgstr ""
+msgstr "Modifier l'article"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:29
 #, fuzzy
 msgid "View Article"
-msgstr "Articles"
+msgstr "Voir l'article"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:30
 msgid "Search Articles"
-msgstr ""
+msgstr "rechercher un article"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:31
 msgid "No Articles found"
-msgstr ""
+msgstr "Aucun article trouvé"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:32
 msgid "No Articles found in Trash"
-msgstr ""
+msgstr "Aucun article trouvé dans la poubelle"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:33
 msgid "All Articles"
-msgstr ""
+msgstr "tous les articles"
 
 #: classes/Modules/Notify/FormHelpers.php:24
 msgid "Service ID"
-msgstr ""
+msgstr "Identifiant du service"
 
 #: classes/Modules/Notify/FormHelpers.php:32
 msgid "No service ids found"
-msgstr ""
+msgstr "Aucun identifiant du service trouvé"
 
 #: classes/Modules/Notify/FormHelpers.php:42
 msgid "Template ID"
-msgstr ""
+msgstr "identifiant du modèle"
 
 #: classes/Modules/Notify/FormHelpers.php:52
 msgid "List ID"
-msgstr ""
+msgstr "identifiant de la liste"
 
 #: classes/Modules/Notify/FormHelpers.php:60
 msgid "No lists found"
-msgstr ""
+msgstr "aucune liste trouvée"
 
 #: classes/Modules/Notify/FormHelpers.php:71
 msgid "Send template to list"
-msgstr ""
+msgstr "envoyer le modèle à la liste"
 
 #: classes/Modules/Notify/Notices.php:47
 msgid "Sent"
-msgstr ""
+msgstr "C'est envoyé"
 
 #: classes/Modules/Notify/Notices.php:56
 msgid "Template ID is required"
-msgstr ""
+msgstr "l'identifiant du modèle est nécessaire"
 
 #: classes/Modules/Notify/Notices.php:65
 msgid "List ID failed to parse"
-msgstr ""
+msgstr "identifiant de la liste ne fonctionne pas"
 
 #: classes/Modules/Notify/Notices.php:76
 msgid "Failed to send"
-msgstr ""
+msgstr "n'a pas réussi à envoyer"
 
 #: classes/Modules/Notify/NotifySettings.php:48
 msgid "Sender Type"
-msgstr ""
+msgstr "Type d'envoi"
 
 #: classes/Modules/Notify/NotifySettings.php:56
 msgid "List Manager"
-msgstr ""
+msgstr "le gestionnaire de liste"
 
 #: classes/Modules/Notify/NotifySettings.php:66
 msgid "WPForms"
-msgstr ""
+msgstr "WPFromulaires"
 
 #: classes/Modules/Notify/NotifySettings.php:83
 msgid "List Values JSON"
-msgstr ""
+msgstr "Liste des valeurs JSON"
 
 #: classes/Modules/Notify/NotifySettings.php:90
 msgid "Format"
-msgstr ""
+msgstr "Le format"
 
 #: classes/Modules/Notify/NotifyTemplateSender.php:75
 msgid "Send Notify Template"
-msgstr ""
+msgstr "Envoyer un modèle depuis GC Notification"
 
 #: classes/Modules/Notify/NotifyTemplateSender.php:76
 msgid "Notify"
-msgstr ""
+msgstr "GC Notification"
 
 #: classes/Modules/Notify/NotifyTemplateSender.php:216
 msgid "There has been an error"
-msgstr ""
+msgstr "Il y a une erreur"
 
 #: classes/Modules/Subscribe/Setup.php:71
 #: classes/Modules/Subscribe/Setup.php:98
 msgid "Internal server error"
-msgstr ""
+msgstr "Erreur interne avec le serveur"
 
 #: classes/Modules/Subscribe/Setup.php:93
 msgid "Thanks for subscribing"
-msgstr ""
+msgstr "Merci de vous abonner"
 
 #: classes/Modules/Subscribe/Setup.php:105
 msgid "400 Bad Request"
-msgstr ""
+msgstr "400 Request Mal"
 
 #: classes/Modules/Subscribe/Setup.php:109
 msgid "401 Unauthorized"
-msgstr ""
+msgstr "401 Interdit"
 
 #: classes/Modules/Subscribe/Setup.php:113
 msgid "Please complete the required field to continue"
-msgstr ""
+msgstr "S'il vous plaît remplir le marqué pour commencer"
 
 #: classes/Modules/Subscribe/SubscriptionForm.php:28
 msgid "Enter your email:"
-msgstr ""
+msgstr "Entrer votre corriel"
 
 #: classes/Modules/Subscribe/SubscriptionForm.php:36
 msgid "Subscribe"
-msgstr ""
+msgstr "S'abonner"
 
 #: classes/Modules/TwoFactor/TwoFactor.php:43
 msgid "Two factor authentication"
-msgstr ""
+msgstr "Authentification multifacteur"
 
 #: classes/Modules/TwoFactor/TwoFactor.php:54 build/index.js:3207
 #: build/index.js:3172
 msgid "Warning"
-msgstr ""
+msgstr "Avertissement"
 
 #: classes/Modules/TwoFactor/TwoFactor.php:57
 msgid "This can be configured on your <a href=\"%s\">User Profile</a>."
-msgstr ""
+msgstr "Ce paramètre peut être configuré dans votre <a href=\"%s\">Profil utilisateur</a>"
 
 #: build/index.js:23 classes/Modules/Notify/src/util.js:7 build/index.js:7
 msgid "Are you sure you want to send?"
-msgstr ""
+msgstr "Confirmez-vous que vous voulez envoyer?"
 
 #: build/index.js:24 classes/Modules/Notify/src/util.js:8 build/index.js:8
 msgid "You won't be able to revert this!"
-msgstr ""
+msgstr "Ce changement est irrévocable"
 
 #: build/index.js:29 classes/Modules/Notify/src/util.js:13 build/index.js:13
 msgid "Yes, send it!"
-msgstr ""
+msgstr "Oui, envoie-le"
 
 #: build/index.js:3201 build/index.js:3166
 msgid "Settings"
-msgstr ""
+msgstr "Paramètres"
 
 #: build/index.js:3204 build/index.js:3169
 msgid "Alert Type"
-msgstr ""
+msgstr "Type d'alerte"
 
 #: build/index.js:3205 build/index.js:3170
 msgid "Info"
-msgstr ""
+msgstr "les informations"
 
 #: build/index.js:3206 build/index.js:3171
 msgid "Success"
-msgstr ""
+msgstr "Succès"
 
 #: build/index.js:3208 build/index.js:3173
 msgid "Danger"
-msgstr ""
+msgstr "Danger"
 
 #: build/index.js:3212 build/index.js:3177
 msgid "Alert"
-msgstr ""
+msgstr "Alerte"
 
 #: build/index.js:3238 build/index.js:3302 build/index.js:3203
 #: build/index.js:3257
 msgid "Title"
-msgstr ""
+msgstr "le Titre"
 
 #: build/index.js:3242 build/index.js:3306 build/index.js:3207
 #: build/index.js:3261
 msgid "Summary"
-msgstr ""
+msgstr "Le résumé"
 
 #: build/index.js:3283 build/index.js:3238
 msgid "Expander"
-msgstr ""
+msgstr "L'extenseur"
 
 #: build/index.js:3464 build/index.js:3409
 msgid "List Name"
-msgstr ""
+msgstr "Nom de la liste"
 
 #: build/index.js:3466 build/index.js:3411
 msgid "Subscriber Count"
-msgstr ""
+msgstr "Nombre d'abonnés"
 
 #: build/index.js:3494 build/index.js:3439
 msgid "Send Template"
-msgstr ""
+msgstr "Modèle d'envoi"
 
 #: build/index.js:3578 build/index.js:3513
 msgid "This list has "
-msgstr ""
+msgstr "Cette liste contient "
 
 #: build/index.js:3580 build/index.js:3515
 msgid " subscribers.  "
-msgstr ""
+msgstr "des abonnés"
 
 #: build/index.js:3581 build/index.js:3516
 msgid "You won't be able to revert this"
-msgstr ""
+msgstr "Ce changement est irrévocable"
 
 #: build/index.js:3760 build/index.js:3675
 msgid "Date"
-msgstr ""
+msgstr "La date"
 
 #: build/index.js:3762 build/index.js:3677
 msgid "User agent"
-msgstr ""
+msgstr "l'agent de l'utilisateur"

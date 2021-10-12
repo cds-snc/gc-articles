@@ -47,6 +47,8 @@ class EncryptedOption
     /**
      * Parse the encryption key.
      *
+     * @param $key
+     *
      * @return string
      */
     protected function parseKey($key): string

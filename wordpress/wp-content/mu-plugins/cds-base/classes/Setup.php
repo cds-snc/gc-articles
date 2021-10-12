@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules;
+namespace CDS;
 
 use CDS\Modules\Cleanup\PostsToArticles;
 use CDS\Modules\Cleanup\SitesToCollections;

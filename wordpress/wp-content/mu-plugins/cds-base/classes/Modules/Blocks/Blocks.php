@@ -9,9 +9,10 @@ class Blocks
 
     public function __construct()
     {
-        $this->version = "1.0.0";
+        $this->version = "1.0.1";
         add_action('admin_enqueue_scripts', [$this, 'register'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'addStyles'], 10, 2);
+        add_action('admin_enqueue_scripts', [$this, 'editorStyles'], 20000, 2);
     }
 
     public function register()
@@ -49,6 +50,31 @@ class Blocks
              */
             wp_set_script_translations('cds-snc-base', 'cds-snc');
         }
+    }
+
+    public function editorStyles()
+    {
+
+        wp_enqueue_style(
+            'cds-base-editor-styles',
+            plugin_dir_url(__FILE__) . 'src/editor-styles/editor.css',
+            [],
+            $this->version,
+        );
+
+        wp_enqueue_style(
+            'cds-base-editor-fonts-lato',
+            'https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap',
+            [],
+            $this->version,
+        );
+
+        wp_enqueue_style(
+            'cds-base-editor-fonts-noto',
+            'https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap',
+            [],
+            $this->version,
+        );
     }
 
     public function addStyles()

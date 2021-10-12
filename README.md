@@ -175,7 +175,66 @@ At this point, you will likely have a bunch of local changes in the `languages` 
 
 All of these files should be committed along with the rest of your PR.
 
-## Deployments 
+## Tests
+
+We are using Cypress to test workflows, [Pest](https://pestphp.com/) for PHP-language unit tests, and [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) for PHP-language linting.
+
+### Cypress
+
+To run the cypress tests, first spin up a wp-env environment. 
+
+```
+npm run wp-env:init
+```
+
+This brings up 2 wordpress environments: a dev environment on http://localhost:8888, and a test environment (used by cypress) on http://localhost:8889. It's not the same as what you see in the `docker compose up` local development environment, but it is close enough, and it allows us to test admin workflows. The default credentials for the wp-env environment are `admin` & `password`.
+
+To open cypress in a browser, use
+
+```
+npm run cy:open
+```
+
+You can run test suites one at a time or the entire set of tests.
+
+To reset the environment, to wipe out local changes, use
+
+```
+npm run wp-env:clean
+```
+
+When you are finished testing, you can spin down the wp-env environment with
+
+```
+npm run wp-env:stop
+```
+
+Additional commands can be found in the root-level `package.json` file.
+
+### Pest
+
+Pest is used for unit-testing PHP. Pest is a wrapper around PHPUnit that abstracting away a lot of the redundant/repetitive class structure code that you usually have with PHPUnit. Pest tests must be run from the `/wordpress` folder.
+
+```
+cd wordpress
+./vendor/bin/pest
+```
+
+### PHP_CodeSniffer
+
+PHP_CodeSniffer (`phpcs`) lints our PHP code to enforce a consistent style across the codebase. To run `phpcs`, first install it globally ([instructions for installing with Homebrew](https://gist.github.com/pbrocks/ab8d8c7ce200ce6f718181cebfc57a1e)). Then, you can lint the codebase with
+
+```
+phpcs .wordpress/wp-content/mu-plugins/cds-base -n --standard=PSR12 --ignore=build,node_modules,vendor,tests,.css,.js
+```
+
+Note that this can pick up vendor files, so specifically targeting the module(s) you are working on (or individual files) will result in least amount of noise.
+
+```
+phpcs ./wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Cleanup/Articles.php --standard=PSR12
+```
+
+## Deployments
 
 **NOTE** You will need to have [GitHub CLI](https://cli.github.com) installed to complete the following steps
 

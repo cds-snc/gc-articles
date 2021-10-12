@@ -28,11 +28,6 @@ variable "alb_target_4xx_maximum" {
   type        = number
 }
 
-variable "alb_5xx_maximum" {
-  description = "Maximum number of 5xx responses from the ALB in a 5 minute period"
-  type        = number
-}
-
 variable "canary_healthcheck_url_eng" {
   description = "URL for the English synthetic canary healthcheck."
   type        = string
@@ -55,11 +50,6 @@ variable "cloudfront_distribution_id" {
 
 variable "cloudfront_4xx_maximum" {
   description = "Allowed threshold of 4xx responses from CloudFront"
-  type        = number
-}
-
-variable "cloudfront_5xx_maximum" {
-  description = "Allowed threshold of 5xx responses from CloudFront"
   type        = number
 }
 

@@ -64,7 +64,6 @@ dependency "ecs" {
 inputs = {
   alb_arn         = dependency.load-balancer.outputs.alb_arn
   alb_arn_suffix  = dependency.load-balancer.outputs.alb_arn_suffix
-  alb_5xx_maximum = 0
 
   alb_target_group_arn_suffix              = dependency.load-balancer.outputs.alb_target_group_arn_suffix
   alb_target_response_time_average_maximum = 2
@@ -77,7 +76,6 @@ inputs = {
   cloudfront_arn              = dependency.load-balancer.outputs.cloudfront_arn
   cloudfront_distribution_id  = dependency.load-balancer.outputs.cloudfront_distribution_id
   cloudfront_waf_web_acl_name = dependency.load-balancer.outputs.cloudfront_waf_web_acl_name
-  cloudfront_5xx_maximum      = 0
   cloudfront_4xx_maximum      = 100
 
   ecs_cluster_name         = dependency.ecs.outputs.ecs_cluster_name

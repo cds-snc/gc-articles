@@ -7,7 +7,6 @@ use CDS\Modules\Notify\Notices;
 use CDS\Modules\Notify\NotifyTemplateSender;
 use InvalidArgumentException;
 
-
 test('parseServiceIds', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $serviceIdEnv = "serviceID1~apikey1,serviceID2~apikey2,serviceID3~apikey3";
@@ -15,18 +14,18 @@ test('parseServiceIds', function () {
     expect($serviceIds)->toEqual(["serviceID1" => "apikey1", "serviceID2" => "apikey2", "serviceID3" => "apikey3"]);
 });
 
-test('parseServiceIdsBadInput', function() {
+test('parseServiceIdsBadInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $serviceIdEnv = "serviceID1";
     $sender->parseServiceIdsFromEnv($serviceIdEnv);
 })->throws(InvalidArgumentException::class);
 
-test('parseServiceIdsNoInput', function() {
+test('parseServiceIdsNoInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $sender->parseServiceIdsFromEnv(null);
 })->throws(InvalidArgumentException::class);
 
-test('parseJsonOptions', function() {
+test('parseJsonOptions', function () {
     try {
         $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
         $options = $sender->parseJsonOptions('[{"id":"123", "type":"email", "label":"my-list"}]');
@@ -36,7 +35,7 @@ test('parseJsonOptions', function() {
     }
 });
 
-test('parseJsonOptionsInvalidJson', function() {
+test('parseJsonOptionsInvalidJson', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $options = $sender->parseJsonOptions("{");
     expect($options)->toEqual(null);
@@ -46,4 +45,3 @@ test('parseJsonOptionsEmpty', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $options = $sender->parseJsonOptions("");
 })->throws(InvalidArgumentException::class);
-

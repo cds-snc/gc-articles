@@ -7,21 +7,17 @@ namespace CDS\Utils;
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Str;
 
-use function add_option;
-use function update_option;
-
 class EncryptedOption
 {
 
-    private string|array|false $key;
+    private string $key;
     private string $cipher;
     private Encrypter $encrypter;
 
-    public function __construct()
+    public function __construct($key, $cipher = 'aes-256-cbc')
     {
-        // @TODO: should the key be loaded through the contructor at init?
-        $this->key = $this->getEncryptionKey();
-        $this->cipher = 'aes-256-cbc';
+        $this->key = $this->parseKey($key);
+        $this->cipher = $cipher;
         $this->encrypter = new Encrypter($this->key, $this->cipher);
     }
 
@@ -46,12 +42,6 @@ class EncryptedOption
 
         add_option($option, $encrypted);
         return true;
-    }
-
-    public function getEncryptionKey()
-    {
-        // @TODO: handle if missing
-        return $this->parseKey(getenv('ENCRYPTION_KEY'));
     }
 
     /**

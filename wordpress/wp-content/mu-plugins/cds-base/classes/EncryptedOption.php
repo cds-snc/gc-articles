@@ -6,22 +6,59 @@ namespace CDS;
 
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Str;
+use WP_CLI;
 
 class EncryptedOption
 {
 
     private string $key;
     private string $cipher;
-    private Encrypter $encrypter;
+    public Encrypter $encrypter;
 
-    public function __construct($key, $cipher = 'aes-256-cbc')
+    /**
+     * @param $key
+     * @param  string  $cipher
+     *
+     * @throws \Exception
+     */
+    public function __construct($key, string $cipher = 'aes-256-cbc')
     {
         $this->key = $this->parseKey($key);
         $this->cipher = $cipher;
         $this->encrypter = new Encrypter($this->key, $this->cipher);
+
+        add_action( 'cli_init', function() {
+            WP_CLI::add_command( 'generate-encryption-key', [$this, 'generateKey'] );
+        });
     }
 
-    public function get($option, $default = false): bool|string
+    /**
+     * @param $string
+     *
+     * @return string
+     */
+    public function encryptString($string): string
+    {
+        return $this->encrypter->encryptString($string);
+    }
+
+    /**
+     * @param $string
+     *
+     * @return string
+     */
+    public function decryptString($string): string
+    {
+        return $this->encrypter->decryptString($string);
+    }
+
+    /**
+     * @param $option
+     * @param  string|null  $default
+     *
+     * @return bool|string
+     */
+    public function getOption($option, string|null $default = null): bool|string
     {
         $encrypted =  get_option($option, $default);
 
@@ -29,12 +66,18 @@ class EncryptedOption
             return $default;
         }
 
-        return $this->encrypter->decryptString($encrypted);
+        return $this->decryptString($encrypted);
     }
 
-    public function set($option, $value): bool
+    /**
+     * @param $option
+     * @param $value
+     *
+     * @return bool
+     */
+    public function setOption($option, $value): bool
     {
-        $encrypted = $this->encrypter->encryptString($value);
+        $encrypted = $this->encryptString($value);
 
         if (get_option($option)) {
             return update_option($option, $encrypted);
@@ -42,6 +85,15 @@ class EncryptedOption
 
         add_option($option, $encrypted);
         return true;
+    }
+
+    public function generateKey()
+    {
+        $key = Encrypter::generateKey($this->cipher);
+        $key = 'base64:' . base64_encode($key);
+
+        WP_CLI::success('Here is an encryption key, you should add it to your .env file as ENCRYPTION_KEY');
+        WP_CLI::line($key);
     }
 
     /**

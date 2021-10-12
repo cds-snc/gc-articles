@@ -4,14 +4,44 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Notify;
 
+use CDS\EncryptedOption;
+
 class NotifySettings
 {
     protected string $admin_page = 'cds_notify_send';
+    protected $encryptedOption;
 
-    public function __construct()
+    public static function register(EncryptedOption $encryptedOption)
     {
-        add_action('admin_menu', [$this, 'registerSubmenuPage']);
-        add_action('admin_init', [$this, 'registerSettings']);
+        $instance = new self($encryptedOption);
+
+        add_action('admin_menu', [$instance, 'registerSubmenuPage']);
+        add_action('admin_init', [$instance, 'registerSettings']);
+
+        $encryptedOptions = [
+            'NOTIFY_API_KEY',
+            'LIST_MANAGER_NOTIFY_SERVICES'
+        ];
+
+        foreach($encryptedOptions as $option) {
+            add_filter("pre_update_option_{$option}", [$instance, 'encryptOption']);
+            add_filter("option_{$option}", [$instance, 'decryptOption']);
+        }
+    }
+
+    public function __construct(EncryptedOption $encryptedOption)
+    {
+        $this->encryptedOption = $encryptedOption;
+    }
+
+    public function encryptOption($value): string
+    {
+        return $this->encryptedOption->encryptString($value);
+    }
+
+    public function decryptOption($value): string
+    {
+        return $this->encryptedOption->decryptString($value);
     }
 
     public function registerSubmenuPage()
@@ -35,9 +65,12 @@ class NotifySettings
     public function renderSettings(): void
     {
         ?>
+
       <div class="wrap">
         <h2><?php echo esc_html(get_admin_page_title()); ?></h2>
           <?php settings_errors(); ?>
+
+
         <form action='options.php' method='post'>
             <?php settings_fields('cds-settings-group'); ?>
             <?php do_settings_sections('cds-settings-group'); ?>

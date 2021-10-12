@@ -21,7 +21,7 @@ class EncryptedOption
         $this->encrypter = new Encrypter($this->key, $this->cipher);
     }
 
-    public function get($option, $default = false)
+    public function get($option, $default = false): bool|string
     {
         $encrypted =  get_option($option, $default);
 
@@ -32,7 +32,7 @@ class EncryptedOption
         return $this->encrypter->decryptString($encrypted);
     }
 
-    public function set($option, $value)
+    public function set($option, $value): bool
     {
         $encrypted = $this->encrypter->encryptString($value);
 
@@ -49,7 +49,7 @@ class EncryptedOption
      *
      * @return string
      */
-    protected function parseKey($key)
+    protected function parseKey($key): string
     {
         if (Str::startsWith($key, $prefix = 'base64:')) {
             $key = base64_decode(Str::after($key, $prefix));

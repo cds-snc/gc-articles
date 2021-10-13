@@ -16,31 +16,31 @@ msgstr ""
 
 #. Theme Name of the theme
 msgid "CDS Default"
-msgstr ""
+msgstr "Le base thème du SNC"
 
 #. Description of the theme
 msgid "WET styled Starter Theme"
-msgstr ""
+msgstr "Thème de démarrage dans le style de WET-BOEW"
 
 #. Author of the theme
 msgid "CDS"
-msgstr ""
+msgstr "SNC"
 
 #: 404.php:18
 msgid "Page not found."
-msgstr ""
+msgstr "la page n'a pas été trouvée"
 
 #: 404.php:25
 msgid "It looks like nothing was found at this location."
-msgstr ""
+msgstr "Rien n'a été trouvé à cette adresse."
 
 #: functions.php:74
 msgid "Primary"
-msgstr ""
+msgstr "le primaire"
 
 #: header.php:40
 msgid "Skip to content"
-msgstr ""
+msgstr "Aller au contenu"
 
 #: header.php:73 header.php:91
 msgid "Search"
@@ -52,65 +52,65 @@ msgstr "Rechercher dans Canada.ca"
 
 #: header.php:103 header.php:108
 msgid "Menu"
-msgstr ""
+msgstr "Le menu"
 
 #: header.php:105
 msgid "Main"
-msgstr ""
+msgstr "le bloc principal"
 
 #: inc/template-functions.php:26
 msgid "Document navigation"
-msgstr ""
+msgstr "Navigation dans les documents"
 
 #: inc/template-functions.php:31
 msgid "Next blog post"
-msgstr ""
+msgstr "le prochain article de blog"
 
 #: inc/template-functions.php:42
 msgid "Previous blog post"
-msgstr ""
+msgstr "l'article de blog précédent"
 
 #. translators: %s: post author.
 #: inc/template-tags.php:44
 msgctxt "post author"
 msgid "by %s"
-msgstr ""
+msgstr "par %s"
 
 #. translators: %s: search query.
 #: search.php:23
 msgid "Search Results for: %s"
-msgstr ""
+msgstr "les résultats de la recherche de: %s"
 
 #: template-parts/content-none.php:17
 msgid "Nothing Found"
-msgstr ""
+msgstr "Il n'y avait rien trouvé"
 
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content-none.php:26
 msgid ""
 "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
+msgstr "Êtes-vous prêt à publier votre premier message ?  <a href=\"%1$s\">Commencez ici</a> "
 
 #: template-parts/content-none.php:38
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
-msgstr ""
+msgstr "Désolé, rien n'a été trouvé avec votre recherche. Veuillez réessayer avec d'autres mots-clés."
 
 #: template-parts/content-none.php:44
 msgid "Nothing found! Perhaps searching can help."
-msgstr ""
+msgstr "Rien n'a été trouvé. s'il vous plaît essayez de rechercher"
 
 #: template-parts/content-page.php:26
 msgid "Pages:"
-msgstr ""
+msgstr "les pages"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content-page.php:40
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr ""
+msgstr "Éditer <span class=\"screen-reader-text\">%s</span>"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content.php:35
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
-msgstr ""
+msgstr "Continuez à lire le post <span class=\"screen-reader-text\"> \"%s\"</span>"

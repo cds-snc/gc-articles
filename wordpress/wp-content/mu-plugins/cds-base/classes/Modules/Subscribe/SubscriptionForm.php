@@ -18,10 +18,10 @@ class SubscriptionForm
 
     public function render($attributes = []): string
     {
-        
+
         ob_start();
         $placeholder = "";
-        if ( ! empty( $attributes['placeholderValue'] ) ) :
+        if (! empty($attributes['placeholderValue'])) :
             $placeholder = $attributes['placeholderValue'];
         endif;
         ?>

@@ -10,6 +10,7 @@
   "config": {
     "WP_DEBUG": 1,
     "WORDPRESS_DEBUG_DISPLAY": 1,
-    "WP_DEBUG_DISPLAY": 1
+    "WP_DEBUG_DISPLAY": 1,
+    "ENCRYPTION_KEY": "base64:KQYtxHmxqceYr5y0VC3cU9JP+TdkIBDeXA5E++wouE8="
   }
 }

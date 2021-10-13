@@ -15,6 +15,7 @@ use CDS\Modules\Cleanup\Menus as CleanupMenus;
 use CDS\Modules\Cleanup\Misc as CleanupMisc;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
+use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\FlashMessage\FlashMessage;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
@@ -46,6 +47,7 @@ class Setup
         $this->setupNotifyTemplateSender();
         $this->setupBlocks();
         $this->setupMeta();
+        $this->setupCli();
         new SubscriptionForm();
         new ContactForm();
         new FlashMessage();
@@ -114,6 +116,11 @@ class Setup
     {
         new Favicon();
         new MetaTags();
+    }
+
+    public function setupCli()
+    {
+        GenerateEncryptionKey::register($this->encryptedOption);
     }
 
     public function setupSubscriptions()

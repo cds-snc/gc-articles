@@ -28,7 +28,7 @@ class EncryptedOption
         $this->encrypter = new Encrypter($this->key, $this->cipher);
 
         add_action('cli_init', function () {
-            WP_CLI::add_command('generate-encryption-key', [$this, 'generateKey']);
+            WP_CLI::add_command('generate-encryption-key', [$this, 'generateKeyCli']);
         });
     }
 
@@ -98,6 +98,13 @@ class EncryptedOption
     {
         $key = Encrypter::generateKey($this->cipher);
         $key = 'base64:' . base64_encode($key);
+
+        return $key;
+    }
+
+    public function generateKeyCli()
+    {
+        $key = $this->generateKey();
 
         WP_CLI::success('Here is an encryption key, you should add it to your .env file as ENCRYPTION_KEY');
         WP_CLI::line($key);

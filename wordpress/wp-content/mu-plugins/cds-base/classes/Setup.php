@@ -127,13 +127,32 @@ class Setup
      */
     protected function getEncryptedOption(): EncryptedOption
     {
+        $encryptionKey = $this->getEncryptionKey();
         /**
          * Setup Encrypted Options
          */
-        if (!ENCRYPTION_KEY || ENCRYPTION_KEY == '') {
+        if (!$encryptionKey || $encryptionKey == '') {
             throw new Exception('No encryption key set in the environment');
         }
 
-        return new EncryptedOption(ENCRYPTION_KEY);
+        return new EncryptedOption($encryptionKey);
+    }
+
+    /**
+     * Get Encryption Key either from CONSTANTS or environment
+     *
+     * @return bool|array|string
+     */
+    protected function getEncryptionKey(): bool|array|string
+    {
+        if (Utils::isWpEnv()) {
+            return "base64:KQYtxHmxqceYr5y0VC3cU9JP+TdkIBDeXA5E++wouE8=";
+        }
+
+        if (defined('ENCRYPTION_KEY')) {
+            return ENCRYPTION_KEY;
+        }
+
+        return getenv('ENCRYPTION_KEY');
     }
 }

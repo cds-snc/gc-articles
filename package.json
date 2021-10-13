@@ -9,6 +9,7 @@
     "check-version": "node ./scripts/check-for-version.js",
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",
+    "generate-encryption-key": "docker exec cli bash -c \"cd /var/www/html; wp generate-encryption-key\"",
     "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build",
     "import": "node ./import/import.js",
     "wp-env": "wp-env",

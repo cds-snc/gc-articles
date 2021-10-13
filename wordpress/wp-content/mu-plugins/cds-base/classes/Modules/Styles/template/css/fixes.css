@@ -1,0 +1,47 @@
+/* Spacing */
+
+main, .gc-form-wrapper, .focus-group, .entry-footer, article {
+    margin-bottom: 20px;
+}
+
+/* Headings */
+
+body h6, body .h6 {
+    font-size: 19px;
+}
+
+/* Lists */
+
+body ul, body .ul, body ol, body .ol {
+    list-style-type: revert;
+    padding-left: 21px;
+}
+
+body ul > ul, body .ul > .ul, body ol > ol, body .ol > .ol {
+    padding-left: 21px;
+}
+
+/* Tables */
+
+body table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 23px;
+}
+
+body table thead tr th {
+    border-top: 0;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 5px;
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+    line-height: 1.4375;
+}
+
+body table tbody tr td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    line-height: 1.4375;
+    vertical-align: top;
+}

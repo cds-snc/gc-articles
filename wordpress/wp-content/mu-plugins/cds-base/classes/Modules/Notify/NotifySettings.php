@@ -9,7 +9,7 @@ use CDS\EncryptedOption;
 class NotifySettings
 {
     protected string $admin_page = 'cds_notify_send';
-    protected $encryptedOption;
+    protected EncryptedOption $encryptedOption;
 
     public static function register(EncryptedOption $encryptedOption)
     {

@@ -33,8 +33,9 @@ class EncryptedOption
     }
 
     /**
-     * @param $string
+     * Encrypt a string
      *
+     * @param $string
      * @return string
      */
     public function encryptString($string): string
@@ -43,8 +44,9 @@ class EncryptedOption
     }
 
     /**
-     * @param $string
+     * Decrypt a string
      *
+     * @param $string
      * @return string
      */
     public function decryptString($string): string
@@ -53,9 +55,10 @@ class EncryptedOption
     }
 
     /**
+     * Get and decrypt an Option
+     *
      * @param $option
      * @param  string|null  $default
-     *
      * @return bool|string
      */
     public function getOption($option, string|null $default = null): bool|string
@@ -70,9 +73,10 @@ class EncryptedOption
     }
 
     /**
+     * Encrypt and Add or Update an Option
+     *
      * @param $option
      * @param $value
-     *
      * @return bool
      */
     public function setOption($option, $value): bool
@@ -87,6 +91,9 @@ class EncryptedOption
         return true;
     }
 
+    /**
+     * Generate a base64 encoded encryption key
+     */
     public function generateKey()
     {
         $key = Encrypter::generateKey($this->cipher);
@@ -100,7 +107,6 @@ class EncryptedOption
      * Parse the encryption key.
      *
      * @param $key
-     *
      * @return string
      */
     protected function parseKey($key): string

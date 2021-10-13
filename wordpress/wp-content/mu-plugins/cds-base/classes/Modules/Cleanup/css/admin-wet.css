@@ -96,6 +96,10 @@ body {
     box-shadow: none;
   }
 
+  #wpadminbar a {
+    outline-color: #fd0;
+  }
+
   /* screen reader shortcuts */
   .screen-reader-shortcut:focus {
     color: #0535d2;

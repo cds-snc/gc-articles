@@ -15,6 +15,7 @@ if (!class_exists('WP_Posts_List_Table')) {
 
 class PostTable extends WP_Posts_List_Table
 {
+    // @codingStandardsIgnoreStart
     public function column_title($post)
     {
         global $mode;
@@ -41,6 +42,7 @@ class PostTable extends WP_Posts_List_Table
                 }
             }
         }
+        // @codingStandardsIgnoreEnd
 
         $can_edit_post = current_user_can('edit_post', $post->ID);
 

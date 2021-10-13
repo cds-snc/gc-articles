@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Contact;
 
+use CDS\Modules\Contact\Block;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -30,6 +31,7 @@ class Setup
         });
 
         new ContactForm();
+        new Block();
     }
 
     public function enqueue()

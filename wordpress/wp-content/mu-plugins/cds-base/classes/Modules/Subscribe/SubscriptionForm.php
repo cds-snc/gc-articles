@@ -16,20 +16,25 @@ class SubscriptionForm
         add_shortcode('subscribe', [$this, 'render']);
     }
 
-    public function render($atts, $content = null): string
+    public function render($attributes = []): string
     {
+        $placeholder = "";
+        if (!empty($attributes['placeholderValue'])) :
+            $placeholder = $attributes['placeholderValue'];
+        endif;
+
         ob_start();
         ?>
         <div class="gc-form-wrapper">
+
            <form id="subscribe-form" method="POST" action="/wp-json/subscribe/v1/process">
                 <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
                 <div class="focus-group">
                     <label class="gc-label required" id="cds-email" for="email">
                         <?php _e("Enter your email:", "cds-snc"); ?>
-                        <span data-testid="asterisk" aria-hidden="true">*</span>
-                        <i class="visually-hidden">Required Field</i>
+                        <i class="visually-hidden"><?php _e("Required Field", "cds-snc"); ?></i>
                     </label>
-                    <input class="gc-input-text" type="text" name="email" value=""/>
+                    <input class="gc-input-text" type="text" name="email" placeholder="<?php echo $placeholder; ?>" value=""/>
                 </div>
                 <div class="buttons">
                     <button class="gc-button gc-button" type="submit" id="subscribe-submit">

@@ -6,7 +6,7 @@ import Edit from './block-edit';
 registerBlockType(name, {
 	apiVersion,
 	title: __('Contact', 'cds-snc'),
-	description: __('', 'cds-snc'),
+	description: __('Platform team contact form', 'cds-snc'),
 	category,
 	icon,
 	keywords: [],

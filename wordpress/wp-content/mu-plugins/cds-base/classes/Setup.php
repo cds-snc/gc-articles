@@ -15,6 +15,7 @@ use CDS\Modules\Cleanup\Menus as CleanupMenus;
 use CDS\Modules\Cleanup\Misc as CleanupMisc;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
+use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\FlashMessage\FlashMessage;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
@@ -28,11 +29,19 @@ use CDS\Modules\Meta\MetaTags;
 use CDS\Modules\Contact\Setup as ContactForm;
 use CDS\Modules\Styles\Setup as Styles;
 use CDS\Utils;
+use Exception;
 
 class Setup
 {
+    public EncryptedOption $encryptedOption;
+
+    /**
+     * @throws Exception
+     */
     public function __construct()
     {
+        $this->encryptedOption = $this->getEncryptedOption();
+
         $this->cleanup();
         $this->checkVersion();
         $this->setupTrackLogins();
@@ -88,10 +97,13 @@ class Setup
         });
     }
 
+    /**
+     * @throws Exception
+     */
     public function setupNotifyTemplateSender()
     {
         new SendTemplateDashboardPanel();
-        new SetupNotify();
+        new SetupNotify($this->encryptedOption);
     }
 
 
@@ -109,5 +121,23 @@ class Setup
     public function setupSubscriptions()
     {
         new SetupSubscriptions();
+    }
+
+    /**
+     * @return EncryptedOption
+     * @throws Exception
+     */
+    protected function getEncryptedOption(): EncryptedOption
+    {
+        /**
+         * Setup Encrypted Options
+         */
+        $encryptionKey = getenv('ENCRYPTION_KEY');
+
+        if (!$encryptionKey || $encryptionKey == '') {
+            throw new Exception('No encryption key set in the environment');
+        }
+
+        return new EncryptedOption($encryptionKey);
     }
 }

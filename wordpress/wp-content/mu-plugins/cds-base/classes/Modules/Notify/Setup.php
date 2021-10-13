@@ -12,11 +12,11 @@ class Setup
     /**
      * @throws Exception
      */
-    public function __construct()
+    public function __construct(EncryptedOption $encryptedOption)
     {
         new NotifyTemplateSender(new FormHelpers(), new Notices());
 
-        NotifySettings::register($this->setupEncryptedOption());
+        NotifySettings::register($encryptedOption);
 
         if ($this->isNotifyConfigured()) {
             include __DIR__ . '/includes/wp-mail-notify-api.php';
@@ -29,23 +29,5 @@ class Setup
     protected function isNotifyConfigured(): bool
     {
         return (bool)getenv('NOTIFY_API_KEY');
-    }
-
-    /**
-     * @return EncryptedOption
-     * @throws Exception
-     */
-    protected function setupEncryptedOption(): EncryptedOption
-    {
-        /**
-         * Setup Encrypted Options
-         */
-        $encryptionKey = getenv('ENCRYPTION_KEY');
-
-        if (!$encryptionKey || $encryptionKey == '') {
-            throw new Exception('No encryption key set in the environment');
-        }
-
-        return new EncryptedOption($encryptionKey);
     }
 }

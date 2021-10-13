@@ -6,7 +6,7 @@ import Edit from './block-edit';
 registerBlockType(name, {
 	apiVersion,
 	title: __('Subscribe', 'cds-snc'),
-	description: __('', 'cds-snc'),
+	description: __('List Mananger subscription', 'cds-snc'),
 	category,
 	icon,
 	keywords: [],

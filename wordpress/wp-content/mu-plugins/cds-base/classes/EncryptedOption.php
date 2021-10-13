@@ -94,7 +94,7 @@ class EncryptedOption
     {
         $key = Encrypter::generateKey($this->cipher);
 
-        return 'base64:'.base64_encode($key);
+        return 'base64:' . base64_encode($key);
     }
 
     /**

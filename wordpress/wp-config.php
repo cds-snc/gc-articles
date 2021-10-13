@@ -129,7 +129,7 @@ define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
 
 /* Custom */
-define( 'SCRIPT_DEBUG', getenv_docker('SCRIPT_DEBUG', false));
+define('SCRIPT_DEBUG', getenv_docker('SCRIPT_DEBUG', false));
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */

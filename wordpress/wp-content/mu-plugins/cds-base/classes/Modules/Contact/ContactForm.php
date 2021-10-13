@@ -112,7 +112,7 @@ class ContactForm
                         <label for="contact_types">
                             <span id="contact_types" class="hidden"><?php _e("Contact Types", "cds-snc") ?></span>
                         </label>
-                        <div class="focus-group">
+                        <div class="focus-group" style="margin-bottom: 1.75rem">
                             <?php $this->radioField("contact-type", "request-site", __("Request a site", "cds-snc")); ?>
                             <?php $this->radioField(
                                 "contact-type",

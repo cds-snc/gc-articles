@@ -1,0 +1,30 @@
+{
+  "name": "subscribe-block",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gutenburg block to render subscribe form",
+  "author": "CDS-SNC",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/cds-snc/platform-mvp/issues"
+  },
+  "homepage": "https://github.com/cds-snc/platform-mvp",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cds-snc/platform-mvp.git"
+  },
+  "scripts": {
+    "wp-env": "wp-env start",
+    "dev": "wp-scripts start",
+    "build": "wp-scripts build",
+    "packages-update": "wp-scripts packages-update",
+    "postinstall" : "npm run build"
+  },
+  "devDependencies": {
+    "@wordpress/block-editor": "^7.0.2",
+    "@wordpress/blocks": "^11.1.0",
+    "@wordpress/i18n": "^4.2.2",
+    "@wordpress/scripts": "^18.0.1",
+    "@wordpress/server-side-render": "^3.0.2"
+  }
+}

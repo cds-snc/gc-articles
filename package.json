@@ -10,7 +10,7 @@
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",
     "generate-encryption-key": "docker exec cli bash -c \"cd /var/www/html; wp generate-encryption-key\"",
-    "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build",
+    "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build && cd classes/Modules/Subscribe && npm install && cd ../Contact && npm install",
     "import": "node ./import/import.js",
     "wp-env": "wp-env",
     "wp-env:init": "wp-env start",

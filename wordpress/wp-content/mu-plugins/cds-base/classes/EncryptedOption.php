@@ -27,8 +27,8 @@ class EncryptedOption
         $this->cipher = $cipher;
         $this->encrypter = new Encrypter($this->key, $this->cipher);
 
-        add_action( 'cli_init', function() {
-            WP_CLI::add_command( 'generate-encryption-key', [$this, 'generateKey'] );
+        add_action('cli_init', function () {
+            WP_CLI::add_command('generate-encryption-key', [$this, 'generateKey']);
         });
     }
 

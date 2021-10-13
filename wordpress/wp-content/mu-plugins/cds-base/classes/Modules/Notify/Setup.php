@@ -42,7 +42,7 @@ class Setup
          */
         $encryptionKey = getenv('ENCRYPTION_KEY');
 
-        if(!$encryptionKey || $encryptionKey == '') {
+        if (!$encryptionKey || $encryptionKey == '') {
             throw new Exception('No encryption key set in the environment');
         }
 

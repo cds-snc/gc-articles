@@ -15,7 +15,6 @@ use CDS\Modules\Cleanup\Menus as CleanupMenus;
 use CDS\Modules\Cleanup\Misc as CleanupMisc;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
-use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\FlashMessage\FlashMessage;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
@@ -28,7 +27,6 @@ use CDS\Modules\Meta\Favicon;
 use CDS\Modules\Meta\MetaTags;
 use CDS\Modules\Contact\Setup as ContactForm;
 use CDS\Modules\Styles\Setup as Styles;
-use CDS\Utils;
 use Exception;
 
 class Setup
@@ -132,12 +130,10 @@ class Setup
         /**
          * Setup Encrypted Options
          */
-        $encryptionKey = getenv('ENCRYPTION_KEY');
-
-        if (!$encryptionKey || $encryptionKey == '') {
+        if (!ENCRYPTION_KEY || ENCRYPTION_KEY == '') {
             throw new Exception('No encryption key set in the environment');
         }
 
-        return new EncryptedOption($encryptionKey);
+        return new EncryptedOption(ENCRYPTION_KEY);
     }
 }

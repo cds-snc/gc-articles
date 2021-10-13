@@ -17,6 +17,13 @@ jobs:
   cypress-tests:
     runs-on: ubuntu-latest
     name: Cypress
+    env:
+      # pass the Dashboard record key as an environment variable
+      CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      # pass GitHub token to allow accurately detecting a build vs a re-run build
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # required for encryption library
+      ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
     steps:
       - uses: actions/checkout@v2.3.4
       - uses: shivammathur/setup-php@v2
@@ -33,13 +40,6 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           record: true
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # pass GitHub token to allow accurately detecting a build vs a re-run build
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # required for encryption library
-          ENCRYPTION_KEY: ${{ secrets.ENCRYPTION_KEY }}
   php-tests:
     runs-on: ubuntu-latest
     name: PHP Pest tests

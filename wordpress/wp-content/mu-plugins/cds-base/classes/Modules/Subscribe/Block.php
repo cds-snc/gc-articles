@@ -30,6 +30,6 @@ class Block
     public function renderCallback($attributes, $content, $block): string
     {
         $form = new SubscriptionForm();
-        return $form->render();
+        return $form->render($attributes);
     }
 }

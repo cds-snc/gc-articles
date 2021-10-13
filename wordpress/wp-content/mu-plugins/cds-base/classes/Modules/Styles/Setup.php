@@ -9,6 +9,7 @@ class Setup
     public function __construct()
     {
         add_action('wp_enqueue_scripts', [$this, 'enqueue'], 99);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue']);
     }
 
     public function enqueue()

@@ -23,6 +23,12 @@ class Block
             __DIR__,
             [
                 'render_callback' => [ $this, 'renderCallback' ],
+                'attributes' => [
+                    'placeholderValue' => [
+                        'type' => 'string',
+                        "default" => "preview@example.com"
+                    ]
+                ]
             ]
         );
     }

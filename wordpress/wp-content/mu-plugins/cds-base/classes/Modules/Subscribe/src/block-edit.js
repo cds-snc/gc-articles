@@ -1,17 +1,31 @@
-
-import { useBlockProps } from '@wordpress/block-editor';
+import { __ } from "@wordpress/i18n";
 import ServerSideRender from '@wordpress/server-side-render';
-import { Disabled } from '@wordpress/components';
+import { PanelBody, Disabled, TextControl } from '@wordpress/components';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { name } from '../block.json';
 
-const Edit = ({ attributes }) => {
+const Edit = ({ attributes, setAttributes }) => {
+	const { placeholderValue } = attributes;
 	const blockProps = useBlockProps();
 	return (
-		<div {...blockProps}>
-			<Disabled>
-				<ServerSideRender block={name} attributes={attributes} />
-			</Disabled>
-		</div>
+		<>
+			<InspectorControls>
+				<PanelBody title={__('Subscribe form settings', "cds-snc")}>
+					<TextControl
+						label={__("Placeholder text", "cds-snc")}
+						value={placeholderValue}
+						onChange={(value) => setAttributes({
+							placeholderValue: value,
+						})}
+					/>
+				</PanelBody>
+			</InspectorControls>
+			<div {...blockProps}>
+				<Disabled>
+					<ServerSideRender block={name} attributes={attributes} />
+				</Disabled>
+			</div>
+		</>
 	);
 };
 

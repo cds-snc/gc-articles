@@ -20,8 +20,10 @@ class SubscriptionForm
     {
         
         ob_start();
-
-
+        $placeholder = "";
+        if ( ! empty( $attributes['placeholderValue'] ) ) :
+            $placeholder = $attributes['placeholderValue'];
+        endif;
         ?>
         <div class="gc-form-wrapper">
 
@@ -30,16 +32,9 @@ class SubscriptionForm
                 <div class="focus-group">
                     <label class="gc-label required" id="cds-email" for="email">
                         <?php _e("Enter your email:", "cds-snc"); ?>
-                        <span data-testid="asterisk" aria-hidden="true">*</span>
-                        <?php if ( !isset($attributes['hide-required-text']) || $attributes['hide-required-text'] == false ) : ?>
                         <i class="visually-hidden"><?php _e("Required Field", "cds-snc"); ?></i>
-                        <?php endif; ?>
                     </label>
-                    <input class="gc-input-text" type="text" name="email" value=" <?php
-                    if ( ! empty( $attributes['placeholder-value'] ) ) :
-                        echo $attributes['placeholder-value'];
-                    endif;
-                    ?>"/>
+                    <input class="gc-input-text" type="text" name="email" placeholder="<?php echo $placeholder; ?>" value=""/>
                 </div>
                 <div class="buttons">
                     <button class="gc-button gc-button" type="submit" id="subscribe-submit">

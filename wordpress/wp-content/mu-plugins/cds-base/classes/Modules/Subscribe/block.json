@@ -9,17 +9,11 @@
 	"textdomain": "cds-snc",
 	"editorScript": "file:./js/dist/index.js",
 	"attributes": {
-		"placeholder-value": {
+		"placeholderValue": {
 			"type": "string",
 			"source": "text",
 			"selector": "div",
 			"default": "preview@example.com"
-		},
-		"hide-required-text": {
-			"type": "boolean",
-			"source": "text",
-			"selector": "div",
-			"default": "true"
 		}
 	}
 }

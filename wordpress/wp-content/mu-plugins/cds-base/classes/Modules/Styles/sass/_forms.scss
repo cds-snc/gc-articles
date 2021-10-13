@@ -255,7 +255,7 @@
 
   .gc-input-text {
     border: solid 2px black;
-    @apply md:w-full md:text-small_base text-base text-gray-700 border-2 py-3 px-2 mt-2 mb-14 w-96;
+    @apply md:w-full md:text-small_base text-base text-gray-700 border-2 py-3 px-2 mt-2 mb-7 w-96;
 
     &:focus {
       @apply outline-none border-blue-focus shadow-input;

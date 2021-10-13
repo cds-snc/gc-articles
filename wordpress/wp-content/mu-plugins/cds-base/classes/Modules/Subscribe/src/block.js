@@ -11,5 +11,5 @@ registerBlockType(name, {
 	icon,
 	keywords: [],
 	edit: Edit,
-	save: () => null,
+	save: ({ attributes, className }) => null,
 });

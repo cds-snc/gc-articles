@@ -9,39 +9,18 @@ use CDS\EncryptedOption;
 class NotifySettings
 {
     protected string $admin_page = 'cds_notify_send';
-    protected EncryptedOption $encryptedOption;
 
-    public static function register(EncryptedOption $encryptedOption)
+    public static function register()
     {
-        $instance = new self($encryptedOption);
+        $instance = new self();
 
         add_action('admin_menu', [$instance, 'registerSubmenuPage']);
         add_action('admin_init', [$instance, 'registerSettings']);
-
-        $encryptedOptions = [
-            'NOTIFY_API_KEY',
-            'LIST_MANAGER_NOTIFY_SERVICES'
-        ];
-
-        foreach ($encryptedOptions as $option) {
-            add_filter("pre_update_option_{$option}", [$instance, 'encryptOption']);
-            add_filter("option_{$option}", [$instance, 'decryptOption']);
-        }
     }
 
-    public function __construct(EncryptedOption $encryptedOption)
+    public function __construct()
     {
-        $this->encryptedOption = $encryptedOption;
-    }
 
-    public function encryptOption($value): string
-    {
-        return $this->encryptedOption->encryptString($value);
-    }
-
-    public function decryptOption($value): string
-    {
-        return $this->encryptedOption->decryptString($value);
     }
 
     public function registerSubmenuPage()

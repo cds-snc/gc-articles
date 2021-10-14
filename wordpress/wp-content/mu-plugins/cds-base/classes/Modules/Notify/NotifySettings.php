@@ -184,7 +184,10 @@ class NotifySettings
             _('List Values JSON', 'cds-snc'), // title
             array( $this, 'listValuesCallback'), // callback
             'notify-api-settings-admin', // page
-            'list_manager_settings_section' // section
+            'list_manager_settings_section', // section
+            [
+                'label_for' => 'list_values'
+            ]
         );
 
         add_settings_field(
@@ -192,7 +195,10 @@ class NotifySettings
             _('Notify API Key', 'cds-snc'), // title
             array( $this, 'notifyApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
-            'notify_api_settings_setting_section' // section
+            'notify_api_settings_setting_section', // section
+            [
+                'label_for' => 'notify_api_key'
+            ]
         );
 
         add_settings_field(
@@ -200,7 +206,10 @@ class NotifySettings
             _('Notify Generic TemplateId', 'cds-snc'), // title
             array( $this, 'notifyGenericTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
-            'notify_api_settings_setting_section' // section
+            'notify_api_settings_setting_section', // section
+            [
+                'label_for' => 'notify_generic_template_id'
+            ]
         );
 
         add_settings_field(
@@ -208,7 +217,10 @@ class NotifySettings
             _('List Manager API Key'), // title
             array( $this, 'listManagerApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
-            'list_manager_settings_section' // section
+            'list_manager_settings_section', // section
+            [
+                'label_for' => 'list_manager_api_key'
+            ]
         );
 
         add_settings_field(
@@ -216,7 +228,10 @@ class NotifySettings
             _('List Manager Notify Services'), // title
             array( $this, 'listManagerNotifyServicesCallback'), // callback
             'notify-api-settings-admin', // page
-            'list_manager_settings_section' // section
+            'list_manager_settings_section', // section
+            [
+                'label_for' => 'list_manager_notify_services'
+            ]
         );
 
         add_settings_field(
@@ -224,7 +239,10 @@ class NotifySettings
             _('List Manager ServiceId'), // title
             array( $this, 'listManagerServiceIdCallback'), // callback
             'notify-api-settings-admin', // page
-            'list_manager_settings_section' // section
+            'list_manager_settings_section', // section
+            [
+                'label_for' => 'list_manager_service_id'
+            ]
         );
     }
 
@@ -289,7 +307,7 @@ class NotifySettings
     public function listValuesCallback()
     {
         printf(
-            '<textarea name="list_values" rows="4" cols="50">%s</textarea>
+            '<textarea name="list_values" id="list_values" rows="4" cols="50">%s</textarea>
 
                 <p class="description" id="new-admin-email-description">
                     ' . _('Format', 'cds-snc') . ':

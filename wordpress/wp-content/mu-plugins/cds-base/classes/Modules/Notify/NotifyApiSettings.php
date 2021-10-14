@@ -14,6 +14,7 @@ class NotifyApiSettings
     private $NOTIFY_GENERIC_TEMPLATE_ID;
     private $LIST_MANAGER_API_KEY;
     private $LIST_MANAGER_NOTIFY_SERVICES;
+    private $LIST_MANAGER_SERVICE_ID;
 
     public function __construct(EncryptedOption $encryptedOption)
     {
@@ -31,7 +32,8 @@ class NotifyApiSettings
         $encryptedOptions = [
             'NOTIFY_API_KEY',
             'LIST_MANAGER_API_KEY',
-            'LIST_MANAGER_NOTIFY_SERVICES'
+            'LIST_MANAGER_NOTIFY_SERVICES',
+            'LIST_MANAGER_SERVICE_ID'
         ];
 
         foreach ($encryptedOptions as $option) {
@@ -66,6 +68,7 @@ class NotifyApiSettings
         $this->NOTIFY_GENERIC_TEMPLATE_ID = get_option('NOTIFY_GENERIC_TEMPLATE_ID');
         $this->LIST_MANAGER_API_KEY = get_option('LIST_MANAGER_API_KEY');
         $this->LIST_MANAGER_NOTIFY_SERVICES = get_option('LIST_MANAGER_NOTIFY_SERVICES');
+        $this->LIST_MANAGER_SERVICE_ID = get_option('LIST_MANAGER_SERVICE_ID');
         ?>
 
         <div class="wrap">
@@ -133,6 +136,18 @@ class NotifyApiSettings
             }
         );
 
+        register_setting(
+            'notify_api_settings_option_group', // option_group
+            'LIST_MANAGER_SERVICE_ID',
+            function($input) {
+                if ($input == '') {
+                    return get_option('LIST_MANAGER_SERVICE_ID');
+                }
+
+                return sanitize_text_field($input);
+            }
+        );
+
         add_settings_section(
             'notify_api_settings_setting_section', // id
             'Settings', // title
@@ -168,6 +183,14 @@ class NotifyApiSettings
             'list_manager_notify_services', // id
             'LIST_MANAGER_NOTIFY_SERVICES', // title
             array( $this, 'list_manager_notify_services_callback' ), // callback
+            'notify-api-settings-admin', // page
+            'notify_api_settings_setting_section' // section
+        );
+
+        add_settings_field(
+            'list_manager_service_id', // id
+            'LIST_MANAGER_SERVICE_ID', // title
+            array( $this, 'list_manager_service_id_callback' ), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section' // section
         );
@@ -250,6 +273,14 @@ class NotifyApiSettings
         printf(
             '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="LIST_MANAGER_NOTIFY_SERVICES" id="list_manager_notify_services" value="">',
             $this->LIST_MANAGER_NOTIFY_SERVICES ? $this->stringify($this->LIST_MANAGER_NOTIFY_SERVICES) : ''
+        );
+    }
+
+    public function list_manager_service_id_callback()
+    {
+        printf(
+            '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="LIST_MANAGER_SERVICE_ID" id="list_manager_service_id" value="">',
+            $this->LIST_MANAGER_SERVICE_ID ? $this->stringify($this->LIST_MANAGER_SERVICE_ID) : ''
         );
     }
 

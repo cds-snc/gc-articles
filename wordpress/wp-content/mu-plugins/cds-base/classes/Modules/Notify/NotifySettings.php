@@ -20,7 +20,6 @@ class NotifySettings
 
     public function __construct()
     {
-
     }
 
     public function registerSubmenuPage()

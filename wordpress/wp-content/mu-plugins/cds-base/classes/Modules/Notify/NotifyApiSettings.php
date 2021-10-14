@@ -91,7 +91,7 @@ class NotifyApiSettings
         register_setting(
             'notify_api_settings_option_group', // option_group
             'NOTIFY_API_KEY',
-            function($input) {
+            function ($input) {
                 if ($input == '') {
                     return get_option('NOTIFY_API_KEY');
                 }
@@ -103,7 +103,7 @@ class NotifyApiSettings
         register_setting(
             'notify_api_settings_option_group', // option_group
             'NOTIFY_GENERIC_TEMPLATE_ID',
-            function($input) {
+            function ($input) {
                 if ($input == '') {
                     return get_option('NOTIFY_GENERIC_TEMPLATE_ID');
                 }
@@ -115,7 +115,7 @@ class NotifyApiSettings
         register_setting(
             'notify_api_settings_option_group', // option_group
             'LIST_MANAGER_API_KEY',
-            function($input) {
+            function ($input) {
                 if ($input == '') {
                     return get_option('LIST_MANAGER_API_KEY');
                 }
@@ -127,7 +127,7 @@ class NotifyApiSettings
         register_setting(
             'notify_api_settings_option_group', // option_group
             'LIST_MANAGER_NOTIFY_SERVICES',
-            function($input) {
+            function ($input) {
                 if ($input == '') {
                     return get_option('LIST_MANAGER_NOTIFY_SERVICES');
                 }
@@ -139,7 +139,7 @@ class NotifyApiSettings
         register_setting(
             'notify_api_settings_option_group', // option_group
             'LIST_MANAGER_SERVICE_ID',
-            function($input) {
+            function ($input) {
                 if ($input == '') {
                     return get_option('LIST_MANAGER_SERVICE_ID');
                 }
@@ -158,7 +158,7 @@ class NotifyApiSettings
         add_settings_field(
             'notify_api_key', // id
             'NOTIFY_API_KEY', // title
-            array( $this, 'notify_api_key_callback' ), // callback
+            array( $this, 'notifyApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section' // section
         );
@@ -166,7 +166,7 @@ class NotifyApiSettings
         add_settings_field(
             'notify_generic_template_id', // id
             'NOTIFY_GENERIC_TEMPLATE_ID', // title
-            array( $this, 'notify_generic_template_id_callback' ), // callback
+            array( $this, 'notifyGenericTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section' // section
         );
@@ -174,7 +174,7 @@ class NotifyApiSettings
         add_settings_field(
             'list_manager_api_key', // id
             'LIST_MANAGER_API_KEY', // title
-            array( $this, 'list_manager_api_key_callback' ), // callback
+            array( $this, 'listManagerApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section' // section
         );
@@ -182,7 +182,7 @@ class NotifyApiSettings
         add_settings_field(
             'list_manager_notify_services', // id
             'LIST_MANAGER_NOTIFY_SERVICES', // title
-            array( $this, 'list_manager_notify_services_callback' ), // callback
+            array( $this, 'listManagerNotifyServicesCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section' // section
         );
@@ -190,7 +190,7 @@ class NotifyApiSettings
         add_settings_field(
             'list_manager_service_id', // id
             'LIST_MANAGER_SERVICE_ID', // title
-            array( $this, 'list_manager_service_id_callback' ), // callback
+            array( $this, 'listManagerServiceIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section' // section
         );
@@ -199,14 +199,14 @@ class NotifyApiSettings
     public function notifyApiSettingsSanitize($input)
     {
         if ($input != '') {
-          return $input;
+            return $input;
         }
     }
 
     public function sanitizeNotifyApiKey($input)
     {
         if ($input == '') {
-          return get_option('NOTIFY_API_KEY');
+            return get_option('NOTIFY_API_KEY');
         }
 
         return sanitize_text_field($input);
@@ -217,7 +217,7 @@ class NotifyApiSettings
     {
     }
 
-    public function notify_api_key_callback()
+    public function notifyApiKeyCallback()
     {
         printf(
             '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="NOTIFY_API_KEY" id="notify_api_key" value="">',
@@ -238,7 +238,7 @@ class NotifyApiSettings
     {
         $textLength = strlen($string);
 
-        return substr_replace($string, '...', $maxChars/2, $textLength-$maxChars);
+        return substr_replace($string, '...', $maxChars / 2, $textLength - $maxChars);
     }
 
     public function obfuscate($string, $replaceWith = 'X'): array|string|null
@@ -252,7 +252,7 @@ class NotifyApiSettings
         return $string;
     }
 
-    public function notify_generic_template_id_callback()
+    public function notifyGenericTemplateIdCallback()
     {
         printf(
             '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="NOTIFY_GENERIC_TEMPLATE_ID" id="notify_generic_template_id" value="">',
@@ -260,7 +260,7 @@ class NotifyApiSettings
         );
     }
 
-    public function list_manager_api_key_callback()
+    public function listManagerApiKeyCallback()
     {
         printf(
             '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="LIST_MANAGER_API_KEY" id="list_manager_api_key" value="">',
@@ -268,7 +268,7 @@ class NotifyApiSettings
         );
     }
 
-    public function list_manager_notify_services_callback()
+    public function listManagerNotifyServicesCallback()
     {
         printf(
             '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="LIST_MANAGER_NOTIFY_SERVICES" id="list_manager_notify_services" value="">',
@@ -276,7 +276,7 @@ class NotifyApiSettings
         );
     }
 
-    public function list_manager_service_id_callback()
+    public function listManagerServiceIdCallback()
     {
         printf(
             '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="LIST_MANAGER_SERVICE_ID" id="list_manager_service_id" value="">',

@@ -196,23 +196,6 @@ class NotifyApiSettings
         );
     }
 
-    public function notifyApiSettingsSanitize($input)
-    {
-        if ($input != '') {
-            return $input;
-        }
-    }
-
-    public function sanitizeNotifyApiKey($input)
-    {
-        if ($input == '') {
-            return get_option('NOTIFY_API_KEY');
-        }
-
-        return sanitize_text_field($input);
-    }
-
-
     public function notifyApiSettingsSectionInfo()
     {
     }

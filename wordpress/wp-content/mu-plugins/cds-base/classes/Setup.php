@@ -82,6 +82,10 @@ class Setup
      */
     protected function getEncryptionKey(): bool|array|string
     {
+        /**
+         * If we're in a wp-env dev, test, or cli environment, return a hard-coded key. This works because the
+         * environment variable is not available in the wp-env environment, but is available in our docker cli.
+         */
         if ((Utils::isWpEnv()) || (defined( 'WP_CLI' ) && WP_CLI)) {
             return getenv('ENCRYPTION_KEY') ?: "base64:cELNoBToBqa9NtubmEoo+Tsh3nz2gAVz79eGrwzg9ZE=";
         }

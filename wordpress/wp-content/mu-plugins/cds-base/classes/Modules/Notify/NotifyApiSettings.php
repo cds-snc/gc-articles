@@ -210,11 +210,7 @@ class NotifyApiSettings
 
     public function stringify($string)
     {
-        // if (is_string($string)) {
-            return $this->truncate($this->obfuscate($string));
-        // }
-
-        //return $string;
+        return $this->truncate($this->obfuscate($string));
     }
 
     public function truncate($string, $maxChars = 16)

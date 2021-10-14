@@ -68,8 +68,13 @@ class PostTable extends WP_Posts_List_Table
         $title = _draft_or_post_title();
 
         // @CDS-SNC start modification
-        _post_states($post);
-        print("<span>&mdash; </span>");
+        $state = _post_states($post, $echo = false);
+
+        if(!empty($state))
+        {
+            $state = strtoupper(trim(str_replace("&mdash;", "", $state)));
+            printf("[%s] ", $state);
+        }
         // end modification
 
         if ($can_edit_post && 'trash' !== $post->post_status) {

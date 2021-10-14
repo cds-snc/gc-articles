@@ -86,10 +86,6 @@ class Setup
             return getenv('ENCRYPTION_KEY') ?: "base64:cELNoBToBqa9NtubmEoo+Tsh3nz2gAVz79eGrwzg9ZE=";
         }
 
-        if (defined('ENCRYPTION_KEY')) {
-            return ENCRYPTION_KEY;
-        }
-
         return getenv('ENCRYPTION_KEY');
     }
 

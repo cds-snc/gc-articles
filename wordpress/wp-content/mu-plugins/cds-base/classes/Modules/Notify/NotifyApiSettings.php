@@ -10,11 +10,11 @@ class NotifyApiSettings
 {
     protected EncryptedOption $encryptedOption;
 
-    private $NOTIFY_API_KEY;
-    private $NOTIFY_GENERIC_TEMPLATE_ID;
-    private $LIST_MANAGER_API_KEY;
-    private $LIST_MANAGER_NOTIFY_SERVICES;
-    private $LIST_MANAGER_SERVICE_ID;
+    private string $NOTIFY_API_KEY;
+    private string $NOTIFY_GENERIC_TEMPLATE_ID;
+    private string $LIST_MANAGER_API_KEY;
+    private string $LIST_MANAGER_NOTIFY_SERVICES;
+    private string $LIST_MANAGER_SERVICE_ID;
 
     public function __construct(EncryptedOption $encryptedOption)
     {
@@ -208,19 +208,40 @@ class NotifyApiSettings
         );
     }
 
-    public function stringify($string)
+    /**
+     * Truncate and Obfuscate the string
+     *
+     * @param $string
+     * @return array|string
+     */
+    public function stringify($string): array|string
     {
         return $this->truncate($this->obfuscate($string));
     }
 
-    public function truncate($string, $maxChars = 16)
+    /**
+     * Truncate the string
+     *
+     * @param $string
+     * @param  int  $maxChars
+     * @return array|string
+     */
+    public function truncate($string, $maxChars = 16): array|string
     {
         $textLength = strlen($string);
 
         return substr_replace($string, '...', $maxChars / 2, $textLength - $maxChars);
     }
 
-    public function obfuscate($string, $replaceWith = 'X'): array|string|null
+    /**
+     * Obfuscate the string
+     *
+     * @param $string
+     * @param  string  $replaceWith
+     *
+     * @return array|string|null
+     */
+    public function obfuscate($string, string $replaceWith = 'X'): array|string|null
     {
         $chars = preg_quote('#/\!?@%^&*()_+=[]{}~"“”‘’\'`~<>,.|;:…—–-', '/');
 

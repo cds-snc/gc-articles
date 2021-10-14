@@ -252,7 +252,7 @@ body {
 
   .postbox,
   #menu-management .menu-edit, #menu-settings-column .accordion-container, .comment-ays, .feature-filter, .imgedit-group, .manage-menus, .menu-item-handle, .popular-tags, .stuffbox, .widget-inside, .widget-top, .widgets-holder-wrap, .wp-editor-container, p.popular-tags, table.widefat {
-      border: 1px solid #ccc;
+    border: 1px solid #ccc;
   }
 
   .postbox-header,
@@ -356,6 +356,11 @@ body {
   #adminmenu .wp-has-current-submenu.opensub .wp-submenu li.current a:hover,
   #adminmenu .wp-has-current-submenu.opensub .wp-submenu li.current a:focus {
     color: #0535d2;
+  }
+
+  #adminmenu a.current {
+    box-shadow: inset 4px 0 0 0 currentColor;
+    transition: box-shadow .1s linear;
   }
   
   ul#adminmenu a.wp-has-current-submenu:after,

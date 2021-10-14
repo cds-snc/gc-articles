@@ -64,11 +64,11 @@ class NotifyApiSettings
 
     public function notifyApiSettingsCreateAdminPage()
     {
-        $this->NOTIFY_API_KEY = get_option('NOTIFY_API_KEY');
-        $this->NOTIFY_GENERIC_TEMPLATE_ID = get_option('NOTIFY_GENERIC_TEMPLATE_ID');
-        $this->LIST_MANAGER_API_KEY = get_option('LIST_MANAGER_API_KEY');
-        $this->LIST_MANAGER_NOTIFY_SERVICES = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $this->LIST_MANAGER_SERVICE_ID = get_option('LIST_MANAGER_SERVICE_ID');
+        $this->NOTIFY_API_KEY = get_option('NOTIFY_API_KEY') ?: '';
+        $this->NOTIFY_GENERIC_TEMPLATE_ID = get_option('NOTIFY_GENERIC_TEMPLATE_ID') ?: '';
+        $this->LIST_MANAGER_API_KEY = get_option('LIST_MANAGER_API_KEY') ?: '';
+        $this->LIST_MANAGER_NOTIFY_SERVICES = get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
+        $this->LIST_MANAGER_SERVICE_ID = get_option('LIST_MANAGER_SERVICE_ID') ?: '';
         ?>
 
         <div class="wrap">

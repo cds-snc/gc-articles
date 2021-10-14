@@ -83,7 +83,7 @@ class Setup
     protected function getEncryptionKey(): bool|array|string
     {
         if ((Utils::isWpEnv()) || (defined( 'WP_CLI' ) && WP_CLI)) {
-            return "base64:KQYtxHmxqceYr5y0VC3cU9JP+TdkIBDeXA5E++wouE8=";
+            return getenv('ENCRYPTION_KEY') ?: "base64:cELNoBToBqa9NtubmEoo+Tsh3nz2gAVz79eGrwzg9ZE=";
         }
 
         if (defined('ENCRYPTION_KEY')) {

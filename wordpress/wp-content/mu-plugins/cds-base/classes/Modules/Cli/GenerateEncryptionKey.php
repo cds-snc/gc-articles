@@ -25,6 +25,18 @@ class GenerateEncryptionKey
         });
     }
 
+    /**
+     * This one can be called from a Composer script
+     *
+     * @param $event
+     * @throws \Exception
+     */
+    public static function generateEncryptionKey($event)
+    {
+        $event->getIO()->write('Here is an encryption key, you should add it to your .env file as ENCRYPTION_KEY');
+        $event->getIO()->write('base64:'.base64_encode(random_bytes(32)));
+    }
+
     public function generateKey()
     {
         $key = $this->encryptedOption->generateKey();

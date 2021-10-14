@@ -17,7 +17,6 @@ class Setup
         new NotifyTemplateSender(new FormHelpers(), new Notices());
 
         NotifySettings::register();
-
         NotifyApiSettings::register($encryptedOption);
 
         if ($this->isNotifyConfigured()) {

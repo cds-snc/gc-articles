@@ -37,10 +37,10 @@ class Misc
         return $actions;
     }
 
-    public function customPostTable( $views )
+    public function customPostTable($views)
     {
-       global $wp_list_table;
-       $wp_list_table = new PostTable();
-       return $views;
+        global $wp_list_table;
+        $wp_list_table = new PostTable();
+        return $views;
     }
 }

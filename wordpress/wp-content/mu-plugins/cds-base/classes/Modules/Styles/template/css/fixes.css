@@ -23,13 +23,13 @@ body ul > ul, body .ul > .ul, body ol > ol, body .ol > .ol {
 
 /* Tables */
 
-body table {
+body:not(.wp-admin) table {
     width: 100%;
     max-width: 100%;
     margin-bottom: 23px;
 }
 
-body table thead tr th {
+body:not(.wp-admin) table thead tr th {
     border-top: 0;
     background-color: #f0f0f0;
     border: 1px solid #ddd;
@@ -39,9 +39,31 @@ body table thead tr th {
     line-height: 1.4375;
 }
 
-body table tbody tr td {
+body:not(.wp-admin) table tbody tr td {
     border: 1px solid #ddd;
     padding: 5px;
     line-height: 1.4375;
     vertical-align: top;
+}
+
+/* Link button (for blog pagination) */
+
+.pager .next > a,
+.pager .next > a:visited,
+.pager .previous > a,
+.pager .previous > a:visited {
+    color: #335075;
+    background-color: #eaebed;
+    border-color: #dcdee1;
+    border-style: outset;
+}
+
+.pager .next > a:hover, .pager .previous > a:hover {
+    background-color: #cfd1d5;
+    border-color: #bbbfc5
+}
+
+.pager .next > a:active, .pager .previous > a:active {
+    background-color: #bbbfc5;
+    border-color: #989da6;
 }

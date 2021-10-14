@@ -189,7 +189,7 @@ class NotifySettings
 
         add_settings_field(
             'notify_api_key', // id
-            'NOTIFY_API_KEY', // title
+            _('Notify API Key', 'cds-snc'), // title
             array( $this, 'notifyApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section' // section
@@ -197,7 +197,7 @@ class NotifySettings
 
         add_settings_field(
             'notify_generic_template_id', // id
-            'NOTIFY_GENERIC_TEMPLATE_ID', // title
+            _('Notify Generic TemplateId', 'cds-snc'), // title
             array( $this, 'notifyGenericTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section' // section
@@ -205,7 +205,7 @@ class NotifySettings
 
         add_settings_field(
             'list_manager_api_key', // id
-            'LIST_MANAGER_API_KEY', // title
+            _('List Manager API Key'), // title
             array( $this, 'listManagerApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
             'list_manager_settings_section' // section
@@ -213,7 +213,7 @@ class NotifySettings
 
         add_settings_field(
             'list_manager_notify_services', // id
-            'LIST_MANAGER_NOTIFY_SERVICES', // title
+            _('List Manager Notify Services'), // title
             array( $this, 'listManagerNotifyServicesCallback'), // callback
             'notify-api-settings-admin', // page
             'list_manager_settings_section' // section
@@ -221,7 +221,7 @@ class NotifySettings
 
         add_settings_field(
             'list_manager_service_id', // id
-            'LIST_MANAGER_SERVICE_ID', // title
+            _('List Manager ServiceId'), // title
             array( $this, 'listManagerServiceIdCallback'), // callback
             'notify-api-settings-admin', // page
             'list_manager_settings_section' // section

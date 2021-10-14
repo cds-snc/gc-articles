@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace CDS;
 
-use CDS\Modules\Cleanup\PostsToArticles;
-use CDS\Modules\Cleanup\SitesToCollections;
 use CDS\Modules\Blocks\Blocks;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
 use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
@@ -13,21 +11,23 @@ use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
 use CDS\Modules\Cleanup\Login as CleanupLogin;
 use CDS\Modules\Cleanup\Menus as CleanupMenus;
 use CDS\Modules\Cleanup\Misc as CleanupMisc;
+use CDS\Modules\Cleanup\PostsToArticles;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
+use CDS\Modules\Cleanup\SitesToCollections;
 use CDS\Modules\Cli\GenerateEncryptionKey;
+use CDS\Modules\Contact\Setup as ContactForm;
 use CDS\Modules\FlashMessage\FlashMessage;
+use CDS\Modules\Meta\Favicon;
+use CDS\Modules\Meta\MetaTags;
 use CDS\Modules\Notify\NotifyClient;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
 use CDS\Modules\Notify\Setup as SetupNotify;
+use CDS\Modules\Styles\Setup as Styles;
+use CDS\Modules\Subscribe\Setup as SubscriptionForm;
 use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\TwoFactor\TwoFactor;
-use CDS\Modules\Subscribe\Setup as SubscriptionForm;
-use CDS\Modules\Meta\Favicon;
-use CDS\Modules\Meta\MetaTags;
-use CDS\Modules\Contact\Setup as ContactForm;
-use CDS\Modules\Styles\Setup as Styles;
 use Exception;
 
 class Setup
@@ -55,6 +55,42 @@ class Setup
 
         // @TODO: subscriptions not tested since refactor
         // $this->setupSubscriptions();
+    }
+
+    /**
+     * @return EncryptedOption
+     * @throws Exception
+     */
+    protected function getEncryptedOption(): EncryptedOption
+    {
+        $encryptionKey = $this->getEncryptionKey();
+
+        /**
+         * Setup Encrypted Options
+         */
+        if (!$encryptionKey || $encryptionKey == '') {
+            throw new Exception('No encryption key set in the environment');
+        }
+
+        return new EncryptedOption($encryptionKey);
+    }
+
+    /**
+     * Get Encryption Key either from CONSTANTS or environment
+     *
+     * @return bool|array|string
+     */
+    protected function getEncryptionKey(): bool|array|string
+    {
+        if ((Utils::isWpEnv()) || (defined( 'WP_CLI' ) && WP_CLI)) {
+            return "base64:KQYtxHmxqceYr5y0VC3cU9JP+TdkIBDeXA5E++wouE8=";
+        }
+
+        if (defined('ENCRYPTION_KEY')) {
+            return ENCRYPTION_KEY;
+        }
+
+        return getenv('ENCRYPTION_KEY');
     }
 
     public function cleanup()
@@ -106,7 +142,6 @@ class Setup
         new SetupNotify($this->encryptedOption);
     }
 
-
     public function setupBlocks()
     {
         new Blocks();
@@ -126,40 +161,5 @@ class Setup
     public function setupSubscriptions()
     {
         new SetupSubscriptions();
-    }
-
-    /**
-     * @return EncryptedOption
-     * @throws Exception
-     */
-    protected function getEncryptedOption(): EncryptedOption
-    {
-        $encryptionKey = $this->getEncryptionKey();
-        /**
-         * Setup Encrypted Options
-         */
-        if (!$encryptionKey || $encryptionKey == '') {
-            throw new Exception('No encryption key set in the environment');
-        }
-
-        return new EncryptedOption($encryptionKey);
-    }
-
-    /**
-     * Get Encryption Key either from CONSTANTS or environment
-     *
-     * @return bool|array|string
-     */
-    protected function getEncryptionKey(): bool|array|string
-    {
-        if (Utils::isWpEnv()) {
-            return "base64:KQYtxHmxqceYr5y0VC3cU9JP+TdkIBDeXA5E++wouE8=";
-        }
-
-        if (defined('ENCRYPTION_KEY')) {
-            return ENCRYPTION_KEY;
-        }
-
-        return getenv('ENCRYPTION_KEY');
     }
 }

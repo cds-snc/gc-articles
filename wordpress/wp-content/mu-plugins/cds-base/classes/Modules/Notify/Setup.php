@@ -16,8 +16,7 @@ class Setup
     {
         new NotifyTemplateSender(new FormHelpers(), new Notices());
 
-        NotifySettings::register();
-        NotifyApiSettings::register($encryptedOption);
+        NotifySettings::register($encryptedOption);
 
         if ($this->isNotifyConfigured()) {
             include __DIR__ . '/includes/wp-mail-notify-api.php';

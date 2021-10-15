@@ -16,21 +16,34 @@ Docker-compose and VS Code Remote Container environment featuring:
 - Docker
 - Docker-compose
 - VS Code w/ Remote Containers extension (optional)
+- Composer
 
 ## Config
 
-Copy the `.env.example` file to `.env` and customize as necessary (you shouldn't need to change anything)
+Copy the `.env.example` file to `.env` and customize as needed
 
 ```
 cp .env.example .env
 ```
 
-## Usage
+First thing you'll want to add is an ENCRYPTION_KEY which will be used for encrypting sensitive information in the 
+database such as NOTIFY API keys. 
 
-To start, clone the repo and then bring up the environment using docker-compose:
+The encryption key is a base64 encoded random string. There is a helpful Composer command for generating one. After 
+cloning the repo, cd to the wordpress directory and generate a key:
 
-```
+```sh
 git clone git@github.com:cds-snc/platform-mvp.git
+cd platform-mvp
+composer generate-encryption-key
+```
+
+## Start it up
+
+With your encryption key and other settings configured, you can bring up the environment using docker-compose from the
+root of the project:
+
+```sh
 docker-compose up
 ```
 

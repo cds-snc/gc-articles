@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace CDS\Modules\Cli;
 
 use CDS\EncryptedOption;
+use Composer\Script\Event;
+use Exception;
 use WP_CLI;
 
 class GenerateEncryptionKey
@@ -26,12 +28,12 @@ class GenerateEncryptionKey
     }
 
     /**
-     * This one can be called from a Composer script
+     * This is a simplified version that can be called from a Composer script directly
      *
-     * @param $event
-     * @throws \Exception
+     * @param  Event  $event
+     * @throws Exception
      */
-    public static function generateEncryptionKey($event)
+    public static function composerGenerateEncryptionKey(Event $event)
     {
         $event->getIO()->write('Here is an encryption key, you should add it to your .env file as ENCRYPTION_KEY');
         $event->getIO()->write('base64:'.base64_encode(random_bytes(32)));

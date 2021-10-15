@@ -36,7 +36,7 @@ class GenerateEncryptionKey
     public static function composerGenerateEncryptionKey(Event $event)
     {
         $event->getIO()->write('Here is an encryption key, you should add it to your .env file as ENCRYPTION_KEY');
-        $event->getIO()->write('base64:'.base64_encode(random_bytes(32)));
+        $event->getIO()->write('base64:' . base64_encode(random_bytes(32)));
     }
 
     public function generateKey()

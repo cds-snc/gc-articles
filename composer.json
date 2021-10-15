@@ -1,0 +1,16 @@
+{
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "scripts": {
+    "generate-encryption-key": "CDS\\Modules\\Cli\\GenerateEncryptionKey::composerGenerateEncryptionKey"
+  },
+  "autoload": {
+    "psr-4": {
+      "CDS\\": "wordpress/wp-content/mu-plugins/cds-base/classes/"
+    }
+  }
+}

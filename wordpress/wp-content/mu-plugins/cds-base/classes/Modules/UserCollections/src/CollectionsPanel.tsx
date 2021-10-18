@@ -71,7 +71,7 @@ export const CollectionsPanel = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getData('user/collections');
+      const response = await getData('user-collection/collections');
       setIsLoading(false);
       const collections = Object.values(response);
       if (collections.length >= 1) {

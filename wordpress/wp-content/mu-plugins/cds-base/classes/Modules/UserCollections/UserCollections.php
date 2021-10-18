@@ -21,7 +21,7 @@ class UserCollections
 
     public function registerRestRoutes()
     {
-        register_rest_route('user', '/collections', [
+        register_rest_route('user-collection', '/collections', [
             'methods'             => 'GET',
             'callback'            => [$this, 'getUserCollections'],
             'permission_callback' => function () {

@@ -1,6 +1,6 @@
 <?php
 
-use CDS\EncryptedOption;
+use CDS\Modules\EncryptedOption\EncryptedOption;
 
 test('Encrypt/Decrypt string', function() {
     $encryptedOption = new EncryptedOption(str_repeat('a', 32));

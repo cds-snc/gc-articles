@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CDS;
+namespace CDS\Modules\EncryptedOption;
 
 use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Str;

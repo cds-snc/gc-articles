@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Cli;
 
-use CDS\EncryptedOption;
+use CDS\Modules\EncryptedOption\EncryptedOption;
 use Composer\Script\Event;
 use Exception;
 use WP_CLI;

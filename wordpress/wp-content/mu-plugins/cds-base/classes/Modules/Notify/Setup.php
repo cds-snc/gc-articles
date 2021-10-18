@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Notify;
 
-use CDS\EncryptedOption;
+use CDS\Modules\EncryptedOption\EncryptedOption;
 use Exception;
 
 class Setup

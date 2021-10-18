@@ -47,7 +47,7 @@ resource "aws_sns_topic" "alert_observe_us_east" {
 resource "aws_sns_topic_subscription" "alert_warning" {
   topic_arn = aws_sns_topic.alert_warning.arn
   protocol  = "lambda"
-  endpoint  = aws_lambda_function.notify_slack.arn
+  endpoint  = module.notify_slack.lambda_arn
 }
 
 resource "aws_sns_topic_subscription" "alert_warning_us_east" {
@@ -55,7 +55,7 @@ resource "aws_sns_topic_subscription" "alert_warning_us_east" {
 
   topic_arn = aws_sns_topic.alert_warning_us_east.arn
   protocol  = "lambda"
-  endpoint  = aws_lambda_function.notify_slack.arn
+  endpoint  = module.notify_slack.lambda_arn
 }
 
 #
@@ -110,4 +110,23 @@ data "aws_iam_policy_document" "sns_cloudwatch" {
       identifiers = ["cloudwatch.amazonaws.com"]
     }
   }
+}
+
+#
+# Lambda: post notifications to Slack
+#
+module "notify_slack" {
+  source = "github.com/cds-snc/terraform-modules?ref=v0.0.36//notify_slack"
+
+  function_name     = "notify_slack"
+  project_name      = "WordPress"
+  slack_webhook_url = var.slack_webhook_url
+
+  sns_topic_arns = [
+    aws_sns_topic.alert_warning.arn,
+    aws_sns_topic.alert_warning_us_east.arn
+  ]
+
+  billing_tag_key   = var.billing_tag_key
+  billing_tag_value = var.billing_tag_value
 }

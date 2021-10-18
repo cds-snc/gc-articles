@@ -103,7 +103,7 @@ class EncryptedOption
      * @param $key
      * @return string
      */
-    protected function parseKey($key): string
+    public function parseKey($key): string
     {
         if (Str::startsWith($key, $prefix = 'base64:')) {
             $key = base64_decode(Str::after($key, $prefix));

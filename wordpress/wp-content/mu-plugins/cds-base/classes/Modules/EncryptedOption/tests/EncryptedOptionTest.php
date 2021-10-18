@@ -20,3 +20,16 @@ test('GenerateKey', function() {
     $keyparts = explode(':', $key);
     $this->assertTrue(strlen($keyparts[1]) === 44);
 });
+
+test('ParseKey', function() {
+    $encryptedOption = new EncryptedOption(str_repeat('a', 32));
+    $key = $encryptedOption->generateKey();
+
+    $keyparts = explode(':', $key);
+    $decoded = base64_decode($keyparts[1]);
+
+    $parsedKey = $encryptedOption->parseKey($key);
+
+    $this->assertFalse(\Illuminate\Support\Str::startsWith($parsedKey, 'base64:'));
+    $this->assertEquals($parsedKey, $decoded);
+});

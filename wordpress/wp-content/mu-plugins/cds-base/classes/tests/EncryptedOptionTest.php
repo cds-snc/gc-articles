@@ -3,8 +3,8 @@
 use CDS\EncryptedOption;
 
 test('Encrypt/Decrypt string', function() {
-    $e = new EncryptedOption(str_repeat('a', 32));
-    $encrypted = $e->encryptString('foo');
+    $encryptedOption = new EncryptedOption(str_repeat('a', 32));
+    $encrypted = $encryptedOption->encryptString('foo');
     $this->assertNotSame('foo', $encrypted);
-    $this->assertSame('foo', $e->decryptString($encrypted));
+    $this->assertSame('foo', $encryptedOption->decryptString($encrypted));
 });

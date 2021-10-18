@@ -30,7 +30,7 @@ First thing you'll want to add is an ENCRYPTION_KEY which will be used for encry
 database such as NOTIFY API keys. 
 
 The encryption key is a base64 encoded random string. There is a helpful Composer command for generating one. After 
-cloning the repo, cd to the wordpress directory and generate a key:
+cloning the repo, cd to the project directory and generate a key:
 
 ```sh
 git clone git@github.com:cds-snc/platform-mvp.git

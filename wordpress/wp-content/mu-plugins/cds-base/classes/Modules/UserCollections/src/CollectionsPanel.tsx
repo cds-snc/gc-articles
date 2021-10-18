@@ -56,7 +56,7 @@ const Collections = ({
             <strong className="collection-website">{__('Website', 'cds-snc')}</strong>
           </th>
           <th>
-            <strong className="collection-admin">{__('Admin', 'cds-snc')}</strong>
+            <strong className="collection-admin">{__('Dashboard', 'cds-snc')}</strong>
           </th>
         </tr>
       </thead>
@@ -71,7 +71,7 @@ export const CollectionsPanel = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getData('user-collection/collections');
+      const response = await getData('usercollection/collections');
       setIsLoading(false);
       const collections = Object.values(response);
       if (collections.length >= 1) {

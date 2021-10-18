@@ -7,7 +7,7 @@ describe('User Collections Panel', () => {
         cy.intercept(
             {
                 method: 'GET',
-                url: 'index.php?rest_route=/user-collection/collections', // that have a URL that matches '/users/*'
+                url: 'index.php?rest_route=/usercollection/collections', // that have a URL that matches '/users/*'
             },
             {
                 "1": {
@@ -49,7 +49,5 @@ describe('User Collections Panel', () => {
 
         cy.get('#collection-panel-container table tbody').find('tr').should('have.length', 2);
         cy.get('#collection-panel-container .row-1 .name').should('have.text', "test");
-        cy.get('#collection-panel-container .row-1 .website a').should('have.text', "http://localhost/test");
-
     });
 });

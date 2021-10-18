@@ -252,11 +252,14 @@ class NotifySettings
 
     public function getObfuscatedOutputLabel($string, $labelId)
     {
-        $startsWith = substr($string,0, 4);
+        $startsWith = substr($string, 0, 4);
         $endsWith = substr($string, -4);
 
         printf(
-            '<span class="hidden_keys" id="%s">Current value: <span class="sr-only">Starts with </span>%s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%s</span>', $labelId, $startsWith, $endsWith
+            '<span class="hidden_keys" id="%s">Current value: <span class="sr-only">Starts with </span>%s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%s</span>',
+            $labelId,
+            $startsWith,
+            $endsWith
         );
     }
 

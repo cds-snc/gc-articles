@@ -84,11 +84,11 @@ class NotifySettings
         ?>
 
         <div class="wrap">
-            <h2>Notify and List Manager Settings</h2>
+            <h1>Notify and List Manager Settings</h1>
             <p></p>
             <?php settings_errors(); ?>
 
-            <form method="post" action="options.php">
+            <form method="post" action="options.php" id="notify_settings_form">
                 <?php
                 settings_fields('notify_api_settings_option_group');
                 do_settings_sections('notify-api-settings-admin');

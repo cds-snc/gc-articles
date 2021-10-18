@@ -70,8 +70,7 @@ class PostTable extends WP_Posts_List_Table
         // @CDS-SNC start modification
         $state = _post_states($post, $echo = false);
 
-        if(!empty($state))
-        {
+        if (!empty($state)) {
             $state = strtoupper(trim(str_replace("&mdash;", "", $state)));
             printf("[%s] ", $state);
         }

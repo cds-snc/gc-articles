@@ -67,7 +67,7 @@ class NotifySettings
         ?>
 
         <div class="wrap">
-            <h1>Notify and List Manager Settings</h1>
+            <h1><?php _('Notify and List Manager Settings', 'cds-snc') ?></h1>
             <p></p>
             <?php settings_errors(); ?>
 
@@ -150,7 +150,7 @@ class NotifySettings
 
         add_settings_section(
             'notify_api_settings_setting_section', // id
-            'Notify', // title
+            _('Notify', 'cds-snc'), // title
             array( $this, 'notifyApiSettingsSectionInfo'), // callback
             'notify-api-settings-admin' // page
         );
@@ -197,7 +197,7 @@ class NotifySettings
 
         add_settings_field(
             'list_manager_api_key', // id
-            _('List Manager API Key'), // title
+            _('List Manager API Key', 'cds-snc'), // title
             array( $this, 'listManagerApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
             'list_manager_settings_section', // section
@@ -208,7 +208,7 @@ class NotifySettings
 
         add_settings_field(
             'list_manager_notify_services', // id
-            _('List Manager Notify Services'), // title
+            _('List Manager Notify Services', 'cds-snc'), // title
             array( $this, 'listManagerNotifyServicesCallback'), // callback
             'notify-api-settings-admin', // page
             'list_manager_settings_section', // section
@@ -219,7 +219,7 @@ class NotifySettings
 
         add_settings_field(
             'list_manager_service_id', // id
-            _('List Manager ServiceId'), // title
+            _('List Manager Service Id', 'cds-snc'), // title
             array( $this, 'listManagerServiceIdCallback'), // callback
             'notify-api-settings-admin', // page
             'list_manager_settings_section', // section
@@ -238,12 +238,11 @@ class NotifySettings
         $startsWith = substr($string, 0, 4);
         $endsWith = substr($string, -4);
 
-        printf(
-            '<span class="hidden_keys" id="%s">Current value: <span class="sr-only">Starts with </span>%s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%s</span>',
+
+          printf(__('<span class="hidden_keys" id="%s">Current value: <span class="sr-only">Starts with </span>%s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%s</span>', 'cds-snc'),
             $labelId,
             $startsWith,
-            $endsWith
-        );
+            $endsWith);
     }
 
     public function notifyApiKeyCallback()

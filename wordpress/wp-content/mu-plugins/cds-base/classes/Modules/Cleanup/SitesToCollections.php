@@ -29,12 +29,8 @@ class SitesToCollections
 
     public function changeSitesLabelAdminBar(): void
     {
+        // remove "My Sites"
         global $wp_admin_bar;
-        $my_sites = $wp_admin_bar->get_node('my-sites');
-
-        $wp_admin_bar->add_node([
-            'id' => 'my-sites',
-            'title' => "My Collections"
-        ]);
+        $wp_admin_bar->remove_menu('my-sites');
     }
 }

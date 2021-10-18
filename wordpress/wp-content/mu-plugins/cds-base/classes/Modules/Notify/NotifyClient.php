@@ -2,7 +2,6 @@
 
 namespace CDS\Modules\Notify;
 
-use Alphagov\Notifications\Exception\NotifyException;
 use Http\Adapter\Guzzle6\Client;
 use Http\Client\Exception;
 
@@ -19,7 +18,7 @@ class NotifyClient
     private function setupClient(): ?\Alphagov\Notifications\Client
     {
         try {
-            $NOTIFY_API_KEY = getenv('NOTIFY_API_KEY');
+            $NOTIFY_API_KEY = get_option('NOTIFY_API_KEY');
 
             if (!$NOTIFY_API_KEY) {
                 return null;

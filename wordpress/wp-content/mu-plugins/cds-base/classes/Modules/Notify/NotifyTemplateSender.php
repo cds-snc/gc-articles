@@ -31,13 +31,13 @@ class NotifyTemplateSender
         try {
             $client = new Client([
                 'headers' => [
-                    "Authorization" => getenv('LIST_MANAGER_API_KEY')
+                    "Authorization" => get_option('LIST_MANAGER_API_KEY')
                 ]
             ]);
 
             $endpoint = getenv('LIST_MANAGER_ENDPOINT');
 
-            $service_id = getenv('LIST_MANAGER_SERVICE_ID');
+            $service_id = get_option('LIST_MANAGER_SERVICE_ID');
 
             $response = $client->request(
                 'GET',
@@ -136,7 +136,7 @@ class NotifyTemplateSender
 
     public function findApiKey($service_id): string
     {
-        $serviceIdData = getenv('LIST_MANAGER_NOTIFY_SERVICES');
+        $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
         $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
@@ -178,7 +178,7 @@ class NotifyTemplateSender
     {
         $client = new Client([
             'headers' => [
-                "Authorization" => getenv('LIST_MANAGER_API_KEY')
+                "Authorization" => get_option('LIST_MANAGER_API_KEY')
             ]
         ]);
 
@@ -238,7 +238,7 @@ class NotifyTemplateSender
             $this->notices->handleNotice($_GET['status']);
         }
 
-        $serviceIdData = getenv('LIST_MANAGER_NOTIFY_SERVICES');
+        $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
 
         $listValues = [];
         $serviceIds = [];

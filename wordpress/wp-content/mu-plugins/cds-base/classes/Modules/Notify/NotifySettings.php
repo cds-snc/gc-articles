@@ -239,7 +239,7 @@ class NotifySettings
         $endsWith = substr($string, -4);
 
 
-          printf(__('<span class="hidden_keys" id="%s">Current value: <span class="sr-only">Starts with </span>%s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%s</span>', 'cds-snc'),
+          printf(__('<span class="hidden_keys" id="%1$s">Current value: <span class="sr-only">Starts with </span>%2$s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%3$s</span>', 'cds-snc'),
             $labelId,
             $startsWith,
             $endsWith);

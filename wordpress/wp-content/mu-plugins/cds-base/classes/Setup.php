@@ -29,8 +29,10 @@ use CDS\Modules\Subscribe\Setup as SubscriptionForm;
 use CDS\Modules\Subscriptions\Setup as SetupSubscriptions;
 use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\TwoFactor\TwoFactor;
-use Exception;
+use CDS\Modules\Users\Users;
 use CDS\Modules\UserCollections\UserCollections;
+use CDS\Utils;
+use Exception;
 
 class Setup
 {
@@ -55,6 +57,7 @@ class Setup
         new FlashMessage();
         new Styles();
         new UserCollections();
+        new Users();
 
         // @TODO: subscriptions not tested since refactor
         // $this->setupSubscriptions();

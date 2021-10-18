@@ -126,3 +126,5 @@ wordpress/wp-content/uploads
 .phpunit.result.cache
 
 wordpress/wp-content/languages
+
+debug-this/

@@ -29,14 +29,14 @@ const Collections = ({
     return null;
   }
 
-  const rows = collections.map((collection) => {
+  const rows = collections.map((collection, index) => {
     return (
-      <tr>
-        <td>{collection.blogname}</td>
-        <td>
+      <tr className={`row-${index}`}>
+        <td className="name">{collection.blogname}</td>
+        <td className="website">
           <a href={collection.siteurl}>{__('Visit', 'cds-snc')}</a>
         </td>
-        <td>
+        <td className="admin">
           <a href={`//${collection.domain}${collection.path}wp-admin`}>
             {__('Dashboard', 'cds-snc')}
           </a>
@@ -53,10 +53,10 @@ const Collections = ({
             <strong className="collection-name">{__('Name', 'cds-snc')}</strong>
           </th>
           <th>
-            <strong className="collection-name">{__('Website', 'cds-snc')}</strong>
+            <strong className="collection-website">{__('Website', 'cds-snc')}</strong>
           </th>
           <th>
-            <strong className="collection-name">{__('Admin', 'cds-snc')}</strong>
+            <strong className="collection-admin">{__('Admin', 'cds-snc')}</strong>
           </th>
         </tr>
       </thead>

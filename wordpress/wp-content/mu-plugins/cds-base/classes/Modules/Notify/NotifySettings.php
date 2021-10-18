@@ -250,26 +250,24 @@ class NotifySettings
     {
     }
 
-    public function notifyApiKeyCallback()
+    public function getObfuscatedOutputLabel($string, $labelId)
     {
+        $startsWith = substr($string,0, 4);
+        $endsWith = substr($string, -4);
+
         printf(
-            '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="NOTIFY_API_KEY" id="notify_api_key" value="">',
-            $this->NOTIFY_API_KEY ? $this->obfuscate($this->NOTIFY_API_KEY) : ''
+            '<span class="hidden_keys" id="%s">Current value: <span class="sr-only">Starts with </span>%s<span aria-hidden="true">…</span><span class="sr-only"> and ends with</span>%s</span>', $labelId, $startsWith, $endsWith
         );
     }
 
-    /**
-     * Obfuscate the string
-     *
-     * @param $string
-     * @param  int  $maxChars
-     * @return array|string
-     */
-    public function obfuscate($string, $maxChars = 8): array|string
+    public function notifyApiKeyCallback()
     {
-        $textLength = strlen($string);
-
-        return substr_replace($string, '......', $maxChars / 2, $textLength - $maxChars);
+        if ($string = $this->NOTIFY_API_KEY) {
+            $this->getObfuscatedOutputLabel($string, 'notify_api_key_value');
+        }
+        printf(
+            '<input class="regular-text" type="text" name="NOTIFY_API_KEY" id="notify_api_key" aria-describedby="notify_api_key_value" value="">'
+        );
     }
 
     public function notifyGenericTemplateIdCallback()
@@ -282,25 +280,31 @@ class NotifySettings
 
     public function listManagerApiKeyCallback()
     {
+        if ($string = $this->LIST_MANAGER_API_KEY) {
+            $this->getObfuscatedOutputLabel($string, 'list_manager_api_key_value');
+        }
         printf(
-            '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="LIST_MANAGER_API_KEY" id="list_manager_api_key" value="">',
-            $this->LIST_MANAGER_API_KEY ? $this->obfuscate($this->LIST_MANAGER_API_KEY) : ''
+            '<input class="regular-text" type="text" name="LIST_MANAGER_API_KEY" id="list_manager_api_key" aria-describedby="list_manager_api_key_value" value="">'
         );
     }
 
     public function listManagerNotifyServicesCallback()
     {
+        if ($string = $this->LIST_MANAGER_NOTIFY_SERVICES) {
+            $this->getObfuscatedOutputLabel($string, 'list_manager_notify_services_value');
+        }
         printf(
-            '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="LIST_MANAGER_NOTIFY_SERVICES" id="list_manager_notify_services" value="">',
-            $this->LIST_MANAGER_NOTIFY_SERVICES ? $this->obfuscate($this->LIST_MANAGER_NOTIFY_SERVICES) : ''
+            '<input class="regular-text" type="text" name="LIST_MANAGER_NOTIFY_SERVICES" id="list_manager_notify_services" aria-describedby="list_manager_notify_services_value" value="">'
         );
     }
 
     public function listManagerServiceIdCallback()
     {
+        if ($string = $this->LIST_MANAGER_SERVICE_ID) {
+            $this->getObfuscatedOutputLabel($string, 'list_manager_service_id_value');
+        }
         printf(
-            '<span class="hidden_keys">%s</span><input class="regular-text" type="text" name="LIST_MANAGER_SERVICE_ID" id="list_manager_service_id" value="">',
-            $this->LIST_MANAGER_SERVICE_ID ? $this->obfuscate($this->LIST_MANAGER_SERVICE_ID) : ''
+            '<input class="regular-text" type="text" name="LIST_MANAGER_SERVICE_ID" id="list_manager_service_id" aria-describedby="list_manager_service_id_value" value="">'
         );
     }
 
@@ -325,6 +329,17 @@ class NotifySettings
             padding: 1px;
             display: block;
         }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
+        }
+
     </style><?php
     }
 

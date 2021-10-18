@@ -256,7 +256,7 @@ class NotifySettings
         $endsWith = substr($string, -4);
 
         printf(
-            '<span class="hidden_keys" id="%s">Current value: <span class="sr-only">Starts with </span>%s<span aria-hidden="true">…</span><span class="sr-only"> and ends with</span>%s</span>', $labelId, $startsWith, $endsWith
+            '<span class="hidden_keys" id="%s">Current value: <span class="sr-only">Starts with </span>%s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%s</span>', $labelId, $startsWith, $endsWith
         );
     }
 
@@ -325,9 +325,10 @@ class NotifySettings
     {
         ?><style type="text/css">
         .hidden_keys {
-            font-size: 1.5em;
+            font-size: 1.2em;
             padding: 1px;
             display: block;
+            color: grey;
         }
         .sr-only {
             position: absolute;

@@ -83,7 +83,7 @@ export const CollectionsPanel = () => {
   }, []);
 
   return (
-    <div id="logins-panel-container">
+    <div id="collection-panel-container">
       <div>
         <Collections collections={collections} isLoading={isLoading} />
       </div>

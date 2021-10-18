@@ -46,23 +46,6 @@ class NotifySettings
 
     public function notifyApiSettingsAddPluginPage()
     {
-        /* add_options_page(
-            'Notify API Settings', // page_title
-            'Notify API Settings', // menu_title
-            'manage_options', // capability
-            'notify-api-settings', // menu_slug
-            array( $this, 'notifyApiSettingsCreateAdminPage' ) // function
-        ); */
-        /*
-        add_menu_page(
-            'Notify API Settings', // page_title
-            'Notify API Settings', // menu_title
-            'manage_options', // capability
-            'notify-api-settings', // menu_slug
-            array( $this, 'notifyApiSettingsCreateAdminPage'), // function
-            'dashicons-admin-generic', // icon_url
-            99 // position
-        );*/
         add_submenu_page(
             $this->admin_page,
             __('Settings'),

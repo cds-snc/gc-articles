@@ -39,7 +39,6 @@ class UserCollections
         $response->set_status(200);
 
         return $response;
-
     }
 
     public function dashboardWidget(): void

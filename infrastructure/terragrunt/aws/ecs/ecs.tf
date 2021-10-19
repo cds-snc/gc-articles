@@ -44,8 +44,8 @@ data "template_file" "wordpress_container_definition" {
   vars = {
     ENABLE_EFS = var.enable_efs
 
-    LIST_MANAGER_ENDPOINT        = aws_secretsmanager_secret_version.list_manager_endpoint.arn
-    ENCRYPTION_KEY              = aws_secretsmanager_secret_version.encryption_key.arn
+    LIST_MANAGER_ENDPOINT      = aws_secretsmanager_secret_version.list_manager_endpoint.arn
+    ENCRYPTION_KEY             = aws_secretsmanager_secret_version.encryption_key.arn
     DEFAULT_DOMAIN             = var.domain_name
     WORDPRESS_IMAGE            = "${var.wordpress_image}:${var.wordpress_image_tag}"
     WORDPRESS_DB_HOST          = var.database_host_secret_arn

@@ -16,10 +16,16 @@ class Users
     public function validateEmailDomain($result)
     {
         $allowed_email_domains_HTML = "<ul><li>" . implode("</li><li>", self::ALLOWED_EMAIL_DOMAINS) . "</li></ul>";
+
+        $details = "<details><summary>" .
+            __('Expand to see allowed domains.', 'cds-snc') .
+            "</summary>" . $allowed_email_domains_HTML . "</details>";
+
         $message = __(
-            "You can not use this email domain for registration. Permitted email addresses:",
+            "You can not use this email domain for registration.",
             'cds-snc'
-        ) . $allowed_email_domains_HTML;
+        ) . $details;
+
 
         if (!$this->isAllowedDomain($result['user_email'])) {
             $result['errors']->add('user_email', $message);

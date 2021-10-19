@@ -71,7 +71,7 @@ class NotifySettings
             <p></p>
             <?php settings_errors(); ?>
 
-            <form method="post" action="options.php" id="notify_settings_form">
+            <form method="post" action="options.php" id="notify_settings_form" class="gc-form-wrapper">
                 <?php
                 settings_fields('notify_api_settings_option_group');
                 do_settings_sections('notify-api-settings-admin');
@@ -317,17 +317,6 @@ class NotifySettings
             display: block;
             color: grey;
         }
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0,0,0,0);
-            border: 0;
-        }
-
     </style><?php
     }
 

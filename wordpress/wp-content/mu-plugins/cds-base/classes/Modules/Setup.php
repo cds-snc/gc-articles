@@ -28,6 +28,7 @@ use CDS\Modules\Meta\MetaTags;
 use CDS\Modules\Contact\Setup as ContactForm;
 use CDS\Modules\Styles\Setup as Styles;
 use CDS\Utils;
+use CDS\Modules\UserCollections\UserCollections;
 
 class Setup
 {
@@ -43,6 +44,7 @@ class Setup
         new ContactForm();
         new FlashMessage();
         new Styles();
+        new UserCollections();
 
         // @TODO: subscriptions not tested since refactor
         // $this->setupSubscriptions();

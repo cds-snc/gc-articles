@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1523b50eeb5cee6c4541185bdf6bd146",
+    "content-hash": "319e89b7649da4f92649cfcf3122cacf",
     "packages": [
         {
             "name": "composer/installers",
@@ -186,6 +186,24 @@
             "homepage": "https://wordpress.org/plugins/wordpress-importer/"
         },
         {
+            "name": "wpackagist-plugin/wordpress-seo",
+            "version": "16.9",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wordpress-seo/",
+                "reference": "tags/16.9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wordpress-seo.16.9.zip"
+            },
+            "require": {
+                "composer/installers": "~1.0 || ~2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wordpress-seo/"
+        },
+        {
             "name": "wpackagist-plugin/wp-bootstrap-blocks",
             "version": "3.3.2",
             "source": {
@@ -223,15 +241,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.8.7",
+            "version": "1.9",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.8.7"
+                "reference": "tags/1.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.8.7.zip"
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.9.zip"
             },
             "require": {
                 "composer/installers": "~1.0 || ~2.0"
@@ -2824,6 +2842,7 @@
                     "type": "github"
                 }
             ],
+            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {

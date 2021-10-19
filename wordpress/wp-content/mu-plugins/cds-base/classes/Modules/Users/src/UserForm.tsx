@@ -20,50 +20,35 @@ const useInput = initialValue => {
 };
 
 export const UserForm = (props) => {
-    const { value: firstName, bind: bindFirstName, reset: resetFirstName } = useInput('');
-    const { value: lastName, bind: bindLastName, reset: resetLastName } = useInput('');
+    const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Submitting Name ${firstName} ${lastName}`);
+        alert(`Finding user by email ${email}`);
         // call rest endpoint
-        resetFirstName();
-        resetLastName();
+        resetEmail();
     }
     return (
-        <div className="wrap">
-            <h1 id="add-new-user">{__("Add User")}</h1>
-            <form onSubmit={handleSubmit}>
-                <table className="form-table">
-                    <tbody>
-                        <tr className="form-field form-required">
-                            <th>
-                                <label>
-                                    {__("First Name:", "cds-snc")}
-                                </label>
-                            </th>
-                            <td>
-                                <input type="text" {...bindFirstName} />
-                            </td>
-                        </tr>
-                        <tr className="form-field form-required">
-                            <th>
-                                <label>
-                                    {__("Last Name:", "cds-snc")}
-                                </label>
-                            </th>
-                            <td>
-                                <input type="text" {...bindLastName} />
-                            </td>
-                        </tr>
-                        <Button isPrimary
-                            className="button-primary"
-                            type="submit" >
-                            {__("Add user", "cds-snc")}
-                        </Button>
-                    </tbody>
-                </table>
-            </form>
-        </div>
+        <form onSubmit={handleSubmit}>
+            <table className="form-table">
+                <tbody>
+                    <tr className="form-field form-required">
+                        <th>
+                            <label>
+                                {__("Email address", "cds-snc")}
+                            </label>
+                        </th>
+                        <td>
+                            <input type="text" {...bindEmail} />
+                        </td>
+                    </tr>
+                    <Button isPrimary
+                        className="button-primary"
+                        type="submit" >
+                        {__("Find user", "cds-snc")}
+                    </Button>
+                </tbody>
+            </table>
+        </form>
     );
 }

@@ -54,7 +54,7 @@ export const renderNotifyPanel = ({
 export const renderUserForm = () => {
   render(
     <UserForm />,
-    document.getElementById("wpbody-content")
+    document.getElementById("react-body")
   );
 };
 

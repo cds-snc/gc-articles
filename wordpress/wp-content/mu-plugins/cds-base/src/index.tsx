@@ -7,7 +7,7 @@ import { LoginsPanel } from "../classes/Modules/TrackLogins/src/LoginsPanel";
 import { CollectionsPanel } from "../classes/Modules/UserCollections/src/CollectionsPanel";
 import { NotifyPanel } from "../classes/Modules/Notify/src/NotifyPanel";
 import { List } from "../classes/Modules/Notify/src/Types";
-import { UserForm } from "../classes/Modules/UserCollections/src/users/UserForm"
+import { UserForm } from "../classes/Modules/Users/src/UserForm"
 
 declare global {
   interface Window {

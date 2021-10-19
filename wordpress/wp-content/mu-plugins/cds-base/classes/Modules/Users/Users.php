@@ -11,6 +11,8 @@ class Users
     public function __construct()
     {
         add_filter('wpmu_validate_user_signup', [$this, 'validateEmailDomain']);
+
+        add_action('admin_enqueue_scripts', [$this, "replaceUserPage"]);
     }
 
     public function validateEmailDomain($result)
@@ -53,5 +55,14 @@ class Users
         }
 
         return false;
+    }
+
+    public function replaceUserPage(): void
+    {
+        $current_page = sprintf(basename($_SERVER['REQUEST_URI']));
+        if ($current_page == "user-new.php") {
+            $data = 'CDS.renderUserForm();';
+            wp_add_inline_script('cds-snc-admin-js', $data, 'after');
+        }
     }
 }

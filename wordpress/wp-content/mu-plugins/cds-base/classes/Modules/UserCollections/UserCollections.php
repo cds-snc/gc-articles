@@ -17,8 +17,6 @@ class UserCollections
         add_action('rest_api_init', [$this, 'registerRestRoutes']);
 
         add_action('wp_dashboard_setup', [$this, 'dashboardWidget']);
-
-        add_action('admin_enqueue_scripts', [$this, "replaceUserPage"]);
     }
 
     public function registerRestRoutes()
@@ -57,14 +55,5 @@ class UserCollections
         echo '<div id="collections-panel"></div>';
         $data = 'CDS.renderCollectionsPanel();';
         wp_add_inline_script('cds-snc-admin-js', $data, 'after');
-    }
-
-    public function replaceUserPage(): void
-    {
-        $current_page = sprintf(basename($_SERVER['REQUEST_URI']));
-        if ($current_page == "user-new.php") {
-            $data = 'CDS.renderUserForm();';
-            wp_add_inline_script('cds-snc-admin-js', $data, 'after');
-        }
     }
 }

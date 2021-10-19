@@ -46,32 +46,14 @@ variable "efs_security_group_id" {
   type = string
 }
 
-variable "list_manager_api_key" {
-  description = "API key used for Platform ListManager request auth"
-  type        = string
-  sensitive   = true
-}
-
-variable "list_manager_notify_services" {
-  description = "Platform ListManager service names and API keys for sending templates v2"
-  type        = string
-  sensitive   = true
-}
-
 variable "list_manager_endpoint" {
   description = "Platform ListManager API endpoint"
   type        = string
   sensitive   = true
 }
 
-variable "list_manager_service_id" {
-  description = "Platform ListManager endpoint ID to get subscriber counts"
-  type        = string
-  sensitive   = true
-}
-
-variable "notify_api_key" {
-  description = "API key used for Notify request auth"
+variable "encryption_key" {
+  description = "Application encryption key"
   type        = string
   sensitive   = true
 }

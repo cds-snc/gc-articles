@@ -32,4 +32,16 @@ class Utils
 
         return false;
     }
+
+    public static function isWpEnv(): bool
+    {
+        if (isset($_SERVER) && isset($_SERVER['SERVER_PORT'])) {
+            $port = $_SERVER['SERVER_PORT'];
+
+            if ($port == 8888 || $port == 8889) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

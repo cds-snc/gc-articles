@@ -76,7 +76,7 @@ class Setup
         try {
             $client = new Client([
                 'headers' => [
-                    "Authorization" => getenv('LIST_MANAGER_API_KEY')
+                    "Authorization" => get_option('LIST_MANAGER_API_KEY')
                 ]
             ]);
 
@@ -86,7 +86,7 @@ class Setup
                 'json' => [
                     "email" => $email,
                     "list_id" => '0c188973-efab-4e8e-8b09-b165e98c66cf',
-                    "service_api_key" => getenv('NOTIFY_API_KEY')
+                    "service_api_key" => get_option('NOTIFY_API_KEY')
                 ]
             ]);
 

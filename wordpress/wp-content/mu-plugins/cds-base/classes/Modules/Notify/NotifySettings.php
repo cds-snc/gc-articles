@@ -4,113 +4,329 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Notify;
 
+use CDS\Modules\EncryptedOption\EncryptedOption;
+
 class NotifySettings
 {
+    protected EncryptedOption $encryptedOption;
     protected string $admin_page = 'cds_notify_send';
 
-    public function __construct()
+    private string $NOTIFY_API_KEY;
+    private string $NOTIFY_GENERIC_TEMPLATE_ID;
+    private string $LIST_MANAGER_API_KEY;
+    private string $LIST_MANAGER_NOTIFY_SERVICES;
+    private string $LIST_MANAGER_SERVICE_ID;
+    private string $list_values;
+
+    public function __construct(EncryptedOption $encryptedOption)
     {
-        add_action('admin_menu', [$this, 'registerSubmenuPage']);
-        add_action('admin_init', [$this, 'registerSettings']);
+        $this->encryptedOption = $encryptedOption;
     }
 
-    public function registerSubmenuPage()
+    public static function register(EncryptedOption $encryptedOption)
+    {
+        $instance = new self($encryptedOption);
+
+        add_action('admin_menu', [$instance, 'notifyApiSettingsAddPluginPage']);
+        add_action('admin_init', [$instance, 'notifyApiSettingsPageInit']);
+        add_action('admin_head', [$instance, 'addStyles']);
+
+        $encryptedOptions = [
+            'NOTIFY_API_KEY',
+            'LIST_MANAGER_API_KEY',
+            'LIST_MANAGER_NOTIFY_SERVICES',
+            'LIST_MANAGER_SERVICE_ID'
+        ];
+
+        foreach ($encryptedOptions as $option) {
+            add_filter("pre_update_option_{$option}", [$instance, 'encryptOption']);
+            add_filter("option_{$option}", [$instance, 'decryptOption']);
+        }
+    }
+
+    public function notifyApiSettingsAddPluginPage()
     {
         add_submenu_page(
             $this->admin_page,
             __('Settings'),
             __('Settings'),
-            'activate_plugins',
+            'manage_options',
             $this->admin_page . '_settings',
-            [$this, 'renderSettings'],
+            [$this, 'notifyApiSettingsCreateAdminPage'],
         );
     }
 
-    public function registerSettings(): void
+    public function notifyApiSettingsCreateAdminPage()
     {
-        register_setting('cds-settings-group', 'sender_type');
-        register_setting('cds-settings-group', 'list_values');
+        $this->NOTIFY_API_KEY = get_option('NOTIFY_API_KEY') ?: '';
+        $this->NOTIFY_GENERIC_TEMPLATE_ID = get_option('NOTIFY_GENERIC_TEMPLATE_ID') ?: '';
+        $this->LIST_MANAGER_API_KEY = get_option('LIST_MANAGER_API_KEY') ?: '';
+        $this->LIST_MANAGER_NOTIFY_SERVICES = get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
+        $this->LIST_MANAGER_SERVICE_ID = get_option('LIST_MANAGER_SERVICE_ID') ?: '';
+        $this->list_values = get_option('list_values') ?: '';
+        ?>
+
+        <div class="wrap">
+            <h1><?php _e('Notify and List Manager Settings', 'cds-snc') ?></h1>
+            <p></p>
+            <?php settings_errors(); ?>
+
+            <form method="post" action="options.php" id="notify_settings_form" class="gc-form-wrapper">
+                <?php
+                settings_fields('notify_api_settings_option_group');
+                do_settings_sections('notify-api-settings-admin');
+                submit_button();
+                ?>
+            </form>
+        </div>
+    <?php }
+
+    public function notifyApiSettingsPageInit()
+    {
+        register_setting(
+            'notify_api_settings_option_group',
+            'list_values'
+        );
+
+        register_setting(
+            'notify_api_settings_option_group', // option_group
+            'NOTIFY_API_KEY',
+            function ($input) {
+                if ($input == '') {
+                    return get_option('NOTIFY_API_KEY');
+                }
+
+                return sanitize_text_field($input);
+            }
+        );
+
+        register_setting(
+            'notify_api_settings_option_group', // option_group
+            'NOTIFY_GENERIC_TEMPLATE_ID',
+            function ($input) {
+                if ($input == '') {
+                    return get_option('NOTIFY_GENERIC_TEMPLATE_ID');
+                }
+
+                return sanitize_text_field($input);
+            }
+        );
+
+        register_setting(
+            'notify_api_settings_option_group', // option_group
+            'LIST_MANAGER_API_KEY',
+            function ($input) {
+                if ($input == '') {
+                    return get_option('LIST_MANAGER_API_KEY');
+                }
+
+                return sanitize_text_field($input);
+            }
+        );
+
+        register_setting(
+            'notify_api_settings_option_group', // option_group
+            'LIST_MANAGER_NOTIFY_SERVICES',
+            function ($input) {
+                if ($input == '') {
+                    return get_option('LIST_MANAGER_NOTIFY_SERVICES');
+                }
+
+                return sanitize_text_field($input);
+            }
+        );
+
+        register_setting(
+            'notify_api_settings_option_group', // option_group
+            'LIST_MANAGER_SERVICE_ID',
+            function ($input) {
+                if ($input == '') {
+                    return get_option('LIST_MANAGER_SERVICE_ID');
+                }
+
+                return sanitize_text_field($input);
+            }
+        );
+
+        add_settings_section(
+            'notify_api_settings_setting_section', // id
+            _('Notify', 'cds-snc'), // title
+            array( $this, 'notifyApiSettingsSectionInfo'), // callback
+            'notify-api-settings-admin' // page
+        );
+
+        add_settings_section(
+            'list_manager_settings_section', // id
+            'List manager', // title
+            array( $this, 'notifyApiSettingsSectionInfo'), // callback
+            'notify-api-settings-admin' // page
+        );
+
+        add_settings_field(
+            'list_values', // id
+            _('List Values JSON', 'cds-snc'), // title
+            array( $this, 'listValuesCallback'), // callback
+            'notify-api-settings-admin', // page
+            'list_manager_settings_section', // section
+            [
+                'label_for' => 'list_values'
+            ]
+        );
+
+        add_settings_field(
+            'notify_api_key', // id
+            _('Notify API Key', 'cds-snc'), // title
+            array( $this, 'notifyApiKeyCallback'), // callback
+            'notify-api-settings-admin', // page
+            'notify_api_settings_setting_section', // section
+            [
+                'label_for' => 'notify_api_key'
+            ]
+        );
+
+        add_settings_field(
+            'notify_generic_template_id', // id
+            _('Notify Generic TemplateId', 'cds-snc'), // title
+            array( $this, 'notifyGenericTemplateIdCallback'), // callback
+            'notify-api-settings-admin', // page
+            'notify_api_settings_setting_section', // section
+            [
+                'label_for' => 'notify_generic_template_id'
+            ]
+        );
+
+        add_settings_field(
+            'list_manager_api_key', // id
+            _('List Manager API Key', 'cds-snc'), // title
+            array( $this, 'listManagerApiKeyCallback'), // callback
+            'notify-api-settings-admin', // page
+            'list_manager_settings_section', // section
+            [
+                'label_for' => 'list_manager_api_key'
+            ]
+        );
+
+        add_settings_field(
+            'list_manager_notify_services', // id
+            _('List Manager Notify Services', 'cds-snc'), // title
+            array( $this, 'listManagerNotifyServicesCallback'), // callback
+            'notify-api-settings-admin', // page
+            'list_manager_settings_section', // section
+            [
+                'label_for' => 'list_manager_notify_services'
+            ]
+        );
+
+        add_settings_field(
+            'list_manager_service_id', // id
+            _('List Manager Service Id', 'cds-snc'), // title
+            array( $this, 'listManagerServiceIdCallback'), // callback
+            'notify-api-settings-admin', // page
+            'list_manager_settings_section', // section
+            [
+                'label_for' => 'list_manager_service_id'
+            ]
+        );
     }
 
-    public function renderSettings(): void
+    public function notifyApiSettingsSectionInfo()
     {
-        ?>
-      <div class="wrap">
-        <h2><?php echo esc_html(get_admin_page_title()); ?></h2>
-          <?php settings_errors(); ?>
-        <form action='options.php' method='post'>
-            <?php settings_fields('cds-settings-group'); ?>
-            <?php do_settings_sections('cds-settings-group'); ?>
-          <table class="form-table">
-            <!-- Sender Type -->
-            <tr valign="top">
-              <th scope="row">
-                  <?php _e('Sender Type', 'cds-snc'); ?>
-              </th>
-              <td>
-                  <?php $current_val = esc_attr(
-                      get_option('sender_type'),
-                  ); ?>
-                <select name="sender_type">
-                    <?php
-                    $label = __('List Manager', 'cds-snc');
-                    $data  = [
-                        'value' => 'list_manager',
-                        'label' => $label,
-                    ];
-                    echo $this->renderSelectOption(
-                        $data,
-                        $current_val,
-                    );
+    }
 
-                    $label = __('WPForms', 'cds-snc');
-                    $data  = [
-                        'value' => 'wp_forms',
-                        'label' => $label,
-                    ];
-                    echo $this->renderSelectOption(
-                        $data,
-                        $current_val,
-                    );
-                    ?>
-                </select>
-              </td>
-            </tr>
+    public function getObfuscatedOutputLabel($string, $labelId)
+    {
+        $startsWith = substr($string, 0, 4);
+        $endsWith = substr($string, -4);
 
-            <!-- Sender Type -->
-            <tr valign="top">
-              <th scope="row">
-                  <?php _e('List Values JSON', 'cds-snc'); ?>
-              </th>
-              <td>
-                  <?php $val = esc_attr(get_option('list_values')); ?>
-                <textarea name="list_values" rows="4" cols="50"><?php echo $val; ?></textarea>
+
+          printf(
+              __('<span class="hidden_keys" id="%1$s">Current value: <span class="sr-only">Starts with </span>%2$s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%3$s</span>', 'cds-snc'),
+              $labelId,
+              $startsWith,
+              $endsWith
+          );
+    }
+
+    public function notifyApiKeyCallback()
+    {
+        if ($string = $this->NOTIFY_API_KEY) {
+            $this->getObfuscatedOutputLabel($string, 'notify_api_key_value');
+        }
+        printf(
+            '<input class="regular-text" type="text" name="NOTIFY_API_KEY" id="notify_api_key" aria-describedby="notify_api_key_value" value="">'
+        );
+    }
+
+    public function notifyGenericTemplateIdCallback()
+    {
+        printf(
+            '<input class="regular-text" type="text" name="NOTIFY_GENERIC_TEMPLATE_ID" id="notify_generic_template_id" value="%s">',
+            $this->NOTIFY_GENERIC_TEMPLATE_ID ? $this->NOTIFY_GENERIC_TEMPLATE_ID : ''
+        );
+    }
+
+    public function listManagerApiKeyCallback()
+    {
+        if ($string = $this->LIST_MANAGER_API_KEY) {
+            $this->getObfuscatedOutputLabel($string, 'list_manager_api_key_value');
+        }
+        printf(
+            '<input class="regular-text" type="text" name="LIST_MANAGER_API_KEY" id="list_manager_api_key" aria-describedby="list_manager_api_key_value" value="">'
+        );
+    }
+
+    public function listManagerNotifyServicesCallback()
+    {
+        if ($string = $this->LIST_MANAGER_NOTIFY_SERVICES) {
+            $this->getObfuscatedOutputLabel($string, 'list_manager_notify_services_value');
+        }
+        printf(
+            '<input class="regular-text" type="text" name="LIST_MANAGER_NOTIFY_SERVICES" id="list_manager_notify_services" aria-describedby="list_manager_notify_services_value" value="">'
+        );
+    }
+
+    public function listManagerServiceIdCallback()
+    {
+        if ($string = $this->LIST_MANAGER_SERVICE_ID) {
+            $this->getObfuscatedOutputLabel($string, 'list_manager_service_id_value');
+        }
+        printf(
+            '<input class="regular-text" type="text" name="LIST_MANAGER_SERVICE_ID" id="list_manager_service_id" aria-describedby="list_manager_service_id_value" value="">'
+        );
+    }
+
+    public function listValuesCallback()
+    {
+        printf(
+            '<textarea name="list_values" id="list_values" rows="4" cols="50">%s</textarea>
 
                 <p class="description" id="new-admin-email-description">
-                    <?php _e('Format', 'cds-snc'); ?>:
+                    ' . _('Format', 'cds-snc') . ':
                     <pre>[{"id":"123", "type":"email", "label":"my-list"}]</pre>
-                </p>
-              </td>
-            </tr>
-          </table>
-            <?php submit_button(); ?>
-        </form>
-      </div>
-        <?php
+                </p>',
+            $this->list_values ?: ''
+        );
     }
 
-    public function renderSelectOption($data, $current_val): string
+    public function addStyles()
     {
-        $str = '<option ';
-        $str .= 'value="' . $data['value'] . '"';
-
-        if ($data['value'] == $current_val) {
-            $str .= 'selected="selected"';
+        ?><style type="text/css">
+        .hidden_keys {
+            font-size: 1.2em;
+            padding: 1px;
+            display: block;
+            color: grey;
         }
-        $str .= '>';
-        $str .= $data['label'];
-        $str .= '</option>';
+    </style><?php
+    }
 
-        return $str;
+    public function encryptOption($value): string
+    {
+        return $this->encryptedOption->encryptString($value);
+    }
+
+    public function decryptOption($value): string
+    {
+        return $this->encryptedOption->decryptString($value);
     }
 }

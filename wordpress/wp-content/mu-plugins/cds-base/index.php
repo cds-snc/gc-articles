@@ -15,7 +15,7 @@ declare(strict_types=1);
 require __DIR__ . '/vendor/autoload.php';
 
 use CDS\Modules\Notify\NotifyTemplateSender;
-use CDS\Modules\Setup;
+use CDS\Setup;
 
 defined('ABSPATH') || exit();
 

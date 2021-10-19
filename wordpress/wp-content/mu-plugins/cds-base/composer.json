@@ -12,7 +12,9 @@
         "alphagov/notifications-php-client": "^3.2",
         "ramsey/uuid": "^4.2",
         "ua-parser/uap-php": "^3.9",
-        "nesbot/carbon": "^2.53"
+        "nesbot/carbon": "^2.53",
+        "illuminate/encryption": "^8.63",
+        "illuminate/support": "^8.63"
     },
     "require-dev": {
         "wp-cli/i18n-command": "^2.2.5"

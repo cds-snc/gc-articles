@@ -6,7 +6,7 @@ namespace CDS\Modules\Meta;
 
 class MetaTags
 {
-    const APPROX_META_DESCRIPTION_LENGTH = 150;
+    public const APPROX_META_DESCRIPTION_LENGTH = 150;
 
     public function __construct()
     {

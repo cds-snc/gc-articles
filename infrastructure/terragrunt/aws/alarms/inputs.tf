@@ -130,16 +130,6 @@ variable "slack_webhook_url" {
   sensitive   = true
 }
 
-variable "sns_lambda_private_subnet_ids" {
-  description = "Private subnet IDs to attach the SNS Lamba Slack notify function to"
-  type        = list(string)
-}
-
-variable "sns_lambda_security_group_id" {
-  description = "Security group ID for the SNS Lambda Slack notify function"
-  type        = string
-}
-
 variable "wordpress_failed_login_maximum" {
   description = "Maximum number of failed WordPress login attempts in a 1 minute period"
   type        = string

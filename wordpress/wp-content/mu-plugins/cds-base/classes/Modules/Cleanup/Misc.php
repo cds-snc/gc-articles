@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Cleanup;
 
+use CDS\Modules\Cleanup\PostTable;
+
 class Misc
 {
     public function __construct()
@@ -14,6 +16,8 @@ class Misc
 
         add_filter('post_row_actions', [$this, 'removeQuickEdit'], 10, 1);
         add_filter('page_row_actions', [$this, 'removeQuickEdit'], 10, 1);
+
+        add_filter('views_edit-post', [$this, "customPostTable"]);
     }
 
     public function removeScreenOptions()
@@ -31,5 +35,12 @@ class Misc
     {
         unset($actions['inline hide-if-no-js']);
         return $actions;
+    }
+
+    public function customPostTable($views)
+    {
+        global $wp_list_table;
+        $wp_list_table = new PostTable();
+        return $views;
     }
 }

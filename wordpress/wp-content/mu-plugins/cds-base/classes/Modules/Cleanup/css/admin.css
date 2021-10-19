@@ -76,7 +76,7 @@ h2, h3 {
 .wp-core-ui .button, .wp-core-ui .button-primary, .wp-core-ui .button-secondary, /* buttons */
 .widefat tfoot td, .widefat th, .widefat thead td, td.column-title strong, td.plugin-title strong, /* headings for table pages */
 #customize-controls h3, /* customizer buttons */
-p
+p, details
  {
     font-size: 16px;
 }

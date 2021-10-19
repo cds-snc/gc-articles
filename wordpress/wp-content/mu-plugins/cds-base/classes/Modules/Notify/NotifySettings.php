@@ -67,7 +67,7 @@ class NotifySettings
         ?>
 
         <div class="wrap">
-            <h1><?php _('Notify and List Manager Settings', 'cds-snc') ?></h1>
+            <h1><?php _e('Notify and List Manager Settings', 'cds-snc') ?></h1>
             <p></p>
             <?php settings_errors(); ?>
 

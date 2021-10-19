@@ -45,11 +45,13 @@ describe('User Collections Panel', () => {
         cy.get('#collection-panel-container .collection-name').scrollIntoView() 
         cy.get('#collection-panel-container .collection-name').should('have.text', 'Name');
         cy.get('#collection-panel-container .collection-website').should('have.text', 'Website');
-        cy.get('#collection-panel-container .collection-admin').should('have.text', 'Dashboard');
+        cy.get('#collection-panel-container .collection-admin').should('have.text', 'Admin');
 
         cy.get('#collection-panel-container table tbody').find('tr').should('have.length', 2);
         cy.get('#collection-panel-container .row-1 .name').should('have.text', "Example Site");
+        cy.get("#collection-panel-container .row-1 .website a").should("have.text", "Visit");
         cy.get("#collection-panel-container .row-1 .website a").should("have.attr", "href", "http://localhost/example");
+        cy.get("#collection-panel-container .row-1 .admin a").should("have.text", "Dashboard");
         cy.get("#collection-panel-container .row-1 .admin a").should("have.attr", "href", "//localhost/example/wp-admin");
     });
 });

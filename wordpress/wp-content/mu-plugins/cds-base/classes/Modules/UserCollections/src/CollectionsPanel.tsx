@@ -10,7 +10,7 @@ const requestHeaders = new Headers();
 requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
 
 interface Collection {
-  siteurl: string,
+  siteurl: string;
   domain: string;
   blogname: string;
   path: string;
@@ -30,15 +30,25 @@ const Collections = ({
   }
 
   const rows = collections.map((collection, index) => {
+    const dashboardText = __('Dashboard', 'cds-snc');
+    const websiteText = __('Visit', 'cds-snc');
     return (
       <tr className={`row-${index}`}>
         <td className="name">{collection.blogname}</td>
         <td className="website">
-          <a href={collection.siteurl}>{__('Visit', 'cds-snc')}</a>
+          <a
+            aria-label={`${websiteText} ${collection.blogname} `}
+            href={collection.siteurl}
+          >
+            {websiteText}
+          </a>
         </td>
         <td className="admin">
-          <a href={`//${collection.domain}${collection.path}wp-admin`}>
-            {__('Dashboard', 'cds-snc')}
+          <a
+            aria-label={`${dashboardText} ${collection.blogname} `}
+            href={`//${collection.domain}${collection.path}wp-admin`}
+          >
+            {dashboardText}
           </a>
         </td>
       </tr>
@@ -53,10 +63,14 @@ const Collections = ({
             <strong className="collection-name">{__('Name', 'cds-snc')}</strong>
           </th>
           <th>
-            <strong className="collection-website">{__('Website', 'cds-snc')}</strong>
+            <strong className="collection-website">
+              {__('Website', 'cds-snc')}
+            </strong>
           </th>
           <th>
-            <strong className="collection-admin">{__('Dashboard', 'cds-snc')}</strong>
+            <strong className="collection-admin">
+              {__('Admin', 'cds-snc')}
+            </strong>
           </th>
         </tr>
       </thead>

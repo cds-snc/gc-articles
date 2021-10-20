@@ -85,6 +85,9 @@ jobs:
             network:
               - 'infrastructure/terragrunt/aws/network/**'
               - 'infrastructure/terragrunt/env/staging/network/**'
+            storage:
+              - 'infrastructure/terragrunt/aws/storage/**'
+              - 'infrastructure/terragrunt/env/staging/storage/**'
 
       # No dependencies
       - name: Terragrunt plan network
@@ -114,6 +117,16 @@ jobs:
           directory: "infrastructure/terragrunt/env/staging/ecr"
           comment-delete: "true"
           comment-title: "Staging: ecr"
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          terragrunt: "true"
+
+      - name: Terragrunt plan storage
+        if: ${{ steps.filter.outputs.storage == 'true' || steps.filter.outputs.common == 'true' }}
+        uses: cds-snc/terraform-plan@v1
+        with:
+          directory: "infrastructure/terragrunt/env/staging/storage"
+          comment-delete: "true"
+          comment-title: "Staging: storage"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
 

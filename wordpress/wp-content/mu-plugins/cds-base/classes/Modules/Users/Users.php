@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Users;
 
+use WP_REST_Response;
+
 class Users
 {
     public const ALLOWED_EMAIL_DOMAINS = ['cds-snc.ca', 'tbs-sct.gc.ca'];
@@ -14,6 +16,30 @@ class Users
 
         add_action('admin_menu', [$this, 'addPageFindUsers']);
         add_action('admin_enqueue_scripts', [$this, 'replacePageFindUsers']);
+
+        add_action('rest_api_init', [$this, 'registerEndpoints']);
+    }
+
+    public function registerEndpoints(): void
+    {
+        register_rest_route('users/v1', '/roles', [
+            'methods' => 'GET',
+            'callback' => [$this, 'getRoles'],
+            'permission_callback' => function () {
+                return true; //current_user_can('read');
+            }
+        ]);
+    }
+
+    public function getRoles()
+    {
+        global $wp_roles;
+        $role_names_arr = array();
+        foreach ($wp_roles->role_names as $key => $value) {
+            array_push($role_names_arr, ["id" => $key, "name" => $value]);
+        }
+
+        return new WP_REST_Response($role_names_arr);
     }
 
     public function addPageFindUsers(): void
@@ -33,14 +59,15 @@ class Users
 
     public function newPageTemplate($page_title = 'Hello world!'): void
     {
+        $enable_js_msg = __('You must enable JavaScript to view this page.', 'cds-snc');
         ?>
         <div class="wrap" id="react-wrap">
             <h1 class="wp-heading-inline">
-                <?php echo esc_html($page_title) ?>
+                <?php echo esc_html($page_title); ?>
             </h1>
             <hr class="wp-header-end" />
             <div id="react-body">
-                <p>You must enable JavaScript to view this page.</p>
+                <p><?php echo $enable_js_msg; ?></p>
             </div>
         </div>
         <?php

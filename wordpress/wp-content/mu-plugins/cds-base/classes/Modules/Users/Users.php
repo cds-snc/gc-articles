@@ -31,7 +31,7 @@ class Users
         ]);
 
         register_rest_route('users/v1', '/submit', [
-            'methods' => 'GET',
+            'methods' => 'POST',
             'callback' => [$this, 'processUserForm'],
             'permission_callback' => function () {
                 return true; //current_user_can('read');
@@ -52,8 +52,10 @@ class Users
 
     public function processUserForm($data)
     {
+        // force return errors
         return new WP_REST_Response([
-            ["location" => 'email', 'errors' => ['error one ... ', 'error two']],
+            ["location" => 'email', 'errors' => ['error one ...', 'error two'] , "submitted value" => $data["email"]],
+            ["location" => 'role', 'errors' => ['your not allow'] , "submitted value" => $data["role"]],
         ]);
     }
 

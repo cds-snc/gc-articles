@@ -20,6 +20,26 @@ const useInput = initialValue => {
 
 import { getData } from '../../Notify/src/NotifyPanel';
 
+// @todo move this out to a util function
+const CDS_VARS = window.CDS_VARS || {};
+const requestHeaders = new Headers({ 'Content-Type': 'application/json;charset=UTF-8' });
+requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
+
+export const sendData = async (endpoint: string, data) => {
+    const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
+        method: 'POST',
+        headers: requestHeaders,
+        mode: 'cors',
+        cache: 'default',
+        body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.json();
+};
+
 export const UserForm = (props) => {
     const emptyRole = { id: "", name: __("Select one"), disabled: true, selected: true };
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
@@ -45,9 +65,8 @@ export const UserForm = (props) => {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        // @todo update to send data
-        const response = await getData('users/v1/submit');
-        console.log("=======");
+        const response = await sendData('users/v1/submit', { email, role });
+        // @todo handle server response
         console.log(response);
     }
     return (

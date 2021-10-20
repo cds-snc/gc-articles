@@ -52,11 +52,64 @@ class Users
 
     public function processUserForm($data)
     {
-        // force return errors
+        try {
+            $uId = false;
+            $email = $data["email"];
+            $role =  $data["role"];
+
+            $uId = username_exists($email);
+
+            // @todo if user already has site access return
+
+            if (!$uId) {
+                $result = wp_create_user($email, wp_generate_password(), $email);
+                if (is_wp_error($result)) {
+                    return new WP_REST_Response([
+                        [
+                            "status" => 400,
+                            "location" => 'email',
+                            'errors' => [$result->get_error_message()],
+                            "message" => "failed to create user"
+                        ]
+                    ]);
+                }
+
+                $uId = $result;
+            }
+
+            // add to blog
+            $blogId = get_current_blog_id();
+
+            $result = add_user_to_blog($blogId,  $uId, $role);
+
+            if (is_wp_error($result)) {
+
+                return new WP_REST_Response([
+                    [
+                        "status" => 400,
+                        "location" => 'role',
+                        'errors' => [$result->get_error_message()],
+                        "message" => "failed to add user to collection"
+                    ]
+                ]);
+            }
+        } catch (\Exception $exception) {
+            return new WP_REST_Response([
+                [
+                    "status" => 400,
+                    "location" => '',
+                    'errors' => [$exception->getMessage()],
+                    "message" => "exception",
+                    "uID" => $uId
+                ]
+            ]);
+        }
+
         return new WP_REST_Response([
-            ["location" => 'email', 'errors' => ['error one ...', 'error two'] , "submitted value" => $data["email"]],
-            ["location" => 'role', 'errors' => ['your not allow'] , "submitted value" => $data["role"]],
+            ["status" => 200, "message" => "user created"]
         ]);
+
+
     }
 
     public function addPageFindUsers(): void
@@ -84,7 +137,7 @@ class Users
             <h1 class="wp-heading-inline">
                 <?php echo esc_html($page_title); ?>
             </h1>
-            <hr class="wp-header-end" />
+            <hr class="wp-header-end"/>
             <div id="react-body">
                 <p><?php echo $enable_js_msg; ?></p>
             </div>

@@ -26,7 +26,7 @@ export const UserForm = (props) => {
     const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: '' });
     const [isLoading, setIsLoading] = useState(true);
     const [roles, setRoles] = useState([emptyRole]);
-    const [errorMessage, setErrorMessage] = useState("Please enter an email address");
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
         const getRoles = async () => {
@@ -43,12 +43,12 @@ export const UserForm = (props) => {
     }, []);
 
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
-        alert(`Email ${email} Role:${role}`);
-        // call rest endpoint
-        resetEmail();
-        resetRole();
+        // @todo update to send data
+        const response = await getData('users/v1/submit');
+        console.log("=======");
+        console.log(response);
     }
     return (
         <div className="wrap" id="cds-react-form">

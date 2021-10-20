@@ -27,19 +27,34 @@ class Users
             'callback' => [$this, 'getRoles'],
             'permission_callback' => function () {
                 return true; //current_user_can('read');
-            }
+            },
+        ]);
+
+        register_rest_route('users/v1', '/submit', [
+            'methods' => 'GET',
+            'callback' => [$this, 'processUserForm'],
+            'permission_callback' => function () {
+                return true; //current_user_can('read');
+            },
         ]);
     }
 
     public function getRoles()
     {
         global $wp_roles;
-        $role_names_arr = array();
+        $role_names_arr = [];
         foreach ($wp_roles->role_names as $key => $value) {
-            array_push($role_names_arr, ["id" => $key, "name" => $value]);
+            array_push($role_names_arr, ['id' => $key, 'name' => $value]);
         }
 
         return new WP_REST_Response($role_names_arr);
+    }
+
+    public function processUserForm($data)
+    {
+        return new WP_REST_Response([
+            ["location" => 'email', 'errors' => ['error one ... ', 'error two']],
+        ]);
     }
 
     public function addPageFindUsers(): void
@@ -53,14 +68,16 @@ class Users
             'manage_options', // permissions needed to see the menu option
             'users-find',
             fn() => $this->newPageTemplate($page_title),
-            2
+            2,
         );
     }
 
     public function newPageTemplate($page_title = 'Hello world!'): void
     {
-        $enable_js_msg = __('You must enable JavaScript to view this page.', 'cds-snc');
-        ?>
+        $enable_js_msg = __(
+            'You must enable JavaScript to view this page.',
+            'cds-snc',
+        ); ?>
         <div class="wrap" id="react-wrap">
             <h1 class="wp-heading-inline">
                 <?php echo esc_html($page_title); ?>
@@ -76,7 +93,7 @@ class Users
     public function replacePageFindUsers(): void
     {
         $current_page = sprintf(basename($_SERVER['REQUEST_URI']));
-        if (str_contains($current_page, "page=users-find")) {
+        if (str_contains($current_page, 'page=users-find')) {
             $data = 'CDS.renderUserForm();';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
         }
@@ -84,17 +101,23 @@ class Users
 
     public function validateEmailDomain($result)
     {
-        $allowed_email_domains_HTML = "<ul><li>" . implode("</li><li>", self::ALLOWED_EMAIL_DOMAINS) . "</li></ul>";
+        $allowed_email_domains_HTML =
+            '<ul><li>' .
+            implode('</li><li>', self::ALLOWED_EMAIL_DOMAINS) .
+            '</li></ul>';
 
-        $details = "<details><summary>" .
+        $details =
+            '<details><summary>' .
             __('Expand to see allowed domains.', 'cds-snc') .
-            "</summary>" . $allowed_email_domains_HTML . "</details>";
+            '</summary>' .
+            $allowed_email_domains_HTML .
+            '</details>';
 
-        $message = __(
-            "You can not use this email domain for registration.",
-            'cds-snc'
-        ) . $details;
-
+        $message =
+            __(
+                'You can not use this email domain for registration.',
+                'cds-snc',
+            ) . $details;
 
         if (!$this->isAllowedDomain($result['user_email'])) {
             $result['errors']->add('user_email', $message);
@@ -107,15 +130,15 @@ class Users
     {
         $allowed_email_domains = apply_filters(
             'cds_allowed_email_domains',
-            self::ALLOWED_EMAIL_DOMAINS
+            self::ALLOWED_EMAIL_DOMAINS,
         );
 
         if (
-            isset($user_email)
-            && strpos($user_email, '@') > 0 // "@" can't be first character
-            && is_email($user_email)
+            isset($user_email) &&
+            strpos($user_email, '@') > 0 && // "@" can't be first character
+            is_email($user_email)
         ) {
-            list($username, $domain) = explode('@', trim($user_email));
+            [$username, $domain] = explode('@', trim($user_email));
             if (in_array($domain, $allowed_email_domains)) {
                 return true;
             }

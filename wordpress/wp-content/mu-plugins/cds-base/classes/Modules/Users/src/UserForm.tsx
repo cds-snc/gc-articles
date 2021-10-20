@@ -21,34 +21,64 @@ const useInput = initialValue => {
 
 export const UserForm = (props) => {
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
+    const { value: role, bind: bindRole, reset: resetRole } = useInput('');
+
+    // @todo 
+    // - set these to useState + fetch the values from the server
+    // - Time bind the values for the select
+    const roles = [
+        { value: " ", label: __("Select One") },
+        { value: "gcadmin", label: __("GC Admin1") },
+        { value: "gceditor", label: __("GC Editor") }
+    ]
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Finding user by email ${email}`);
+        alert(`Email ${email} ${role}`);
         // call rest endpoint
         resetEmail();
+        resetRole();
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <table className="form-table">
-                <tbody>
-                    <tr className="form-field form-required">
-                        <th>
-                            <label>
-                                {__("Email address", "cds-snc")}
-                            </label>
-                        </th>
-                        <td>
-                            <input type="text" {...bindEmail} />
-                        </td>
-                    </tr>
-                    <Button isPrimary
-                        className="button-primary"
-                        type="submit" >
-                        {__("Find user", "cds-snc")}
-                    </Button>
-                </tbody>
-            </table>
-        </form>
+        <div className="wrap">
+            <h1 id="add-new-user">{__("Add user to collection")}</h1>
+            <p>{__("Create a brand new user or if they already exists add them to this Collection.")}</p>
+            <form onSubmit={handleSubmit} id="adduser">
+                <table className="form-table">
+                    <tbody>
+                        <tr className="form-field form-required">
+                            <th>
+                                <label>
+                                    {__("Email:", "cds-snc")}
+                                </label>
+                            </th>
+                            <td>
+                                <input type="text" {...bindEmail} />
+                            </td>
+                        </tr>
+                        <tr className="form-field form-required">
+                            <th>
+                                <label>
+                                    {__("Role:", "cds-snc")}
+                                </label>
+                            </th>
+                            <td>
+                                <select name="role" id="role">
+                                    {roles.map((role) => {
+                                        return <option value={role.value}>{role.label}</option>
+                                    })}
+                                </select>
+                            </td>
+                        </tr>
+                        <Button
+                            isPrimary
+                            className="button-primary"
+                            type="submit" >
+                            {__("Add user", "cds-snc")}
+                        </Button>
+                    </tbody>
+                </table>
+            </form>
+        </div>
     );
 }

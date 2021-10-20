@@ -5,7 +5,6 @@ import { Button } from "@wordpress/components";
 
 const useInput = initialValue => {
     const [value, setValue] = useState(initialValue);
-
     return {
         value,
         setValue,
@@ -21,11 +20,10 @@ const useInput = initialValue => {
 
 export const UserForm = (props) => {
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
-    const { value: role, bind: bindRole, reset: resetRole } = useInput('');
-
+    const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: "gcadmin" });
+    
     // @todo 
     // - set these to useState + fetch the values from the server
-    // - Time bind the values for the select
     const roles = [
         { value: " ", label: __("Select One") },
         { value: "gcadmin", label: __("GC Admin1") },
@@ -34,7 +32,7 @@ export const UserForm = (props) => {
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        alert(`Email ${email} ${role}`);
+        alert(`Email ${email} Role:${role}`);
         // call rest endpoint
         resetEmail();
         resetRole();
@@ -63,7 +61,7 @@ export const UserForm = (props) => {
                                 </label>
                             </th>
                             <td>
-                                <select name="role" id="role">
+                                <select name="role" id="role" defaultValue="gcadmin" {...bindRole} value={...role.value} >
                                     {roles.map((role) => {
                                         return <option value={role.value}>{role.label}</option>
                                     })}

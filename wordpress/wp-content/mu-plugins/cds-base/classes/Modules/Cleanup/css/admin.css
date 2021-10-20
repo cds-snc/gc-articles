@@ -113,3 +113,8 @@ input[type=date], input[type=datetime-local], input[type=datetime], input[type=e
 .tablenav {
     height: auto; /* add space under the filters above tables */
 }
+
+#cds-react-form .components-notice.is-error{
+    background-color: #f8eae9 !important;
+    margin-left:0;
+}

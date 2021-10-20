@@ -55,10 +55,9 @@ export const UserForm = (props) => {
         resetRole();
     }
     return (
-        <div className="wrap">
+        <div className="wrap" id="cds-react-form">
             <h1 id="add-new-user">{__("Add user to collection")}</h1>
             <p>{__("Create a brand new user or if they already exists add them to this Collection.")}</p>
-
             {errorMessage && (
                 <Notice
                     onRemove={() => setErrorMessage("")}

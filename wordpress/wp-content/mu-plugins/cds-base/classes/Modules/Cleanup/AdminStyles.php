@@ -18,7 +18,7 @@ class AdminStyles
             'cds-base-style-admin',
             plugin_dir_url(__FILE__) . 'css/admin.css',
             ["wp-edit-blocks"],
-            BASE_PLUGIN_NAME_VERSION,
+            BASE_PLUGIN_NAME_VERSION."a",
         );
 
         wp_enqueue_style(

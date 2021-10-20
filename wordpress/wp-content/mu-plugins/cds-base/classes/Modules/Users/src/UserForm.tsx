@@ -21,7 +21,7 @@ const useInput = initialValue => {
 import { getData } from '../../Notify/src/NotifyPanel';
 
 export const UserForm = (props) => {
-    const emptyRole = { id: " ", name: __("Select One") };
+    const emptyRole = { id: "", name: __("Select one"), disabled: true, selected: true };
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
     const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: '' });
     const [isLoading, setIsLoading] = useState(true);
@@ -51,8 +51,7 @@ export const UserForm = (props) => {
         console.log(response);
     }
     return (
-        <div className="wrap" id="cds-react-form">
-            <h1 id="add-new-user">{__("Add user to collection")}</h1>
+        <div id="cds-react-form">
             <p>{__("Create a brand new user or if they already exists add them to this Collection.")}</p>
             {errorMessage && (
                 <Animate type="appear" options={{ origin: "top left" }}>
@@ -91,7 +90,7 @@ export const UserForm = (props) => {
                             <td>
                                 <select disabled={isLoading ? true : false} name="role" id="role" defaultValue="gcadmin" {...bindRole} value={...role.value} >
                                     {roles.map((role) => {
-                                        return <option value={role.id}>{role.name}</option>
+                                        return <option value={role.id} disabled={role.disabled} selected={role.selected}>{role.name}</option>
                                     })}
                                 </select>
                             </td>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Button } from "@wordpress/components";
+import { Button, Notice } from "@wordpress/components";
 
 const useInput = initialValue => {
     const [value, setValue] = useState(initialValue);
@@ -21,14 +21,15 @@ const useInput = initialValue => {
 export const UserForm = (props) => {
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
     const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: "gcadmin" });
-    
+    const [isLoading, setIsLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState("Please enter an email address");
     // @todo 
     // - set these to useState + fetch the values from the server
     const roles = [
         { value: " ", label: __("Select One") },
         { value: "gcadmin", label: __("GC Admin1") },
         { value: "gceditor", label: __("GC Editor") }
-    ]
+    ];
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -41,6 +42,17 @@ export const UserForm = (props) => {
         <div className="wrap">
             <h1 id="add-new-user">{__("Add user to collection")}</h1>
             <p>{__("Create a brand new user or if they already exists add them to this Collection.")}</p>
+
+            {errorMessage && (
+                <Notice
+                    onRemove={() => console.log("here")}
+                    status="error"
+                    isDismissible={true}
+                >
+                    {errorMessage}
+                </Notice>
+            )}
+
             <form onSubmit={handleSubmit} id="adduser">
                 <table className="form-table">
                     <tbody>
@@ -70,7 +82,8 @@ export const UserForm = (props) => {
                         </tr>
                         <Button
                             isPrimary
-                            className="button-primary"
+                            isBusy={isLoading}
+                            disabled={isLoading}
                             type="submit" >
                             {__("Add user", "cds-snc")}
                         </Button>

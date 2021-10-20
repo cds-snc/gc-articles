@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Button, Notice } from "@wordpress/components";
 
@@ -18,6 +18,8 @@ const useInput = initialValue => {
     };
 };
 
+import { getData } from '../../Notify/src/NotifyPanel';
+
 export const UserForm = (props) => {
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
     const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: "gcadmin" });
@@ -30,6 +32,20 @@ export const UserForm = (props) => {
         { value: "gcadmin", label: __("GC Admin1") },
         { value: "gceditor", label: __("GC Editor") }
     ];
+
+    useEffect(() => {
+        // @todo replace this
+        const fetchData = async () => {
+            const response = await getData('user/logins');
+            setIsLoading(false);
+            if (response.length >= 1) {
+                //
+            }
+        };
+
+        fetchData();
+    }, []);
+
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
@@ -45,7 +61,7 @@ export const UserForm = (props) => {
 
             {errorMessage && (
                 <Notice
-                    onRemove={() => console.log("here")}
+                    onRemove={() => setErrorMessage("")}
                     status="error"
                     isDismissible={true}
                 >

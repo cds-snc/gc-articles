@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Button, Notice } from "@wordpress/components";
+import { Button, Notice, Animate } from "@wordpress/components";
 
 const useInput = initialValue => {
     const [value, setValue] = useState(initialValue);
@@ -24,6 +24,13 @@ export const UserForm = (props) => {
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
     const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: "gcadmin" });
     const [isLoading, setIsLoading] = useState(true);
+
+
+    const errors = [{
+        "location": "email",
+        "errors": ["required field", "too short"]
+    }];
+
     const [errorMessage, setErrorMessage] = useState("Please enter an email address");
     // @todo 
     // - set these to useState + fetch the values from the server
@@ -59,13 +66,18 @@ export const UserForm = (props) => {
             <h1 id="add-new-user">{__("Add user to collection")}</h1>
             <p>{__("Create a brand new user or if they already exists add them to this Collection.")}</p>
             {errorMessage && (
-                <Notice
-                    onRemove={() => setErrorMessage("")}
-                    status="error"
-                    isDismissible={true}
-                >
-                    {errorMessage}
-                </Notice>
+                <Animate type="appear" options={{ origin: "top left" }}>
+                    {({ className }) => (
+                        <Notice
+                            className={className}
+                            onRemove={() => setErrorMessage("")}
+                            status="error"
+                            isDismissible={true}
+                        >
+                            {errorMessage}
+                        </Notice>
+                    )}
+                </Animate>
             )}
 
             <form onSubmit={handleSubmit} id="adduser">
@@ -73,7 +85,7 @@ export const UserForm = (props) => {
                     <tbody>
                         <tr className="form-field form-required">
                             <th>
-                                <label>
+                                <label className="error">
                                     {__("Email:", "cds-snc")}
                                 </label>
                             </th>

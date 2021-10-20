@@ -21,36 +21,25 @@ const useInput = initialValue => {
 import { getData } from '../../Notify/src/NotifyPanel';
 
 export const UserForm = (props) => {
+    const emptyRole = { id: " ", name: __("Select One") };
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
-    const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: "gcadmin" });
+    const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: '' });
     const [isLoading, setIsLoading] = useState(true);
-
-
-    const errors = [{
-        "location": "email",
-        "errors": ["required field", "too short"]
-    }];
-
+    const [roles, setRoles] = useState([emptyRole]);
     const [errorMessage, setErrorMessage] = useState("Please enter an email address");
-    // @todo 
-    // - set these to useState + fetch the values from the server
-    const roles = [
-        { value: " ", label: __("Select One") },
-        { value: "gcadmin", label: __("GC Admin1") },
-        { value: "gceditor", label: __("GC Editor") }
-    ];
 
     useEffect(() => {
-        // @todo replace this
-        const fetchData = async () => {
-            const response = await getData('user/logins');
-            setIsLoading(false);
-            if (response.length >= 1) {
-                //
-            }
-        };
+        const getRoles = async () => {
+            const response = await getData('users/v1/roles');
 
-        fetchData();
+            if (response.length >= 1) {
+                setRoles([emptyRole, ...response]);
+            }
+
+            setIsLoading(false);
+        }
+
+        getRoles();
     }, []);
 
 
@@ -100,9 +89,9 @@ export const UserForm = (props) => {
                                 </label>
                             </th>
                             <td>
-                                <select name="role" id="role" defaultValue="gcadmin" {...bindRole} value={...role.value} >
+                                <select disabled={isLoading ? true : false} name="role" id="role" defaultValue="gcadmin" {...bindRole} value={...role.value} >
                                     {roles.map((role) => {
-                                        return <option value={role.value}>{role.label}</option>
+                                        return <option value={role.id}>{role.name}</option>
                                     })}
                                 </select>
                             </td>

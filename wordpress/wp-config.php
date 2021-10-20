@@ -131,10 +131,10 @@ define('BLOG_ID_CURRENT_SITE', 1);
 /* Custom */
 define('SCRIPT_DEBUG', getenv_docker('SCRIPT_DEBUG', false));
 
-define( 'S3_UPLOADS_BUCKET', getenv_docker('S3_UPLOADS_BUCKET', '') );
-define( 'S3_UPLOADS_REGION', getenv_docker('S3_UPLOADS_REGION', 'ca-central-1') );
-define( 'S3_UPLOADS_KEY', getenv_docker('S3_UPLOADS_KEY', '') );
-define( 'S3_UPLOADS_SECRET', getenv_docker('S3_UPLOADS_SECRET', '') );
+define('S3_UPLOADS_BUCKET', getenv_docker('S3_UPLOADS_BUCKET', ''));
+define('S3_UPLOADS_REGION', getenv_docker('S3_UPLOADS_REGION', 'ca-central-1'));
+define('S3_UPLOADS_KEY', getenv_docker('S3_UPLOADS_KEY', ''));
+define('S3_UPLOADS_SECRET', getenv_docker('S3_UPLOADS_SECRET', ''));
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */

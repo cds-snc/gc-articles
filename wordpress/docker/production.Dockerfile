@@ -14,9 +14,25 @@ COPY --from=composer /app /app
 RUN apk add --no-cache git
 RUN npm --unsafe-perm install
 
+## Prepare release container
+FROM wordpress:5.8.1-php8.0-apache AS release
+
+# Add build deps
+RUN apk add --update --virtual mod-deps  \
+    autoconf  \
+    alpine-sdk \
+    libmcrypt-dev \
+
+RUN pecl install pcov \
+    && docker-php-ext-enable pcov
+
+# clean up
+RUN apk del mod-deps && \
+  rm -rf /apk /tmp/* /var/cache/apk/*
+
 ## Release build
 
-FROM wordpress:5.8.1-php8.0-apache
+FROM release
 
 ARG APACHE_CERT
 ARG APACHE_KEY

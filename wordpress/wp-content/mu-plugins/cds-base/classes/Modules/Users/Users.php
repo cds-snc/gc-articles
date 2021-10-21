@@ -6,6 +6,7 @@ namespace CDS\Modules\Users;
 
 use JetBrains\PhpStorm\ArrayShape;
 use InvalidArgumentException;
+use Mockery\Exception;
 use WP_REST_Response;
 
 class Users
@@ -53,15 +54,19 @@ class Users
     }
 
     #[ArrayShape(["email" => "mixed|string", "role" => "mixed|string"])]
-    public function santatizeEmailAndRole($data = []): array|false
+    public function santatizeEmailAndRole($data): array|false
     {
-        if (!is_array($data)) {
+        /*
+        if (!is_array($data) && !is_object($data)) {
             throw new InvalidArgumentException("email and role is required");
             return false;
         }
+        */
 
         // check email
-        $email = $data["email"] ?? '';
+        $email = $data["email"];
+
+        return ["email" => "test@example.com", "role" => ""];
 
         if ($email === "") {
             throw new InvalidArgumentException("email is required");
@@ -93,7 +98,7 @@ class Users
         return ["email" => $email, "role" => $role];
     }
 
-    protected function createUser($email): int
+    public function createUser($email): int
     {
         $result = wp_create_user($email, wp_generate_password(), $email);
         if (is_wp_error($result)) {
@@ -103,7 +108,7 @@ class Users
         return intval($result);
     }
 
-    protected function addToBlog($uId, $role)
+    public function addToBlog($uId, $role)
     {
         $result = add_user_to_blog(get_current_blog_id(), $uId, $role);
 
@@ -112,38 +117,59 @@ class Users
         }
     }
 
-    public function addUserToCollection($data): array|false
+    public function detectErrorField($errorMsg, $fieldName)
+    {
+        if (str_contains($errorMsg, $fieldName)) {
+            return $fieldName;
+        }
+
+        return "";
+    }
+
+    public function addUserToCollection($data): WP_REST_Response|false
     {
         try {
-            return new WP_REST_Response([
-                ["status" => 200, "message" => "success"]
-            ]);
             $uId = false;
-            [$email, $role] = $this->santatizeEmailAndRole($data);
-            /*
-            $uId = username_exists($email);
 
-            if (is_user_member_of_blog($uId, get_current_blog_id())) {
-                throw new Error("user is already a member for this collection");
+            list('email' => $email, 'role' => $role) = $this->santatizeEmailAndRole($data);
+
+            $uId = email_exists($email);  // we could use user_exist here
+
+            // throw new \Exception("debug");
+            
+            if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
+                throw new \Exception("user is already a member for this collection");
                 return false;
             }
 
-            if (!$uId) {
+            if (!$uId && $email) {
                 $uId = $this->createUser($email);
+                $this->addToBlog($uId, $role);
+
+                return new WP_REST_Response([
+                    ["status" => 200, "message" => "success"]
+                ]);
             }
 
-            $this->addToBlog($uId, $role);
-            */
-
-            return new WP_REST_Response([
-                ["status" => 200, "message" => "success"]
-            ]);
+            throw new Exception("unknown issue occurred");
 
         } catch (\InvalidArgumentException $exception) {
+            $fields = [];
+            $fieldNames = ["email" , "role"];
+
+            foreach ($fieldNames as $fieldName) {
+                $result = $this->detectErrorField($exception->getMessage(), $fieldName);
+                if($result !== ""){
+                    array_push($fields, $result);
+                }
+            }
+
             return new WP_REST_Response([
                 [
                     "status" => 400,
-                    "location" => 'detect this',
+                    "locations" => $fields,
+                    "data" => $data,
+                    "type" => gettype($data),
                     'errors' => [$exception->getMessage()],
                     "uID" => $uId
                 ]

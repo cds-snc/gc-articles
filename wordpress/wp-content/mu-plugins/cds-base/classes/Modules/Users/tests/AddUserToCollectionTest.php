@@ -86,3 +86,25 @@ test('returns array with cleaned values', function () {
         print_r($e->getMessage());
     }
 });
+
+test('detects email', function () {
+    $users = new Users();
+    $result = $users->detectErrorField("email is required", "email");
+    $this->assertTrue($result === "email");
+});
+
+test('detects role', function () {
+    $users = new Users();
+    $result = $users->detectErrorField("role is required", "role");
+    $this->assertTrue($result === "role");
+});
+
+test('detects role or email', function () {
+    $users = new Users();
+    $str = "email and role is required";
+    $this->assertTrue( $users->detectErrorField($str, "email") === "email");
+    $this->assertTrue( $users->detectErrorField($str, "role") === "role");
+});
+
+
+

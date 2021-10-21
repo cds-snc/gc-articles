@@ -68,13 +68,7 @@ class Users
             return false;
         }
 
-        if(is_email($email) === false)
-        {
-            throw new InvalidArgumentException("invalid email");
-            return false;
-        }
-
-        if (!$this->containsDomain($email)) {
+        if (!$this->isAllowedDomain($email)) {
             throw new InvalidArgumentException("you cannot use this email domain for registration");
             return false;
         }

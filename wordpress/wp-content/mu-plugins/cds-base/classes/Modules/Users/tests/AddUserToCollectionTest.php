@@ -3,6 +3,9 @@ use CDS\Modules\Users\Users;
 
 beforeAll(function () {
     WP_Mock::setUp();
+    WP_Mock::userFunction('is_email', array(
+        'return' => true,
+    ));
 });
 
 afterAll(function () {

@@ -4,11 +4,9 @@ const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
 describe('Find users', () => {
   before(() => {
-
   });
 
   after(() => {
-
   });
 
   it('Can load the new page', () => {
@@ -17,5 +15,10 @@ describe('Find users', () => {
     cy.get('h1').contains("Find Users");
     cy.get("button.button-primary").first().should('have.text', "Find user");
   });
+
+  // Get the roles
+  // Hit submit get the validation messages
+  // Bad email no role
+  // Good email good role
 
 });

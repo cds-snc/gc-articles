@@ -8,6 +8,7 @@ use JetBrains\PhpStorm\ArrayShape;
 use InvalidArgumentException;
 use Mockery\Exception;
 use WP_REST_Response;
+use CDS\Modules\Users\ValidationException;
 
 class Users
 {
@@ -54,47 +55,67 @@ class Users
     }
 
     #[ArrayShape(["email" => "mixed|string", "role" => "mixed|string"])]
-    public function santatizeEmailAndRole($data = []): array|false
+    public function sanitizeEmailAndRole($data = []): array|false
     {
-
         if (!is_array($data) && !is_object($data)) {
-            throw new InvalidArgumentException("email and role are required");
+            throw new ValidationException([ this->getEmailErrors(), $this->getRoleErrors() ]);
             return false;
         }
 
-        $email = $data["email"] ?? "";
-        $role =  $data["role"] ?? "";
+        $errors = array();
 
-        if ($email === "" && $role === "") {
-            throw new InvalidArgumentException("email and role are required");
-            return false;
+        /* validate email */
+        $email = $data['email'] ?? "";
+        $email_errors = $this->getEmailErrors($email);
+        if ($email_errors) {
+            array_push($errors, $email_errors);
         }
+
+        /* validate role */
+        $role = $data['role']['value'] ?? $data['role'] ?? "";
+        $role_errors = $this->getRoleErrors($role);
+        if ($role_errors) {
+            array_push($errors, $role_errors);
+        }
+
+        if (count($errors)) {
+            throw new ValidationException($errors);
+        }
+
+        return ["email" => sanitize_email($email), "role" => sanitize_text_field($role)];
+    }
+
+    private function getEmailErrors($email)
+    {
+        $error = ["location" => "email", "errors" => ["Email is required."], "value" => $email];
 
         if ($email === "") {
-            throw new InvalidArgumentException("email is required");
-            return false;
+            return $error;
         }
 
-        $email = sanitize_email($email);
-
-        if (!$this->isAllowedDomain($email)) {
-            throw new InvalidArgumentException("you cannot use this email domain for registration");
-            return false;
+        if (!$this->isAllowedDomain(sanitize_email($email))) {
+            $error['errors'] = ["You can’t use this email domain for registration."];
+            return $error;
         }
 
-        if (!$role === "") {
-            throw new InvalidArgumentException("role is required");
-            return false;
+        return false;
+    }
+
+    private function getRoleErrors($role)
+    {
+        $error = ["location" => "role", "errors" => ["Role is required."], "value" => $role];
+
+        if ($role === "") {
+            return $error;
         }
 
-        $role = sanitize_text_field($role);
-
-        if (!in_array($role, ["gcadmin", "gceditor"])) {
-            throw new InvalidArgumentException("role is not allowed");
-            return false;
+        /* TODO: work this out with Tim */
+        if (!in_array(sanitize_text_field($role), [ "gceditor", "gcadmin" ])) { // could get these from WP directly
+            $error['errors'] = ["You entered an invalid role."];
+            return $error;
         }
 
-        return ["email" => $email, "role" => $role];
+        return false;
     }
 
     public function createUser($email): int
@@ -116,26 +137,19 @@ class Users
         }
     }
 
-    public function detectErrorField($errorMsg, $fieldName)
-    {
-        if (str_contains($errorMsg, $fieldName)) {
-            return $fieldName;
-        }
-
-        return "";
-    }
-
     public function addUserToCollection($data): WP_REST_Response|false
     {
         try {
             $uId = false;
 
-            list('email' => $email, 'role' => $role) = $this->santatizeEmailAndRole($data);
+            $list = list('email' => $email, 'role' => $role) = $this->sanitizeEmailAndRole($data);
 
-            $uId = email_exists($email);  // we could use user_exist here
+            // look for matching username OR email
+            // if we just use a logical OR, we get a uId == true rather than the number
+            $uId = email_exists($email) ? email_exists($email) : username_exists($email);  // we could use user_exist here
 
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
-                throw new \Exception("user is already a member for this collection");
+                throw new \Exception($email . " is already a member of this collection");
                 return false;
             }
 
@@ -149,25 +163,14 @@ class Users
             }
 
             throw new Exception("unknown issue occurred");
-        } catch (\InvalidArgumentException $exception) {
-            $fields = [];
-            $fieldNames = ["email" , "role"];
-
-            foreach ($fieldNames as $fieldName) {
-                $result = $this->detectErrorField($exception->getMessage(), $fieldName);
-                if ($result !== "") {
-                    array_push($fields, $result);
-                }
-            }
-
+        } catch (ValidationException $exception) {
             return new WP_REST_Response([
                 [
                     "status" => 400,
-                    "locations" => $fields,
                     "data" => $data,
                     "type" => gettype($data),
-                    'errors' => [$exception->getMessage()],
-                    "uId" => $uId
+                    'errors' => $exception->decodeMessage(),
+                    'uID' => $uId
                 ]
             ]);
         } catch (\Exception $exception) {
@@ -176,7 +179,7 @@ class Users
                     "status" => 400,
                     "location" => 'unknown',
                     'errors' => [$exception->getMessage()],
-                    "uID" => $uId
+                    'uID' => $uId
                 ]
             ]);
         }
@@ -204,13 +207,6 @@ class Users
             'cds-snc',
         ); ?>
         <div class="wrap" id="react-wrap">
-            <style>
-            .notice-error h2, .error-summary h2 {margin: .8em 0 .5em 0;}
-            .notice-error ul, .error-summary ul {font-size: 16px;}
-            .error-wrapper { border-left: 4px solid #d63638; padding-left: .5em; }
-            .validation-error { display:block; color: #d63638; margin: .5em 0;}
-            </style>
-
             <h1 class="wp-heading-inline">
                 <?php echo esc_html($page_title); ?>
             </h1>
@@ -224,7 +220,7 @@ class Users
 
     public function replacePageFindUsers(): void
     {
-        $current_page = sprintf(basename($_SERVER['REQUEST_URI']));
+        $current_page = basename($_SERVER['REQUEST_URI']);
         if (str_contains($current_page, 'page=users-find')) {
             $data = 'CDS.renderUserForm();';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');

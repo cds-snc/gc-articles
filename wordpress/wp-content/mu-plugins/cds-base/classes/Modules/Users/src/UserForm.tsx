@@ -40,20 +40,6 @@ export const sendData = async (endpoint: string, data) => {
     return await response.json();
 };
 
-const tempErrors = {
-    errors: ["The email address entered did not appear to be a valid email address. Please enter a valid email address."],
-    location: "email",
-    submittedValue: {value: ''}
-}
-
-const tempErrorsArray = [{ ...tempErrors },
-    {
-        errors: ['You have not selected a user role.'],
-        location: "role",
-        submittedValue: {value: ''}
-    }
-]
-
 const ErrorSummary = ({ errors = [] }) => {
     return <Notice
         className="error-summary"
@@ -62,9 +48,12 @@ const ErrorSummary = ({ errors = [] }) => {
     >
         <h2>There is a problem</h2>
         <ul>   
-            {errors.map((err) => 
-                <li key={err.location}><a href={`#${err.location}`}>{err.errors[0]}</a></li>
-            )}
+            {errors.map((err, i) => {
+                return err.location ? 
+                    <li key={err.location}><a href={`#${err.location}`}>{err.errors[0]}</a></li> :
+                    <li key={i}>{err}</li>
+                })
+            }
         </ul>
     </Notice>
 }
@@ -111,18 +100,21 @@ export const UserForm = (props) => {
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         const response = await sendData('users/v1/submit', { email, role });
-        // @todo handle server response
-        console.log(response);
-        
-        setErrors(tempErrorsArray);
+
+        const [ { status } ] = response;
+        if(parseInt(status) >= 400) {
+            const [ { errors: serverErrors = [] } = {} ] = response;
+            setErrors(serverErrors);
+        }
     }
+
     return (
         <div id="cds-react-form">
             {
                 errors.length > 0 && <ErrorSummary errors={errors} />
             }
 
-            <p>{__("Create a brand new user or if they already exists add them to this Collection.")}</p>
+            <p>{__("Create a brand new user or add them to this Collection if they already exist.")}</p>
 
             <form onSubmit={handleSubmit} id="adduser">
                 <table className="form-table">
@@ -147,10 +139,11 @@ export const UserForm = (props) => {
                                 </label>
                             </th>
                             <td>
+                                {/* The "id" needs to match the field ID attribute */}
                                 <FieldError errors={errors} id={"role"}>
-                                    <select disabled={isLoading ? true : false} name="role" id="role" aria-describedby="validation-error--role" defaultValue="gcadmin" {...bindRole} value={...role.value} >
+                                    <select disabled={isLoading ? true : false} name="role" id="role" aria-describedby="validation-error--role" {...bindRole} value={...role.value}>
                                         {roles.map((role) => {
-                                            return <option value={role.id} disabled={role.disabled} selected={role.selected}>{role.name}</option>
+                                            return <option value={role.id} disabled={role.disabled}>{role.name}</option>
                                         })}
                                     </select>
                                 </FieldError>

@@ -58,12 +58,17 @@ class Users
     {
 
         if (!is_array($data) && !is_object($data)) {
-            throw new InvalidArgumentException("email and role is required");
+            throw new InvalidArgumentException("email and role are required");
             return false;
         }
 
-        // check email
         $email = $data["email"] ?? "";
+        $role =  $data["role"] ?? "";
+
+        if($email === "" && $role === ""){
+            throw new InvalidArgumentException("email and role are required");
+            return false;
+        }
 
         if ($email === "") {
             throw new InvalidArgumentException("email is required");
@@ -76,9 +81,6 @@ class Users
             throw new InvalidArgumentException("you cannot use this email domain for registration");
             return false;
         }
-
-        // check role
-        $role =  $data["role"] ?? '';
 
         if (!$role === "") {
             throw new InvalidArgumentException("role is required");

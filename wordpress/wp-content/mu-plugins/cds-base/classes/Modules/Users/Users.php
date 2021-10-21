@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Users;
 
+use JetBrains\PhpStorm\ArrayShape;
+use InvalidArgumentException;
 use WP_REST_Response;
 
 class Users
@@ -32,7 +34,7 @@ class Users
 
         register_rest_route('users/v1', '/submit', [
             'methods' => 'POST',
-            'callback' => [$this, 'processUserForm'],
+            'callback' => [$this, 'addUserToCollection'],
             'permission_callback' => function () {
                 return true; //current_user_can('read');
             },
@@ -50,66 +52,121 @@ class Users
         return new WP_REST_Response($role_names_arr);
     }
 
-    public function processUserForm($data)
+    #[ArrayShape(["email" => "mixed|string", "role" => "mixed|string"])]
+    public function santatizeEmailAndRole($data = []): array|false
+    {
+        if (!is_array($data)) {
+            throw new InvalidArgumentException("email and role is required");
+            return false;
+        }
+
+        // check email
+        $email = $data["email"] ?? '';
+
+        if ($email === "") {
+            throw new InvalidArgumentException("email is required");
+            return false;
+        }
+
+        if(is_email($email) === false)
+        {
+            throw new InvalidArgumentException("invalid email");
+            return false;
+        }
+
+        if (!$this->containsDomain($email)) {
+            throw new InvalidArgumentException("you cannot use this email domain for registration");
+            return false;
+        }
+
+        // check role
+        $role =  $data["role"] ?? '';
+
+        if (!$role === "") {
+            throw new InvalidArgumentException("role is required");
+            return false;
+        }
+
+        if (!in_array($role, ["gcadmin", "gceditor"])) {
+            throw new InvalidArgumentException("role is not allowed");
+            return false;
+        }
+
+        return ["email" => $email, "role" => $role];
+    }
+
+    protected function containsDomain ($email): bool
+    {
+        $allowed_email_domains = Users::ALLOWED_EMAIL_DOMAINS;
+
+        [$username, $domain] = explode('@', trim($email));
+        if (in_array($domain, $allowed_email_domains)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function createUser($email): int
+    {
+        $result = wp_create_user($email, wp_generate_password(), $email);
+        if (is_wp_error($result)) {
+            throw new \Exception($result->get_error_message());
+        }
+
+        return intval($result);
+    }
+
+    protected function addToBlog($uId, $role)
+    {
+        $result = add_user_to_blog(get_current_blog_id(), $uId, $role);
+
+        if (is_wp_error($result)) {
+            throw new \Exception($result->get_error_message());
+        }
+    }
+
+    public function addUserToCollection($data): array
     {
         try {
             $uId = false;
-            $email = $data["email"];
-            $role =  $data["role"];
-
+            [$email, $role] = $this->santatizeEmailAndRole($data);
+            /*
             $uId = username_exists($email);
 
-            // @todo if user already has site access return
+            if (is_user_member_of_blog($uId, get_current_blog_id())) {
+                throw new Error("user is already a member for this collection");
+            }
 
             if (!$uId) {
-                $result = wp_create_user($email, wp_generate_password(), $email);
-                if (is_wp_error($result)) {
-                    return new WP_REST_Response([
-                        [
-                            "status" => 400,
-                            "location" => 'email',
-                            'errors' => [$result->get_error_message()],
-                            "message" => "failed to create user"
-                        ]
-                    ]);
-                }
-
-                $uId = $result;
+                $uId = $this->createUser($email);
             }
 
-            // add to blog
-            $blogId = get_current_blog_id();
-
-            $result = add_user_to_blog($blogId,  $uId, $role);
-
-            if (is_wp_error($result)) {
-
-                return new WP_REST_Response([
-                    [
-                        "status" => 400,
-                        "location" => 'role',
-                        'errors' => [$result->get_error_message()],
-                        "message" => "failed to add user to collection"
-                    ]
-                ]);
-            }
+            $this->addToBlog($uId, $role);
+            */
+        } catch (\InvalidArgumentException $exception) {
+            return new WP_REST_Response([
+                [
+                    "status" => 400,
+                    "location" => 'detect this',
+                    'errors' => [$exception->getMessage()],
+                    "uID" => $uId
+                ]
+            ]);
         } catch (\Exception $exception) {
             return new WP_REST_Response([
                 [
                     "status" => 400,
                     "location" => '',
                     'errors' => [$exception->getMessage()],
-                    "message" => "exception",
                     "uID" => $uId
                 ]
             ]);
         }
 
         return new WP_REST_Response([
-            ["status" => 200, "message" => "user created"]
+            ["status" => 200, "message" => "success"]
         ]);
-
-
     }
 
     public function addPageFindUsers(): void
@@ -181,8 +238,9 @@ class Users
         return $result;
     }
 
-    public function isAllowedDomain($user_email): boolean
+    public function isAllowedDomain($user_email): bool
     {
+
         $allowed_email_domains = apply_filters(
             'cds_allowed_email_domains',
             self::ALLOWED_EMAIL_DOMAINS,

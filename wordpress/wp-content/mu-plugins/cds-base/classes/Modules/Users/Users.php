@@ -56,17 +56,14 @@ class Users
     #[ArrayShape(["email" => "mixed|string", "role" => "mixed|string"])]
     public function santatizeEmailAndRole($data): array|false
     {
-        /*
+
         if (!is_array($data) && !is_object($data)) {
             throw new InvalidArgumentException("email and role is required");
             return false;
         }
-        */
 
         // check email
-        $email = $data["email"];
-
-        return ["email" => "test@example.com", "role" => ""];
+        $email = $data["email"] ?? "";
 
         if ($email === "") {
             throw new InvalidArgumentException("email is required");
@@ -126,6 +123,20 @@ class Users
         return "";
     }
 
+    function userEmailExists($email)
+    {
+
+        global $wpdb;
+
+        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->users WHERE ID = %d", $email));
+
+        if ($count == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function addUserToCollection($data): WP_REST_Response|false
     {
         try {
@@ -133,10 +144,12 @@ class Users
 
             list('email' => $email, 'role' => $role) = $this->santatizeEmailAndRole($data);
 
-            $uId = email_exists($email);  // we could use user_exist here
+            // $uId = email_exists($email);  // we could use user_exist here
+
+            $uId = $this->userEmailExists($email);
 
             // throw new \Exception("debug");
-            
+
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
                 throw new \Exception("user is already a member for this collection");
                 return false;
@@ -152,14 +165,13 @@ class Users
             }
 
             throw new Exception("unknown issue occurred");
-
         } catch (\InvalidArgumentException $exception) {
             $fields = [];
             $fieldNames = ["email" , "role"];
 
             foreach ($fieldNames as $fieldName) {
                 $result = $this->detectErrorField($exception->getMessage(), $fieldName);
-                if($result !== ""){
+                if ($result !== "") {
                     array_push($fields, $result);
                 }
             }
@@ -171,7 +183,7 @@ class Users
                     "data" => $data,
                     "type" => gettype($data),
                     'errors' => [$exception->getMessage()],
-                    "uID" => $uId
+                    "uId" => $uId
                 ]
             ]);
         } catch (\Exception $exception) {

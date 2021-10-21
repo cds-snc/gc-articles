@@ -65,7 +65,7 @@ class Users
         $email = $data["email"] ?? "";
         $role =  $data["role"] ?? "";
 
-        if($email === "" && $role === ""){
+        if ($email === "" && $role === "") {
             throw new InvalidArgumentException("email and role are required");
             return false;
         }

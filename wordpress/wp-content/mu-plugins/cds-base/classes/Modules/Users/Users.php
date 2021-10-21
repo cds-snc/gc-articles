@@ -204,6 +204,13 @@ class Users
             'cds-snc',
         ); ?>
         <div class="wrap" id="react-wrap">
+            <style>
+            .notice-error h2, .error-summary h2 {margin: .8em 0 .5em 0;}
+            .notice-error ul, .error-summary ul {font-size: 16px;}
+            .error-wrapper { border-left: 4px solid #d63638; padding-left: .5em; }
+            .validation-error { display:block; color: #d63638; margin: .5em 0;}
+            </style>
+
             <h1 class="wp-heading-inline">
                 <?php echo esc_html($page_title); ?>
             </h1>

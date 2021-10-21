@@ -68,6 +68,8 @@ class Users
             return false;
         }
 
+        $email = sanitize_email($email);
+
         if (!$this->isAllowedDomain($email)) {
             throw new InvalidArgumentException("you cannot use this email domain for registration");
             return false;
@@ -80,6 +82,8 @@ class Users
             throw new InvalidArgumentException("role is required");
             return false;
         }
+
+        $role = sanitize_text_field($role);
 
         if (!in_array($role, ["gcadmin", "gceditor"])) {
             throw new InvalidArgumentException("role is not allowed");
@@ -108,9 +112,12 @@ class Users
         }
     }
 
-    public function addUserToCollection($data): array
+    public function addUserToCollection($data): array|false
     {
         try {
+            return new WP_REST_Response([
+                ["status" => 200, "message" => "success"]
+            ]);
             $uId = false;
             [$email, $role] = $this->santatizeEmailAndRole($data);
             /*
@@ -118,6 +125,7 @@ class Users
 
             if (is_user_member_of_blog($uId, get_current_blog_id())) {
                 throw new Error("user is already a member for this collection");
+                return false;
             }
 
             if (!$uId) {
@@ -126,6 +134,11 @@ class Users
 
             $this->addToBlog($uId, $role);
             */
+
+            return new WP_REST_Response([
+                ["status" => 200, "message" => "success"]
+            ]);
+
         } catch (\InvalidArgumentException $exception) {
             return new WP_REST_Response([
                 [
@@ -139,16 +152,12 @@ class Users
             return new WP_REST_Response([
                 [
                     "status" => 400,
-                    "location" => '',
+                    "location" => 'unknown',
                     'errors' => [$exception->getMessage()],
                     "uID" => $uId
                 ]
             ]);
         }
-
-        return new WP_REST_Response([
-            ["status" => 200, "message" => "success"]
-        ]);
     }
 
     public function addPageFindUsers(): void

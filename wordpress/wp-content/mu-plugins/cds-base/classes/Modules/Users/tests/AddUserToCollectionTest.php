@@ -3,6 +3,15 @@ use CDS\Modules\Users\Users;
 
 beforeAll(function () {
     WP_Mock::setUp();
+
+    \WP_Mock::userFunction( 'sanitize_email', array(
+        'return_arg' => 0
+    ) );
+
+    \WP_Mock::userFunction( 'sanitize_text_field', array(
+        'return_arg' => 0
+    ) );
+
     WP_Mock::userFunction('is_email', array(
         'return' => true,
     ));

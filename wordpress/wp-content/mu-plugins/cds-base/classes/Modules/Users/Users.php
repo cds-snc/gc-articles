@@ -89,18 +89,6 @@ class Users
         return ["email" => $email, "role" => $role];
     }
 
-    protected function containsDomain ($email): bool
-    {
-        $allowed_email_domains = Users::ALLOWED_EMAIL_DOMAINS;
-
-        [$username, $domain] = explode('@', trim($email));
-        if (in_array($domain, $allowed_email_domains)) {
-            return true;
-        }
-
-        return false;
-    }
-
     protected function createUser($email): int
     {
         $result = wp_create_user($email, wp_generate_password(), $email);

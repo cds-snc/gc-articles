@@ -54,7 +54,7 @@ class Users
     }
 
     #[ArrayShape(["email" => "mixed|string", "role" => "mixed|string"])]
-    public function santatizeEmailAndRole($data): array|false
+    public function santatizeEmailAndRole($data = []): array|false
     {
 
         if (!is_array($data) && !is_object($data)) {
@@ -123,20 +123,6 @@ class Users
         return "";
     }
 
-    function userEmailExists($email)
-    {
-
-        global $wpdb;
-
-        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM $wpdb->users WHERE ID = %d", $email));
-
-        if ($count == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public function addUserToCollection($data): WP_REST_Response|false
     {
         try {
@@ -144,11 +130,7 @@ class Users
 
             list('email' => $email, 'role' => $role) = $this->santatizeEmailAndRole($data);
 
-            // $uId = email_exists($email);  // we could use user_exist here
-
-            $uId = $this->userEmailExists($email);
-
-            // throw new \Exception("debug");
+            $uId = email_exists($email);  // we could use user_exist here
 
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
                 throw new \Exception("user is already a member for this collection");

@@ -36,8 +36,8 @@ RUN a2enmod ssl \
     && echo "$APACHE_KEY" > /etc/ssl/private/self-signed.key
 
 COPY --from=buildjs /app/wordpress/wp-content ./wp-content
+COPY --from=composer /app/wordpress/vendor ../vendor
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
-COPY ./wordpress/vendor ../vendor
 
 EXPOSE 80 443

@@ -12,7 +12,7 @@ WORKDIR /app
 COPY --from=composer /app /app
 
 RUN apk add --no-cache git
-RUN npm --unsafe-perm install --only=production
+RUN npm --unsafe-perm install
 
 ## Release build
 
@@ -35,9 +35,14 @@ RUN a2enmod ssl \
     && echo "$APACHE_CERT" > /etc/ssl/certs/self-signed.crt \
     && echo "$APACHE_KEY" > /etc/ssl/private/self-signed.key
 
-COPY --from=buildjs /app/wordpress/wp-content ./wp-content
-COPY --from=composer /app/wordpress/vendor ../vendor
+COPY ./wordpress/wp-content ./wp-content
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
+
+# Get the vendor folder from the composer build phase and drop it outside of web root
+COPY --from=composer /app/wordpress/vendor ../vendor
+
+# Get the build folder from the buildjs phase
+COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/build ./wp-content/mu-plugins/cds-base/build
 
 EXPOSE 80 443

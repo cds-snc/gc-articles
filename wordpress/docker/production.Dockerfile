@@ -21,7 +21,7 @@ FROM wordpress:5.8.1-php8.0-apache AS release
 RUN apk add --update --virtual mod-deps  \
     autoconf  \
     alpine-sdk \
-    libmcrypt-dev \
+    libmcrypt-dev
 
 RUN pecl install pcov \
     && docker-php-ext-enable pcov

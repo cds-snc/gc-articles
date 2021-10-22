@@ -1,5 +1,7 @@
 FROM wordpress:cli-php8.0
 
+WORKDIR /usr/src/gc-articles/wordpress
+
 USER root
 
 RUN apk add --update --virtual mod-deps autoconf alpine-sdk \

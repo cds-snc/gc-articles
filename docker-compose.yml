@@ -32,11 +32,11 @@ services:
       - 80:80
     env_file: .env
     volumes:
-      - wordpress:/var/www/html
-      - ./wordpress/wp-content:/var/www/html/wp-content
-      - ./wordpress/vendor:/var/www/html/vendor
-      - ./wordpress/wp-config.php:/var/www/html/wp-config.php
-      - ./wordpress/.htaccess-multisite:/var/www/html/.htaccess
+      - wordpress:/usr/src/gc-articles/wordpress
+      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
+      - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
+      - ./wordpress/.htaccess-multisite:/usr/src/gc-articles/wordpress/.htaccess
       - ./wordpress/docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
       - ./wordpress/docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
       - ./wordpress/docker/php/conf.d/upload_max_filesize.ini:/usr/local/etc/php/conf.d/uplaod_max_filesize.ini
@@ -80,16 +80,17 @@ services:
     command: >
       /bin/bash -c '
       /wait-for-it.sh db:3306;
-      wp core multisite-install --path="/var/www/html" --url="localhost" --title="CDS Wordpress Base" --admin_user=${ADMIN_USER} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL};
+      cd /usr/src/gc-articles/wordpress;
+      wp core multisite-install --url="localhost" --title="CDS Wordpress Base" --admin_user=${ADMIN_USER} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL};
       wp option update permalink_structure "/%postname%/";
       wp theme enable cds-default --activate;
       wp plugin activate sitepress-multilingual-cms --network;
       '
     volumes:
-      - wordpress:/var/www/html
-      - ./wordpress/wp-content:/var/www/html/wp-content
-      - ./wordpress/vendor:/var/www/html/vendor
-      - ./wordpress/wp-config.php:/var/www/html/wp-config.php
+      - wordpress:/usr/src/gc-articles/wordpress
+      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
+      - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./wait-for-it.sh:/wait-for-it.sh
     networks:
       - app-network
@@ -104,10 +105,10 @@ services:
       dockerfile: .devcontainer/Dockerfile
     env_file: .env
     volumes:
-      - wordpress:/var/www/html
-      - ./wordpress/wp-content:/var/www/html/wp-content
-      - ./wordpress/vendor:/var/www/html/vendor
-      - ./wordpress/wp-config.php:/var/www/html/wp-config.php
+      - wordpress:/usr/src/gc-articles/wordpress
+      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
+      - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./:/home/default/project
       - ~/.ssh:/home/default/.ssh
       - ~/.gitconfig:/home/default/.gitconfig

@@ -18,6 +18,13 @@ RUN npm --unsafe-perm install
 
 FROM wordpress:5.8.1-php8.0-apache
 
+WORKDIR /usr/src/gc-articles/wordpress
+
+# Update path to wordpress in apache *.conf files
+RUN set -eux; \
+    find /etc/apache2 -name '*.conf' -type f -exec sed -ri -e "s!/var/www/html!$PWD!g" -e "s!Directory /var/www/!Directory $PWD!g" '{}' +;
+
+# Setup self-signed cert/ssl
 ARG APACHE_CERT
 ARG APACHE_KEY
 
@@ -28,12 +35,9 @@ RUN a2enmod ssl \
     && echo "$APACHE_CERT" > /etc/ssl/certs/self-signed.crt \
     && echo "$APACHE_KEY" > /etc/ssl/private/self-signed.key
 
-WORKDIR /var/www/html
-
 COPY --from=buildjs /app/wordpress/wp-content ./wp-content
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
-COPY ./wordpress/composer.json ./
-COPY ./wordpress/composer.lock ./
+COPY ./wordpress/vendor ../vendor
 
 EXPOSE 80 443

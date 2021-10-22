@@ -13,7 +13,7 @@ env:
   STAGING_ECR_REGISTRY: 729164266357.dkr.ecr.ca-central-1.amazonaws.com
 
 jobs:
-  build-push-container:
+  build-container:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

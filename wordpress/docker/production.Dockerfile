@@ -9,10 +9,10 @@ RUN cd wordpress && composer install --no-interaction --optimize-autoloader --no
 
 FROM node:14-alpine AS buildjs
 WORKDIR /app
-COPY --from=composer /app /app
+COPY . .
 
 RUN apk add --no-cache git
-RUN npm --unsafe-perm install --only=production
+RUN npm --unsafe-perm install
 
 ## Release build
 
@@ -35,9 +35,17 @@ RUN a2enmod ssl \
     && echo "$APACHE_CERT" > /etc/ssl/certs/self-signed.crt \
     && echo "$APACHE_KEY" > /etc/ssl/private/self-signed.key
 
-COPY --from=buildjs /app/wordpress/wp-content ./wp-content
-COPY --from=composer /app/wordpress/vendor ../vendor
+COPY ./wordpress/wp-content ./wp-content
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
+
+# Copy the vendor folder from the composer build phase and drop it outside of web root
+COPY --from=composer /app/wordpress/vendor ../vendor
+
+# Copy compiled js and css from the buildjs phase @TODO: these should be combined into a single location
+COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/build ./wp-content/mu-plugins/cds-base/build
+COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Contact/js ./wp-content/mu-plugins/cds-base/classes/Modules/Contact/js
+COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Subscribe/js ./wp-content/mu-plugins/cds-base/classes/Modules/Subscribe/js
+COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Styles/template/css ./wp-content/mu-plugins/cds-base/classes/Modules/Styles/template/css
 
 EXPOSE 80 443

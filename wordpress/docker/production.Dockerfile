@@ -9,7 +9,7 @@ RUN cd wordpress && composer install --no-interaction --optimize-autoloader --no
 
 FROM node:14-alpine AS buildjs
 WORKDIR /app
-COPY --from=composer /app /app
+COPY . .
 
 RUN apk add --no-cache git
 RUN npm --unsafe-perm install
@@ -39,10 +39,12 @@ COPY ./wordpress/wp-content ./wp-content
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
 
-# Get the vendor folder from the composer build phase and drop it outside of web root
+# Copy the vendor folder from the composer build phase and drop it outside of web root
 COPY --from=composer /app/wordpress/vendor ../vendor
 
-# Get the build folder from the buildjs phase
+# Copy compiled js and css from the buildjs phase @TODO: these should be combined into a single location
 COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/build ./wp-content/mu-plugins/cds-base/build
+COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Contact/js ./wp-content/mu-plugins/cds-base/classes/Modules/Contact/js
+COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Styles/template/css ./wp-content/mu-plugins/cds-base/classes/Modules/Styles/template/css
 
 EXPOSE 80 443

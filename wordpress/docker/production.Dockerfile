@@ -12,7 +12,7 @@ WORKDIR /app
 COPY --from=composer /app /app
 
 RUN apk add --no-cache git
-RUN npm --unsafe-perm install
+RUN npm --unsafe-perm install --only=production
 
 ## Release build
 

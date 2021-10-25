@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
-import { Button, Notice, Animate } from "@wordpress/components";
+import { Button, Notice } from "@wordpress/components";
 
 const useInput = initialValue => {
     const [value, setValue] = useState(initialValue);
     return {
         value,
         setValue,
-        reset: () => setValue(""),
+        reset: val => setValue(val),
         bind: {
             value,
             onChange: event => {
@@ -40,6 +40,16 @@ export const sendData = async (endpoint: string, data) => {
     return await response.json();
 };
 
+const Success = ({ message }) => {
+    return <Notice
+        status="success"
+        isDismissible={false}
+    >
+        <h2>Success!</h2>
+        <p>{message}</p>
+    </Notice>
+}
+
 const ErrorSummary = ({ errors = [] }) => {
     return <Notice
         className="error-summary"
@@ -47,7 +57,7 @@ const ErrorSummary = ({ errors = [] }) => {
         isDismissible={false}
     >
         <h2>There is a problem</h2>
-        <ul>   
+        <ul>
             {errors.map((err, i) => {
                 return err.location ? 
                     <li key={err.location}><a href={`#${err.location}`}>{err.errors[0]}</a></li> :
@@ -58,8 +68,10 @@ const ErrorSummary = ({ errors = [] }) => {
     </Notice>
 }
 
+const findErrorId = (errors = [], id = '') => errors.find(err => err.location === id)
+
 const FieldError = ({ errors = [], id = '', children }) => {
-    const error = errors.find(err => err.location === id)
+    const error = findErrorId(errors, id)
 
     if(!id || !error) {
         return <div>{children}</div>
@@ -81,6 +93,12 @@ export const UserForm = (props) => {
     const [isLoading, setIsLoading] = useState(true);
     const [roles, setRoles] = useState([emptyRole]);
     const [errors, setErrors] = useState([]);
+    const [successMsg, setSuccessMsg] = useState('');
+    const resetForm = () => {
+        resetEmail('');
+        resetRole({value: ''});
+        setErrors([]);
+    }
 
     useEffect(() => {
         const getRoles = async () => {
@@ -105,11 +123,21 @@ export const UserForm = (props) => {
         if(parseInt(status) >= 400) {
             const [ { errors: serverErrors = [] } = {} ] = response;
             setErrors(serverErrors);
+            setSuccessMsg(''); // clear success message
+            
+        } else if (parseInt(status) == 201) {
+            const [ { message = '' } = {} ] = response;
+            resetForm(); // clear inputs and remove errors
+
+            setSuccessMsg(message);
         }
     }
 
     return (
-        <div id="cds-react-form">
+        <div className="cds-react-form">
+            {
+                successMsg.length > 0 && <Success message={successMsg}  />
+            }
             {
                 errors.length > 0 && <ErrorSummary errors={errors} />
             }
@@ -128,7 +156,7 @@ export const UserForm = (props) => {
                             <td>
                                 {/* The "id" needs to match the field ID attribute */}
                                 <FieldError errors={errors} id={"email"}>
-                                    <input type="text" id="email" aria-describedby="validation-error--email" {...bindEmail} />
+                                    <input type="text" id="email" aria-describedby={findErrorId(errors, "email") ? `validation-error--email` : null} {...bindEmail} />
                                 </FieldError>
                             </td>
                         </tr>
@@ -141,7 +169,7 @@ export const UserForm = (props) => {
                             <td>
                                 {/* The "id" needs to match the field ID attribute */}
                                 <FieldError errors={errors} id={"role"}>
-                                    <select disabled={isLoading ? true : false} name="role" id="role" aria-describedby="validation-error--role" {...bindRole} value={...role.value}>
+                                    <select disabled={isLoading ? true : false} name="role" id="role" aria-describedby={findErrorId(errors, "role") ? `validation-error--role` : null} {...bindRole} value={...role.value}>
                                         {roles.map((role) => {
                                             return <option value={role.id} disabled={role.disabled}>{role.name}</option>
                                         })}

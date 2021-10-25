@@ -117,13 +117,16 @@ input[type=date], input[type=datetime-local], input[type=datetime], input[type=e
 }
 
 /* Style error components for React admin pages */
+.cds-react-form .components-notice {
+    margin-left: 0;
+}
+
 .error-summary {
     background-color: #f8eae9 !important;
-    margin-left:0;
 }
 
 .error-summary h2 {
-    margin: .8em 0 .5em 0;
+    margin: .5em 0;
 }
 
 .error-wrapper {

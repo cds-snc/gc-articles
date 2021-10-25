@@ -18,8 +18,9 @@ class Users
     {
         add_filter('wpmu_validate_user_signup', [$this, 'validateEmailDomain']);
 
-        add_action('admin_menu', [$this, 'addPageFindUsers']);
-        add_action('admin_enqueue_scripts', [$this, 'replacePageFindUsers']);
+        add_action('admin_menu', [$this, 'addPageAddUsers']);
+        add_action('admin_menu', [$this, 'removePageUsersAddNew']);
+        add_action('admin_enqueue_scripts', [$this, 'replacePageAddUsers']);
 
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
@@ -140,8 +141,11 @@ class Users
     public function sendReset($uId, $email)
     {
         $userInfo = get_userdata($uId);
-        $unique = get_password_reset_key( $userInfo );
-        $uniqueUrl = network_site_url("wp-login.php?action=rp&key=$unique&login=" . rawurlencode($userInfo->user_login), 'login');
+        $unique = get_password_reset_key($userInfo);
+        $uniqueUrl = network_site_url(
+            "wp-login.php?action=rp&key=$unique&login=" . rawurlencode($userInfo->user_login),
+            'login'
+        );
 
         $subject  = "Set Password";
         $message  = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
@@ -150,20 +154,19 @@ class Users
         $message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
         $message .=  $uniqueUrl;
 
-        wp_mail( $email, $subject, $message );
+        wp_mail($email, $subject, $message);
     }
 
     public function addUserToCollection($data): WP_REST_Response|false
     {
         try {
-
             $uId = false;
 
             $list = list('email' => $email, 'role' => $role) = $this->sanitizeEmailAndRole($data);
 
             // look for matching username OR email
             // if we just use a logical OR, we get a uId == true rather than the number
-            $uId = email_exists($email) ? email_exists($email) : username_exists($email);  // we could use user_exist here
+            $uId = email_exists($email) ? email_exists($email) : username_exists($email);  // could use user_exist here
 
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
                 throw new \Exception($email . " is already a member of this collection");
@@ -177,7 +180,7 @@ class Users
                 $this->sendReset($uId, $email);
 
                 return new WP_REST_Response([
-                    ["status" => 200, "message" => "success"]
+                    ["status" => 201, "message" => $email . " was added to the collection.", "uID" => $uId]
                 ]);
             }
 
@@ -204,19 +207,33 @@ class Users
         }
     }
 
-    public function addPageFindUsers(): void
+    public function addPageAddUsers(): void
     {
-        $page_title = __('Find Users', 'cds-snc');
+        $page_title = __('Add user', 'cds-snc');
 
         // https://developer.wordpress.org/reference/functions/add_users_page/
         add_users_page(
             $page_title,
             $page_title,
             'manage_options', // permissions needed to see the menu option
-            'users-find',
+            'users-add',
             fn() => $this->newPageTemplate($page_title),
             2,
         );
+    }
+
+
+    public function removePageUsersAddNew(): void
+    {
+        $page = remove_submenu_page('users.php', 'user-new.php');
+
+        global $pagenow;
+
+        # Redirect from the default "Add New" users page to our new page
+        if ($pagenow === 'user-new.php') {
+            wp_redirect(admin_url('/users.php?page=users-add'));
+            exit;
+        }
     }
 
     public function newPageTemplate($page_title = 'Hello world!'): void
@@ -237,10 +254,10 @@ class Users
         <?php
     }
 
-    public function replacePageFindUsers(): void
+    public function replacePageAddUsers(): void
     {
         $current_page = basename($_SERVER['REQUEST_URI']);
-        if (str_contains($current_page, 'page=users-find')) {
+        if (str_contains($current_page, 'page=users-add')) {
             $data = 'CDS.renderUserForm();';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
         }

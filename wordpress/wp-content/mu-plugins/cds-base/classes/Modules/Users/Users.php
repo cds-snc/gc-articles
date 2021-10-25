@@ -119,6 +119,7 @@ class Users
 
     public function createUser($email): int
     {
+        // @TODO: username should be the same as email
         $result = wp_create_user($email, wp_generate_password(), $email);
         if (is_wp_error($result)) {
             throw new \Exception($result->get_error_message());
@@ -164,6 +165,8 @@ class Users
 
             // if we just use a logical OR, we get $uId === true rather than the integer
             $uId = email_exists($email) ? email_exists($email) : username_exists($email);
+
+            // @TODO: handle case where uId exists but NOT member of blog
 
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
                 throw new \Exception($email . " is already a member of this Collection");
@@ -230,6 +233,7 @@ class Users
         global $pagenow;
 
         // Redirect from the default "Add New" users page to our new page
+        // @TODO: GC Admins only see a "add existing" button / screen
         if ($pagenow === 'user-new.php') {
             wp_redirect(admin_url('/users.php?page=users-add'));
             exit;

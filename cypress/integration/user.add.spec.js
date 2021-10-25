@@ -20,8 +20,7 @@ describe('Add user', () => {
     cy.exec('npm run wp-env:test:setup');
   });
 
-  after(() => {
-  });
+  after(() => {});
 
   beforeEach(() => {
     cy.login();

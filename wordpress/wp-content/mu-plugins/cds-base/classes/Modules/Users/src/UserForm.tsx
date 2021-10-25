@@ -118,9 +118,9 @@ export const UserForm = (props) => {
     const handleSubmit = async (evt) => {
         evt.preventDefault();
         const response = await sendData('users/v1/submit', { email, role });
-
         const [ { status } ] = response;
-        //TODO: catch 500
+
+        //@TODO: catch 500 errors
 
         if(parseInt(status) >= 400) {
             const [ { errors: serverErrors = [] } = {} ] = response;

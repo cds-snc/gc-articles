@@ -9,7 +9,7 @@ resource "aws_iam_user" "wordpress_storage" {
 }
 
 resource "aws_s3_bucket_policy" "wordpress_storage" {
-  bucket = module.wordpress_storage.id
+  bucket = module.wordpress_storage.s3_bucket_id
 
   policy = jsonencode({
     Version = "2012-10-17"

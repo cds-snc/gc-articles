@@ -30,7 +30,7 @@ class Users
             'methods' => 'GET',
             'callback' => [$this, 'getRoles'],
             'permission_callback' => function () {
-                return true; //current_user_can('read');
+                return current_user_can('read');
             },
         ]);
 
@@ -38,7 +38,7 @@ class Users
             'methods' => 'POST',
             'callback' => [$this, 'addUserToCollection'],
             'permission_callback' => function () {
-                return true; //current_user_can('read');
+                return current_user_can('read');
             },
         ]);
     }
@@ -109,8 +109,7 @@ class Users
             return $error;
         }
 
-        /* TODO: work this out with Tim */
-        if (!in_array(sanitize_text_field($role), [ "gceditor", "gcadmin" ])) { // could get these from WP directly
+        if (!in_array(sanitize_text_field($role), [ "gceditor", "gcadmin" ])) {
             $error['errors'] = ["You entered an invalid role."];
             return $error;
         }
@@ -137,24 +136,24 @@ class Users
         }
     }
 
-    // public function sendReset($uId, $email)
-    // {
-    //     $userInfo = get_userdata($uId);
-    //     $unique = get_password_reset_key($userInfo);
-    //     $uniqueUrl = network_site_url(
-    //         "wp-login.php?action=rp&key=$unique&login=" . rawurlencode($userInfo->user_login),
-    //         'login'
-    //     );
+    public function sendReset($uId, $email)
+    {
+        $userInfo = get_userdata($uId);
+        $unique = get_password_reset_key($userInfo);
+        $uniqueUrl = network_site_url(
+            "wp-login.php?action=rp&key=$unique&login=" . rawurlencode($userInfo->user_login),
+            'login'
+        );
 
-    //     $subject  = "Set Password";
-    //     $message  = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
-    //     $message .= __("Hi");
-    //     $message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
-    //     $message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
-    //     $message .=  $uniqueUrl;
+        $subject  = "Set Password";
+        $message  = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
+        $message .= __("Hi");
+        $message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
+        $message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
+        $message .=  $uniqueUrl;
 
-    //     wp_mail($email, $subject, $message);
-    // }
+        wp_mail($email, $subject, $message);
+    }
 
     public function addUserToCollection($data): WP_REST_Response|false
     {
@@ -163,23 +162,24 @@ class Users
 
             $list = list('email' => $email, 'role' => $role) = $this->sanitizeEmailAndRole($data);
 
-            // look for matching username OR email
-            // if we just use a logical OR, we get a uId == true rather than the number
-            $uId = email_exists($email) ? email_exists($email) : username_exists($email);  // could use user_exist here
+            // if we just use a logical OR, we get $uId === true rather than the integer
+            $uId = email_exists($email) ? email_exists($email) : username_exists($email);
 
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
-                throw new \Exception($email . " is already a member of this collection");
+                throw new \Exception($email . " is already a member of this Collection");
                 return false;
             }
 
             if (!$uId && $email) {
                 $uId = $this->createUser($email);
-                $this->addToBlog($uId, $role);
+                if (is_multisite()) {
+                    $this->addToBlog($uId, $role);
+                }
 
-                // $this->sendReset($uId, $email);
+                $this->sendReset($uId, $email);
 
                 return new WP_REST_Response([
-                    ["status" => 201, "message" => $email . " was added to the collection.", "uID" => $uId]
+                    ["status" => 201, "message" => $email . " was added to the Collection.", "uID" => $uId]
                 ]);
             }
 
@@ -229,7 +229,7 @@ class Users
 
         global $pagenow;
 
-        # Redirect from the default "Add New" users page to our new page
+        // Redirect from the default "Add New" users page to our new page
         if ($pagenow === 'user-new.php') {
             wp_redirect(admin_url('/users.php?page=users-add'));
             exit;
@@ -265,21 +265,9 @@ class Users
 
     public function validateEmailDomain($result)
     {
-        $allowed_email_domains_HTML =
-            '<ul><li>' .
-            implode('</li><li>', self::ALLOWED_EMAIL_DOMAINS) .
-            '</li></ul>';
-
-        $details =
-            '<details><summary>' .
-            __('Expand to see allowed domains.', 'cds-snc') .
-            '</summary>' .
-            $allowed_email_domains_HTML .
-            '</details>';
-
         $message =
             __(
-                'You can not use this email domain for registration.',
+                'You can’t use this email domain for registration.',
                 'cds-snc',
             ) . $details;
 

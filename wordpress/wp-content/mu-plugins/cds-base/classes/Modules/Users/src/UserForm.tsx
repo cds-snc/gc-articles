@@ -45,7 +45,7 @@ const Success = ({ message }) => {
         status="success"
         isDismissible={false}
     >
-        <h2>Success!</h2>
+        <h2>{__("Success!")}</h2>
         <p>{message}</p>
     </Notice>
 }
@@ -56,7 +56,7 @@ const ErrorSummary = ({ errors = [] }) => {
         status="error"
         isDismissible={false}
     >
-        <h2>There is a problem</h2>
+        <h2>{__("There is a problem")}</h2>
         <ul>
             {errors.map((err, i) => {
                 return err.location ? 
@@ -120,6 +120,8 @@ export const UserForm = (props) => {
         const response = await sendData('users/v1/submit', { email, role });
 
         const [ { status } ] = response;
+        //TODO: catch 500
+
         if(parseInt(status) >= 400) {
             const [ { errors: serverErrors = [] } = {} ] = response;
             setErrors(serverErrors);
@@ -142,7 +144,7 @@ export const UserForm = (props) => {
                 errors.length > 0 && <ErrorSummary errors={errors} />
             }
 
-            <p>{__("Create a brand new user or add them to this Collection if they already exist.")}</p>
+            <p>{__("Create a super brand new user or add them to this Collection if they already exist.")}</p>
 
             <form onSubmit={handleSubmit} id="adduser">
                 <table className="form-table">

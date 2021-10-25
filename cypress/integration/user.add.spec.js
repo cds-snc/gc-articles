@@ -9,16 +9,55 @@ describe('Find users', () => {
   after(() => {
   });
 
-  it('Can load the new page', () => {
+  it('Can load the new Add User page', () => {
     cy.login();
-    cy.visit("wp-admin/users.php?page=users-find");
-    cy.get('h1').contains("Find Users");
-    cy.get("button.button-primary").first().should('have.text', "Find user");
+    cy.contains('Users').click()
+    cy.get('h1').contains("Users"); // get to the "users page"
+    
+    cy.get('#wpbody .page-title-action').contains('Add New').click()
+    cy.get('h1').contains("Add user");
+    
+    // Get the roles
+    // cy.get("select#role").select('GC Editor').should('have.value', 'gceditor');
+    // cy.get("select#role").select('GC Admin').should('have.value', 'gcadmin');
+
+    cy.get(".components-button.is-primary").first().should('have.text', "Add user");
   });
 
-  // Get the roles
-  // Hit submit get the validation messages
+  it('Gets correct validation messages for no email and no role', () => {
+    cy.login();
+    cy.visit("wp-admin/users.php?page=users-add");
+    cy.contains('button', 'Add user').click()
+
+    // error summary
+    cy.get('h2').contains("There is a problem");
+
+    // email error
+    cy.get('.components-notice.is-error ul').contains("Email is required.");
+    cy.get('#validation-error--email').contains("Email is required.");
+    cy.get('input#email').invoke('attr', 'aria-describedBy').should('eq', 'validation-error--email')
+
+    // role error
+    cy.get('.components-notice.is-error ul').contains("Role is required.");
+    cy.get('#validation-error--role').contains("Role is required.");
+    cy.get('select#role').invoke('attr', 'aria-describedBy').should('eq', 'validation-error--role')
+  });
+
+  it('Gets correct validation messages for good email and no role', () => {
+    cy.login();
+    cy.visit("wp-admin/users.php?page=users-add");
+    cy.get('input#email').type("editor@cds-snc.ca")
+    cy.contains('button', 'Add user').click()
+
+    // error summary
+    cy.get('h2').contains("There is a problem");
+
+    // role error
+    cy.get('.components-notice.is-error ul').contains("Role is required.");
+    cy.get('#validation-error--role').contains("Role is required.");
+    cy.get('select#role').invoke('attr', 'aria-describedBy').should('eq', 'validation-error--role')
+  });
+
   // Bad email no role
   // Good email good role
-
 });

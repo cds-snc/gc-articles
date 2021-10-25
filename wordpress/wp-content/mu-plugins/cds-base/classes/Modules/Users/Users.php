@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace CDS\Modules\Users;
 
 use JetBrains\PhpStorm\ArrayShape;
-use InvalidArgumentException;
 use Mockery\Exception;
 use WP_REST_Response;
 use CDS\Modules\Users\ValidationException;
@@ -138,24 +137,24 @@ class Users
         }
     }
 
-    public function sendReset($uId, $email)
-    {
-        $userInfo = get_userdata($uId);
-        $unique = get_password_reset_key($userInfo);
-        $uniqueUrl = network_site_url(
-            "wp-login.php?action=rp&key=$unique&login=" . rawurlencode($userInfo->user_login),
-            'login'
-        );
+    // public function sendReset($uId, $email)
+    // {
+    //     $userInfo = get_userdata($uId);
+    //     $unique = get_password_reset_key($userInfo);
+    //     $uniqueUrl = network_site_url(
+    //         "wp-login.php?action=rp&key=$unique&login=" . rawurlencode($userInfo->user_login),
+    //         'login'
+    //     );
 
-        $subject  = "Set Password";
-        $message  = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
-        $message .= __("Hi");
-        $message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
-        $message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
-        $message .=  $uniqueUrl;
+    //     $subject  = "Set Password";
+    //     $message  = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
+    //     $message .= __("Hi");
+    //     $message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
+    //     $message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
+    //     $message .=  $uniqueUrl;
 
-        wp_mail($email, $subject, $message);
-    }
+    //     wp_mail($email, $subject, $message);
+    // }
 
     public function addUserToCollection($data): WP_REST_Response|false
     {
@@ -177,14 +176,14 @@ class Users
                 $uId = $this->createUser($email);
                 $this->addToBlog($uId, $role);
 
-                $this->sendReset($uId, $email);
+                // $this->sendReset($uId, $email);
 
                 return new WP_REST_Response([
                     ["status" => 201, "message" => $email . " was added to the collection.", "uID" => $uId]
                 ]);
             }
 
-            throw new Exception("unknown issue occurred");
+            throw new \Exception("Unknown issue occurred");
         } catch (ValidationException $exception) {
             return new WP_REST_Response([
                 [
@@ -201,7 +200,8 @@ class Users
                     "status" => 400,
                     "location" => 'unknown',
                     'errors' => [$exception->getMessage()],
-                    'uID' => $uId
+                    'uID' => $uId,
+                    'email' => $email
                 ]
             ]);
         }

@@ -121,12 +121,12 @@ input[type=date], input[type=datetime-local], input[type=datetime], input[type=e
     margin-left: 0;
 }
 
-.error-summary {
-    background-color: #f8eae9 !important;
+.cds-react-form .components-notice h2 {
+    margin: .5em 0;
 }
 
-.error-summary h2 {
-    margin: .5em 0;
+.error-summary {
+    background-color: #f8eae9 !important;
 }
 
 .error-wrapper {

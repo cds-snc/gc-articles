@@ -170,22 +170,22 @@ export const UserForm = (props) => {
                                 {/* The "id" needs to match the field ID attribute */}
                                 <FieldError errors={errors} id={"role"}>
                                     <select disabled={isLoading ? true : false} name="role" id="role" aria-describedby={findErrorId(errors, "role") ? `validation-error--role` : null} {...bindRole} value={...role.value}>
-                                        {roles.map((role) => {
-                                            return <option value={role.id} disabled={role.disabled}>{role.name}</option>
+                                        {roles.map((role, i) => {
+                                            return <option key={role.id || i} value={role.id} disabled={role.disabled}>{role.name}</option>
                                         })}
                                     </select>
                                 </FieldError>
                             </td>
                         </tr>
-                        <Button
-                            isPrimary
-                            isBusy={isLoading}
-                            disabled={isLoading}
-                            type="submit" >
-                            {__("Add user", "cds-snc")}
-                        </Button>
                     </tbody>
                 </table>
+                <Button
+                    isPrimary
+                    isBusy={isLoading}
+                    disabled={isLoading}
+                    type="submit" >
+                    {__("Add user", "cds-snc")}
+                </Button>
             </form>
         </div>
     );

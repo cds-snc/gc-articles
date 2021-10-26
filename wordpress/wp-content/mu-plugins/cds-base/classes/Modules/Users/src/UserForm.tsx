@@ -112,7 +112,7 @@ export const UserForm = (props) => {
                 setSuccessMsg(message);
             }
         } catch (e) {
-            setErrors([{ "location": "unknown", "errors": [__("Internal server error", "cds-snc")] }]);
+            setErrors([{ "errors": [__("Internal server error", "cds-snc")] }]);
             setSuccessMsg(''); // clear success message
         }
     }
@@ -126,7 +126,7 @@ export const UserForm = (props) => {
                 errors.length > 0 && <ErrorSummary errors={errors} />
             }
 
-            <p>{__("Create a super brand new user or add them to this Collection if they already exist.")}</p>
+            <p>{__("Create a brand new user or add them to this Collection if they already exist.")}</p>
 
             <form onSubmit={handleSubmit} id="adduser">
                 <table className="form-table">

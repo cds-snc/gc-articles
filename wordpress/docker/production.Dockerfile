@@ -14,25 +14,12 @@ COPY . .
 RUN apk add --no-cache git
 RUN npm --unsafe-perm install
 
-## Prepare release container
-FROM wordpress:5.8.1-php8.0-apache AS release
+## Release build
 
-# Add build deps
-RUN apk add --update --virtual mod-deps  \
-    autoconf  \
-    alpine-sdk \
-    libmcrypt-dev
+FROM wordpress:5.8.1-php8.0-apache
 
 RUN pecl install pcov \
     && docker-php-ext-enable pcov
-
-# clean up
-RUN apk del mod-deps && \
-  rm -rf /apk /tmp/* /var/cache/apk/*
-
-## Release build
-
-FROM release
 
 WORKDIR /usr/src/gc-articles/wordpress
 
@@ -56,7 +43,7 @@ COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
 
 # Copy the vendor folder from the composer build phase and drop it outside of web root
-COPY --from=composer /app/wordpress/vendor ../vendor
+COPY --from=composer /app/wordpress/vendor ./vendor
 
 # Copy compiled js and css from the buildjs phase @TODO: these should be combined into a single location
 COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/build ./wp-content/mu-plugins/cds-base/build

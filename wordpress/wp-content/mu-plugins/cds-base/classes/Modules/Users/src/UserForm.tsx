@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Button, Notice } from "@wordpress/components";
 
@@ -78,6 +78,7 @@ export const UserForm = (props) => {
         resetRole({ value: '' });
         setErrors([]);
     }
+    const errorSummary = useRef(null);
 
     useEffect(() => {
         const getRoles = async () => {
@@ -115,16 +116,19 @@ export const UserForm = (props) => {
             setErrors([{ "errors": [__("Internal server error", "cds-snc")] }]);
             setSuccessMsg(''); // clear success message
         }
+        errorSummary.current.focus();
     }
 
     return (
         <div className="cds-react-form">
-            {
-                successMsg.length > 0 && <Success message={successMsg} />
-            }
-            {
-                errors.length > 0 && <ErrorSummary errors={errors} />
-            }
+            <div className="notice-container" role="alert" aria-atomic="true" tabIndex={-1} ref={errorSummary}>
+                {
+                    successMsg.length > 0 && <Success message={successMsg} />
+                }
+                {
+                    errors.length > 0 && <ErrorSummary errors={errors} />
+                }
+            </div>
 
             <p>{__("Create a brand new user or add them to this Collection if they already exist.")}</p>
 

@@ -147,9 +147,8 @@ class Users
 
         $subject  = "Set Password";
         $message  = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
-        $message .= __("Hi");
         $message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
-        $message .= __('To reset your password, visit the following address:') . "\r\n\r\n";
+        $message .= __('To set your password, visit the following address:') . "\r\n\r\n";
         $message .=  $uniqueUrl;
 
         wp_mail($email, $subject, $message);

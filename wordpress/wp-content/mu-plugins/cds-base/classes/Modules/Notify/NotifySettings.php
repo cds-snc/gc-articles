@@ -312,8 +312,7 @@ class NotifySettings
     {
         ?><style type="text/css">
         .hidden_keys {
-            font-size: 1.2em;
-            padding: 1px;
+            padding-bottom: 3px;
             display: block;
             color: grey;
         }

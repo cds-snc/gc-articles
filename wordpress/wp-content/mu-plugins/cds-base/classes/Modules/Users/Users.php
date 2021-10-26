@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace CDS\Modules\Users;
 
 use JetBrains\PhpStorm\ArrayShape;
-use Mockery\Exception;
 use WP_REST_Response;
 use CDS\Modules\Users\ValidationException;
 

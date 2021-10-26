@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Spinner } from '../../Spinner/src/Spinner';
-import { getData } from 'util/getData';
+import { getData } from 'util/fetch';
 interface Login {
   user_agent: string;
   time_login: string;

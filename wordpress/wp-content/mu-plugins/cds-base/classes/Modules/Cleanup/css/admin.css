@@ -76,7 +76,9 @@ h2, h3 {
 .wp-core-ui .button, .wp-core-ui .button-primary, .wp-core-ui .button-secondary, /* buttons */
 .widefat tfoot td, .widefat th, .widefat thead td, td.column-title strong, td.plugin-title strong, /* headings for table pages */
 #customize-controls h3, /* customizer buttons */
-p, details
+p, details,
+.error-summary ul, /* validation messsages */
+.components-button.is-primary /* gutenberg buttons */
  {
     font-size: 16px;
 }
@@ -112,4 +114,26 @@ input[type=date], input[type=datetime-local], input[type=datetime], input[type=e
 
 .tablenav {
     height: auto; /* add space under the filters above tables */
+}
+
+/* Style error components for React admin pages */
+.cds-react-form .components-notice {
+    margin-left: 0;
+}
+
+.cds-react-form .components-notice h2 {
+    margin: .5em 0;
+}
+
+.error-summary {
+    background-color: #f8eae9 !important;
+}
+
+.error-wrapper {
+    border-left: 4px solid #d63638;
+    padding-left: .5em;
+}
+
+.validation-error {
+    display:block; color: #d63638; margin: .5em 0;
 }

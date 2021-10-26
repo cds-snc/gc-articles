@@ -16,6 +16,7 @@ class TestUsers extends \WP_Mock\Tools\TestCase
     private $goodEmails = [
         'justin.trudeau@cds-snc.ca',
         'justin.trudeau@tbs-sct.gc.ca',
+        'admin@cds-snc.ca'
     ];
 
     private $users;

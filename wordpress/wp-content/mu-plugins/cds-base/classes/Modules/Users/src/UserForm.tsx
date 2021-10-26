@@ -38,10 +38,10 @@ const ErrorSummary = ({ errors = [] }) => {
         <h2>{__("There is a problem")}</h2>
         <ul>
             {errors.map((err, i) => {
-                return err.location ? 
+                return err.location ?
                     <li key={err.location}><a href={`#${err.location}`}>{err.errors[0]}</a></li> :
                     <li key={i}>{err}</li>
-                })
+            })
             }
         </ul>
     </Notice>
@@ -52,7 +52,7 @@ const findErrorId = (errors = [], id = '') => errors.find(err => err.location ==
 const FieldError = ({ errors = [], id = '', children }) => {
     const error = findErrorId(errors, id)
 
-    if(!id || !error) {
+    if (!id || !error) {
         return <div>{children}</div>
     }
 
@@ -75,7 +75,7 @@ export const UserForm = (props) => {
     const [successMsg, setSuccessMsg] = useState('');
     const resetForm = () => {
         resetEmail('');
-        resetRole({value: ''});
+        resetRole({ value: '' });
         setErrors([]);
     }
 
@@ -96,28 +96,31 @@ export const UserForm = (props) => {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        const response = await sendData('users/v1/submit', { email, role });
-        const [ { status } ] = response;
 
-        //@TODO: catch 500 errors
+        try {
+            const response = await sendData('users/v1/submit', { email, role });
+            const [{ status }] = response;
 
-        if(parseInt(status) >= 400) {
-            const [ { errors: serverErrors = [] } = {} ] = response;
-            setErrors(serverErrors);
+            if (parseInt(status) >= 400) {
+                const [{ errors: serverErrors = [] } = {}] = response;
+                setErrors(serverErrors);
+                setSuccessMsg(''); // clear success message
+            } else if (parseInt(status) == 201) {
+                const [{ message = '' } = {}] = response;
+                resetForm(); // clear inputs and remove errors
+
+                setSuccessMsg(message);
+            }
+        } catch (e) {
+            setErrors([{ "location": "unknown", "errors": [__("Internal server error", "cds-snc")] }]);
             setSuccessMsg(''); // clear success message
-            
-        } else if (parseInt(status) == 201) {
-            const [ { message = '' } = {} ] = response;
-            resetForm(); // clear inputs and remove errors
-
-            setSuccessMsg(message);
         }
     }
 
     return (
         <div className="cds-react-form">
             {
-                successMsg.length > 0 && <Success message={successMsg}  />
+                successMsg.length > 0 && <Success message={successMsg} />
             }
             {
                 errors.length > 0 && <ErrorSummary errors={errors} />

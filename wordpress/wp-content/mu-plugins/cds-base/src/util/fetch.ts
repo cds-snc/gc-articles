@@ -1,13 +1,12 @@
 const CDS_VARS = window.CDS_VARS || {};
-const headers = new Headers();
-headers.append('X-WP-Nonce', CDS_VARS.rest_nonce);
 
-export const requestHeaders = headers;
 export interface ErrorWithStatus extends Error {
   status: number;
 }
 
 export const getData = async (endpoint: string) => {
+  const requestHeaders = new Headers();
+  requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
   const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
     method: 'GET',
     headers: requestHeaders,
@@ -26,12 +25,17 @@ export const getData = async (endpoint: string) => {
 };
 
 export const sendData = async (endpoint: string, data) => {
+  const requestHeaders = new Headers({
+    'Content-Type': 'application/json;charset=UTF-8',
+  });
+  requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
+
   const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
-      method: 'POST',
-      headers: requestHeaders,
-      mode: 'cors',
-      cache: 'default',
-      body: JSON.stringify(data)
+    method: 'POST',
+    headers: requestHeaders,
+    mode: 'cors',
+    cache: 'default',
+    body: JSON.stringify(data),
   });
 
   if (!response.ok) {

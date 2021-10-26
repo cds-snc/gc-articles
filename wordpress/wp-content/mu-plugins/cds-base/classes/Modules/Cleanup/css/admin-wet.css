@@ -188,7 +188,7 @@ body {
     color: #1d2327;
   }
   
-  .wp-core-ui .button-primary, .wrap .page-title-action {
+  .wp-core-ui .button-primary, .wrap .page-title-action, .components-button.is-primary {
     background: #26374a;
     border-color: #26374a;
     color: #fff;

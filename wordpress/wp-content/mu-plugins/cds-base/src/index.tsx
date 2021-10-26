@@ -7,6 +7,7 @@ import { LoginsPanel } from "../classes/Modules/TrackLogins/src/LoginsPanel";
 import { CollectionsPanel } from "../classes/Modules/UserCollections/src/CollectionsPanel";
 import { NotifyPanel } from "../classes/Modules/Notify/src/NotifyPanel";
 import { List } from "../classes/Modules/Notify/src/Types";
+import { UserForm } from "../classes/Modules/Users/src/UserForm"
 
 declare global {
   interface Window {
@@ -20,6 +21,7 @@ declare global {
       };
       renderLoginsPanel?: () => void;
       renderCollectionsPanel?: () => void;
+      renderUserForm?:() => void;
     };
     CDS_VARS: {
       rest_url?: string;
@@ -48,9 +50,19 @@ export const renderNotifyPanel = ({
   );
 };
 
+
+export const renderUserForm = () => {
+  render(
+    <UserForm />,
+    document.getElementById("react-body")
+  );
+};
+
+
 window.CDS = window.CDS || {};
 window.CDS.Notify = { renderPanel: renderNotifyPanel };
 window.CDS.renderLoginsPanel = renderLoginsPanel;
 window.CDS.renderCollectionsPanel = renderCollectionsPanel;
+window.CDS.renderUserForm = renderUserForm;
 
 

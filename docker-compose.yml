@@ -33,7 +33,7 @@ services:
     env_file: .env
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./wordpress/.htaccess-multisite:/usr/src/gc-articles/wordpress/.htaccess
@@ -88,7 +88,7 @@ services:
       '
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./wait-for-it.sh:/wait-for-it.sh
@@ -106,7 +106,7 @@ services:
     env_file: .env
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./:/home/default/project

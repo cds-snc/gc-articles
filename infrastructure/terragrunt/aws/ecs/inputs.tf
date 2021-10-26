@@ -58,6 +58,24 @@ variable "encryption_key" {
   sensitive   = true
 }
 
+variable "s3_uploads_bucket" {
+  description = "Bucket for user uploads"
+  type        = string
+  sensitive   = true
+}
+
+variable "s3_uploads_key" {
+  description = "Credentials for S3 Uploads bucket IAM user"
+  type        = string
+  sensitive   = true
+}
+
+variable "s3_uploads_secret" {
+  description = "Credentials for S3 Uploads bucket IAM user"
+  type        = string
+  sensitive   = true
+}
+
 variable "memory" {
   type = string
 }

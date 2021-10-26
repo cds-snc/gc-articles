@@ -40,7 +40,8 @@
         "wpackagist-plugin/two-factor",
         "wpackagist-plugin/wps-hide-login",
         "wpackagist-plugin/wp-native-php-sessions",
-        "wpackagist-plugin/wp-bootstrap-blocks"
+        "wpackagist-plugin/wp-bootstrap-blocks",
+        "humanmade/s3-uploads"
       ]
     }
   },

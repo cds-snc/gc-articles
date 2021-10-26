@@ -29,7 +29,7 @@ class Users
             'methods' => 'GET',
             'callback' => [$this, 'getRoles'],
             'permission_callback' => function () {
-                return current_user_can('read');
+                return current_user_can('delete_posts');
             },
         ]);
 
@@ -37,7 +37,7 @@ class Users
             'methods' => 'POST',
             'callback' => [$this, 'addUserToCollection'],
             'permission_callback' => function () {
-                return current_user_can('read');
+                return current_user_can('delete_posts');
             },
         ]);
     }

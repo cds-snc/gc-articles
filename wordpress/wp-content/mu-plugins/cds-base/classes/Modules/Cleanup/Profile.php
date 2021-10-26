@@ -101,7 +101,6 @@ class Profile
          * Remove Application Passwords Fields
          *--------------------------------------------*/
         $crawler->filter('.application-passwords')->remove();
-        
 
         echo $crawler->save();
     }

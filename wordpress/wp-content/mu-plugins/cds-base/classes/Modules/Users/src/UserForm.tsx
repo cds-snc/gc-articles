@@ -18,28 +18,7 @@ const useInput = initialValue => {
     };
 };
 
-import { getData } from '../../Notify/src/NotifyPanel';
-
-// @todo move this out to a util function
-const CDS_VARS = window.CDS_VARS || {};
-const requestHeaders = new Headers({ 'Content-Type': 'application/json;charset=UTF-8' });
-requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
-
-export const sendData = async (endpoint: string, data) => {
-    const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
-        method: 'POST',
-        headers: requestHeaders,
-        mode: 'cors',
-        cache: 'default',
-        body: JSON.stringify(data)
-    });
-
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return await response.json();
-};
-
+import { getData, sendData } from 'util/fetch';
 const Success = ({ message }) => {
     return <Notice
         status="success"

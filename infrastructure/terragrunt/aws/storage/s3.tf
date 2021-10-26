@@ -8,6 +8,26 @@ resource "aws_iam_user" "wordpress_storage" {
   name = "wordpress_storage"
 }
 
+resource "aws_s3_bucket_policy" "wordpress_storage" {
+  bucket = module.wordpress_storage.s3_bucket_id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid       = "PublicReadGetObject"
+        Effect    = "Allow"
+        Principal = "*"
+        "Action" : [
+          "s3:GetObject"
+        ],
+        Resource = [
+          "${module.wordpress_storage.s3_bucket_arn}/*",
+        ]
+      },
+    ]
+  })
+}
 
 resource "aws_iam_user_policy" "wordpress_storage" {
   name = "wordpress_storage"

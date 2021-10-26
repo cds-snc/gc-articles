@@ -35,7 +35,7 @@ RUN a2enmod ssl \
     && echo "$APACHE_CERT" > /etc/ssl/certs/self-signed.crt \
     && echo "$APACHE_KEY" > /etc/ssl/private/self-signed.key
 
-COPY ./wordpress/wp-content ./wp-content
+COPY  --from=composer /app/wordpress/wp-content ./wp-content
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
 

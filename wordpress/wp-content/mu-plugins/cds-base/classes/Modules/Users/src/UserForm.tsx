@@ -106,7 +106,7 @@ export const UserForm = (props) => {
                 const [{ errors: serverErrors = [] } = {}] = response;
                 setErrors(serverErrors);
                 setSuccessMsg(''); // clear success message
-            } else if (parseInt(status) == 201) {
+            } else if ([200, 201].includes(parseInt(status)) ) {
                 const [{ message = '' } = {}] = response;
                 resetForm(); // clear inputs and remove errors
 

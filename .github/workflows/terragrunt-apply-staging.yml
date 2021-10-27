@@ -23,11 +23,8 @@ env:
   TF_VAR_database_password: ${{ secrets.STAGING_DATABASE_PASSWORD }}
   TF_VAR_cloudfront_custom_header_name: ${{ secrets.STAGING_CLOUDFRONT_CUSTOM_HEADER_NAME }}
   TF_VAR_cloudfront_custom_header_value: ${{ secrets.STAGING_CLOUDFRONT_CUSTOM_HEADER_VALUE }}
-  TF_VAR_list_manager_api_key: ${{ secrets.STAGING_LIST_MANAGER_API_KEY }}
   TF_VAR_list_manager_endpoint: ${{ secrets.STAGING_LIST_MANAGER_ENDPOINT }}
-  TF_VAR_list_manager_service_id: ${{ secrets.STAGING_LIST_MANAGER_SERVICE_ID }}
-  TF_VAR_list_manager_notify_services: ${{ secrets.STAGING_LIST_MANAGER_NOTIFY_SERVICES }}
-  TF_VAR_notify_api_key: ${{ secrets.STAGING_NOTIFY_API_KEY }}
+  TF_VAR_encryption_key: ${{ secrets.STAGING_ENCRYPTION_KEY }}
   TF_VAR_slack_webhook_url: ${{ secrets.STAGING_SLACK_WEBHOOK_URL }}
   TF_VAR_wordpress_auth_key: ${{ secrets.STAGING_WORDPRESS_AUTH_KEY }}
   TF_VAR_wordpress_secure_auth_key: ${{ secrets.STAGING_WORDPRESS_SECURE_AUTH_KEY }}
@@ -90,6 +87,9 @@ jobs:
             network:
               - 'infrastructure/terragrunt/aws/network/**'
               - 'infrastructure/terragrunt/env/staging/network/**'
+            storage:
+              - 'infrastructure/terragrunt/aws/storage/**'
+              - 'infrastructure/terragrunt/env/staging/storage/**'
 
       # No dependencies
       - name: Terragrunt apply network
@@ -105,6 +105,11 @@ jobs:
       - name: Terragrunt apply ecr
         if: ${{ steps.filter.outputs.ecr == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/ecr
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Terragrunt apply storage
+        if: ${{ steps.filter.outputs.storage == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/storage
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 
       # Network dependency
@@ -129,3 +134,4 @@ jobs:
         if: ${{ steps.filter.outputs.alarms == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/alarms
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
+

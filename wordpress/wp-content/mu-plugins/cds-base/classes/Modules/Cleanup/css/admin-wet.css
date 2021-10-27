@@ -84,7 +84,7 @@ body {
   }
   
   /* focus rings */
-.wp-core-ui select:hover, .wp-core-ui select:focus {
+  .wp-core-ui select:hover, .wp-core-ui select:focus {
     color: #0535d2;
   }
 
@@ -98,6 +98,33 @@ body {
 
   #wpadminbar a {
     outline-color: #fd0;
+  }
+
+  /* details */
+  details {
+    padding: 2px;
+  }
+
+  details summary {
+    cursor: pointer;
+  }
+
+  details summary:hover, details summary:focus {
+    text-decoration: underline;
+    color: #0535d2;
+  }
+
+  details summary:focus {
+    outline: 2px solid #0535d2;
+    outline-offset: 2px;
+  }
+
+  details ul, details ol {
+    margin: 8px 0;
+  }
+
+  details ul li, details ol li {
+    margin-bottom: 0;
   }
 
   /* screen reader shortcuts */
@@ -161,7 +188,7 @@ body {
     color: #1d2327;
   }
   
-  .wp-core-ui .button-primary, .wrap .page-title-action {
+  .wp-core-ui .button-primary, .wrap .page-title-action, .components-button.is-primary {
     background: #26374a;
     border-color: #26374a;
     color: #fff;
@@ -252,7 +279,7 @@ body {
 
   .postbox,
   #menu-management .menu-edit, #menu-settings-column .accordion-container, .comment-ays, .feature-filter, .imgedit-group, .manage-menus, .menu-item-handle, .popular-tags, .stuffbox, .widget-inside, .widget-top, .widgets-holder-wrap, .wp-editor-container, p.popular-tags, table.widefat {
-      border: 1px solid #ccc;
+    border: 1px solid #ccc;
   }
 
   .postbox-header,
@@ -357,6 +384,11 @@ body {
   #adminmenu .wp-has-current-submenu.opensub .wp-submenu li.current a:focus {
     color: #0535d2;
   }
+
+  #adminmenu a.current {
+    box-shadow: inset 4px 0 0 0 currentColor;
+    transition: box-shadow .1s linear;
+  }
   
   ul#adminmenu a.wp-has-current-submenu:after,
   ul#adminmenu > li.current > a.current:after {
@@ -399,6 +431,12 @@ body {
   #collapse-button:focus {
     color: #0535d2;
     background-color: #eaebed;
+  }
+
+  /* Admin menu: WPML */
+  /* CSS hack to add colour on top of a PNG. It doesn't work super good but it's better than a white image */
+  #adminmenu .wp-menu-image img {
+    filter: opacity(1) invert(100%) drop-shadow(0 0 0 #284162) saturate(1000%);
   }
   
   /* Admin Bar */

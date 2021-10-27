@@ -60,7 +60,8 @@
     "compile-translations": [
       "cd wp-content/themes/cds-default && composer compile-translations",
       "cd wp-content/mu-plugins/cds-base && composer compile-translations"
-    ]
+    ],
+    "generate-encryption-key": "CDS\\Modules\\Cli\\GenerateEncryptionKey::generateEncryptionKey"
   },
   "autoload": {
     "psr-4": {

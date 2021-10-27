@@ -7,6 +7,9 @@
     "noImplicitAny": false,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-	"baseUrl": "src",
+    "baseUrl": "src",
+    "paths": {
+      "util": ["/src/util/*"]
+    }
   }
 }

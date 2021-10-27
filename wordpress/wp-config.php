@@ -127,12 +127,17 @@ define('DOMAIN_CURRENT_SITE', getenv_docker('DEFAULT_DOMAIN', 'localhost'));
 define('PATH_CURRENT_SITE', '/');
 define('SITE_ID_CURRENT_SITE', 1);
 define('BLOG_ID_CURRENT_SITE', 1);
+
+/* Custom */
+define('SCRIPT_DEBUG', getenv_docker('SCRIPT_DEBUG', false));
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
 if (!defined('ABSPATH')) {
     define('ABSPATH', __DIR__ . '/');
 }
+
+require_once __DIR__ . '/../vendor/autoload.php';
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';

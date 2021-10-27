@@ -4,7 +4,7 @@
  * Plugin Name: CDS-SNC Base
  * Plugin URI: https://github.com/cds-snc/platform-mvp
  * Description: Custom Block setup and other overrides
- * Version: 1.5.2
+ * Version: 1.7.1
  * Author: Tim Arney
  *
  * @package cds-snc-base
@@ -15,7 +15,7 @@ declare(strict_types=1);
 require __DIR__ . '/vendor/autoload.php';
 
 use CDS\Modules\Notify\NotifyTemplateSender;
-use CDS\Modules\Setup;
+use CDS\Setup;
 
 defined('ABSPATH') || exit();
 
@@ -24,7 +24,7 @@ if (!defined('BASE_PLUGIN_NAME')) {
 }
 
 if (!defined('BASE_PLUGIN_NAME_VERSION')) {
-    define('BASE_PLUGIN_NAME_VERSION', '1.5.2');
+    define('BASE_PLUGIN_NAME_VERSION', '1.7.1');
 }
 
 if (is_multisite()) {

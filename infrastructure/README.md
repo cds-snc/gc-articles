@@ -22,11 +22,8 @@ The following Terraform variables are required:
 * `database_name`: Name of the database to create in the RDS cluster
 * `database_username`: Root database user
 * `database_password`: Root database user's password
-* `list_manager_api_key`: API key used for Platform ListManager request auth
+* `encryption_key`: Base64-encoded Encryption Key [Generate one](https://github.com/cds-snc/gc-articles#config)
 * `list_manager_endpoint`: Platform ListManager API endpoint
-* `list_manager_notify_services`: Platform ListManager service names and API keys for sending templates
-* `list_manager_service_id`: Platform ListManager endpoint ID to get subscriber counts
-* `notify_api_key`: API key used for Notify request auth
 * `slack_webhook_url`: Slack incoming webhook to post SNS notifications to
 
 WordPress [generated secret keys](https://api.wordpress.org/secret-key/1.1/salt/):

@@ -97,6 +97,11 @@ class Profile
 
         $crawler->filter('.yoast-settings')->remove();
 
+        /*--------------------------------------------*
+         * Remove Application Passwords Fields
+         *--------------------------------------------*/
+        $crawler->filter('.application-passwords')->remove();
+
         echo $crawler->save();
     }
 

@@ -30,6 +30,9 @@ class Roles
                 remove_role('ircc');
                 $this->cleanupRoles('gceditor');
                 $this->cleanupRoles('gcadmin');
+
+                // Allow Collection administrators to add new users to their Collection via the "Users → Add New" page
+                update_network_option(null, 'add_new_users', 1);
             }
         });
     }
@@ -44,6 +47,7 @@ class Roles
                 'delete_users' => 1,
                 'remove_users' => 1,
                 'promote_users' => 1,
+                'manage_network_users' => 1,
                 'add_users' => 1,
                 'switch_themes' => 1,
                 'edit_themes' => 1,
@@ -194,6 +198,7 @@ class Roles
                 'remove_users' => 1,
                 'add_users' => 1,
                 'promote_users' => 1,
+                'manage_network_users' => 1, // enables "edit_users" for GC Admins
                 'read' => 1,
                 'level_1' => 1,
                 'level_0' => 1,

@@ -28,7 +28,7 @@ class Users
             'methods' => 'GET',
             'callback' => [$this, 'getRoles'],
             'permission_callback' => function () {
-                return current_user_can('delete_posts');
+                return current_user_can('create_users');
             },
         ]);
 
@@ -36,7 +36,7 @@ class Users
             'methods' => 'POST',
             'callback' => [$this, 'addUserToCollection'],
             'permission_callback' => function () {
-                return current_user_can('delete_posts');
+                return current_user_can('create_users');
             },
         ]);
     }
@@ -215,7 +215,7 @@ class Users
         add_users_page(
             $page_title,
             $page_title,
-            'manage_options', // permissions needed to see the menu option
+            'create_users',
             'users-add',
             fn() => $this->newPageTemplate($page_title),
             2,

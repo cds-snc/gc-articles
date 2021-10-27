@@ -17,6 +17,7 @@ class Roles
         }
 
         Utils::checkOptionCallback('cds_base_activated', '1.0.7', function () {
+
             if (is_blog_installed()) {
                 remove_role('administrator');
                 remove_role('editor');
@@ -37,11 +38,17 @@ class Roles
     {
         $default_roles = [
             'administrator' => [
+                'create_users' => 1,
+                'edit_users' => 1,
+                'list_users' => 1,
+                'delete_users' => 1,
+                'remove_users' => 1,
+                'promote_users' => 1,
+                'add_users' => 1,
                 'switch_themes' => 1,
                 'edit_themes' => 1,
                 'activate_plugins' => 1,
                 'edit_plugins' => 1,
-                'edit_users' => 1,
                 'edit_files' => 1,
                 'manage_options' => 1,
                 'moderate_comments' => 1,
@@ -82,8 +89,6 @@ class Roles
                 'delete_private_pages' => 1,
                 'edit_private_pages' => 1,
                 'read_private_pages' => 1,
-                'delete_users' => 1,
-                'create_users' => 1,
                 'unfiltered_upload' => 1,
                 'edit_dashboard' => 1,
                 'update_plugins' => 1,
@@ -92,10 +97,6 @@ class Roles
                 'update_themes' => 1,
                 'install_themes' => 1,
                 'update_core' => 1,
-                'list_users' => 1,
-                'remove_users' => 1,
-                'add_users' => 1,
-                'promote_users' => 1,
                 'edit_theme_options' => 1,
                 'delete_themes' => 1,
                 'export' => 1,

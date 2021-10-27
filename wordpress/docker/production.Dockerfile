@@ -42,6 +42,8 @@ RUN a2enmod ssl \
 COPY --from=composer /app/wordpress/wp-content ./wp-content
 COPY --from=composer /app/wordpress/vendor ./vendor
 
+RUN echo "Deny from all" > ./vendor/.htaccess
+
 # Copy wp-config and .htaccess
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess

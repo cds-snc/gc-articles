@@ -7,6 +7,8 @@
  * @package cds-snc-base
  */
 
+require_once(__DIR__ . '/../../vendor/autoload.php');
+
 require WPMU_PLUGIN_DIR . '/wp-native-php-sessions/pantheon-sessions.php';
 require WPMU_PLUGIN_DIR . '/cds-base/index.php';
 require WPMU_PLUGIN_DIR . '/two-factor/two-factor.php';

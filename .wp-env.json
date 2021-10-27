@@ -4,7 +4,8 @@
   ],
   "mappings": {
     "wp-content/mu-plugins": "./wordpress/wp-content/mu-plugins",
-    "wp-content/plugins": "./wordpress/wp-content/plugins"
+    "wp-content/plugins": "./wordpress/wp-content/plugins",
+    "vendor": "./wordpress/vendor"
   },
   "phpVersion": "8.0",
   "config": {

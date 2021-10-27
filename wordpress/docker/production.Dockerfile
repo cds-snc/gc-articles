@@ -42,6 +42,7 @@ RUN a2enmod ssl \
 COPY --from=composer /app/wordpress/wp-content ./wp-content
 COPY --from=composer /app/wordpress/vendor ./vendor
 
+# Deny all web access to the vendor folder contents
 RUN echo "Deny from all" > ./vendor/.htaccess
 
 # Copy wp-config and .htaccess

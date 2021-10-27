@@ -1,0 +1,10 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.22.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'snyk:lic:composer:humanmade:s3-uploads:GPL-2.0':
+    - '*':
+        reason: None Given
+        expires: 2021-11-26T20:13:46.272Z
+        created: 2021-10-27T20:13:46.273Z
+patch: {}

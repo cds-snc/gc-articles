@@ -5,6 +5,6 @@ ignore:
   'snyk:lic:composer:humanmade:s3-uploads:GPL-2.0':
     - '*':
         reason: None Given
-        expires: 2021-11-26T20:13:46.272Z
-        created: 2021-10-27T20:13:46.273Z
+        expires: 9999-12-30T00:00:00.000Z
+        created: 2021-10-27T20:50:18.079Z
 patch: {}

@@ -23,6 +23,9 @@ The following Terraform variables are required:
 * `database_username`: Root database user
 * `database_password`: Root database user's password
 * `encryption_key`: Base64-encoded Encryption Key [Generate one](https://github.com/cds-snc/gc-articles#config)
+* `s3_uploads_bucket`: Bucket name for uploads storage
+* `s3_uploads_key`: S3 credentials for uploads storage IAM user
+* `s3_uploads_secret`: S3 credentials for uploads storage IAM user
 * `list_manager_endpoint`: Platform ListManager API endpoint
 * `slack_webhook_url`: Slack incoming webhook to post SNS notifications to
 

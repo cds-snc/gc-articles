@@ -48,6 +48,7 @@ describe('Add user', () => {
 
     // error summary
     cy.get('h2').contains("There is a problem");
+    cy.focused().should('contain', 'There is a problem');
     assertEmailErrors(cy)
     assertRoleErrors(cy)
   });
@@ -58,6 +59,7 @@ describe('Add user', () => {
 
     // error summary
     cy.get('h2').contains("There is a problem");
+    cy.focused().should('contain', 'There is a problem');
     assertRoleErrors(cy)
   });
 
@@ -68,6 +70,7 @@ describe('Add user', () => {
 
     // error summary
     cy.get('h2').contains("There is a problem");
+    cy.focused().should('contain', 'There is a problem');
     assertEmailErrors(cy, "You can’t use this email domain for registration.");
   });
 
@@ -78,6 +81,7 @@ describe('Add user', () => {
 
     // Success notice
     cy.get('h2').contains("Success!");
+    cy.focused().should('contain', 'Success!');
   });
 
   it('Shows an error when trying to add an existing user', () => {
@@ -87,7 +91,7 @@ describe('Add user', () => {
 
     // error summary
     cy.get('h2').contains("There is a problem");
+    cy.focused().should('contain', 'There is a problem');
     cy.get('.components-notice.is-error ul').contains("editor@cds-snc.ca is already a member of this Collection");
-
   });
 });

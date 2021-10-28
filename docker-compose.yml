@@ -61,12 +61,15 @@ services:
     image: composer/composer:latest
     command: install
     volumes:
+      - ~/.ssh:/root/.ssh
+      - ~/.gitconfig:/root/.gitconfig
       - ./wordpress:/app
 
   wp-install:
     depends_on:
       - db
       - wordpress
+      - composer
     image: wordpress:cli-php8.0
     env_file: .env
     command: >

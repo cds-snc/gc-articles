@@ -75,24 +75,29 @@ describe('Add user', () => {
   });
 
   it('Successfully adds a new user', () => {
-    cy.get('input#email').type("editor@cds-snc.ca"); // domain is not allowed
+    cy.get('input#email').type("new+editor@cds-snc.ca"); // domain is not allowed
     cy.get('select#role').select('gceditor');
     cy.contains('button', 'Add user').click();
 
     // Success notice
     cy.get('h2').contains("Success!");
     cy.focused().should('contain', 'Success!');
+
+    // make sure exists in username column
+    cy.contains('Users').click();
+    cy.get('h1').contains("Users");
+    cy.get('table.users td.column-username').contains("new+editor@cds-snc.ca");
   });
 
   it('Shows an error when trying to add an existing user', () => {
-    cy.get('input#email').type("editor@cds-snc.ca");
+    cy.get('input#email').type("new+editor@cds-snc.ca");
     cy.get('select#role').select('gceditor');
     cy.contains('button', 'Add user').click();
 
     // error summary
     cy.get('h2').contains("There is a problem");
     cy.focused().should('contain', 'There is a problem');
-    cy.get('.components-notice.is-error ul').contains("editor@cds-snc.ca is already a member of this Collection");
+    cy.get('.components-notice.is-error ul').contains("new+editor@cds-snc.ca is already a member of this Collection");
   });
 });
 

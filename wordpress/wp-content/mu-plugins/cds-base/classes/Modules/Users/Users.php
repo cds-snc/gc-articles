@@ -7,15 +7,18 @@ namespace CDS\Modules\Users;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
 use CDS\Modules\Users\EmailDomains;
+use CDS\Modules\Users\Usernames;
 use CDS\Modules\Users\ValidationException;
 
 class Users
 {
     public function __construct()
     {
-        add_filter('wpmu_validate_user_signup', [$this, 'validateEmailDomain']);
-        add_filter('sanitize_user', [$this, 'sanitize_username_like_email'], 10, 3 );
-    
+        add_filter('sanitize_user', ['CDS\Modules\Users\Usernames', 'sanitizeUsernameAsEmail'], 10, 3);
+        add_filter('manage_users_columns', ['CDS\Modules\Users\Usernames', 'removeEmailColumn']);
+
+        add_filter('wpmu_validate_user_signup', ['CDS\Modules\Users\EmailDomains', 'validateEmailDomain']);
+
         add_action('admin_menu', [$this, 'addPageAddUsers']);
         add_action('admin_menu', [$this, 'removePageUsersAddNew']);
         add_action('admin_enqueue_scripts', [$this, 'replacePageAddUsers']);
@@ -263,28 +266,5 @@ class Users
             $data = 'CDS.renderUserForm();';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
         }
-    }
-
-    public function validateEmailDomain($result)
-    {
-        $message =
-            __(
-                'You can’t use this email domain for registration.',
-                'cds-snc',
-            ) . $details;
-
-        if (!EmailDomains::isAllowedDomain($result['user_email'])) {
-            $result['errors']->add('user_email', $message);
-        }
-
-        return $result;
-    }
-
-    public function sanitize_username_like_email( $username, $raw_username, $strict ) {
-        if ( $username === $raw_username) {
-            return $username;
-        }
-
-        return sanitize_email($raw_username);
     }
 }

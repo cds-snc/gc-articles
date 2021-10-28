@@ -16,7 +16,7 @@ class Roles
             return;
         }
 
-        Utils::checkOptionCallback('cds_base_activated', '1.0.7', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.0.8', function () {
 
             if (is_blog_installed()) {
                 remove_role('administrator');

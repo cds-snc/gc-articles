@@ -14,7 +14,8 @@ class Users
     public function __construct()
     {
         add_filter('wpmu_validate_user_signup', [$this, 'validateEmailDomain']);
-
+        add_filter('sanitize_user', [$this, 'sanitize_username_like_email'], 10, 3 );
+    
         add_action('admin_menu', [$this, 'addPageAddUsers']);
         add_action('admin_menu', [$this, 'removePageUsersAddNew']);
         add_action('admin_enqueue_scripts', [$this, 'replacePageAddUsers']);
@@ -277,5 +278,13 @@ class Users
         }
 
         return $result;
+    }
+
+    public function sanitize_username_like_email( $username, $raw_username, $strict ) {
+        if ( $username === $raw_username) {
+            return $username;
+        }
+
+        return sanitize_email($raw_username);
     }
 }

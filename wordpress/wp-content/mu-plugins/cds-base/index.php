@@ -4,7 +4,7 @@
  * Plugin Name: CDS-SNC Base
  * Plugin URI: https://github.com/cds-snc/platform-mvp
  * Description: Custom Block setup and other overrides
- * Version: 1.7.1
+ * Version: 1.8.0
  * Author: Tim Arney
  *
  * @package cds-snc-base
@@ -24,7 +24,7 @@ if (!defined('BASE_PLUGIN_NAME')) {
 }
 
 if (!defined('BASE_PLUGIN_NAME_VERSION')) {
-    define('BASE_PLUGIN_NAME_VERSION', '1.7.1');
+    define('BASE_PLUGIN_NAME_VERSION', '1.8.0');
 }
 
 if (is_multisite()) {

@@ -8,6 +8,7 @@ import { CollectionsPanel } from "../classes/Modules/UserCollections/src/Collect
 import { NotifyPanel } from "../classes/Modules/Notify/src/NotifyPanel";
 import { List } from "../classes/Modules/Notify/src/Types";
 import { UserForm } from "../classes/Modules/Users/src/UserForm"
+import { writeInterstitialMessage } from "util/preview"
 
 declare global {
   interface Window {
@@ -21,13 +22,15 @@ declare global {
       };
       renderLoginsPanel?: () => void;
       renderCollectionsPanel?: () => void;
-      renderUserForm?:() => void;
+      renderUserForm?: () => void;
+      writeInterstitialMessage?: () => void;
     };
     CDS_VARS: {
       rest_url?: string;
       rest_nonce?: string;
       notify_list_ids?: List[];
-    };
+    }
+    wp:any;
   }
 }
 
@@ -64,5 +67,12 @@ window.CDS.Notify = { renderPanel: renderNotifyPanel };
 window.CDS.renderLoginsPanel = renderLoginsPanel;
 window.CDS.renderCollectionsPanel = renderCollectionsPanel;
 window.CDS.renderUserForm = renderUserForm;
+window.CDS.writeInterstitialMessage =  writeInterstitialMessage;
+
+window.wp.hooks.addFilter(
+	'editor.PostPreview.interstitialMarkup',
+	'my-plugin/custom-preview-message',
+	() => window.CDS.writeInterstitialMessage()
+);
 
 

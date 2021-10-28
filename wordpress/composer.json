@@ -25,7 +25,8 @@
     "wpackagist-plugin/wp-bootstrap-blocks":"3.3.2",
     "wpml/sitepress-multilingual-cms": "4.4.12",
     "wpackagist-plugin/wordpress-importer":"0.6.4",
-    "wpackagist-plugin/wordpress-seo": "^16.9"
+    "wpackagist-plugin/wordpress-seo": "^16.9",
+    "humanmade/s3-uploads": "^3.0"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",
@@ -40,7 +41,8 @@
         "wpackagist-plugin/two-factor",
         "wpackagist-plugin/wps-hide-login",
         "wpackagist-plugin/wp-native-php-sessions",
-        "wpackagist-plugin/wp-bootstrap-blocks"
+        "wpackagist-plugin/wp-bootstrap-blocks",
+        "humanmade/s3-uploads"
       ]
     }
   },

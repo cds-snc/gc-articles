@@ -33,21 +33,13 @@ services:
     env_file: .env
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./wordpress/.htaccess-multisite:/usr/src/gc-articles/wordpress/.htaccess
       - ./wordpress/docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
       - ./wordpress/docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
       - ./wordpress/docker/php/conf.d/upload_max_filesize.ini:/usr/local/etc/php/conf.d/uplaod_max_filesize.ini
-    networks:
-      - app-network
-
-  mailhog:
-    image: mailhog/mailhog
-    ports: 
-      - 1025:1025 # smtp server
-      - 8025:8025 # web ui
     networks:
       - app-network
 
@@ -69,12 +61,15 @@ services:
     image: composer/composer:latest
     command: install
     volumes:
+      - ~/.ssh:/root/.ssh
+      - ~/.gitconfig:/root/.gitconfig
       - ./wordpress:/app
 
   wp-install:
     depends_on:
       - db
       - wordpress
+      - composer
     image: wordpress:cli-php8.0
     env_file: .env
     command: >
@@ -88,7 +83,7 @@ services:
       '
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./wait-for-it.sh:/wait-for-it.sh
@@ -106,7 +101,7 @@ services:
     env_file: .env
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./:/home/default/project

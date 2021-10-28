@@ -95,3 +95,27 @@ describe('Add user', () => {
     cy.get('.components-notice.is-error ul').contains("editor@cds-snc.ca is already a member of this Collection");
   });
 });
+
+describe('As GC Admin', () => {
+    before( () => {
+      cy.addUser('gcadmin', 'secret', 'gcadmin');
+    });
+
+    it('can add a user', () => {
+        cy.login('gcadmin', 'secret');
+
+        cy.visit("wp-admin/users.php");
+        cy.get('h1').contains("Users");
+
+        cy.get('#wpbody .page-title-action').contains('Add New').click();
+        cy.get('h1').contains("Add user");
+
+        cy.get('input#email').type("editor+2@cds-snc.ca");
+        cy.get('select#role').select('gceditor');
+        cy.contains('button', 'Add user').click();
+
+        // Success notice
+        cy.get('h2').contains("Success!");
+        cy.focused().should('contain', 'Success!');
+    });
+});

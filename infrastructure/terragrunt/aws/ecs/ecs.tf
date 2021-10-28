@@ -46,6 +46,9 @@ data "template_file" "wordpress_container_definition" {
 
     LIST_MANAGER_ENDPOINT      = aws_secretsmanager_secret_version.list_manager_endpoint.arn
     ENCRYPTION_KEY             = aws_secretsmanager_secret_version.encryption_key.arn
+    S3_UPLOADS_BUCKET          = aws_secretsmanager_secret_version.s3_uploads_bucket.arn
+    S3_UPLOADS_KEY             = aws_secretsmanager_secret_version.s3_uploads_key.arn
+    S3_UPLOADS_SECRET          = aws_secretsmanager_secret_version.s3_uploads_secret.arn
     DEFAULT_DOMAIN             = var.domain_name
     WORDPRESS_IMAGE            = "${var.wordpress_image}:${var.wordpress_image_tag}"
     WORDPRESS_DB_HOST          = var.database_host_secret_arn

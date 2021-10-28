@@ -28,7 +28,7 @@ class Users
             'methods' => 'GET',
             'callback' => [$this, 'getRoles'],
             'permission_callback' => function () {
-                return current_user_can('delete_posts');
+                return current_user_can('create_users');
             },
         ]);
 
@@ -36,7 +36,7 @@ class Users
             'methods' => 'POST',
             'callback' => [$this, 'addUserToCollection'],
             'permission_callback' => function () {
-                return current_user_can('delete_posts');
+                return current_user_can('create_users');
             },
         ]);
     }
@@ -157,33 +157,33 @@ class Users
     {
         try {
             $uId = false;
+            $statusCode = 200;
 
             $list = list('email' => $email, 'role' => $role) = $this->sanitizeEmailAndRole($data);
 
             // if we just use a logical OR, we get $uId === true rather than the integer
             $uId = email_exists($email) ? email_exists($email) : username_exists($email);
 
-            // @TODO: handle case where uId exists but NOT member of blog
-
+            // if we have a user AND they are a member of the blog, end early
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
                 throw new \Exception($email . " is already a member of this Collection");
                 return false;
             }
 
-            if (!$uId && $email) {
+            // create the user if not exists
+            if (!$uId) {
                 $uId = $this->createUser($email);
-                if (is_multisite()) {
-                    $this->addToBlog($uId, $role);
-                }
-
                 $this->sendReset($uId, $email);
-
-                return new WP_REST_Response([
-                    ["status" => 201, "message" => $email . " was added to the Collection.", "uID" => $uId]
-                ]);
+                $statusCode = 201;
             }
 
-            throw new \Exception("Unknown issue occurred");
+            if (is_multisite()) {
+                $this->addToBlog($uId, $role);
+            }
+
+            return new WP_REST_Response([
+                ["status" => $statusCode, "message" => $email . " was added to the Collection.", "uID" => $uId]
+            ]);
         } catch (ValidationException $exception) {
             return new WP_REST_Response([
                 [
@@ -215,7 +215,7 @@ class Users
         add_users_page(
             $page_title,
             $page_title,
-            'manage_options', // permissions needed to see the menu option
+            'create_users',
             'users-add',
             fn() => $this->newPageTemplate($page_title),
             2,

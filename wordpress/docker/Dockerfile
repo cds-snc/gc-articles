@@ -7,3 +7,6 @@ RUN set -eux; \
 
 RUN pecl install xdebug \
     && docker-php-ext-enable xdebug
+
+RUN pecl install pcov \
+    && docker-php-ext-enable pcov

@@ -41,10 +41,11 @@ composer generate-encryption-key
 ## Start it up
 
 With your encryption key and other settings configured, you can bring up the environment using docker-compose from the
-root of the project:
+root of the project. Note here that we're bringing up the ephemeral composer container first which installs composer
+dependencies and then exits:
 
 ```sh
-docker-compose up
+docker-compose up composer && docker-compose up
 ```
 
 Once the services are running, you can access a cli environment preconfigured with all the tools needed for development:

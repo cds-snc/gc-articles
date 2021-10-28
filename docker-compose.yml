@@ -33,7 +33,7 @@ services:
     env_file: .env
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./wordpress/.htaccess-multisite:/usr/src/gc-articles/wordpress/.htaccess
@@ -61,12 +61,15 @@ services:
     image: composer/composer:latest
     command: install
     volumes:
+      - ~/.ssh:/root/.ssh
+      - ~/.gitconfig:/root/.gitconfig
       - ./wordpress:/app
 
   wp-install:
     depends_on:
       - db
       - wordpress
+      - composer
     image: wordpress:cli-php8.0
     env_file: .env
     command: >
@@ -80,7 +83,7 @@ services:
       '
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./wait-for-it.sh:/wait-for-it.sh
@@ -98,7 +101,7 @@ services:
     env_file: .env
     volumes:
       - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/vendor
+      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
       - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
       - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
       - ./:/home/default/project

@@ -89,14 +89,14 @@ class Users
 
     private function getEmailErrors($email)
     {
-        $error = ["location" => "email", "errors" => ["Email is required."], "value" => $email];
+        $error = ["location" => "email", "message" => __("Email is required."), "value" => $email];
 
         if ($email === "") {
             return $error;
         }
 
         if (!EmailDomains::isAllowedDomain(sanitize_email($email))) {
-            $error['errors'] = ["You can’t use this email domain for registration."];
+            $error['message'] = __("You can’t use this email domain for registration.");
             return $error;
         }
 
@@ -105,14 +105,14 @@ class Users
 
     private function getRoleErrors($role)
     {
-        $error = ["location" => "role", "errors" => ["Role is required."], "value" => $role];
+        $error = ["location" => "role", "message" => __("Role is required."), "value" => $role];
 
         if ($role === "") {
             return $error;
         }
 
         if (!in_array(sanitize_text_field($role), [ "gceditor", "gcadmin" ])) {
-            $error['errors'] = ["You entered an invalid role."];
+            $error['message'] = __("You entered an invalid role.");
             return $error;
         }
 
@@ -170,7 +170,7 @@ class Users
 
             // if we have a user AND they are a member of the blog, end early
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
-                throw new \Exception($email . " is already a member of this Collection");
+                throw new \Exception($email . __(" is already a member of this Collection"));
                 return false;
             }
 
@@ -186,7 +186,12 @@ class Users
             }
 
             return new WP_REST_Response([
-                ["status" => $statusCode, "message" => $email . " was added to the Collection.", "uID" => $uId]
+                [
+                    "status" => $statusCode,
+                    "message" => $email . __(" was added to the Collection."),
+                    "uID" => $uId,
+                    "email" => $email
+                ]
             ]);
         } catch (ValidationException $exception) {
             return new WP_REST_Response([
@@ -202,8 +207,7 @@ class Users
             return new WP_REST_Response([
                 [
                     "status" => 400,
-                    "location" => 'unknown',
-                    'errors' => [$exception->getMessage()],
+                    'errors' => [ [ "message" => $exception->getMessage() ] ],
                     'uID' => $uId,
                     'email' => $email
                 ]

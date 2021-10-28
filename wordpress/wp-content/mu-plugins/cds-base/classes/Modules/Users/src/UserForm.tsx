@@ -24,7 +24,7 @@ const Success = ({ message }) => {
         status="success"
         isDismissible={false}
     >
-        <h2>{__("Success!")}</h2>
+        <h2>{__("Success!", "cds-snc")}</h2>
         <p>{message}</p>
     </Notice>
 }
@@ -35,12 +35,12 @@ const ErrorSummary = ({ errors = [] }) => {
         status="error"
         isDismissible={false}
     >
-        <h2>{__("There is a problem")}</h2>
+        <h2>{__("There is a problem", "cds-snc")}</h2>
         <ul>
             {errors.map((err, i) => {
                 return err.location ?
-                    <li key={err.location}><a href={`#${err.location}`}>{err.errors[0]}</a></li> :
-                    <li key={i}>{err}</li>
+                    <li key={err.location}><a href={`#${err.location}`}>{err.message}</a></li> :
+                    <li key={i}>{err.message}</li>
             })
             }
         </ul>
@@ -58,15 +58,14 @@ const FieldError = ({ errors = [], id = '', children }) => {
 
     return <div className="error-wrapper">
         <span className="validation-error" id={`validation-error--${error.location}`}>
-            {/* Get the first error */}
-            {error.errors[0]}
+            {error.message}
         </span>
         {children}
     </div>
 }
 
 export const UserForm = (props) => {
-    const emptyRole = { id: "", name: __("Select one"), disabled: true, selected: true };
+    const emptyRole = { id: "", name: __("Select one", "cds-snc"), disabled: true, selected: true };
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
     const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: '' });
     const [isLoading, setIsLoading] = useState(true);
@@ -113,7 +112,7 @@ export const UserForm = (props) => {
                 setSuccessMsg(message);
             }
         } catch (e) {
-            setErrors([{ "errors": [__("Internal server error", "cds-snc")] }]);
+            setErrors([{ "errors": [{ "message": __("Internal server error", "cds-snc") }] }]);
             setSuccessMsg(''); // clear success message
         }
         errorSummary.current.focus();
@@ -130,7 +129,7 @@ export const UserForm = (props) => {
                 }
             </div>
 
-            <p>{__("Create a brand new user or add them to this Collection if they already exist.")}</p>
+            <p>{__("Create a brand new user or add them to this Collection if they already exist.", "cds-snc")}</p>
 
             <form onSubmit={handleSubmit} id="adduser">
                 <table className="form-table">

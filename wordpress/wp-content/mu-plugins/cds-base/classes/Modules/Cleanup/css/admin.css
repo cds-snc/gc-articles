@@ -122,7 +122,12 @@ input[type=date], input[type=datetime-local], input[type=datetime], input[type=e
 }
 
 .cds-react-form .components-notice h2 {
-    margin: .5em 0;
+    margin: 8px 0 16px 0;
+}
+
+
+.cds-react-form .components-notice p {
+    margin: 8px 0;
 }
 
 .error-summary {

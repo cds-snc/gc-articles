@@ -87,6 +87,59 @@ if (!function_exists('cds_setup')) {
             'style',
             'script',
         ]);
+
+        add_theme_support( 'editor-color-palette', array(
+            array(
+                'name'  => __( 'Black', 'cds-snc' ),
+                'slug'  => 'black',
+                'color'	=> '#000000',
+            ),
+            array(
+                'name'  => __( 'White', 'cds-snc' ),
+                'slug'  => 'white',
+                'color'	=> '#ffffff',
+            ),
+            array(
+                'name'  => __( 'Primary Blue', 'cds-snc' ),
+                'slug'  => 'primary-blue',
+                'color'	=> '#284162',
+            ),
+            array(
+                'name'  => __( 'Dark Blue', 'cds-snc' ),
+                'slug'  => 'dark-blue',
+                'color'	=> '#32373c',
+            ),
+            array(
+                'name'  => __( 'Light Blue', 'cds-snc' ),
+                'slug'  => 'light-blue',
+                'color' => '#b2e3ff',
+            ),
+            array(
+                'name'  => __( 'Dark Grey', 'cds-snc' ),
+                'slug'  => 'dark-grey',
+                'color' => '#444444',
+            ),
+            array(
+                'name'  => __( 'Grey', 'cds-snc' ),
+                'slug'  => 'grey',
+                'color' => '#bfc1c3',
+            ),
+            array(
+                'name'	=> __( 'Orange', 'cds-snc' ),
+                'slug'	=> 'orange',
+                'color'	=> '#ffbf47',
+            ),
+            array(
+                'name'  => __( 'Green', 'cds-snc' ),
+                'slug'  => 'green',
+                'color' => '#00703c',
+            ),
+            array(
+                'name'  => __( 'Red', 'cds-snc' ),
+                'slug'  => 'red',
+                'color' => '#af3c43',
+            ),
+        ) );
     }
 }
 add_action('after_setup_theme', 'cds_setup');

@@ -111,7 +111,7 @@ class Users
             return $error;
         }
 
-        if (!in_array(sanitize_text_field($role), [ "gceditor", "gcadmin" ])) {
+        if (!in_array(sanitize_text_field($role), [ "gceditor", "administrator" ])) {
             $error['message'] = __("You entered an invalid role.");
             return $error;
         }

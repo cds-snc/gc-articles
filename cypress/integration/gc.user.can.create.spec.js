@@ -12,7 +12,7 @@ describe('User - GC Editor', () => {
     });
 
     it('GC Admin can add GC Editors', () => {
-        cy.addUser('gcadmin', 'secret', 'gcadmin');
+        cy.addUser('gcadmin', 'secret', 'administrator');
         cy.login('gcadmin', 'secret');
         // try adding a GC Editor using GC Admin account
         cy.addUser('gceditor', 'secret', 'gceditor', false);

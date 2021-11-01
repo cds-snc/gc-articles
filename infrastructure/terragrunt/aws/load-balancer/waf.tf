@@ -1,6 +1,6 @@
 locals {
   # Rules that must be excluded from the AWSManagedRulesCommonRuleSet for WordPress to work
-  wpadmin_rules         = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH"]
+  wpadmin_rules         = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH", "CrossSiteScripting_BODY"]
   file_upload_rules     = ["SizeRestrictions_BODY", "CrossSiteScripting_BODY"]
   common_excluded_rules = var.allow_wordpress_uploads ? concat(local.wpadmin_rules, local.file_upload_rules) : local.wpadmin_rules
 }

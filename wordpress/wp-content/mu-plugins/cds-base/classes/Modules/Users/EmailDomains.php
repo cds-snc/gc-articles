@@ -32,4 +32,19 @@ class EmailDomains
 
         return false;
     }
+
+    public static function validateEmailDomain($result)
+    {
+        $message =
+            __(
+                'You can’t use this email domain for registration.',
+                'cds-snc',
+            ) . $details;
+
+        if (!self::isAllowedDomain($result['user_email'])) {
+            $result['errors']->add('user_email', $message);
+        }
+
+        return $result;
+    }
 }

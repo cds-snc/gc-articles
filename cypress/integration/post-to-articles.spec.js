@@ -18,7 +18,9 @@ describe('Articles', () => {
     cy.get("a.page-title-action").first().should('have.text', "Add Article");
     cy.get(".dashicons-admin-post").next().should('have.text', "Articles");
     cy.get("#menu-posts li a").eq(1).should('have.text', "Add Article");
-    cy.get("#menu-posts li a").eq(3).should('have.text', "Tags");
+
+    // @TODO: should Tags or Categories be visible here for administrator (gcadmin) role?
+    // cy.get("#menu-posts li a").eq(3).should('have.text', "Tags");
   });
 
 });

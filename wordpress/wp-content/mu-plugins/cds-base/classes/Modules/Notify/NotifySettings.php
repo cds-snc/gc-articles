@@ -50,7 +50,7 @@ class NotifySettings
             $this->admin_page,
             __('Settings'),
             __('Settings'),
-            'manage_options',
+            'manage_notify',
             $this->admin_page . '_settings',
             [$this, 'notifyApiSettingsCreateAdminPage'],
         );

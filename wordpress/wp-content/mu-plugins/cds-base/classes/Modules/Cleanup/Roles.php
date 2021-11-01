@@ -40,7 +40,8 @@ class Roles
                 'add_users' => 1,
                 'promote_users' => 1,
                 'manage_network_users' => 1, // enables "edit_users" for GC Admins'
-                'manage_options' => 1,
+                'manage_options' => 0,
+                'manage_notify' => 1,
                 'read' => 1,
                 'level_1' => 1,
                 'level_0' => 1,

@@ -18,7 +18,7 @@
     "wp-env:debug": "wp-env start --debug",
     "wp-env:clean" : "wp-env clean all",
     "wp-env:destroy": "wp-env destroy",
-    "cy:run": "cypress run --record",
+    "cy:run": "cypress run",
     "cy:open": "cypress open"
   },
   "devDependencies": {

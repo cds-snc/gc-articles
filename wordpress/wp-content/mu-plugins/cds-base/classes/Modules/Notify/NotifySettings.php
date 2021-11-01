@@ -31,8 +31,8 @@ class NotifySettings
         add_action('admin_init', [$instance, 'notifyApiSettingsPageInit']);
         add_action('admin_head', [$instance, 'addStyles']);
 
-        add_filter('option_page_capability_notify_api_settings_option_group', function($capability) {
-          return 'manage_notify';
+        add_filter('option_page_capability_notify_api_settings_option_group', function ($capability) {
+            return 'manage_notify';
         });
 
         $encryptedOptions = [

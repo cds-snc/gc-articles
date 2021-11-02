@@ -54,7 +54,7 @@ describe('User - GC Editor', () => {
 
 describe('User - GC Admin', () => {
     before(() => {
-        cy.addUser('gcadmin', 'secret', 'gcadmin');
+        cy.addUser('gcadmin', 'secret', 'administrator');
     });
 
     it('GC Admin login & page access', () => {

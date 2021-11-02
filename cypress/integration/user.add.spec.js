@@ -38,7 +38,7 @@ describe('Add user', () => {
     
     // Get the roles
     cy.get("select#role").select('GC Editor').should('have.value', 'gceditor');
-    cy.get("select#role").select('GC Admin').should('have.value', 'gcadmin');
+    cy.get("select#role").select('GC Admin').should('have.value', 'administrator');
 
     cy.get(".components-button.is-primary").first().should('have.text', "Add user");
   });
@@ -103,7 +103,7 @@ describe('Add user', () => {
 
 describe('As GC Admin', () => {
     before( () => {
-      cy.addUser('gcadmin', 'secret', 'gcadmin');
+      cy.addUser('gcadmin', 'secret', 'administrator');
     });
 
     it('can add a user', () => {

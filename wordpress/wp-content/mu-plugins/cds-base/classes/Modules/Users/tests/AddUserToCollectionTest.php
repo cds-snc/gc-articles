@@ -81,9 +81,9 @@ test('returns array with cleaned values', function () {
 
     try {
         $users = new Users();
-        $result = $users->sanitizeEmailAndRole(["email" => "test@cds-snc.ca",  "role" => "gcadmin"]);
+        $result = $users->sanitizeEmailAndRole(["email" => "test@cds-snc.ca",  "role" => "administrator"]);
         $this->assertTrue($result["email"] === "test@cds-snc.ca");
-        $this->assertTrue($result["role"] === "gcadmin");
+        $this->assertTrue($result["role"] === "administrator");
     } catch (ValidationException $e) {
         print_r($e->getMessage());
         $this->assertTrue(false === true);

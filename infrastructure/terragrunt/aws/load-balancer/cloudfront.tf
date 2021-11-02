@@ -41,7 +41,9 @@ resource "aws_cloudfront_distribution" "wordpress" {
           "wordpress_logged_in_*",
           "wordpress_test_cookie",
           "wp-settings-*",
-          "wp-resetpass-*"
+          "wp-resetpass-*",
+          "wp-saving-post",
+          "wp-postpass_*"
         ]
       }
     }

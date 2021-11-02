@@ -33,7 +33,7 @@ class TrackLogins
     {
         register_rest_route('user', '/logins', [
             'methods'             => 'GET',
-            'callback'            => [$this, 'getUserLogins'],
+            'callback'            => [$this, 'getRESTUserLogins'],
             'permission_callback' => function () {
                 return current_user_can('delete_posts');
             }
@@ -61,10 +61,9 @@ class TrackLogins
         $this->wpdb->query("DROP TABLE IF EXISTS $this->tableName");
     }
 
-    public function logUserLogin($user_login, $user)
-    {
+    public function insertUserLogin($user, $user_agent) {
         $data = [
-            'user_agent' => $this->getUserAgent(),
+            'user_agent' => $user_agent,
             'time_login' => current_time('mysql', 1),
             'user_id'    => $user->ID
         ];
@@ -72,24 +71,32 @@ class TrackLogins
         $this->wpdb->insert($this->tableName, $data);
     }
 
+    public function logUserLogin($user_login, $user)
+    {
+        $this->insertUserLogin($user, $user_agent = $this->getUserAgent());
+    }
+
     protected function getUserAgent(): string
     {
         return $_SERVER['HTTP_USER_AGENT'];
     }
 
-    public function getUserLogins(): WP_REST_Response
-    {
-        $current_user_id = get_current_user_id();
-        $parser          = Parser::create();
-
-        $results = $this->wpdb->get_results(
+    public function getUserLogins($current_user_id, $limit = 3): array {
+        return $this->wpdb->get_results(
             $this->wpdb->prepare("
                 SELECT time_login, user_agent 
                 FROM {$this->tableName} 
                 WHERE user_id=%d 
-                ORDER BY time_login DESC LIMIT 3", $current_user_id)
+                ORDER BY time_login DESC LIMIT {$limit}", $current_user_id)
         );
+    }
 
+    public function getRESTUserLogins(): WP_REST_Response
+    {
+        $current_user_id = get_current_user_id();
+        $results = $this->getUserLogins($current_user_id, $limit = 3);
+
+        $parser  = Parser::create();
         $results = array_map(function ($login) use ($parser) {
             $parsed     = $parser->parse($login->user_agent);
             $user_agent = $parsed->os->family . ' | ' . $parsed->ua->family;

@@ -7,6 +7,7 @@ namespace CDS\Modules\Users;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
 use CDS\Modules\Users\EmailDomains;
+use CDS\Modules\Users\UserLockout;
 use CDS\Modules\Users\Usernames;
 use CDS\Modules\Users\ValidationException;
 
@@ -26,6 +27,10 @@ class Users
         add_action('pre_user_query', [$this, 'hideSuperAdminsFromUserList']);
 
         add_action('rest_api_init', [$this, 'registerEndpoints']);
+
+        add_action( 'plugins_loaded', function() {
+            new UserLockout();
+        }, 12 ); // the plugin activates itself at priority 11
     }
 
     public function registerEndpoints(): void

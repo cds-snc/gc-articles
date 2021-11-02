@@ -23,6 +23,8 @@ class Users
         add_action('admin_menu', [$this, 'removePageUsersAddNew']);
         add_action('admin_enqueue_scripts', [$this, 'replacePageAddUsers']);
 
+        add_action('pre_user_query', [$this, 'hideSuperAdminsFromUserList']);
+
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
@@ -269,6 +271,22 @@ class Users
         if (str_contains($current_page, 'page=users-add')) {
             $data = 'CDS.renderUserForm();';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
+        }
+    }
+
+    public function hideSuperAdminsFromUserList($user_search)
+    {
+        if (! is_super_admin()) {
+            $super_admins = get_super_admins(); // returns array of superadmin usernames, not IDs
+            $usernames = implode("', '", array_map('esc_sql', $super_admins));
+
+            global $wpdb;
+            $user_search->query_where =
+                str_replace(
+                    'WHERE 1=1',
+                    "WHERE 1=1 AND {$wpdb->users}.user_login NOT IN ('" . $usernames . "')",
+                    $user_search->query_where
+                );
         }
     }
 }

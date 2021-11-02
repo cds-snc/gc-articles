@@ -41,7 +41,7 @@ describe('Notify Template Sender', () => {
 
     it('Send Notify Template', () => {
         cy.visitNotify();
-        cy.screenshot();
+
         cy.get('h1').should('have.text', 'Send Notify Template');
 
         cy.get('select#list_id').select('One more');

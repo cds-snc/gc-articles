@@ -7,7 +7,7 @@ describe('Login', () => {
     const host = Cypress.config().baseUrl;
 
     cy.visit("/login");
-    cy.screenshot();
+
     cy.get("#login h1 a").should("have.text", "Canadian Digital Service");
     cy.get('#login h1 a').should('have.css', 'background-image', 'url("'+host+'/wp-content/mu-plugins/cds-base/images/site-login-logo.svg")')
     cy.get('.login form label').should('have.css', 'font-size', '16px')

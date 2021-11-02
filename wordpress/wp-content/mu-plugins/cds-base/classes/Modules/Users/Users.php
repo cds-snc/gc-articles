@@ -62,7 +62,7 @@ class Users
     public function sanitizeEmailAndRole($data = []): array|false
     {
         if (!is_array($data) && !is_object($data)) {
-            throw new ValidationException([ this->getEmailErrors(), $this->getRoleErrors() ]);
+            throw new ValidationException([ $this->getEmailErrors(), $this->getRoleErrors() ]);
             return false;
         }
 

@@ -2,10 +2,7 @@ name: Build container
 
 on:
   pull_request:
-    paths:
-      - ".dockerignore"
-      - ".github/workflows/build_container.yml"
-      - "wordpress/**"
+    branches: [main]
 
 env:
   DOCKER_BUILDKIT: 1

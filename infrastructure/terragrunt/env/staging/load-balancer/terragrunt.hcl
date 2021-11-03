@@ -27,7 +27,6 @@ dependency "hosted-zone" {
 }
 
 inputs = {
-  allow_wordpress_uploads         = true
   domain_name                     = "articles.cdssandbox.xyz"
   load_balancer_security_group_id = dependency.network.outputs.load_balancer_security_group_id
   public_subnet_ids               = dependency.network.outputs.public_subnet_ids

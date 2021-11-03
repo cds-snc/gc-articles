@@ -98,7 +98,7 @@ class Users
         }
 
         if (!EmailDomains::isAllowedDomain(sanitize_email($email))) {
-            $error['message'] = __("You must enter Government of Canada email to send an invitation.");
+            $error['message'] = __("You must enter a Government of Canada email to send an invitation.");
             return $error;
         }
 

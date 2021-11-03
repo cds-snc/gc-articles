@@ -71,7 +71,7 @@ describe('Add user', () => {
     // error summary
     cy.get('h2').contains("There is a problem");
     cy.focused().should('contain', 'There is a problem');
-    assertEmailErrors(cy, "You must enter Government of Canada email to send an invitation.");
+    assertEmailErrors(cy, "You must enter a Government of Canada email to send an invitation.");
   });
 
   it('Successfully adds a new user', () => {

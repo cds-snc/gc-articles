@@ -150,11 +150,11 @@ class Users
             'login'
         );
 
-        $subject  = "Set Password";
-        $message  = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
-        $message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
-        $message .= __('To set your password, visit the following address:') . "\r\n\r\n";
-        $message .=  $uniqueUrl;
+        $subject = __("Invitation to collaborate on GC Articles", "cds-snc");
+        $message = __('Someone has invited this email to collaborate on a GC Articles collection site.', "cds-snc") . "\r\n\r\n";
+        $message .= __('If this was a mistake, please ignore this email and the invitation will expire', "cds-snc") . "\r\n\r\n";
+        $message .= __('To set your GC Articles account password, please visit the following address:', "cds-snc") . "\r\n\r\n";
+        $message .= $uniqueUrl;
 
         wp_mail($email, $subject, $message);
     }

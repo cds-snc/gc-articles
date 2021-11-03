@@ -24,10 +24,10 @@ class SitesToCollections
             return $translation;
         }
 
-        if($text === "###SITENAME###"){
+        if ($text === "###SITENAME###") {
             return $translation;
         }
-        
+
         return str_ireplace('Site', "Collection", $text);
     }
 

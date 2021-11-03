@@ -94,7 +94,7 @@ describe('Add user', () => {
     // error summary
     cy.get('h2').contains("There is a problem");
     cy.focused().should('contain', 'There is a problem');
-    assertEmailErrors(cy, "You can’t use this email domain for registration.");
+    assertEmailErrors(cy, "You must enter a Government of Canada email to send an invitation.");
   });
 
   it('Successfully adds a new user', () => {

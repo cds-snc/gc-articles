@@ -52,7 +52,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SizeRestrictions_BODY"
-    priority = 1
+    priority = 10
     action {
       block {}
     }
@@ -101,7 +101,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_CrossSiteScripting_BODY"
-    priority = 1
+    priority = 11
     action {
       block {}
     }

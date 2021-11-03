@@ -1,17 +1,8 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/ci.yml"
-      - "wordpress/**"
   pull_request:
-    paths:
-      - ".github/workflows/ci.yml"
-      - "wordpress/**"
-      - "cypress/**"
+    branches: [main]
 
 jobs:
   cypress-tests:

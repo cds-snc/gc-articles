@@ -102,6 +102,53 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
+    name     = "Custom_CrossSiteScripting_BODY"
+    priority = 1
+    action {
+      block {}
+    }
+
+    visibility_config {
+      sampled_requests_enabled   = true
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Custom_CrossSiteScripting_BODY"
+    }
+
+    statement {
+      and_statement {
+        statement {
+          xss_match_statement {
+            field_to_match {
+              body {}
+            }
+            text_transformation {
+              type     = "NONE"
+              priority = 0
+            }
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "STARTS_WITH"
+                search_string         = "/wp-admin"
+                text_transformation {
+                  type     = "NONE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  rule {
     name     = "AWSManagedRulesKnownBadInputsRuleSet"
     priority = 2
 

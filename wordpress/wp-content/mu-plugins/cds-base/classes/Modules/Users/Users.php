@@ -98,7 +98,7 @@ class Users
         }
 
         if (!EmailDomains::isAllowedDomain(sanitize_email($email))) {
-            $error['message'] = __("You can’t use this email domain for registration.");
+            $error['message'] = __("You must enter Government of Canada email to send an invitation.");
             return $error;
         }
 
@@ -190,7 +190,7 @@ class Users
             return new WP_REST_Response([
                 [
                     "status" => $statusCode,
-                    "message" => $email . __(" was added to the Collection."),
+                    "message" => $email . __(" was invited to the Collection."),
                     "uID" => $uId,
                     "email" => $email
                 ]

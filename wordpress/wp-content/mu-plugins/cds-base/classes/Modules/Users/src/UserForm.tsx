@@ -129,7 +129,7 @@ export const UserForm = (props) => {
                 }
             </div>
 
-            <p>{__("Create a brand new user or add them to this Collection if they already exist.", "cds-snc")}</p>
+            <p>{__("Invite a user to collaborate on your GC Articles collection.", "cds-snc")}</p>
 
             <form onSubmit={handleSubmit} id="adduser">
                 <table className="form-table">

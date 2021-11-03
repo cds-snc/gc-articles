@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2021-09-29T16:41:33+00:00\n"
+"POT-Creation-Date: 2021-11-03T18:30:33+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,27 +34,68 @@ msgstr "la page n'a pas été trouvée"
 msgid "It looks like nothing was found at this location."
 msgstr "Rien n'a été trouvé à cette adresse."
 
-#: functions.php:74
+#: functions.php:78
 msgid "Primary"
 msgstr "le primaire"
 
-#: header.php:40
+#: functions.php:97
+msgid "Black"
+msgstr ""
+
+#: functions.php:102
+msgid "White"
+msgstr ""
+
+#: functions.php:107
+#, fuzzy
+msgid "Primary Blue"
+msgstr "le primaire"
+
+#: functions.php:112
+msgid "Dark Blue"
+msgstr ""
+
+#: functions.php:117
+msgid "Light Blue"
+msgstr ""
+
+#: functions.php:122
+msgid "Dark Grey"
+msgstr ""
+
+#: functions.php:127
+msgid "Grey"
+msgstr ""
+
+#: functions.php:132
+msgid "Orange"
+msgstr ""
+
+#: functions.php:137
+msgid "Green"
+msgstr ""
+
+#: functions.php:142
+msgid "Red"
+msgstr ""
+
+#: header.php:37
 msgid "Skip to content"
 msgstr "Aller au contenu"
 
-#: header.php:73 header.php:91
+#: header.php:70 header.php:88
 msgid "Search"
 msgstr "Recherche"
 
-#: header.php:77 header.php:82
+#: header.php:74 header.php:79
 msgid "Search Canada.ca"
 msgstr "Rechercher dans Canada.ca"
 
-#: header.php:103 header.php:108
+#: header.php:100 header.php:105
 msgid "Menu"
 msgstr "Le menu"
 
-#: header.php:105
+#: header.php:102
 msgid "Main"
 msgstr "le bloc principal"
 
@@ -89,13 +130,17 @@ msgstr "Il n'y avait rien trouvé"
 #: template-parts/content-none.php:26
 msgid ""
 "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr "Êtes-vous prêt à publier votre premier message ?  <a href=\"%1$s\">Commencez ici</a> "
+msgstr ""
+"Êtes-vous prêt à publier votre premier message ?  <a href=\"%1$s\">Commencez "
+"ici</a> "
 
 #: template-parts/content-none.php:38
 msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
-msgstr "Désolé, rien n'a été trouvé avec votre recherche. Veuillez réessayer avec d'autres mots-clés."
+msgstr ""
+"Désolé, rien n'a été trouvé avec votre recherche. Veuillez réessayer avec "
+"d'autres mots-clés."
 
 #: template-parts/content-none.php:44
 msgid "Nothing found! Perhaps searching can help."
@@ -113,4 +158,5 @@ msgstr "Éditer <span class=\"screen-reader-text\">%s</span>"
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content.php:35
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
-msgstr "Continuez à lire le post <span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr ""
+"Continuez à lire le post <span class=\"screen-reader-text\"> \"%s\"</span>"

@@ -70,6 +70,7 @@ export const UserForm = (props) => {
     const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: '' });
     const [isLoading, setIsLoading] = useState(true);
     const [roles, setRoles] = useState([emptyRole]);
+    const [roleDescription, setRoleDescription] = useState("");
     const [errors, setErrors] = useState([]);
     const [successMsg, setSuccessMsg] = useState('');
     const resetForm = () => {
@@ -105,7 +106,7 @@ export const UserForm = (props) => {
                 const [{ errors: serverErrors = [] } = {}] = response;
                 setErrors(serverErrors);
                 setSuccessMsg(''); // clear success message
-            } else if ([200, 201].includes(parseInt(status)) ) {
+            } else if ([200, 201].includes(parseInt(status))) {
                 const [{ message = '' } = {}] = response;
                 resetForm(); // clear inputs and remove errors
 
@@ -156,12 +157,32 @@ export const UserForm = (props) => {
                             <td>
                                 {/* The "id" needs to match the field ID attribute */}
                                 <FieldError errors={errors} id={"role"}>
-                                    <select disabled={isLoading ? true : false} name="role" id="role" aria-describedby={findErrorId(errors, "role") ? `validation-error--role` : null} {...bindRole} value={...role.value}>
+                                    <select
+                                        disabled={isLoading ? true : false}
+                                        name="role" id="role"
+                                        aria-describedby={findErrorId(errors, "role") ? `validation-error--role` : null}
+                                        onChange={(event) => {
+                                            const val = event.target.value;
+
+                                            const role = roles.filter((role) => {
+                                                return role.id === val
+                                            })
+
+                                            if (role.length >= 1) {
+                                                setRoleDescription(role[0]["description"])
+                                            } else {
+                                                setRoleDescription("")
+                                            }
+
+                                            bindRole.onChange(event);
+                                        }}
+                                        value={...role.value}>
                                         {roles.map((role, i) => {
                                             return <option key={role.id || i} value={role.id} disabled={role.disabled}>{role.name}</option>
                                         })}
                                     </select>
                                 </FieldError>
+                                <p aria-live="polite" className="role-desc description">{roleDescription}</p>
                             </td>
                         </tr>
                     </tbody>

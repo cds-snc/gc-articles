@@ -51,8 +51,17 @@ class Users
     {
         global $wp_roles;
         $role_names_arr = [];
+
+        $administrator = __("This role has complete control over the articles collection and can perform all other roles actions", "cds-snc");
+        $gceditor = __("This role is allows the user to write and publish articles online to the collection.", "cds-snc");
+        $roleDescriptions = ["administrator" => $administrator, "gceditor" => $gceditor];
+
         foreach ($wp_roles->role_names as $key => $value) {
-            array_push($role_names_arr, ['id' => $key, 'name' => $value]);
+            $desc = "";
+            if ($roleDescriptions[$key]) {
+                $desc = $roleDescriptions[$key];
+            }
+            array_push($role_names_arr, ['id' => $key, 'name' => $value, "description" => $desc]);
         }
 
         return new WP_REST_Response($role_names_arr);

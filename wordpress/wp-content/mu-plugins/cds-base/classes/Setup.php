@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CDS;
 
+use CDS\Modules\Cleanup\Wpml;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\Blocks\Blocks;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
@@ -58,6 +59,7 @@ class Setup
         new Styles();
         new UserCollections();
         new Users();
+        Wpml::setup();
 
         // @TODO: subscriptions not tested since refactor
         // $this->setupSubscriptions();

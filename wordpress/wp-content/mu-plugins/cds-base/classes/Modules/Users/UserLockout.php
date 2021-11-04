@@ -8,38 +8,30 @@ use CDS\Modules\TrackLogins\TrackLogins;
 
 class UserLockout
 {
-    public const USER_LOCKOUT_STRING = '_is_disabled'; // same key as "Disable User Login" plugin
-    public const USER_LOCKOUT_TIME = 60; // 60 seconds
+    public const USER_LOCKOUT_TIME = (60 * 60 * 24) * 90; // 90 days
 
     public $loginPlugin;
     public $trackLogins;
 
     public function __construct()
     {
-        /* @TODO: on "enabled", update login time */
-
         // Setup method for "Disable User Login" plugin
         $disable_user_login_plugin_active = function_exists('SSDUL');
-        // var_dump($disable_user_login_plugin_active);
 
-        if($disable_user_login_plugin_active) {
-
+        if ($disable_user_login_plugin_active) {
             // returns an instance of "SS_Disable_User_Login_Plugin"
             $this->loginPlugin = SSDUL();
             $this->trackLogins = new TrackLogins();
 
-            // the original width of 80px messed up our table
-            add_action('admin_footer-users.php', [$this, 'manage_users_css'], 11);
-            // add a login whenever someone is enabled
+            // add a login row whenever someone is enabled
             add_action('disable_user_login.user_enabled', [$this,'insertLoginForEnabledUser']);
 
-            add_filter('cron_schedules', [$this, 'customCronSchedule']);
             add_action('lockout_cron', [$this, 'setLoginLock']);
 
             register_deactivation_hook(__FILE__, [$this, 'deactivateCron']);
 
             if (! wp_next_scheduled('lockout_cron')) {
-                wp_schedule_event(time(), '45-seconds', 'lockout_cron');
+                wp_schedule_event(time(), 'daily', 'lockout_cron');
             }
         } else {
             // remove cron event if disable login plugin is not active
@@ -47,49 +39,27 @@ class UserLockout
         }
     }
 
-    /**
-	 * Specify the width of our custom column
-     */
-	public function manage_users_css()
+    public function deactivateCron(): void
     {
-		echo '<style type="text/css">.column-disable_user_login { width: 85px; }</style>';
-	}
-
-    public function deactivateCron()
-    {
-        $timestamp = wp_next_scheduled( 'lockout_cron' );
-        wp_unschedule_event( $timestamp, 'lockout_cron' );
+        $timestamp = wp_next_scheduled('lockout_cron');
+        wp_unschedule_event($timestamp, 'lockout_cron');
         wp_clear_scheduled_hook('lockout_cron');
     }
 
-    /**
-     * Adds a custom cron schedule for every minute
-     *
-     * @param array $schedules An array of non-default cron schedules.
-     * @return array Filtered array of non-default cron schedules.
-     */
-    public function customCronSchedule(array $schedules): array
+    public function lockUser(string|int $user_id): void
     {
-        $schedules[ '45-seconds' ] = array( 'interval' => 45, 'display' => __('Every 45 seconds', 'cds-snc') );
-        return $schedules;
+        $originally_disabled = get_user_meta($user_id, $this->loginPlugin->user_meta_key(), true);
+
+        // Update the user's disabled status
+        update_user_meta($user_id, $this->loginPlugin->user_meta_key(), true);
+
+        // Trigger an action when a user's account is enabled
+        if (!$originally_disabled) {
+            do_action('disable_user_login.user_disabled', $user_id);
+        }
     }
 
-    public function lockUser(string|int $user_id)
-    {
-        $originally_disabled = get_user_meta( $user_id, self::USER_LOCKOUT_STRING, true );
-
-		// Update the user's disabled status
-		update_user_meta( $user_id, self::USER_LOCKOUT_STRING, true );
-
-        /**
-		 * Trigger an action when a user's account is enabled
-		 */
-		if ( ! $originally_disabled ) {
-			do_action( 'disable_user_login.user_disabled', $user_id );
-		}
-    }
-
-    public function setLoginLock()
+    public function setLoginLock(): void
     {
         $users = get_users(array( 'fields' => array( 'id' ) ));
         $user_ids = array_map(function ($users) {
@@ -99,7 +69,9 @@ class UserLockout
         // remove superadmins
         $user_ids = array_filter(
             $user_ids,
-            function ($user_id) { return ! is_super_admin( $user_id ); },
+            function ($user_id) {
+                return ! is_super_admin($user_id);
+            }
         );
 
         foreach ($user_ids as $user_id) {
@@ -118,7 +90,8 @@ class UserLockout
         }
     }
 
-    public function insertLoginForEnabledUser($user_id) {
+    public function insertLoginForEnabledUser(int|string $user_id): void
+    {
         $user = get_user_by('id', $user_id);
 
         $this->trackLogins->insertUserLogin(

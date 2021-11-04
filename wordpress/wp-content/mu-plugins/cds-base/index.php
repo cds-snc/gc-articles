@@ -14,7 +14,6 @@ declare(strict_types=1);
 
 require __DIR__ . '/vendor/autoload.php';
 
-use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\Notify\NotifyTemplateSender;
 use CDS\Setup;
 
@@ -79,67 +78,3 @@ function cds_admin_js(): void
 add_action('admin_enqueue_scripts', 'cds_admin_js');
 
 $setupComponents = new Setup();
-
-function setLoginLock()
-{
-    $unlock = true;
-    $trackLogins = new TrackLogins();
-
-    $users = get_users(array( 'fields' => array( 'id' ) ));
-    $user_ids = array_map(
-        function ($users) { return $users->id; },
-        $users
-    );
-
-    foreach ($user_ids as $user_id) {
-        $logins = $trackLogins->getUserLogins($user_id, $limit = 1);
-        $login = $logins[0]?->time_login;
-
-        // set to current time if they have never logged in 
-        // (you can't be locked out before you log in)
-        $login_time = $login ? strtotime($login) : time();
-        $seconds = time() - $login_time;
-
-        if ($unlock) {
-            update_user_meta($user_id, '_is_disabled', false);
-        } elseif ($seconds > 60) {
-            update_user_meta($user_id, '_is_disabled', true);
-        } else {
-            update_user_meta($user_id, '_is_disabled', false);
-        }
-    }
-}
-
-function getLoginLock()
-{
-    $arr = array(
-        [
-            "user" => "admin",
-            "_is_disabled" => get_user_meta(1, '_is_disabled', true)
-        ],
-        [
-            "user" => "paul.craig+admin@cds-snc.ca",
-            "_is_disabled" => get_user_meta(2, '_is_disabled', true)
-        ],
-        [
-            "user" => "paul.craig+editor@cds-snc.ca",
-            "_is_disabled" => get_user_meta(3, '_is_disabled', true)
-        ],
-        [
-            "user" => "paul.craig+1@cds-snc.ca",
-            "_is_disabled" => get_user_meta(4, '_is_disabled', true)
-        ],
-        [
-            "user" => "paul.craig+2@cds-snc.ca",
-            "_is_disabled" => get_user_meta(5, '_is_disabled', true)
-        ],
-        [
-            "user" => "paul.craig+network@cds-snc.ca",
-            "_is_disabled" => get_user_meta(7, '_is_disabled', true)
-        ],
-    );
-    var_dump($arr);
-}
-
-// add_action('admin_head', 'setLoginLock');
-// add_action('admin_head', 'getLoginLock');

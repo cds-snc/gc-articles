@@ -27,6 +27,10 @@ class Block
                     'placeholderValue' => [
                         'type' => 'string',
                         "default" => "preview@example.com"
+                    ],
+                    'listId' => [
+                        'type' => 'string',
+                        "default" => "0c188973-efab-4e8e-8b09-b165e98c66cf"
                     ]
                 ]
             ]

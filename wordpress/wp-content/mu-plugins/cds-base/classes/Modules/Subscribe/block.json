@@ -14,6 +14,12 @@
 			"source": "text",
 			"selector": "div",
 			"default": "preview@example.com"
+		},
+		"listId": {
+			"type": "string",
+			"source": "text",
+			"selector": "div",
+			"default": "list to subscribe to"
 		}
 	}
 }

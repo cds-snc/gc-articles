@@ -5,7 +5,7 @@ import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { name } from '../block.json';
 
 const Edit = ({ attributes, setAttributes }) => {
-	const { placeholderValue } = attributes;
+	const { placeholderValue, listId } = attributes;
 	const blockProps = useBlockProps();
 	return (
 		<>
@@ -18,6 +18,15 @@ const Edit = ({ attributes, setAttributes }) => {
 							placeholderValue: value,
 						})}
 					/>
+
+					<TextControl
+						label={__("List ID", "cds-snc")}
+						value={listId}
+						onChange={(value) => setAttributes({
+							listId: value,
+						})}
+					/>
+
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps}>

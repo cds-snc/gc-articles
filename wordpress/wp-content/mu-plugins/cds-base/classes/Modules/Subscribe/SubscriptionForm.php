@@ -19,15 +19,20 @@ class SubscriptionForm
     public function render($attributes = []): string
     {
         $placeholder = "";
+        $listId = "";
         if (!empty($attributes['placeholderValue'])) :
             $placeholder = $attributes['placeholderValue'];
+        endif;
+
+        if (!empty($attributes['listId'])) :
+            $listId = $attributes['listId'];
         endif;
 
         ob_start();
         ?>
         <div class="gc-form-wrapper">
-
            <form id="subscribe-form" method="POST" action="/wp-json/subscribe/v1/process">
+                <input type="hidden" name="list_id" value="<?php echo $listId; ?>"/>
                 <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
                 <div class="focus-group">
                     <label class="gc-label required" id="cds-email" for="email">

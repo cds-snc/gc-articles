@@ -54,7 +54,7 @@ class Profile
          *--------------------------------------------*/
         // WPML settings under personal options
         $crawler->filter('#name')->addClass('hidden');
-        //$crawler->filter('.user-language-wrap')->remove();
+        $crawler->filter('.user-language-wrap')->remove();
 
         $crawler->filter('.user-user-login-wrap')->remove();
         // note nickname is a require field so it's hidden using CSS

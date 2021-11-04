@@ -15,7 +15,6 @@ describe('Collections', () => {
     cy.login();
     cy.visitDashboard();
     cy.get('#wp-admin-bar-view-site a').first().should('have.text', "Visit Collection");
-    cy.get(".welcome-panel-column .button-hero").first().should('have.text', "Customize Your Collection");
   });
 
 });

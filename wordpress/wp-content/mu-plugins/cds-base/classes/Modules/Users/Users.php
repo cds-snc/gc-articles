@@ -7,17 +7,23 @@ namespace CDS\Modules\Users;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
 use CDS\Modules\Users\EmailDomains;
+use CDS\Modules\Users\Usernames;
 use CDS\Modules\Users\ValidationException;
 
 class Users
 {
     public function __construct()
     {
-        add_filter('wpmu_validate_user_signup', [$this, 'validateEmailDomain']);
+        add_filter('sanitize_user', ['CDS\Modules\Users\Usernames', 'sanitizeUsernameAsEmail'], 10, 3);
+        add_filter('manage_users_columns', ['CDS\Modules\Users\Usernames', 'removeEmailColumn']);
+
+        add_filter('wpmu_validate_user_signup', ['CDS\Modules\Users\EmailDomains', 'validateEmailDomain']);
 
         add_action('admin_menu', [$this, 'addPageAddUsers']);
         add_action('admin_menu', [$this, 'removePageUsersAddNew']);
         add_action('admin_enqueue_scripts', [$this, 'replacePageAddUsers']);
+
+        add_action('pre_user_query', [$this, 'hideSuperAdminsFromUserList']);
 
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
@@ -45,8 +51,17 @@ class Users
     {
         global $wp_roles;
         $role_names_arr = [];
+
+        $administrator = __("This role has complete control over the articles collection and can perform all other roles actions", "cds-snc");
+        $gceditor = __("This role is allows the user to write and publish articles online to the collection.", "cds-snc");
+        $roleDescriptions = ["administrator" => $administrator, "gceditor" => $gceditor];
+
         foreach ($wp_roles->role_names as $key => $value) {
-            array_push($role_names_arr, ['id' => $key, 'name' => $value]);
+            $desc = "";
+            if ($roleDescriptions[$key]) {
+                $desc = $roleDescriptions[$key];
+            }
+            array_push($role_names_arr, ['id' => $key, 'name' => $value, "description" => $desc]);
         }
 
         return new WP_REST_Response($role_names_arr);
@@ -56,7 +71,7 @@ class Users
     public function sanitizeEmailAndRole($data = []): array|false
     {
         if (!is_array($data) && !is_object($data)) {
-            throw new ValidationException([ this->getEmailErrors(), $this->getRoleErrors() ]);
+            throw new ValidationException([ $this->getEmailErrors(), $this->getRoleErrors() ]);
             return false;
         }
 
@@ -85,14 +100,14 @@ class Users
 
     private function getEmailErrors($email)
     {
-        $error = ["location" => "email", "errors" => ["Email is required."], "value" => $email];
+        $error = ["location" => "email", "message" => __("Email is required."), "value" => $email];
 
         if ($email === "") {
             return $error;
         }
 
         if (!EmailDomains::isAllowedDomain(sanitize_email($email))) {
-            $error['errors'] = ["You can’t use this email domain for registration."];
+            $error['message'] = __("You must enter a Government of Canada email to send an invitation.");
             return $error;
         }
 
@@ -101,14 +116,14 @@ class Users
 
     private function getRoleErrors($role)
     {
-        $error = ["location" => "role", "errors" => ["Role is required."], "value" => $role];
+        $error = ["location" => "role", "message" => __("Role is required."), "value" => $role];
 
         if ($role === "") {
             return $error;
         }
 
-        if (!in_array(sanitize_text_field($role), [ "gceditor", "gcadmin" ])) {
-            $error['errors'] = ["You entered an invalid role."];
+        if (!in_array(sanitize_text_field($role), [ "gceditor", "administrator" ])) {
+            $error['message'] = __("You entered an invalid role.");
             return $error;
         }
 
@@ -144,11 +159,11 @@ class Users
             'login'
         );
 
-        $subject  = "Set Password";
-        $message  = __('Someone requested that the password be reset for the following account:') . "\r\n\r\n";
-        $message .= __('If this was a mistake, just ignore this email and nothing will happen.') . "\r\n\r\n";
-        $message .= __('To set your password, visit the following address:') . "\r\n\r\n";
-        $message .=  $uniqueUrl;
+        $subject = __("Invitation to collaborate on GC Articles", "cds-snc");
+        $message = __('Someone has invited this email to collaborate on a GC Articles collection site.', "cds-snc") . "\r\n\r\n";
+        $message .= __('If this was a mistake, please ignore this email and the invitation will expire', "cds-snc") . "\r\n\r\n";
+        $message .= __('To set your GC Articles account password, please visit the following address:', "cds-snc") . "\r\n\r\n";
+        $message .= $uniqueUrl;
 
         wp_mail($email, $subject, $message);
     }
@@ -166,7 +181,7 @@ class Users
 
             // if we have a user AND they are a member of the blog, end early
             if ($uId && is_user_member_of_blog($uId, get_current_blog_id())) {
-                throw new \Exception($email . " is already a member of this Collection");
+                throw new \Exception($email . __(" is already a member of this Collection"));
                 return false;
             }
 
@@ -182,7 +197,12 @@ class Users
             }
 
             return new WP_REST_Response([
-                ["status" => $statusCode, "message" => $email . " was added to the Collection.", "uID" => $uId]
+                [
+                    "status" => $statusCode,
+                    "message" => $email . __(" was invited to the Collection."),
+                    "uID" => $uId,
+                    "email" => $email
+                ]
             ]);
         } catch (ValidationException $exception) {
             return new WP_REST_Response([
@@ -198,8 +218,7 @@ class Users
             return new WP_REST_Response([
                 [
                     "status" => 400,
-                    "location" => 'unknown',
-                    'errors' => [$exception->getMessage()],
+                    'errors' => [ [ "message" => $exception->getMessage() ] ],
                     'uID' => $uId,
                     'email' => $email
                 ]
@@ -264,18 +283,19 @@ class Users
         }
     }
 
-    public function validateEmailDomain($result)
+    public function hideSuperAdminsFromUserList($user_search)
     {
-        $message =
-            __(
-                'You can’t use this email domain for registration.',
-                'cds-snc',
-            ) . $details;
+        if (! is_super_admin()) {
+            $super_admins = get_super_admins(); // returns array of superadmin usernames, not IDs
+            $usernames = implode("', '", array_map('esc_sql', $super_admins));
 
-        if (!EmailDomains::isAllowedDomain($result['user_email'])) {
-            $result['errors']->add('user_email', $message);
+            global $wpdb;
+            $user_search->query_where =
+                str_replace(
+                    'WHERE 1=1',
+                    "WHERE 1=1 AND {$wpdb->users}.user_login NOT IN ('" . $usernames . "')",
+                    $user_search->query_where
+                );
         }
-
-        return $result;
     }
 }

@@ -20,25 +20,48 @@ describe('Add user', () => {
     cy.exec('npm run wp-env:test:setup');
   });
 
-  after(() => {});
+  after(() => { });
 
   beforeEach(() => {
+
+    cy.intercept(
+      {
+        method: 'GET',
+        url: '/wp-json/users/v1/roles',
+      },
+      [
+        {
+            "id": "gceditor",
+            "name": "GC Editor",
+            "description": "GC editor desc"
+        },
+        {
+            "id": "administrator",
+            "name": "GC Admin",
+            "description": "GC admin desc"
+        }
+    ]
+    ).as('getRoleDescriptions');
+
     cy.login();
     cy.visit("wp-admin/users.php?page=users-add");
-});
+  });
 
   it('Can load the new Add User page', () => {
     cy.visit("wp-admin");
 
     cy.contains('Users').click();
     cy.get('h1').contains("Users"); // get to the "users page"
-    
+
     cy.get('#wpbody .page-title-action').contains('Add New').click();
     cy.get('h1').contains("Add user");
-    
+
     // Get the roles
     cy.get("select#role").select('GC Editor').should('have.value', 'gceditor');
-    cy.get("select#role").select('GC Admin').should('have.value', 'gcadmin');
+    cy.get('.role-desc').should('contain', 'GC editor desc');
+
+    cy.get("select#role").select('GC Admin').should('have.value', 'administrator');
+    cy.get('.role-desc').should('contain', 'GC admin desc');
 
     cy.get(".components-button.is-primary").first().should('have.text', "Add user");
   });
@@ -71,51 +94,57 @@ describe('Add user', () => {
     // error summary
     cy.get('h2').contains("There is a problem");
     cy.focused().should('contain', 'There is a problem');
-    assertEmailErrors(cy, "You can’t use this email domain for registration.");
+    assertEmailErrors(cy, "You must enter a Government of Canada email to send an invitation.");
   });
 
   it('Successfully adds a new user', () => {
-    cy.get('input#email').type("editor@cds-snc.ca"); // domain is not allowed
+    cy.get('input#email').type("new+editor@cds-snc.ca"); // domain is not allowed
     cy.get('select#role').select('gceditor');
     cy.contains('button', 'Add user').click();
 
     // Success notice
     cy.get('h2').contains("Success!");
     cy.focused().should('contain', 'Success!');
+
+    // make sure exists in username column
+    cy.contains('Users').click();
+    cy.get('h1').contains("Users");
+    cy.get('table.users td.column-username').contains("new+editor@cds-snc.ca");
   });
 
   it('Shows an error when trying to add an existing user', () => {
-    cy.get('input#email').type("editor@cds-snc.ca");
+    cy.get('input#email').type("new+editor@cds-snc.ca");
     cy.get('select#role').select('gceditor');
     cy.contains('button', 'Add user').click();
 
     // error summary
     cy.get('h2').contains("There is a problem");
     cy.focused().should('contain', 'There is a problem');
-    cy.get('.components-notice.is-error ul').contains("editor@cds-snc.ca is already a member of this Collection");
+    cy.get('.components-notice.is-error ul').contains("new+editor@cds-snc.ca is already a member of this Collection");
   });
 });
 
 describe('As GC Admin', () => {
-    before( () => {
-      cy.addUser('gcadmin', 'secret', 'gcadmin');
-    });
+  before(() => {
+    cy.addUser('gcadmin', 'secret', 'administrator');
+  });
 
-    it('can add a user', () => {
-        cy.login('gcadmin', 'secret');
+  it('can add a user', () => {
+    cy.login('gcadmin', 'secret');
 
-        cy.visit("wp-admin/users.php");
-        cy.get('h1').contains("Users");
+    cy.visit("wp-admin/users.php");
+    cy.get('h1').contains("Users");
 
-        cy.get('#wpbody .page-title-action').contains('Add New').click();
-        cy.get('h1').contains("Add user");
+    cy.get('#wpbody .page-title-action').contains('Add New').click();
+    cy.get('h1').contains("Add user");
 
-        cy.get('input#email').type("editor+2@cds-snc.ca");
-        cy.get('select#role').select('gceditor');
-        cy.contains('button', 'Add user').click();
+    cy.get('input#email').type("editor+2@cds-snc.ca");
+    cy.get('select#role').select('gceditor');
 
-        // Success notice
-        cy.get('h2').contains("Success!");
-        cy.focused().should('contain', 'Success!');
-    });
+    cy.contains('button', 'Add user').click();
+
+    // Success notice
+    cy.get('h2').contains("Success!");
+    cy.focused().should('contain', 'Success!');
+  });
 });

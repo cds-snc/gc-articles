@@ -25,7 +25,7 @@ describe('Notify Panel', () => {
 
     it('Can view Notify Panel on dashboard', () => {
         cy.visitDashboard();
-        cy.screenshot();
+
         cy.get('#notify-panel-container a').should('have.text', 'Send Template');
 
         cy.get('.label-my-list').should('have.text', 'My List');

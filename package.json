@@ -1,7 +1,7 @@
 {
   "name": "platform-mvp",
   "type": "module",
-  "version": "1.8.0",
+  "version": "1.9.1",
   "scripts": {
     "deploy-plugin": "./deploy/plugin",
     "update-version": "node ./scripts/prepare-release.js --version_num",
@@ -18,7 +18,7 @@
     "wp-env:debug": "wp-env start --debug",
     "wp-env:clean" : "wp-env clean all",
     "wp-env:destroy": "wp-env destroy",
-    "cy:run": "cypress run --record",
+    "cy:run": "cypress run",
     "cy:open": "cypress open"
   },
   "devDependencies": {

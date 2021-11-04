@@ -31,6 +31,10 @@ class NotifySettings
         add_action('admin_init', [$instance, 'notifyApiSettingsPageInit']);
         add_action('admin_head', [$instance, 'addStyles']);
 
+        add_filter('option_page_capability_notify_api_settings_option_group', function ($capability) {
+            return 'manage_notify';
+        });
+
         $encryptedOptions = [
             'NOTIFY_API_KEY',
             'LIST_MANAGER_API_KEY',
@@ -50,7 +54,7 @@ class NotifySettings
             $this->admin_page,
             __('Settings'),
             __('Settings'),
-            'manage_options',
+            'manage_notify',
             $this->admin_page . '_settings',
             [$this, 'notifyApiSettingsCreateAdminPage'],
         );

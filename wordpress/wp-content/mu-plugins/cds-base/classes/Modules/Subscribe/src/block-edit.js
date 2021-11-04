@@ -6,7 +6,8 @@ import { name } from '../block.json';
 
 const Edit = ({ attributes, setAttributes }) => {
 
-	const { placeholderValue, listId } = attributes;
+	const { placeholderValue, listId, emailLabel, subscribeLabel } = attributes;
+
 	const blockProps = useBlockProps();
 
 	let listValues = CDS_VARS.notify_list_ids || [];
@@ -24,6 +25,20 @@ const Edit = ({ attributes, setAttributes }) => {
 						value={placeholderValue}
 						onChange={(value) => setAttributes({
 							placeholderValue: value,
+						})}
+					/>
+					<TextControl
+						label={__("Email field label", "cds-snc")}
+						value={emailLabel}
+						onChange={(value) => setAttributes({
+							emailLabel: value,
+						})}
+					/>
+					<TextControl
+						label={__("Subscribe button label", "cds-snc")}
+						value={subscribeLabel}
+						onChange={(value) => setAttributes({
+							subscribeLabel: value,
 						})}
 					/>
 					<SelectControl

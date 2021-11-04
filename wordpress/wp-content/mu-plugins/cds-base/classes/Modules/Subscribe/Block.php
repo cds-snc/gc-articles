@@ -30,8 +30,16 @@ class Block
                     ],
                     'listId' => [
                         'type' => 'string',
-                        "default" => "0c188973-efab-4e8e-8b09-b165e98c66cf"
-                    ]
+                        "default" => ""
+                    ],
+                    'emailLabel' => [
+                        'type' => 'string',
+                        "default" => _("Enter your email:", "cds-snc")
+                    ],
+                    'subscribeLabel' => [
+                        'type' => 'string',
+                        "default" => _("Subscribe", "cds-snc")
+                    ],
                 ]
             ]
         );

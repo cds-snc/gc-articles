@@ -48,11 +48,13 @@ class Setup
 
         $this->cleanup();
         $this->checkVersion();
-        $this->setupTrackLogins();
         $this->setupNotifyTemplateSender();
         $this->setupBlocks();
         $this->setupMeta();
         $this->setupCli();
+
+        TrackLogins::register();
+
         new SubscriptionForm();
         new ContactForm();
         new FlashMessage();

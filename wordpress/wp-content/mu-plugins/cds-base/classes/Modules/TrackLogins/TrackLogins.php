@@ -5,6 +5,7 @@ namespace CDS\Modules\TrackLogins;
 use Carbon\Carbon;
 use UAParser\Parser;
 use WP_REST_Response;
+use CDS\Utils;
 
 class TrackLogins
 {
@@ -16,17 +17,21 @@ class TrackLogins
         global $wpdb;
         $this->wpdb      = $wpdb;
         $this->tableName = $this->wpdb->prefix . 'userlogins';
-
-        $this->addActions();
     }
 
-    public function addActions()
+    public static function register()
     {
-        add_action('wp_login', [$this, 'logUserLogin'], 10, 2);
+        $instance = new self();
 
-        add_action('rest_api_init', [$this, 'registerRestRoutes']);
+        Utils::checkOptionCallback('cds_track_logins_installed', '1.0', function () use ($instance) {
+            $instance->install();
+        });
 
-        add_action('wp_dashboard_setup', [$this, 'dashboardWidget']);
+        add_action('wp_login', [$instance, 'logUserLogin'], 10, 2);
+
+        add_action('rest_api_init', [$instance, 'registerRestRoutes']);
+
+        add_action('wp_dashboard_setup', [$instance, 'dashboardWidget']);
     }
 
     public function registerRestRoutes()
@@ -82,21 +87,25 @@ class TrackLogins
         return $_SERVER['HTTP_USER_AGENT'];
     }
 
-    public function getUserLogins(string $current_user_id, int $limit = 3): array
+    public function getUserLogins(string $current_user_id, int $limit = 3, bool $real_user_agent = false): array
     {
+        $real_user_agent = $real_user_agent ? "disable_user_login.user_enabled" : null;
         return $this->wpdb->get_results(
-            $this->wpdb->prepare("
-                SELECT time_login, user_agent 
+            $this->wpdb->prepare(
+                "SELECT time_login, user_agent
                 FROM {$this->tableName} 
-                WHERE user_id=%d 
-                ORDER BY time_login DESC LIMIT {$limit}", $current_user_id)
+                WHERE user_id=%d AND user_agent <> %s
+                ORDER BY time_login DESC LIMIT {$limit}",
+                $current_user_id,
+                $real_user_agent
+            )
         );
     }
 
     public function getRESTUserLogins(): WP_REST_Response
     {
         $current_user_id = get_current_user_id();
-        $results = $this->getUserLogins($current_user_id, $limit = 3);
+        $results = $this->getUserLogins($current_user_id, $limit = 3, $real_user_agent = true);
 
         $parser  = Parser::create();
         $results = array_map(function ($login) use ($parser) {

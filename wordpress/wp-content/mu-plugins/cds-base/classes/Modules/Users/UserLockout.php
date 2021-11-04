@@ -8,6 +8,7 @@ use CDS\Modules\TrackLogins\TrackLogins;
 
 class UserLockout
 {
+    public const USER_LOCKOUT_STRING = '_is_disabled'; // same key as "Disable User Login" plugin
     public const USER_LOCKOUT_TIME = (60 * 60 * 24) * 90; // 90 days
 
     public $loginPlugin;
@@ -48,10 +49,10 @@ class UserLockout
 
     public function lockUser(string|int $user_id): void
     {
-        $originally_disabled = get_user_meta($user_id, $this->loginPlugin->user_meta_key(), true);
+        $originally_disabled = get_user_meta($user_id, self::USER_LOCKOUT_STRING, true);
 
         // Update the user's disabled status
-        update_user_meta($user_id, $this->loginPlugin->user_meta_key(), true);
+        update_user_meta($user_id, self::USER_LOCKOUT_STRING, true);
 
         // Trigger an action when a user's account is enabled
         if (!$originally_disabled) {

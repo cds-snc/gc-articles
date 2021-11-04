@@ -63,8 +63,8 @@ class Setup
 
                 $errors = "";
 
-                if(!$exceptions || !property_exists($exceptions, "detail")){
-                   throw new \Exception("details not found");
+                if (!$exceptions || !property_exists($exceptions, "detail")) {
+                    throw new \Exception("details not found");
                 }
 
                 foreach ($exceptions->detail as $error) {
@@ -72,7 +72,7 @@ class Setup
                 }
 
                 return $errors;
-            }catch(\Exception $e){
+            } catch (\Exception $e) {
                 return __("Internal server error", "cds-snc");
             }
         }

@@ -8,7 +8,6 @@ use CDS\Modules\TrackLogins\TrackLogins;
 
 class UserLockout
 {
-    public const USER_LOCKOUT_STRING = '_is_disabled'; // same key as "Disable User Login" plugin
     public const USER_LOCKOUT_TIME = (60 * 60 * 24) * 90; // 90 days
 
     public $loginPlugin;
@@ -29,11 +28,11 @@ class UserLockout
 
             add_action('lockout_cron', [$this, 'setLoginLock']);
 
-            register_deactivation_hook(__FILE__, [$this, 'deactivateCron']);
-
             if (! wp_next_scheduled('lockout_cron')) {
                 wp_schedule_event(time(), 'daily', 'lockout_cron');
             }
+
+            register_deactivation_hook(__FILE__, [$this, 'deactivateCron']);
         } else {
             // remove cron event if disable login plugin is not active
             $this->deactivateCron();
@@ -47,12 +46,12 @@ class UserLockout
         wp_clear_scheduled_hook('lockout_cron');
     }
 
-    public function lockUser(string|int $user_id): void
+    public function lockUser(string $user_id): void
     {
-        $originally_disabled = get_user_meta($user_id, self::USER_LOCKOUT_STRING, true);
+        $originally_disabled = get_user_meta($user_id, $this->loginPlugin->user_meta_key(), true);
 
         // Update the user's disabled status
-        update_user_meta($user_id, self::USER_LOCKOUT_STRING, true);
+        update_user_meta($user_id, $this->loginPlugin->user_meta_key(), true);
 
         // Trigger an action when a user's account is enabled
         if (!$originally_disabled) {
@@ -91,7 +90,7 @@ class UserLockout
         }
     }
 
-    public function insertLoginForEnabledUser(int|string $user_id): void
+    public function insertLoginForEnabledUser(string $user_id): void
     {
         $user = get_user_by('id', $user_id);
 

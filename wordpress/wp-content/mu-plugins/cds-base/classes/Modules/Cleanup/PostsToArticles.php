@@ -37,6 +37,6 @@ class PostsToArticles
             error_log("post menu not found");
         }
 
-        unregister_taxonomy_for_object_type( 'post_tag', 'post' );
+        unregister_taxonomy_for_object_type('post_tag', 'post');
     }
 }

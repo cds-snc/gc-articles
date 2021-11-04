@@ -50,7 +50,7 @@ class SubscriptionForm
                         <?php echo $emailLabel; ?>
                         <i class="visually-hidden"><?php _e("Required Field", "cds-snc"); ?></i>
                     </label>
-                    <input class="gc-input-text" type="text" name="email" placeholder="<?php echo $placeholder; ?>" value=""/>
+                    <input style="margin-bottom:0;" class="gc-input-text" type="text" name="email" placeholder="<?php echo $placeholder; ?>" value=""/>
                 </div>
                 <div class="buttons">
                     <button class="gc-button gc-button" type="submit" id="subscribe-submit">

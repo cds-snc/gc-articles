@@ -61,7 +61,8 @@ class TrackLogins
         $this->wpdb->query("DROP TABLE IF EXISTS $this->tableName");
     }
 
-    public function insertUserLogin($user, $user_agent) {
+    public function insertUserLogin($user, $user_agent): void
+    {
         $data = [
             'user_agent' => $user_agent,
             'time_login' => current_time('mysql', 1),
@@ -71,7 +72,7 @@ class TrackLogins
         $this->wpdb->insert($this->tableName, $data);
     }
 
-    public function logUserLogin($user_login, $user)
+    public function logUserLogin($user_login, $user): void
     {
         $this->insertUserLogin($user, $user_agent = $this->getUserAgent());
     }
@@ -81,7 +82,8 @@ class TrackLogins
         return $_SERVER['HTTP_USER_AGENT'];
     }
 
-    public function getUserLogins($current_user_id, $limit = 3): array {
+    public function getUserLogins(string $current_user_id, int $limit = 3): array
+    {
         return $this->wpdb->get_results(
             $this->wpdb->prepare("
                 SELECT time_login, user_agent 

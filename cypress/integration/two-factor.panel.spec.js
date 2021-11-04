@@ -8,7 +8,7 @@ describe('Two Factor Panel', () => {
     });
 
     after(() => {
-        cy.exec('npm run wp-env:clean')
+
     });
 
     it('Can view Two Factor Panel on dashboard', () => {

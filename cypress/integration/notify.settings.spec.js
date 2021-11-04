@@ -1,6 +1,5 @@
 describe('Encrypted options', () => {
   before(() => {
-    cy.exec('npm run wp-env:clean')
     cy.exec('npm run wp-env:test:setup')
   });
 

@@ -13,7 +13,7 @@
     "import": "node ./import/import.js",
     "wp-env": "wp-env",
     "wp-env:init": "wp-env start",
-    "wp-env:test:setup": "sh cypress/test-setup/setup.sh",
+    "wp-env:test:setup": "sh cypress/test-setup/setup-ci.sh",
     "wp-env:stop": "wp-env stop",
     "wp-env:debug": "wp-env start --debug",
     "wp-env:clean" : "wp-env clean all",

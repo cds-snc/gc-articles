@@ -26,9 +26,10 @@ class NotifyTemplateSender
         add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
-    public static function processListCounts(): WP_REST_Response
+    public static function processListCounts($data): WP_REST_Response
     {
         try {
+            $service_id = $data->get_param('service_id');
             $client = new Client([
                 'headers' => [
                     "Authorization" => get_option('LIST_MANAGER_API_KEY')
@@ -36,8 +37,6 @@ class NotifyTemplateSender
             ]);
 
             $endpoint = getenv('LIST_MANAGER_ENDPOINT');
-
-            $service_id = get_option('LIST_MANAGER_SERVICE_ID');
 
             $response = $client->request(
                 'GET',
@@ -60,9 +59,12 @@ class NotifyTemplateSender
             }
         ]);
 
-        register_rest_route('wp-notify/v1', '/list_counts', [
+        register_rest_route('wp-notify/v1', '/list_counts/(?P<service_id>[a-zA-Z0-9_-]+)', [
             'methods' => 'GET',
             'callback' => [$this, 'processListCounts'],
+            'args' => [
+                'service_id' => [],
+            ],
             'permission_callback' => function () {
                 return current_user_can('delete_posts');
             }

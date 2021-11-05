@@ -35,7 +35,7 @@ declare global {
       rest_nonce?: string;
       notify_list_ids?: List[];
     }
-    wp:any;
+    wp: any;
   }
 }
 
@@ -49,11 +49,13 @@ export const renderCollectionsPanel = () => {
 
 export const renderNotifyPanel = ({
   sendTemplateLink,
+  serviceId
 }: {
-  sendTemplateLink: boolean;
+  sendTemplateLink: boolean
+  serviceId: string
 }) => {
   render(
-    <NotifyPanel sendTemplateLink={sendTemplateLink} />,
+    <NotifyPanel sendTemplateLink={sendTemplateLink} serviceId={serviceId} />,
     document.getElementById("notify-panel")
   );
 };
@@ -87,9 +89,9 @@ window.CDS.renderListValuesRepeaterForm = renderListValuesRepeaterForm;
 window.CDS.renderNotifyServicesRepeaterForm = renderNotifyServicesRepeaterForm;
 
 window.wp.hooks.addFilter(
-	'editor.PostPreview.interstitialMarkup',
-	'my-plugin/custom-preview-message',
-	() => window.CDS.writeInterstitialMessage()
+  'editor.PostPreview.interstitialMarkup',
+  'my-plugin/custom-preview-message',
+  () => window.CDS.writeInterstitialMessage()
 );
 
 

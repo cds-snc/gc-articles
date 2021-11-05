@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CDS-SNC Base 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
-"POT-Creation-Date: 2021-11-03T18:30:35+00:00\n"
+"POT-Creation-Date: 2021-11-05T16:32:35+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -305,44 +305,44 @@ msgstr ""
 msgid "You can’t use this email domain for registration."
 msgstr ""
 
-#: classes/Modules/Users/Users.php:55
+#: classes/Modules/Users/Users.php:60
 msgid ""
 "This role has complete control over the articles collection and can perform "
 "all other roles actions"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:56
+#: classes/Modules/Users/Users.php:64
 msgid ""
 "This role is allows the user to write and publish articles online to the "
 "collection."
 msgstr ""
 
-#: classes/Modules/Users/Users.php:162
+#: classes/Modules/Users/Users.php:174
 msgid "Invitation to collaborate on GC Articles"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:163
+#: classes/Modules/Users/Users.php:175
 msgid ""
 "Someone has invited this email to collaborate on a GC Articles collection "
 "site."
 msgstr ""
 
-#: classes/Modules/Users/Users.php:164
+#: classes/Modules/Users/Users.php:176
 msgid ""
 "If this was a mistake, please ignore this email and the invitation will "
 "expire"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:165
+#: classes/Modules/Users/Users.php:177
 msgid ""
 "To set your GC Articles account password, please visit the following address:"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:231 build/index.js:4192 build/index.js:4087
+#: classes/Modules/Users/Users.php:244 build/index.js:4192 build/index.js:4087
 msgid "Add user"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:261
+#: classes/Modules/Users/Users.php:274
 msgid "You must enable JavaScript to view this page."
 msgstr ""
 
@@ -461,8 +461,7 @@ msgid "Select one"
 msgstr ""
 
 #: build/index.js:4161 build/index.js:4056
-msgid ""
-"Create a brand new user or add them to this Collection if they already exist."
+msgid "Invite a user to collaborate on your GC Articles collection."
 msgstr ""
 
 #: build/index.js:4173 build/index.js:4068

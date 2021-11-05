@@ -161,8 +161,8 @@ input[type='week'] {
   content: '\0041';
   color:#f8eae9;
   font-size: 30px;
-  padding-left: 5px;
-  padding-top: 5px;
+  padding-left: 6px;
+  padding-top: 6px;
   font-style: normal;
   font-weight: normal;
   line-height: 1;
@@ -172,4 +172,8 @@ input[type='week'] {
 
 .edit-post-fullscreen-mode-close.has-icon svg{
   display:none;
+}
+
+th.column-disable_user_login {
+  width: 90px;
 }

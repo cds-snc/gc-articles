@@ -17,4 +17,9 @@ ignore:
         reason: None Given
         expires: 9999-12-30T00:00:00.000Z
         created: 2021-11-01T21:19:45.920Z
+  'snyk:lic:composer:wpackagist-plugin:disable-user-login:GPL-3.0':
+    - '*':
+        reason: None Given
+        expires: 9999-12-30T00:00:00.000Z
+        created: 2021-11-04T14:51:05.876Z
 patch: {}

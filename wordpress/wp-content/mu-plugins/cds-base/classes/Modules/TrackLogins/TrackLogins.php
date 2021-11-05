@@ -5,6 +5,7 @@ namespace CDS\Modules\TrackLogins;
 use Carbon\Carbon;
 use UAParser\Parser;
 use WP_REST_Response;
+use CDS\Utils;
 
 class TrackLogins
 {
@@ -16,8 +17,17 @@ class TrackLogins
         global $wpdb;
         $this->wpdb      = $wpdb;
         $this->tableName = $this->wpdb->prefix . 'userlogins';
+    }
 
-        $this->addActions();
+    public static function register()
+    {
+        $instance = new self();
+
+        Utils::checkOptionCallback('cds_track_logins_installed', '1.0', function () use ($instance) {
+            $instance->install();
+        });
+
+        $instance->addActions();
     }
 
     public function addActions()
@@ -33,7 +43,7 @@ class TrackLogins
     {
         register_rest_route('user', '/logins', [
             'methods'             => 'GET',
-            'callback'            => [$this, 'getUserLogins'],
+            'callback'            => [$this, 'getRESTUserLogins'],
             'permission_callback' => function () {
                 return current_user_can('delete_posts');
             }
@@ -61,10 +71,10 @@ class TrackLogins
         $this->wpdb->query("DROP TABLE IF EXISTS $this->tableName");
     }
 
-    public function logUserLogin($user_login, $user)
+    public function insertUserLogin($user, $user_agent): void
     {
         $data = [
-            'user_agent' => $this->getUserAgent(),
+            'user_agent' => $user_agent,
             'time_login' => current_time('mysql', 1),
             'user_id'    => $user->ID
         ];
@@ -72,24 +82,37 @@ class TrackLogins
         $this->wpdb->insert($this->tableName, $data);
     }
 
+    public function logUserLogin($user_login, $user): void
+    {
+        $this->insertUserLogin($user, $user_agent = $this->getUserAgent());
+    }
+
     protected function getUserAgent(): string
     {
         return $_SERVER['HTTP_USER_AGENT'];
     }
 
-    public function getUserLogins(): WP_REST_Response
+    public function getUserLogins(string $current_user_id, int $limit = 3, bool $real_user_agent = false): array
+    {
+        $real_user_agent = $real_user_agent ? "disable_user_login.user_enabled" : null;
+        return $this->wpdb->get_results(
+            $this->wpdb->prepare(
+                "SELECT time_login, user_agent
+                FROM {$this->tableName} 
+                WHERE user_id=%d AND user_agent <> %s
+                ORDER BY time_login DESC LIMIT {$limit}",
+                $current_user_id,
+                $real_user_agent
+            )
+        );
+    }
+
+    public function getRESTUserLogins(): WP_REST_Response
     {
         $current_user_id = get_current_user_id();
-        $parser          = Parser::create();
+        $results = $this->getUserLogins($current_user_id, $limit = 3, $real_user_agent = true);
 
-        $results = $this->wpdb->get_results(
-            $this->wpdb->prepare("
-                SELECT time_login, user_agent 
-                FROM {$this->tableName} 
-                WHERE user_id=%d 
-                ORDER BY time_login DESC LIMIT 3", $current_user_id)
-        );
-
+        $parser  = Parser::create();
         $results = array_map(function ($login) use ($parser) {
             $parsed     = $parser->parse($login->user_agent);
             $user_agent = $parsed->os->family . ' | ' . $parsed->ua->family;

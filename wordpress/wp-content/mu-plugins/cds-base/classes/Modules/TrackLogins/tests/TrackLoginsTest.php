@@ -4,6 +4,10 @@ use CDS\Modules\TrackLogins\TrackLogins;
 
 beforeAll(function () {
     WP_Mock::setUp();
+
+    WP_Mock::userFunction('get_option', array(
+        'return' => true,
+    ));
 });
 
 afterAll(function () {

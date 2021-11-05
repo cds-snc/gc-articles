@@ -7,6 +7,7 @@ namespace CDS\Modules\Users;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
 use CDS\Modules\Users\EmailDomains;
+use CDS\Modules\Users\UserLockout;
 use CDS\Modules\Users\Usernames;
 use CDS\Modules\Users\ValidationException;
 
@@ -26,6 +27,10 @@ class Users
         add_action('pre_user_query', [$this, 'hideSuperAdminsFromUserList']);
 
         add_action('rest_api_init', [$this, 'registerEndpoints']);
+
+        add_action('plugins_loaded', function () {
+            new UserLockout();
+        }, 12); // relies on "Disable User Login" plugin, which activates itself at priority 11
     }
 
     public function registerEndpoints(): void
@@ -52,8 +57,14 @@ class Users
         global $wp_roles;
         $role_names_arr = [];
 
-        $administrator = __("This role has complete control over the articles collection and can perform all other roles actions", "cds-snc");
-        $gceditor = __("This role is allows the user to write and publish articles online to the collection.", "cds-snc");
+        $administrator = __(
+            "This role has complete control over the articles collection and can perform all other roles actions",
+            "cds-snc"
+        );
+        $gceditor = __(
+            "This role is allows the user to write and publish articles online to the collection.",
+            "cds-snc"
+        );
         $roleDescriptions = ["administrator" => $administrator, "gceditor" => $gceditor];
 
         foreach ($wp_roles->role_names as $key => $value) {
@@ -159,11 +170,13 @@ class Users
             'login'
         );
 
+        // phpcs:disable
         $subject = __("Invitation to collaborate on GC Articles", "cds-snc");
         $message = __('Someone has invited this email to collaborate on a GC Articles collection site.', "cds-snc") . "\r\n\r\n";
         $message .= __('If this was a mistake, please ignore this email and the invitation will expire', "cds-snc") . "\r\n\r\n";
         $message .= __('To set your GC Articles account password, please visit the following address:', "cds-snc") . "\r\n\r\n";
         $message .= $uniqueUrl;
+        // phpcs:enable
 
         wp_mail($email, $subject, $message);
     }

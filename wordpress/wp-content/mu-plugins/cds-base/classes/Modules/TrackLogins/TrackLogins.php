@@ -27,11 +27,16 @@ class TrackLogins
             $instance->install();
         });
 
-        add_action('wp_login', [$instance, 'logUserLogin'], 10, 2);
+        $instance->addActions();
+    }
 
-        add_action('rest_api_init', [$instance, 'registerRestRoutes']);
+    public function addActions()
+    {
+        add_action('wp_login', [$this, 'logUserLogin'], 10, 2);
 
-        add_action('wp_dashboard_setup', [$instance, 'dashboardWidget']);
+        add_action('rest_api_init', [$this, 'registerRestRoutes']);
+
+        add_action('wp_dashboard_setup', [$this, 'dashboardWidget']);
     }
 
     public function registerRestRoutes()

@@ -26,7 +26,7 @@ class Menus
             __('Posts'),
             __('Articles', 'cds'),
             __('Users'),
-            __('WPForms'),
+            __('Settings'),
         ];
 
         //  __('Settings'), __('Appearance')

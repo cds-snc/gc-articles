@@ -45,13 +45,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Cypress install
+      - name: Cypress and NPM install and build
         uses: cypress-io/github-action@v2
         with:
           runTests: false
 
       - name: Start test environment
-        run: wp-env start
+        run: npm run wp-env:init
 
       - name: Cypress run
         uses: cypress-io/github-action@v2

@@ -17,6 +17,8 @@ class Misc
         add_filter('post_row_actions', [$this, 'removeQuickEdit'], 10, 1);
         add_filter('page_row_actions', [$this, 'removeQuickEdit'], 10, 1);
 
+        add_filter('user_row_actions', [$this, 'removeView'], 10, 1);
+
         add_filter('views_edit-post', [$this, "customPostTable"]);
     }
 
@@ -34,6 +36,12 @@ class Misc
     public function removeQuickEdit($actions)
     {
         unset($actions['inline hide-if-no-js']);
+        return $actions;
+    }
+
+    public function removeView($actions)
+    {
+        unset($actions['view']);
         return $actions;
     }
 

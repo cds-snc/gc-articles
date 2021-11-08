@@ -1,11 +1,11 @@
-name: Cypress Tests with installation job
+name: Cypress Tests
 
 on:
   pull_request:
     branches: [main]
 
 jobs:
-  install-and-run:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

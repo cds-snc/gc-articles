@@ -44,7 +44,7 @@ class NotifySettings
     public function notifyApiSettingsAddPluginPage()
     {
         add_options_page(
-            __('Notify Settings'), // page_title
+            __('Notify API Settings'), // page_title
             __('Notify API Settings'), // menu_title
             'manage_notify', // capability
             'notify-settings', // menu_slug
@@ -59,7 +59,7 @@ class NotifySettings
         ?>
 
         <div class="wrap">
-            <h1><?php _e('Notify and List Manager Settings', 'cds-snc') ?></h1>
+            <h1><?php _e('Notify API Settings', 'cds-snc') ?></h1>
             <p></p>
             <?php settings_errors(); ?>
 

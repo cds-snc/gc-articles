@@ -21,11 +21,11 @@ const Logins = ({
     return null;
   }
 
-  const rows = logins.map((login) => {
+  const rows = logins.map((login, index) => {
     const date = new Date(login.time_login);
 
     return (
-      <tr>
+      <tr key={index}>
         <td>{date.toLocaleString()}</td>
         <td>{login.user_agent}</td>
       </tr>

@@ -22,8 +22,9 @@ class SendTemplateDashboardPanel
 
     public function notifyPanelHandler(): void
     {
+        $serviceId = get_option('LIST_MANAGER_SERVICE_ID');
         echo '<div id="notify-panel"></div>';
-        $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :true});';
+        $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :true , serviceId: "' . $serviceId . '"});';
         wp_add_inline_script('cds-snc-admin-js', $data, 'after');
     }
 }

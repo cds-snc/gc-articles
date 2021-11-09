@@ -124,16 +124,21 @@ const NotifyLists = ({
   );
 };
 
-export const NotifyPanel = ({ sendTemplateLink = false }) => {
+export const NotifyPanel = ({ sendTemplateLink = false, serviceId = "" }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [listCounts, setListCounts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getData('wp-notify/v1/list_counts');
-      setIsLoading(false);
-      if (response.length >= 1) {
-        setListCounts(await matchCountToList(response));
+
+      try {
+        const response = await getData(`wp-notify/v1/list_counts/${serviceId}`);
+        setIsLoading(false);
+        if (response.length >= 1) {
+          setListCounts(await matchCountToList(response));
+        }
+      } catch (e) {
+        console.log(e.message)
       }
     };
 

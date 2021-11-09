@@ -79,7 +79,8 @@ class FormHelpers
         <div id="notify-panel"></div>
 
           <?php
-            $data = "CDS.Notify.renderPanel({ 'sendTemplateLink': false });";
+            $serviceId = get_option('LIST_MANAGER_SERVICE_ID');
+            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $serviceId . '"});';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
             ?>
 

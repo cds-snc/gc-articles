@@ -75,7 +75,7 @@ class NotifyTemplateSender
     {
         add_menu_page(
             __('Send Notify Template', "cds-snc"),
-            __('Notify', "cds-snc"),
+            __('Bulk Send', "cds-snc"),
             'level_0',
             $this->admin_page,
             [$this, 'renderForm'],

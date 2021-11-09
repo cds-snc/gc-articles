@@ -8,7 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.0.10', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.0.11', function () {
 
             if (is_blog_installed()) {
                 remove_role('editor');
@@ -43,6 +43,7 @@ class Roles
                 'manage_options' => 0,
                 'manage_notify' => 1,
                 'manage_list_manager' => 1,
+                'manage_categories' => 1,
                 'read' => 1,
                 'level_1' => 1,
                 'level_0' => 1,

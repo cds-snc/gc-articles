@@ -9,6 +9,7 @@ use WP_REST_Response;
 use CDS\Modules\Users\EmailDomains;
 use CDS\Modules\Users\UserLockout;
 use CDS\Modules\Users\Usernames;
+use CDS\Modules\Users\UserSessions;
 use CDS\Modules\Users\ValidationException;
 
 class Users
@@ -31,6 +32,8 @@ class Users
         add_action('plugins_loaded', function () {
             new UserLockout();
         }, 12); // relies on "Disable User Login" plugin, which activates itself at priority 11
+
+        UserSessions::getInstance();
     }
 
     public function registerEndpoints(): void

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\Notify;
 
 use CDS\Modules\EncryptedOption\EncryptedOption;
+use InvalidArgumentException;
 
 class NotifySettings
 {
@@ -237,18 +238,24 @@ class NotifySettings
     {
     }
 
-    public function getObfuscatedOutputLabel($string, $labelId)
+    public function getObfuscatedOutputLabel($string, $labelId, $print = true)
     {
         $startsWith = substr($string, 0, 4);
         $endsWith = substr($string, -4);
 
+        $hint = sprintf(
+            __('<span class="hidden_keys" id="%1$s">Current value: <span class="sr-only">Starts with </span>%2$s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%3$s</span>', 'cds-snc'),
+            $labelId,
+            $startsWith,
+            $endsWith
+        );
 
-          printf(
-              __('<span class="hidden_keys" id="%1$s">Current value: <span class="sr-only">Starts with </span>%2$s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%3$s</span>', 'cds-snc'),
-              $labelId,
-              $startsWith,
-              $endsWith
-          );
+        if ($print) {
+            echo $hint;
+            return;
+        }
+
+        return $hint;
     }
 
     public function notifyApiKeyCallback()
@@ -279,14 +286,55 @@ class NotifySettings
         );
     }
 
+    // @todo pull this from NotifyTemplateSender
+    public function parseServiceIdsFromEnv($serviceIdData): array
+    {
+        if (!$serviceIdData) {
+            throw new InvalidArgumentException('No service data');
+        }
+
+        try {
+            $arr = explode(',', $serviceIdData);
+            $service_ids = [];
+
+            for ($i = 0; $i < count($arr); $i++) {
+                $key_value = explode('~', $arr [$i]);
+                $service_ids[$key_value[0]] = $key_value[1];
+            }
+
+            return $service_ids;
+        } catch (Exception $exception) {
+            throw new InvalidArgumentException($exception->getMessage());
+        }
+    }
+
     public function listManagerNotifyServicesCallback()
     {
-        if ($string = $this->LIST_MANAGER_NOTIFY_SERVICES) {
-            $this->getObfuscatedOutputLabel($string, 'list_manager_notify_services_value');
+        try {
+            $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
+            $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
+        } catch (InvalidArgumentException $e) {
+            error_log($e->getMessage());
+            $service_ids = [];
         }
-        printf(
-            '<input class="regular-text" type="text" name="LIST_MANAGER_NOTIFY_SERVICES" id="list_manager_notify_services" aria-describedby="list_manager_notify_services_value" value="">'
-        );
+
+        $values = [];
+        $i = 0;
+        foreach ($service_ids as $key => $value) {
+            $hint = $this->getObfuscatedOutputLabel($value, 'list_manager_notify_services_value', false);
+            array_push($values, ["id" => $i, "apiKey" => "", "name" => $key , "hint" => $hint]);
+            $i++;
+        }
+
+        if (count($values) < 1) {
+            array_push($values, ["id" => "", "apiKey" => "", "name" => "" , "hint" => ""]);
+        }
+
+        $values = json_encode($values);
+
+        printf('<div id="notify-services-repeater-form" style="margin-top:20px;">notify services</div>');
+        $data = 'CDS.renderNotifyServicesRepeaterForm(' . $values . ');';
+        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
     }
 
     public function listManagerServiceIdCallback()
@@ -301,15 +349,9 @@ class NotifySettings
 
     public function listValuesCallback()
     {
-        printf(
-            '<textarea name="list_values" id="list_values" rows="4" cols="50">%s</textarea>
-
-                <p class="description" id="new-admin-email-description">
-                    ' . _('Format', 'cds-snc') . ':
-                    <pre>[{"id":"123", "type":"email", "label":"my-list"}]</pre>
-                </p>',
-            $this->list_values ?: ''
-        );
+        printf('<div id="list-values-repeater-form"></div>');
+        $data = 'CDS.renderListValuesRepeaterForm(' . $this->list_values . ');';
+        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
     }
 
     public function addStyles()

@@ -14,8 +14,7 @@ class Setup
      */
     public function __construct(EncryptedOption $encryptedOption)
     {
-        new NotifyTemplateSender(new FormHelpers(), new Notices());
-
+        NotifyTemplateSender::register();
         NotifySettings::register($encryptedOption);
         ListManagerSettings::register($encryptedOption);
 

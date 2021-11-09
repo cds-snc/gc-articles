@@ -131,11 +131,14 @@ export const NotifyPanel = ({ sendTemplateLink = false, serviceId = "" }) => {
   useEffect(() => {
     const fetchData = async () => {
 
-      console.log("serviceId:", serviceId);
-      const response = await getData(`wp-notify/v1/list_counts/${serviceId}`);
-      setIsLoading(false);
-      if (response.length >= 1) {
-        setListCounts(await matchCountToList(response));
+      try {
+        const response = await getData(`wp-notify/v1/list_counts/${serviceId}`);
+        setIsLoading(false);
+        if (response.length >= 1) {
+          setListCounts(await matchCountToList(response));
+        }
+      } catch (e) {
+        console.log(e.message)
       }
     };
 

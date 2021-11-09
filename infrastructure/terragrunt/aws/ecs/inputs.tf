@@ -52,7 +52,7 @@ variable "list_manager_endpoint" {
   sensitive   = true
 }
 
-variable "list_manager_api_key" {
+variable "default_list_manager_api_key" {
   description = "API key used for Platform ListManager request auth"
   type        = string
   sensitive   = true

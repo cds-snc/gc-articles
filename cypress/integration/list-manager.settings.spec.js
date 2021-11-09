@@ -12,7 +12,6 @@ describe('List Manager Settings', () => {
 
     cy.get('h1').should('have.text', 'List Manager Settings');
 
-    cy.get('#list_manager_api_key').should('be.empty');
     cy.get('#list_manager_notify_services').should('be.empty');
     cy.get('#list_manager_service_id').should('be.empty');
   });
@@ -20,7 +19,6 @@ describe('List Manager Settings', () => {
   it('Can save settings', () => {
     cy.visit('/wp-admin/admin.php?page=cds_list_manager_settings');
 
-    cy.get('#list_manager_api_key').type('thisisthelistmanagerapikey');
     cy.get('#list_manager_notify_services').type('listmanagerserviceslist');
     cy.get('#list_manager_service_id').type('serviceidforlistmanager');
     cy.get('#submit').click();
@@ -30,8 +28,7 @@ describe('List Manager Settings', () => {
 
   it('Encrypted settings are not re-populated', () => {
     cy.visit('/wp-admin/admin.php?page=cds_list_manager_settings');
-
-    cy.get('#list_manager_api_key').should('be.empty');
+    
     cy.get('#list_manager_notify_services').should('be.empty');
     cy.get('#list_manager_service_id').should('be.empty');
   })

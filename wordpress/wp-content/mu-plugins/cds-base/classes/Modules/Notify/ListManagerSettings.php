@@ -11,7 +11,6 @@ class ListManagerSettings
     protected EncryptedOption $encryptedOption;
     protected string $admin_page = 'cds_notify_send';
 
-    private string $LIST_MANAGER_API_KEY;
     private string $LIST_MANAGER_NOTIFY_SERVICES;
     private string $LIST_MANAGER_SERVICE_ID;
     private string $list_values;
@@ -34,7 +33,6 @@ class ListManagerSettings
         });
 
         $encryptedOptions = [
-            'LIST_MANAGER_API_KEY',
             'LIST_MANAGER_NOTIFY_SERVICES',
             'LIST_MANAGER_SERVICE_ID' // @TODO: does this need to be encrypted?
         ];
@@ -59,7 +57,6 @@ class ListManagerSettings
 
     public function listManagerSettingsCreateAdminPage()
     {
-        $this->LIST_MANAGER_API_KEY = get_option('LIST_MANAGER_API_KEY') ?: '';
         $this->LIST_MANAGER_NOTIFY_SERVICES = get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
         $this->LIST_MANAGER_SERVICE_ID = get_option('LIST_MANAGER_SERVICE_ID') ?: '';
         $this->list_values = get_option('list_values') ?: '';
@@ -85,18 +82,6 @@ class ListManagerSettings
         register_setting(
             'list_manager_settings_option_group',
             'list_values'
-        );
-
-        register_setting(
-            'list_manager_settings_option_group', // option_group
-            'LIST_MANAGER_API_KEY',
-            function ($input) {
-                if ($input == '') {
-                    return get_option('LIST_MANAGER_API_KEY');
-                }
-
-                return sanitize_text_field($input);
-            }
         );
 
         register_setting(
@@ -142,17 +127,6 @@ class ListManagerSettings
         );
 
         add_settings_field(
-            'list_manager_api_key', // id
-            _('List Manager API Key', 'cds-snc'), // title
-            array( $this, 'listManagerApiKeyCallback'), // callback
-            'list-manager-settings-admin', // page
-            'list_manager_settings_section', // section
-            [
-                'label_for' => 'list_manager_api_key'
-            ]
-        );
-
-        add_settings_field(
             'list_manager_notify_services', // id
             _('List Manager Notify Services', 'cds-snc'), // title
             array( $this, 'listManagerNotifyServicesCallback'), // callback
@@ -190,16 +164,6 @@ class ListManagerSettings
             $labelId,
             $startsWith,
             $endsWith
-        );
-    }
-
-    public function listManagerApiKeyCallback()
-    {
-        if ($string = $this->LIST_MANAGER_API_KEY) {
-            $this->getObfuscatedOutputLabel($string, 'list_manager_api_key_value');
-        }
-        printf(
-            '<input class="regular-text" type="text" name="LIST_MANAGER_API_KEY" id="list_manager_api_key" aria-describedby="list_manager_api_key_value" value="">'
         );
     }
 

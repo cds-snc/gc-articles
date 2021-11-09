@@ -13,6 +13,24 @@ resource "aws_secretsmanager_secret_version" "list_manager_endpoint" {
   secret_string = var.list_manager_endpoint
 }
 
+resource "aws_secretsmanager_secret" "list_manager_api_key" {
+  name = "list_manager_api_key_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "list_manager_api_key" {
+  secret_id     = aws_secretsmanager_secret.list_manager_api_key.id
+  secret_string = var.list_manager_api_key
+}
+
+resource "aws_secretsmanager_secret" "default_notify_api_key" {
+  name = "default_notify_api_key_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "default_notify_api_key" {
+  secret_id     = aws_secretsmanager_secret.default_notify_api_key.id
+  secret_string = var.default_notify_api_key
+}
+
 resource "aws_secretsmanager_secret" "encryption_key" {
   name = "encryption_key_${random_string.random.result}"
 }

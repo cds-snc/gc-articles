@@ -86,7 +86,7 @@ class ListManagerSettings
                 submit_button();?>
             </form>
         </div>
-    <?php
+        <?php
     }
 
     public function listManagerSettingsPageInit()
@@ -268,7 +268,7 @@ class ListManagerSettings
     public function listValuesCallback()
     {
         $values = [];
-        
+
         if ($this->list_values) {
             $values = json_decode($values);
         }

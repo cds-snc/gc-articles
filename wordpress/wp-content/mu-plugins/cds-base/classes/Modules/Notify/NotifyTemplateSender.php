@@ -19,7 +19,6 @@ class NotifyTemplateSender
 
     public function __construct()
     {
-
     }
 
     public static function register()

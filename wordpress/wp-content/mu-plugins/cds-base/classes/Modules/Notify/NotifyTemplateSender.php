@@ -88,7 +88,6 @@ class NotifyTemplateSender
 
     public function processSend($data): void
     {
-
         try {
             $sanitized = $this->validate($data);
 
@@ -145,8 +144,9 @@ class NotifyTemplateSender
         $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
-            if (trim($service_id) == trim($key)) {
-                $api_key = $value;
+
+            if (trim($service_id) == trim($value['service_id'])) {
+                $api_key = $value['api_key'];
             }
         }
 
@@ -165,13 +165,23 @@ class NotifyTemplateSender
 
             for ($i = 0; $i < count($arr); $i++) {
                 $key_value = explode('~', $arr [$i]);
-                $service_ids[$key_value[0]] = $key_value[1];
+
+                $service_ids[$key_value[0]] = [
+                    'service_id' => $this->extractServiceIdFromApiKey($key_value[1]),
+                    'api_key' => $key_value[1],
+                    'name' => $key_value[0]
+                ];
             }
 
             return $service_ids;
         } catch (Exception $exception) {
             throw new InvalidArgumentException($exception->getMessage());
         }
+    }
+
+    public function extractServiceIdFromApiKey($apiKey): string
+    {
+        return substr($apiKey, -73, 36);
     }
 
     public function baseRedirect(): string

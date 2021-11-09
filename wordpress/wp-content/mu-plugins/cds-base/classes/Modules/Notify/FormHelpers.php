@@ -95,7 +95,7 @@ class FormHelpers
 
         foreach ($data as $key => $value) {
             echo '<option value="' .
-                 trim($key) .
+                 trim($value['service_id']) .
                  '">' .
                  trim($key) .
                  '</option>';

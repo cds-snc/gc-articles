@@ -22,7 +22,7 @@ env:
   TF_VAR_cloudfront_custom_header_name: ${{ secrets.STAGING_CLOUDFRONT_CUSTOM_HEADER_NAME }}
   TF_VAR_cloudfront_custom_header_value: ${{ secrets.STAGING_CLOUDFRONT_CUSTOM_HEADER_VALUE }}
   TF_VAR_list_manager_endpoint: ${{ secrets.STAGING_LIST_MANAGER_ENDPOINT }}
-  TF_VAR_list_manager_api_key: ${{ secrets.STAGING_LIST_MANAGER_API_KEY }}
+  TF_VAR_default_list_manager_api_key: ${{ secrets.STAGING_DEFAULT_LIST_MANAGER_API_KEY }}
   TF_VAR_default_notify_api_key: ${{ secrets.STAGING_DEFAULT_NOTIFY_API_KEY }}
   TF_VAR_encryption_key: ${{ secrets.STAGING_ENCRYPTION_KEY }}
   TF_VAR_s3_uploads_bucket: ${{ secrets.STAGING_S3_UPLOADS_BUCKET }}

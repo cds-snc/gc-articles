@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\Notify;
 
 use CDS\Modules\EncryptedOption\EncryptedOption;
+use InvalidArgumentException;
 
 class NotifySettings
 {
@@ -133,18 +134,24 @@ class NotifySettings
     {
     }
 
-    public function getObfuscatedOutputLabel($string, $labelId)
+    public function getObfuscatedOutputLabel($string, $labelId, $print = true)
     {
         $startsWith = substr($string, 0, 4);
         $endsWith = substr($string, -4);
 
+        $hint = sprintf(
+            __('<span class="hidden_keys" id="%1$s">Current value: <span class="sr-only">Starts with </span>%2$s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%3$s</span>', 'cds-snc'),
+            $labelId,
+            $startsWith,
+            $endsWith
+        );
 
-          printf(
-              __('<span class="hidden_keys" id="%1$s">Current value: <span class="sr-only">Starts with </span>%2$s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%3$s</span>', 'cds-snc'),
-              $labelId,
-              $startsWith,
-              $endsWith
-          );
+        if ($print) {
+            echo $hint;
+            return;
+        }
+
+        return $hint;
     }
 
     public function notifyApiKeyCallback()

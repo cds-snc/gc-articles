@@ -52,6 +52,18 @@ variable "list_manager_endpoint" {
   sensitive   = true
 }
 
+variable "list_manager_api_key" {
+  description = "API key used for Platform ListManager request auth"
+  type        = string
+  sensitive   = true
+}
+
+variable "default_notify_api_key" {
+  description = "Default Notify API key used before a site has one configured"
+  type        = string
+  sensitive   = true
+}
+
 variable "encryption_key" {
   description = "Application encryption key"
   type        = string

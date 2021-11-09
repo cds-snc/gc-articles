@@ -177,3 +177,48 @@ input[type='week'] {
 th.column-disable_user_login {
   width: 90px;
 }
+
+.settings-repeater .items{
+  margin-top:10px;
+}
+
+.settings-repeater .items .item {
+  border: 1px solid #000000;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  padding: 1.25em;
+  position: relative;
+  max-width: 500px;
+  margin-bottom:10px;
+}
+.settings-repeater .items .item label {
+  display: block;
+  font-weight: 600;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.settings-repeater .items .item input {
+  width: 380px;
+}
+.settings-repeater .items .item .panel-actions {
+  display: flex;
+}
+.settings-repeater .items .item .panel-actions .mover {
+  display: flex;
+  flex-direction: column;
+  margin-right: 0.2em;
+}
+.settings-repeater .items .item .panel-actions .mover button {
+  width: 20px;
+  margin-bottom:5px;
+}
+.settings-repeater .panel-actions {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 5px;
+}
+.settings-repeater .panel-actions .actions {
+  display: flex;
+}

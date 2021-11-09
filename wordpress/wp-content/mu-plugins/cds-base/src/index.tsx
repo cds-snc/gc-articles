@@ -7,9 +7,12 @@ import { LoginsPanel } from "../classes/Modules/TrackLogins/src/LoginsPanel";
 import { CollectionsPanel } from "../classes/Modules/UserCollections/src/CollectionsPanel";
 import { NotifyPanel } from "../classes/Modules/Notify/src/NotifyPanel";
 import { List } from "../classes/Modules/Notify/src/Types";
-import { UserForm } from "../classes/Modules/Users/src/UserForm"
-import { writeInterstitialMessage } from "util/preview"
-
+import { UserForm } from "../classes/Modules/Users/src/UserForm";
+import { writeInterstitialMessage } from "util/preview";
+import {
+  ListValuesRepeaterForm,
+  NotifyServicesRepeaterForm
+} from "./repeater/RepeaterForm";
 declare global {
   interface Window {
     CDS: {
@@ -20,6 +23,8 @@ declare global {
           sendTemplateLink: boolean;
         }) => void;
       };
+      renderListValuesRepeaterForm?: (values) => void,
+      renderNotifyServicesRepeaterForm?: (values) => void,
       renderLoginsPanel?: () => void;
       renderCollectionsPanel?: () => void;
       renderUserForm?: () => void;
@@ -53,7 +58,6 @@ export const renderNotifyPanel = ({
   );
 };
 
-
 export const renderUserForm = () => {
   render(
     <UserForm />,
@@ -61,13 +65,26 @@ export const renderUserForm = () => {
   );
 };
 
+export const renderListValuesRepeaterForm = (values) => {
+  render(<ListValuesRepeaterForm defaultState={values} />,
+    document.getElementById("list-values-repeater-form")
+  );
+}
+
+export const renderNotifyServicesRepeaterForm = (values) => {
+  render(<NotifyServicesRepeaterForm defaultState={values} />,
+    document.getElementById("notify-services-repeater-form")
+  );
+}
 
 window.CDS = window.CDS || {};
 window.CDS.Notify = { renderPanel: renderNotifyPanel };
 window.CDS.renderLoginsPanel = renderLoginsPanel;
 window.CDS.renderCollectionsPanel = renderCollectionsPanel;
 window.CDS.renderUserForm = renderUserForm;
-window.CDS.writeInterstitialMessage =  writeInterstitialMessage;
+window.CDS.writeInterstitialMessage = writeInterstitialMessage;
+window.CDS.renderListValuesRepeaterForm = renderListValuesRepeaterForm;
+window.CDS.renderNotifyServicesRepeaterForm = renderNotifyServicesRepeaterForm;
 
 window.wp.hooks.addFilter(
 	'editor.PostPreview.interstitialMarkup',

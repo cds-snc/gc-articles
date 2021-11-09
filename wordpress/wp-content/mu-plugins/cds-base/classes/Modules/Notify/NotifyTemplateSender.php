@@ -160,7 +160,7 @@ class NotifyTemplateSender
 
             for ($i = 0; $i < count($arr); $i++) {
                 $key_value = explode('~', $arr [$i]);
-                $service_ids[$key_value [0]] = $key_value [1];
+                $service_ids[$key_value[0]] = $key_value[1];
             }
 
             return $service_ids;

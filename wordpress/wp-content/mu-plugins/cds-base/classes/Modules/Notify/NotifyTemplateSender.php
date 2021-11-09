@@ -144,7 +144,6 @@ class NotifyTemplateSender
         $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
-
             if (trim($service_id) == trim($value['service_id'])) {
                 $api_key = $value['api_key'];
             }

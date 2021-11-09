@@ -30,7 +30,7 @@ describe('Track Login Panel', () => {
 
 describe('Track Login Panel captures logins', () => {
     before(() => {
-        cy.exec('npm run wp-env:clean')
+        cy.exec('npm run wp-env:test:setup')
     });
 
     it('On first Login display only one login', () => {

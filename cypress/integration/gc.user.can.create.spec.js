@@ -8,7 +8,7 @@ describe('User - GC Editor', () => {
     });
 
     after(() => {
-        cy.exec('npm run wp-env:clean');
+
     });
 
     it('GC Admin can add GC Editors', () => {

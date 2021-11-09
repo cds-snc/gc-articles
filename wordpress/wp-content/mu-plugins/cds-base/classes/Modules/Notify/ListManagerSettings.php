@@ -270,7 +270,7 @@ class ListManagerSettings
         $values = "[]";
 
         if ($this->list_values) {
-            $values = json_decode($values);
+            $values = json_decode($this->list_values);
         }
 
         if (count($values) < 1) {

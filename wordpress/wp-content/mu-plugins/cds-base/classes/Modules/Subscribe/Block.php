@@ -27,7 +27,19 @@ class Block
                     'placeholderValue' => [
                         'type' => 'string',
                         "default" => "preview@example.com"
-                    ]
+                    ],
+                    'listId' => [
+                        'type' => 'string',
+                        "default" => ""
+                    ],
+                    'emailLabel' => [
+                        'type' => 'string',
+                        "default" => _("Enter your email:", "cds-snc")
+                    ],
+                    'subscribeLabel' => [
+                        'type' => 'string',
+                        "default" => _("Subscribe", "cds-snc")
+                    ],
                 ]
             ]
         );

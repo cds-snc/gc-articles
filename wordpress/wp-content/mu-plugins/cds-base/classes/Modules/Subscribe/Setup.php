@@ -8,6 +8,7 @@ use CDS\Modules\Subscribe\Block;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use PHPUnit\TextUI\Exception;
 
 class Setup
 {
@@ -57,21 +58,29 @@ class Setup
         error_log($exception);
 
         if ($this->isJson($exception)) {
-            $exceptions = json_decode($exception);
+            try {
+                $exceptions = json_decode($exception);
 
-            $errors = "";
+                $errors = "";
 
-            foreach ($exceptions->detail as $error) {
-                $errors = $errors . $error->loc[1] . ': ' . $error->msg . '<br>';
+                if (!$exceptions || !property_exists($exceptions, "detail")) {
+                    throw new \Exception("details not found");
+                }
+
+                foreach ($exceptions->detail as $error) {
+                    $errors = $errors . $error->loc[1] . ': ' . $error->msg . '<br>';
+                }
+
+                return $errors;
+            } catch (\Exception $e) {
+                return __("Internal server error", "cds-snc");
             }
-
-            return $errors;
         }
 
         return __("Internal server error", "cds-snc");
     }
 
-    protected function subscribe(string $email): array
+    protected function subscribe(string $email, string $listId): array
     {
         try {
             $client = new Client([
@@ -85,7 +94,7 @@ class Setup
             $client->request('POST', $endpoint . '/subscription', [
                 'json' => [
                     "email" => $email,
-                    "list_id" => '0c188973-efab-4e8e-8b09-b165e98c66cf',
+                    "list_id" => $listId,
                     "service_api_key" => get_option('NOTIFY_API_KEY')
                 ]
             ]);
@@ -113,6 +122,10 @@ class Setup
             return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
         }
 
-        return json_encode($this->subscribe($_POST["email"]));
+        if (!isset($_POST["list_id"])) {
+            return json_encode(["error" => __("Unknown subscription", "cds-snc")]);
+        }
+
+        return json_encode($this->subscribe($_POST["email"], $_POST['list_id']));
     }
 }

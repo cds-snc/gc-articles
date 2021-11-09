@@ -267,7 +267,7 @@ class ListManagerSettings
 
     public function listValuesCallback()
     {
-        $values = [];
+        $values = "[]";
 
         if ($this->list_values) {
             $values = json_decode($values);

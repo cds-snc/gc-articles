@@ -13,17 +13,20 @@ use WP_REST_Response;
 
 class NotifyTemplateSender
 {
-    protected FormHelpers $formHelpers;
+
     protected Notices $notices;
     protected string $admin_page = 'cds_notify_send';
 
-    public function __construct(FormHelpers $formHelpers, Notices $notices)
+    public function __construct()
     {
-        $this->formHelpers = $formHelpers;
-        $this->notices = $notices;
+    }
 
-        add_action('admin_menu', [$this, 'addMenu']);
-        add_action('rest_api_init', [$this, 'registerEndpoints']);
+    public static function register()
+    {
+        $instance = new self();
+
+        add_action('admin_menu', [$instance, 'addMenu']);
+        add_action('rest_api_init', [$instance, 'registerEndpoints']);
     }
 
     public static function processListCounts($data): WP_REST_Response
@@ -237,7 +240,7 @@ class NotifyTemplateSender
     public function renderForm(): void
     {
         if (isset($_GET['status'])) {
-            $this->notices->handleNotice($_GET['status']);
+            Notices::handleNotice($_GET['status']);
         }
 
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');

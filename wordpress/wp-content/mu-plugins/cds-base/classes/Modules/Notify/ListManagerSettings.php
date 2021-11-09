@@ -97,6 +97,7 @@ class ListManagerSettings
             'list_manager_settings_option_group', // option_group
             'LIST_MANAGER_NOTIFY_SERVICES',
             function ($input) {
+                // @TODO: this callback isn't going to work anymore to prevent saving empty values
                 if ($input == '') {
                     return get_option('LIST_MANAGER_NOTIFY_SERVICES');
                 }

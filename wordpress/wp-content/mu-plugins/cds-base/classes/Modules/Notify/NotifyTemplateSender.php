@@ -31,7 +31,7 @@ class NotifyTemplateSender
         try {
             $client = new Client([
                 'headers' => [
-                    "Authorization" => get_option('LIST_MANAGER_API_KEY')
+                    "Authorization" => getenv('DEFAULT_LIST_MANAGER_API_KEY')
                 ]
             ]);
 
@@ -178,7 +178,7 @@ class NotifyTemplateSender
     {
         $client = new Client([
             'headers' => [
-                "Authorization" => get_option('LIST_MANAGER_API_KEY')
+                "Authorization" => getenv('DEFAULT_LIST_MANAGER_API_KEY')
             ]
         ]);
 

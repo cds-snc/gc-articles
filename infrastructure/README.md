@@ -27,6 +27,8 @@ The following Terraform variables are required:
 * `s3_uploads_key`: S3 credentials for uploads storage IAM user
 * `s3_uploads_secret`: S3 credentials for uploads storage IAM user
 * `list_manager_endpoint`: Platform ListManager API endpoint
+* `list_manager_api_key`: API key used for Platform ListManager request auth
+* `default_notify_api_key`: Default Notify API key used before a site has one configured
 * `slack_webhook_url`: Slack incoming webhook to post SNS notifications to
 
 WordPress [generated secret keys](https://api.wordpress.org/secret-key/1.1/salt/):

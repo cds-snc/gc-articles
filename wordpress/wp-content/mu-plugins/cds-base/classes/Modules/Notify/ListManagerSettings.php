@@ -13,7 +13,6 @@ class ListManagerSettings
     protected string $admin_page = 'cds_notify_send';
 
     private string $LIST_MANAGER_NOTIFY_SERVICES;
-    private string $LIST_MANAGER_SERVICE_ID;
     private string $list_values;
 
     public function __construct(EncryptedOption $encryptedOption)
@@ -41,7 +40,6 @@ class ListManagerSettings
 
         $encryptedOptions = [
             'LIST_MANAGER_NOTIFY_SERVICES',
-            'LIST_MANAGER_SERVICE_ID', // @TODO: does this need to be encrypted?
         ];
 
         foreach ($encryptedOptions as $option) {
@@ -69,8 +67,7 @@ class ListManagerSettings
     {
         $this->LIST_MANAGER_NOTIFY_SERVICES =
             get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        $this->LIST_MANAGER_SERVICE_ID =
-            get_option('LIST_MANAGER_SERVICE_ID') ?: '';
+            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
         $this->list_values = get_option('list_values') ?: '';
         ?>
 
@@ -100,18 +97,6 @@ class ListManagerSettings
                 // @TODO: this callback isn't going to work anymore to prevent saving empty values
                 if ($input == '') {
                     return get_option('LIST_MANAGER_NOTIFY_SERVICES');
-                }
-
-                return sanitize_text_field($input);
-            },
-        );
-
-        register_setting(
-            'list_manager_settings_option_group', // option_group
-            'LIST_MANAGER_SERVICE_ID',
-            function ($input) {
-                if ($input == '') {
-                    return get_option('LIST_MANAGER_SERVICE_ID');
                 }
 
                 return sanitize_text_field($input);

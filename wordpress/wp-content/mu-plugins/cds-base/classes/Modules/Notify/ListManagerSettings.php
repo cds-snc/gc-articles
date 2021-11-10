@@ -58,7 +58,7 @@ class ListManagerSettings
         add_submenu_page(
             $this->admin_page,
             __('List Manager'),
-            __('List Manager'),
+            __('Settings'),
             'manage_list_manager',
             'cds_list_manager_settings',
             [$this, 'listManagerSettingsCreateAdminPage'],

@@ -15,7 +15,7 @@ export const NotifyServicesForm = ({ item }) => {
 
   // map cleanedState to existing format
   state.forEach((item, index) => {
-    cleanedState += `${item.name}~${item.apiKey}|`;
+    cleanedState += `${item.name}~${item.apiKey},`;
   });
 
   cleanedState = cleanedState.slice(0, -1);

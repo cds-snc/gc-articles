@@ -234,7 +234,7 @@ class ListManagerSettings
         }
 
         $values = json_encode($values);
-
+        printf("<p class='desc'>%s</p>", __("Add the <a href='https://notification.canada.ca/accounts'>sending service</a> for your subscription lists.", "cds-snc"));
         printf(
             '<div id="notify-services-repeater-form" style="margin-top:20px;">notify services</div>',
         );
@@ -259,7 +259,7 @@ class ListManagerSettings
         }
 
         $values = json_encode($values);
-
+        printf("<p class='desc'>%s</p>", __("Add details for each of your subscription lists.", "cds-snc"));
         printf('<div id="list-values-repeater-form"></div>');
         $data = 'CDS.renderListValuesRepeaterForm(' . $values . ');';
         wp_add_inline_script('cds-snc-admin-js', $data, 'after');

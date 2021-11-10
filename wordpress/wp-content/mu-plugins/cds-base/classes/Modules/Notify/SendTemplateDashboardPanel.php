@@ -32,7 +32,7 @@ class SendTemplateDashboardPanel
         foreach ($services as $key => $value) {
             array_push($serviceIds, $value['service_id']);
         }
-        
+
         echo '<div id="notify-panel"></div>';
         $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :true , serviceId: "' . $serviceIds[0] . '"});';
         wp_add_inline_script('cds-snc-admin-js', $data, 'after');

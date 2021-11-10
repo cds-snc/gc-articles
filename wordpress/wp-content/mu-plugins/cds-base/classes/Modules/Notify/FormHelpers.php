@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 namespace CDS\Modules\Notify;
-use CDS\Modules\Notify\NotifyTemplateSender;
 
+use CDS\Modules\Notify\NotifyTemplateSender;
 use Exception;
 
 class FormHelpers
@@ -88,7 +88,7 @@ class FormHelpers
             foreach ($services as $key => $value) {
                 array_push($serviceIds, $value['service_id']);
             }
-            
+
             $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $serviceIds[0] . '"});';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
             ?>

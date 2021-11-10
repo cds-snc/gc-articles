@@ -160,33 +160,11 @@ class ListManagerSettings
         return $hint;
     }
 
-    // @todo pull this from NotifyTemplateSender
-    public function parseServiceIdsFromEnv($serviceIdData): array
-    {
-        if (!$serviceIdData) {
-            throw new InvalidArgumentException('No service data');
-        }
-
-        try {
-            $arr = explode(',', $serviceIdData);
-            $service_ids = [];
-
-            for ($i = 0; $i < count($arr); $i++) {
-                $key_value = explode('~', $arr[$i]);
-                $service_ids[$key_value[0]] = $key_value[1];
-            }
-
-            return $service_ids;
-        } catch (Exception $exception) {
-            throw new InvalidArgumentException($exception->getMessage());
-        }
-    }
-
     public function listManagerNotifyServicesCallback()
     {
         try {
             $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-            $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
+            $service_ids = Utils::parseServiceIdsFromEnv($serviceIdData);
         } catch (InvalidArgumentException $e) {
             error_log($e->getMessage());
             $service_ids = [];

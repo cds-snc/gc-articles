@@ -141,7 +141,7 @@ class NotifyTemplateSender
     public function findApiKey($service_id): string
     {
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
+        $service_ids = Utils::parseServiceIdsFromEnv($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
             if (trim($service_id) == trim($value['service_id'])) {
@@ -150,37 +150,6 @@ class NotifyTemplateSender
         }
 
         return $api_key;
-    }
-
-    public function parseServiceIdsFromEnv($serviceIdData): array
-    {
-        if (!$serviceIdData) {
-            throw new InvalidArgumentException('No service data');
-        }
-
-        try {
-            $arr = explode(',', $serviceIdData);
-            $service_ids = [];
-
-            for ($i = 0; $i < count($arr); $i++) {
-                $key_value = explode('~', $arr [$i]);
-
-                $service_ids[$key_value[0]] = [
-                    'service_id' => $this->extractServiceIdFromApiKey($key_value[1]),
-                    'api_key' => $key_value[1],
-                    'name' => $key_value[0]
-                ];
-            }
-
-            return $service_ids;
-        } catch (Exception $exception) {
-            throw new InvalidArgumentException($exception->getMessage());
-        }
-    }
-
-    public function extractServiceIdFromApiKey($apiKey): string
-    {
-        return substr($apiKey, -73, 36);
     }
 
     public function baseRedirect(): string
@@ -258,7 +227,7 @@ class NotifyTemplateSender
         $serviceIds = [];
 
         try {
-            $serviceIds = $this->parseServiceIdsFromEnv($serviceIdData);
+            $serviceIds = Utils::parseServiceIdsFromEnv($serviceIdData);
         } catch (Exception $e) {
             error_log($e->getMessage());
         }

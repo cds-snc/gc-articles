@@ -5,12 +5,13 @@ namespace CDS\Tests\Unit;
 use CDS\Modules\Notify\FormHelpers;
 use CDS\Modules\Notify\Notices;
 use CDS\Modules\Notify\NotifyTemplateSender;
+use CDS\Modules\Notify\Utils;
 use InvalidArgumentException;
 
 test('parseServiceIds', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $serviceIdEnv = "serviceID1~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b47-ade1-64a9094d00f7,serviceID2~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a8-4b47-ade1-64a9094d00f7,serviceID3~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b46-ade1-64a9094d00f7";
-    $serviceIds = $sender->parseServiceIdsFromEnv($serviceIdEnv);
+    $serviceIds = Utils::parseServiceIdsFromEnv($serviceIdEnv);
     expect($serviceIds)->toEqual(["serviceID1" => [
         'service_id' => 'e609f6b0-0390-45b0-aaae-f4cc92c713e4',
         'api_key' => 'mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b47-ade1-64a9094d00f7',
@@ -29,12 +30,12 @@ test('parseServiceIds', function () {
 test('parseServiceIdsBadInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $serviceIdEnv = "serviceID1";
-    $sender->parseServiceIdsFromEnv($serviceIdEnv);
+    Utils::parseServiceIdsFromEnv($serviceIdEnv);
 })->throws(InvalidArgumentException::class);
 
 test('parseServiceIdsNoInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
-    $sender->parseServiceIdsFromEnv(null);
+    Utils::parseServiceIdsFromEnv(null);
 })->throws(InvalidArgumentException::class);
 
 test('parseJsonOptions', function () {

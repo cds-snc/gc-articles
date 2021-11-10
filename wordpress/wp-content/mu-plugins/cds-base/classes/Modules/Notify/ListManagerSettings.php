@@ -166,7 +166,7 @@ class ListManagerSettings
     {
         try {
             $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-            $service_ids = Utils::parseServiceIdsFromEnv($serviceIdData);
+            $service_ids = Utils::parseServicesStringToArray($serviceIdData);
         } catch (InvalidArgumentException $e) {
             error_log($e->getMessage());
             $service_ids = [];
@@ -176,13 +176,13 @@ class ListManagerSettings
         $i = 0;
         foreach ($service_ids as $key => $value) {
             $hint = $this->getObfuscatedOutputLabel(
-                $value,
+                $value['api_key'],
                 'list_manager_notify_services_value',
                 false,
             );
             array_push($values, [
                 'id' => $i,
-                'apiKey' => '',
+                'apiKey' => '', // don't re-display in form field
                 'name' => $key,
                 'hint' => $hint,
             ]);

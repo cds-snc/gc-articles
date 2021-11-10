@@ -82,7 +82,7 @@ class FormHelpers
           <?php
             $sender = new NotifyTemplateSender();
             $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-            $services = Utils::parseServiceIdsFromEnv($serviceIdData);
+            $services = Utils::parseServicesStringToArray($serviceIdData);
 
             $serviceIds = [];
             foreach ($services as $key => $value) {

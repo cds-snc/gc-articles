@@ -141,7 +141,7 @@ class NotifyTemplateSender
     public function findApiKey($service_id): string
     {
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $service_ids = Utils::parseServiceIdsFromEnv($serviceIdData);
+        $service_ids = Utils::parseServicesStringToArray($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
             if (trim($service_id) == trim($value['service_id'])) {
@@ -227,7 +227,7 @@ class NotifyTemplateSender
         $serviceIds = [];
 
         try {
-            $serviceIds = Utils::parseServiceIdsFromEnv($serviceIdData);
+            $serviceIds = Utils::parseServicesStringToArray($serviceIdData);
         } catch (Exception $e) {
             error_log($e->getMessage());
         }

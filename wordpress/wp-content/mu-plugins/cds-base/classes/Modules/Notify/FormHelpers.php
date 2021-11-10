@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace CDS\Modules\Notify;
+use CDS\Modules\Notify\NotifyTemplateSender;
 
 use Exception;
 
@@ -79,8 +80,16 @@ class FormHelpers
         <div id="notify-panel"></div>
 
           <?php
-            $serviceId = get_option('LIST_MANAGER_SERVICE_ID');
-            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $serviceId . '"});';
+            $sender = new NotifyTemplateSender();
+            $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
+            $services = $sender->parseServiceIdsFromEnv($serviceIdData);
+
+            $serviceIds = [];
+            foreach ($services as $key => $value) {
+                array_push($serviceIds, $value['service_id']);
+            }
+            
+            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $serviceIds[0] . '"});';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
             ?>
 

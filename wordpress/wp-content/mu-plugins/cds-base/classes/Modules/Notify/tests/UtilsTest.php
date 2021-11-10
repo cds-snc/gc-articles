@@ -24,9 +24,20 @@ test('mergeListManagerServicesString: Update one existing', function() {
 
 test('mergeListManagerServicesString: Remove one', function() {
     $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-    $incoming = 'LIST1~oldapikey1,LIST3~oldapikey3';
+    $incoming = 'LIST1~,LIST3~';
 
     $expected = 'LIST1~oldapikey1,LIST3~oldapikey3';
+
+    $new = Utils::mergeListManagerServicesString($incoming, $existing);
+
+    $this->assertSame($new, $expected);
+});
+
+test('mergeListManagerServicesString: Remove one and update another', function() {
+    $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
+    $incoming = 'LIST1~,LIST3~newapikey3';
+
+    $expected = 'LIST1~oldapikey1,LIST3~newapikey3';
 
     $new = Utils::mergeListManagerServicesString($incoming, $existing);
 

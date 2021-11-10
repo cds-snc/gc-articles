@@ -59,7 +59,7 @@ class Utils
         return trim($str, ',');
     }
 
-    public static function mergeListManagerServicesString(string $incoming, string $existing): string
+    public static function mergeListManagerServicesString(string $incoming, string|bool $existing): string
     {
         // If existing is empty no reason to merge just return incoming
         if (!$existing) {

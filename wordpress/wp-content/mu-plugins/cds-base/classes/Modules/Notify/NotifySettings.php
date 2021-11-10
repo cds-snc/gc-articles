@@ -36,9 +36,11 @@ class NotifySettings
             'NOTIFY_API_KEY',
         ];
 
-        foreach ($encryptedOptions as $option) {
-            add_filter("pre_update_option_{$option}", [$instance, 'encryptOption']);
-            add_filter("option_{$option}", [$instance, 'decryptOption']);
+        if (!\CDS\Utils::isWpEnv()) {
+            foreach ($encryptedOptions as $option) {
+                add_filter("pre_update_option_{$option}", [$instance, 'encryptOption']);
+                add_filter("option_{$option}", [$instance, 'decryptOption']);
+            }
         }
     }
 

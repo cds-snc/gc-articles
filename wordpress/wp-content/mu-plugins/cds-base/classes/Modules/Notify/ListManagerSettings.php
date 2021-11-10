@@ -127,7 +127,7 @@ class ListManagerSettings
 
         add_settings_field(
             'list_values', // id
-            _('List Values JSON', 'cds-snc'), // title
+            _('List details', 'cds-snc'), // title
             [$this, 'listValuesCallback'], // callback
             'list-manager-settings-admin', // page
             'list_manager_settings_section', // section
@@ -138,23 +138,12 @@ class ListManagerSettings
 
         add_settings_field(
             'list_manager_notify_services', // id
-            _('List Manager Notify Services', 'cds-snc'), // title
+            _('Notify Services', 'cds-snc'), // title
             [$this, 'listManagerNotifyServicesCallback'], // callback
             'list-manager-settings-admin', // page
             'list_manager_settings_section', // section
             [
                 'label_for' => 'list_manager_notify_services',
-            ],
-        );
-
-        add_settings_field(
-            'list_manager_service_id', // id
-            _('List Manager Service Id', 'cds-snc'), // title
-            [$this, 'listManagerServiceIdCallback'], // callback
-            'list-manager-settings-admin', // page
-            'list_manager_settings_section', // section
-            [
-                'label_for' => 'list_manager_service_id',
             ],
         );
     }
@@ -251,19 +240,6 @@ class ListManagerSettings
         );
         $data = 'CDS.renderNotifyServicesRepeaterForm(' . $values . ');';
         wp_add_inline_script('cds-snc-admin-js', $data, 'after');
-    }
-
-    public function listManagerServiceIdCallback()
-    {
-        if ($string = $this->LIST_MANAGER_SERVICE_ID) {
-            $this->getObfuscatedOutputLabel(
-                $string,
-                'list_manager_service_id_value',
-            );
-        }
-        printf(
-            '<input class="regular-text" type="text" name="LIST_MANAGER_SERVICE_ID" id="list_manager_service_id" aria-describedby="list_manager_service_id_value" value="">',
-        );
     }
 
     public function listValuesCallback()

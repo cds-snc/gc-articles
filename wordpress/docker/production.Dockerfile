@@ -16,7 +16,7 @@ RUN npm --unsafe-perm install
 
 ## Release build
 
-FROM wordpress:5.8.1-php8.0-apache
+FROM wordpress:5.8.2-php8.0-apache
 
 RUN pecl install pcov \
     && docker-php-ext-enable pcov

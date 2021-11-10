@@ -31,7 +31,7 @@ test('parseServiceIdsBadInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $serviceIdEnv = "serviceID1";
     Utils::parseServicesStringToArray($serviceIdEnv);
-})->throws(InvalidArgumentException::class)->skip();
+})->throws(InvalidArgumentException::class)->skip(); // @TODO: this doesn't throw an exception
 
 test('parseServiceIdsNoInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());

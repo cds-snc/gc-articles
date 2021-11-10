@@ -27,6 +27,31 @@ class SendTemplateDashboardPanel
         $sender = new NotifyTemplateSender();
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
         $services = Utils::parseServiceIdsFromEnv($serviceIdData);
+        
+        // $services = Utils::parseServiceIdsFromEnv("MVP Updates~");
+        // $services = Utils::parseServiceIdsFromEnv("MVP Updates~gc-articles-a7902fc7-37f0-419c-84c8-3ab499ee24c8-30569ea9-362b-41c4-a811-842ccf3db3dc");
+        /*
+        $services = Utils::parseServiceIdsFromEnv("MVP Updates~gc-articles-a7902fc7-37f0-419c-84c8-3ab499ee24c8-30569ea9-362b-41c4-a811-842ccf3db3dc,MVP Updates 2~,MVP Updates 3~gc-articles-a7902fc7-37f0-419c-84c8-3ab499ee24c8-30569ea9-362b-41c4-a811-842ccf3db3dc");
+        $serviceIds = [];
+        $str = "";
+
+        foreach ($services as $key => $value) {
+            if($value['name'] !== "" && $value['service_id'] !== "" && $value['api_key'] !== ""){
+                
+                $str.=$value['name'].'~'.$value['api_key'].",";
+            }
+        }
+
+        print_r($services);
+
+        if($str === ""){
+            echo "<p> == Don't save == <p>";
+        }else{
+            echo "<p>== Save ==</p>";
+            $str = rtrim($str, ",");
+            echo $str;
+        }
+        */
 
         $serviceIds = [];
         foreach ($services as $key => $value) {

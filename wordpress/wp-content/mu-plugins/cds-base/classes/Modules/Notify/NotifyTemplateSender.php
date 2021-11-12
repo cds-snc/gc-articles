@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\ClientException;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
-use CDS\Modules\Notify\Utils
+use CDS\Modules\Notify\Utils;
 
 class NotifyTemplateSender
 {

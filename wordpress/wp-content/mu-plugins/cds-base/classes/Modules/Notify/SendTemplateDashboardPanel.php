@@ -16,10 +16,7 @@ class SendTemplateDashboardPanel
     public function dashboardWidget(): void
     {
         wp_add_dashboard_widget(
-            'cds_notify_widget', __('Notify', 'cds'), [
-            $this,
-            'notifyPanelHandler',
-            ]
+            'cds_notify_widget', __('Notify', 'cds'), [$this,'notifyPanelHandler']
         );
     }
 

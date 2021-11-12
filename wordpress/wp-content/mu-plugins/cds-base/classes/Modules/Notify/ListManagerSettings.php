@@ -24,12 +24,7 @@ class ListManagerSettings
     {
         $instance = new self($encryptedOption);
 
-        add_action(
-            'admin_menu', [
-            $instance,
-            'listManagerSettingsAddPluginPage',
-            ]
-        );
+        add_action('admin_menu', [$instance,'listManagerSettingsAddPluginPage']);
         add_action('admin_init', [$instance, 'listManagerSettingsPageInit']);
         add_action('admin_head', [$instance, 'addStyles']); // @TODO
 
@@ -46,12 +41,7 @@ class ListManagerSettings
 
         if (!\CDS\Utils::isWpEnv()) {
             foreach ($encryptedOptions as $option) {
-                add_filter(
-                    "pre_update_option_{$option}", [
-                    $instance,
-                    'encryptOption',
-                    ]
-                );
+                add_filter("pre_update_option_{$option}", [$instance,'encryptOption']);
                 add_filter("option_{$option}", [$instance, 'decryptOption']);
             }
         }

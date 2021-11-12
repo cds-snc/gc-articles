@@ -48,12 +48,12 @@ class Notices
         if (isset($_GET['serviceId'])) {
             $sId = sanitize_text_field($_GET['serviceId']);
             $link = sprintf("https://notification.canada.ca/services/%s/notifications/email", $sId);
-            $linkText = __("<a href='%s'>View</a> sending logs in GG Notify", "cds-snc");
+            $linkText = __("&nbsp;&nbsp;<a href='%s'>View</a> sending logs in GG Notify", "cds-snc");
             $viewLink = sprintf($linkText, $link);
         }
         ?>
       <div class="notice notice-success is-dismissible">
-        <p class="notice-sent"><?php _e('Sent.', 'cds-snc');?><?php echo '&nbsp;&nbsp;' . $viewLink; ?></p>
+        <p class="notice-sent"><?php _e('Sent.', 'cds-snc');?><?php echo $viewLink; ?></p>
       </div>
         <?php
     }

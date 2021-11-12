@@ -16,9 +16,10 @@ class SendTemplateDashboardPanel
     public function dashboardWidget(): void
     {
         wp_add_dashboard_widget(
-            'cds_notify_widget',
-            __('Notify', 'cds'),
-            [$this, 'notifyPanelHandler'],
+            'cds_notify_widget', __('Notify', 'cds'), [
+            $this,
+            'notifyPanelHandler',
+            ]
         );
     }
 
@@ -29,12 +30,20 @@ class SendTemplateDashboardPanel
         $services = Utils::parseServicesStringToArray($serviceIdData);
 
         $serviceIds = [];
-        foreach ($services as $key => $value) {
-            array_push($serviceIds, $value['service_id']);
+        try {
+            foreach ($services as $key => $value) {
+                array_push($serviceIds, $value['service_id']);
+            }
+        } catch (\Exception $e) {
+            // catch and add empty id
+            array_push($serviceIds, '');
         }
 
         echo '<div id="notify-panel"></div>';
-        $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :true , serviceId: "' . $serviceIds[0] . '"});';
+        $data =
+            'CDS.Notify.renderPanel({ "sendTemplateLink" :true , serviceId: "' .
+            $serviceIds[0] .
+            '"});';
         wp_add_inline_script('cds-snc-admin-js', $data, 'after');
     }
 }

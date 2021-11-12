@@ -24,10 +24,12 @@ class ListManagerSettings
     {
         $instance = new self($encryptedOption);
 
-        add_action('admin_menu', [
+        add_action(
+            'admin_menu', [
             $instance,
             'listManagerSettingsAddPluginPage',
-        ]);
+            ]
+        );
         add_action('admin_init', [$instance, 'listManagerSettingsPageInit']);
         add_action('admin_head', [$instance, 'addStyles']); // @TODO
 
@@ -44,10 +46,12 @@ class ListManagerSettings
 
         if (!\CDS\Utils::isWpEnv()) {
             foreach ($encryptedOptions as $option) {
-                add_filter("pre_update_option_{$option}", [
+                add_filter(
+                    "pre_update_option_{$option}", [
                     $instance,
                     'encryptOption',
-                ]);
+                    ]
+                );
                 add_filter("option_{$option}", [$instance, 'decryptOption']);
             }
         }
@@ -170,27 +174,37 @@ class ListManagerSettings
         $values = [];
         $i = 0;
         foreach ($service_ids as $key => $value) {
-            $hint = $this->getObfuscatedOutputLabel(
-                $value['api_key'],
-                'list_manager_notify_services_value',
-                false,
-            );
-            array_push($values, [
+            $hint= "";
+            
+            // get obfuscated `hint` label
+            if(isset($value['api_key'])) {
+                $hint = $this->getObfuscatedOutputLabel(
+                    $value['api_key'],
+                    'list_manager_notify_services_value',
+                    false,
+                );
+            }
+
+            array_push(
+                $values, [
                 'id' => $i,
                 'apiKey' => '', // don't re-display in form field
                 'name' => $key,
                 'hint' => $hint,
-            ]);
+                ]
+            );
             $i++;
         }
 
         if (count($values) < 1) {
-            array_push($values, [
+            array_push(
+                $values, [
                 'id' => '',
                 'apiKey' => '',
                 'name' => '',
                 'hint' => '',
-            ]);
+                ]
+            );
         }
 
         $values = json_encode($values);
@@ -211,11 +225,13 @@ class ListManagerSettings
         }
 
         if (count($values) < 1) {
-            array_push($values, [
+            array_push(
+                $values, [
                 'id' => '',
                 'label' => '',
                 'type' => '',
-            ]);
+                ]
+            );
         }
 
         $values = json_encode($values);

@@ -11,7 +11,7 @@ describe('Notify Panel', () => {
         cy.intercept(
             {
                 method: 'GET',
-                url: '/wp-json/wp-notify/v1/list_counts',
+                url: '/wp-json/wp-notify/v1/list_counts/*',
             },
             [
                 { "list_id": "fb26a6b5-57aa-4cc2-85fe-3053ed344fe8", "subscriber_count": 3 },
@@ -28,7 +28,7 @@ describe('Notify Panel', () => {
 
         cy.get('#notify-panel-container a').should('have.text', 'Send Template');
 
-        /* @TODO: come back and fix this test
+        
         cy.get('.label-my-list').should('have.text', 'My List');
         cy.get('.subscriber-count-my-list').should('have.text', '3');
 
@@ -36,6 +36,6 @@ describe('Notify Panel', () => {
         cy.get('.subscriber-count-another-list').should('have.text', '2');
 
         cy.get('.subscriber-count-one-more').should('have.text', '0');
-         */
+        
     });
 });

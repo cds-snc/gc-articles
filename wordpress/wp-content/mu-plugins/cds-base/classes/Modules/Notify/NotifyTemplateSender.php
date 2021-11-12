@@ -10,6 +10,7 @@ use GuzzleHttp\Exception\ClientException;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
+use CDS\Modules\Notify\Utils
 
 class NotifyTemplateSender
 {
@@ -98,8 +99,8 @@ class NotifyTemplateSender
                 $sanitized['list_type'],
                 'WP Bulk send',
             );
-
-            wp_redirect($this->baseRedirect() . '&status=200');
+            $serviceId = Utils::parseServicesStringToArray($sanitized['api_key']);
+            wp_redirect($this->baseRedirect() . '&status=200&serviceId='.$serviceId);
             exit();
         } catch (ClientException $e) {
             $this->handleValidationException($e);

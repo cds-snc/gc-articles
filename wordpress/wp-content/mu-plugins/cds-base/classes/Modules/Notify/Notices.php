@@ -42,9 +42,18 @@ class Notices
 
     public static function noticeSuccess(): void
     {
+        ?>  
+        <?php
+        $viewLink = "";
+        if (isset($_GET['serviceId'])) {
+            $sId = sanitize_text_field($_GET['serviceId']);
+            $link = sprintf("https://notification.canada.ca/services/%s/notifications/email", $sId);
+            $linkText = __("<a href='%s'>View</a> sending logs in GG Notify", "cds-snc");
+            $viewLink = sprintf($linkText, $link);
+        }
         ?>
       <div class="notice notice-success is-dismissible">
-        <p class="notice-sent"><?php _e('Sent', 'cds-snc'); ?></p>
+        <p class="notice-sent"><?php _e('Sent.', 'cds-snc');?><?php echo '&nbsp;&nbsp;' . $viewLink; ?></p>
       </div>
         <?php
     }

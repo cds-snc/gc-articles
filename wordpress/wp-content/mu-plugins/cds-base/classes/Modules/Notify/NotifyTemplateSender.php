@@ -100,7 +100,7 @@ class NotifyTemplateSender
                 'WP Bulk send',
             );
             $serviceId = Utils::parseServicesStringToArray($sanitized['api_key']);
-            wp_redirect($this->baseRedirect() . '&status=200&serviceId='.$serviceId);
+            wp_redirect($this->baseRedirect() . '&status=200&serviceId=' . $serviceId);
             exit();
         } catch (ClientException $e) {
             $this->handleValidationException($e);

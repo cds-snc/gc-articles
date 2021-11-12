@@ -164,10 +164,10 @@ class ListManagerSettings
         $values = [];
         $i = 0;
         foreach ($service_ids as $key => $value) {
-            $hint= "";
-            
+            $hint = "";
+
             // get obfuscated `hint` label
-            if(isset($value['api_key'])) {
+            if (isset($value['api_key'])) {
                 $hint = $this->getObfuscatedOutputLabel(
                     $value['api_key'],
                     'list_manager_notify_services_value',
@@ -176,7 +176,8 @@ class ListManagerSettings
             }
 
             array_push(
-                $values, [
+                $values,
+                [
                 'id' => $i,
                 'apiKey' => '', // don't re-display in form field
                 'name' => $key,
@@ -188,7 +189,8 @@ class ListManagerSettings
 
         if (count($values) < 1) {
             array_push(
-                $values, [
+                $values,
+                [
                 'id' => '',
                 'apiKey' => '',
                 'name' => '',
@@ -216,7 +218,8 @@ class ListManagerSettings
 
         if (count($values) < 1) {
             array_push(
-                $values, [
+                $values,
+                [
                 'id' => '',
                 'label' => '',
                 'type' => '',

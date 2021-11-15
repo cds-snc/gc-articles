@@ -18,5 +18,14 @@ class Wpml
         add_action('setup_theme', function () {
             Utils::addOrUpdateOption('wpml_language_switcher_template_objects', []);
         }, 10, 1);
+
+        if ($settings = get_option('icl_sitepress_settings')) {
+            if(isset($settings['translation-management'])) {
+                if(!isset($settings['translation-management']['post_translation_editor_native'])) {
+                    $settings['translation-management']['post_translation_editor_native'] = true;
+                    update_option('icl_sitepress_settings', $settings);
+                }
+            }
+        }
     }
 }

@@ -20,8 +20,8 @@ class Wpml
         }, 10, 1);
 
         if ($settings = get_option('icl_sitepress_settings')) {
-            if(isset($settings['translation-management'])) {
-                if(!isset($settings['translation-management']['post_translation_editor_native'])) {
+            if (isset($settings['translation-management'])) {
+                if (!isset($settings['translation-management']['post_translation_editor_native'])) {
                     $settings['translation-management']['post_translation_editor_native'] = true;
                     update_option('icl_sitepress_settings', $settings);
                 }

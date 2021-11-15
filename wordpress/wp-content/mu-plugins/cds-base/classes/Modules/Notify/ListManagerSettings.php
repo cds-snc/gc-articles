@@ -200,7 +200,9 @@ class ListManagerSettings
         }
 
         $values = json_encode($values);
-        printf("<p class='desc'>%s</p>", __("Add the <a href='https://notification.canada.ca/accounts'>sending service</a> for your subscription lists.", "cds-snc"));
+
+        printf('<p class="desc">' . __("Add the <a href='%s'>sending service</a> for your subscription lists.", "cds-snc") . '</p>', 'https://notification.canada.ca/accounts');
+
         printf(
             '<div id="notify-services-repeater-form" style="margin-top:20px;">notify services</div>',
         );

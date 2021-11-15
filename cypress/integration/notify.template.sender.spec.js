@@ -49,6 +49,6 @@ describe('Notify Template Sender', () => {
         cy.get('#swal2-html-container').contains('This list has 3 subscribers');
         cy.get('.swal2-confirm').click();
         cy.wait('@bulkSender');
-        cy.get('.notice-sent').should('have.text', 'Sent');
+        cy.get('.notice-sent').should('have.text', 'Sent.');
     });
 });

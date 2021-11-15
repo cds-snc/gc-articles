@@ -27,7 +27,7 @@ class SendTemplateDashboardPanel
         $sender = new NotifyTemplateSender();
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
         $serviceIds = [];
-        
+
         try {
             $services = Utils::deserializeServiceIds($serviceIdData);
 

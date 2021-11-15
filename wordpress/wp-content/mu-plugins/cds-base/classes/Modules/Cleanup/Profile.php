@@ -102,6 +102,11 @@ class Profile
          *--------------------------------------------*/
         $crawler->filter('.application-passwords')->remove();
 
+        /*--------------------------------------------*
+         * Remove "Log Out Everywhere Else" button
+         *--------------------------------------------*/
+        $crawler->filter('.user-sessions-wrap')->remove();
+
         echo $crawler->save();
     }
 

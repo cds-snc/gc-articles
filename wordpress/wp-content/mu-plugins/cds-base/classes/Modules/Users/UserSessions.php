@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Users;
 
+use WP_Session_Tokens;
+
 class UserSessions
 {
     /**
@@ -40,6 +42,9 @@ class UserSessions
         // shorten session time to 48 hours
         add_filter('auth_cookie_expiration', [$this, 'expireSessions'], 99, 3);
 
+        // log out other sessions after a successful login
+        add_action('set_current_user', [$this, 'destroyOtherSessions']);
+
         // ~Heavily~ inspired by the "Remember Me Not" plugin: https://wordpress.org/plugins/remembermenot/
 
         // Remove the "Remember me" option from the login form
@@ -54,6 +59,13 @@ class UserSessions
         $expiration = (60 * 60) * 48; // 48 hours
 
         return $expiration;
+    }
+
+    public function destroyOtherSessions(): void
+    {
+        $user_id = get_current_user_id();
+        $sessions = WP_Session_Tokens::get_instance($user_id);
+        $sessions->destroy_others(wp_get_session_token());
     }
 
     public function resetRememberMeOption(): void

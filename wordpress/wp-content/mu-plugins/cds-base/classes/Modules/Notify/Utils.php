@@ -9,7 +9,7 @@ use InvalidArgumentException;
 
 class Utils
 {
-    public static function parseServicesStringToArray($serviceIdData): array
+    public static function deserializeServiceIds($serviceIdData): array
     {
         if (!$serviceIdData) {
             throw new InvalidArgumentException('No service data');
@@ -44,7 +44,7 @@ class Utils
         return substr($apiKey, -73, 36);
     }
 
-    public static function convertServicesArrayToString($services)
+    public static function serializeServiceIds($services): string
     {
         $str = "";
 
@@ -71,8 +71,8 @@ class Utils
             return $existing;
         }
 
-        $incomingArray = self::parseServicesStringToArray($incoming);
-        $existingArray = self::parseServicesStringToArray($existing);
+        $incomingArray = self::deserializeServiceIds($incoming);
+        $existingArray = self::deserializeServiceIds($existing);
 
         if (count($incomingArray)) {
             foreach ($existingArray as $key => $details) {
@@ -91,7 +91,7 @@ class Utils
             }
 
             $merged = array_merge($incomingArray, $existingArray);
-            return self::convertServicesArrayToString($merged);
+            return self::serializeServiceIds($merged);
         }
 
         return $existing;

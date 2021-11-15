@@ -11,7 +11,7 @@ use InvalidArgumentException;
 test('parseServiceIds', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $serviceIdEnv = "serviceID1~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b47-ade1-64a9094d00f7,serviceID2~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a8-4b47-ade1-64a9094d00f7,serviceID3~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b46-ade1-64a9094d00f7";
-    $serviceIds = Utils::parseServicesStringToArray($serviceIdEnv);
+    $serviceIds = Utils::deserializeServiceIds($serviceIdEnv);
     expect($serviceIds)->toEqual(["serviceID1" => [
         'service_id' => 'e609f6b0-0390-45b0-aaae-f4cc92c713e4',
         'api_key' => 'mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b47-ade1-64a9094d00f7',
@@ -30,12 +30,12 @@ test('parseServiceIds', function () {
 test('parseServiceIdsBadInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $serviceIdEnv = "serviceID1";
-    Utils::parseServicesStringToArray($serviceIdEnv);
+    Utils::deserializeServiceIds($serviceIdEnv);
 })->throws(InvalidArgumentException::class)->skip(); // @TODO: this doesn't throw an exception
 
 test('parseServiceIdsNoInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
-    Utils::parseServicesStringToArray(null);
+    Utils::deserializeServiceIds(null);
 })->throws(InvalidArgumentException::class);
 
 test('parseJsonOptions', function () {

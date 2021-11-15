@@ -99,7 +99,7 @@ class NotifyTemplateSender
                 $sanitized['list_type'],
                 'WP Bulk send',
             );
-            $serviceId = Utils::parseServicesStringToArray($sanitized['api_key']);
+            $serviceId = Utils::deserializeServiceIds($sanitized['api_key']);
             wp_redirect($this->baseRedirect() . '&status=200&serviceId=' . $serviceId);
             exit();
         } catch (ClientException $e) {
@@ -142,7 +142,7 @@ class NotifyTemplateSender
     public function findApiKey($service_id): string
     {
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $service_ids = Utils::parseServicesStringToArray($serviceIdData);
+        $service_ids = Utils::deserializeServiceIds($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
             if (trim($service_id) == trim($value['service_id'])) {
@@ -228,7 +228,7 @@ class NotifyTemplateSender
         $serviceIds = [];
 
         try {
-            $serviceIds = Utils::parseServicesStringToArray($serviceIdData);
+            $serviceIds = Utils::deserializeServiceIds($serviceIdData);
         } catch (Exception $e) {
             error_log($e->getMessage());
         }

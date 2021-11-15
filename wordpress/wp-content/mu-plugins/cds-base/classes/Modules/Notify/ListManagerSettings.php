@@ -155,7 +155,7 @@ class ListManagerSettings
     {
         try {
             $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-            $service_ids = Utils::parseServicesStringToArray($serviceIdData);
+            $service_ids = Utils::deserializeServiceIds($serviceIdData);
         } catch (InvalidArgumentException $e) {
             error_log($e->getMessage());
             $service_ids = [];

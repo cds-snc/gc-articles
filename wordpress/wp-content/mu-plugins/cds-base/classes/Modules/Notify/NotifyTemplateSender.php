@@ -10,6 +10,7 @@ use GuzzleHttp\Exception\ClientException;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
+use CDS\Modules\Notify\Utils;
 
 class NotifyTemplateSender
 {
@@ -88,7 +89,6 @@ class NotifyTemplateSender
 
     public function processSend($data): void
     {
-
         try {
             $sanitized = $this->validate($data);
 
@@ -99,8 +99,8 @@ class NotifyTemplateSender
                 $sanitized['list_type'],
                 'WP Bulk send',
             );
-
-            wp_redirect($this->baseRedirect() . '&status=200');
+            $serviceId = Utils::deserializeServiceIds($sanitized['api_key']);
+            wp_redirect($this->baseRedirect() . '&status=200&serviceId=' . $serviceId);
             exit();
         } catch (ClientException $e) {
             $this->handleValidationException($e);
@@ -142,36 +142,15 @@ class NotifyTemplateSender
     public function findApiKey($service_id): string
     {
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
+        $service_ids = Utils::deserializeServiceIds($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
-            if (trim($service_id) == trim($key)) {
-                $api_key = $value;
+            if (trim($service_id) == trim($value['service_id'])) {
+                $api_key = $value['api_key'];
             }
         }
 
         return $api_key;
-    }
-
-    public function parseServiceIdsFromEnv($serviceIdData): array
-    {
-        if (!$serviceIdData) {
-            throw new InvalidArgumentException('No service data');
-        }
-
-        try {
-            $arr = explode(',', $serviceIdData);
-            $service_ids = [];
-
-            for ($i = 0; $i < count($arr); $i++) {
-                $key_value = explode('~', $arr [$i]);
-                $service_ids[$key_value[0]] = $key_value[1];
-            }
-
-            return $service_ids;
-        } catch (Exception $exception) {
-            throw new InvalidArgumentException($exception->getMessage());
-        }
     }
 
     public function baseRedirect(): string
@@ -249,7 +228,7 @@ class NotifyTemplateSender
         $serviceIds = [];
 
         try {
-            $serviceIds = $this->parseServiceIdsFromEnv($serviceIdData);
+            $serviceIds = Utils::deserializeServiceIds($serviceIdData);
         } catch (Exception $e) {
             error_log($e->getMessage());
         }

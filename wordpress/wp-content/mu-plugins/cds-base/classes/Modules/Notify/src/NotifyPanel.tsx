@@ -101,7 +101,7 @@ const NotifyLists = ({
   const rows = listCounts.map((list) => {
     const id = slugify(list.label);
     return (
-      <tr>
+      <tr key={id}>
         <td className={`label-${id}`}>{list.label}</td>
         <td className={`subscriber-count-${id}`}>{list.subscriber_count}</td>
       </tr>

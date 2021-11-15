@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed610cd90db31de27ac55be01a5571af",
+    "content-hash": "8bf05fd18cbb89ca1b9325a080afdaf3",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1230,11 +1230,11 @@
         },
         {
             "name": "wpml/sitepress-multilingual-cms",
-            "version": "4.5.0",
+            "version": "4.5.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:cds-snc/sitepress-multilingual-cms.git",
-                "reference": "v4.5.0"
+                "reference": "v4.5.1"
             },
             "type": "wordpress-plugin"
         }

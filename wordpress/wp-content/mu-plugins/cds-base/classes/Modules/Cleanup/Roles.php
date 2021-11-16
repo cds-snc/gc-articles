@@ -8,8 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.0.11', function () {
-
+        Utils::checkOptionCallback('cds_base_activated', '1.0.15', function () {
             if (is_blog_installed()) {
                 remove_role('editor');
                 remove_role('author');
@@ -42,7 +41,8 @@ class Roles
                 'manage_network_users' => 1, // enables "edit_users" for GC Admins'
                 'manage_options' => 0,
                 'manage_notify' => 1,
-                'manage_list_manager' => 1,
+                'manage_list_manager' => 1,  // by default this is off
+                'list_manager_bulk_send' => 0, // this is managed per user (see user profile)
                 'manage_categories' => 1,
                 'read' => 1,
                 'level_1' => 1,

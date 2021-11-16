@@ -24,7 +24,8 @@ class Menus
         $allowed = [
             __('Pages'),
             __('Posts'),
-            __('Articles', 'cds'),
+            __('Articles', 'cds-snc'),
+            __('Bulk', 'cds-snc'),
             __('Users'),
             __('Settings'),
         ];

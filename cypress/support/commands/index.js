@@ -5,3 +5,4 @@ import './visit-notify';
 import './visit-profile';
 import './add-user';
 import './login-user';
+import './add-user-cap';

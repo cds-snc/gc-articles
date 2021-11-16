@@ -17,244 +17,278 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     allow {}
   }
 
-  # rule {
-  #   name     = "AWSManagedRulesCommonRuleSet"
-  #   priority = 1
+  rule {
+    name     = "AWSManagedRulesCommonRuleSet"
+    priority = 1
 
-  #   override_action {
-  #     none {}
-  #   }
+    override_action {
+      none {}
+    }
 
-  #   statement {
-  #     managed_rule_group_statement {
-  #       name        = "AWSManagedRulesCommonRuleSet"
-  #       vendor_name = "AWS"
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesCommonRuleSet"
+        vendor_name = "AWS"
 
-  #       dynamic "excluded_rule" {
-  #         for_each = local.common_excluded_rules
-  #         content {
-  #           name = excluded_rule.value
-  #         }
-  #       }
+        dynamic "excluded_rule" {
+          for_each = local.common_excluded_rules
+          content {
+            name = excluded_rule.value
+          }
+        }
 
-  #       excluded_rule {
-  #         name = "SizeRestrictions_BODY"
-  #       }
-  #     }
-  #   }
+        excluded_rule {
+          name = "SizeRestrictions_BODY"
+        }
+      }
+    }
 
-  #   visibility_config {
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "AWSManagedRulesCommonRuleSet"
-  #     sampled_requests_enabled   = true
-  #   }
-  # }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesCommonRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
 
-  # rule {
-  #   name     = "Custom_SizeRestrictions_BODY"
-  #   priority = 10
-  #   action {
-  #     block {}
-  #   }
+  rule {
+    name     = "Custom_SizeRestrictions_BODY"
+    priority = 10
+    action {
+      block {}
+    }
 
-  #   visibility_config {
-  #     sampled_requests_enabled   = true
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "Custom_SizeRestrictions_BODY"
-  #   }
+    visibility_config {
+      sampled_requests_enabled   = true
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Custom_SizeRestrictions_BODY"
+    }
 
-  #   statement {
-  #     and_statement {
-  #       statement {
-  #         size_constraint_statement {
-  #           field_to_match {
-  #             body {}
-  #           }
-  #           comparison_operator = "GT"
-  #           size                = "8192"
-  #           text_transformation {
-  #             type     = "NONE"
-  #             priority = 0
-  #           }
-  #         }
-  #       }
-  #       statement {
-  #         not_statement {
-  #           statement {
-  #             byte_match_statement {
-  #               field_to_match {
-  #                 uri_path {}
-  #               }
-  #               positional_constraint = "STARTS_WITH"
-  #               search_string         = "/wp-admin"
-  #               text_transformation {
-  #                 type     = "NONE"
-  #                 priority = 0
-  #               }
-  #             }
-  #           }
-  #         }
-  #       }
-  #     }
-  #   }
-  # }
+    statement {
+      and_statement {
+        statement {
+          size_constraint_statement {
+            field_to_match {
+              body {}
+            }
+            comparison_operator = "GT"
+            size                = "8192"
+            text_transformation {
+              type     = "NONE"
+              priority = 0
+            }
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "STARTS_WITH"
+                search_string         = "/wp-admin"
+                text_transformation {
+                  type     = "NONE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "STARTS_WITH"
+                search_string         = "/wp-json"
+                text_transformation {
+                  type     = "NONE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
-  # rule {
-  #   name     = "Custom_CrossSiteScripting_BODY"
-  #   priority = 11
-  #   action {
-  #     block {}
-  #   }
+  rule {
+    name     = "Custom_CrossSiteScripting_BODY"
+    priority = 11
+    action {
+      block {}
+    }
 
-  #   visibility_config {
-  #     sampled_requests_enabled   = true
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "Custom_CrossSiteScripting_BODY"
-  #   }
+    visibility_config {
+      sampled_requests_enabled   = true
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Custom_CrossSiteScripting_BODY"
+    }
 
-  #   statement {
-  #     and_statement {
-  #       statement {
-  #         xss_match_statement {
-  #           field_to_match {
-  #             body {}
-  #           }
-  #           text_transformation {
-  #             type     = "NONE"
-  #             priority = 0
-  #           }
-  #         }
-  #       }
-  #       statement {
-  #         not_statement {
-  #           statement {
-  #             byte_match_statement {
-  #               field_to_match {
-  #                 uri_path {}
-  #               }
-  #               positional_constraint = "STARTS_WITH"
-  #               search_string         = "/wp-admin"
-  #               text_transformation {
-  #                 type     = "NONE"
-  #                 priority = 0
-  #               }
-  #             }
-  #           }
-  #         }
-  #       }
-  #     }
-  #   }
-  # }
+    statement {
+      and_statement {
+        statement {
+          xss_match_statement {
+            field_to_match {
+              body {}
+            }
+            text_transformation {
+              type     = "NONE"
+              priority = 0
+            }
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "STARTS_WITH"
+                search_string         = "/wp-admin"
+                text_transformation {
+                  type     = "NONE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "STARTS_WITH"
+                search_string         = "/wp-json"
+                text_transformation {
+                  type     = "NONE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
-  # rule {
-  #   name     = "AWSManagedRulesKnownBadInputsRuleSet"
-  #   priority = 2
+  rule {
+    name     = "AWSManagedRulesKnownBadInputsRuleSet"
+    priority = 2
 
-  #   override_action {
-  #     none {}
-  #   }
+    override_action {
+      none {}
+    }
 
-  #   statement {
-  #     managed_rule_group_statement {
-  #       name        = "AWSManagedRulesKnownBadInputsRuleSet"
-  #       vendor_name = "AWS"
-  #     }
-  #   }
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
+        vendor_name = "AWS"
+      }
+    }
 
-  #   visibility_config {
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "AWSManagedRulesKnownBadInputsRuleSet"
-  #     sampled_requests_enabled   = true
-  #   }
-  # }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesKnownBadInputsRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
 
-  # rule {
-  #   name     = "AWSManagedRulesLinuxRuleSet"
-  #   priority = 3
+  rule {
+    name     = "AWSManagedRulesLinuxRuleSet"
+    priority = 3
 
-  #   override_action {
-  #     none {}
-  #   }
+    override_action {
+      none {}
+    }
 
-  #   statement {
-  #     managed_rule_group_statement {
-  #       name        = "AWSManagedRulesLinuxRuleSet"
-  #       vendor_name = "AWS"
-  #     }
-  #   }
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesLinuxRuleSet"
+        vendor_name = "AWS"
+      }
+    }
 
-  #   visibility_config {
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "AWSManagedRulesLinuxRuleSet"
-  #     sampled_requests_enabled   = true
-  #   }
-  # }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesLinuxRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
 
-  # rule {
-  #   name     = "AWSManagedRulesSQLiRuleSet"
-  #   priority = 4
+  rule {
+    name     = "AWSManagedRulesSQLiRuleSet"
+    priority = 4
 
-  #   override_action {
-  #     none {}
-  #   }
+    override_action {
+      none {}
+    }
 
-  #   statement {
-  #     managed_rule_group_statement {
-  #       name        = "AWSManagedRulesSQLiRuleSet"
-  #       vendor_name = "AWS"
-  #     }
-  #   }
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesSQLiRuleSet"
+        vendor_name = "AWS"
+      }
+    }
 
-  #   visibility_config {
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "AWSManagedRulesSQLiRuleSet"
-  #     sampled_requests_enabled   = true
-  #   }
-  # }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesSQLiRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
 
-  # rule {
-  #   name     = "AWSManagedRulesPHPRuleSet"
-  #   priority = 5
+  rule {
+    name     = "AWSManagedRulesPHPRuleSet"
+    priority = 5
 
-  #   override_action {
-  #     none {}
-  #   }
+    override_action {
+      none {}
+    }
 
-  #   statement {
-  #     managed_rule_group_statement {
-  #       name        = "AWSManagedRulesPHPRuleSet"
-  #       vendor_name = "AWS"
-  #     }
-  #   }
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesPHPRuleSet"
+        vendor_name = "AWS"
+      }
+    }
 
-  #   visibility_config {
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "AWSManagedRulesPHPRuleSet"
-  #     sampled_requests_enabled   = true
-  #   }
-  # }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesPHPRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
 
-  # rule {
-  #   name     = "AWSManagedRulesWordPressRuleSet"
-  #   priority = 6
+  rule {
+    name     = "AWSManagedRulesWordPressRuleSet"
+    priority = 6
 
-  #   override_action {
-  #     none {}
-  #   }
+    override_action {
+      none {}
+    }
 
-  #   statement {
-  #     managed_rule_group_statement {
-  #       name        = "AWSManagedRulesWordPressRuleSet"
-  #       vendor_name = "AWS"
-  #     }
-  #   }
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesWordPressRuleSet"
+        vendor_name = "AWS"
+      }
+    }
 
-  #   visibility_config {
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "AWSManagedRulesWordPressRuleSet"
-  #     sampled_requests_enabled   = true
-  #   }
-  # }
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesWordPressRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
 
   # rule {
   #   name     = "AWSManagedRulesAmazonIpReputationList"

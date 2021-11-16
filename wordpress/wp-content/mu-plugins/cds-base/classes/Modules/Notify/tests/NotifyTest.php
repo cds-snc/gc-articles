@@ -6,7 +6,6 @@ use CDS\Modules\Notify\FormHelpers;
 use CDS\Modules\Notify\Notices;
 use CDS\Modules\Notify\NotifyTemplateSender;
 use CDS\Modules\Notify\Utils;
-use InvalidArgumentException;
 
 test('parseServiceIds', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
@@ -30,22 +29,20 @@ test('parseServiceIds', function () {
 test('parseServiceIdsBadInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $serviceIdEnv = "serviceID1";
-    Utils::deserializeServiceIds($serviceIdEnv);
-})->throws(InvalidArgumentException::class)->skip(); // @TODO: this doesn't throw an exception
+    $result = Utils::deserializeServiceIds($serviceIdEnv);
+    expect($result)->toEqual(["serviceID1" => NULL]);
+});
 
 test('parseServiceIdsNoInput', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
-    Utils::deserializeServiceIds(null);
-})->throws(InvalidArgumentException::class);
+    $result = Utils::deserializeServiceIds(null);
+    expect($result)->toEqual([]);
+});
 
 test('parseJsonOptions', function () {
-    try {
-        $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
-        $options = $sender->parseJsonOptions('[{"id":"123", "type":"email", "label":"my-list"}]');
-        expect($options)->toEqual([["id" => 123, "type" => "email", "label" => "my-list"]]);
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
+    $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
+    $options = $sender->parseJsonOptions('[{"id":"123", "type":"email", "label":"my-list"}]');
+    expect($options)->toEqual([["id" => 123, "type" => "email", "label" => "my-list"]]);
 });
 
 test('parseJsonOptionsInvalidJson', function () {
@@ -57,4 +54,5 @@ test('parseJsonOptionsInvalidJson', function () {
 test('parseJsonOptionsEmpty', function () {
     $sender = new NotifyTemplateSender(new FormHelpers(), new Notices());
     $options = $sender->parseJsonOptions("");
-})->throws(InvalidArgumentException::class);
+    expect($options)->toEqual([]);
+});

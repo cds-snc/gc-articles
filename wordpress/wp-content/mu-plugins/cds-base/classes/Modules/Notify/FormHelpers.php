@@ -81,6 +81,8 @@ class FormHelpers
 
           <?php
             $sender = new NotifyTemplateSender();
+            $services = [];
+
             $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
             $services = Utils::deserializeServiceIds($serviceIdData);
 

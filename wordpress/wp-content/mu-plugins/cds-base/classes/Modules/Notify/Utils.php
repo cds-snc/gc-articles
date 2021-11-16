@@ -12,7 +12,7 @@ class Utils
     public static function deserializeServiceIds($serviceIdData): array
     {
         if (!$serviceIdData) {
-            throw new InvalidArgumentException('No service data');
+            return [];
         }
 
         try {

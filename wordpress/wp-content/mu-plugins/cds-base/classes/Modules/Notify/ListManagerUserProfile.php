@@ -15,7 +15,6 @@ class ListManagerUserProfile
     {
         $instance = new self();
 
-        add_action('show_user_profile', [$instance, 'displayListManagerMeta']);
         add_action('edit_user_profile', [$instance, 'displayListManagerMeta']);
 
         add_action('personal_options_update', [$instance, 'updateListManagerMeta']);

@@ -95,6 +95,23 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
             }
           }
         }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "STARTS_WITH"
+                search_string         = "/wp-json"
+                text_transformation {
+                  type     = "NONE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -134,6 +151,23 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
                 }
                 positional_constraint = "STARTS_WITH"
                 search_string         = "/wp-admin"
+                text_transformation {
+                  type     = "NONE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "STARTS_WITH"
+                search_string         = "/wp-json"
                 text_transformation {
                   type     = "NONE"
                   priority = 0

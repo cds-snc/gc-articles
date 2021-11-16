@@ -11,6 +11,7 @@ use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
 use CDS\Modules\Notify\Utils;
+use CDS\Modules\Notify\ListManagerUserProfile;
 
 class NotifyTemplateSender
 {
@@ -28,6 +29,9 @@ class NotifyTemplateSender
 
         add_action('admin_menu', [$instance, 'addMenu']);
         add_action('rest_api_init', [$instance, 'registerEndpoints']);
+
+        $listManagerProfile = new ListManagerUserProfile();
+        $listManagerProfile->register();
     }
 
     public static function processListCounts($data): WP_REST_Response
@@ -59,7 +63,7 @@ class NotifyTemplateSender
             'methods' => 'POST',
             'callback' => [$this, 'processSend'],
             'permission_callback' => function () {
-                return current_user_can('delete_posts');
+                return current_user_can('list_manager_bulk_send');
             }
         ]);
 
@@ -70,7 +74,7 @@ class NotifyTemplateSender
                 'service_id' => [],
             ],
             'permission_callback' => function () {
-                return current_user_can('delete_posts');
+                return current_user_can('list_manager_bulk_send');
             }
         ]);
     }
@@ -80,7 +84,7 @@ class NotifyTemplateSender
         add_menu_page(
             __('Send Notify Template', "cds-snc"),
             __('Bulk Send', "cds-snc"),
-            'level_0',
+            'list_manager_bulk_send',
             $this->admin_page,
             [$this, 'renderForm'],
             'dashicons-email'

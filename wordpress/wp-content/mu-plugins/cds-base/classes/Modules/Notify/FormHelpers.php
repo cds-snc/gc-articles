@@ -80,9 +80,6 @@ class FormHelpers
         <div id="notify-panel"></div>
 
           <?php
-            $sender = new NotifyTemplateSender();
-            $services = [];
-
             $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
             $services = Utils::deserializeServiceIds($serviceIdData);
 
@@ -91,11 +88,11 @@ class FormHelpers
                 array_push($serviceIds, $value['service_id']);
             }
 
-            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $serviceIds[0] . '"});';
+            $defaultServiceId = $serviceIds[0] ?? '';
+
+            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $defaultServiceId . '"});';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
             ?>
-
-
       </div>
         <?php
     }

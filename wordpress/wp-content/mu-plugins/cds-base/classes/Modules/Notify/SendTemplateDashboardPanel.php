@@ -34,7 +34,7 @@ class SendTemplateDashboardPanel
         }
 
         // catch and add empty id
-        if(empty($serviceIds)) {
+        if (empty($serviceIds)) {
             array_push($serviceIds, '');
         }
 

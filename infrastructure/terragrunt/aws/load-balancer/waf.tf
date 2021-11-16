@@ -85,7 +85,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
                 field_to_match {
                   uri_path {}
                 }
-                positional_constraint = "STARTS_WITH"
+                positional_constraint = "CONTAINS"
                 search_string         = "/wp-admin"
                 text_transformation {
                   type     = "NONE"
@@ -149,7 +149,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
                 field_to_match {
                   uri_path {}
                 }
-                positional_constraint = "STARTS_WITH"
+                positional_constraint = "CONTAINS"
                 search_string         = "/wp-admin"
                 text_transformation {
                   type     = "NONE"

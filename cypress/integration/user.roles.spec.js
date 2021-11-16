@@ -9,8 +9,7 @@ const allowedPages200 = [
     'edit.php',
     'post-new.php',
     'edit.php?post_type=page',
-    'post-new.php?post_type=page',
-    'admin.php?page=cds_notify_send'
+    'post-new.php?post_type=page'
 ];
 
 // user should not be able to access these pages
@@ -18,7 +17,8 @@ const allowedPages200 = [
 const blockedPages403 = [
     'upload.php',
     'themes.php',
-    'options-general.php'
+    'options-general.php',
+    'admin.php?page=cds_notify_send'
 ];
 
 const blockedPages500 = [

@@ -25,6 +25,7 @@ describe('Notify Template Sender', () => {
             req.redirect("/wp-admin/admin.php?page=cds_notify_send&status=200");
         }).as('bulkSender');
 
+        cy.addUserCap("admin", "list_manager_bulk_send");
         cy.login();
     });
 

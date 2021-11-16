@@ -38,14 +38,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
           "comment_author_email_*",
           "comment_author_url_*",
           "wordpress_*",
-          "wordpress_logged_in_*",
-          "wordpress_sec_*",
-          "wordpress_test_cookie",
-          "wp-settings-*",
-          "wp-resetpass-*",
-          "wp-saving-post",
-          "wp-postpass_*",
-          "wp-wpml_*"
+          "wp-*"
         ]
       }
     }

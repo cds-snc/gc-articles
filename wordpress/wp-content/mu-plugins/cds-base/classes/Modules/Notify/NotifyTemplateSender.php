@@ -226,21 +226,8 @@ class NotifyTemplateSender
             Notices::handleNotice($_GET['status']);
         }
 
-        $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-
-        $listValues = [];
-        $serviceIds = [];
-
-        try {
-            $serviceIds = Utils::deserializeServiceIds($serviceIdData);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-        }
-        try {
-            $listValues = self::parseJsonOptions(get_option('list_values'));
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-        }
+        $serviceIds = Utils::deserializeServiceIds(get_option('LIST_MANAGER_NOTIFY_SERVICES'));
+        $listValues = self::parseJsonOptions(get_option('list_values'));
 
         FormHelpers::render([
             "service_ids" => $serviceIds,
@@ -251,7 +238,7 @@ class NotifyTemplateSender
     public static function parseJsonOptions($data)
     {
         if (empty($data)) {
-            throw new InvalidArgumentException('No list data');
+            return [];
         }
 
         $data = preg_replace(

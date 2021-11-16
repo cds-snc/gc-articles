@@ -24,17 +24,17 @@ class SendTemplateDashboardPanel
 
     public function notifyPanelHandler(): void
     {
-        $sender = new NotifyTemplateSender();
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
+        $serviceIds = [];
+
         $services = Utils::deserializeServiceIds($serviceIdData);
 
-        $serviceIds = [];
-        try {
-            foreach ($services as $key => $value) {
-                array_push($serviceIds, $value['service_id']);
-            }
-        } catch (\Exception $e) {
-            // catch and add empty id
+        foreach ($services as $key => $value) {
+            array_push($serviceIds, $value['service_id']);
+        }
+
+        // catch and add empty id
+        if (empty($serviceIds)) {
             array_push($serviceIds, '');
         }
 

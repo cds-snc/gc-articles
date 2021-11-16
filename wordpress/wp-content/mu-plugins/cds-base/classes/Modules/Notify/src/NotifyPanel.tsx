@@ -132,8 +132,14 @@ export const NotifyPanel = ({ sendTemplateLink = false, serviceId = "" }) => {
     const fetchData = async () => {
 
       try {
+        if(!serviceId) {
+          setIsLoading(false);
+          return;
+        }
+
         const response = await getData(`wp-notify/v1/list_counts/${serviceId}`);
         setIsLoading(false);
+
         if (response.length >= 1) {
           setListCounts(await matchCountToList(response));
         }

@@ -28,6 +28,6 @@ class Setup
      */
     protected function isNotifyConfigured(): bool
     {
-        return (bool)get_option('NOTIFY_API_KEY');
+        return (bool)get_option('NOTIFY_API_KEY') || (bool)getenv('DEFAULT_NOTIFY_API_KEY');
     }
 }

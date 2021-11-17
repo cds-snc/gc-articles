@@ -8,16 +8,16 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.0.15', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.0.16', function () {
             if (is_blog_installed()) {
-                remove_role('editor');
-                remove_role('author');
-                remove_role('contributor');
-                remove_role('subscriber');
-                remove_role('gceditor');
-                remove_role('gcadmin');
-                // the ircc role should be removed in the next version update (leaving to cleanup current db)
-                remove_role('ircc');
+                $wp_roles = wp_roles();
+                $allRoles = array_keys($wp_roles->roles); // array_keys returns only the slug
+
+                // remove ALL roles, not just ones we know about
+                foreach ($allRoles as $role) {
+                    remove_role($role);
+                }
+
                 $this->cleanupRoles('gceditor');
                 $this->cleanupRoles('administrator');
 
@@ -25,6 +25,15 @@ class Roles
                 update_network_option(null, 'add_new_users', 1);
             }
         });
+
+        add_action('wpseo_activate', [$this, 'removeSEORoles'], 99);
+    }
+
+    public function removeSEORoles()
+    {
+        /* Installed by Yoast when plugin is activated */
+        remove_role('wpseo_manager');
+        remove_role('wpseo_editor');
     }
 
     protected function cleanupRoles($role)

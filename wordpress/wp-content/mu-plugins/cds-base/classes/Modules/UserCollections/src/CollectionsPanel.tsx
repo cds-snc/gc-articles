@@ -33,7 +33,7 @@ const Collections = ({
     const dashboardText = __('Dashboard', 'cds-snc');
     const websiteText = __('Visit', 'cds-snc');
     return (
-      <tr className={`row-${index}`}>
+      <tr key={`row-${index}`} className={`row-${index}`}>
         <td className="name">{collection.blogname}</td>
         <td className="website">
           <a

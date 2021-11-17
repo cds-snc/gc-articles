@@ -36,5 +36,7 @@ class PostsToArticles
         } catch (Exception $e) {
             error_log("post menu not found");
         }
+
+        unregister_taxonomy_for_object_type('post_tag', 'post');
     }
 }

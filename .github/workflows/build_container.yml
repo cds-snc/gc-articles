@@ -1,0 +1,37 @@
+name: Build container
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  DOCKER_BUILDKIT: 1
+  REPO_NAME: platform/wordpress
+  STAGING_ECR_REGISTRY: 729164266357.dkr.ecr.ca-central-1.amazonaws.com
+
+jobs:
+  build-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Docker image tag
+        run: |
+          if [[ $GITHUB_EVENT_NAME == "release" ]]; then
+            echo "IMAGE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=sha-${GITHUB_SHA}" >> $GITHUB_ENV
+          fi
+
+      - name: Add Composer auth credentials
+        run: echo '${{ secrets.COMPOSER_AUTH_JSON }}' > $GITHUB_WORKSPACE/wordpress/auth.json
+
+      - name: Build container
+        run: |
+          docker build \
+          --build-arg git_sha="$GITHUB_SHA" \
+          --build-arg APACHE_KEY="${{ secrets.STAGING_WORDPRESS_APACHE_KEY }}" \
+          --build-arg APACHE_CERT="${{ secrets.STAGING_WORDPRESS_APACHE_CERT }}" \
+          -t "${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
+          -f ./wordpress/docker/production.Dockerfile .

@@ -14,9 +14,9 @@ class Setup
      */
     public function __construct(EncryptedOption $encryptedOption)
     {
-        new NotifyTemplateSender(new FormHelpers(), new Notices());
-
+        NotifyTemplateSender::register();
         NotifySettings::register($encryptedOption);
+        ListManagerSettings::register($encryptedOption);
 
         if ($this->isNotifyConfigured()) {
             include __DIR__ . '/includes/wp-mail-notify-api.php';
@@ -28,6 +28,6 @@ class Setup
      */
     protected function isNotifyConfigured(): bool
     {
-        return (bool)get_option('NOTIFY_API_KEY');
+        return (bool)get_option('NOTIFY_API_KEY') || (bool)getenv('DEFAULT_NOTIFY_API_KEY');
     }
 }

@@ -54,7 +54,7 @@ class Profile
          *--------------------------------------------*/
         // WPML settings under personal options
         $crawler->filter('#name')->addClass('hidden');
-        //$crawler->filter('.user-language-wrap')->remove();
+        $crawler->filter('.user-language-wrap')->remove();
 
         $crawler->filter('.user-user-login-wrap')->remove();
         // note nickname is a require field so it's hidden using CSS
@@ -96,6 +96,16 @@ class Profile
          *--------------------------------------------*/
 
         $crawler->filter('.yoast-settings')->remove();
+
+        /*--------------------------------------------*
+         * Remove Application Passwords Fields
+         *--------------------------------------------*/
+        $crawler->filter('.application-passwords')->remove();
+
+        /*--------------------------------------------*
+         * Remove "Log Out Everywhere Else" button
+         *--------------------------------------------*/
+        $crawler->filter('.user-sessions-wrap')->remove();
 
         echo $crawler->save();
     }

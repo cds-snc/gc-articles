@@ -1,0 +1,25 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.22.1
+# ignores vulnerabilities until expiry date; change duration by modifying expiry date
+ignore:
+  'snyk:lic:composer:humanmade:s3-uploads:GPL-2.0':
+    - '*':
+        reason: None Given
+        expires: 9999-12-30T00:00:00.000Z
+        created: 2021-10-27T20:50:18.079Z
+  'snyk:lic:composer:wpackagist-plugin:wordpress-seo:GPL-3.0':
+    - '*':
+        reason: None Given
+        expires: 9999-12-30T00:00:00.000Z
+        created: 2021-10-27T21:19:45.920Z
+  'snyk:lic:composer:wpackagist-plugin:login-lockdown:GPL-2.0':
+    - '*':
+        reason: None Given
+        expires: 9999-12-30T00:00:00.000Z
+        created: 2021-11-01T21:19:45.920Z
+  'snyk:lic:composer:wpackagist-plugin:disable-user-login:GPL-3.0':
+    - '*':
+        reason: None Given
+        expires: 9999-12-30T00:00:00.000Z
+        created: 2021-11-04T14:51:05.876Z
+patch: {}

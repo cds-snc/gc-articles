@@ -13,6 +13,24 @@ resource "aws_secretsmanager_secret_version" "list_manager_endpoint" {
   secret_string = var.list_manager_endpoint
 }
 
+resource "aws_secretsmanager_secret" "default_list_manager_api_key" {
+  name = "default_list_manager_api_key_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "default_list_manager_api_key" {
+  secret_id     = aws_secretsmanager_secret.default_list_manager_api_key.id
+  secret_string = var.default_list_manager_api_key
+}
+
+resource "aws_secretsmanager_secret" "default_notify_api_key" {
+  name = "default_notify_api_key_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "default_notify_api_key" {
+  secret_id     = aws_secretsmanager_secret.default_notify_api_key.id
+  secret_string = var.default_notify_api_key
+}
+
 resource "aws_secretsmanager_secret" "encryption_key" {
   name = "encryption_key_${random_string.random.result}"
 }
@@ -20,6 +38,33 @@ resource "aws_secretsmanager_secret" "encryption_key" {
 resource "aws_secretsmanager_secret_version" "encryption_key" {
   secret_id     = aws_secretsmanager_secret.encryption_key.id
   secret_string = var.encryption_key
+}
+
+resource "aws_secretsmanager_secret" "s3_uploads_bucket" {
+  name = "s3_uploads_bucket_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "s3_uploads_bucket" {
+  secret_id     = aws_secretsmanager_secret.s3_uploads_bucket.id
+  secret_string = var.s3_uploads_bucket
+}
+
+resource "aws_secretsmanager_secret" "s3_uploads_key" {
+  name = "s3_uploads_key_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "s3_uploads_key" {
+  secret_id     = aws_secretsmanager_secret.s3_uploads_key.id
+  secret_string = var.s3_uploads_key
+}
+
+resource "aws_secretsmanager_secret" "s3_uploads_secret" {
+  name = "s3_uploads_secret_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "s3_uploads_secret" {
+  secret_id     = aws_secretsmanager_secret.s3_uploads_secret.id
+  secret_string = var.s3_uploads_secret
 }
 
 resource "aws_secretsmanager_secret" "wordpress_auth_key" {

@@ -19,26 +19,42 @@ class SubscriptionForm
     public function render($attributes = []): string
     {
         $placeholder = "";
+        $listId = "";
+        $emailLabel = _("Enter your email:", "cds-snc");
+        $subscribeLabel = _("Subscribe", "cds-snc");
+
         if (!empty($attributes['placeholderValue'])) :
             $placeholder = $attributes['placeholderValue'];
+        endif;
+
+        if (!empty($attributes['listId'])) :
+            $listId = $attributes['listId'];
+        endif;
+
+        if (!empty($attributes['emailLabel'])) :
+            $emailLabel = $attributes['emailLabel'];
+        endif;
+
+        if (!empty($attributes['subscribeLabel'])) :
+            $subscribeLabel = $attributes['subscribeLabel'];
         endif;
 
         ob_start();
         ?>
         <div class="gc-form-wrapper">
-
            <form id="subscribe-form" method="POST" action="/wp-json/subscribe/v1/process">
+                <input type="hidden" name="list_id" value="<?php echo $listId; ?>"/>
                 <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
                 <div class="focus-group">
                     <label class="gc-label required" id="cds-email" for="email">
-                        <?php _e("Enter your email:", "cds-snc"); ?>
+                        <?php echo $emailLabel; ?>
                         <i class="visually-hidden"><?php _e("Required Field", "cds-snc"); ?></i>
                     </label>
-                    <input class="gc-input-text" type="text" name="email" placeholder="<?php echo $placeholder; ?>" value=""/>
+                    <input id="email" style="margin-bottom:0;" class="gc-input-text" type="text" name="email" placeholder="<?php echo $placeholder; ?>" value=""/>
                 </div>
                 <div class="buttons">
                     <button class="gc-button gc-button" type="submit" id="subscribe-submit">
-                        <?php _e("Subscribe", "cds-snc"); ?>
+                    <?php echo $subscribeLabel ; ?>
                     </button>
                 </div>
             </form>

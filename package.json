@@ -1,7 +1,7 @@
 {
   "name": "platform-mvp",
   "type": "module",
-  "version": "1.6.0",
+  "version": "2.1.0",
   "scripts": {
     "deploy-plugin": "./deploy/plugin",
     "update-version": "node ./scripts/prepare-release.js --version_num",
@@ -13,12 +13,12 @@
     "import": "node ./import/import.js",
     "wp-env": "wp-env",
     "wp-env:init": "wp-env start",
-    "wp-env:test:setup": "sh cypress/test-setup/setup.sh",
+    "wp-env:test:setup": "sh cypress/test-setup/setup-ci.sh",
     "wp-env:stop": "wp-env stop",
     "wp-env:debug": "wp-env start --debug",
     "wp-env:clean" : "wp-env clean all",
     "wp-env:destroy": "wp-env destroy",
-    "cy:run": "cypress run --record",
+    "cy:run": "cypress run",
     "cy:open": "cypress open"
   },
   "devDependencies": {

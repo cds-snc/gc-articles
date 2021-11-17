@@ -38,9 +38,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
           "comment_author_email_*",
           "comment_author_url_*",
           "wordpress_*",
-          "wordpress_logged_in_*",
-          "wordpress_test_cookie",
-          "wp-settings-*"
+          "wp-*"
         ]
       }
     }
@@ -53,7 +51,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
   }
 
   ordered_cache_behavior {
-    path_pattern     = "/login"
+    path_pattern     = "/sign-in-se-connecter*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_lb.wordpress.name

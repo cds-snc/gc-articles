@@ -7,7 +7,7 @@ describe('User Collections Panel', () => {
         cy.intercept(
             {
                 method: 'GET',
-                url: 'index.php?rest_route=/usercollection/collections', // that have a URL that matches '/users/*'
+                url: '/wp-json/usercollection/collections',
             },
             {
                 "1": {
@@ -36,7 +36,6 @@ describe('User Collections Panel', () => {
                 }
             }
         ).as('getUserCollections');
-
         cy.login();
     });
 

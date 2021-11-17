@@ -11,7 +11,7 @@ describe('Notify Template Sender', () => {
         cy.intercept(
           {
               method: 'GET',
-              url: '/wp-json/wp-notify/v1/list_counts',
+              url: '/wp-json/wp-notify/v1/list_counts/*',
           },
           [
               { "list_id": "fb26a6b5-57aa-4cc2-85fe-3053ed344fe8", "subscriber_count": 3 },
@@ -20,28 +20,18 @@ describe('Notify Template Sender', () => {
           ]
         ).as('getListCounts');
 
-        cy.intercept(
-          {
-              method: 'POST',
-              url: 'http://localhost:8889/wp-json/wp-notify/v1/bulk',
-          },
-          {
-              statusCode: 200,
-              body: 'it worked!',
-          }
-        ).as('bulkSender');
-
         const host = Cypress.config().baseUrl;
         cy.intercept('POST', host + '/wp-json/wp-notify/v1/bulk', (req) => {
             req.redirect("/wp-admin/admin.php?page=cds_notify_send&status=200");
         }).as('bulkSender');
 
+        cy.addUserCap("admin", "list_manager_bulk_send");
         cy.login();
     });
 
     it('Send Notify Template', () => {
         cy.visitNotify();
-        cy.screenshot();
+
         cy.get('h1').should('have.text', 'Send Notify Template');
 
         cy.get('select#list_id').select('One more');
@@ -60,6 +50,6 @@ describe('Notify Template Sender', () => {
         cy.get('#swal2-html-container').contains('This list has 3 subscribers');
         cy.get('.swal2-confirm').click();
         cy.wait('@bulkSender');
-        cy.get('.notice-sent').should('have.text', 'Sent');
+        cy.get('.notice-sent').should('have.text', 'Sent.');
     });
 });

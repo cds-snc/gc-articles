@@ -23,11 +23,14 @@ module.exports = {
 	resolve: {
 		...defaultConfig.resolve,
 		extensions: [".tsx", ".ts", "js", "jsx"],
+		alias: {
+			util: path.resolve(__dirname, "src/util/")
+		}
 	},
 
 	output: {
 		...defaultConfig.output,
 		filename: "index.js",
 		path: path.resolve(__dirname, "build"),
-	},
+	}
 };

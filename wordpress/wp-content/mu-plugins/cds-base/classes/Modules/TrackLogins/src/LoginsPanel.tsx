@@ -2,13 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Spinner } from '../../Spinner/src/Spinner';
-import { getData } from '../../Notify/src/NotifyPanel';
-
-const CDS_VARS = window.CDS_VARS || {};
-
-const requestHeaders = new Headers();
-requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
-
+import { getData } from 'util/fetch';
 interface Login {
   user_agent: string;
   time_login: string;
@@ -27,11 +21,11 @@ const Logins = ({
     return null;
   }
 
-  const rows = logins.map((login) => {
+  const rows = logins.map((login, index) => {
     const date = new Date(login.time_login);
 
     return (
-      <tr>
+      <tr key={index}>
         <td>{date.toLocaleString()}</td>
         <td>{login.user_agent}</td>
       </tr>
@@ -60,10 +54,14 @@ export const LoginsPanel = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getData('user/logins');
-      setIsLoading(false);
-      if (response.length >= 1) {
-        setLogins(response);
+      try {
+        const response = await getData('user/logins');
+        setIsLoading(false);
+        if (response.length >= 1) {
+          setLogins(response);
+        }
+      } catch (e) {
+        setIsLoading(false);
       }
     };
 

@@ -10,34 +10,41 @@ use GuzzleHttp\Exception\ClientException;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
+use CDS\Modules\Notify\Utils;
+use CDS\Modules\Notify\ListManagerUserProfile;
 
 class NotifyTemplateSender
 {
-    protected FormHelpers $formHelpers;
+
     protected Notices $notices;
     protected string $admin_page = 'cds_notify_send';
 
-    public function __construct(FormHelpers $formHelpers, Notices $notices)
+    public function __construct()
     {
-        $this->formHelpers = $formHelpers;
-        $this->notices = $notices;
-
-        add_action('admin_menu', [$this, 'addMenu']);
-        add_action('rest_api_init', [$this, 'registerEndpoints']);
     }
 
-    public static function processListCounts(): WP_REST_Response
+    public static function register()
+    {
+        $instance = new self();
+
+        add_action('admin_menu', [$instance, 'addMenu']);
+        add_action('rest_api_init', [$instance, 'registerEndpoints']);
+
+        $listManagerProfile = new ListManagerUserProfile();
+        $listManagerProfile->register();
+    }
+
+    public static function processListCounts($data): WP_REST_Response
     {
         try {
+            $service_id = $data->get_param('service_id');
             $client = new Client([
                 'headers' => [
-                    "Authorization" => get_option('LIST_MANAGER_API_KEY')
+                    "Authorization" => getenv('DEFAULT_LIST_MANAGER_API_KEY')
                 ]
             ]);
 
             $endpoint = getenv('LIST_MANAGER_ENDPOINT');
-
-            $service_id = get_option('LIST_MANAGER_SERVICE_ID');
 
             $response = $client->request(
                 'GET',
@@ -56,15 +63,18 @@ class NotifyTemplateSender
             'methods' => 'POST',
             'callback' => [$this, 'processSend'],
             'permission_callback' => function () {
-                return current_user_can('delete_posts');
+                return current_user_can('list_manager_bulk_send');
             }
         ]);
 
-        register_rest_route('wp-notify/v1', '/list_counts', [
+        register_rest_route('wp-notify/v1', '/list_counts/(?P<service_id>[a-zA-Z0-9_-]+)', [
             'methods' => 'GET',
             'callback' => [$this, 'processListCounts'],
+            'args' => [
+                'service_id' => [],
+            ],
             'permission_callback' => function () {
-                return current_user_can('delete_posts');
+                return current_user_can('list_manager_bulk_send');
             }
         ]);
     }
@@ -73,8 +83,8 @@ class NotifyTemplateSender
     {
         add_menu_page(
             __('Send Notify Template', "cds-snc"),
-            __('Notify', "cds-snc"),
-            'level_0',
+            __('Bulk Send', "cds-snc"),
+            'list_manager_bulk_send',
             $this->admin_page,
             [$this, 'renderForm'],
             'dashicons-email'
@@ -83,7 +93,6 @@ class NotifyTemplateSender
 
     public function processSend($data): void
     {
-
         try {
             $sanitized = $this->validate($data);
 
@@ -94,8 +103,8 @@ class NotifyTemplateSender
                 $sanitized['list_type'],
                 'WP Bulk send',
             );
-
-            wp_redirect($this->baseRedirect() . '&status=200');
+            $serviceId = Utils::deserializeServiceIds($sanitized['api_key']);
+            wp_redirect($this->baseRedirect() . '&status=200&serviceId=' . $serviceId);
             exit();
         } catch (ClientException $e) {
             $this->handleValidationException($e);
@@ -137,36 +146,15 @@ class NotifyTemplateSender
     public function findApiKey($service_id): string
     {
         $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $service_ids = $this->parseServiceIdsFromEnv($serviceIdData);
+        $service_ids = Utils::deserializeServiceIds($serviceIdData);
         $api_key = "";
         foreach ($service_ids as $key => $value) {
-            if (trim($service_id) == trim($key)) {
-                $api_key = $value;
+            if (trim($service_id) == trim($value['service_id'])) {
+                $api_key = $value['api_key'];
             }
         }
 
         return $api_key;
-    }
-
-    public function parseServiceIdsFromEnv($serviceIdData): array
-    {
-        if (!$serviceIdData) {
-            throw new InvalidArgumentException('No service data');
-        }
-
-        try {
-            $arr = explode(',', $serviceIdData);
-            $service_ids = [];
-
-            for ($i = 0; $i < count($arr); $i++) {
-                $key_value = explode('~', $arr [$i]);
-                $service_ids[$key_value [0]] = $key_value [1];
-            }
-
-            return $service_ids;
-        } catch (Exception $exception) {
-            throw new InvalidArgumentException($exception->getMessage());
-        }
     }
 
     public function baseRedirect(): string
@@ -178,7 +166,7 @@ class NotifyTemplateSender
     {
         $client = new Client([
             'headers' => [
-                "Authorization" => get_option('LIST_MANAGER_API_KEY')
+                "Authorization" => getenv('DEFAULT_LIST_MANAGER_API_KEY')
             ]
         ]);
 
@@ -235,24 +223,11 @@ class NotifyTemplateSender
     public function renderForm(): void
     {
         if (isset($_GET['status'])) {
-            $this->notices->handleNotice($_GET['status']);
+            Notices::handleNotice($_GET['status']);
         }
 
-        $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-
-        $listValues = [];
-        $serviceIds = [];
-
-        try {
-            $serviceIds = $this->parseServiceIdsFromEnv($serviceIdData);
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-        }
-        try {
-            $listValues = self::parseJsonOptions(get_option('list_values'));
-        } catch (Exception $e) {
-            error_log($e->getMessage());
-        }
+        $serviceIds = Utils::deserializeServiceIds(get_option('LIST_MANAGER_NOTIFY_SERVICES'));
+        $listValues = self::parseJsonOptions(get_option('list_values'));
 
         FormHelpers::render([
             "service_ids" => $serviceIds,
@@ -263,7 +238,7 @@ class NotifyTemplateSender
     public static function parseJsonOptions($data)
     {
         if (empty($data)) {
-            throw new InvalidArgumentException('No list data');
+            return [];
         }
 
         $data = preg_replace(

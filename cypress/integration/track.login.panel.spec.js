@@ -21,7 +21,7 @@ describe('Track Login Panel', () => {
 
     it('Can view Track Login Panel on dashboard', () => {
         cy.visitDashboard();
-        cy.screenshot();
+
         cy.get('#logins-panel-container .login-date').should('have.text', 'Date');
         cy.get('#logins-panel-container .login-userAgent').should('have.text', 'User agent');
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)
@@ -30,34 +30,34 @@ describe('Track Login Panel', () => {
 
 describe('Track Login Panel captures logins', () => {
     before(() => {
-        cy.exec('npm run wp-env:clean')
+        cy.exec('npm run wp-env:test:setup')
     });
 
     it('On first Login display only one login', () => {
         cy.login();
         cy.visitDashboard();
-        cy.screenshot();
+
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 1)
     })
 
     it('On second Login display two logins', () => {
         cy.login();
         cy.visitDashboard();
-        cy.screenshot();
+
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 2)
     })
 
     it('On third and subsequent Login display three logins', () => {
         cy.login();
         cy.visitDashboard();
-        cy.screenshot();
+
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)
 
         cy.clearCookies();
 
         cy.login();
         cy.visitDashboard();
-        cy.screenshot();
+
         cy.get('#logins-panel-container table tbody').find('tr').should('have.length', 3)
     })
 })

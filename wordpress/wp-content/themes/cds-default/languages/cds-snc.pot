@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS Default 1.3.3\n"
+"Project-Id-Version: CDS Default 1.9.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-09-29T16:41:33+00:00\n"
+"POT-Creation-Date: 2021-11-05T16:32:34+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: cds-snc\n"
@@ -34,30 +34,70 @@ msgstr ""
 msgid "It looks like nothing was found at this location."
 msgstr ""
 
-#: functions.php:74
+#: functions.php:78
 msgid "Primary"
 msgstr ""
 
-#: header.php:40
+#: functions.php:97
+msgid "Black"
+msgstr ""
+
+#: functions.php:102
+msgid "White"
+msgstr ""
+
+#: functions.php:107
+msgid "Primary Blue"
+msgstr ""
+
+#: functions.php:112
+msgid "Dark Blue"
+msgstr ""
+
+#: functions.php:117
+msgid "Light Blue"
+msgstr ""
+
+#: functions.php:122
+msgid "Dark Grey"
+msgstr ""
+
+#: functions.php:127
+msgid "Grey"
+msgstr ""
+
+#: functions.php:132
+msgid "Orange"
+msgstr ""
+
+#: functions.php:137
+msgid "Green"
+msgstr ""
+
+#: functions.php:142
+msgid "Red"
+msgstr ""
+
+#: header.php:37
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:73
-#: header.php:91
+#: header.php:70
+#: header.php:88
 msgid "Search"
 msgstr ""
 
-#: header.php:77
-#: header.php:82
+#: header.php:74
+#: header.php:79
 msgid "Search Canada.ca"
 msgstr ""
 
-#: header.php:103
-#: header.php:108
+#: header.php:100
+#: header.php:105
 msgid "Menu"
 msgstr ""
 
-#: header.php:105
+#: header.php:102
 msgid "Main"
 msgstr ""
 

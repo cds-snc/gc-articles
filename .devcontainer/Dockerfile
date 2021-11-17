@@ -1,21 +1,31 @@
 FROM wordpress:cli-php8.0
 
-# ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+WORKDIR /usr/src/gc-articles/wordpress
+
 USER root
 
-# install utils
-RUN apk add sudo --no-cache \
-    nano \
-    openssh \
-    rsync \
-    git \
-    composer \
-    nodejs \
-    npm \
-    zsh \
-    zsh-autosuggestions \
-    zsh-syntax-highlighting \
-    gettext
+RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
+    libmcrypt-dev && \
+    # install dev utils
+    apk add sudo --no-cache \
+        nano \
+        openssh \
+        rsync \
+        git \
+        composer \
+        nodejs \
+        npm \
+        zsh \
+        zsh-autosuggestions \
+        zsh-syntax-highlighting \
+        gettext
+
+RUN pecl install pcov \
+    && docker-php-ext-enable pcov
+
+# clean up
+RUN apk del mod-deps && \
+  rm -rf /apk /tmp/* /var/cache/apk/*
 
 # Create non-root default user
 ARG USER=default

@@ -24,6 +24,10 @@ class SitesToCollections
             return $translation;
         }
 
+        if (str_contains($translation, '###')) {
+            return $translation;
+        }
+
         return str_ireplace('Site', "Collection", $text);
     }
 

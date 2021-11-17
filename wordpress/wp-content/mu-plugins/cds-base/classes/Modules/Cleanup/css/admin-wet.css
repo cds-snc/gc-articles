@@ -188,7 +188,7 @@ body {
     color: #1d2327;
   }
   
-  .wp-core-ui .button-primary, .wrap .page-title-action {
+  .wp-core-ui .button-primary, .wrap .page-title-action, .components-button.is-primary {
     background: #26374a;
     border-color: #26374a;
     color: #fff;
@@ -431,6 +431,12 @@ body {
   #collapse-button:focus {
     color: #0535d2;
     background-color: #eaebed;
+  }
+
+  /* Admin menu: WPML */
+  /* CSS hack to add colour on top of a PNG. It doesn't work super good but it's better than a white image */
+  #adminmenu .wp-menu-image img {
+    filter: opacity(1) invert(100%) drop-shadow(0 0 0 #284162) saturate(1000%);
   }
   
   /* Admin Bar */

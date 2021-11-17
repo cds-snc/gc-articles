@@ -52,8 +52,38 @@ variable "list_manager_endpoint" {
   sensitive   = true
 }
 
+variable "default_list_manager_api_key" {
+  description = "API key used for Platform ListManager request auth"
+  type        = string
+  sensitive   = true
+}
+
+variable "default_notify_api_key" {
+  description = "Default Notify API key used before a site has one configured"
+  type        = string
+  sensitive   = true
+}
+
 variable "encryption_key" {
   description = "Application encryption key"
+  type        = string
+  sensitive   = true
+}
+
+variable "s3_uploads_bucket" {
+  description = "Bucket for user uploads"
+  type        = string
+  sensitive   = true
+}
+
+variable "s3_uploads_key" {
+  description = "Credentials for S3 Uploads bucket IAM user"
+  type        = string
+  sensitive   = true
+}
+
+variable "s3_uploads_secret" {
+  description = "Credentials for S3 Uploads bucket IAM user"
   type        = string
   sensitive   = true
 }

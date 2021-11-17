@@ -48,7 +48,7 @@ class NotifyTemplateSender
 
             $response = $client->request(
                 'GET',
-                $endpoint . '/lists/' . $service_id . '/subscriber-count'
+                $endpoint . '/lists/' . $service_id . '/subscriber-count?unique=1'
             );
 
             return new WP_REST_Response(json_decode($response->getBody()->getContents()));

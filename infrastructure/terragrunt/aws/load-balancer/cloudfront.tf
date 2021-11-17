@@ -30,7 +30,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
     forwarded_values {
       query_string = true
-      headers      = ["Host", "Options"]
+      headers      = ["Host", "Options", "Referer"]
       cookies {
         forward = "whitelist"
         whitelisted_names = [

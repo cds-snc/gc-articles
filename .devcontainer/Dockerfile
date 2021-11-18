@@ -1,6 +1,6 @@
 FROM wordpress:cli-php8.0
 
-WORKDIR /usr/src/gc-articles/wordpress
+WORKDIR /usr/src/wordpress
 
 USER root
 

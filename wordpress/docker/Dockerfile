@@ -1,26 +1,15 @@
-FROM wordpress:5.8.1-php8.0-fpm-alpine
+FROM wordpress:5.8.2-php8.0-fpm-alpine
 
-# update apk repositories
-RUN apk update
+WORKDIR /usr/src/wordpress
 
-# upgrade all
-RUN apk upgrade
-
-# install apache
-RUN apk add \
+RUN apk add --no-cache \
     apache2 \
+    apache2-proxy \
     apache2-ssl \
-    apache2-proxy
+    supervisor
 
-# From main:
-#
-# WORKDIR /usr/src/gc-articles/wordpress
-#
-# RUN set -eux; \
-#    find /etc/apache2 -name '*.conf' -type f -exec sed -ri -e "s!/var/www/html!$PWD!g" -e "s!Directory /var/www/!Directory $PWD!g" '{}' +;
+COPY apache/httpd.conf /etc/apache2/httpd.conf
+COPY include/supervisord.ini /etc/supervisor.d/supervisord.ini
 
-RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
-
-RUN pecl install pcov \
-    && docker-php-ext-enable pcov
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]

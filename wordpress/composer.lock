@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8bf05fd18cbb89ca1b9325a080afdaf3",
+    "content-hash": "16b910c4ca83566a7a0408731aaa01de",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -58,16 +58,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.202.2",
+            "version": "3.204.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4460481cd63446454869534c69ddaf00cffa45be"
+                "reference": "96ad45b95bfe4515623cec11576ec22c10dd22f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4460481cd63446454869534c69ddaf00cffa45be",
-                "reference": "4460481cd63446454869534c69ddaf00cffa45be",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/96ad45b95bfe4515623cec11576ec22c10dd22f3",
+                "reference": "96ad45b95bfe4515623cec11576ec22c10dd22f3",
                 "shasum": ""
             },
             "require": {
@@ -143,9 +143,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.202.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.204.0"
             },
-            "time": "2021-11-12T19:15:25+00:00"
+            "time": "2021-11-17T19:17:36+00:00"
         },
         {
             "name": "composer/installers",
@@ -1097,10 +1097,28 @@
                 "url": "https://downloads.wordpress.org/plugin/disable-user-login.1.3.2.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/disable-user-login/"
+        },
+        {
+            "name": "wpackagist-plugin/gutenberg",
+            "version": "11.9.1",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/gutenberg/",
+                "reference": "tags/11.9.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.11.9.1.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/gutenberg/"
         },
         {
             "name": "wpackagist-plugin/login-lockdown",
@@ -1115,7 +1133,7 @@
                 "url": "https://downloads.wordpress.org/plugin/login-lockdown.zip?timestamp=1627976788"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/login-lockdown/"
@@ -1133,7 +1151,7 @@
                 "url": "https://downloads.wordpress.org/plugin/two-factor.zip?timestamp=1630999277"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/two-factor/"
@@ -1151,7 +1169,7 @@
                 "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.6.4.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordpress-importer/"
@@ -1169,7 +1187,7 @@
                 "url": "https://downloads.wordpress.org/plugin/wordpress-seo.16.9.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordpress-seo/"
@@ -1187,7 +1205,7 @@
                 "url": "https://downloads.wordpress.org/plugin/wp-bootstrap-blocks.3.3.2.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wp-bootstrap-blocks/"
@@ -1205,7 +1223,7 @@
                 "url": "https://downloads.wordpress.org/plugin/wp-native-php-sessions.1.2.4.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wp-native-php-sessions/"
@@ -1223,7 +1241,7 @@
                 "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.9.1.zip"
             },
             "require": {
-                "composer/installers": "~1.0 || ~2.0"
+                "composer/installers": "^1.0 || ^2.0"
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wps-hide-login/"
@@ -1852,16 +1870,16 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v1.20.0",
+            "version": "v1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "ba06c5a76d95bbdef93aa4e05b489c3335b6c8c1"
+                "reference": "11eb1903c2ecf83149e7c65b8160bc44a823ac39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/ba06c5a76d95bbdef93aa4e05b489c3335b6c8c1",
-                "reference": "ba06c5a76d95bbdef93aa4e05b489c3335b6c8c1",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/11eb1903c2ecf83149e7c65b8160bc44a823ac39",
+                "reference": "11eb1903c2ecf83149e7c65b8160bc44a823ac39",
                 "shasum": ""
             },
             "require": {
@@ -1929,7 +1947,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v1.20.0"
+                "source": "https://github.com/pestphp/pest/tree/v1.21.0"
             },
             "funding": [
                 {
@@ -1957,7 +1975,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-09-25T12:52:12+00:00"
+            "time": "2021-11-17T10:54:00+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
@@ -4764,5 +4782,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

@@ -95,15 +95,20 @@ declare(strict_types=1);
 
     </div>
   </div>
+
+  <?php $headerMenu = wp_nav_menu(["menu" => "header", "echo" => false]); ?>
+  <?php
+    if ($headerMenu) :
+        echo $headerMenu;
+    else :
+        ?>
   <nav class="gcweb-menu" typeof="SiteNavigationElement">
     <div class="container">
       <h2 class="wb-inv"><?php _e('Menu', 'cds-snc'); ?></h2>
-      <button type="button" aria-haspopup="true" aria-expanded="false"><span
-          class="wb-inv"><?php _e(
-              'Main',
-              'cds-snc',
-          ); ?> </span><?php _e('Menu', 'cds-snc'); ?> <span
-          class="expicon glyphicon glyphicon-chevron-down"></span></button>
+      <button type="button" aria-haspopup="true" aria-expanded="false">
+        <span class="wb-inv"><?php _e('Main', 'cds-snc'); ?> </span>
+          <?php _e('Menu', 'cds-snc'); ?> 
+          <span class="expicon glyphicon glyphicon-chevron-down"></span></button>
       <ul role="menu" aria-orientation="vertical">
           <?php // pulls in menu items from Canada.ca endpoint
             echo file_get_contents(
@@ -114,5 +119,6 @@ declare(strict_types=1);
       </ul>
     </div>
   </nav>
-    <?php echo cds_breadcrumb(); ?>
+    <?php endif; ?>
+  <?php echo cds_breadcrumb(); ?>
 </header>

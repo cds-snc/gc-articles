@@ -75,7 +75,9 @@ if (!function_exists('cds_setup')) {
 
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus([
-            'menu-1' => esc_html__('Primary', 'cds-snc'),
+            'header' => esc_html__('Primary', 'cds-snc'),
+            'side-left' => esc_html__('Secondary', 'cds-snc'),
+            'footer' => esc_html__('Footer', 'cds-snc'),
         ]);
 
         /*

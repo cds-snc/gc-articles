@@ -97,14 +97,13 @@ declare(strict_types=1);
   </div>
 
   <?php
-    $showMenu = false;
-    $headerMenu = wp_nav_menu(["menu" => "header", "echo" => false]);
-    ?>
+    $showMenu = true;
+    $headerMenu = wp_nav_menu(["menu" => "header", "echo" => false, "depth" => 1, "menu_class" => "nav nav--primary container", "container_class" => "nav--primary__container"]); ?>
   <?php
     if ($headerMenu && $showMenu) :
         echo $headerMenu;
     else :
-        ?>
+    ?>
   <nav class="gcweb-menu" typeof="SiteNavigationElement">
     <div class="container">
       <h2 class="wb-inv"><?php _e('Menu', 'cds-snc'); ?></h2>

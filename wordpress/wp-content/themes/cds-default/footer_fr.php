@@ -38,11 +38,24 @@ declare(strict_types=1);
                 <nav class="col-md-10 ftr-urlt-lnk">
                     <h2 class="wb-inv">À propos de ce site</h2>
                     <ul>
+                    <?php
+                        $footerMenuItems = wp_get_nav_menu_items("footer");
+                    if ($footerMenuItems) {
+                        foreach ($footerMenuItems as $item) {
+                            printf(
+                                "<li><a href='%s'>%s</a></li>",
+                                clean_url($item->url),
+                                esc_html($item->title)
+                            );
+                        }
+                    } else {
+                        ?>
                         <li><a href="https://www.canada.ca/fr/sociaux.html">Médias sociaux</a></li>
                         <li><a href="https://www.canada.ca/fr/mobile.html">Applications mobiles</a></li>
                         <li><a href="https://www.canada.ca/fr/gouvernement/a-propos.html">À propos de Canada.ca</a></li>
                         <li><a href="https://www.canada.ca/fr/transparence/avis.html">Avis</a></li>
                         <li><a href="https://www.canada.ca/fr/transparence/confidentialite.html">Confidentialité</a></li>
+                        <?php } ?>                        
                     </ul>
                 </nav>
                 <div class="col-xs-6 visible-sm visible-xs tofpg">

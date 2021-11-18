@@ -97,9 +97,9 @@ declare(strict_types=1);
   </div>
 
   <?php
-  $showMenu = false;
-  $headerMenu = wp_nav_menu(["menu" => "header", "echo" => false]); 
-  ?>
+    $showMenu = false;
+    $headerMenu = wp_nav_menu(["menu" => "header", "echo" => false]);
+    ?>
   <?php
     if ($headerMenu && $showMenu) :
         echo $headerMenu;

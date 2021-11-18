@@ -44,6 +44,10 @@ class SitesToCollections
 
     public function changeSitesLabelAdminBar(): void
     {
+        if (is_super_admin()) {
+            return;
+        }
+
         // remove "My Sites"
         global $wp_admin_bar;
         $wp_admin_bar->remove_menu('my-sites');

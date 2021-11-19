@@ -27,6 +27,10 @@ class Wpml
                 $settings['translation-management']['post_translation_editor_native'] = true;
                 update_option('icl_sitepress_settings', $settings);
             }
+            if (array_key_exists('post_translation_editor_native_for_post_type', $settings['translation-management'] ?? [])) {
+                unset($settings['translation-management']['post_translation_editor_native_for_post_type']);
+                update_option('icl_sitepress_settings', $settings);
+            }
         }
     }
 }

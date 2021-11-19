@@ -28,6 +28,7 @@ class Menus
             __('Bulk', 'cds-snc'),
             __('Users'),
             __('Settings'),
+            __('Media')
         ];
 
         //  __('Settings'), __('Appearance')

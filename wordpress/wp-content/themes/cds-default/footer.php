@@ -38,7 +38,7 @@ $footerText = require_once('footer_text_' . $lang . '.php');
                     </ul>
                 </nav>
                 <div class="col-xs-6 visible-sm visible-xs tofpg">
-                    <a href="#wb-cont">
+                    <a href="#top">
                         <?php echo $footerText['topOfPage']; ?>
                         <span class="glyphicon glyphicon-chevron-up"></span>
                     </a>

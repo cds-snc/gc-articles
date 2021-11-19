@@ -38,7 +38,7 @@ declare(strict_types=1);
     'Skip to content',
     'cds-snc',
 ); ?></a>
-<header>
+<header id="top">
   <div id="wb-bnr" class="container">
     <div class="row">
       <section id="wb-lng" class="col-xs-3 col-sm-12 pull-right text-right">

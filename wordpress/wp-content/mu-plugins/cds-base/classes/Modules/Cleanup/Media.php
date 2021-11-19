@@ -31,10 +31,6 @@ class Media
     {
         ?>
         <style type="text/css">
-        .view-switch .view-list {
-            display: none;
-        }
-
         .wp-filter .view-switch {
             margin: 28px 12px 0 -15px !important;
         }

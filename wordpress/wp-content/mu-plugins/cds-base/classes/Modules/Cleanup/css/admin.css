@@ -222,3 +222,7 @@ th.column-disable_user_login {
 .settings-repeater .panel-actions .actions {
   display: flex;
 }
+
+.edit-term-notes p:nth-child(2){
+  display: none;
+}

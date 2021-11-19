@@ -17,7 +17,7 @@ require_once __DIR__ . '/inc/template-filters.php';
 // phpcs:disable
 if (!defined('_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_S_VERSION', '2.1.0');
+    define('_S_VERSION', '2.1.2');
 }
 
 if (!defined('THEME_NAMESPACE')) {
@@ -75,7 +75,9 @@ if (!function_exists('cds_setup')) {
 
         // This theme uses wp_nav_menu() in one location.
         register_nav_menus([
-            'menu-1' => esc_html__('Primary', 'cds-snc'),
+            'header' => esc_html__('Primary', 'cds-snc'),
+            'side-left' => esc_html__('Secondary', 'cds-snc'),
+            'footer' => esc_html__('Footer', 'cds-snc'),
         ]);
 
         /*

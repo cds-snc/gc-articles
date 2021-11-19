@@ -5,6 +5,9 @@ main, .gc-form-wrapper, .focus-group, .entry-footer, article {
 }
 
 /* Headings */
+.homepage h2 {
+    font-size: 1.2em;
+}
 
 body h6, body .h6 {
     font-size: 19px;

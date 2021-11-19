@@ -168,6 +168,18 @@ add_action('wp_enqueue_scripts', 'cds_scripts');
 require get_template_directory() . '/inc/template-tags.php';
 
 /**
+ * Remove the "home" body class (conflicts with WET), replace with "homepage"
+ */
+add_filter('body_class', function (array $classes) {
+    if (in_array('home', $classes)) {
+        unset($classes[array_search('home', $classes)]);
+        $classes[] = 'homepage';
+    }
+
+    return $classes;
+});
+
+/**
  * Function to print links for a wordpress menu. Used to create the Canada.ca footer.
  */
 function print_menu_links(array $links): string

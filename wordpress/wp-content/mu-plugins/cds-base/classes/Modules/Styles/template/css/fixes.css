@@ -13,6 +13,15 @@ body h6, body .h6 {
     font-size: 19px;
 }
 
+/* WET Menu */
+.gcweb-menu button[aria-haspopup=true] {
+    border-radius: 0 0 3px 3px;
+}
+
+header .gcweb-menu {
+    border-top-color: #26374a; /* originally #38414d */
+}
+
 /* Lists */
 
 body ul:not(".components-panel__header ul"), body .ul, body ol, body .ol {

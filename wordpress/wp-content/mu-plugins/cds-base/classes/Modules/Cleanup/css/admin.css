@@ -226,3 +226,11 @@ th.column-disable_user_login {
 .edit-term-notes p:nth-child(2){
   display: none;
 }
+
+.term-description-wrap p{
+  display: none;
+}
+
+.term-parent-wrap p{
+  display: none;
+}

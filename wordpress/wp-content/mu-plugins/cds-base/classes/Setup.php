@@ -17,6 +17,7 @@ use CDS\Modules\Cleanup\PostsToArticles;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\Cleanup\SitesToCollections;
+use CDS\Modules\Cleanup\Media;
 use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\Contact\Setup as ContactForm;
 use CDS\Modules\FlashMessage\FlashMessage;
@@ -61,6 +62,7 @@ class Setup
         new Styles();
         new UserCollections();
         new Users();
+        new Media();
         Wpml::setup();
 
         // @TODO: subscriptions not tested since refactor

@@ -166,3 +166,22 @@ add_action('wp_enqueue_scripts', 'cds_scripts');
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Function to print links for a wordpress menu. Used to create the Canada.ca footer.
+ */
+function print_menu_links(array $links): string
+{
+    $string = '';
+
+    foreach ($links as $link) {
+        $link = (object)$link; // cast to object so that we can use arrow notation
+        $string .= sprintf(
+            "<li><a href='%s'>%s</a></li>",
+            clean_url($link->url),
+            esc_html($link->title)
+        );
+    }
+
+    return $string;
+}

@@ -1,5 +1,9 @@
 # platform-mvp
 
+## Demo
+
+[GC Articles Live Demo](https://articles.cdssandbox.xyz/) (MVP)
+
 ## Local dev
 
 Docker-compose and VS Code Remote Container environment featuring:

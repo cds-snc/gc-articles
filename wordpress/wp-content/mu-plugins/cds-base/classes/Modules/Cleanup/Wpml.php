@@ -8,14 +8,16 @@ use CDS\Utils;
 
 class Wpml
 {
-    
+
     public static function setup()
     {
-        add_action('admin_footer', function (){
-            if(!isset($_GET["taxonomy"])) return;
+        add_action('admin_footer', function () {
+            if (!isset($_GET["taxonomy"])) {
+                return;
+            }
             echo '<script>jQuery("#icl_subsubsub").clone().removeAttr("id").prependTo(".search-form");</script>';
             echo '<style>#icl_subsubsub{display:none !important;}</style>';
-        } );
+        });
         /**
          * We need to set this option to an empty array. This is supposed to be an array of directories that WPML will
          * scan looking for language switchers, but it has problems with s3: prefixed URLs. We don't use these
@@ -26,7 +28,7 @@ class Wpml
         }, 10, 1);
 
 
-        
+
 
         /**
          * Disable WPML Translation Editor

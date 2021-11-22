@@ -1,5 +1,5 @@
 {
-    "name": "cds-snc/base",
+    "name": "cds-snc/cds-base",
     "autoload": {
         "psr-4": {
             "CDS\\": "classes/"
@@ -19,6 +19,7 @@
     "require-dev": {
         "wp-cli/i18n-command": "^2.2.5"
     },
+    "type": "wordpress-plugin",
     "scripts": {
         "make-pot": "wp i18n make-pot --domain=cds-snc . languages/cds-snc.pot",
         "merge-po": "msgmerge -U ./languages/fr_FR.po ./languages/cds-snc.pot",

@@ -24,16 +24,16 @@ $footerText = require_once('footer_text_' . $lang . '.php');
                     <h2 class="wb-inv"><?php echo $footerText['aboutThisSiteTitle']; ?></h2>
                     <ul>
                     <?php
-                        $locations = get_nav_menu_locations();
+                    $locations = get_nav_menu_locations();
 
-                        if(isset($locations['footer'])) {
-                            // Get menu assigned to 'footer' location, or false
-                            $footerMenu = wp_get_nav_menu_object($locations['footer']);
-                        }
+                    if (isset($locations['footer'])) {
+                        // Get menu assigned to 'footer' location, or false
+                        $footerMenu = wp_get_nav_menu_object($locations['footer']);
+                    }
 
-                        $links = $footerMenu ? wp_get_nav_menu_items($footerMenu->name) : $footerText['aboutThisSite'];
+                    $links = $footerMenu ? wp_get_nav_menu_items($footerMenu->name) : $footerText['aboutThisSite'];
 
-                        echo print_menu_links($links);
+                    echo print_menu_links($links);
                     ?>
                     </ul>
                 </nav>

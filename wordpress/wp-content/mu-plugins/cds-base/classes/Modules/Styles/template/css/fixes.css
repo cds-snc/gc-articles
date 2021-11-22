@@ -5,9 +5,21 @@ main, .gc-form-wrapper, .focus-group, .entry-footer, article {
 }
 
 /* Headings */
+.homepage h2 {
+    font-size: 1.2em;
+}
 
 body h6, body .h6 {
     font-size: 19px;
+}
+
+/* WET Menu */
+.gcweb-menu button[aria-haspopup=true] {
+    border-radius: 0 0 3px 3px;
+}
+
+header .gcweb-menu {
+    border-top-color: #26374a; /* originally #38414d */
 }
 
 /* Lists */

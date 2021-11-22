@@ -38,7 +38,7 @@ declare(strict_types=1);
     'Skip to content',
     'cds-snc',
 ); ?></a>
-<header>
+<header id="top">
   <div id="wb-bnr" class="container">
     <div class="row">
       <section id="wb-lng" class="col-xs-3 col-sm-12 pull-right text-right">
@@ -68,7 +68,10 @@ declare(strict_types=1);
       </div>
       <section id="wb-srch" class="col-lg-offset-4 col-md-offset-4 col-sm-offset-2 col-xs-12 col-sm-5 col-md-4">
         <h2><?php _e('Search', 'cds-snc'); ?></h2>
-        <form id="site-search" action="https://canada.ca/<?php echo $langText['abbr']; ?>/sr/srb.html" method="post" name="cse-search-box"
+        <form id="site-search"
+              action="https://canada.ca/<?php echo $langText['abbr']; ?>/sr/srb.html"
+              method="post"
+              name="cse-search-box"
               role="search">
           <div class="form-group wb-srch-qry">
             <label for="wb-srch-q" class="wb-inv"><?php _e(
@@ -97,11 +100,17 @@ declare(strict_types=1);
   </div>
 
   <?php
-    $showMenu = false;
-    $headerMenu = wp_nav_menu(["menu" => "header", "echo" => false]);
-    ?>
+    // Don't get the menu by name, but by theme location. Returns false if not found
+    $headerMenu = wp_nav_menu([
+      "theme_location" => "header",
+      "fallback_cb" => false,
+      "echo" => false,
+      "depth" => 1,
+      "menu_class" => "nav nav--primary container",
+      "container_class" => "nav--primary__container"
+    ]); ?>
   <?php
-    if ($headerMenu && $showMenu) :
+    if ($headerMenu) :
         echo $headerMenu;
     else :
         ?>

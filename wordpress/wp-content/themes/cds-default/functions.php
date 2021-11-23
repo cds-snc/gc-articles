@@ -17,7 +17,7 @@ require_once __DIR__ . '/inc/template-filters.php';
 // phpcs:disable
 if (!defined('_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_S_VERSION', '2.1.2');
+    define('_S_VERSION', '2.2.0');
 }
 
 if (!defined('THEME_NAMESPACE')) {
@@ -166,3 +166,34 @@ add_action('wp_enqueue_scripts', 'cds_scripts');
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Remove the "home" body class (conflicts with WET), replace with "homepage"
+ */
+add_filter('body_class', function (array $classes) {
+    if (in_array('home', $classes)) {
+        unset($classes[array_search('home', $classes)]);
+        $classes[] = 'homepage';
+    }
+
+    return $classes;
+});
+
+/**
+ * Function to print links for a wordpress menu. Used to create the Canada.ca footer.
+ */
+function print_menu_links(array $links): string
+{
+    $string = '';
+
+    foreach ($links as $link) {
+        $link = (object)$link; // cast to object so that we can use arrow notation
+        $string .= sprintf(
+            "<li><a href='%s'>%s</a></li>",
+            clean_url($link->url),
+            esc_html($link->title)
+        );
+    }
+
+    return $string;
+}

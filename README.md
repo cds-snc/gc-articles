@@ -4,10 +4,10 @@
 
 Docker-compose and VS Code Remote Container environment featuring:
 
+- apache (reverse-proxy to wordpress/php-fpm)
 - mariadb (instead of mysql)
-- wordpress (wordpress/apache)
+- wordpress (wordpress/php-fpm)
 - wp-cli & composer (devcontainer)
-- mailhog (fake mail)
 - phpmyadmin (db admin)
 
 ## Requirements
@@ -38,14 +38,22 @@ cd platform-mvp
 composer generate-encryption-key
 ```
 
-## Start it up
+## Install things
 
-With your encryption key and other settings configured, you can bring up the environment using docker-compose from the
-root of the project. Note here that we're bringing up the ephemeral composer container first which installs composer
-dependencies and then exits:
+The following to docker-compose tasks will get all your dependencies installed and database setup:
 
 ```sh
-docker-compose up composer && docker-compose up
+docker-compose run composer
+docker-compose run install
+```
+
+## Start it up
+
+With your encryption key, environment configuration, and dependencies installed, you can bring up the environment using 
+docker-compose from the root of the project.
+
+```sh
+docker-compose up
 ```
 
 Once the services are running, you can access a cli environment preconfigured with all the tools needed for development:

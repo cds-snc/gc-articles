@@ -51,7 +51,6 @@
   "extra": {
     "installer-paths": {
       "wp-content/mu-plugins/{$name}/": [
-        "wpackagist-plugin/wps-hide-login",
         "wpackagist-plugin/wp-native-php-sessions",
         "wpackagist-plugin/disable-user-login"
       ]

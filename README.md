@@ -82,13 +82,6 @@ password: `secret`
 
 ## Useful services
 
-### Mailhog
-
-Local mailcatcher for fake email sending. To use it, configure your WordPress install to use the SMTP interface.
-
-Web interface: `localhost:8025`
-SMTP interface: `mailhog:1025`
-
 ### PHPMyAdmin
 
 Web admin for MySQL database.
@@ -100,13 +93,16 @@ password: `secret`
 
 ## Plugins and Themes
 
-Pre-installed plugins:
+### Pre-installed plugins:
 
 - [two-factor](https://wordpress.org/plugins/two-factor/)
 - [wp-bootstrap-blocks](https://wordpress.org/plugins/wp-bootstrap-blocks/)
 - [wp-native-php-sessions](https://en-ca.wordpress.org/plugins/wp-native-php-sessions/)
 - [wps-hide-login](https://en-ca.wordpress.org/plugins/wps-hide-login/)
 - [wpml](https://wpml.org/)
+- [yoast](https://yoast.com/wordpress/plugins/seo/)
+- [login-lockdown](https://en-ca.wordpress.org/plugins/login-lockdown/)
+- [disable-user-login](https://en-ca.wordpress.org/plugins/disable-user-login/)
 
 
 ### Installing Plugins
@@ -120,6 +116,14 @@ Note: when starting up the devcontainer or docker-compose, `composer install` is
 ### Creating
 
 When creating a custom plugin or theme, you should prefix the folder name with `cds-`. This will ensure the code is included in git and code quality scans.
+
+### About plugin and theme dependencies and the vendor folder
+
+Our custom plugin and theme both use Composer dependencies. It should be noted that they are configured to store their
+dependencies in the wordpress-level vendor folder. This reduces the risk of conflicting vendor packages being loaded
+by different autoloaders. 
+
+See the `wordpress/composer.json` file for how we configure our plugin/theme as local "path" dependencies.
 
 ### About WPML
 

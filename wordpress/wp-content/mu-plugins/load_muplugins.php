@@ -13,7 +13,6 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 
 require WPMU_PLUGIN_DIR . '/wp-native-php-sessions/pantheon-sessions.php';
 require WPMU_PLUGIN_DIR . '/wps-hide-login/wps-hide-login.php';
-require WPMU_PLUGIN_DIR . '/s3-uploads/s3-uploads.php';
 require WPMU_PLUGIN_DIR . '/disable-user-login/disable-user-login.php';
 
 

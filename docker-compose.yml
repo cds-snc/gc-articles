@@ -104,6 +104,7 @@ services:
       wp plugin activate sitepress-multilingual-cms --network;
       wp plugin activate cds-base --network;
       wp plugin activate two-factor --network;
+      wp plugin activate login-lockdown --network;
       '
     volumes:
       - wordpress:/usr/src/wordpress

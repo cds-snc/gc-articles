@@ -51,7 +51,6 @@
   "extra": {
     "installer-paths": {
       "wp-content/mu-plugins/{$name}/": [
-        "wpackagist-plugin/two-factor",
         "wpackagist-plugin/wps-hide-login",
         "wpackagist-plugin/wp-native-php-sessions",
         "wpackagist-plugin/wp-bootstrap-blocks",

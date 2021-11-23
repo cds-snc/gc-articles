@@ -102,6 +102,7 @@ services:
       wp theme enable cds-default --activate --network;
       wp theme disable twentytwentyone --network;
       wp plugin activate sitepress-multilingual-cms --network;
+      wp plugin activate cds-base --network
       '
     volumes:
       - wordpress:/usr/src/wordpress

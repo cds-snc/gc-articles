@@ -57,8 +57,7 @@
         "wpackagist-plugin/wp-bootstrap-blocks",
         "humanmade/s3-uploads",
         "wpackagist-plugin/login-lockdown",
-        "wpackagist-plugin/disable-user-login",
-        "cds-snc/cds-base"
+        "wpackagist-plugin/disable-user-login"
       ]
     }
   },

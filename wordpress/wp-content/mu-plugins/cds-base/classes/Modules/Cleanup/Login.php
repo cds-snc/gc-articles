@@ -11,7 +11,7 @@ class Login
         add_filter('login_headertext', [$this, 'customizeLoginHeaderText']);
         add_action('login_head', [$this, 'favicon']);
         add_action('admin_head', [$this, 'favicon']);
-        add_filter( 'login_title', [$this, 'customLoginTitle'] );
+        add_filter('login_title', [$this, 'customLoginTitle']);
         add_action('wp_login_failed', [$this, 'loginFailed']);
         add_filter('login_redirect', [$this, 'loginRedirect'], 10, 3);
     }
@@ -72,8 +72,9 @@ class Login
         error_log("LOGIN FAILED: user $username: authentication failure for \"" . admin_url() . "\"");
     }
 
-    public function customLoginTitle( $login_title ) {
+    public function customLoginTitle($login_title)
+    {
         $siteName = __("GC Articles", "cds-snc");
-        return str_replace(array('&lsaquo;', 'WordPress'), array( '', $siteName),$login_title );
+        return str_replace(array('&lsaquo;', 'WordPress'), array( '', $siteName), $login_title);
     }
 }

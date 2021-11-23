@@ -78,17 +78,20 @@ services:
     restart: 'no'
     image: composer/composer:latest
     command: install
+    profiles:
+      - tools
     volumes:
       - ~/.ssh:/root/.ssh
       - ~/.gitconfig:/root/.gitconfig
       - ./wordpress:/app
 
-  wp-install:
+  install:
     depends_on:
       - db
       - wordpress
-      - composer
     image: wordpress:cli-php8.0
+    profiles:
+      - tools
     env_file: .env
     command: >
       /bin/bash -c '
@@ -96,7 +99,8 @@ services:
       cd /usr/src/wordpress;
       wp core multisite-install --url="localhost" --title="CDS Wordpress Base" --admin_user=${ADMIN_USER} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL};
       wp option update permalink_structure "/%postname%/";
-      wp theme enable cds-default --activate;
+      wp theme enable cds-default --activate --network;
+      wp theme disable twentytwentyone --network;
       wp plugin activate sitepress-multilingual-cms --network;
       '
     volumes:

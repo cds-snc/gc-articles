@@ -29,7 +29,6 @@
   "require": {
     "wpackagist-plugin/two-factor": "^0.7.0",
     "wpackagist-plugin/wps-hide-login": "^1.8",
-    "wpackagist-plugin/wp-native-php-sessions": "^1.2",
     "wpackagist-plugin/wp-bootstrap-blocks":"3.3.2",
     "wpml/sitepress-multilingual-cms": "4.5.1",
     "wpackagist-plugin/login-lockdown":"1.8.1",

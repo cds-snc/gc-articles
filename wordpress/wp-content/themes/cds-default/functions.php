@@ -179,25 +179,6 @@ add_filter('body_class', function (array $classes) {
     return $classes;
 });
 
-/**
- * Function to print links for a wordpress menu. Used to create the Canada.ca footer.
- */
-function print_menu_links(array $links): string
-{
-    $string = '';
-
-    foreach ($links as $link) {
-        $link = (object)$link; // cast to object so that we can use arrow notation
-        $string .= sprintf(
-            "<li><a href='%s'>%s</a></li>",
-            esc_url($link->url),
-            esc_html($link->title)
-        );
-    }
-
-    return $string;
-}
-
 add_action('init', function () {
     remove_theme_support('core-block-patterns');
     unregister_block_pattern_category('buttons');
@@ -265,4 +246,3 @@ if (! function_exists('cds_get_block_pattern_markup')) :
         return ob_get_clean();
     }
 endif;
-//

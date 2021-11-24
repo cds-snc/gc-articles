@@ -280,3 +280,22 @@ function language_switcher(): string
     error_log("language_switcher: not found");
     return "";
 }
+
+/**
+ * Function to print links for a wordpress menu. Used to create the Canada.ca footer.
+ */
+function print_footer_links(array $links): string
+{
+    $string = '';
+
+    foreach ($links as $link) {
+        $link = (object)$link; // cast to object so that we can use arrow notation
+        $string .= sprintf(
+            "<li><a href='%s'>%s</a></li>",
+            clean_url($link->url),
+            esc_html($link->title)
+        );
+    }
+
+    return $string;
+}

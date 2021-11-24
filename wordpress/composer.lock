@@ -269,7 +269,7 @@
             "version": "dev-feature/change_container_to_alpine",
             "dist": {
                 "type": "path",
-                "url": "wp-content/mu-plugins/cds-base",
+                "url": "wp-content/plugins/cds-base",
                 "reference": "d50341ebae8ae8dfd47a3b08cc31e8cd2aa59a05"
             },
             "require": {

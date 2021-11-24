@@ -9,4 +9,3 @@
 
 // leaving this here so this loads really early
 require_once __DIR__ . '/../../vendor/autoload.php';
-

@@ -299,3 +299,60 @@ function print_footer_links(array $links): string
 
     return $string;
 }
+
+/**
+ * Function that will return a HTML for a side nav if the current page meets the following conditions:
+ *   - It is a "page"
+ *   - It has 'child' pages OR it has a 'parent' page
+ *
+ * If the current page doesn't have a side nav, return an empty string
+ */
+function getSideNav(): string
+{
+    global $post;
+    $parent_page_is_current_page = '';
+
+    $parents = get_post_ancestors($post->post_id);
+    krsort($parents);
+    $parents = array_merge(array(), $parents);
+
+    if (is_home() || is_single()) {
+        $id = get_option('page_for_posts');
+        $parent = get_post_ancestors($id);
+        $id = $parent[0];
+    } elseif ($parents) {
+        $id = $parents[0];
+    } else {
+        $id = $post->ID;
+        $parent_page_is_current_page = "current_page_item";
+    }
+
+    $children = wp_list_pages('title_li=&child_of=' . $id . '&echo=0');
+    $out = '';
+
+    if ($children) {
+        ob_start();
+        ?>
+            <div id="subpages" class="nav--about__desktop">
+                <div class="nav--about__desktop__title <?php echo $parent_page_is_current_page; ?>"><?php echo get_the_title($id); ?></div>
+                <nav class="nav--about" aria-label="Table of contents: <?php echo get_the_title($id); ?>">
+                    <ul>
+                        <?php echo $children; ?>
+                    </ul>
+                </nav>
+            </div><!-- end of .nav--about__desktop -->
+            <details class="nav--about__mobile">
+                <summary><div><?php echo get_the_title($id); ?></div></summary>
+                <nav class="nav--about" aria-label="Table of contents: <?php echo get_the_title($id); ?>">
+                    <ul>
+                        <?php echo $children; ?>
+                    </ul>
+                </nav>
+            </details>
+        <?php
+        $out = ob_get_contents();
+        ob_end_clean();
+    }
+
+    return $out;
+}

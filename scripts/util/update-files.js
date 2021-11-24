@@ -30,13 +30,13 @@ const updateWordPressThemeVersion = async (version) => {
 
 const updateWordPressPluginVersion = async (version) => {
   await replaceContent({
-    files: 'wordpress/wp-content/mu-plugins/cds-base/index.php',
+    files: 'wordpress/wp-content/plugins/cds-base/index.php',
     from: new RegExp("BASE_PLUGIN_NAME_VERSION',.*", 'i'),
     to: `BASE_PLUGIN_NAME_VERSION', '${version}');`,
   });
 
   await replaceContent({
-    files: 'wordpress/wp-content/mu-plugins/cds-base/index.php',
+    files: 'wordpress/wp-content/plugins/cds-base/index.php',
     from: new RegExp("Version:.*", 'i'),
     to: `Version: ${version}`,
   });
@@ -45,7 +45,7 @@ const updateWordPressPluginVersion = async (version) => {
 const updatePackageJsonVersion = async (version) => {
 
   await replaceContent({
-    files: 'wordpress/wp-content/mu-plugins/cds-base/package.json',
+    files: 'wordpress/wp-content/plugins/cds-base/package.json',
     from: new RegExp('"version":.*"', 'i'),
     to: `"version": "${version}"`,
   });

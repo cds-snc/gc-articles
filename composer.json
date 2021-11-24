@@ -10,7 +10,7 @@
   },
   "autoload": {
     "psr-4": {
-      "CDS\\": "wordpress/wp-content/mu-plugins/cds-base/classes/"
+      "CDS\\": "wordpress/wp-content/plugins/cds-base/classes/"
     }
   }
 }

@@ -19,7 +19,7 @@
     },
     {
       "type": "path",
-      "url": "wp-content/mu-plugins/cds-base"
+      "url": "wp-content/plugins/cds-base"
     },
     {
       "type": "path",
@@ -49,17 +49,17 @@
   "scripts": {
     "prepare-translations": [
       "cd wp-content/themes/cds-default && composer prepare-translations",
-      "cd wp-content/mu-plugins/cds-base && composer prepare-translations"
+      "cd wp-content/plugins/cds-base && composer prepare-translations"
     ],
     "compile-translations": [
       "cd wp-content/themes/cds-default && composer compile-translations",
-      "cd wp-content/mu-plugins/cds-base && composer compile-translations"
+      "cd wp-content/plugins/cds-base && composer compile-translations"
     ],
     "generate-encryption-key": "CDS\\Modules\\Cli\\GenerateEncryptionKey::generateEncryptionKey"
   },
   "autoload": {
     "psr-4": {
-      "CDS\\": "wp-content/mu-plugins/cds-base/classes/"
+      "CDS\\": "wp-content/plugins/cds-base/classes/"
     }
   }
 }

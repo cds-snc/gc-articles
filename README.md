@@ -255,13 +255,13 @@ cd wordpress
 PHP_CodeSniffer (`phpcs`) lints our PHP code to enforce a consistent style across the codebase. To run `phpcs`, first install it globally ([instructions for installing with Homebrew](https://gist.github.com/pbrocks/ab8d8c7ce200ce6f718181cebfc57a1e)). Then, you can lint the codebase with
 
 ```
-phpcs .wordpress/wp-content/mu-plugins/cds-base -n --standard=PSR12 --ignore=build,node_modules,vendor,tests,.css,.js
+phpcs .wordpress/wp-content/plugins/cds-base -n --standard=PSR12 --ignore=build,node_modules,vendor,tests,.css,.js
 ```
 
 Note that this can pick up vendor files, so specifically targeting the module(s) you are working on (or individual files) will result in least amount of noise.
 
 ```
-phpcs ./wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Cleanup/Articles.php --standard=PSR12
+phpcs ./wordpress/wp-content/plugins/cds-base/classes/Modules/Cleanup/Articles.php --standard=PSR12
 ```
 
 ## Deployments

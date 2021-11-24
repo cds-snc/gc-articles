@@ -15,6 +15,10 @@ class SendTemplateDashboardPanel
 
     public function dashboardWidget(): void
     {
+        if (!current_user_can('list_manager_bulk_send')) {
+            return;
+        }
+
         wp_add_dashboard_widget(
             'cds_notify_widget',
             __('Notify', 'cds'),

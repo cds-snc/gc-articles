@@ -292,7 +292,7 @@ function print_footer_links(array $links): string
         $link = (object)$link; // cast to object so that we can use arrow notation
         $string .= sprintf(
             "<li><a href='%s'>%s</a></li>",
-            clean_url($link->url),
+            esc_url($link->url),
             esc_html($link->title)
         );
     }

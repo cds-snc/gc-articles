@@ -14,7 +14,7 @@ $footerMenu = '';
         <nav class="container wb-navcurr">
             <h2 class="wb-inv"><?php echo $footerText['aboutGovernmentTitle']; ?></h2>
             <ul class="list-unstyled colcount-sm-2 colcount-md-3">
-                <?php echo print_menu_links($footerText['aboutGovernment']); ?>
+                <?php echo print_footer_links($footerText['aboutGovernment']); ?>
             </ul>
         </nav>
     </div>
@@ -34,7 +34,7 @@ $footerMenu = '';
 
                     $links = $footerMenu ? wp_get_nav_menu_items($footerMenu->name) : $footerText['aboutThisSite'];
 
-                    echo print_menu_links($links);
+                    echo print_footer_links($links);
                     ?>
                     </ul>
                 </nav>

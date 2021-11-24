@@ -24,6 +24,7 @@ describe('Notify Panel', () => {
     });
 
     it('Can view Notify Panel on dashboard', () => {
+        cy.addUserCap("admin", "list_manager_bulk_send");
         cy.visitDashboard();
 
         cy.get('#notify-panel-container a').should('have.text', 'Send Template');

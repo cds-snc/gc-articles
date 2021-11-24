@@ -20,6 +20,23 @@ services:
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
 
+  apache:
+    container_name: apache
+    image: httpd:2.4-alpine
+    ports:
+      - 80:80
+    volumes:
+      - wordpress:/usr/src/wordpress
+      - ./wordpress/vendor:/usr/src/wordpress/vendor
+      - ./wordpress/wp-content:/usr/src/wordpress/wp-content
+      - ./wordpress/wp-config.php:/usr/src/wordpress/wp-config.php
+      - ./wordpress/.htaccess-multisite:/usr/src/wordpress/.htaccess
+      - ./wordpress/docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./wordpress/docker/apache/conf.d/php-fpm.conf:/usr/local/apache2/conf.d/php-fpm.conf
+      - ./wordpress/docker/apache/conf.d/default-site.conf:/usr/local/apache2/conf.d/default-site.conf
+    networks:
+      - app-network
+
   wordpress:
     depends_on:
       - db
@@ -28,18 +45,19 @@ services:
       context: ./wordpress/docker
     container_name: wordpress
     restart: always
-    ports:
-      - 80:80
     env_file: .env
     volumes:
-      - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
-      - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
-      - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
-      - ./wordpress/.htaccess-multisite:/usr/src/gc-articles/wordpress/.htaccess
+      - wordpress:/usr/src/wordpress
+      - ./wordpress/vendor:/usr/src/wordpress/vendor
+      - ./wordpress/wp-content:/usr/src/wordpress/wp-content
+      - ./wordpress/wp-config.php:/usr/src/wordpress/wp-config.php
+      - ./wordpress/.htaccess-multisite:/usr/src/wordpress/.htaccess
       - ./wordpress/docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
       - ./wordpress/docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
-      - ./wordpress/docker/php/conf.d/upload_max_filesize.ini:/usr/local/etc/php/conf.d/uplaod_max_filesize.ini
+      - ./wordpress/docker/php/conf.d/upload_max_filesize.ini:/usr/local/etc/php/conf.d/upload_max_filesize.ini
+      - ./wordpress/docker/php/conf.d/memory_limit.ini:/usr/local/etc/php/conf.d/memory_limit.ini
+      - ./wordpress/docker/php/conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
+      - ./wordpress/docker/php/conf.d/max_execution_time.ini:/usr/local/etc/php/conf.d/max_execution_time.ini
     networks:
       - app-network
 
@@ -60,32 +78,36 @@ services:
     restart: 'no'
     image: composer/composer:latest
     command: install
+    profiles:
+      - tools
     volumes:
       - ~/.ssh:/root/.ssh
       - ~/.gitconfig:/root/.gitconfig
       - ./wordpress:/app
 
-  wp-install:
+  install:
     depends_on:
       - db
       - wordpress
-      - composer
     image: wordpress:cli-php8.0
+    profiles:
+      - tools
     env_file: .env
     command: >
       /bin/bash -c '
       /wait-for-it.sh db:3306;
-      cd /usr/src/gc-articles/wordpress;
+      cd /usr/src/wordpress;
       wp core multisite-install --url="localhost" --title="CDS Wordpress Base" --admin_user=${ADMIN_USER} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL};
       wp option update permalink_structure "/%postname%/";
-      wp theme enable cds-default --activate;
+      wp theme enable cds-default --activate --network;
+      wp theme disable twentytwentyone --network;
       wp plugin activate sitepress-multilingual-cms --network;
       '
     volumes:
-      - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
-      - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
-      - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
+      - wordpress:/usr/src/wordpress
+      - ./wordpress/vendor:/usr/src/wordpress/vendor
+      - ./wordpress/wp-content:/usr/src/wordpress/wp-content
+      - ./wordpress/wp-config.php:/usr/src/wordpress/wp-config.php
       - ./wait-for-it.sh:/wait-for-it.sh
     networks:
       - app-network
@@ -100,10 +122,10 @@ services:
       dockerfile: .devcontainer/Dockerfile
     env_file: .env
     volumes:
-      - wordpress:/usr/src/gc-articles/wordpress
-      - ./wordpress/vendor:/usr/src/gc-articles/wordpress/vendor
-      - ./wordpress/wp-content:/usr/src/gc-articles/wordpress/wp-content
-      - ./wordpress/wp-config.php:/usr/src/gc-articles/wordpress/wp-config.php
+      - wordpress:/usr/src/wordpress
+      - ./wordpress/vendor:/usr/src/wordpress/vendor
+      - ./wordpress/wp-content:/usr/src/wordpress/wp-content
+      - ./wordpress/wp-config.php:/usr/src/wordpress/wp-config.php
       - ./:/home/default/project
       - ~/.ssh:/home/default/.ssh
       - ~/.gitconfig:/home/default/.gitconfig

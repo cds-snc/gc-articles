@@ -1,11 +1,11 @@
-FROM wordpress:5.8.2-php8.0-apache
+FROM wordpress:5.8.2-php8.0-fpm-alpine
 
-WORKDIR /usr/src/gc-articles/wordpress
+WORKDIR /usr/src/wordpress
 
-RUN set -eux; \
-    find /etc/apache2 -name '*.conf' -type f -exec sed -ri -e "s!/var/www/html!$PWD!g" -e "s!Directory /var/www/!Directory $PWD!g" '{}' +;
+RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 
-RUN pecl install xdebug \
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install xdebug \
     && docker-php-ext-enable xdebug
 
 RUN pecl install pcov \

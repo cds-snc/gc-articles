@@ -16,6 +16,14 @@
           "reference": "v4.5.1"
         }
       }
+    },
+    {
+      "type": "path",
+      "url": "wp-content/mu-plugins/cds-base"
+    },
+    {
+      "type": "path",
+      "url": "wp-content/themes/cds-default"
     }
   ],
   "require": {
@@ -29,7 +37,9 @@
     "wpackagist-plugin/wordpress-importer":"0.6.4",
     "wpackagist-plugin/wordpress-seo": "^16.9",
     "humanmade/s3-uploads": "^3.0",
-    "wpackagist-plugin/gutenberg":"11.9.1"
+    "wpackagist-plugin/gutenberg":"11.9.1",
+    "cds-snc/cds-base": "@dev",
+    "cds-snc/cds-default": "@dev"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",
@@ -47,19 +57,12 @@
         "wpackagist-plugin/wp-bootstrap-blocks",
         "humanmade/s3-uploads",
         "wpackagist-plugin/login-lockdown",
-        "wpackagist-plugin/disable-user-login"
+        "wpackagist-plugin/disable-user-login",
+        "cds-snc/cds-base"
       ]
     }
   },
   "scripts": {
-    "post-install-cmd": [
-      "cd wp-content/themes/cds-default && composer install",
-      "cd wp-content/mu-plugins/cds-base && composer install"
-    ],
-    "post-update-cmd": [
-      "cd wp-content/themes/cds-default && composer update",
-      "cd wp-content/mu-plugins/cds-base && composer update"
-    ],
     "prepare-translations": [
       "cd wp-content/themes/cds-default && composer prepare-translations",
       "cd wp-content/mu-plugins/cds-base && composer prepare-translations"

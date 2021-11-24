@@ -8,10 +8,10 @@
 
 Docker-compose and VS Code Remote Container environment featuring:
 
+- apache (reverse-proxy to wordpress/php-fpm)
 - mariadb (instead of mysql)
-- wordpress (wordpress/apache)
+- wordpress (wordpress/php-fpm)
 - wp-cli & composer (devcontainer)
-- mailhog (fake mail)
 - phpmyadmin (db admin)
 
 ## Requirements
@@ -42,14 +42,22 @@ cd platform-mvp
 composer generate-encryption-key
 ```
 
-## Start it up
+## Install things
 
-With your encryption key and other settings configured, you can bring up the environment using docker-compose from the
-root of the project. Note here that we're bringing up the ephemeral composer container first which installs composer
-dependencies and then exits:
+The following to docker-compose tasks will get all your dependencies installed and database setup:
 
 ```sh
-docker-compose up composer && docker-compose up
+docker-compose run composer
+docker-compose run install
+```
+
+## Start it up
+
+With your encryption key, environment configuration, and dependencies installed, you can bring up the environment using 
+docker-compose from the root of the project.
+
+```sh
+docker-compose up
 ```
 
 Once the services are running, you can access a cli environment preconfigured with all the tools needed for development:
@@ -78,13 +86,6 @@ password: `secret`
 
 ## Useful services
 
-### Mailhog
-
-Local mailcatcher for fake email sending. To use it, configure your WordPress install to use the SMTP interface.
-
-Web interface: `localhost:8025`
-SMTP interface: `mailhog:1025`
-
 ### PHPMyAdmin
 
 Web admin for MySQL database.
@@ -96,13 +97,16 @@ password: `secret`
 
 ## Plugins and Themes
 
-Pre-installed plugins:
+### Pre-installed plugins:
 
 - [two-factor](https://wordpress.org/plugins/two-factor/)
 - [wp-bootstrap-blocks](https://wordpress.org/plugins/wp-bootstrap-blocks/)
 - [wp-native-php-sessions](https://en-ca.wordpress.org/plugins/wp-native-php-sessions/)
 - [wps-hide-login](https://en-ca.wordpress.org/plugins/wps-hide-login/)
 - [wpml](https://wpml.org/)
+- [yoast](https://yoast.com/wordpress/plugins/seo/)
+- [login-lockdown](https://en-ca.wordpress.org/plugins/login-lockdown/)
+- [disable-user-login](https://en-ca.wordpress.org/plugins/disable-user-login/)
 
 
 ### Installing Plugins
@@ -116,6 +120,14 @@ Note: when starting up the devcontainer or docker-compose, `composer install` is
 ### Creating
 
 When creating a custom plugin or theme, you should prefix the folder name with `cds-`. This will ensure the code is included in git and code quality scans.
+
+### About plugin and theme dependencies and the vendor folder
+
+Our custom plugin and theme both use Composer dependencies. It should be noted that they are configured to store their
+dependencies in the wordpress-level vendor folder. This reduces the risk of conflicting vendor packages being loaded
+by different autoloaders. 
+
+See the `wordpress/composer.json` file for how we configure our plugin/theme as local "path" dependencies.
 
 ### About WPML
 

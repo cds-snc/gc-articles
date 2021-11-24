@@ -12,7 +12,6 @@
 */
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../wp-content/mu-plugins/cds-base/vendor/autoload.php';
 
 WP_Mock::bootstrap();
 

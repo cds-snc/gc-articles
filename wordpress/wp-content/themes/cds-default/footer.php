@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 $lang = get_active_language();
 $footerText = require_once('footer_text_' . $lang . '.php');
+$footerMenu = '';
 
 ?>
 

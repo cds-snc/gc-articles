@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a398305a48a41e59631ebca15519a348",
+    "content-hash": "0331b0703c972a1a489351053c0f1b89",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.204.3",
+            "version": "3.204.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ff16c004eecf274b6aab71c1138c6cb6f9f873e7"
+                "reference": "0444c8809d9d80b5d0d31441ccabf67069d47976"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ff16c004eecf274b6aab71c1138c6cb6f9f873e7",
-                "reference": "ff16c004eecf274b6aab71c1138c6cb6f9f873e7",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0444c8809d9d80b5d0d31441ccabf67069d47976",
+                "reference": "0444c8809d9d80b5d0d31441ccabf67069d47976",
                 "shasum": ""
             },
             "require": {
@@ -200,9 +200,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.204.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.204.4"
             },
-            "time": "2021-11-22T19:19:49+00:00"
+            "time": "2021-11-23T19:17:05+00:00"
         },
         {
             "name": "brick/math",
@@ -266,7 +266,7 @@
         },
         {
             "name": "cds-snc/cds-base",
-            "version": "dev-feature/change_container_to_alpine",
+            "version": "dev-refactor/move_plugins_out_of_mu-plugins",
             "dist": {
                 "type": "path",
                 "url": "wp-content/plugins/cds-base",
@@ -320,7 +320,7 @@
         },
         {
             "name": "cds-snc/cds-default",
-            "version": "dev-feature/change_container_to_alpine",
+            "version": "dev-refactor/move_plugins_out_of_mu-plugins",
             "dist": {
                 "type": "path",
                 "url": "wp-content/themes/cds-default",
@@ -1075,7 +1075,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v8.73.1",
+            "version": "v8.73.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -1129,7 +1129,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v8.73.1",
+            "version": "v8.73.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -1177,7 +1177,7 @@
         },
         {
             "name": "illuminate/encryption",
-            "version": "v8.73.1",
+            "version": "v8.73.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/encryption.git",
@@ -1228,7 +1228,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v8.73.1",
+            "version": "v8.73.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -1274,16 +1274,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v8.73.1",
+            "version": "v8.73.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "05b82a3fb311c4a3a40edfc8540463d576d7e65e"
+                "reference": "ecb4d4fb01f9716b2decbb1bf584ea8164c3b222"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/05b82a3fb311c4a3a40edfc8540463d576d7e65e",
-                "reference": "05b82a3fb311c4a3a40edfc8540463d576d7e65e",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/ecb4d4fb01f9716b2decbb1bf584ea8164c3b222",
+                "reference": "ecb4d4fb01f9716b2decbb1bf584ea8164c3b222",
                 "shasum": ""
             },
             "require": {
@@ -1338,7 +1338,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-11-19T14:01:03+00:00"
+            "time": "2021-11-23T14:10:18+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -3535,42 +3535,6 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wordpress-seo/"
-        },
-        {
-            "name": "wpackagist-plugin/wp-bootstrap-blocks",
-            "version": "3.3.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-bootstrap-blocks/",
-                "reference": "tags/3.3.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-bootstrap-blocks.3.3.2.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-bootstrap-blocks/"
-        },
-        {
-            "name": "wpackagist-plugin/wp-native-php-sessions",
-            "version": "1.2.4",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/wp-native-php-sessions/",
-                "reference": "tags/1.2.4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-native-php-sessions.1.2.4.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/wp-native-php-sessions/"
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
@@ -6128,7 +6092,6 @@
                     "type": "github"
                 }
             ],
-            "abandoned": true,
             "time": "2020-09-28T06:45:17+00:00"
         },
         {

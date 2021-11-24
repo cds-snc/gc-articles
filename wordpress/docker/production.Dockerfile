@@ -50,9 +50,9 @@ COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
 
 # Copy compiled js and css from the buildjs phase @TODO: these should be combined into a single location
-COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/build ./wp-content/mu-plugins/cds-base/build
-COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Contact/js ./wp-content/mu-plugins/cds-base/classes/Modules/Contact/js
-COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Subscribe/js ./wp-content/mu-plugins/cds-base/classes/Modules/Subscribe/js
-COPY --from=buildjs /app/wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Styles/template/css ./wp-content/mu-plugins/cds-base/classes/Modules/Styles/template/css
+COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/build ./wp-content/plugins/cds-base/build
+COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Contact/js ./wp-content/plugins/cds-base/classes/Modules/Contact/js
+COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Subscribe/js ./wp-content/plugins/cds-base/classes/Modules/Subscribe/js
+COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Styles/template/css ./wp-content/plugins/cds-base/classes/Modules/Styles/template/css
 
 EXPOSE 80 443

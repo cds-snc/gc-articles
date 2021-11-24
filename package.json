@@ -9,7 +9,7 @@
     "check-version": "node ./scripts/check-for-version.js",
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",
-    "postinstall": "cd wordpress/wp-content/mu-plugins/cds-base && npm install && npm run build && cd classes/Modules/Subscribe && npm install && cd ../Contact && npm install",
+    "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && npm run build && cd classes/Modules/Subscribe && npm install && cd ../Contact && npm install",
     "import": "node ./import/import.js",
     "wp-env": "wp-env",
     "wp-env:init": "wp-env start",

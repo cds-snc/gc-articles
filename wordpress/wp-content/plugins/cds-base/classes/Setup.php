@@ -20,7 +20,6 @@ use CDS\Modules\Cleanup\SitesToCollections;
 use CDS\Modules\Cleanup\Media;
 use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\Contact\Setup as ContactForm;
-use CDS\Modules\FlashMessage\FlashMessage;
 use CDS\Modules\Meta\Favicon;
 use CDS\Modules\Meta\MetaTags;
 use CDS\Modules\Notify\NotifyClient;
@@ -58,7 +57,6 @@ class Setup
 
         new SubscriptionForm();
         new ContactForm();
-        new FlashMessage();
         new Styles();
         new UserCollections();
         new Users();

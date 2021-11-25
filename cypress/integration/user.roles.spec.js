@@ -10,7 +10,8 @@ const allowedPages200 = [
     'post-new.php',
     'edit.php?post_type=page',
     'post-new.php?post_type=page',
-    'upload.php'
+    'upload.php',
+    'nav-menus.php'
 ];
 
 // user should not be able to access these pages
@@ -46,7 +47,7 @@ describe('User - GC Editor', () => {
         cy.login('gceditor', 'secret');
 
         checkPages(allowedPages200, 200);
-        checkPages([...blockedPages403, 'users.php'], 403);
+        checkPages([...blockedPages403, 'users.php', 'customize.php'], 403);
         checkPages(blockedPages500, 500);
     });
 

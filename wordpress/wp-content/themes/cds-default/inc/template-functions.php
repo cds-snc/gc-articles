@@ -284,7 +284,7 @@ function language_switcher(): string
 /**
  * Function to print links for a wordpress menu. Used to create the Canada.ca footer.
  */
-function print_footer_links(array $links): string
+function get_footer_links(array $links): string
 {
     $string = '';
 
@@ -307,7 +307,7 @@ function print_footer_links(array $links): string
  *
  * If the current page doesn't have a side nav, return an empty string
  */
-function getSideNav(): string
+function get_side_nav(): string
 {
     global $post;
     $parent_page_is_current_page = '';

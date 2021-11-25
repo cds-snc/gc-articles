@@ -8,7 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.1.1', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.1.2', function () {
             if (is_blog_installed()) {
                 $wp_roles = wp_roles();
                 $allRoles = array_keys($wp_roles->roles); // array_keys returns only the slug
@@ -77,7 +77,8 @@ class Roles
                 'delete_pages' => 1,
                 'delete_others_pages' => 1,
                 'delete_published_pages' => 1,
-                'upload_files' => 1
+                'upload_files' => 1,
+                'edit_theme_options' => 1 // allows editing the "menu" options
             ],
             'editor' => [
                 'moderate_comments' => 1,
@@ -163,7 +164,8 @@ class Roles
                 'delete_pages' => 1,
                 'delete_others_pages' => 1,
                 'delete_published_pages' => 1,
-                'upload_files' => 1
+                'upload_files' => 1,
+                'edit_theme_options' => 1 // allows editing the "menu" options
             ],
             'display_name' => [
                 'administrator' => 'GC Admin',

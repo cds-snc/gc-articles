@@ -15,7 +15,7 @@
 
 declare(strict_types=1);
 
-$side_nav = getSideNav();
+$side_nav = get_side_nav();
 $has_side_nav = !empty($side_nav) ? true : false;
 
 get_header();

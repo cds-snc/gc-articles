@@ -190,7 +190,7 @@ class Users
 
         $blogName = get_bloginfo('name');
         $url = network_site_url('wp-login.php');
-        
+
         // phpcs:disable
         $subject = __("Invitation to collaborate on GC Articles", "cds-snc"). " — ". $blogName;
         $message .= __('Someone has invited this email to collaborate on a GC Articles — ', "cds-snc").$blogName.".". "\r\n\r\n";

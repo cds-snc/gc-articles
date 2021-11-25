@@ -4,7 +4,7 @@ const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
 describe('Alert Block', () => {
     beforeEach(() => {
-        cy.loginUser('admin', 'password');
+        cy.login('admin', 'password');
         cy.screenshot();
         cy.createNewPost();
         cy.screenshot();

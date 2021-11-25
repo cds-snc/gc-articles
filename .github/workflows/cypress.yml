@@ -77,4 +77,4 @@ jobs:
         if: always()
         with:
           name: build
-          path: .
+          path: wordpress/wp-content/plugins/cds-base/build

@@ -190,10 +190,79 @@ function print_menu_links(array $links): string
         $link = (object)$link; // cast to object so that we can use arrow notation
         $string .= sprintf(
             "<li><a href='%s'>%s</a></li>",
-            clean_url($link->url),
+            esc_url($link->url),
             esc_html($link->title)
         );
     }
 
     return $string;
 }
+
+add_action('init', function () {
+    remove_theme_support('core-block-patterns');
+    unregister_block_pattern_category('buttons');
+    unregister_block_pattern_category('columns');
+    unregister_block_pattern_category('gallery');
+    unregister_block_pattern_category('header');
+    unregister_block_pattern_category('text');
+    unregister_block_pattern_category('query');
+});
+
+if (! function_exists('cds_register_block_patterns')) :
+    function cds_register_block_patterns()
+    {
+
+        if (! ( function_exists('register_block_pattern_category') && function_exists('register_block_pattern') )) {
+            return;
+        }
+
+        // The block pattern categories
+        $cds_block_pattern_categories = apply_filters('cds_block_pattern_categories', array(
+            'homepage' => array(
+                'label'         => esc_html__('GC Homepage', 'cds-snc'),
+            )
+        ));
+
+        // Sort the block pattern categories alphabetically based on the label value, to ensure alphabetized order when the strings are localized.
+        uasort($cds_block_pattern_categories, function ($a, $b) {
+            return strcmp($a["label"], $b["label"]);
+        });
+
+        // Register block pattern categories.
+        foreach ($cds_block_pattern_categories as $slug => $settings) {
+            register_block_pattern_category($slug, $settings);
+        }
+
+        // patterns
+        $cds_block_patterns = apply_filters('cds_block_patterns', array(
+            'cds/homepage' => array(
+                'title'         => esc_html__('Default homepage', 'cds-snc'),
+                'categories'    => array( 'homepage' ),
+                'content'       => cds_get_block_pattern_markup('homepage/landing'),
+            ),
+        ));
+
+        // Register block patterns.
+        foreach ($cds_block_patterns as $slug => $settings) {
+            register_block_pattern($slug, $settings);
+        }
+    }
+    add_action('after_setup_theme', 'cds_register_block_patterns');
+endif;
+
+if (! function_exists('cds_get_block_pattern_markup')) :
+    function cds_get_block_pattern_markup($pattern_name)
+    {
+
+        $path = 'inc/block-patterns/' . $pattern_name . '.php';
+
+        if (! locate_template($path)) {
+            return;
+        }
+
+        ob_start();
+        include(locate_template($path));
+        return ob_get_clean();
+    }
+endif;
+//

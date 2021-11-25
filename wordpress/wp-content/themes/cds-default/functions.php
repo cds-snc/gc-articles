@@ -190,7 +190,7 @@ function print_menu_links(array $links): string
         $link = (object)$link; // cast to object so that we can use arrow notation
         $string .= sprintf(
             "<li><a href='%s'>%s</a></li>",
-            clean_url($link->url),
+            esc_url($link->url),
             esc_html($link->title)
         );
     }
@@ -206,7 +206,6 @@ add_action('init', function () {
     unregister_block_pattern_category('header');
     unregister_block_pattern_category('text');
     unregister_block_pattern_category('query');
-    unregister_block_pattern_category('uncategorized');
 });
 
 if (! function_exists('cds_register_block_patterns')) :

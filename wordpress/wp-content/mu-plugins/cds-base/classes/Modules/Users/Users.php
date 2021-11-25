@@ -184,6 +184,25 @@ class Users
         wp_mail($email, $subject, $message);
     }
 
+    public function sendAddToCollection($uId, $email)
+    {
+        $userInfo = get_userdata($uId);
+
+        $blogName = get_bloginfo('name');
+        
+        // phpcs:disable
+        $subject = __("Invitation to collaborate on GC Articles", "cds-snc"). " — ". $blogName;
+        
+        $blogInfo->name;
+        
+        $message = __('Someone has invited this email to collaborate on a GC Articles collection site.', "cds-snc") . "\r\n\r\n";
+        
+        
+        // phpcs:enable
+
+        wp_mail($email, $subject, $message);
+    }
+
     public function addUserToCollection($data): WP_REST_Response|false
     {
         try {
@@ -210,6 +229,11 @@ class Users
 
             if (is_multisite()) {
                 $this->addToBlog($uId, $role);
+                
+                if($statusCode === 200){
+                    // only send if we haven't created a new user
+                    $this->sendAddToCollection($uId, $email);
+                }
             }
 
             return new WP_REST_Response([

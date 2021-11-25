@@ -189,7 +189,7 @@ class Users
         $userInfo = get_userdata($uId);
 
         $blogName = get_bloginfo('name');
-        
+
         // phpcs:disable
         $subject = __("Invitation to collaborate on GC Articles", "cds-snc"). " — ". $blogName;
         
@@ -229,8 +229,8 @@ class Users
 
             if (is_multisite()) {
                 $this->addToBlog($uId, $role);
-                
-                if($statusCode === 200){
+
+                if ($statusCode === 200) {
                     // only send if we haven't created a new user
                     $this->sendAddToCollection($uId, $email);
                 }

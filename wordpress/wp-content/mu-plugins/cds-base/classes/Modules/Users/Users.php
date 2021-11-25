@@ -189,12 +189,12 @@ class Users
         $userInfo = get_userdata($uId);
 
         $blogName = get_bloginfo('name');
-        $url = get_bloginfo('url');
-
+        $url = network_site_url('wp-login.php');
+        
         // phpcs:disable
         $subject = __("Invitation to collaborate on GC Articles", "cds-snc"). " — ". $blogName;
-        $message .= __('Someone has invited this email to collaborate on a GC Articles — ', "cds-snc").$blogName. "\r\n\r\n";
-        $message .= __('To get started log in here:', "cds-snc").$url;
+        $message .= __('Someone has invited this email to collaborate on a GC Articles — ', "cds-snc").$blogName.".". "\r\n\r\n";
+        $message .= __('To get started log in here: ', "cds-snc").$url;
         
         // phpcs:enable
 

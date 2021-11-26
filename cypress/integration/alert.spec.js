@@ -14,8 +14,6 @@ describe('Alert Block', () => {
 
     it('Alert block should be initialized with default attributes', () => {
         cy.insertAlertBlock();
-
         cy.selectAlertBlock();
-
     });
 });

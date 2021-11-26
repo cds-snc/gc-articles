@@ -4,7 +4,7 @@ const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
 describe('User - GC Editor', () => {
     before(() => {
-
+        cy.exec('npm run wp-env:test:setup')
     });
 
     after(() => {

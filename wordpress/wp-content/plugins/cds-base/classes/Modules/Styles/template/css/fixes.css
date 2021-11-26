@@ -79,3 +79,8 @@ body:not(.wp-admin) table tbody tr td {
     background-color: #bbbfc5;
     border-color: #989da6;
 }
+
+
+.users-php .subsubsub{
+    display:none;
+}

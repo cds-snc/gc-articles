@@ -17,6 +17,12 @@ class Wpml
             echo "<script>
                     jQuery(jQuery('a[href*=\"edit-tags.php?taxonomy=category\"]'))
                     .attr('href', 'edit-tags.php?taxonomy=category&lang=all' )
+                    
+                    jQuery(jQuery('#menu-pages a')[0])
+                    .attr('href', 'edit.php?post_type=page&lang=all' )
+
+                    jQuery(jQuery('#menu-posts a')[0])
+                    .attr('href', 'edit.php?post_type=post&all_posts=1&lang=all' )
                   </script>";
 
             if (!isset($_GET["taxonomy"])) {

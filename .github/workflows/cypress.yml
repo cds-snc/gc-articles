@@ -35,15 +35,15 @@ jobs:
       - name: Composer install
         run: cd wordpress && composer install --prefer-dist --no-progress
 
-      - name: Cache NPM
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+#      - name: Cache NPM
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            ~/.npm
+#            ~/.cache/Cypress
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-
 
       - name: Cypress and NPM install and build
         uses: cypress-io/github-action@v2
@@ -62,3 +62,13 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+      - uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: cypress-videos
+          path: cypress/videos

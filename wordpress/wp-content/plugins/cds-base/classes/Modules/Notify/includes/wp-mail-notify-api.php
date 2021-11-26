@@ -1,6 +1,5 @@
 <?php
 
-use CDS\Modules\FlashMessage\FlashMessage;
 use CDS\Modules\Notify\NotifyClient;
 
 if (!function_exists('wp_mail')) {
@@ -21,11 +20,7 @@ if (!function_exists('wp_mail')) {
         } catch (\Alphagov\Notifications\Exception\NotifyException $e) {
             error_log("[Notify] " . $e->getMessage());
 
-            FlashMessage::queueFlashMessage(
-                "There was an error sending the email :" . $e->getMessage(),
-                'error'
-            );
-
+            // @TODO: Return a code or throw an exception to be caught in Users.php?
             return false;
         }
         return true;

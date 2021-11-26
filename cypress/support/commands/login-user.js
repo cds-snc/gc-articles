@@ -1,4 +1,5 @@
 Cypress.Commands.add('login', (username = 'admin', password = 'password') => {
+  cy.clearCookies();
   cy.visit('/login');
   // somehow we need to wait for some time before entering the credentials
   // eslint-disable-next-line cypress/no-unnecessary-waiting

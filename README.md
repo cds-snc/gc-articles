@@ -117,6 +117,10 @@ To install a plugin or theme, find it on [WPackagist](https://wpackagist.org/), 
 
 Note: when starting up the devcontainer or docker-compose, `composer install` is run to automatically install plugins and themes defined in composer.json.
 
+When adding plugins, if they should be automatically enabled for sites, make sure you activate them in:
+- cypress/test-setup/setup-ci.sh
+- docker-compose.yml
+
 ### Creating
 
 When creating a custom plugin or theme, you should prefix the folder name with `cds-`. This will ensure the code is included in git and code quality scans.
@@ -255,13 +259,13 @@ cd wordpress
 PHP_CodeSniffer (`phpcs`) lints our PHP code to enforce a consistent style across the codebase. To run `phpcs`, first install it globally ([instructions for installing with Homebrew](https://gist.github.com/pbrocks/ab8d8c7ce200ce6f718181cebfc57a1e)). Then, you can lint the codebase with
 
 ```
-phpcs .wordpress/wp-content/mu-plugins/cds-base -n --standard=PSR12 --ignore=build,node_modules,vendor,tests,.css,.js
+phpcs .wordpress/wp-content/plugins/cds-base -n --standard=PSR12 --ignore=build,node_modules,vendor,tests,.css,.js
 ```
 
 Note that this can pick up vendor files, so specifically targeting the module(s) you are working on (or individual files) will result in least amount of noise.
 
 ```
-phpcs ./wordpress/wp-content/mu-plugins/cds-base/classes/Modules/Cleanup/Articles.php --standard=PSR12
+phpcs ./wordpress/wp-content/plugins/cds-base/classes/Modules/Cleanup/Articles.php --standard=PSR12
 ```
 
 ## Deployments

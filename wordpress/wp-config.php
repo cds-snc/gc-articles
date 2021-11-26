@@ -138,7 +138,7 @@ define('S3_UPLOADS_SECRET', getenv_docker('S3_UPLOADS_SECRET', ''));
 define('S3_UPLOADS_OBJECT_ACL', 'private');
 
 define('OTGS_DISABLE_AUTO_UPDATES', true);
-define( 'WP_AUTO_UPDATE_CORE', false );
+define('WP_AUTO_UPDATE_CORE', false);
 
 /* That's all, stop editing! Happy publishing. */
 

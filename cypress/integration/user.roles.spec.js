@@ -18,6 +18,7 @@ const allowedPages200 = [
 // defaults for "GC Editor"
 const blockedPages403 = [
     'themes.php',
+    'customize.php',
     'options-general.php',
     'admin.php?page=cds_notify_send'
 ];
@@ -47,7 +48,7 @@ describe('User - GC Editor', () => {
         cy.login('gceditor', 'secret');
 
         checkPages(allowedPages200, 200);
-        checkPages([...blockedPages403, 'users.php', 'customize.php'], 403);
+        checkPages([...blockedPages403, 'users.php'], 403);
         checkPages(blockedPages500, 500);
     });
 

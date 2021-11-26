@@ -102,7 +102,7 @@ services:
       wp theme enable cds-default --activate --network;
       wp theme disable twentytwentyone --network;
       wp plugin activate sitepress-multilingual-cms cds-base two-factor login-lockdown --network;
-      wp plugin activate s3-uploads wps-hide-login disable-user-login --network;
+      wp plugin activate s3-uploads wps-hide-login disable-user-login gutenberg --network;
       '
     volumes:
       - wordpress:/usr/src/wordpress

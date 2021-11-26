@@ -194,10 +194,10 @@ nav.nav--about li a:focus {
 
 /* Side nav layout between 600px and 768px */
 @media screen and (min-width: 600px) and (max-width: 768px) {
-    .wp-block-column:not(:only-child).page__side-nav {
+    .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__side-nav {
         flex: 3 !important;
     }
-    .wp-block-column:not(:only-child).page__content {
+    .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__content {
         flex: 5 !important;
     }
 }

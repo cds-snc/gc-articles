@@ -192,24 +192,35 @@ nav.nav--about li a:focus {
     }
 }
 
-/* Side nav layout */
-@media screen and (min-width: 768px) {
-    .page__side-nav {
-        flex-basis: 35%;
+/* Side nav layout between 600px and 768px */
+@media screen and (min-width: 600px) and (max-width: 768px) {
+    .wp-block-column:not(:only-child).page__side-nav {
+        flex: 3 !important;
     }
-    .page__content {
-        flex-basis: 65%;
+    .wp-block-column:not(:only-child).page__content {
+        flex: 5 !important;
     }
 }
 
-@media screen and (min-width: 1200px) {
-    .page__side-nav {
-        flex-basis: 25%;
+/* Side nav layout over 768px */
+@media screen and (min-width: 768px) {
+    .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__side-nav {
+        flex: 3.5;
     }
-    .page__content {
-        flex-basis: 75%;
+    .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__content {
+        flex: 6.5;
     }
 }
+/* Side nav layout over 1200px */
+@media screen and (min-width: 1200px) {
+    .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__side-nav {
+        flex: 1;
+    }
+    .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__content {
+        flex: 3;
+    }
+}
+
 
 .has-black-color {
     color: #000;

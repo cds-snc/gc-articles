@@ -62,9 +62,6 @@ class Setup
         new Users();
         new Media();
         Wpml::setup();
-
-        // @TODO: subscriptions not tested since refactor
-        // $this->setupSubscriptions();
     }
 
     /**
@@ -166,10 +163,5 @@ class Setup
     public function setupCli()
     {
         GenerateEncryptionKey::register($this->encryptedOption);
-    }
-
-    public function setupSubscriptions()
-    {
-        new SetupSubscriptions();
     }
 }

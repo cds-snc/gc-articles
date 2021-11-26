@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Cleanup;
 
+use CDS\Utils;
+
 class Menus
 {
     public function __construct()
@@ -51,7 +53,7 @@ class Menus
 
     public function blockAppearancePages(): void
     {
-        if (is_super_admin()) {
+        if (is_super_admin() && !Utils::isWPEnvAdmin()) {
             return;
         }
 
@@ -71,7 +73,7 @@ class Menus
     public function addMenusLinkToAdmin(): void
     {
         // Super Admins can see the "Appearance" menu, so they don't need this.
-        if (is_super_admin()) {
+        if (is_super_admin() && !Utils::isWPEnvAdmin()) {
             return;
         }
 

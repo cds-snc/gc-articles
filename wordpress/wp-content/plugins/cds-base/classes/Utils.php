@@ -44,4 +44,19 @@ class Utils
         }
         return false;
     }
+
+    public static function isWPEnvAdmin(): bool
+    {
+        $current_user = wp_get_current_user();
+
+        if ($current_user) {
+            $current_username = $current_user->user_login;
+
+            if ($current_username === 'gcadmin') {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

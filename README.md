@@ -117,6 +117,10 @@ To install a plugin or theme, find it on [WPackagist](https://wpackagist.org/), 
 
 Note: when starting up the devcontainer or docker-compose, `composer install` is run to automatically install plugins and themes defined in composer.json.
 
+When adding plugins, if they should be automatically enabled for sites, make sure you activate them in:
+- cypress/test-setup/setup-ci.sh
+- docker-compose.yml
+
 ### Creating
 
 When creating a custom plugin or theme, you should prefix the folder name with `cds-`. This will ensure the code is included in git and code quality scans.

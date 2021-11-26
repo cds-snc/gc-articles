@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?>>
+<html lang="<?php echo get_active_language(); ?>">
 <head>
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1">

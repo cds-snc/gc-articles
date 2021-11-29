@@ -37,7 +37,7 @@ use Exception;
 
 class Setup
 {
-    public EncryptedOption $encryptedOption;
+    public EncryptedOption $encryptedOption; // test
 
     /**
      * @throws Exception

@@ -16,27 +16,12 @@ RUN npm --unsafe-perm install
 
 ## Release build
 
-FROM wordpress:5.8.2-php8.0-apache
+FROM wordpress:5.8.2-php8.0-fpm-alpine
 
 RUN pecl install pcov \
     && docker-php-ext-enable pcov
 
 WORKDIR /usr/src/gc-articles/wordpress
-
-# Update path to wordpress in apache *.conf files
-RUN set -eux; \
-    find /etc/apache2 -name '*.conf' -type f -exec sed -ri -e "s!/var/www/html!$PWD!g" -e "s!Directory /var/www/!Directory $PWD!g" '{}' +;
-
-# Setup self-signed cert/ssl
-ARG APACHE_CERT
-ARG APACHE_KEY
-
-COPY ./wordpress/docker/apache/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
-
-RUN a2enmod ssl \
-    && a2ensite default-ssl \
-    && echo "$APACHE_CERT" > /etc/ssl/certs/self-signed.crt \
-    && echo "$APACHE_KEY" > /etc/ssl/private/self-signed.key
 
 # Copy wp-content (including installed plugins) and vendor folder from composer stage
 COPY --from=composer /app/wordpress/wp-content ./wp-content
@@ -55,4 +40,5 @@ COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/C
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Subscribe/js ./wp-content/plugins/cds-base/classes/Modules/Subscribe/js
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Styles/template/css ./wp-content/plugins/cds-base/classes/Modules/Styles/template/css
 
+# @TODO: do we need 443 here anymore?
 EXPOSE 80 443

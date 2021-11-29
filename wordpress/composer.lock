@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e0242624e25a2ea2cffc63853604bfd",
+    "content-hash": "7d52c6b2c1e8d86a6652b0b74082aac5",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -3429,6 +3429,24 @@
                 "source": "https://github.com/wasinger/htmlpagedom/tree/master"
             },
             "time": "2019-11-22T09:50:29+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/custom-welcome-guide",
+            "version": "1.0.3",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/custom-welcome-guide/",
+                "reference": "tags/1.0.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/custom-welcome-guide.1.0.3.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/custom-welcome-guide/"
         },
         {
             "name": "wpackagist-plugin/disable-user-login",

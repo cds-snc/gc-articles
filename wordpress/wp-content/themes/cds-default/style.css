@@ -360,3 +360,7 @@ nav.nav--about li a:focus {
 .wp-block-button__link.has-red-background-color:hover, .wp-block-button__link.has-red-background-color:focus {
     background-color: #632226;
 }
+
+.pager .previous a::before{
+    content: "" !important;
+}

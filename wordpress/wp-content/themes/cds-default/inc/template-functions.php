@@ -362,3 +362,43 @@ function get_side_nav(): string
 
     return $out;
 }
+
+/**
+ * Function that returns the menu assigned to the "Primary" location
+ * Also:
+ *   - Add a "menu" button similar to bootstrap
+ *   - Add aria-labels to the <nav> and <ul> submenu(s)
+ *
+ * If no menu is found, return an empty string
+ */
+function get_top_nav(): string
+{
+    // Don't get the menu by name, but by theme location. Returns false if not found
+    $headerMenu = wp_nav_menu([
+        "theme_location" => "header",
+        "fallback_cb" => false,
+        "echo" => false,
+        "depth" => 2,
+        "menu_class" => "nav nav--primary container",
+        "container" => "nav",
+        "container_class" => "nav--primary__container"
+    ]);
+
+    if ($headerMenu) {
+        // Insert a button (markup taken from bootstrap)
+        // It seems like we can't append an element using the PHP HTML Parser https://stackoverflow.com/q/51466367
+        $headerMenu = str_replace('<nav class="nav--primary__container">', '<nav class="nav--primary__container"><div class="container"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-top-of-the-page" aria-controls="menu-top-of-the-page" aria-expanded="false" aria-label="Toggle navigation">Menu</button></div>', $headerMenu);
+
+        $dom = new Dom();
+        $dom->loadStr($headerMenu);
+
+        // Insert aria-label for top nav (otherwise axe complains)
+        $dom->find('.nav--primary__container')->setAttribute('aria-label', 'Top navigation');
+        // // Insert aria-label for submenu
+        $dom->find('.sub-menu')->setAttribute('aria-label', 'submenu');
+
+        return $dom->outerHTML;
+    }
+
+    return '';
+}

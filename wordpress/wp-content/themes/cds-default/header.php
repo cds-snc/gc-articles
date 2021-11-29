@@ -100,16 +100,7 @@ declare(strict_types=1);
   </div>
 
   <?php
-    // Don't get the menu by name, but by theme location. Returns false if not found
-    $headerMenu = wp_nav_menu([
-      "theme_location" => "header",
-      "fallback_cb" => false,
-      "echo" => false,
-      "depth" => 1,
-      "menu_class" => "nav nav--primary container",
-      "container_class" => "nav--primary__container"
-    ]); ?>
-  <?php
+    $headerMenu = get_top_nav();
     if ($headerMenu) :
         echo $headerMenu;
     else :

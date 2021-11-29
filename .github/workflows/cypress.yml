@@ -38,15 +38,15 @@ jobs:
       - name: Composer install
         run: cd wordpress && composer install --prefer-dist --no-progress
 
-      - name: Cache NPM
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.npm
-            ~/.cache/Cypress
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+#      - name: Cache NPM
+#        uses: actions/cache@v2
+#        with:
+#          path: |
+#            ~/.npm
+#            ~/.cache/Cypress
+#          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-node-
 
       - name: Cypress and NPM install and build
         uses: cypress-io/github-action@v2

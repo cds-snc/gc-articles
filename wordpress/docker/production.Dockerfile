@@ -18,7 +18,8 @@ RUN npm --unsafe-perm install
 
 FROM wordpress:5.8.2-php8.0-fpm-alpine
 
-RUN pecl install pcov \
+RUN apk add --no-cache $PHPIZE_DEPS \
+    && pecl install pcov \
     && docker-php-ext-enable pcov
 
 WORKDIR /usr/src/gc-articles/wordpress

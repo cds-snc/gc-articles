@@ -12,11 +12,17 @@ use PHPHtmlParser\Dom;
 
 function cds_prev_next_links(): void
 {
+    $prev_id = false;
     $prev_post = get_previous_post();
-    $prev_id = $prev_post->ID;
-    $prev_permalink = get_permalink($prev_id);
-    $next_post = get_next_post();
+
+    if ($prev_post && $prev_post->ID) {
+        $prev_id = $prev_post->ID;
+        $prev_permalink = get_permalink($prev_id);
+    }
+
     $next_id = false;
+    $next_post = get_next_post();
+
     if ($next_post && $next_post->ID) {
         $next_id = $next_post->ID;
         $next_permalink = get_permalink($next_id);
@@ -25,9 +31,9 @@ function cds_prev_next_links(): void
   <nav class="mrgn-tp-xl">
     <h2 class="wb-inv"> <?php _e('Document navigation', 'cds-snc'); ?> </h2>
     <ul class="pager">
-      <?php if ($prev_id) : ?>
+      <?php if ($next_id && $next_permalink) : ?>
       <li class="next">
-        <a id="<?php echo $prev_id ?>" href="<?php echo $next_permalink; ?>">
+        <a id="<?php echo $next_id ?>" href="<?php echo $next_permalink; ?>">
             <?php _e(
                 'Next blog post',
                 'cds-snc'
@@ -36,9 +42,9 @@ function cds_prev_next_links(): void
       </li>
       <?php endif; ?>
 
-      <?php if ($next_id) : ?>
+      <?php if ($prev_id && $prev_permalink) : ?>
       <li class="previous">
-        <a id="<?php echo $next_id ?>" href="<?php echo $prev_permalink; ?>"
+        <a id="<?php echo $prev_id ?>" href="<?php echo $prev_permalink; ?>"
            rel="prev">«&nbsp;<?php _e('Previous blog post', 'cds-snc'); ?></a>
       </li>
       <?php endif; ?>

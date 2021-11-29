@@ -37,7 +37,8 @@
     "humanmade/s3-uploads": "^3.0",
     "wpackagist-plugin/gutenberg":"11.9.1",
     "cds-snc/cds-base": "@dev",
-    "cds-snc/cds-default": "@dev"
+    "cds-snc/cds-default": "@dev",
+    "wpackagist-plugin/custom-welcome-guide":"1.0.3"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

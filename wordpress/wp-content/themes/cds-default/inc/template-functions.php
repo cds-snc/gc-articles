@@ -12,11 +12,17 @@ use PHPHtmlParser\Dom;
 
 function cds_prev_next_links(): void
 {
+    $prev_id = false;
     $prev_post = get_previous_post();
-    $prev_id = $prev_post->ID;
-    $prev_permalink = get_permalink($prev_id);
-    $next_post = get_next_post();
+    
+    if ($prev_post && $prev_post->ID) {
+        $prev_id = $prev_post->ID;
+        $prev_permalink = get_permalink($prev_id);
+    }
+    
     $next_id = false;
+    $next_post = get_next_post();
+    
     if ($next_post && $next_post->ID) {
         $next_id = $next_post->ID;
         $next_permalink = get_permalink($next_id);

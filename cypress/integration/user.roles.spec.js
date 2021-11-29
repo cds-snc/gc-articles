@@ -10,13 +10,15 @@ const allowedPages200 = [
     'post-new.php',
     'edit.php?post_type=page',
     'post-new.php?post_type=page',
-    'upload.php'
+    'upload.php',
+    'nav-menus.php'
 ];
 
 // user should not be able to access these pages
 // defaults for "GC Editor"
 const blockedPages403 = [
     'themes.php',
+    'customize.php',
     'options-general.php',
     'admin.php?page=cds_notify_send'
 ];

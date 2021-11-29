@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Cleanup;
 
+use CDS\Utils;
+
 class Menus
 {
     public function __construct()
     {
         add_action('admin_menu', [$this, 'removeMenuPages'], 2147483647);
         add_filter('wp_mail_smtp_admin_adminbarmenu_has_access', '__return_false');
+
+        // add "Menus" link for GC Admins and GC Editors
+        add_action('admin_menu', [$this, 'addMenusLinkToAdmin'], 11);
+        // BlockGC Admins and GC Editors from seeing "themes" or "customize" pages
+        add_action('admin_init', [$this, 'blockAppearancePages']);
     }
 
     public function removeMenuPages(): void
@@ -42,6 +49,44 @@ class Menus
         }
 
         $this->hideWPMailSmtpMenus();
+    }
+
+    public function blockAppearancePages(): void
+    {
+        if (is_super_admin() && !Utils::isWPEnvAdmin()) {
+            return;
+        }
+
+        $appearanceSubPages = ["themes.php", "customize.php"];
+        $currentUrlPath = $_SERVER['REQUEST_URI'];
+
+        foreach ($appearanceSubPages as $subpage) {
+            if (strpos($currentUrlPath, $subpage) !== false) { // If subpage URL appears in current URL path
+                wp_die(
+                    __("Sorry, you are not allowed to access this page."),
+                    403 // status code
+                );
+            }
+        }
+    }
+
+    public function addMenusLinkToAdmin(): void
+    {
+        // Super Admins can see the "Appearance" menu, so they don't need this.
+        if (is_super_admin() && !Utils::isWPEnvAdmin()) {
+            return;
+        }
+
+        $menusTitle = __('Menus');
+        add_menu_page(
+            $menusTitle,
+            $menusTitle,
+            'edit_theme_options',
+            'nav-menus.php',
+            '',
+            'dashicons-editor-ul',
+            60
+        );
     }
 
     public function hideWPMailSmtpMenus(): void

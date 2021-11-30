@@ -22,7 +22,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install pcov \
     && docker-php-ext-enable pcov
 
-WORKDIR /usr/src/gc-articles/wordpress
+WORKDIR /usr/src/wordpress
 
 # Copy wp-content (including installed plugins) and vendor folder from composer stage
 COPY --from=composer /app/wordpress/wp-content ./wp-content
@@ -35,11 +35,12 @@ RUN echo "Deny from all" > ./vendor/.htaccess
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
 
-# Copy compiled js and css from the buildjs phase @TODO: these should be combined into a single location
+# Copy compiled js and css from the buildjs phase
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/build ./wp-content/plugins/cds-base/build
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Contact/js ./wp-content/plugins/cds-base/classes/Modules/Contact/js
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Subscribe/js ./wp-content/plugins/cds-base/classes/Modules/Subscribe/js
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Styles/template/css ./wp-content/plugins/cds-base/classes/Modules/Styles/template/css
 
-# @TODO: do we need 443 here anymore?
-EXPOSE 80 443
+VOLUME /usr/src/wordpress
+
+EXPOSE 9000

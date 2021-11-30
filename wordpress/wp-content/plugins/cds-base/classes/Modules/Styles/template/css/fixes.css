@@ -84,3 +84,7 @@ body:not(.wp-admin) table tbody tr td {
 .users-php .subsubsub{
     display:none;
 }
+
+.hide-if-no-customize{
+	display: none !important;
+}

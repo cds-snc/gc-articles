@@ -17,7 +17,7 @@ class TrackLogins
         global $wpdb;
         $this->wpdb      = $wpdb;
 
-        if ($wpdb->base_prefix) {
+        if (property_exists($wpdb, 'base_prefix')) {
             $this->tableName = $wpdb->base_prefix . 'userlogins';
         } else {
             $this->tableName = $this->wpdb->prefix . 'userlogins';

@@ -373,6 +373,8 @@ function get_side_nav(): string
  */
 function get_top_nav(): string
 {
+    $menuID = 'nav--primary';
+
     // Don't get the menu by name, but by theme location. Returns false if not found
     $headerMenu = wp_nav_menu([
         "theme_location" => "header",
@@ -380,6 +382,7 @@ function get_top_nav(): string
         "echo" => false,
         "depth" => 2,
         "menu_class" => "nav nav--primary container",
+        "menu_id" => $menuID,
         "container" => "nav",
         "container_class" => "nav--primary__container"
     ]);
@@ -390,7 +393,7 @@ function get_top_nav(): string
 
         // Insert a button (markup taken from bootstrap)
         // It seems like we can't append an element using the PHP HTML Parser https://stackoverflow.com/q/51466367
-        $headerMenu = str_replace('<nav class="nav--primary__container">', '<nav class="nav--primary__container"><div class="container"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-top-of-the-page" aria-controls="menu-top-of-the-page" aria-expanded="false">Menu</button></div>', $headerMenu);
+        $headerMenu = str_replace('<nav class="nav--primary__container">', '<nav class="nav--primary__container"><div class="container"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . $menuID . '" aria-controls="' . $menuID . '" aria-expanded="false">Menu</button></div>', $headerMenu);
 
         $dom = new Dom();
         $dom->loadStr($headerMenu);

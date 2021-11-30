@@ -25,6 +25,8 @@ dependency "ecr" {
   mock_outputs = {
     wordpress_repository_arn = ""
     wordpress_repository_url = ""
+    apache_repository_arn = ""
+    apache_repository_url = ""
   }
 }
 

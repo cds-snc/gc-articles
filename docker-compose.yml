@@ -77,7 +77,11 @@ services:
   composer:
     restart: 'no'
     image: composer/composer:latest
-    command: install
+    command: >
+      /bin/bash -c '
+      composer config -g http-basic.my.yoast.com token ${COMPOSER_YOAST_TOKEN};
+      composer install;
+      '
     profiles:
       - tools
     volumes:

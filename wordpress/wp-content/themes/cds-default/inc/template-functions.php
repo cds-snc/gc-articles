@@ -164,9 +164,9 @@ function cds_breadcrumb($sep = ''): string
         $html = $child->firstChild()->innerHtml;
         $parts = explode('|', $html);
 
-        $output = '<nav id="wb-bc" property="breadcrumb">';
+        $output = '<nav id="wb-bc" property="breadcrumb" aria-label="' .  __("Breadcrumbs") . '">';
         $output .= '<div class="container">';
-        $output .= '<h2><?php _e("You are here:"); ?></h2>';
+        $output .= '<h2>' . __("You are here:") . '</h2>';
         $output .= '<ol class="breadcrumb">';
         // note this will need to point to the correct language
         $output .= '<li><a href="https://www.canada.ca/en.html">Canada.ca</a></li>';
@@ -385,17 +385,20 @@ function get_top_nav(): string
     ]);
 
     if ($headerMenu) {
+        $topMenu = __('Top menu');
+        $submenu = __('submenu');
+
         // Insert a button (markup taken from bootstrap)
         // It seems like we can't append an element using the PHP HTML Parser https://stackoverflow.com/q/51466367
-        $headerMenu = str_replace('<nav class="nav--primary__container">', '<nav class="nav--primary__container"><div class="container"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-top-of-the-page" aria-controls="menu-top-of-the-page" aria-expanded="false" aria-label="Toggle navigation">Menu</button></div>', $headerMenu);
+        $headerMenu = str_replace('<nav class="nav--primary__container">', '<nav class="nav--primary__container"><div class="container"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-top-of-the-page" aria-controls="menu-top-of-the-page" aria-expanded="false">Menu</button></div>', $headerMenu);
 
         $dom = new Dom();
         $dom->loadStr($headerMenu);
 
         // Insert aria-label for top nav (otherwise axe complains)
-        $dom->find('.nav--primary__container')->setAttribute('aria-label', 'Top navigation');
+        $dom->find('.nav--primary__container')->setAttribute('aria-label', $topMenu);
         // // Insert aria-label for submenu
-        $dom->find('.sub-menu')->setAttribute('aria-label', 'submenu');
+        $dom->find('.sub-menu')->setAttribute('aria-label', $submenu);
 
         return $dom->outerHTML;
     }

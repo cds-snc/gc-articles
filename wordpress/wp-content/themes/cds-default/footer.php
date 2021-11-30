@@ -11,8 +11,8 @@ $footerMenu = '';
 <div style="display:none;" id="version" style="margin-top:30px;"><?php echo _S_VERSION; ?></div>
 <footer id="wb-info">
     <div class="landscape">
-        <nav class="container wb-navcurr">
-            <h2 class="wb-inv"><?php echo $footerText['aboutGovernmentTitle']; ?></h2>
+        <nav class="container wb-navcurr" aria-labelledby="footerNavAboutGovernment">
+            <h2 class="wb-inv" id="footerNavAboutGovernment"><?php echo $footerText['aboutGovernmentTitle']; ?></h2>
             <ul class="list-unstyled colcount-sm-2 colcount-md-3">
                 <?php echo get_footer_links($footerText['aboutGovernment']); ?>
             </ul>
@@ -21,8 +21,8 @@ $footerMenu = '';
     <div class="brand">
         <div class="container">
             <div class="row">
-                <nav class="col-md-9 col-lg-10 ftr-urlt-lnk">
-                    <h2 class="wb-inv"><?php echo $footerText['aboutThisSiteTitle']; ?></h2>
+                <nav class="col-md-9 col-lg-10 ftr-urlt-lnk" aria-labelledby="footerNavAbout">
+                    <h2 class="wb-inv" id="footerNavAbout"><?php echo $footerText['aboutThisSiteTitle']; ?></h2>
                     <ul>
                     <?php
                     $locations = get_nav_menu_locations();

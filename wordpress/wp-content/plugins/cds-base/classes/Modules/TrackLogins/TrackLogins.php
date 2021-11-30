@@ -16,7 +16,12 @@ class TrackLogins
     {
         global $wpdb;
         $this->wpdb      = $wpdb;
-        $this->tableName = $this->wpdb->prefix . 'userlogins';
+
+        if (property_exists($wpdb, 'base_prefix')) {
+            $this->tableName = $wpdb->base_prefix . 'userlogins';
+        } else {
+            $this->tableName = $this->wpdb->prefix . 'userlogins';
+        }
     }
 
     public static function register()

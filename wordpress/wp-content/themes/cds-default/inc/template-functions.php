@@ -400,8 +400,10 @@ function get_top_nav(): string
 
         // Insert aria-label for top nav (otherwise axe complains)
         $dom->find('.nav--primary__container')->setAttribute('aria-label', $topMenu);
-        // // Insert aria-label for submenu
+        // Insert aria-label for submenu
         $dom->find('.sub-menu')->setAttribute('aria-label', $submenu);
+        // Insert aria-expanded for link with submenu
+        $dom->find('.menu-item-has-children')->setAttribute('aria-expanded', "false");
 
         return $dom->outerHTML;
     }

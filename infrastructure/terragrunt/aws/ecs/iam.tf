@@ -104,8 +104,7 @@ data "aws_iam_policy_document" "wordpress_ecs_task_get_ecr_image" {
       "ecr:BatchGetImage"
     ]
     resources = [
-      var.wordpress_repository_arn,
-      var.apache_repository_arn
+      var.wordpress_repository_arn
     ]
   }
 }

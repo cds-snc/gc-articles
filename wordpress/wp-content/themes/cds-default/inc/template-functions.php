@@ -388,32 +388,37 @@ function get_top_nav(): string
     ]);
 
     if ($headerMenu) {
-        $topMenu = __('Top menu', 'cds-snc');
-        $submenu = __('submenu', 'cds-snc');
-
         // Insert a button (markup taken from bootstrap)
         // It seems like we can't append an element using the PHP HTML Parser https://stackoverflow.com/q/51466367
         $headerMenu = str_replace('<nav class="nav--primary__container">', '<nav class="nav--primary__container"><div class="container"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . $menuID . '" aria-controls="' . $menuID . '" aria-expanded="false">Menu</button></div>', $headerMenu);
 
-        $dom = new Dom();
-        $dom->loadStr($headerMenu);
+        try {
+            $topMenu = __('Top menu', 'cds-snc');
+            $submenu = __('submenu', 'cds-snc');
 
-        // Insert aria-label for top nav (otherwise axe complains)
-        $dom->find('.nav--primary__container')->setAttribute('aria-label', $topMenu);
 
-        // Insert aria-label for submenu
-        $submenuNode = $dom->find('.sub-menu')[0];
-        if ($submenuNode) {
-            $submenuNode->setAttribute('aria-label', $submenu);
+            $dom = new Dom();
+            $dom->loadStr($headerMenu);
+
+            // Insert aria-label for top nav (otherwise axe complains)
+            $dom->find('.nav--primary__container')->setAttribute('aria-label', $topMenu);
+
+            // Insert aria-label for submenu
+            $submenuNode = $dom->find('.sub-menu')[0];
+            if ($submenuNode) {
+                $submenuNode->setAttribute('aria-label', $submenu);
+            }
+
+            // Insert aria-expanded for link with submenu
+            $menuItemNode = $dom->find('.menu-item-has-children')[0];
+            if ($menuItemNode) {
+                $menuItemNode->setAttribute('aria-expanded', "false");
+            }
+
+            return $dom->outerHTML;
+        } catch (Exception) {
+            return $headerMenu;
         }
-
-        // Insert aria-expanded for link with submenu
-        $menuItemNode = $dom->find('.menu-item-has-children')[0];
-        if ($menuItemNode) {
-            $menuItemNode->setAttribute('aria-expanded', "false");
-        }
-
-        return $dom->outerHTML;
     }
 
     return '';

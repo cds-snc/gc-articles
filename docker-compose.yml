@@ -22,10 +22,7 @@ services:
 
   apache:
     container_name: apache
-    # image: httpd:2.4-alpine
-    build:
-      dockerfile: Dockerfile
-      context: ./wordpress/docker/apache
+    image: httpd:2.4-alpine
     ports:
       - 80:80
     volumes:

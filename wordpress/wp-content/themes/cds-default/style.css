@@ -202,7 +202,7 @@ button.navbar-toggler[aria-expanded='true']::after {
         background: #e1e1e1;
     }
 
-    .menu-item-has-children > a::after {
+    .nav--primary > .menu-item-has-children > a::after {
         color: currentColor;
         border-style: solid;
         border-width: 2px 2px 0 0;
@@ -218,8 +218,8 @@ button.navbar-toggler[aria-expanded='true']::after {
         transition: all 0.2s ease;
     }
     
-    .menu-item-has-children:hover > a::after,
-    .menu-item-has-children:focus-within > a::after {
+    .nav--primary > .menu-item-has-children:hover > a::after,
+    .nav--primary > .menu-item-has-children:focus-within > a::after {
         transform: rotate(-45deg);
     }
 

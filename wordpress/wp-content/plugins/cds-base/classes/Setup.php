@@ -47,7 +47,6 @@ class Setup
         $this->encryptedOption = $this->getEncryptedOption();
 
         $this->cleanup();
-        $this->checkVersion();
         $this->setupNotifyTemplateSender();
         $this->setupBlocks();
         $this->setupMeta();
@@ -113,22 +112,6 @@ class Setup
         new CleanupMisc();
         new CleanupProfile();
         new TwoFactor();
-    }
-
-    public function checkVersion()
-    {
-        $theme_data    = wp_get_theme();
-        $theme_version = $theme_data["Version"];
-
-        Utils::checkOptionCallback('theme_version', $theme_version, function () use ($theme_version) {
-            $notifyClient = new NotifyClient();
-            $notifyClient->sendMail(
-                "tim.arney@cds-snc.ca",
-                "377d0592-0039-4c04-b8c2-e302bab59d7c",
-                ["version" => $theme_version],
-                $ref = "container update"
-            );
-        });
     }
 
     public function setupTrackLogins()

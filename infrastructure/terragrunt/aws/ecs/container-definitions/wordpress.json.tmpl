@@ -3,8 +3,17 @@
      "name": "apache",
      "image": "${APACHE_IMAGE}",
      "essential": true,
+     "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${AWS_LOGS_GROUP}",
+          "awslogs-region": "${AWS_LOGS_REGION}",
+          "awslogs-stream-prefix": "${AWS_LOGS_STREAM_PREFIX}"
+        }
+      },
      "portMappings": [
        {
+         "hostPort": 443,
          "containerPort": 443,
          "protocol": "tcp"
        }
@@ -26,6 +35,13 @@
         "awslogs-stream-prefix": "${AWS_LOGS_STREAM_PREFIX}"
       }
     },
+    "portMappings": [
+      {
+        "hostPort": 9000,
+        "containerPort": 9000,
+        "protocol": "tcp"
+      }
+    ],
     "essential": true,
     "image": "${WORDPRESS_IMAGE}",
     "environment": [

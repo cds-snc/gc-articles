@@ -34,11 +34,8 @@ jobs:
 
       - name: Docker image tag
         run: |
-          if [[ $GITHUB_EVENT_NAME == "release" ]]; then
-            echo "IMAGE_TAG=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-          else
-            echo "IMAGE_TAG=sha-${GITHUB_SHA}" >> $GITHUB_ENV
-          fi
+          VERSION=$(cat wordpress/docker/apache/VERSION)
+          echo "IMAGE_TAG=$VERSION" >> $GITHUB_ENV
 
       - name: Build container
         run: |

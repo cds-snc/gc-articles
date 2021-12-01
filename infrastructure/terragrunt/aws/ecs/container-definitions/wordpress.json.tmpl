@@ -3,6 +3,14 @@
      "name": "apache",
      "image": "${APACHE_IMAGE}",
      "essential": true,
+     "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${AWS_LOGS_GROUP}",
+          "awslogs-region": "${AWS_LOGS_REGION}",
+          "awslogs-stream-prefix": "${AWS_LOGS_STREAM_PREFIX}"
+        }
+      },
      "portMappings": [
        {
          "containerPort": 443,

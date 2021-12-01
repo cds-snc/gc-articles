@@ -4,7 +4,7 @@
  * Author: CDS
  * Text Domain: cds-snc
  * Domain Path: /languages
- * Version: 2.4.0
+ * Version: 2.5.1
 */
 
 /* https://jsonformatter.org/sass-to-css */
@@ -79,19 +79,15 @@ nav a:visited {
     color: #284162;
 }
 
-nav ul {
+nav ul, .sub-menu {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
 
 /* Nav: header */
-.nav--primary__container {
+.nav--primary__container, .sub-menu {
     background-color: #eeeeee;
-}
-
-.nav--primary {
-    margin-top: 10px;
 }
 
 .nav.nav--primary > li,
@@ -99,20 +95,152 @@ nav ul {
     display: inline-block;
 }
 
-
 .nav.nav--primary a {
     padding-top: 14px;
-    border-bottom: 4px solid transparent;
+    border-left: 4px solid transparent;
 }
 
 .nav.nav--primary a:hover {
     color: #0535d2;
-    border-bottom: 4px solid #0535d2; 
+    border-left: 4px solid #0535d2; 
 }
 
-.nav--primary li.current-menu-item a {
+.nav--primary li.current-menu-item > a {
     color: #284162;
-    border-bottom: 4px solid #284162;
+    border-left: 4px solid #284162;
+}
+
+.nav--primary li:hover > .sub-menu,
+.nav--primary li:focus-within > .sub-menu,
+.nav--primary li > .sub-menu:hover,
+.nav--primary li > .sub-menu:focus {
+   visibility: visible;
+   opacity: 1;
+   display: block;
+}
+
+.sub-menu li {
+    padding: 5px 0 0 15px;
+}
+
+.nav--primary .sub-menu li a {
+    display: inline-block;
+    padding: 10px 15px 10px 11px;
+}
+
+.menu-item-has-children a {
+    padding-right: 25px;
+}
+
+button.navbar-toggler {
+    color: #284162;
+    padding: 10px 25px 10px 15px;
+    margin: 0;
+    cursor: pointer;
+    background: #e1e1e1;
+}
+
+button.navbar-toggler:hover {
+    color: #0535d2;
+    background: #d4d6da;
+}
+
+
+button.navbar-toggler[aria-expanded]::after {
+    color: currentColor;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    content: '';
+    display: inline-block;
+    height: 8px;
+    left: 10px;
+    position: relative;
+    top: -3px;
+    transform: rotate(-225deg);
+    vertical-align: baseline;
+    width: 8px;
+    transition: all 0.2s ease;
+}
+
+button.navbar-toggler[aria-expanded='true']::after {
+    transform: rotate(-45deg);
+    top: -1px;
+}
+
+/* Large screens */
+@media screen and (min-width: 600px) {
+    .nav.nav--primary li a {
+        border-left: 0;
+        border-bottom: 4px solid transparent;
+    }
+
+    .nav.nav--primary li a {
+        border-left: 0;
+        border-bottom: 4px solid transparent;
+    }
+    
+    .nav.nav--primary li > a:hover {
+        border-left: 0;
+        border-bottom: 4px solid #0535d2;
+    }
+    
+    .nav--primary li.current-menu-item > a {
+        border-left: 0;
+        border-bottom: 4px solid #284162;
+    }
+
+    .nav--primary li .sub-menu {
+        min-width: calc(130% + 30px);
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+        display: none;
+        z-index: 1;
+    }
+
+    .nav--primary li .sub-menu li:hover {
+        background: #e1e1e1;
+    }
+
+    .menu-item-has-children > a::after {
+        color: currentColor;
+        border-style: solid;
+        border-width: 2px 2px 0 0;
+        content: '';
+        display: inline-block;
+        height: 8px;
+        left: 10px;
+        position: relative;
+        top: -3px;
+        transform: rotate(-225deg);
+        vertical-align: baseline;
+        width: 8px;
+        transition: all 0.2s ease;
+    }
+    
+    .menu-item-has-children:hover > a::after,
+    .menu-item-has-children:focus-within > a::after {
+        transform: rotate(-45deg);
+    }
+
+    .nav--primary__container > div.container:first-child {
+        display: none;
+    }
+}
+
+/* Small screens */
+@media screen and (max-width: 599px) {
+    .nav.nav--primary:not(.show) {
+        display: none;
+    }
+
+    .nav--primary {
+        border-top: #e1e1e1 2px solid;
+    }
+
+    .nav.nav--primary > li {
+        display: block;
+    }
 }
 
 #wb-bc ol.breadcrumb {
@@ -120,7 +248,6 @@ nav ul {
 }
 
 /* Nav: left-hand menu */
-
 nav.nav--about ul {
     margin-left: 20px;
 }

@@ -1,6 +1,6 @@
 {
   "name": "cds-base",
-  "version": "2.4.0",
+  "version": "2.5.1",
   "private": true,
   "description": "CDS-SNC base plugin",
   "author": "Tim Arney",

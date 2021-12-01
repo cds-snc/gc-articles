@@ -128,3 +128,5 @@ wordpress/wp-content/uploads
 wordpress/wp-content/languages
 
 debug-this/
+
+auth.json

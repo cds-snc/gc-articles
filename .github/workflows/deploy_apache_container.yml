@@ -1,20 +1,16 @@
-name: Build and push container
+name: Build and push Apache sidecar container
 
 on:
   push:
     branches:
       - main
     paths:
-      - ".dockerignore"
-      - ".github/workflows/build_push_container.yml"
-      - "wordpress/**"
-  release:
-    types:
-      - created
+      - ".github/workflows/deploy_apache_container.yml"
+      - "wordpress/docker/apache/**"
 
 env:
   DOCKER_BUILDKIT: 1
-  REPO_NAME: platform/wordpress
+  REPO_NAME: platform/apache
   STAGING_ECR_REGISTRY: 729164266357.dkr.ecr.ca-central-1.amazonaws.com
 
 jobs:
@@ -44,12 +40,6 @@ jobs:
             echo "IMAGE_TAG=sha-${GITHUB_SHA}" >> $GITHUB_ENV
           fi
 
-      - name: Add Composer auth credentials
-        run: |
-          cd wordpress
-          composer config github-oauth.github.com ${{ secrets.COMPOSER_GITHUB_TOKEN }}
-          composer config http-basic.my.yoast.com token ${{ secrets.COMPOSER_YOAST_TOKEN }}
-
       - name: Build container
         run: |
           docker build \
@@ -57,7 +47,7 @@ jobs:
           --build-arg APACHE_KEY="${{ secrets.STAGING_WORDPRESS_APACHE_KEY }}" \
           --build-arg APACHE_CERT="${{ secrets.STAGING_WORDPRESS_APACHE_CERT }}" \
           -t "${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
-          -f ./wordpress/docker/production.Dockerfile .
+          -f ./wordpress/docker/apache/Dockerfile .
 
       - name: Push containers to ECR
         run: |

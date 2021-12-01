@@ -13,6 +13,7 @@
       },
      "portMappings": [
        {
+         "hostPort": 443,
          "containerPort": 443,
          "protocol": "tcp"
        }
@@ -34,6 +35,12 @@
         "awslogs-stream-prefix": "${AWS_LOGS_STREAM_PREFIX}"
       }
     },
+    "portMappings": [
+      {
+        "containerPort": 9000,
+        "protocol": "tcp"
+      }
+    ],
     "essential": true,
     "image": "${WORDPRESS_IMAGE}",
     "environment": [

@@ -45,10 +45,10 @@ jobs:
           fi
 
       - name: Add Composer auth credentials
-          run: |
-            cd wordpress
-            composer config github-oauth.github.com ${{ secrets.COMPOSER_GITHUB_TOKEN }}
-            composer config http-basic.my.yoast.com token ${{ secrets.COMPOSER_YOAST_TOKEN }}
+        run: |
+          cd wordpress
+          composer config github-oauth.github.com ${{ secrets.COMPOSER_GITHUB_TOKEN }}
+          composer config http-basic.my.yoast.com token ${{ secrets.COMPOSER_YOAST_TOKEN }}
 
       - name: Build container
         run: |

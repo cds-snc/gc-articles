@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.207.0",
+            "version": "3.206.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c5252787784bf41b678b03cb3292d413fe281319"
+                "reference": "ade6621f709261097a0fd2ca0cad7a15ba899b76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c5252787784bf41b678b03cb3292d413fe281319",
-                "reference": "c5252787784bf41b678b03cb3292d413fe281319",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ade6621f709261097a0fd2ca0cad7a15ba899b76",
+                "reference": "ade6621f709261097a0fd2ca0cad7a15ba899b76",
                 "shasum": ""
             },
             "require": {
@@ -200,9 +200,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.207.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.206.0"
             },
-            "time": "2021-11-30T23:44:55+00:00"
+            "time": "2021-11-29T23:46:23+00:00"
         },
         {
             "name": "brick/math",
@@ -266,7 +266,7 @@
         },
         {
             "name": "cds-snc/cds-base",
-            "version": "dev-trigger_new_build",
+            "version": "dev-feature/upgrade-to-yoast-premium",
             "dist": {
                 "type": "path",
                 "url": "wp-content/plugins/cds-base",
@@ -320,7 +320,7 @@
         },
         {
             "name": "cds-snc/cds-default",
-            "version": "dev-trigger_new_build",
+            "version": "dev-feature/upgrade-to-yoast-premium",
             "dist": {
                 "type": "path",
                 "url": "wp-content/themes/cds-default",
@@ -3628,16 +3628,16 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "17.7.1",
+            "version": "17.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "3693f32a638680affbc6c59cdba4ddd822a6b3bd"
+                "reference": "6e0cb4e413a5f60992ba396753592c9541f30ba5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yoast-dist/wordpress-seo/zipball/3693f32a638680affbc6c59cdba4ddd822a6b3bd",
-                "reference": "3693f32a638680affbc6c59cdba4ddd822a6b3bd",
+                "url": "https://api.github.com/repos/Yoast-dist/wordpress-seo/zipball/6e0cb4e413a5f60992ba396753592c9541f30ba5",
+                "reference": "6e0cb4e413a5f60992ba396753592c9541f30ba5",
                 "shasum": ""
             },
             "require": {
@@ -3690,7 +3690,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "wiki": "https://github.com/Yoast/wordpress-seo/wiki"
             },
-            "time": "2021-12-01T14:42:19+00:00"
+            "time": "2021-11-30T08:36:30+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
@@ -4294,16 +4294,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.13.2",
+            "version": "v4.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "210577fe3cf7badcc5814d99455df46564f3c077"
+                "reference": "63a79e8daa781cac14e5195e63ed8ae231dd10fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/210577fe3cf7badcc5814d99455df46564f3c077",
-                "reference": "210577fe3cf7badcc5814d99455df46564f3c077",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/63a79e8daa781cac14e5195e63ed8ae231dd10fd",
+                "reference": "63a79e8daa781cac14e5195e63ed8ae231dd10fd",
                 "shasum": ""
             },
             "require": {
@@ -4344,9 +4344,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.2"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.13.1"
             },
-            "time": "2021-11-30T19:35:32+00:00"
+            "time": "2021-11-03T20:52:16+00:00"
         },
         {
             "name": "nunomaduro/collision",

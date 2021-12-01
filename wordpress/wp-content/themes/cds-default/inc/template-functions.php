@@ -90,10 +90,10 @@ function cds_the_posts_navigation($args = []): void
         $args = wp_parse_args(
             $args,
             [
-                'prev_text' => __('Older posts'),
-                'next_text' => __('Newer posts'),
-                'screen_reader_text' => __('Posts navigation'),
-                'aria_label' => __('Posts'),
+                'prev_text' => __('Older posts', 'cds-snc'),
+                'next_text' => __('Newer posts', 'cds-snc'),
+                'screen_reader_text' => __('Posts navigation', 'cds-snc'),
+                'aria_label' => __('Posts', 'cds-snc'),
                 'class' => 'posts-navigation',
             ]
         );
@@ -164,9 +164,9 @@ function cds_breadcrumb($sep = ''): string
         $html = $child->firstChild()->innerHtml;
         $parts = explode('|', $html);
 
-        $output = '<nav id="wb-bc" property="breadcrumb" aria-label="' .  __("Breadcrumbs") . '">';
+        $output = '<nav id="wb-bc" property="breadcrumb" aria-label="' .  __("Breadcrumbs", 'cds-snc') . '">';
         $output .= '<div class="container">';
-        $output .= '<h2>' . __("You are here:") . '</h2>';
+        $output .= '<h2>' . __("You are here:", 'cds-snc') . '</h2>';
         $output .= '<ol class="breadcrumb">';
         // note this will need to point to the correct language
         $output .= '<li><a href="https://www.canada.ca/en.html">Canada.ca</a></li>';
@@ -388,8 +388,8 @@ function get_top_nav(): string
     ]);
 
     if ($headerMenu) {
-        $topMenu = __('Top menu');
-        $submenu = __('submenu');
+        $topMenu = __('Top menu', 'cds-snc');
+        $submenu = __('submenu', 'cds-snc');
 
         // Insert a button (markup taken from bootstrap)
         // It seems like we can't append an element using the PHP HTML Parser https://stackoverflow.com/q/51466367

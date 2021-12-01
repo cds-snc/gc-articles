@@ -18,6 +18,10 @@
       }
     },
     {
+      "type": "composer",
+      "url": "https://my.yoast.com/packages/"
+    },
+    {
       "type": "path",
       "url": "wp-content/plugins/cds-base"
     },
@@ -33,11 +37,11 @@
     "wpackagist-plugin/login-lockdown":"1.8.1",
     "wpackagist-plugin/disable-user-login":"1.3.2",
     "wpackagist-plugin/wordpress-importer":"0.6.4",
-    "wpackagist-plugin/wordpress-seo": "^16.9",
     "humanmade/s3-uploads": "^3.0",
     "wpackagist-plugin/gutenberg":"11.9.1",
     "cds-snc/cds-base": "@dev",
     "cds-snc/cds-default": "@dev",
+    "yoast/wordpress-seo-premium": "^17.7",
     "wpackagist-plugin/custom-welcome-guide":"1.0.3"
   },
   "require-dev": {

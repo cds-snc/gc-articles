@@ -77,7 +77,11 @@ services:
   composer:
     restart: 'no'
     image: composer/composer:latest
-    command: install
+    command: >
+      /bin/bash -c '
+      composer config -g http-basic.my.yoast.com token ${COMPOSER_YOAST_TOKEN};
+      composer install;
+      '
     profiles:
       - tools
     volumes:
@@ -103,6 +107,7 @@ services:
       wp theme disable twentytwentyone --network;
       wp plugin activate sitepress-multilingual-cms cds-base two-factor login-lockdown --network;
       wp plugin activate s3-uploads wps-hide-login disable-user-login gutenberg --network;
+      wp plugin activate wordpress-seo wordpress-seo-premium --network;
       '
     volumes:
       - wordpress:/usr/src/wordpress

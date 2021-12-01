@@ -34,7 +34,5 @@ jobs:
         run: |
           docker build \
           --build-arg git_sha="$GITHUB_SHA" \
-          --build-arg APACHE_KEY="${{ secrets.STAGING_WORDPRESS_APACHE_KEY }}" \
-          --build-arg APACHE_CERT="${{ secrets.STAGING_WORDPRESS_APACHE_CERT }}" \
           -t "${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
           -f ./wordpress/docker/production.Dockerfile .

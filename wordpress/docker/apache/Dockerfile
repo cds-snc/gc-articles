@@ -20,3 +20,5 @@ RUN sed -i \
         -e 's/^#\(LoadModule .*mod_ssl.so\)/\1/' \
         -e 's/^#\(LoadModule .*mod_socache_shmcb.so\)/\1/' \
         /usr/local/apache2/conf/httpd.conf
+
+EXPOSE 80 443

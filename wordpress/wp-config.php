@@ -103,6 +103,9 @@ $table_prefix = getenv_docker('WORDPRESS_TABLE_PREFIX', 'wp_');
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
+
+define('WP_DEFAULT_THEME', !!getenv_docker('WP_DEFAULT_THEME', 'cds-default'));
+
 define('WP_DEBUG', !!getenv_docker('WORDPRESS_DEBUG', ''));
 define('WP_DEBUG_DISPLAY', !!getenv_docker('WORDPRESS_DEBUG_DISPLAY', 0));
 @ini_set('display_errors', WP_DEBUG_DISPLAY);

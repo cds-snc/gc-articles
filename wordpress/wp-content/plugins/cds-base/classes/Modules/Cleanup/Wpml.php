@@ -10,7 +10,7 @@ class Wpml
     public static function setup()
     {
         add_action('wpml_override_is_translator', '__return_true');
-        
+
         add_action('admin_footer', function () {
 
             // update category url in side nav to default to "all"

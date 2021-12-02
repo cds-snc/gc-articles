@@ -14,7 +14,7 @@ get_header();
 ?>
  <main id="error-404 not-found" property="mainContentOfPage" class="index container" resource="#wb-main" typeof="WebPageElement"> 
         
-            <header class="page-header">
+            <header class="page-header" id="primary">
                 <h1 class="page-title"><?php esc_html_e(
                     'Page not found.',
                     'cds-snc',

@@ -16,30 +16,41 @@ Docker-compose and VS Code Remote Container environment featuring:
 
 ## Requirements
 
-- NPM
-- Docker
-- Docker-compose
-- VS Code w/ Remote Containers extension (optional)
-- Composer
+Including installation instructions on a Mac.
+
+- NPM (install [Node](https://nodejs.org/en/download/))
+- Docker (install [Docker Desktop](https://www.docker.com/products/docker-desktop))
+- Docker-compose (included with Docker Desktop)
+- [VS Code](https://code.visualstudio.com/download) w/ Remote Containers extension (optional)
+- [Composer](https://formulae.brew.sh/formula/composer)
 
 ## Config
 
-Copy the `.env.example` file to `.env` and customize as needed
+Clone the repo and `cd` to the project directory.
 
+```sh
+git clone git@github.com:cds-snc/gc-articles.git
+cd gc-articles
 ```
+
+Copy the `.env.example` file to `.env` and customize as needed.
+
+```sh
 cp .env.example .env
 ```
 
-First thing you'll want to add is an ENCRYPTION_KEY which will be used for encrypting sensitive information in the 
-database such as NOTIFY API keys. 
+First thing you'll want to add is an `ENCRYPTION_KEY` which will be used for encrypting sensitive information in the database such as the Notify API keys.
 
-The encryption key is a base64 encoded random string. There is a helpful Composer command for generating one. After 
-cloning the repo, cd to the project directory and generate a key:
+The encryption key is a base64 encoded random string. There is a helpful Composer command for generating a key:
 
 ```sh
-git clone git@github.com:cds-snc/platform-mvp.git
-cd platform-mvp
 composer generate-encryption-key
+```
+
+In your `.env` file, make sure to quote the entire string, including the "base64:" prefix.
+
+```sh
+ENCRYPTION_KEY="base64:dvss45WujgTWIy1lMspSU128PsnyV3fNXDfZNPZOG+k="
 ```
 
 ## Install things
@@ -49,6 +60,12 @@ The following to docker-compose tasks will get all your dependencies installed a
 ```sh
 docker-compose run composer
 docker-compose run install
+```
+
+Afterwards, download and build your frontend dependencies:
+
+```sh
+npm i
 ```
 
 ## Start it up
@@ -76,8 +93,8 @@ Alternatively, you can open the project in VS Code Remote Containers:
 
 Either way, once the environment is up, the site will be available on `localhost`:
 
-- Visit `localhost` to see your new WordPress install
-- Visit `localhost/login` to see the admin interface
+- Visit [`localhost`](http://localhost) to see your new WordPress install
+- Visit [`localhost/login`](http://localhost/login) to see the admin interface
 
 Wordpress will be installed with some pre-configured plugins and themes, and will be configured as a multi-site install. There will also be a default administrator account, with the following credentials:
 

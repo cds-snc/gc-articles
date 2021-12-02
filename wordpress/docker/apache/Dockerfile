@@ -16,7 +16,6 @@ COPY ./wordpress/docker/apache/conf.d/default-site-ssl.conf /usr/local/apache2/c
 
 # Configure SSL
 RUN sed -i \
-        -e 's/^#\(Include .*httpd-ssl.conf\)/\1/' \
         -e 's/^#\(LoadModule .*mod_ssl.so\)/\1/' \
         -e 's/^#\(LoadModule .*mod_socache_shmcb.so\)/\1/' \
         /usr/local/apache2/conf/httpd.conf

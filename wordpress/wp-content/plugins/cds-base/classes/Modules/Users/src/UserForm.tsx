@@ -97,10 +97,12 @@ export const UserForm = (props) => {
 
     const handleSubmit = async (evt) => {
         evt.preventDefault();
+        setIsLoading(true);
 
         try {
             const response = await sendData('users/v1/submit', { email, role });
             const [{ status }] = response;
+            setIsLoading(false);
 
             if (parseInt(status) >= 400) {
                 const [{ errors: serverErrors = [] } = {}] = response;

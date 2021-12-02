@@ -11,9 +11,8 @@ RUN echo "$APACHE_CERT" > /usr/local/apache2/conf/server.crt \
 
 # Copy config
 COPY ./wordpress/docker/apache/httpd.conf /usr/local/apache2/conf/httpd.conf
-# COPY ./wordpress/docker/apache/conf.d/php-fpm.conf /usr/local/apache2/conf.d/php-fpm.conf
+COPY ./wordpress/docker/apache/conf.d/php-fpm.conf /usr/local/apache2/conf.d/php-fpm.conf
 COPY ./wordpress/docker/apache/conf.d/default-site-ssl.conf /usr/local/apache2/conf.d/default-site-ssl.conf
-COPY ./wordpress/docker/apache/index.html /usr/src/wordpress/index.html
 
 # Configure SSL
 RUN sed -i \

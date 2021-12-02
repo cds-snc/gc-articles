@@ -68,7 +68,7 @@ inputs = {
 
   apache_repository_arn = dependency.ecr.outputs.apache_repository_arn
   apache_image          = dependency.ecr.outputs.apache_repository_url
-  apache_image_tag      = "v1.0.8"
+  apache_image_tag      = "v1.0.9"
 
   database_host_secret_arn         = dependency.database.outputs.database_host_secret_arn
   database_name_secret_arn         = dependency.database.outputs.database_name_secret_arn

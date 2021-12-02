@@ -36,7 +36,7 @@ resource "aws_lb_target_group" "wordpress" {
     interval            = 10
     port                = 443
     protocol            = "HTTPS"
-    path                = "/index.html"
+    path                = "/"
     matcher             = "200-399"
     timeout             = 5
     healthy_threshold   = 2

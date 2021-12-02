@@ -3,16 +3,16 @@
   "version": "2.5.1",
   "private": true,
   "description": "CDS-SNC base plugin",
-  "author": "Tim Arney",
+  "author": "CDS-SNC",
   "license": "GPL-2.0-or-later",
   "keywords": [
     "WordPress",
     "block"
   ],
-  "homepage": "https://github.com/cds-snc/platform-mvp",
-  "repository": "git+https://github.com/cds-snc/platform-mvp.git",
+  "homepage": "https://github.com/cds-snc/gc-articles",
+  "repository": "git+https://github.com/cds-snc/gc-articles",
   "bugs": {
-    "url": "https://github.com/cds-snc/platform-mvp/issues"
+    "url": "https://github.com/cds-snc/gc-articles/issues"
   },
   "main": "src/index.js",
   "dependencies": {

@@ -2,10 +2,11 @@
 
 /**
  * Plugin Name: CDS-SNC Base
- * Plugin URI: https://github.com/cds-snc/platform-mvp
+ * Plugin URI: https://github.com/cds-snc/gc-articles
  * Description: Custom Block setup and other overrides
  * Version: 2.5.1
- * Author: Tim Arney
+ * Update URI: false
+ * Author: CDS-SNC
  *
  * @package cds-snc-base
  */
@@ -26,7 +27,10 @@ if (!defined('BASE_PLUGIN_NAME_VERSION')) {
 }
 
 if (is_multisite()) {
-    define('MU_PLUGIN_URL', network_site_url('/wp-content/mu-plugins', 'relative'));
+    define(
+        'MU_PLUGIN_URL',
+        network_site_url('/wp-content/mu-plugins', 'relative'),
+    );
 } else {
     define('MU_PLUGIN_URL', content_url('/mu-plugins'));
 }
@@ -61,16 +65,18 @@ function cds_admin_js(): void
 
     $notifyListIds = [];
     try {
-        $notifyListIds = NotifyTemplateSender::parseJsonOptions(get_option('list_values'));
+        $notifyListIds = NotifyTemplateSender::parseJsonOptions(
+            get_option('list_values'),
+        );
     } catch (Exception $e) {
         error_log($e->getMessage());
     }
 
-    wp_localize_script("cds-snc-admin-js", "CDS_VARS", array(
-        "rest_url" => esc_url_raw(rest_url()),
-        "rest_nonce" => wp_create_nonce("wp_rest"),
-        "notify_list_ids" => $notifyListIds
-    ));
+    wp_localize_script('cds-snc-admin-js', 'CDS_VARS', [
+        'rest_url' => esc_url_raw(rest_url()),
+        'rest_nonce' => wp_create_nonce('wp_rest'),
+        'notify_list_ids' => $notifyListIds,
+    ]);
 }
 
 add_action('admin_enqueue_scripts', 'cds_admin_js');

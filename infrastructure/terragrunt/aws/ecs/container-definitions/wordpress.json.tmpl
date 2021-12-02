@@ -1,12 +1,32 @@
 [
   {
-    "portMappings": [
-      {
-        "hostPort": 443,
-        "containerPort": 443,
-        "protocol": "tcp"
-      }
-    ],
+     "name": "apache",
+     "image": "${APACHE_IMAGE}",
+     "essential": true,
+     "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "${AWS_LOGS_GROUP}",
+          "awslogs-region": "${AWS_LOGS_REGION}",
+          "awslogs-stream-prefix": "${AWS_LOGS_STREAM_PREFIX}"
+        }
+      },
+     "portMappings": [
+       {
+         "hostPort": 443,
+         "containerPort": 443,
+         "protocol": "tcp"
+       }
+     ],
+     "volumesFrom": [
+        {
+          "sourceContainer": "wordpress",
+          "readOnly": true
+        }
+     ]
+  },
+  {
+    "name" : "wordpress",
     "logConfiguration": {
       "logDriver": "awslogs",
       "options": {
@@ -15,19 +35,15 @@
         "awslogs-stream-prefix": "${AWS_LOGS_STREAM_PREFIX}"
       }
     },
-    "volumesFrom": [],
-    "essential": true,
-    "name": "wordpress",
-    "image": "${WORDPRESS_IMAGE}",
-    "mountPoints": [
-      %{ if ENABLE_EFS }
+    "portMappings": [
       {
-        "containerPath": "/var/www/html/wp-content",
-        "sourceVolume": "wp-content",
-        "readOnly": false
+        "hostPort": 9000,
+        "containerPort": 9000,
+        "protocol": "tcp"
       }
-      %{ endif }
     ],
+    "essential": true,
+    "image": "${WORDPRESS_IMAGE}",
     "environment": [
       {
         "name": "DEFAULT_DOMAIN",

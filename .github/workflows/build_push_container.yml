@@ -2,6 +2,8 @@ name: Build and push container
 
 on:
   push:
+    branches:
+      - main
     paths:
       - ".dockerignore"
       - ".github/workflows/build_push_container.yml"

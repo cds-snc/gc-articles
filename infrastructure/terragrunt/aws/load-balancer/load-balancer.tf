@@ -34,8 +34,8 @@ resource "aws_lb_target_group" "wordpress" {
   health_check {
     enabled             = true
     interval            = 10
-    port                = 443
-    protocol            = "HTTPS"
+    port                = 80
+    protocol            = "HTTP"
     path                = "/index.html"
     matcher             = "200-399"
     timeout             = 5

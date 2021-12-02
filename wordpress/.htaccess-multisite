@@ -15,6 +15,9 @@ RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
 RewriteCond %{REQUEST_URI} wp-login.php
 RewriteRule ^ /404 [L]
 
+RewriteCond %{REQUEST_URI} /health\-check
+RewriteRule ^ - [R=200]
+
 RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]

@@ -25,6 +25,8 @@ dependency "ecr" {
   mock_outputs = {
     wordpress_repository_arn = ""
     wordpress_repository_url = ""
+    apache_repository_arn = ""
+    apache_repository_url = ""
   }
 }
 
@@ -62,7 +64,11 @@ inputs = {
 
   wordpress_repository_arn = dependency.ecr.outputs.wordpress_repository_arn
   wordpress_image          = dependency.ecr.outputs.wordpress_repository_url
-  wordpress_image_tag      = "v2.5.3"
+  wordpress_image_tag      = "sha-105f729fa5b67b33cfe0e7f28c661fde63aa243e"
+
+  apache_repository_arn = dependency.ecr.outputs.apache_repository_arn
+  apache_image          = dependency.ecr.outputs.apache_repository_url
+  apache_image_tag      = "v1.0.2"
 
   database_host_secret_arn         = dependency.database.outputs.database_host_secret_arn
   database_name_secret_arn         = dependency.database.outputs.database_name_secret_arn

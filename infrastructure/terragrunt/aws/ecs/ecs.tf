@@ -53,6 +53,7 @@ data "template_file" "wordpress_container_definition" {
     S3_UPLOADS_SECRET            = aws_secretsmanager_secret_version.s3_uploads_secret.arn
     DEFAULT_DOMAIN               = var.domain_name
     WORDPRESS_IMAGE              = "${var.wordpress_image}:${var.wordpress_image_tag}"
+    APACHE_IMAGE                 = "${var.apache_image}:${var.apache_image_tag}"
     WORDPRESS_DB_HOST            = var.database_host_secret_arn
     WORDPRESS_DB_NAME            = var.database_name_secret_arn
     WORDPRESS_DB_USER            = var.database_username_secret_arn
@@ -138,7 +139,7 @@ resource "aws_ecs_service" "wordpress_service" {
 
   load_balancer {
     target_group_arn = var.alb_target_group_arn
-    container_name   = "wordpress"
+    container_name   = "apache"
     container_port   = 443
   }
 

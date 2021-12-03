@@ -14,6 +14,9 @@ COPY ./wordpress/docker/apache/httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY ./wordpress/docker/apache/conf.d/php-fpm.conf /usr/local/apache2/conf.d/php-fpm.conf
 COPY ./wordpress/docker/apache/conf.d/default-site-ssl.conf /usr/local/apache2/conf.d/default-site-ssl.conf
 
+# Configure php-fpm
+RUN sed -i -e 's/wordpress/127.0.0.1/g' /usr/local/apache2/conf.d/php-fpm.conf
+
 # Configure SSL
 RUN sed -i \
         -e 's/^#\(LoadModule .*mod_ssl.so\)/\1/' \

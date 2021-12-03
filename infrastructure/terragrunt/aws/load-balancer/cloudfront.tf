@@ -1,3 +1,11 @@
+locals {
+  s3_origin_id = "wordpress_uploads"
+}
+
+resource "aws_cloudfront_origin_access_identity" "wordpress_uploads" {
+  comment = "Wordpress uploads"
+}
+
 resource "aws_cloudfront_distribution" "wordpress" {
 
   origin {
@@ -14,6 +22,15 @@ resource "aws_cloudfront_distribution" "wordpress" {
       https_port             = 443
       origin_protocol_policy = "https-only"
       origin_ssl_protocols   = ["TLSv1.2"]
+    }
+  }
+
+  origin {
+    domain_name = module.wordpress_storage.s3_bucket_regional_domain_name
+    origin_id   = local.s3_origin_id
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.wordpress_uploads.cloudfront_access_identity_path
     }
   }
 

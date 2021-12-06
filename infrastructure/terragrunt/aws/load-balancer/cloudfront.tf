@@ -19,7 +19,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
   origin {
     domain_name = var.s3_bucket_regional_domain_name
-    origin_id   = "wordpress-uploads-${var.environment}"
+    origin_id   = "wordpress-uploads"
 
     s3_origin_config {
       origin_access_identity = var.s3_cloudfront_origin_access_identity_iam_arn

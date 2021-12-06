@@ -43,7 +43,6 @@ class ContactForm
         ?>
         <div class="gc-form-wrapper">
             <?php if (isset($_POST['contact-type'])) {
-
                 $contactType = $_POST['contact-type'];
                 $heading = '';
                 $label = '';
@@ -81,8 +80,7 @@ class ContactForm
                 }
                 ?>
 
-                <?php if ($contactType === 'request-site'): ?>
-                    
+                <?php if ($contactType === 'request-site') : ?>
                     <form id="contact-form" method="POST" action="/wp-json/contact/v1/process">
                     <input type="hidden" name="contact-type" value="<?php echo $contactType; ?>"/> 
                     <h2><?php echo $heading; ?></h2>
@@ -174,7 +172,7 @@ class ContactForm
                     </div>
                 </form>
                 
-                <?php else: ?>
+                <?php else : ?>
                 <form id="contact-form" method="POST" action="/wp-json/contact/v1/process">
                     <h2><?php echo $heading; ?></h2>
                     <?php wp_nonce_field(
@@ -209,7 +207,7 @@ class ContactForm
                 </form>
 
                 <?php endif; ?>
-               <?php
+                <?php
             } else {
                 $current_url = home_url(add_query_arg([], $wp->request)); ?>
                 <form id="contact-form-step-1" method="POST" action="<?php echo $current_url; ?>">
@@ -218,7 +216,7 @@ class ContactForm
                             <span id="contact_types" class="hidden"><?php _e(
                                 'Contact Types',
                                 'cds-snc',
-                            ); ?></span>
+                                                                    ); ?></span>
                         </label>
                         <div class="focus-group" style="margin-bottom: 1.75rem">
                             <?php $this->radioField(

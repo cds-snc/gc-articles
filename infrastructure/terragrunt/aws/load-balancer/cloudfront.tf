@@ -1,5 +1,8 @@
-resource "aws_cloudfront_distribution" "wordpress" {
+locals {
+  s3_origin_id = "wordpress_uploads"
+}
 
+resource "aws_cloudfront_distribution" "wordpress" {
   origin {
     domain_name = aws_lb.wordpress.dns_name
     origin_id   = aws_lb.wordpress.name
@@ -19,7 +22,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
   origin {
     domain_name = var.s3_bucket_regional_domain_name
-    origin_id   = "wordpress-uploads"
+    origin_id   = local.s3_origin_id
 
     s3_origin_config {
       origin_access_identity = var.s3_cloudfront_origin_access_identity_iam_arn

@@ -73,14 +73,52 @@ class Setup
             return json_encode(["error" => __("401 Unauthorized", "cds-snc")]);
         }
 
-        if (
-            (!isset($_POST["message"]) || $_POST["message"] === "")
-            || (!isset($_POST['contact-type']) || $_POST['contact-type'] === "")
-            || (!isset($_POST['email']) || $_POST['email'] === "")
-        ) {
-            return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
+        if(isset($_POST['contact-type']) && $_POST['contact-type'] === "request-site"){
+            $errors = false;
+            if(!isset($_POST['purpose']) || $_POST['purpose'] === ""){
+               $errors = true;
+            }
+
+            if(!isset($_POST['heard-about-from']) || $_POST['heard-about-from'] === ""){
+                $errors = true;
+            }
+
+
+            if(!isset($_POST['gc-collection-name']) || $_POST['gc-collection-name'] === ""){
+                $errors = true;
+            }
+
+            if(!isset($_POST['sending-integration']) || $_POST['sending-integration'] === ""){
+                $errors = true;
+            }
+
+            if($errors){
+                return json_encode(["error" => __("Please complete all required fields to continue", "cds-snc")]);
+            }
+
+            $message = "\n\n";
+            $message .= "Request Collection Name: ".sanitize_text_field($_POST['gc-collection-name'])."\n\n";
+            $message .= "Purpose: ".sanitize_text_field($_POST['purpose'])."\n\n";
+            $message .= "Heard about from: ".sanitize_text_field($_POST['heard-about-from'])."\n\n";
+            $message .= "Sending integration: ".sanitize_text_field($_POST['sending-integration'])."\n\n";
+            
+            
+            return json_encode($this->sendEmail($_POST["email"], $message, $_POST["contact-type"]));
+
+        }else{
+
+            if (
+                (!isset($_POST["message"]) || $_POST["message"] === "")
+                || (!isset($_POST['contact-type']) || $_POST['contact-type'] === "")
+                || (!isset($_POST['email']) || $_POST['email'] === "")
+            ) {
+                return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
+            }
+    
+            return json_encode($this->sendEmail($_POST["email"], $message, $_POST["contact-type"]));
+
         }
 
-        return json_encode($this->sendEmail($_POST["email"], $_POST["message"], $_POST["contact-type"]));
+        
     }
 }

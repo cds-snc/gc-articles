@@ -25,7 +25,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
     origin_id   = local.s3_origin_id
 
     s3_origin_config {
-      origin_access_identity = var.s3_cloudfront_origin_access_identity_iam_arn
+      origin_access_identity = var.s3_cloudfront_origin_access_identity_path
     }
   }
 

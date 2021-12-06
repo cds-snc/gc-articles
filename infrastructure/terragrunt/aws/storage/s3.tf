@@ -27,6 +27,29 @@ resource "aws_s3_bucket_policy" "wordpress_storage" {
   })
 }
 
+resource "aws_s3_bucket_policy" "wordpress_uploads" {
+  bucket = module.wordpress_storage.s3_bucket_id
+
+  policy = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "OnlyCloudfrontReadAccess",
+      "Principal": {
+        "AWS": "${aws_cloudfront_origin_access_identity.origin_access_identity.iam_arn}"
+      },
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Resource": "${module.wordpress_storage.s3_bucket_arn}/*"
+    }
+  ]
+}
+POLICY
+}
+
 resource "aws_iam_user" "wordpress_storage" {
   name = "wordpress_storage"
 }

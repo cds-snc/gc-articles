@@ -44,6 +44,7 @@ inputs = {
   zone_id                                      = dependency.hosted-zone.outputs.zone_id
   s3_bucket_regional_domain_name               = dependency.storage.outputs.s3_bucket_regional_domain_name
   s3_cloudfront_origin_access_identity_iam_arn = dependency.storage.outputs.s3_cloudfront_origin_access_identity_iam_arn
+  s3_cloudfront_origin_access_identity_path    = dependency.storage.outputs.s3_cloudfront_origin_access_identity_path
 }
 
 terraform {

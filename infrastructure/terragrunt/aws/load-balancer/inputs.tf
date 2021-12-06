@@ -44,3 +44,8 @@ variable "s3_cloudfront_origin_access_identity_iam_arn" {
   description = "Iam arn for the origin access identity"
   type        = string
 }
+
+variable "s3_cloudfront_origin_access_identity_path" {
+  description = "Path for the origin access identity"
+  type        = string
+}

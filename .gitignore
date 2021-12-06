@@ -121,6 +121,8 @@ __pycache__/
 
 wordpress/wp-content/uploads
 
+wordpress/wp-content/upgrade
+
 .idea
 
 .phpunit.result.cache

@@ -34,3 +34,13 @@ variable "zone_id" {
   description = "Hosted zone ID for the DNS records"
   type        = string
 }
+
+variable "s3_bucket_regional_domain_name" {
+  description = "Domain name for uploads storage bucket"
+  type        = string
+}
+
+variable "s3_cloudfront_origin_access_identity_iam_arn" {
+  description = "Iam arn for the origin access identity"
+  type        = string
+}

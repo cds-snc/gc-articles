@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import "../classes/Modules/Blocks/src/expander";
+import "../classes/Modules/Blocks/src/accordion";
 import "../classes/Modules/Blocks/src/alert";
 import { render } from "@wordpress/element";
 import { LoginsPanel } from "../classes/Modules/TrackLogins/src/LoginsPanel";

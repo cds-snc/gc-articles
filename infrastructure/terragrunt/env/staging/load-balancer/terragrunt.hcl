@@ -41,6 +41,7 @@ inputs = {
   public_subnet_ids               = dependency.network.outputs.public_subnet_ids
   vpc_id                          = dependency.network.outputs.vpc_id
   zone_id                         = dependency.hosted-zone.outputs.zone_id
+  s3_bucket_regional_domain_name  = dependency.storage.outputs.s3_bucket_regional_domain_name
 }
 
 terraform {

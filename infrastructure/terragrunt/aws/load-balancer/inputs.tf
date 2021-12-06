@@ -34,3 +34,8 @@ variable "zone_id" {
   description = "Hosted zone ID for the DNS records"
   type        = string
 }
+
+variable "s3_bucket_regional_domain_name" {
+  description = "Domain name for uploads storage bucket"
+  type        = string
+}

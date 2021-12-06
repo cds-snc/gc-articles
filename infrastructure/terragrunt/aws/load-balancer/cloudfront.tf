@@ -26,7 +26,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
   }
 
   origin {
-    domain_name = module.wordpress_storage.s3_bucket_regional_domain_name
+    domain_name = var.s3_bucket_regional_domain_name
     origin_id   = local.s3_origin_id
 
     s3_origin_config {

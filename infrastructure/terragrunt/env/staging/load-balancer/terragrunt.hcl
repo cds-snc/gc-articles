@@ -3,7 +3,7 @@ include {
 }
 
 dependencies {
-  paths = ["../network", "../hosted-zone"]
+  paths = ["../network", "../hosted-zone", "../storage"]
 }
 
 dependency "network" {
@@ -24,6 +24,15 @@ dependency "hosted-zone" {
   mock_outputs = {
     zone_id = ""
   }
+}
+
+dependency "storage" {
+  config_path = "../storage"
+
+  mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs = {
+    s3_bucket_regional_domain_name = ""
+  }  
 }
 
 inputs = {

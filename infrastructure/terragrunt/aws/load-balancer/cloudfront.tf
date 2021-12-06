@@ -1,7 +1,3 @@
-resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
-  comment = "Cloudfront origin access identity"
-}
-
 resource "aws_cloudfront_distribution" "wordpress" {
 
   origin {
@@ -26,7 +22,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
     origin_id   = "wordpress-uploads-${var.environment}"
 
     s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
+      origin_access_identity = var.s3_cloudfront_origin_access_identity_iam_arn
     }
   }
 

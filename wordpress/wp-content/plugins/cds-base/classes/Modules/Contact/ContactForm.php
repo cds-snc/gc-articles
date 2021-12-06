@@ -213,10 +213,7 @@ class ContactForm
                 <form id="contact-form-step-1" method="POST" action="<?php echo $current_url; ?>">
                     <div role="group" aria-labelledby="contact_types">
                         <label for="contact_types">
-                            <span id="contact_types" class="hidden"><?php _e(
-                                'Contact Types',
-                                'cds-snc',
-                            ); ?></span>
+                            <span id="contact_types" class="hidden"><?php _e('Contact Types','cds-snc'); ?></span>
                         </label>
                         <div class="focus-group" style="margin-bottom: 1.75rem">
                             <?php $this->radioField(

@@ -120,6 +120,7 @@ __pycache__/
 *.pem
 
 wordpress/wp-content/uploads
+wordpress/wp-content/upgrade
 
 wordpress/wp-content/upgrade
 

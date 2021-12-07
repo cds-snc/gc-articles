@@ -16,14 +16,22 @@ class Wpml
             // update category url in side nav to default to "all"
             echo "<script>
                     jQuery(jQuery('a[href*=\"edit-tags.php?taxonomy=category\"]'))
-                    .attr('href', 'edit-tags.php?taxonomy=category&lang=all' )
+                    .attr('href', 'edit-tags.php?taxonomy=category&lang=all' );
                     
                     jQuery(jQuery('#menu-pages a')[0])
-                    .attr('href', 'edit.php?post_type=page&lang=all' )
+                    .attr('href', 'edit.php?post_type=page&lang=all' );
 
                     jQuery(jQuery('#menu-posts a')[0])
-                    .attr('href', 'edit.php?post_type=post&all_posts=1&lang=all' )
-                  </script>";
+                    .attr('href', 'edit.php?post_type=post&all_posts=1&lang=all' );
+
+                    jQuery(document).ready(function( $ ) {
+                        // noting need to wrap this in 'ready' for the element to exist
+                        var el = $('a[href*=\"menus-sync.php\"]');
+                        if(el.length >= 1){
+                            $(el[0]).hide();
+                        }
+                    });
+                    </script>";
 
             if (!isset($_GET["taxonomy"])) {
                 return;
@@ -31,7 +39,7 @@ class Wpml
 
             echo '<script>jQuery("#icl_subsubsub").clone().removeAttr("id").prependTo(".search-form");</script>';
             echo '<style>#icl_subsubsub{display:none !important;}</style>';
-        });
+        }, 200, 10);
 
         /**
          * Disable WPML Translation Editor

@@ -3,6 +3,7 @@
 namespace CDS\Modules\Contact;
 
 use CDS\Modules\Contact\ContactForm;
+use CDS\Utils;
 
 class Block
 {
@@ -19,6 +20,10 @@ class Block
 
     public function registerBlock()
     {
+        if (!is_super_admin() && !Utils::isWpEnv()) {
+            return;
+        }
+
         register_block_type_from_metadata(
             __DIR__,
             [

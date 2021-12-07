@@ -97,10 +97,10 @@ class Setup
             }
 
             $message = "\n\n";
-            $message .= "Request Collection Name: " . sanitize_text_field($_POST['gc-collection-name']) . "\n\n";
-            $message .= "Purpose: " . sanitize_text_field($_POST['purpose']) . "\n\n";
-            $message .= "Heard about from: " . sanitize_text_field($_POST['heard-about-from']) . "\n\n";
-            $message .= "Sending integration: " . sanitize_text_field($_POST['sending-integration']) . "\n\n";
+            $message .= "• Request Collection Name: " . sanitize_text_field($_POST['gc-collection-name']) . "\n\n";
+            $message .= "• Purpose: " . sanitize_text_field($_POST['purpose']) . "\n\n";
+            $message .= "• Heard about from: " . sanitize_text_field($_POST['heard-about-from']) . "\n\n";
+            $message .= "• Sending integration: " . sanitize_text_field($_POST['sending-integration']) . "\n\n";
 
 
             return json_encode($this->sendEmail($_POST["email"], $message, $_POST["contact-type"]));
@@ -112,6 +112,8 @@ class Setup
             ) {
                 return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
             }
+
+            $message = $_POST['message'];
 
             return json_encode($this->sendEmail($_POST["email"], $message, $_POST["contact-type"]));
         }

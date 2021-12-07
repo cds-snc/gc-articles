@@ -83,7 +83,7 @@ class ContactForm
                 <?php if ($contactType === 'request-site') : ?>
                     <form id="contact-form" method="POST" action="/wp-json/contact/v1/process">
                     <input type="hidden" name="contact-type" value="<?php echo $contactType; ?>"/> 
-                    <h2><?php echo $heading; ?></h2>
+                    <?php // echo $heading; ?>
                     <?php wp_nonce_field(
                         'contact_form_nonce_action',
                         'contact',
@@ -169,7 +169,7 @@ class ContactForm
                 
                 <?php else : ?>
                 <form id="contact-form" method="POST" action="/wp-json/contact/v1/process">
-                    <h2><?php echo $heading; ?></h2>
+                    <?php // echo $heading; ?>
                     <?php wp_nonce_field(
                         'contact_form_nonce_action',
                         'contact',

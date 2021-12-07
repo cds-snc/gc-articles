@@ -10,27 +10,6 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
   comment = "Cloudfront origin access identity"
 }
 
-resource "aws_s3_bucket_policy" "wordpress_storage" {
-  bucket = module.wordpress_storage.s3_bucket_id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Sid       = "PublicReadGetObject"
-        Effect    = "Allow"
-        Principal = "*"
-        "Action" : [
-          "s3:GetObject"
-        ],
-        Resource = [
-          "${module.wordpress_storage.s3_bucket_arn}/*",
-        ]
-      },
-    ]
-  })
-}
-
 resource "aws_s3_bucket_policy" "wordpress_uploads" {
   bucket = module.wordpress_storage.s3_bucket_id
 

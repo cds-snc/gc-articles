@@ -20,10 +20,10 @@ class Block
 
     public function registerBlock()
     {
-        if(!is_super_admin() && !Utils::isWpEnv()){
+        if (!is_super_admin() && !Utils::isWpEnv()) {
             return;
         }
-        
+
         register_block_type_from_metadata(
             __DIR__,
             [

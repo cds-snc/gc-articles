@@ -38,11 +38,10 @@
     "wpackagist-plugin/disable-user-login":"1.3.2",
     "wpackagist-plugin/wordpress-importer":"0.6.4",
     "humanmade/s3-uploads": "^3.0",
-    "wpackagist-plugin/gutenberg":"11.9.1",
+    "wpackagist-plugin/gutenberg":"12.0.2",
     "cds-snc/cds-base": "@dev",
     "cds-snc/cds-default": "@dev",
-    "yoast/wordpress-seo-premium": "^17.7",
-    "wpackagist-plugin/custom-welcome-guide":"1.0.3"
+    "yoast/wordpress-seo-premium": "^17.7"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

@@ -9,7 +9,7 @@ class Blocks
 
     public function __construct()
     {
-        $this->version = "1.0.1";
+        $this->version = "1.0.2";
         add_action('admin_enqueue_scripts', [$this, 'register'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'addStyles'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'editorStyles'], 20000, 2);
@@ -23,6 +23,10 @@ class Blocks
         ]);
 
         register_block_type('cds-snc/alert', [
+            'editor_script' => 'cds-snc',
+        ]);
+
+        register_block_type('cds-snc/accordion', [
             'editor_script' => 'cds-snc',
         ]);
 

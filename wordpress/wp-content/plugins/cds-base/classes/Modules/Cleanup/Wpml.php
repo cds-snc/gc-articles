@@ -38,7 +38,7 @@ class Wpml
             }
 
             echo '<script>jQuery("#icl_subsubsub").clone().removeAttr("id").prependTo(".search-form");</script>';
-            echo '<style>#icl_subsubsub{display:none !important;}</style>';
+            echo '<style>#icl_subsubsub{display:none !important;} .otgs-notice { display: none !important; }.</style>';
         }, 200, 10);
 
         /**

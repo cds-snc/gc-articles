@@ -113,6 +113,8 @@ class Setup
                 return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
             }
 
+            $message = $_POST['message'];
+
             return json_encode($this->sendEmail($_POST["email"], $message, $_POST["contact-type"]));
         }
     }

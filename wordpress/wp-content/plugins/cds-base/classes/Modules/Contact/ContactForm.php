@@ -108,7 +108,6 @@ class ContactForm
                             class="gc-input-text"
                             id="gc-collection-name"
                             required
-                            aria-describedby="collection-name-label"
                             placeholder=""
                             name="gc-collection-name"
                     ></input>
@@ -116,7 +115,7 @@ class ContactForm
 
                     <!-- heard about  -->
                     <div class="focus-group">
-                    <label class="gc-label required" id="heard-about-from=label" for="heard-about-from">
+                    <label class="gc-label required" id="heard-about-from" for="heard-about-from">
                         <?php _e("How did you hear about GC Articles?", "cds-snc"); ?>
                     </label>
                     <input
@@ -124,7 +123,6 @@ class ContactForm
                             class="gc-input-text"
                             id="heard-about-from"
                             required
-                            aria-describedby="heard-about-from-label"
                             placeholder=""
                             name="heard-about-from"
                     ></input>
@@ -133,15 +131,13 @@ class ContactForm
                      <!-- purpose  -->
                      <div class="focus-group">
                      <label class="gc-label required" id="purpose-label" for="purpose">
-                        <?php _e("What will you use your GC Articles collection for?
-", "cds-snc"); ?>
+                        <?php _e("What will you use your GC Articles collection for?", "cds-snc"); ?>
                     </label>
                     <textarea
                             data-testid="textarea"
                             class="gc-textarea"
                             id="purpose"
                             required
-                            aria-describedby="purpose-label"
                             placeholder=""
                             name="purpose"
                     ></textarea>
@@ -159,7 +155,6 @@ class ContactForm
                             class="gc-textarea"
                             id="sending-integration"
                             required
-                            aria-describedby="sending-integration-label"
                             placeholder=""
                             name="sending-integration"
                     ></textarea>
@@ -195,7 +190,6 @@ class ContactForm
                             class="gc-textarea"
                             id="message"
                             required
-                            aria-describedby="contact-label"
                             placeholder=""
                             name="message"
                     ></textarea>

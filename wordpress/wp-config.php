@@ -139,6 +139,7 @@ define('S3_UPLOADS_REGION', getenv_docker('S3_UPLOADS_REGION', 'ca-central-1'));
 define('S3_UPLOADS_KEY', getenv_docker('S3_UPLOADS_KEY', ''));
 define('S3_UPLOADS_SECRET', getenv_docker('S3_UPLOADS_SECRET', ''));
 define('S3_UPLOADS_OBJECT_ACL', 'private');
+define('S3_UPLOADS_BUCKET_URL', 'https://articles.cdssandbox.xyz');
 
 define('OTGS_DISABLE_AUTO_UPDATES', true);
 define('WP_AUTO_UPDATE_CORE', false);

@@ -52,7 +52,7 @@ declare(strict_types=1);
         <?php $langText = get_language_text(); ?>
       <div class="brand col-xs-9 col-sm-5 col-md-4" property="publisher" resource="#wb-publisher"
            typeof="GovernmentOrganization">
-        <a href="https://www.canada.ca/<?php echo get_active_language(); ?>.html" property="url">
+        <a href="<?php echo home_url(); ?>" property="url">
             <?php if (get_active_language() === 'fr') { ?>
               <img src="https://canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-fr.svg"
                    alt="Gouvernement du Canada" property="logo">

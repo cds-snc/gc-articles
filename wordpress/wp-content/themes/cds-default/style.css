@@ -348,6 +348,46 @@ nav.nav--about li a:focus {
     }
 }
 
+/* Latest posts */
+
+.wet-latest-posts {
+    max-width: 850px;
+    margin: 20px 0;
+}
+
+.read-more--hidden .wp-block-latest-posts__post-excerpt a {
+    display: none;
+}
+
+.wet-latest-posts li {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.wet-latest-posts li > a {
+    display: block;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+.wet-latest-posts .wp-block-latest-posts__post-author,
+.wet-latest-posts .wp-block-latest-posts__post-date {
+    display: inline-block;
+    font-size: 1em;
+}
+
+.wet-latest-posts .wp-block-latest-posts__post-author {
+    margin-right: 10px;
+}
+
+.wet-latest-posts .wp-block-latest-posts__post-author::after {
+    content: "|";
+    margin-left: 10px;
+}
+
+.wet-latest-posts .wp-block-latest-posts__post-excerpt {
+    margin: 10px 0 20px 0;
+}
 
 .has-black-color {
     color: #000;

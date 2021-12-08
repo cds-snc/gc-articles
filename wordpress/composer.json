@@ -10,10 +10,12 @@
         "name": "wpml/sitepress-multilingual-cms",
         "version": "4.5.1",
         "type": "wordpress-plugin",
-        "source": {
-          "url": "git@github.com:cds-snc/sitepress-multilingual-cms.git",
-          "type": "git",
-          "reference": "v4.5.1"
+        "dist": {
+          "type": "zip",
+          "url": "https://wpml.org/?download=6088&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
+        },
+        "require": {
+          "ffraenz/private-composer-installer": "^5.0"
         }
       }
     },

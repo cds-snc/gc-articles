@@ -1,8 +1,15 @@
 ## Install composer dependencies
-
 FROM composer:latest AS composer
+
+ARG WPML_USER_ID
+ARG WPML_KEY
+
 WORKDIR /app
 COPY . .
+
+RUN echo "WPML_USER_ID=$WPML_USER_ID" > .env \
+    && echo "WPML_KEY=$WPML_KEY" >> .env
+
 RUN cd wordpress && composer install --no-interaction --optimize-autoloader --no-dev
 
 ## Install NPM dependencies

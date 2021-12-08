@@ -7,6 +7,9 @@ export interface ErrorWithStatus extends Error {
 export const getData = async (endpoint: string) => {
   const requestHeaders = new Headers();
   requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
+
+
+
   const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
     method: 'GET',
     headers: requestHeaders,

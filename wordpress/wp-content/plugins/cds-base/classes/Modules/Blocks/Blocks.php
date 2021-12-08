@@ -13,6 +13,10 @@ class Blocks
         add_action('admin_enqueue_scripts', [$this, 'register'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'addStyles'], 10, 2);
         add_action('admin_enqueue_scripts', [$this, 'editorStyles'], 20000, 2);
+
+        /* Both of these change the _rendered_ output of latest-posts, but not the gutenberg editor output */
+        add_filter('render_block_core/latest-posts', ['CDS\Modules\Blocks\src\latestPosts\LatestPosts', 'renderBlock'], 10, 2);
+        add_filter('excerpt_more', ['CDS\Modules\Blocks\src\latestPosts\LatestPosts', 'excerptMore']);
     }
 
     public function register()

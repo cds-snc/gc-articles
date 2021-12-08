@@ -8,7 +8,6 @@ use JetBrains\PhpStorm\ArrayShape;
 use WP_REST_Response;
 use CDS\Modules\Users\EmailDomains;
 use CDS\Modules\Users\UserLockout;
-use CDS\Modules\Users\Usernames;
 use CDS\Modules\Users\UserSessions;
 use CDS\Modules\Users\ValidationException;
 

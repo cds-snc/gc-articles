@@ -3,6 +3,7 @@ import * as React from "react";
 import "../classes/Modules/Blocks/src/expander";
 import "../classes/Modules/Blocks/src/accordion";
 import "../classes/Modules/Blocks/src/alert";
+import "../classes/Modules/Blocks/src/latestPosts";
 import { render } from "@wordpress/element";
 import { LoginsPanel } from "../classes/Modules/TrackLogins/src/LoginsPanel";
 import { DBInsightsPanel } from "../classes/Modules/DBInsights/src/DBInsights";

@@ -32,6 +32,7 @@ use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\TwoFactor\TwoFactor;
 use CDS\Modules\Users\Users;
 use CDS\Modules\UserCollections\UserCollections;
+use CDS\Modules\DBInsights\DBInsights;
 use CDS\Utils;
 use Exception;
 
@@ -53,6 +54,7 @@ class Setup
         $this->setupCli();
 
         TrackLogins::register();
+        DBInsights::register();
 
         new SubscriptionForm();
         new ContactForm();
@@ -60,6 +62,7 @@ class Setup
         new UserCollections();
         new Users();
         new Media();
+
         Wpml::setup();
     }
 

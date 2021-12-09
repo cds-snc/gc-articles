@@ -117,6 +117,14 @@ body:not(.wp-admin) table tbody tr td {
   height: 6em;
 }
 
+.hide-if-no-customize{
+	display: none !important;
+}
+
+.wp-admin-bar-archive{
+    display:none;
+}
+
 .alpha {
   background-color: #b2e4ff;
   font-size: 0.8rem;

@@ -88,3 +88,7 @@ body:not(.wp-admin) table tbody tr td {
 .hide-if-no-customize{
 	display: none !important;
 }
+
+.wp-admin-bar-archive{
+    display:none;
+}

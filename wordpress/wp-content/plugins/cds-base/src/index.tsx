@@ -5,6 +5,8 @@ import "../classes/Modules/Blocks/src/accordion";
 import "../classes/Modules/Blocks/src/alert";
 import { render } from "@wordpress/element";
 import { LoginsPanel } from "../classes/Modules/TrackLogins/src/LoginsPanel";
+import { DBInsightsPanel } from "../classes/Modules/DBInsights/src/DBInsights";
+
 import { CollectionsPanel } from "../classes/Modules/UserCollections/src/CollectionsPanel";
 import { NotifyPanel } from "../classes/Modules/Notify/src/NotifyPanel";
 import { List } from "../classes/Modules/Notify/src/Types";
@@ -30,6 +32,7 @@ declare global {
       renderCollectionsPanel?: () => void;
       renderUserForm?: () => void;
       writeInterstitialMessage?: () => void;
+      renderDBInsightsPanel?:() => void;
     };
     CDS_VARS: {
       rest_url?: string;
@@ -46,6 +49,10 @@ export const renderLoginsPanel = () => {
 
 export const renderCollectionsPanel = () => {
   render(<CollectionsPanel />, document.getElementById("collections-panel"));
+};
+
+export const renderDBInsightsPanel = () => {
+  render(<DBInsightsPanel />, document.getElementById("db-insignts-panel"));
 };
 
 export const renderNotifyPanel = ({
@@ -88,6 +95,8 @@ window.CDS.renderUserForm = renderUserForm;
 window.CDS.writeInterstitialMessage = writeInterstitialMessage;
 window.CDS.renderListValuesRepeaterForm = renderListValuesRepeaterForm;
 window.CDS.renderNotifyServicesRepeaterForm = renderNotifyServicesRepeaterForm;
+window.CDS.renderDBInsightsPanel = renderDBInsightsPanel;
+
 
 window.wp.hooks.addFilter(
   'editor.PostPreview.interstitialMarkup',

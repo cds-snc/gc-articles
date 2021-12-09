@@ -69,20 +69,20 @@ declare(strict_types=1);
       <section id="wb-srch" class="col-lg-offset-4 col-md-offset-4 col-sm-offset-2 col-xs-12 col-sm-5 col-md-4">
         <h2><?php _e('Search', 'cds-snc'); ?></h2>
         <form id="site-search"
-              action="https://canada.ca/<?php echo $langText['abbr']; ?>/sr/srb.html"
-              method="post"
+              action="<?php echo home_url(); ?>"
+              method="GET"
               name="cse-search-box"
               role="search">
           <div class="form-group wb-srch-qry">
             <label for="wb-srch-q" class="wb-inv"><?php _e(
-                'Search Canada.ca',
+                'Search',
                 'cds-snc',
             ); ?></label>
-            <input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search"
-                   value="" size="34" maxlength="170" placeholder="<?php _e(
-                       'Search Canada.ca',
-                       'cds-snc',
-                   ); ?>">
+            <?php
+            $placeholder = __('Search', 'cds-snc') . " " . get_bloginfo("name");
+            ?>
+            <input name="s" id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search"
+                   value="<?php echo get_search_query(); ?>" size="34" maxlength="170" placeholder="<?php echo $placeholder; ?> ">
             <datalist id="wb-srch-q-ac">
             </datalist>
           </div>

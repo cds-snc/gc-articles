@@ -10,6 +10,7 @@ dependency "hosted-zone" {
   config_path = "../hosted-zone"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     zone_id = ""
   }
@@ -19,6 +20,7 @@ dependency "load-balancer" {
   config_path = "../load-balancer"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     alb_arn                     = ""
     alb_arn_suffix              = ""
@@ -33,6 +35,7 @@ dependency "database" {
   config_path = "../database"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     rds_cluster_id = ""
   }
@@ -42,6 +45,7 @@ dependency "ecs" {
   config_path = "../ecs"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     ecs_cloudfront_log_group_name = ""
     ecs_cluster_name              = ""

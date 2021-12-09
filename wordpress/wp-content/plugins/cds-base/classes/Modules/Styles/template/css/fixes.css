@@ -117,12 +117,12 @@ body:not(.wp-admin) table tbody tr td {
   height: 6em;
 }
 
-.hide-if-no-customize{
-	display: none !important;
+.hide-if-no-customize {
+  display: none !important;
 }
 
-.wp-admin-bar-archive{
-    display:none;
+.wp-admin-bar-archive {
+  display: none;
 }
 
 .alpha {
@@ -130,4 +130,8 @@ body:not(.wp-admin) table tbody tr td {
   font-size: 0.8rem;
   padding: 5px 10px;
   border-radius: 10px;
+}
+
+.otgs-notice {
+  display: none !important;
 }

@@ -8,12 +8,44 @@
       "type": "package",
       "package": {
         "name": "wpml/sitepress-multilingual-cms",
-        "version": "4.5.1",
+        "version": "4.5.2",
         "type": "wordpress-plugin",
-        "source": {
-          "url": "git@github.com:cds-snc/sitepress-multilingual-cms.git",
-          "type": "git",
-          "reference": "v4.5.1"
+        "dist": {
+          "type": "zip",
+          "url": "https://wpml.org/?download=6088&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
+        },
+        "require": {
+          "ffraenz/private-composer-installer": "^5.0"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "wpml/wpml-string-translation",
+        "version": "3.2.0",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://wpml.org/?download=6092&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
+        },
+        "require": {
+          "ffraenz/private-composer-installer": "^5.0"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "wpml/wp-seo-multilingual",
+        "version": "2.0.1",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://wpml.org/?download=3566177&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
+        },
+        "require": {
+          "ffraenz/private-composer-installer": "^5.0"
         }
       }
     },
@@ -33,7 +65,9 @@
   "require": {
     "wpackagist-plugin/two-factor": "^0.7.0",
     "wpackagist-plugin/wps-hide-login": "^1.8",
-    "wpml/sitepress-multilingual-cms": "4.5.1",
+    "wpml/sitepress-multilingual-cms": "*",
+    "wpml/wpml-string-translation": "*",
+    "wpml/wp-seo-multilingual": "*",
     "wpackagist-plugin/login-lockdown":"1.8.1",
     "wpackagist-plugin/disable-user-login":"1.3.2",
     "wpackagist-plugin/wordpress-importer":"0.6.4",

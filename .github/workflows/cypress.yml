@@ -4,6 +4,10 @@ on:
   pull_request:
     branches: [main]
 
+env:
+  WPML_USER_ID: ${{ secrets.WPML_USER_ID }}
+  WPML_KEY: ${{ secrets.WPML_KEY }}
+
 jobs:
   test:
     runs-on: ubuntu-latest

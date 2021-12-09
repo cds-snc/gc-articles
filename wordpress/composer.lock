@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f69d60eeab33a2cc1aef76e0a9aadfac",
+    "content-hash": "149d1887728e03a3b131e8668acdefcc",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -3817,10 +3817,22 @@
         },
         {
             "name": "wpml/sitepress-multilingual-cms",
-            "version": "4.5.1",
+            "version": "4.5.2",
             "dist": {
                 "type": "zip",
                 "url": "https://wpml.org/?download=6088&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
+            },
+            "require": {
+                "ffraenz/private-composer-installer": "^5.0"
+            },
+            "type": "wordpress-plugin"
+        },
+        {
+            "name": "wpml/wpml-string-translation",
+            "version": "3.2.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://wpml.org/?download=6092&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
             },
             "require": {
                 "ffraenz/private-composer-installer": "^5.0"

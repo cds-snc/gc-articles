@@ -23,7 +23,12 @@
           "sourceContainer": "wordpress",
           "readOnly": true
         }
-     ]
+     ],
+     "linuxParameters": {
+        "capabilities": {
+          "drop": ["ALL"]
+        }
+     }
   },
   {
     "name" : "wordpress",
@@ -131,6 +136,11 @@
         "name": "WORDPRESS_NONCE_SALT",
         "valueFrom": "${WORDPRESS_NONCE_SALT}"
       }
-    ]
+    ],
+    "linuxParameters": {
+      "capabilities": {
+        "drop": ["ALL"]
+      }
+    }
   }
 ]

@@ -10,6 +10,7 @@ dependency "hosted-zone" {
   config_path = "../hosted-zone"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     zone_id = ""
   }
@@ -19,6 +20,7 @@ dependency "load-balancer" {
   config_path = "../load-balancer"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     alb_arn                     = ""
     alb_arn_suffix              = ""
@@ -33,6 +35,7 @@ dependency "database" {
   config_path = "../database"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     rds_cluster_id = ""
   }
@@ -42,6 +45,7 @@ dependency "ecs" {
   config_path = "../ecs"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     ecs_cloudfront_log_group_name = ""
     ecs_cluster_name              = ""
@@ -60,8 +64,8 @@ inputs = {
   alb_target_5xx_maximum                   = 0
   alb_target_4xx_maximum                   = 100
 
-  canary_healthcheck_url_eng = "https://ircc.digital.canada.ca/"
-  canary_healthcheck_url_fra = "https://ircc.digital.canada.ca/"
+  canary_healthcheck_url_eng = "https://articles.alpha.canada.ca/"
+  canary_healthcheck_url_fra = "https://articles.alpha.canada.ca/"
 
   cloudfront_arn              = dependency.load-balancer.outputs.cloudfront_arn
   cloudfront_distribution_id  = dependency.load-balancer.outputs.cloudfront_distribution_id
@@ -85,10 +89,10 @@ inputs = {
   rds_cpu_maxiumum               = 80
   rds_freeable_memory_minimum    = 64000000
 
-  wordpress_failed_login_maximum = "50"
+  wordpress_failed_login_maximum = "5"
   wordpress_log_group_name       = dependency.ecs.outputs.ecs_cloudfront_log_group_name
 }
 
 terraform {
-  source = "../../../aws//alarms"
+  source = "git::https://github.com/cds-snc/gc-articles/infrastructure/terragrunt//aws/alarms?ref=${get_env("TARGET_VERSION")}"
 }

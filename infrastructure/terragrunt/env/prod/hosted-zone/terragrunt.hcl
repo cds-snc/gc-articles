@@ -3,9 +3,9 @@ include {
 }
 
 inputs = {
-  zone_name = "ircc.digital.canada.ca"
+  zone_name = "articles.alpha.canada.ca"
 }
 
 terraform {
-  source = "../../../aws//hosted-zone"
+  source = "git::https://github.com/cds-snc/gc-articles/infrastructure/terragrunt//aws/hosted-zone?ref=${get_env("TARGET_VERSION")}"
 }

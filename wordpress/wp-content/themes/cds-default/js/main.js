@@ -1,11 +1,5 @@
 (function($) {
 
-  const search_form_value = $("#site-search").attr("action");
-
-  $('#wb-srch-q').keyup(function() {
-    $("#site-search").attr("action", search_form_value+ "?q=" + $(this).val());
-  });
-
   const $menuToggle = $('button.navbar-toggler');
   const $itemWithSubmenu = $('.menu-item-has-children');
 

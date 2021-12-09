@@ -50,4 +50,6 @@ COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/S
 
 VOLUME /usr/src/wordpress
 
+USER www-data
+
 EXPOSE 9000

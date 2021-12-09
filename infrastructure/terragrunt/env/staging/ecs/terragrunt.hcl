@@ -10,6 +10,7 @@ dependency "network" {
   config_path = "../network"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     ecs_events_lambda_security_group_id = ""
     ecs_service_security_group_id = ""
@@ -22,6 +23,7 @@ dependency "ecr" {
   config_path = "../ecr"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     wordpress_repository_arn = ""
     wordpress_repository_url = ""
@@ -34,6 +36,7 @@ dependency "load-balancer" {
   config_path = "../load-balancer"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     alb_target_group_arn = ""
     domain_name          = ""
@@ -44,6 +47,7 @@ dependency "database" {
   config_path = "../database"
 
   mock_outputs_allowed_terraform_commands = ["init", "fmt", "validate", "plan", "show"]
+  mock_outputs_merge_with_state           = true
   mock_outputs = {
     database_host_secret_arn         = ""
     database_name_secret_arn         = ""

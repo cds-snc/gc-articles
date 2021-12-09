@@ -64,7 +64,7 @@ inputs = {
 
   wordpress_repository_arn = dependency.ecr.outputs.wordpress_repository_arn
   wordpress_image          = dependency.ecr.outputs.wordpress_repository_url
-  wordpress_image_tag      = "v2.6.0"
+  wordpress_image_tag      = "v2.7.0"
 
   apache_repository_arn = dependency.ecr.outputs.apache_repository_arn
   apache_image          = dependency.ecr.outputs.apache_repository_url

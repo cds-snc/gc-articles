@@ -94,5 +94,5 @@ inputs = {
 }
 
 terraform {
-  source = "../../../aws//alarms"
+  source = "git::https://github.com/cds-snc/gc-articles/infrastructure/terragrunt//aws/alarms?ref=${get_env("TARGET_VERSION")}"
 }

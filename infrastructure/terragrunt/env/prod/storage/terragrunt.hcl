@@ -3,5 +3,5 @@ include {
 }
 
 terraform {
-  source = "../../../aws//storage"
+  source = "git::https://github.com/cds-snc/gc-articles/infrastructure/terragrunt//aws/storage?ref=${get_env("TARGET_VERSION")}"
 }

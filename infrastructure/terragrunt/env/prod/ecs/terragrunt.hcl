@@ -92,5 +92,5 @@ inputs = {
 }
 
 terraform {
-  source = "../../../aws//ecs"
+  source = "git::https://github.com/cds-snc/gc-articles/infrastructure/terragrunt//aws/ecs?ref=${get_env("TARGET_VERSION")}"
 }

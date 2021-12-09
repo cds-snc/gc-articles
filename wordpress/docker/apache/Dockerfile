@@ -23,4 +23,6 @@ RUN sed -i \
         -e 's/^#\(LoadModule .*mod_socache_shmcb.so\)/\1/' \
         /usr/local/apache2/conf/httpd.conf
 
+USER www-data
+
 EXPOSE 80 443

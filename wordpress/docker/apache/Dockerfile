@@ -9,6 +9,12 @@ ARG APACHE_KEY
 RUN echo "$APACHE_CERT" > /usr/local/apache2/conf/server.crt \
     && echo "$APACHE_KEY" > /usr/local/apache2/conf/server.key
 
+RUN apk update \
+    && apk upgrade \
+    && apk add libcap procps \
+    && setcap 'cap_net_bind_service=+ep' /usr/local/apache2/bin/httpd \
+    && chown www-data:www-data /usr/local/apache2/logs
+
 # Copy config
 COPY ./wordpress/docker/apache/httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY ./wordpress/docker/apache/conf.d/php-fpm.conf /usr/local/apache2/conf.d/php-fpm.conf
@@ -25,4 +31,4 @@ RUN sed -i \
 
 USER www-data
 
-EXPOSE 8443
+EXPOSE 80 443

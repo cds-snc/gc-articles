@@ -12,8 +12,8 @@ resource "aws_security_group" "wordpress_ecs" {
 resource "aws_security_group_rule" "wordpress_ecs_ingress_lb" {
   description              = "Security group rule for WordPress ingress from load balancer"
   type                     = "ingress"
-  from_port                = 8443
-  to_port                  = 8443
+  from_port                = 443
+  to_port                  = 443
   protocol                 = "tcp"
   security_group_id        = aws_security_group.wordpress_ecs.id
   source_security_group_id = aws_security_group.wordpress_load_balancer.id
@@ -69,8 +69,8 @@ resource "aws_security_group" "wordpress_load_balancer" {
 
     content {
       protocol    = "tcp"
-      from_port   = 8443
-      to_port     = 8443
+      from_port   = 443
+      to_port     = 443
       cidr_blocks = [egress.value.cidr]
       description = "Traffic to ECS cluster"
     }

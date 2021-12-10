@@ -1,0 +1,35 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "4a791f59a22a63a0c5c394cfc91b4340",
+    "packages": [
+        {
+            "name": "articles/cli",
+            "version": "dev-infra/change_apache_port_number",
+            "dist": {
+                "type": "path",
+                "url": "./cli",
+                "reference": "69ae1f9f5cd6992f87127666c52b721b75050d73"
+            },
+            "bin": [
+                "bin/articles"
+            ],
+            "type": "library",
+            "transport-options": {
+                "relative": true
+            }
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}

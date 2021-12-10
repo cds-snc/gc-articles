@@ -1,0 +1,6 @@
+{
+  "name": "articles/cli",
+  "bin": [
+    "bin/articles"
+  ]
+}

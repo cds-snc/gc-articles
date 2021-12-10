@@ -77,23 +77,30 @@ fi
 
 if [ $# -gt 0 ]; then
     # Proxy Composer commands to the "composer" binary on the application container...
-    if [ "$1" == "install" ] || [ "$1" == "update" ] || [ "$1" == "generate-encryption-key" ]; then
+    if [ "$1" == "init" ]; then
 
         docker-compose run \
             "$CLI_SERVICE" \
-            bash -c "composer $1"
+            bash -c "composer update"
+
+    elif [ "$1" == "generate-encryption-key" ]; then
+
+      docker-compose run "$CLI_SERVICE" bash -c "composer generate-encryption-key"
+
+    elif [ "$1" == "install" ] || [ "$1" == "update" ]; then
+
+      docker-compose run \
+          "$CLI_SERVICE" \
+          bash -c "composer config -g http-basic.my.yoast.com token ${COMPOSER_YOAST_TOKEN} && cd wordpress && composer $@"
 
     elif [ "$1" == "wordpress" ]; then
         shift 1
 
-        if [ "$EXEC" == "yes" ]; then
-            docker-compose run \
-                "$CLI_SERVICE" \
-                bash -c "composer config -g http-basic.my.yoast.com token ${COMPOSER_YOAST_TOKEN} && cd wordpress && composer $@"
+        if [ "$1" == "install" ]; then
+          docker-compose run install
         else
-            sail_is_not_running
+          echo "error"
         fi
-
     # Proxy the "test" command to the "php artisan test" Artisan command...
     elif [ "$1" == "test" ]; then
         shift 1

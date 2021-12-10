@@ -25,4 +25,4 @@ RUN sed -i \
 
 USER www-data
 
-EXPOSE 8443
+EXPOSE 80 443

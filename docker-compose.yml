@@ -120,6 +120,7 @@ services:
 
   cli:
     container_name: cli
+    working_dir: /home/default/project
     depends_on:
       - db
       - wordpress

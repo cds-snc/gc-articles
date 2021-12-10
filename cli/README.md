@@ -20,6 +20,7 @@ Now you can run all of the following commands:
 
 - `articles install`: Install composer dependencies at root
 - `articles update`: Update composer dependencies at root
+- `articles generate-encryption-key`: Generate Encryption Key
 - `articles wordpress install`: Install WordPress composer dependencies
 - `articles wordpress update`: Update WordPress compose dependencies
 - `articles up`: Bring up the full docker-compose environment

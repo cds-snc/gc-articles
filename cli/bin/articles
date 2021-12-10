@@ -77,11 +77,11 @@ fi
 
 if [ $# -gt 0 ]; then
     # Proxy Composer commands to the "composer" binary on the application container...
-    if [ "$1" == "install" ] || [ "$1" == "update" ]; then
+    if [ "$1" == "install" ] || [ "$1" == "update" ] || [ "$1" == "generate-encryption-key" ]; then
 
         docker-compose run \
             "$CLI_SERVICE" \
-            bash -c "composer config -g http-basic.my.yoast.com token ${COMPOSER_YOAST_TOKEN} && composer $1"
+            bash -c "composer $1"
 
     elif [ "$1" == "wordpress" ]; then
         shift 1

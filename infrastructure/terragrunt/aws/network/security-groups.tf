@@ -69,8 +69,8 @@ resource "aws_security_group" "wordpress_load_balancer" {
 
     content {
       protocol    = "tcp"
-      from_port   = 443
-      to_port     = 443
+      from_port   = 8443
+      to_port     = 8443
       cidr_blocks = [egress.value.cidr]
       description = "Traffic to ECS cluster"
     }

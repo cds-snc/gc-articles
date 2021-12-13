@@ -6,7 +6,6 @@ use CDS\Modules\Subscribe\SubscriptionForm as SubscriptionForm;
 
 class Block
 {
-
     public function __construct()
     {
         add_action('plugins_loaded', [ $this, 'init' ]);

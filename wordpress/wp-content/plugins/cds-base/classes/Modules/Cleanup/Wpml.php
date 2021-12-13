@@ -6,7 +6,6 @@ namespace CDS\Modules\Cleanup;
 
 class Wpml
 {
-
     public static function setup()
     {
         add_action('wpml_override_is_translator', '__return_true');

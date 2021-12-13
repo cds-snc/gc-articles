@@ -15,7 +15,6 @@ use CDS\Modules\Notify\ListManagerUserProfile;
 
 class NotifyTemplateSender
 {
-
     protected Notices $notices;
     protected string $admin_page = 'cds_notify_send';
 

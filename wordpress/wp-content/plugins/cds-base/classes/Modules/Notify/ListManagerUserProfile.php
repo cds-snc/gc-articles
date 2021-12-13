@@ -6,7 +6,6 @@ use WP_User;
 
 class ListManagerUserProfile
 {
-
     public function __construct()
     {
     }

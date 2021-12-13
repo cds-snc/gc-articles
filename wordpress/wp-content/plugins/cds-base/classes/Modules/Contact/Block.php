@@ -7,7 +7,6 @@ use CDS\Utils;
 
 class Block
 {
-
     public function __construct()
     {
         add_action('plugins_loaded', [ $this, 'init' ]);

@@ -10,7 +10,6 @@ use WP_CLI;
 
 class EncryptedOption
 {
-
     private string $key;
     private string $cipher;
     public Encrypter $encrypter;

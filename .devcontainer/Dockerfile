@@ -18,9 +18,14 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
         zsh \
         zsh-autosuggestions \
         zsh-syntax-highlighting \
-        gettext
+        gettext \
+        php8-xmlwriter \
+        php8-simplexml \
+        php8-tokenizer \
+        php8-dom \
+        php8-xml
 
-RUN pecl install pcov \
+RUN pecl install pcov  \
     && docker-php-ext-enable pcov
 
 # clean up

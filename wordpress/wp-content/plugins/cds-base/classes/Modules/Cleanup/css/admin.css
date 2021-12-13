@@ -56,6 +56,49 @@
   display: none;
 }
 
+/* Hide user role filter on Users listing */
+.users-php .subsubsub {
+  display: none;
+}
+
+/* Hide all the things that should be hidden since the customizer is gone */
+.hide-if-no-customize {
+  display: none !important;
+}
+
+/* Hide wp-admin notices */
+.wp-admin-bar-archive {
+  display: none;
+}
+
+.otgs-notice {
+  display: none !important;
+}
+
+/* "Alpha" tag on dashboard widget */
+.alpha {
+  background-color: #b2e4ff;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.faded-edge::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 1) 90%
+  );
+  width: 100%;
+  height: 6em;
+}
+
 /* Update the font sizes */
 
 .postbox .inside h2,

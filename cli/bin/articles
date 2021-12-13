@@ -105,13 +105,9 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "test" ]; then
         shift 1
 
-        if [ "$EXEC" == "yes" ]; then
-            docker-compose run \
-                "$CLI_SERVICE" \
-                bash -c "cd wordpress && ./vendor/bin/pest"
-        else
-            sail_is_not_running
-        fi
+        docker-compose run \
+            "$CLI_SERVICE" \
+            bash -c "cd wordpress && ./vendor/bin/pest"
 
     # Proxy Node commands to the "node" binary on the application container...
     elif [ "$1" == "node" ]; then
@@ -130,13 +126,9 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "npm" ]; then
         shift 1
 
-        if [ "$EXEC" == "yes" ]; then
-            docker-compose run \
-                "$CLI_SERVICE" \
-                npm "$@"
-        else
-            sail_is_not_running
-        fi
+        docker-compose run \
+            "$CLI_SERVICE" \
+            npm "$@"
 
     # Proxy NPX commands to the "npx" binary on the application container...
     elif [ "$1" == "npx" ]; then

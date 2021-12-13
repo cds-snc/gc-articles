@@ -14,6 +14,7 @@ use CDS\Modules\Cleanup\Login as CleanupLogin;
 use CDS\Modules\Cleanup\Menus as CleanupMenus;
 use CDS\Modules\Cleanup\Misc as CleanupMisc;
 use CDS\Modules\Cleanup\PostsToArticles;
+use CDS\Modules\Cleanup\PrintStyles as CleanupPrintStyles;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\Cleanup\SitesToCollections;
@@ -112,6 +113,7 @@ class Setup
         new CleanupDashboard();
         new CleanupAdminBar();
         new CleanupAdminStyles();
+        new CleanupPrintStyles();
         new CleanupMisc();
         new CleanupProfile();
         new TwoFactor();

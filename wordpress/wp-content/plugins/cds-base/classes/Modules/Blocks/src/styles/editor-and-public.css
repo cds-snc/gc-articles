@@ -6,6 +6,14 @@ article ol {
   padding-left: 21px;
 }
 
+/* hr */
+hr.wp-block-separator {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 /* Tables */
 body:not(.wp-admin) table,
 .wp-block-table table {

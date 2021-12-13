@@ -17,21 +17,15 @@
 <!-- /wp:media-text -->
 
 <!-- wp:heading -->
-<h2 id="what-does-government-service-do">What<em> </em>does <em>Government Service </em>do?</h2>
+<h2 id="what-does-government-service-do">What does <em>Government Service</em> do?</h2>
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
 <p>Exempt technovation diversity root cause hold the pen reinvent request for information client-centric strategic. Silo high level human-centred service design file leadership measure. Indeterminate playbook acceleration assignment appointment talent inclusive deliverology bio break action plan.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>Sub-committee pizza party proactive disclosure collaborative hashtag reinvent. Protected C internet explorer director alignment design thinking human-centred new normal. Customer-centric parking lot data lake feedback ATIP-able outcome memorandum of understanding digitization data regulations. Value added service design steering committee initiative disrupt transformation open standards commitee. Hackathon acceleration quick win memorandum of understanding oversight bio break subject matter expert contribution data science sub-committee acting.</p>
-<!-- /wp:paragraph -->
+<!-- wp:heading -->
+<h2 id="latest-posts__heading">Recent articles</h2>
+<!-- /wp:heading -->
 
-<!-- wp:paragraph -->
-<p>Management transformation hold the pen wordsmith tri-lat gcdocs taxi chit leadership lunch and learn intern civil bureaucracy data ignite. End-to-end fiscal Phoenix webinar flip chart bandwidth BlackBerry ad hoc onboarding indeterminate public purse. Prebrief living document evergreen deep web responsive end-to-end sabbatical acronym initiative union governance data science. BlackBerry incentivize mission statement workplace 2.0 client-centric renewal ethics.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Re-imagine unconference incubator interim buzzword pdf hashtag. Quick win directive flip chart bi-lat initiative equity impartial blue sky compliance return to work sub-committee. Standard ignite accessibility accessibility assignment technovation deployment return to work digital transformation ignite value. Outcome flip me gcdocs bring forward silo initiative union evergreen living document contribution.</p>
-<!-- /wp:paragraph -->
+<!-- wp:latest-posts {"postsToShow":4,"displayPostContent":true,"excerptLength":47,"displayAuthor":true,"displayPostDate":true} /-->

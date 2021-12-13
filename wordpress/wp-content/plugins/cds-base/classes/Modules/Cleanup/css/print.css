@@ -1,0 +1,102 @@
+/* Keep FIP fairly small */
+header .brand img {
+    width: 200px;
+}
+
+/* Remove padding and margin on breadcrumbs */
+html .gcweb-menu~#wb-bc ol {
+    margin-top: 0;
+    padding: 5px 0 0 0;
+}
+
+/* Force white text to be black */
+html #content .has-white-color {
+    color: #000!important;
+}
+
+/* Hide top and side menus */
+.page__side-nav,
+.nav--primary__container {
+    display: none;
+}
+
+/* Collapse area occupied by images */
+html .wp-block-media-text.is-image-fill .wp-block-media-text__media {
+    min-height: unset;
+    height: auto;
+}
+
+/* Remove padding on columns */
+html .wp-block-columns:where(.has-background),
+html .wp-block-column,
+html .wp-block-media-text .wp-block-media-text__content {
+    padding: 0 !important;
+}
+
+/* Images with empty alt tags */
+main img[alt=""] {
+    display: none;
+}
+
+/* All new font sizes and top margins are original values * 0.8 */
+hr.wp-block-separator {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+html main {
+    font-size: 16px;
+    line-height: 1.55em;
+}
+
+html .h1, 
+html h1 {
+    font-size: 1.52em !important;
+    margin-top: 30.4px !important;
+}
+
+html .h2, 
+html h2 {
+    font-size: 1.44em !important;
+    margin-top: 30.4px !important;
+}
+
+html .h3, 
+html h3 {
+    font-size: 0.96em !important;
+    margin-top: 25.6px !important;
+}
+
+html .h4,
+html h4 {
+    font-size: .88em !important;
+    margin-top: 20.8px !important;
+}
+
+html .h5,
+html h5 {
+    font-size: 1em !important;
+    margin-top: 18.4px !important;
+}
+
+html .h6,
+html h6 {
+    font-size: .76em !important;
+    margin-top: 16.8px !important;
+}
+
+html pre {
+    font-size: 12px;
+}
+
+/* Forms */
+.gc-form-wrapper .gc-label,
+.gc-form-wrapper .gc-input-text,
+.gc-form-wrapper .gc-button {
+    font-size: 16px;
+}
+
+.wp-block-button__link,
+.gc-form-wrapper .gc-button {
+    background: #ddd !important;
+}

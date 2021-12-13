@@ -206,8 +206,8 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     name     = "Custom_LFI_QueryString"
     priority = 3
 
-    override_action {
-      none {}
+    action {
+      block {}
     }
 
     visibility_config {
@@ -249,8 +249,8 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     name     = "Custom_AWSManagedRulesLinuxRuleSet"
     priority = 4
 
-    override_action {
-      none {}
+    action {
+      block {}
     }
 
     visibility_config {
@@ -260,7 +260,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
 
     statement {
-      and_statement {
+      or_statement {
         statement {
           label_match_statement {
             scope = "LABEL"

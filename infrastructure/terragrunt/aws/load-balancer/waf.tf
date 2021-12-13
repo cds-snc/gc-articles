@@ -203,11 +203,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
-    name     = "Custom_AWSManagedRulesLinuxRuleSet"
+    name     = "Custom_LFI_QueryString"
     priority = 3
 
-    overrid_action {
+    override_action {
       none {}
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Custom_LFI_QueryString"
+      sampled_requests_enabled   = true
     }
 
     statement {
@@ -240,30 +246,40 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
-    name     = "AWSManagedRulesLinuxRuleSet"
-    priority = 3
+    name     = "Custom_AWSManagedRulesLinuxRuleSet"
+    priority = 4
 
     override_action {
       none {}
     }
 
-    statement {
-      managed_rule_group_statement {
-        name        = "AWSManagedRulesLinuxRuleSet"
-        vendor_name = "AWS"
-      }
-    }
-
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "AWSManagedRulesLinuxRuleSet"
+      metric_name                = "Custom_ AWSManagedRulesLinuxRuleSet"
       sampled_requests_enabled   = true
+    }
+
+    statement {
+      and_statement {
+        statement {
+          label_match_statement {
+            scope = "LABEL"
+            key   = "awswaf:managed:aws:linux-os:LFI_URIPath"
+          }
+        }
+        statement {
+          label_match_statement {
+            scope = "LABEL"
+            key   = "awswaf:managed:aws:linux-os:LFI_Cookie"
+          }
+        }
+      }
     }
   }
 
   rule {
     name     = "AWSManagedRulesSQLiRuleSet"
-    priority = 4
+    priority = 5
 
     override_action {
       none {}
@@ -285,7 +301,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesPHPRuleSet"
-    priority = 5
+    priority = 6
 
     override_action {
       none {}
@@ -307,7 +323,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesWordPressRuleSet"
-    priority = 6
+    priority = 7
 
     override_action {
       none {}

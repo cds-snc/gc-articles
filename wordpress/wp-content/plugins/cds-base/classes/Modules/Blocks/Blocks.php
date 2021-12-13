@@ -11,11 +11,21 @@ class Blocks
     {
         $this->version = "1.0.2";
         add_action('admin_enqueue_scripts', [$this, 'register'], 10, 2);
-        add_action('admin_enqueue_scripts', [$this, 'addStyles'], 10, 2);
+
         add_action('admin_enqueue_scripts', [$this, 'editorStyles'], 20000, 2);
 
+        add_action('wp_enqueue_scripts', [$this, 'publicStyles'], 99);
+
+        add_action('admin_enqueue_scripts', [$this, 'editorAndPublicStyles'], 99);
+        add_action('wp_enqueue_scripts', [$this, 'editorAndPublicStyles'], 99);
+
         /* Both of these change the _rendered_ output of latest-posts, but not the gutenberg editor output */
-        add_filter('render_block_core/latest-posts', ['CDS\Modules\Blocks\src\latestPosts\LatestPosts', 'renderBlock'], 10, 2);
+        add_filter(
+            'render_block_core/latest-posts',
+            ['CDS\Modules\Blocks\src\latestPosts\LatestPosts', 'renderBlock'],
+            10,
+            2
+        );
         add_filter('excerpt_more', ['CDS\Modules\Blocks\src\latestPosts\LatestPosts', 'excerptMore']);
     }
 
@@ -62,10 +72,9 @@ class Blocks
 
     public function editorStyles()
     {
-
         wp_enqueue_style(
-            'cds-base-editor-styles',
-            plugin_dir_url(__FILE__) . 'src/editor-styles/editor.css',
+            'cds-base-blocks-editor',
+            plugin_dir_url(__FILE__) . 'src/styles/editor.css',
             [],
             $this->version,
         );
@@ -85,14 +94,23 @@ class Blocks
         );
     }
 
-    public function addStyles()
+    public function publicStyles()
     {
-        // add stylesheet to the wp admin
         wp_enqueue_style(
-            'cds-base-block-alert',
-            plugin_dir_url(__FILE__) . 'src/alert/alert.css',
+            'cds-base-blocks-public',
+            plugin_dir_url(__FILE__) . 'src/styles/public.css',
             [],
-            $this->version,
+            $this->version
+        );
+    }
+
+    public function editorAndPublicStyles()
+    {
+        wp_enqueue_style(
+            'cds-base-blocks-editor-public',
+            plugin_dir_url(__FILE__) . 'src/styles/editor-and-public.css',
+            [],
+            $this->version
         );
     }
 }

@@ -1,0 +1,36 @@
+main {
+  margin-bottom: 20px;
+}
+
+/* Headings */
+.homepage h2 {
+  font-size: 1.2em;
+}
+
+/* WET Menu */
+header .gcweb-menu {
+  border-top-color: #26374a; /* originally #38414d */
+}
+
+/* Link button (for blog pagination) */
+.pager .next > a,
+.pager .next > a:visited,
+.pager .previous > a,
+.pager .previous > a:visited {
+  color: #335075;
+  background-color: #eaebed;
+  border-color: #dcdee1;
+  border-style: outset;
+}
+
+.pager .next > a:hover,
+.pager .previous > a:hover {
+  background-color: #cfd1d5;
+  border-color: #bbbfc5;
+}
+
+.pager .next > a:active,
+.pager .previous > a:active {
+  background-color: #bbbfc5;
+  border-color: #989da6;
+}

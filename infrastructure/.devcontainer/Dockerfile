@@ -15,14 +15,12 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 
 # Install Terraform
 RUN curl -Lo terraform.zip https://releases.hashicorp.com/terraform/"${TERRAFORM_VERSION}"/terraform_"${TERRAFORM_VERSION}"_linux_"$(dpkg --print-architecture)".zip \
-    && echo "${TERRAFORM_CHECKSUM} terraform.zip" | sha256sum --check \
     && unzip terraform.zip \
     && mv terraform /usr/local/bin/ \
     && rm terraform.zip
 
 # Install Terragrunt
 RUN curl -Lo terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v"${TERRAGRUNT_VERSION}"/terragrunt_linux_"$(dpkg --print-architecture)" \
-    && echo "${TERRAGRUNT_CHECKSUM} terragrunt" | sha256sum --check \
     && chmod +x terragrunt \
     && mv terragrunt /usr/local/bin/
 

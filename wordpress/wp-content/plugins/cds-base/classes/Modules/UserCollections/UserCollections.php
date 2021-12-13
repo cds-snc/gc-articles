@@ -6,7 +6,6 @@ use WP_REST_Response;
 
 class UserCollections
 {
-
     public function __construct()
     {
         $this->addActions();

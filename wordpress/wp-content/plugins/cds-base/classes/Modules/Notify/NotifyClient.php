@@ -7,7 +7,6 @@ use Http\Client\Exception;
 
 class NotifyClient
 {
-
     public $notifyClient;
 
     public function __construct()

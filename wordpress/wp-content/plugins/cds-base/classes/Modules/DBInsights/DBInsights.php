@@ -8,7 +8,6 @@ use wpdb;
 
 class DBInsights
 {
-
     protected $wpdb;
 
     public function __construct()

@@ -4,7 +4,6 @@ namespace CDS\Modules\Cleanup;
 
 class Media
 {
-
     public function __construct()
     {
         add_action('admin_init', [$this, 'removeListMode'], 99);

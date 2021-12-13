@@ -4,7 +4,6 @@ namespace CDS\Modules\Blocks;
 
 class Blocks
 {
-
     protected $version;
 
     public function __construct()

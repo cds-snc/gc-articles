@@ -73,8 +73,31 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
-    name     = "Custom_LFI_QueryString"
+    name     = "AWSManagedRulesLinuxRuleSet"
     priority = 3
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name          = "AWSManagedRulesLinuxRuleSet"
+        vendor_name   = "AWS"
+        excluded_rule = "awswaf:managed:aws:linux-os:LFI_QueryString"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesLinuxRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "Custom_LFI_QueryString"
+    priority = 4
 
     action {
       block {}
@@ -109,38 +132,6 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
                 }
               }
             }
-          }
-        }
-      }
-    }
-  }
-
-  rule {
-    name     = "Custom_AWSManagedRulesLinuxRuleSet"
-    priority = 4
-
-    action {
-      block {}
-    }
-
-    visibility_config {
-      cloudwatch_metrics_enabled = true
-      metric_name                = "Custom_AWSManagedRulesLinuxRuleSet"
-      sampled_requests_enabled   = true
-    }
-
-    statement {
-      or_statement {
-        statement {
-          label_match_statement {
-            scope = "LABEL"
-            key   = "awswaf:managed:aws:linux-os:LFI_URIPath"
-          }
-        }
-        statement {
-          label_match_statement {
-            scope = "LABEL"
-            key   = "awswaf:managed:aws:linux-os:LFI_Cookie"
           }
         }
       }

@@ -125,7 +125,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "Custom_ AWSManagedRulesLinuxRuleSet"
+      metric_name                = "Custom_AWSManagedRulesLinuxRuleSet"
       sampled_requests_enabled   = true
     }
 

@@ -3,8 +3,16 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org"
+    },
+    {
+      "type": "path",
+      "url": "./cli"
     }
   ],
+  "require": {
+    "articles/cli": "*"
+  },
+  "minimum-stability": "dev",
   "scripts": {
     "generate-encryption-key": "CDS\\Modules\\Cli\\GenerateEncryptionKey::composerGenerateEncryptionKey"
   },

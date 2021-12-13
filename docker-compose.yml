@@ -120,9 +120,7 @@ services:
 
   cli:
     container_name: cli
-    depends_on:
-      - db
-      - wordpress
+    working_dir: /home/default/project
     build: 
       context: .
       dockerfile: .devcontainer/Dockerfile

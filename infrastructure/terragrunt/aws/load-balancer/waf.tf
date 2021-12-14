@@ -85,7 +85,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         name        = "AWSManagedRulesLinuxRuleSet"
         vendor_name = "AWS"
         excluded_rule {
-          name = "LFI_QueryString"
+          name = "LFI_QUERYSTRING"
         }
       }
     }

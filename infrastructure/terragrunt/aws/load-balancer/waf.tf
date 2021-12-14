@@ -85,7 +85,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         name        = "AWSManagedRulesLinuxRuleSet"
         vendor_name = "AWS"
         excluded_rule {
-          name = "awswaf:managed:aws:linux-os:LFI_QueryString"
+          name = "LFI_QueryString"
         }
       }
     }
@@ -129,7 +129,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
                 positional_constraint = "CONTAINS"
                 search_string         = "/wp-admin"
                 text_transformation {
-                  type     = "NONE"
+                  type     = "LOWERCASE"
                   priority = 0
                 }
               }

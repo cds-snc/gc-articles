@@ -51,6 +51,184 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
+    name     = "AWSManagedRulesKnownBadInputsRuleSet"
+    priority = 2
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesKnownBadInputsRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesKnownBadInputsRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesLinuxRuleSet"
+    priority = 3
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesLinuxRuleSet"
+        vendor_name = "AWS"
+        excluded_rule {
+          name = "LFI_QueryString"
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesLinuxRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "Custom_LFI_QueryString"
+    priority = 4
+
+    action {
+      block {}
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Custom_LFI_QueryString"
+      sampled_requests_enabled   = true
+    }
+
+    statement {
+      and_statement {
+        statement {
+          label_match_statement {
+            scope = "LABEL"
+            key   = "awswaf:managed:aws:linux-os:LFI_QueryString"
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "CONTAINS"
+                search_string         = "/wp-admin"
+                text_transformation {
+                  type     = "LOWERCASE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesSQLiRuleSet"
+    priority = 5
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesSQLiRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesSQLiRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesPHPRuleSet"
+    priority = 6
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesPHPRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesPHPRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesWordPressRuleSet"
+    priority = 7
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesWordPressRuleSet"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesWordPressRuleSet"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesAmazonIpReputationList"
+    priority = 8
+
+    override_action {
+      none {}
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesAmazonIpReputationList"
+        vendor_name = "AWS"
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "AWSManagedRulesAmazonIpReputationList"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
     name     = "Custom_SizeRestrictions_BODY"
     priority = 10
     action {
@@ -181,158 +359,26 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
-    name     = "AWSManagedRulesKnownBadInputsRuleSet"
-    priority = 2
+    name     = "WordpressRateLimit"
+    priority = 101
 
-    override_action {
-      none {}
+    action {
+      block {}
     }
 
     statement {
-      managed_rule_group_statement {
-        name        = "AWSManagedRulesKnownBadInputsRuleSet"
-        vendor_name = "AWS"
+      rate_based_statement {
+        limit              = 10000
+        aggregate_key_type = "IP"
       }
     }
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "AWSManagedRulesKnownBadInputsRuleSet"
+      metric_name                = "WordpressRateLimit"
       sampled_requests_enabled   = true
     }
   }
-
-  rule {
-    name     = "AWSManagedRulesLinuxRuleSet"
-    priority = 3
-
-    override_action {
-      none {}
-    }
-
-    statement {
-      managed_rule_group_statement {
-        name        = "AWSManagedRulesLinuxRuleSet"
-        vendor_name = "AWS"
-      }
-    }
-
-    visibility_config {
-      cloudwatch_metrics_enabled = true
-      metric_name                = "AWSManagedRulesLinuxRuleSet"
-      sampled_requests_enabled   = true
-    }
-  }
-
-  rule {
-    name     = "AWSManagedRulesSQLiRuleSet"
-    priority = 4
-
-    override_action {
-      none {}
-    }
-
-    statement {
-      managed_rule_group_statement {
-        name        = "AWSManagedRulesSQLiRuleSet"
-        vendor_name = "AWS"
-      }
-    }
-
-    visibility_config {
-      cloudwatch_metrics_enabled = true
-      metric_name                = "AWSManagedRulesSQLiRuleSet"
-      sampled_requests_enabled   = true
-    }
-  }
-
-  rule {
-    name     = "AWSManagedRulesPHPRuleSet"
-    priority = 5
-
-    override_action {
-      none {}
-    }
-
-    statement {
-      managed_rule_group_statement {
-        name        = "AWSManagedRulesPHPRuleSet"
-        vendor_name = "AWS"
-      }
-    }
-
-    visibility_config {
-      cloudwatch_metrics_enabled = true
-      metric_name                = "AWSManagedRulesPHPRuleSet"
-      sampled_requests_enabled   = true
-    }
-  }
-
-  rule {
-    name     = "AWSManagedRulesWordPressRuleSet"
-    priority = 6
-
-    override_action {
-      none {}
-    }
-
-    statement {
-      managed_rule_group_statement {
-        name        = "AWSManagedRulesWordPressRuleSet"
-        vendor_name = "AWS"
-      }
-    }
-
-    visibility_config {
-      cloudwatch_metrics_enabled = true
-      metric_name                = "AWSManagedRulesWordPressRuleSet"
-      sampled_requests_enabled   = true
-    }
-  }
-
-  # rule {
-  #   name     = "AWSManagedRulesAmazonIpReputationList"
-  #   priority = 7
-
-  #   override_action {
-  #     none {}
-  #   }
-
-  #   statement {
-  #     managed_rule_group_statement {
-  #       name        = "AWSManagedRulesAmazonIpReputationList"
-  #       vendor_name = "AWS"
-  #     }
-  #   }
-
-  #   visibility_config {
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "AWSManagedRulesAmazonIpReputationList"
-  #     sampled_requests_enabled   = true
-  #   }
-  # }
-
-  # rule {
-  #   name     = "WordpressRateLimit"
-  #   priority = 101
-
-  #   action {
-  #     block {}
-  #   }
-
-  #   statement {
-  #     rate_based_statement {
-  #       limit              = 10000
-  #       aggregate_key_type = "IP"
-  #     }
-  #   }
-
-  #   visibility_config {
-  #     cloudwatch_metrics_enabled = true
-  #     metric_name                = "WordpressRateLimit"
-  #     sampled_requests_enabled   = true
-  #   }
-  # }
 
   visibility_config {
     cloudwatch_metrics_enabled = true

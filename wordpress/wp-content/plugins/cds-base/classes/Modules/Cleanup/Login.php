@@ -18,6 +18,7 @@ class Login
 
     public function loginLogo(): void
     {
+        $logoPath = ICL_LANGUAGE_CODE === 'en' ? 'site-login-logo.svg' : 'site-login-logo-fr.svg';
         ?>
       <style>
           .login *, .login form label, .login form .button.button-large {
@@ -25,7 +26,7 @@ class Login
           }
 
           body.login div#login h1 a {
-              background-image: url(<?php echo cds_plugin_images_url('site-login-logo.svg'); ?>);
+              background-image: url(<?php echo cds_plugin_images_url($logoPath); ?>);
               width: 300px;
               height: 59px;
               background-size: contain;

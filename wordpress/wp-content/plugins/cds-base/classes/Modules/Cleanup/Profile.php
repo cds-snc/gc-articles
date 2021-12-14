@@ -13,6 +13,7 @@ class Profile
         add_action('personal_options', [$this, 'start']);
         add_filter('additional_capabilities_display', [$this, 'removeAdditionalCapabilitiesFunc']);
         add_action('wpml_user_profile_options', [$this, 'wpmlOptions']);
+        add_action('additional_capabilities_display', [$this, 'yoastOptions']);
 
         if (is_admin()) {
             remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
@@ -96,7 +97,6 @@ class Profile
          *--------------------------------------------*/
 
         $crawler->filter('.yoast-settings')->remove();
-
         /*--------------------------------------------*
          * Remove Application Passwords Fields
          *--------------------------------------------*/
@@ -128,8 +128,30 @@ class Profile
         return false;
     }
 
+    public function yoastOptions(): void
+    {
+        // re-add via hidden fields -- with no values
+        // :( we need these values in order to submit without yoast errors
+
+        $fields = ["honorificPrefix",
+        "honorificSuffix",
+        "birthDate",
+        "gender",
+        "award",
+        "knowsAbout",
+        "knowsLanguage",
+        "jobTitle",
+        "worksFor"];
+
+        foreach ($fields as $field) {
+            printf('<input type="hidden" name="wpseo_user_schema[%s]">', $field);
+        }
+    }
+
     public function wpmlOptions($userId): void
     {
-        echo '<input type="hidden" id="icl_show_hidden_languages" name="icl_show_hidden_languages" type="checkbox" value="1">';
+        echo '<input type="hidden" id="icl_admin_language_for_edit" name="icl_admin_language_for_edit" value="0">';
+        echo '<input type="hidden" id="icl_show_hidden_languages" name="icl_show_hidden_languages" value="1">';
+        echo '<input type="hidden" id="icl_user_admin_language" name="icl_user_admin_language" value="en">';
     }
 }

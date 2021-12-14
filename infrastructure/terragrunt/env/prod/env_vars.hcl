@@ -1,7 +1,7 @@
 inputs = {
-  account_id        = "514867032726"
+  account_id        = "472286471787"
   enable_efs        = false
-  env               = "prod"
+  env               = "production"
   billing_tag_key   = "CostCentre"
   billing_tag_value = "PlatformGCArticles"
 }

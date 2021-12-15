@@ -23,14 +23,38 @@ class Releases
     public function dashboardWidget(): void
     {
         wp_add_dashboard_widget(
-            'cds_releases_widget',
+            'cds_updates_widget',
             __('GC Articles Updates', 'cds'),
             [
                 $this,
-                'releasesPanelHandler',
+                'releasesPanelHandlerPage',
 
             ],
         );
+ 
+        /* // not in use yet
+        wp_add_dashboard_widget(
+            'cds_releases_widget',
+            __('Latest Release', 'cds'),
+            [
+                $this,
+                'releasesPanelHandlerEmbed',
+            ],
+        );
+        */
+    }
+
+    public function getEmbedPage()
+    {
+        // set the page name we want to pull content from
+        $page = get_page_by_path("updates"); 
+        if(!$page){
+            echo "";
+            return ;
+        }
+
+        $content = apply_filters( 'the_content', get_the_content(null, null, $page->ID) );
+        return $content;
     }
 
     public function getVersion($prefix): string
@@ -44,7 +68,12 @@ class Releases
         return "";
     }
 
-    public function releasesPanelHandler()
+    public function releasesPanelHandlerPage()
+    {
+        echo $this->getEmbedPage();
+    }
+
+    public function releasesPanelHandlerEmbed()
     {
         $page = sprintf('%s/releases/%s', get_site_url(0), $this->getVersion("releases"));
 

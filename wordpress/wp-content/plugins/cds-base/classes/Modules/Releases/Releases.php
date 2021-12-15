@@ -31,7 +31,7 @@ class Releases
 
             ],
         );
- 
+
         /* // not in use yet
         wp_add_dashboard_widget(
             'cds_releases_widget',
@@ -47,13 +47,13 @@ class Releases
     public function getEmbedPage()
     {
         // set the page name we want to pull content from
-        $page = get_page_by_path("updates"); 
-        if(!$page){
+        $page = get_page_by_path("updates");
+        if (!$page) {
             echo "";
             return ;
         }
 
-        $content = apply_filters( 'the_content', get_the_content(null, null, $page->ID) );
+        $content = apply_filters('the_content', get_the_content(null, null, $page->ID));
         return $content;
     }
 

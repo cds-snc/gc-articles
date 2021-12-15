@@ -3,7 +3,7 @@ variable "database_instances_count" {
 }
 
 variable "database_instance_class" {
-  type = number
+  type = string
 }
 
 variable "database_name" {

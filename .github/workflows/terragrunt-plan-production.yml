@@ -45,7 +45,7 @@ jobs:
   # Create a comment with a link showing the diff between versions
   diff-comment:
     needs: version-manifest
-    uses: cds-snc/forms-terraform/.github/workflows/diff-comment.yml@main
+    uses: cds-snc/gc-articles/.github/workflows/diff-comment.yml@main
     with:
       base: ${{ needs.version-manifest.outputs.previous }}
       ref: ${{ needs.version-manifest.outputs.current }}

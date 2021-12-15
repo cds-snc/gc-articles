@@ -27,11 +27,12 @@ jobs:
           fetch-depth: 0
 
       - name: Versions
+        working-directory: "infrastructure"
         id: versions
         run: |
-          PREV_SHA="$(git show -2 --pretty=format:"%h" --no-patch infrastructure/VERSION | tail -n 1)"
-          PREV_VERSION="$(git show ${PREV_SHA}:infrastructure/VERSION)"
-          CURR_VERSION="$(cat infrastructure/VERSION)"
+          PREV_SHA="$(git show -2 --pretty=format:"%h" --no-patch VERSION | tail -n 1)"
+          PREV_VERSION="$(git show ${PREV_SHA}:VERSION)"
+          CURR_VERSION="$(cat VERSION)"
           echo "PREV_SHA=${PREV_SHA}"
           echo "PREV_VERSION=${PREV_VERSION}"
           echo "CURR_VERSION=${CURR_VERSION}"

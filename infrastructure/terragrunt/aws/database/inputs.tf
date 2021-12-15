@@ -2,7 +2,7 @@ variable "database_instances_count" {
   type = number
 }
 
-variable "database_instances_class" {
+variable "database_instance_class" {
   type = number
 }
 

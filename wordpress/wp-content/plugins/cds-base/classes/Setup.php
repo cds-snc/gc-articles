@@ -65,7 +65,7 @@ class Setup
         new UserCollections();
         new Users();
         new Media();
-    
+
         Wpml::setup();
     }
 

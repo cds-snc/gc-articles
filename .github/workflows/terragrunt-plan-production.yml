@@ -9,33 +9,33 @@ on:
 
 env:
   AWS_REGION: ca-central-1
-  AWS_ACCESS_KEY_ID: ${{ secrets.STAGING_AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.STAGING_AWS_SECRET_ACCESS_KEY }}
+  AWS_ACCESS_KEY_ID: ${{ secrets.PRODUCTION_AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.PRODUCTION_AWS_SECRET_ACCESS_KEY }}
   CONFTEST_VERSION: 0.27.0
   TERRAFORM_VERSION: 1.0.10
   TERRAGRUNT_VERSION: 0.35.6
   TF_INPUT: false
-  TF_VAR_database_name: ${{ secrets.STAGING_DATABASE_NAME }}
-  TF_VAR_database_username: ${{ secrets.STAGING_DATABASE_USERNAME }}
-  TF_VAR_database_password: ${{ secrets.STAGING_DATABASE_PASSWORD }}
-  TF_VAR_cloudfront_custom_header_name: ${{ secrets.STAGING_CLOUDFRONT_CUSTOM_HEADER_NAME }}
-  TF_VAR_cloudfront_custom_header_value: ${{ secrets.STAGING_CLOUDFRONT_CUSTOM_HEADER_VALUE }}
-  TF_VAR_list_manager_endpoint: ${{ secrets.STAGING_LIST_MANAGER_ENDPOINT }}
-  TF_VAR_default_list_manager_api_key: ${{ secrets.STAGING_DEFAULT_LIST_MANAGER_API_KEY }}
-  TF_VAR_default_notify_api_key: ${{ secrets.STAGING_DEFAULT_NOTIFY_API_KEY }}
-  TF_VAR_encryption_key: ${{ secrets.STAGING_ENCRYPTION_KEY }}
-  TF_VAR_s3_uploads_bucket: ${{ secrets.STAGING_S3_UPLOADS_BUCKET }}
-  TF_VAR_s3_uploads_key: ${{ secrets.STAGING_S3_UPLOADS_KEY }}
-  TF_VAR_s3_uploads_secret: ${{ secrets.STAGING_S3_UPLOADS_SECRET }}
-  TF_VAR_slack_webhook_url: ${{ secrets.STAGING_SLACK_WEBHOOK_URL }}
-  TF_VAR_wordpress_auth_key: ${{ secrets.STAGING_WORDPRESS_AUTH_KEY }}
-  TF_VAR_wordpress_secure_auth_key: ${{ secrets.STAGING_WORDPRESS_SECURE_AUTH_KEY }}
-  TF_VAR_wordpress_logged_in_key: ${{ secrets.STAGING_WORDPRESS_LOGGED_IN_KEY }}
-  TF_VAR_wordpress_nonce_key: ${{ secrets.STAGING_WORDPRESS_NONCE_KEY }}
-  TF_VAR_wordpress_auth_salt: ${{ secrets.STAGING_WORDPRESS_AUTH_SALT }}
-  TF_VAR_wordpress_secure_auth_salt: ${{ secrets.STAGING_WORDPRESS_SECURE_AUTH_SALT }}
-  TF_VAR_wordpress_logged_in_salt: ${{ secrets.STAGING_WORDPRESS_LOGGED_IN_SALT }}
-  TF_VAR_wordpress_nonce_salt: ${{ secrets.STAGING_WORDPRESS_NONCE_SALT }}
+  TF_VAR_database_name: ${{ secrets.PRODUCTION_DATABASE_NAME }}
+  TF_VAR_database_username: ${{ secrets.PRODUCTION_DATABASE_USERNAME }}
+  TF_VAR_database_password: ${{ secrets.PRODUCTION_DATABASE_PASSWORD }}
+  TF_VAR_cloudfront_custom_header_name: ${{ secrets.PRODUCTION_CLOUDFRONT_CUSTOM_HEADER_NAME }}
+  TF_VAR_cloudfront_custom_header_value: ${{ secrets.PRODUCTION_CLOUDFRONT_CUSTOM_HEADER_VALUE }}
+  TF_VAR_list_manager_endpoint: ${{ secrets.PRODUCTION_LIST_MANAGER_ENDPOINT }}
+  TF_VAR_default_list_manager_api_key: ${{ secrets.PRODUCTION_DEFAULT_LIST_MANAGER_API_KEY }}
+  TF_VAR_default_notify_api_key: ${{ secrets.PRODUCTION_DEFAULT_NOTIFY_API_KEY }}
+  TF_VAR_encryption_key: ${{ secrets.PRODUCTION_ENCRYPTION_KEY }}
+  TF_VAR_s3_uploads_bucket: ${{ secrets.PRODUCTION_S3_UPLOADS_BUCKET }}
+  TF_VAR_s3_uploads_key: ${{ secrets.PRODUCTION_S3_UPLOADS_KEY }}
+  TF_VAR_s3_uploads_secret: ${{ secrets.PRODUCTION_S3_UPLOADS_SECRET }}
+  TF_VAR_slack_webhook_url: ${{ secrets.PRODUCTION_SLACK_WEBHOOK_URL }}
+  TF_VAR_wordpress_auth_key: ${{ secrets.PRODUCTION_WORDPRESS_AUTH_KEY }}
+  TF_VAR_wordpress_secure_auth_key: ${{ secrets.PRODUCTION_WORDPRESS_SECURE_AUTH_KEY }}
+  TF_VAR_wordpress_logged_in_key: ${{ secrets.PRODUCTION_WORDPRESS_LOGGED_IN_KEY }}
+  TF_VAR_wordpress_nonce_key: ${{ secrets.PRODUCTION_WORDPRESS_NONCE_KEY }}
+  TF_VAR_wordpress_auth_salt: ${{ secrets.PRODUCTION_WORDPRESS_AUTH_SALT }}
+  TF_VAR_wordpress_secure_auth_salt: ${{ secrets.PRODUCTION_WORDPRESS_SECURE_AUTH_SALT }}
+  TF_VAR_wordpress_logged_in_salt: ${{ secrets.PRODUCTION_WORDPRESS_LOGGED_IN_SALT }}
+  TF_VAR_wordpress_nonce_salt: ${{ secrets.PRODUCTION_WORDPRESS_NONCE_SALT }}
 
 jobs:
   # Check the VERSION file to get the target version to deploy and previously deployed version.

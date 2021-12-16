@@ -124,11 +124,6 @@ resource "aws_ecs_service" "wordpress_service" {
   deployment_maximum_percent         = 200
   health_check_grace_period_seconds  = 60
 
-  ordered_placement_strategy {
-    type  = "spread"
-    field = "attribute:ecs.availability-zone"
-  }
-
   deployment_controller {
     type = "ECS"
   }

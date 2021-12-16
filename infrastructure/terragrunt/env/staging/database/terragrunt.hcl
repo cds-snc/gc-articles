@@ -19,6 +19,7 @@ dependency "network" {
 
 inputs = {
   database_instances_count = 2
+  database_instance_class = "db.t3.small"
   private_subnet_ids       = dependency.network.outputs.private_subnet_ids
   vpc_id                   = dependency.network.outputs.vpc_id
 }

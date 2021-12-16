@@ -2,6 +2,10 @@ variable "database_instances_count" {
   type = number
 }
 
+variable "database_instance_class" {
+  type = string
+}
+
 variable "database_name" {
   type      = string
   sensitive = true

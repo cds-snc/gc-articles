@@ -9,10 +9,10 @@ on:
     outputs:
       previous:
         description: "The previous contents of the VERSION manifest"
-        value: ${{ jobs.version-manifest.outputs.previous }}
+        value: infrastructure/${{ jobs.version-manifest.outputs.previous }}
       current:
         description: "The current contents of the VERSION manifest"
-        value: ${{ jobs.version-manifest.outputs.current }}
+        value: infrastructure/${{ jobs.version-manifest.outputs.current }}
 
 jobs:
   version-manifest:

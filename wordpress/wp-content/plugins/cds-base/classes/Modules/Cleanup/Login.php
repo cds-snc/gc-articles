@@ -14,10 +14,12 @@ class Login
         add_filter('login_title', [$this, 'customLoginTitle']);
         add_action('wp_login_failed', [$this, 'loginFailed']);
         add_filter('login_redirect', [$this, 'loginRedirect'], 10, 3);
+        add_filter('login_message', [$this, 'addLangLink']);
     }
 
     public function loginLogo(): void
     {
+        $logoPath = ICL_LANGUAGE_CODE === 'en' ? 'site-login-logo.svg' : 'site-login-logo-fr.svg';
         ?>
       <style>
           .login *, .login form label, .login form .button.button-large {
@@ -25,11 +27,24 @@ class Login
           }
 
           body.login div#login h1 a {
-              background-image: url(<?php echo cds_plugin_images_url('site-login-logo.svg'); ?>);
+              background-image: url(<?php echo cds_plugin_images_url($logoPath); ?>);
               width: 300px;
               height: 59px;
               background-size: contain;
               margin-bottom: 20px;
+          }
+
+          .login .switch-lang {
+              padding: 0 24px 0;
+              margin-bottom: 24px;
+          }
+
+          .login .switch-lang a {
+              color: #50575e;
+          }
+
+          .login .switch-lang a:hover {
+              color: #135e96;
           }
 
           .wp-core-ui .button-primary, .wp-core-ui .button-primary:focus {
@@ -45,6 +60,27 @@ class Login
           }
       </style>
     <?php }
+
+    public function addLangLink($message)
+    {
+        $frPrefix = '/fr';
+        $loginPath = parse_url(wp_login_url(), PHP_URL_PATH);
+        $switchLangPath = str_starts_with($loginPath, $frPrefix) ?
+            str_replace($frPrefix, '', $loginPath) :
+            $frPrefix . $loginPath;
+
+        $switchLangText = ICL_LANGUAGE_CODE === 'en' ? 'Français' : 'English';
+        $switchLangAttr = ICL_LANGUAGE_CODE === 'en' ? 'fr' : 'en';
+
+        $switchLangLink = sprintf(
+            '<div class="switch-lang"><a lang="%s" href="%s">%s</a></div>',
+            $switchLangAttr,
+            esc_url_raw($switchLangPath),
+            $switchLangText
+        );
+
+        return $switchLangLink . $message;
+    }
 
     public function loginLogoUrl(): string
     {

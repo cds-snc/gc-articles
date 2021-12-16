@@ -51,5 +51,5 @@ inputs = {
 }
 
 terraform {
-  source = "git::https://github.com/cds-snc/gc-articles/infrastructure/terragrunt//aws/load-balancer?ref=${get_env("TARGET_VERSION")}"
+  source = "git::https://github.com/cds-snc/gc-articles//infrastructure/terragrunt/aws/load-balancer?ref=${get_env("TARGET_VERSION")}"
 }

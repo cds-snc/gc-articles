@@ -8,11 +8,11 @@ on:
       - ".dockerignore"
       - ".github/workflows/build_push_container.yml"
       - "wordpress/**"
+    tags-ignore:
+      - infrastructure/*
   release:
     types:
       - created
-    tags-ignore:
-      - infrastructure/*
 
 env:
   DOCKER_BUILDKIT: 1

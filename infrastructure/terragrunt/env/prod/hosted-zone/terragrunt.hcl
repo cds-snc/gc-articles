@@ -7,5 +7,5 @@ inputs = {
 }
 
 terraform {
-  source = "git::https://github.com/cds-snc/gc-articles/infrastructure/terragrunt//aws/hosted-zone?ref=${get_env("TARGET_VERSION")}"
+  source = "git::https://github.com/cds-snc/gc-articles//infrastructure/terragrunt/aws/hosted-zone?ref=${get_env("TARGET_VERSION")}"
 }

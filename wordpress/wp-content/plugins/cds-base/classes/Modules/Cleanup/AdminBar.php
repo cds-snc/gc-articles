@@ -11,7 +11,7 @@ class AdminBar
         add_action('admin_bar_menu', [$this, 'removeFromAdminBar'], 2147483647);
         add_action('wp_before_admin_bar_render', [$this, 'removeFromAdminBarBefore'], 99);
 
-        add_action( 'admin_bar_menu', [$this, 'addCollections'], 21 );
+        add_action('admin_bar_menu', [$this, 'addCollections'], 21);
     }
 
     public function addCollections($wp_admin_bar): void
@@ -32,15 +32,15 @@ class AdminBar
 
         $current_site_id = get_current_blog_id();
 
-        /* Inspiration for this loop comes from 'wp_admin_bar_my_sites_menu' function in core WP */
-        foreach ((array) $wp_admin_bar->user->blogs as $blog) {
-            switch_to_blog($blog->userblog_id);
+        $user_blogs = get_blogs_of_user(get_current_user_id());
 
+        /* Inspiration for this loop comes from 'wp_admin_bar_my_sites_menu' function in core WP */
+        foreach ((array) $user_blogs as $blog) {
             if (has_site_icon()) {
                 $blavatar = sprintf(
                     '<img class="blavatar" src="%s" srcset="%s 2x" alt="" width="16" height="16" />',
-                    esc_url(get_site_icon_url(16)),
-                    esc_url(get_site_icon_url(32))
+                    esc_url(get_site_icon_url(size: 16, blog_id: $blog->userblog_id)),
+                    esc_url(get_site_icon_url(size: 32, blog_id: $blog->userblog_id))
                 );
             } else {
                 $blavatar = '<div class="blavatar"></div>';
@@ -49,7 +49,7 @@ class AdminBar
             $blogname = $blog->blogname;
 
             if (!$blogname) {
-                $blogname = preg_replace('#^(https?://)?(www.)?#', '', get_home_url());
+                $blogname = preg_replace('#^(https?://)?(www.)?#', '', get_home_url($blog->userblog_id));
             }
 
             $menu_id = 'site-' . $blog->userblog_id;
@@ -60,7 +60,7 @@ class AdminBar
                     'parent' => $root_id,
                     'id'     => $menu_id,
                     'title'  => $blavatar . $blogname . $is_current,
-                    'href'   => admin_url(),
+                    'href'   => get_admin_url(blog_id: $blog->userblog_id),
                 )
             );
 
@@ -69,7 +69,7 @@ class AdminBar
                     'parent' => $menu_id,
                     'id'     => $menu_id . '-d',
                     'title'  => __('Dashboard', 'cds-snc'),
-                    'href'   => admin_url(),
+                    'href'   => get_admin_url(blog_id: $blog->userblog_id),
                 )
             );
 
@@ -78,11 +78,10 @@ class AdminBar
                     'parent' => $menu_id,
                     'id'     => $menu_id . '-v',
                     'title'  => __('Visit', 'cds-snc'),
-                    'href'   => home_url('/'),
+                    'href'   => get_home_url(blog_id: $blog->userblog_id, path: '/'),
                 )
             );
         }
-        restore_current_blog();
     }
 
     public function removeFromAdminBarBefore(): void

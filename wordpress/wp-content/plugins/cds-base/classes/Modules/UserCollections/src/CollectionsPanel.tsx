@@ -14,6 +14,7 @@ interface Collection {
   domain: string;
   blogname: string;
   path: string;
+  current?: boolean;
 }
 
 const Collections = ({
@@ -32,9 +33,18 @@ const Collections = ({
   const rows = collections.map((collection, index) => {
     const dashboardText = __('Dashboard', 'cds-snc');
     const websiteText = __('Visit', 'cds-snc');
+    const isCurrent = collection.current;
+
+    const renderName = (blogname, current = false) => {
+      if (current) {
+        return <strong>{ blogname } ({__('current', 'cds-snc')})</strong>
+      }
+      return blogname;
+    }
+
     return (
       <tr key={`row-${index}`} className={`row-${index}`}>
-        <td className="name">{collection.blogname}</td>
+        <td className="name">{renderName(collection.blogname, collection.current)}</td>
         <td className="website">
           <a
             aria-label={`${websiteText} ${collection.blogname} `}

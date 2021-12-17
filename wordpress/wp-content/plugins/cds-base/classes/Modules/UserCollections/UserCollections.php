@@ -33,7 +33,13 @@ class UserCollections
     {
         $uId = get_current_user_id();
 
-        $response = new WP_REST_Response(get_blogs_of_user($uId));
+        $blogs = get_blogs_of_user($uId);
+        $current_blog_id = get_current_blog_id();
+
+        $data = json_decode(json_encode($blogs), true);
+        $data[$current_blog_id]['current'] = true;
+
+        $response = new WP_REST_Response($data);
 
         $response->set_status(200);
 

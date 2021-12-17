@@ -149,8 +149,11 @@ code {
   height: 36px; /* increase admin bar height because it is fixed, not related to text size */
 }
 
-#wpadminbar .quicklinks a {
-  height: auto; /* admin bar links are the same size as admin bar */
+.wp-admin #wpadminbar .ab-top-menu > li > .ab-empty-item,
+.wp-admin #wpadminbar .ab-top-menu > li > a,
+.wp-admin #wpadminbar .ab-top-menu > li > .shortlink-input
+ {
+  min-height: 36px; /* admin bar links are the same size as admin bar */
 }
 
 .wp-core-ui select,

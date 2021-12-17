@@ -21,6 +21,25 @@ class Login
         add_action('wp_login_failed', [$this, 'loginFailed']);
         add_filter('login_redirect', [$this, 'loginRedirect'], 10, 3);
         add_filter('login_message', [$this, 'addLangLink']);
+
+        add_action('admin_page_access_denied', [$this, 'redirectToNewestBlog'], 98);
+    }
+
+    public function redirectToNewestBlog(): void
+    {
+        $blogs = get_blogs_of_user(get_current_user_id());
+
+        if (empty($blogs)) {
+            return;
+        }
+
+        // else, send to newest-created blog, since we have no other way of prioritizing.
+        $newestBlog = array_pop($blogs);
+        $adminUrl = esc_url(get_admin_url($newestBlog->userblog_id));
+        wp_redirect($adminUrl, 302, $x_redirect_by = 'CDS\Modules\Cleanup\Login');
+
+        // call this, or else we get a splash page called by '_access_denied_splash' in core WP
+        die();
     }
 
     public function loginLogo(): void

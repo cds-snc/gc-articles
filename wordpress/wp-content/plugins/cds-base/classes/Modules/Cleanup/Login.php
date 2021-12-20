@@ -4,14 +4,8 @@ namespace CDS\Modules\Cleanup;
 
 class Login
 {
-    public string $lang;
-
     public function __construct()
     {
-        $this->lang = defined('ICL_LANGUAGE_CODE')
-            ? (ICL_LANGUAGE_CODE === 'fr' ? 'fr' : 'en')
-            : '';
-
         add_action('login_enqueue_scripts', [$this, 'loginLogo']);
         add_filter('login_headerurl', [$this, 'loginLogoUrl']);
         add_filter('login_headertext', [$this, 'customizeLoginHeaderText']);
@@ -23,9 +17,21 @@ class Login
         add_filter('login_message', [$this, 'addLangLink']);
     }
 
+    private function getLanguage(): string
+    {
+        // check if icl_get_languages function exists, and 'fr' is a valid value (otherwise french hasn't been set up)
+        if (function_exists('icl_get_languages') && in_array('fr', array_keys(icl_get_languages()))) {
+            return defined('ICL_LANGUAGE_CODE')
+                ? (ICL_LANGUAGE_CODE === 'fr' ? 'fr' : 'en')
+                : '';
+        }
+
+        return '';
+    }
+
     public function loginLogo(): void
     {
-        $logoPath = $this->lang === 'fr' ? 'site-login-logo-fr.svg' : 'site-login-logo.svg';
+        $logoPath = $this->getLanguage() === 'fr' ? 'site-login-logo-fr.svg' : 'site-login-logo.svg';
         ?>
       <style>
           .login *, .login form label, .login form .button.button-large {
@@ -69,15 +75,16 @@ class Login
 
     public function addLangLink($message): string
     {
-        if (!empty($this->lang)) {
+        $lang = $this->getLanguage();
+        if (!empty($lang)) {
             $frPrefix = '/fr';
             $loginPath = parse_url(wp_login_url(), PHP_URL_PATH);
             $switchLangPath = str_starts_with($loginPath, $frPrefix) ?
                 str_replace($frPrefix, '', $loginPath) :
                 $frPrefix . $loginPath;
 
-            $switchLangText = $this->lang === 'fr' ? 'English' : 'Français';
-            $switchLangAttr = $this->lang === 'fr' ? 'en' : 'fr';
+            $switchLangText = $lang === 'fr' ? 'English' : 'Français';
+            $switchLangAttr = $lang === 'fr' ? 'en' : 'fr';
 
             $switchLangLink = sprintf(
                 '<div class="switch-lang"><a lang="%s" href="%s">%s</a></div>',

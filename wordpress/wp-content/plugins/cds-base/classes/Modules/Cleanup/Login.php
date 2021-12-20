@@ -79,9 +79,17 @@ class Login
         if (!empty($lang)) {
             $frPrefix = '/fr';
             $loginPath = parse_url(wp_login_url(), PHP_URL_PATH);
-            $switchLangPath = str_starts_with($loginPath, $frPrefix) ?
-                str_replace($frPrefix, '', $loginPath) :
-                $frPrefix . $loginPath;
+
+            if (str_contains($loginPath, $frPrefix)) {
+                // there is a french prefix, remove it
+                $switchLangPath = str_replace($frPrefix, '', $loginPath);
+            } else {
+                // no french prefix, add it as the second-last url item
+                $pathParts = explode('/', rtrim($loginPath, '/'));
+                $loginPart = array_pop($pathParts);
+                array_push($pathParts, ltrim($frPrefix, '/'), $loginPart);
+                $switchLangPath = (implode("/", $pathParts));
+            }
 
             $switchLangText = $lang === 'fr' ? 'English' : 'Français';
             $switchLangAttr = $lang === 'fr' ? 'en' : 'fr';

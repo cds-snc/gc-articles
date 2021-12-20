@@ -4,8 +4,14 @@ namespace CDS\Modules\Cleanup;
 
 class Login
 {
+    public string $lang;
+
     public function __construct()
     {
+        $this->lang = defined('ICL_LANGUAGE_CODE')
+            ? (ICL_LANGUAGE_CODE === 'fr' ? 'fr' : 'en')
+            : '';
+
         add_action('login_enqueue_scripts', [$this, 'loginLogo']);
         add_filter('login_headerurl', [$this, 'loginLogoUrl']);
         add_filter('login_headertext', [$this, 'customizeLoginHeaderText']);
@@ -19,7 +25,7 @@ class Login
 
     public function loginLogo(): void
     {
-        $logoPath = ICL_LANGUAGE_CODE === 'en' ? 'site-login-logo.svg' : 'site-login-logo-fr.svg';
+        $logoPath = $this->lang === 'fr' ? 'site-login-logo-fr.svg' : 'site-login-logo.svg';
         ?>
       <style>
           .login *, .login form label, .login form .button.button-large {
@@ -61,25 +67,28 @@ class Login
       </style>
     <?php }
 
-    public function addLangLink($message)
+    public function addLangLink($message): string
     {
-        $frPrefix = '/fr';
-        $loginPath = parse_url(wp_login_url(), PHP_URL_PATH);
-        $switchLangPath = str_starts_with($loginPath, $frPrefix) ?
-            str_replace($frPrefix, '', $loginPath) :
-            $frPrefix . $loginPath;
+        if (!empty($this->lang)) {
+            $frPrefix = '/fr';
+            $loginPath = parse_url(wp_login_url(), PHP_URL_PATH);
+            $switchLangPath = str_starts_with($loginPath, $frPrefix) ?
+                str_replace($frPrefix, '', $loginPath) :
+                $frPrefix . $loginPath;
 
-        $switchLangText = ICL_LANGUAGE_CODE === 'en' ? 'Français' : 'English';
-        $switchLangAttr = ICL_LANGUAGE_CODE === 'en' ? 'fr' : 'en';
+            $switchLangText = $this->lang === 'fr' ? 'English' : 'Français';
+            $switchLangAttr = $this->lang === 'fr' ? 'en' : 'fr';
 
-        $switchLangLink = sprintf(
-            '<div class="switch-lang"><a lang="%s" href="%s">%s</a></div>',
-            $switchLangAttr,
-            esc_url_raw($switchLangPath),
-            $switchLangText
-        );
+            $switchLangLink = sprintf(
+                '<div class="switch-lang"><a lang="%s" href="%s">%s</a></div>',
+                $switchLangAttr,
+                esc_url_raw($switchLangPath),
+                $switchLangText
+            );
 
-        return $switchLangLink . $message;
+            return $switchLangLink . $message;
+        }
+        return '';
     }
 
     public function loginLogoUrl(): string

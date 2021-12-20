@@ -29,7 +29,13 @@ class Login
     {
         $blogs = get_blogs_of_user(get_current_user_id());
 
+        // nowhere to redirect if user has no blogs, so return
         if (empty($blogs)) {
+            return;
+        }
+
+        // if user is currently on a blog they are allowed to be on, then this is a permissions error, so return
+        if (in_array(get_current_blog_id(), array_keys($blogs))) {
             return;
         }
 

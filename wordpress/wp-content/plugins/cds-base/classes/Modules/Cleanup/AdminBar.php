@@ -9,8 +9,79 @@ class AdminBar
     public function __construct()
     {
         add_action('admin_bar_menu', [$this, 'removeFromAdminBar'], 2147483647);
-
         add_action('wp_before_admin_bar_render', [$this, 'removeFromAdminBarBefore'], 99);
+
+        add_action('admin_bar_menu', [$this, 'addCollections'], 21);
+    }
+
+    public function addCollections($wp_admin_bar): void
+    {
+        // if less than 2 collections or a superadmin, skip this
+        if (count($wp_admin_bar->user->blogs) < 2 || is_super_admin()) {
+            return;
+        }
+
+        $root_id = 'my-collections';
+        $wp_admin_bar->add_node([
+            'id'    =>  $root_id,
+            'title' => '<div class="ab-item"><span class="ab-icon"></span>' . __(
+                'My Collections',
+                'cds-snc'
+            ) . '</div>'
+        ]);
+
+        $current_site_id = get_current_blog_id();
+
+        $user_blogs = get_blogs_of_user(get_current_user_id());
+
+        /* Inspiration for this loop comes from 'wp_admin_bar_my_sites_menu' function in core WP */
+        foreach ((array) $user_blogs as $blog) {
+            if (has_site_icon()) {
+                $blavatar = sprintf(
+                    '<img class="blavatar" src="%s" srcset="%s 2x" alt="" width="16" height="16" />',
+                    esc_url(get_site_icon_url(size: 16, blog_id: $blog->userblog_id)),
+                    esc_url(get_site_icon_url(size: 32, blog_id: $blog->userblog_id))
+                );
+            } else {
+                $blavatar = '<div class="blavatar"></div>';
+            }
+
+            $blogname = $blog->blogname;
+
+            if (!$blogname) {
+                $blogname = preg_replace('#^(https?://)?(www.)?#', '', get_home_url($blog->userblog_id));
+            }
+
+            $menu_id = 'site-' . $blog->userblog_id;
+            $is_current = $blog->userblog_id === $current_site_id ? __(' (current)', 'cds-snc') : '';
+
+            $wp_admin_bar->add_node(
+                array(
+                    'parent' => $root_id,
+                    'id'     => $menu_id,
+                    'title'  => $blavatar . $blogname . $is_current,
+                    'href'   => get_admin_url(blog_id: $blog->userblog_id),
+                )
+            );
+
+            $wp_admin_bar->add_node(
+                array(
+                    'parent' => $menu_id,
+                    'id'     => $menu_id . '-d',
+                    'title'  => __('Dashboard', 'cds-snc'),
+                    'href'   => get_admin_url(blog_id: $blog->userblog_id),
+                )
+            );
+
+            $wp_admin_bar->add_node(
+                array(
+                    'parent' => $menu_id,
+                    'id'     => $menu_id . '-v',
+                    'title'  => __('Visit', 'cds-snc'),
+                    'href'   => get_home_url(blog_id: $blog->userblog_id, path: '/'),
+                )
+            );
+        }
     }
 
     public function removeFromAdminBarBefore(): void

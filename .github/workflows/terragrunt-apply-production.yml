@@ -68,12 +68,80 @@ jobs:
           chmod +x bin/*
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
-      - name: Install Conftest
-        run: |
-          wget "https://github.com/open-policy-agent/conftest/releases/download/v${{ env.CONFTEST_VERSION }}/conftest_${{ env.CONFTEST_VERSION }}_Linux_x86_64.tar.gz" \
-          && wget "https://github.com/open-policy-agent/conftest/releases/download/v${{ env.CONFTEST_VERSION }}/checksums.txt" \
-          && grep 'Linux_x86_64.tar.gz' < checksums.txt | sha256sum --check  --status \
-          && tar -zxvf "conftest_${{ env.CONFTEST_VERSION }}_Linux_x86_64.tar.gz" conftest \
-          && mv conftest /usr/local/bin \
-          && rm "conftest_${{ env.CONFTEST_VERSION }}_Linux_x86_64.tar.gz" checksums.txt
+      - uses: cds-snc/paths-filter@v2.10.3
+        id: filter
+        with:
+          filters: |
+            common:
+              - '.github/workflows/terragrunt-apply-staging.yml'
+              - 'infrastructure/terragrunt/env/common/**'
+              - 'infrastructure/terragrunt/env/terragrunt.hcl'
+              - 'infrastructure/terragrunt/env/staging/env_vars.hcl'
+            alarms:
+              - 'infrastructure/terragrunt/aws/alarms/**'
+              - 'infrastructure/terragrunt/env/staging/alarms/**'
+            database:
+              - 'infrastructure/terragrunt/aws/database/**'
+              - 'infrastructure/terragrunt/env/staging/database/**'
+            ecr:
+              - 'infrastructure/terragrunt/aws/ecr/**'
+              - 'infrastructure/terragrunt/env/staging/ecr/**'
+            ecs:
+              - 'infrastructure/terragrunt/aws/ecs/**'
+              - 'infrastructure/terragrunt/env/staging/ecs/**'
+            hosted-zone:
+              - 'infrastructure/terragrunt/aws/hosted-zone/**'
+              - 'infrastructure/terragrunt/env/staging/hosted-zone/**'
+            load-balancer:
+              - 'infrastructure/terragrunt/aws/load-balancer/**'
+              - 'infrastructure/terragrunt/env/staging/load-balancer/**'
+            network:
+              - 'infrastructure/terragrunt/aws/network/**'
+              - 'infrastructure/terragrunt/env/staging/network/**'
+            storage:
+              - 'infrastructure/terragrunt/aws/storage/**'
+              - 'infrastructure/terragrunt/env/staging/storage/**'
 
+      # No dependencies
+      - name: Terragrunt apply network
+        if: ${{ steps.filter.outputs.network == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/network
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Terragrunt apply hosted-zone
+        if: ${{ steps.filter.outputs.hosted-zone == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/hosted-zone
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Terragrunt apply ecr
+        if: ${{ steps.filter.outputs.ecr == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/ecr
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Terragrunt apply storage
+        if: ${{ steps.filter.outputs.storage == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/storage
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      # Network dependency
+      - name: Terragrunt apply database
+        if: ${{ steps.filter.outputs.database == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/database
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Terragrunt apply load-balancer
+        if: ${{ steps.filter.outputs.load-balancer == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/load-balancer
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      # Load-balancer & database dependency
+      - name: Terragrunt apply ecs
+        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/ecs
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      # Depends on everything
+      - name: Terragrunt apply alarms
+        if: ${{ steps.filter.outputs.alarms == 'true' || steps.filter.outputs.common == 'true' }}
+        working-directory: infrastructure/terragrunt/env/staging/alarms
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve

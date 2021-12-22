@@ -8,9 +8,9 @@ on:
       - ".dockerignore"
       - ".github/workflows/build_push_container.yml"
       - "wordpress/**"
+  release:
     tags-ignore:
       - infrastructure/*
-  release:
     types:
       - created
 

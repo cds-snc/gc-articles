@@ -13,7 +13,7 @@ declare(strict_types=1);
 get_header();
 ?>
 
-    <main property="mainContentOfPage" class="search container" resource="#wb-main" typeof="WebPageElement">
+    <main id="primary" property="mainContentOfPage" class="search container" resource="#wb-main" typeof="WebPageElement">
 
         <?php if (have_posts()) { ?>
             <header class="page-header">

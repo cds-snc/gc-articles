@@ -21,7 +21,7 @@ $has_side_nav = !empty($side_nav) ? true : false;
 get_header();
 ?>
 
-    <main property="mainContentOfPage" class="page container" resource="#wb-main" typeof="WebPageElement">
+    <main id="primary" property="mainContentOfPage" class="page container" resource="#wb-main" typeof="WebPageElement">
 
         <?php if ($has_side_nav) { ?>
         <div class="wp-block-columns">

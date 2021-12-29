@@ -251,7 +251,7 @@ if (! function_exists('cds_is_maintenance_mode')) :
     {
         $collection_mode = get_option('collection_mode');
 
-        if ($collection_mode === "maintenance") {
+        if ($collection_mode === "maintenance" && !is_user_logged_in()) {
             return true;
         }
 

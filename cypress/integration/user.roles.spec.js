@@ -19,7 +19,6 @@ const allowedPages200 = [
 const blockedPages403 = [
     'themes.php',
     'customize.php',
-    'options-general.php',
     'admin.php?page=cds_notify_send'
 ];
 

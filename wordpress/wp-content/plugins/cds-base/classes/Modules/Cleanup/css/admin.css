@@ -207,7 +207,7 @@ input[type='week'] {
 }
 
 .edit-post-fullscreen-mode-close.has-icon:before {
-  display: inline-block;
+  display: none;
   font-family: 'cds';
   content: '\0041';
   color:#f8eae9;
@@ -221,8 +221,18 @@ input[type='week'] {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.edit-post-fullscreen-mode-close.has-icon svg{
+.edit-post-fullscreen-mode-close.has-icon svg {
   display:none;
+}
+
+.edit-post-fullscreen-mode-close.has-icon img {
+  transform: none !important;
+  border-radius: 3px !important;
+}
+
+.edit-post-fullscreen-mode-close.has-icon img:hover {
+  outline: 2px solid #757575;
+  outline-offset: 2px;
 }
 
 th.column-disable_user_login {

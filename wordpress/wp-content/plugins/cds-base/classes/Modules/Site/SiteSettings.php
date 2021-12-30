@@ -66,6 +66,11 @@ class SiteSettings
             }
         );
 
+        register_setting(
+            'site_settings_group', // option_group
+            'collection_mode_maintenance_page',
+        );
+
         add_settings_section(
             'collection_settings_section', // id
             get_bloginfo("name"), // title
@@ -83,14 +88,37 @@ class SiteSettings
                 'label_for' => 'collection_mode'
             ]
         );
+
+        add_settings_field(
+            'collection_mode_maintenance_page', // id
+            _('Maintenance Page', 'cds-snc'), // title
+            array( $this, 'collectionMaintenancePageCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section', // section
+            [
+                'label_for' => 'collection_mode_maintenance_page'
+            ]
+        );
     }
 
     public function collectionModeCallback()
     {
-
         $collection_mode = get_option('collection_mode');
 
         printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">Maintenance</label><br />', checked('maintenance', $collection_mode, false));
         printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">Live</label><br />', checked('live', $collection_mode, false));
+    }
+
+    public function collectionMaintenancePageCallback()
+    {
+        wp_dropdown_pages(
+            array(
+                'name'              => 'collection_mode_maintenance_page',
+                'echo'              => 1,
+                'show_option_none'  => __('&mdash; Select &mdash;'),
+                'option_none_value' => '0',
+                'selected'          => get_option('collection_mode_maintenance_page'),
+            )
+        );
     }
 }

@@ -41,7 +41,7 @@ jobs:
   # Check the VERSION file to get the target version to deploy and previously deployed version.
   # These are used to determine which Terraform modules need to have `terraform plan` run.
   version-manifest:
-    uses: cds-snc/gc-articles/.github/workflows/version-manifest.yml@infra/production_workflows # TODO: change this to main
+    uses: cds-snc/gc-articles/.github/workflows/version-manifest.yml@main
 
   terragrunt-apply:
     needs: version-manifest

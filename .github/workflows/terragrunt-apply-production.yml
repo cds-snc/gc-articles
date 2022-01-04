@@ -1,6 +1,6 @@
 name: "Terragrunt apply PRODUCTION"
 
- on:
+on:
   push:
     branches:
       - main

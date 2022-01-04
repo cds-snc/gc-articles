@@ -1,6 +1,6 @@
 name: "Terragrunt plan PRODUCTION"
 
- on:
+on:
   pull_request:
     branches:
       - main

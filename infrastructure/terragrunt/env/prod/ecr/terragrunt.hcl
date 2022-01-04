@@ -3,5 +3,5 @@ include {
 }
 
 terraform {
-  source = "git::https://github.com/cds-snc/gc-articles/infrastructure/terragrunt//aws/ecr?ref=${get_env("TARGET_VERSION")}"
+  source = "git::https://github.com/cds-snc/gc-articles//infrastructure/terragrunt/aws/ecr?ref=${get_env("TARGET_VERSION")}"
 }

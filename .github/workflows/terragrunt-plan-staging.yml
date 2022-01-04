@@ -60,7 +60,7 @@ jobs:
           chmod +x bin/*
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
-      - uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721 # v2.10.2
+      - uses: cds-snc/paths-filter@v2.10.3
         id: filter
         with:
           filters: |

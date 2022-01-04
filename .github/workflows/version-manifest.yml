@@ -36,5 +36,5 @@ jobs:
           echo "PREV_SHA=${PREV_SHA}"
           echo "PREV_VERSION=infrastructure/${PREV_VERSION}"
           echo "CURR_VERSION=infrastructure/${CURR_VERSION}"
-          echo "::set-output name=previous::v${PREV_VERSION}"
-          echo "::set-output name=current::v${CURR_VERSION}"
+          echo "::set-output name=previous::infrastructure/v${PREV_VERSION}"
+          echo "::set-output name=current::infrastructure/v${CURR_VERSION}"

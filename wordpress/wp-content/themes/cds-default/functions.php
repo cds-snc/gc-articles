@@ -266,6 +266,7 @@ add_filter('template_include', 'maintenance_mode');
 function maintenance_mode($original_template)
 {
     if (cds_is_maintenance_mode()) {
+        status_header(503);
         return __DIR__ . '/maintenance.php';
     } else {
         return $original_template;

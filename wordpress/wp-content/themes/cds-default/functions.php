@@ -263,10 +263,22 @@ add_filter('auto_update_plugin', '__return_false');
 add_filter('auto_update_theme', '__return_false');
 add_filter('template_include', 'maintenance_mode');
 
+function isWpEnv()
+{
+        if (isset($_SERVER) && isset($_SERVER['SERVER_PORT'])) {
+            $port = $_SERVER['SERVER_PORT'];
+
+            if ($port == 8888 || $port == 8889) {
+                return true;
+            }
+        }
+        return false;
+}
+
 function maintenance_mode($original_template)
 {
     if (cds_is_maintenance_mode()) {
-        if (!Utils::isWpEnv()) {
+        if (!isWpEnv()) {
             status_header(503);
         }
         return __DIR__ . '/maintenance.php';

@@ -12,9 +12,10 @@ if ($maintenance_page_id) {
     $content = apply_filters('the_content', get_the_content(null, null, $maintenance_page_id));
 }
 
-add_filter("pre_get_document_title",'title_callback');
+add_filter("pre_get_document_title", 'title_callback');
 
-function title_callback(){
+function title_callback()
+{
     global $title;
     return $title;
 }

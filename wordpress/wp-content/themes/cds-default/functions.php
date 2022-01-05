@@ -265,13 +265,13 @@ add_filter('template_include', 'maintenance_mode');
 
 function isWpEnv()
 {
-        if (isset($_SERVER) && isset($_SERVER['SERVER_PORT'])) {
-            $port = $_SERVER['SERVER_PORT'];
+    if (isset($_SERVER) && isset($_SERVER['SERVER_PORT'])) {
+        $port = $_SERVER['SERVER_PORT'];
 
-            if ($port == 8888 || $port == 8889) {
-                return true;
-            }
+        if ($port == 8888 || $port == 8889) {
+            return true;
         }
+    }
         return false;
 }
 

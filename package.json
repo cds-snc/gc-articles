@@ -41,6 +41,6 @@
     "cypress-wp-test-utils": "^0.3.0",
     "cypress-xpath": "^1.6.2",
     "@cypress/snapshot": "^2.1.7",
-    "@wordpress/env": "^4.1.1"
+    "@wordpress/env": "^4.1.3"
   }
 }

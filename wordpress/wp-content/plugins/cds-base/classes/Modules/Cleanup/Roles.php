@@ -8,7 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.1.2', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.1.3', function () {
             if (is_blog_installed()) {
                 $wp_roles = wp_roles();
                 $allRoles = array_keys($wp_roles->roles); // array_keys returns only the slug
@@ -48,7 +48,7 @@ class Roles
                 'add_users' => 1,
                 'promote_users' => 1,
                 'manage_network_users' => 1, // enables "edit_users" for GC Admins'
-                'manage_options' => 0,
+                'manage_options' => 1,
                 'manage_notify' => 1,
                 'manage_list_manager' => 1,  // by default this is off
                 'list_manager_bulk_send' => 0, // this is managed per user (see user profile)

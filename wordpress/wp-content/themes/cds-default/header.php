@@ -101,7 +101,7 @@ declare(strict_types=1);
 
   <?php
     $headerMenu = get_top_nav();
-    if ($headerMenu) :
+    if ($headerMenu && !cds_is_maintenance_mode()) :
         echo $headerMenu;
     else :
         ?>

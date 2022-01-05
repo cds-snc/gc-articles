@@ -246,5 +246,43 @@ if (! function_exists('cds_get_block_pattern_markup')) :
     }
 endif;
 
+if (! function_exists('cds_is_maintenance_mode')) :
+    function cds_is_maintenance_mode()
+    {
+        $collection_mode = get_option('collection_mode');
+
+        if ($collection_mode === "maintenance" && !is_user_logged_in()) {
+            return true;
+        }
+
+        return false;
+    }
+endif;
+
 add_filter('auto_update_plugin', '__return_false');
 add_filter('auto_update_theme', '__return_false');
+add_filter('template_include', 'maintenance_mode');
+
+function isWpEnv()
+{
+    if (isset($_SERVER) && isset($_SERVER['SERVER_PORT'])) {
+        $port = $_SERVER['SERVER_PORT'];
+
+        if ($port == 8888 || $port == 8889) {
+            return true;
+        }
+    }
+        return false;
+}
+
+function maintenance_mode($original_template)
+{
+    if (cds_is_maintenance_mode()) {
+        if (!isWpEnv()) {
+            status_header(503);
+        }
+        return __DIR__ . '/maintenance.php';
+    } else {
+        return $original_template;
+    }
+}

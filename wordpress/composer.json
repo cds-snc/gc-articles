@@ -75,7 +75,8 @@
     "wpackagist-plugin/gutenberg":"12.0.2",
     "cds-snc/cds-base": "@dev",
     "cds-snc/cds-default": "@dev",
-    "yoast/wordpress-seo-premium": "^17.7"
+    "yoast/wordpress-seo-premium": "^17.7",
+    "wpackagist-plugin/wp-rest-api-v2-menus":"0.10"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

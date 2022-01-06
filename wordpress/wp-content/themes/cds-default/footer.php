@@ -33,8 +33,9 @@ $footerMenu = '';
                     }
 
                     $links = $footerMenu ? wp_get_nav_menu_items($footerMenu->name) : $footerText['aboutThisSite'];
-
-                    echo get_footer_links($links);
+                    if (!cds_is_maintenance_mode()) :
+                        echo get_footer_links($links);
+                    endif;
                     ?>
                     </ul>
                 </nav>

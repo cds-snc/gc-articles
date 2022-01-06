@@ -35,6 +35,7 @@ use CDS\Modules\Users\Users;
 use CDS\Modules\UserCollections\UserCollections;
 use CDS\Modules\DBInsights\DBInsights;
 use CDS\Modules\Releases\Releases;
+use CDS\Modules\Site\SiteSettings;
 use CDS\Utils;
 use Exception;
 
@@ -58,6 +59,7 @@ class Setup
         TrackLogins::register();
         DBInsights::register();
         Releases::register();
+        SiteSettings::register();
 
         new SubscriptionForm();
         new ContactForm();

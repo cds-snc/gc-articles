@@ -172,7 +172,8 @@ data "aws_iam_policy_document" "cache_buster" {
 }
 
 resource "aws_iam_policy" "cache_buster" {
-  name   = "cache_buster"
+  name = "cache_buster"
+  #checkov:skip=CKV_AWS_40:This is a one-off user for cache-busting plugin
   policy = data.aws_iam_policy_document.cache_buster.json
 }
 

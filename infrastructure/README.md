@@ -26,6 +26,8 @@ The following Terraform variables are required:
 * `s3_uploads_bucket`: Bucket name for uploads storage
 * `s3_uploads_key`: S3 credentials for uploads storage IAM user
 * `s3_uploads_secret`: S3 credentials for uploads storage IAM user
+* `c3_aws_access_key_id`: Credentials for cache busting IAM user
+* `c3_aws_secret_access_key`: Credentials for cache busting IAM user
 * `list_manager_endpoint`: Platform ListManager API endpoint
 * `default_list_manager_api_key`: API key used for Platform ListManager request auth
 * `default_notify_api_key`: Default Notify API key used before a site has one configured

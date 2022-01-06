@@ -84,6 +84,8 @@ data "aws_iam_policy_document" "wordpress_ecs_task_get_secret_value" {
       aws_secretsmanager_secret_version.s3_uploads_bucket.arn,
       aws_secretsmanager_secret_version.s3_uploads_key.arn,
       aws_secretsmanager_secret_version.s3_uploads_secret.arn,
+      aws_secretsmanager_secret_version.c3_aws_access_key_id.arn,
+      aws_secretsmanager_secret_version.c3_aws_secret_access_key.arn,
       aws_secretsmanager_secret_version.wordpress_auth_key.arn,
       aws_secretsmanager_secret_version.wordpress_secure_auth_key.arn,
       aws_secretsmanager_secret_version.wordpress_logged_in_key.arn,

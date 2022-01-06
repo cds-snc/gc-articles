@@ -143,9 +143,9 @@ define('S3_UPLOADS_OBJECT_ACL', 'private');
 define('S3_UPLOADS_BUCKET_URL', getenv_docker('S3_UPLOADS_BUCKET_URL', 'https://articles.cdssandbox.xyz'));
 
 /* Config for C3 Cloudfront Clear Cache plugin */
-define( 'AWS_ACCESS_KEY_ID', getenv_docker('C3_AWS_ACCESS_KEY_ID', ''));
-define( 'AWS_SECRET_ACCESS_KEY', getenv_docker('C3_AWS_SECRET_ACCESS_KEY', ''));
-define( 'C3_DISTRIBUTION_ID', getenv_docker('C3_DISTRIBUTION_ID', ''));
+define('AWS_ACCESS_KEY_ID', getenv_docker('C3_AWS_ACCESS_KEY_ID', ''));
+define('AWS_SECRET_ACCESS_KEY', getenv_docker('C3_AWS_SECRET_ACCESS_KEY', ''));
+define('C3_DISTRIBUTION_ID', getenv_docker('C3_DISTRIBUTION_ID', ''));
 
 /* This is for WPML auto updates */
 define('OTGS_DISABLE_AUTO_UPDATES', true);

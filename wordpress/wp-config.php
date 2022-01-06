@@ -134,6 +134,7 @@ define('BLOG_ID_CURRENT_SITE', 1);
 /* Custom */
 define('SCRIPT_DEBUG', getenv_docker('SCRIPT_DEBUG', false));
 
+/* Config for S3 Uploads plugin */
 define('S3_UPLOADS_BUCKET', getenv_docker('S3_UPLOADS_BUCKET', ''));
 define('S3_UPLOADS_REGION', getenv_docker('S3_UPLOADS_REGION', 'ca-central-1'));
 define('S3_UPLOADS_KEY', getenv_docker('S3_UPLOADS_KEY', ''));
@@ -141,7 +142,15 @@ define('S3_UPLOADS_SECRET', getenv_docker('S3_UPLOADS_SECRET', ''));
 define('S3_UPLOADS_OBJECT_ACL', 'private');
 define('S3_UPLOADS_BUCKET_URL', getenv_docker('S3_UPLOADS_BUCKET_URL', 'https://articles.cdssandbox.xyz'));
 
+/* Config for C3 Cloudfront Clear Cache plugin */
+define( 'AWS_ACCESS_KEY_ID', getenv_docker('C3_AWS_ACCESS_KEY_ID', ''));
+define( 'AWS_SECRET_ACCESS_KEY', getenv_docker('C3_AWS_SECRET_ACCESS_KEY', ''));
+define( 'C3_DISTRIBUTION_ID', getenv_docker('C3_DISTRIBUTION_ID', ''));
+
+/* This is for WPML auto updates */
 define('OTGS_DISABLE_AUTO_UPDATES', true);
+
+/* Disable core updates */
 define('WP_AUTO_UPDATE_CORE', false);
 
 /* That's all, stop editing! Happy publishing. */

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cbcebbeca4ff4db738aeb2e434ef6d62",
+    "content-hash": "cb09ceff6a7cf3c52f622313b94dbbe6",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -3714,24 +3714,6 @@
                 "source": "https://github.com/wasinger/htmlpagedom/tree/master"
             },
             "time": "2019-11-22T09:50:29+00:00"
-        },
-        {
-            "name": "wpackagist-plugin/amazon-polly",
-            "version": "4.3.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/amazon-polly/",
-                "reference": "tags/4.3.2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/amazon-polly.4.3.2.zip"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/amazon-polly/"
         },
         {
             "name": "wpackagist-plugin/disable-user-login",

@@ -76,8 +76,7 @@
     "cds-snc/cds-base": "dev-main",
     "cds-snc/cds-default": "dev-main",
     "yoast/wordpress-seo-premium": "^17.7",
-    "wpackagist-plugin/wp-rest-api-v2-menus":"0.10",
-    "wpackagist-plugin/amazon-polly": "4.3.2"
+    "wpackagist-plugin/wp-rest-api-v2-menus":"0.10"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

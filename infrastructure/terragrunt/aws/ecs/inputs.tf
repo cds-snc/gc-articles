@@ -100,6 +100,10 @@ variable "c3_aws_secret_access_key" {
   sensitive   = true
 }
 
+variable "c3_distribution_id" {
+  type = string
+}
+
 variable "memory" {
   type = string
 }

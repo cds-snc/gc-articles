@@ -54,7 +54,7 @@ data "template_file" "wordpress_container_definition" {
     S3_UPLOADS_BUCKET_URL        = "https://${var.domain_name}"
     C3_AWS_ACCESS_KEY_ID         = aws_secretsmanager_secret_version.c3_aws_access_key_id.arn
     C3_AWS_SECRET_ACCESS_KEY     = aws_secretsmanager_secret_version.c3_aws_secret_access_key.arn
-    C3_DISTRIBUTION_ID           = aws_cloudfront_distribution.wordpress.id
+    C3_DISTRIBUTION_ID           = var.c3_distribution_id
     DEFAULT_DOMAIN               = var.domain_name
     WORDPRESS_IMAGE              = "${var.wordpress_image}:${var.wordpress_image_tag}"
     APACHE_IMAGE                 = "${var.apache_image}:${var.apache_image_tag}"

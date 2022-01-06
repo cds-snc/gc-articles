@@ -43,6 +43,10 @@ class Blocks
             'editor_script' => 'cds-snc',
         ]);
 
+        register_block_type('cds-snc/image-heading', [
+            'editor_script' => 'cds-snc',
+        ]);
+
         /* table styles */
         register_block_style('core/table', [
             'name' => 'bordered-table',

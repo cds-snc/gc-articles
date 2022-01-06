@@ -150,3 +150,34 @@ resource "aws_cloudfront_distribution" "wordpress" {
     (var.billing_tag_key) = var.billing_tag_value
   }
 }
+
+resource "aws_iam_user" "cache_buster" {
+  name = "cache_buster"
+}
+
+data "aws_iam_policy_document" "cache_buster" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "cloudfront:GetDistribution",
+      "cloudfront:ListInvalidations",
+      "cloudfront:GetDistributionConfig",
+      "cloudfront:GetInvalidation",
+      "cloudfront:CreateInvalidation"
+    ]
+    resources = [
+      aws_cloudfront_distribution.wordpress.arn
+    ]
+  }
+}
+
+resource "aws_iam_policy" "cache_buster" {
+  name   = "cache_buster"
+  policy = data.aws_iam_policy_document.cache_buster.json
+}
+
+resource "aws_iam_user_policy_attachment" "cache_buster" {
+  #checkov:skip=CKV_AWS_40:This is a one-off user for cache-busting plugin
+  user       = aws_iam_user.cache_buster.name
+  policy_arn = aws_iam_policy.cache_buster.arn
+}

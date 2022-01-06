@@ -167,7 +167,6 @@ resource "aws_iam_user_policy" "cache_buster" {
         "Action" : [
           "cloudfront:GetDistribution",
           "cloudfront:ListInvalidations",
-          "cloudfront:GetStreamingDistribution",
           "cloudfront:GetDistributionConfig",
           "cloudfront:GetInvalidation",
           "cloudfront:CreateInvalidation"

@@ -40,6 +40,7 @@ dependency "load-balancer" {
   mock_outputs = {
     alb_target_group_arn = ""
     domain_name          = ""
+    c3_distribution_id   = ""
   }
 }
 
@@ -79,6 +80,8 @@ inputs = {
   database_username_secret_arn     = dependency.database.outputs.database_username_secret_arn
   database_password_secret_arn     = dependency.database.outputs.database_password_secret_arn
   database_proxy_security_group_id = dependency.database.outputs.database_proxy_security_group_id
+
+  c3_distribution_id = dependency.load-balancer.outputs.cloudfront_distribution_id
 
   cluster_name           = "wordpress"
   cpu_units              = "1024"

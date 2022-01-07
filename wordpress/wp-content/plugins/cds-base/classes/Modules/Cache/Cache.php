@@ -10,9 +10,9 @@ class Cache
     {
         $instance = new self();
 
-        add_filter( 'c3_invalidation_items', function($items, $post) {
+        add_filter('c3_invalidation_items', function ($items, $post) {
             global $blog_id;
-            $site = get_blog_details( array( 'blog_id' => $blog_id ) );
+            $site = get_blog_details(array( 'blog_id' => $blog_id ));
             $sitePrefix = $site->path;
 
             return array_merge($items, [

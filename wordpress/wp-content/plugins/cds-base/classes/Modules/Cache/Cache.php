@@ -12,7 +12,7 @@ class Cache
 
         add_filter( 'c3_invalidation_items', function($items, $post) {
             return array_merge($items, [
-                "/site-name/wp-json/wp-v2/" . $post->post_name
+                "/site-name/wp-json/wp/v2/" . $post->post_name
             ]);
         }, 10, 2);
     }

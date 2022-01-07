@@ -11,8 +11,12 @@ class Cache
         $instance = new self();
 
         add_filter( 'c3_invalidation_items', function($items, $post) {
+            global $blog_id;
+            $site = get_blog_details( array( 'blog_id' => $blog_id ) );
+            $sitePrefix = $site->path;
+
             return array_merge($items, [
-                "/site-name/wp-json/wp/v2/" . $post->post_name
+                "{$sitePrefix}wp-json/wp/v2/{$post->post_type}s/?slug={$post->post_name}",
             ]);
         }, 10, 2);
     }

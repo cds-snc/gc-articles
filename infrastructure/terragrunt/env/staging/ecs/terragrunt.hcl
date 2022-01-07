@@ -54,6 +54,7 @@ dependency "database" {
     database_username_secret_arn     = ""
     database_password_secret_arn     = ""
     database_proxy_security_group_id = ""
+    c3_distribution_id               = ""
   }
 }
 

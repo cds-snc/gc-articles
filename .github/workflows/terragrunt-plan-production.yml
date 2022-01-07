@@ -27,6 +27,8 @@ env:
   TF_VAR_s3_uploads_bucket: ${{ secrets.PRODUCTION_S3_UPLOADS_BUCKET }}
   TF_VAR_s3_uploads_key: ${{ secrets.PRODUCTION_S3_UPLOADS_KEY }}
   TF_VAR_s3_uploads_secret: ${{ secrets.PRODUCTION_S3_UPLOADS_SECRET }}
+  TF_VAR_c3_aws_access_key_id: ${{ secrets.PRODUCTION_C3_AWS_ACCESS_KEY_ID }}
+  TF_VAR_c3_aws_secret_access_key: ${{ secrets.PRODUCTION_C3_AWS_SECRET_ACCESS_KEY }}
   TF_VAR_slack_webhook_url: ${{ secrets.PRODUCTION_SLACK_WEBHOOK_URL }}
   TF_VAR_wordpress_auth_key: ${{ secrets.PRODUCTION_WORDPRESS_AUTH_KEY }}
   TF_VAR_wordpress_secure_auth_key: ${{ secrets.PRODUCTION_WORDPRESS_SECURE_AUTH_KEY }}

@@ -67,6 +67,24 @@ resource "aws_secretsmanager_secret_version" "s3_uploads_secret" {
   secret_string = var.s3_uploads_secret
 }
 
+resource "aws_secretsmanager_secret" "c3_aws_access_key_id" {
+  name = "c3_aws_access_key_id_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "c3_aws_access_key_id" {
+  secret_id     = aws_secretsmanager_secret.c3_aws_access_key_id.id
+  secret_string = var.c3_aws_access_key_id
+}
+
+resource "aws_secretsmanager_secret" "c3_aws_secret_access_key" {
+  name = "c3_aws_secret_access_key_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "c3_aws_secret_access_key" {
+  secret_id     = aws_secretsmanager_secret.c3_aws_secret_access_key.id
+  secret_string = var.c3_aws_secret_access_key
+}
+
 resource "aws_secretsmanager_secret" "wordpress_auth_key" {
   name = "wordpress_auth_key_${random_string.random.result}"
 }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2be32802709bc9663c8a2aa3ed38658d",
+    "content-hash": "1fcd81abbb72f56852c606985d6a7a08",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.208.9",
+            "version": "3.208.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "acc9e8f88f568e03e00c2a57c27b550740e6c493"
+                "reference": "a7802ac9289e0c4de2c76cfe0ea0f11f72955754"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/acc9e8f88f568e03e00c2a57c27b550740e6c493",
-                "reference": "acc9e8f88f568e03e00c2a57c27b550740e6c493",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a7802ac9289e0c4de2c76cfe0ea0f11f72955754",
+                "reference": "a7802ac9289e0c4de2c76cfe0ea0f11f72955754",
                 "shasum": ""
             },
             "require": {
@@ -200,9 +200,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.208.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.208.10"
             },
-            "time": "2022-01-04T19:15:39+00:00"
+            "time": "2022-01-05T19:19:54+00:00"
         },
         {
             "name": "brick/math",
@@ -266,7 +266,7 @@
         },
         {
             "name": "cds-snc/cds-base",
-            "version": "dev-feature/add-wp-rest-api-v2-menus",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "wp-content/plugins/cds-base",
@@ -320,7 +320,7 @@
         },
         {
             "name": "cds-snc/cds-default",
-            "version": "dev-feature/add-wp-rest-api-v2-menus",
+            "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "wp-content/themes/cds-default",
@@ -3714,6 +3714,24 @@
                 "source": "https://github.com/wasinger/htmlpagedom/tree/master"
             },
             "time": "2019-11-22T09:50:29+00:00"
+        },
+        {
+            "name": "wpackagist-plugin/c3-cloudfront-clear-cache",
+            "version": "6.1.2",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/c3-cloudfront-clear-cache/",
+                "reference": "trunk"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/c3-cloudfront-clear-cache.zip?timestamp=1625553267"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/c3-cloudfront-clear-cache/"
         },
         {
             "name": "wpackagist-plugin/disable-user-login",
@@ -7378,5 +7396,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

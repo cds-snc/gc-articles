@@ -56,6 +56,10 @@
       {
         "name": "WORDPRESS_CONFIG_EXTRA",
         "value": "${WORDPRESS_CONFIG_EXTRA}"
+      },
+      {
+        "name": "C3_DISTRIBUTION_ID",
+        "value": "${C3_DISTRIBUTION_ID}"
       }
     ],
     "secrets": [
@@ -86,6 +90,14 @@
       {
         "name": "S3_UPLOADS_SECRET",
         "valueFrom": "${S3_UPLOADS_SECRET}"
+      },
+      {
+        "name": "C3_AWS_ACCESS_KEY_ID",
+        "valueFrom": "${C3_AWS_ACCESS_KEY_ID}"
+      },
+      {
+        "name": "C3_AWS_SECRET_ACCESS_KEY",
+        "valueFrom": "${C3_AWS_SECRET_ACCESS_KEY}"
       },
       {
         "name": "WORDPRESS_DB_HOST",

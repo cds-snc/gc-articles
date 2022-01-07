@@ -73,10 +73,11 @@
     "wpackagist-plugin/wordpress-importer":"0.6.4",
     "humanmade/s3-uploads": "^3.0",
     "wpackagist-plugin/gutenberg":"12.0.2",
-    "cds-snc/cds-base": "@dev",
-    "cds-snc/cds-default": "@dev",
+    "cds-snc/cds-base": "dev-main",
+    "cds-snc/cds-default": "dev-main",
     "yoast/wordpress-seo-premium": "^17.7",
-    "wpackagist-plugin/wp-rest-api-v2-menus":"0.10"
+    "wpackagist-plugin/wp-rest-api-v2-menus":"0.10",
+    "wpackagist-plugin/c3-cloudfront-clear-cache": "^6.1"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

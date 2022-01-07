@@ -88,6 +88,23 @@ variable "s3_uploads_secret" {
   sensitive   = true
 }
 
+variable "c3_aws_access_key_id" {
+  description = "Credentials for cache busting IAM user"
+  type        = string
+  sensitive   = true
+}
+
+variable "c3_aws_secret_access_key" {
+  description = "Credentials for cache busting IAM user"
+  type        = string
+  sensitive   = true
+}
+
+variable "c3_distribution_id" {
+  description = "Distribution ID for Cloudfront"
+  type        = string
+}
+
 variable "memory" {
   type = string
 }

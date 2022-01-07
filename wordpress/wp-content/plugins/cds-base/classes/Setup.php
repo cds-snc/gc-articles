@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CDS;
 
+use CDS\Modules\Cache\Cache;
 use CDS\Modules\Cleanup\Wpml;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\Blocks\Blocks;
@@ -60,6 +61,7 @@ class Setup
         DBInsights::register();
         Releases::register();
         SiteSettings::register();
+        Cache::register();
 
         new SubscriptionForm();
         new ContactForm();

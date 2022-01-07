@@ -101,7 +101,8 @@ variable "c3_aws_secret_access_key" {
 }
 
 variable "c3_distribution_id" {
-  type = string
+  description = "Distribution ID for Cloudfront"
+  type        = string
 }
 
 variable "memory" {

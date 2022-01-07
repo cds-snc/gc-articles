@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1fcd81abbb72f56852c606985d6a7a08",
+    "content-hash": "226da1fedc2ca1f7b85e824665329c21",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.208.10",
+            "version": "3.209.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a7802ac9289e0c4de2c76cfe0ea0f11f72955754"
+                "reference": "34afa064da0bf2816640b91b7e376ee781cded42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a7802ac9289e0c4de2c76cfe0ea0f11f72955754",
-                "reference": "a7802ac9289e0c4de2c76cfe0ea0f11f72955754",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/34afa064da0bf2816640b91b7e376ee781cded42",
+                "reference": "34afa064da0bf2816640b91b7e376ee781cded42",
                 "shasum": ""
             },
             "require": {
@@ -200,9 +200,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.208.10"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.209.0"
             },
-            "time": "2022-01-05T19:19:54+00:00"
+            "time": "2022-01-06T19:13:57+00:00"
         },
         {
             "name": "brick/math",
@@ -608,6 +608,60 @@
                 }
             ],
             "time": "2021-09-13T08:19:44+00:00"
+        },
+        {
+            "name": "digitalcube/c3-cloudfront-clear-cache",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache.git",
+                "reference": "6ef006eac0cd28d3a6b6f97973701832750ba3bd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amimoto-ami/c3-cloudfront-clear-cache/zipball/6ef006eac0cd28d3a6b6f97973701832750ba3bd",
+                "reference": "6ef006eac0cd28d3a6b6f97973701832750ba3bd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "dealerdirect/phpcodesniffer-composer-installer": "*",
+                "phpcompatibility/phpcompatibility-wp": "*",
+                "phpunit/phpunit": "7.5.20",
+                "squizlabs/php_codesniffer": "*",
+                "wp-coding-standards/wpcs": "*",
+                "wp-phpunit/wp-phpunit": "5.7.2"
+            },
+            "default-branch": true,
+            "type": "wordpress-plugin",
+            "autoload": {
+                "psr-4": {
+                    "C3_CloudFront_Cache_Controller\\": "classes/",
+                    "C3_CloudFront_Cache_Controller\\WP\\": "classes/WP/",
+                    "C3_CloudFront_Cache_Controller\\Test\\": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ],
+                "format": [
+                    "phpcbf --standard=./.phpcs.xml.dist --report-summary --report-source"
+                ],
+                "lint": [
+                    "phpcs --standard=./.phpcs.xml.dist"
+                ],
+                "phpcs": [
+                    "phpcs --standard=./.phpcs.xml.dist"
+                ]
+            },
+            "support": {
+                "source": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache/tree/master",
+                "issues": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache/issues"
+            },
+            "time": "2021-11-02T01:11:10+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -3716,24 +3770,6 @@
             "time": "2019-11-22T09:50:29+00:00"
         },
         {
-            "name": "wpackagist-plugin/c3-cloudfront-clear-cache",
-            "version": "6.1.2",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/c3-cloudfront-clear-cache/",
-                "reference": "trunk"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/c3-cloudfront-clear-cache.zip?timestamp=1625553267"
-            },
-            "require": {
-                "composer/installers": "^1.0 || ^2.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/c3-cloudfront-clear-cache/"
-        },
-        {
             "name": "wpackagist-plugin/disable-user-login",
             "version": "1.3.2",
             "source": {
@@ -4371,16 +4407,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.14.4",
+            "version": "2.14.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "f056f1fe935d9ed86e698905a957334029899895"
+                "reference": "a63e5e8f26ebbebf8ed3c5c691637325512eb0dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/f056f1fe935d9ed86e698905a957334029899895",
-                "reference": "f056f1fe935d9ed86e698905a957334029899895",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/a63e5e8f26ebbebf8ed3c5c691637325512eb0dc",
+                "reference": "a63e5e8f26ebbebf8ed3c5c691637325512eb0dc",
                 "shasum": ""
             },
             "require": {
@@ -4430,7 +4466,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.14.4"
+                "source": "https://github.com/filp/whoops/tree/2.14.5"
             },
             "funding": [
                 {
@@ -4438,7 +4474,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-03T12:00:00+00:00"
+            "time": "2022-01-07T12:00:00+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
@@ -7390,7 +7426,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "cds-snc/cds-base": 20,
-        "cds-snc/cds-default": 20
+        "cds-snc/cds-default": 20,
+        "digitalcube/c3-cloudfront-clear-cache": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

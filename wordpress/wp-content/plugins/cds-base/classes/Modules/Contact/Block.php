@@ -19,7 +19,7 @@ class Block
 
     public function registerBlock()
     {
-        if (!is_super_admin() && !Utils::isWpEnv()) {
+        if (is_admin() && !is_super_admin() && !Utils::isWpEnv()) {
             return;
         }
 

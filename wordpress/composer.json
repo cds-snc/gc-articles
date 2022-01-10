@@ -60,6 +60,10 @@
     {
       "type": "path",
       "url": "wp-content/themes/cds-default"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache"
     }
   ],
   "require": {
@@ -77,7 +81,7 @@
     "cds-snc/cds-default": "dev-main",
     "yoast/wordpress-seo-premium": "^17.7",
     "wpackagist-plugin/wp-rest-api-v2-menus":"0.10",
-    "wpackagist-plugin/c3-cloudfront-clear-cache": "^6.1"
+    "digitalcube/c3-cloudfront-clear-cache": "dev-master"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

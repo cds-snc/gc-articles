@@ -22,11 +22,9 @@ function title_callback()
 
 get_header();
 ?>
-
     <main id="primary" property="mainContentOfPage" class="index container" resource="#wb-main" typeof="WebPageElement">
        <h1><?php echo $title;?></h1>
        <?php echo $content; ?>
     </main><!-- #main -->
-
 <?php
 get_footer();

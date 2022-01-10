@@ -57,13 +57,6 @@ class SiteSettings
         register_setting(
             'site_settings_group', // option_group
             'collection_mode',
-            function ($input) {
-                if ($input !== "maintenance" || $input !== "live") {
-                    return "maintenance";
-                }
-
-                return sanitize_text_field($input);
-            }
         );
 
         register_setting(

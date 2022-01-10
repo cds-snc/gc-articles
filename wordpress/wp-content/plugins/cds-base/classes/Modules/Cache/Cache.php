@@ -6,7 +6,7 @@ namespace CDS\Modules\Cache;
 
 class Cache
 {
-    const locale_fr = 'fr_FR';
+    const LOCALE_FR = 'fr_FR';
 
     public static function register()
     {
@@ -38,10 +38,10 @@ class Cache
 
     protected function getLocalePrefixForPost($post): string
     {
-        if($language_information = apply_filters('wpml_post_language_details', null, $post->ID)) {
+        if ($language_information = apply_filters('wpml_post_language_details', null, $post->ID)) {
             $locale = $language_information['locale'];
 
-            if ($locale === self::locale_fr) {
+            if ($locale === self::LOCALE_FR) {
                 return 'fr/';
             }
         }

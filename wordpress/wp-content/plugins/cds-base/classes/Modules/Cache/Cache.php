@@ -18,16 +18,22 @@ class Cache
     protected function registerInvalidationPaths()
     {
         add_filter('c3_invalidation_items', function ($items, $post) {
-            global $blog_id;
-            $site       = get_blog_details(array('blog_id' => $blog_id));
-            $sitePrefix = $site->path;
 
+            $sitePrefix = $this->getSitePrefixForPost();
             $localePrefix = $this->getLocalePrefixForPost($post);
 
             return array_merge($items, [
                 "{$sitePrefix}{$localePrefix}wp-json/wp/v2/{$post->post_type}s/?slug={$post->post_name}",
             ]);
         }, 10, 2);
+    }
+
+    protected function getSitePrefixForPost(): string
+    {
+        global $blog_id;
+        $site = get_blog_details(array('blog_id' => $blog_id));
+
+        return $site->path;
     }
 
     protected function getLocalePrefixForPost($post): string

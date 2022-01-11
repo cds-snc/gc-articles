@@ -15,7 +15,7 @@ module "rds_cluster" {
 
   backup_retention_period      = 14
   preferred_backup_window      = "02:00-04:00"
-  performance_insights_enabled = false
+  performance_insights_enabled = var.database_performance_insights_enabled
 
   vpc_id     = var.vpc_id
   subnet_ids = var.private_subnet_ids

@@ -6,6 +6,10 @@ variable "database_instance_class" {
   type = string
 }
 
+variable "database_performance_insights_enabled" {
+  type = string
+}
+
 variable "database_name" {
   type      = string
   sensitive = true

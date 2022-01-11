@@ -56,9 +56,8 @@ msgstr ""
 #: classes/Modules/Cleanup/AdminBar.php:121
 #: classes/Modules/Cleanup/Login.php:162
 #: classes/Modules/Releases/Releases.php:80
-#, fuzzy
 msgid "GC Articles"
-msgstr "Articles"
+msgstr ""
 
 #: classes/Modules/Cleanup/Login.php:141
 msgid "Canadian Digital Service"
@@ -77,9 +76,8 @@ msgstr ""
 #: classes/Modules/Cleanup/PostsToArticles.php:24
 #: classes/Modules/Cleanup/PostsToArticles.php:28
 #: classes/Modules/Cleanup/PostsToArticles.php:35
-#, fuzzy
 msgid "Article"
-msgstr "Articles"
+msgstr ""
 
 #: classes/Modules/Cleanup/PostsToArticles.php:25
 #: classes/Modules/Cleanup/PostsToArticles.php:26
@@ -91,9 +89,8 @@ msgid "Edit Article"
 msgstr ""
 
 #: classes/Modules/Cleanup/PostsToArticles.php:29
-#, fuzzy
 msgid "View Article"
-msgstr "Articles"
+msgstr ""
 
 #: classes/Modules/Cleanup/PostsToArticles.php:30
 msgid "Search Articles"

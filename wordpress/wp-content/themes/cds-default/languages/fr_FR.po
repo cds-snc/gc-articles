@@ -51,9 +51,8 @@ msgid "White"
 msgstr ""
 
 #: functions.php:108
-#, fuzzy
 msgid "Primary Blue"
-msgstr "le primaire"
+msgstr ""
 
 #: functions.php:113
 msgid "Dark Blue"
@@ -128,9 +127,8 @@ msgid "Newer posts"
 msgstr ""
 
 #: inc/template-functions.php:95
-#, fuzzy
 msgid "Posts navigation"
-msgstr "Navigation dans les documents"
+msgstr ""
 
 #: inc/template-functions.php:96
 msgid "Posts"

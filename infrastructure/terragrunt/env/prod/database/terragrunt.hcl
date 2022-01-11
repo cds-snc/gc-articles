@@ -18,10 +18,11 @@ dependency "network" {
 }
 
 inputs = {
-  database_instances_count = 3
-  database_instance_class = "db.r4.large"
-  private_subnet_ids       = dependency.network.outputs.private_subnet_ids
-  vpc_id                   = dependency.network.outputs.vpc_id
+  database_instances_count              = 3
+  database_instance_class               = "db.r4.large"
+  database_performance_insights_enabled = true
+  private_subnet_ids                    = dependency.network.outputs.private_subnet_ids
+  vpc_id                                = dependency.network.outputs.vpc_id
 }
 
 terraform {

@@ -1,15 +1,15 @@
-# Copyright (C) 2021 Tim Arney
+# Copyright (C) 2022 CDS-SNC
 # This file is distributed under the same license as the CDS-SNC Base plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS-SNC Base 1.9.1\n"
+"Project-Id-Version: CDS-SNC Base 2.11.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-11-05T16:32:35+00:00\n"
+"POT-Creation-Date: 2022-01-11T18:03:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: cds-snc\n"
@@ -19,7 +19,7 @@ msgid "CDS-SNC Base"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://github.com/cds-snc/platform-mvp"
+msgid "https://github.com/cds-snc/gc-articles"
 msgstr ""
 
 #. Description of the plugin
@@ -27,20 +27,51 @@ msgid "Custom Block setup and other overrides"
 msgstr ""
 
 #. Author of the plugin
-msgid "Tim Arney"
+msgid "CDS-SNC"
 msgstr ""
 
-#: classes/Modules/Cleanup/AdminBar.php:50
+#: classes/Modules/Blocks/src/latestPosts/LatestPosts.php:46
+msgid "Read more"
+msgstr ""
+
+#: classes/Modules/Cleanup/AdminBar.php:27
+msgid "My Collections"
+msgstr ""
+
+#: classes/Modules/Cleanup/AdminBar.php:56
+msgid " (current)"
+msgstr ""
+
+#: classes/Modules/Cleanup/AdminBar.php:71
+#: build/index.js:4102
+#: build/index.js:3987
+msgid "Dashboard"
+msgstr ""
+
+#: classes/Modules/Cleanup/AdminBar.php:80
+#: build/index.js:4103
+#: build/index.js:3988
+msgid "Visit"
+msgstr ""
+
+#: classes/Modules/Cleanup/AdminBar.php:121
+#: classes/Modules/Cleanup/Login.php:162
+#: classes/Modules/Releases/Releases.php:80
 msgid "GC Articles"
 msgstr ""
 
-#: classes/Modules/Cleanup/Login.php:55
+#: classes/Modules/Cleanup/Login.php:141
 msgid "Canadian Digital Service"
 msgstr ""
 
+#: classes/Modules/Cleanup/Menus.php:34
 #: classes/Modules/Cleanup/PostsToArticles.php:23
 #: classes/Modules/Cleanup/PostsToArticles.php:34
 msgid "Articles"
+msgstr ""
+
+#: classes/Modules/Cleanup/Menus.php:35
+msgid "Bulk"
 msgstr ""
 
 #: classes/Modules/Cleanup/PostsToArticles.php:24
@@ -78,78 +109,106 @@ msgstr ""
 msgid "All Articles"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:52
-#: classes/Modules/Contact/ContactForm.php:116
+#: classes/Modules/Cleanup/SitesToCollections.php:22
+msgid "Admin Email <strong>must be</strong> a current Super Admin"
+msgstr ""
+
+#: classes/Modules/Cleanup/SitesToCollections.php:23
+msgid "or else a Collection won’t be created"
+msgstr ""
+
+#: classes/Modules/Contact/ContactForm.php:51
+#: classes/Modules/Contact/ContactForm.php:216
 msgid "Request a site"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:53
+#: classes/Modules/Contact/ContactForm.php:52
 msgid "Describe the site you would like"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:56
-#: classes/Modules/Contact/ContactForm.php:120
+#: classes/Modules/Contact/ContactForm.php:58
+#: classes/Modules/Contact/ContactForm.php:221
 msgid "Ask a question"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:57
+#: classes/Modules/Contact/ContactForm.php:59
 msgid "Your question"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:60
-#: classes/Modules/Contact/ContactForm.php:125
+#: classes/Modules/Contact/ContactForm.php:62
+#: classes/Modules/Contact/ContactForm.php:226
 msgid "Get technical support"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:61
+#: classes/Modules/Contact/ContactForm.php:63
 msgid "Describe the problem."
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:64
-#: classes/Modules/Contact/ContactForm.php:127
+#: classes/Modules/Contact/ContactForm.php:66
+#: classes/Modules/Contact/ContactForm.php:231
 msgid "Give feedback"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:65
+#: classes/Modules/Contact/ContactForm.php:67
 msgid "How can we do better?"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:68
-#: classes/Modules/Contact/ContactForm.php:131
+#: classes/Modules/Contact/ContactForm.php:70
+#: classes/Modules/Contact/ContactForm.php:236
 msgid "Set up a demo to learn more about GC Articles"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:69
+#: classes/Modules/Contact/ContactForm.php:74
 msgid "Your contact information"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:72
+#: classes/Modules/Contact/ContactForm.php:77
 msgid "Tell us more"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:73
+#: classes/Modules/Contact/ContactForm.php:78
 msgid "Your message"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:83
-#: build/index.js:4167
-#: build/index.js:4062
+#: classes/Modules/Contact/ContactForm.php:95
+#: classes/Modules/Contact/ContactForm.php:180
+#: build/index.js:4350
+#: build/index.js:4225
 msgid "Email"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:102
+#: classes/Modules/Contact/ContactForm.php:104
+msgid "What do you want to name your GC Articles collection?"
+msgstr ""
+
+#: classes/Modules/Contact/ContactForm.php:119
+msgid "How did you hear about GC Articles?"
+msgstr ""
+
+#: classes/Modules/Contact/ContactForm.php:134
+msgid "What will you use your GC Articles collection for?"
+msgstr ""
+
+#: classes/Modules/Contact/ContactForm.php:150
+msgid ""
+"Do you require a GC Notify email sending integration? if yes, what for?\n"
+""
+msgstr ""
+
+#: classes/Modules/Contact/ContactForm.php:165
+#: classes/Modules/Contact/ContactForm.php:198
 msgid "Submit"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:113
+#: classes/Modules/Contact/ContactForm.php:210
 msgid "Contact Types"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:133
+#: classes/Modules/Contact/ContactForm.php:244
 msgid "Other"
 msgstr ""
 
-#: classes/Modules/Contact/ContactForm.php:138
+#: classes/Modules/Contact/ContactForm.php:250
 msgid "Continue"
 msgstr ""
 
@@ -158,132 +217,182 @@ msgid "Thanks for the message"
 msgstr ""
 
 #: classes/Modules/Contact/Setup.php:69
-#: classes/Modules/Subscribe/Setup.php:105
+#: classes/Modules/Subscribe/Setup.php:114
 msgid "400 Bad Request"
 msgstr ""
 
 #: classes/Modules/Contact/Setup.php:73
-#: classes/Modules/Subscribe/Setup.php:109
+#: classes/Modules/Subscribe/Setup.php:118
 msgid "401 Unauthorized"
 msgstr ""
 
-#: classes/Modules/Contact/Setup.php:81
-#: classes/Modules/Subscribe/Setup.php:113
+#: classes/Modules/Contact/Setup.php:96
+msgid "Please complete all required fields to continue"
+msgstr ""
+
+#: classes/Modules/Contact/Setup.php:113
+#: classes/Modules/Subscribe/Setup.php:122
 msgid "Please complete the required field to continue"
 msgstr ""
 
-#: classes/Modules/Notify/FormHelpers.php:24
+#: classes/Modules/DBInsights/DBInsights.php:123
+msgid "Alpha"
+msgstr ""
+
+#: classes/Modules/Notify/FormHelpers.php:25
 msgid "Service ID"
 msgstr ""
 
-#: classes/Modules/Notify/FormHelpers.php:32
+#: classes/Modules/Notify/FormHelpers.php:33
 msgid "No service ids found"
 msgstr ""
 
-#: classes/Modules/Notify/FormHelpers.php:42
+#: classes/Modules/Notify/FormHelpers.php:43
 msgid "Template ID"
 msgstr ""
 
-#: classes/Modules/Notify/FormHelpers.php:52
+#: classes/Modules/Notify/FormHelpers.php:53
+#: classes/Modules/Subscribe/js/dist/index.js:1
+#: classes/Modules/Subscribe/src/block-edit.js:45
 msgid "List ID"
 msgstr ""
 
-#: classes/Modules/Notify/FormHelpers.php:60
+#: classes/Modules/Notify/FormHelpers.php:61
 msgid "No lists found"
 msgstr ""
 
-#: classes/Modules/Notify/FormHelpers.php:71
+#: classes/Modules/Notify/FormHelpers.php:72
 msgid "Send template to list"
 msgstr ""
 
-#: classes/Modules/Notify/Notices.php:47
-msgid "Sent"
+#: classes/Modules/Notify/ListManagerSettings.php:71
+msgid "List Manager Settings"
 msgstr ""
 
-#: classes/Modules/Notify/Notices.php:56
-msgid "Template ID is required"
+#: classes/Modules/Notify/ListManagerSettings.php:99
+msgid "List manager"
 msgstr ""
 
-#: classes/Modules/Notify/Notices.php:65
-msgid "List ID failed to parse"
+#: classes/Modules/Notify/ListManagerSettings.php:106
+msgid "List details"
 msgstr ""
 
-#: classes/Modules/Notify/Notices.php:76
-msgid "Failed to send"
+#: classes/Modules/Notify/ListManagerSettings.php:117
+msgid "Notify Services"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:74
-msgid "Notify and List Manager Settings"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:157
-#: classes/Modules/Notify/NotifyTemplateSender.php:76
-msgid "Notify"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:171
-msgid "List Values JSON"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:182
-msgid "Notify API Key"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:193
-msgid "Notify Generic TemplateId"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:204
-msgid "List Manager API Key"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:215
-msgid "List Manager Notify Services"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:226
-msgid "List Manager Service Id"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:247
+#: classes/Modules/Notify/ListManagerSettings.php:137
+#: classes/Modules/Notify/NotifySettings.php:145
 msgid "<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-only\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span class=\"sr-only\"> and ends with</span>%3$s</span>"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:308
-msgid "Format"
+#: classes/Modules/Notify/ListManagerSettings.php:199
+msgid "Add the <a href='%s'>sending service</a> for your subscription lists."
 msgstr ""
 
-#: classes/Modules/Notify/NotifyTemplateSender.php:75
+#: classes/Modules/Notify/ListManagerSettings.php:228
+msgid "Add details for each of your subscription lists."
+msgstr ""
+
+#: classes/Modules/Notify/ListManagerUserProfile.php:37
+msgid "List Manager"
+msgstr ""
+
+#: classes/Modules/Notify/ListManagerUserProfile.php:42
+#: classes/Modules/Notify/NotifyTemplateSender.php:85
+msgid "Bulk Send"
+msgstr ""
+
+#: classes/Modules/Notify/ListManagerUserProfile.php:47
+msgid "Allow bulk send"
+msgstr ""
+
+#: classes/Modules/Notify/Notices.php:51
+msgid "&nbsp;&nbsp;<a href='%s'>View</a> sending logs in GG Notify"
+msgstr ""
+
+#: classes/Modules/Notify/Notices.php:56
+msgid "Sent."
+msgstr ""
+
+#: classes/Modules/Notify/Notices.php:65
+msgid "Template ID is required"
+msgstr ""
+
+#: classes/Modules/Notify/Notices.php:74
+msgid "List ID failed to parse"
+msgstr ""
+
+#: classes/Modules/Notify/Notices.php:85
+msgid "Failed to send"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:65
+msgid "Notify API Settings"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:107
+msgid "Notify"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:114
+msgid "Notify API Key"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:125
+msgid "Notify Generic TemplateId"
+msgstr ""
+
+#: classes/Modules/Notify/NotifyTemplateSender.php:84
 msgid "Send Notify Template"
 msgstr ""
 
-#: classes/Modules/Notify/NotifyTemplateSender.php:216
+#: classes/Modules/Notify/NotifyTemplateSender.php:203
 msgid "There has been an error"
 msgstr ""
 
-#: classes/Modules/Subscribe/Setup.php:71
-#: classes/Modules/Subscribe/Setup.php:98
-#: build/index.js:4148
-#: build/index.js:4043
-msgid "Internal server error"
+#: classes/Modules/Site/SiteSettings.php:42
+msgid "Collection Settings"
 msgstr ""
 
-#: classes/Modules/Subscribe/Setup.php:93
-msgid "Thanks for subscribing"
+#: classes/Modules/Site/SiteSettings.php:76
+msgid "Mode"
 msgstr ""
 
-#: classes/Modules/Subscribe/SubscriptionForm.php:34
+#: classes/Modules/Site/SiteSettings.php:87
+msgid "Maintenance Page"
+msgstr ""
+
+#: classes/Modules/Subscribe/Block.php:36
+#: classes/Modules/Subscribe/SubscriptionForm.php:23
 msgid "Enter your email:"
 msgstr ""
 
-#: classes/Modules/Subscribe/SubscriptionForm.php:35
-msgid "Required Field"
-msgstr ""
-
-#: classes/Modules/Subscribe/SubscriptionForm.php:41
+#: classes/Modules/Subscribe/Block.php:40
+#: classes/Modules/Subscribe/SubscriptionForm.php:24
 #: classes/Modules/Subscribe/js/dist/index.js:1
 #: classes/Modules/Subscribe/src/block.js:8
 msgid "Subscribe"
+msgstr ""
+
+#: classes/Modules/Subscribe/Setup.php:76
+#: classes/Modules/Subscribe/Setup.php:80
+#: classes/Modules/Subscribe/Setup.php:107
+#: build/index.js:4331
+#: build/index.js:4206
+msgid "Internal server error"
+msgstr ""
+
+#: classes/Modules/Subscribe/Setup.php:102
+msgid "Thanks for subscribing"
+msgstr ""
+
+#: classes/Modules/Subscribe/Setup.php:126
+msgid "Unknown subscription"
+msgstr ""
+
+#: classes/Modules/Subscribe/SubscriptionForm.php:51
+msgid "Required Field"
 msgstr ""
 
 #: classes/Modules/TwoFactor/TwoFactor.php:43
@@ -291,8 +400,8 @@ msgid "Two factor authentication"
 msgstr ""
 
 #: classes/Modules/TwoFactor/TwoFactor.php:54
-#: build/index.js:3267
-#: build/index.js:3232
+#: build/index.js:3333
+#: build/index.js:3288
 msgid "Warning"
 msgstr ""
 
@@ -304,37 +413,46 @@ msgstr ""
 msgid "You can’t use this email domain for registration."
 msgstr ""
 
-#: classes/Modules/Users/Users.php:60
+#: classes/Modules/Users/Users.php:62
 msgid "This role has complete control over the articles collection and can perform all other roles actions"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:64
+#: classes/Modules/Users/Users.php:66
 msgid "This role is allows the user to write and publish articles online to the collection."
 msgstr ""
 
-#: classes/Modules/Users/Users.php:174
+#: classes/Modules/Users/Users.php:176
+#: classes/Modules/Users/Users.php:194
 msgid "Invitation to collaborate on GC Articles"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:175
+#: classes/Modules/Users/Users.php:177
 msgid "Someone has invited this email to collaborate on a GC Articles collection site."
 msgstr ""
 
-#: classes/Modules/Users/Users.php:176
+#: classes/Modules/Users/Users.php:178
 msgid "If this was a mistake, please ignore this email and the invitation will expire"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:177
+#: classes/Modules/Users/Users.php:179
 msgid "To set your GC Articles account password, please visit the following address:"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:244
-#: build/index.js:4192
-#: build/index.js:4087
+#: classes/Modules/Users/Users.php:195
+msgid "Someone has invited this email to collaborate on a GC Articles — "
+msgstr ""
+
+#: classes/Modules/Users/Users.php:196
+msgid "To get started log in here: "
+msgstr ""
+
+#: classes/Modules/Users/Users.php:268
+#: build/index.js:4375
+#: build/index.js:4250
 msgid "Add user"
 msgstr ""
 
-#: classes/Modules/Users/Users.php:274
+#: classes/Modules/Users/Users.php:298
 msgid "You must enable JavaScript to view this page."
 msgstr ""
 
@@ -356,143 +474,155 @@ msgstr ""
 msgid "Yes, send it!"
 msgstr ""
 
-#: build/index.js:3261
-#: build/index.js:3226
-msgid "Settings"
+#: build/index.js:3269
+#: build/index.js:3234
+msgid "Accordion"
 msgstr ""
 
-#: build/index.js:3264
-#: build/index.js:3229
-msgid "Alert Type"
-msgstr ""
-
-#: build/index.js:3265
-#: build/index.js:3230
-msgid "Info"
-msgstr ""
-
-#: build/index.js:3266
-#: build/index.js:3231
-msgid "Success"
-msgstr ""
-
-#: build/index.js:3268
-#: build/index.js:3233
-msgid "Danger"
-msgstr ""
-
-#: build/index.js:3272
-#: build/index.js:3237
-msgid "Alert"
-msgstr ""
-
-#: build/index.js:3298
-#: build/index.js:3362
-#: build/index.js:3263
-#: build/index.js:3317
+#: build/index.js:3283
+#: build/index.js:3364
+#: build/index.js:3428
+#: build/index.js:3248
+#: build/index.js:3319
+#: build/index.js:3373
 msgid "Title"
 msgstr ""
 
-#: build/index.js:3302
-#: build/index.js:3366
-#: build/index.js:3267
-#: build/index.js:3321
+#: build/index.js:3327
+#: build/index.js:3282
+msgid "Settings"
+msgstr ""
+
+#: build/index.js:3330
+#: build/index.js:3285
+msgid "Alert Type"
+msgstr ""
+
+#: build/index.js:3331
+#: build/index.js:3286
+msgid "Info"
+msgstr ""
+
+#: build/index.js:3332
+#: build/index.js:3287
+msgid "Success"
+msgstr ""
+
+#: build/index.js:3334
+#: build/index.js:3289
+msgid "Danger"
+msgstr ""
+
+#: build/index.js:3338
+#: build/index.js:3293
+msgid "Alert"
+msgstr ""
+
+#: build/index.js:3368
+#: build/index.js:3432
+#: build/index.js:3323
+#: build/index.js:3377
 msgid "Summary"
 msgstr ""
 
-#: build/index.js:3343
-#: build/index.js:3298
+#: build/index.js:3409
+#: build/index.js:3354
 msgid "Expander"
 msgstr ""
 
-#: build/index.js:3524
-#: build/index.js:3469
+#: build/index.js:3511
+#: build/index.js:3446
+msgid " Tables exist from deleted collections"
+msgstr ""
+
+#: build/index.js:3694
+#: build/index.js:3619
 msgid "List Name"
 msgstr ""
 
-#: build/index.js:3526
-#: build/index.js:3471
+#: build/index.js:3696
+#: build/index.js:3621
 msgid "Subscriber Count"
 msgstr ""
 
-#: build/index.js:3554
-#: build/index.js:3499
+#: build/index.js:3735
+#: build/index.js:3660
 msgid "Send Template"
-msgstr ""
-
-#: build/index.js:3638
-#: build/index.js:3573
-msgid "This list has "
-msgstr ""
-
-#: build/index.js:3640
-#: build/index.js:3575
-msgid " subscribers.  "
-msgstr ""
-
-#: build/index.js:3641
-#: build/index.js:3576
-msgid "You won't be able to revert this"
-msgstr ""
-
-#: build/index.js:3817
-#: build/index.js:3732
-msgid "Date"
 msgstr ""
 
 #: build/index.js:3819
 #: build/index.js:3734
+msgid "This list has "
+msgstr ""
+
+#: build/index.js:3821
+#: build/index.js:3736
+msgid " subscribers.  "
+msgstr ""
+
+#: build/index.js:3822
+#: build/index.js:3737
+msgid "You won't be able to revert this"
+msgstr ""
+
+#: build/index.js:3998
+#: build/index.js:3893
+msgid "Date"
+msgstr ""
+
+#: build/index.js:4000
+#: build/index.js:3895
 msgid "User agent"
 msgstr ""
 
-#: build/index.js:3921
-#: build/index.js:3826
-msgid "Dashboard"
-msgstr ""
-
-#: build/index.js:3922
-#: build/index.js:3827
-msgid "Visit"
-msgstr ""
-
-#: build/index.js:3934
-#: build/index.js:3839
+#: build/index.js:4115
+#: build/index.js:4000
 msgid "Name"
 msgstr ""
 
-#: build/index.js:3936
-#: build/index.js:3841
+#: build/index.js:4117
+#: build/index.js:4002
 msgid "Website"
 msgstr ""
 
-#: build/index.js:3938
-#: build/index.js:3843
+#: build/index.js:4119
+#: build/index.js:4004
 msgid "Admin"
 msgstr ""
 
-#: build/index.js:4060
-#: build/index.js:3955
+#: build/index.js:4241
+#: build/index.js:4116
 msgid "Success!"
 msgstr ""
 
-#: build/index.js:4066
-#: build/index.js:3961
+#: build/index.js:4247
+#: build/index.js:4122
 msgid "There is a problem"
 msgstr ""
 
-#: build/index.js:4090
-#: build/index.js:3985
+#: build/index.js:4271
+#: build/index.js:4146
 msgid "Select one"
 msgstr ""
 
-#: build/index.js:4161
-#: build/index.js:4056
+#: build/index.js:4344
+#: build/index.js:4219
 msgid "Invite a user to collaborate on your GC Articles collection."
 msgstr ""
 
-#: build/index.js:4173
-#: build/index.js:4068
+#: build/index.js:4356
+#: build/index.js:4231
 msgid "Role"
+msgstr ""
+
+#: build/index.js:4470
+#: build/index.js:4325
+msgid "Add List"
+msgstr ""
+
+#: build/index.js:4476
+#: build/index.js:4331
+msgid "Add Service"
 msgstr ""
 
 #: classes/Modules/Contact/js/dist/index.js:1
@@ -511,13 +641,23 @@ msgid "List Mananger subscription"
 msgstr ""
 
 #: classes/Modules/Subscribe/js/dist/index.js:1
-#: classes/Modules/Subscribe/src/block-edit.js:13
+#: classes/Modules/Subscribe/src/block-edit.js:22
 msgid "Subscribe form settings"
 msgstr ""
 
 #: classes/Modules/Subscribe/js/dist/index.js:1
-#: classes/Modules/Subscribe/src/block-edit.js:15
+#: classes/Modules/Subscribe/src/block-edit.js:24
 msgid "Placeholder text"
+msgstr ""
+
+#: classes/Modules/Subscribe/js/dist/index.js:1
+#: classes/Modules/Subscribe/src/block-edit.js:31
+msgid "Email field label"
+msgstr ""
+
+#: classes/Modules/Subscribe/js/dist/index.js:1
+#: classes/Modules/Subscribe/src/block-edit.js:38
+msgid "Subscribe button label"
 msgstr ""
 
 #: classes/Modules/Contact/block.json

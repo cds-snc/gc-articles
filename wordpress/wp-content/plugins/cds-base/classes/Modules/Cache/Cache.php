@@ -24,6 +24,7 @@ class Cache
 
             return array_merge($items, [
                 "{$sitePrefix}{$localePrefix}wp-json/wp/v2/{$post->post_type}s/?slug={$post->post_name}",
+                "{$sitePrefix}menus/v1/menus/*",
             ]);
         }, 10, 2);
     }

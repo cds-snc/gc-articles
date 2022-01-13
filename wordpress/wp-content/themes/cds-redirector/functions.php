@@ -1,11 +1,11 @@
 <?php
 
-namespace CDS\Redirector;
-
 /**
  * Theme Options Panel
  *
  */
+
+namespace CDS\Redirector;
 
 // Exit if accessed directly
 if (! defined('ABSPATH')) {
@@ -17,7 +17,6 @@ if (! class_exists('Redirector')) {
 
     class Redirector
     {
-
         /**
          * @since 1.0.0
          */

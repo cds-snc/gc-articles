@@ -35,8 +35,8 @@ if (! class_exists('Redirector')) {
         {
              // Register the admin panel on the back-end
             if (is_admin()) {
-                add_action('admin_menu', array( $this, 'add_admin_menu' ));
-                add_action('admin_init', array(  $this, 'register_settings' ));
+                add_action('admin_menu', array( $this, 'addAdminMenu' ));
+                add_action('admin_init', array(  $this, 'registerSettings' ));
             }
         }
 
@@ -45,7 +45,7 @@ if (! class_exists('Redirector')) {
          *
          * @since 1.0.0
          */
-        public static function get_theme_options()
+        public static function getThemeOptions()
         {
             return get_option('theme_options');
         }
@@ -55,9 +55,9 @@ if (! class_exists('Redirector')) {
          *
          * @since 1.0.0
          */
-        public static function get_theme_option($id)
+        public static function getThemeOption($id)
         {
-            $options = self::get_theme_options();
+            $options = self::getThemeOptions();
             if (isset($options[$id])) {
                 return $options[$id];
             }
@@ -68,26 +68,21 @@ if (! class_exists('Redirector')) {
          *
          * @since 1.0.0
          */
-        public function add_admin_menu()
+        public function addAdminMenu()
         {
             add_menu_page(
                 esc_html__('Theme Settings', 'cds-redirect'),
                 esc_html__('Theme Settings', 'cds-redirect'),
                 'manage_options',
                 'theme-settings',
-                array( $this, 'create_admin_page' )
+                array( $this, 'createAdminPage' )
             );
         }
 
         /**
-         * Register a setting and its sanitization callback.
-         *
-         * We are only registering 1 setting so we can store all options in a single option as
-         * an array. You could, however, register a new setting for each option
-         *
          * @since 1.0.0
          */
-        public function register_settings()
+        public function registerSettings()
         {
             register_setting('theme_options', 'theme_options', array( $this, 'sanitize' ));
         }
@@ -119,7 +114,7 @@ if (! class_exists('Redirector')) {
          *
          * @since 1.0.0
          */
-        public static function create_admin_page()
+        public static function createAdminPage()
         {
             ?>
 
@@ -136,7 +131,7 @@ if (! class_exists('Redirector')) {
                         <tr valign="top">
                             <th scope="row"><?php esc_html_e('Redirect URL', 'cds-redirect'); ?></th>
                             <td>
-                                <?php $value = self::get_theme_option('redirect_url'); ?>
+                                <?php $value = self::getThemeOption('redirect_url'); ?>
                                 <input type="text" name="theme_options[redirect_url]" value="<?php echo esc_attr($value); ?>">
                             </td>
                         </tr>
@@ -153,5 +148,5 @@ Redirector::register();
 // Helper function to use in your theme to return a theme option value
 function cds_get_theme_option($id = '')
 {
-    return Redirector::get_theme_option($id);
+    return Redirector::getThemeOption($id);
 }

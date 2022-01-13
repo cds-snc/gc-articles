@@ -1,5 +1,7 @@
 <?php
 
+namespace CDS\Redirector;
+
 /**
  * Theme Options Panel
  *
@@ -11,9 +13,9 @@ if (! defined('ABSPATH')) {
 }
 
 // Start Class
-if (! class_exists('CDS_Theme_Options')) {
+if (! class_exists('Redirector')) {
 
-    class CDS_Theme_Options
+    class Redirector
     {
 
         /**
@@ -21,11 +23,20 @@ if (! class_exists('CDS_Theme_Options')) {
          */
         public function __construct()
         {
+        }
 
-            // Register the admin panel on the back-end
+        public static function register()
+        {
+            $instance = new self();
+            $instance->addActions();
+        }
+
+        public function addActions()
+        {
+             // Register the admin panel on the back-end
             if (is_admin()) {
-                add_action('admin_menu', array( 'CDS_Theme_Options', 'add_admin_menu' ));
-                add_action('admin_init', array( 'CDS_Theme_Options', 'register_settings' ));
+                add_action('admin_menu', array( $this, 'add_admin_menu' ));
+                add_action('admin_init', array(  $this, 'register_settings' ));
             }
         }
 
@@ -57,14 +68,14 @@ if (! class_exists('CDS_Theme_Options')) {
          *
          * @since 1.0.0
          */
-        public static function add_admin_menu()
+        public function add_admin_menu()
         {
             add_menu_page(
                 esc_html__('Theme Settings', 'cds-redirect'),
                 esc_html__('Theme Settings', 'cds-redirect'),
                 'manage_options',
                 'theme-settings',
-                array( 'CDS_Theme_Options', 'create_admin_page' )
+                array( $this, 'create_admin_page' )
             );
         }
 
@@ -76,9 +87,9 @@ if (! class_exists('CDS_Theme_Options')) {
          *
          * @since 1.0.0
          */
-        public static function register_settings()
+        public function register_settings()
         {
-            register_setting('theme_options', 'theme_options', array( 'CDS_Theme_Options', 'sanitize' ));
+            register_setting('theme_options', 'theme_options', array( $this, 'sanitize' ));
         }
 
         /**
@@ -136,10 +147,11 @@ if (! class_exists('CDS_Theme_Options')) {
         <?php }
     }
 }
-new CDS_Theme_Options();
+
+Redirector::register();
 
 // Helper function to use in your theme to return a theme option value
 function cds_get_theme_option($id = '')
 {
-    return CDS_Theme_Options::get_theme_option($id);
+    return Redirector::get_theme_option($id);
 }

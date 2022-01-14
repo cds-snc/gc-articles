@@ -1,11 +1,10 @@
 <?php
-
 declare(strict_types=1);
+
+use function CDS\Redirector\cds_get_theme_option;
 
 // Redirects all requests to the platform.cdssandbox.xyz.
 // Primarily used to redirect preview links from WP Admin
-
-global $wp;
 $host = $_SERVER['HTTP_HOST'];
 
 $redirectHost = cds_get_theme_option("redirect_url");

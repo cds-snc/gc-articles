@@ -50,7 +50,7 @@ class Wpml
                         "fr" => ""
                     ],
                     "gotUrlRewrite" => true,
-                    "siteUrl" => "http://localhost/", // should come from somewhere
+                    "siteUrl" => $this->getSiteUrl(),
                     "validDomainFormats" => [
                         "fr" => true
                     ],
@@ -125,6 +125,14 @@ class Wpml
     protected function getWpmlKey(): bool|array|string
     {
         return getenv("WPML_SITE_KEY");
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getSiteUrl(): mixed
+    {
+        return get_site_url();
     }
 
     /**

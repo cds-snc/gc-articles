@@ -2,11 +2,19 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\Cleanup;
+namespace CDS\Modules\Wpml;
 
-class Wpml
+class Cleanup
 {
-    public static function setup()
+    public static function register()
+    {
+        $instance = new self();
+
+        $instance->addActions();
+        $instance->disableWpmlTranslationEditor();
+    }
+
+    protected function addActions()
     {
         add_action('wpml_override_is_translator', '__return_true');
 
@@ -39,7 +47,10 @@ class Wpml
             echo '<script>jQuery("#icl_subsubsub").clone().removeAttr("id").prependTo(".search-form");</script>';
             echo '<style>#icl_subsubsub{display:none !important;} .otgs-notice { display: none !important; }.</style>';
         }, 200, 10);
+    }
 
+    protected function disableWpmlTranslationEditor()
+    {
         /**
          * Disable WPML Translation Editor
          */

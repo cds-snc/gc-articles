@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace CDS;
 
 use CDS\Modules\Cache\Cache;
-use CDS\Modules\Cleanup\Wpml;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\Blocks\Blocks;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
@@ -35,7 +34,7 @@ use CDS\Modules\UserCollections\UserCollections;
 use CDS\Modules\DBInsights\DBInsights;
 use CDS\Modules\Releases\Releases;
 use CDS\Modules\Site\SiteSettings;
-use CDS\Modules\Wpml\Wpml as WpmlInstaller;
+use CDS\Modules\Wpml\Wpml;
 use Exception;
 
 class Setup
@@ -60,7 +59,7 @@ class Setup
         Releases::register();
         SiteSettings::register();
         Cache::register();
-        WpmlInstaller::register();
+        Wpml::register();
 
         new SubscriptionForm();
         new ContactForm();
@@ -68,8 +67,6 @@ class Setup
         new UserCollections();
         new Users();
         new Media();
-
-        Wpml::setup();
     }
 
     /**

@@ -35,6 +35,7 @@ use CDS\Modules\UserCollections\UserCollections;
 use CDS\Modules\DBInsights\DBInsights;
 use CDS\Modules\Releases\Releases;
 use CDS\Modules\Site\SiteSettings;
+use CDS\Modules\Wpml\Wpml as WpmlInstaller;
 use Exception;
 
 class Setup
@@ -59,7 +60,7 @@ class Setup
         Releases::register();
         SiteSettings::register();
         Cache::register();
-        \CDS\Modules\Wpml\Wpml::register();
+        WpmlInstaller::register();
 
         new SubscriptionForm();
         new ContactForm();

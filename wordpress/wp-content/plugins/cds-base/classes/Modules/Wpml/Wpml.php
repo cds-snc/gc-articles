@@ -21,7 +21,6 @@ use WPML\TranslationMode\Endpoint\SetTranslateEverything;
 
 class Wpml
 {
-
     /**
      * @var array|array[]
      */
@@ -134,7 +133,7 @@ class Wpml
      */
     public function onInit($newSite)
     {
-        switch_to_blog( $newSite->id );
+        switch_to_blog($newSite->id);
 
         // If this doesn't exist, WPML doesn't exist
         if (function_exists('icl_sitepress_activate')) {
@@ -157,7 +156,7 @@ class Wpml
      */
     protected function runAction($class, Collection $data)
     {
-        $instance = new $class;
+        $instance = new $class();
         $instance->run($data);
     }
 }

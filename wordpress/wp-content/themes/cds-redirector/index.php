@@ -5,12 +5,13 @@ declare(strict_types=1);
 use function CDS\Redirector\cds_get_theme_option;
 use function CDS\Redirector\cds_get_active_language;
 
-function HTTPValue($stringValue) {
+function HTTPValue($stringValue)
+{
     if (!preg_match("~^(?:f|ht)tps?://~i", $stringValue)) {
-       $stringValue = "http://" . $stringValue;
+        $stringValue = "http://" . $stringValue;
     }
     return $stringValue;
- }
+}
 
 // Redirects all requests to the platform.cdssandbox.xyz.
 // Primarily used to redirect preview links from WP Admin
@@ -24,6 +25,6 @@ $search = [$host, 'http://', '/en', '/fr'];
 $replace = [$redirectHost, 'https://', '',''];
 
 $redirectUrl = str_replace($search, $replace, $homeUrl);
-$redirectUrl = HTTPValue($redirectUrl)."?lang=".cds_get_active_language();
+$redirectUrl = HTTPValue($redirectUrl) . "?lang=" . cds_get_active_language();
 
 header("Location: ${redirectUrl}");

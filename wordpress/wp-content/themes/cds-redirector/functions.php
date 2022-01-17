@@ -39,6 +39,11 @@ if (! class_exists('Redirector')) {
 
                 add_action('admin_footer', function () {
                     global $post;
+                    
+                    if(!$post){
+                        return;
+                    }
+
                     $text = __("Preview", "cds-snc");
                     $url = cds_get_theme_option("redirect_url") . "/preview?id=" . $post->ID;
                     echo "<script>

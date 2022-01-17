@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use function CDS\Redirector\cds_get_theme_option;

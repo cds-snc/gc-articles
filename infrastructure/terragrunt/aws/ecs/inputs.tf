@@ -105,6 +105,11 @@ variable "c3_distribution_id" {
   type        = string
 }
 
+variable "jwt_auth_secret_key" {
+  description = "Secret key for signing Json Web Tokens"
+  type        = string
+}
+
 variable "memory" {
   type = string
 }

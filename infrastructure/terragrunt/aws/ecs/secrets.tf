@@ -85,6 +85,15 @@ resource "aws_secretsmanager_secret_version" "c3_aws_secret_access_key" {
   secret_string = var.c3_aws_secret_access_key
 }
 
+resource "aws_secretsmanager_secret" "jwt_auth_secret_key" {
+  name = "jwt_auth_secret_key_${random_string.random.result}"
+}
+
+resource "aws_secretsmanager_secret_version" "jwt_auth_secret_key" {
+  secret_id     = aws_secretsmanager_secret.jwt_auth_secret_key.id
+  secret_string = var.jwt_auth_secret_key
+}
+
 resource "aws_secretsmanager_secret" "wordpress_auth_key" {
   name = "wordpress_auth_key_${random_string.random.result}"
 }

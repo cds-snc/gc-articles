@@ -36,6 +36,19 @@ if (! class_exists('Redirector')) {
             if (is_admin()) {
                 add_action('admin_menu', array( $this, 'addAdminMenu' ));
                 add_action('admin_init', array(  $this, 'registerSettings' ));
+
+                add_action('admin_footer', function () {
+                    global $post;
+                    $text = __("Preview", "cds-snc");
+                    $url = cds_get_theme_option("redirect_url") . "/preview?id=" . $post->ID;
+                    echo "<script>
+                    jQuery(document).ready(function( $ ) {
+                        setTimeout(function(){
+                            $('.block-editor-post-preview__dropdown').replaceWith('<a class=\"components-button is-tertiary\" href=\"$url\">$text</a>');
+                        }, 1000);
+                    });
+                    </script>";
+                }, 200, 10);
             }
         }
 

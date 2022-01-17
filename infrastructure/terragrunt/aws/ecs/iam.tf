@@ -93,7 +93,8 @@ data "aws_iam_policy_document" "wordpress_ecs_task_get_secret_value" {
       aws_secretsmanager_secret_version.wordpress_auth_salt.arn,
       aws_secretsmanager_secret_version.wordpress_secure_auth_salt.arn,
       aws_secretsmanager_secret_version.wordpress_logged_in_salt.arn,
-      aws_secretsmanager_secret_version.wordpress_nonce_salt.arn
+      aws_secretsmanager_secret_version.wordpress_nonce_salt.arn,
+      aws_secretsmanager_secret_version.jwt_auth_secret_key.arn
     ]
   }
 }

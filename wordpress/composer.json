@@ -81,7 +81,8 @@
     "cds-snc/cds-default": "dev-main",
     "yoast/wordpress-seo-premium": "^17.7",
     "wpackagist-plugin/wp-rest-api-v2-menus":"0.10",
-    "digitalcube/c3-cloudfront-clear-cache": "dev-master"
+    "digitalcube/c3-cloudfront-clear-cache": "dev-master",
+    "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

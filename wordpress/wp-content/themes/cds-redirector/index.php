@@ -24,6 +24,6 @@ $search = [$host, 'http://', '/en', '/fr'];
 $replace = [$redirectHost, 'https://', '',''];
 
 $redirectUrl = str_replace($search, $replace, $homeUrl);
-echo HTTPValue($redirectUrl)."?lang=".cds_get_active_language();
+$redirectUrl = HTTPValue($redirectUrl)."?lang=".cds_get_active_language();
 
-// header("Location: ${redirectUrl}");
+header("Location: ${redirectUrl}");

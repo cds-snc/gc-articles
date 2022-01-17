@@ -39,8 +39,8 @@ if (! class_exists('Redirector')) {
 
                 add_action('admin_footer', function () {
                     global $post;
-                    
-                    if(!$post){
+
+                    if (!$post) {
                         return;
                     }
 
@@ -157,6 +157,23 @@ if (! class_exists('Redirector')) {
                 </form>
             </div><!-- .wrap -->
         <?php }
+
+        public static function getActiveLanguage(): string
+        {
+            if (function_exists('icl_get_languages')) {
+                if (ICL_LANGUAGE_CODE !== null) {
+                    return ICL_LANGUAGE_CODE;
+                }
+            }
+
+            try {
+                $locale = get_locale();
+                $pieces = explode("_", $locale);
+                return $pieces[0];
+            } catch (Exception $e) {
+                return "en";
+            }
+        }
     }
 }
 
@@ -166,4 +183,9 @@ Redirector::register();
 function cds_get_theme_option($id = '')
 {
     return Redirector::getThemeOption($id);
+}
+
+function cds_get_active_language()
+{
+    return Redirector::getActiveLanguage();
 }

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use function CDS\Redirector\cds_get_theme_option;
+use function CDS\Redirector\cds_get_active_language;
 
 function HTTPValue($stringValue) {
     if (!preg_match("~^(?:f|ht)tps?://~i", $stringValue)) {
@@ -18,10 +19,11 @@ $host = $_SERVER['HTTP_HOST'];
 $redirectHost = cds_get_theme_option("redirect_url");
 $homeUrl = home_url($wp->request);
 
-$search = [$host, 'http://'];
-$replace = [$redirectHost, 'https://'];
+// @todo add option to either keep or replace /en & /fr
+$search = [$host, 'http://', '/en', '/fr'];
+$replace = [$redirectHost, 'https://', '',''];
 
 $redirectUrl = str_replace($search, $replace, $homeUrl);
-echo HTTPValue($redirectUrl);
+echo HTTPValue($redirectUrl)."?lang=".cds_get_active_language();
 
 // header("Location: ${redirectUrl}");

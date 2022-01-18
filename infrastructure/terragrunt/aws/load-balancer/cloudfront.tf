@@ -126,6 +126,27 @@ resource "aws_cloudfront_distribution" "wordpress" {
     viewer_protocol_policy = "redirect-to-https"
   }
 
+  ordered_cache_behavior {
+    path_pattern     = "/wp-json/*"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id = aws_lb.wordpress.name
+
+    forwarded_values {
+      query_string = true
+      headers      = ["Host", "Origin", "User-Agent", "Authorization"]
+      cookies {
+        forward = "all"
+      }
+    }
+
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 0
+    compress               = true
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
   price_class = "PriceClass_200"
 
   restrictions {

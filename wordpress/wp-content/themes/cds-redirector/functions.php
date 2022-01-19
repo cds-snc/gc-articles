@@ -47,7 +47,7 @@ if (! class_exists('Redirector')) {
                     }
 
                     $text = __("Preview", "cds-snc");
-                    $url = Utils::addHttp(cds_get_theme_option("redirect_url")) . "/preview?id=" . $post->ID."&lang=".cds_get_active_language();
+                    $url = Utils::addHttp(cds_get_theme_option("redirect_url")) . "/preview?id=" . $post->ID . "&lang=" . cds_get_active_language();
                     echo "<script>
                     jQuery(document).ready(function( $ ) {
                         setTimeout(function(){

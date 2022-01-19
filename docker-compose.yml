@@ -118,7 +118,7 @@ services:
       wp plugin activate sitepress-multilingual-cms cds-base two-factor login-lockdown --network;
       wp plugin activate s3-uploads wps-hide-login disable-user-login gutenberg --network;
       wp plugin activate wordpress-seo wordpress-seo-premium wpml-string-translation wp-seo-multilingual --network;
-      wp plugin activate jwt-authentications-for-wp-rest-api --network;
+      wp plugin activate jwt-authentication-for-wp-rest-api --network;
       '
     volumes:
       - wordpress:/usr/src/wordpress

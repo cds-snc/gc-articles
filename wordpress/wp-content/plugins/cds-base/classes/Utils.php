@@ -59,4 +59,23 @@ class Utils
 
         return false;
     }
+
+    public static function addHttp($url, $protocol = "https")
+    {
+
+        $cleanUrl = $url;
+
+        if (!preg_match("~^(?:f|ht)tps?://~i", $url)) {
+            // add ":" if not localhost
+            $colon = str_contains($url, "localhost") ? "" : ":";
+            // don't add slashes if they exists i.e. //canada.ca
+            // or if localhost
+            $slashes = str_contains($url, "//") || $colon === "" ? "" : "//";
+            // add http or https
+            $cleanUrl = $protocol . $colon . $slashes . $url;
+        }
+
+        // Return url
+        return rtrim($cleanUrl, '/');
+    }
 }

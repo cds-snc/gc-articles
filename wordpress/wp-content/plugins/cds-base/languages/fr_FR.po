@@ -427,7 +427,7 @@ msgid ""
 "collection."
 msgstr ""
 "Ce rôle permet à une personne d'écrire et de publier des articles en ligne sur le "
-"collection.""
+"collection."
 
 #: classes/Modules/Users/Users.php:176 classes/Modules/Users/Users.php:194
 msgid "Invitation to collaborate on GC Articles"

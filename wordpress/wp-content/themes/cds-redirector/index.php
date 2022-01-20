@@ -7,7 +7,14 @@ use CDS\Utils;
 use function CDS\Redirector\cds_get_theme_option;
 use function CDS\Redirector\cds_get_active_language;
 
-$pageName = "/" . $wp->request;
+$lang = cds_get_active_language();
 $redirectHost = cds_get_theme_option("redirect_url");
-$redirectUrl = Utils::addHttp($redirectHost) . $pageName . "?lang=" . cds_get_active_language();
+$pageName = sprintf("/%s?lang=%s", $wp->request, $lang);
+
+if (isset($_GET['page_id']) && isset($_GET['preview'])) :
+    // handles incoming "draft" links from wp table (list view)
+    $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['page_id']), $lang);
+endif;
+
+$redirectUrl = Utils::addHttp($redirectHost) . $pageName;
 header("Location: ${redirectUrl}");

@@ -84,7 +84,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
   }
 
   ordered_cache_behavior {
-    path_pattern     = "*wp-admin/*"
+    path_pattern     = "*/wp-admin/*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_lb.wordpress.name
@@ -127,7 +127,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
   }
 
   ordered_cache_behavior {
-    path_pattern     = "*wp-json/*"
+    path_pattern     = "*/wp-json/*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_lb.wordpress.name

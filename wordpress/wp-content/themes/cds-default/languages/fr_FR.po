@@ -36,59 +36,59 @@ msgstr "Rien n'a été trouvé à cette adresse."
 
 #: functions.php:78
 msgid "Primary"
-msgstr "le primaire"
+msgstr "La navigation principale"
 
 #: functions.php:79
 msgid "Footer"
-msgstr ""
+msgstr "La navigation en pied de page"
 
 #: functions.php:98
 msgid "Black"
-msgstr ""
+msgstr "Noir"
 
 #: functions.php:103
 msgid "White"
-msgstr ""
+msgstr "Blanc"
 
 #: functions.php:108
 msgid "Primary Blue"
-msgstr ""
+msgstr "bleu primaire"
 
 #: functions.php:113
 msgid "Dark Blue"
-msgstr ""
+msgstr "bleu foncé"
 
 #: functions.php:118
 msgid "Light Blue"
-msgstr ""
+msgstr "bleu clair"
 
 #: functions.php:123
 msgid "Dark Grey"
-msgstr ""
+msgstr "gris foncé"
 
 #: functions.php:128
 msgid "Grey"
-msgstr ""
+msgstr "gris"
 
 #: functions.php:133
 msgid "Orange"
-msgstr ""
+msgstr "orange"
 
 #: functions.php:138
 msgid "Green"
-msgstr ""
+msgstr "vert"
 
 #: functions.php:143
 msgid "Red"
-msgstr ""
+msgstr "rouge"
 
 #: functions.php:202
 msgid "GC Homepage"
-msgstr ""
+msgstr "Page d'accueil GC"
 
 #: functions.php:219
 msgid "Default homepage"
-msgstr ""
+msgstr "Page d'accueil par défaut"
 
 #: header.php:37
 msgid "Skip to content"
@@ -120,35 +120,35 @@ msgstr "l'article de blog précédent"
 
 #: inc/template-functions.php:93
 msgid "Older posts"
-msgstr ""
+msgstr "articles passés"
 
 #: inc/template-functions.php:94
 msgid "Newer posts"
-msgstr ""
+msgstr "articles suivants"
 
 #: inc/template-functions.php:95
 msgid "Posts navigation"
-msgstr ""
+msgstr "navigation dans les articles"
 
 #: inc/template-functions.php:96
 msgid "Posts"
-msgstr ""
+msgstr "Articles"
 
 #: inc/template-functions.php:167
 msgid "Breadcrumbs"
-msgstr ""
+msgstr "Fil d'Ariane"
 
 #: inc/template-functions.php:169
 msgid "You are here:"
-msgstr ""
+msgstr "Tu es là"
 
 #: inc/template-functions.php:396
 msgid "Top menu"
-msgstr ""
+msgstr "navigation supérieure"
 
 #: inc/template-functions.php:397
 msgid "submenu"
-msgstr ""
+msgstr "sous-navigation"
 
 #. translators: %s: post author.
 #: inc/template-tags.php:44
@@ -158,7 +158,7 @@ msgstr "par %s"
 
 #: maintenance.php:5
 msgid "We're currently working on this"
-msgstr ""
+msgstr "Actuellement, cet endroit est en travaux."
 
 #. translators: %s: search query.
 #: search.php:23

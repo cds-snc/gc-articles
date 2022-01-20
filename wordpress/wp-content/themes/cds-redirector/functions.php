@@ -20,7 +20,7 @@ if (! class_exists('Redirector')) {
     class Redirector
     {
         /**
-         * @since 1.0.0
+         * @since 1.1.0
          */
         public function __construct()
         {
@@ -34,6 +34,8 @@ if (! class_exists('Redirector')) {
 
         public function addActions()
         {
+            add_action('after_setup_theme', array($this, 'registerNavMenus'));
+
              // Register the admin panel on the back-end
             if (is_admin()) {
                 add_action('admin_menu', array( $this, 'addAdminMenu' ));
@@ -104,6 +106,18 @@ if (! class_exists('Redirector')) {
         public function registerSettings()
         {
             register_setting('theme_options', 'theme_options', array( $this, 'sanitize' ));
+        }
+
+        /**
+         * @since 1.1.0
+         */
+        public function registerNavMenus()
+        {
+            // This theme uses wp_nav_menu() in two locations.
+            register_nav_menus([
+                'header' => esc_html__('Primary', 'cds-snc'),
+                'footer' => esc_html__('Footer', 'cds-snc'),
+            ]);
         }
 
         /**

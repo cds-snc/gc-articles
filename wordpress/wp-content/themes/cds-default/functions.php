@@ -73,7 +73,7 @@ if (!function_exists('cds_setup')) {
          */
         add_theme_support('post-thumbnails');
 
-        // This theme uses wp_nav_menu() in one location.
+        // This theme uses wp_nav_menu() in two locations.
         register_nav_menus([
             'header' => esc_html__('Primary', 'cds-snc'),
             'footer' => esc_html__('Footer', 'cds-snc'),

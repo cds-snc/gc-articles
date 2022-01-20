@@ -7,6 +7,8 @@
 
 namespace CDS\Redirector;
 
+use CDS\Utils;
+
 // Exit if accessed directly
 if (! defined('ABSPATH')) {
     exit;
@@ -18,7 +20,7 @@ if (! class_exists('Redirector')) {
     class Redirector
     {
         /**
-         * @since 1.0.0
+         * @since 1.1.0
          */
         public function __construct()
         {
@@ -32,6 +34,8 @@ if (! class_exists('Redirector')) {
 
         public function addActions()
         {
+            add_action('after_setup_theme', array($this, 'registerNavMenus'));
+
              // Register the admin panel on the back-end
             if (is_admin()) {
                 add_action('admin_menu', array( $this, 'addAdminMenu' ));
@@ -45,7 +49,7 @@ if (! class_exists('Redirector')) {
                     }
 
                     $text = __("Preview", "cds-snc");
-                    $url = cds_get_theme_option("redirect_url") . "/preview?id=" . $post->ID;
+                    $url = Utils::addHttp(cds_get_theme_option("redirect_url")) . "/preview?id=" . $post->ID . "&lang=" . cds_get_active_language();
                     echo "<script>
                     jQuery(document).ready(function( $ ) {
                         setTimeout(function(){
@@ -102,6 +106,18 @@ if (! class_exists('Redirector')) {
         public function registerSettings()
         {
             register_setting('theme_options', 'theme_options', array( $this, 'sanitize' ));
+        }
+
+        /**
+         * @since 1.1.0
+         */
+        public function registerNavMenus()
+        {
+            // This theme uses wp_nav_menu() in two locations.
+            register_nav_menus([
+                'header' => esc_html__('Primary', 'cds-snc'),
+                'footer' => esc_html__('Footer', 'cds-snc'),
+            ]);
         }
 
         /**
@@ -189,3 +205,7 @@ function cds_get_active_language()
 {
     return Redirector::getActiveLanguage();
 }
+
+add_filter('gutenberg_can_edit_post', '__return_true', 5);
+add_filter('use_block_editor_for_post', '__return_true', 5);
+add_filter('user_can_richedit', '__return_true', 50);

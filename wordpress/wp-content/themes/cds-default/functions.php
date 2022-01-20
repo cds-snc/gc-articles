@@ -17,7 +17,7 @@ require_once __DIR__ . '/inc/template-filters.php';
 // phpcs:disable
 if (!defined('_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_S_VERSION', '2.11.0');
+    define('_S_VERSION', '2.13.1');
 }
 
 if (!defined('THEME_NAMESPACE')) {
@@ -73,7 +73,7 @@ if (!function_exists('cds_setup')) {
          */
         add_theme_support('post-thumbnails');
 
-        // This theme uses wp_nav_menu() in one location.
+        // This theme uses wp_nav_menu() in two locations.
         register_nav_menus([
             'header' => esc_html__('Primary', 'cds-snc'),
             'footer' => esc_html__('Footer', 'cds-snc'),

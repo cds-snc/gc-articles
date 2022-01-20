@@ -2,29 +2,19 @@
 
 declare(strict_types=1);
 
+use CDS\Utils;
+
 use function CDS\Redirector\cds_get_theme_option;
 use function CDS\Redirector\cds_get_active_language;
 
-function HTTPValue($stringValue)
-{
-    if (!preg_match("~^(?:f|ht)tps?://~i", $stringValue)) {
-        $stringValue = "http://" . $stringValue;
-    }
-    return $stringValue;
-}
-
-// Redirects all requests to the platform.cdssandbox.xyz.
-// Primarily used to redirect preview links from WP Admin
-$host = $_SERVER['HTTP_HOST'];
-
+$lang = cds_get_active_language();
 $redirectHost = cds_get_theme_option("redirect_url");
-$homeUrl = home_url($wp->request);
+$pageName = sprintf("/%s?lang=%s", $wp->request, $lang);
 
-// @todo add option to either keep or replace /en & /fr
-$search = [$host, 'http://', '/en', '/fr'];
-$replace = [$redirectHost, 'https://', '',''];
+if (isset($_GET['page_id']) && isset($_GET['preview'])) :
+    // handles incoming "draft" links from wp table (list view)
+    $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['page_id']), $lang);
+endif;
 
-$redirectUrl = str_replace($search, $replace, $homeUrl);
-$redirectUrl = HTTPValue($redirectUrl) . "?lang=" . cds_get_active_language();
-
+$redirectUrl = Utils::addHttp($redirectHost) . $pageName;
 header("Location: ${redirectUrl}");

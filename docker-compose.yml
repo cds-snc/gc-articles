@@ -5,6 +5,9 @@ services:
     image: mariadb:10.5.8
     container_name: db
     restart: unless-stopped
+    logging:
+      driver:
+        ${LOCAL_DB_LOG_DRIVER:-local}
     environment:
       - MYSQL_DATABASE=wordpress
       - MYSQL_ROOT_PASSWORD=${WORDPRESS_DB_PASSWORD}
@@ -23,6 +26,9 @@ services:
   apache:
     container_name: apache
     image: httpd:2.4-alpine
+    logging:
+      driver:
+        ${LOCAL_APACHE_LOG_DRIVER:-local}
     ports:
       - 80:80
     volumes:
@@ -66,6 +72,9 @@ services:
       - db
     image: phpmyadmin/phpmyadmin
     restart: always
+    logging:
+      driver:
+        ${LOCAL_PHPMYADMIN_LOG_DRIVER:-local}
     ports:
       - 8080:80
     environment:
@@ -109,7 +118,7 @@ services:
       wp plugin activate sitepress-multilingual-cms cds-base two-factor login-lockdown --network;
       wp plugin activate s3-uploads wps-hide-login disable-user-login gutenberg --network;
       wp plugin activate wordpress-seo wordpress-seo-premium wpml-string-translation wp-seo-multilingual --network;
-      wp plugin activate jwt-authentications-for-wp-rest-api --network;
+      wp plugin activate jwt-authentication-for-wp-rest-api --network;
       '
     volumes:
       - wordpress:/usr/src/wordpress

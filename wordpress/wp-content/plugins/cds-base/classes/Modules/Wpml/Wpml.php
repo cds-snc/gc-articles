@@ -29,7 +29,7 @@ class Wpml
             register_rest_field('page', 'slug_en', array(
                 'get_callback' => function ($post, $field_name, $request) {
                     $translatedPostId = self::getTranslatedPost($post['id'], 'en');
-                    return get_post_field('post_name', $translatedPostId);
+                    return is_null($translatedPostId) ? null : get_post_field('post_name', $translatedPostId);
                 },
                 'update_callback' => null,
                 'schema' => array(
@@ -45,7 +45,7 @@ class Wpml
             register_rest_field('page', 'slug_fr', array(
                 'get_callback' => function ($post, $field_name, $request) {
                     $translatedPostId = self::getTranslatedPost($post['id'], 'fr');
-                    return get_post_field('post_name', $translatedPostId);
+                    return is_null($translatedPostId) ? null : get_post_field('post_name', $translatedPostId);
                 },
                 'update_callback' => null,
                 'schema' => array(

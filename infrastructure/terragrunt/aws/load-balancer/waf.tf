@@ -152,6 +152,9 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
       managed_rule_group_statement {
         name        = "AWSManagedRulesSQLiRuleSet"
         vendor_name = "AWS"
+        excluded_rule {
+          name = "SQLi_BODY"
+        }
       }
     }
 
@@ -163,8 +166,51 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
-    name     = "AWSManagedRulesPHPRuleSet"
+    name     = "Custom_SQLi_BODY"
     priority = 6
+
+    action {
+      block {}
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Custom_SQLi_BODY"
+      sampled_requests_enabled   = true
+    }
+
+    statement {
+      and_statement {
+        statement {
+          label_match_statement {
+            scope = "LABEL"
+            key   = "awswaf:managed:aws:sql-database:SQLi_Body"
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                positional_constraint = "CONTAINS"
+                search_string         = "sign-in-se-connecter"
+                text_transformation {
+                  type     = "LOWERCASE"
+                  priority = 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesPHPRuleSet"
+    priority = 7
 
     override_action {
       none {}
@@ -186,7 +232,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesWordPressRuleSet"
-    priority = 7
+    priority = 8
 
     override_action {
       none {}
@@ -208,7 +254,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesAmazonIpReputationList"
-    priority = 8
+    priority = 9
 
     override_action {
       none {}

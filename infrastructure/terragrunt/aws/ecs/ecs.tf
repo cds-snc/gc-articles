@@ -72,6 +72,7 @@ data "template_file" "wordpress_container_definition" {
     WORDPRESS_LOGGED_IN_SALT     = aws_secretsmanager_secret_version.wordpress_logged_in_salt.arn
     WORDPRESS_NONCE_SALT         = aws_secretsmanager_secret_version.wordpress_nonce_salt.arn
     JWT_AUTH_SECRET_KEY          = aws_secretsmanager_secret_version.jwt_auth_secret_key.arn
+    WPML_SITE_KEY                = aws_secretsmanager_secret_version.wpml_site_key.arn
 
     AWS_LOGS_GROUP         = aws_cloudwatch_log_group.wordpress_ecs_logs.name
     AWS_LOGS_REGION        = var.region

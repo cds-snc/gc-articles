@@ -7,16 +7,17 @@
 
 namespace CDS\Redirector;
 
-use CDS\Utils;
-
 // Exit if accessed directly
-if (! defined('ABSPATH')) {
-    exit;
+if (!defined('ABSPATH')) {
+    exit();
 }
 
-// Start Class
-if (! class_exists('Redirector')) {
+require_once __DIR__ . '/filter-core-buttons.php';
 
+use CDS\Utils;
+
+// Start Class
+if (!class_exists('Redirector')) {
     class Redirector
     {
         /**
@@ -34,30 +35,42 @@ if (! class_exists('Redirector')) {
 
         public function addActions()
         {
-            add_action('after_setup_theme', array($this, 'registerNavMenus'));
+            add_action('after_setup_theme', [$this, 'registerNavMenus']);
 
-             // Register the admin panel on the back-end
+            // Register the admin panel on the back-end
             if (is_admin()) {
-                add_action('admin_menu', array( $this, 'addAdminMenu' ));
-                add_action('admin_init', array(  $this, 'registerSettings' ));
+                add_action('admin_menu', [$this, 'addAdminMenu']);
+                add_action('admin_init', [$this, 'registerSettings']);
 
-                add_action('admin_footer', function () {
-                    global $post;
+                add_action(
+                    'admin_footer',
+                    function () {
+                        global $post;
 
-                    if (!$post) {
-                        return;
-                    }
+                        if (!$post) {
+                            return;
+                        }
 
-                    $text = __("Preview", "cds-snc");
-                    $url = Utils::addHttp(cds_get_theme_option("redirect_url")) . "/preview?id=" . $post->ID . "&lang=" . cds_get_active_language();
-                    echo "<script>
+                        $text = __('Preview', 'cds-snc');
+                        $url =
+                            Utils::addHttp(
+                                cds_get_theme_option('redirect_url'),
+                            ) .
+                            '/preview?id=' .
+                            $post->ID .
+                            '&lang=' .
+                            cds_get_active_language();
+                        echo "<script>
                     jQuery(document).ready(function( $ ) {
                         setTimeout(function(){
                             $('.block-editor-post-preview__dropdown').replaceWith('<a class=\"components-button is-tertiary\" href=\"$url\">$text</a>');
                         }, 1000);
                     });
                     </script>";
-                }, 200, 10);
+                    },
+                    200,
+                    10,
+                );
             }
         }
 
@@ -96,7 +109,7 @@ if (! class_exists('Redirector')) {
                 esc_html__('Theme Settings', 'cds-redirect'),
                 'manage_options',
                 'theme-settings',
-                array( $this, 'createAdminPage' )
+                [$this, 'createAdminPage'],
             );
         }
 
@@ -105,7 +118,10 @@ if (! class_exists('Redirector')) {
          */
         public function registerSettings()
         {
-            register_setting('theme_options', 'theme_options', array( $this, 'sanitize' ));
+            register_setting('theme_options', 'theme_options', [
+                $this,
+                'sanitize',
+            ]);
         }
 
         /**
@@ -127,12 +143,13 @@ if (! class_exists('Redirector')) {
          */
         public static function sanitize($options)
         {
-
             // If we have options lets sanitize them
             if ($options) {
                 // Input
-                if (! empty($options['redirect_url'])) {
-                    $options['redirect_url'] = sanitize_text_field($options['redirect_url']);
+                if (!empty($options['redirect_url'])) {
+                    $options['redirect_url'] = sanitize_text_field(
+                        $options['redirect_url'],
+                    );
                 } else {
                     unset($options['redirect_url']); // Remove from options if empty
                 }
@@ -160,19 +177,28 @@ if (! class_exists('Redirector')) {
                     <?php settings_fields('theme_options'); ?>
 
                     <table class="form-table cds-custom-admin-login-table">
-                        <?php // Text input example ?>
+                        <?php // Text input example
+                        ?>
                         <tr valign="top">
-                            <th scope="row"><?php esc_html_e('Redirect URL', 'cds-redirect'); ?></th>
+                            <th scope="row"><?php esc_html_e(
+                                'Redirect URL',
+                                'cds-redirect',
+                            ); ?></th>
                             <td>
-                                <?php $value = self::getThemeOption('redirect_url'); ?>
-                                <input type="text" name="theme_options[redirect_url]" value="<?php echo esc_attr($value); ?>">
+                                <?php $value = self::getThemeOption(
+                                    'redirect_url',
+                                ); ?>
+                                <input type="text" name="theme_options[redirect_url]" value="<?php echo esc_attr(
+                                    $value,
+                                ); ?>">
                             </td>
                         </tr>
                     </table>
                     <?php submit_button(); ?>
                 </form>
             </div><!-- .wrap -->
-        <?php }
+            <?php
+        }
 
         public static function getActiveLanguage(): string
         {
@@ -184,10 +210,10 @@ if (! class_exists('Redirector')) {
 
             try {
                 $locale = get_locale();
-                $pieces = explode("_", $locale);
+                $pieces = explode('_', $locale);
                 return $pieces[0];
             } catch (Exception $e) {
-                return "en";
+                return 'en';
             }
         }
     }

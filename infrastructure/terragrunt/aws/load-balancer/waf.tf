@@ -213,7 +213,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SQLiExtendedPatterns_BODY"
-    priority = 6
+    priority = 7
 
     action {
       block {}
@@ -256,7 +256,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesPHPRuleSet"
-    priority = 7
+    priority = 8
 
     override_action {
       none {}
@@ -278,7 +278,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesWordPressRuleSet"
-    priority = 8
+    priority = 9
 
     override_action {
       none {}
@@ -300,7 +300,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesAmazonIpReputationList"
-    priority = 9
+    priority = 10
 
     override_action {
       none {}
@@ -322,7 +322,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SizeRestrictions_BODY"
-    priority = 10
+    priority = 11
     action {
       block {}
     }
@@ -388,7 +388,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_CrossSiteScripting_BODY"
-    priority = 11
+    priority = 12
     action {
       block {}
     }

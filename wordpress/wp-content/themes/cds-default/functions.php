@@ -320,4 +320,5 @@ function fix_svg()
           }
           </style>';
 }
-  add_action('admin_head', 'fix_svg');
+
+add_action('admin_head', 'fix_svg');

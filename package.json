@@ -1,7 +1,7 @@
 {
   "name": "platform-mvp",
   "type": "module",
-  "version": "2.13.1",
+  "version": "2.14.0",
   "scripts": {
     "deploy-plugin": "./deploy/plugin",
     "update-version": "node ./scripts/prepare-release.js --version_num",

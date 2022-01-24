@@ -1,0 +1,27 @@
+{
+    "version": 1,
+    "$schema": "https://json.schemastore.org/theme-v1.json",
+    "settings": {
+        "color": {
+            "custom": false,
+            "gradients": [],
+            "link": false,
+            "background": false,
+            "defaultPalette": false,
+			"defaultGradients": false,
+            "customGradient": false,
+            "palette": [
+                {
+                    "name": "Red",
+                    "slug": "red",
+                    "color": "#b10e1e"
+                },
+                {
+                    "name": "Blue",
+                    "slug": "blue",
+                    "color": "#26374A"
+                }
+            ]
+        }
+    }
+}

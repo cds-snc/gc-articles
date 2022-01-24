@@ -70,6 +70,12 @@ variable "encryption_key" {
   sensitive   = true
 }
 
+variable "wpml_site_key" {
+  description = "WPML Site Key"
+  type        = string
+  sensitive   = true
+}
+
 variable "s3_uploads_bucket" {
   description = "Bucket for user uploads"
   type        = string

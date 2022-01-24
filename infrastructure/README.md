@@ -33,6 +33,7 @@ The following Terraform variables are required:
 * `default_list_manager_api_key`: API key used for Platform ListManager request auth
 * `default_notify_api_key`: Default Notify API key used before a site has one configured
 * `slack_webhook_url`: Slack incoming webhook to post SNS notifications to
+* `wpml_site_key`: Site Key from WPML
 
 WordPress [generated secret keys](https://api.wordpress.org/secret-key/1.1/salt/):
 * `wordpress_auth_key`

@@ -179,7 +179,7 @@ if (!class_exists('Redirector')) {
                     <table class="form-table cds-custom-admin-login-table">
                         <?php // Text input example ?>
                         <tr valign="top">
-                            <th scope="row"><?php esc_html_e('Redirect URL','cds-redirect'); ?></th>
+                            <th scope="row"><?php esc_html_e('Redirect URL', 'cds-redirect'); ?></th>
                             <td>
                                 <?php $value = self::getThemeOption('redirect_url'); ?>
                                 <input type="text" name="theme_options[redirect_url]" value="<?php echo esc_attr($value); ?>">

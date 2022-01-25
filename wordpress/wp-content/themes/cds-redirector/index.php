@@ -16,19 +16,25 @@ if (isset($_GET['page_id']) && isset($_GET['preview'])) :
     $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['page_id']), $lang);
 endif;
 
+$isSelf = false;
+
+if(str_contains($_SERVER['REQUEST_URI'], $redirectHost) || isset($_GET['action']) == "edit" || isset($_GET['_wp-find-template'])):
+    $isSelf = true;
+endif;
+
 $isAjaxRequest = false;
 
 //IF HTTP_X_REQUESTED_WITH is equal to xmlhttprequest
 if(
     isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
-){
+):
     //Set our $isAjaxRequest to true.
     $isAjaxRequest = true;
-}
+endif;
 
 // don't redirect for ajax requests
-if(!$isAjaxRequest){
+if(!$isAjaxRequest && !$isSelf):
     $redirectUrl = Utils::addHttp($redirectHost) . $pageName;
     header("Location: ${redirectUrl}");
-}
+endif;

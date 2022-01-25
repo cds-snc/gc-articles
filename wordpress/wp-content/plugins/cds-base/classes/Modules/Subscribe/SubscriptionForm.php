@@ -39,10 +39,12 @@ class SubscriptionForm
             $subscribeLabel = $attributes['subscribeLabel'];
         endif;
 
+        $apiEndpoint = site_url() . '/wp-json/subscribe/v1/process';
+
         ob_start();
         ?>
         <div class="gc-form-wrapper">
-           <form id="subscribe-form" method="POST" action="/wp-json/subscribe/v1/process">
+           <form id="subscribe-form" method="POST" action="<?php echo $apiEndpoint; ?>">
                 <input type="hidden" name="list_id" value="<?php echo $listId; ?>"/>
                 <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
                 <div class="focus-group">

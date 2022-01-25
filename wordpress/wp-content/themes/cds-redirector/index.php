@@ -18,23 +18,23 @@ endif;
 
 $isSelf = false;
 
-if(str_contains($_SERVER['REQUEST_URI'], $redirectHost) || isset($_GET['action']) == "edit" || isset($_GET['_wp-find-template'])):
+if (str_contains($_SERVER['REQUEST_URI'], $redirectHost) || isset($_GET['action']) == "edit" || isset($_GET['_wp-find-template'])) :
     $isSelf = true;
 endif;
 
 $isAjaxRequest = false;
 
 //IF HTTP_X_REQUESTED_WITH is equal to xmlhttprequest
-if(
+if (
     isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
     strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
-):
+) :
     //Set our $isAjaxRequest to true.
     $isAjaxRequest = true;
 endif;
 
 // don't redirect for ajax requests
-if(!$isAjaxRequest && !$isSelf):
+if (!$isAjaxRequest && !$isSelf) :
     $redirectUrl = Utils::addHttp($redirectHost) . $pageName;
     header("Location: ${redirectUrl}");
 endif;

@@ -16,5 +16,11 @@ if (isset($_GET['page_id']) && isset($_GET['preview'])) :
     $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['page_id']), $lang);
 endif;
 
-$redirectUrl = Utils::addHttp($redirectHost) . $pageName;
-header("Location: ${redirectUrl}");
+
+if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest'){
+    $redirectUrl = Utils::addHttp($redirectHost) . $pageName;
+    header("Location: ${redirectUrl}");
+}
+
+
+

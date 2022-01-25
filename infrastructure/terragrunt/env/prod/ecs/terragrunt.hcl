@@ -2,6 +2,10 @@ include {
   path = find_in_parent_folders()
 }
 
+locals {
+  environments = yamldecode(file(find_in_parent_folders("environments.yml")))
+}
+
 dependencies {
   paths = ["../network", "../ecr", "../load-balancer", "../database"]
 }
@@ -69,11 +73,11 @@ inputs = {
 
   wordpress_repository_arn = dependency.ecr.outputs.wordpress_repository_arn
   wordpress_image          = dependency.ecr.outputs.wordpress_repository_url
-  wordpress_image_tag      = "v2.14.2"
+  wordpress_image_tag      = "v${local.environments.production.wordpress}"
 
   apache_repository_arn = dependency.ecr.outputs.apache_repository_arn
   apache_image          = dependency.ecr.outputs.apache_repository_url
-  apache_image_tag      = "v1.0.19"
+  apache_image_tag      = "v${local.environments.production.apache}"
 
   database_host_secret_arn         = dependency.database.outputs.database_host_secret_arn
   database_name_secret_arn         = dependency.database.outputs.database_name_secret_arn

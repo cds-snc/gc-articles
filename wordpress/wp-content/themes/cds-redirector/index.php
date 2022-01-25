@@ -16,8 +16,19 @@ if (isset($_GET['page_id']) && isset($_GET['preview'])) :
     $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['page_id']), $lang);
 endif;
 
+$isAjaxRequest = false;
+
+//IF HTTP_X_REQUESTED_WITH is equal to xmlhttprequest
+if(
+    isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+    strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
+){
+    //Set our $isAjaxRequest to true.
+    $isAjaxRequest = true;
+}
+
 // don't redirect for ajax requests
-if(!isset($_SERVER['HTTP_X_REQUESTED_WITH']) || strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) != 'xmlhttprequest'){
+if(!$isAjaxRequest){
     $redirectUrl = Utils::addHttp($redirectHost) . $pageName;
     header("Location: ${redirectUrl}");
 }

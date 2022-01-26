@@ -54,6 +54,14 @@ class SiteSettings
 
     public function collectionSettingsPageInit()
     {
+        // add section
+        add_settings_section(
+            'collection_settings_section', // id
+            get_bloginfo("name"), // title
+            null, // callback
+            'collection-settings-admin' // page
+        );
+
         register_setting(
             'site_settings_group', // option_group
             'collection_mode',
@@ -64,31 +72,23 @@ class SiteSettings
             'collection_mode_maintenance_page',
         );
 
-        // reading
+        // reading options
         register_setting(
-            'reading', // option_group
+            'site_settings_group', // option_group
             'show_on_front',
         );
 
         register_setting(
-            'reading', // option_group
+            'site_settings_group', // option_group
             'page_on_front',
         );
 
         register_setting(
-            'reading', // option_group
+            'site_settings_group', // option_group
             'blog_public',
         );
 
-        // add sections
-
-        add_settings_section(
-            'collection_settings_section', // id
-            get_bloginfo("name"), // title
-            null, // callback
-            'collection-settings-admin' // page
-        );
-
+        // add fields
         add_settings_field(
             'collection_mode', // id
             _('Mode', 'cds-snc'), // title
@@ -112,18 +112,18 @@ class SiteSettings
         );
 
         add_settings_field(
-            'reading_settings', // id
+            'page_on_front', // id
             _('Home Page', 'cds-snc'), // title
             array( $this, 'readingSettingsCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section', // section
             [
-                'label_for' => 'reading_settings'
+                'label_for' => 'page_on_front'
             ]
         );
 
         add_settings_field(
-            'index_settings', // id
+            'blog_public', // id
             _('Search engine visibility', 'cds-snc'), // title
             array( $this, 'indexSiteCallback'), // callback
             'collection-settings-admin', // page
@@ -158,7 +158,7 @@ class SiteSettings
     public function readingSettingsCallback()
     {
 
-           echo '<input name="show_on_front" type="hidden" value="page">';
+           // echo '<input name="show_on_front" type="hidden" value="page">';
 
             wp_dropdown_pages(
                 array(
@@ -174,8 +174,8 @@ class SiteSettings
     public function indexSiteCallback()
     {
         ?>
-        <label for="blog_public"><input name="blog_public" type="checkbox" id="blog_public" value="0" <?php checked('0', get_option('blog_public')); ?> />
-        <?php _e('Discourage search engines from indexing this site'); ?></label>
+        <input name="blog_public" type="checkbox" id="blog_public" value="0" <?php checked('0', get_option('blog_public')); ?> />
+        <?php _e('Discourage search engines from indexing this site'); ?>
         <p class="description"><?php _e('It is up to search engines to honor this request.'); ?></p>
         <?php
     }

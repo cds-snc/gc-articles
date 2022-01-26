@@ -110,9 +110,10 @@ class Menus
         remove_submenu_page('wp-mail-smtp', 'wp-mail-smtp-about');
     }
 
-    public function removeSettingsPages(){
+    public function removeSettingsPages()
+    {
         global $submenu;
-        
+
         /* add items to keep here */
         $allowed = [
             __('Notify API Settings', 'cds-snc'),
@@ -120,9 +121,9 @@ class Menus
         ];
 
         $options = $submenu["options-general.php"];
-        foreach($options as $key => $value){
+        foreach ($options as $key => $value) {
             if (! in_array($value[0] !== null ? $value[0] : '', $allowed)) :
-               unset($submenu["options-general.php"][$key]);
+                unset($submenu["options-general.php"][$key]);
             endif;
         }
     }

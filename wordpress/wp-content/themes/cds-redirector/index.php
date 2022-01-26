@@ -24,7 +24,7 @@ if (
         $redirectHost
     ) || isset($_GET['action']) == "edit" || isset($_GET['_wp-find-template'])
 ) {
-    $isSelf = true;
+    exit();
 }
 
 $isAjaxRequest = false;
@@ -35,11 +35,13 @@ if (
     strcasecmp($_SERVER['HTTP_X_REQUESTED_WITH'], 'xmlhttprequest') == 0
 ) {
     //Set our $isAjaxRequest to true.
-    $isAjaxRequest = true;
+    exit();
 }
 
-// don't redirect for ajax requests
-if (!$isAjaxRequest && !$isSelf) {
-    $redirectUrl = Utils::addHttp($redirectHost) . $pageName;
-    header("Location: ${redirectUrl}");
+if (!$redirectHost) {
+    $link = site_url() . "/wp-admin/admin.php?page=theme-settings";
+    wp_die("You have the Redirector theme enabled, but have not <a href='${link}'>configured a redirect.</a>");
 }
+
+$redirectUrl = Utils::addHttp($redirectHost) . $pageName;
+header("Location: ${redirectUrl}");

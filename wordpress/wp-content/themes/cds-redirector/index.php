@@ -16,8 +16,6 @@ if (isset($_GET['page_id']) && isset($_GET['preview'])) {
     $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['page_id']), $lang);
 }
 
-$isSelf = false;
-
 if (
     $redirectHost && str_contains(
         $_SERVER['REQUEST_URI'],
@@ -26,8 +24,6 @@ if (
 ) {
     exit();
 }
-
-$isAjaxRequest = false;
 
 //IF HTTP_X_REQUESTED_WITH is equal to xmlhttprequest
 if (

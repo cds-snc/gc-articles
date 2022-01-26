@@ -20,22 +20,24 @@ jobs:
   version-manifest:
     runs-on: ubuntu-latest
     outputs:
-      previous: ${{ steps.versions.outputs.previous }}
-      current: ${{ steps.versions.outputs.current }}
+      environments: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
-      - name: Read environments.yml
-        uses: KJ002/read-yaml@1.5
-        id: wordpress
-        with:
-          file: './infrastructure/environments.yml'
-          key-path: '["staging", "wordpress"]'
-
-      - name: Versions
-        id: versions
+      - id: set-matrix
         run: |
-          echo "Staging WordPress: ${data.wordpress}"
+          YML=$(cat ./infrastructure/environments.yml)
+          echo "::set-output name=matrix::${YML}"
+  read-versions:
+    needs: version-manifest
+    runs-on: ubuntu-latest
+    env:
+      ENVIRONMENTS: ${{ needs.version-manifest.outputs.environments }}
+    steps:
+      - name: Versions
+        run: |
+          echo "ENVIRONMENTS: ${env.ENVIRONMENTS}"
+
+

@@ -120,11 +120,17 @@ class Menus
             __('Site Settings', 'cds-snc'),
         ];
 
-        $options = $submenu["options-general.php"];
-        foreach ($options as $key => $value) {
-            if (! in_array($value[0] !== null ? $value[0] : '', $allowed)) :
-                unset($submenu["options-general.php"][$key]);
+        try {
+            if ($submenu && isset($submenu["options-general.php"])) :
+                $options = $submenu["options-general.php"];
+                foreach ($options as $key => $value) {
+                    if (! in_array($value[0] !== null ? $value[0] : '', $allowed)) :
+                        unset($submenu["options-general.php"][$key]);
+                    endif;
+                }
             endif;
+        } catch (Exception $e) {
+            // no-op
         }
     }
 }

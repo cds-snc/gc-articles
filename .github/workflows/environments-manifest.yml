@@ -33,7 +33,7 @@ jobs:
         id: wordpress
         with:
           file: './infrastructure/environments.yml'
-          key-path: ["staging", "wordpress"]
+          key-path: '["staging", "wordpress"]'
 
       - name: Versions
         id: versions

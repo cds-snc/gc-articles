@@ -40,6 +40,8 @@ services:
       - ./wordpress/docker/apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
       - ./wordpress/docker/apache/conf.d/php-fpm.conf:/usr/local/apache2/conf.d/php-fpm.conf
       - ./wordpress/docker/apache/conf.d/default-site.conf:/usr/local/apache2/conf.d/default-site.conf
+      - ./assets/en.png:/usr/src/wordpress/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png
+      - ./assets/fr.png:/usr/src/wordpress/wp-content/plugins/sitepress-multilingual-cms/res/flags/fr.png
     networks:
       - app-network
 

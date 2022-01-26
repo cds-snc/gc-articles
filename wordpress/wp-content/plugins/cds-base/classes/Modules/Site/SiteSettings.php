@@ -158,7 +158,7 @@ class SiteSettings
     public function readingSettingsCallback()
     {
 
-           // echo '<input name="show_on_front" type="hidden" value="page">';
+           echo '<input name="show_on_front" type="hidden" value="page">';
 
             wp_dropdown_pages(
                 array(

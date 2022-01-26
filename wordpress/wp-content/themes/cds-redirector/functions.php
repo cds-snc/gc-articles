@@ -214,12 +214,12 @@ if (!class_exists('Redirector')) {
 Redirector::register();
 
 // Helper function to use in your theme to return a theme option value
-function cds_get_theme_option($id = '')
+function cds_get_theme_option($id = ''): ?string
 {
     return Redirector::getThemeOption($id);
 }
 
-function cds_get_active_language()
+function cds_get_active_language(): ?string
 {
     return Redirector::getActiveLanguage();
 }

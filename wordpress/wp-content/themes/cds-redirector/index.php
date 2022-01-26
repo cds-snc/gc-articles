@@ -18,9 +18,10 @@ endif;
 
 $isSelf = false;
 
-if (str_contains($_SERVER['REQUEST_URI'], $redirectHost) || isset($_GET['action']) == "edit" || isset($_GET['_wp-find-template'])) :
+if ($redirectHost && str_contains($_SERVER['REQUEST_URI'],
+        $redirectHost) || isset($_GET['action']) == "edit" || isset($_GET['_wp-find-template'])) {
     $isSelf = true;
-endif;
+}
 
 $isAjaxRequest = false;
 

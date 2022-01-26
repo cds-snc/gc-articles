@@ -35,6 +35,10 @@ WORKDIR /usr/src/wordpress
 COPY --from=composer /app/wordpress/wp-content ./wp-content
 COPY --from=composer /app/wordpress/vendor ./vendor
 
+# Copy flags
+COPY ./assets/en.png /usr/src/wordpress/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png
+COPY ./assets/fr.png /usr/src/wordpress/wp-content/plugins/sitepress-multilingual-cms/res/flags/fr.png
+
 # Deny all web access to the vendor folder contents
 RUN echo "Deny from all" > ./vendor/.htaccess
 

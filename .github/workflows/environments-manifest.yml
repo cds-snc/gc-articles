@@ -1,11 +1,11 @@
-name: "Version manifest"
+name: "Environments version manifest"
 
 # Gets the following content from the `VERSION` manifest:
 # 1. current version: the target version for the Terraform plan and apply.
 # 2. previous version: the previously deployed Terraform version.
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
 #  workflow_call:
 #    outputs:
@@ -17,10 +17,10 @@ on:
 #        value: ${{ jobs.version-manifest.outputs.current }}
 
 jobs:
-  version-manifest:
+  environments-manifest:
     runs-on: ubuntu-latest
     outputs:
-      environments: ${{ steps.set-matrix.outputs.matrix }}
+      wordpress: ${{ steps.set-matrix.outputs.matrix.production.wordpress }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -31,13 +31,13 @@ jobs:
           YML=$(cat ./infrastructure/environments.yml)
           echo "::set-output name=matrix::${YML}"
   read-versions:
-    needs: version-manifest
+    needs: environments-manifest
     runs-on: ubuntu-latest
     env:
-      ENVIRONMENTS: ${{ needs.version-manifest.outputs.environments }}
+      WORDPRESS: ${{ needs.environments-manifest.outputs.wordpress }}
     steps:
       - name: Versions
         run: |
-          echo "ENVIRONMENTS: ${ENVIRONMENTS}"
+          echo "WORDPRESS: ${WORDPRESS}"
 
 

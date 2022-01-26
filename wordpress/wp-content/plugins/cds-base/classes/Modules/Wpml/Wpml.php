@@ -8,18 +8,19 @@ class Wpml
 {
     public static function register()
     {
-        Installer::register();
-        Cleanup::register();
+        // Installer::register();
+        // Cleanup::register();
 
-        self::addTranslatedIDsToPages();
+        // $instance = new self();
+        // $instance->addTranslatedIDsToPages();
     }
 
-    private static function getTranslatedPost($post_id, $lang)
+    private function getTranslatedPost($post_id, $lang)
     {
         return apply_filters('wpml_object_id', $post_id, 'post', false, $lang);
     }
 
-    private static function addTranslatedIDsToPages()
+    private function addTranslatedIDsToPages()
     {
         add_action('rest_api_init', function () {
             /**
@@ -28,7 +29,7 @@ class Wpml
              */
             register_rest_field('page', 'slug_en', array(
                 'get_callback' => function ($post, $field_name, $request) {
-                    $translatedPostId = self::getTranslatedPost($post['id'], 'en');
+                    $translatedPostId = $this->getTranslatedPost($post['id'], 'en');
                     return is_null($translatedPostId) ? null : get_post_field('post_name', $translatedPostId);
                 },
                 'update_callback' => null,
@@ -44,7 +45,7 @@ class Wpml
              */
             register_rest_field('page', 'slug_fr', array(
                 'get_callback' => function ($post, $field_name, $request) {
-                    $translatedPostId = self::getTranslatedPost($post['id'], 'fr');
+                    $translatedPostId = $this->getTranslatedPost($post['id'], 'fr');
                     return is_null($translatedPostId) ? null : get_post_field('post_name', $translatedPostId);
                 },
                 'update_callback' => null,
@@ -61,7 +62,7 @@ class Wpml
              */
             register_rest_field('page', 'id_en', array(
                 'get_callback' => function ($post, $field_name, $request) {
-                    return self::getTranslatedPost($post['id'], 'en');
+                    return $this->getTranslatedPost($post['id'], 'en');
                 },
                 'update_callback' => null,
                 'schema' => array(
@@ -76,7 +77,7 @@ class Wpml
              */
             register_rest_field('page', 'id_fr', array(
                 'get_callback' => function ($post, $field_name, $request) {
-                    return self::getTranslatedPost($post['id'], 'fr');
+                    return $this->getTranslatedPost($post['id'], 'fr');
                 },
                 'update_callback' => null,
                 'schema' => array(

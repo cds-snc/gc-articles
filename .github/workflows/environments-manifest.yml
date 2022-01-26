@@ -1,0 +1,41 @@
+name: "Version manifest"
+
+# Gets the following content from the `VERSION` manifest:
+# 1. current version: the target version for the Terraform plan and apply.
+# 2. previous version: the previously deployed Terraform version.
+
+on:
+  pull_request:
+    branches: [ main ]
+#  workflow_call:
+#    outputs:
+#      previous:
+#        description: "The previous contents of the VERSION manifest"
+#        value: ${{ jobs.version-manifest.outputs.previous }}
+#      current:
+#        description: "The current contents of the VERSION manifest"
+#        value: ${{ jobs.version-manifest.outputs.current }}
+
+jobs:
+  version-manifest:
+    runs-on: ubuntu-latest
+    outputs:
+      previous: ${{ steps.versions.outputs.previous }}
+      current: ${{ steps.versions.outputs.current }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Read environments.yml
+        uses: KJ002/read-yaml@1.5
+        id: wordpress
+        with:
+          file: './infrastructure/environments.yml'
+          key-path: ["staging", "wordpress"]
+
+      - name: Versions
+        id: versions
+        run: |
+          echo "Staging WordPress: ${data.wordpress}"

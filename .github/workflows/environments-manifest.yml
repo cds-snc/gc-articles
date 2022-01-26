@@ -38,6 +38,6 @@ jobs:
     steps:
       - name: Versions
         run: |
-          echo "ENVIRONMENTS: ${env.ENVIRONMENTS}"
+          echo "ENVIRONMENTS: ${ENVIRONMENTS}"
 
 

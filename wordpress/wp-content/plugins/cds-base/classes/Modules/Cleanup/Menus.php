@@ -49,6 +49,7 @@ class Menus
         }
 
         $this->hideWPMailSmtpMenus();
+        $this->removeSettingsPages();
     }
 
     public function blockAppearancePages(): void
@@ -107,5 +108,29 @@ class Menus
         remove_submenu_page('wp-mail-smtp', 'wp-mail-smtp-tools');
         //Hide "WP Mail SMTP → About Us".
         remove_submenu_page('wp-mail-smtp', 'wp-mail-smtp-about');
+    }
+
+    public function removeSettingsPages()
+    {
+        global $submenu;
+
+        /* add items to keep here */
+        $allowed = [
+            __('Notify API Settings', 'cds-snc'),
+            __('Site Settings', 'cds-snc'),
+        ];
+
+        try {
+            if ($submenu && isset($submenu["options-general.php"])) :
+                $options = $submenu["options-general.php"];
+                foreach ($options as $key => $value) {
+                    if (! in_array($value[0] !== null ? $value[0] : '', $allowed)) :
+                        unset($submenu["options-general.php"][$key]);
+                    endif;
+                }
+            endif;
+        } catch (Exception $e) {
+            // no-op
+        }
     }
 }

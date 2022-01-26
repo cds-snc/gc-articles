@@ -25,8 +25,8 @@ class SiteSettings
     public function collectionSettingsAddPluginPage()
     {
         add_options_page(
-            __('Collection Settings'), // page_title
-            __('Collection Settings'), // menu_title
+            __('Site Settings', "cds-snc"), // page_title
+            __('Site Settings', "cds-snc"), // menu_title
             'manage_options', // capability
             'collection-settings', // menu_slug
             array( $this, 'collectionSettingsCreateAdminPage' ) // function
@@ -39,7 +39,7 @@ class SiteSettings
         ?>
 
         <div class="wrap">
-            <h1><?php _e('Collection Settings', 'cds-snc') ?></h1>
+            <h1><?php _e('Site Settings', 'cds-snc') ?></h1>
             <?php settings_errors(); ?>
 
             <form method="post" action="options.php" id="collection_settings_form" class="gc-form-wrapper">
@@ -54,6 +54,14 @@ class SiteSettings
 
     public function collectionSettingsPageInit()
     {
+        // add section
+        add_settings_section(
+            'collection_settings_section', // id
+            get_bloginfo("name"), // title
+            null, // callback
+            'collection-settings-admin' // page
+        );
+
         register_setting(
             'site_settings_group', // option_group
             'collection_mode',
@@ -64,13 +72,23 @@ class SiteSettings
             'collection_mode_maintenance_page',
         );
 
-        add_settings_section(
-            'collection_settings_section', // id
-            get_bloginfo("name"), // title
-            null, // callback
-            'collection-settings-admin' // page
+        // reading options
+        register_setting(
+            'site_settings_group', // option_group
+            'show_on_front',
         );
 
+        register_setting(
+            'site_settings_group', // option_group
+            'page_on_front',
+        );
+
+        register_setting(
+            'site_settings_group', // option_group
+            'blog_public',
+        );
+
+        // add fields
         add_settings_field(
             'collection_mode', // id
             _('Mode', 'cds-snc'), // title
@@ -90,6 +108,28 @@ class SiteSettings
             'collection_settings_section', // section
             [
                 'label_for' => 'collection_mode_maintenance_page'
+            ]
+        );
+
+        add_settings_field(
+            'page_on_front', // id
+            _('Home Page', 'cds-snc'), // title
+            array( $this, 'readingSettingsCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section', // section
+            [
+                'label_for' => 'page_on_front'
+            ]
+        );
+
+        add_settings_field(
+            'blog_public', // id
+            _('Search engine visibility', 'cds-snc'), // title
+            array( $this, 'indexSiteCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section', // section
+            [
+                'label_for' => 'blog_public'
             ]
         );
     }
@@ -113,5 +153,30 @@ class SiteSettings
                 'selected'          => get_option('collection_mode_maintenance_page'),
             )
         );
+    }
+
+    public function readingSettingsCallback()
+    {
+
+           echo '<input name="show_on_front" type="hidden" value="page">';
+
+            wp_dropdown_pages(
+                array(
+                    'name' => 'page_on_front',
+                    'echo' => 1,
+                    'show_option_none' => __('&mdash; Select &mdash;'),
+                    'option_none_value' => '0',
+                    'selected' => get_option('page_on_front'),
+                )
+            );
+    }
+
+    public function indexSiteCallback()
+    {
+        ?>
+        <input name="blog_public" type="checkbox" id="blog_public" value="0" <?php checked('0', get_option('blog_public')); ?> />
+        <?php _e('Discourage search engines from indexing this site'); ?>
+        <p class="description"><?php _e('It is up to search engines to honor this request.'); ?></p>
+        <?php
     }
 }

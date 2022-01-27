@@ -1,0 +1,33 @@
+name: Test CI
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".dockerignore"
+      - ".github/workflows/build_push_container.yml"
+      - "wordpress/**"
+
+jobs:
+  Echo-On-Commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@v2
+
+      - name: "Set CI flag from commit"
+        env:
+          COMMIT_VAR: ${{ contains(github.event.head_commit.message, '[skip ci]') }}
+        run: |
+          if ${COMMIT_VAR} == true; then
+            echo "flag=true" >> $GITHUB_ENV
+            echo "skip ci set to true"
+          else
+            echo "flag=false" >> $GITHUB_ENV
+            echo "skip ci set to false"
+          fi
+
+      - name: "Run CI?"
+        if: env.flag
+        run: echo "CI will run!"

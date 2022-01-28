@@ -12,6 +12,44 @@ class AdminBar
         add_action('wp_before_admin_bar_render', [$this, 'removeFromAdminBarBefore'], 99);
 
         add_action('admin_bar_menu', [$this, 'addCollections'], 21);
+        add_action('admin_bar_menu', [$this, 'addAdminToggle'], 21);
+    }
+
+    public function addAdminToggle($wp_admin_bar): void
+    {
+        $menu_id = 'cds-home';
+        // "is_admin" checks if viewing an admin page, it's not a role check
+        $home_url = is_admin() ? home_url('/') : admin_url();
+
+        $wp_admin_bar->add_node([
+            'id'    => $menu_id,
+            'title' => '<div class="ab-item"><span class="ab-icon"></span>' . __(
+                'GC Articles:',
+                'cds-snc'
+            ) . ' ' . get_bloginfo('name') . '</div>',
+            'href'  => $home_url,
+        ]);
+
+        // Add an option to visit the site.
+        $wp_admin_bar->add_node(
+            array(
+                'parent' => $menu_id,
+                'id'     => $menu_id . '-view-site',
+                'title'  => __('Visit Site'),
+                'href'   => home_url('/'),
+            )
+        );
+
+
+        // Add an option to visit the site.
+        $wp_admin_bar->add_node(
+            array(
+                'parent' => $menu_id,
+                'id'     => $menu_id . '-admin-dashboard',
+                'title'  => __('Admin dashboard'),
+                'href'   => admin_url(),
+            )
+        );
     }
 
     public function addCollections($wp_admin_bar): void
@@ -114,15 +152,6 @@ class AdminBar
         $wp_admin_bar->add_node([
             'id'    => 'my-account',
             'title' => $newtext,
-        ]);
-
-        $wp_admin_bar->add_node([
-            'id'    => 'cds-home',
-            'title' => '<div class="ab-item"><span class="ab-icon"></span>' . __(
-                'GC Articles',
-                'cds-snc'
-            ) . '</div>',
-            'href'  => admin_url(),
         ]);
 
         $wp_admin_bar->remove_menu('my-sites');

@@ -34,6 +34,7 @@ use CDS\Modules\UserCollections\UserCollections;
 use CDS\Modules\DBInsights\DBInsights;
 use CDS\Modules\Releases\Releases;
 use CDS\Modules\Site\SiteSettings;
+use CDS\Modules\Site\SiteSetup;
 use CDS\Modules\Wpml\Wpml;
 use Exception;
 
@@ -58,6 +59,7 @@ class Setup
         DBInsights::register();
         Releases::register();
         SiteSettings::register();
+        SiteSetup::register();
         Cache::register();
         Wpml::register();
 

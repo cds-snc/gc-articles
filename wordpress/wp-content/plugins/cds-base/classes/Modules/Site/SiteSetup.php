@@ -87,9 +87,13 @@ class SiteSetup
     public function finishPanel()
     {
         $optionsSet = get_option("options_set");
-        # $optionsSet = 0;
+        // $optionsSet = 0; debug
 
         if (intVal($optionsSet) >= 1) {
+            return;
+        }
+
+        if (\CDS\Utils::isWpEnv()) {
             return;
         }
 

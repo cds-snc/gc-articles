@@ -68,6 +68,10 @@
   margin-bottom: .5rem;
 }
 
+.finish-setup-content .text-status a{
+  color: #efefef;
+}
+
 .finish-setup-content .hidden {
   display: none;
 }

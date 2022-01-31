@@ -45,15 +45,18 @@ class AdminStyles
             }
         </style>
         <?php
+        try {
+            $show_maple_leaf_css = ob_get_contents();
+            ob_end_clean();
 
-        $show_maple_leaf_css = ob_get_clean();
-        ob_end_clean();
+            $hasIcon = get_site_icon_url() !== "";
 
-        $hasIcon = get_site_icon_url() !== "";
-
-        if (!$hasIcon) {
-            // If there is an icon, show the default maple leaf and hide the WP logo
-            echo $show_maple_leaf_css;
+            if (!$hasIcon) {
+                // If there is an icon, show the default maple leaf and hide the WP logo
+                echo $show_maple_leaf_css;
+            }
+        } catch (Exception $exception) {
+            // no-op
         }
     }
 }

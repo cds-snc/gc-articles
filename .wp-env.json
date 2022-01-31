@@ -1,5 +1,5 @@
 {
-  "core": "5.8.3",
+  "core": "WordPress/WordPress#5.8.3",
   "themes": [
     "./wordpress/wp-content/themes/cds-default"
   ],

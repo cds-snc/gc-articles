@@ -4,7 +4,7 @@
  * Author: CDS
  * Text Domain: cds-snc
  * Domain Path: /languages
- * Version: 2.14.2
+ * Version: 2.14.4
 */
 
 /* https://jsonformatter.org/sass-to-css */
@@ -489,4 +489,8 @@ nav.nav--about li a:focus {
 
 .pager .previous a::before{
     content: "" !important;
+}
+
+.wpml-ls-statics-footer{
+    display:none;
 }

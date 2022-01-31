@@ -10,7 +10,7 @@ describe('Site Settings', () => {
   it('Displays settings screen', () => {
     cy.visit('/wp-admin/options-general.php?page=collection-settings');
 
-    cy.get('h1').should('have.text', 'Collection Settings');
+    cy.get('h1').should('have.text', 'Site Settings');
 
     cy.get('#collection_maintenance').should('be.empty');
     cy.get('#collection_live').should('be.empty');

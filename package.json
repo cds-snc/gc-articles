@@ -38,7 +38,7 @@
     "showdown": "^1.9.1",
     "yargs": "^17.1.1",
     "cypress": "^8.4.1",
-    "cypress-wp-test-utils": "^0.3.0",
+    "cypress-wp-test-utils": "^0.7.1",
     "cypress-xpath": "^1.6.2",
     "@cypress/snapshot": "^2.1.7",
     "@wordpress/env": "^4.2.0"

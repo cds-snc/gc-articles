@@ -40,8 +40,19 @@ class AdminBar
             )
         );
 
+        // Add an option to visit the site's "settings" page for superadmins
+        if (is_multisite() && current_user_can('manage_sites')) {
+            $wp_admin_bar->add_node(
+                array(
+                    'parent' => $menu_id,
+                    'id'     => $menu_id . '-edit-site',
+                    'title'  => __('Edit Site'),
+                    'href'   => network_admin_url('site-info.php?id=' . get_current_blog_id()),
+                )
+            );
+        }
 
-        // Add an option to visit the site.
+        // Add an option to visit the dashboard.
         $wp_admin_bar->add_node(
             array(
                 'parent' => $menu_id,
@@ -131,6 +142,7 @@ class AdminBar
     public function removeFromAdminBar($wp_admin_bar): void
     {
         $wp_admin_bar->remove_node('new-content');
+        $wp_admin_bar->remove_node('site-name');
 
         if (is_super_admin()) {
             return;
@@ -139,7 +151,6 @@ class AdminBar
         $wp_admin_bar->remove_node('updates');
         $wp_admin_bar->remove_node('comments');
         $wp_admin_bar->remove_node('wp-logo');
-        $wp_admin_bar->remove_node('site-name');
         $wp_admin_bar->remove_node('customize');
 
         /* plugins */

@@ -1,6 +1,6 @@
 Cypress.Commands.add('login', (username = 'admin', password = 'password') => {
   cy.clearCookies();
-  cy.visit('/login');
+  cy.visit('/wp-login.php');
   // somehow we need to wait for some time before entering the credentials
   // eslint-disable-next-line cypress/no-unnecessary-waiting
   cy.wait(500);

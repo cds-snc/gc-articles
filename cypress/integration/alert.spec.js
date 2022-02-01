@@ -4,7 +4,13 @@ const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
 describe('Alert Block', () => {
     before(() => {
-        cy.exec('npm run wp-env:test:setup')
+        cy.exec('npm run wp-env:test:setup', {
+            timeout: 10000
+        }).then((result) => {
+            cy.log("huzzah");
+            cy.log(result.stdout);
+        })
+
     });
     
     beforeEach(() => {

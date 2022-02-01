@@ -21,4 +21,4 @@ wp-env run tests-cli wp plugin activate wordpress-seo wordpress-seo-premium wp-r
 wp-env run tests-cli wp option update permalink_structure "/%postname%/";
 wp-env run tests-cli "wp option add LIST_MANAGER_NOTIFY_SERVICES 'Les Articles GC Articles~gc-articles-fb26a6b5-57aa-4cc2-85fe-3053ed344fe8-30569ea9-362b-41c4-a811-842ccf3db3dc'"
 
-# wp-env run tests-cli wp db export "$DB_BACKUP"
+wp-env run tests-cli wp db export "$DB_BACKUP"

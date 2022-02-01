@@ -5,7 +5,7 @@ import { addPage } from "./util";
 
 describe('Add Side Nav', () => {
     before(() => {
-        cy.exec('npm run wp-env:test:setup')
+        cy.testSetup();
       });
 
     it('GC Admin can add a child page', async () => {

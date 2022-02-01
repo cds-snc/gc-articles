@@ -16,7 +16,7 @@ const assertRoleErrors = (cy) => {
 
 describe('Add user', () => {
   before(() => {
-    cy.exec('npm run wp-env:test:setup');
+    cy.testSetup();;
   });
 
   after(() => { });

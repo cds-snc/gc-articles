@@ -58,9 +58,7 @@ jobs:
           runTests: false
 
       - name: Start test environment
-        run: |
-          npm run wp-env:init
-          npm run wp-env:test:setup-ci
+        run: npm run wp-env:init
 
       - name: Cypress run
         uses: cypress-io/github-action@v2

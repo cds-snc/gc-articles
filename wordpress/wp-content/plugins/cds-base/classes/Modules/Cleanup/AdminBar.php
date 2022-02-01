@@ -13,6 +13,9 @@ class AdminBar
 
         add_action('admin_bar_menu', [$this, 'addCollections'], 21);
         add_action('admin_bar_menu', [$this, 'addAdminToggle'], 21);
+
+        add_action('admin_bar_menu', [$this, 'addLanguageSwitcher'], 21);
+        add_action('admin_post_cds_change_lang', [$this, 'handleLanguageSwitcherResponse']);
     }
 
     public function addAdminToggle($wp_admin_bar): void
@@ -61,6 +64,61 @@ class AdminBar
                 'href'   => admin_url(),
             )
         );
+    }
+
+    public function addLanguageSwitcher($wp_admin_bar): void
+    {
+        $user_locale = get_user_locale();
+        $translation_locale = str_contains($user_locale, "en") ? "fr_FR" : "en_US";
+        // Not using i18n function for these because we don't want to translate them
+        $translation_locale_name = str_contains($user_locale, "en") ? "Français" : "English";
+
+        ob_start();
+        ?>
+        <form action="<?php echo esc_url(admin_url('admin-post.php')); ?>" method="post" id="cds_change_lang_form" >
+            <input type="hidden" name="action" value="cds_change_lang">
+            <?php wp_nonce_field('change_lang', "cds_change_lang_nonce"); ?>
+            <input name="locale" type="hidden" value="<?php echo $translation_locale; ?>" /> 
+            <input
+                type="submit"
+                name="submit"
+                id="submit-change-lang"
+                value="<?php echo $translation_locale_name; ?>"
+                lang="<?php echo $translation_locale; ?>"
+            />
+        </form>
+        <?php
+
+        $cds_change_lang_form = ob_get_contents();
+        ob_end_clean();
+
+        $wp_admin_bar->add_node([
+            'id'    => 'change-lang',
+            'parent' => 'top-secondary',
+            'title' => $cds_change_lang_form,
+            'href'  => '',
+        ]);
+    }
+
+    public function handleLanguageSwitcherResponse(): void
+    {
+        if (
+            isset($_POST['cds_change_lang_nonce']) &&
+            check_admin_referer('change_lang', 'cds_change_lang_nonce')
+        ) {
+            // sanitize the input
+            $lang = sanitize_key($_POST['locale']);
+            $user_id = get_current_user_id();
+            wp_update_user(['ID' => $user_id, 'locale' => $lang]);
+            wp_redirect(esc_url_raw($_POST['_wp_http_referer']));
+            die();
+        } else {
+            wp_die(
+                __('Invalid nonce', 'cds-snc'),
+                __('Error', 'cds-snc'),
+                ['response' => 403, 'back_link' => admin_url()]
+            );
+        }
     }
 
     public function addCollections($wp_admin_bar): void

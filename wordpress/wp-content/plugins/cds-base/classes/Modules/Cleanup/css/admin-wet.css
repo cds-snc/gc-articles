@@ -188,13 +188,21 @@ details ul li, details ol li {
   color: #1d2327;
 }
 
-.wp-core-ui .button-primary, .wrap .page-title-action, .components-button.is-primary {
+.wp-core-ui .button-primary,
+.wrap .page-title-action,
+.components-button.is-primary,
+#wpadminbar input[type=submit] {
   background: #26374a;
   border-color: #26374a;
   color: #fff;
 }
 
-.wp-core-ui .button-primary:hover, .wp-core-ui .button-primary:focus, .wrap .page-title-action:hover, .wrap .page-title-action:focus {
+.wp-core-ui .button-primary:hover,
+.wp-core-ui .button-primary:focus,
+.wrap .page-title-action:hover,
+.wrap .page-title-action:focus,
+#wpadminbar input[type=submit]:hover,
+#wpadminbar input[type=submit]:focus {
   color: #fff;
   background-color: #1c578a;
   border-color: #091c2d;
@@ -208,7 +216,8 @@ details ul li, details ol li {
 
 .wp-core-ui .button-primary:active,
 .wp-core-ui .button-primary.active, .wp-core-ui .button-primary.active:focus, .wp-core-ui .button-primary.active:hover,
-.wrap .page-title-action:active {
+.wrap .page-title-action:active,
+#wpadminbar input[type=submit]:active {
   color: #fff;
   background-color: #16446c;
   border-color: #000;

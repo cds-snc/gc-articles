@@ -13,6 +13,11 @@ variable "billing_tag_value" {
   type        = string
 }
 
+variable "cbs_satellite_bucket_name" {
+  description = "(Required) Name of the Cloud Based Sensor S3 satellite bucket"
+  type        = string
+}
+
 variable "enable_efs" {
   description = "(Required) Enable the shared Elastic File System for the WordPress ECS tasks"
   type        = string

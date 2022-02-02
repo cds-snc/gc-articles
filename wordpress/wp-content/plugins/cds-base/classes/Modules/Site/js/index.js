@@ -80,7 +80,7 @@ API.setOptions = async ($, data) => {
 
 (function ($) {
    
-   const BASE_SITE = "/demo" // this is the site to pull content from
+   const BASE_SITE = "/template-site" // this is the site to pull content from
 
    $('.text-status').hide().removeClass("hidden");
    $('.loader-container').hide().removeClass("hidden");

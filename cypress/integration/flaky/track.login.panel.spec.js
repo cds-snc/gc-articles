@@ -19,7 +19,7 @@ describe('Track Login Panel', () => {
         cy.login();
     });
 
-    it('Can view Track Login Panel on dashboard', () => {
+    it.skip('Can view Track Login Panel on dashboard', () => {
         cy.visitDashboard();
 
         cy.get('#logins-panel-container .login-date').should('have.text', 'Date');

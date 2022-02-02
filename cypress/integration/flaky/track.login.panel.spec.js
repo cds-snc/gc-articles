@@ -2,7 +2,7 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe('Track Login Panel', () => {
+describe.skip('Track Login Panel', () => {
     beforeEach(() => {
         cy.intercept(
           {

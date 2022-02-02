@@ -28,7 +28,7 @@ describe('Track Login Panel', () => {
     });
 });
 
-describe('Track Login Panel captures logins', () => {
+describe.skip('Track Login Panel captures logins', () => {
     before(() => {
         cy.testSetup();
     });

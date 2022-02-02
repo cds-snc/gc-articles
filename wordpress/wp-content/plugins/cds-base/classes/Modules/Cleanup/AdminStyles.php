@@ -45,7 +45,7 @@ class AdminStyles
             }
         </style>
         <?php
-        try{
+        try {
             $show_maple_leaf_css = ob_get_contents();
             ob_end_clean();
 

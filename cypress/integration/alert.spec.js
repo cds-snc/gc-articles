@@ -9,9 +9,7 @@ describe('Alert Block', () => {
     
     beforeEach(() => {
         cy.login();
-        cy.visit('/wp-admin/options-permalink.php');
-        cy.visit('/wp-admin/index.php');
-        
+
         cy.createNewPost();
     });
 

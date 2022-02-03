@@ -154,6 +154,8 @@ class Installer
             }
         }
 
+        $this->updateLangLocale();
+
         restore_current_blog();
     }
 
@@ -166,5 +168,26 @@ class Installer
     {
         $instance = new $class();
         $instance->run($data);
+    }
+
+
+    /**
+     * Updates the default WPML en/fr language locales to CA
+     */
+    protected function updateLangLocale()
+    {
+        global $wpdb;
+
+        $wpdb->update(
+            $wpdb->prefix . 'icl_languages',
+            ['default_locale' => 'en_CA'],
+            ['code' => 'en']
+        );
+
+        $wpdb->update(
+            $wpdb->prefix . 'icl_languages',
+            ['default_locale' => 'fr_CA'],
+            ['code' => 'fr']
+        );
     }
 }

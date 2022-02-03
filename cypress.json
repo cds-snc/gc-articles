@@ -1,7 +1,7 @@
 {
 	"baseUrl": "http://localhost:8889",
-	"video": true,
-	"screenshotOnRunFailure": true,
+	"video": false,
+	"screenshotOnRunFailure": false,
 	"retries": {
 		"runMode": 2,
 		"openMode": 0

@@ -1,6 +1,6 @@
 describe('List Manager Settings', () => {
   before(() => {
-    cy.exec('npm run wp-env:test:setup')
+    cy.testSetup();
   });
 
   beforeEach(() => {

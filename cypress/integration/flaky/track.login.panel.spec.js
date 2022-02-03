@@ -2,7 +2,7 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe('Track Login Panel', () => {
+describe.skip('Track Login Panel', () => {
     beforeEach(() => {
         cy.intercept(
           {
@@ -19,7 +19,7 @@ describe('Track Login Panel', () => {
         cy.login();
     });
 
-    it('Can view Track Login Panel on dashboard', () => {
+    it.skip('Can view Track Login Panel on dashboard', () => {
         cy.visitDashboard();
 
         cy.get('#logins-panel-container .login-date').should('have.text', 'Date');
@@ -28,9 +28,9 @@ describe('Track Login Panel', () => {
     });
 });
 
-describe('Track Login Panel captures logins', () => {
+describe.skip('Track Login Panel captures logins', () => {
     before(() => {
-        cy.exec('npm run wp-env:test:setup')
+        cy.testSetup();
     });
 
     it('On first Login display only one login', () => {

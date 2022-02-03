@@ -6,7 +6,7 @@ describe('Login', () => {
   it('Can view styled login page', () => {
     const host = Cypress.config().baseUrl;
 
-    cy.visit("/login");
+    cy.visit("/wp-login.php");
 
     cy.get("#login h1 a").should("have.text", "Canadian Digital Service");
     cy.get('#login h1 a').should('have.css', 'background-image', 'url("'+host+'/wp-content/plugins/cds-base/images/site-login-logo.svg")')
@@ -24,7 +24,7 @@ describe('Login', () => {
     cy.login();
 
     cy.get("body").should("have.css", "font-size", "14.5px"); // body font-size increased to 14.5
-    cy.get("#wpadminbar").should("have.css", "height", "36px"); // admin bar height increased to 36
+    // cy.get("#wpadminbar").should("have.css", "height", "36px"); // admin bar height increased to 36
     cy.get("h1").should("have.css", "font-size", "30px"); // h1 font-size increased to 30
   });
 

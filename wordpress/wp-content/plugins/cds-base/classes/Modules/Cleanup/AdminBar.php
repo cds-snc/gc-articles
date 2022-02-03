@@ -27,9 +27,9 @@ class AdminBar
         $wp_admin_bar->add_node([
             'id'    => $menu_id,
             'title' => '<div class="ab-item"><span class="ab-icon"></span>' . __(
-                'GC Articles:',
+                'GC Articles',
                 'cds-snc'
-            ) . ' ' . get_bloginfo('name') . '</div>',
+            ) . ' › ' . get_bloginfo('name') . '</div>',
             'href'  => $home_url,
         ]);
 

@@ -16,12 +16,12 @@ class Wpml
         add_action('rest_api_init', [$instance, 'addTranslatedIDsToPages']);
     }
 
-    private function getTranslatedPost($post_id, $lang)
+    protected function getTranslatedPost($post_id, $lang)
     {
         return apply_filters('wpml_object_id', $post_id, 'post', false, $lang);
     }
 
-    private function addTranslatedIDsToPages()
+    protected function addTranslatedIDsToPages()
     {
         /**
          * Add an 'slug_en' field field to the REST response for a page

@@ -1,41 +1,52 @@
 #
 # Kinesis Firehose
 #
+locals {
+  cbs_satellite_bucket_arn    = "arn:aws:s3:::${var.cbs_satellite_bucket_name}"
+  cbs_satellite_bucket_prefix = "waf_acl_logs/AWSLogs/${var.account_id}/"
+}
+
 resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs" {
-  name        = "aws-waf-logs-platform-ircc"
-  destination = "s3"
+  name        = "aws-waf-logs-platform-mvp-${var.region}"
+  destination = "extended_s3"
 
   server_side_encryption {
     enabled = true
   }
 
-  s3_configuration {
-    role_arn   = aws_iam_role.firehose_waf_logs.arn
-    bucket_arn = module.firehose_waf_log_bucket.s3_bucket_arn
+  extended_s3_configuration {
+    role_arn           = aws_iam_role.firehose_waf_logs.arn
+    prefix             = local.cbs_satellite_bucket_prefix
+    bucket_arn         = local.cbs_satellite_bucket_arn
+    compression_format = "GZIP"
   }
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
+    Terraform             = true
   }
 }
 
 resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_us_east" {
   provider = aws.us-east-1
 
-  name        = "aws-waf-logs-platform-ircc-us-east"
-  destination = "s3"
+  name        = "aws-waf-logs-platform-mvp-us-east-1"
+  destination = "extended_s3"
 
   server_side_encryption {
     enabled = true
   }
 
-  s3_configuration {
-    role_arn   = aws_iam_role.firehose_waf_logs.arn
-    bucket_arn = module.firehose_waf_log_bucket.s3_bucket_arn
+  extended_s3_configuration {
+    role_arn           = aws_iam_role.firehose_waf_logs.arn
+    prefix             = local.cbs_satellite_bucket_prefix
+    bucket_arn         = local.cbs_satellite_bucket_arn
+    compression_format = "GZIP"
   }
 
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
+    Terraform             = true
   }
 }
 
@@ -52,7 +63,7 @@ module "firehose_waf_log_bucket" {
       id      = "expire"
       enabled = true
       expiration = {
-        days = 90
+        days = 30
       }
     }
   ]
@@ -100,8 +111,8 @@ data "aws_iam_policy_document" "firehose_waf_logs" {
       "s3:PutObject"
     ]
     resources = [
-      module.firehose_waf_log_bucket.s3_bucket_arn,
-      "${module.firehose_waf_log_bucket.s3_bucket_arn}/*"
+      local.cbs_satellite_bucket_arn,
+      "${local.cbs_satellite_bucket_arn}/*"
     ]
   }
   statement {

@@ -17,6 +17,19 @@ module "wordpress_vpc" {
   billing_tag_value = var.billing_tag_value
 }
 
+resource "aws_flow_log" "cloud_based_sensor" {
+  log_destination      = "arn:aws:s3:::${var.cbs_satellite_bucket_name}/vpc_flow_logs/"
+  log_destination_type = "s3"
+  traffic_type         = "ALL"
+  vpc_id               = module.wordpress_vpc.vpc_id
+  log_format           = "$${vpc-id} $${version} $${account-id} $${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport} $${protocol} $${packets} $${bytes} $${start} $${end} $${action} $${log-status} $${subnet-id} $${instance-id}"
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+    Terraform             = true
+  }
+}
+
 resource "aws_vpc_endpoint" "ecr-dkr" {
   vpc_id              = module.wordpress_vpc.vpc_id
   vpc_endpoint_type   = "Interface"

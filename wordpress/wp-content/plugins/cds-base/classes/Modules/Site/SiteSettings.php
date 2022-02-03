@@ -85,7 +85,17 @@ class SiteSettings
 
         register_setting(
             'site_settings_group', // option_group
-            'blog_public',
+            'collection_mode',
+        );
+
+        register_setting(
+            'site_settings_group', // option_group
+            'blogname',
+        );
+
+        register_setting(
+            'site_settings_group', // option_group
+            'blogdescription',
         );
 
         // add fields
@@ -119,6 +129,28 @@ class SiteSettings
             'collection_settings_section', // section
             [
                 'label_for' => 'page_on_front'
+            ]
+        );
+
+        add_settings_field(
+            'blogname', // id
+            _('Site Name', 'cds-snc'), // title
+            array( $this, 'blogNameCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section', // section
+            [
+                'label_for' => 'blogname'
+            ]
+        );
+
+        add_settings_field(
+            'blogdescription', // id
+            _('Site Description', 'cds-snc'), // title
+            array( $this, 'blogDescriptionCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section', // section
+            [
+                'label_for' => 'blogdescription'
             ]
         );
 
@@ -169,6 +201,20 @@ class SiteSettings
                     'selected' => get_option('page_on_front'),
                 )
             );
+    }
+
+    public function blogNameCallback()
+    {
+        ?>
+        <input name="blogname" type="text" id="blogname" class="regular-text" value="<?php echo get_option("blogname");?>">
+        <?php
+    }
+
+    public function blogDescriptionCallback()
+    {
+        ?>
+        <input name="blogdescription" type="text" id="blogdescription" class="regular-text" value="<?php echo get_option("blogdescription");?>">
+        <?php
     }
 
     public function indexSiteCallback()

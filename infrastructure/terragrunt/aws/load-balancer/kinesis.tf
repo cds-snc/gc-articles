@@ -7,7 +7,7 @@ locals {
 }
 
 resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs" {
-  name        = "aws-waf-logs-platform-ircc"
+  name        = "aws-waf-logs-platform-mvp"
   destination = "extended_s3"
 
   server_side_encryption {
@@ -30,7 +30,7 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs" {
 resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_us_east" {
   provider = aws.us-east-1
 
-  name        = "aws-waf-logs-platform-ircc-us-east"
+  name        = "aws-waf-logs-platform-mvp-us-east"
   destination = "extended_s3"
 
   server_side_encryption {

@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "articles/cli",
-            "version": "dev-feature/add_cli_helper",
+            "version": "dev-mem-source",
             "dist": {
                 "type": "path",
                 "url": "./cli",
@@ -31,5 +31,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }

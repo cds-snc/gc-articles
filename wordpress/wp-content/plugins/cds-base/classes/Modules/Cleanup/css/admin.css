@@ -295,3 +295,19 @@ th.column-disable_user_login {
 .term-parent-wrap p{
   display: none;
 }
+
+/* Change language button in WP Admin bar */
+#wpadminbar #wp-admin-bar-change-lang > div {
+  padding: 0;
+  margin-right: 8px;
+}
+
+#wpadminbar #wp-admin-bar-change-lang input[type=submit] {
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+#wpadminbar #wp-admin-bar-change-lang input[type=submit]:focus-visible {
+  outline: 2px solid #fd0;
+  outline-offset: -1px;
+}

@@ -16,12 +16,12 @@ class Wpml
         add_action('rest_api_init', [$instance, 'addTranslatedIDsToPages']);
     }
 
-    protected function getTranslatedPost($post_id, $lang)
+    public function getTranslatedPost($post_id, $lang)
     {
         return apply_filters('wpml_object_id', $post_id, 'post', false, $lang);
     }
 
-    protected function addTranslatedIDsToPages()
+    public function addTranslatedIDsToPages()
     {
         /**
          * Add an 'slug_en' field field to the REST response for a page
@@ -99,7 +99,7 @@ class Wpml
         ]);
     }
 
-    protected function wpmlTranslatePost()
+    public function wpmlTranslatePost()
     {
         try {
             $post_id = intval($_POST['post_id']);

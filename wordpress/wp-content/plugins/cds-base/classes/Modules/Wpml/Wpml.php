@@ -84,6 +84,52 @@ class Wpml
                     'type'        => 'integer'
                 ),
             ));
+
+            /**
+             * Adds a new endpoint to handle creating a linked page or post
+            */
+
+            register_rest_route('cds-wpml/v1', '/translate', [
+                'methods'             => 'POST',
+                'callback'            => [new Wpml(), 'wpmlTranslatePost'],
+                'permission_callback' => function () {
+                    return current_user_can('delete_posts');
+                }
+            ]);
         });
+    }
+
+    public static function wpmlTranslatePost()
+    {
+
+        try {
+            $post_id = intval($_POST['post_id']);
+            $post_type = "page";
+
+            // Include WPML API
+            include_once(WP_PLUGIN_DIR . '/sitepress-multilingual-cms/inc/wpml-api.php');
+
+            // Define title of translated post
+            $post_translated_title = get_post($post_id)->post_title . '(fr)';
+
+            // Insert translated post
+            $post_translated_id = wp_insert_post(array( 'post_title' => $post_translated_title, 'post_type' => $post_type, "post_status" => "publish" ));
+
+            // Get trid of original post
+            $trid = wpml_get_content_trid('post_' . $post_type, $post_id);
+
+            // Associate original post and translated post
+            global $wpdb;
+            $wpdb->update(
+                $wpdb->prefix . 'icl_translations',
+                array( 'trid' => $trid, 'element_type' => "post_" . $post_type, 'language_code' => "fr", 'source_language_code' => "en" ),
+                array( 'element_id' => $post_translated_id )
+            );
+
+            // Return translated post ID
+            return [ "post_id" => $post_id, "post_translated_id" =>  $post_translated_id , "trid" =>  $trid];
+        } catch (Exception $e) {
+            return $e->message;
+        }
     }
 }

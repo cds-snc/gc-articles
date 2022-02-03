@@ -67,6 +67,8 @@ class SiteSetup
             update_option("collection_mode", "maintenance");
             update_option("blog_public", 0);
             update_option("options_set", 1);
+            update_option("options_set", 1);
+            update_option("blogdescription", get_bloginfo("name"));
 
             if (isset($_POST['homeId'])) {
                 $homeId = intval($_POST['homeId']);

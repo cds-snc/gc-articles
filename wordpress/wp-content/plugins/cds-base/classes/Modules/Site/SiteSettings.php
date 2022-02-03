@@ -123,6 +123,17 @@ class SiteSettings
         );
 
         add_settings_field(
+            'blogdescription', // id
+            _('Site Description', 'cds-snc'), // title
+            array( $this, 'blogDescriptionCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section', // section
+            [
+                'label_for' => 'blogdescription'
+            ]
+        );
+
+        add_settings_field(
             'blog_public', // id
             _('Search engine visibility', 'cds-snc'), // title
             array( $this, 'indexSiteCallback'), // callback
@@ -169,6 +180,13 @@ class SiteSettings
                     'selected' => get_option('page_on_front'),
                 )
             );
+    }
+
+    public function blogDescriptionCallback()
+    {
+        ?>
+        <input name="blogdescription" type="text" id="blogdescription" class="regular-text" value="<?php echo get_bloginfo("name");?>">
+        <?php
     }
 
     public function indexSiteCallback()

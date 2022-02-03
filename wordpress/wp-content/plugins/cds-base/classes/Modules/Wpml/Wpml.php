@@ -99,7 +99,7 @@ class Wpml
         ]);
     }
 
-    public function wpmlTranslatePost()
+    protected function wpmlTranslatePost()
     {
         try {
             $post_id = intval($_POST['post_id']);

@@ -128,8 +128,8 @@ class Wpml
 
             // Return translated post ID
             return [ "post_id" => $post_id, "post_translated_id" =>  $post_translated_id , "trid" =>  $trid];
-        } catch (Exception $e) {
-            return $e->message;
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
     }
 }

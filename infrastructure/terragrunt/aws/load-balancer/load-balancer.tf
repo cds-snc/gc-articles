@@ -12,8 +12,8 @@ resource "aws_lb" "wordpress" {
   subnets = var.public_subnet_ids
 
   access_logs {
-    bucket  = module.wordpress_lb_logs.s3_bucket_id
-    prefix  = "wordpress"
+    bucket  = var.cbs_satellite_bucket_name
+    prefix  = "lb_logs"
     enabled = true
   }
 

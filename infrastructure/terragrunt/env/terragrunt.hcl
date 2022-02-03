@@ -3,12 +3,13 @@ locals {
 }
 
 inputs = {
-  account_id        = "${local.vars.inputs.account_id}"
-  billing_tag_key   = "${local.vars.inputs.billing_tag_key}"
-  billing_tag_value = "${local.vars.inputs.billing_tag_value}"
-  enable_efs        = "${local.vars.inputs.enable_efs}"
-  env               = "${local.vars.inputs.env}"
-  region            = "ca-central-1"
+  account_id                = "${local.vars.inputs.account_id}"
+  billing_tag_key           = "${local.vars.inputs.billing_tag_key}"
+  billing_tag_value         = "${local.vars.inputs.billing_tag_value}"
+  enable_efs                = "${local.vars.inputs.enable_efs}"
+  env                       = "${local.vars.inputs.env}"
+  region                    = "ca-central-1"
+  cbs_satellite_bucket_name = "cbs-satellite-${local.vars.inputs.account_id}"
 }
 
 remote_state {

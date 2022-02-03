@@ -73,7 +73,7 @@ class AdminBar
         }
 
         $user_locale = get_user_locale();
-        $translation_locale = str_contains($user_locale, "en") ? "fr_FR" : "en_US";
+        $translation_locale = str_contains($user_locale, "en") ? "fr_CA" : "en_CA";
         // Not using i18n function for these because we don't want to translate them
         $translation_locale_name = str_contains($user_locale, "en") ? "Français" : "English";
 

@@ -68,6 +68,10 @@ class AdminBar
 
     public function addLanguageSwitcher($wp_admin_bar): void
     {
+        if (!is_admin()) {
+            return;
+        }
+
         $user_locale = get_user_locale();
         $translation_locale = str_contains($user_locale, "en") ? "fr_FR" : "en_US";
         // Not using i18n function for these because we don't want to translate them

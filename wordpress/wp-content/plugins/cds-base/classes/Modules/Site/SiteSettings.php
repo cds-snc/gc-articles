@@ -85,7 +85,13 @@ class SiteSettings
 
         register_setting(
             'site_settings_group', // option_group
-            'blog_public',
+            'collection_mode',
+        );
+
+
+        register_setting(
+            'site_settings_group', // option_group
+            'blogdescription',
         );
 
         // add fields
@@ -185,7 +191,7 @@ class SiteSettings
     public function blogDescriptionCallback()
     {
         ?>
-        <input name="blogdescription" type="text" id="blogdescription" class="regular-text" value="<?php echo get_bloginfo("name");?>">
+        <input name="blogdescription" type="text" id="blogdescription" class="regular-text" value="<?php echo get_option("blogdescription");?>">
         <?php
     }
 

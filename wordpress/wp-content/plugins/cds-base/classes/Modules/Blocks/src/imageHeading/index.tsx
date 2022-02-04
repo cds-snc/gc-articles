@@ -41,10 +41,10 @@ const Heading = (props) => {
 
 const Settings = ({ headingTag, iconSize, iconPosition, setAttributes }) => {
     return <InspectorControls>
-        <PanelBody title={__("Settings", "cds-snc")} initialOpen={true}>
+        <PanelBody title={__("Heading", "cds-snc")} initialOpen={true}>
             <PanelRow>
                 <SelectControl
-                    label={__("Heading Type", "cds-snc")}
+                    label={__("Type", "cds-snc")}
                     value={headingTag}
                     options={[
                         { label: __("Heading 2", "cds-snc"), value: "h2" },
@@ -55,9 +55,11 @@ const Settings = ({ headingTag, iconSize, iconPosition, setAttributes }) => {
                     onChange={(newval) => setAttributes({ headingTag: newval })}
                 />
             </PanelRow>
+        </PanelBody>
+        <PanelBody title={__("Icon", "cds-snc")} initialOpen={true}>
             <PanelRow>
                 <RangeControl
-                    label={__("Icon Size", "cds-snc")}
+                    label={__("Size", "cds-snc")}
                     value={iconSize}
                     onChange={(value) => setAttributes({ iconSize: Number(value) })}
                     min={10}
@@ -66,7 +68,7 @@ const Settings = ({ headingTag, iconSize, iconPosition, setAttributes }) => {
             </PanelRow>
             <PanelRow>
                 <SelectControl
-                    label={__("Icon Position", "cds-snc")}
+                    label={__("Position", "cds-snc")}
                     value={iconPosition}
                     options={[
                         { label: __("Left", "cds-snc"), value: "icon-left" },

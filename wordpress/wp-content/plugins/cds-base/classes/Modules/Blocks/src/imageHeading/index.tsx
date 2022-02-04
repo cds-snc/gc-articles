@@ -71,8 +71,8 @@ const Settings = ({ headingTag, iconSize, iconPosition, setAttributes }) => {
                     label={__("Position", "cds-snc")}
                     value={iconPosition}
                     options={[
-                        { label: __("Left", "cds-snc"), value: "icon-left" },
-                        { label: __("Right", "cds-snc"), value: "icon-right" },
+                        { label: __("Left Align", "cds-snc"), value: "icon-left" },
+                        { label: __("Right Align", "cds-snc"), value: "icon-right" },
 
                     ]}
                     onChange={(newval) => setAttributes({ iconPosition: newval })}

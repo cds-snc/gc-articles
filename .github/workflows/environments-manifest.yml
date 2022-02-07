@@ -5,8 +5,8 @@ name: "Environments version manifest"
 # 2. previous version: the previously deployed Terraform version.
 
 on:
-  push:
-    branches: [ experimental/production_deployments ]
+  pull_request:
+    branches: [main]
 #  workflow_call:
 #    outputs:
 #      previous:

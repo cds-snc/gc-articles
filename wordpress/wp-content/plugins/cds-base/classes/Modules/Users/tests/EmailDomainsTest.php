@@ -50,7 +50,7 @@ class TestEmailDomains extends \WP_Mock\Tools\TestCase
      */
     public function testBadEmails(string $email): void
     {
-        expect(EmailDomains::isAllowedDomain($email))->toEqual(false);
+        expect(EmailDomains::isValidDomain($email))->toEqual(false);
     }
 
     public function goodEmails(): array
@@ -71,6 +71,6 @@ class TestEmailDomains extends \WP_Mock\Tools\TestCase
      */
     public function testGoodemails(string $email): void
     {
-        expect(EmailDomains::isAllowedDomain($email))->toEqual(true);
+        expect(EmailDomains::isValidDomain($email))->toEqual(true);
     }
 }

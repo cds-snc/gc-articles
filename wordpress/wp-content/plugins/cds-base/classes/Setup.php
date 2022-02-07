@@ -36,6 +36,7 @@ use CDS\Modules\Releases\Releases;
 use CDS\Modules\Site\SiteSettings;
 use CDS\Modules\Site\SiteSetup;
 use CDS\Modules\Wpml\Wpml;
+use CDS\Modules\Users\EmailDomains;
 use Exception;
 
 class Setup
@@ -62,6 +63,7 @@ class Setup
         SiteSetup::register();
         Cache::register();
         Wpml::register();
+        EmailDomains::register();
 
         new SubscriptionForm();
         new ContactForm();

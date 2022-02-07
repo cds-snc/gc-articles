@@ -92,7 +92,7 @@ class EmailDomains
         return $result;
     }
 
-    public static function isEmailFilter($is_email = false, $email): bool
+    public static function isEmailFilter($is_email = false, $email = ""): bool
     {
 
         if (!$is_email) {

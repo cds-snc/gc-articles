@@ -32,7 +32,7 @@ class EmailDomains
             strpos($user_email, '@') > 0 && // "@" can't be first character
             is_email($user_email)
         ) {
-            return EmailDomains::filterDomain($user_email);
+            return EmailDomains::filterDomain(true, $user_email);
         }
 
         return false;
@@ -54,7 +54,7 @@ class EmailDomains
     }
 
     // fixes https://github.com/cds-snc/gc-articles-issues/issues/208
-    public static function filterDomain($email): bool
+    public static function filterDomain($is_email, $email): bool
     {
         $allowed_email_domains = apply_filters(
             'cds_allowed_email_domains',

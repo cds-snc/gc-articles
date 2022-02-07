@@ -30,7 +30,7 @@ jobs:
       - name: Versions
         id: versions
         run: |
-          echo yq '.production.wordpress' < ./infrastructure/environments.yml
+          echo $(yq '.production.wordpress' < ./infrastructure/environments.yml)
 #  read-versions:
 #    needs: environments-manifest
 #    runs-on: ubuntu-latest

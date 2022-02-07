@@ -1,0 +1,45 @@
+name: "Environments version manifest"
+
+# Gets the following content from the `VERSION` manifest:
+# 1. current version: the target version for the Terraform plan and apply.
+# 2. previous version: the previously deployed Terraform version.
+
+on:
+  push:
+    branches: [ experimental/production_deployments ]
+#  workflow_call:
+#    outputs:
+#      previous:
+#        description: "The previous contents of the VERSION manifest"
+#        value: ${{ jobs.version-manifest.outputs.previous }}
+#      current:
+#        description: "The current contents of the VERSION manifest"
+#        value: ${{ jobs.version-manifest.outputs.current }}
+
+jobs:
+  environments-manifest:
+    runs-on: ubuntu-latest
+    outputs:
+      wordpress: ${{ steps.set-matrix.outputs.matrix.production.wordpress }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Versions
+        uses: @cumulusds@v0.0.0
+        with:
+          file: ./infrastructure/environments.yml
+          productionWorpress: production.wordpress
+          productionApache: production.apache
+          stagingWordpress: staging.wordpress
+          stagingApache: staging.apache
+  read-versions:
+    needs: environments-manifest
+    runs-on: ubuntu-latest
+    env:
+      WORDPRESS: ${{ needs.environments-manifest.outputs.wordpress }}
+    steps:
+      - name: Versions
+        run: |
+          echo "WORDPRESS: ${WORDPRESS}"

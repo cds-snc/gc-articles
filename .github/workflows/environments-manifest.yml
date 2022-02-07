@@ -27,7 +27,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Versions
-        uses: cumulusds@v0.1.0
+        uses: CumulusDS/get-yaml-paths-action@v0.1.0
         with:
           file: ./infrastructure/environments.yml
           productionWorpress: production.wordpress

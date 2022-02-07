@@ -34,35 +34,16 @@ jobs:
         run: |
           PROD_WORDPRESS=$(yq '.production.wordpress' < ./infrastructure/environments.yml)
           STAG_WORDPRESS=$(yq '.production.apache' < ./infrastructure/environments.yml)
-          echo "Production Wordpress: $PROD_WORDPRESS"
-          echo "Production Apache: $STAG_WORDPRESS"
+          echo $(cat ./infrastructure/environments.yml)
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
       - name: Previous versions
         id: previous
         run: |
-          echo $(yq --version)
           PREV_SHA="$(git show -2 --pretty=format:"%h" --no-patch infrastructure/environments.yml | tail -n 1)"
           PREV_ENVIRONMENTS_YML="$(git show ${PREV_SHA}:infrastructure/environments.yml)"
           echo "$PREV_ENVIRONMENTS_YML"
           PROD_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
           STAG_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
-          echo "Previous production worpdress: $PROD_WORDPRESS"
-          echo "Previous staging wordpress: $STAG_WORDPRESS"
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
-
-#
-#          echo "PREV_VERSION=infrastructure/${PREV_VERSION}"
-#                    echo "CURR_VERSION=infrastructure/${CURR_VERSION}"
-#                    echo "::set-output name=previous::v${PREV_VERSION}"
-#                    echo "::set-output name=current::v${CURR_VERSION}"
-#  read-versions:
-#    needs: environments-manifest
-#    runs-on: ubuntu-latest
-#    env:
-#      WORDPRESS: ${{ needs.environments-manifest.outputs.productionWordpress }}
-#    steps:
-#      - name: Versions
-#        run: |
-#          echo "WORDPRESS: ${WORDPRESS}"

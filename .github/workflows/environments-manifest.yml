@@ -39,7 +39,7 @@ jobs:
       - name: Previous versions
         id: previous
         run: |
-          PREV_SHA="$(git show -2 --pretty=format:"%h" --no-patch VERSION | tail -n 1)"
+          PREV_SHA="$(git show -2 --pretty=format:"%h" --no-patch infrastructure/environments.yml | tail -n 1)"
           PREV_ENVIRONMENTS_YML="$(git show ${PREV_SHA}:infrastructure/environments.yml)"
           PROD_WORDPRESS=$(yq '.production.wordpress' < $PREV_ENVIRONMENTS_YML)
           STAG_WORDPRESS=$(yq '.staging.wordpress' < $PREV_ENVIRONMENTS_YML)

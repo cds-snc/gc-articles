@@ -30,10 +30,10 @@ jobs:
         uses: CumulusDS/get-yaml-paths-action@v0.1.0
         with:
           file: ./infrastructure/environments.yml
-          productionWorpress: production.wordpress
-          productionApache: production.apache
-          stagingWordpress: staging.wordpress
-          stagingApache: staging.apache
+          productionWorpress: 'production.wordpress'
+          productionApache: 'production.apache'
+          stagingWordpress: 'staging.wordpress'
+          stagingApache: 'staging.apache'
   read-versions:
     needs: environments-manifest
     runs-on: ubuntu-latest

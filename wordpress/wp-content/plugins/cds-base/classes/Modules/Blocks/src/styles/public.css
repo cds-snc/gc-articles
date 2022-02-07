@@ -3,8 +3,9 @@ main {
 }
 
 /* Headings */
-.homepage h2 {
-  font-size: 1.2em;
+.homepage h2 ,
+.blog h2 {
+    font-size: 1.2em;
 }
 
 /* WET Menu */

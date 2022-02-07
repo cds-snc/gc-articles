@@ -27,7 +27,7 @@ class EmailDomains
 
         $pageName = basename($_SERVER['PHP_SELF']);
 
-        if ('profile.php' === $pageName) {
+        if ('profile.php' === $pageName || 'user-edit.php' === $pageName) {
             add_filter('is_email', [$this, "isEmailFilter"], 10, 3);
         }
     }

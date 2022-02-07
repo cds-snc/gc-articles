@@ -19,9 +19,9 @@ on:
 jobs:
   environments-manifest:
     runs-on: ubuntu-latest
-#    outputs:
-#      productionWorpress: ${{ steps.versions.outputs.production.wordpress }}
-#      stagingWordpress: ${{ steps.versions.outputs.staging.wordpress }}
+    outputs:
+      PROD_WORDPRESS: ${{ steps.versions.outputs.PROD_WORDPRESS }}
+      STAG_WORDPRESS: ${{ steps.versions.outputs.STAG_WORDPRESS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2

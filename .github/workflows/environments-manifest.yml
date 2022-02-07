@@ -30,7 +30,19 @@ jobs:
       - name: Versions
         id: versions
         run: |
-          echo $(yq '.production.wordpress' < ./infrastructure/environments.yml)
+          PROD_WORDPRESS=$(yq '.production.wordpress' < ./infrastructure/environments.yml)
+          STAG_WORDPRESS=$(yq '.production.apache' < ./infrastructure/environments.yml)
+          echo "Production Wordpress: $PROD_WORDPRESS"
+          echo "Production Apache: $STAG_WORDPRESS"
+          echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
+          echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
+
+
+#
+#          echo "PREV_VERSION=infrastructure/${PREV_VERSION}"
+#                    echo "CURR_VERSION=infrastructure/${CURR_VERSION}"
+#                    echo "::set-output name=previous::v${PREV_VERSION}"
+#                    echo "::set-output name=current::v${CURR_VERSION}"
 #  read-versions:
 #    needs: environments-manifest
 #    runs-on: ubuntu-latest

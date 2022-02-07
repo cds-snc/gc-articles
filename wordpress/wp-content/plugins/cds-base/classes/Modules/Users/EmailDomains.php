@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Users;
 
+use WP_Error;
+
 class EmailDomains
 {
     public const ALLOWED_EMAIL_DOMAINS = ['cds-snc.ca', 'gc.ca', 'canada.ca'];
@@ -22,7 +24,14 @@ class EmailDomains
 
     public function addFilters()
     {
-        add_filter('is_email', [$this, "filterDomain"], 10, 3);
+
+        $pageName = basename($_SERVER['PHP_SELF']);
+
+        if ( 'profile.php' === $pageName){
+           add_filter('is_email', [$this, "isEmail"], 10, 3);
+        }
+
+        // add_filter('is_email_address_unsafe', [$this, "isUnsafeEmail"], 10, 2);
     }
 
     public static function isAllowedDomain($user_email): bool
@@ -32,7 +41,7 @@ class EmailDomains
             strpos($user_email, '@') > 0 && // "@" can't be first character
             is_email($user_email)
         ) {
-            return EmailDomains::filterDomain(true, $user_email);
+            return EmailDomains::filterDomain($user_email);
         }
 
         return false;
@@ -40,6 +49,7 @@ class EmailDomains
 
     public static function validateEmailDomain($result)
     {
+
         $message =
             __(
                 'You can’t use this email domain for registration.',
@@ -53,24 +63,74 @@ class EmailDomains
         return $result;
     }
 
-    // fixes https://github.com/cds-snc/gc-articles-issues/issues/208
-    public static function filterDomain($is_email, $email): bool
-    {
-        $allowed_email_domains = apply_filters(
-            'cds_allowed_email_domains',
-            self::ALLOWED_EMAIL_DOMAINS,
-        );
+    public static function isEmail($is_email = false, $email):bool{
 
-        $isAllowedDomain = false;
-
-        [, $domain] = explode('@', trim($email));
-
-        foreach (self::ALLOWED_EMAIL_DOMAINS as $allowed_domain) {
-            if (str_ends_with($domain, $allowed_domain)) {
-                $isAllowedDomain = true;
-            }
+        if(!$is_email){
+            return false;
         }
 
-        return $isAllowedDomain;
+        $isAllowed = self::isAllowedDomain($email);
+
+
+       if(!$isAllowed){
+            /*
+           $errors = new WP_Error();
+
+           $message =
+               __(
+                   'You can’t use this email domain for registration.',
+                   'cds-snc',
+               );
+
+           $errors->add( 'user_email', $message );
+            */
+       }
+
+       return $isAllowed;
+
+    }
+
+    public static function isUnsafeEmail($is_email_address_unsafe, $email): bool{
+
+        if($is_email_address_unsafe === true){
+            return $is_email_address_unsafe;
+        }
+
+        if(!self::filterDomain($email)){
+            // this is "unsafe
+            return true;
+        }
+
+        return false;
+    }
+
+    // fixes https://github.com/cds-snc/gc-articles-issues/issues/208
+    public static function filterDomain($email) : bool
+    {
+        try {
+
+            $allowed_email_domains = apply_filters(
+                'cds_allowed_email_domains',
+                self::ALLOWED_EMAIL_DOMAINS,
+            );
+
+
+            $isAllowedDomain  = false;
+
+            [, $domain] = explode('@', trim($email));
+
+            foreach ($allowed_email_domains as $allowed_domain) {
+                if (str_ends_with($domain, $allowed_domain)) {
+                    $isAllowedDomain = true;
+                }
+            }
+
+            return  $isAllowedDomain;
+
+        }catch(\Exception $e){
+            echo $e->getMessage();
+            return false;
+        }
+
     }
 }

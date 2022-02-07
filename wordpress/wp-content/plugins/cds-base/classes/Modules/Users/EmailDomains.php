@@ -22,7 +22,7 @@ class EmailDomains
 
     public function addFilters()
     {
-        add_filter('is_email', [$this, "filterDomain"], 10, 3 );
+        add_filter('is_email', [$this, "filterDomain"], 10, 3);
     }
 
     public static function isAllowedDomain($user_email): bool

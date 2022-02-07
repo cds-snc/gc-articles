@@ -19,27 +19,24 @@ on:
 jobs:
   environments-manifest:
     runs-on: ubuntu-latest
-    outputs:
-      wordpress: ${{ steps.set-matrix.outputs.matrix.production.wordpress }}
+#    outputs:
+#      productionWorpress: ${{ steps.versions.outputs.production.wordpress }}
+#      stagingWordpress: ${{ steps.versions.outputs.staging.wordpress }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
       - name: Versions
-        uses: CumulusDS/get-yaml-paths-action@v0.1.0
-        with:
-          file: ./infrastructure/environments.yml
-          productionWorpress: 'production.wordpress'
-          productionApache: 'production.apache'
-          stagingWordpress: 'staging.wordpress'
-          stagingApache: 'staging.apache'
-  read-versions:
-    needs: environments-manifest
-    runs-on: ubuntu-latest
-    env:
-      WORDPRESS: ${{ needs.environments-manifest.outputs.productionWordpress }}
-    steps:
-      - name: Versions
+        id: versions
         run: |
-          echo "WORDPRESS: ${WORDPRESS}"
+          echo yq '.production.wordpress' < ./infrastructure/environments.yml
+#  read-versions:
+#    needs: environments-manifest
+#    runs-on: ubuntu-latest
+#    env:
+#      WORDPRESS: ${{ needs.environments-manifest.outputs.productionWordpress }}
+#    steps:
+#      - name: Versions
+#        run: |
+#          echo "WORDPRESS: ${WORDPRESS}"

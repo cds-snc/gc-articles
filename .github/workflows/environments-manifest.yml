@@ -22,6 +22,8 @@ jobs:
     outputs:
       PROD_WORDPRESS: ${{ steps.versions.outputs.PROD_WORDPRESS }}
       STAG_WORDPRESS: ${{ steps.versions.outputs.STAG_WORDPRESS }}
+      PREV_PROD_WORDPRESS: ${{ steps.previous.outputs.PROD_WORDPRESS }}
+      PREV_STAG_WORDPRESS: ${{ steps.previous.outputs.STAG_WORDPRESS }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -47,6 +49,8 @@ jobs:
           STAG_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
           echo "Previous production worpdress: $PROD_WORDPRESS"
           echo "Previous staging wordpress: $STAG_WORDPRESS"
+          echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
+          echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
 
 #
 #          echo "PREV_VERSION=infrastructure/${PREV_VERSION}"

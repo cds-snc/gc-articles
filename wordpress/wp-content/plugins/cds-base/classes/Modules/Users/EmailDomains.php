@@ -27,8 +27,8 @@ class EmailDomains
 
         $pageName = basename($_SERVER['PHP_SELF']);
 
-        if ('profile.php' === $pageName){
-           add_filter('is_email', [$this, "isEmailFilter"], 10, 3);
+        if ('profile.php' === $pageName) {
+            add_filter('is_email', [$this, "isEmailFilter"], 10, 3);
         }
     }
 
@@ -45,10 +45,9 @@ class EmailDomains
         return false;
     }
 
-    public static function isValidDomain($email) : bool
+    public static function isValidDomain($email): bool
     {
         try {
-
             $allowed_email_domains = apply_filters(
                 'cds_allowed_email_domains',
                 self::ALLOWED_EMAIL_DOMAINS,
@@ -66,12 +65,10 @@ class EmailDomains
             }
 
             return  $isAllowedDomain;
-
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             // no-op
             return false;
         }
-
     }
 
     public static function validateEmailDomain($result)
@@ -90,13 +87,18 @@ class EmailDomains
         return $result;
     }
 
-    public static function isEmailFilter($is_email = false, $email): bool{
+    public static function isEmailFilter($is_email = false, $email): bool
+    {
 
-        if(!$is_email){
+        if (!$is_email) {
             return false;
         }
 
+
+        $WP_Error = new WP_Error();
+        $WP_Error->add('invalid_email', __('Bad domain'));
+        do_action('wp_error_added', "invalid_email", "bad", null, $WP_Error);
+
         return  self::isValidDomain($email);
     }
-
 }

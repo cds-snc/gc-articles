@@ -41,8 +41,8 @@ jobs:
         run: |
           PREV_SHA="$(git show -2 --pretty=format:"%h" --no-patch infrastructure/environments.yml | tail -n 1)"
           PREV_ENVIRONMENTS_YML="$(git show ${PREV_SHA}:infrastructure/environments.yml)"
-          PROD_WORDPRESS=$(yq '.production.wordpress' < $PREV_ENVIRONMENTS_YML)
-          STAG_WORDPRESS=$(yq '.staging.wordpress' < $PREV_ENVIRONMENTS_YML)
+          PROD_WORDPRESS=$(echo $PREV_ENVIRONMENTS_YML | yq '.production.wordpress')
+          STAG_WORDPRESS=$(echo $PREV_ENVIRONMENTS_YML | yq '.staging.wordpress')
           echo "Previous production worpdress: $PROD_WORDPRESS"
           echo "Previous staging wordpress: $STAG_WORDPRESS"
 

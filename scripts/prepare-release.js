@@ -18,6 +18,8 @@ import {
     gitCheckClean,
     gitCheckMain,
 } from "./util/git.js";
+import fs from 'fs';
+import YAML from 'yaml';
 
 const argv = yargs(process.argv.slice(2)).argv;
 
@@ -47,6 +49,9 @@ const inputReleaseTag = async () => {
 
 (async () => {
     try {
+        if (argv.test) {
+            await updateEnvironmentManifest('2.2.2');
+        }
         if (argv.version_num) {
             await gitCheckMain();
             await gitCheckClean();
@@ -66,7 +71,6 @@ const inputReleaseTag = async () => {
             await gitPullLatestFromMain();
             const { tag, notes } = await inputReleaseTag();
             await gitCreateReleaseBranch(tag);
-            await updateTerragruntHcl(tag);
             await gitAddReleaseFiles();
             await gitCommitReleaseFiles(tag);
             await gitPushReleaseFiles(tag);

@@ -48,6 +48,12 @@ class EmailDomains
     public static function isValidDomain($email): bool
     {
         try {
+            
+            if(!strpos($email, '@') > 0){
+                return false;
+            }
+            
+            
             $allowed_email_domains = apply_filters(
                 'cds_allowed_email_domains',
                 self::ALLOWED_EMAIL_DOMAINS,

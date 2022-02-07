@@ -34,7 +34,7 @@ jobs:
         run: |
           PROD_WORDPRESS=$(yq '.production.wordpress' < ./infrastructure/environments.yml)
           STAG_WORDPRESS=$(yq '.production.apache' < ./infrastructure/environments.yml)
-          echo $(cat ./infrastructure/environments.yml)
+          echo "$(cat ./infrastructure/environments.yml)"
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
       - name: Previous versions

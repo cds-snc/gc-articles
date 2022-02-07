@@ -38,7 +38,7 @@ jobs:
     needs: environments-manifest
     runs-on: ubuntu-latest
     env:
-      WORDPRESS: ${{ needs.environments-manifest.outputs.wordpress }}
+      WORDPRESS: ${{ needs.environments-manifest.outputs.productionWordpress }}
     steps:
       - name: Versions
         run: |

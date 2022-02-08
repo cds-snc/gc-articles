@@ -85,7 +85,7 @@ class ContactForm
                 <?php
 
                 if (!$contactType) {
-                    return __('Something Went Wrong Try Again.', 'cds-snc');
+                    return __('Something went wrong. Please try again.', 'cds-snc');
                 }
                 ?>
 

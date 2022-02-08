@@ -126,6 +126,9 @@ class Setup
             return json_encode(["error" => __("Unknown subscription", "cds-snc")]);
         }
 
-        return json_encode($this->subscribe($_POST["email"], $_POST['list_id']));
+        $email = sanitize_email($_POST["email"]);
+        $listId = sanitize_text_field($_POST['list_id']);
+
+        return json_encode($this->subscribe($email, $listId));
     }
 }

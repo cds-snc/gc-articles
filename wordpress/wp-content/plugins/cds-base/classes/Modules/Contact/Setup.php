@@ -101,9 +101,10 @@ class Setup
             $message .= "• Purpose: " . sanitize_text_field($_POST['purpose']) . "\n\n";
             $message .= "• Heard about from: " . sanitize_text_field($_POST['heard-about-from']) . "\n\n";
             $message .= "• Sending integration: " . sanitize_text_field($_POST['sending-integration']) . "\n\n";
+            $email = sanitize_email($_POST["email"]);
+            $contactType = sanitize_text_field($_POST["contact-type"]);
 
-
-            return json_encode($this->sendEmail($_POST["email"], $message, $_POST["contact-type"]));
+            return json_encode($this->sendEmail($email, $message, $contactType));
         } else {
             if (
                 (!isset($_POST["message"]) || $_POST["message"] === "")
@@ -113,9 +114,11 @@ class Setup
                 return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
             }
 
-            $message = $_POST['message'];
+            $message = sanitize_text_field($_POST['message']);
+            $email = sanitize_email($_POST["email"]);
+            $contactType = sanitize_text_field($_POST["contact-type"]);
 
-            return json_encode($this->sendEmail($_POST["email"], $message, $_POST["contact-type"]));
+            return json_encode($this->sendEmail($email, $message, $contactType));
         }
     }
 }

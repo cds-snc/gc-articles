@@ -43,7 +43,7 @@ class ContactForm
         ?>
         <div class="gc-form-wrapper">
             <?php if (isset($_POST['contact-type'])) {
-                $contactType = $_POST['contact-type'];
+                $contactType = sanitize_text_field(urldecode($_POST['contact-type']));
                 $heading = '';
                 $label = '';
                 switch ($contactType) {
@@ -77,6 +77,15 @@ class ContactForm
                         $heading = __('Tell us more', 'cds-snc');
                         $label = __('Your message', 'cds-snc');
                         break;
+                    default:
+                        $contactType = "";
+                }
+                ?>
+
+                <?php
+
+                if (!$contactType) {
+                    return __('Something went wrong. Please try again.', 'cds-snc');
                 }
                 ?>
 

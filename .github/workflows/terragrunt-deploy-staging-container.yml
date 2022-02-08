@@ -41,15 +41,15 @@ env:
   TF_VAR_wpml_site_key: ${{ secrets.STAGING_WPML_SITE_KEY }}
 
 jobs:
-  environment-manifest:
+  environments-manifest:
     uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
 
   terragrunt-apply-staging:
-    needs: version-manifest
+    needs: environments-manifest
 
     if: |
       (github.ref == 'refs/heads/main' && github.event_name == 'push') &&
-      (needs.environment-manifest.outputs.STAG_WORDPRESS != needs.environment-manifest.outputs.PREV_STAG_WORDPRESS)
+      (needs.environments-manifest.outputs.STAG_WORDPRESS != needs.environments-manifest.outputs.PREV_STAG_WORDPRESS)
 
     runs-on: ubuntu-latest
     steps:

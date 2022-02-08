@@ -1,7 +1,7 @@
 import yargs from "yargs";
 import inquirer from 'inquirer';
 import { updateVersion, updateEnvironmentManifest } from './util/update-files.js';
-import { createTaggedRelease, getVersionTag, getVersion } from './util/tag-files.js';
+import { createTaggedRelease, getVersionTag } from './util/tag-files.js';
 import {
     gitCreateVersionBranch,
     gitAddVersionFiles,

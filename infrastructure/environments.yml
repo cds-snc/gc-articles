@@ -1,3 +1,11 @@
+# Deployed container versions
+# The versions here refer to the deployed versions of the respective containers in ECS. These versions are picked
+# up in the terragrunt.hcl files in the ECS module.
+#
+# These should correspond with the following files:
+# ./VERSION
+# ./wordpress/docker/apache/VERSION
+#
 production:
   apache: 1.0.19
   wordpress: 2.14.4

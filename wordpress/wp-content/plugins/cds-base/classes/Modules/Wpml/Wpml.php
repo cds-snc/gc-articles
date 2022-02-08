@@ -24,7 +24,7 @@ class Wpml
     public function addTranslatedIDsToPages()
     {
         /**
-         * Add an 'slug_en' field field to the REST response for a page
+         * Add an 'slug_en' field to the REST response for a page
          * Returns a string, or 'null' if no translation provided
          */
         register_rest_field('page', 'slug_en', array(
@@ -40,7 +40,7 @@ class Wpml
         ));
 
         /**
-         * Add an 'slug_fr' field field to the REST response for a page
+         * Add an 'slug_fr' field to the REST response for a page
          * Returns an string, or 'null' if no translation provided
          */
         register_rest_field('page', 'slug_fr', array(
@@ -57,7 +57,7 @@ class Wpml
 
 
         /**
-         * Add an 'id_en' field field to the REST response for a page
+         * Add an 'id_en' field to the REST response for a page
          * Returns an integer id, or 'null' if no translation provided
          */
         register_rest_field('page', 'id_en', array(
@@ -83,6 +83,22 @@ class Wpml
             'schema' => array(
                 'description' => __('ID for French page.', 'cds-snc'),
                 'type'        => 'integer'
+            ),
+        ));
+
+         /**
+         * Add a 'lang' field to the REST response for a page
+         * Returns a string locale, or 'null' if no language has been assigned
+         */
+        register_rest_field('page', 'lang', array(
+            'get_callback' => function ($post, $field_name, $request) {
+                $locale_array = apply_filters('wpml_post_language_details', null, $post['id']);
+                return $locale_array['language_code'] ?? null;
+            },
+            'update_callback' => null,
+            'schema' => array(
+                'description' => __('Language of page', 'cds-snc'),
+                'type'        => 'string'
             ),
         ));
 

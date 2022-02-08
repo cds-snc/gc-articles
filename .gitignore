@@ -127,8 +127,6 @@ wordpress/wp-content/upgrade
 
 .phpunit.result.cache
 
-wordpress/wp-content/languages
-
 debug-this/
 
 auth.json

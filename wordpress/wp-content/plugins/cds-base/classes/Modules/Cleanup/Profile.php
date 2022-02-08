@@ -109,15 +109,6 @@ class Profile
          *--------------------------------------------*/
         $crawler->filter('.user-sessions-wrap')->remove();
 
-        /*--------------------------------------------*
-         * Remove Yubikeys from the 2FA plugin
-         *--------------------------------------------*/
-        // Remove the last row of the 2FA table, which has the option to add Yubikeys
-        $crawler->filter('.two-factor-methods-table tbody tr:last-of-type')->remove();
-        // Remove the section about security keys
-        $crawler->filter('.security-keys')->remove();
-
-
         echo $crawler->save();
     }
 

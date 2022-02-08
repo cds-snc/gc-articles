@@ -60,7 +60,7 @@ const updatePackageJsonVersion = async (version) => {
 
 }
 
-const updateEnvironmentManifest = async (version, environment = 'staging') => {
+export const updateEnvironmentManifest = async (version, environment = 'staging') => {
   const environmentsFile = './infrastructure/environments.yml';
   const current = fs.readFileSync(environmentsFile, 'utf8')
   let manifest = YAML.parse(current)
@@ -76,7 +76,6 @@ export const updateVersion = async (version) => {
   await writeVersionFile(version);
   await updateWordPressThemeVersion(version);
   await updateWordPressPluginVersion(version);
-  await updateEnvironmentManifest(version, 'staging');
 }
 
 

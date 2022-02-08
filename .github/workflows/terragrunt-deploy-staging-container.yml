@@ -42,7 +42,7 @@ env:
 
 jobs:
   environment-manifest:
-    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@experimental/production_deployments # TODO: change to main
+    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
 
   terragrunt-apply-staging:
     needs: version-manifest

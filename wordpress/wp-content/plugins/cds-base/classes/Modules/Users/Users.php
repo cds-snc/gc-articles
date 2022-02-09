@@ -80,8 +80,8 @@ class Users
         return new WP_REST_Response($role_names_arr);
     }
 
-    #[ArrayShape(["email" => "mixed|string", "role" => "mixed|string"])]
-    public function sanitizeEmailAndRole($data = []): array|false
+    #[ArrayShape(["email" => "mixed|string", "role" => "mixed|string" , "confirmationType" => "mixed|string"])]
+    public function sanitizeValues($data = []): array|false
     {
         if (!is_array($data) && !is_object($data)) {
             throw new ValidationException([ $this->getEmailErrors(), $this->getRoleErrors() ]);
@@ -108,7 +108,13 @@ class Users
             throw new ValidationException($errors);
         }
 
-        return ["email" => sanitize_email($email), "role" => sanitize_text_field($role)];
+        $confirmationType = $data['confirmationType'] ?? "";
+
+        if($confirmationType !== "welcome"){
+            $confirmationType = "default";
+        }
+
+        return ["email" => sanitize_email($email), "role" => sanitize_text_field($role), "confirmationType" => $confirmationType];
     }
 
     private function getEmailErrors($email)
@@ -206,7 +212,7 @@ class Users
             $uId = false;
             $statusCode = 200;
 
-            $list = list('email' => $email, 'role' => $role) = $this->sanitizeEmailAndRole($data);
+            $list = list('email' => $email, 'role' => $role , 'confirmationType' => $confirmationType) = $this->sanitizeValues($data);
 
             // if we just use a logical OR, we get $uId === true rather than the integer
             $uId = email_exists($email) ? email_exists($email) : username_exists($email);
@@ -238,7 +244,8 @@ class Users
                     "status" => $statusCode,
                     "message" => $email . __(" was invited to the Collection."),
                     "uID" => $uId,
-                    "email" => $email
+                    "email" => $email,
+                    "confirmationType" => $confirmationType
                 ]
             ]);
         } catch (ValidationException $exception) {
@@ -248,7 +255,8 @@ class Users
                     "data" => $data,
                     "type" => gettype($data),
                     'errors' => $exception->decodeMessage(),
-                    'uID' => $uId
+                    'uID' => $uId,
+                    "confirmationType" => $confirmationType
                 ]
             ]);
         } catch (\Exception $exception) {
@@ -257,7 +265,8 @@ class Users
                     "status" => 400,
                     'errors' => [ [ "message" => $exception->getMessage() ] ],
                     'uID' => $uId,
-                    'email' => $email
+                    'email' => $email,
+                    "confirmationType" => $confirmationType
                 ]
             ]);
         }
@@ -315,7 +324,11 @@ class Users
     {
         $current_page = basename($_SERVER['REQUEST_URI']);
         if (str_contains($current_page, 'page=users-add')) {
-            $data = 'CDS.renderUserForm();';
+            if (is_super_admin()) {
+                $data = 'CDS.renderUserForm({isSuperAdmin: true});';
+            }else{
+                $data = 'CDS.renderUserForm({isSuperAdmin: false});';
+            }
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
         }
     }

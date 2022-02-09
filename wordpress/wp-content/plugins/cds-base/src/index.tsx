@@ -31,9 +31,9 @@ declare global {
       renderNotifyServicesRepeaterForm?: (values) => void,
       renderLoginsPanel?: () => void;
       renderCollectionsPanel?: () => void;
-      renderUserForm?: () => void;
+      renderUserForm?: ({ isSuperAdmin }, { isSuperAdmin: boolean }) => void;
       writeInterstitialMessage?: () => void;
-      renderDBInsightsPanel?:() => void;
+      renderDBInsightsPanel?: () => void;
     };
     CDS_VARS: {
       rest_url?: string;
@@ -69,9 +69,9 @@ export const renderNotifyPanel = ({
   );
 };
 
-export const renderUserForm = () => {
+export const renderUserForm = ({ isSuperAdmin }) => {
   render(
-    <UserForm />,
+    <UserForm isSuperAdmin={isSuperAdmin} />,
     document.getElementById("react-body")
   );
 };

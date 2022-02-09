@@ -33,7 +33,7 @@ then
     if [ $? != 0 ]
     then
         echo "Coding standards errors have been detected. Running phpcbf..."
-        ../../wordpress/vendor/bin/phpcs --standard=PSR12 --encoding=utf-8 -n -p $FILES
+        ../../wordpress/vendor/bin/phpcbf --standard=PSR12 --encoding=utf-8 -n -p $FILES
         git add $FILES
         echo "Running Code Sniffer again..."
         ../../wordpress/vendor/bin/phpcs --standard=PSR12 --encoding=utf-8 -n -p $FILES

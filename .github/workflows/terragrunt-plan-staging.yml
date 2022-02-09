@@ -3,6 +3,7 @@ name: "Terragrunt plan STAGING"
 on:
   pull_request:
     paths:
+      - "infrastructure/environments.yml"
       - "infrastructure/terragrunt/aws/**"
       - "infrastructure/terragrunt/env/staging/**"
       - "infrastructure/terragrunt/env/common/**"
@@ -43,8 +44,14 @@ env:
   TF_VAR_wpml_site_key: ${{ secrets.STAGING_WPML_SITE_KEY }}
 
 jobs:
+  environments-manifest:
+    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
 
   terragrunt-plan-staging:
+    needs: environments-manifest
+
+    if: needs.environments-manifest.outputs.PROD_DEPLOY == false
+
     runs-on: ubuntu-latest
     steps:
 

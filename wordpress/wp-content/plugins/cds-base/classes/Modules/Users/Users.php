@@ -110,7 +110,7 @@ class Users
 
         $confirmationType = $data['confirmationType'] ?? "";
 
-        if($confirmationType !== "welcome"){
+        if ($confirmationType !== "welcome") {
             $confirmationType = "default";
         }
 
@@ -173,7 +173,7 @@ class Users
     // for use when setting up a new site / user
     public function sendWelcome($uId, $email, $userExists)
     {
-        if(!$userExists){
+        if (!$userExists) {
             $userInfo = get_userdata($uId);
             $unique = get_password_reset_key($userInfo);
             $uniqueUrl = network_site_url(
@@ -254,9 +254,9 @@ class Users
             if (!$uId) {
                 $uId = $this->createUser($email);
 
-                if($confirmationType === "welcome"){
+                if ($confirmationType === "welcome") {
                     $this->sendWelcome($uId, $email, false);
-                }else{
+                } else {
                     $this->sendReset($uId, $email);
                 }
 
@@ -267,10 +267,9 @@ class Users
                 $this->addToBlog($uId, $role);
 
                 if ($statusCode === 200) {
-
-                    if($confirmationType === "welcome"){
+                    if ($confirmationType === "welcome") {
                         $this->sendWelcome($uId, $email, true);
-                    }else{
+                    } else {
                         // only send if we haven't created a new user
                         $this->sendAddToCollection($uId, $email);
                     }
@@ -364,7 +363,7 @@ class Users
         if (str_contains($current_page, 'page=users-add')) {
             if (is_super_admin()) {
                 $data = 'CDS.renderUserForm({isSuperAdmin: true});';
-            }else{
+            } else {
                 $data = 'CDS.renderUserForm({isSuperAdmin: false});';
             }
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');

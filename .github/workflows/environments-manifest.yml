@@ -63,7 +63,7 @@ jobs:
       - name: Deploy environment
         id: environment
         run: |
-          if [ ${steps.previous.outputs.PROD_WORDPRESS} != ${steps.versions.outputs.PROD_WORDPRESS} ]; then
+          if [ ${{ steps.previous.outputs.PROD_WORDPRESS }} != ${{ steps.versions.outputs.PROD_WORDPRESS }} ]; then
             echo "::set-output name=PROD_DEPLOYMENT::true"
           else
             echo "::set-output name=PROD_DEPLOYMENT::false"

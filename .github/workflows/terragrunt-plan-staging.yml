@@ -56,8 +56,8 @@ jobs:
 
     steps:
       - name: Just testing
-        run: echo ${{ needs.environments-manifest.outputs.PROD_DEPLOY }}
-        
+        run: echo "${{ needs.environments-manifest.outputs.PROD_DEPLOY }}"
+
       - name: Checkout
         uses: actions/checkout@v2
 

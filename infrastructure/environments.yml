@@ -8,7 +8,7 @@
 #
 production:
   apache: 1.0.19
-  wordpress: 2.14.4
+  wordpress: 2.15.0
 staging:
   apache: 1.0.19
   wordpress: 2.15.1

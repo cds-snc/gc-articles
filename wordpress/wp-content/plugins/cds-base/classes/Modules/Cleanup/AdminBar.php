@@ -16,6 +16,23 @@ class AdminBar
 
         add_action('admin_bar_menu', [$this, 'addLanguageSwitcher'], 21);
         add_action('admin_post_cds_change_lang', [$this, 'handleLanguageSwitcherResponse']);
+
+        add_action('admin_menu', [$this, 'redirectNewPostToLocale']);
+    }
+
+    public function redirectNewPostToLocale(): void
+    {
+        global $pagenow;
+        $current_lang = sanitize_text_field($_GET['lang'] ?? null);
+
+        if ($pagenow === 'post-new.php' && is_null($current_lang)) {
+            $lang = get_user_locale();
+            $base_lang =  substr($lang, 0, 2);
+            $url = add_query_arg('lang', $base_lang);
+
+            wp_redirect($url);
+            exit;
+        }
     }
 
     public function addAdminToggle($wp_admin_bar): void

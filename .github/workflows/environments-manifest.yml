@@ -48,6 +48,7 @@ jobs:
       - name: Previous versions
         id: previous
         run: |
+          git branch
           PREV_ENVIRONMENTS_YML="$(git show main:infrastructure/environments.yml)"
           echo "$PREV_ENVIRONMENTS_YML"
           PROD_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)

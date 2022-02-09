@@ -48,7 +48,7 @@ jobs:
       - name: Previous versions
         id: previous
         run: |
-          PREV_ENVIRONMENTS_YML="$(git show main:infrastructure/environments.yml)" # get from main
+          PREV_ENVIRONMENTS_YML="$(git show main:infrastructure/environments.yml)"
           echo "$PREV_ENVIRONMENTS_YML"
           PROD_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
           STAG_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)

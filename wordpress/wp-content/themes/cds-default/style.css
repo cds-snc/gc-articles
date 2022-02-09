@@ -494,3 +494,7 @@ nav.nav--about li a:focus {
 .wpml-ls-statics-footer{
     display:none;
 }
+
+#subscribe-submit{
+    margin-top:20px;
+}

@@ -113,7 +113,17 @@ class AdminBar
             // sanitize the input
             $lang = sanitize_text_field($_POST['locale']);
             $user_id = get_current_user_id();
+
             wp_update_user(['ID' => $user_id, 'locale' => $lang]);
+
+            // change default lang for sitepress if WPML is installed
+            global $sitepress;
+            if ($sitepress) {
+                // grab "en" or "fr"
+                $base_lang =  substr($lang, 0, 2);
+                $sitepress->set_default_language($base_lang);
+            }
+
             wp_redirect(esc_url_raw($_POST['_wp_http_referer']));
             die();
         } else {

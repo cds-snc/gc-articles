@@ -111,7 +111,7 @@ class AdminBar
             check_admin_referer('change_lang', 'cds_change_lang_nonce')
         ) {
             // sanitize the input
-            $lang = sanitize_key($_POST['locale']);
+            $lang = sanitize_text_field($_POST['locale']);
             $user_id = get_current_user_id();
             wp_update_user(['ID' => $user_id, 'locale' => $lang]);
             wp_redirect(esc_url_raw($_POST['_wp_http_referer']));

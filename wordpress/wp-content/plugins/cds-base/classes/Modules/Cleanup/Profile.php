@@ -95,8 +95,10 @@ class Profile
         /*--------------------------------------------*
          * Remove Yoast Settings
          *--------------------------------------------*/
-
         $crawler->filter('.yoast-settings')->remove();
+        $crawler->filter('#yoast-seo-schema ~ p')->remove();
+        $crawler->filter('#yoast-seo-schema')->remove();
+
         /*--------------------------------------------*
          * Remove Application Passwords Fields
          *--------------------------------------------*/

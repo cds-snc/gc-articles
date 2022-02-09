@@ -77,7 +77,7 @@ export const UserForm = ({ isSuperAdmin = false }) => {
     const resetForm = () => {
         resetEmail('');
         resetRole({ value: '' });
-        resetConfirmationType('');
+        resetConfirmationType('default');
         setErrors([]);
     }
     const errorSummary = useRef(null);

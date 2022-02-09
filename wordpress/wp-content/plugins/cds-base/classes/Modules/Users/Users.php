@@ -171,7 +171,7 @@ class Users
 
     // note this is only available to super admins
     // for use when setting up a new site / user
-    public function sendWelcome($userExists)
+    public function sendWelcome($uId, $email, $userExists)
     {
         if(!$userExists){
             $userInfo = get_userdata($uId);

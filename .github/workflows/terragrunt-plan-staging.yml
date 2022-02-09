@@ -54,7 +54,7 @@ jobs:
     env:
       PROD_DEPLOY: ${{ needs.environments-manifest.outputs.PROD_DEPLOY }}
 
-    if: env.PROD_DEPLOY == false
+    if: ${{ env.PROD_DEPLOY == false }}
 
     steps:
       - name: Checkout

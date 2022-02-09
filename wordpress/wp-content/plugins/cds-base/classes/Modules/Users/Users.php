@@ -169,6 +169,33 @@ class Users
         }
     }
 
+    // note this is only available to super admins
+    // for use when setting up a new site / user
+    public function sendWelcome($userExists)
+    {
+        if(!$userExists){
+            $userInfo = get_userdata($uId);
+            $unique = get_password_reset_key($userInfo);
+            $uniqueUrl = network_site_url(
+                "wp-login.php?action=rp&key=$unique&login=" . rawurlencode($userInfo->user_login),
+                'login'
+            );
+        }
+
+        // phpcs:disable
+        $subject = __("Your GC Articles site is ready", "cds-snc");
+        $message = __('@todo add welcome information here', "cds-snc") . "\r\n\r\n";
+        $message .= __('To set your GC Articles account password, please visit the following address:', "cds-snc") . "\r\n\r\n";
+        
+        if(!$userExists){
+            // send reset pass url
+            $message .= $uniqueUrl;
+        }
+        // phpcs:enable
+
+        wp_mail($email, $subject, $message);
+    }
+
     public function sendReset($uId, $email)
     {
         $userInfo = get_userdata($uId);
@@ -226,7 +253,13 @@ class Users
             // create the user if not exists
             if (!$uId) {
                 $uId = $this->createUser($email);
-                $this->sendReset($uId, $email);
+
+                if($confirmationType === "welcome"){
+                    $this->sendWelcome($uId, $email, false);
+                }else{
+                    $this->sendReset($uId, $email);
+                }
+
                 $statusCode = 201;
             }
 
@@ -234,8 +267,13 @@ class Users
                 $this->addToBlog($uId, $role);
 
                 if ($statusCode === 200) {
-                    // only send if we haven't created a new user
-                    $this->sendAddToCollection($uId, $email);
+
+                    if($confirmationType === "welcome"){
+                        $this->sendWelcome($uId, $email, true);
+                    }else{
+                        // only send if we haven't created a new user
+                        $this->sendAddToCollection($uId, $email);
+                    }
                 }
             }
 

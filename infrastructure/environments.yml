@@ -11,4 +11,4 @@ production:
   wordpress: 2.14.5
 staging:
   apache: 1.0.19
-  wordpress: 2.15.1
+  wordpress: 2.15.2

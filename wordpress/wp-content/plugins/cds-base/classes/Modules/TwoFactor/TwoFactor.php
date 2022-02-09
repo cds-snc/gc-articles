@@ -30,7 +30,6 @@ class TwoFactor
         return [
             'Two_Factor_Email' => TWO_FACTOR_DIR . 'providers/class-two-factor-email.php',
             'Two_Factor_Totp' => TWO_FACTOR_DIR . 'providers/class-two-factor-totp.php',
-            'Two_Factor_FIDO_U2F' => TWO_FACTOR_DIR . 'providers/class-two-factor-fido-u2f.php',
         ];
     }
 

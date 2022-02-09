@@ -16,6 +16,23 @@ class AdminBar
 
         add_action('admin_bar_menu', [$this, 'addLanguageSwitcher'], 21);
         add_action('admin_post_cds_change_lang', [$this, 'handleLanguageSwitcherResponse']);
+
+        add_action('admin_menu', [$this, 'redirectNewPostToLocale']);
+    }
+
+    public function redirectNewPostToLocale(): void
+    {
+        global $pagenow;
+        $current_lang = sanitize_text_field($_GET['lang'] ?? null);
+
+        if ($pagenow === 'post-new.php' && is_null($current_lang)) {
+            $lang = get_user_locale();
+            $base_lang =  substr($lang, 0, 2);
+            $url = add_query_arg('lang', $base_lang);
+
+            wp_redirect($url);
+            exit;
+        }
     }
 
     public function addAdminToggle($wp_admin_bar): void
@@ -111,9 +128,15 @@ class AdminBar
             check_admin_referer('change_lang', 'cds_change_lang_nonce')
         ) {
             // sanitize the input
-            $lang = sanitize_key($_POST['locale']);
+            $lang = sanitize_text_field($_POST['locale']);
             $user_id = get_current_user_id();
+
             wp_update_user(['ID' => $user_id, 'locale' => $lang]);
+
+            // get "en" or "fr"
+            $base_lang =  substr($lang, 0, 2);
+            update_user_meta($user_id, 'icl_admin_language', $base_lang);
+
             wp_redirect(esc_url_raw($_POST['_wp_http_referer']));
             die();
         } else {

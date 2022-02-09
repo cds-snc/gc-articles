@@ -50,13 +50,13 @@ jobs:
   terragrunt-plan-staging:
     needs: environments-manifest
 
-    if: needs.environments-manifest.outputs.PROD_DEPLOY == false
+    if: needs.environments-manifest.outputs.PROD_DEPLOYMENT == false
 
     runs-on: ubuntu-latest
 
     steps:
       - name: Just testing
-        run: echo "${{ needs.environments-manifest.outputs.PROD_DEPLOY }}"
+        run: echo "${{ needs.environments-manifest.outputs.PROD_DEPLOYMENT }}"
 
       - name: Checkout
         uses: actions/checkout@v2

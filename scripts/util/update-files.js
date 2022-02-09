@@ -65,9 +65,8 @@ export const updateEnvironmentManifest = async (version, environment = 'staging'
   const current = fs.readFileSync(environmentsFile, 'utf8')
   let manifest = YAML.parse(current)
   manifest[environment].wordpress = version;
-
-  let output = YAML.stringify(manifest);
-  fs.writeFileSync(environmentsFile, output);
+  
+  fs.writeFileSync(environmentsFile, YAML.stringify(manifest));
 }
 
 

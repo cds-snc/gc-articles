@@ -54,10 +54,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
-#    env:
-#      PROD_DEPLOY: ${{ needs.environments-manifest.outputs.PROD_DEPLOY }}
-
     steps:
+      - name: Just testing
+        run: echo ${{ needs.environments-manifest.outputs.PROD_DEPLOY }}
+        
       - name: Checkout
         uses: actions/checkout@v2
 

@@ -6,7 +6,6 @@
     "deploy-plugin": "./deploy/plugin",
     "update-version": "node ./scripts/prepare-release.js --version_num",
     "tag-release": "node ./scripts/prepare-release.js --tag",
-    "just-testing": "node ./scripts/prepare-release.js --test",
     "check-version": "node ./scripts/check-for-version.js",
     "deploy-theme": "./deploy/theme",
     "cli": "docker exec -it cli /bin/zsh",

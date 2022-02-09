@@ -51,11 +51,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: environments-manifest
 
-    if: needs.environments-manifest.outputs.PROD_DEPLOYMENT == false
+    # if: needs.environments-manifest.outputs.PROD_DEPLOYMENT == false
 
     steps:
       - name: Just testing
-        run: echo "${{ needs.environments-manifest.outputs.PROD_DEPLOYMENT }}"
+        run: |
+          echo "${{ needs.environments-manifest.outputs.PROD_WORDPRESS }}"
+          echo "${{ needs.environments-manifest.outputs.PREV_PROD_WORDPRESS }}"
+          echo "${{ needs.environments-manifest.outputs.PROD_DEPLOYMENT }}"
 
       - name: Checkout
         uses: actions/checkout@v2

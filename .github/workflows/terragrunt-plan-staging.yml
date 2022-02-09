@@ -45,7 +45,7 @@ env:
 
 jobs:
   environments-manifest:
-    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@configure_staging_deployments_manifest # TODO: should be main
+    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
 
   terragrunt-plan-staging:
     runs-on: ubuntu-latest
@@ -54,12 +54,6 @@ jobs:
     if: needs.environments-manifest.outputs.PROD_DEPLOYMENT == 'false'
 
     steps:
-      - name: Just testing
-        run: |
-          echo "${{ needs.environments-manifest.outputs.PROD_WORDPRESS }}"
-          echo "${{ needs.environments-manifest.outputs.PREV_PROD_WORDPRESS }}"
-          echo "${{ needs.environments-manifest.outputs.PROD_DEPLOYMENT }}"
-
       - name: Checkout
         uses: actions/checkout@v2
 

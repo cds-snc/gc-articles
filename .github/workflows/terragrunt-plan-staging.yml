@@ -50,7 +50,7 @@ jobs:
   terragrunt-plan-staging:
     needs: environments-manifest
 
-    if: ${{ needs.environments-manifest.outputs.PROD_DEPLOY == false }}
+    if: needs.environments-manifest.outputs.PROD_DEPLOY == false
 
     runs-on: ubuntu-latest
 

@@ -45,7 +45,7 @@ env:
 
 jobs:
   environments-manifest:
-    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
+    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@configure_staging_deployments_manifest # TODO: should be main
 
   terragrunt-plan-staging:
     needs: environments-manifest

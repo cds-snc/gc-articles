@@ -116,13 +116,9 @@ class AdminBar
 
             wp_update_user(['ID' => $user_id, 'locale' => $lang]);
 
-            // change default lang for sitepress if WPML is installed
-            global $sitepress;
-            if ($sitepress) {
-                // grab "en" or "fr"
-                $base_lang =  substr($lang, 0, 2);
-                $sitepress->set_default_language($base_lang);
-            }
+            // get "en" or "fr"
+            $base_lang =  substr($lang, 0, 2);
+            update_user_meta($user_id, 'icl_admin_language', $base_lang);
 
             wp_redirect(esc_url_raw($_POST['_wp_http_referer']));
             die();

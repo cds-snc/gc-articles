@@ -48,14 +48,10 @@ jobs:
     uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@configure_staging_deployments_manifest # TODO: should be main
 
   terragrunt-plan-staging:
+    runs-on: ubuntu-latest
     needs: environments-manifest
 
-    env:
-      PROD_DEPLOYMENT: ${{ needs.environments-manifext.outputs.PROD_DEPLOYMENT }}
-
-    if: PROD_DEPLOYMENT == false
-
-    runs-on: ubuntu-latest
+    if: needs.environments-manifest.outputs.PROD_DEPLOYMENT == false
 
     steps:
       - name: Just testing

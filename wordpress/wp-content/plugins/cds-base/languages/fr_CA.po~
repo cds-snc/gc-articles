@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CDS-SNC Base 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
-"POT-Creation-Date: 2022-02-10T16:49:16+00:00\n"
+"POT-Creation-Date: 2022-02-10T15:10:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,13 +57,13 @@ msgstr "Mes sites"
 msgid " (current)"
 msgstr " (actuel)"
 
-#: classes/Modules/Cleanup/AdminBar.php:205 build/index.js:4284
-#: build/index.js:4159
+#: classes/Modules/Cleanup/AdminBar.php:205 build/index.js:4195
+#: build/index.js:4070
 msgid "Dashboard"
 msgstr "tableau de bord"
 
-#: classes/Modules/Cleanup/AdminBar.php:214 build/index.js:4285
-#: build/index.js:4160
+#: classes/Modules/Cleanup/AdminBar.php:214 build/index.js:4196
+#: build/index.js:4071
 msgid "Visit"
 msgstr "Visitez"
 
@@ -197,8 +197,8 @@ msgid "Something went wrong. Please try again."
 msgstr ""
 
 #: classes/Modules/Contact/ContactForm.php:104
-#: classes/Modules/Contact/ContactForm.php:189 build/index.js:4547
-#: build/index.js:4412
+#: classes/Modules/Contact/ContactForm.php:189 build/index.js:4455
+#: build/index.js:4320
 msgid "Email"
 msgstr "votre courrial"
 
@@ -428,8 +428,8 @@ msgstr "S'abonner"
 
 #: classes/Modules/Subscribe/Setup.php:76
 #: classes/Modules/Subscribe/Setup.php:80
-#: classes/Modules/Subscribe/Setup.php:107 build/index.js:4528
-#: build/index.js:4393
+#: classes/Modules/Subscribe/Setup.php:107 build/index.js:4436
+#: build/index.js:4301
 msgid "Internal server error"
 msgstr "Erreur interne du serveur"
 
@@ -449,8 +449,8 @@ msgstr "Champs requis"
 msgid "Two factor authentication"
 msgstr "authentification multi-facteurs"
 
-#: classes/Modules/TwoFactor/TwoFactor.php:53 build/index.js:3422
-#: build/index.js:3377
+#: classes/Modules/TwoFactor/TwoFactor.php:53 build/index.js:3333
+#: build/index.js:3288
 msgid "Warning"
 msgstr "Avis"
 
@@ -514,7 +514,7 @@ msgstr "Quelqu'un a invité cet courriel à collaborer sur un article GC —"
 msgid "To get started log in here: "
 msgstr "Pour commencer, authentifiez-vous ici:"
 
-#: classes/Modules/Users/Users.php:268 build/index.js:4583 build/index.js:4448
+#: classes/Modules/Users/Users.php:268 build/index.js:4480 build/index.js:4345
 msgid "Add user"
 msgstr "Ajouter un utilisateur"
 
@@ -554,142 +554,130 @@ msgstr "Vous ne pourrez pas revenir en arrière!"
 msgid "Yes, send it!"
 msgstr "Oui, envoyez-le !"
 
-#: build/index.js:3358 build/index.js:3323
+#: build/index.js:3269 build/index.js:3234
 msgid "Accordion"
 msgstr "Accordéon"
 
-#: build/index.js:3372 build/index.js:3453 build/index.js:3517
-#: build/index.js:3337 build/index.js:3408 build/index.js:3462
+#: build/index.js:3283 build/index.js:3364 build/index.js:3428
+#: build/index.js:3248 build/index.js:3319 build/index.js:3373
 msgid "Title"
 msgstr "Le titre"
 
-#: build/index.js:3416 build/index.js:3371
+#: build/index.js:3327 build/index.js:3282
 msgid "Settings"
 msgstr "les paramètres"
 
-#: build/index.js:3419 build/index.js:3374
+#: build/index.js:3330 build/index.js:3285
 msgid "Alert Type"
 msgstr "Type d'alerte"
 
-#: build/index.js:3420 build/index.js:3375
+#: build/index.js:3331 build/index.js:3286
 msgid "Info"
 msgstr "Info"
 
-#: build/index.js:3421 build/index.js:3376
+#: build/index.js:3332 build/index.js:3287
 msgid "Success"
 msgstr "Succès"
 
-#: build/index.js:3423 build/index.js:3378
+#: build/index.js:3334 build/index.js:3289
 msgid "Danger"
 msgstr "Danger"
 
-#: build/index.js:3427 build/index.js:3382
+#: build/index.js:3338 build/index.js:3293
 msgid "Alert"
 msgstr "Alerte"
 
-#: build/index.js:3457 build/index.js:3521 build/index.js:3412
-#: build/index.js:3466
+#: build/index.js:3368 build/index.js:3432 build/index.js:3323
+#: build/index.js:3377
 msgid "Summary"
 msgstr "le sommaire"
 
-#: build/index.js:3498 build/index.js:3443
+#: build/index.js:3409 build/index.js:3354
 msgid "Expander"
 msgstr "Expanseur"
 
-#: build/index.js:3586 build/index.js:3521
+#: build/index.js:3497 build/index.js:3432
 msgid "Show “Read More”"
 msgstr ""
 
-#: build/index.js:3693 build/index.js:3618
+#: build/index.js:3604 build/index.js:3529
 msgid " Tables exist from deleted collections"
 msgstr "Des tables existent à partir de collections supprimées"
 
-#: build/index.js:3876 build/index.js:3791
+#: build/index.js:3787 build/index.js:3702
 msgid "List Name"
 msgstr "Liste de noms"
 
-#: build/index.js:3878 build/index.js:3793
+#: build/index.js:3789 build/index.js:3704
 msgid "Subscriber Count"
 msgstr "Nombre d'abonnés"
 
-#: build/index.js:3917 build/index.js:3832
+#: build/index.js:3828 build/index.js:3743
 msgid "Send Template"
 msgstr "Envoyer le gabarit"
 
-#: build/index.js:4001 build/index.js:3906
+#: build/index.js:3912 build/index.js:3817
 msgid "This list has "
 msgstr "Cette liste a"
 
-#: build/index.js:4003 build/index.js:3908
+#: build/index.js:3914 build/index.js:3819
 msgid " subscribers.  "
 msgstr "les abonnés."
 
-#: build/index.js:4004 build/index.js:3909
+#: build/index.js:3915 build/index.js:3820
 msgid "You won't be able to revert this"
 msgstr "Vous ne pourrez pas revenir en arrière"
 
-#: build/index.js:4180 build/index.js:4065
+#: build/index.js:4091 build/index.js:3976
 msgid "Date"
 msgstr "la date"
 
-#: build/index.js:4182 build/index.js:4067
+#: build/index.js:4093 build/index.js:3978
 msgid "User agent"
 msgstr "navigateur agent utilisateur"
 
-#: build/index.js:4293 build/index.js:4168
+#: build/index.js:4204 build/index.js:4079
 #, fuzzy
 msgid "current"
 msgstr " (actuel)"
 
-#: build/index.js:4309 build/index.js:4184
+#: build/index.js:4220 build/index.js:4095
 msgid "Name"
 msgstr "nom"
 
-#: build/index.js:4311 build/index.js:4186
+#: build/index.js:4222 build/index.js:4097
 msgid "Website"
 msgstr "Site Internet"
 
-#: build/index.js:4313 build/index.js:4188
+#: build/index.js:4224 build/index.js:4099
 msgid "Admin"
 msgstr "Administrateur"
 
-#: build/index.js:4435 build/index.js:4300
+#: build/index.js:4346 build/index.js:4211
 msgid "Success!"
 msgstr "Succès!"
 
-#: build/index.js:4441 build/index.js:4306
+#: build/index.js:4352 build/index.js:4217
 msgid "There is a problem"
 msgstr "Il ya un problème"
 
-#: build/index.js:4466 build/index.js:4331
+#: build/index.js:4376 build/index.js:4241
 msgid "Select one"
 msgstr "Sélectionnez-en un"
 
-#: build/index.js:4541 build/index.js:4406
+#: build/index.js:4449 build/index.js:4314
 msgid "Invite a user to collaborate on your GC Articles collection."
 msgstr "Invitez un utilisateur à collaborer sur votre site d'articles du GC."
 
-#: build/index.js:4553 build/index.js:4418
+#: build/index.js:4461 build/index.js:4326
 msgid "Role"
 msgstr "rôle"
 
-#: build/index.js:4575 build/index.js:4440
-msgid "Confirmation type"
-msgstr ""
-
-#: build/index.js:4579 build/index.js:4444
-msgid " Welcome"
-msgstr ""
-
-#: build/index.js:4582 build/index.js:4447
-msgid "Default"
-msgstr ""
-
-#: build/index.js:4680 build/index.js:4525
+#: build/index.js:4576 build/index.js:4421
 msgid "Add List"
 msgstr "Ajouter une liste"
 
-#: build/index.js:4686 build/index.js:4531
+#: build/index.js:4582 build/index.js:4427
 msgid "Add Service"
 msgstr "Ajouter un service"
 

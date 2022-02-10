@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-10T15:14:09+00:00\n"
+"POT-Creation-Date: 2022-02-10T16:49:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: cds-snc\n"
@@ -57,14 +57,14 @@ msgid " (current)"
 msgstr ""
 
 #: classes/Modules/Cleanup/AdminBar.php:205
-#: build/index.js:4195
-#: build/index.js:4070
+#: build/index.js:4284
+#: build/index.js:4159
 msgid "Dashboard"
 msgstr ""
 
 #: classes/Modules/Cleanup/AdminBar.php:214
-#: build/index.js:4196
-#: build/index.js:4071
+#: build/index.js:4285
+#: build/index.js:4160
 msgid "Visit"
 msgstr ""
 
@@ -196,8 +196,8 @@ msgstr ""
 
 #: classes/Modules/Contact/ContactForm.php:104
 #: classes/Modules/Contact/ContactForm.php:189
-#: build/index.js:4455
-#: build/index.js:4320
+#: build/index.js:4547
+#: build/index.js:4412
 msgid "Email"
 msgstr ""
 
@@ -418,8 +418,8 @@ msgstr ""
 #: classes/Modules/Subscribe/Setup.php:76
 #: classes/Modules/Subscribe/Setup.php:80
 #: classes/Modules/Subscribe/Setup.php:107
-#: build/index.js:4436
-#: build/index.js:4301
+#: build/index.js:4528
+#: build/index.js:4393
 msgid "Internal server error"
 msgstr ""
 
@@ -440,8 +440,8 @@ msgid "Two factor authentication"
 msgstr ""
 
 #: classes/Modules/TwoFactor/TwoFactor.php:53
-#: build/index.js:3333
-#: build/index.js:3288
+#: build/index.js:3422
+#: build/index.js:3377
 msgid "Warning"
 msgstr ""
 
@@ -487,8 +487,8 @@ msgid "To get started log in here: "
 msgstr ""
 
 #: classes/Modules/Users/Users.php:268
-#: build/index.js:4480
-#: build/index.js:4345
+#: build/index.js:4583
+#: build/index.js:4448
 msgid "Add user"
 msgstr ""
 
@@ -534,164 +534,179 @@ msgstr ""
 msgid "Yes, send it!"
 msgstr ""
 
-#: build/index.js:3269
-#: build/index.js:3234
+#: build/index.js:3358
+#: build/index.js:3323
 msgid "Accordion"
 msgstr ""
 
-#: build/index.js:3283
-#: build/index.js:3364
-#: build/index.js:3428
-#: build/index.js:3248
-#: build/index.js:3319
-#: build/index.js:3373
+#: build/index.js:3372
+#: build/index.js:3453
+#: build/index.js:3517
+#: build/index.js:3337
+#: build/index.js:3408
+#: build/index.js:3462
 msgid "Title"
 msgstr ""
 
-#: build/index.js:3327
-#: build/index.js:3282
+#: build/index.js:3416
+#: build/index.js:3371
 msgid "Settings"
 msgstr ""
 
-#: build/index.js:3330
-#: build/index.js:3285
+#: build/index.js:3419
+#: build/index.js:3374
 msgid "Alert Type"
 msgstr ""
 
-#: build/index.js:3331
-#: build/index.js:3286
+#: build/index.js:3420
+#: build/index.js:3375
 msgid "Info"
 msgstr ""
 
-#: build/index.js:3332
-#: build/index.js:3287
+#: build/index.js:3421
+#: build/index.js:3376
 msgid "Success"
 msgstr ""
 
-#: build/index.js:3334
-#: build/index.js:3289
+#: build/index.js:3423
+#: build/index.js:3378
 msgid "Danger"
 msgstr ""
 
-#: build/index.js:3338
-#: build/index.js:3293
+#: build/index.js:3427
+#: build/index.js:3382
 msgid "Alert"
 msgstr ""
 
-#: build/index.js:3368
-#: build/index.js:3432
-#: build/index.js:3323
-#: build/index.js:3377
+#: build/index.js:3457
+#: build/index.js:3521
+#: build/index.js:3412
+#: build/index.js:3466
 msgid "Summary"
 msgstr ""
 
-#: build/index.js:3409
-#: build/index.js:3354
+#: build/index.js:3498
+#: build/index.js:3443
 msgid "Expander"
 msgstr ""
 
-#: build/index.js:3497
-#: build/index.js:3432
+#: build/index.js:3586
+#: build/index.js:3521
 msgid "Show “Read More”"
 msgstr ""
 
-#: build/index.js:3604
-#: build/index.js:3529
+#: build/index.js:3693
+#: build/index.js:3618
 msgid " Tables exist from deleted collections"
 msgstr ""
 
-#: build/index.js:3787
-#: build/index.js:3702
+#: build/index.js:3876
+#: build/index.js:3791
 msgid "List Name"
 msgstr ""
 
-#: build/index.js:3789
-#: build/index.js:3704
+#: build/index.js:3878
+#: build/index.js:3793
 msgid "Subscriber Count"
 msgstr ""
 
-#: build/index.js:3828
-#: build/index.js:3743
+#: build/index.js:3917
+#: build/index.js:3832
 msgid "Send Template"
 msgstr ""
 
-#: build/index.js:3912
-#: build/index.js:3817
+#: build/index.js:4001
+#: build/index.js:3906
 msgid "This list has "
 msgstr ""
 
-#: build/index.js:3914
-#: build/index.js:3819
+#: build/index.js:4003
+#: build/index.js:3908
 msgid " subscribers.  "
 msgstr ""
 
-#: build/index.js:3915
-#: build/index.js:3820
+#: build/index.js:4004
+#: build/index.js:3909
 msgid "You won't be able to revert this"
 msgstr ""
 
-#: build/index.js:4091
-#: build/index.js:3976
+#: build/index.js:4180
+#: build/index.js:4065
 msgid "Date"
 msgstr ""
 
-#: build/index.js:4093
-#: build/index.js:3978
+#: build/index.js:4182
+#: build/index.js:4067
 msgid "User agent"
 msgstr ""
 
-#: build/index.js:4204
-#: build/index.js:4079
+#: build/index.js:4293
+#: build/index.js:4168
 msgid "current"
 msgstr ""
 
-#: build/index.js:4220
-#: build/index.js:4095
+#: build/index.js:4309
+#: build/index.js:4184
 msgid "Name"
 msgstr ""
 
-#: build/index.js:4222
-#: build/index.js:4097
+#: build/index.js:4311
+#: build/index.js:4186
 msgid "Website"
 msgstr ""
 
-#: build/index.js:4224
-#: build/index.js:4099
+#: build/index.js:4313
+#: build/index.js:4188
 msgid "Admin"
 msgstr ""
 
-#: build/index.js:4346
-#: build/index.js:4211
+#: build/index.js:4435
+#: build/index.js:4300
 msgid "Success!"
 msgstr ""
 
-#: build/index.js:4352
-#: build/index.js:4217
+#: build/index.js:4441
+#: build/index.js:4306
 msgid "There is a problem"
 msgstr ""
 
-#: build/index.js:4376
-#: build/index.js:4241
+#: build/index.js:4466
+#: build/index.js:4331
 msgid "Select one"
 msgstr ""
 
-#: build/index.js:4449
-#: build/index.js:4314
+#: build/index.js:4541
+#: build/index.js:4406
 msgid "Invite a user to collaborate on your GC Articles collection."
 msgstr ""
 
-#: build/index.js:4461
-#: build/index.js:4326
+#: build/index.js:4553
+#: build/index.js:4418
 msgid "Role"
 msgstr ""
 
-#: build/index.js:4576
-#: build/index.js:4421
-msgid "Add List"
+#: build/index.js:4575
+#: build/index.js:4440
+msgid "Confirmation type"
+msgstr ""
+
+#: build/index.js:4579
+#: build/index.js:4444
+msgid " Welcome"
 msgstr ""
 
 #: build/index.js:4582
-#: build/index.js:4427
+#: build/index.js:4447
+msgid "Default"
+msgstr ""
+
+#: build/index.js:4680
+#: build/index.js:4525
+msgid "Add List"
+msgstr ""
+
+#: build/index.js:4686
+#: build/index.js:4531
 msgid "Add Service"
 msgstr ""
 

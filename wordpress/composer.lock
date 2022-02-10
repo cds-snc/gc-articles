@@ -297,13 +297,13 @@
                     "wp i18n make-pot --domain=cds-snc . languages/cds-snc.pot"
                 ],
                 "merge-po": [
-                    "msgmerge -U ./languages/fr_FR.po ./languages/cds-snc.pot"
+                    "msgmerge -U ./languages/fr_CA.po ./languages/cds-snc.pot"
                 ],
                 "compile-mo": [
-                    "msgfmt -o ./languages/fr_FR.mo ./languages/fr_FR.po"
+                    "msgfmt -o ./languages/fr_CA.mo ./languages/fr_CA.po"
                 ],
                 "compile-json": [
-                    "wp i18n make-json ./languages/fr_FR.po --no-purge"
+                    "wp i18n make-json ./languages/fr_CA.po --no-purge"
                 ],
                 "compile-translations": [
                     "@compile-mo",
@@ -342,13 +342,13 @@
                     "wp i18n make-pot --domain=cds-snc . languages/cds-snc.pot"
                 ],
                 "merge-po": [
-                    "msgmerge -U ./languages/fr_FR.po ./languages/cds-snc.pot"
+                    "msgmerge -U ./languages/fr_CA.po ./languages/cds-snc.pot"
                 ],
                 "compile-mo": [
-                    "msgfmt -o ./languages/fr_FR.mo ./languages/fr_FR.po"
+                    "msgfmt -o ./languages/fr_CA.mo ./languages/fr_CA.po"
                 ],
                 "compile-json": [
-                    "wp i18n make-json ./languages/fr_FR.po --no-purge"
+                    "wp i18n make-json ./languages/fr_CA.po --no-purge"
                 ],
                 "compile-translations": [
                     "@compile-mo",

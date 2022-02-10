@@ -202,7 +202,7 @@ composer prepare-translations
 ```
 
 This will scan the plugin or theme files and update the `cds-snc.pot` file which captures all the translatable strings.
-It will then merge any updates into the `fr_FR.po` file which is where translations are added.
+It will then merge any updates into the `fr_CA.po` file which is where translations are added.
 
 2. Add translated strings
 

@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - "infrastructure/environments.yml"
       - "infrastructure/terragrunt/aws/**"
       - "infrastructure/terragrunt/env/staging/**"
       - "infrastructure/terragrunt/env/common/**"
@@ -45,11 +46,18 @@ env:
   TF_VAR_wpml_site_key: ${{ secrets.STAGING_WPML_SITE_KEY }}
 
 jobs:
-  terragrunt-apply-staging:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
+  environments-manifest:
+    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
 
+  terragrunt-apply-staging:
+    runs-on: ubuntu-latest
+    needs: environments-manifest
+
+    if: |
+      github.ref == 'refs/heads/main' && github.event_name == 'push' &&
+      needs.environments-manifest.outputs.PROD_DEPLOYMENT == 'false'
+
+    steps:
       - name: Checkout
         uses: actions/checkout@v2
 

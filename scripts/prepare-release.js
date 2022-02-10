@@ -1,6 +1,6 @@
 import yargs from "yargs";
 import inquirer from 'inquirer';
-import { updateVersion, updateTerragruntHcl } from './util/update-files.js';
+import { updateVersion, updateEnvironmentManifest } from './util/update-files.js';
 import { createTaggedRelease, getVersionTag } from './util/tag-files.js';
 import {
     gitCreateVersionBranch,
@@ -42,11 +42,15 @@ const inputReleaseTag = async () => {
     ];
 
     const answer = await inquirer.prompt(question);
-    return { tag: await getVersionTag(), notes: answer.notes };
+    const version = await getVersionTag();
+    return { tag: version.tag, notes: answer.notes, version: version.number };
 }
 
 (async () => {
     try {
+        if (argv.test) {
+            await updateEnvironmentManifest('2.2.2');
+        }
         if (argv.version_num) {
             await gitCheckMain();
             await gitCheckClean();
@@ -64,9 +68,9 @@ const inputReleaseTag = async () => {
             await gitCheckMain();
             await gitCheckClean();
             await gitPullLatestFromMain();
-            const { tag, notes } = await inputReleaseTag();
+            const { version, tag, notes } = await inputReleaseTag();
             await gitCreateReleaseBranch(tag);
-            await updateTerragruntHcl(tag);
+            await updateEnvironmentManifest(version, 'staging');
             await gitAddReleaseFiles();
             await gitCommitReleaseFiles(tag);
             await gitPushReleaseFiles(tag);

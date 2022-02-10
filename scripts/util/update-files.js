@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import replace from 'replace-in-file';
+import YAML from 'yaml';
+import fs from 'fs'
 
 const replaceContent = async (options) => {
   const results = await replace(options);
@@ -58,12 +60,23 @@ const updatePackageJsonVersion = async (version) => {
 
 }
 
+export const updateEnvironmentManifest = async (version, environment = 'staging') => {
+  const environmentsFile = './infrastructure/environments.yml';
+  const current = fs.readFileSync(environmentsFile, 'utf8')
+  let manifest = YAML.parse(current)
+  manifest[environment].wordpress = version;
+  
+  fs.writeFileSync(environmentsFile, YAML.stringify(manifest));
+}
+
+
 export const updateVersion = async (version) => {
   await updatePackageJsonVersion(version);
   await writeVersionFile(version);
   await updateWordPressThemeVersion(version);
   await updateWordPressPluginVersion(version);
 }
+
 
 export const updateTerragruntHcl = async (tag) => {
   // update wordpress_image_tag

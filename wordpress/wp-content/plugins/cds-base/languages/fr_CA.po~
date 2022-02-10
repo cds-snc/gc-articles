@@ -1,395 +1,405 @@
-# Copyright (C) 2022 CDS-SNC
+# Copyright (C) 2021 Tim Arney
 # This file is distributed under the same license as the CDS-SNC Base plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS-SNC Base 2.15.2\n"
+"Project-Id-Version: CDS-SNC Base 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
+"POT-Creation-Date: 2022-02-10T14:37:45+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-10T15:00:11+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
+"X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: cds-snc\n"
 
 #. Plugin Name of the plugin
 msgid "CDS-SNC Base"
-msgstr ""
+msgstr "Base du plugin SNC-CDS"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/cds-snc/gc-articles"
-msgstr ""
+msgstr "https://github.com/cds-snc/gc-articles"
 
 #. Description of the plugin
 msgid "Custom Block setup and other overrides"
-msgstr ""
+msgstr "Configuration de bloc personnalisé et autres remplacements"
 
 #. Author of the plugin
 msgid "CDS-SNC"
-msgstr ""
+msgstr "SNC-CDS"
 
 #: classes/Modules/Blocks/src/latestPosts/LatestPosts.php:46
 msgid "Read more"
-msgstr ""
+msgstr "En savoir plus"
 
-#: classes/Modules/Cleanup/AdminBar.php:46
+#: classes/Modules/Cleanup/AdminBar.php:29
 #: classes/Modules/Cleanup/Login.php:162
 #: classes/Modules/Releases/Releases.php:80
 msgid "GC Articles"
-msgstr ""
+msgstr "Les Articles GC"
 
-#: classes/Modules/Cleanup/AdminBar.php:144
+#: classes/Modules/Cleanup/AdminBar.php:121
 msgid "Invalid nonce"
 msgstr ""
 
-#: classes/Modules/Cleanup/AdminBar.php:145
+#: classes/Modules/Cleanup/AdminBar.php:122
 msgid "Error"
 msgstr ""
 
-#: classes/Modules/Cleanup/AdminBar.php:161
+#: classes/Modules/Cleanup/AdminBar.php:138
 msgid "My Collections"
-msgstr ""
+msgstr "Mes sites"
 
-#: classes/Modules/Cleanup/AdminBar.php:190
+#: classes/Modules/Cleanup/AdminBar.php:167
 msgid " (current)"
-msgstr ""
+msgstr " (actuel)"
 
-#: classes/Modules/Cleanup/AdminBar.php:205
-#: build/index.js:4284
+#: classes/Modules/Cleanup/AdminBar.php:182 build/index.js:4284
 #: build/index.js:4159
 msgid "Dashboard"
-msgstr ""
+msgstr "tableau de bord"
 
-#: classes/Modules/Cleanup/AdminBar.php:214
-#: build/index.js:4285
+#: classes/Modules/Cleanup/AdminBar.php:191 build/index.js:4285
 #: build/index.js:4160
 msgid "Visit"
-msgstr ""
+msgstr "Visitez"
 
 #: classes/Modules/Cleanup/Login.php:141
 msgid "Canadian Digital Service"
-msgstr ""
+msgstr "Service numérique canadien"
 
 #: classes/Modules/Cleanup/Menus.php:34
 #: classes/Modules/Cleanup/PostsToArticles.php:23
 #: classes/Modules/Cleanup/PostsToArticles.php:34
 msgid "Articles"
-msgstr ""
+msgstr "Les Articles"
 
 #: classes/Modules/Cleanup/Menus.php:35
 msgid "Bulk"
-msgstr ""
+msgstr "en masse"
 
 #: classes/Modules/Cleanup/Menus.php:119
 #: classes/Modules/Notify/NotifySettings.php:65
 msgid "Notify API Settings"
-msgstr ""
+msgstr "Notifier les paramètres de l'API"
 
 #: classes/Modules/Cleanup/Menus.php:120
 #: classes/Modules/Site/SiteSettings.php:28
 #: classes/Modules/Site/SiteSettings.php:29
 #: classes/Modules/Site/SiteSettings.php:42
+#, fuzzy
 msgid "Site Settings"
-msgstr ""
+msgstr "les paramètres"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:24
 #: classes/Modules/Cleanup/PostsToArticles.php:28
 #: classes/Modules/Cleanup/PostsToArticles.php:35
 msgid "Article"
-msgstr ""
+msgstr "l'article"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:25
 #: classes/Modules/Cleanup/PostsToArticles.php:26
 msgid "Add Article"
-msgstr ""
+msgstr "Ajouter un article"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:27
 msgid "Edit Article"
-msgstr ""
+msgstr "Modifier l'article"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:29
 msgid "View Article"
-msgstr ""
+msgstr "Voir l'article"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:30
 msgid "Search Articles"
-msgstr ""
+msgstr "Rechercher des articles"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:31
 msgid "No Articles found"
-msgstr ""
+msgstr "Aucun article trouvé"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:32
 msgid "No Articles found in Trash"
-msgstr ""
+msgstr "Aucun article n'a été trouvé dans la corbeille"
 
 #: classes/Modules/Cleanup/PostsToArticles.php:33
 msgid "All Articles"
-msgstr ""
+msgstr "Tous les articles"
 
 #: classes/Modules/Cleanup/SitesToCollections.php:14
 msgid "Admin Email <strong>must be</strong> a current Super Admin"
 msgstr ""
+"L'adresse corriel de l'administrateur <strong>doit être</strong> un super "
+"administrateur actuellement"
 
 #: classes/Modules/Cleanup/SitesToCollections.php:15
 msgid "or else a Collection won’t be created"
-msgstr ""
+msgstr "sinon un site ne sera pas créée"
 
 #: classes/Modules/Contact/ContactForm.php:51
 #: classes/Modules/Contact/ContactForm.php:225
 msgid "Request a site"
-msgstr ""
+msgstr "Demander un site"
 
 #: classes/Modules/Contact/ContactForm.php:52
 msgid "Describe the site you would like"
-msgstr ""
+msgstr "Décrivez-nous le but du site que vous souhaitez avoir"
 
 #: classes/Modules/Contact/ContactForm.php:58
 #: classes/Modules/Contact/ContactForm.php:230
 msgid "Ask a question"
-msgstr ""
+msgstr "Posez-nous une question"
 
 #: classes/Modules/Contact/ContactForm.php:59
 msgid "Your question"
-msgstr ""
+msgstr "Ta question"
 
 #: classes/Modules/Contact/ContactForm.php:62
 #: classes/Modules/Contact/ContactForm.php:235
 msgid "Get technical support"
-msgstr ""
+msgstr "Obtenir une assistance technique"
 
 #: classes/Modules/Contact/ContactForm.php:63
 msgid "Describe the problem."
-msgstr ""
+msgstr "Décrivez-nous votre problème."
 
 #: classes/Modules/Contact/ContactForm.php:66
 #: classes/Modules/Contact/ContactForm.php:240
 msgid "Give feedback"
-msgstr ""
+msgstr "rends-nous le commentaire"
 
 #: classes/Modules/Contact/ContactForm.php:67
 msgid "How can we do better?"
-msgstr ""
+msgstr "Comment pouvons-nous faire mieux?"
 
 #: classes/Modules/Contact/ContactForm.php:70
 #: classes/Modules/Contact/ContactForm.php:245
 msgid "Set up a demo to learn more about GC Articles"
-msgstr ""
+msgstr "demander une démo pour en savoir plus sur les articles GC"
 
 #: classes/Modules/Contact/ContactForm.php:74
 msgid "Your contact information"
-msgstr ""
+msgstr "Quel est votre nom et titre"
 
 #: classes/Modules/Contact/ContactForm.php:77
 msgid "Tell us more"
-msgstr ""
+msgstr "dis nous en plus"
 
 #: classes/Modules/Contact/ContactForm.php:78
 msgid "Your message"
-msgstr ""
+msgstr "Votre message"
 
 #: classes/Modules/Contact/ContactForm.php:88
 msgid "Something went wrong. Please try again."
 msgstr ""
 
 #: classes/Modules/Contact/ContactForm.php:104
-#: classes/Modules/Contact/ContactForm.php:189
-#: build/index.js:4547
+#: classes/Modules/Contact/ContactForm.php:189 build/index.js:4547
 #: build/index.js:4412
 msgid "Email"
-msgstr ""
+msgstr "votre courrial"
 
 #: classes/Modules/Contact/ContactForm.php:113
 msgid "What do you want to name your GC Articles collection?"
-msgstr ""
+msgstr "Comment voulez-vous appeler votre site GC Articles?"
 
 #: classes/Modules/Contact/ContactForm.php:128
 msgid "How did you hear about GC Articles?"
-msgstr ""
+msgstr "Comment avez-vous connu les articles GC?"
 
 #: classes/Modules/Contact/ContactForm.php:143
 msgid "What will you use your GC Articles collection for?"
-msgstr ""
+msgstr "Comment allez-vous utiliser votre site d'articles GC"
 
 #: classes/Modules/Contact/ContactForm.php:159
 msgid ""
 "Do you require a GC Notify email sending integration? if yes, what for?\n"
-""
 msgstr ""
+"Avez-vous besoin d'une intégration d'envoi d'e-mails Notification GC? si "
+"oui, pour quoi?\n"
 
 #: classes/Modules/Contact/ContactForm.php:174
 #: classes/Modules/Contact/ContactForm.php:207
 msgid "Submit"
-msgstr ""
+msgstr "Soumettez"
 
 #: classes/Modules/Contact/ContactForm.php:219
 msgid "Contact Types"
-msgstr ""
+msgstr "Types de contacts"
 
 #: classes/Modules/Contact/ContactForm.php:253
 msgid "Other"
-msgstr ""
+msgstr "Autre"
 
 #: classes/Modules/Contact/ContactForm.php:259
 msgid "Continue"
-msgstr ""
+msgstr "continuer"
 
 #: classes/Modules/Contact/Setup.php:59
 msgid "Thanks for the message"
-msgstr ""
+msgstr "Merci pour le message"
 
-#: classes/Modules/Contact/Setup.php:69
-#: classes/Modules/Subscribe/Setup.php:114
+#: classes/Modules/Contact/Setup.php:69 classes/Modules/Subscribe/Setup.php:114
 msgid "400 Bad Request"
-msgstr ""
+msgstr "400 Mauvaise demande"
 
-#: classes/Modules/Contact/Setup.php:73
-#: classes/Modules/Subscribe/Setup.php:118
+#: classes/Modules/Contact/Setup.php:73 classes/Modules/Subscribe/Setup.php:118
 msgid "401 Unauthorized"
-msgstr ""
+msgstr "401 Non autorisé"
 
 #: classes/Modules/Contact/Setup.php:96
 msgid "Please complete all required fields to continue"
-msgstr ""
+msgstr "Veuillez remplir tous les champs obligatoires pour continuer"
 
 #: classes/Modules/Contact/Setup.php:114
 #: classes/Modules/Subscribe/Setup.php:122
 msgid "Please complete the required field to continue"
-msgstr ""
+msgstr "Veuillez remplir le champ obligatoire pour continuer"
 
 #: classes/Modules/DBInsights/DBInsights.php:123
 msgid "Alpha"
-msgstr ""
+msgstr "Alpha"
 
 #: classes/Modules/Notify/FormHelpers.php:25
 msgid "Service ID"
-msgstr ""
+msgstr "ID de service"
 
 #: classes/Modules/Notify/FormHelpers.php:33
 msgid "No service ids found"
-msgstr ""
+msgstr "Aucun identifiant de service trouvé"
 
 #: classes/Modules/Notify/FormHelpers.php:43
 msgid "Template ID"
-msgstr ""
+msgstr "ID de gabarit"
 
 #: classes/Modules/Notify/FormHelpers.php:53
 #: classes/Modules/Subscribe/js/dist/index.js:1
 #: classes/Modules/Subscribe/src/block-edit.js:45
 msgid "List ID"
-msgstr ""
+msgstr "ID de liste"
 
 #: classes/Modules/Notify/FormHelpers.php:61
 msgid "No lists found"
-msgstr ""
+msgstr "Aucune liste trouvée"
 
 #: classes/Modules/Notify/FormHelpers.php:72
 msgid "Send template to list"
-msgstr ""
+msgstr "Envoyer le gabarit à la liste"
 
 #: classes/Modules/Notify/ListManagerSettings.php:71
 msgid "List Manager Settings"
-msgstr ""
+msgstr "paramètres du gestionnaire de liste"
 
 #: classes/Modules/Notify/ListManagerSettings.php:99
 msgid "List manager"
-msgstr ""
+msgstr "le gestionnaire de liste"
 
 #: classes/Modules/Notify/ListManagerSettings.php:106
 msgid "List details"
-msgstr ""
+msgstr "Détails de la liste"
 
 #: classes/Modules/Notify/ListManagerSettings.php:117
 msgid "Notify Services"
-msgstr ""
+msgstr "Services Notification"
 
 #: classes/Modules/Notify/ListManagerSettings.php:137
 #: classes/Modules/Notify/NotifySettings.php:145
-msgid "<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-only\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span class=\"sr-only\"> and ends with</span>%3$s</span>"
+msgid ""
+"<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-only"
+"\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span class="
+"\"sr-only\"> and ends with</span>%3$s</span>"
 msgstr ""
+"<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-only"
+"\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span class="
+"\"sr-only\">  et se termine par</span>%3$s</span>"
 
 #: classes/Modules/Notify/ListManagerSettings.php:199
 msgid "Add the <a href='%s'>sending service</a> for your subscription lists."
 msgstr ""
+"Ajoutez le <a href='%s'>service d'envoi</a> pour vos listes d'abonnement."
 
 #: classes/Modules/Notify/ListManagerSettings.php:228
 msgid "Add details for each of your subscription lists."
-msgstr ""
+msgstr "Ajoutez des détails pour chacune de vos listes d'abonnement."
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:37
 msgid "List Manager"
-msgstr ""
+msgstr "Gestionnaire des listes"
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:42
 #: classes/Modules/Notify/NotifyTemplateSender.php:85
 msgid "Bulk Send"
-msgstr ""
+msgstr "Envoyer en masse"
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:47
 msgid "Allow bulk send"
-msgstr ""
+msgstr "permettre l'envoi en masse"
 
 #: classes/Modules/Notify/Notices.php:51
 msgid "&nbsp;&nbsp;<a href='%s'>View</a> sending logs in GG Notify"
 msgstr ""
+"&nbsp;&nbsp;<a href='%s'>Afficher</a> les journaux d'envoi dans GG Notify"
 
 #: classes/Modules/Notify/Notices.php:56
 msgid "Sent."
-msgstr ""
+msgstr "expédié"
 
 #: classes/Modules/Notify/Notices.php:65
 msgid "Template ID is required"
-msgstr ""
+msgstr "L'identifiant du gabarit est requis"
 
 #: classes/Modules/Notify/Notices.php:74
 msgid "List ID failed to parse"
-msgstr ""
+msgstr "L'identifiant de la liste n'a pas pu être analysé"
 
 #: classes/Modules/Notify/Notices.php:85
 msgid "Failed to send"
-msgstr ""
+msgstr "Échec de l'envoi"
 
 #: classes/Modules/Notify/NotifySettings.php:107
 msgid "Notify"
-msgstr ""
+msgstr "Notifier"
 
 #: classes/Modules/Notify/NotifySettings.php:114
 msgid "Notify API Key"
-msgstr ""
+msgstr "Notifier la clé API"
 
 #: classes/Modules/Notify/NotifySettings.php:125
 msgid "Notify Generic TemplateId"
-msgstr ""
+msgstr "Notifier l'ID de modèle générique"
 
 #: classes/Modules/Notify/NotifyTemplateSender.php:84
 msgid "Send Notify Template"
-msgstr ""
+msgstr "Envoyer un modèle de notification"
 
 #: classes/Modules/Notify/NotifyTemplateSender.php:203
 msgid "There has been an error"
-msgstr ""
+msgstr "il y a eu une erreur"
 
 #: classes/Modules/Site/SiteSettings.php:104
 msgid "Mode"
-msgstr ""
+msgstr "la mode"
 
 #: classes/Modules/Site/SiteSettings.php:115
 msgid "Maintenance Page"
-msgstr ""
+msgstr "la page entretien"
 
 #: classes/Modules/Site/SiteSettings.php:126
 msgid "Home Page"
 msgstr ""
 
 #: classes/Modules/Site/SiteSettings.php:137
+#, fuzzy
 msgid "Site Name"
-msgstr ""
+msgstr "Liste de noms"
 
 #: classes/Modules/Site/SiteSettings.php:148
+#, fuzzy
 msgid "Site Description"
-msgstr ""
+msgstr "l'abonnement List Manager"
 
 #: classes/Modules/Site/SiteSettings.php:159
 msgid "Search engine visibility"
@@ -400,101 +410,117 @@ msgid "Finish Site Setup"
 msgstr ""
 
 #: classes/Modules/Site/SiteSetup.php:110
-msgid "Your almost done.  Let's create some pages, articles and default settings."
+msgid ""
+"Your almost done.  Let's create some pages, articles and default settings."
 msgstr ""
 
 #: classes/Modules/Subscribe/Block.php:36
 #: classes/Modules/Subscribe/SubscriptionForm.php:23
 msgid "Enter your email:"
-msgstr ""
+msgstr "Entrer votre courriel"
 
 #: classes/Modules/Subscribe/Block.php:40
 #: classes/Modules/Subscribe/SubscriptionForm.php:24
 #: classes/Modules/Subscribe/js/dist/index.js:1
 #: classes/Modules/Subscribe/src/block.js:8
 msgid "Subscribe"
-msgstr ""
+msgstr "S'abonner"
 
 #: classes/Modules/Subscribe/Setup.php:76
 #: classes/Modules/Subscribe/Setup.php:80
-#: classes/Modules/Subscribe/Setup.php:107
-#: build/index.js:4528
+#: classes/Modules/Subscribe/Setup.php:107 build/index.js:4528
 #: build/index.js:4393
 msgid "Internal server error"
-msgstr ""
+msgstr "Erreur interne du serveur"
 
 #: classes/Modules/Subscribe/Setup.php:102
 msgid "Thanks for subscribing"
-msgstr ""
+msgstr "Merci pour votre abonnement"
 
 #: classes/Modules/Subscribe/Setup.php:126
 msgid "Unknown subscription"
-msgstr ""
+msgstr "l'abonnement inconnu"
 
 #: classes/Modules/Subscribe/SubscriptionForm.php:53
 msgid "Required Field"
-msgstr ""
+msgstr "Champs requis"
 
 #: classes/Modules/TwoFactor/TwoFactor.php:42
 msgid "Two factor authentication"
-msgstr ""
+msgstr "authentification multi-facteurs"
 
-#: classes/Modules/TwoFactor/TwoFactor.php:53
-#: build/index.js:3422
+#: classes/Modules/TwoFactor/TwoFactor.php:53 build/index.js:3422
 #: build/index.js:3377
 msgid "Warning"
-msgstr ""
+msgstr "Avis"
 
 #: classes/Modules/TwoFactor/TwoFactor.php:56
 msgid "This can be configured on your <a href=\"%s\">User Profile</a>."
 msgstr ""
+"Cela peut être configuré sur votre <a href=\"%s\">profil de connexion</a>"
 
 #: classes/Modules/Users/EmailDomains.php:83
 msgid "You can’t use this email domain for registration."
 msgstr ""
+"Vous ne pouvez pas utiliser ce domaine de messagerie pour l'enregistrement."
 
 #: classes/Modules/Users/Users.php:62
-msgid "This role has complete control over the articles collection and can perform all other roles actions"
+msgid ""
+"This role has complete control over the articles collection and can perform "
+"all other roles actions"
 msgstr ""
+"Ce rôle a un contrôle total sur la collection d'articles et peut "
+"effectuertoutes les autres actions de rôle"
 
 #: classes/Modules/Users/Users.php:66
-msgid "This role is allows the user to write and publish articles online to the collection."
+msgid ""
+"This role is allows the user to write and publish articles online to the "
+"collection."
 msgstr ""
+"Ce rôle permet à une personne d'écrire et de publier des articles en ligne "
+"sur le collection."
 
-#: classes/Modules/Users/Users.php:176
-#: classes/Modules/Users/Users.php:194
+#: classes/Modules/Users/Users.php:176 classes/Modules/Users/Users.php:194
 msgid "Invitation to collaborate on GC Articles"
-msgstr ""
+msgstr "Une invitation à collaborer sur les articles du GC"
 
 #: classes/Modules/Users/Users.php:177
-msgid "Someone has invited this email to collaborate on a GC Articles collection site."
+msgid ""
+"Someone has invited this email to collaborate on a GC Articles collection "
+"site."
 msgstr ""
+"Quelqu'un a invité cet courriel à collaborer sur une site d'articles GC  "
 
 #: classes/Modules/Users/Users.php:178
-msgid "If this was a mistake, please ignore this email and the invitation will expire"
+msgid ""
+"If this was a mistake, please ignore this email and the invitation will "
+"expire"
 msgstr ""
+"S'il s'agit d'une erreur, veuillez ignorer ce message et l'invitation sera "
+"expirer"
 
 #: classes/Modules/Users/Users.php:179
-msgid "To set your GC Articles account password, please visit the following address:"
+msgid ""
+"To set your GC Articles account password, please visit the following address:"
 msgstr ""
+"Pour définir le mot de passe de votre compte Articles GC, veuillez vous "
+"rendre à l'adresse suivante:"
 
 #: classes/Modules/Users/Users.php:195
 msgid "Someone has invited this email to collaborate on a GC Articles — "
-msgstr ""
+msgstr "Quelqu'un a invité cet courriel à collaborer sur un article GC —"
 
 #: classes/Modules/Users/Users.php:196
 msgid "To get started log in here: "
-msgstr ""
+msgstr "Pour commencer, authentifiez-vous ici:"
 
-#: classes/Modules/Users/Users.php:268
-#: build/index.js:4583
-#: build/index.js:4448
+#: classes/Modules/Users/Users.php:268 build/index.js:4583 build/index.js:4448
 msgid "Add user"
-msgstr ""
+msgstr "Ajouter un utilisateur"
 
 #: classes/Modules/Users/Users.php:298
 msgid "You must enable JavaScript to view this page."
-msgstr ""
+msgstr "Vous devez activer JavaScript afin de visualiser cette page."
 
 #: classes/Modules/Wpml/Wpml.php:37
 msgid "Post slug for English page."
@@ -516,251 +542,211 @@ msgstr ""
 msgid "Language of page"
 msgstr ""
 
-#: build/index.js:23
-#: classes/Modules/Notify/src/util.js:7
-#: build/index.js:7
+#: build/index.js:23 classes/Modules/Notify/src/util.js:7 build/index.js:7
 msgid "Are you sure you want to send?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir envoyer?"
 
-#: build/index.js:24
-#: classes/Modules/Notify/src/util.js:8
-#: build/index.js:8
+#: build/index.js:24 classes/Modules/Notify/src/util.js:8 build/index.js:8
 msgid "You won't be able to revert this!"
-msgstr ""
+msgstr "Vous ne pourrez pas revenir en arrière!"
 
-#: build/index.js:29
-#: classes/Modules/Notify/src/util.js:13
-#: build/index.js:13
+#: build/index.js:29 classes/Modules/Notify/src/util.js:13 build/index.js:13
 msgid "Yes, send it!"
-msgstr ""
+msgstr "Oui, envoyez-le !"
 
-#: build/index.js:3358
-#: build/index.js:3323
+#: build/index.js:3358 build/index.js:3323
 msgid "Accordion"
-msgstr ""
+msgstr "Accordéon"
 
-#: build/index.js:3372
-#: build/index.js:3453
-#: build/index.js:3517
-#: build/index.js:3337
-#: build/index.js:3408
-#: build/index.js:3462
+#: build/index.js:3372 build/index.js:3453 build/index.js:3517
+#: build/index.js:3337 build/index.js:3408 build/index.js:3462
 msgid "Title"
-msgstr ""
+msgstr "Le titre"
 
-#: build/index.js:3416
-#: build/index.js:3371
+#: build/index.js:3416 build/index.js:3371
 msgid "Settings"
-msgstr ""
+msgstr "les paramètres"
 
-#: build/index.js:3419
-#: build/index.js:3374
+#: build/index.js:3419 build/index.js:3374
 msgid "Alert Type"
-msgstr ""
+msgstr "Type d'alerte"
 
-#: build/index.js:3420
-#: build/index.js:3375
+#: build/index.js:3420 build/index.js:3375
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
-#: build/index.js:3421
-#: build/index.js:3376
+#: build/index.js:3421 build/index.js:3376
 msgid "Success"
-msgstr ""
+msgstr "Succès"
 
-#: build/index.js:3423
-#: build/index.js:3378
+#: build/index.js:3423 build/index.js:3378
 msgid "Danger"
-msgstr ""
+msgstr "Danger"
 
-#: build/index.js:3427
-#: build/index.js:3382
+#: build/index.js:3427 build/index.js:3382
 msgid "Alert"
-msgstr ""
+msgstr "Alerte"
 
-#: build/index.js:3457
-#: build/index.js:3521
-#: build/index.js:3412
+#: build/index.js:3457 build/index.js:3521 build/index.js:3412
 #: build/index.js:3466
 msgid "Summary"
-msgstr ""
+msgstr "le sommaire"
 
-#: build/index.js:3498
-#: build/index.js:3443
+#: build/index.js:3498 build/index.js:3443
 msgid "Expander"
-msgstr ""
+msgstr "Expanseur"
 
-#: build/index.js:3586
-#: build/index.js:3521
+#: build/index.js:3586 build/index.js:3521
 msgid "Show “Read More”"
 msgstr ""
 
-#: build/index.js:3693
-#: build/index.js:3618
+#: build/index.js:3693 build/index.js:3618
 msgid " Tables exist from deleted collections"
-msgstr ""
+msgstr "Des tables existent à partir de collections supprimées"
 
-#: build/index.js:3876
-#: build/index.js:3791
+#: build/index.js:3876 build/index.js:3791
 msgid "List Name"
-msgstr ""
+msgstr "Liste de noms"
 
-#: build/index.js:3878
-#: build/index.js:3793
+#: build/index.js:3878 build/index.js:3793
 msgid "Subscriber Count"
-msgstr ""
+msgstr "Nombre d'abonnés"
 
-#: build/index.js:3917
-#: build/index.js:3832
+#: build/index.js:3917 build/index.js:3832
 msgid "Send Template"
-msgstr ""
+msgstr "Envoyer le gabarit"
 
-#: build/index.js:4001
-#: build/index.js:3906
+#: build/index.js:4001 build/index.js:3906
 msgid "This list has "
-msgstr ""
+msgstr "Cette liste a"
 
-#: build/index.js:4003
-#: build/index.js:3908
+#: build/index.js:4003 build/index.js:3908
 msgid " subscribers.  "
-msgstr ""
+msgstr "les abonnés."
 
-#: build/index.js:4004
-#: build/index.js:3909
+#: build/index.js:4004 build/index.js:3909
 msgid "You won't be able to revert this"
-msgstr ""
+msgstr "Vous ne pourrez pas revenir en arrière"
 
-#: build/index.js:4180
-#: build/index.js:4065
+#: build/index.js:4180 build/index.js:4065
 msgid "Date"
-msgstr ""
+msgstr "la date"
 
-#: build/index.js:4182
-#: build/index.js:4067
+#: build/index.js:4182 build/index.js:4067
 msgid "User agent"
-msgstr ""
+msgstr "navigateur agent utilisateur"
 
-#: build/index.js:4293
-#: build/index.js:4168
+#: build/index.js:4293 build/index.js:4168
+#, fuzzy
 msgid "current"
-msgstr ""
+msgstr " (actuel)"
 
-#: build/index.js:4309
-#: build/index.js:4184
+#: build/index.js:4309 build/index.js:4184
 msgid "Name"
-msgstr ""
+msgstr "nom"
 
-#: build/index.js:4311
-#: build/index.js:4186
+#: build/index.js:4311 build/index.js:4186
 msgid "Website"
-msgstr ""
+msgstr "Site Internet"
 
-#: build/index.js:4313
-#: build/index.js:4188
+#: build/index.js:4313 build/index.js:4188
 msgid "Admin"
-msgstr ""
+msgstr "Administrateur"
 
-#: build/index.js:4435
-#: build/index.js:4300
+#: build/index.js:4435 build/index.js:4300
 msgid "Success!"
-msgstr ""
+msgstr "Succès!"
 
-#: build/index.js:4441
-#: build/index.js:4306
+#: build/index.js:4441 build/index.js:4306
 msgid "There is a problem"
-msgstr ""
+msgstr "Il ya un problème"
 
-#: build/index.js:4466
-#: build/index.js:4331
+#: build/index.js:4466 build/index.js:4331
 msgid "Select one"
-msgstr ""
+msgstr "Sélectionnez-en un"
 
-#: build/index.js:4541
-#: build/index.js:4406
+#: build/index.js:4541 build/index.js:4406
 msgid "Invite a user to collaborate on your GC Articles collection."
-msgstr ""
+msgstr "Invitez un utilisateur à collaborer sur votre site d'articles du GC."
 
-#: build/index.js:4553
-#: build/index.js:4418
+#: build/index.js:4553 build/index.js:4418
 msgid "Role"
-msgstr ""
+msgstr "rôle"
 
-#: build/index.js:4575
-#: build/index.js:4440
+#: build/index.js:4575 build/index.js:4440
 msgid "Confirmation type"
 msgstr ""
 
-#: build/index.js:4579
-#: build/index.js:4444
+#: build/index.js:4579 build/index.js:4444
 msgid " Welcome"
 msgstr ""
 
-#: build/index.js:4582
-#: build/index.js:4447
+#: build/index.js:4582 build/index.js:4447
 msgid "Default"
 msgstr ""
 
-#: build/index.js:4680
-#: build/index.js:4525
+#: build/index.js:4680 build/index.js:4525
 msgid "Add List"
-msgstr ""
+msgstr "Ajouter une liste"
 
-#: build/index.js:4686
-#: build/index.js:4531
+#: build/index.js:4686 build/index.js:4531
 msgid "Add Service"
-msgstr ""
+msgstr "Ajouter un service"
 
 #: classes/Modules/Contact/js/dist/index.js:1
 #: classes/Modules/Contact/src/block.js:8
 msgid "Contact"
-msgstr ""
+msgstr "le forumulaire contact"
 
 #: classes/Modules/Contact/js/dist/index.js:1
 #: classes/Modules/Contact/src/block.js:9
 msgid "Platform team contact form"
-msgstr ""
+msgstr "Formulaire de contact de l'équipe de la plateforme"
 
 #: classes/Modules/Subscribe/js/dist/index.js:1
 #: classes/Modules/Subscribe/src/block.js:9
 msgid "List Mananger subscription"
-msgstr ""
+msgstr "l'abonnement List Manager"
 
 #: classes/Modules/Subscribe/js/dist/index.js:1
 #: classes/Modules/Subscribe/src/block-edit.js:22
 msgid "Subscribe form settings"
-msgstr ""
+msgstr "Paramètres du formulaire d'abonnement"
 
 #: classes/Modules/Subscribe/js/dist/index.js:1
 #: classes/Modules/Subscribe/src/block-edit.js:24
 msgid "Placeholder text"
-msgstr ""
+msgstr "Texte d'espace réservé"
 
 #: classes/Modules/Subscribe/js/dist/index.js:1
 #: classes/Modules/Subscribe/src/block-edit.js:31
 msgid "Email field label"
-msgstr ""
+msgstr "Libellé du champ E-mail"
 
 #: classes/Modules/Subscribe/js/dist/index.js:1
 #: classes/Modules/Subscribe/src/block-edit.js:38
 msgid "Subscribe button label"
-msgstr ""
+msgstr "Libellé du bouton S'abonner"
 
 #: classes/Modules/Contact/block.json
 msgctxt "block title"
 msgid "Contact Form"
-msgstr ""
+msgstr "Le formulaire de contact"
 
 #: classes/Modules/Contact/block.json
 msgctxt "block description"
 msgid "Generic contact form"
-msgstr ""
+msgstr "Formulaire de contact générique"
 
 #: classes/Modules/Subscribe/block.json
 msgctxt "block title"
 msgid "Subscribe Form"
-msgstr ""
+msgstr "le formulaire d'abonnement"
 
 #: classes/Modules/Subscribe/block.json
 msgctxt "block description"
 msgid "Add subscription form"
-msgstr ""
+msgstr "Ajouter un formulaire d'abonnement"
+
+#~ msgid "Collection Settings"
+#~ msgstr "Paramètres du site"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CDS-SNC Base 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
-"POT-Creation-Date: 2022-02-10T14:37:45+00:00\n"
+"POT-Creation-Date: 2022-02-10T15:00:11+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,34 +35,34 @@ msgstr "SNC-CDS"
 msgid "Read more"
 msgstr "En savoir plus"
 
-#: classes/Modules/Cleanup/AdminBar.php:29
+#: classes/Modules/Cleanup/AdminBar.php:46
 #: classes/Modules/Cleanup/Login.php:162
 #: classes/Modules/Releases/Releases.php:80
 msgid "GC Articles"
 msgstr "Les Articles GC"
 
-#: classes/Modules/Cleanup/AdminBar.php:121
+#: classes/Modules/Cleanup/AdminBar.php:144
 msgid "Invalid nonce"
 msgstr ""
 
-#: classes/Modules/Cleanup/AdminBar.php:122
+#: classes/Modules/Cleanup/AdminBar.php:145
 msgid "Error"
 msgstr ""
 
-#: classes/Modules/Cleanup/AdminBar.php:138
+#: classes/Modules/Cleanup/AdminBar.php:161
 msgid "My Collections"
 msgstr "Mes sites"
 
-#: classes/Modules/Cleanup/AdminBar.php:167
+#: classes/Modules/Cleanup/AdminBar.php:190
 msgid " (current)"
 msgstr " (actuel)"
 
-#: classes/Modules/Cleanup/AdminBar.php:182 build/index.js:4284
+#: classes/Modules/Cleanup/AdminBar.php:205 build/index.js:4284
 #: build/index.js:4159
 msgid "Dashboard"
 msgstr "tableau de bord"
 
-#: classes/Modules/Cleanup/AdminBar.php:191 build/index.js:4285
+#: classes/Modules/Cleanup/AdminBar.php:214 build/index.js:4285
 #: build/index.js:4160
 msgid "Visit"
 msgstr "Visitez"

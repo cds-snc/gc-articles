@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CDS-SNC Base 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
-"POT-Creation-Date: 2022-02-11T17:37:25+00:00\n"
+"POT-Creation-Date: 2022-02-11T18:19:34+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,8 +91,6 @@ msgstr "Notifier les paramètres de l'API"
 #: classes/Modules/Cleanup/Menus.php:120
 #: classes/Modules/Site/SiteSettings.php:28
 #: classes/Modules/Site/SiteSettings.php:29
-#: classes/Modules/Site/SiteSettings.php:42
-#, fuzzy
 msgid "Site Settings"
 msgstr "les paramètres"
 
@@ -291,6 +289,16 @@ msgstr "Aucune liste trouvée"
 msgid "Send template to list"
 msgstr "Envoyer le gabarit à la liste"
 
+#: classes/Modules/Notify/ListManagerSettings.php:54
+#: classes/Modules/Notify/ListManagerUserProfile.php:37
+msgid "List Manager"
+msgstr "Gestionnaire des listes"
+
+#: classes/Modules/Notify/ListManagerSettings.php:55 build/index.js:3327
+#: build/index.js:3282
+msgid "Settings"
+msgstr "les paramètres"
+
 #: classes/Modules/Notify/ListManagerSettings.php:71
 msgid "List Manager Settings"
 msgstr "paramètres du gestionnaire de liste"
@@ -326,10 +334,6 @@ msgstr ""
 #: classes/Modules/Notify/ListManagerSettings.php:228
 msgid "Add details for each of your subscription lists."
 msgstr "Ajoutez des détails pour chacune de vos listes d'abonnement."
-
-#: classes/Modules/Notify/ListManagerUserProfile.php:37
-msgid "List Manager"
-msgstr "Gestionnaire des listes"
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:42
 #: classes/Modules/Notify/NotifyTemplateSender.php:85
@@ -381,6 +385,10 @@ msgstr "Envoyer un modèle de notification"
 msgid "There has been an error"
 msgstr "il y a eu une erreur"
 
+#: classes/Modules/Site/SiteSettings.php:42
+msgid "Site settings"
+msgstr "les paramètres"
+
 #: classes/Modules/Site/SiteSettings.php:104
 msgid "Mode"
 msgstr "la mode"
@@ -394,18 +402,16 @@ msgid "Home Page"
 msgstr ""
 
 #: classes/Modules/Site/SiteSettings.php:137
-#, fuzzy
 msgid "Site Name"
-msgstr "Liste de noms"
+msgstr "Site name (FR)"
 
 #: classes/Modules/Site/SiteSettings.php:148
-#, fuzzy
 msgid "Site Description"
-msgstr "l'abonnement List Manager"
+msgstr "Site description (FR)"
 
 #: classes/Modules/Site/SiteSettings.php:159
 msgid "Search engine visibility"
-msgstr ""
+msgstr "Search engine visibility (FR)"
 
 #: classes/Modules/Site/SiteSetup.php:109
 msgid "Finish Site Setup"
@@ -564,10 +570,6 @@ msgstr "Accordéon"
 #: build/index.js:3248 build/index.js:3319 build/index.js:3373
 msgid "Title"
 msgstr "Le titre"
-
-#: build/index.js:3327 build/index.js:3282
-msgid "Settings"
-msgstr "les paramètres"
 
 #: build/index.js:3330 build/index.js:3285
 msgid "Alert Type"

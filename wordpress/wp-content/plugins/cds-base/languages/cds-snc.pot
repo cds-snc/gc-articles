@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-02-11T17:37:25+00:00\n"
+"POT-Creation-Date: 2022-02-11T18:08:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: cds-snc\n"
@@ -291,6 +291,17 @@ msgstr ""
 msgid "Send template to list"
 msgstr ""
 
+#: classes/Modules/Notify/ListManagerSettings.php:54
+#: classes/Modules/Notify/ListManagerUserProfile.php:37
+msgid "List Manager"
+msgstr ""
+
+#: classes/Modules/Notify/ListManagerSettings.php:55
+#: build/index.js:3327
+#: build/index.js:3282
+msgid "Settings"
+msgstr ""
+
 #: classes/Modules/Notify/ListManagerSettings.php:71
 msgid "List Manager Settings"
 msgstr ""
@@ -318,10 +329,6 @@ msgstr ""
 
 #: classes/Modules/Notify/ListManagerSettings.php:228
 msgid "Add details for each of your subscription lists."
-msgstr ""
-
-#: classes/Modules/Notify/ListManagerUserProfile.php:37
-msgid "List Manager"
 msgstr ""
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:42
@@ -548,11 +555,6 @@ msgstr ""
 #: build/index.js:3319
 #: build/index.js:3373
 msgid "Title"
-msgstr ""
-
-#: build/index.js:3327
-#: build/index.js:3282
-msgid "Settings"
 msgstr ""
 
 #: build/index.js:3330

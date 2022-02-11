@@ -42,35 +42,16 @@ if (!class_exists('Redirector')) {
                 add_action('admin_menu', [$this, 'addAdminMenu']);
                 add_action('admin_init', [$this, 'registerSettings']);
 
-                add_action('admin_enqueue_scripts', [$this, 'redirector_scripts']);
+                add_action('admin_enqueue_scripts', [$this, 'redirectorStyles']);
             }
         }
 
-   
-
         /**
-         * Enqueue scripts.
+         * Enqueue styles.
          */
-        public function redirector_scripts(): void
+        public function redirectorStyles(): void
         {
-            global $post;
-
-            if (!$post) {
-                return;
-            }
-
-            wp_enqueue_script('redirector-main', get_template_directory_uri() . '/js/main.js', ['jquery']);
-
-            $url = Utils::addHttp(
-                cds_get_theme_option('redirect_url')
-            ) .
-                '/preview?id=' .
-                $post->ID .
-                '&lang=' .
-                cds_get_active_language();
-
-            $params = array('url' => $url);
-            wp_localize_script('redirector-main', 'OBJECT', $params );
+            wp_enqueue_style('redirector-style', get_stylesheet_uri(), []);
         }
 
 

@@ -8,3 +8,12 @@ Version: 1.1.0
 Text Domain: cds-redirector
 */
 
+/* Hide the "preview" show/hide button */
+.edit-post-header .block-editor-post-preview__dropdown {
+    display: none;
+}
+
+/* Show the mobile "preview" link */
+.edit-post-header .edit-post-header__settings .editor-post-preview {
+    display: flex;
+}

@@ -170,8 +170,8 @@ class SiteSettings
     {
         $collection_mode = get_option('collection_mode');
 
-        printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">Maintenance</label><br />', checked('maintenance', $collection_mode, false));
-        printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">Live</label><br />', checked('live', $collection_mode, false));
+        printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">%s</label><br />', checked('maintenance', $collection_mode, false), __("Maintenance", "cds-snc"));
+        printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">%s</label><br />', checked('live', $collection_mode, false), __("Live", "cds-snc"));
     }
 
     public function collectionMaintenancePageCallback()

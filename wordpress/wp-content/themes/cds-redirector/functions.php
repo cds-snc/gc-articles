@@ -42,37 +42,37 @@ if (!class_exists('Redirector')) {
                 add_action('admin_menu', [$this, 'addAdminMenu']);
                 add_action('admin_init', [$this, 'registerSettings']);
 
-                add_action(
-                    'admin_footer',
-                    function () {
-                        global $post;
-
-                        if (!$post) {
-                            return;
-                        }
-
-                        $text = __('Preview', 'cds-snc');
-                        $url =
-                            Utils::addHttp(
-                                cds_get_theme_option('redirect_url'),
-                            ) .
-                            '/preview?id=' .
-                            $post->ID .
-                            '&lang=' .
-                            cds_get_active_language();
-                        echo "<script>
-                    jQuery(document).ready(function( $ ) {
-                        setTimeout(function(){
-                            $('.block-editor-post-preview__dropdown').replaceWith('<a class=\"components-button is-tertiary\" href=\"$url\">$text</a>');
-                        }, 1000);
-                    });
-                    </script>";
-                    },
-                    200,
-                    10,
-                );
+                add_action('admin_enqueue_scripts', [$this, 'redirector_scripts']);
             }
         }
+
+   
+
+        /**
+         * Enqueue scripts.
+         */
+        public function redirector_scripts(): void
+        {
+            global $post;
+
+            if (!$post) {
+                return;
+            }
+
+            wp_enqueue_script('redirector-main', get_template_directory_uri() . '/js/main.js', ['jquery']);
+
+            $url = Utils::addHttp(
+                cds_get_theme_option('redirect_url')
+            ) .
+                '/preview?id=' .
+                $post->ID .
+                '&lang=' .
+                cds_get_active_language();
+
+            $params = array('url' => $url);
+            wp_localize_script('redirector-main', 'OBJECT', $params );
+        }
+
 
         /**
          * Returns all theme options

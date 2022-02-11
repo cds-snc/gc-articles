@@ -101,7 +101,7 @@ class SiteSettings
         // add fields
         add_settings_field(
             'collection_mode', // id
-            _('Mode', 'cds-snc'), // title
+            __('Mode', 'cds-snc'), // title
             array( $this, 'collectionModeCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section', // section
@@ -112,7 +112,7 @@ class SiteSettings
 
         add_settings_field(
             'collection_mode_maintenance_page', // id
-            _('Maintenance Page', 'cds-snc'), // title
+            __('Maintenance Page', 'cds-snc'), // title
             array( $this, 'collectionMaintenancePageCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section', // section
@@ -123,7 +123,7 @@ class SiteSettings
 
         add_settings_field(
             'page_on_front', // id
-            _('Home Page', 'cds-snc'), // title
+            __('Home Page', 'cds-snc'), // title
             array( $this, 'readingSettingsCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section', // section
@@ -134,7 +134,7 @@ class SiteSettings
 
         add_settings_field(
             'blogname', // id
-            _('Site Name', 'cds-snc'), // title
+            __('Site Name', 'cds-snc'), // title
             array( $this, 'blogNameCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section', // section
@@ -145,7 +145,7 @@ class SiteSettings
 
         add_settings_field(
             'blogdescription', // id
-            _('Site Description', 'cds-snc'), // title
+            __('Site Description', 'cds-snc'), // title
             array( $this, 'blogDescriptionCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section', // section
@@ -156,7 +156,7 @@ class SiteSettings
 
         add_settings_field(
             'blog_public', // id
-            _('Search engine visibility', 'cds-snc'), // title
+            __('Search engine visibility', 'cds-snc'), // title
             array( $this, 'indexSiteCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section', // section

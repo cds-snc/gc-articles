@@ -50,7 +50,7 @@ class TwoFactor
         $profileUrl = admin_url('profile.php') . '#two-factor-options';
 
         $panel = '<div id="two-factor-panel">';
-        $panel .= '<h4><span style="color:red" class="dashicons dashicons-warning"></span> ' . _('Warning', 'cds-snc') . '</h4>';
+        $panel .= '<h4><span style="color:red" class="dashicons dashicons-warning"></span> ' . __('Warning', 'cds-snc') . '</h4>';
         $panel .= '<p>';
         $panel .= 'For security purposes, you should consider enabling two-factor authentication. ';
         $panel .= sprintf(wp_kses(__('This can be configured on your <a href="%s">User Profile</a>.', 'cds-snc'), ['a' => ['href' => []]]), esc_url($profileUrl));

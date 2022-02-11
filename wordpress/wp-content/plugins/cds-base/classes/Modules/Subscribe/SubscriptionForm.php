@@ -20,8 +20,8 @@ class SubscriptionForm
     {
         $placeholder = "";
         $listId = "";
-        $emailLabel = _("Enter your email:", "cds-snc");
-        $subscribeLabel = _("Subscribe", "cds-snc");
+        $emailLabel = __("Enter your email:", "cds-snc");
+        $subscribeLabel = __("Subscribe", "cds-snc");
 
         if (!empty($attributes['placeholderValue'])) :
             $placeholder = $attributes['placeholderValue'];

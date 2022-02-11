@@ -47,8 +47,8 @@ class NotifySettings
     public function notifyApiSettingsAddPluginPage()
     {
         add_options_page(
-            __('Notify API Settings'), // page_title
-            __('Notify API Settings'), // menu_title
+            __('Notify API Settings', 'cds-snc'), // page_title
+            __('Notify API Settings', 'cds-snc'), // menu_title
             'manage_notify', // capability
             'notify-settings', // menu_slug
             array( $this, 'notifyApiSettingsCreateAdminPage' ) // function
@@ -104,14 +104,14 @@ class NotifySettings
 
         add_settings_section(
             'notify_api_settings_setting_section', // id
-            _('Notify', 'cds-snc'), // title
+            __('Notify', 'cds-snc'), // title
             array( $this, 'notifyApiSettingsSectionInfo'), // callback
             'notify-api-settings-admin' // page
         );
 
         add_settings_field(
             'notify_api_key', // id
-            _('Notify API Key', 'cds-snc'), // title
+            __('Notify API Key', 'cds-snc'), // title
             array( $this, 'notifyApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section', // section
@@ -122,7 +122,7 @@ class NotifySettings
 
         add_settings_field(
             'notify_generic_template_id', // id
-            _('Notify Generic TemplateId', 'cds-snc'), // title
+            __('Notify Generic TemplateId', 'cds-snc'), // title
             array( $this, 'notifyGenericTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section', // section

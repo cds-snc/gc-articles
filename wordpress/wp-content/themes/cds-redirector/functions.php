@@ -46,6 +46,34 @@ if (!class_exists('Redirector')) {
             }
         }
 
+   
+
+        /**
+         * Enqueue scripts.
+         */
+        public function redirector_scripts(): void
+        {
+            global $post;
+
+            if (!$post) {
+                return;
+            }
+
+            wp_enqueue_script('redirector-main', get_template_directory_uri() . '/js/main.js', ['jquery']);
+
+            $url = Utils::addHttp(
+                cds_get_theme_option('redirect_url')
+            ) .
+                '/preview?id=' .
+                $post->ID .
+                '&lang=' .
+                cds_get_active_language();
+
+            $params = array('url' => $url);
+            wp_localize_script('redirector-main', 'OBJECT', $params );
+        }
+
+
         /**
          * Enqueue styles.
          */

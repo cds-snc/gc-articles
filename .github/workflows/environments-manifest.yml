@@ -19,8 +19,14 @@ on:
       PREV_PROD_WORDPRESS:
         description: "The previous version of the Production Wordpress container"
         value: ${{ jobs.environments-manifest.outputs.PREV_PROD_WORDPRESS }}
+      PROD_INFRASTRUCTURE:
+        description: "The current version of the Production infrastructure"
+        value: ${{ jobs.environments-manifest.outputs.PROD_INFRASTRUCTURE }}
+      PREV_PROD_INFRASTRUCTURE:
+        description: "The previous version of the Production infrastructure"
+        value: ${{ jobs.environments-manifest.outputs.PREV_PROD_INFRASTRUCTURE }}
       CONTAINER_DEPLOYMENT:
-        description: "Boolean flag to indicate if we're dealing with a Prod deployment"
+        description: "Boolean flag to indicate if we're dealing with a container deployment"
         value: ${{ jobs.environments-manifest.outputs.CONTAINER_DEPLOYMENT }}
 
 jobs:
@@ -28,8 +34,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       PROD_WORDPRESS: ${{ steps.versions.outputs.PROD_WORDPRESS }}
+      PROD_INFRASTRUCTURE: ${{ steps.versions.outputs.PROD_INFRASTRUCTURE }}
       STAG_WORDPRESS: ${{ steps.versions.outputs.STAG_WORDPRESS }}
       PREV_PROD_WORDPRESS: ${{ steps.previous.outputs.PROD_WORDPRESS }}
+      PREV_PROD_INFRASTRUCTURE: ${{ steps.previous.outputs.PROD_INFRASTRUCTURE }}
       PREV_STAG_WORDPRESS: ${{ steps.previous.outputs.STAG_WORDPRESS }}
       CONTAINER_DEPLOYMENT: ${{ steps.environment.outputs.CONTAINER_DEPLOYMENT }}
     steps:

@@ -1,9 +1,11 @@
-Cypress.Commands.add('testSetup', (index = 0) => {
+Cypress.Commands.add('testSetup', ({ theme = 'cds-default' } = {}) => {
   const options = { failOnNonZeroExit: false }
 
   cy.exec('wp-env run tests-cli wp db import "test_run_dump.sql"', options).then((result) => {
     cy.log(result.code);
     cy.log(result.stdout);
+
+    cy.exec(`wp-env run tests-cli wp theme activate ${theme}`, options)
 
     if(result.code === 0) {
       return;
@@ -12,7 +14,6 @@ Cypress.Commands.add('testSetup', (index = 0) => {
     cy.exec('npm run wp-env:clean', options);
     cy.exec('wp-env run tests-cli wp option delete list_values', options);
     cy.exec('wp-env run tests-cli wp option set list_values --format=json < ./cypress/fixtures/notify-list-data.json', options)
-    cy.exec('wp-env run tests-cli wp theme activate cds-default', options)
     cy.exec('wp-env run tests-cli wp plugin activate sitepress-multilingual-cms cds-base two-factor;', options)
     cy.exec('wp-env run tests-cli wp plugin activate s3-uploads disable-user-login;', options) // wps-hide-login
     cy.exec('wp-env run tests-cli wp plugin activate wordpress-seo wordpress-seo-premium wp-rest-api-v2-menus;', options)

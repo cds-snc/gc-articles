@@ -60,7 +60,7 @@ class LanguageSwitcherTest extends \WP_Mock\Tools\TestCase
             "fr" => [
                 "id" => 4,
                 "active" => 0,
-                "default_locale" => "fr_FR",
+                "default_locale" => "fr_CA",
                 "native_name" => "Français",
                 "missing" => 0,
                 "translated_name" => "French",

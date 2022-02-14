@@ -51,8 +51,8 @@ class ListManagerSettings
     {
         add_submenu_page(
             $this->admin_page,
-            __('List Manager'),
-            __('Settings'),
+            __('List Manager', 'cds-snc'),
+            __('Settings', 'cds-snc'),
             'manage_list_manager',
             'cds_list_manager_settings',
             [$this, 'listManagerSettingsCreateAdminPage'],
@@ -96,14 +96,14 @@ class ListManagerSettings
 
         add_settings_section(
             'list_manager_settings_section', // id
-            _('List manager', 'cds-snc'), // title
+            __('List manager', 'cds-snc'), // title
             [$this, 'listManagerSettingsSectionInfo'], // callback
             'list-manager-settings-admin', // page
         );
 
         add_settings_field(
             'list_values', // id
-            _('List details', 'cds-snc'), // title
+            __('List details', 'cds-snc'), // title
             [$this, 'listValuesCallback'], // callback
             'list-manager-settings-admin', // page
             'list_manager_settings_section', // section
@@ -114,7 +114,7 @@ class ListManagerSettings
 
         add_settings_field(
             'list_manager_notify_services', // id
-            _('Notify Services', 'cds-snc'), // title
+            __('Notify Services', 'cds-snc'), // title
             [$this, 'listManagerNotifyServicesCallback'], // callback
             'list-manager-settings-admin', // page
             'list_manager_settings_section', // section

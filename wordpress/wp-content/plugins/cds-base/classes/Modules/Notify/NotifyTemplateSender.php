@@ -200,7 +200,7 @@ class NotifyTemplateSender
             return;
         }
 
-        set_transient('api_response', _('There has been an error', 'cds-snc'));
+        set_transient('api_response', __('There has been an error', 'cds-snc'));
         error_log($exception);
     }
 

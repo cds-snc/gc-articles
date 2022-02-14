@@ -33,11 +33,11 @@ class Block
                     ],
                     'emailLabel' => [
                         'type' => 'string',
-                        "default" => _("Enter your email:", "cds-snc")
+                        "default" => __("Enter your email:", "cds-snc")
                     ],
                     'subscribeLabel' => [
                         'type' => 'string',
-                        "default" => _("Subscribe", "cds-snc")
+                        "default" => __("Subscribe", "cds-snc")
                     ],
                 ]
             ]

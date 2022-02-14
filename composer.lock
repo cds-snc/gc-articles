@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "articles/cli",
-            "version": "dev-mem-source",
+            "version": "dev-patch/update-translation-files",
             "dist": {
                 "type": "path",
                 "url": "./cli",

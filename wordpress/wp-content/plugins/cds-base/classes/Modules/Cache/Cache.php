@@ -6,7 +6,7 @@ namespace CDS\Modules\Cache;
 
 class Cache
 {
-    const LOCALE_FR = 'fr_FR';
+    const LOCALE_FR = 'fr_CA';
 
     public static function register()
     {

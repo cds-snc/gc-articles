@@ -202,7 +202,7 @@ composer prepare-translations
 ```
 
 This will scan the plugin or theme files and update the `cds-snc.pot` file which captures all the translatable strings.
-It will then merge any updates into the `fr_FR.po` file which is where translations are added.
+It will then merge any updates into the `fr_CA.po` file which is where translations are added.
 
 2. Add translated strings
 
@@ -220,9 +220,9 @@ composer compile-translations
 
 At this point, you will likely have a bunch of local changes in the `languages` folder: 
 - `cds-snc.pot`
-- `fr_FR.mo`
-- `fr_FR.po`
-- one or more `fr_FR-xxx.json` files (* IF any strings appear in javascript files)
+- `fr_CA.mo`
+- `fr_CA.po`
+- one or more `fr_CA-xxx.json` files (* IF any strings appear in javascript files)
 
 All of these files should be committed along with the rest of your PR.
 

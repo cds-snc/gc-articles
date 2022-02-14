@@ -1,6 +1,7 @@
 {
 	"baseUrl": "http://localhost:8889",
 	"video": false,
+	"defaultCommandTimeout": 60000,
 	"screenshotOnRunFailure": false,
 	"retries": {
 		"runMode": 2,

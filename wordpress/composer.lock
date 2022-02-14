@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d16ab745e0fd34d97bd05ccd98b32be",
+    "content-hash": "5b3e357d121c8476d4e00c301384ab67",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -3950,6 +3950,60 @@
             "type": "wordpress-plugin"
         },
         {
+            "name": "yoast/duplicate-post",
+            "version": "4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Yoast-dist/duplicate-post.git",
+                "reference": "aae6ee73d987ac3c43e7beaffe856b2264e5a366"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Yoast-dist/duplicate-post/zipball/aae6ee73d987ac3c43e7beaffe856b2264e5a366",
+                "reference": "aae6ee73d987ac3c43e7beaffe856b2264e5a366",
+                "shasum": ""
+            },
+            "require": {
+                "composer/installers": "^1.12.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "yoast/wp-test-utils": "^1.0.0",
+                "yoast/yoastcs": "^2.2.0"
+            },
+            "type": "wordpress-plugin",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Enrico Battocchi & Team Yoast",
+                    "email": "support@yoast.com",
+                    "homepage": "https://yoast.com"
+                }
+            ],
+            "description": "The go-to tool for cloning posts and pages, including the powerful Rewrite & Republish feature.",
+            "homepage": "https://wordpress.org/plugins/duplicate-post/",
+            "keywords": [
+                "clone",
+                "copy",
+                "post",
+                "wordpress"
+            ],
+            "support": {
+                "forum": "https://wordpress.org/support/plugin/duplicate-post",
+                "issues": "https://github.com/Yoast/duplicate-post/issues",
+                "source": "https://github.com/Yoast/duplicate-post"
+            },
+            "time": "2022-01-25T09:31:34+00:00"
+        },
+        {
             "name": "yoast/i18n-module",
             "version": "3.1.1",
             "source": {
@@ -7368,5 +7422,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }

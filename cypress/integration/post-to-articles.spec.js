@@ -2,7 +2,7 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe('Articles', () => {
+describe.skip('Articles', () => {
   before(() => {
 
   });

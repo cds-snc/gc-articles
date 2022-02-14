@@ -1,4 +1,4 @@
-describe('List Manager Settings', () => {
+describe.skip('List Manager Settings', () => {
   before(() => {
     cy.testSetup();
   });

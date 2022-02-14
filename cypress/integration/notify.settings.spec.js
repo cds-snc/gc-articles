@@ -1,4 +1,4 @@
-describe('Notify API Settings', () => {
+describe.skip('Notify API Settings', () => {
   before(() => {
     cy.testSetup();
   });

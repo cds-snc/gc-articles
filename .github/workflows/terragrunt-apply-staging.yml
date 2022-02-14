@@ -53,9 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: environments-manifest
 
-    if: |
-      github.ref == 'refs/heads/main' && github.event_name == 'push' &&
-      needs.environments-manifest.outputs.PROD_DEPLOYMENT == 'false'
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
     steps:
       - name: Checkout
@@ -142,7 +140,7 @@ jobs:
 
       # Load-balancer & database dependency
       - name: Terragrunt apply ecs
-        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
+        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' || needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'staging' }}
         working-directory: infrastructure/terragrunt/env/staging/ecs
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 

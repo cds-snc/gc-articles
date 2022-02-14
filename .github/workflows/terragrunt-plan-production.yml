@@ -55,7 +55,6 @@ jobs:
       PREVIOUS_VERSION: ${{ needs.version-manifest.outputs.previous }}
 
     steps:
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -183,7 +182,7 @@ jobs:
 
       # Load-balancer & database dependency
       - name: Terragrunt plan ecs
-        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
+        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' || needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production' }}
         uses: cds-snc/terraform-plan@v1
         with:
           directory: "infrastructure/terragrunt/env/prod/ecs"

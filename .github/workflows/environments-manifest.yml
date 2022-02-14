@@ -19,9 +19,9 @@ on:
       PREV_PROD_WORDPRESS:
         description: "The previous version of the Production Wordpress container"
         value: ${{ jobs.environments-manifest.outputs.PREV_PROD_WORDPRESS }}
-      PROD_DEPLOYMENT:
+      CONTAINER_DEPLOYMENT:
         description: "Boolean flag to indicate if we're dealing with a Prod deployment"
-        value: ${{ jobs.environments-manifest.outputs.PROD_DEPLOYMENT }}
+        value: ${{ jobs.environments-manifest.outputs.CONTAINER_DEPLOYMENT }}
 
 jobs:
   environments-manifest:
@@ -31,7 +31,7 @@ jobs:
       STAG_WORDPRESS: ${{ steps.versions.outputs.STAG_WORDPRESS }}
       PREV_PROD_WORDPRESS: ${{ steps.previous.outputs.PROD_WORDPRESS }}
       PREV_STAG_WORDPRESS: ${{ steps.previous.outputs.STAG_WORDPRESS }}
-      PROD_DEPLOYMENT: ${{ steps.environment.outputs.PROD_DEPLOYMENT }}
+      CONTAINER_DEPLOYMENT: ${{ steps.environment.outputs.CONTAINER_DEPLOYMENT }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -68,9 +68,12 @@ jobs:
         id: environment
         run: |
           if [ ${{ steps.previous.outputs.PROD_WORDPRESS }} != ${{ steps.versions.outputs.PROD_WORDPRESS }} ]; then
-            echo "PROD_DEPLOYMENT=true"
-            echo "::set-output name=PROD_DEPLOYMENT::true"
+            echo "CONTAINER_DEPLOYMENT=production"
+            echo "::set-output name=CONTAINER_DEPLOYMENT::production"
+          elif [ ${{ steps.previous.outputs.STAG_WORDPRESS }} != ${{ steps.versions.outputs.STAG_WORDPRESS }} ]; then
+            echo "CONTAINER_DEPLOYMENT=staging"
+            echo "::set-output name=CONTAINER_DEPLOYMENT::staging"
           else
-            echo "PROD_DEPLOYMENT=false"
-            echo "::set-output name=PROD_DEPLOYMENT::false"
+            echo "CONTAINER_DEPLOYMENT=false"
+            echo "::set-output name=CONTAINER_DEPLOYMENT::false"
           fi

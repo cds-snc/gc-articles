@@ -51,8 +51,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: environments-manifest
 
-    if: needs.environments-manifest.outputs.PROD_DEPLOYMENT == 'false'
-
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -168,7 +166,7 @@ jobs:
 
       # Load-balancer & database dependency
       - name: Terragrunt plan ecs
-        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
+        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' || needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'staging' }}
         uses: cds-snc/terraform-plan@v1
         with:
           directory: "infrastructure/terragrunt/env/staging/ecs"

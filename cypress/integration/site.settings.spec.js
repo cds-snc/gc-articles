@@ -1,4 +1,4 @@
-describe.skip('Site Settings', () => {
+describe('Site Settings', () => {
   before(() => {
     cy.testSetup();
   });
@@ -16,7 +16,7 @@ describe.skip('Site Settings', () => {
     cy.get('#collection_live').should('be.empty');
   });
 
-  it('Can save collection settings and show maintenance pagec', () => {
+  it.skip('Can save collection settings and show maintenance pagec', () => {
     cy.visit('/wp-admin/options-general.php?page=collection-settings');
     cy.get('#collection_maintenance').check();
     cy.get('#submit').click();

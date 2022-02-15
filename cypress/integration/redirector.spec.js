@@ -2,7 +2,7 @@ import { addArticle } from "./util";
 
 /// <reference types="Cypress" />
 
-describe('Switch theme', () => {
+describe.skip('Switch theme', () => {
     before(() => {
       cy.testSetup({theme: 'cds-redirector'});
     });

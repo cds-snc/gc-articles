@@ -27,10 +27,9 @@ describe('Site Settings', () => {
       expect($a.attr('href'), 'href').to.contain('action=logout')
     }).invoke('attr', 'href').then(href => {
       cy.visit(href)
+       // should be logged out
+      cy.visit('/')
+      cy.get('h1').should('have.text', "We're currently working on this");
     });
-    
-    // should be logged out
-    cy.visit('/')
-    cy.get('h1').should('have.text', "We're currently working on this");
   })
 });

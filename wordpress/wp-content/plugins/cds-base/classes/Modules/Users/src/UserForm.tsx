@@ -205,7 +205,7 @@ export const UserForm = ({ isSuperAdmin = false }) => {
                                             checked={confirmationType === "welcome"}
                                             onChange={(event) => { bindConfirmationType.onChange(event) }}
                                         />
-                                        {__(" Welcome", "cds-snc")}
+                                        {__("Welcome", "cds-snc")}
                                     </label>
                                     <label>
                                         <input

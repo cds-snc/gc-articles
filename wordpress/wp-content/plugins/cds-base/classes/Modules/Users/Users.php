@@ -176,19 +176,20 @@ class Users
         if (!$userExists) {
             $userInfo = get_userdata($uId);
             $unique = get_password_reset_key($userInfo);
+
             $uniqueUrl = network_site_url(
-                "wp-login.php?action=rp&key=$unique&login=" . rawurlencode($userInfo->user_login),
-                'login'
+                sprintf("wp-login.php?action=rp&key=%s&login=",$unique,rawurlencode($userInfo->user_login)), 'login'
             );
         }
 
         // phpcs:disable
         $subject = __("Your GC Articles site is ready", "cds-snc");
         $message = __('@todo add welcome information here', "cds-snc") . "\r\n\r\n";
-        $message .= __('To set your GC Articles account password, please visit the following address:', "cds-snc") . "\r\n\r\n";
+       
         
         if(!$userExists){
             // send reset pass url
+            $message .= __('To set your GC Articles account password, please visit the following address:', "cds-snc") . "\r\n\r\n";
             $message .= $uniqueUrl;
         }
         // phpcs:enable

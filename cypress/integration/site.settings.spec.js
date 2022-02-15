@@ -1,4 +1,4 @@
-describe('Site Settings', () => {
+describe.skip('Site Settings', () => {
   before(() => {
     cy.testSetup();
   });

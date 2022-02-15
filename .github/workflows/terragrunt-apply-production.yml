@@ -140,7 +140,7 @@ jobs:
 
       # Load-balancer & database dependency
       - name: Terragrunt apply ecs
-        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' || needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'true' }}
+        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' || needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production' }}
         working-directory: infrastructure/terragrunt/env/prod/ecs
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 

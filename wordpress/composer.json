@@ -50,6 +50,19 @@
       }
     },
     {
+      "type": "package",
+      "package": {
+        "name": "shawnhooper/delete-orphaned-multisite-tables",
+        "type": "wordpress-plugin",
+        "version": "1.0",
+        "source": {
+          "url": "https://github.com/shawnhooper/delete-orphaned-multisite-tables",
+          "type": "git",
+          "reference": "main"
+        }
+      }
+    },
+    {
       "type": "composer",
       "url": "https://my.yoast.com/packages/"
     },
@@ -83,7 +96,8 @@
     "digitalcube/c3-cloudfront-clear-cache": "dev-master",
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",
     "wpackagist-plugin/memsource-connector":"3.3.2",
-    "yoast/duplicate-post": "^4.4"
+    "yoast/duplicate-post": "^4.4",
+    "shawnhooper/delete-orphaned-multisite-tables": "1.0"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

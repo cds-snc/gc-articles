@@ -27,6 +27,7 @@ Now you can run the following commands:
 - `articles up`: Bring up the full docker-compose environment
 - `articles down`: Bring down the full docker-compose environment
 - `articles npm install`: Install and build npm dependencies
+- `articles db-cleanup`: Cleans up any orphaned multisite tables
 
 ## Starting fresh
 

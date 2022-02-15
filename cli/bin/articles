@@ -168,6 +168,15 @@ if [ $# -gt 0 ]; then
             sail_is_not_running
         fi
 
+    elif [ "$1" == "db-cleanup" ]; then
+      if [ "$EXEC" == "yes" ]; then
+          docker exec -i \
+              "$CLI_SERVICE" \
+              bash < ./cli/bin/db-cleanup.sh
+      else
+          sail_is_not_running
+      fi
+
     # Pass unknown commands to the "docker-compose" binary...
     else
         docker-compose "$@"

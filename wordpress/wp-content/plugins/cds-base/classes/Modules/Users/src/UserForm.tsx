@@ -64,10 +64,11 @@ const FieldError = ({ errors = [], id = '', children }) => {
     </div>
 }
 
-export const UserForm = (props) => {
+export const UserForm = ({ isSuperAdmin = false }) => {
     const emptyRole = { id: "", name: __("Select one", "cds-snc"), disabled: true, selected: true };
     const { value: email, bind: bindEmail, reset: resetEmail } = useInput('');
     const { value: role, bind: bindRole, reset: resetRole } = useInput({ value: '' });
+    const { value: confirmationType, bind: bindConfirmationType, reset: resetConfirmationType } = useInput('default');
     const [isLoading, setIsLoading] = useState(true);
     const [roles, setRoles] = useState([emptyRole]);
     const [roleDescription, setRoleDescription] = useState("");
@@ -76,6 +77,7 @@ export const UserForm = (props) => {
     const resetForm = () => {
         resetEmail('');
         resetRole({ value: '' });
+        resetConfirmationType('default');
         setErrors([]);
     }
     const errorSummary = useRef(null);
@@ -100,7 +102,7 @@ export const UserForm = (props) => {
         setIsLoading(true);
 
         try {
-            const response = await sendData('users/v1/submit', { email, role });
+            const response = await sendData('users/v1/submit', { email, role, confirmationType });
             const [{ status }] = response;
             setIsLoading(false);
 
@@ -187,6 +189,37 @@ export const UserForm = (props) => {
                                 <p aria-live="polite" className="role-desc description">{roleDescription}</p>
                             </td>
                         </tr>
+                        {isSuperAdmin ?
+                            <tr>
+                                <th>
+                                    <label>
+                                        {__("Confirmation type", "cds-snc")}
+                                    </label>
+                                </th>
+                                <td>
+                                    <label style={{ marginRight: "12px" }}>
+                                        <input
+                                            name="confirmationType"
+                                            type="radio"
+                                            value="welcome"
+                                            checked={confirmationType === "welcome"}
+                                            onChange={(event) => { bindConfirmationType.onChange(event) }}
+                                        />
+                                        {__("Welcome", "cds-snc")}
+                                    </label>
+                                    <label>
+                                        <input
+                                            name="confirmationType"
+                                            type="radio"
+                                            value="default"
+                                            checked={confirmationType === "default"}
+                                            onChange={(event) => { bindConfirmationType.onChange(event) }}
+                                        />
+                                        {__("Default", "cds-snc")}
+                                    </label>
+                                </td>
+                            </tr> : <input name="confirmationType" type="hidden" value="default" />}
+
                     </tbody>
                 </table>
                 <Button

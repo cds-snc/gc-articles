@@ -25,18 +25,18 @@ afterAll(function () {
 
 test('too few args', function () {
     $users = new Users();
-    $users->sanitizeEmailAndRole();
+    $users->sanitizeValues();
 })->throws(ValidationException::class);
 
 test('empty array', function () {
     $users = new Users();
-    $users->sanitizeEmailAndRole([]);
+    $users->sanitizeValues([]);
 })->throws(ValidationException::class);
 
 test('empty email throws email error', function () {
     try {
         $users = new Users();
-        $users->sanitizeEmailAndRole(["role" => "gceditor"]);
+        $users->sanitizeValues(["role" => "gceditor", "confirmationType" => ""]);
     } catch (ValidationException $e) {
         $this->assertTrue(str_contains($e->getMessage(), "email"));
     }
@@ -45,7 +45,7 @@ test('empty email throws email error', function () {
 test('bad domain for email throws', function () {
     try {
         $users = new Users();
-        $users->sanitizeEmailAndRole(["email" => "test@example.com"]);
+        $users->sanitizeValues(["email" => "test@example.com", "confirmationType" => ""]);
     } catch (ValidationException $e) {
         $this->assertTrue(str_contains($e->getMessage(), "email"));
     }
@@ -55,7 +55,7 @@ test('bad domain for email throws', function () {
 test('empty role throws role error', function () {
     try {
         $users = new Users();
-        $users->sanitizeEmailAndRole(["email" => "admin@cds-snc.ca",  "role" => ""]);
+        $users->sanitizeValues(["email" => "admin@cds-snc.ca",  "role" => "" , "confirmationType" => ""]);
     } catch (ValidationException $e) {
         $this->assertTrue(str_contains($e->getMessage(), "role"));
     }
@@ -68,7 +68,7 @@ test('throws when an invalid role is passed', function () {
 
     try {
         $users = new Users();
-        $users->sanitizeEmailAndRole(["email" => "test@cds-snc.ca",  "role" => "admin"]);
+        $users->sanitizeValues(["email" => "test@cds-snc.ca",  "role" => "admin", "confirmationType" => ""]);
     } catch (ValidationException $e) {
         $this->assertTrue(str_contains($e->getMessage(), "role"));
     }
@@ -81,7 +81,7 @@ test('returns array with cleaned values', function () {
 
     try {
         $users = new Users();
-        $result = $users->sanitizeEmailAndRole(["email" => "test@cds-snc.ca",  "role" => "administrator"]);
+        $result = $users->sanitizeValues(["email" => "test@cds-snc.ca",  "role" => "administrator", "confirmationType" => ""]);
         $this->assertTrue($result["email"] === "test@cds-snc.ca");
         $this->assertTrue($result["role"] === "administrator");
     } catch (ValidationException $e) {

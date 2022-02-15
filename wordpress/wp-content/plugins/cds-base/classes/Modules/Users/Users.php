@@ -178,7 +178,8 @@ class Users
             $unique = get_password_reset_key($userInfo);
 
             $uniqueUrl = network_site_url(
-                sprintf("wp-login.php?action=rp&key=%s&login=",$unique,rawurlencode($userInfo->user_login)), 'login'
+                sprintf("wp-login.php?action=rp&key=%s&login=", $unique, rawurlencode($userInfo->user_login)),
+                'login'
             );
         }
 

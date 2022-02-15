@@ -20,7 +20,7 @@ on:
         description: "The previous version of the Production Wordpress container"
         value: ${{ jobs.environments-manifest.outputs.PREV_PROD_WORDPRESS }}
       CONTAINER_DEPLOYMENT:
-        description: "Boolean flag to indicate if we're dealing with a Prod deployment"
+        description: "(production|staging|false) flag to indicate if we're dealing with a container deployment"
         value: ${{ jobs.environments-manifest.outputs.CONTAINER_DEPLOYMENT }}
 
 jobs:
@@ -41,8 +41,8 @@ jobs:
       - name: Versions
         id: versions
         run: |
-          PROD_WORDPRESS=$(yq '.production.wordpress' < ./infrastructure/environments.yml)
-          STAG_WORDPRESS=$(yq '.production.apache' < ./infrastructure/environments.yml)
+          PROD_WORDPRESS=v$(yq '.production.wordpress' < ./infrastructure/environments.yml)
+          STAG_WORDPRESS=v$(yq '.staging.wordpress' < ./infrastructure/environments.yml)
           echo "$(cat ./infrastructure/environments.yml)"
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
@@ -59,8 +59,8 @@ jobs:
           git branch
           PREV_ENVIRONMENTS_YML="$(git show main:infrastructure/environments.yml)"
           echo "$PREV_ENVIRONMENTS_YML"
-          PROD_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
-          STAG_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
+          PROD_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
+          STAG_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
 

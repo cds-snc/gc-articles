@@ -67,10 +67,10 @@ jobs:
           git branch
           PREV_ENVIRONMENTS_YML="$(git show main:infrastructure/environments.yml)"
           echo "$PREV_ENVIRONMENTS_YML"
-          PROD_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
-          STAG_WORDPRESS=$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
-          echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
-          echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
+          PROD_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
+          STAG_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
+          echo "::set-output name=PROD_WORDPRESS::v${PROD_WORDPRESS}"
+          echo "::set-output name=STAG_WORDPRESS::v${STAG_WORDPRESS}"
 
       - name: Deploy environment
         id: environment

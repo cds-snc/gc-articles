@@ -28,8 +28,10 @@ describe('Site Settings', () => {
     }).invoke('attr', 'href').then(href => {
       cy.visit(href)
        // should be logged out
-      cy.visit('/')
-      cy.get('h1').should('have.text', "We're currently working on this");
+      cy.visit('/').then(() => {
+        cy.get('h1').should('have.text', "We're currently working on this");
+
+      })
     });
   })
 });

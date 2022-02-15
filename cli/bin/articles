@@ -169,12 +169,16 @@ if [ $# -gt 0 ]; then
         fi
 
     elif [ "$1" == "db-cleanup" ]; then
-      if [ "$EXEC" == "yes" ]; then
+      shift 1
+
+      if [ "$1" == "delete" ]; then
           docker exec -i \
               "$CLI_SERVICE" \
-              bash < ./cli/bin/db-cleanup.sh
+              bash < ./cli/bin/db-cleanup-delete.sh
       else
-          sail_is_not_running
+        docker exec -i \
+          "$CLI_SERVICE" \
+          bash < ./cli/bin/db-cleanup-list.sh
       fi
 
     # Pass unknown commands to the "docker-compose" binary...

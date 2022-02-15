@@ -16,7 +16,7 @@ describe('Site Settings', () => {
     cy.get('#collection_live').should('be.empty');
   });
 
-  it('Can save collection settings and show maintenance pagec', () => {
+  it('Can save collection settings and show maintenance page', () => {
     cy.visit('/wp-admin/options-general.php?page=collection-settings');
     cy.get('#collection_maintenance').check();
     cy.get('#submit').click();

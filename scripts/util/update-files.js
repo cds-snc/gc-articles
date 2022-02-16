@@ -60,11 +60,11 @@ const updatePackageJsonVersion = async (version) => {
 
 }
 
-export const updateEnvironmentManifest = async (version, environment = 'staging') => {
+export const updateEnvironmentManifest = async (version, environment = 'staging', service = 'wordpress') => {
   const environmentsFile = './infrastructure/environments.yml';
   const current = fs.readFileSync(environmentsFile, 'utf8')
   let manifest = YAML.parse(current)
-  manifest[environment].wordpress = version;
+  manifest[environment][service] = version;
   
   fs.writeFileSync(environmentsFile, YAML.stringify(manifest));
 }

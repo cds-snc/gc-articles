@@ -17,7 +17,11 @@ import {
     gitPullLatestFromMain,
     gitCheckClean,
     gitCheckMain,
-} from "./util/git.js";
+    gitCreateProductionReleaseBranch,
+    gitCommitProductionManifestFile,
+    gitPushProductionManifestFile,
+    ghProductionReleasePullRequest, gitAddProductionManifestFile
+} from './util/git.js';
 
 const argv = yargs(process.argv.slice(2)).argv;
 
@@ -76,6 +80,20 @@ const inputReleaseTag = async () => {
             await gitPushReleaseFiles(tag);
             await ghReleasePullRequest(tag, notes);
             createTaggedRelease(tag, notes);
+            await gitCheckoutMain();
+        }
+
+        if (argv.production) {
+            await gitCheckMain();
+            await gitCheckClean();
+            await gitPullLatestFromMain();
+            const version = await inputVersionNumber();
+            await gitCreateProductionReleaseBranch(version);
+            await updateEnvironmentManifest(version, 'production');
+            await gitAddProductionManifestFile();
+            await gitCommitProductionManifestFile(version);
+            await gitPushProductionManifestFile(version);
+            await ghProductionReleasePullRequest(version);
             await gitCheckoutMain();
         }
 

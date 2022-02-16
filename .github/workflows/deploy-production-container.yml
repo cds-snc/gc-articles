@@ -48,7 +48,7 @@ env:
 
 jobs:
   environments-manifest:
-    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
+    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@testing # TODO: this should be main
 
   terragrunt-plan-production:
     needs: environments-manifest

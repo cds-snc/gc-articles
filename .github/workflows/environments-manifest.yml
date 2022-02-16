@@ -56,7 +56,6 @@ jobs:
       - name: Previous versions
         id: previous
         run: |
-          echo "Current branch: ${{ github.ref_name }}"
           if [ ${{ github.ref_name }} == 'main' ]; then
             PREV_SHA="$(git show -2 --pretty=format:"%h" --no-patch infrastructure/environments.yml | tail -n 1)"
             PREV_ENVIRONMENTS_YML="$(git show ${PREV_SHA}:infrastructure/environments.yml)"

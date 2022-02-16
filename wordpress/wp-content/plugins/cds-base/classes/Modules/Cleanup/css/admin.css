@@ -314,7 +314,7 @@ th.column-disable_user_login {
 
 /* hide yoast profile fields */
 
-#yoast-seo-schema{
+#yoast-seo-schema, #yoast-seo-schema + p{
   display:none;
 }
 
@@ -341,6 +341,9 @@ th.column-disable_user_login {
 #wpseo-metabox-root div:nth-child(3){
   display:none;
 }
+
+
+
 
 .yoast-settings{
   display:none;

@@ -2,7 +2,7 @@ import { addArticle } from "./util";
 
 /// <reference types="Cypress" />
 
-describe.skip('Add Article as GC Editor', () => {
+describe('Add Article as GC Editor', () => {
     it('GC Editor can add an article', async () => {
         cy.addUser('gceditor', 'secret', 'gceditor');
         cy.login('gceditor', 'secret');

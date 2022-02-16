@@ -53,7 +53,7 @@ describe.skip('User - GC Editor', () => {
 
 });
 
-describe.skip('User - GC Admin', () => {
+describe('User - GC Admin', () => {
     before(() => {
         cy.addUser('gcadmin', 'secret', 'administrator');
     });

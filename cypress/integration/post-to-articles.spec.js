@@ -2,15 +2,7 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe.skip('Articles', () => {
-  before(() => {
-
-  });
-
-  after(() => {
-
-  });
-
+describe('Articles', () => {
   it('Posts are renamed to Articles', () => {
     cy.login();
     cy.visit("wp-admin/edit.php");

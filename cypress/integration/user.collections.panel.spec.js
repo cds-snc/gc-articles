@@ -2,7 +2,7 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe.skip('User Collections Panel', () => {
+describe('User Collections Panel', () => {
     beforeEach(() => {
         cy.intercept(
             {
@@ -39,7 +39,7 @@ describe.skip('User Collections Panel', () => {
         cy.login();
     });
 
-    it.skip('Can view User Collections Panel on dashboard', () => {
+    it('Can view User Collections Panel on dashboard', () => {
         cy.visitDashboard();
         cy.get('#collection-panel-container .collection-name').scrollIntoView() 
         cy.get('#collection-panel-container .collection-name').should('have.text', 'Name');

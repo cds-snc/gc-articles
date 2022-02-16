@@ -3,7 +3,7 @@ import { addPage } from "./util";
 /// <reference types="Cypress" />
 
 
-describe.skip('Add Side Nav', () => {
+describe('Add Side Nav', () => {
     before(() => {
         cy.testSetup();
       });

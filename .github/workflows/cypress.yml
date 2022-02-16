@@ -62,6 +62,17 @@ jobs:
           npm run wp-env:init
           npm run wp-env:test:setup
 
+      - name: Cypress run main
+        uses: cypress-io/github-action@v2
+        with:
+          install: false
+          spec: "cypress/integration/main/*.spec.js"
+        env:
+          # pass the Dashboard record key as an environment variable
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          # pass GitHub token to allow accurately detecting a build vs a re-run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Cypress run redirector
         uses: cypress-io/github-action@v2
         with:
@@ -78,17 +89,6 @@ jobs:
         with:
           install: false
           spec: "cypress/integration/flaky/*.spec.js"
-        env:
-          # pass the Dashboard record key as an environment variable
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # pass GitHub token to allow accurately detecting a build vs a re-run build
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Cypress run main
-        uses: cypress-io/github-action@v2
-        with:
-          install: false
-          spec: "cypress/integration/main/*.spec.js"
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

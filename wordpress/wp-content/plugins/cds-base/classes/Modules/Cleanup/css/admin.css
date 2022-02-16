@@ -311,3 +311,37 @@ th.column-disable_user_login {
   outline: 2px solid #fd0;
   outline-offset: -1px;
 }
+
+/* hide yoast profile fields */
+
+#yoast-seo-schema{
+  display:none;
+}
+
+#yoast-configuration-workout-notice{
+  display:none;
+}
+
+/* hide focus-keyword-input-metabox div */
+
+#focus-keyword-input-metabox{
+  display:none;
+}
+
+#yoast-get-related-keyphrases-metabox{
+  display:none;
+}
+
+/* 
+   We didn't have a classname to hook to...
+   if your here --- this is likely what you need to edit
+*/ 
+
+/* focus-keyword-input-metabox */
+#wpseo-metabox-root div:nth-child(3){
+  display:none;
+}
+
+.yoast-settings{
+  display:none;
+}

@@ -51,6 +51,9 @@ jobs:
     env:
       TARGET_VERSION: ${{ needs.environments-manifest.outputs.PROD_INFRASTRUCTURE }}
       PREVIOUS_VERSION: ${{ needs.environments-manifest.outputs.PREV_PROD_INFRASTRUCTURE }}
+
+    if: needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'false'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -140,7 +143,7 @@ jobs:
 
       # Load-balancer & database dependency
       - name: Terragrunt apply ecs
-        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' || needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production' }}
+        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/prod/ecs
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 

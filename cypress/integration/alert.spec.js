@@ -21,6 +21,5 @@ describe.skip('Alert Block', () => {
             'button.editor-block-list-item-cds-snc-alert'
         ).click({ force: true });
         cy.selectBlockByName('cds-snc/alert', 0);
-
     });
 });

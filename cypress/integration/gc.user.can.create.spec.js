@@ -2,13 +2,9 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe.skip('User - GC Editor', () => {
+describe('User - GC Editor', () => {
     before(() => {
         cy.testSetup();
-    });
-
-    after(() => {
-
     });
 
     it('GC Admin can add GC Editors', () => {

@@ -2,7 +2,7 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe.skip('Two Factor Panel', () => {
+describe('Two Factor Panel', () => {
     beforeEach(() => {
         cy.login();
     });

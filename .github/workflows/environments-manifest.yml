@@ -57,7 +57,7 @@ jobs:
         id: previous
         run: |
           git branch
-          echo ${GITHUB_REF##*/}
+          echo ${{ github.head_ref }}
           PREV_ENVIRONMENTS_YML="$(git show main:infrastructure/environments.yml)"
           echo "$PREV_ENVIRONMENTS_YML"
           PROD_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)

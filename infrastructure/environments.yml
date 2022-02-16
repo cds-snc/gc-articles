@@ -3,4 +3,4 @@ production:
   wordpress: 2.16.1
 staging:
   apache: 1.0.19
-  wordpress: 2.16.1
+  wordpress: 2.16.2

@@ -1,4 +1,4 @@
-import { addArticle } from "./util";
+import { addArticle } from "../util";
 
 /// <reference types="Cypress" />
 

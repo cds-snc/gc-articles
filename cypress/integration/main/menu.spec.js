@@ -1,4 +1,4 @@
-import { addPage } from "./util";
+import { addPage } from "../util";
 
 /// <reference types="Cypress" />
 

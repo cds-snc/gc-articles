@@ -45,7 +45,7 @@ jobs:
   environments-manifest:
     uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
 
-  terragrunt-apply:
+  terragrunt-apply-production:
     needs: environments-manifest
     runs-on: ubuntu-latest
     env:

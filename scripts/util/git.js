@@ -136,6 +136,15 @@ export const gitCreateProductionReleaseBranch = async (version) => {
     await delay();
 }
 
+export const gitAddProductionManifestFile = async () => {
+    if (shell.exec(`git add infrastructure/environments.yml`).code !== 0) {
+        shell.echo('Error: git add files failed for version bump');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+
 export const gitCommitProductionManifestFile = async (version) => {
     if (shell.exec(`git commit -m "Update Production container to version ${version}"`).code !== 0) {
         shell.echo('Error: git commit failed for version bump');

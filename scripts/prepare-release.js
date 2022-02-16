@@ -20,7 +20,7 @@ import {
     gitCreateProductionReleaseBranch,
     gitCommitProductionManifestFile,
     gitPushProductionManifestFile,
-    ghProductionReleasePullRequest
+    ghProductionReleasePullRequest, gitAddProductionManifestFile
 } from './util/git.js';
 
 const argv = yargs(process.argv.slice(2)).argv;
@@ -90,7 +90,7 @@ const inputReleaseTag = async () => {
             const version = await inputVersionNumber();
             await gitCreateProductionReleaseBranch(version);
             await updateEnvironmentManifest(version, 'production');
-            await gitAddVersionFiles();
+            await gitAddProductionManifestFile();
             await gitCommitProductionManifestFile(version);
             await gitPushProductionManifestFile(version);
             await ghProductionReleasePullRequest(version);

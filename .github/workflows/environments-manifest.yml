@@ -26,11 +26,7 @@ on:
         description: "The previous version of the Production infrastructure"
         value: ${{ jobs.environments-manifest.outputs.PREV_PROD_INFRASTRUCTURE }}
       CONTAINER_DEPLOYMENT:
-<<<<<<< HEAD
-        description: "Boolean flag to indicate if we're dealing with a container deployment"
-=======
         description: "(production|staging|false) flag to indicate if we're dealing with a container deployment"
->>>>>>> main
         value: ${{ jobs.environments-manifest.outputs.CONTAINER_DEPLOYMENT }}
 
 jobs:

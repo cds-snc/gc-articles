@@ -68,8 +68,12 @@ jobs:
       - name: Previous versions
         id: previous
         run: |
-          git branch
-          PREV_ENVIRONMENTS_YML="$(git show main:infrastructure/environments.yml)"
+          if [ ${{ github.ref_name }} == 'main' ]; then
+            PREV_SHA="$(git show -2 --pretty=format:"%h" --no-patch infrastructure/environments.yml | tail -n 1)"
+            PREV_ENVIRONMENTS_YML="$(git show ${PREV_SHA}:infrastructure/environments.yml)"
+          else
+            PREV_ENVIRONMENTS_YML="$(git show main:infrastructure/environments.yml)"
+          fi
           echo "$PREV_ENVIRONMENTS_YML"
           PROD_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
           STAG_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)

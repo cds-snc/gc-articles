@@ -127,3 +127,38 @@ export const gitCheckMain = async () => {
     await delay();
 }
 
+export const gitCreateProductionReleaseBranch = async (version) => {
+    if (shell.exec(`git checkout -b production/${version}`).code !== 0) {
+        shell.echo('Error: git create version branch failed');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+
+export const gitCommitProductionManifestFile = async (version) => {
+    if (shell.exec(`git commit -m "Update Production container to version ${version}"`).code !== 0) {
+        shell.echo('Error: git commit failed for version bump');
+        shell.exit(1);
+    }
+
+    await delay(5000);
+}
+
+export const gitPushProductionManifestFile = async (version) => {
+    if (shell.exec(`git push --set-upstream origin production/${version}`).code !== 0) {
+        shell.echo('Error: git push failed for version bump');
+        shell.exit(1);
+    }
+
+    await delay(5000);
+}
+
+export const ghProductionReleasePullRequest = async (version) => {
+    if (shell.exec(`gh pr create --title "Production release: ${version}" --body "Update Production container version"`).code !== 0) {
+        shell.echo('Error: to create pull request for version bump');
+        shell.exit(1);
+    }
+
+    await delay();
+}

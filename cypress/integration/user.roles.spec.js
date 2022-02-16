@@ -37,7 +37,7 @@ const checkPages = (pages, status) => {
     });
 }
 
-describe('User - GC Editor', () => {
+describe.skip('User - GC Editor', () => {
     before(() => {
         cy.addUser('gceditor', 'secret', 'gceditor');
     });
@@ -53,7 +53,7 @@ describe('User - GC Editor', () => {
 
 });
 
-describe('User - GC Admin', () => {
+describe.skip('User - GC Admin', () => {
     before(() => {
         cy.addUser('gcadmin', 'secret', 'administrator');
     });

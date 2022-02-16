@@ -2,7 +2,7 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe('Login', () => {
+describe.skip('Login', () => {
   it('Can view styled login page', () => {
     const host = Cypress.config().baseUrl;
 

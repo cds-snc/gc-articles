@@ -2,7 +2,7 @@
 
 const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 
-describe('User Collections Panel', () => {
+describe.skip('User Collections Panel', () => {
     beforeEach(() => {
         cy.intercept(
             {

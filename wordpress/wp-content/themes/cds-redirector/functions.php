@@ -54,7 +54,6 @@ if (!class_exists('Redirector')) {
             wp_enqueue_style('redirector-style', get_stylesheet_uri(), []);
         }
 
-
         /**
          * Returns all theme options
          *

@@ -65,7 +65,7 @@ describe('Add user', () => {
     cy.get(".components-button.is-primary").first().should('have.text', "Add user");
   });
 
-  it.skip('Gets correct validation messages for no email and no role', () => {
+  it('Gets correct validation messages for no email and no role', () => {
     cy.contains('button', 'Add user').click();
 
     // error summary
@@ -75,7 +75,7 @@ describe('Add user', () => {
     assertRoleErrors(cy)
   });
 
-  it.skip('Gets correct validation messages for good email and no role', () => {
+  it('Gets correct validation messages for good email and no role', () => {
     cy.get('input#email').type("editor@cds-snc.ca");
     cy.contains('button', 'Add user').click();
 
@@ -85,7 +85,7 @@ describe('Add user', () => {
     assertRoleErrors(cy)
   });
 
-  it.skip('Gets correct validation messages for bad email domain', () => {
+  it('Gets correct validation messages for bad email domain', () => {
     cy.get('input#email').type("editor@gmail.com"); // domain is not allowed
     cy.get('select#role').select('gceditor');
     cy.contains('button', 'Add user').click();
@@ -96,7 +96,7 @@ describe('Add user', () => {
     assertEmailErrors(cy, "You must enter a Government of Canada email to send an invitation.");
   });
 
-  it.skip('Successfully adds a new user', () => {
+  it('Successfully adds a new user', () => {
     cy.get('input#email').type("new+editor@cds-snc.ca"); // domain is not allowed
     cy.get('select#role').select('gceditor');
     cy.contains('button', 'Add user').click();
@@ -111,7 +111,7 @@ describe('Add user', () => {
     cy.get('table.users td.column-username').contains("new+editor@cds-snc.ca");
   });
 
-  it.skip('Shows an error when trying to add an existing user', () => {
+  it('Shows an error when trying to add an existing user', () => {
     cy.get('input#email').type("new+editor@cds-snc.ca");
     cy.get('select#role').select('gceditor');
     cy.contains('button', 'Add user').click();
@@ -123,7 +123,7 @@ describe('Add user', () => {
   });
 });
 
-describe.skip('As GC Admin', () => {
+describe('As GC Admin', () => {
   before(() => {
     cy.addUser('gcadmin', 'secret', 'administrator');
   });

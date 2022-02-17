@@ -18,4 +18,4 @@ describe('User - GC Editor', () => {
         cy.addUser('gceditor', 'secret', 'gceditor', false);
     });
 
-});
+}); 

@@ -39,7 +39,7 @@ describe('User Collections Panel', () => {
         cy.login();
     });
 
-    it.skip('Can view User Collections Panel on dashboard', () => {
+    it('Can view User Collections Panel on dashboard', () => {
         cy.visitDashboard();
         cy.get('#collection-panel-container .collection-name').scrollIntoView() 
         cy.get('#collection-panel-container .collection-name').should('have.text', 'Name');

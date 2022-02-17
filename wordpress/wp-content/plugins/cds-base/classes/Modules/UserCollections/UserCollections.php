@@ -50,7 +50,7 @@ class UserCollections
     {
         wp_add_dashboard_widget(
             'cds_collections_widget',
-            __('Your collections', 'cds'),
+            __('Your sites', 'cds'),
             [$this, 'userCollectionsPanelHandler'],
         );
     }

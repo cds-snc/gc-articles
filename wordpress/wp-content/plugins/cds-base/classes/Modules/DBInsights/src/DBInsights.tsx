@@ -33,7 +33,7 @@ const DBInsights = ({
     <div className="wp-list-table">
       <h4>
         <span style={{ color: "red" }} className="dashicons dashicons-warning"></span>
-        {__(' Tables exist from deleted collections', 'cds-snc')}
+        {__(' Tables exist from deleted sites', 'cds-snc')}
       </h4>
       <div className="faded-edge" style={{ paddingLeft: 30, height: 200, overflowY: "scroll" }}>
         {rows}

@@ -52,7 +52,7 @@ jobs:
           --build-arg WPML_USER_ID="${{ secrets.WPML_USER_ID }}" \
           --build-arg WPML_KEY="${{ secrets.WPML_KEY }}" \
           -t "${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
-          -f ./wordpress/docker/production.Dockerfile .
+          -f ./wordpress/docker/Dockerfile .
 
       - name: Push containers to ECR
         run: |

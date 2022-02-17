@@ -49,7 +49,7 @@ services:
     depends_on:
       - db
     build:
-      dockerfile: Dockerfile
+      dockerfile: local.Dockerfile
       context: ./wordpress/docker
     container_name: wordpress
     restart: always

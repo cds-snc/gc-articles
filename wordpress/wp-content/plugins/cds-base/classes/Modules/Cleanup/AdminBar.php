@@ -11,7 +11,7 @@ class AdminBar
         add_action('admin_bar_menu', [$this, 'removeFromAdminBar'], 2147483647);
         add_action('wp_before_admin_bar_render', [$this, 'removeFromAdminBarBefore'], 99);
 
-        add_action('admin_bar_menu', [$this, 'addCollections'], 21);
+        add_action('admin_bar_menu', [$this, 'addSites'], 21);
         add_action('admin_bar_menu', [$this, 'addAdminToggle'], 21);
 
         add_action('admin_bar_menu', [$this, 'addLanguageSwitcher'], 21);
@@ -148,18 +148,18 @@ class AdminBar
         }
     }
 
-    public function addCollections($wp_admin_bar): void
+    public function addSites($wp_admin_bar): void
     {
-        // if less than 2 collections or a superadmin, skip this
+        // if less than 2 sites or a superadmin, skip this
         if (count($wp_admin_bar->user->blogs) < 2 || is_super_admin()) {
             return;
         }
 
-        $root_id = 'my-collections';
+        $root_id = 'cds-my-sites';
         $wp_admin_bar->add_node([
             'id'    =>  $root_id,
             'title' => '<div class="ab-item"><span class="ab-icon"></span>' . __(
-                'My Collections',
+                'My Sites',
                 'cds-snc'
             ) . '</div>'
         ]);

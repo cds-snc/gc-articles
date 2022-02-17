@@ -37,7 +37,7 @@ const checkPages = (pages, status) => {
     });
 }
 
-describe.skip('User - GC Editor', () => {
+describe('User - GC Editor', () => {
     before(() => {
         cy.addUser('gceditor', 'secret', 'gceditor');
     });

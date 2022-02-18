@@ -87,3 +87,28 @@ body:not(.wp-admin) table tbody tr td,
 .wp-block-latest-posts .wp-block-latest-posts__post-excerpt {
   margin: 10px 0 20px 0;
 }
+
+/* Details */
+/* Remove bottom margin on open details elements and open alerts */
+section[class^="wp-block"] details[open],
+details[class^="wp-block"][open] {
+  padding-bottom: 0;
+}
+
+/* Alerts */
+.wp-block-cds-snc-alert details.alert {
+  /* Fix weird border glitch on closed alerts */
+  border-image: none;
+  margin-left: 0;
+}
+
+/* Align the alert icon with the title */
+.wp-block-cds-snc-alert details.alert:before,
+.wp-block-cds-snc-alert details.alert[open]:before {
+  padding: 0;
+  margin: 0;
+  padding-top: 15px;
+  margin-left: -1.3em;
+  top: unset;
+  line-height: unset;
+}

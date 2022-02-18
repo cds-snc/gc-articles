@@ -174,9 +174,9 @@ class Users
     // for use when setting up a new site / user
     public function sendWelcome($uId, $email, $userExists)
     {
-        
+
         $password_message = "";
-        
+
         if (!$userExists) {
             $userInfo = get_userdata($uId);
             $unique = get_password_reset_key($userInfo);
@@ -186,8 +186,8 @@ class Users
                 'login'
             );
         }
-       
-        if(!$userExists){
+
+        if (!$userExists) {
             // we don't need to send this for existing users
             $password_message = $uniqueUrl;
         }

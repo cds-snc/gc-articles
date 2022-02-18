@@ -204,7 +204,7 @@ class Users
         } catch (\Alphagov\Notifications\Exception\NotifyException $e) {
             error_log("[Notify] " . $e->getMessage());
             // throw new error to be handled by add user
-            return $e->getMessage();
+            throw new \Exception($e->getMessage());
         }
 
         return true;
@@ -269,8 +269,7 @@ class Users
                 $uId = $this->createUser($email);
 
                 if ($confirmationType === "welcome") {
-                    $result = $this->sendWelcome($uId, $email, false);
-                    if($result !== true) throw new \Exception($result);
+                    $this->sendWelcome($uId, $email, false);
                 } else {
                     $this->sendReset($uId, $email);
                 }
@@ -283,8 +282,7 @@ class Users
 
                 if ($statusCode === 200) {
                     if ($confirmationType === "welcome") {
-                        $result = $this->sendWelcome($uId, $email, true);
-                        if($result !== true) throw new \Exception($result);
+                        $this->sendWelcome($uId, $email, true);
                     } else {
                         // only send if we haven't created a new user
                         $this->sendAddToCollection($uId, $email);

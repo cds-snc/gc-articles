@@ -129,7 +129,6 @@ class Wpml
 
             // Insert translated post
             $post_translated_id = wp_insert_post(array( 'post_title' => $post_translated_title, 'post_type' => $post_type, "post_status" => "publish" ));
-
             // Get trid of original post
             $trid = wpml_get_content_trid('post_' . $post_type, $post_id);
 
@@ -138,7 +137,7 @@ class Wpml
             $wpdb->update(
                 $wpdb->prefix . 'icl_translations',
                 array( 'trid' => $trid, 'element_type' => "post_" . $post_type, 'language_code' => "fr", 'source_language_code' => "en" ),
-                array( 'element_id' => $post_translated_id )
+                array( 'element_id' => $post_translated_id, 'element_type' => 'post_page')
             );
 
             // Return translated post ID

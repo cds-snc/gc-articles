@@ -10,6 +10,7 @@ use CDS\Modules\Users\EmailDomains;
 use CDS\Modules\Users\UserLockout;
 use CDS\Modules\Users\UserSessions;
 use CDS\Modules\Users\ValidationException;
+use CDS\Modules\Notify\NotifyClient;
 
 class Users
 {
@@ -173,6 +174,9 @@ class Users
     // for use when setting up a new site / user
     public function sendWelcome($uId, $email, $userExists)
     {
+        
+        $password_message = "";
+        
         if (!$userExists) {
             $userInfo = get_userdata($uId);
             $unique = get_password_reset_key($userInfo);
@@ -182,20 +186,28 @@ class Users
                 'login'
             );
         }
-
-        // phpcs:disable
-        $subject = __("Your GC Articles site is ready", "cds-snc");
-        $message = __('@todo add welcome information here', "cds-snc") . "\r\n\r\n";
        
-        
         if(!$userExists){
-            // send reset pass url
-            $message .= __('To set your GC Articles account password, please visit the following address:', "cds-snc") . "\r\n\r\n";
-            $message .= $uniqueUrl;
+            // we don't need to send this for existing users
+            $password_message = $uniqueUrl;
         }
-        // phpcs:enable
 
-        wp_mail($email, $subject, $message);
+        try {
+            $notifyClient = new NotifyClient();
+            $notifyClient->sendMail(
+                $email,
+                "a11693cb-2b84-4920-9e66-e9eb649fc948",
+                [
+                    "password_message" => $password_message
+                ],
+            );
+        } catch (\Alphagov\Notifications\Exception\NotifyException $e) {
+            error_log("[Notify] " . $e->getMessage());
+            // throw new error to be handled by add user
+            return $e->getMessage();
+        }
+
+        return true;
     }
 
     public function sendReset($uId, $email)
@@ -257,7 +269,8 @@ class Users
                 $uId = $this->createUser($email);
 
                 if ($confirmationType === "welcome") {
-                    $this->sendWelcome($uId, $email, false);
+                    $result = $this->sendWelcome($uId, $email, false);
+                    if($result !== true) throw new \Exception($result);
                 } else {
                     $this->sendReset($uId, $email);
                 }
@@ -270,7 +283,8 @@ class Users
 
                 if ($statusCode === 200) {
                     if ($confirmationType === "welcome") {
-                        $this->sendWelcome($uId, $email, true);
+                        $result = $this->sendWelcome($uId, $email, true);
+                        if($result !== true) throw new \Exception($result);
                     } else {
                         // only send if we haven't created a new user
                         $this->sendAddToCollection($uId, $email);
@@ -281,7 +295,7 @@ class Users
             return new WP_REST_Response([
                 [
                     "status" => $statusCode,
-                    "message" => $email . __(" was invited to the Collection."),
+                    "message" => $email . __(" was invited to the Site."),
                     "uID" => $uId,
                     "email" => $email,
                     "confirmationType" => $confirmationType

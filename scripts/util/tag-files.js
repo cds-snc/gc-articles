@@ -30,7 +30,6 @@ export const createInfrastructureTagAndPush = (version) => {
         try {
             shell.exec(`git tag -a infrastructure/v${version} -m "v${version}"`);
             shell.exec(`git push --tags`);
-
             resolve(true);
         } catch (e) {
             reject(e.message);

@@ -55,7 +55,7 @@ jobs:
           echo "$(cat ./infrastructure/environments.yml)"
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
-          echo "::set-output name=PROD_INFRASTRUCTURE::${PROD_INFRASTRUCTURE}"
+          echo "::set-output name=PROD_INFRASTRUCTURE::infrastructure/${PROD_INFRASTRUCTURE}"
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -78,7 +78,7 @@ jobs:
           PROD_INFRASTRUCTURE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.infrastructure' -)
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
-          echo "::set-output name=PROD_INFRASTRUCTURE::${PROD_INFRASTRUCTURE}"
+          echo "::set-output name=PROD_INFRASTRUCTURE::infrastructure/${PROD_INFRASTRUCTURE}"
           
       - name: Deploy environment
         id: environment

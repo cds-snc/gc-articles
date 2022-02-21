@@ -124,11 +124,19 @@ class Wpml
             // Include WPML API
             include_once(WP_PLUGIN_DIR . '/sitepress-multilingual-cms/inc/wpml-api.php');
 
-            // Define title of translated post
-            $post_translated_title = get_post($post_id)->post_title . '(fr)';
+            // Define title & content of translated post
+            $post_translated_title = sanitize_text_field($_POST['translated_title']);
+            $post_translated_content = sanitize_text_field($_POST['translated_content']);
 
             // Insert translated post
-            $post_translated_id = wp_insert_post(array( 'post_title' => $post_translated_title, 'post_type' => $post_type, "post_status" => "publish" ));
+            $post_translated_id = wp_insert_post(
+                array(
+                    'post_title' => $post_translated_title,
+                    'post_content' => $post_translated_content,
+                    'post_type' => $post_type,
+                    "post_status" => "publish"
+                )
+            );
             // Get trid of original post
             $trid = wpml_get_content_trid('post_' . $post_type, $post_id);
 

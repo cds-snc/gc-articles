@@ -39,9 +39,18 @@ API.createPage = ($, data) => {
    });
 }
 
-API.translatePage = async ($, data) => {
+API.translatePage = async ($, BASE_SITE, data) => {
+
+   $('.text-status').text(`Retrieving ${slug} page content`);
+   const postContent = await API.getContent($, `${BASE_SITE}/fr`, data.fr_slug);
+
+   data.translated_title = postContent.title;
+   data.translated_content = postContent.content;
 
    const endpoint = window.ADMIN_REST.ENDPOINT;
+
+
+   $('.text-status').text(`Creating page`);
 
    return new Promise(async (resolve, reject) => {
       const result = await $.ajax({
@@ -79,7 +88,7 @@ API.setOptions = async ($, data) => {
 }
 
 (function ($) {
-   
+
    const BASE_SITE = "/template-site" // this is the site to pull content from
 
    $('.text-status').hide().removeClass("hidden");
@@ -103,8 +112,8 @@ API.setOptions = async ($, data) => {
          await API.setOptions($, { homeId, maintenanceId });
 
          $('.text-status').delay(500).text("Creating page translations");
-         await API.translatePage($, { post_id: homeId });
-         await API.translatePage($, { post_id: maintenanceId });
+         await API.translatePage($, BASE_SITE, { post_id: homeId, fr_slug: "home-fr" });
+         await API.translatePage($, BASE_SITE, { post_id: maintenanceId, fr_slug: "maintenance-fr" });
 
          $('.loader-container').fadeOut();
          $('.text-status').html(`Finished. You can now <a href="users.php?page=users-add">add a user</a>.`);

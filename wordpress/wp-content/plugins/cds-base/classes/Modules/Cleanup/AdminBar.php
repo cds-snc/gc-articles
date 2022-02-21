@@ -242,9 +242,10 @@ class AdminBar
         $wp_admin_bar->remove_menu('wp-mail-smtp-menu');
         $wp_admin_bar->remove_menu('wpseo-menu');
 
-        /* remove "Howdy" from admin bar */
+        /* remove "Howdy" and "Salutations" from admin bar */
         $my_account = $wp_admin_bar->get_node('my-account');
-        $newtext    = str_replace('Howdy,', '', $my_account->title);
+        $newtext    = str_replace('Howdy, ', '', $my_account->title);
+        $newtext    = str_replace('Salutations, ', '', $newtext);
         $wp_admin_bar->add_node([
             'id'    => 'my-account',
             'title' => $newtext,

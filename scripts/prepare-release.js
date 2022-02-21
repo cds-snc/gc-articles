@@ -1,7 +1,7 @@
 import yargs from "yargs";
 import inquirer from 'inquirer';
-import { updateVersion, updateEnvironmentManifest } from './util/update-files.js';
-import { createTaggedRelease, getVersionTag } from './util/tag-files.js';
+import { updateVersion, updateEnvironmentManifest, updateInfrastructureVersion } from './util/update-files.js';
+import { createInfrastructureTagAndPush, createTaggedRelease, getVersionTag } from './util/tag-files.js';
 import {
     gitCreateVersionBranch,
     gitAddVersionFiles,
@@ -20,10 +20,42 @@ import {
     gitCreateProductionReleaseBranch,
     gitCommitProductionManifestFile,
     gitPushProductionManifestFile,
-    ghProductionReleasePullRequest, gitAddProductionManifestFile
+    ghProductionReleasePullRequest, gitAddProductionManifestFile, ghInfrastructureReleasePullRequest
 } from './util/git.js';
+import path from 'path';
+import fs from 'fs';
+import shell from 'shelljs';
 
 const argv = yargs(process.argv.slice(2)).argv;
+
+const displayPreviousVersion = async (service = 'infrastructure') => {
+    let fileName = 'VERSION';
+    let filePath = '.';
+
+    if (service === 'infrastructure') {
+        filePath = './infrastructure/'
+    }
+
+    if (service === 'wordpress') {
+        filePath = '.'
+    }
+
+    if (service === 'apache') {
+        filePath = './wordpress/docker/apache'
+    }
+
+    return new Promise(async (resolve, reject) => {
+        try {
+            const file = path.join(filePath, fileName);
+            const version = await fs.promises.readFile(file, 'utf8');
+
+            shell.echo("Previous version: " + version);
+            resolve(true);
+        } catch (e) {
+            reject(e.message);
+        }
+    })
+}
 
 const inputVersionNumber = async () => {
     const question = {
@@ -94,6 +126,19 @@ const inputReleaseTag = async () => {
             await gitCommitProductionManifestFile(version);
             await gitPushProductionManifestFile(version);
             await ghProductionReleasePullRequest(version);
+            await gitCheckoutMain();
+        }
+
+        if (argv.deployInfrastructure) {
+            await gitCheckMain();
+            await gitCheckClean();
+            await gitPullLatestFromMain();
+            await displayPreviousVersion('infrastructure');
+            const version = await inputVersionNumber();
+            await updateInfrastructureVersion(version);
+            await updateEnvironmentManifest(version, 'production', 'infrastructure');
+            await createInfrastructureTagAndPush(version);
+            await ghInfrastructureReleasePullRequest(version);
             await gitCheckoutMain();
         }
 

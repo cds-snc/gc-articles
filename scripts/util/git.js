@@ -171,3 +171,12 @@ export const ghProductionReleasePullRequest = async (version) => {
 
     await delay();
 }
+
+export const ghInfrastructureReleasePullRequest = async (version) => {
+    if (shell.exec(`gh pr create --title "Infrastructure release: ${version}" --body "Update Production infrastructure"`).code !== 0) {
+        shell.echo('Error: to create pull request for infrastructure release');
+        shell.exit(1);
+    }
+
+    await delay();
+}

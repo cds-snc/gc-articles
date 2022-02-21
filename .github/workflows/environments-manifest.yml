@@ -51,9 +51,11 @@ jobs:
         run: |
           PROD_WORDPRESS=v$(yq '.production.wordpress' < ./infrastructure/environments.yml)
           STAG_WORDPRESS=v$(yq '.staging.wordpress' < ./infrastructure/environments.yml)
+          PROD_INFRASTRUCTURE=v$(yq '.production.infrastructure' < ./infrastructure/environments.yml)
           echo "$(cat ./infrastructure/environments.yml)"
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
+          echo "::set-output name=PROD_INFRASTRUCTURE::${PROD_INFRASTRUCTURE}"
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -73,9 +75,11 @@ jobs:
           echo "$PREV_ENVIRONMENTS_YML"
           PROD_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
           STAG_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
+          PROD_INFRASTRUCTURE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.infrastructure' -)
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
-
+          echo "::set-output name=PROD_INFRASTRUCTURE::${PROD_INFRASTRUCTURE}"
+          
       - name: Deploy environment
         id: environment
         run: |

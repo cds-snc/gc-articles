@@ -23,7 +23,7 @@ import {
     ghProductionReleasePullRequest,
     gitAddProductionManifestFile,
     ghInfrastructureReleasePullRequest,
-    gitCreateInfrastructureReleaseBranch, gitCommitInfrastructureFiles
+    gitCreateInfrastructureReleaseBranch, gitCommitInfrastructureFiles, gitPushInfrastructureFiles
 } from './util/git.js';
 import path from 'path';
 import fs from 'fs';
@@ -144,6 +144,7 @@ const inputReleaseTag = async () => {
             await gitCreateInfrastructureReleaseBranch(version);
             await gitAddReleaseFiles();
             await gitCommitInfrastructureFiles(version);
+            await gitPushInfrastructureFiles(version);
             await ghInfrastructureReleasePullRequest(version);
             await gitCheckoutMain();
         }

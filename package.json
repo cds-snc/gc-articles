@@ -20,7 +20,7 @@
     "wp-env:destroy": "wp-env destroy",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "format": "./wordpress/vendor/bin/phpcbf -n --standard=PSR12 --extensions=php --ignore=vendor,node_modules ./wordpress/wp-content/plugins/cds-base ./wordpress/wp-content/themes/cds-*",
+    "format": "./wordpress/vendor/bin/phpcbf -n --standard=PSR12 --extensions=php --ignore=vendor,node_modules,tests ./wordpress/wp-content/plugins/cds-base ./wordpress/wp-content/themes/cds-*",
     "watch": "npm-watch"
   },
   "devDependencies": {

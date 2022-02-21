@@ -19,7 +19,9 @@
     "wp-env:clean": "wp-env clean all",
     "wp-env:destroy": "wp-env destroy",
     "cy:run": "cypress run",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "format": "./wordpress/vendor/bin/phpcbf -n --standard=PSR12 --extensions=php --ignore=vendor,node_modules ./wordpress/wp-content/plugins/cds-base ./wordpress/wp-content/themes/cds-*",
+    "watch": "npm-watch"
   },
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
@@ -36,6 +38,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "inquirer": "^8.1.2",
+    "npm-watch": "^0.11.0",
     "prettier": "^2.3.2",
     "replace-in-file": "^6.2.0",
     "request-promise": "^0.4.1",
@@ -43,5 +46,15 @@
     "showdown": "^1.9.1",
     "yaml": "^1.10.2",
     "yargs": "^17.1.1"
+  },
+  "watch": {
+    "format": {
+      "patterns": [
+        "wordpress"
+      ],
+      "extensions": "php",
+      "runOnChangeOnly": false,
+      "clearBuffer": true
+    }
   }
 }

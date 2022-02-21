@@ -44,10 +44,17 @@ const displayPreviousVersion = async (service = 'infrastructure') => {
         filePath = './wordpress/docker/apache'
     }
 
-    const file = path.join(filePath, fileName);
-    const version = await fs.promises.readFile(file, 'utf8');
+    return new Promise(async (resolve, reject) => {
+        try {
+            const file = path.join(filePath, fileName);
+            const version = await fs.promises.readFile(file, 'utf8');
 
-    shell.echo("Previous version: " + version);
+            shell.echo("Previous version: " + version);
+            resolve(true);
+        } catch (e) {
+            reject(e.message);
+        }
+    })
 }
 
 const inputVersionNumber = async () => {

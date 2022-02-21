@@ -1,0 +1,216 @@
+# Translation of Plugins - Yoast Duplicate Post - Stable (latest release) in French (Canada)
+# This file is distributed under the same license as the Plugins - Yoast Duplicate Post - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-10-31 03:55:31+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: fr_CA\n"
+"Project-Id-Version: Plugins - Yoast Duplicate Post - Stable (latest release)\n"
+
+#: src/handlers/link-handler.php:58 src/handlers/link-handler.php:114
+#: src/handlers/link-handler.php:188
+msgid "Current user is not allowed to copy posts."
+msgstr "L’utilisateur actuel n’a pas les droits pour copier les publications."
+
+#: admin-functions.php:750
+msgid "Documentation"
+msgstr "Documentation"
+
+#: src/admin/options.php:165
+msgid "you probably want this unchecked, unless you have very special requirements"
+msgstr "mieux vaut que vous laissiez cette case vide, à moins d’avoir des exigences particulières"
+
+#: src/admin/options.php:307
+msgid "Bulk Actions"
+msgstr "Actions groupées"
+
+#: src/admin/options.php:186
+msgid "Menu order"
+msgstr "Ordre du menu"
+
+#: src/admin/options.php:149
+msgid "Author"
+msgstr "Auteur"
+
+#: src/admin/options.php:217
+msgid "You can use * to match zero or more alphanumeric characters or underscores: e.g. field*"
+msgstr "Vous pouvez utiliser * pour remplacer zéro ou plusieurs caractères alphanumériques ou tirets du bas : par ex. champ*."
+
+#: src/admin/options.php:135
+msgid "Template"
+msgstr "Modèle"
+
+#: src/admin/options.php:128
+msgid "Featured Image"
+msgstr "Image mise en avant"
+
+#. translators: %s: Number of posts copied.
+#: src/watchers/bulk-actions-watcher.php:55
+#: src/watchers/link-actions-watcher.php:73
+msgid "%s item copied."
+msgid_plural "%s items copied."
+msgstr[0] "%s élément copié."
+msgstr[1] "%s éléments copiés."
+
+#: src/admin/options.php:156
+msgid "Password"
+msgstr "Mot de passe"
+
+#: src/admin/options.php:121 src/handlers/check-changes-handler.php:127
+msgid "Content"
+msgstr "Contenu"
+
+#: src/admin/options.php:100
+msgid "Status"
+msgstr "État"
+
+#: src/admin/options.php:93
+msgid "Date"
+msgstr "Date"
+
+#: src/admin/options.php:86 src/handlers/check-changes-handler.php:126
+msgid "Title"
+msgstr "Titre"
+
+#: src/admin/options.php:178
+msgid "Comments"
+msgstr "Commentaires"
+
+#: src/admin/options.php:107
+msgid "Slug"
+msgstr "Identifiant"
+
+#: src/admin/views/options.php:162 src/admin/views/options.php:166
+msgid "Enable for these post types"
+msgstr "Activer pour ces types de publications"
+
+#: src/admin/views/options.php:127
+msgid "Show/hide private taxonomies"
+msgstr "Afficher/cacher les taxonomies privées"
+
+#: src/admin/options.php:208
+msgid "Add this number to the original menu order (blank or zero to retain the value)"
+msgstr "Ajouter ce numéro à l’ordre initial du menu (vide ou zéro pour conserver la valeur)"
+
+#: src/admin/options.php:206 src/admin/views/options.php:93
+msgid "Increase menu order by"
+msgstr "Augmenter l’ordre du menu de"
+
+#: src/admin/options.php:180
+msgid "except pingbacks and trackbacks"
+msgstr "sauf pingbacks et trackbacks"
+
+#: src/admin/options.php:171
+msgid "Children"
+msgstr "Enfants"
+
+#: src/admin/options.php:163
+msgid "Attachments"
+msgstr "Pièces jointes"
+
+#: src/admin/options.php:114 src/handlers/check-changes-handler.php:128
+msgid "Excerpt"
+msgstr "Extrait"
+
+#: src/admin/views/options.php:58 src/admin/views/options.php:61
+msgid "Post/page elements to copy"
+msgstr "Éléments à copier"
+
+#: src/admin/views/options.php:46 src/admin/views/options.php:187
+msgid "Display"
+msgstr "Afficher"
+
+#: src/admin/views/options.php:37 src/admin/views/options.php:140
+msgid "Permissions"
+msgstr "Droits"
+
+#: src/admin/views/options.php:28 src/admin/views/options.php:55
+msgid "What to copy"
+msgstr "Quoi copier"
+
+#: admin-functions.php:603
+msgid "Copy features for this post type are not enabled in options page"
+msgstr "Les fonctionnalités de copie pour ce type de publication ne sont pas activées dans la page d’options."
+
+#: src/admin/options.php:297
+msgid "Admin bar"
+msgstr "Barre d'administration"
+
+#: src/admin/options.php:302
+msgid "Edit screen"
+msgstr "Écran d'édition"
+
+#: src/admin/options.php:292
+msgid "Post list"
+msgstr "Liste des publications"
+
+#: src/admin/views/options.php:202
+msgid "Show links in"
+msgstr "Montrer les liens dans"
+
+#: src/admin/views/options.php:144 src/admin/views/options.php:147
+msgid "Roles allowed to copy"
+msgstr "Rôles autorisés à copier"
+
+#: src/admin/options.php:201
+msgid "Suffix to be added after the title, e.g. \"(dup)\" (blank for no suffix)"
+msgstr "Suffixe à ajouter après le titre, par ex : « dup » (laissez vide pour ne pas ajouter de suffixe)."
+
+#: src/admin/options.php:199 src/admin/views/options.php:82
+msgid "Title suffix"
+msgstr "Suffixe du titre"
+
+#: src/admin/options.php:194
+msgid "Prefix to be added before the title, e.g. \"Copy of\" (blank for no prefix)"
+msgstr "Préfixe à ajouter devant le titre, par ex : « Copie de » (laissez vide pour ne pas ajouter de préfixe)."
+
+#: src/admin/options.php:192 src/admin/views/options.php:71
+msgid "Title prefix"
+msgstr "Préfixe du titre"
+
+#: src/admin/views/options.php:116 src/admin/views/options.php:120
+msgid "Do not copy these taxonomies"
+msgstr "Ne pas copier ces taxonomies"
+
+#: src/admin/options.php:213 src/admin/views/options.php:105
+msgid "Do not copy these fields"
+msgstr "Ne pas copier ces champs"
+
+#: src/admin/options-page.php:77 src/ui/admin-bar.php:89 src/ui/metabox.php:59
+msgid "Duplicate Post"
+msgstr "Duplicate Post"
+
+#: src/admin/options-page.php:76 src/admin/views/options.php:14
+msgid "Duplicate Post Options"
+msgstr "Options de Duplicate Post"
+
+#: src/handlers/link-handler.php:75 src/handlers/link-handler.php:131
+#: src/handlers/link-handler.php:205
+msgid "Copy creation failed, could not find original:"
+msgstr "Échec de la copie. Impossible de trouver l’original :"
+
+#: src/handlers/link-handler.php:63 src/handlers/link-handler.php:119
+#: src/handlers/link-handler.php:193
+msgid "No post to duplicate has been supplied!"
+msgstr "Vous n’avez sélectionné aucune publication à dupliquer !"
+
+#: src/admin/options.php:271 src/ui/row-actions.php:114
+msgid "New Draft"
+msgstr "Nouveau brouillon"
+
+#: common-functions.php:79 src/ui/admin-bar.php:97 src/ui/admin-bar.php:115
+#: src/ui/classic-editor.php:135 js/dist/duplicate-post-edit-440.js:1
+msgid "Copy to a new draft"
+msgstr "Copier dans un nouveau brouillon"
+
+#: src/admin/options.php:276 src/ui/bulk-actions.php:69
+msgid "Clone"
+msgstr "Dupliquer"
+
+#: duplicate-post.php:99
+msgid "Settings"
+msgstr "Réglages"

@@ -41,7 +41,7 @@ API.createPage = ($, data) => {
 
 API.translatePage = async ($, BASE_SITE, data) => {
 
-   $('.text-status').text(`Retrieving ${slug} page content`);
+   $('.text-status').text(`Retrieving page content`);
    const postContent = await API.getContent($, `${BASE_SITE}/fr`, data.fr_slug);
 
    data.translated_title = postContent.title;

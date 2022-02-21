@@ -30,7 +30,7 @@ describe('Add Side Nav', () => {
 
         // Add 2nd page
         addPage(childPage.text, childPage.title);
-        
+
         // Open up the settings sidebar and select the parent page
         cy.get('button[aria-label="Settings"]').click();
         cy.get('button[data-label="Page"]').click();

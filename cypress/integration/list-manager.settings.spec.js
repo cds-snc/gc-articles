@@ -27,7 +27,7 @@ describe('List Manager Settings', () => {
 
   it('Encrypted settings are not re-populated', () => {
     cy.visit('/wp-admin/admin.php?page=cds_list_manager_settings');
-    
+
     cy.get('#list_manager_notify_services').should('be.empty');
   })
 });

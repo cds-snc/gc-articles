@@ -21,5 +21,5 @@ docker build \
     --build-arg APACHE_KEY="$APACHE_KEY" \
     --build-arg APACHE_CERT="$APACHE_CERT" \
     -t platform-mvp/ircc:"$GITHUB_SHA" \
-    -f ./wordpress/docker/production.Dockerfile .
+    -f ./wordpress/docker/Dockerfile .
 ```

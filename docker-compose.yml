@@ -49,7 +49,7 @@ services:
     depends_on:
       - db
     build:
-      dockerfile: Dockerfile
+      dockerfile: local.Dockerfile
       context: ./wordpress/docker
     container_name: wordpress
     restart: always
@@ -118,7 +118,7 @@ services:
       wp theme enable cds-default --activate --network;
       wp theme disable twentytwentyone --network;
       wp plugin activate sitepress-multilingual-cms cds-base two-factor login-lockdown --network;
-      wp plugin activate s3-uploads wps-hide-login disable-user-login gutenberg --network;
+      wp plugin activate s3-uploads wps-hide-login disable-user-login --network;
       wp plugin activate wordpress-seo wordpress-seo-premium wpml-string-translation wp-seo-multilingual --network;
       wp plugin activate jwt-authentication-for-wp-rest-api --network;
       wp plugin activate delete-orphaned-multisite-tables --network;

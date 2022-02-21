@@ -35,3 +35,21 @@ header .gcweb-menu {
   background-color: #bbbfc5;
   border-color: #989da6;
 }
+
+/* Alerts */
+.wp-block-cds-snc-alert details.alert {
+  /* Fix weird border glitch on closed alerts */
+  border-image: none;
+  margin-left: 0;
+}
+
+/* Align the alert icon with the title */
+.wp-block-cds-snc-alert details.alert:before,
+.wp-block-cds-snc-alert details.alert[open]:before {
+  padding: 0;
+  margin: 0;
+  padding-top: 15px;
+  margin-left: -1.3em;
+  top: unset;
+  line-height: unset;
+}

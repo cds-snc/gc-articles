@@ -17,7 +17,7 @@ use CDS\Modules\Cleanup\PostsToArticles;
 use CDS\Modules\Cleanup\PrintStyles as CleanupPrintStyles;
 use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
-use CDS\Modules\Cleanup\SitesToCollections;
+use CDS\Modules\Cleanup\CreateSites;
 use CDS\Modules\Cleanup\Media;
 use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\Contact\Setup as ContactForm;
@@ -111,7 +111,7 @@ class Setup
 
     public function cleanup()
     {
-        new SitesToCollections();
+        new CreateSites();
         new PostsToArticles();
         new CleanupRoles();
         new CleanupLogin();

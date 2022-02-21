@@ -1,6 +1,6 @@
 {
   "name": "cds-base",
-  "version": "2.16.2",
+  "version": "2.17.0",
   "private": true,
   "description": "CDS-SNC base plugin",
   "author": "CDS-SNC",

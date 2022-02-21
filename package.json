@@ -21,7 +21,8 @@
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "format": "./wordpress/vendor/bin/phpcbf -n --standard=PSR12 --extensions=php --ignore=vendor,node_modules,tests ./wordpress/wp-content/plugins/cds-base ./wordpress/wp-content/themes/cds-*",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "watch2": "node ./cli/format.js"
   },
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
@@ -44,6 +45,7 @@
     "request-promise": "^0.4.1",
     "shelljs": "^0.8.4",
     "showdown": "^1.9.1",
+    "watch": "^1.0.2",
     "yaml": "^1.10.2",
     "yargs": "^17.1.1"
   },

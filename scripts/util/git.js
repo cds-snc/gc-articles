@@ -172,6 +172,24 @@ export const ghProductionReleasePullRequest = async (version) => {
     await delay();
 }
 
+export const gitCreateInfrastructureReleaseBranch = async (version) => {
+    if (shell.exec(`git checkout -b infrastructure/${version}`).code !== 0) {
+        shell.echo('Error: git create infrastructure branch failed');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+
+export const gitCommitInfrastructureFiles = async (tag) => {
+    if (shell.exec(`git commit -m "Infrastructure release ${tag}"`).code !== 0) {
+        shell.echo('Error: git commit failed for release');
+        shell.exit(1);
+    }
+
+    await delay();
+}
+
 export const ghInfrastructureReleasePullRequest = async (version) => {
     if (shell.exec(`gh pr create --title "Infrastructure release: ${version}" --body "Update Production infrastructure"`).code !== 0) {
         shell.echo('Error: to create pull request for infrastructure release');

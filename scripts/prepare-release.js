@@ -20,7 +20,10 @@ import {
     gitCreateProductionReleaseBranch,
     gitCommitProductionManifestFile,
     gitPushProductionManifestFile,
-    ghProductionReleasePullRequest, gitAddProductionManifestFile, ghInfrastructureReleasePullRequest
+    ghProductionReleasePullRequest,
+    gitAddProductionManifestFile,
+    ghInfrastructureReleasePullRequest,
+    gitCreateInfrastructureReleaseBranch, gitCommitInfrastructureFiles
 } from './util/git.js';
 import path from 'path';
 import fs from 'fs';
@@ -138,6 +141,9 @@ const inputReleaseTag = async () => {
             await updateInfrastructureVersion(version);
             await updateEnvironmentManifest(version, 'production', 'infrastructure');
             await createInfrastructureTagAndPush(version);
+            await gitCreateInfrastructureReleaseBranch(version);
+            await gitAddReleaseFiles();
+            await gitCommitInfrastructureFiles(version);
             await ghInfrastructureReleasePullRequest(version);
             await gitCheckoutMain();
         }

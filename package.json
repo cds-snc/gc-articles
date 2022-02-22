@@ -22,11 +22,6 @@
     "cy:open": "cypress open",
     "watch": "node ./cli/format.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "echo \"[Husky] pre-commit \""
-    }
-  },
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
     "@prettier/plugin-php": "^0.17.3",

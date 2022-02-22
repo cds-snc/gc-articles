@@ -12,6 +12,7 @@ class Cleanup
 
         $instance->addActions();
         $instance->disableWpmlTranslationEditor();
+        // comment
     }
 
     protected function addActions()

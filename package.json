@@ -38,12 +38,12 @@
     "eslint-plugin-promise": "^5.1.0",
     "inquirer": "^8.1.2",
     "node-notifier": "^10.0.1",
-    "npm-watch": "^0.11.0",
     "prettier": "^2.3.2",
     "replace-in-file": "^6.2.0",
     "request-promise": "^0.4.1",
     "shelljs": "^0.8.4",
     "showdown": "^1.9.1",
+    "watch": "^1.0.2",
     "yaml": "^1.10.2",
     "yargs": "^17.1.1"
   }

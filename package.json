@@ -22,6 +22,11 @@
     "cy:open": "cypress open",
     "watch": "node ./cli/format.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo \"[Husky] pre-commit\""
+    }
+  },
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
     "@prettier/plugin-php": "^0.17.3",
@@ -36,6 +41,7 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
+    "husky": "^7.0.4",
     "inquirer": "^8.1.2",
     "node-notifier": "^10.0.1",
     "prettier": "^2.3.2",

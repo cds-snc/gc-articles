@@ -191,5 +191,5 @@ export const ListView = () => {
         ],
         []);
 
-    return <div><CreateListLink /> <TableStyles><Table columns={columns} data={data} /></TableStyles></div>
+    return <><CreateListLink /> <TableStyles><Table columns={columns} data={data} /></TableStyles></>
 }

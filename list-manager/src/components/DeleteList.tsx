@@ -7,7 +7,6 @@ export const DeleteList = () => {
     const [data, setData] = useState({ deleted: false })
     
     const deleteList = useCallback(async (id) => {
-        console.log(id);
         await request.delete(`/list/${id}`)
 
         

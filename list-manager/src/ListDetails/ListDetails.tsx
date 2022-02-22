@@ -6,7 +6,7 @@ import { SubmitHandler } from "react-hook-form";
 import { Inputs } from "../types";
 
 export const ListDetails = () => {
-  const { get, put, response } = useFetch({ data: [] })
+  const { request, response, loading } = useFetch({ data: [] })
   const [inputData, setInputData] = useState({ id: null })
 
   let params = useParams();
@@ -15,18 +15,20 @@ export const ListDetails = () => {
   const onSubmit: SubmitHandler<Inputs> = data => updateList(listId, data);
 
   const updateList = useCallback(async (listId: string | undefined, formData: Inputs) => {
-    console.log("submit data", formData);
-    await put(`list/${listId}`, formData)
+
+    const { id, ...updateData } = formData;
+
+    await request.put(`list/${listId}`, updateData)
 
     if (response.ok) {
       //
     }
 
     return {}
-  }, [response, put]);
+  }, [response, request]);
 
   const loadData = useCallback(async () => {
-    await get('/lists')
+    await request.get('/lists')
 
     if (response.ok) {
       const lists = await response.json()
@@ -38,9 +40,10 @@ export const ListDetails = () => {
       setInputData(data[0])
     }
 
-  }, [response, get, listId]);
+  }, [response, request, listId]);
 
   useEffect(() => { loadData() }, [loadData]) // componentDidMount
 
-  return (<ListForm formData={inputData} handler={onSubmit} />)
+  return inputData?.id ? <ListForm formData={inputData} handler={onSubmit} /> : null
+
 }

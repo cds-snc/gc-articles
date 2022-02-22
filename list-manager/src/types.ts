@@ -1,5 +1,5 @@
 export type Inputs = {
-  id?: string;
+  id: string;
   name: string;
   language: string;
   service_id: string;

@@ -20,7 +20,8 @@
     "wp-env:destroy": "wp-env destroy",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "watch": "node ./cli/format.js"
+    "watch": "node ./cli/format.js",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",

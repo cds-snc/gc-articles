@@ -3,19 +3,20 @@ import useFetch from 'use-http';
 import { Navigate, useParams } from 'react-router-dom';
 
 export const ResetList = () => {
-    const { request, response } = useFetch({ data: [] })
+    const { request, response, cache } = useFetch({ data: [] })
     const [data, setData] = useState({ reset: false })
     
     const resetList = useCallback(async (id) => {
         await request.put(`/list/${id}/reset`)
 
         if (response.ok) {
+            cache.clear()
             setData({reset:true})
         }
 
         return {}
 
-    }, [request, response]);
+    }, [cache, request, response.ok]);
 
     let params = useParams();
     const listId = params?.listId

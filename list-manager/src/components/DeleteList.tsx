@@ -18,7 +18,7 @@ export const DeleteList = () => {
 
         return {}
 
-    }, [request, response]);
+    }, [cache, request, response.ok]);
 
     let params = useParams();
     const listId = params?.listId

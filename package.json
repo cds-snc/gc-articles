@@ -20,9 +20,7 @@
     "wp-env:destroy": "wp-env destroy",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "format": "./wordpress/vendor/bin/phpcbf -n --standard=PSR12 --extensions=php --ignore=vendor,node_modules,tests ./wordpress/wp-content/plugins/cds-base ./wordpress/wp-content/themes/cds-*",
-    "watch": "npm-watch",
-    "watch2": "node ./cli/format.js"
+    "watch": "node ./cli/format.js"
   },
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
@@ -39,6 +37,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "inquirer": "^8.1.2",
+    "node-notifier": "^10.0.1",
     "npm-watch": "^0.11.0",
     "prettier": "^2.3.2",
     "replace-in-file": "^6.2.0",

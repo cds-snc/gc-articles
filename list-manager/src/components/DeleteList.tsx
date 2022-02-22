@@ -3,7 +3,7 @@ import useFetch from 'use-http';
 import { Navigate, useParams } from 'react-router-dom';
 
 export const DeleteList = () => {
-    const { request, response } = useFetch({ data: [] })
+    const { request, response, cache } = useFetch({ data: [] })
     const [data, setData] = useState({ deleted: false })
     
     const deleteList = useCallback(async (id) => {
@@ -12,6 +12,7 @@ export const DeleteList = () => {
 
         
         if (response.ok) {
+            cache.clear();
             setData({deleted:true})
         }
 

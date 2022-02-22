@@ -12,7 +12,7 @@ function App() {
   const options = {
     interceptors: {
       request: async ({ options }: { options: any }) => {
-        options.headers.Authorization = `TOKEN_HERE`
+        options.headers.Authorization = `b902e63f-ca23-415f-866d-64e442531a39`
         return options
       },
     }

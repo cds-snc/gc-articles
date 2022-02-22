@@ -33,6 +33,11 @@ const TableStyles = styled.div`
   }
 `
 
+const HeaderStyles = styled.div`
+    display: flex;
+    justify-content: space-between;
+`
+
 const Table = ({ columns, data }: { columns: any, data: any }) => {
     const {
         getTableProps,
@@ -73,13 +78,7 @@ const Table = ({ columns, data }: { columns: any, data: any }) => {
 }
 
 const CreateListLink = () => {
-    return <Link
-        to={{
-            pathname: `list/create`,
-        }}
-    >
-        Create List
-    </Link>
+    return <Link to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
 export const ListView = () => {
@@ -88,8 +87,6 @@ export const ListView = () => {
 
     const loadInitialData = useCallback(async () => {
 
-        console.log("load");
-        
         const initialTodos = await get('/lists')
 
         if (response.ok) {
@@ -105,7 +102,8 @@ export const ListView = () => {
     const columns = React.useMemo(
         () => [
             {
-                Header: 'Lists',
+                Header: () => { return <HeaderStyles><div>Lists</div> <div><CreateListLink /> </div></HeaderStyles> },
+                accessor: 'lists',
                 columns: [
                     {
                         Header: 'Name',
@@ -168,7 +166,7 @@ export const ListView = () => {
                                         pathname: `list/${row?.values?.id}/delete`,
                                     }}
                                 >
-                                    [delete]
+                                    delete
                                 </Link>
                             )
                         },
@@ -183,7 +181,7 @@ export const ListView = () => {
                                         pathname: `list/${row?.values?.id}/reset`,
                                     }}
                                 >
-                                    [reset]
+                                    reset
                                 </Link>
                             )
                         },
@@ -194,5 +192,5 @@ export const ListView = () => {
         ],
         []);
 
-    return <><CreateListLink /> <TableStyles><Table columns={columns} data={data} /></TableStyles></>
+    return <TableStyles><Table columns={columns} data={data} /></TableStyles>
 }

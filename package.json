@@ -44,18 +44,7 @@
     "request-promise": "^0.4.1",
     "shelljs": "^0.8.4",
     "showdown": "^1.9.1",
-    "watch": "^1.0.2",
     "yaml": "^1.10.2",
     "yargs": "^17.1.1"
-  },
-  "watch": {
-    "format": {
-      "patterns": [
-        "wordpress"
-      ],
-      "extensions": "php",
-      "runOnChangeOnly": false,
-      "clearBuffer": true
-    }
   }
 }

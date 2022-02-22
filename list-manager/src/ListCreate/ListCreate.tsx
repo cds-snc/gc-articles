@@ -7,13 +7,14 @@ import { Navigate } from "react-router-dom";
 
 export const ListCreate = () => {
 
-    const { post, response } = useFetch({ data: [] })
+    const { post, cache, response } = useFetch({ data: [] })
     const [data, setData] = useState({ id: null })
 
     const createList = useCallback(async (formData: Inputs) => {
         await post('/list', formData)
 
         if (response.ok) {
+            cache.clear();
             setData(await response.json())
         }
 
@@ -33,5 +34,5 @@ export const ListCreate = () => {
         , subscribe_redirect_url: "https://articles.cdssandbox.xyz"
     }
 
-    return data.id ? <Navigate to="/" replace={true} /> : <ListForm formData={ inputData } handler={onSubmit} />
+    return data.id ? <Navigate to="/" replace={true} /> : <ListForm formData={inputData} handler={onSubmit} />
 }

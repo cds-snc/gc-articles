@@ -87,6 +87,9 @@ export const ListView = () => {
     const [data, setData] = useState([])
 
     const loadInitialData = useCallback(async () => {
+
+        console.log("load");
+        
         const initialTodos = await get('/lists')
 
         if (response.ok) {

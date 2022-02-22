@@ -155,6 +155,36 @@ export const ListView = () => {
                         Header: 'Unsubscribe Phone Template Id',
                         accessor: 'unsubscribe_phone_template_id',
                     },
+                    {
+                        Header: 'Delete',
+                        accessor: 'delete',
+                        Cell: ({ row }: { row: any }) => {
+                            return (
+                                <Link
+                                    to={{
+                                        pathname: `list/delete/${row?.values?.id}`,
+                                    }}
+                                >
+                                    [delete]
+                                </Link>
+                            )
+                        },
+                    },
+                    {
+                        Header: 'Reset',
+                        accessor: 'reset',
+                        Cell: ({ row }: { row: any }) => {
+                            return (
+                                <Link
+                                    to={{
+                                        pathname: `list/reset/${row?.values?.id}`,
+                                    }}
+                                >
+                                    [reset]
+                                </Link>
+                            )
+                        },
+                    },
                 ],
             },
 

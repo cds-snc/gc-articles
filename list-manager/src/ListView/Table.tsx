@@ -165,7 +165,7 @@ export const ListView = () => {
                             return (
                                 <Link
                                     to={{
-                                        pathname: `list/delete/${row?.values?.id}`,
+                                        pathname: `list/${row?.values?.id}/delete`,
                                     }}
                                 >
                                     [delete]
@@ -180,7 +180,7 @@ export const ListView = () => {
                             return (
                                 <Link
                                     to={{
-                                        pathname: `list/reset/${row?.values?.id}`,
+                                        pathname: `list/${row?.values?.id}/reset`,
                                     }}
                                 >
                                     [reset]

@@ -3,6 +3,8 @@ import './App.css';
 import { ListView } from './ListView/Table';
 import { ListDetails } from './ListDetails/ListDetails';
 import { ListCreate } from './ListCreate/ListCreate';
+import { DeleteList } from './components/DeleteList';
+import { ResetList } from './components/ResetList';
 import { Provider } from 'use-http';
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 
@@ -26,6 +28,8 @@ function App() {
             <Route path="/" element={<ListView />} />
             <Route path="/list/create" element={<ListCreate />} />
             <Route path="/list/:listId" element={<ListDetails />} />
+            <Route path="/list/:listId/delete" element={<DeleteList />} />
+            <Route path="/list/:listId/reset" element={<ResetList />} />
           </Routes>
         </Suspense>
       </Provider>

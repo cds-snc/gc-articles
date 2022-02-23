@@ -172,12 +172,8 @@ export const ListViewTable = () => {
                                 setData(newData)
                             }}> Delete</a>
                             */
-<<<<<<< HEAD
-                            return (<DeleteActionLink text="delete" id={`${row?.values?.id}`} />)
-=======
 
                             return (<DeleteActionLink id={`${row?.values?.id}`} />)
->>>>>>> ec327a3ed8401f3750062ebb6bb743576096987b
                         },
                     },
                     {

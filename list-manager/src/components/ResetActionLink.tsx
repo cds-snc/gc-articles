@@ -4,7 +4,7 @@ import { ConfirmActionLink } from "./ConfirmActionLink"
 export const ResetActionLink = ({id = ''}:{id: string}) => {
     const { request, response } = useFetch({ data: [] })
     
-    const deleteList = async ({id = ''}:{id: string}) => {
+    const resetList = async ({id = ''}:{id: string}) => {
         await request.put(`/list/${id}/reset`)
     
         if (response.ok) {
@@ -12,5 +12,5 @@ export const ResetActionLink = ({id = ''}:{id: string}) => {
         } 
     }
 
-    return <ConfirmActionLink text={"reset"} isConfirmedHandler={ () => deleteList({id}) } />
+    return <ConfirmActionLink text={"reset"} isConfirmedHandler={ () => resetList({id}) } />
 }

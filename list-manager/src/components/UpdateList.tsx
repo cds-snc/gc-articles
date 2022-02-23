@@ -1,13 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import useFetch from 'use-http';
 import { useParams } from "react-router-dom";
-import { ListForm } from "../ListForm/ListForm";
+import { ListForm } from "./ListForm";
 import { SubmitHandler } from "react-hook-form";
-import { Inputs } from "../types";
+import { Inputs, ListId } from "../types";
+import { Navigate } from "react-router-dom";
 
-export const ListDetails = () => {
-  const { request, response, loading } = useFetch({ data: [] })
+export const UpdateList = () => {
+  const { request, cache, response, loading } = useFetch({ data: [] })
   const [inputData, setInputData] = useState({ id: null })
+  const [responseData, setResponseData] = useState<ListId>({ id: null })
 
   let params = useParams();
   const listId = params?.listId
@@ -15,17 +17,19 @@ export const ListDetails = () => {
   const onSubmit: SubmitHandler<Inputs> = data => updateList(listId, data);
 
   const updateList = useCallback(async (listId: string | undefined, formData: Inputs) => {
-
+    
+    // remove id from payload
     const { id, ...updateData } = formData;
 
     await request.put(`list/${listId}`, updateData)
 
     if (response.ok) {
-      //
+      cache.clear();
+      setResponseData({ id: id })
     }
 
     return {}
-  }, [response, request]);
+  }, [response, request, cache]);
 
   const loadData = useCallback(async () => {
     await request.get('/lists')
@@ -44,6 +48,9 @@ export const ListDetails = () => {
 
   useEffect(() => { loadData() }, [loadData]) // componentDidMount
 
-  return inputData?.id ? <ListForm formData={inputData} handler={onSubmit} /> : null
+  if (responseData.id) {
+    return <Navigate to="/" replace={true} />
+  }
 
+  return inputData?.id ? <ListForm formData={inputData} handler={onSubmit} /> : null
 }

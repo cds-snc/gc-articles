@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react'
 import './App.css';
-import { ListView } from './ListView/Table';
-import { ListDetails } from './ListDetails/ListDetails';
-import { ListCreate } from './ListCreate/ListCreate';
+import { ListViewTable } from './components/ListViewTable';
+import { UpdateList } from './components/UpdateList';
+import { CreateList } from './components/CreateList';
 import { DeleteList } from './components/DeleteList';
 import { ResetList } from './components/ResetList';
 import { Provider } from 'use-http';
@@ -25,9 +25,9 @@ function App() {
       <Provider url="http://localhost:8000" options={options}>
         <Suspense fallback='Loading...'>
           <Routes>
-            <Route path="/" element={<ListView />} />
-            <Route path="/list/create" element={<ListCreate />} />
-            <Route path="/list/:listId" element={<ListDetails />} />
+            <Route path="/" element={<ListViewTable />} />
+            <Route path="/list/create" element={<CreateList />} />
+            <Route path="/list/:listId" element={<UpdateList />} />
             <Route path="/list/:listId/delete" element={<DeleteList />} />
             <Route path="/list/:listId/reset" element={<ResetList />} />
           </Routes>

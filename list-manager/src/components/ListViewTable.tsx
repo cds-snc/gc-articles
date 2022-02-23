@@ -3,8 +3,7 @@ import styled from 'styled-components'
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 import useFetch from 'use-http';
-import { ConfirmActionLink } from '../components/ConfirmActionLink';
-import { Inputs } from '../types';
+import { ConfirmActionLink } from './ConfirmActionLink';
 
 const TableStyles = styled.div`
   padding: 1rem;
@@ -83,7 +82,7 @@ const CreateListLink = () => {
     return <Link to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
-export const ListView = () => {
+export const ListViewTable = () => {
     const { get, response } = useFetch({ data: [] })
     const [data, setData] = useState([])
 
@@ -104,7 +103,7 @@ export const ListView = () => {
     const columns = React.useMemo(
         () => [
             {
-                Header: () => { return <HeaderStyles><div>Lists</div> <div><CreateListLink /> </div></HeaderStyles> },
+                Header: () => { return <HeaderStyles><div>Lists</div><CreateListLink /></HeaderStyles> },
                 accessor: 'lists',
                 columns: [
                     {

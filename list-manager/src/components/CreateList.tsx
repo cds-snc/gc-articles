@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react'
-import { ListForm } from "../ListForm/ListForm";
+import { ListForm } from "./ListForm";
 import { SubmitHandler } from "react-hook-form";
 import { Inputs } from "../types";
 import useFetch from 'use-http';
 import { Navigate } from "react-router-dom";
 
-export const ListCreate = () => {
+export const CreateList = () => {
 
     const { post, cache, response } = useFetch({ data: [] })
     const [data, setData] = useState({ id: null })

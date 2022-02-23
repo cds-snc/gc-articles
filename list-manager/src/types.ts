@@ -11,3 +11,7 @@ export type Inputs = {
   confirm_redirect_url?: string;
   unsubscribe_redirect_url?: string;
 };
+
+export type ListId = {
+  id: string | null;
+};

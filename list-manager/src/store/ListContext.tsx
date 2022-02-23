@@ -1,8 +1,9 @@
 // @ts-nocheck
 import React, { createContext, useReducer, useContext, FC } from 'react'
+import { v4 as uuidv4 } from "uuid";
 
 const ListContext = createContext({
-    state: { lists: [] },
+    state: { lists: [], messages: [] },
     dispatch: ({ }) => { return null },
 });
 
@@ -10,14 +11,16 @@ const ListReducer = (state, action: any) => {
 
     switch (action.type) {
         case "add":
-            return { ...state, messages: { type: "delete", message: `Added ${action.payload}` } }
+            console.log("add");
+            return { ...state, messages: [{ id: uuidv4(), type: "add", message: `Added ${action.payload.id}` }] }
         case "delete":
+            console.log("delete");
             const lists = state.lists.filter((item: Inputs) => {
                 return item.id !== action.payload.id
             })
-            return { ...state, lists, messages: { type: "delete", message: "deleted" } }
+            return { ...state, lists, messages: [{ id: uuidv4(), type: "delete", message: `Deleted  ${action.payload.id}` }] }
         case "load":
-            return { lists: [...action.payload] };
+            return { ...state, lists: [...action.payload] };
         default: {
             throw new Error(`Unhandled action type: ${action.type}`);
         }

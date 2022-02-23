@@ -7,6 +7,7 @@ import { Spinner } from './Spinner';
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
 import { useList } from "../store/ListContext";
+import { Messages } from "./Messages"
 
 const TableStyles = styled.div`
   padding: 1rem;
@@ -195,7 +196,7 @@ export const ListViewTable = () => {
         <>
             {error && 'Error!'}
             {loading && <Spinner />}
-            {lists && lists.length >= 1 && <TableStyles><Table columns={columns} data={lists} /></TableStyles>}
+            {lists && lists.length >= 1 && <><Messages /><TableStyles><Table columns={columns} data={lists} /></TableStyles></>}
         </>
     )
 }

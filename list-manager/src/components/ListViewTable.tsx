@@ -4,6 +4,7 @@ import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 import useFetch from 'use-http';
 import { ConfirmActionLink } from './ConfirmActionLink';
+import { Spinner } from './Spinner'
 
 const TableStyles = styled.div`
   padding: 1rem;
@@ -83,22 +84,19 @@ const CreateListLink = () => {
 }
 
 export const ListViewTable = () => {
-    const { get, response } = useFetch({ data: [] })
+    const { request, response, error, loading } = useFetch({ data: [] })
     const [data, setData] = useState([])
 
-    const loadInitialData = useCallback(async () => {
-
-        const initialTodos = await get('/lists')
+    const loadData = useCallback(async () => {
+        await request.get('/lists')
 
         if (response.ok) {
             setData(await response.json())
         }
 
-        return initialTodos
+    }, [response, request]);
 
-    }, [response, get]);
-
-    useEffect(() => { loadInitialData() }, [loadInitialData]) // componentDidMount
+    useEffect(() => { loadData() }, [loadData]) // componentDidMount
 
     const columns = React.useMemo(
         () => [
@@ -190,5 +188,12 @@ export const ListViewTable = () => {
         ],
         [data]);
 
-    return <TableStyles><Table columns={columns} data={data} /></TableStyles>
+
+    return (
+        <>
+            {error && 'Error!'}
+            {loading && <Spinner />}
+            <TableStyles><Table columns={columns} data={data} /></TableStyles>
+        </>
+    )
 }

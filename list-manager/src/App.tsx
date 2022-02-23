@@ -6,11 +6,13 @@ import { CreateList } from './components/CreateList';
 import { DeleteList } from './components/DeleteList';
 import { ResetList } from './components/ResetList';
 import { Provider } from 'use-http';
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Spinner } from './components/Spinner';
 
-// https://codesandbox.io/s/github/ggascoigne/react-table-example
+// @todo - lazy load components for routes
+// https://stackblitz.com/github/remix-run/react-router/tree/main/examples/lazy-loading?file=src/App.tsx
 
-function App() {
+const App = () => {
   const options = {
     interceptors: {
       request: async ({ options }: { options: any }) => {
@@ -23,7 +25,7 @@ function App() {
   return (
     <BrowserRouter>
       <Provider url="http://localhost:8000" options={options}>
-        <Suspense fallback='Loading...'>
+        <Suspense fallback={<Spinner />}>
           <Routes>
             <Route path="/" element={<ListViewTable />} />
             <Route path="/list/create" element={<CreateList />} />

@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "@types/react-table": "^7.7.9",
-    "@types/styled-components": "^5.1.23"
+    "@types/styled-components": "^5.1.23",
+    "@types/uuid": "^8.3.4"
   }
 }

@@ -1,6 +1,7 @@
 // @ts-nocheck
 import React, { createContext, useReducer, useContext, FC } from 'react'
 import { v4 as uuidv4 } from "uuid";
+import {Inputs} from "../types"
 
 const ListContext = createContext({
     state: { lists: [], messages: [] },

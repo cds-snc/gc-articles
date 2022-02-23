@@ -2,7 +2,7 @@ import useFetch from "use-http";
 import { ConfirmActionLink } from "./ConfirmActionLink"
 import { useList } from "../store/ListContext";
 
-export const DeleteActionLink = ({ id = '', text = '' }: { id: string, text: string }) => {
+export const DeleteActionLink = ({id = ''}:{id: string}) => {
     const { request, response } = useFetch({ data: [] })
     const { dispatch } = useList();
 

@@ -1,8 +1,9 @@
 import Swal from "sweetalert2";
 
-export const ConfirmActionLink = ({text = '', isConfirmedHandler}:{text: string, isConfirmedHandler: () => void}) => {
+export const ConfirmActionLink = ({ text = '', isConfirmedHandler }: { text: string, isConfirmedHandler: () => void }) => {
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    return (<a href="#" onClick={async () => {
+    return (<a href="#" onClick={async (e) => {
+        e.preventDefault();
         let result = await ConfirmDialog();
 
         if (result) {
@@ -11,7 +12,7 @@ export const ConfirmActionLink = ({text = '', isConfirmedHandler}:{text: string,
     }}>{text}</a>)
 }
 
-const ConfirmDialog = async () => {    
+const ConfirmDialog = async () => {
     let result = await Swal.fire({
         title: 'Warning!',
         text: 'This is a destructive action. Are you sure you want to continue?',
@@ -22,7 +23,7 @@ const ConfirmDialog = async () => {
 
     if (result.isConfirmed) {
         return true;
-    } 
+    }
 
     return false;
 }

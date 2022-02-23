@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { createContext, useReducer, useContext, FC } from 'react'
 
 const ListContext = createContext({
@@ -7,10 +8,12 @@ const ListContext = createContext({
 
 const ListReducer = (state = [], action: any) => {
     switch (action.type) {
-        case "delete": {
-            console.log("remove", action.payload);
-            return [...state];
-        }
+        case "delete":
+            return state.filter((item: Inputs) => {
+                return item.id !== action.payload.id
+            })
+        case "load":
+            return [...action.payload];
         default: {
             throw new Error(`Unhandled action type: ${action.type}`);
         }

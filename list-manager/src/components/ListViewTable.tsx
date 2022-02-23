@@ -6,6 +6,7 @@ import useFetch from 'use-http';
 import { Spinner } from './Spinner';
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
+import { useList } from "../store/ListContext";
 
 const TableStyles = styled.div`
   padding: 1rem;
@@ -86,13 +87,14 @@ const CreateListLink = () => {
 
 export const ListViewTable = () => {
     const { request, response, error, loading } = useFetch({ data: [] })
-    const [data, setData] = useState([])
+
+    const { state, dispatch } = useList();
 
     const loadData = useCallback(async () => {
         await request.get('/lists')
 
         if (response.ok) {
-            setData(await response.json())
+            dispatch({ type: "load", payload: await response.json() })
         }
 
     }, [response, request]);
@@ -187,14 +189,14 @@ export const ListViewTable = () => {
             },
 
         ],
-        [data]);
+        []);
 
 
     return (
         <>
             {error && 'Error!'}
             {loading && <Spinner />}
-            <TableStyles><Table columns={columns} data={data} /></TableStyles>
+            <TableStyles><Table columns={columns} data={state} /></TableStyles>
         </>
     )
 }

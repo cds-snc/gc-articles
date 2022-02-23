@@ -9,8 +9,14 @@ import { Provider } from 'use-http';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Spinner } from './components/Spinner';
 
-// @todo - lazy load components for routes
+// @todo 
+// - lazy load components for routes
 // https://stackblitz.com/github/remix-run/react-router/tree/main/examples/lazy-loading?file=src/App.tsx
+
+// group lists by Service Ids
+// https://react-table.tanstack.com/docs/examples/grouping-column
+
+// get subscriber counts for lists + display 
 
 const App = () => {
   const options = {

@@ -4,6 +4,7 @@ import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 import useFetch from 'use-http';
 import { ConfirmActionLink } from '../components/ConfirmActionLink';
+import { Inputs } from '../types';
 
 const TableStyles = styled.div`
   padding: 1rem;
@@ -161,6 +162,19 @@ export const ListView = () => {
                         Header: 'Delete',
                         accessor: 'delete',
                         Cell: ({ row }: { row: any }) => {
+                            /*
+                            // @todo "inline delete" to prevent re-draw
+                            return <a href="#" onClick={(e) => {
+                                // if confirm
+                                // inline delete --- + make request.delete call without navigating
+                                e.preventDefault();
+                                const newData = data.filter((item: Inputs) => {
+                                    return item.id !== row?.values?.id
+                                })
+                                setData(newData)
+                            }}> Delete</a>
+                            */
+
                             return (<ConfirmActionLink text="delete" path={`list/${row?.values?.id}/delete`} />)
                         },
                     },
@@ -175,7 +189,7 @@ export const ListView = () => {
             },
 
         ],
-        []);
+        [data]);
 
     return <TableStyles><Table columns={columns} data={data} /></TableStyles>
 }

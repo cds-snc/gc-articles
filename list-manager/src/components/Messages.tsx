@@ -25,8 +25,6 @@ const Toast = Swal.mixin({
 export const Messages = () => {
     const { state, dispatch } = useList();
 
-    let messages: any = []
-
     if (state.messages && state.messages.length >= 1) {
 
         state.messages.map((item: Message) => {
@@ -36,6 +34,8 @@ export const Messages = () => {
                     icon: "success",
                     title: 'Success'
                 })
+
+                // @todo  dispatch to clear messages
 
             }
         })

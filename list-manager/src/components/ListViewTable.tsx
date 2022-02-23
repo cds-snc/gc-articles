@@ -4,7 +4,7 @@ import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 import useFetch from 'use-http';
 import { ConfirmActionLink } from './ConfirmActionLink';
-import { Spinner } from './Spinner'
+import { Spinner } from './Spinner';
 
 const TableStyles = styled.div`
   padding: 1rem;

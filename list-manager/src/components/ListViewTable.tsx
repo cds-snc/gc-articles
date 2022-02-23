@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import styled from 'styled-components'
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
@@ -87,8 +87,8 @@ const CreateListLink = () => {
 
 export const ListViewTable = () => {
     const { request, response, error, loading } = useFetch({ data: [] })
-
     const { state, dispatch } = useList();
+    const { lists } = state;
 
     const loadData = useCallback(async () => {
         await request.get('/lists')
@@ -97,7 +97,7 @@ export const ListViewTable = () => {
             dispatch({ type: "load", payload: await response.json() })
         }
 
-    }, [response, request]);
+    }, [response, request, dispatch]);
 
     useEffect(() => { loadData() }, [loadData]) // componentDidMount
 
@@ -191,12 +191,11 @@ export const ListViewTable = () => {
         ],
         []);
 
-
     return (
         <>
             {error && 'Error!'}
             {loading && <Spinner />}
-            <TableStyles><Table columns={columns} data={state} /></TableStyles>
+            {lists && lists.length >= 1 && <TableStyles><Table columns={columns} data={lists} /></TableStyles>}
         </>
     )
 }

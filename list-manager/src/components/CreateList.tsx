@@ -4,18 +4,23 @@ import { SubmitHandler } from "react-hook-form";
 import { Inputs } from "../types";
 import useFetch from 'use-http';
 import { Navigate } from "react-router-dom";
+import { useList } from "../store/ListContext";
 
 export const CreateList = () => {
 
     const { post, cache, response } = useFetch({ data: [] })
     const [data, setData] = useState({ id: null })
+    const { dispatch } = useList();
+
 
     const createList = useCallback(async (formData: Inputs) => {
         await post('/list', formData)
 
         if (response.ok) {
             cache.clear();
-            setData(await response.json())
+            const id = await response.json()
+            setData(await response.json());
+            dispatch({ type: "add", payload: id })
         }
 
         return {}

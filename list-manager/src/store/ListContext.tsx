@@ -2,18 +2,22 @@
 import React, { createContext, useReducer, useContext, FC } from 'react'
 
 const ListContext = createContext({
-    state: [],
-    dispatch: ({ }) => { },
+    state: { lists: [] },
+    dispatch: ({ }) => { return null },
 });
 
-const ListReducer = (state = [], action: any) => {
+const ListReducer = (state, action: any) => {
+
     switch (action.type) {
+        case "add":
+            return { ...state, messages: { type: "delete", message: `Added ${action.payload}` } }
         case "delete":
-            return state.filter((item: Inputs) => {
+            const lists = state.lists.filter((item: Inputs) => {
                 return item.id !== action.payload.id
             })
+            return { ...state, lists, messages: { type: "delete", message: "deleted" } }
         case "load":
-            return [...action.payload];
+            return { lists: [...action.payload] };
         default: {
             throw new Error(`Unhandled action type: ${action.type}`);
         }

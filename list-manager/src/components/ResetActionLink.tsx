@@ -1,7 +1,7 @@
 import useFetch from "use-http";
 import { ConfirmActionLink } from "./ConfirmActionLink"
 
-export const ResetActionLink = ({id = '', text = ''}:{id: string, text: string}) => {
+export const ResetActionLink = ({id = ''}:{id: string}) => {
     const { request, response } = useFetch({ data: [] })
     
     const deleteList = async ({id = ''}:{id: string}) => {
@@ -12,5 +12,5 @@ export const ResetActionLink = ({id = '', text = ''}:{id: string, text: string})
         } 
     }
 
-    return <ConfirmActionLink text={"delete"} isConfirmedHandler={ () => deleteList({id}) } />
+    return <ConfirmActionLink text={"reset"} isConfirmedHandler={ () => deleteList({id}) } />
 }

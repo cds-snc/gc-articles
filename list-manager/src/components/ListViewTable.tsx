@@ -173,14 +173,14 @@ export const ListViewTable = () => {
                             }}> Delete</a>
                             */
 
-                            return (<DeleteActionLink text="delete" id={`${row?.values?.id}`} />)
+                            return (<DeleteActionLink id={`${row?.values?.id}`} />)
                         },
                     },
                     {
                         Header: 'Reset',
                         accessor: 'reset',
                         Cell: ({ row }: { row: any }) => {
-                            return (<ResetActionLink text="reset" id={`${row?.values?.id}`} />);
+                            return (<ResetActionLink id={`${row?.values?.id}`} />);
                         },
                     },
                 ],

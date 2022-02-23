@@ -1,7 +1,7 @@
 import useFetch from "use-http";
 import { ConfirmActionLink } from "./ConfirmActionLink"
 
-export const DeleteActionLink = ({id = '', text = ''}:{id: string, text: string}) => {
+export const DeleteActionLink = ({id = ''}:{id: string}) => {
     const { request, response } = useFetch({ data: [] })
     
     const deleteList = async ({id = ''}:{id: string}) => {

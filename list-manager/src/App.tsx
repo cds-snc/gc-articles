@@ -8,6 +8,7 @@ import { ResetList } from './components/ResetList';
 import { Provider } from 'use-http';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Spinner } from './components/Spinner';
+import { ListProvider } from "./store/ListContext"
 
 // @todo 
 // - lazy load components for routes
@@ -30,17 +31,19 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <Provider url="http://localhost:8000" options={options}>
-        <Suspense fallback={<Spinner />}>
-          <Routes>
-            <Route path="/" element={<ListViewTable />} />
-            <Route path="/list/create" element={<CreateList />} />
-            <Route path="/list/:listId" element={<UpdateList />} />
-            <Route path="/list/:listId/delete" element={<DeleteList />} />
-            <Route path="/list/:listId/reset" element={<ResetList />} />
-          </Routes>
-        </Suspense>
-      </Provider>
+      <ListProvider>
+        <Provider url="http://localhost:8000" options={options}>
+          <Suspense fallback={<Spinner />}>
+            <Routes>
+              <Route path="/" element={<ListViewTable />} />
+              <Route path="/list/create" element={<CreateList />} />
+              <Route path="/list/:listId" element={<UpdateList />} />
+              <Route path="/list/:listId/delete" element={<DeleteList />} />
+              <Route path="/list/:listId/reset" element={<ResetList />} />
+            </Routes>
+          </Suspense>
+        </Provider>
+      </ListProvider>
     </BrowserRouter>
   )
 }

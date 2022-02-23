@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 import useFetch from 'use-http';
-import { ConfirmActionLink } from './ConfirmActionLink';
 import { Spinner } from './Spinner';
+import { DeleteActionLink } from './DeleteActionLink';
+import { ResetActionLink } from './ResetActionLink';
 
 const TableStyles = styled.div`
   padding: 1rem;
@@ -172,14 +173,14 @@ export const ListViewTable = () => {
                             }}> Delete</a>
                             */
 
-                            return (<ConfirmActionLink text="delete" path={`list/${row?.values?.id}/delete`} />)
+                            return (<DeleteActionLink text="delete" id={`${row?.values?.id}`} />)
                         },
                     },
                     {
                         Header: 'Reset',
                         accessor: 'reset',
                         Cell: ({ row }: { row: any }) => {
-                            return (<ConfirmActionLink text="reset" path={`list/${row?.values?.id}/reset`} />)
+                            return (<ResetActionLink text="reset" id={`${row?.values?.id}`} />);
                         },
                     },
                 ],

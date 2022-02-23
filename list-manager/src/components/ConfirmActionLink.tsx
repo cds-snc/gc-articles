@@ -1,14 +1,12 @@
-import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export const ConfirmActionLink = ({path = '', text = ''}:{path: string, text: string}) => {
-    let navigate = useNavigate();
+export const ConfirmActionLink = ({text = '', isConfirmedHandler}:{text: string, isConfirmedHandler: () => void}) => {
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
     return (<a href="#" onClick={async () => {
         let result = await ConfirmDialog();
 
         if (result) {
-            navigate(path)
+            await isConfirmedHandler();
         }
     }}>{text}</a>)
 }

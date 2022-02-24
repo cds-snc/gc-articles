@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
 import { Provider } from 'use-http';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { Spinner } from './components/Spinner';
 import { ListProvider } from "./store/ListContext"
 import { ListViewTable } from './components/ListViewTable';
@@ -26,8 +27,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <ListProvider>
-        <Provider url="http://localhost:8000" options={options}>
+      <Provider url="http://localhost:8000" options={options}>
+        <ListProvider>
           <Suspense fallback={<Spinner />}>
             <Routes>
               <Route path="/" element={<ListViewTable />} />
@@ -43,8 +44,8 @@ const App = () => {
               } />
             </Routes>
           </Suspense>
-        </Provider>
-      </ListProvider>
+        </ListProvider>
+      </Provider>
     </BrowserRouter>
   )
 }

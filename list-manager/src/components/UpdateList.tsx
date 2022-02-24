@@ -1,10 +1,11 @@
 import { useState, useCallback, useEffect } from 'react'
 import useFetch from 'use-http';
 import { useParams } from "react-router-dom";
-import { ListForm } from "./ListForm";
 import { SubmitHandler } from "react-hook-form";
-import { List, ListId } from "../types";
 import { Navigate } from "react-router-dom";
+
+import { List, ListId } from "../types";
+import { ListForm } from "./ListForm";
 
 export const UpdateList = () => {
   const { request, cache, response } = useFetch({ data: [] })

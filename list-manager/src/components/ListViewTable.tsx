@@ -1,14 +1,15 @@
-import React, { useEffect, useCallback } from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
-import useFetch from 'use-http';
+
+import { List } from "../types"
+import { useList } from "../store/ListContext";
 import { Spinner } from './Spinner';
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
-import { useList } from "../store/ListContext";
 import { Messages } from "./Messages"
-import { List } from "../types"
+
 
 const TableStyles = styled.div`
   padding: 1rem;
@@ -88,20 +89,8 @@ const CreateListLink = () => {
 }
 
 export const ListViewTable = () => {
-    const { request, response, error, loading } = useFetch({ data: [] })
-    const { state, dispatch } = useList();
+    const { state, loading } = useList();
     const { lists } = state;
-
-    const loadData = useCallback(async () => {
-        await request.get('/lists')
-
-        if (response.ok) {
-            dispatch({ type: "load", payload: await response.json() })
-        }
-
-    }, [response, request, dispatch]);
-
-    useEffect(() => { loadData() }, [loadData]) // componentDidMount
 
     const columns = React.useMemo(
         () => [
@@ -137,8 +126,6 @@ export const ListViewTable = () => {
                     {
                         Header: 'Service Id',
                         accessor: 'service_id',
-                        // GET /lists/{service_id}
-                        // GET /lists/{service_id}/subscriber-count/
                     },
 
                     {
@@ -164,19 +151,6 @@ export const ListViewTable = () => {
                         Header: 'Delete',
                         accessor: 'delete',
                         Cell: ({ row }: { row: any }) => {
-                            /*
-                            // @todo "inline delete" to prevent re-draw
-                            return <a href="#" onClick={(e) => {
-                                // if confirm
-                                // inline delete --- + make request.delete call without navigating
-                                e.preventDefault();
-                                const newData = data.filter((item: Inputs) => {
-                                    return item.id !== row?.values?.id
-                                })
-                                setData(newData)
-                            }}> Delete</a>
-                            */
-
                             return (<DeleteActionLink id={`${row?.values?.id}`} />)
                         },
                     },
@@ -189,15 +163,14 @@ export const ListViewTable = () => {
                     },
                 ],
             },
-
         ],
         []);
 
+    if (loading) {
+        return <Spinner />
+    }
+
     return (
-        <>
-            {error && 'Error!'}
-            {loading && <Spinner />}
-            {lists && lists.length >= 1 && <><Messages /><TableStyles><Table columns={columns} data={lists} /></TableStyles></>}
-        </>
+        <><Messages /><TableStyles><Table columns={columns} data={lists} /></TableStyles></>
     )
 }

@@ -88,6 +88,12 @@ const CreateListLink = () => {
     return <Link to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
+const NOTIFY_UTL = "https://notification.canada.ca";
+
+const templateLink = (serviceId: string, templateId: string) => {
+    return `${NOTIFY_UTL}/services/${serviceId}/templates/${templateId}`;
+}
+
 export const ListViewTable = () => {
     const { state, loading } = useList();
     const { lists } = state;
@@ -126,26 +132,49 @@ export const ListViewTable = () => {
                     {
                         Header: 'Service Id',
                         accessor: 'service_id',
+                        Cell: ({ row }: { row: any }) => {
+                            return <a href={`${NOTIFY_UTL}/services/${row?.values?.service_id}`}>{row?.values?.service_id}</a>
+                        },
                     },
 
                     {
                         Header: 'Subscribe Email Template Id',
                         accessor: 'subscribe_email_template_id',
+                        Cell: ({ row }: { row: any }) => {
+                            const serviceId = row?.values?.service_id;
+                            const templateId = row?.values?.subscribe_email_template_id;
+                            return <a href={templateLink(serviceId, templateId)}>{templateId}</a>
+                        },
                     },
 
                     {
                         Header: 'Unsubscribe Email Template Id',
                         accessor: 'unsubscribe_email_template_id',
+                        Cell: ({ row }: { row: any }) => {
+                            const serviceId = row?.values?.service_id;
+                            const templateId = row?.values?.unsubscribe_email_template_id;
+                            return <a href={templateLink(serviceId, templateId)}>{templateId}</a>
+                        },
                     },
 
                     {
                         Header: 'Subscribe Phone Template Id',
                         accessor: 'subscribe_phone_template_id',
+                        Cell: ({ row }: { row: any }) => {
+                            const serviceId = row?.values?.service_id;
+                            const templateId = row?.values?.subscribe_phone_template_id;
+                            return <a href={templateLink(serviceId, templateId)}>{templateId}</a>
+                        },
                     },
 
                     {
                         Header: 'Unsubscribe Phone Template Id',
                         accessor: 'unsubscribe_phone_template_id',
+                        Cell: ({ row }: { row: any }) => {
+                            const serviceId = row?.values?.service_id;
+                            const templateId = row?.values?.unsubscribe_phone_template_id;
+                            return <a href={templateLink(serviceId, templateId)}>{templateId}</a>
+                        },
                     },
                     {
                         Header: 'Delete',

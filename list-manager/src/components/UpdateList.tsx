@@ -32,6 +32,7 @@ export const UpdateList = () => {
     return {}
   }, [response, request, cache]);
 
+  // @todo replace this with data from the provider
   const loadData = useCallback(async () => {
     await request.get('/lists')
 

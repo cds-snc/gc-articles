@@ -33,12 +33,21 @@ const TableStyles = styled.div`
       padding: 0.5rem;
       border-bottom: 1px solid black;
       border-right: 1px solid black;
+      vertical-align: top;
 
       :last-child {
         border-right: 0;
       }
     }
   }
+`
+
+const TemplateGroupStyles = styled.div`
+  margin: 1rem;
+`
+
+const DetailsLinkStyles = styled.div`
+    margin: .5rem 0;
 `
 
 const HeaderStyles = styled.div`
@@ -141,42 +150,32 @@ export const ListViewTable = () => {
                     },
 
                     {
-                        Header: 'Subscribe Email Template Id',
+                        Header: 'Templates',
                         accessor: 'subscribe_email_template_id',
                         Cell: ({ row }: { row: any }) => {
-                            const serviceId = row?.values?.service_id;
-                            const templateId = row?.values?.subscribe_email_template_id;
-                            return <a href={templateLink(serviceId, templateId)}>{templateId}</a>
-                        },
-                    },
 
-                    {
-                        Header: 'Unsubscribe Email Template Id',
-                        accessor: 'unsubscribe_email_template_id',
-                        Cell: ({ row }: { row: any }) => {
-                            const serviceId = row?.values?.service_id;
-                            const templateId = row?.values?.unsubscribe_email_template_id;
-                            return <a href={templateLink(serviceId, templateId)}>{templateId}</a>
-                        },
-                    },
+                            const values = row?.original;
+                            return (
+                                <details>
+                                    <summary>Details</summary>
+                                    <TemplateGroupStyles>
+                                        <div><strong>Email</strong></div>
+                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.subscribe_email_template_id)}>Subscribe</a></DetailsLinkStyles>
+                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.unsubscribe_email_template_id)}>Unsubscribe</a></DetailsLinkStyles>
+                                    </TemplateGroupStyles>
 
-                    {
-                        Header: 'Subscribe Phone Template Id',
-                        accessor: 'subscribe_phone_template_id',
-                        Cell: ({ row }: { row: any }) => {
-                            const serviceId = row?.values?.service_id;
-                            const templateId = row?.values?.subscribe_phone_template_id;
-                            return <a href={templateLink(serviceId, templateId)}>{templateId}</a>
-                        },
-                    },
+                                    <TemplateGroupStyles>
+                                        <div><strong>Phone</strong></div>
+                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.subscribe_phone_template_id)}>Subscribe</a></DetailsLinkStyles>
+                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.unsubscribe_phone_template_id)}>Unsubscribe</a></DetailsLinkStyles>
+                                    </TemplateGroupStyles>
 
-                    {
-                        Header: 'Unsubscribe Phone Template Id',
-                        accessor: 'unsubscribe_phone_template_id',
-                        Cell: ({ row }: { row: any }) => {
-                            const serviceId = row?.values?.service_id;
-                            const templateId = row?.values?.unsubscribe_phone_template_id;
-                            return <a href={templateLink(serviceId, templateId)}>{templateId}</a>
+                                    <TemplateGroupStyles>
+                                        <div><strong>Confirm</strong></div>
+                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.confirm_redirect_url)}>Confirm</a></DetailsLinkStyles>
+                                    </TemplateGroupStyles>
+                                </details>)
+
                         },
                     },
                     {

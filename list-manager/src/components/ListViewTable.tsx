@@ -177,6 +177,10 @@ export const ListViewTable = () => {
                         },
                     },
                     {
+                        Header: 'Subscribers',
+                        accessor: 'subscriber_count',
+                    },
+                    {
                         Header: 'Delete',
                         accessor: 'delete',
                         Cell: ({ row }: { row: any }) => {

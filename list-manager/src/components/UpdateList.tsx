@@ -18,9 +18,9 @@ export const UpdateList = () => {
   const onSubmit: SubmitHandler<List> = data => updateList(listId, data);
 
   const updateList = useCallback(async (listId: string | undefined, formData: List) => {
-
+    console.log(formData);
     // remove id from payload
-    const { id, ...updateData } = formData;
+    const { id, subscriber_count, active, ...updateData } = formData;
 
     await request.put(`list/${listId}`, updateData)
 
@@ -51,7 +51,8 @@ export const UpdateList = () => {
   useEffect(() => { loadData() }, [loadData]) // componentDidMount
 
   if (responseData.id) {
-    return <Navigate to="/" replace={false} />
+    window.location.href = 'http://localhost:3000'
+    // return <Navigate to="/" replace={false} />
   }
 
   return inputData?.id ? <ListForm formData={inputData} handler={onSubmit} /> : null

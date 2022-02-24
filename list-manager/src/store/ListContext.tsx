@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext, useEffect, useState } from 'react';
+import { createContext, useReducer, useContext, useEffect, useState, useMemo } from 'react';
 import useFetch from 'use-http';
 import { v4 as uuidv4 } from "uuid";
 import { List, State, Dispatch, Action, ListProviderProps } from "../types"
@@ -37,11 +37,14 @@ const ListProvider = ({ children }: ListProviderProps) => {
         })();
     }, [request, response]);
 
-    const value = {
-        loading,
-        state,
-        dispatch,
-    };
+    const value = useMemo(
+        () => ({
+            loading,
+            state,
+            dispatch,
+        }),
+        [loading, state, dispatch]
+    );
 
     return (
         <ListContext.Provider value={value}>

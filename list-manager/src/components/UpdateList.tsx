@@ -51,7 +51,7 @@ export const UpdateList = () => {
   useEffect(() => { loadData() }, [loadData]) // componentDidMount
 
   if (responseData.id) {
-    return <Navigate to="/" replace={true} />
+    return <Navigate to="/" replace={false} />
   }
 
   return inputData?.id ? <ListForm formData={inputData} handler={onSubmit} /> : null

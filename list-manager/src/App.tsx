@@ -25,11 +25,13 @@ const App = () => {
     }
   }
 
+  console.log("app")
+
   return (
     <BrowserRouter>
       <Provider url="http://localhost:8000" options={options}>
-        <ListProvider>
-          <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<Spinner />}>
+          <ListProvider>
             <Routes>
               <Route path="/" element={<ListViewTable />} />
               <Route path="/list/create" element={
@@ -43,8 +45,8 @@ const App = () => {
                 </React.Suspense>
               } />
             </Routes>
-          </Suspense>
-        </ListProvider>
+          </ListProvider>
+        </Suspense>
       </Provider>
     </BrowserRouter>
   )

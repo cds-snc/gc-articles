@@ -10,6 +10,8 @@ export type List = {
   subscribe_redirect_url?: string;
   confirm_redirect_url?: string;
   unsubscribe_redirect_url?: string;
+  subscriber_count?: string;
+  active?: string;
 };
 
 export type Dispatch = (action: Action) => void;
@@ -33,6 +35,7 @@ export type State = {
 export type Action =
   | { type: 'add'; payload: { id: string } }
   | { type: 'delete'; payload: { id: string } }
-  | { type: 'load'; payload: List[] };
+  | { type: 'load'; payload: List[] }
+  | { type: 'reset'; payload: { id: string } };
 
 export type ListProviderProps = { children: React.ReactNode };

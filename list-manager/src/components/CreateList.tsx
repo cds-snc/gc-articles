@@ -1,34 +1,29 @@
-import React, { useState, useCallback } from 'react'
-import { ListForm } from "./ListForm";
+import { useState, useCallback } from 'react'
 import { SubmitHandler } from "react-hook-form";
-import { Inputs } from "../types";
 import useFetch from 'use-http';
 import { Navigate } from "react-router-dom";
 import { useList } from "../store/ListContext";
+import { ListForm } from "./ListForm";
+import { List } from "../types";
 
 export const CreateList = () => {
-
-    const { post, cache, response } = useFetch({ data: [] })
+    const { request, cache, response } = useFetch({ data: [] })
     const [data, setData] = useState({ id: null })
     const { dispatch } = useList();
 
-
-    const createList = useCallback(async (formData: Inputs) => {
-        await post('/list', formData)
+    const createList = useCallback(async (formData: List) => {
+        await request.post('/list', formData)
 
         if (response.ok) {
             cache.clear();
+
             const id = await response.json()
             setData(await response.json());
             dispatch({ type: "add", payload: id })
         }
+    }, [response, request, cache, dispatch]);
 
-        return {}
-
-
-    }, [response, post]);
-
-    const onSubmit: SubmitHandler<Inputs> = data => createList(data);
+    const onSubmit: SubmitHandler<List> = data => createList(data);
 
     // use this data to help fill for now
     const inputData = {
@@ -41,3 +36,5 @@ export const CreateList = () => {
 
     return data.id ? <Navigate to="/" replace={true} /> : <ListForm formData={inputData} handler={onSubmit} />
 }
+
+export default CreateList;

@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Inputs } from "../types";
+import { List } from "../types";
 
 const Asterisk = () => {
     return (
@@ -16,7 +16,7 @@ const Asterisk = () => {
 // - alert for success + fail
 
 export const ListForm = ({ handler = "", formData = {} }: { handler: any, formData: any }) => {
-    const { register, handleSubmit, formState: { errors } } = useForm<Inputs>({ defaultValues: formData });
+    const { register, handleSubmit, formState: { errors } } = useForm<List>({ defaultValues: formData });
 
     return (
         <div id="gc-form-wrapper" className="gc-form-wrapper">

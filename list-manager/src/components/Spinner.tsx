@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 const styles: { [key: string]: React.CSSProperties } = {
   ldsEllipsis: {
     display: 'inline-block',

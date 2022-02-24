@@ -8,6 +8,7 @@ import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
 import { useList } from "../store/ListContext";
 import { Messages } from "./Messages"
+import { List } from "../types"
 
 const TableStyles = styled.div`
   padding: 1rem;
@@ -43,7 +44,7 @@ const HeaderStyles = styled.div`
     justify-content: space-between;
 `
 
-const Table = ({ columns, data }: { columns: any, data: any }) => {
+const Table = ({ columns, data }: { columns: any, data: List[] }) => {
     const {
         getTableProps,
         getTableBodyProps,

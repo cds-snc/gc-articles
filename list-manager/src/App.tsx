@@ -1,19 +1,14 @@
 import React, { Suspense } from 'react'
-import './App.css';
-import { ListViewTable } from './components/ListViewTable';
-import { UpdateList } from './components/UpdateList';
-import { CreateList } from './components/CreateList';
-import { DeleteList } from './components/DeleteList';
-import { ResetList } from './components/ResetList';
 import { Provider } from 'use-http';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Spinner } from './components/Spinner';
 import { ListProvider } from "./store/ListContext"
+import { ListViewTable } from './components/ListViewTable';
+import './App.css';
+const UpdateList = React.lazy(() => import("./components/UpdateList"));
+const CreateList = React.lazy(() => import("./components/CreateList"));
 
 // @todo 
-// - lazy load components for routes
-// https://stackblitz.com/github/remix-run/react-router/tree/main/examples/lazy-loading?file=src/App.tsx
-
 // group lists by Service Ids
 // https://react-table.tanstack.com/docs/examples/grouping-column
 
@@ -36,10 +31,16 @@ const App = () => {
           <Suspense fallback={<Spinner />}>
             <Routes>
               <Route path="/" element={<ListViewTable />} />
-              <Route path="/list/create" element={<CreateList />} />
-              <Route path="/list/:listId" element={<UpdateList />} />
-              <Route path="/list/:listId/delete" element={<DeleteList />} />
-              <Route path="/list/:listId/reset" element={<ResetList />} />
+              <Route path="/list/create" element={
+                <React.Suspense fallback={<Spinner />}>
+                  <CreateList />
+                </React.Suspense>
+              } />
+              <Route path="/list/:listId" element={
+                <React.Suspense fallback={<Spinner />}>
+                  <UpdateList />
+                </React.Suspense>
+              } />
             </Routes>
           </Suspense>
         </Provider>

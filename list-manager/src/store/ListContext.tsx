@@ -1,36 +1,28 @@
-// @ts-nocheck
-import React, { createContext, useReducer, useContext, FC } from 'react'
+import { createContext, useReducer, useContext } from 'react'
 import { v4 as uuidv4 } from "uuid";
-import {Inputs} from "../types"
+import { List, State, Dispatch, Action, ListProviderProps } from "../types"
 
-const ListContext = createContext({
-    state: { lists: [], messages: [] },
-    dispatch: ({ }) => { return null },
-});
+const ListContext = createContext<{ state: State; dispatch: Dispatch } | undefined>(undefined)
 
-const ListReducer = (state, action: any) => {
-
+const ListReducer = (state: State, action: Action): State => {
     switch (action.type) {
         case "add":
-            console.log("add");
             return { ...state, messages: [{ id: uuidv4(), type: "add", message: `Added ${action.payload.id}` }] }
         case "delete":
-            console.log("delete");
-            const lists = state.lists.filter((item: Inputs) => {
+            const lists = state.lists.filter((item: List) => {
                 return item.id !== action.payload.id
             })
             return { ...state, lists, messages: [{ id: uuidv4(), type: "delete", message: `Deleted  ${action.payload.id}` }] }
         case "load":
             return { ...state, lists: [...action.payload] };
-        default: {
-            throw new Error(`Unhandled action type: ${action.type}`);
-        }
+        default:
+            throw new Error(`Unhandled action type`);
     }
 };
 
-const ListProvider: FC = ({ children },) => {
+const ListProvider = ({ children }: ListProviderProps) => {
 
-    const [state, dispatch] = useReducer(ListReducer, []);
+    const [state, dispatch] = useReducer(ListReducer, { lists: [], messages: [] });
 
     const value = {
         state,

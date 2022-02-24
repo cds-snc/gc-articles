@@ -1,4 +1,3 @@
-import React from 'react'
 import { useList } from "../store/ListContext";
 import Swal from "sweetalert2";
 
@@ -7,7 +6,6 @@ type Message = {
     type: string,
     message: string;
 };
-
 
 const Toast = Swal.mixin({
     toast: true,
@@ -23,7 +21,7 @@ const Toast = Swal.mixin({
 
 
 export const Messages = () => {
-    const { state, dispatch } = useList();
+    const { state } = useList();
 
     if (state.messages && state.messages.length >= 1) {
 
@@ -38,7 +36,9 @@ export const Messages = () => {
                 // @todo  dispatch to clear messages
 
             }
+            return true
         })
+
     }
 
     return null;

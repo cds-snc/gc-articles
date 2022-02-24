@@ -1,23 +1,23 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import useFetch from 'use-http';
 import { useParams } from "react-router-dom";
 import { ListForm } from "./ListForm";
 import { SubmitHandler } from "react-hook-form";
-import { Inputs, ListId } from "../types";
+import { List, ListId } from "../types";
 import { Navigate } from "react-router-dom";
 
 export const UpdateList = () => {
-  const { request, cache, response, loading } = useFetch({ data: [] })
+  const { request, cache, response } = useFetch({ data: [] })
   const [inputData, setInputData] = useState({ id: null })
   const [responseData, setResponseData] = useState<ListId>({ id: null })
 
   let params = useParams();
   const listId = params?.listId
 
-  const onSubmit: SubmitHandler<Inputs> = data => updateList(listId, data);
+  const onSubmit: SubmitHandler<List> = data => updateList(listId, data);
 
-  const updateList = useCallback(async (listId: string | undefined, formData: Inputs) => {
-    
+  const updateList = useCallback(async (listId: string | undefined, formData: List) => {
+
     // remove id from payload
     const { id, ...updateData } = formData;
 
@@ -54,3 +54,5 @@ export const UpdateList = () => {
 
   return inputData?.id ? <ListForm formData={inputData} handler={onSubmit} /> : null
 }
+
+export default UpdateList;

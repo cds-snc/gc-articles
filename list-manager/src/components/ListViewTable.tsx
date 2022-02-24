@@ -171,8 +171,8 @@ export const ListViewTable = () => {
                                     </TemplateGroupStyles>
 
                                     <TemplateGroupStyles>
-                                        <div><strong>Confirm</strong></div>
-                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.confirm_redirect_url)}>Confirm</a></DetailsLinkStyles>
+                                        <div><strong>Confirm Url</strong></div>
+                                        <DetailsLinkStyles><a href={values.confirm_redirect_url}>Confirm</a></DetailsLinkStyles>
                                     </TemplateGroupStyles>
                                 </details>)
 

@@ -9,6 +9,8 @@ const ListReducer = (state: State, action: Action): State => {
     switch (action.type) {
         case "add":
             return { ...state, messages: [{ id: uuidv4(), type: "add", message: `Added ${action.payload.id}` }] }
+        case "reset":
+            return { ...state, messages: [{ id: uuidv4(), type: "reset", message: `Reset list ${action.payload.id}` }] }
         case "delete":
             const lists = state.lists.filter((item: List) => {
                 return item.id !== action.payload.id

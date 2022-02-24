@@ -27,7 +27,7 @@ export const Messages = () => {
     if (state.messages && state.messages.length >= 1) {
 
         state.messages.map((item: Message) => {
-            if (item.type === "add" || item.type === "delete") {
+            if (item.type === "add" || item.type === "delete" || item.type === "reset") {
 
                 Toast.fire({
                     icon: "success",

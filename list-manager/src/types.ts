@@ -12,7 +12,7 @@ export type List = {
   unsubscribe_redirect_url?: string;
 };
 
-export type Dispatch = (action: Action) => void
+export type Dispatch = (action: Action) => void;
 
 export type ListId = {
   id: string | null;
@@ -25,6 +25,7 @@ export type Message = {
 };
 
 export type State = {
+  loading: boolean;
   lists: List[] | [];
   messages: Message[] | [];
 };
@@ -34,5 +35,4 @@ export type Action =
   | { type: 'delete'; payload: { id: string } }
   | { type: 'load'; payload: List[] };
 
-
-export type ListProviderProps = {children: React.ReactNode}
+export type ListProviderProps = { children: React.ReactNode };

@@ -1,9 +1,8 @@
-import { createContext, useReducer, useContext, useEffect, useState, useMemo } from 'react';
-import useFetch from 'use-http';
+import { createContext, useReducer, useContext } from 'react';
 import { v4 as uuidv4 } from "uuid";
-import { List, State, Dispatch, Action, ListProviderProps } from "../types"
+import { List, State, Dispatch, Action, ListProviderProps } from "../types";
 
-const ListContext = createContext<{ state: State; dispatch: Dispatch, loading: boolean } | undefined>(undefined)
+const ListContext = createContext<{ state: State; dispatch: Dispatch } | undefined>(undefined)
 
 const ListReducer = (state: State, action: Action): State => {
     switch (action.type) {
@@ -22,29 +21,12 @@ const ListReducer = (state: State, action: Action): State => {
 };
 
 const ListProvider = ({ children }: ListProviderProps) => {
-    const [loading, setLoading] = useState(false);
-    const { request, response } = useFetch({ data: [] })
-    const [state, dispatch] = useReducer(ListReducer, { lists: [], messages: [] });
+    const [state, dispatch] = useReducer(ListReducer, { loading: false, lists: [], messages: [] });
 
-    useEffect(() => {
-        (async (): Promise<void> => {
-            setLoading(true)
-            await request.get('/lists')
-            if (response.ok) {
-                dispatch({ type: "load", payload: await response.json() })
-                setLoading(false)
-            }
-        })();
-    }, [request, response]);
-
-    const value = useMemo(
-        () => ({
-            loading,
-            state,
-            dispatch,
-        }),
-        [loading, state, dispatch]
-    );
+    const value = {
+        state,
+        dispatch,
+    }
 
     return (
         <ListContext.Provider value={value}>

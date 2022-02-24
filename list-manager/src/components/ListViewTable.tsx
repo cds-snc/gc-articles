@@ -9,6 +9,7 @@ import { Spinner } from './Spinner';
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
 import { Messages } from "./Messages"
+import { useListFetch } from '../store/UseListFetch';
 
 
 const TableStyles = styled.div`
@@ -95,8 +96,10 @@ const templateLink = (serviceId: string, templateId: string) => {
 }
 
 export const ListViewTable = () => {
-    const { state, loading } = useList();
-    const { lists } = state;
+    const { state } = useList();
+    const { lists, loading } = state;
+
+    useListFetch();
 
     const columns = React.useMemo(
         () => [

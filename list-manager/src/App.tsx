@@ -25,8 +25,6 @@ const App = () => {
     }
   }
 
-  console.log("app")
-
   return (
     <BrowserRouter>
       <Provider url="http://localhost:8000" options={options}>

@@ -1,3 +1,5 @@
+import { string } from 'yargs';
+
 export type List = {
   id: string;
   name: string;
@@ -43,10 +45,17 @@ export type ListProviderProps = { children: React.ReactNode };
 export type ErrorResponse = {
   detail: [
     {
-      loc: string[];
+      loc: [string, keyof List];
       msg: string;
       type: string;
       ctx?: {};
     }
   ];
 };
+
+export type FieldError = {
+  name: keyof List;
+  msg: string;
+};
+
+export type ServerErrors = [] | FieldError[];

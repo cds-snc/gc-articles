@@ -6,23 +6,24 @@ import { Navigate } from "react-router-dom";
 import { useList } from "../store/ListContext";
 import { ListForm } from "./ListForm";
 import { useListFetch } from '../store/UseListFetch';
-import { ErrorResponse, List, ListId } from "../types";
+import { ErrorResponse, ServerErrors, FieldError, List, ListId } from "../types";
 
 const parseError = async (response: Response) => {
   try {
     const err: ErrorResponse = await response.json();
-    err.detail.map((item) => {
-      console.log(item.loc);
-      console.log(item.msg);
+    return err.detail.map((item): FieldError => {
+      return { name: item.loc[1], msg: item.msg };
     })
   } catch (e) {
     console.log((e as Error).message)
+    return []
   }
 }
 
 export const UpdateList = () => {
   const { request, cache, response } = useFetch({ data: [] });
   const [responseData, setResponseData] = useState<ListId>({ id: null });
+  const [errors, setErrors] = useState<ServerErrors>([]);
   const { state } = useList();
 
   useListFetch();
@@ -44,7 +45,8 @@ export const UpdateList = () => {
       return;
     }
 
-    parseError(response);
+    setErrors(await parseError(response));
+    return;
 
   }, [response, request, cache]);
 
@@ -56,7 +58,7 @@ export const UpdateList = () => {
     return <Navigate to="/" replace={false} />
   }
 
-  return list ? <ListForm formData={list} handler={onSubmit} /> : null
+  return list ? <ListForm formData={list} handler={onSubmit} serverErrors={errors} /> : null
 }
 
 export default UpdateList;

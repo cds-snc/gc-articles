@@ -98,6 +98,10 @@ const CreateListLink = () => {
     return <Link to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
+const UploadListLink = () => {
+    return <Link to={{ pathname: `/upload` }}>Upload list</Link>
+}
+
 const NOTIFY_UTL = "https://notification.canada.ca";
 
 const templateLink = (serviceId: string, templateId: string) => {
@@ -113,7 +117,7 @@ export const ListViewTable = () => {
     const columns = React.useMemo(
         () => [
             {
-                Header: () => { return <HeaderStyles><div>Lists</div><CreateListLink /></HeaderStyles> },
+                Header: () => { return <HeaderStyles><div>Lists</div><UploadListLink /> <CreateListLink /></HeaderStyles> },
                 accessor: 'lists',
                 columns: [
                     {

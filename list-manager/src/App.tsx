@@ -8,6 +8,7 @@ import { ListViewTable } from './components/ListViewTable';
 import './App.css';
 const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
+const UploadList = React.lazy(() => import("./components/UploadList"));
 
 // @todo 
 // group lists by Service Ids
@@ -42,11 +43,18 @@ const App = () => {
                   <UpdateList />
                 </React.Suspense>
               } />
+              <Route path="/upload" element={
+                <React.Suspense fallback={<Spinner />}>
+                  <UploadList />
+                </React.Suspense>
+              } />
             </Routes>
+
+
           </ListProvider>
         </Suspense>
       </Provider>
-    </BrowserRouter>
+    </BrowserRouter >
   )
 }
 

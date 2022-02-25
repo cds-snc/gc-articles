@@ -59,3 +59,7 @@ export type FieldError = {
 };
 
 export type ServerErrors = [] | FieldError[];
+
+export type CSVData = {
+  email: string;
+};

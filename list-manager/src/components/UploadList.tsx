@@ -1,4 +1,5 @@
 import { Importer, ImporterField } from "react-csv-importer";
+import { CSVData } from "../types"
 
 // theme CSS for React CSV Importer
 import "react-csv-importer/dist/index.css";
@@ -16,23 +17,27 @@ export const UploadList = () => {
             // required, receives a list of parsed objects based on defined fields and user column mapping;
             // may be called several times if file is large
             // (if this callback returns a promise, the widget will wait for it before parsing more data)
-            console.log("received batch of rows", rows);
+            // console.log("received batch of rows", rows);
+
+            const emails = rows.map((item) => {
+                return item.email;
+            });
+
+            console.log(emails);
 
             // mock timeout to simulate processing
             await new Promise((resolve) => setTimeout(resolve, 500));
         }}
-        onComplete={({ file, fields }) => {
+        onComplete={({ file, fields }: { file: File, fields: string[] }) => {
             // optional, invoked right after import is done (but user did not dismiss/reset the widget yet)
             console.log("finished import of file", file, "with fields", fields);
-        }}
-        onClose={() => {
             // optional, invoked when import is done and user clicked "Finish"
             // (if this is not specified, the widget lets the user upload another file)
             console.log("importer dismissed");
         }}
     >
         <ImporterField name="email" label="Email" />
-    </Importer>
+    </Importer >
 }
 
 export default UploadList;

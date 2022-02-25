@@ -3,11 +3,22 @@ import useFetch from 'use-http';
 import { useParams } from "react-router-dom";
 import { SubmitHandler } from "react-hook-form";
 import { Navigate } from "react-router-dom";
-
-import { List, ListId } from "../types";
 import { useList } from "../store/ListContext";
 import { ListForm } from "./ListForm";
 import { useListFetch } from '../store/UseListFetch';
+import { ErrorResponse, List, ListId } from "../types";
+
+const parseError = async (response: Response) => {
+  try {
+    const err: ErrorResponse = await response.json();
+    err.detail.map((item) => {
+      console.log(item.loc);
+      console.log(item.msg);
+    })
+  } catch (e) {
+    console.log((e as Error).message)
+  }
+}
 
 export const UpdateList = () => {
   const { request, cache, response } = useFetch({ data: [] });
@@ -22,17 +33,19 @@ export const UpdateList = () => {
   const onSubmit: SubmitHandler<List> = data => updateList(listId, data);
 
   const updateList = useCallback(async (listId: string | undefined, formData: List) => {
-    // remove id from payload
+    // remove extra fields from payload
     const { id, subscriber_count, active, ...updateData } = formData;
 
     await request.put(`list/${listId}`, updateData)
 
     if (response.ok) {
       cache.clear();
-      setResponseData({ id: id })
+      setResponseData({ id: id });
+      return;
     }
 
-    return {}
+    parseError(response);
+
   }, [response, request, cache]);
 
   const list = state.lists.filter((list: any) => {

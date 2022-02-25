@@ -11,11 +11,6 @@ const Asterisk = () => {
     )
 }
 
-// @todo 
-// - add more error handling 
-// - set proper required fields
-// - alert for success + fail
-
 export const ListForm = ({ handler = "", formData = {} }: { handler: any, formData: any }) => {
     const { register, handleSubmit, formState: { errors } } = useForm<List>({ defaultValues: formData });
 

@@ -17,10 +17,10 @@ export const CreateList = () => {
 
         if (response.ok) {
             cache.clear();
-
             const id = await response.json()
             setData(await response.json());
             dispatch({ type: "add", payload: id })
+            return
         }
     }, [response, request, cache, dispatch]);
 

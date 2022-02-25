@@ -39,3 +39,14 @@ export type Action =
   | { type: 'reset'; payload: { id: string } };
 
 export type ListProviderProps = { children: React.ReactNode };
+
+export type ErrorResponse = {
+  detail: [
+    {
+      loc: string[];
+      msg: string;
+      type: string;
+      ctx?: {};
+    }
+  ];
+};

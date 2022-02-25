@@ -1,10 +1,15 @@
 import { Importer, ImporterField } from "react-csv-importer";
-import { CSVData } from "../types"
+import useFetch from 'use-http';
+import { useParams } from "react-router-dom";
 
 // theme CSS for React CSV Importer
 import "react-csv-importer/dist/index.css";
 
 export const UploadList = () => {
+    const { request, cache, response } = useFetch({ data: [] })
+    const params = useParams();
+    const listId = params?.listId
+
     return <Importer
         chunkSize={10000} // optional, internal parsing chunk size in bytes
         assumeNoHeaders={false} // optional, keeps "data has headers" checkbox off by default
@@ -23,7 +28,13 @@ export const UploadList = () => {
                 return item.email;
             });
 
-            console.log(emails);
+            await request.post('/listimport', { list_id: listId, emails })
+
+            if (response.ok) {
+                cache.clear();
+                console.log(await response.json());
+                return
+            }
 
             // mock timeout to simulate processing
             await new Promise((resolve) => setTimeout(resolve, 500));

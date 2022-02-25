@@ -43,7 +43,7 @@ const App = () => {
                   <UpdateList />
                 </React.Suspense>
               } />
-              <Route path="/upload" element={
+              <Route path="/upload/:listId" element={
                 <React.Suspense fallback={<Spinner />}>
                   <UploadList />
                 </React.Suspense>

@@ -18,6 +18,8 @@ const UploadList = React.lazy(() => import("./components/UploadList"));
 
 // get subscriber counts for lists + display 
 
+const { endpoint } = window.CDS_LIST_MANAGER || { endpoint: "" };
+
 const App = () => {
   const options = {
     interceptors: {
@@ -30,7 +32,7 @@ const App = () => {
 
   return (
     <HashRouter>
-      <Provider url="http://localhost:8000" options={options}>
+      <Provider url={endpoint} options={options}>
         <Suspense fallback={<Spinner />}>
           <ListProvider>
             <Routes>

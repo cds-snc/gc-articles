@@ -5,6 +5,7 @@ import App from './App';
 
 declare global {
   interface Window {
+    CDS_LIST_MANAGER: { endpoint: string },
     renderListManager: (el: string) => void
   }
 }

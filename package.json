@@ -8,7 +8,7 @@
     "check-version": "node ./scripts/check-for-version.js",
     "deploy-production": "node ./scripts/prepare-release.js --production",
     "cli": "docker exec -it cli /bin/zsh",
-    "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && npm run build && cd classes/Modules/Subscribe && npm install && cd ../Contact && npm install && cd ../ListManager/app && npm install",
+    "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && npm run build",
     "import": "node ./import/import.js",
     "wp-env": "wp-env",
     "wp-env:init": "wp-env start",

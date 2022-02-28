@@ -23,19 +23,34 @@ class ListManager
 
     public function enqueue()
     {
-        wp_enqueue_style(
-            'list-manager',
-            plugin_dir_url(__FILE__) . 'app/build/static/css/main.6ae49f62.css',
-            null,
-            '1.0.0',
-        );
+        try{
+            $path = plugin_dir_path(__FILE__) . 'app/build/asset-manifest.json';
+            $json = file_get_contents($path);
+            $data = json_decode($json, true);
+            $files = $data["files"];
         
-        wp_enqueue_script(
-            'list-manager',
-            plugin_dir_url(__FILE__) . 'app/build/static/js/main.3b907e1c.js',
-            null,
-            '1.0.0',
-            true,
-        );
+            wp_enqueue_style(
+                'list-manager',
+                plugin_dir_url(__FILE__) . 'app/build/'.$files["main.css"],
+                null,
+                '1.0.0',
+            );
+            
+            wp_enqueue_script(
+                'list-manager',
+                plugin_dir_url(__FILE__) . 'app/build/'.$files["main.js"],
+                null,
+                '1.0.0',
+                true,
+            );
+
+        }catch(\Exception $exception){
+            echo $exception->getMessage();
+        }
+        
+        
+        
+        
+       
     }
 }

@@ -212,7 +212,7 @@ export const ListViewTable = () => {
             },
         ],
         []);
-
+    
     if (loading) {
         return <Spinner />
     }

@@ -1,10 +1,11 @@
 import React, { Suspense } from 'react'
 import { Provider } from 'use-http';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 
 import { Spinner } from './components/Spinner';
 import { ListProvider } from "./store/ListContext"
 import { ListViewTable } from './components/ListViewTable';
+import { NotFound } from './components/NotFound';
 import './App.css';
 const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
@@ -27,7 +28,7 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Provider url="http://localhost:8000" options={options}>
         <Suspense fallback={<Spinner />}>
           <ListProvider>
@@ -48,13 +49,13 @@ const App = () => {
                   <UploadList />
                 </React.Suspense>
               } />
+
+              <Route path="*" element={<NotFound />} />
             </Routes>
-
-
           </ListProvider>
         </Suspense>
       </Provider>
-    </BrowserRouter >
+    </HashRouter>
   )
 }
 

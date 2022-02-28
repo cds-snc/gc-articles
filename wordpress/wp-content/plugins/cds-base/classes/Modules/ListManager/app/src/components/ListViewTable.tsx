@@ -94,13 +94,16 @@ export const ListViewTable = () => {
                         accessor: 'name',
                         Cell: ({ row }: { row: any }) => {
                             return (
-                                <Link
-                                    to={{
-                                        pathname: `list/${row?.values?.id}`,
-                                    }}
-                                >
-                                    {row?.values?.name}
-                                </Link>
+                                <strong>
+                                    <Link
+                                        className="row-title"
+                                        to={{
+                                            pathname: `list/${row?.values?.id}`,
+                                        }}
+                                    >
+                                        {row?.values?.name}
+                                    </Link>
+                                </strong>
                             )
                         },
                     },

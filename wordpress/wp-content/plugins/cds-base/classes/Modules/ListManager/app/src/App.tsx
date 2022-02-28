@@ -1,4 +1,5 @@
-import React, { Suspense } from 'react'
+import * as React from 'react';
+import { Suspense } from 'react'
 import { Provider } from 'use-http';
 import { HashRouter, Routes, Route } from "react-router-dom";
 

@@ -1,3 +1,4 @@
+import * as React from 'react';
 import Swal from "sweetalert2";
 
 export const ConfirmActionLink = ({ text = '', isConfirmedHandler }: { text: string, isConfirmedHandler: () => void }) => {

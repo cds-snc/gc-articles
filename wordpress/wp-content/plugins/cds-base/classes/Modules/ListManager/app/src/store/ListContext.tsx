@@ -7,17 +7,28 @@ const ListContext = createContext<{ state: State; dispatch: Dispatch } | undefin
 
 const ListReducer = (state: State, action: Action): State => {
     switch (action.type) {
-        case "add":
+        case "add": {
             return { ...state, messages: [{ id: uuidv4(), type: "add", message: `Added ${action.payload.id}` }] }
-        case "reset":
-            return { ...state, messages: [{ id: uuidv4(), type: "reset", message: `Reset list ${action.payload.id}` }] }
-        case "delete":
+        }
+        case "reset": {
+            const lists = state.lists.filter((item: List) => {
+                if (item.id === action.payload.id) {
+                    item.subscriber_count = "0";
+                }
+
+                return item;
+            })
+            return { ...state, lists, messages: [{ id: uuidv4(), type: "reset", message: `Reset list ${action.payload.id}` }] }
+        }
+        case "delete": {
             const lists = state.lists.filter((item: List) => {
                 return item.id !== action.payload.id
             })
             return { ...state, lists, messages: [{ id: uuidv4(), type: "delete", message: `Deleted  ${action.payload.id}` }] }
-        case "load":
+        }
+        case "load": {
             return { ...state, lists: [...action.payload] };
+        }
         default:
             throw new Error(`Unhandled action type`);
     }

@@ -1,15 +1,21 @@
 import * as React from 'react';
+import { useState } from 'react'
 import { Importer, ImporterField } from "react-csv-importer";
 import useFetch from 'use-http';
-import { useParams } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 
 // theme CSS for React CSV Importer
 import "react-csv-importer/dist/index.css";
 
 export const UploadList = () => {
+    const [finished, setFinished] = useState<boolean>(false)
     const { request, cache, response } = useFetch({ data: [] })
     const params = useParams();
     const listId = params?.listId
+
+    if (finished) {
+        return <Navigate to="/" replace={true} />
+    }
 
     return <Importer
         chunkSize={10000} // optional, internal parsing chunk size in bytes
@@ -25,27 +31,34 @@ export const UploadList = () => {
             // (if this callback returns a promise, the widget will wait for it before parsing more data)
             // console.log("received batch of rows", rows);
 
-            const emails = rows.map((item) => {
-                return item.email;
+            // await new Promise((resolve) => setTimeout(resolve, 500));
+
+            return new Promise(async (resolve) => {
+
+                const emails = rows.map((item) => {
+                    return item.email;
+                });
+
+                await request.post('/listimport', { list_id: listId, emails })
+
+                if (response.ok) {
+                    cache.clear();
+                    console.log(await response.json());
+                    resolve()
+                }
             });
-
-            await request.post('/listimport', { list_id: listId, emails })
-
-            if (response.ok) {
-                cache.clear();
-                console.log(await response.json());
-                return
-            }
-
             // mock timeout to simulate processing
-            await new Promise((resolve) => setTimeout(resolve, 500));
+            // await new Promise((resolve) => setTimeout(resolve, 500));
         }}
-        onComplete={({ file, fields }: { file: File, fields: string[] }) => {
+        onComplete={({ file, fields }) => {
             // optional, invoked right after import is done (but user did not dismiss/reset the widget yet)
             console.log("finished import of file", file, "with fields", fields);
+        }}
+        onClose={() => {
             // optional, invoked when import is done and user clicked "Finish"
             // (if this is not specified, the widget lets the user upload another file)
             console.log("importer dismissed");
+            setFinished(true);
         }}
     >
         <ImporterField name="email" label="Email" />

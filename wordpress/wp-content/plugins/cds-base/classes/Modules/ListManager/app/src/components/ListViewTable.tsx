@@ -11,37 +11,6 @@ import { ResetActionLink } from './ResetActionLink';
 import { Messages } from "./Messages"
 import { useListFetch } from '../store/UseListFetch';
 
-
-const TableStyles = styled.div`
-  padding: 1rem;
-
-  table {
-    border-spacing: 0;
-    border: 1px solid black;
-
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
-    }
-
-    th,
-    td {
-      margin: 0;
-      padding: 0.5rem;
-      border-bottom: 1px solid black;
-      border-right: 1px solid black;
-      vertical-align: top;
-
-      :last-child {
-        border-right: 0;
-      }
-    }
-  }
-`
-
 const TemplateGroupStyles = styled.div`
   margin: 1rem;
 `
@@ -68,7 +37,7 @@ const Table = ({ columns, data }: { columns: any, data: List[] }) => {
     })
 
     return (
-        <table {...getTableProps()}>
+        <table {...getTableProps()} className="wp-list-table widefat fixed striped table-view-list users">
             <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -95,11 +64,11 @@ const Table = ({ columns, data }: { columns: any, data: List[] }) => {
 }
 
 const CreateListLink = () => {
-    return <Link to={{ pathname: `list/create` }}>Create new list</Link>
+    return <Link className="button action" to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
 const UploadListLink = ({ id }: { id: string }) => {
-    return <Link to={{ pathname: `/upload/${id}` }}>Upload list</Link>
+    return <Link className="button action" to={{ pathname: `/upload/${id}` }}>Upload list</Link>
 }
 
 const NOTIFY_UTL = "https://notification.canada.ca";
@@ -117,7 +86,7 @@ export const ListViewTable = () => {
     const columns = React.useMemo(
         () => [
             {
-                Header: () => { return <HeaderStyles><div>Lists</div> <CreateListLink /></HeaderStyles> },
+                Header: () => { return <HeaderStyles><CreateListLink /></HeaderStyles> },
                 accessor: 'lists',
                 columns: [
                     {
@@ -212,12 +181,12 @@ export const ListViewTable = () => {
             },
         ],
         []);
-    
+
     if (loading) {
         return <Spinner />
     }
 
     return (
-        <><Messages /><TableStyles><Table columns={columns} data={lists} /></TableStyles></>
+        <><Messages /><Table columns={columns} data={lists} /></>
     )
 }

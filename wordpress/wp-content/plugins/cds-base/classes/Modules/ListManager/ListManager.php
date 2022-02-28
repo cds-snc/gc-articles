@@ -31,14 +31,14 @@ class ListManager
         
             wp_enqueue_style(
                 'list-manager',
-                plugin_dir_url(__FILE__) . 'app/build/'.$files["main.css"],
+                $files["main.css"],
                 null,
                 '1.0.0',
             );
             
             wp_enqueue_script(
                 'list-manager',
-                plugin_dir_url(__FILE__) . 'app/build/'.$files["main.js"],
+                $files["main.js"],
                 null,
                 '1.0.0',
                 true,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\Notify;
 
 use CDS\Modules\EncryptedOption\EncryptedOption;
+use CDS\Modules\ListManager\ListManager;
 use InvalidArgumentException;
 
 class ListManagerSettings
@@ -45,6 +46,8 @@ class ListManagerSettings
                 add_filter("option_{$option}", [$instance, 'decryptOption']);
             }
         }
+
+        ListManager::register();
     }
 
     public function listManagerSettingsAddPluginPage()
@@ -56,6 +59,15 @@ class ListManagerSettings
             'manage_list_manager',
             'cds_list_manager_settings',
             [$this, 'listManagerSettingsCreateAdminPage'],
+        );
+
+        add_submenu_page(
+            $this->admin_page,
+            __('List Manager', 'cds-snc'),
+            __('List Manager', 'cds-snc'),
+            'manage_list_manager',
+            'cds_list_manager_app',
+            [$this, 'listManagerAdminPage'],
         );
     }
 
@@ -78,6 +90,24 @@ class ListManagerSettings
                 do_settings_sections('list-manager-settings-admin');
                 submit_button();?>
             </form>
+        </div>
+        <?php
+    }
+
+
+    public function listManagerAdminPage()
+    {
+        $this->LIST_MANAGER_NOTIFY_SERVICES =
+            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
+            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
+        $this->list_values = get_option('list_values') ?: '';
+        ?>
+
+        <div class="wrap">
+            <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+            <div id="list-manager-app">
+               App here
+            </div>
         </div>
         <?php
     }

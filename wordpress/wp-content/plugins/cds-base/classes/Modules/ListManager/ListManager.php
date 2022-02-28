@@ -44,6 +44,10 @@ class ListManager
                 true,
             );
 
+            wp_localize_script("list-manager", "CDS_LIST_MANAGER", array(
+                "endpoint" => esc_url_raw(getenv('LIST_MANAGER_ENDPOINT'))
+            ));
+
         }catch(\Exception $exception){
             echo $exception->getMessage();
         }

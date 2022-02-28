@@ -10,22 +10,13 @@ declare global {
 }
 
 
-if (document.getElementById("root")) {
+if (document.getElementById("list-manager-app")) {
   // render outside WP
   ReactDOM.render(
     <React.StrictMode>
       <App />
     </React.StrictMode>,
-    document.getElementById("root")
+    document.getElementById("list-manager-app")
   );
 
-}
-
-window.renderListManager = (el: string) => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>,
-    document.getElementById(el)
-  );
 }

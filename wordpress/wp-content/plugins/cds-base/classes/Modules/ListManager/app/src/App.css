@@ -29,3 +29,20 @@
 .colored-toast .swal2-html-container {
   color: white;
 }
+
+
+.swal2-container{
+  z-index: 10000 !important;
+}
+
+.swal2-confirm{
+  background-color: #26374a !important;
+  background-image: none;
+  border-color: transparent;
+}
+
+.swal2-confirm:hover, .swal2-confirm:focus{
+  background-color: #1c578a !important;
+  background-image: none !important;
+}
+

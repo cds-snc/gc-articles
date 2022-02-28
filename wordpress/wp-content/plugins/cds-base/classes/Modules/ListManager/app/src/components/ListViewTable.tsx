@@ -64,11 +64,11 @@ const Table = ({ columns, data }: { columns: any, data: List[] }) => {
 }
 
 const CreateListLink = () => {
-    return <Link className="button action" to={{ pathname: `list/create` }}>Create new list</Link>
+    return <Link className="button button-primary" to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
 const UploadListLink = ({ id }: { id: string }) => {
-    return <Link className="button action" to={{ pathname: `/upload/${id}` }}>Upload list</Link>
+    return <Link className="button action" to={{ pathname: `/upload/${id}` }}>Upload List</Link>
 }
 
 const NOTIFY_UTL = "https://notification.canada.ca";

@@ -17,5 +17,5 @@ export const DeleteActionLink = ({id = ''}:{id: string}) => {
         }
     }
 
-    return <ConfirmActionLink text={"delete"} isConfirmedHandler={() => deleteList({ id })} />
+    return <ConfirmActionLink text={"Delete"} isConfirmedHandler={() => deleteList({ id })} />
 }

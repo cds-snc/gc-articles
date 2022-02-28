@@ -15,5 +15,5 @@ export const ResetActionLink = ({id = ''}:{id: string}) => {
         } 
     }
 
-    return <ConfirmActionLink text={"reset"} isConfirmedHandler={ () => resetList({id}) } />
+    return <ConfirmActionLink text={"Reset"} isConfirmedHandler={ () => resetList({id}) } />
 }

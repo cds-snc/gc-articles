@@ -5,7 +5,6 @@ import { List, FieldError } from "../types";
 
 const textWidth = { width: "25em" }
 
-
 const Asterisk = () => {
     return (
         <>
@@ -19,7 +18,6 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
 
     useEffect(() => {
-        console.log(serverErrors)
         serverErrors && serverErrors.length >= 1 && serverErrors.forEach((item) => {
 
             setError(item?.name, {

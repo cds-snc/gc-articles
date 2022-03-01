@@ -37,7 +37,6 @@ use CDS\Modules\Site\SiteSettings;
 use CDS\Modules\Site\SiteSetup;
 use CDS\Modules\Wpml\Wpml;
 use CDS\Modules\Users\EmailDomains;
-
 use Exception;
 
 class Setup

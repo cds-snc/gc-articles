@@ -15,15 +15,14 @@
             url: url,
             data: form.serialize(), // serializes the form's elements.
             success: function (data) {
-                var parsedData = JSON.parse(data);
-
-                if (parsedData && parsedData["error"]) {
-                    var errorEl = '<p data-testid="errorMessage" class="gc-error-message" role="alert">' + parsedData["error"] + '</p>'
+                if (data && data["error"]) {
+                    var errorEl = '<p id="contact-error" data-testid="errorMessage" class="gc-alert gc-alert--error gc-alert--validation gc-error-message" role="alert">' + data.error_message + '</p>'
                     $(errorEl).insertAfter('#contact');
+                    document.getElementById("contact-error").scrollIntoView();
                 }
 
-                if (parsedData && parsedData["success"]) {
-                    $("#contact-form").replaceWith('<div class="panel-body"><div class="alert alert-success"><p>' + parsedData.success + '</p></div></div>')
+                if (data && data["success"]) {
+                    $("#contact-form").replaceWith('<div class="panel-body"><div class="alert alert-success"><p>' + data.success + '</p></div></div>');
                 }
             }
         });

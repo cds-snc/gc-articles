@@ -18,13 +18,13 @@ const UploadList = React.lazy(() => import("./components/UploadList"));
 
 // get subscriber counts for lists + display 
 
-const { endpoint } = window.CDS_LIST_MANAGER || { endpoint: "" };
+const endpoint = "/wp-json/list-manager";
 
 const App = () => {
   const options = {
     interceptors: {
       request: async ({ options }: { options: any }) => {
-        options.headers.Authorization = `c806e63f-ca53-415f-866d-64e442531a39`
+        options.headers["X-WP-Nonce"] = window.CDS_VARS.rest_nonce
         return options
       },
     }

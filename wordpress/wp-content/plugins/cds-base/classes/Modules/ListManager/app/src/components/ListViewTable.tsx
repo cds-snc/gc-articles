@@ -79,7 +79,7 @@ const templateLink = (serviceId: string, templateId: string) => {
 
 export const ListViewTable = () => {
     const { state } = useList();
-    const { lists, loading } = state;
+    const { lists } = state;
 
     const { status } = useListFetch();
 

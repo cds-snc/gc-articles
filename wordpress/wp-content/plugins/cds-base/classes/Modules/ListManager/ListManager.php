@@ -66,6 +66,14 @@ class ListManager
         ]);
     }
 
+    /**
+     * Local WP Rest proxy for list-manager requests.
+     * Adds authorization header before forwarding the request.
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_Error|WP_REST_Response
+     */
     public function proxyRequest(WP_REST_Request $request): WP_Error|WP_REST_Response
     {
         $token = getenv_docker('DEFAULT_LIST_MANAGER_API_KEY', '');

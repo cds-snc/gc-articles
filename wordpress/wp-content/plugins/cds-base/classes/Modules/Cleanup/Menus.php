@@ -25,30 +25,45 @@ class Menus
             return;
         }
 
-        global $menu, $submenu;
+        global $menu;
 
         /* add items to keep here */
         $allowed = [
-            __('Pages'),
-            __('Posts'),
-            __('Articles', 'cds-snc'),
-            __('Bulk', 'cds-snc'),
-            __('Users'),
-            __('Settings'),
-            __('Media')
+            // English menu items
+            "Dashboard",
+            "Articles",
+            "Media",
+            "Pages", // same in FR
+            "Menus", // same in FR
+            "Users",
+            "Settings",
+            "Bulk Send",
+
+            // French menu items
+            "Tableau de bord",
+            "Les Articles",
+            "Média",
+            "Utilisateurs",
+            "Réglages",
+            "Envoyer en masse",
         ];
 
         //  __('Settings'), __('Appearance')
         // http://localhost/wp-admin/options-reading.php
         end($menu);
         while (prev($menu)) {
-            $value = explode(' ', $menu[key($menu)][0]);
-            if (! in_array($value[0] !== null ? $value[0] : '', $allowed)) {
+            $value = $menu[key($menu)] ?? [];
+            $label = $value[0] ?? '';
+            $isSeparator = ($value[4] ?? null)  === "wp-menu-separator";
+
+            // Unset menu items unless they are safelisted or separators
+            if (!in_array($label, $allowed) && !$isSeparator) {
                 unset($menu[key($menu)]);
             }
         }
 
         $this->hideWPMailSmtpMenus();
+        $this->removeDashboardSubmenu();
         $this->removeSettingsPages();
     }
 
@@ -108,6 +123,19 @@ class Menus
         remove_submenu_page('wp-mail-smtp', 'wp-mail-smtp-tools');
         //Hide "WP Mail SMTP → About Us".
         remove_submenu_page('wp-mail-smtp', 'wp-mail-smtp-about');
+    }
+
+    public function removeDashboardSubmenu()
+    {
+        global $submenu;
+
+        try {
+            if ($submenu && isset($submenu["index.php"])) :
+                $submenu["index.php"] = [];
+            endif;
+        } catch (Exception $e) {
+            // no-op
+        }
     }
 
     public function removeSettingsPages()

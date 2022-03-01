@@ -19,6 +19,12 @@ on:
       PREV_PROD_WORDPRESS:
         description: "The previous version of the Production Wordpress container"
         value: ${{ jobs.environments-manifest.outputs.PREV_PROD_WORDPRESS }}
+      PROD_INFRASTRUCTURE:
+        description: "The current version of the Production infrastructure"
+        value: ${{ jobs.environments-manifest.outputs.PROD_INFRASTRUCTURE }}
+      PREV_PROD_INFRASTRUCTURE:
+        description: "The previous version of the Production infrastructure"
+        value: ${{ jobs.environments-manifest.outputs.PREV_PROD_INFRASTRUCTURE }}
       CONTAINER_DEPLOYMENT:
         description: "(production|staging|false) flag to indicate if we're dealing with a container deployment"
         value: ${{ jobs.environments-manifest.outputs.CONTAINER_DEPLOYMENT }}
@@ -28,8 +34,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       PROD_WORDPRESS: ${{ steps.versions.outputs.PROD_WORDPRESS }}
+      PROD_INFRASTRUCTURE: ${{ steps.versions.outputs.PROD_INFRASTRUCTURE }}
       STAG_WORDPRESS: ${{ steps.versions.outputs.STAG_WORDPRESS }}
       PREV_PROD_WORDPRESS: ${{ steps.previous.outputs.PROD_WORDPRESS }}
+      PREV_PROD_INFRASTRUCTURE: ${{ steps.previous.outputs.PROD_INFRASTRUCTURE }}
       PREV_STAG_WORDPRESS: ${{ steps.previous.outputs.STAG_WORDPRESS }}
       CONTAINER_DEPLOYMENT: ${{ steps.environment.outputs.CONTAINER_DEPLOYMENT }}
     steps:
@@ -43,9 +51,11 @@ jobs:
         run: |
           PROD_WORDPRESS=v$(yq '.production.wordpress' < ./infrastructure/environments.yml)
           STAG_WORDPRESS=v$(yq '.staging.wordpress' < ./infrastructure/environments.yml)
+          PROD_INFRASTRUCTURE=v$(yq '.production.infrastructure' < ./infrastructure/environments.yml)
           echo "$(cat ./infrastructure/environments.yml)"
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
+          echo "::set-output name=PROD_INFRASTRUCTURE::infrastructure/${PROD_INFRASTRUCTURE}"
 
       - name: Checkout
         uses: actions/checkout@v2
@@ -65,9 +75,11 @@ jobs:
           echo "$PREV_ENVIRONMENTS_YML"
           PROD_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
           STAG_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
+          PROD_INFRASTRUCTURE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.infrastructure' -)
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
-
+          echo "::set-output name=PROD_INFRASTRUCTURE::infrastructure/${PROD_INFRASTRUCTURE}"
+          
       - name: Deploy environment
         id: environment
         run: |

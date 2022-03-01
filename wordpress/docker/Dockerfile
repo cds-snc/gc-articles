@@ -23,7 +23,7 @@ RUN npm --unsafe-perm install
 
 ## Release build
 
-FROM wordpress:5.9.0-php8.0-fpm-alpine
+FROM wordpress:5.9.1-php8.0-fpm-alpine
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install pcov \
@@ -42,9 +42,10 @@ COPY ./assets/fr.png /usr/src/wordpress/wp-content/plugins/sitepress-multilingua
 # Deny all web access to the vendor folder contents
 RUN echo "Deny from all" > ./vendor/.htaccess
 
-# Copy wp-config and .htaccess
+# Copy files
 COPY ./wordpress/wp-config.php ./
 COPY ./wordpress/.htaccess-multisite ./.htaccess
+COPY ./wordpress/docker/security.txt ./.well-known/security.txt
 
 # Copy compiled js and css from the buildjs phase
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/build ./wp-content/plugins/cds-base/build

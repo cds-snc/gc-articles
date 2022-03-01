@@ -77,6 +77,14 @@ export const updateVersion = async (version) => {
   await updateWordPressPluginVersion(version);
 }
 
+export const updateInfrastructureVersion = async (version) => {
+  await replaceContent({
+    files: './infrastructure/VERSION',
+    from: new RegExp(/.*/g, 'i'),
+    to: version,
+  });
+}
+
 
 export const updateTerragruntHcl = async (tag) => {
   // update wordpress_image_tag

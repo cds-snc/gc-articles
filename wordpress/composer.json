@@ -95,7 +95,6 @@
     "wpackagist-plugin/wp-rest-api-v2-menus":"0.10",
     "digitalcube/c3-cloudfront-clear-cache": "dev-master",
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",
-    "wpackagist-plugin/memsource-connector":"3.3.2",
     "yoast/duplicate-post": "^4.4",
     "shawnhooper/delete-orphaned-multisite-tables": "1.0"
   },

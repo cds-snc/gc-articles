@@ -54,7 +54,10 @@ jobs:
     needs: environments-manifest
     runs-on: ubuntu-latest
 
-    if: github.ref != 'refs/heads/main' && github.event_name == 'pull_request'
+    if: |
+      github.ref != 'refs/heads/main' &&
+      github.event_name == 'pull_request' &&
+      needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production'
 
     env:
       TARGET_VERSION: ${{ needs.environments-manifest.outputs.PROD_WORDPRESS }}
@@ -101,7 +104,10 @@ jobs:
     needs: environments-manifest
     runs-on: ubuntu-latest
 
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: |
+      github.ref == 'refs/heads/main' &&
+      github.event_name == 'push' &&
+      needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production'
 
     env:
       TARGET_VERSION: ${{ needs.environments-manifest.outputs.PROD_WORDPRESS }}

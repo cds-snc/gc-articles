@@ -53,3 +53,7 @@ header .gcweb-menu {
   top: unset;
   line-height: unset;
 }
+
+.wp-block-image img {
+  height: auto;
+}

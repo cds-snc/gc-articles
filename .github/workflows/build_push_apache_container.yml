@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - ".github/workflows/deploy_apache_container.yml"
+      - ".github/workflows/build_push_apache_container.yml"
       - "wordpress/docker/apache/**"
 
 env:

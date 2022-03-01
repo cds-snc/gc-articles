@@ -7,6 +7,7 @@
     "tag-release": "node ./scripts/prepare-release.js --tag",
     "check-version": "node ./scripts/check-for-version.js",
     "deploy-production": "node ./scripts/prepare-release.js --production",
+    "deploy-infrastructure": "node ./scripts/prepare-release.js --deployInfrastructure",
     "cli": "docker exec -it cli /bin/zsh",
     "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && npm run build",
     "import": "node ./import/import.js",
@@ -18,7 +19,9 @@
     "wp-env:clean": "wp-env clean all",
     "wp-env:destroy": "wp-env destroy",
     "cy:run": "cypress run",
-    "cy:open": "cypress open"
+    "cy:open": "cypress open",
+    "watch": "node ./cli/format.js",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
@@ -34,12 +37,15 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
+    "husky": "^7.0.4",
     "inquirer": "^8.1.2",
+    "node-notifier": "^10.0.1",
     "prettier": "^2.3.2",
     "replace-in-file": "^6.2.0",
     "request-promise": "^0.4.1",
     "shelljs": "^0.8.4",
     "showdown": "^1.9.1",
+    "watch": "^1.0.2",
     "yaml": "^1.10.2",
     "yargs": "^17.1.1"
   }

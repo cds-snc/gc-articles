@@ -1,0 +1,22 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Only staged/changed files
+files=$(git diff --name-only --cached)
+
+for file in $files
+do
+  ext="${file##*.}"
+
+  # Only files with .php extension
+  if [[ $ext == "php" ]]; then
+    echo ""
+    echo "[PHPCBF] ${file}"
+
+    # PHPCBF
+    ./wordpress/vendor/bin/phpcbf -n --standard=PSR12 --extensions=php --ignore=vendor,node_modules,tests ${file} || true
+
+    # Add the cleaned file
+    git add -A $file
+  fi
+done

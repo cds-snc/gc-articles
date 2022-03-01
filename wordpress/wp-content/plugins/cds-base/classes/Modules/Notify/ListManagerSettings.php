@@ -65,14 +65,16 @@ class ListManagerSettings
             [$this, 'listManagerSettingsCreateAdminPage'],
         );
 
-        add_submenu_page(
-            $this->admin_page,
-            __('List Manager', 'cds-snc'),
-            __('List Manager', 'cds-snc'),
-            'manage_list_manager',
-            'cds_list_manager_app',
-            [$this, 'listManagerAdminPage'],
-        );
+        if(is_super_admin()){
+            add_submenu_page(
+                $this->admin_page,
+                __('List Manager', 'cds-snc'),
+                __('List Manager', 'cds-snc'),
+                'manage_list_manager',
+                'cds_list_manager_app',
+                [$this, 'listManagerAdminPage'],
+            );
+        }
     }
 
     public function listManagerSettingsCreateAdminPage()

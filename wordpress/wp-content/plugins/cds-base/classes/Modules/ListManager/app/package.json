@@ -11,6 +11,7 @@
     "@types/node": "^16.11.25",
     "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
+    "@wordpress/i18n": "^4.3.1",
     "react": "^17.0.2",
     "react-csv-importer": "^0.7.0",
     "react-dom": "^17.0.2",
@@ -31,7 +32,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall" : "npm run build"
+    "postinstall": "npm run build"
   },
   "eslintConfig": {
     "extends": [

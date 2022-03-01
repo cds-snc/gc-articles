@@ -90,6 +90,11 @@ class SiteSettings
 
         register_setting(
             'site_settings_group', // option_group
+            'show_search',
+        );
+
+        register_setting(
+            'site_settings_group', // option_group
             'blogname',
         );
 
@@ -107,6 +112,17 @@ class SiteSettings
             'collection_settings_section', // section
             [
                 'label_for' => 'collection_mode'
+            ]
+        );
+
+        add_settings_field(
+            'show_search', // id
+            __('Show Search', 'cds-snc'), // title
+            array( $this, 'showSearchCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section', // section
+            [
+                'label_for' => 'show_search'
             ]
         );
 
@@ -172,6 +188,14 @@ class SiteSettings
 
         printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">%s</label><br />', checked('maintenance', $collection_mode, false), __("Maintenance", "cds-snc"));
         printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">%s</label><br />', checked('live', $collection_mode, false), __("Live", "cds-snc"));
+    }
+
+    public function showSearchCallback()
+    {
+        $show_search = get_option('show_search');
+
+        printf('<input type="radio" name="show_search" id="show_search_on" value="on" %s /> <label for="show_search_on">%s</label><br />', checked('on', $show_search, false), __("Yes", "cds-snc"));
+        printf('<input type="radio" name="show_search" id="show_search_off" value="off" %s /> <label for="show_search_off">%s</label><br />', checked('off', $show_search, false), __("No", "cds-snc"));
     }
 
     public function collectionMaintenancePageCallback()

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Swal from "sweetalert2";
 
 import { useList } from "../store/ListContext";

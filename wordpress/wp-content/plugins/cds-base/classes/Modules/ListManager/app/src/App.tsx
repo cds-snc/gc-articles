@@ -12,12 +12,6 @@ const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
 const UploadList = React.lazy(() => import("./components/UploadList"));
 
-// @todo 
-// group lists by Service Ids
-// https://react-table.tanstack.com/docs/examples/grouping-column
-
-// get subscriber counts for lists + display 
-
 const endpoint = "/wp-json/list-manager";
 
 const App = () => {

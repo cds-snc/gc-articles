@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace CDS\Modules\ListManager;
 
-
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -73,7 +72,7 @@ class ListManager
         $base_url = getenv_docker('LIST_MANAGER_ENDPOINT', '');
         $path = $request['path'];
         $body = $request->get_body();
-        $url = $base_url .'/'. $path;
+        $url = $base_url . '/' . $path;
 
         $args = [
             'method' => $request->get_method(),
@@ -92,7 +91,7 @@ class ListManager
         $response_message = $proxy_response["response"]["message"];
         $response_body = $proxy_response["body"];
 
-        if ($response_code < 400 ) {
+        if ($response_code < 400) {
             return new WP_REST_Response(json_decode($response_body));
         } else {
             return new WP_Error($response_code, $response_message, $response_body);

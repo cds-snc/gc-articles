@@ -81,7 +81,7 @@ export const ListViewTable = () => {
     const { state } = useList();
     const { lists, loading } = state;
 
-    useListFetch();
+    const { status } = useListFetch();
 
     const columns = React.useMemo(
         () => [
@@ -185,7 +185,18 @@ export const ListViewTable = () => {
         ],
         []);
 
-    if (loading) {
+
+    if (status === "error") {
+        return (
+            <div className="error-summary components-notice is-error">
+                <div className="components-notice__content">
+                    <h2>Error something went wrong</h2>
+                </div>
+            </div>
+        )
+    }
+
+    if (status === "loading") {
         return <Spinner />
     }
 

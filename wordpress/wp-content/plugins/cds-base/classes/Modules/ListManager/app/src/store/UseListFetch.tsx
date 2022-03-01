@@ -15,7 +15,7 @@ export const useListFetch = () => {
                 dispatch({ type: "load", payload: await response.json() })
                 setStatus("idle")
             } else {
-                console.log("useListFetch", response)
+                setStatus("error")
             }
         }
 

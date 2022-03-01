@@ -16,7 +16,6 @@ declare global {
   }
 }
 
-
 if (document.getElementById("list-manager-app")) {
   // render outside WP
   ReactDOM.render(

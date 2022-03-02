@@ -57,3 +57,12 @@ header .gcweb-menu {
 .wp-block-image img {
   height: auto;
 }
+
+/* Hide search bar */
+.hide-search-bar header .brand {
+  margin-bottom: 20px;
+}
+
+.hide-search-bar #wb-srch {
+  display: none;
+}

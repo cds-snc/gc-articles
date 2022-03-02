@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\Notify;
 
 use CDS\Modules\EncryptedOption\EncryptedOption;
+use CDS\Modules\ListManager\ListManager;
 use InvalidArgumentException;
 
 class ListManagerSettings
@@ -24,7 +25,10 @@ class ListManagerSettings
     {
         $instance = new self($encryptedOption);
 
-        add_action('admin_menu', [$instance,'listManagerSettingsAddPluginPage']);
+        add_action('admin_menu', [
+            $instance,
+            'listManagerSettingsAddPluginPage',
+        ]);
         add_action('admin_init', [$instance, 'listManagerSettingsPageInit']);
         add_action('admin_head', [$instance, 'addStyles']); // @TODO
 
@@ -35,16 +39,19 @@ class ListManagerSettings
             },
         );
 
-        $encryptedOptions = [
-            'LIST_MANAGER_NOTIFY_SERVICES',
-        ];
+        $encryptedOptions = ['LIST_MANAGER_NOTIFY_SERVICES'];
 
         if (!\CDS\Utils::isWpEnv()) {
             foreach ($encryptedOptions as $option) {
-                add_filter("pre_update_option_{$option}", [$instance,'encryptOption']);
+                add_filter("pre_update_option_{$option}", [
+                    $instance,
+                    'encryptOption',
+                ]);
                 add_filter("option_{$option}", [$instance, 'decryptOption']);
             }
         }
+
+        ListManager::register();
     }
 
     public function listManagerSettingsAddPluginPage()
@@ -57,13 +64,24 @@ class ListManagerSettings
             'cds_list_manager_settings',
             [$this, 'listManagerSettingsCreateAdminPage'],
         );
+
+        if (is_super_admin()) {
+            add_submenu_page(
+                $this->admin_page,
+                __('List Manager', 'cds-snc'),
+                __('List Manager', 'cds-snc'),
+                'manage_list_manager',
+                'cds_list_manager_app',
+                [$this, 'listManagerAdminPage'],
+            );
+        }
     }
 
     public function listManagerSettingsCreateAdminPage()
     {
         $this->LIST_MANAGER_NOTIFY_SERVICES =
             get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
+        get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
         $this->list_values = get_option('list_values') ?: '';
         ?>
 
@@ -82,6 +100,22 @@ class ListManagerSettings
         <?php
     }
 
+    public function listManagerAdminPage()
+    {
+        $this->LIST_MANAGER_NOTIFY_SERVICES =
+            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
+        get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
+        $this->list_values = get_option('list_values') ?: '';
+        ?>
+
+        <div class="wrap">
+            <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+            <div id="list-manager-app">
+            </div>
+        </div>
+        <?php
+    }
+
     public function listManagerSettingsPageInit()
     {
         register_setting('list_manager_settings_option_group', 'list_values');
@@ -90,7 +124,10 @@ class ListManagerSettings
             'list_manager_settings_option_group', // option_group
             'LIST_MANAGER_NOTIFY_SERVICES',
             function ($input) {
-                return Utils::mergeListManagerServicesString(sanitize_text_field($input), get_option('LIST_MANAGER_NOTIFY_SERVICES'));
+                return Utils::mergeListManagerServicesString(
+                    sanitize_text_field($input),
+                    get_option('LIST_MANAGER_NOTIFY_SERVICES'),
+                );
             },
         );
 
@@ -159,7 +196,7 @@ class ListManagerSettings
         $values = [];
         $i = 0;
         foreach ($service_ids as $key => $value) {
-            $hint = "";
+            $hint = '';
 
             // get obfuscated `hint` label
             if (isset($value['api_key'])) {
@@ -170,33 +207,35 @@ class ListManagerSettings
                 );
             }
 
-            array_push(
-                $values,
-                [
+            array_push($values, [
                 'id' => $i,
                 'apiKey' => '', // don't re-display in form field
                 'name' => $key,
                 'hint' => $hint,
-                ]
-            );
+            ]);
             $i++;
         }
 
         if (count($values) < 1) {
-            array_push(
-                $values,
-                [
+            array_push($values, [
                 'id' => '',
                 'apiKey' => '',
                 'name' => '',
                 'hint' => '',
-                ]
-            );
+            ]);
         }
 
         $values = json_encode($values);
 
-        printf('<p class="desc">' . __("Add the <a href='%s'>sending service</a> for your subscription lists.", "cds-snc") . '</p>', 'https://notification.canada.ca/accounts');
+        printf(
+            '<p class="desc">' .
+                __(
+                    "Add the <a href='%s'>sending service</a> for your subscription lists.",
+                    'cds-snc',
+                ) .
+                '</p>',
+            'https://notification.canada.ca/accounts',
+        );
 
         printf(
             '<div id="notify-services-repeater-form" style="margin-top:20px;">notify services</div>',
@@ -214,18 +253,18 @@ class ListManagerSettings
         }
 
         if (count($values) < 1) {
-            array_push(
-                $values,
-                [
+            array_push($values, [
                 'id' => '',
                 'label' => '',
                 'type' => '',
-                ]
-            );
+            ]);
         }
 
         $values = json_encode($values);
-        printf("<p class='desc'>%s</p>", __("Add details for each of your subscription lists.", "cds-snc"));
+        printf(
+            "<p class='desc'>%s</p>",
+            __('Add details for each of your subscription lists.', 'cds-snc'),
+        );
         printf('<div id="list-values-repeater-form"></div>');
         $data = 'CDS.renderListValuesRepeaterForm(' . $values . ');';
         wp_add_inline_script('cds-snc-admin-js', $data, 'after');

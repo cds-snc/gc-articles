@@ -133,6 +133,8 @@ define('BLOG_ID_CURRENT_SITE', 1);
 
 /* Custom */
 define('SCRIPT_DEBUG', getenv_docker('SCRIPT_DEBUG', false));
+define('DEFAULT_LIST_MANAGER_API_KEY', getenv_docker('DEFAULT_LIST_MANAGER_API_KEY', ''));
+define('LIST_MANAGER_ENDPOINT', getenv_docker('LIST_MANAGER_ENDPOINT', ''));
 
 /* Config for S3 Uploads plugin */
 define('S3_UPLOADS_BUCKET', getenv_docker('S3_UPLOADS_BUCKET', ''));

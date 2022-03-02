@@ -39,6 +39,7 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack --watch",
-    "packages-update": "wp-scripts packages-update"
+    "packages-update": "wp-scripts packages-update",
+    "preinstall": "cd classes/Modules/Subscribe && npm install && cd ../Contact && npm install && cd ../ListManager/app && npm install"
   }
 }

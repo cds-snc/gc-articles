@@ -64,7 +64,7 @@ class SiteSettings
         // add section MAINTENANCE MODE
         add_settings_section(
             'collection_settings_section_maintenance', // id
-            __("Maintenance mode"), // title
+            __("Maintenance mode", 'cds-snc'), // title
             array( $this, 'maintenanceDescriptionCallback'), // callback
             'collection-settings-admin' // page
         );
@@ -72,7 +72,7 @@ class SiteSettings
         // add section SITE CONFIGURATION
         add_settings_section(
             'collection_settings_section_config', // id
-            __("Site configuration"), // title
+            __("Site configuration", 'cds-snc'), // title
             null, // callback
             'collection-settings-admin' // page
         );
@@ -225,24 +225,24 @@ class SiteSettings
     {
         $collection_mode = get_option('collection_mode');
 
-        printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">%s</label><br />', checked('maintenance', $collection_mode, false), __("Turn on", "cds-snc"));
-        printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">%s</label><br />', checked('live', $collection_mode, false), __("Turn off", "cds-snc"));
+        printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">%s</label><br />', checked('maintenance', $collection_mode, false), __('Turn on', "cds-snc"));
+        printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">%s</label><br />', checked('live', $collection_mode, false), __('Turn off', "cds-snc"));
     }
 
     public function showSearchCallback()
     {
         $show_search = get_option('show_search');
 
-        printf('<input type="radio" name="show_search" id="show_search_on" value="on" %s /> <label for="show_search_on">%s</label><br />', checked('on', $show_search, false), __("Show the search bar", "cds-snc"));
-        printf('<input type="radio" name="show_search" id="show_search_off" value="off" %s /> <label for="show_search_off">%s</label><br />', checked('off', $show_search, false), __("Hide the search bar", "cds-snc"));
+        printf('<input type="radio" name="show_search" id="show_search_on" value="on" %s /> <label for="show_search_on">%s</label><br />', checked('on', $show_search, false), __('Show the search bar', "cds-snc"));
+        printf('<input type="radio" name="show_search" id="show_search_off" value="off" %s /> <label for="show_search_off">%s</label><br />', checked('off', $show_search, false), __('Hide the search bar', "cds-snc"));
     }
 
     public function breadcrumbsCallback()
     {
         $show_breadcrumbs = get_option('show_breadcrumbs');
 
-        printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_on" value="on" %s /> <label for="show_breadcrumbs_on">%s</label><br />', checked("on", $show_breadcrumbs, false), __("Show breadcrumbs", "cds-snc"));
-        printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_off" value="off" %s /> <label for="show_breadcrumbs_off">%s</label><br />', checked("off", $show_breadcrumbs, false), __("Hide breadcrumbs", "cds-snc"));
+        printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_on" value="on" %s /> <label for="show_breadcrumbs_on">%s</label><br />', checked("on", $show_breadcrumbs, false), __('Show breadcrumbs', "cds-snc"));
+        printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_off" value="off" %s /> <label for="show_breadcrumbs_off">%s</label><br />', checked("off", $show_breadcrumbs, false), __('Hide breadcrumbs', "cds-snc"));
     }
 
     public function collectionMaintenancePageCallback()
@@ -299,8 +299,8 @@ class SiteSettings
 
     public function maintenanceDescriptionCallback()
     {
-        echo __('In maintenance mode, pages and articles you publish will <strong>not</strong> be publicly visible.');
+        echo __('In maintenance mode, pages and articles you publish will <strong>not</strong> be publicly visible.', 'cds-snc');
         echo '<br />';
-        echo __('Logged-in users will be able to create and view content, but all other visitors will be redirected to the maintenance page.');
+        echo __('Logged-in users will be able to create and view content, but all other visitors will be redirected to the maintenance page.', 'cds-snc');
     }
 }

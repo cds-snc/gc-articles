@@ -151,7 +151,8 @@ function cds_breadcrumb($sep = ''): string
         return $breadcrumb;
     }
 
-    if (!function_exists('yoast_breadcrumb')) {
+    // if breadcrumbs are disabled, yoast_breadcrumb returns null
+    if (!function_exists('yoast_breadcrumb') || is_null(yoast_breadcrumb('', '', null))) {
         return '';
     }
 

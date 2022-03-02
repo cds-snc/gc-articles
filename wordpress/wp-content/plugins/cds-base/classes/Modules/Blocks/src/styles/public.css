@@ -66,3 +66,12 @@ header .gcweb-menu {
 .hide-search-bar #wb-srch {
   display: none;
 }
+
+/* Hide breadcrumbs */
+.hide-breadcrumbs header {
+  margin-bottom: 25px;
+}
+
+.hide-breadcrumbs #wb-bc {
+  display: none;
+}

@@ -105,17 +105,22 @@ class SiteSettings
 
         register_setting(
             'site_settings_group', // option_group
-            'show_search',
-        );
-
-        register_setting(
-            'site_settings_group', // option_group
             'blogname',
         );
 
         register_setting(
             'site_settings_group', // option_group
             'blogdescription',
+        );
+
+        register_setting(
+            'site_settings_group', // option_group
+            'show_search',
+        );
+
+        register_setting(
+            'site_settings_group', // option_group
+            'show_breadcrumbs',
         );
 
         // add fields GENERAL
@@ -197,6 +202,23 @@ class SiteSettings
                 'label_for' => 'show_search'
             ]
         );
+
+        /**
+         * Note that there is also a Yoast (WPSEO) setting for this, but it's nested in an array.
+         * -> get_option('wpseo_titles')['breadcrumbs-enable']
+         *
+         * Since the settings API doesn't let me write to that field easily, I am creating a new setting.
+         */
+        add_settings_field(
+            'show_breadcrumbs', // id
+            __('Breadcrumbs', 'cds-snc'), // title
+            array( $this, 'breadcrumbsCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_config', // section
+            [
+                'label_for' => 'show_breadcrumbs'
+            ]
+        );
     }
 
     public function collectionModeCallback()
@@ -213,6 +235,14 @@ class SiteSettings
 
         printf('<input type="radio" name="show_search" id="show_search_on" value="on" %s /> <label for="show_search_on">%s</label><br />', checked('on', $show_search, false), __("Show the search bar", "cds-snc"));
         printf('<input type="radio" name="show_search" id="show_search_off" value="off" %s /> <label for="show_search_off">%s</label><br />', checked('off', $show_search, false), __("Hide the search bar", "cds-snc"));
+    }
+
+    public function breadcrumbsCallback()
+    {
+        $show_breadcrumbs = get_option('show_breadcrumbs');
+
+        printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_on" value="on" %s /> <label for="show_breadcrumbs_on">%s</label><br />', checked("on", $show_breadcrumbs, false), __("Show breadcrumbs", "cds-snc"));
+        printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_off" value="off" %s /> <label for="show_breadcrumbs_off">%s</label><br />', checked("off", $show_breadcrumbs, false), __("Hide breadcrumbs", "cds-snc"));
     }
 
     public function collectionMaintenancePageCallback()

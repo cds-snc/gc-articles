@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace CDS\Modules\ListManager;
 
-use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -78,9 +77,9 @@ class ListManager
      *
      * @param  WP_REST_Request  $request
      *
-     * @return WP_Error|WP_REST_Response
+     * @return WP_REST_Response
      */
-    public function proxyRequest(WP_REST_Request $request): WP_Error|WP_REST_Response
+    public function proxyRequest(WP_REST_Request $request): WP_REST_Response
     {
         $endpoint = $request['endpoint'];
         $body = $request->get_body();
@@ -100,13 +99,12 @@ class ListManager
 
         // Retrieve information
         $response_code = $proxy_response["response"]["code"];
-        $response_message = $proxy_response["response"]["message"];
         $response_body = $proxy_response["body"];
 
-        if ($response_code < 400) {
-            return new WP_REST_Response(json_decode($response_body));
-        } else {
-            return new WP_Error($response_code, $response_message, $response_body);
-        }
+        // Return response and code
+        $response = new WP_REST_Response(json_decode($response_body));
+        $response->set_status($response_code);
+
+        return $response;
     }
 }

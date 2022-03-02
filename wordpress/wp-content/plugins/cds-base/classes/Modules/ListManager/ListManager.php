@@ -100,13 +100,12 @@ class ListManager
 
         // Retrieve information
         $response_code = $proxy_response["response"]["code"];
-        $response_message = $proxy_response["response"]["message"];
         $response_body = $proxy_response["body"];
 
-        if ($response_code < 400) {
-            return new WP_REST_Response(json_decode($response_body));
-        } else {
-            return new WP_Error($response_code, $response_message, $response_body);
-        }
+        // Return response and code
+        $response = new WP_REST_Response(json_decode($response_body));
+        $response->set_status($response_code);
+
+        return $response;
     }
 }

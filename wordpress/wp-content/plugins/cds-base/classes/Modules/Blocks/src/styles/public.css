@@ -57,3 +57,21 @@ header .gcweb-menu {
 .wp-block-image img {
   height: auto;
 }
+
+/* Hide search bar */
+.hide-search-bar header .brand {
+  margin-bottom: 20px;
+}
+
+.hide-search-bar #wb-srch {
+  display: none;
+}
+
+/* Hide breadcrumbs */
+.hide-breadcrumbs header {
+  margin-bottom: 25px;
+}
+
+.hide-breadcrumbs #wb-bc {
+  display: none;
+}

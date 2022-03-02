@@ -14,7 +14,7 @@ class SiteSettings
     {
         $instance = new self();
 
-        add_action('admin_menu', [$instance, 'collectionSettingsAddPluginPage']);
+        add_action('admin_menu', [$instance, 'collectionSettingsAddPluginPage'], 99);
         add_action('admin_init', [$instance, 'collectionSettingsPageInit']);
 
         add_filter('collection_settings_option_group', function ($capability) {
@@ -40,7 +40,6 @@ class SiteSettings
 
         <div class="wrap">
             <h1><?php _e('Site Settings', 'cds-snc') ?></h1>
-            <?php settings_errors(); ?>
 
             <form method="post" action="options.php" id="collection_settings_form" class="gc-form-wrapper">
                 <?php
@@ -54,10 +53,26 @@ class SiteSettings
 
     public function collectionSettingsPageInit()
     {
-        // add section
+        // add section GENERAL
         add_settings_section(
-            'collection_settings_section', // id
-            get_bloginfo("name"), // title
+            'collection_settings_section_general', // id
+            __("General"), // title
+            null, // callback
+            'collection-settings-admin' // page
+        );
+
+        // add section MAINTENANCE MODE
+        add_settings_section(
+            'collection_settings_section_maintenance', // id
+            __("Maintenance mode", 'cds-snc'), // title
+            array( $this, 'maintenanceDescriptionCallback'), // callback
+            'collection-settings-admin' // page
+        );
+
+        // add section SITE CONFIGURATION
+        add_settings_section(
+            'collection_settings_section_config', // id
+            __("Site configuration", 'cds-snc'), // title
             null, // callback
             'collection-settings-admin' // page
         );
@@ -98,46 +113,23 @@ class SiteSettings
             'blogdescription',
         );
 
-        // add fields
-        add_settings_field(
-            'collection_mode', // id
-            __('Mode', 'cds-snc'), // title
-            array( $this, 'collectionModeCallback'), // callback
-            'collection-settings-admin', // page
-            'collection_settings_section', // section
-            [
-                'label_for' => 'collection_mode'
-            ]
+        register_setting(
+            'site_settings_group', // option_group
+            'show_search',
         );
 
-        add_settings_field(
-            'collection_mode_maintenance_page', // id
-            __('Maintenance Page', 'cds-snc'), // title
-            array( $this, 'collectionMaintenancePageCallback'), // callback
-            'collection-settings-admin', // page
-            'collection_settings_section', // section
-            [
-                'label_for' => 'collection_mode_maintenance_page'
-            ]
+        register_setting(
+            'site_settings_group', // option_group
+            'show_breadcrumbs',
         );
 
-        add_settings_field(
-            'page_on_front', // id
-            __('Home Page', 'cds-snc'), // title
-            array( $this, 'readingSettingsCallback'), // callback
-            'collection-settings-admin', // page
-            'collection_settings_section', // section
-            [
-                'label_for' => 'page_on_front'
-            ]
-        );
-
+        // add fields GENERAL
         add_settings_field(
             'blogname', // id
             __('Site Name', 'cds-snc'), // title
             array( $this, 'blogNameCallback'), // callback
             'collection-settings-admin', // page
-            'collection_settings_section', // section
+            'collection_settings_section_general', // section
             [
                 'label_for' => 'blogname'
             ]
@@ -148,9 +140,43 @@ class SiteSettings
             __('Site Description', 'cds-snc'), // title
             array( $this, 'blogDescriptionCallback'), // callback
             'collection-settings-admin', // page
-            'collection_settings_section', // section
+            'collection_settings_section_general', // section
             [
                 'label_for' => 'blogdescription'
+            ]
+        );
+
+        add_settings_field(
+            'page_on_front', // id
+            __('Home Page', 'cds-snc'), // title
+            array( $this, 'readingSettingsCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_general', // section
+            [
+                'label_for' => 'page_on_front'
+            ]
+        );
+
+        // add fields MAINTENANCE
+        add_settings_field(
+            'collection_mode', // id
+            __('Activate maintenance mode', 'cds-snc'), // title
+            array( $this, 'collectionModeCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_maintenance', // section
+            [
+                'label_for' => 'collection_mode'
+            ]
+        );
+
+        add_settings_field(
+            'collection_mode_maintenance_page', // id
+            __('Maintenance Page', 'cds-snc'), // title
+            array( $this, 'collectionMaintenancePageCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_maintenance', // section
+            [
+                'label_for' => 'collection_mode_maintenance_page'
             ]
         );
 
@@ -159,9 +185,38 @@ class SiteSettings
             __('Search engine visibility', 'cds-snc'), // title
             array( $this, 'indexSiteCallback'), // callback
             'collection-settings-admin', // page
-            'collection_settings_section', // section
+            'collection_settings_section_general', // section
             [
                 'label_for' => 'blog_public'
+            ]
+        );
+
+        // add fields MAINTENANCE
+        add_settings_field(
+            'show_search', // id
+            __('Search bar', 'cds-snc'), // title
+            array( $this, 'showSearchCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_config', // section
+            [
+                'label_for' => 'show_search'
+            ]
+        );
+
+        /**
+         * Note that there is also a Yoast (WPSEO) setting for this, but it's nested in an array.
+         * -> get_option('wpseo_titles')['breadcrumbs-enable']
+         *
+         * Since the settings API doesn't let me write to that field easily, I am creating a new setting.
+         */
+        add_settings_field(
+            'show_breadcrumbs', // id
+            __('Breadcrumbs', 'cds-snc'), // title
+            array( $this, 'breadcrumbsCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_config', // section
+            [
+                'label_for' => 'show_breadcrumbs'
             ]
         );
     }
@@ -170,8 +225,24 @@ class SiteSettings
     {
         $collection_mode = get_option('collection_mode');
 
-        printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">%s</label><br />', checked('maintenance', $collection_mode, false), __("Maintenance", "cds-snc"));
-        printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">%s</label><br />', checked('live', $collection_mode, false), __("Live", "cds-snc"));
+        printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">%s</label><br />', checked('maintenance', $collection_mode, false), __('Turn on', "cds-snc"));
+        printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">%s</label><br />', checked('live', $collection_mode, false), __('Turn off', "cds-snc"));
+    }
+
+    public function showSearchCallback()
+    {
+        $show_search = get_option('show_search');
+
+        printf('<input type="radio" name="show_search" id="show_search_on" value="on" %s /> <label for="show_search_on">%s</label><br />', checked('on', $show_search, false), __('Show the search bar', "cds-snc"));
+        printf('<input type="radio" name="show_search" id="show_search_off" value="off" %s /> <label for="show_search_off">%s</label><br />', checked('off', $show_search, false), __('Hide the search bar', "cds-snc"));
+    }
+
+    public function breadcrumbsCallback()
+    {
+        $show_breadcrumbs = get_option('show_breadcrumbs');
+
+        printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_on" value="on" %s /> <label for="show_breadcrumbs_on">%s</label><br />', checked("on", $show_breadcrumbs, false), __('Show breadcrumbs', "cds-snc"));
+        printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_off" value="off" %s /> <label for="show_breadcrumbs_off">%s</label><br />', checked("off", $show_breadcrumbs, false), __('Hide breadcrumbs', "cds-snc"));
     }
 
     public function collectionMaintenancePageCallback()
@@ -224,5 +295,12 @@ class SiteSettings
         <?php _e('Discourage search engines from indexing this site'); ?>
         <p class="description"><?php _e('It is up to search engines to honor this request.'); ?></p>
         <?php
+    }
+
+    public function maintenanceDescriptionCallback()
+    {
+        echo __('In maintenance mode, pages and articles you publish will <strong>not</strong> be publicly visible.', 'cds-snc');
+        echo '<br />';
+        echo __('Logged-in users will be able to create and view content, but all other visitors will be redirected to the maintenance page.', 'cds-snc');
     }
 }

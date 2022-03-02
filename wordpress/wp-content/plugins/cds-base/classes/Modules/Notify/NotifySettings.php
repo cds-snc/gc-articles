@@ -24,7 +24,7 @@ class NotifySettings
     {
         $instance = new self($encryptedOption);
 
-        add_action('admin_menu', [$instance, 'notifyApiSettingsAddPluginPage']);
+        add_action('admin_menu', [$instance, 'notifyApiSettingsAddPluginPage'], 100);
         add_action('admin_init', [$instance, 'notifyApiSettingsPageInit']);
         add_action('admin_head', [$instance, 'addStyles']);
 

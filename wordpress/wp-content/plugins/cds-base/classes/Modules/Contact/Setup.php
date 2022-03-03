@@ -26,7 +26,7 @@ class Setup
                 'callback' => [$this, 'confirmSend'],
                 'permission_callback' => function () {
                     return '';
-                }
+                },
             ]);
         });
 
@@ -36,89 +36,172 @@ class Setup
 
     public function enqueue()
     {
-        wp_enqueue_script('cds-contact-js', plugin_dir_url(__FILE__) . '/src/handler.js', ['jquery'], "1.0.0", true);
+        wp_enqueue_script(
+            'cds-contact-js',
+            plugin_dir_url(__FILE__) . '/src/handler.js',
+            ['jquery'],
+            '1.0.0',
+            true,
+        );
 
-        wp_localize_script("cds-subscribe-js", "CDS_VARS", array(
-            "rest_url" => esc_url_raw(rest_url()),
-            "rest_nonce" => wp_create_nonce("wp_rest"),
-        ));
+        wp_localize_script('cds-subscribe-js', 'CDS_VARS', [
+            'rest_url' => esc_url_raw(rest_url()),
+            'rest_nonce' => wp_create_nonce('wp_rest'),
+        ]);
     }
 
-    protected function sendEmail(string $email, string $message, string $contactType): array
+    protected function isJson($string): bool
+    {
+        json_decode($string);
+
+        return json_last_error() === JSON_ERROR_NONE;
+    }
+
+    protected function handleException($e)
+    {
+        $exception = (string) $e->getResponse()->getBody();
+
+        error_log("ZENDESK - ClientException" . $exception);
+
+        if ($this->isJson($exception)) {
+            try {
+                return json_decode($exception);
+            } catch (\Exception $e) {
+                return __('ZenDesk client error', 'cds-snc');
+            }
+        }
+    }
+
+    protected function createTicket(
+        string $goal,
+        string $fullname,
+        string $email,
+        string $message,
+    ): array {
+
+        try {
+            $client = new Client([]);
+
+            $response = $client->request('POST', getenv('ZENDESK_API_URL') . '/api/v2/requests', [
+                'json' =>  ["request" => [
+                    'subject' => $goal,
+                    'description' => '',
+                    'email' => $email,
+                    'comment' => ['body' => $message],
+                    'requester' => ['name' => $fullname, 'email' => $email],
+                    'tags' => ['articles_api']
+                ]
+                ],
+            ]);
+
+            return ['success' => __('Success', 'cds-snc')];
+        } catch (ClientException $exception) {
+            return ['error' => ["exceptions" => $this->handleException($exception)], "error_message" => __('Internal server error', 'cds-snc')];
+        } catch (Exception $e) {
+            error_log("ZENDESK - Exception" . $exception->getMessage());
+            return ['error' => true, "error_message" => __('ZenDesk server error', 'cds-snc')];
+        }
+    }
+
+    protected function sendEmail(string $email, string $message): array
     {
         try {
             $notifyMailer = new NotifyClient();
-            $to = 'platform-mvp@cds-snc.ca';
-            $notifyTemplateId = "125002c5-cf95-4eec-a6c8-f97eda56550a";
-            $notifyMailer->sendMail($to, $notifyTemplateId, [
+            $notifyTemplateId = '125002c5-cf95-4eec-a6c8-f97eda56550a';
+            $notifyMailer->sendMail($email, $notifyTemplateId, [
                 'email' => $email,
-                'contact-type' => $contactType,
-                'message' => $message
+                'message' => $message,
             ]);
 
-            return ["success" => __("Thanks for the message", "cds-snc")];
+            return ['success' => __('Thanks for the message', 'cds-snc')];
         } catch (Exception $exception) {
             error_log($exception->getMessage());
-            return ["error" => $exception->getMessage()];
+            return ['error' => $exception->getMessage(), "error_message" => __('Error sending email', 'cds-snc')];
         }
     }
 
-    public function confirmSend(): string
+    public function confirmSend(): array
     {
         if (!isset($_POST['contact'])) {
-            return json_encode(["error" => __("400 Bad Request", "cds-snc")]);
+            $message = __('400 Bad Request', 'cds-snc');
+            return ['error' => true, "error_message" => $message];
         }
 
         if (!wp_verify_nonce($_POST['contact'], 'contact_form_nonce_action')) {
-            return json_encode(["error" => __("401 Unauthorized", "cds-snc")]);
+            $message = __('400 Bad Request', 'cds-snc');
+            return ['error' => true , "error_message" => $message];
         }
 
-        if (isset($_POST['contact-type']) && $_POST['contact-type'] === "request-site") {
-            $errors = false;
-            if (!isset($_POST['purpose']) || $_POST['purpose'] === "") {
-                $errors = true;
-            }
+        if (
+            !isset($_POST['message']) || $_POST['message'] === '' ||
+            (!isset($_POST['fullname']) || $_POST['fullname'] === '') ||
+            (!isset($_POST['email']) || $_POST['email'] === '') ||
+            (!isset($_POST['goal']) || $_POST['goal'] === '')
+        ) {
+            $message = __(
+                'Please complete the required field(s) to continue',
+                'cds-snc',
+            );
 
-            if (!isset($_POST['heard-about-from']) || $_POST['heard-about-from'] === "") {
-                $errors = true;
-            }
-
-
-            if (!isset($_POST['gc-collection-name']) || $_POST['gc-collection-name'] === "") {
-                $errors = true;
-            }
-
-            if (!isset($_POST['sending-integration']) || $_POST['sending-integration'] === "") {
-                $errors = true;
-            }
-
-            if ($errors) {
-                return json_encode(["error" => __("Please complete all required fields to continue", "cds-snc")]);
-            }
-
-            $message = "\n\n";
-            $message .= "• Request Collection Name: " . sanitize_text_field($_POST['gc-collection-name']) . "\n\n";
-            $message .= "• Purpose: " . sanitize_text_field($_POST['purpose']) . "\n\n";
-            $message .= "• Heard about from: " . sanitize_text_field($_POST['heard-about-from']) . "\n\n";
-            $message .= "• Sending integration: " . sanitize_text_field($_POST['sending-integration']) . "\n\n";
-            $email = sanitize_email($_POST["email"]);
-            $contactType = sanitize_text_field($_POST["contact-type"]);
-
-            return json_encode($this->sendEmail($email, $message, $contactType));
-        } else {
-            if (
-                (!isset($_POST["message"]) || $_POST["message"] === "")
-                || (!isset($_POST['contact-type']) || $_POST['contact-type'] === "")
-                || (!isset($_POST['email']) || $_POST['email'] === "")
-            ) {
-                return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
-            }
-
-            $message = sanitize_text_field($_POST['message']);
-            $email = sanitize_email($_POST["email"]);
-            $contactType = sanitize_text_field($_POST["contact-type"]);
-
-            return json_encode($this->sendEmail($email, $message, $contactType));
+            return [
+                'error' =>  true,
+                "error_message" => $message
+            ];
         }
+
+        $fullname = sanitize_text_field($_POST['fullname']);
+        $email = sanitize_email($_POST['email']);
+        $goal = sanitize_text_field($_POST['goal']);
+
+        $message = 'Goal of your message:' . "\n";
+        $message .= $goal . "\n\n";
+
+        if (isset($_POST['usage'])) {
+            $message .=
+                'What are you thinking about using GC Articles for?' . "\n";
+
+            foreach ($_POST['usage'] as $item) {
+                $message .= '- ' . sanitize_text_field($item) . "\n";
+            }
+        }
+
+        if (isset($_POST['usage-other']) && $_POST['usage-other'] !== '') {
+            $message .=
+                "\n" .
+                '(Other) ' .
+                sanitize_text_field($_POST['usage-other']) .
+                "\n";
+        }
+
+        if (isset($_POST['target'])) {
+            $message .=
+                "\n\n" .
+                'Who are the target audiences you’re thinking about?' .
+                "\n";
+            foreach ($_POST['target'] as $item) {
+                $message .= '- ' . sanitize_text_field($item) . "\n";
+            }
+        }
+
+        if (isset($_POST['target-other']) && $_POST['target-other'] !== '') {
+            $message .=
+                "\n" .
+                '(Other) ' .
+                sanitize_text_field($_POST['target-other']) .
+                "\n";
+        }
+
+        $message .= "\n\n" . 'Message:' . "\n";
+        $message .= sanitize_text_field($_POST['message']);
+
+        # on hold
+        # $response = $this->createTicket($goal, $fullname, $email, $message);
+        $this->sendEmail("platform-mvp@cds-snc.ca", $message);
+
+        if (isset($_POST['cc']) && $_POST['cc'] !== "") {
+            $this->sendEmail($email, $message);
+        }
+
+        return $response;
     }
 }

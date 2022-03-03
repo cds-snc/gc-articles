@@ -8,7 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.1.5', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.1.6', function () {
             if (is_blog_installed()) {
                 $wp_roles = wp_roles();
                 $allRoles = array_keys($wp_roles->roles); // array_keys returns only the slug
@@ -18,6 +18,7 @@ class Roles
                     remove_role($role);
                 }
 
+                $this->cleanupRoles('gcwriter');
                 $this->cleanupRoles('gceditor');
                 $this->cleanupRoles('administrator');
 
@@ -167,6 +168,34 @@ class Roles
                 'upload_files' => 1,
                 'edit_theme_options' => 1 // allows editing the "menu" options
             ],
+            'gcwriter' => [
+                'read' => 1,
+                'level_1' => 1,
+                'level_0' => 1,
+                'moderate_comments' => 0,
+                'edit_posts' => 1,
+                'edit_others_posts' => 0,
+                'edit_published_posts' => 0,
+                'publish_posts' => 0,
+                'delete_posts' => 0,
+                'delete_others_posts' => 0,
+                'delete_published_posts' => 0,
+                'delete_private_posts' => 0,
+                'edit_private_posts' => 0,
+                'read_private_posts' => 0,
+                'edit_pages' => 1,
+                'delete_private_pages' => 0,
+                'edit_private_pages' => 0,
+                'read_private_pages' => 0,
+                'edit_others_pages' => 1,
+                'edit_published_pages' => 0,
+                'publish_pages' => 0,
+                'delete_pages' => 0,
+                'delete_others_pages' => 0,
+                'delete_published_pages' => 0,
+                'upload_files' => 0,
+                'edit_theme_options' => 0 // allows editing the "menu" options
+            ],
             'display_name' => [
                 'administrator' => 'GC Admin',
                 'editor' => 'Editor',
@@ -174,6 +203,7 @@ class Roles
                 'contributor' => 'Contributor',
                 'subscriber' => 'Subscriber',
                 'gceditor' => 'GC Editor',
+                'gcwriter' => 'GC Writer',
             ],
         ];
 

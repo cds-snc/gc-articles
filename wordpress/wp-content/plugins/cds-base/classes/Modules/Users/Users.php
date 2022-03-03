@@ -68,7 +68,12 @@ class Users
             "This role is allows the user to write and publish articles online to the collection.",
             "cds-snc"
         );
-        $roleDescriptions = ["administrator" => $administrator, "gceditor" => $gceditor];
+
+        $gcwriter = __(
+            "This role is allows the user to write articles online to the collection.",
+            "cds-snc"
+        );
+        $roleDescriptions = ["administrator" => $administrator, "gceditor" => $gceditor, "gcwriter" => $gcwriter];
 
         foreach ($wp_roles->role_names as $key => $value) {
             $desc = "";
@@ -142,7 +147,7 @@ class Users
             return $error;
         }
 
-        if (!in_array(sanitize_text_field($role), [ "gceditor", "administrator" ])) {
+        if (!in_array(sanitize_text_field($role), [ "gcwriter", "gceditor", "administrator" ])) {
             $error['message'] = __("You entered an invalid role.");
             return $error;
         }

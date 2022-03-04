@@ -65,3 +65,29 @@ describe('User - GC Admin', () => {
         checkPages(blockedPages403, 403);
     });
 });
+
+
+describe('User - GC Writer', () => {
+    before(() => {
+        cy.addUser('gcwriter', 'secret', 'gcwriter');
+    });
+
+    it('GC Writer login & page access', () => {
+
+        cy.login('gcwriter', 'secret');
+
+        const allowedPagesWriter200 = [
+            'index.php',
+            'edit.php',
+            'post-new.php',
+            'edit.php?post_type=page',
+            'post-new.php?post_type=page',
+
+        ];
+
+        checkPages(allowedPagesWriter200, 200);
+        checkPages([...blockedPages403, 'users.php', 'upload.php', 'nav-menus.php'], 403);
+        checkPages(blockedPages500, 500);
+    });
+
+});

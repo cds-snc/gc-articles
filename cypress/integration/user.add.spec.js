@@ -38,7 +38,12 @@ describe('Add user', () => {
             "id": "administrator",
             "name": "GC Admin",
             "description": "GC admin desc"
-        }
+        },
+        {
+          "id": "gcwriter",
+          "name": "GC Writer",
+          "description": "GC writer desc"
+      }
     ]
     ).as('getRoleDescriptions');
 
@@ -58,6 +63,9 @@ describe('Add user', () => {
     // Get the roles
     cy.get("select#role").select('GC Editor').should('have.value', 'gceditor');
     cy.get('.role-desc').should('contain', 'GC editor desc');
+
+    cy.get("select#role").select('GC Writer').should('have.value', 'gcwriter');
+    cy.get('.role-desc').should('contain', 'GC writer desc');
 
     cy.get("select#role").select('GC Admin').should('have.value', 'administrator');
     cy.get('.role-desc').should('contain', 'GC admin desc');
@@ -128,7 +136,7 @@ describe('As GC Admin', () => {
     cy.addUser('gcadmin', 'secret', 'administrator');
   });
 
-  it('can add a user', () => {
+  it('can add GC editor', () => {
     cy.login('gcadmin', 'secret');
 
     cy.visit("wp-admin/users.php");
@@ -139,6 +147,25 @@ describe('As GC Admin', () => {
 
     cy.get('input#email').type("editor+2@cds-snc.ca");
     cy.get('select#role').select('gceditor');
+
+    cy.contains('button', 'Add user').click();
+
+    // Success notice
+    cy.get('h2').contains("Success!");
+    cy.focused().should('contain', 'Success!');
+  });
+
+  it('can add GC writer', () => {
+    cy.login('gcadmin', 'secret');
+
+    cy.visit("wp-admin/users.php");
+    cy.get('h1').contains("Users");
+
+    cy.get('#wpbody .page-title-action').contains('Add New').click();
+    cy.get('h1').contains("Add user");
+
+    cy.get('input#email').type("writer+2@cds-snc.ca");
+    cy.get('select#role').select('gcwriter');
 
     cy.contains('button', 'Add user').click();
 

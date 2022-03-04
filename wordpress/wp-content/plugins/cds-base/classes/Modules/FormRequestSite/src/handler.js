@@ -17,7 +17,21 @@
             success: function (data) {
                 console.log(data);
                 if (data && data["error"]) {
-                    var errorEl = '<p id="request-error" data-testid="errorMessage" class="gc-alert gc-alert--error gc-alert--validation gc-error-message" role="alert">' + data.error_message + '</p>'
+                    var errorEl = '<div id="request-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
+                    errorEl += '<div class="gc-alert__body">';
+                    errorEl += '<h2 class="gc-h3">' + data.error_message + '</h2>';
+                    if(data['keys']) {
+                        errorEl += '<ol class="gc-ordered-list">';
+                        data['keys'].forEach(key => {
+                            errorEl += '<li><a href="#' + key + '" class="gc-error-link">Please complete the required field: ' + key +'</li>'
+
+                            var $validationMsg = '<p data-testid="errorMessage" class="gc-error-message" role="alert">Please complete the required field to continue</p>'
+                            $($validationMsg).insertBefore('#' + key);
+                        });
+                        errorEl += '</ol>';
+                    }
+                    errorEl += '</div>';
+
                     $(errorEl).insertAfter('#request');
                     document.getElementById("request-error").scrollIntoView();
                 }

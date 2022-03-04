@@ -64,6 +64,11 @@ class Setup
         }
     }
 
+    public function isUnsetOrEmpty(string $needle, array $haystack): bool
+    {
+        return !isset($haystack[$needle]) || $haystack[$needle] === '';
+    }
+
     /* TODO */
     public function confirmSend(): array
     {
@@ -77,14 +82,18 @@ class Setup
             return ['error' => true , "error_message" => $message];
         }
 
-        return [
-            'error' =>  true,
-            "error_message" => 'problem',
-            'post' => $_POST
-        ];
+        $keys_page_1 = ['site', 'usage', 'target', 'timeline', 'usage-other', 'target-other'];
+        $keys_page_2 = ['fullname', 'email', 'role', 'department'];
+        $empty_keys = [];
+
+        foreach ($keys_page_2 as $_key) {
+            if ($this->isUnsetOrEmpty($_key, $_POST)) {
+                array_push($empty_keys, $_key);
+            }
+        }
 
         if (
-            !isset($_POST['site']) || $_POST['site'] === ''
+            !empty($empty_keys) // if this is NOT empty, then we are missing a key
         ) {
             $message = __(
                 'Please complete the required field(s) to continue',
@@ -93,14 +102,15 @@ class Setup
 
             return [
                 'error' =>  true,
-                "error_message" => $message,
-                'post' => $_POST
+                'error_message' => $message,
+                'keys' => $empty_keys
             ];
         }
 
         return [
             'error' =>  true,
-            "error_message" => "everything worked"
+            "error_message" => "everything worked",
+            'post' => $_POST
         ];
     }
 }

@@ -77,6 +77,12 @@ class Setup
             return ['error' => true , "error_message" => $message];
         }
 
+        return [
+            'error' =>  true,
+            "error_message" => 'problem',
+            'post' => $_POST
+        ];
+
         if (
             !isset($_POST['site']) || $_POST['site'] === ''
         ) {

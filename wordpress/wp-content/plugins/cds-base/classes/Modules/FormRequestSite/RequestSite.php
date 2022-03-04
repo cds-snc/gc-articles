@@ -42,16 +42,51 @@ class RequestSite
         ?>
 
         <div class="gc-form-wrapper">
-            <?php if (isset($_POST['site'])) {  // if "site" exists, use second half of form ?>
+            <?php
+
+            $required_keys = ['site', 'usage', 'target', 'timeline'];
+            $all_keys = array_merge($required_keys, ['usage-other', 'target-other']);
+            $all_values = [];
+            $all_required_values_exist = true;
+
+            // create array of keys and values
+            foreach ($all_keys as $_key) {
+                $all_values[$_key] = $_POST[$_key] ?? '';
+
+                // check if a required key is empty
+                if (in_array($_key, $required_keys)) {
+                    $all_required_values_exist = $all_values[$_key] !== '';
+                }
+            }
+
+            if (
+                $all_required_values_exist
+            ) {  // if a required key is missing, use second half of form
+                ?>
+
                 <form id="request-form" method="POST" action="/wp-json/request/v1/process">
                 
                 <?php wp_nonce_field(
                     'request_form_nonce_action',
                     'request',
-                ); ?>
-            
-                 <!-- start name -->
-                 <div class="focus-group">
+                );
+
+                // add hidden fields for previous answers
+                foreach ($all_values as $_key => $_value) {
+                    // if is array, iterate through each array value
+                    if (is_array($_value)) {
+                        foreach ($_value as $_v) {
+                            echo '<input type="hidden" name="' . sanitize_text_field($_key) . '[]" value="' . sanitize_text_field($_v) . '" />';
+                        }
+                    } else {
+                        echo '<input type="hidden" name="' . sanitize_text_field($_key) . '" value="' . sanitize_text_field($_value) . '" />';
+                    }
+                }
+
+                ?>
+
+                <!-- start name -->
+                <div class="focus-group">
                     <label class="gc-label" for="fullname" id="fullname-label">
                         <?php _e('Full name', 'cds-snc'); ?>
                     </label>

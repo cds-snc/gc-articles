@@ -49,9 +49,9 @@ class Releases
     public function getEmbedPage()
     {
         $response = wp_remote_get("https://articles.alpha.canada.ca/wp-json/wp/v2/pages/?slug=updates");
-        $responseBody = wp_remote_retrieve_body( $response );
-        $result = json_decode( $responseBody );
-        if ( is_array( $result ) && ! is_wp_error( $result ) ) {
+        $responseBody = wp_remote_retrieve_body($response);
+        $result = json_decode($responseBody);
+        if (is_array($result) && ! is_wp_error($result)) {
             $content = $result[0]->content->rendered;
             $content = apply_filters('the_content', $content);
             return $content;

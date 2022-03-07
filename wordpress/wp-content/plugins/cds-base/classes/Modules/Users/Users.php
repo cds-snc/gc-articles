@@ -61,16 +61,16 @@ class Users
         $role_names_arr = [];
 
         $administrator = __(
-            "This role has complete control over the articles collection and can perform all other roles actions",
+            "This role has complete control over the articles site and can perform all other roles actions",
             "cds-snc"
         );
         $gceditor = __(
-            "This role is allows the user to write and publish articles online to the collection.",
+            "This role allows the user to write and publish articles.",
             "cds-snc"
         );
 
         $gcwriter = __(
-            "This role is allows the user to write articles online to the collection.",
+            "This role allows the user to draft articles but not to publish them.",
             "cds-snc"
         );
         $roleDescriptions = ["administrator" => $administrator, "gceditor" => $gceditor, "gcwriter" => $gcwriter];

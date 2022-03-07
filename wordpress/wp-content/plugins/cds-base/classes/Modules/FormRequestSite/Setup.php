@@ -45,15 +45,13 @@ class Setup
         ));
     }
 
-    protected function sendEmail(string $email, string $message, string $contactType): array
+    protected function sendEmail(string $message): array
     {
         try {
             $notifyMailer = new NotifyClient();
             $to = 'platform-mvp@cds-snc.ca';
-            $notifyTemplateId = "125002c5-cf95-4eec-a6c8-f97eda56550a";
+            $notifyTemplateId = "1c3c7d24-24f4-4466-a0ac-21dd687a7a4e";
             $notifyMailer->sendMail($to, $notifyTemplateId, [
-                'email' => $email,
-                'contact-type' => $contactType,
                 'message' => $message
             ]);
 
@@ -82,7 +80,7 @@ class Setup
             return ['error' => true , "error_message" => $message];
         }
 
-        $keys_page_1 = ['site', 'usage', 'target', 'timeline', 'usage-other', 'target-other'];
+        $keys_page_1 = ['site', 'usage', 'usage-other', 'target', 'target-other', 'timeline'];
         $keys_page_2 = ['fullname', 'email', 'role', 'department'];
         $empty_keys = [];
 
@@ -107,10 +105,18 @@ class Setup
             ];
         }
 
-        return [
-            'error' =>  true,
-            "error_message" => "everything worked",
-            'post' => $_POST
-        ];
+        $all_keys = array_merge($keys_page_1, $keys_page_2);
+        $message = '';
+        foreach ($all_keys as $_key) {
+            $value = $_POST[$_key] ?? '';
+            if ($value) {
+                $value = is_array($value) ? str_replace(".", "", implode(", ", $value)) : $value;
+                $message .= sanitize_text_field(ucfirst($_key)) . ': ' . sanitize_text_field($value) . "\n\n";
+            }
+        }
+
+        $response = $this->sendEmail($message);
+
+        return $response;
     }
 }

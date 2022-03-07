@@ -89,14 +89,14 @@ class RequestSite
             ) {  // no empty 'required' keys exist, use second part of form
                 ?>
 
+                <form id="request-form" method="POST" action="/wp-json/request/v1/process">
                 <p>
                     <?php
                     echo _e('Site administrator details. ', 'cds-snc');
                     echo _e('(Step 2 of 2)', 'cds-snc');
                     ?>
                 </p>
-                <form id="request-form" method="POST" action="/wp-json/request/v1/process">
-                
+
                 <?php wp_nonce_field(
                     'request_form_nonce_action',
                     'request',
@@ -212,19 +212,20 @@ class RequestSite
 
             <?php } else {  // if no "site", beginning of the form
                 $current_url = home_url(add_query_arg([], $wp->request)); ?>
-            <p>
-                <?php
-                echo _e('Tell us about your site. ', 'cds-snc');
-                echo _e('(Step 1 of 2)', 'cds-snc');
-                ?>
-            </p>
+
                 <?php
                 if ($is_error) {
                     echo $this->errorMessage($empty_values);
                 }
                 ?>
             <form id="request-form-step-1" method="POST" action="<?php echo $current_url; ?>">
-                
+                <p>
+                    <?php
+                    echo _e('Tell us about your site. ', 'cds-snc');
+                    echo _e('(Step 1 of 2)', 'cds-snc');
+                    ?>
+                </p>
+
                 <?php wp_nonce_field(
                     'request_form_nonce_action',
                     'request',

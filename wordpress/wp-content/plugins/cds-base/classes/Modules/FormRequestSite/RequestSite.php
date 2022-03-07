@@ -16,8 +16,11 @@ class RequestSite
         add_shortcode('request-site-form', [$this, 'render']);
     }
 
-    public function checkboxField($name, $id, $value): void
+    public function checkboxField($name, $id, $value, $vals = []): void
     {
+        // set to empty array if a non-array is passed in
+        $vals = is_array($vals) ? $vals : [];
+        $checked = in_array($value, $vals);
         ?>
          <div class="gc-input-checkbox">
             <input
@@ -26,6 +29,9 @@ class RequestSite
                 id="<?php echo sanitize_title($id); ?>"
                 type="checkbox"
                 value="<?php echo $id; ?>"
+                <?php if ($checked) {
+                    echo 'checked';
+                } ?>
             />
             <label class="gc-checkbox-label" for="<?php echo sanitize_title($id); ?>">
             <span class="checkbox-label-text"><?php echo $value; ?></span>
@@ -54,16 +60,22 @@ class RequestSite
                 $all_values[$_key] = $_POST[$_key] ?? '';
 
                 // check if a required key is empty
-                if (in_array($_key, $required_keys)) {
+                if ($all_required_values_exist && in_array($_key, $required_keys)) {
                     $all_required_values_exist = $all_values[$_key] !== '';
                 }
             }
 
             if (
                 $all_required_values_exist
-            ) {  // if a required key is missing, use second half of form
+            ) {  // if all required keys exist, use second half of form
                 ?>
 
+                <p>
+                    <?php
+                    echo _e('Site administrator details. ', 'cds-snc');
+                    echo _e('(Step 2 of 2)', 'cds-snc');
+                    ?>
+                </p>
                 <form id="request-form" method="POST" action="/wp-json/request/v1/process">
                 
                 <?php wp_nonce_field(
@@ -180,7 +192,13 @@ class RequestSite
 
 
             <?php } else {  // if no "site", beginning of the form
-                $current_url = home_url(add_query_arg([], $wp->request)); ?>       
+                $current_url = home_url(add_query_arg([], $wp->request)); ?>
+            <p>
+                <?php
+                echo _e('Tell us about your site. ', 'cds-snc');
+                echo _e('(Step 1 of 2)', 'cds-snc');
+                ?>
+            </p>
             <form id="request-form-step-1" method="POST" action="<?php echo $current_url; ?>">
                 
                 <?php wp_nonce_field(
@@ -202,7 +220,7 @@ class RequestSite
                         id="site" 
                         required 
                         name="site" 
-                        value=""
+                        value="<?php echo $all_values['site']; ?>"
                     />
                 </div>
                 <!-- end name -->
@@ -219,26 +237,31 @@ class RequestSite
                         'usage[]',
                         'Blog.',
                         __('Blog.', 'cds-snc'),
+                        $all_values['usage']
                     ); ?>
                     <?php $this->checkboxField(
                         'usage[]',
                         'Newsletter archive with emailing to a subscriber list.',
                         __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
+                        $all_values['usage']
                     ); ?>
                     <?php $this->checkboxField(
                         'usage[]',
                         'Website.',
                         __('Website.', 'cds-snc'),
+                        $all_values['usage']
                     ); ?>
                     <?php $this->checkboxField(
                         'usage[]',
                         'Internal website.',
                         __('Internal website.', 'cds-snc'),
+                        $all_values['usage']
                     ); ?>
                     <?php $this->checkboxField(
                         'usage[]',
                         'Something else.',
                         __('Something else.', 'cds-snc'),
+                        $all_values['usage']
                     ); ?>
                     </div>
                     
@@ -250,7 +273,7 @@ class RequestSite
                         class="gc-input-text" 
                         id="usage-other" 
                         name="usage-other" 
-                        value=""
+                        value="<?php echo $all_values['usage-other']; ?>"
                     />
                 </div>
                 <!-- end usage -->
@@ -267,26 +290,31 @@ class RequestSite
                         'target[]',
                         'People who use your programs and services.',
                         __('People who use your programs and services.', 'cds-snc'),
+                        $all_values['target']
                     ); ?>
                     <?php $this->checkboxField(
                         'target[]',
                         'General public.',
                         __('General public.', 'cds-snc'),
+                        $all_values['target']
                     ); ?>
                     <?php $this->checkboxField(
                         'target[]',
                         'Subscribers.',
                         __('Subscribers.', 'cds-snc'),
+                        $all_values['target']
                     ); ?>
                     <?php $this->checkboxField(
                         'target[]',
                         'Internal employees and/or community volunteers.',
                         __('Internal employees and/or community volunteers.', 'cds-snc'),
+                        $all_values['target']
                     ); ?>
                     <?php $this->checkboxField(
                         'target[]',
                         'Other people.',
                         __('Other people.', 'cds-snc'),
+                        $all_values['target']
                     ); ?>
                     </div>
                     <label class="gc-label" for="target-other" id="target-other-label" class="hidden"">
@@ -297,7 +325,7 @@ class RequestSite
                         class="gc-input-text" 
                         id="target-other" 
                         name="target-other" 
-                        value=""
+                        value="<?php echo $all_values['target-other']; ?>"
                     />
                 </div>
 
@@ -315,7 +343,7 @@ class RequestSite
                     required
                     placeholder=""
                     name="timeline"
-                ></textarea>
+                ><?php echo $all_values['timeline']; ?></textarea>
 
                 <div class="buttons" style="margin-top: 1.5rem;">
                     <button class="gc-button gc-button" type="submit" id="submit">

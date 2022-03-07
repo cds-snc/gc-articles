@@ -343,8 +343,10 @@ th.column-disable_user_login {
   display:none;
 }
 
-
-
 .yoast-settings{
+  display:none;
+}
+
+.field-xfn, .field-description{
   display:none;
 }

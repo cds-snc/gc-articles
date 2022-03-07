@@ -13,6 +13,7 @@ if (!defined('ABSPATH')) {
 }
 
 require_once __DIR__ . '/filter-core-buttons.php';
+require_once __DIR__ . '/admin-css.php';
 
 use CDS\Utils;
 

@@ -41,6 +41,19 @@ class RequestSite
         <?php
     }
 
+    public function errorMessage(array $error_ids): string
+    {
+        $errorEl = '<div id="request-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
+        $errorEl .= '<div class="gc-alert__body">';
+        $errorEl .= '<h2 class="gc-h3">' . __('Please correct the errors on the page', 'cds-snc') . '</h2>';
+        $errorEl .= '<ol class="gc-ordered-list">';
+        foreach ($error_ids as $id) {
+            $errorEl .= '<li><a href="#' . $id . '" class="gc-error-link">Please complete the required field: ' . $id . '</a></li>';
+        }
+        $errorEl .= '</ol></div></div>';
+        return $errorEl;
+    }
+
     public function render($atts, $content = null): string
     {
         global $wp;
@@ -53,21 +66,27 @@ class RequestSite
             $required_keys = ['site', 'usage', 'target', 'timeline'];
             $all_keys = array_merge($required_keys, ['usage-other', 'target-other']);
             $all_values = [];
-            $all_required_values_exist = true;
+            $empty_values = [];
 
             // create array of keys and values
             foreach ($all_keys as $_key) {
                 $all_values[$_key] = $_POST[$_key] ?? '';
+            }
 
-                // check if a required key is empty
-                if ($all_required_values_exist && in_array($_key, $required_keys)) {
-                    $all_required_values_exist = $all_values[$_key] !== '';
+            // find all empty values
+            foreach ($all_values as $_key => $_value) {
+                // if it's a required key AND it's empty
+                if (in_array($_key, $required_keys) && $_value === '') {
+                    array_push($empty_values, $_key);
                 }
             }
 
+            // if all required fields are empty, it's a new form. If some are but not others, it's an error
+            $is_error = count($empty_values) !== count($required_keys);
+
             if (
-                $all_required_values_exist
-            ) {  // if all required keys exist, use second half of form
+                count($empty_values) === 0
+            ) {  // no empty 'required' keys exist, use second part of form
                 ?>
 
                 <p>
@@ -199,6 +218,11 @@ class RequestSite
                 echo _e('(Step 1 of 2)', 'cds-snc');
                 ?>
             </p>
+                <?php
+                if ($is_error) {
+                    echo $this->errorMessage($empty_values);
+                }
+                ?>
             <form id="request-form-step-1" method="POST" action="<?php echo $current_url; ?>">
                 
                 <?php wp_nonce_field(

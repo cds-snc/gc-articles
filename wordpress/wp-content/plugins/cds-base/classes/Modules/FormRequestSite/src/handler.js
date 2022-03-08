@@ -23,9 +23,9 @@
                     if(data['keys']) {
                         errorEl += '<ol class="gc-ordered-list">';
                         data['keys'].forEach(key => {
-                            errorEl += '<li><a href="#' + key + '" class="gc-error-link">Please complete the required field: ' + key +'</li>'
+                            errorEl += '<li><a href="#' + key + '" class="gc-error-link">' + key +'</li>'
 
-                            var $validationMsg = '<p data-testid="errorMessage" class="gc-error-message" role="alert">Please complete the required field to continue</p>'
+                            var $validationMsg = '<p data-testid="errorMessage" class="gc-error-message" role="alert">' + data.error_message + '</p>'
                             $($validationMsg).insertBefore('#' + key);
                         });
                         errorEl += '</ol>';

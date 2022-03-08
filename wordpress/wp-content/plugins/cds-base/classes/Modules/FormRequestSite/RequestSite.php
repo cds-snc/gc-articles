@@ -45,10 +45,10 @@ class RequestSite
     {
         $errorEl = '<div id="request-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
         $errorEl .= '<div class="gc-alert__body">';
-        $errorEl .= '<h2 class="gc-h3">' . __('Please correct the errors on the page', 'cds-snc') . '</h2>';
+        $errorEl .= '<h2 class="gc-h3">' . __('Please complete the required field(s) to continue', 'cds-snc') . '</h2>';
         $errorEl .= '<ol class="gc-ordered-list">';
         foreach ($error_ids as $id) {
-            $errorEl .= '<li><a href="#' . $id . '" class="gc-error-link">Please complete the required field: ' . $id . '</a></li>';
+            $errorEl .= '<li><a href="#' . $id . '" class="gc-error-link">' . $id . '</a></li>';
         }
         $errorEl .= '</ol></div></div>';
         return $errorEl;

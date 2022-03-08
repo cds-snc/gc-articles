@@ -61,14 +61,19 @@ class Users
         $role_names_arr = [];
 
         $administrator = __(
-            "This role has complete control over the articles collection and can perform all other roles actions",
+            "This role has complete control over the articles site and can perform all other roles actions",
             "cds-snc"
         );
         $gceditor = __(
-            "This role is allows the user to write and publish articles online to the collection.",
+            "This role allows the user to write and publish articles.",
             "cds-snc"
         );
-        $roleDescriptions = ["administrator" => $administrator, "gceditor" => $gceditor];
+
+        $gcwriter = __(
+            "This role allows the user to draft articles but not to publish them.",
+            "cds-snc"
+        );
+        $roleDescriptions = ["administrator" => $administrator, "gceditor" => $gceditor, "gcwriter" => $gcwriter];
 
         foreach ($wp_roles->role_names as $key => $value) {
             $desc = "";
@@ -142,7 +147,7 @@ class Users
             return $error;
         }
 
-        if (!in_array(sanitize_text_field($role), [ "gceditor", "administrator" ])) {
+        if (!in_array(sanitize_text_field($role), [ "gcwriter", "gceditor", "administrator" ])) {
             $error['message'] = __("You entered an invalid role.");
             return $error;
         }

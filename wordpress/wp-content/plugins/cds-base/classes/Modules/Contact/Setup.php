@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\Contact;
 
 use CDS\Modules\Contact\Block;
+use CDS\Modules\Forms\Messenger;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -103,23 +104,6 @@ class Setup
         }
     }
 
-    protected function sendEmail(string $email, string $message): array
-    {
-        try {
-            $notifyMailer = new NotifyClient();
-            $notifyTemplateId = '125002c5-cf95-4eec-a6c8-f97eda56550a';
-            $notifyMailer->sendMail($email, $notifyTemplateId, [
-                'email' => $email,
-                'message' => $message,
-            ]);
-
-            return ['success' => __('Thanks for the message', 'cds-snc')];
-        } catch (Exception $exception) {
-            error_log($exception->getMessage());
-            return ['error' => $exception->getMessage(), "error_message" => __('Error sending email', 'cds-snc')];
-        }
-    }
-
     public function confirmSend(): array
     {
         if (!isset($_POST['contact'])) {
@@ -196,10 +180,11 @@ class Setup
 
         # on hold
         # $response = $this->createTicket($goal, $fullname, $email, $message);
-        $this->sendEmail("platform-mvp@cds-snc.ca", $message);
+        $messenger = new Messenger();
+        $response = $messenger->sendMail("platform-mvp@cds-snc.ca", $message);
 
         if (isset($_POST['cc']) && $_POST['cc'] !== "") {
-            $this->sendEmail($email, $message);
+            $messenger->sendMail($email, $message);
         }
 
         return $response;

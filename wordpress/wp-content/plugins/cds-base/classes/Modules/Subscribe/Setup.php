@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Subscribe;
 
-use CDS\Modules\Subscribe\Block;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -31,7 +30,6 @@ class Setup
         });
 
         new SubscriptionForm();
-        new Block();
     }
 
     public function enqueue()

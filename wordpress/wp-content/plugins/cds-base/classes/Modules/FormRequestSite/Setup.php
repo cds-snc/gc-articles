@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\FormRequestSite;
 
 use CDS\Modules\FormRequestSite\Block;
+use CDS\Modules\Forms\Messenger;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -37,23 +38,6 @@ class Setup
     public function enqueue()
     {
         wp_enqueue_script('cds-request-js', plugin_dir_url(__FILE__) . '/src/handler.js', ['jquery'], "1.0.0", true);
-    }
-
-    protected function sendEmail(string $message): array
-    {
-        try {
-            $notifyMailer = new NotifyClient();
-            $to = 'platform-mvp@cds-snc.ca';
-            $notifyTemplateId = "1c3c7d24-24f4-4466-a0ac-21dd687a7a4e";
-            $notifyMailer->sendMail($to, $notifyTemplateId, [
-                'message' => $message
-            ]);
-
-            return ["success" => __("Thanks for the message", "cds-snc")];
-        } catch (Exception $exception) {
-            error_log($exception->getMessage());
-            return ["error" => $exception->getMessage()];
-        }
     }
 
     public function isUnsetOrEmpty(string $needle, array $haystack): bool
@@ -109,7 +93,13 @@ class Setup
             }
         }
 
-        $response = $this->sendEmail($message);
+        $messenger = new Messenger();
+        $response = $messenger->sendMail("platform-mvp@cds-snc.ca", $message);
+
+        // # @TODO add a "CC" to the requet form
+        // if (isset($_POST['cc']) && $_POST['cc'] !== "") {
+        //     $messenger->sendMail($email, $message);
+        // }
 
         return $response;
     }

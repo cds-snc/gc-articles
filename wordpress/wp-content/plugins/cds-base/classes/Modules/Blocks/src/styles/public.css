@@ -8,6 +8,11 @@ main {
     font-size: 1.2em;
 }
 
+/* Remove top margin in form validation headings */
+.gc-h3 {
+  margin-top: 0;
+}
+
 /* WET Menu */
 header .gcweb-menu {
   border-top-color: #26374a; /* originally #38414d */

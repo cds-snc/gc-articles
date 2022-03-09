@@ -95,12 +95,11 @@ class Setup
 
         $messenger = new Messenger();
         $response = $messenger->createTicket($goal, $fullname, $email, $message);
-        $messenger->sendMail($email, $message);
 
-        // # @TODO add a "CC" to the requet form
-        // if (isset($_POST['cc']) && $_POST['cc'] !== "") {
-        //     $messenger->sendMail($email, $message);
-        // }
+        $cc = $_POST['cc'] ?? '';
+        if ($cc) {
+            $messenger->sendMail($email, $message);
+        }
 
         return $response;
     }

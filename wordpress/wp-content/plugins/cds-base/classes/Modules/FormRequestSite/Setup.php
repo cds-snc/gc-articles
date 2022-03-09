@@ -41,6 +41,12 @@ class Setup
         return !isset($haystack[$needle]) || $haystack[$needle] === '';
     }
 
+    protected function removeslashes($str)
+    {
+        $str = implode("", explode("\\", $str));
+        return stripslashes(trim($str));
+    }
+
     public function confirmSend(): array
     {
         if (!isset($_POST['request'])) {
@@ -80,16 +86,17 @@ class Setup
 
         $all_keys = array_merge($keys_page_1, $keys_page_2);
         $message = '';
+
         foreach ($all_keys as $_key) {
             $value = $_POST[$_key] ?? '';
             if ($value) {
                 $value = is_array($value) ? str_replace(".", "", implode(", ", $value)) : $value;
-                $message .= sanitize_text_field(ucfirst($_key)) . ': ' . sanitize_text_field($value) . "\n\n";
+                $message .= sanitize_text_field(ucfirst($_key)) . ': ' . $this->removeslashes(sanitize_text_field($value)) . "\n\n";
             }
         }
 
         $site = $_POST['site'] ?? __('No name specified', 'cds-snc');
-        $goal = __('Request a site:', 'cds-snc') . ' ' . $site;
+        $goal = __('Request a site:', 'cds-snc') . ' ' . $this->removeslashes($site);
         $fullname = $_POST['fullname'];
         $email = $_POST['email'];
 

@@ -6,9 +6,6 @@ namespace CDS\Modules\FormRequestSite;
 
 use CDS\Modules\FormRequestSite\Block;
 use CDS\Modules\Forms\Messenger;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use CDS\Modules\Notify\NotifyClient;
 
 class Setup
 {
@@ -91,8 +88,14 @@ class Setup
             }
         }
 
+        $site = $_POST['site'] ?? __('No name specified', 'cds-snc');
+        $goal = __('Request a site:', 'cds-snc') . ' ' . $site;
+        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+
         $messenger = new Messenger();
-        $response = $messenger->sendMail("platform-mvp@cds-snc.ca", $message);
+        $response = $messenger->createTicket($goal, $fullname, $email, $message);
+        $messenger->sendMail($email, $message);
 
         // # @TODO add a "CC" to the requet form
         // if (isset($_POST['cc']) && $_POST['cc'] !== "") {

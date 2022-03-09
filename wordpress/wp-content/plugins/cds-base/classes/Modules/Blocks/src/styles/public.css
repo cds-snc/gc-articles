@@ -80,3 +80,8 @@ header .gcweb-menu {
 .hide-breadcrumbs #wb-bc {
   display: none;
 }
+
+/* Aria toggle */
+form *[aria-hidden="true"] {
+  display: none;
+}

@@ -16,7 +16,7 @@ class RequestSite
         add_shortcode('request-site-form', [$this, 'render']);
     }
 
-    public function checkboxField($name, $id, $value, $vals = []): void
+    public function checkboxField($name, $id, $value, $vals = [], $ariaControls = false): void
     {
         // set to empty array if a non-array is passed in
         $vals = is_array($vals) ? $vals : [];
@@ -31,6 +31,10 @@ class RequestSite
                 value="<?php echo $id; ?>"
                 <?php if ($checked) {
                     echo 'checked';
+                } ?>
+                <?php if ($ariaControls) {
+                    echo 'aria-controls="' . $ariaControls . '" ';
+                    echo 'aria-expanded="' . $checked . '" ';
                 } ?>
             />
             <label class="gc-checkbox-label" for="<?php echo sanitize_title($id); ?>">
@@ -258,48 +262,52 @@ class RequestSite
                     <p><?php _e('We use this information to improve GC Articles.', 'cds-snc');?></p>
                     
                     <div class="focus-group" style="margin-bottom: 1.75rem">
-                    <?php $this->checkboxField(
-                        'usage[]',
-                        'Blog.',
-                        __('Blog.', 'cds-snc'),
-                        $all_values['usage']
-                    ); ?>
-                    <?php $this->checkboxField(
-                        'usage[]',
-                        'Newsletter archive with emailing to a subscriber list.',
-                        __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
-                        $all_values['usage']
-                    ); ?>
-                    <?php $this->checkboxField(
-                        'usage[]',
-                        'Website.',
-                        __('Website.', 'cds-snc'),
-                        $all_values['usage']
-                    ); ?>
-                    <?php $this->checkboxField(
-                        'usage[]',
-                        'Internal website.',
-                        __('Internal website.', 'cds-snc'),
-                        $all_values['usage']
-                    ); ?>
-                    <?php $this->checkboxField(
-                        'usage[]',
-                        'Something else.',
-                        __('Something else.', 'cds-snc'),
-                        $all_values['usage']
-                    ); ?>
+                        <?php $this->checkboxField(
+                            'usage[]',
+                            'Blog.',
+                            __('Blog.', 'cds-snc'),
+                            $all_values['usage']
+                        ); ?>
+                        <?php $this->checkboxField(
+                            'usage[]',
+                            'Newsletter archive with emailing to a subscriber list.',
+                            __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
+                            $all_values['usage']
+                        ); ?>
+                        <?php $this->checkboxField(
+                            'usage[]',
+                            'Website.',
+                            __('Website.', 'cds-snc'),
+                            $all_values['usage']
+                        ); ?>
+                        <?php $this->checkboxField(
+                            'usage[]',
+                            'Internal website.',
+                            __('Internal website.', 'cds-snc'),
+                            $all_values['usage'],
+                        ); ?>
+
+                        <?php $this->checkboxField(
+                            'usage[]',
+                            'Something else.',
+                            __('Something else.', 'cds-snc'),
+                            $all_values['usage'],
+                            "optional-usage"
+                        ); ?>
                     </div>
                     
-                    <label class="gc-label" for="usage-other" id="usage-other-label" class="hidden"">
-                        <?php _e('Other usage', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="usage-other" 
-                        name="usage-other" 
-                        value="<?php echo $all_values['usage-other']; ?>"
-                    />
+                    <div id="optional-usage" aria-hidden="false">
+                        <label class="gc-label" for="usage-other" id="usage-other-label" class="hidden">
+                            <?php _e('Other usage', 'cds-snc'); ?>
+                        </label>
+                        <input
+                            type="text"
+                            class="gc-input-text"
+                            id="usage-other"
+                            name="usage-other"
+                            value="<?php echo $all_values['usage-other']; ?>"
+                        />
+                    </div>
                 </div>
                 <!-- end usage -->
 
@@ -339,19 +347,22 @@ class RequestSite
                         'target[]',
                         'Other people.',
                         __('Other people.', 'cds-snc'),
-                        $all_values['target']
+                        $all_values['target'],
+                        "optional-target"
                     ); ?>
                     </div>
-                    <label class="gc-label" for="target-other" id="target-other-label" class="hidden"">
-                        <?php _e('Other target audience', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="target-other" 
-                        name="target-other" 
-                        value="<?php echo $all_values['target-other']; ?>"
-                    />
+                    <div id="optional-target" aria-hidden="false">
+                        <label class="gc-label" for="target-other" id="target-other-label" class="hidden">
+                            <?php _e('Other target audience', 'cds-snc'); ?>
+                        </label>
+                        <input
+                            type="text"
+                            class="gc-input-text"
+                            id="target-other"
+                            name="target-other"
+                            value="<?php echo $all_values['target-other']; ?>"
+                        />
+                    </div>
                 </div>
 
                 <!-- timeline -->

@@ -92,7 +92,7 @@ class Messenger
         } catch (ClientException $exception) {
             return ['error' => ["exceptions" => $this->handleException($exception)], "error_message" => __('Internal server error', 'cds-snc')];
         } catch (\Exception $e) {
-            error_log("ZENDESK - Exception" . $exception->getMessage());
+            error_log("ZENDESK - Exception" . $e->getMessage());
             return ['error' => true, "error_message" => __('ZenDesk server error', 'cds-snc')];
         }
     }

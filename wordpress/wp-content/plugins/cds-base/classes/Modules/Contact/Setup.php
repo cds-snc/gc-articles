@@ -90,7 +90,10 @@ class Setup
                     'email' => $email,
                     'comment' => ['body' => $message],
                     'requester' => ['name' => $fullname, 'email' => $email],
-                    'tags' => ['articles_api']
+                    'tags' => ['articles_api'],
+                    'is_public' => true,
+                    'recipient' => 'platform-mvp@cds-snc.ca',
+                    'type' => 'question'
                 ]
                 ],
             ]);
@@ -179,7 +182,7 @@ class Setup
         $message .= sanitize_text_field($_POST['message']);
 
         # on hold
-        # $response = $this->createTicket($goal, $fullname, $email, $message);
+        $response = $this->createTicket($goal, $fullname, $email, $message);
         $messenger = new Messenger();
         $response = $messenger->sendMail("platform-mvp@cds-snc.ca", $message);
 

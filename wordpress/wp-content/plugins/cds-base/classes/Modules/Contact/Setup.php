@@ -6,10 +6,6 @@ namespace CDS\Modules\Contact;
 
 use CDS\Modules\Contact\Block;
 use CDS\Modules\Forms\Messenger;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
-use CDS\Modules\Notify\NotifyClient;
 
 class Setup
 {
@@ -49,62 +45,6 @@ class Setup
             'rest_url' => esc_url_raw(rest_url()),
             'rest_nonce' => wp_create_nonce('wp_rest'),
         ]);
-    }
-
-    protected function isJson($string): bool
-    {
-        json_decode($string);
-
-        return json_last_error() === JSON_ERROR_NONE;
-    }
-
-    protected function handleException($e)
-    {
-        $exception = (string) $e->getResponse()->getBody();
-
-        error_log("ZENDESK - ClientException" . $exception);
-
-        if ($this->isJson($exception)) {
-            try {
-                return json_decode($exception);
-            } catch (\Exception $e) {
-                return __('ZenDesk client error', 'cds-snc');
-            }
-        }
-    }
-
-    protected function createTicket(
-        string $goal,
-        string $fullname,
-        string $email,
-        string $message,
-    ): array {
-
-        try {
-            $client = new Client([]);
-
-            $response = $client->request('POST', getenv('ZENDESK_API_URL') . '/api/v2/requests', [
-                'json' =>  ["request" => [
-                    'subject' => $goal,
-                    'description' => '',
-                    'email' => $email,
-                    'comment' => ['body' => $message],
-                    'requester' => ['name' => $fullname, 'email' => $email],
-                    'tags' => ['articles_api'],
-                    'is_public' => true,
-                    'recipient' => 'platform-mvp@cds-snc.ca',
-                    'type' => 'question'
-                ]
-                ],
-            ]);
-
-            return ['success' => __('Success', 'cds-snc')];
-        } catch (ClientException $exception) {
-            return ['error' => ["exceptions" => $this->handleException($exception)], "error_message" => __('Internal server error', 'cds-snc')];
-        } catch (Exception $e) {
-            error_log("ZENDESK - Exception" . $exception->getMessage());
-            return ['error' => true, "error_message" => __('ZenDesk server error', 'cds-snc')];
-        }
     }
 
     public function confirmSend(): array
@@ -181,10 +121,8 @@ class Setup
         $message .= "\n\n" . 'Message:' . "\n";
         $message .= sanitize_text_field($_POST['message']);
 
-        # on hold
-        $response = $this->createTicket($goal, $fullname, $email, $message);
         $messenger = new Messenger();
-        $response = $messenger->sendMail("platform-mvp@cds-snc.ca", $message);
+        $response = $messenger->createTicket($goal, $fullname, $email, $message);
 
         if (isset($_POST['cc']) && $_POST['cc'] !== "") {
             $messenger->sendMail($email, $message);

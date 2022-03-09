@@ -8,7 +8,6 @@ use CDS\Modules\FormRequestSite\Block;
 use CDS\Modules\Forms\Messenger;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
 use CDS\Modules\Notify\NotifyClient;
 
 class Setup
@@ -45,7 +44,6 @@ class Setup
         return !isset($haystack[$needle]) || $haystack[$needle] === '';
     }
 
-    /* TODO */
     public function confirmSend(): array
     {
         if (!isset($_POST['request'])) {

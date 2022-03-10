@@ -1,4 +1,29 @@
 (function ($) {
+    function toggleOptional($el) {
+        $controlsElement = $('#' + $el.attr('aria-controls'));
+
+        // only change attributes if "aria-controls" element exists
+        if($controlsElement) {
+            if($el.is(':checked')) {
+                //show element
+                $el.attr('aria-expanded', true);
+                $controlsElement.removeClass('displayNone');
+            } else {
+                // hide element
+                $el.attr('aria-expanded', false);
+                $controlsElement.addClass('displayNone').find('input').val('');
+            }
+        }
+    }
+
+    $('input[aria-controls]').on("click", function (e) {
+        // add click handler
+        toggleOptional($(e.target));
+    }).each(function() {
+        // run it once on page load
+        toggleOptional($(this));
+    });
+
     $("body").on("submit", "#request-form", function (e) {
         e.preventDefault();
         var form = $(this);

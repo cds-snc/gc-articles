@@ -74,7 +74,7 @@ class RequestSite
 
             // create array of keys and values
             foreach ($all_keys as $_key) {
-                $all_values[$_key] = $_POST[$_key] ?? '';
+                $all_values[$_key] = stripslashes($_POST[$_key] ?? '');
             }
 
             // find all empty values

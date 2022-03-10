@@ -16,8 +16,11 @@ class ContactForm
         add_shortcode('contact-form', [$this, 'render']);
     }
 
-    public function checkBox($name, $id, $value): void
+    public function checkBox($name, $id, $value, $vals = [], $ariaControls = false): void
     {
+        // set to empty array if a non-array is passed in
+        $vals = is_array($vals) ? $vals : [];
+        $checked = in_array($value, $vals);
         ?>
         <div class="gc-input-checkbox">
             <input
@@ -26,6 +29,13 @@ class ContactForm
                 id="<?php echo sanitize_title($id); ?>"
                 type="checkbox"
                 value="<?php echo $id; ?>"
+                <?php if ($checked) {
+                    echo 'checked';
+                } ?>
+                <?php if ($ariaControls) {
+                    echo 'aria-controls="' . $ariaControls . '" ';
+                    echo 'aria-expanded="' . $checked . '" ';
+                } ?>
             />
             <label class="gc-checkbox-label" for="<?php echo sanitize_title($id); ?>">
             <span class="checkbox-label-text"><?php echo $value; ?></span>
@@ -172,19 +182,23 @@ class ContactForm
                         'usage[]',
                         'Something else.',
                         __('Something else.', 'cds-snc'),
+                        null, // we don't have previous values to pass in
+                        'optional-usage'
                     ); ?>
                     </div>
                     
-                    <label class="gc-label" for="usage-other" id="usage-other-label" class="hidden"">
-                        <?php _e('Other usage', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="usage-other" 
-                        name="usage-other" 
-                        value=""
-                    />
+                    <div id="optional-usage" aria-hidden="false">
+                        <label class="gc-label" for="usage-other" id="usage-other-label" class="hidden"">
+                            <?php _e('Other usage', 'cds-snc'); ?>
+                        </label>
+                        <input
+                            type="text"
+                            class="gc-input-text"
+                            id="usage-other"
+                            name="usage-other"
+                            value=""
+                        />
+                    </div>
                 </div>
                 <!-- end usage -->
 
@@ -220,18 +234,22 @@ class ContactForm
                         'target[]',
                         'Other people.',
                         __('Other people.', 'cds-snc'),
+                        null, // we don't have previous values to pass in
+                        'optional-target'
                     ); ?>
                     </div>
-                    <label class="gc-label" for="target-other" id="target-other-label" class="hidden"">
-                        <?php _e('Other target audience', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="target-other" 
-                        name="target-other" 
-                        value=""
-                    />
+                    <div id="optional-target" aria-hidden="false">
+                        <label class="gc-label" for="target-other" id="target-other-label" class="hidden"">
+                            <?php _e('Other target audience', 'cds-snc'); ?>
+                        </label>
+                        <input
+                            type="text"
+                            class="gc-input-text"
+                            id="target-other"
+                            name="target-other"
+                            value=""
+                        />
+                    </div>
                 </div>
                 <!-- target -->
                 <label data-testid="description" class="gc-label" id="message-label" for="message">

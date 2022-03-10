@@ -292,7 +292,7 @@ class RequestSite
                             'Something else.',
                             __('Something else.', 'cds-snc'),
                             $all_values['usage'],
-                            "optional-usage"
+                            'optional-usage'
                         ); ?>
                     </div>
                     
@@ -348,7 +348,7 @@ class RequestSite
                         'Other people.',
                         __('Other people.', 'cds-snc'),
                         $all_values['target'],
-                        "optional-target"
+                        'optional-target'
                     ); ?>
                     </div>
                     <div id="optional-target" aria-hidden="false">

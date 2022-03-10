@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\FormRequestSite;
 
 use CDS\Modules\FormRequestSite\Block;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
-use CDS\Modules\Notify\NotifyClient;
+use CDS\Modules\Forms\Messenger;
 
 class Setup
 {
@@ -39,29 +36,17 @@ class Setup
         wp_enqueue_script('cds-request-js', plugin_dir_url(__FILE__) . '/src/handler.js', ['jquery'], "1.0.0", true);
     }
 
-    protected function sendEmail(string $message): array
-    {
-        try {
-            $notifyMailer = new NotifyClient();
-            $to = 'platform-mvp@cds-snc.ca';
-            $notifyTemplateId = "1c3c7d24-24f4-4466-a0ac-21dd687a7a4e";
-            $notifyMailer->sendMail($to, $notifyTemplateId, [
-                'message' => $message
-            ]);
-
-            return ["success" => __("Thanks for the message", "cds-snc")];
-        } catch (Exception $exception) {
-            error_log($exception->getMessage());
-            return ["error" => $exception->getMessage()];
-        }
-    }
-
     public function isUnsetOrEmpty(string $needle, array $haystack): bool
     {
         return !isset($haystack[$needle]) || $haystack[$needle] === '';
     }
 
-    /* TODO */
+    protected function removeslashes($str)
+    {
+        $str = implode("", explode("\\", $str));
+        return stripslashes(trim($str));
+    }
+
     public function confirmSend(): array
     {
         if (!isset($_POST['request'])) {
@@ -101,15 +86,27 @@ class Setup
 
         $all_keys = array_merge($keys_page_1, $keys_page_2);
         $message = '';
+
         foreach ($all_keys as $_key) {
             $value = $_POST[$_key] ?? '';
             if ($value) {
                 $value = is_array($value) ? str_replace(".", "", implode(", ", $value)) : $value;
-                $message .= sanitize_text_field(ucfirst($_key)) . ': ' . sanitize_text_field($value) . "\n\n";
+                $message .= sanitize_text_field(ucfirst($_key)) . ': ' . $this->removeslashes(sanitize_text_field($value)) . "\n\n";
             }
         }
 
-        $response = $this->sendEmail($message);
+        $site = $_POST['site'] ?? __('No name specified', 'cds-snc');
+        $goal = __('Request a site:', 'cds-snc') . ' ' . $this->removeslashes($site);
+        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+
+        $messenger = new Messenger();
+        $response = $messenger->createTicket($goal, $fullname, $email, $message);
+
+        $cc = $_POST['cc'] ?? '';
+        if ($cc) {
+            $messenger->sendMail($email, $message);
+        }
 
         return $response;
     }

@@ -41,7 +41,7 @@ class NotifyClient
             return false;
         }
 
-        $this->notifyClient->sendEmail(
+        return $this->notifyClient->sendEmail(
             $emailTo,
             $templateId,
             $data,

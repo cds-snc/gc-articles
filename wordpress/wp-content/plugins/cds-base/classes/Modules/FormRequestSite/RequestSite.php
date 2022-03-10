@@ -201,6 +201,23 @@ class RequestSite
                     </li>
                 </ul>
 
+                <!-- send me a copy -->
+                <div>
+                    <div class="gc-input-checkbox">
+                        <input
+                            name="cc"
+                            class="gc-input-checkbox__input"
+                            id="send-a-copy-to-your-email"
+                            type="checkbox"
+                            value="<?php _e('Send a copy to your email.', 'cds-snc'); ?>"
+                        />
+                        <label class="gc-checkbox-label" for="send-a-copy-to-your-email">
+                            <span class="checkbox-label-text"><?php _e('Send a copy to your email.', 'cds-snc'); ?></span>
+                        </label>
+                    </div>
+                </div>
+                <!-- send me a copy -->
+
                 <div class="buttons" style="margin-top: 1.5rem;">
                     <button class="gc-button gc-button" type="submit" id="submit">
                         <?php _e('Request site', 'cds-snc'); ?>

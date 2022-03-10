@@ -7,6 +7,7 @@ namespace CDS;
 use CDS\Modules\Cache\Cache;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\Blocks\Blocks;
+use CDS\Modules\BlocksPHP\BlocksPHP;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
 use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
 use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
@@ -150,6 +151,7 @@ class Setup
     public function setupBlocks()
     {
         new Blocks();
+        new BlocksPHP();
     }
 
     public function setupMeta()

@@ -2,7 +2,7 @@ import { __ } from "@wordpress/i18n";
 import ServerSideRender from '@wordpress/server-side-render';
 import { PanelBody, Disabled, TextControl, SelectControl } from '@wordpress/components';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { name } from '../block.json';
+import { name } from './block.json';
 
 const Edit = ({ attributes, setAttributes }) => {
 

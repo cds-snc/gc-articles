@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace CDS\Modules\FormRequestSite;
 
-use CDS\Modules\FormRequestSite\Block;
 use CDS\Modules\Forms\Messenger;
 
 class Setup
@@ -28,7 +27,6 @@ class Setup
         });
 
         new RequestSite();
-        new Block();
     }
 
     public function enqueue()

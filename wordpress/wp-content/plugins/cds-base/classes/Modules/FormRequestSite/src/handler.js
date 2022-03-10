@@ -7,11 +7,11 @@
             if($el.is(':checked')) {
                 //show element
                 $el.attr('aria-expanded', true);
-                $controlsElement.attr('aria-hidden', false);
+                $controlsElement.removeClass('displayNone');
             } else {
                 // hide element
                 $el.attr('aria-expanded', false);
-                $controlsElement.attr('aria-hidden', true);
+                $controlsElement.addClass('displayNone').find('input').val('');
             }
         }
     }

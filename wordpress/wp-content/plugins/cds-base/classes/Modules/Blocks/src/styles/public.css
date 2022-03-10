@@ -82,6 +82,6 @@ header .gcweb-menu {
 }
 
 /* Aria toggle */
-form *[aria-hidden="true"] {
+form .displayNone {
   display: none;
 }

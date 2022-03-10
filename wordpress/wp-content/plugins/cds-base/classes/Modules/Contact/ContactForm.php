@@ -187,8 +187,8 @@ class ContactForm
                     ); ?>
                     </div>
                     
-                    <div id="optional-usage" aria-hidden="false">
-                        <label class="gc-label" for="usage-other" id="usage-other-label" class="hidden"">
+                    <div id="optional-usage">
+                        <label class="gc-label" for="usage-other" id="usage-other-label">
                             <?php _e('Other usage', 'cds-snc'); ?>
                         </label>
                         <input
@@ -238,8 +238,8 @@ class ContactForm
                         'optional-target'
                     ); ?>
                     </div>
-                    <div id="optional-target" aria-hidden="false">
-                        <label class="gc-label" for="target-other" id="target-other-label" class="hidden"">
+                    <div id="optional-target">
+                        <label class="gc-label" for="target-other" id="target-other-label">
                             <?php _e('Other target audience', 'cds-snc'); ?>
                         </label>
                         <input

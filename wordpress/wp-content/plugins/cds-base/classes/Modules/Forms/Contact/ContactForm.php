@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\Contact;
+namespace CDS\Modules\Forms\Contact;
 
 class ContactForm
 {

@@ -81,7 +81,12 @@ header .gcweb-menu {
   display: none;
 }
 
-/* Aria toggle */
+/* Forms */
 form .displayNone {
   display: none;
+}
+
+form button.gc-button[disabled] {
+  opacity: .7;
+  cursor: progress;
 }

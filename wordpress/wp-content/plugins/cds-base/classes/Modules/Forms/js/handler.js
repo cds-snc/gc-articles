@@ -24,13 +24,16 @@
         toggleOptional($(this));
     });
 
-    $("body").on("submit", "#request-form", function (e) {
+    $("body").on("submit", "#cds-form", function (e) {
         e.preventDefault();
-        var form = $(this);
-        var url = form.attr('action');
+        var $form = $(this);
+        var url = $form.attr('action');
+        var $button = $form.find('button#submit');
+        // disable button so that it can't be submitted twice
+        $button.prop('disabled', true);
 
         // clear previous error messages
-        $(".gc-error-message").remove();
+        $(".gc-error-message, .gc-alert--error").remove();
 
         $.ajax({
             type: "POST",
@@ -38,11 +41,13 @@
                 'X-WP-Nonce': CDS_VARS.rest_nonce
             },
             url: url,
-            data: form.serialize(), // serializes the form's elements.
+            data: $form.serialize(), // serializes the form's elements.
             success: function (data) {
-                console.log(data);
+                // re-enable button
+                $button.prop('disabled', false);
+
                 if (data && data["error"]) {
-                    var errorEl = '<div id="request-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
+                    var errorEl = '<div id="cds-form-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
                     errorEl += '<div class="gc-alert__body">';
                     errorEl += '<h2 class="gc-h3">' + data.error_message + '</h2>';
                     if(data['keys']) {
@@ -57,12 +62,12 @@
                     }
                     errorEl += '</div>';
 
-                    $(errorEl).insertAfter('#request');
-                    document.getElementById("request-error").scrollIntoView();
+                    $(errorEl).insertAfter('#cds-form-nonce');
+                    document.getElementById("cds-form-error").scrollIntoView();
                 }
 
                 if (data && data["success"]) {
-                    $("#request-form").replaceWith('<div class="panel-body"><div class="alert alert-success"><p>' + data.success + '</p></div></div>');
+                    $("#cds-form").replaceWith('<div class="panel-body"><div class="alert alert-success"><p>' + data.success + '</p></div></div>');
                 }
             }
         });

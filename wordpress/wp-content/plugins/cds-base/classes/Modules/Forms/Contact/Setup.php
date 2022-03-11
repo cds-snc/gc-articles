@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\Contact;
+namespace CDS\Modules\Forms\Contact;
 
 use CDS\Modules\Forms\Messenger;
 
@@ -10,8 +10,6 @@ class Setup
 {
     public function __construct()
     {
-        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
-
         /*
          * Note - if testing with WP ENV
          * https://wordpress.org/support/topic/wp-env-with-gutenber-doesnt-have-a-rest-api/
@@ -29,39 +27,29 @@ class Setup
         new ContactForm();
     }
 
-    public function enqueue()
-    {
-        wp_enqueue_script(
-            'cds-contact-js',
-            plugin_dir_url(__FILE__) . '/src/handler.js',
-            ['jquery'],
-            '1.0.0',
-            true,
-        );
-
-        wp_localize_script('cds-subscribe-js', 'CDS_VARS', [
-            'rest_url' => esc_url_raw(rest_url()),
-            'rest_nonce' => wp_create_nonce('wp_rest'),
-        ]);
-    }
-
     public function confirmSend(): array
     {
-        if (!isset($_POST['contact'])) {
+        if (!isset($_POST['cds-form-nonce'])) {
             $message = __('400 Bad Request', 'cds-snc');
             return ['error' => true, "error_message" => $message];
         }
 
-        if (!wp_verify_nonce($_POST['contact'], 'contact_form_nonce_action')) {
+        if (!wp_verify_nonce($_POST['cds-form-nonce'], 'cds_form_nonce_action')) {
             $message = __('400 Bad Request', 'cds-snc');
             return ['error' => true , "error_message" => $message];
         }
 
+        $required_keys = ['fullname', 'email', 'goal', 'message'];
+        $empty_keys = [];
+
+        foreach ($required_keys as $_key) {
+            if (!isset($_POST[$_key]) || $_POST[$_key] === '') {
+                array_push($empty_keys, $_key);
+            }
+        }
+
         if (
-            !isset($_POST['message']) || $_POST['message'] === '' ||
-            (!isset($_POST['fullname']) || $_POST['fullname'] === '') ||
-            (!isset($_POST['email']) || $_POST['email'] === '') ||
-            (!isset($_POST['goal']) || $_POST['goal'] === '')
+            !empty($empty_keys) // if this is NOT empty, then we are missing a key
         ) {
             $message = __(
                 'Please complete the required field(s) to continue',
@@ -70,7 +58,8 @@ class Setup
 
             return [
                 'error' =>  true,
-                "error_message" => $message
+                'error_message' => $message,
+                'keys' => $empty_keys
             ];
         }
 

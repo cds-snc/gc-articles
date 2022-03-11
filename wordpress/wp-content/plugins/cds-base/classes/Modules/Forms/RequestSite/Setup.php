@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\FormRequestSite;
+namespace CDS\Modules\Forms\RequestSite;
 
 use CDS\Modules\Forms\Messenger;
 
@@ -10,8 +10,6 @@ class Setup
 {
     public function __construct()
     {
-        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
-
         /*
          * Note - if testing with WP ENV
          * https://wordpress.org/support/topic/wp-env-with-gutenber-doesnt-have-a-rest-api/
@@ -26,17 +24,7 @@ class Setup
             ]);
         });
 
-        new RequestSite();
-    }
-
-    public function enqueue()
-    {
-        wp_enqueue_script('cds-request-js', plugin_dir_url(__FILE__) . '/src/handler.js', ['jquery'], "1.0.0", true);
-    }
-
-    public function isUnsetOrEmpty(string $needle, array $haystack): bool
-    {
-        return !isset($haystack[$needle]) || $haystack[$needle] === '';
+        new RequestSiteForm();
     }
 
     protected function removeslashes($str)
@@ -47,12 +35,12 @@ class Setup
 
     public function confirmSend(): array
     {
-        if (!isset($_POST['request'])) {
+        if (!isset($_POST['cds-form-nonce'])) {
             $message = __('400 Bad Request', 'cds-snc');
             return ['error' => true, "error_message" => $message];
         }
 
-        if (!wp_verify_nonce($_POST['request'], 'request_form_nonce_action')) {
+        if (!wp_verify_nonce($_POST['cds-form-nonce'], 'cds_form_nonce_action')) {
             $message = __('400 Bad Request', 'cds-snc');
             return ['error' => true , "error_message" => $message];
         }
@@ -62,7 +50,7 @@ class Setup
         $empty_keys = [];
 
         foreach ($keys_page_2 as $_key) {
-            if ($this->isUnsetOrEmpty($_key, $_POST)) {
+            if (!isset($_POST[$_key]) || $_POST[$_key] === '') {
                 array_push($empty_keys, $_key);
             }
         }

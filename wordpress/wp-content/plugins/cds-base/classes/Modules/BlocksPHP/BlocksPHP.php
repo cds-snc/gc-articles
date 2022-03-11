@@ -2,8 +2,9 @@
 
 namespace CDS\Modules\BlocksPHP;
 
-use CDS\Modules\Contact\ContactForm;
-use CDS\Modules\FormRequestSite\RequestSite;
+use CDS\Utils;
+use CDS\Modules\Forms\Contact\ContactForm;
+use CDS\Modules\Forms\RequestSite\RequestSiteForm;
 use CDS\Modules\Subscribe\SubscriptionForm as SubscriptionForm;
 
 class BlocksPHP
@@ -45,33 +46,36 @@ class BlocksPHP
             ]
         ]);
 
-        // internal blocks
-        if (is_super_admin()) {
-            register_block_type(__DIR__ . '/build/contact/', [
-                'render_callback' => function ($attributes, $content, $block): string {
-                    $form = new ContactForm();
-                    return $form->render($attributes);
-                },
-                'attributes' => [
-                    'placeholderValue' => [
-                        'type' => 'string',
-                        "default" => "preview@example.com"
-                    ]
-                ]
-            ]);
-
-            register_block_type(__DIR__ . '/build/request/', [
-                'render_callback' => function ($attributes, $content, $block): string {
-                    $form = new RequestSite();
-                    return $form->render($attributes);
-                },
-                'attributes' => [
-                    'placeholderValue' => [
-                        'type' => 'string',
-                        "default" => "preview@example.com"
-                    ]
-                ]
-            ]);
+        // return early if viewing the admin interface but not a superadmin
+        if (is_admin() && !is_super_admin() && !Utils::isWpEnv()) {
+            return;
         }
+
+        // internal blocks
+        register_block_type(__DIR__ . '/build/contact/', [
+            'render_callback' => function ($attributes, $content, $block): string {
+                $form = new ContactForm();
+                return $form->render($attributes);
+            },
+            'attributes' => [
+                'placeholderValue' => [
+                    'type' => 'string',
+                    "default" => "preview@example.com"
+                ]
+            ]
+        ]);
+
+        register_block_type(__DIR__ . '/build/request/', [
+            'render_callback' => function ($attributes, $content, $block): string {
+                $form = new RequestSiteForm();
+                return $form->render($attributes);
+            },
+            'attributes' => [
+                'placeholderValue' => [
+                    'type' => 'string',
+                    "default" => "preview@example.com"
+                ]
+            ]
+        ]);
     }
 }

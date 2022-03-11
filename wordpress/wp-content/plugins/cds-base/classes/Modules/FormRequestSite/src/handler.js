@@ -26,8 +26,11 @@
 
     $("body").on("submit", "#cds-form", function (e) {
         e.preventDefault();
-        var form = $(this);
-        var url = form.attr('action');
+        var $form = $(this);
+        var url = $form.attr('action');
+        var $button = $form.find('button#submit');
+        // disable button so that it can't be submitted twice
+        $button.prop('disabled', true);
 
         // clear previous error messages
         $(".gc-error-message").remove();
@@ -38,9 +41,11 @@
                 'X-WP-Nonce': CDS_VARS.rest_nonce
             },
             url: url,
-            data: form.serialize(), // serializes the form's elements.
+            data: $form.serialize(), // serializes the form's elements.
             success: function (data) {
-                console.log(data);
+                // re-enable button
+                $button.prop('disabled', false);
+
                 if (data && data["error"]) {
                     var errorEl = '<div id="cds-form-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
                     errorEl += '<div class="gc-alert__body">';

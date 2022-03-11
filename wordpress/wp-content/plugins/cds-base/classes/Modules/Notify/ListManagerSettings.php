@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Notify;
 
+use CDS\Modules\Notify\Utils;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\ListManager\ListManager;
 use InvalidArgumentException;
@@ -106,11 +107,17 @@ class ListManagerSettings
             get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
         get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
         $this->list_values = get_option('list_values') ?: '';
-        ?>
 
+        $serviceIds = Utils::deserializeServiceIds(get_option('LIST_MANAGER_NOTIFY_SERVICES'));
+        $services = [];
+        foreach ($serviceIds as $key => $val) {
+            $services[] = ["name" => $key , "service_id" => $val["service_id"]];
+        }
+        ?>
+        <!-- app -->
         <div class="wrap">
             <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
-            <div id="list-manager-app">
+            <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>
             </div>
         </div>
         <?php

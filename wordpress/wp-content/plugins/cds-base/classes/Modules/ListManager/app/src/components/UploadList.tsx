@@ -11,10 +11,11 @@ export const UploadList = () => {
     const [finished, setFinished] = useState<boolean>(false)
     const { request, cache, response } = useFetch({ data: [] })
     const params = useParams();
-    const listId = params?.listId
+    const serviceId = params?.serviceId;
+    const listId = params?.listId;
 
     if (finished) {
-        return <Navigate to="/" replace={true} />
+        return <Navigate to={`/service/${serviceId}`} replace={true} />
     }
 
     return <Importer

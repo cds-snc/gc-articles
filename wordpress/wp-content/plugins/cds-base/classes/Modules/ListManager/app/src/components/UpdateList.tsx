@@ -29,8 +29,9 @@ export const UpdateList = () => {
 
   useListFetch();
 
-  let params = useParams();
-  const listId = params?.listId
+  const params = useParams();
+  const serviceId = params?.serviceId;
+  const listId = params?.listId;
 
   const onSubmit: SubmitHandler<List> = data => updateList(listId, data);
 
@@ -56,7 +57,7 @@ export const UpdateList = () => {
   })[0];
 
   if (responseData.id) {
-    return <Navigate to="/" replace={false} />
+    return <Navigate to={`/service/${serviceId}`} replace={true} />
   }
 
   return list ? <ListForm formData={list} handler={onSubmit} serverErrors={errors} /> : null

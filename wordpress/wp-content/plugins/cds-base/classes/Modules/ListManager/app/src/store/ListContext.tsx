@@ -34,8 +34,8 @@ const ListReducer = (state: State, action: Action): State => {
     }
 };
 
-const ListProvider = ({ children }: ListProviderProps) => {
-    const [state, dispatch] = useReducer(ListReducer, { loading: false, lists: [], messages: [] });
+const ListProvider = ({ children, serviceData }: ListProviderProps) => {
+    const [state, dispatch] = useReducer(ListReducer, { loading: false, serviceData, lists: [], messages: [] });
 
     const value = {
         state,

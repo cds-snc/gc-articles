@@ -4,7 +4,7 @@ namespace CDS\Modules\BlocksPHP;
 
 use CDS\Utils;
 use CDS\Modules\Contact\ContactForm;
-use CDS\Modules\FormRequestSite\RequestSite;
+use CDS\Modules\Forms\RequestSite\RequestSiteForm;
 use CDS\Modules\Subscribe\SubscriptionForm as SubscriptionForm;
 
 class BlocksPHP
@@ -17,12 +17,6 @@ class BlocksPHP
     public function init(): void
     {
         add_action('init', [$this, 'registerBlocks']);
-        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
-    }
-
-    public function enqueue()
-    {
-        wp_enqueue_script('cds-blocks-js', plugin_dir_url(__FILE__) . '/js/handler.js', ['jquery'], "1.0.0", true);
     }
 
     public function registerBlocks()
@@ -73,7 +67,7 @@ class BlocksPHP
 
         register_block_type(__DIR__ . '/build/request/', [
             'render_callback' => function ($attributes, $content, $block): string {
-                $form = new RequestSite();
+                $form = new RequestSiteForm();
                 return $form->render($attributes);
             },
             'attributes' => [

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\FormRequestSite;
+namespace CDS\Modules\Forms\RequestSite;
 
 use CDS\Modules\Forms\Messenger;
 
@@ -24,7 +24,7 @@ class Setup
             ]);
         });
 
-        new RequestSite();
+        new RequestSiteForm();
     }
 
     protected function removeslashes($str)

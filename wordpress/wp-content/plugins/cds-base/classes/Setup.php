@@ -22,7 +22,7 @@ use CDS\Modules\Cleanup\CreateSites;
 use CDS\Modules\Cleanup\Media;
 use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\Contact\Setup as ContactForm;
-use CDS\Modules\FormRequestSite\Setup as RequestSiteForm;
+use CDS\Modules\Forms\Setup as RequestSiteForm;
 use CDS\Modules\Meta\Favicon;
 use CDS\Modules\Meta\MetaTags;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;

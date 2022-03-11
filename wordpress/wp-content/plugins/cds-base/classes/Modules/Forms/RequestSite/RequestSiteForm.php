@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\FormRequestSite;
+namespace CDS\Modules\Forms\RequestSite;
 
-class RequestSite
+class RequestSiteForm
 {
     public function __construct()
     {
@@ -74,7 +74,7 @@ class RequestSite
 
             // create array of keys and values
             foreach ($all_keys as $_key) {
-                $all_values[$_key] = stripslashes($_POST[$_key] ?? '');
+                $all_values[$_key] = is_array($_POST[$_key] ?? '') ? $_POST[$_key] : stripslashes($_POST[$_key] ?? '');
             }
 
             // find all empty values

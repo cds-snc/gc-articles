@@ -74,11 +74,11 @@ class ContactForm
             fullname
         -->
         <div class="gc-form-wrapper">
-            <form id="contact-form" method="POST" action="/wp-json/contact/v1/process">
+            <form id="cds-form" method="POST" action="/wp-json/contact/v1/process">
                 
                 <?php wp_nonce_field(
-                    'contact_form_nonce_action',
-                    'contact',
+                    'cds_form_nonce_action',
+                    'cds-form-nonce',
                 ); ?>
             
                 <!-- start name -->

@@ -47,21 +47,27 @@ class Setup
 
     public function confirmSend(): array
     {
-        if (!isset($_POST['contact'])) {
+        if (!isset($_POST['cds-form-nonce'])) {
             $message = __('400 Bad Request', 'cds-snc');
             return ['error' => true, "error_message" => $message];
         }
 
-        if (!wp_verify_nonce($_POST['contact'], 'contact_form_nonce_action')) {
+        if (!wp_verify_nonce($_POST['cds-form-nonce'], 'cds_form_nonce_action')) {
             $message = __('400 Bad Request', 'cds-snc');
             return ['error' => true , "error_message" => $message];
         }
 
+        $required_keys = ['fullname', 'email', 'goal', 'message'];
+        $empty_keys = [];
+
+        foreach ($required_keys as $_key) {
+            if (!isset($_POST[$_key]) || $_POST[$_key] === '') {
+                array_push($empty_keys, $_key);
+            }
+        }
+
         if (
-            !isset($_POST['message']) || $_POST['message'] === '' ||
-            (!isset($_POST['fullname']) || $_POST['fullname'] === '') ||
-            (!isset($_POST['email']) || $_POST['email'] === '') ||
-            (!isset($_POST['goal']) || $_POST['goal'] === '')
+            !empty($empty_keys) // if this is NOT empty, then we are missing a key
         ) {
             $message = __(
                 'Please complete the required field(s) to continue',
@@ -70,7 +76,8 @@ class Setup
 
             return [
                 'error' =>  true,
-                "error_message" => $message
+                'error_message' => $message,
+                'keys' => $empty_keys
             ];
         }
 

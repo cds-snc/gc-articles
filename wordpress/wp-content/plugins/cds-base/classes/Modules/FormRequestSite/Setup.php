@@ -34,11 +34,6 @@ class Setup
         wp_enqueue_script('cds-request-js', plugin_dir_url(__FILE__) . '/src/handler.js', ['jquery'], "1.0.0", true);
     }
 
-    public function isUnsetOrEmpty(string $needle, array $haystack): bool
-    {
-        return !isset($haystack[$needle]) || $haystack[$needle] === '';
-    }
-
     protected function removeslashes($str)
     {
         $str = implode("", explode("\\", $str));
@@ -62,7 +57,7 @@ class Setup
         $empty_keys = [];
 
         foreach ($keys_page_2 as $_key) {
-            if ($this->isUnsetOrEmpty($_key, $_POST)) {
+            if (!isset($_POST[$_key]) || $_POST[$_key] === '') {
                 array_push($empty_keys, $_key);
             }
         }

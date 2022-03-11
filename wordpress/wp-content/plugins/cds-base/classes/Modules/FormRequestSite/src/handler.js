@@ -33,7 +33,7 @@
         $button.prop('disabled', true);
 
         // clear previous error messages
-        $(".gc-error-message").remove();
+        $(".gc-error-message, .gc-alert--error").remove();
 
         $.ajax({
             type: "POST",

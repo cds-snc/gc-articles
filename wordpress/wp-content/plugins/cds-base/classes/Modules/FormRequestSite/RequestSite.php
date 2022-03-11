@@ -93,7 +93,7 @@ class RequestSite
             ) {  // no empty 'required' keys exist, use second part of form
                 ?>
 
-                <form id="request-form" method="POST" action="/wp-json/request/v1/process">
+                <form id="cds-form" method="POST" action="/wp-json/request/v1/process">
                 <p>
                     <?php
                     echo _e('Site administrator details. ', 'cds-snc');
@@ -102,8 +102,8 @@ class RequestSite
                 </p>
 
                 <?php wp_nonce_field(
-                    'request_form_nonce_action',
-                    'request',
+                    'cds_form_nonce_action',
+                    'cds-form-nonce',
                 );
 
                 // add hidden fields for previous answers
@@ -239,7 +239,7 @@ class RequestSite
                     echo $this->errorMessage($empty_values);
                 }
                 ?>
-            <form id="request-form-step-1" method="POST" action="<?php echo $current_url; ?>">
+            <form id="cds-form-step-1" method="POST" action="<?php echo $current_url; ?>">
                 <p>
                     <?php
                     echo _e('Tell us about your site. ', 'cds-snc');
@@ -248,8 +248,8 @@ class RequestSite
                 </p>
 
                 <?php wp_nonce_field(
-                    'request_form_nonce_action',
-                    'request',
+                    'cds_form_nonce_action',
+                    'cds-form-nonce',
                 ); ?>
             
                 <!-- start site -->

@@ -47,12 +47,12 @@ class Setup
 
     public function confirmSend(): array
     {
-        if (!isset($_POST['request'])) {
+        if (!isset($_POST['cds-form-nonce'])) {
             $message = __('400 Bad Request', 'cds-snc');
             return ['error' => true, "error_message" => $message];
         }
 
-        if (!wp_verify_nonce($_POST['request'], 'request_form_nonce_action')) {
+        if (!wp_verify_nonce($_POST['cds-form-nonce'], 'cds_form_nonce_action')) {
             $message = __('400 Bad Request', 'cds-snc');
             return ['error' => true , "error_message" => $message];
         }

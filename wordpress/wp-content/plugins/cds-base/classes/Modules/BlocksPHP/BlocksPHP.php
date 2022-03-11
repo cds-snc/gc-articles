@@ -16,6 +16,12 @@ class BlocksPHP
     public function init(): void
     {
         add_action('init', [$this, 'registerBlocks']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
+    }
+
+    public function enqueue()
+    {
+        wp_enqueue_script('cds-blocks-js', plugin_dir_url(__FILE__) . '/js/handler.js', ['jquery'], "1.0.0", true);
     }
 
     public function registerBlocks()

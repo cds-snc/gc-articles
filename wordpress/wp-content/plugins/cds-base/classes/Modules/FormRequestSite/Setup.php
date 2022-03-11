@@ -10,8 +10,6 @@ class Setup
 {
     public function __construct()
     {
-        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
-
         /*
          * Note - if testing with WP ENV
          * https://wordpress.org/support/topic/wp-env-with-gutenber-doesnt-have-a-rest-api/
@@ -27,11 +25,6 @@ class Setup
         });
 
         new RequestSite();
-    }
-
-    public function enqueue()
-    {
-        wp_enqueue_script('cds-request-js', plugin_dir_url(__FILE__) . '/src/handler.js', ['jquery'], "1.0.0", true);
     }
 
     protected function removeslashes($str)

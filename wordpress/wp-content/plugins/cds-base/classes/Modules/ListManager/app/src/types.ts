@@ -1,5 +1,3 @@
-import { string } from 'yargs';
-
 export type List = {
   id: string;
   name: string;
@@ -28,10 +26,15 @@ export type Message = {
   message: string;
 };
 
+export type Service = { name: string; service_id: string };
+
+export type ServiceData = Service[] | null;
+
 export type State = {
   loading: boolean;
   lists: List[] | [];
   messages: Message[] | [];
+  serviceData: ServiceData;
 };
 
 export type Action =
@@ -39,8 +42,6 @@ export type Action =
   | { type: 'delete'; payload: { id: string } }
   | { type: 'load'; payload: List[] }
   | { type: 'reset'; payload: { id: string } };
-
-export type ListProviderProps = { children: React.ReactNode };
 
 export type ErrorResponse = {
   detail: [
@@ -62,4 +63,9 @@ export type ServerErrors = [] | FieldError[];
 
 export type CSVData = {
   email: string;
+};
+
+export type ListProviderProps = {
+  serviceData: ServiceData;
+  children: React.ReactNode;
 };

@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import styled from 'styled-components';
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
@@ -8,8 +9,8 @@ import { useList } from "../store/ListContext";
 import { Spinner } from './Spinner';
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
-import { Messages } from "./Messages"
 import { useListFetch } from '../store/UseListFetch';
+import { useParams } from "react-router-dom";
 
 const TemplateGroupStyles = styled.div`
   margin: 1rem;
@@ -67,8 +68,8 @@ const CreateListLink = () => {
     return <Link className="button button-primary" to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
-const UploadListLink = ({ id }: { id: string }) => {
-    return <Link className="button action" to={{ pathname: `/upload/${id}` }}>Upload List</Link>
+const UploadListLink = ({ name, id }: { name: string, id: string }) => {
+    return <Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/upload/${id}` }}>Upload List</Link>
 }
 
 const NOTIFY_UTL = "https://notification.canada.ca";
@@ -77,11 +78,16 @@ const templateLink = (serviceId: string, templateId: string) => {
     return `${NOTIFY_UTL}/services/${serviceId}/templates/${templateId}`;
 }
 
+const updateLink = (serviceId: string | undefined, listId: string) => {
+    return `/service/${serviceId}/list/${listId}/update`;
+}
+
 export const ListViewTable = () => {
     const { state } = useList();
     const { lists } = state;
-
     const { status } = useListFetch();
+    const params = useParams();
+    const serviceId = params?.serviceId;
 
     const columns = React.useMemo(
         () => [
@@ -98,7 +104,7 @@ export const ListViewTable = () => {
                                     <Link
                                         className="row-title"
                                         to={{
-                                            pathname: `list/${row?.values?.id}`,
+                                            pathname: updateLink(serviceId, row?.values?.id),
                                         }}
                                     >
                                         {row?.values?.name}
@@ -116,13 +122,6 @@ export const ListViewTable = () => {
                     {
                         Header: 'Language',
                         accessor: 'language',
-                    },
-                    {
-                        Header: 'Service Id',
-                        accessor: 'service_id',
-                        Cell: ({ row }: { row: any }) => {
-                            return <a href={`${NOTIFY_UTL}/services/${row?.values?.service_id}`}>{row?.values?.service_id}</a>
-                        },
                     },
 
                     {
@@ -177,13 +176,13 @@ export const ListViewTable = () => {
                         Header: 'Upload',
                         accessor: 'active',
                         Cell: ({ row }: { row: any }) => {
-                            return <UploadListLink id={`${row?.values?.id}`} />
+                            return <UploadListLink name={`${row?.values?.name}`} id={`${row?.values?.id}`} />
                         },
                     },
                 ],
             },
         ],
-        []);
+        [serviceId]);
 
 
     if (status === "error") {
@@ -201,6 +200,8 @@ export const ListViewTable = () => {
     }
 
     return (
-        <><Messages /><Table columns={columns} data={lists} /></>
+        <Table columns={columns} data={lists} />
     )
 }
+
+export default ListViewTable;

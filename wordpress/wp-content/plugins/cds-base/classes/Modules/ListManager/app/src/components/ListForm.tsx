@@ -37,7 +37,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.name ? "error-wrapper" : ""}>
                             {errors.name && <span className="validation-error">{errors.name?.message || __("Name is required", "cds-snc")}</span>}
-                            <input style={textWidth} type="text" {...register("name", { required: true })} />
+                            <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
                         </div>
                     </td>
                 </tr>
@@ -46,7 +46,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.language ? "error-wrapper" : ""}>
                             {errors.language && <span className="validation-error">{errors.language?.message || __("Language is required", "cds-snc")}</span>}
-                            <input style={textWidth} type="text" {...register("language", { required: true })} />
+                            <input id="language" style={textWidth} type="text" {...register("language", { required: true })} />
                         </div>
                     </td>
                 </tr>
@@ -55,7 +55,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.service_id ? "error-wrapper" : ""}>
                             {errors.service_id && <span className="validation-error">{errors.service_id?.message || __("Service ID is required", "cds-snc")}</span>}
-                            <input style={textWidth} type="text" {...register("service_id", { required: true })} />
+                            <input id="service_id" style={textWidth} type="text" {...register("service_id", { required: true })} />
                         </div>
                     </td>
                 </tr>
@@ -64,7 +64,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.subscribe_email_template_id ? "error-wrapper" : ""}>
                             {errors.subscribe_email_template_id && <span className="validation-error">{errors.subscribe_email_template_id?.message}</span>}
-                            <input style={textWidth} type="text" {...register("subscribe_email_template_id")} />
+                            <input id="subscribe_email_template_id" style={textWidth} type="text" {...register("subscribe_email_template_id")} />
                         </div>
                     </td>
                 </tr>
@@ -73,7 +73,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.unsubscribe_email_template_id ? "error-wrapper" : ""}>
                             {errors.unsubscribe_email_template_id && <span className="validation-error">{errors.unsubscribe_email_template_id?.message}</span>}
-                            <input style={textWidth} type="text" {...register("unsubscribe_email_template_id")} />
+                            <input id="unsubscribe_email_template_id" style={textWidth} type="text" {...register("unsubscribe_email_template_id")} />
                         </div>
                     </td>
                 </tr>
@@ -82,7 +82,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.subscribe_phone_template_id ? "error-wrapper" : ""}>
                             {errors.subscribe_phone_template_id && <span className="validation-error">{errors.subscribe_phone_template_id?.message}</span>}
-                            <input style={textWidth} type="text" {...register("subscribe_phone_template_id")} />
+                            <input id="subscribe_phone_template_id" style={textWidth} type="text" {...register("subscribe_phone_template_id")} />
                         </div>
                     </td>
                 </tr>
@@ -91,7 +91,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.unsubscribe_phone_template_id ? "error-wrapper" : ""}>
                             {errors.unsubscribe_phone_template_id && <span className="validation-error">{errors.unsubscribe_phone_template_id?.message}</span>}
-                            <input style={textWidth} type="text" {...register("unsubscribe_phone_template_id")} />
+                            <input id="unsubscribe_phone_template_id" style={textWidth} type="text" {...register("unsubscribe_phone_template_id")} />
                         </div>
                     </td>
                 </tr>
@@ -100,7 +100,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.subscribe_redirect_url ? "error-wrapper" : ""}>
                             {errors.subscribe_redirect_url && <span className="validation-error">{errors.subscribe_redirect_url?.message}</span>}
-                            <input style={textWidth} type="text" {...register("subscribe_redirect_url")} />
+                            <input id="subscribe_redirect_url" style={textWidth} type="text" {...register("subscribe_redirect_url")} />
                         </div>
                     </td>
                 </tr>
@@ -109,7 +109,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
                             {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
-                            <input style={textWidth} type="text" {...register("unsubscribe_redirect_url")} />
+                            <input id="unsubscribe_redirect_url" style={textWidth} type="text" {...register("unsubscribe_redirect_url")} />
                         </div>
                     </td>
                 </tr>
@@ -118,7 +118,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.confirm_redirect_url ? "error-wrapper" : ""}>
                             {errors.confirm_redirect_url && <span className="validation-error">{errors.confirm_redirect_url?.message}</span>}
-                            <input style={textWidth} type="text" {...register("confirm_redirect_url")} />
+                            <input id="confirm_redirect_url" style={textWidth} type="text" {...register("confirm_redirect_url")} />
                         </div>
                     </td>
                 </tr>

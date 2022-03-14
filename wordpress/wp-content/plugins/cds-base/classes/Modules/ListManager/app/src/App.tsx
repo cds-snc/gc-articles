@@ -5,20 +5,24 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 
 import { Spinner } from './components/Spinner';
 import { ListProvider } from "./store/ListContext"
-import { ListViewTable } from './components/ListViewTable';
+import { Services } from './components/Services';
 import { NotFound } from './components/NotFound';
+import { ServiceData } from "./types";
 import './App.css';
+const Service = React.lazy(() => import("./components/Service"));
 const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
 const UploadList = React.lazy(() => import("./components/UploadList"));
 
 const endpoint = "/wp-json/list-manager";
 
-const App = () => {
+const App = ({ serviceData }: { serviceData: ServiceData }) => {
   const options = {
     interceptors: {
       request: async ({ options }: { options: any }) => {
-        options.headers["X-WP-Nonce"] = window.CDS_VARS.rest_nonce
+        if (window?.CDS_VARS?.rest_nonce) {
+          options.headers["X-WP-Nonce"] = window.CDS_VARS.rest_nonce;
+        }
         return options
       },
     }
@@ -28,25 +32,30 @@ const App = () => {
     <HashRouter>
       <Provider url={endpoint} options={options}>
         <Suspense fallback={<Spinner />}>
-          <ListProvider>
+          <ListProvider serviceData={serviceData}>
             <Routes>
-              <Route path="/" element={<ListViewTable />} />
-              <Route path="/list/create" element={
+              <Route path="/" element={<Services />} />
+              <Route path="/service/:serviceId" element={
+                <React.Suspense fallback={<Spinner />}>
+                  <Service />
+                </React.Suspense>
+              }
+              />
+              <Route path="/service/:serviceId/list/create" element={
                 <React.Suspense fallback={<Spinner />}>
                   <CreateList />
                 </React.Suspense>
               } />
-              <Route path="/list/:listId" element={
+              <Route path="/service/:serviceId/list/:listId/update" element={
                 <React.Suspense fallback={<Spinner />}>
                   <UpdateList />
                 </React.Suspense>
               } />
-              <Route path="/upload/:listId" element={
+              <Route path="/service/:serviceId/list/:listId/upload" element={
                 <React.Suspense fallback={<Spinner />}>
                   <UploadList />
                 </React.Suspense>
               } />
-
               <Route path="*" element={<NotFound />} />
             </Routes>
           </ListProvider>

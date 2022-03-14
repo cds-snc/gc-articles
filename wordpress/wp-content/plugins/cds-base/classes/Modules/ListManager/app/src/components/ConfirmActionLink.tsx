@@ -2,6 +2,7 @@ import * as React from 'react';
 import Swal from "sweetalert2";
 
 export const ConfirmActionLink = ({ text = '', isConfirmedHandler }: { text: string, isConfirmedHandler: () => void }) => {
+    // @todo add aria labels to avoid duplicate text
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
     return (<a href="#" className="button action" onClick={async (e) => {
         e.preventDefault();

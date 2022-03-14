@@ -196,14 +196,16 @@ class RequestSiteForm
                 </div>
                 <!-- end department -->
 
-                <ul>
-                    <li>
-                        <?php _e('Reminder: Only use GC Articles for information that is not sensitive and can be shared publicly.', 'cds-snc'); ?>
-                    </li>
-                    <li>
-                        <?php _e('Make sure you’re allowed to publsh this information on behalf of the Government of Canada.', 'cds-snc'); ?>
-                    </li>
-                </ul>
+                <div class="focus-group">
+                    <ul>
+                        <li>
+                            <?php _e('Reminder: Only use GC Articles for information that is not sensitive and can be shared publicly.', 'cds-snc'); ?>
+                        </li>
+                        <li>
+                            <?php _e('Make sure you’re allowed to publsh this information on behalf of the Government of Canada.', 'cds-snc'); ?>
+                        </li>
+                    </ul>
+                </div>
 
                 <!-- send me a copy -->
                 <div>
@@ -222,7 +224,7 @@ class RequestSiteForm
                 </div>
                 <!-- send me a copy -->
 
-                <div class="buttons" style="margin-top: 1.5rem;">
+                <div class="buttons">
                     <button class="gc-button gc-button" type="submit" id="submit">
                         <?php _e('Request site', 'cds-snc'); ?>
                     </button>
@@ -276,9 +278,11 @@ class RequestSiteForm
                     <label class="gc-label" for="usage" id="usage_types">
                         <?php _e('What will you use your site for?', 'cds-snc'); ?>
                     </label>
-                    <p><?php _e('We use this information to improve GC Articles.', 'cds-snc');?></p>
+                    <div id="usage-desc" class="gc-description" data-testid="description">
+                        <?php _e('We use this information to improve GC Articles.', 'cds-snc');?>
+                    </div>
                     
-                    <div class="focus-group" style="margin-bottom: 1.75rem">
+                    <div class="focus-group">
                         <?php $this->checkboxField(
                             'usage[]',
                             'Blog.',
@@ -333,9 +337,11 @@ class RequestSiteForm
                     <label class="gc-label" for="target" id="target_types">
                         <?php _e('Who are the target audiences for your site?', 'cds-snc'); ?>
                     </label>
-                    <p><?php _e('We use this information to improve GC Articles.', 'cds-snc');?></p>
+                    <div id="target-desc" class="gc-description" data-testid="description">
+                        <?php _e('We use this information to improve GC Articles.', 'cds-snc');?>
+                    </div>
                     
-                    <div class="focus-group" style="margin-bottom: 1.75rem">
+                    <div class="focus-group">
                     <?php $this->checkboxField(
                         'target[]',
                         'People who use your programs and services.',
@@ -383,22 +389,24 @@ class RequestSiteForm
                 </div>
 
                 <!-- timeline -->
-                <label data-testid="description" class="gc-label" id="timeline-label" for="timeline">
-                    <?php _e('When do you plan to make your site public?', 'cds-snc'); ?>
-                </label>
-                <div id="timeline-desc" class="gc-description" data-testid="description">
-                    <?php _e('We look for sites that will launch in the next 2 months. Sites that linger for longer than 2 months without being made public reduce our ranking in search engines.', 'cds-snc'); ?>
+                <div class="focus-group">
+                    <label data-testid="description" class="gc-label" id="timeline-label" for="timeline">
+                        <?php _e('When do you plan to make your site public?', 'cds-snc'); ?>
+                    </label>
+                    <div id="timeline-desc" class="gc-description" data-testid="description">
+                        <?php _e('We look for sites that will launch in the next 2 months. Sites that linger for longer than 2 months without being made public reduce our ranking in search engines.', 'cds-snc'); ?>
+                    </div>
+                    <textarea
+                        data-testid="textarea"
+                        class="gc-textarea"
+                        id="timeline"
+                        required
+                        placeholder=""
+                        name="timeline"
+                    ><?php echo $all_values['timeline']; ?></textarea>
                 </div>
-                <textarea
-                    data-testid="textarea"
-                    class="gc-textarea"
-                    id="timeline"
-                    required
-                    placeholder=""
-                    name="timeline"
-                ><?php echo $all_values['timeline']; ?></textarea>
 
-                <div class="buttons" style="margin-top: 1.5rem;">
+                <div class="buttons">
                     <button class="gc-button gc-button" type="submit" id="submit">
                         <?php _e('Next', 'cds-snc'); ?>
                     </button>

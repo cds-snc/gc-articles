@@ -119,9 +119,11 @@ class ContactForm
                     <label class="gc-label" for="goal" id="goal_types">
                         <?php _e('Goal of your message', 'cds-snc'); ?>
                     </label>
-                    <p><?php _e('Your answer helps us make sure your message gets to the right people.', 'cds-snc');?></p>
+                    <div id="usage-desc" class="gc-description" data-testid="description">
+                        <?php _e('Your answer helps us make sure your message gets to the right people.', 'cds-snc');?>
+                    </div>
 
-                    <div class="focus-group" style="margin-bottom: 1.75rem">
+                    <div class="focus-group">
                     <?php $this->radioField(
                         'goal',
                         'Ask a question.',
@@ -155,9 +157,11 @@ class ContactForm
                     <label class="gc-label" for="usage" id="usage_types">
                         <?php _e('What are you thinking about using GC Articles for? (optional)', 'cds-snc'); ?>
                     </label>
-                    <p><?php _e('We use this information to improve GC Articles.', 'cds-snc');?></p>
-                    
-                    <div class="focus-group" style="margin-bottom: 1.75rem">
+                    <div id="usage-desc" class="gc-description" data-testid="description">
+                        <?php _e('We use this information to improve GC Articles.', 'cds-snc');?>
+                    </div>
+
+                    <div class="focus-group">
                     <?php $this->checkBox(
                         'usage[]',
                         'Blog.',
@@ -207,9 +211,11 @@ class ContactForm
                     <label class="gc-label" for="target" id="target_types">
                         <?php _e('Who are the target audiences you’re thinking about? (optional)', 'cds-snc'); ?>
                     </label>
-                    <p><?php _e('We use this information to improve GC Articles.', 'cds-snc');?></p>
+                    <div id="usage-desc" class="gc-description" data-testid="description">
+                        <?php _e('We use this information to improve GC Articles.', 'cds-snc');?>
+                    </div>
                     
-                    <div class="focus-group" style="margin-bottom: 1.75rem">
+                    <div class="focus-group">
                     <?php $this->checkBox(
                         'target[]',
                         'People who use your programs and services.',
@@ -275,7 +281,7 @@ class ContactForm
                 </div>
                 <!-- send me a copy -->
 
-                <div class="buttons" style="margin-top: 1.5rem;">
+                <div class="buttons">
                     <button class="gc-button gc-button" type="submit" id="submit">
                         <?php _e('Submit', 'cds-snc'); ?>
                     </button>

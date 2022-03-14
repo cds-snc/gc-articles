@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\Subscribe;
+namespace CDS\Modules\Forms\Subscribe;
 
 class SubscriptionForm
 {
@@ -44,19 +44,36 @@ class SubscriptionForm
         ob_start();
         ?>
         <div class="gc-form-wrapper">
-           <form id="subscribe-form" method="POST" action="<?php echo $apiEndpoint; ?>">
+           <form id="cds-form" method="POST" action="<?php echo $apiEndpoint; ?>">
                 <input type="hidden" name="list_id" value="<?php echo $listId; ?>"/>
                 <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
+
+                <?php wp_nonce_field(
+                    'cds_form_nonce_action',
+                    'cds-form-nonce',
+                ); ?>
+
+                <!-- start email -->
                 <div class="focus-group">
-                    <label class="gc-label required" id="cds-email" for="email">
+                    <label class="gc-label" for="email" id="email-label">
                         <?php echo $emailLabel; ?>
-                        <i class="visually-hidden"><?php _e("Required Field", "cds-snc"); ?></i>
                     </label>
-                    <input id="email" style="margin-bottom:0;" class="gc-input-text" type="text" name="email" placeholder="<?php echo $placeholder; ?>" value=""/>
+                    <input 
+                        type="email" 
+                        class="gc-input-text" 
+                        id="email" 
+                        required 
+                        autocomplete="email"
+                        name="email" 
+                        value=""
+                        placeholder="<?php echo $placeholder; ?>" 
+                    />
                 </div>
-                <div class="buttons">
-                    <button class="gc-button gc-button" type="submit" id="subscribe-submit">
-                    <?php echo $subscribeLabel ; ?>
+                <!-- end email -->
+
+                <div class="buttons" style="margin-top: 1.5rem;">
+                    <button class="gc-button gc-button" type="submit" id="submit">
+                        <?php echo $subscribeLabel ; ?>
                     </button>
                 </div>
             </form>

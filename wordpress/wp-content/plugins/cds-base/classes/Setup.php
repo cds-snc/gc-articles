@@ -27,7 +27,6 @@ use CDS\Modules\Meta\MetaTags;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
 use CDS\Modules\Notify\Setup as SetupNotify;
 use CDS\Modules\Styles\Setup as Styles;
-use CDS\Modules\Subscribe\Setup as SubscriptionForm;
 use CDS\Modules\TrackLogins\TrackLogins;
 use CDS\Modules\TwoFactor\TwoFactor;
 use CDS\Modules\Users\Users;
@@ -68,7 +67,6 @@ class Setup
         Wpml::register();
         EmailDomains::register();
 
-        new SubscriptionForm();
         new SetupForms();
         new Styles();
         new UserCollections();

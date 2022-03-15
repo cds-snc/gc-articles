@@ -2,19 +2,18 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\Subscribe;
+namespace CDS\Modules\Forms\Subscribe;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use PHPUnit\TextUI\Exception;
+use CDS\Modules\Forms\Utils;
 
 class Setup
 {
     public function __construct()
     {
-        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
-
         /*
          * Note - if testing with WP ENV
          * https://wordpress.org/support/topic/wp-env-with-gutenber-doesnt-have-a-rest-api/
@@ -30,16 +29,6 @@ class Setup
         });
 
         new SubscriptionForm();
-    }
-
-    public function enqueue()
-    {
-        wp_enqueue_script('cds-subscribe-js', plugin_dir_url(__FILE__) . '/src/handler.js', ['jquery'], "1.0.0", true);
-
-        wp_localize_script("cds-subscribe-js", "CDS_VARS", array(
-            "rest_url" => esc_url_raw(rest_url()),
-            "rest_nonce" => wp_create_nonce("wp_rest"),
-        ));
     }
 
     protected function isJson($string): bool
@@ -106,22 +95,30 @@ class Setup
         }
     }
 
-    public function confirmSubscription(): string
+    public function confirmSubscription(): array
     {
-        if (!isset($_POST['list_manager'])) {
-            return json_encode(["error" => __("400 Bad Request", "cds-snc")]);
-        }
-
-        if (!wp_verify_nonce($_POST['list_manager'], 'list_manager_nonce_action')) {
-            return json_encode(["error" => __("401 Unauthorized", "cds-snc")]);
+        $nonceErrorMessage = Utils::isNonceErrorMessage($_POST);
+        if ($nonceErrorMessage) {
+            return ['error' => true, "error_message" => $nonceErrorMessage];
         }
 
         if (!isset($_POST["email"]) || $_POST["email"] === "") {
-            return json_encode(["error" => __("Please complete the required field to continue", "cds-snc")]);
+            return [
+                'error' =>  true,
+                'error_message' => __(
+                    'Please complete the required field(s) to continue',
+                    'cds-snc',
+                ),
+                'keys' => ['email']
+            ];
         }
 
-        if (!isset($_POST["list_id"])) {
-            return json_encode(["error" => __("Unknown subscription", "cds-snc")]);
+        if (!isset($_POST["list_id"]) || $_POST["list_id"] === "") {
+            return [
+                'error' =>  true,
+                'error_message' => __('Unknown subscription', 'cds-snc'),
+                'keys' => ['list_id']
+            ];
         }
 
         $email = sanitize_email($_POST["email"]);

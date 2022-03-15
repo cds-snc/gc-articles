@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\Forms\Contact;
 
 use CDS\Modules\Forms\Messenger;
+use CDS\Modules\Forms\Utils;
 
 class Setup
 {
@@ -29,14 +30,9 @@ class Setup
 
     public function confirmSend(): array
     {
-        if (!isset($_POST['cds-form-nonce'])) {
-            $message = __('400 Bad Request', 'cds-snc');
-            return ['error' => true, "error_message" => $message];
-        }
-
-        if (!wp_verify_nonce($_POST['cds-form-nonce'], 'cds_form_nonce_action')) {
-            $message = __('400 Bad Request', 'cds-snc');
-            return ['error' => true , "error_message" => $message];
+        $nonceErrorMessage = Utils::isNonceErrorMessage($_POST);
+        if ($nonceErrorMessage) {
+            return ['error' => true, "error_message" => $nonceErrorMessage];
         }
 
         $required_keys = ['fullname', 'email', 'goal', 'message'];

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Forms\Contact;
 
+use CDS\Modules\Forms\Utils;
+
 class ContactForm
 {
     public function __construct()
@@ -14,55 +16,6 @@ class ContactForm
     public function register()
     {
         add_shortcode('contact-form', [$this, 'render']);
-    }
-
-    public function checkBox($name, $id, $value, $vals = [], $ariaControls = false): void
-    {
-        // set to empty array if a non-array is passed in
-        $vals = is_array($vals) ? $vals : [];
-        $checked = in_array($value, $vals);
-        ?>
-        <div class="gc-input-checkbox">
-            <input
-                name="<?php echo $name; ?>"
-                class="gc-input-checkbox__input"
-                id="<?php echo sanitize_title($id); ?>"
-                type="checkbox"
-                value="<?php echo $id; ?>"
-                <?php if ($checked) {
-                    echo 'checked';
-                } ?>
-                <?php if ($ariaControls) {
-                    echo 'aria-controls="' . $ariaControls . '" ';
-                    echo 'aria-expanded="' . $checked . '" ';
-                } ?>
-            />
-            <label class="gc-checkbox-label" for="<?php echo sanitize_title($id); ?>">
-            <span class="checkbox-label-text"><?php echo $value; ?></span>
-            </label
-            >
-        </div>
-        <?php
-    }
-
-    public function radioField($name, $id, $value): void
-    {
-        ?>
-        <div class="gc-input-radio">
-            <input
-                name="<?php echo $name; ?>"
-                class="gc-radio__input"
-                id="<?php echo sanitize_title($id); ?>"
-                type="radio"
-                required
-                value="<?php echo $id; ?>"
-            />
-            <label class="gc-radio-label" for="<?php echo sanitize_title($id); ?>">
-            <span class="radio-label-text"><?php echo $value; ?></span>
-            </label
-            >
-        </div>
-        <?php
     }
 
     public function render($atts, $content = null): string
@@ -81,38 +34,9 @@ class ContactForm
                     'cds-form-nonce',
                 ); ?>
             
-                <!-- start name -->
-                <div class="focus-group">
-                    <label class="gc-label" for="fullname" id="fullname-label">
-                        <?php _e('Full name', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="fullname" 
-                        required 
-                        name="fullname" 
-                        value=""
-                    />
-                </div>
-                <!-- end name -->
+                <?php echo Utils::textField('fullname', __('Full name', 'cds-snc')); ?>
                 
-                <!-- start email -->
-                <div class="focus-group">
-                    <label class="gc-label" for="email" id="email-label">
-                        <?php _e('Email', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="email" 
-                        class="gc-input-text" 
-                        id="email" 
-                        required 
-                        autocomplete="email"
-                        name="email" 
-                        value=""
-                    />
-                </div>
-                <!-- end email -->
+                <?php echo Utils::textField('email', __('Email', 'cds-snc')); ?>
             
                 <!-- goal of your message -->
                 <div role="group" aria-labelledby="goal_types">
@@ -124,27 +48,27 @@ class ContactForm
                     </div>
 
                     <div class="focus-group">
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Ask a question.',
                         __('Ask a question.', 'cds-snc'),
                     ); ?>
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Get technical support.',
                         __('Get technical support.', 'cds-snc'),
                     ); ?>
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Give feedback.',
                         __('Give feedback.', 'cds-snc'),
                     ); ?>
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Schedule a demo to learn more about GC Articles.',
                         __('Schedule a demo to learn more about GC Articles.', 'cds-snc'),
                     ); ?>
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Other',
                         __('Other', 'cds-snc'),
@@ -162,27 +86,27 @@ class ContactForm
                     </div>
 
                     <div class="focus-group">
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Blog.',
                         __('Blog.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Newsletter archive with emailing to a subscriber list.',
                         __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Website.',
                         __('Website.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Internal website.',
                         __('Internal website.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Something else.',
                         __('Something else.', 'cds-snc'),
@@ -192,16 +116,7 @@ class ContactForm
                     </div>
                     
                     <div id="optional-usage">
-                        <label class="gc-label" for="usage-other" id="usage-other-label">
-                            <?php _e('Other usage', 'cds-snc'); ?>
-                        </label>
-                        <input
-                            type="text"
-                            class="gc-input-text"
-                            id="usage-other"
-                            name="usage-other"
-                            value=""
-                        />
+                        <?php echo Utils::textField('usage-optional', __('Other usage', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -216,27 +131,27 @@ class ContactForm
                     </div>
                     
                     <div class="focus-group">
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'People who use your programs and services.',
                         __('People who use your programs and services.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'General public.',
                         __('General public.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'Subscribers.',
                         __('Subscribers.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'Internal employees and/or community volunteers.',
                         __('Internal employees and/or community volunteers.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'Other people.',
                         __('Other people.', 'cds-snc'),
@@ -245,16 +160,7 @@ class ContactForm
                     ); ?>
                     </div>
                     <div id="optional-target">
-                        <label class="gc-label" for="target-other" id="target-other-label">
-                            <?php _e('Other target audience', 'cds-snc'); ?>
-                        </label>
-                        <input
-                            type="text"
-                            class="gc-input-text"
-                            id="target-other"
-                            name="target-other"
-                            value=""
-                        />
+                        <?php echo Utils::textField('target-optional', __('Other target audience', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- target -->
@@ -273,7 +179,7 @@ class ContactForm
 
                 <!-- send me a copy -->
                 <div>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'cc',
                         'Send a copy to your email.',
                         __('Send a copy to your email.', 'cds-snc'),
@@ -281,12 +187,7 @@ class ContactForm
                 </div>
                 <!-- send me a copy -->
 
-                <div class="buttons">
-                    <button class="gc-button gc-button" type="submit" id="submit">
-                        <?php _e('Submit', 'cds-snc'); ?>
-                    </button>
-                </div>
-                
+                <?php echo Utils::submitButton(__('Submit', 'cds-snc')); ?>
             </form>
         </div>
         <?php

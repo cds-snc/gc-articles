@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace CDS\Modules\Subscribe;
+namespace CDS\Modules\Forms\Subscribe;
+
+use CDS\Modules\Forms\Utils;
 
 class SubscriptionForm
 {
@@ -44,21 +46,17 @@ class SubscriptionForm
         ob_start();
         ?>
         <div class="gc-form-wrapper">
-           <form id="subscribe-form" method="POST" action="<?php echo $apiEndpoint; ?>">
+           <form id="cds-form" method="POST" action="<?php echo $apiEndpoint; ?>">
                 <input type="hidden" name="list_id" value="<?php echo $listId; ?>"/>
-                <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
-                <div class="focus-group">
-                    <label class="gc-label required" id="cds-email" for="email">
-                        <?php echo $emailLabel; ?>
-                        <i class="visually-hidden"><?php _e("Required Field", "cds-snc"); ?></i>
-                    </label>
-                    <input id="email" style="margin-bottom:0;" class="gc-input-text" type="text" name="email" placeholder="<?php echo $placeholder; ?>" value=""/>
-                </div>
-                <div class="buttons">
-                    <button class="gc-button gc-button" type="submit" id="subscribe-submit">
-                    <?php echo $subscribeLabel ; ?>
-                    </button>
-                </div>
+
+                <?php wp_nonce_field(
+                    'cds_form_nonce_action',
+                    'cds-form-nonce',
+                ); ?>
+
+                <?php echo Utils::textField('email', $emailLabel, null, null, $placeholder); ?>
+
+                <?php echo Utils::submitButton($subscribeLabel); ?>
             </form>
         </div>
         <?php

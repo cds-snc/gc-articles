@@ -5,7 +5,7 @@ namespace CDS\Modules\BlocksPHP;
 use CDS\Utils;
 use CDS\Modules\Forms\Contact\ContactForm;
 use CDS\Modules\Forms\RequestSite\RequestSiteForm;
-use CDS\Modules\Subscribe\SubscriptionForm as SubscriptionForm;
+use CDS\Modules\Forms\Subscribe\SubscriptionForm;
 
 class BlocksPHP
 {

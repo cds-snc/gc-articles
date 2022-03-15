@@ -18,35 +18,6 @@ class ContactForm
         add_shortcode('contact-form', [$this, 'render']);
     }
 
-    public function checkBox($name, $id, $value, $vals = [], $ariaControls = false): void
-    {
-        // set to empty array if a non-array is passed in
-        $vals = is_array($vals) ? $vals : [];
-        $checked = in_array($value, $vals);
-        ?>
-        <div class="gc-input-checkbox">
-            <input
-                name="<?php echo $name; ?>"
-                class="gc-input-checkbox__input"
-                id="<?php echo sanitize_title($id); ?>"
-                type="checkbox"
-                value="<?php echo $id; ?>"
-                <?php if ($checked) {
-                    echo 'checked';
-                } ?>
-                <?php if ($ariaControls) {
-                    echo 'aria-controls="' . $ariaControls . '" ';
-                    echo 'aria-expanded="' . $checked . '" ';
-                } ?>
-            />
-            <label class="gc-checkbox-label" for="<?php echo sanitize_title($id); ?>">
-            <span class="checkbox-label-text"><?php echo $value; ?></span>
-            </label
-            >
-        </div>
-        <?php
-    }
-
     public function render($atts, $content = null): string
     {
         global $wp;
@@ -144,27 +115,27 @@ class ContactForm
                     </div>
 
                     <div class="focus-group">
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Blog.',
                         __('Blog.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Newsletter archive with emailing to a subscriber list.',
                         __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Website.',
                         __('Website.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Internal website.',
                         __('Internal website.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'usage[]',
                         'Something else.',
                         __('Something else.', 'cds-snc'),
@@ -198,27 +169,27 @@ class ContactForm
                     </div>
                     
                     <div class="focus-group">
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'People who use your programs and services.',
                         __('People who use your programs and services.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'General public.',
                         __('General public.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'Subscribers.',
                         __('Subscribers.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'Internal employees and/or community volunteers.',
                         __('Internal employees and/or community volunteers.', 'cds-snc'),
                     ); ?>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'target[]',
                         'Other people.',
                         __('Other people.', 'cds-snc'),
@@ -255,7 +226,7 @@ class ContactForm
 
                 <!-- send me a copy -->
                 <div>
-                    <?php $this->checkBox(
+                    <?php echo Utils::checkboxField(
                         'cc',
                         'Send a copy to your email.',
                         __('Send a copy to your email.', 'cds-snc'),

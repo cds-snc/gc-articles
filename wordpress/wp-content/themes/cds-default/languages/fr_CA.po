@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-01-11T18:00:25+00:00\n"
+"POT-Creation-Date: 2022-03-14T20:40:20+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -134,19 +134,19 @@ msgstr "navigation dans les articles"
 msgid "Posts"
 msgstr "Articles"
 
-#: inc/template-functions.php:167
+#: inc/template-functions.php:168
 msgid "Breadcrumbs"
 msgstr "Fil d'Ariane"
 
-#: inc/template-functions.php:169
+#: inc/template-functions.php:170
 msgid "You are here:"
 msgstr "Tu es là"
 
-#: inc/template-functions.php:396
+#: inc/template-functions.php:397
 msgid "Top menu"
 msgstr "navigation supérieure"
 
-#: inc/template-functions.php:397
+#: inc/template-functions.php:398
 msgid "submenu"
 msgstr "sous-navigation"
 

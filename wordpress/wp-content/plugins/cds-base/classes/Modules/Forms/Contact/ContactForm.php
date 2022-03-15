@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Forms\Contact;
 
+use CDS\Modules\Forms\Utils;
+
 class ContactForm
 {
     public function __construct()
@@ -39,26 +41,6 @@ class ContactForm
             />
             <label class="gc-checkbox-label" for="<?php echo sanitize_title($id); ?>">
             <span class="checkbox-label-text"><?php echo $value; ?></span>
-            </label
-            >
-        </div>
-        <?php
-    }
-
-    public function radioField($name, $id, $value): void
-    {
-        ?>
-        <div class="gc-input-radio">
-            <input
-                name="<?php echo $name; ?>"
-                class="gc-radio__input"
-                id="<?php echo sanitize_title($id); ?>"
-                type="radio"
-                required
-                value="<?php echo $id; ?>"
-            />
-            <label class="gc-radio-label" for="<?php echo sanitize_title($id); ?>">
-            <span class="radio-label-text"><?php echo $value; ?></span>
             </label
             >
         </div>
@@ -124,27 +106,27 @@ class ContactForm
                     </div>
 
                     <div class="focus-group">
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Ask a question.',
                         __('Ask a question.', 'cds-snc'),
                     ); ?>
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Get technical support.',
                         __('Get technical support.', 'cds-snc'),
                     ); ?>
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Give feedback.',
                         __('Give feedback.', 'cds-snc'),
                     ); ?>
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Schedule a demo to learn more about GC Articles.',
                         __('Schedule a demo to learn more about GC Articles.', 'cds-snc'),
                     ); ?>
-                    <?php $this->radioField(
+                    <?php echo Utils::radioField(
                         'goal',
                         'Other',
                         __('Other', 'cds-snc'),

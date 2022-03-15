@@ -118,4 +118,18 @@ class Utils
         ob_end_clean();
         return $field;
     }
+
+    public static function submitButton(string $label): string
+    {
+        ob_start();
+        ?>
+        <div class="buttons">
+            <button class="gc-button" type="submit" id="submit"><?php echo $label; ?></button>
+        </div>
+        <?php
+
+        $field = ob_get_contents();
+        ob_end_clean();
+        return $field;
+    }
 }

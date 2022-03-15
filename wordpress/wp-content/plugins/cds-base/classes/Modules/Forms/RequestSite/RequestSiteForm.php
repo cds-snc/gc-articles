@@ -129,12 +129,7 @@ class RequestSiteForm
                 </div>
                 <!-- send me a copy -->
 
-                <div class="buttons">
-                    <button class="gc-button gc-button" type="submit" id="submit">
-                        <?php _e('Request site', 'cds-snc'); ?>
-                    </button>
-                </div>
-                
+                <?php echo Utils::submitButton(__('Request site', 'cds-snc')); ?>
             </form>
 
 
@@ -282,12 +277,7 @@ class RequestSiteForm
                     ><?php echo $all_values['timeline']; ?></textarea>
                 </div>
 
-                <div class="buttons">
-                    <button class="gc-button gc-button" type="submit" id="submit">
-                        <?php _e('Next', 'cds-snc'); ?>
-                    </button>
-                </div>
-                
+                <?php echo Utils::submitButton(__('Next', 'cds-snc')); ?>
             </form>
             <?php }  // end of the big if ?>
         </div>

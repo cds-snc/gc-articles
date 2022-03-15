@@ -187,12 +187,7 @@ class ContactForm
                 </div>
                 <!-- send me a copy -->
 
-                <div class="buttons">
-                    <button class="gc-button gc-button" type="submit" id="submit">
-                        <?php _e('Submit', 'cds-snc'); ?>
-                    </button>
-                </div>
-                
+                <?php echo Utils::submitButton(__('Submit', 'cds-snc')); ?>
             </form>
         </div>
         <?php

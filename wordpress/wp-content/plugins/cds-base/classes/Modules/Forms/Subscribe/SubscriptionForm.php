@@ -56,11 +56,7 @@ class SubscriptionForm
 
                 <?php echo Utils::textField('email', $emailLabel, null, null, $placeholder); ?>
 
-                <div class="buttons">
-                    <button class="gc-button gc-button" type="submit" id="submit">
-                        <?php echo $subscribeLabel ; ?>
-                    </button>
-                </div>
+                <?php echo Utils::submitButton($subscribeLabel); ?>
             </form>
         </div>
         <?php

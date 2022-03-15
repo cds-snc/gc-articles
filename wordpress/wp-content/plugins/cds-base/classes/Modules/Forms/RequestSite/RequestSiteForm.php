@@ -93,81 +93,20 @@ class RequestSiteForm
 
                 ?>
 
-                <!-- start name -->
-                <div class="focus-group">
-                    <label class="gc-label" for="fullname" id="fullname-label">
-                        <?php _e('Full name', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="fullname" 
-                        required 
-                        name="fullname" 
-                        value=""
-                    />
-                </div>
-                <!-- end name -->
+                <?php echo Utils::textField('fullname', __('Full name', 'cds-snc')); ?>
 
                 <!-- start email -->
-                <div class="focus-group">
-                    <label class="gc-label" for="email" id="email-label">
-                        <?php _e('Email', 'cds-snc'); ?>
-                    </label>
-                    <div id="email-desc" class="gc-description" data-testid="description">
-                        <?php _e('Must be a Government of Canada email address. Currently, we accept email addresses ending in:'); ?>
-                        <ul>
-                            <li>gc.ca</li>
-                            <li>canada.ca</li>
-                            <li>cds-snc.ca</li>
-                        </ul>
-                    </div>
-                    <input 
-                        type="email" 
-                        class="gc-input-text" 
-                        id="email" 
-                        required 
-                        autocomplete="email"
-                        name="email" 
-                        value=""
-                    />
-                </div>
+                <?php echo Utils::textField(
+                    'email',
+                    __('Email', 'cds-snc'),
+                    __('Must be a Government of Canada email address. <br />Currently, we accept email addresses ending in gc.ca, canada.ca, or cds-snc.ca.'),
+                );
+                ?>
                 <!-- end email -->
 
-                <!-- start role -->
-                <div class="focus-group">
-                    <label class="gc-label" for="role" id="fullname-role">
-                        <?php _e('Job title or role', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="role" 
-                        required 
-                        name="role" 
-                        value=""
-                    />
-                </div>
-                <!-- end role -->
+                <?php echo Utils::textField('role', __('Job title or role', 'cds-snc')); ?>
 
-                <!-- start department -->
-                <div class="focus-group">
-                    <label class="gc-label" for="department" id="department-label">
-                        <?php _e('Department or agency', 'cds-snc'); ?>
-                    </label>
-                    <div id="department-desc" class="gc-description" data-testid="description">
-                        <?php _e('GC Articles is only for government employees.', 'cds-snc'); ?>
-                    </div>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="department" 
-                        required 
-                        name="department" 
-                        value=""
-                    />
-                </div>
-                <!-- end department -->
+                <?php echo Utils::textField('department', __('Department or agency', 'cds-snc'), __('GC Articles is only for government employees.', 'cds-snc')); ?>
 
                 <div class="focus-group">
                     <ul>
@@ -182,18 +121,11 @@ class RequestSiteForm
 
                 <!-- send me a copy -->
                 <div>
-                    <div class="gc-input-checkbox">
-                        <input
-                            name="cc"
-                            class="gc-input-checkbox__input"
-                            id="send-a-copy-to-your-email"
-                            type="checkbox"
-                            value="<?php _e('Send a copy to your email.', 'cds-snc'); ?>"
-                        />
-                        <label class="gc-checkbox-label" for="send-a-copy-to-your-email">
-                            <span class="checkbox-label-text"><?php _e('Send a copy to your email.', 'cds-snc'); ?></span>
-                        </label>
-                    </div>
+                    <?php echo Utils::checkboxField(
+                        'cc',
+                        'Send a copy to your email.',
+                        __('Send a copy to your email.', 'cds-snc'),
+                    ); ?>
                 </div>
                 <!-- send me a copy -->
 
@@ -228,23 +160,13 @@ class RequestSiteForm
                 ); ?>
             
                 <!-- start site -->
-                <div class="focus-group">
-                    <label class="gc-label" for="site" id="site-label">
-                        <?php _e('English title of your site', 'cds-snc'); ?>
-                    </label>
-                    <div id="site-desc" class="gc-description" data-testid="description">
-                        <?php _e('This title will appear at the top of your site. You can change this later.', 'cds-snc'); ?>
-                    </div>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="site" 
-                        required 
-                        name="site" 
-                        value="<?php echo $all_values['site']; ?>"
-                    />
-                </div>
-                <!-- end name -->
+                <?php echo Utils::textField(
+                    'site',
+                    __('English title of your site', 'cds-snc'),
+                    __('This title will appear at the top of your site. You can change this later.', 'cds-snc'),
+                    $all_values['site']
+                ); ?>
+                <!-- end site -->
 
                 <!-- usage -->
                 <div role="group" aria-labelledby="usage_types">
@@ -289,18 +211,8 @@ class RequestSiteForm
                             'optional-usage'
                         ); ?>
                     </div>
-                    
                     <div id="optional-usage" aria-hidden="false">
-                        <label class="gc-label" for="usage-other" id="usage-other-label" class="hidden">
-                            <?php _e('Other usage', 'cds-snc'); ?>
-                        </label>
-                        <input
-                            type="text"
-                            class="gc-input-text"
-                            id="usage-other"
-                            name="usage-other"
-                            value="<?php echo $all_values['usage-other']; ?>"
-                        />
+                        <?php echo Utils::textField('usage-optional', __('Other usage', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -348,16 +260,7 @@ class RequestSiteForm
                     ); ?>
                     </div>
                     <div id="optional-target" aria-hidden="false">
-                        <label class="gc-label" for="target-other" id="target-other-label" class="hidden">
-                            <?php _e('Other target audience', 'cds-snc'); ?>
-                        </label>
-                        <input
-                            type="text"
-                            class="gc-input-text"
-                            id="target-other"
-                            name="target-other"
-                            value="<?php echo $all_values['target-other']; ?>"
-                        />
+                        <?php echo Utils::textField('target-optional', __('Other target audience', 'cds-snc')); ?>
                     </div>
                 </div>
 

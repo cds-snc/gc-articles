@@ -34,38 +34,9 @@ class ContactForm
                     'cds-form-nonce',
                 ); ?>
             
-                <!-- start name -->
-                <div class="focus-group">
-                    <label class="gc-label" for="fullname" id="fullname-label">
-                        <?php _e('Full name', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="gc-input-text" 
-                        id="fullname" 
-                        required 
-                        name="fullname" 
-                        value=""
-                    />
-                </div>
-                <!-- end name -->
+                <?php echo Utils::textField('fullname', __('Full name', 'cds-snc')); ?>
                 
-                <!-- start email -->
-                <div class="focus-group">
-                    <label class="gc-label" for="email" id="email-label">
-                        <?php _e('Email', 'cds-snc'); ?>
-                    </label>
-                    <input 
-                        type="email" 
-                        class="gc-input-text" 
-                        id="email" 
-                        required 
-                        autocomplete="email"
-                        name="email" 
-                        value=""
-                    />
-                </div>
-                <!-- end email -->
+                <?php echo Utils::textField('email', __('Email', 'cds-snc')); ?>
             
                 <!-- goal of your message -->
                 <div role="group" aria-labelledby="goal_types">
@@ -145,16 +116,7 @@ class ContactForm
                     </div>
                     
                     <div id="optional-usage">
-                        <label class="gc-label" for="usage-other" id="usage-other-label">
-                            <?php _e('Other usage', 'cds-snc'); ?>
-                        </label>
-                        <input
-                            type="text"
-                            class="gc-input-text"
-                            id="usage-other"
-                            name="usage-other"
-                            value=""
-                        />
+                        <?php echo Utils::textField('usage-optional', __('Other usage', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -198,16 +160,7 @@ class ContactForm
                     ); ?>
                     </div>
                     <div id="optional-target">
-                        <label class="gc-label" for="target-other" id="target-other-label">
-                            <?php _e('Other target audience', 'cds-snc'); ?>
-                        </label>
-                        <input
-                            type="text"
-                            class="gc-input-text"
-                            id="target-other"
-                            name="target-other"
-                            value=""
-                        />
+                        <?php echo Utils::textField('target-optional', __('Other target audience', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- target -->

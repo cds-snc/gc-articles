@@ -23,6 +23,42 @@ class Utils
         return '';
     }
 
+    public static function textField(string $id, string $label, ?string $description = null, ?string $value = '', ?string $placeholder = null): string
+    {
+        $isEmail = $id === 'email';
+        $isRequired = !str_ends_with($id, "optional");
+        ob_start();
+        ?>
+        <div class="focus-group">
+            <label class="gc-label" for="<?php echo $id ?>" id="<?php echo $id ?>-label"><?php echo $label ?></label>
+            <?php if ($description) { ?>
+                <div id="<?php echo $id ?>-desc" class="gc-description" data-testid="description"><?php echo $description; ?></div>
+            <?php } ?>
+            <input
+                <?php if ($isEmail) {
+                    echo 'type="email" autocomplete="email"';
+                } else {
+                    echo 'type="text"';
+                }?>
+                id="<?php echo $id ?>"
+                name="<?php echo $id ?>"
+                value="<?php echo $value ?>"
+                <?php if ($placeholder) {
+                    echo 'placeholder="' . $placeholder . '"';
+                } ?>
+                <?php if ($isRequired) {
+                    echo 'required';
+                } ?>
+                class="gc-input-text"
+            />
+        </div>
+        <?php
+
+        $field = ob_get_contents();
+        ob_end_clean();
+        return $field;
+    }
+
     public static function radioField(string $name, string $id, string $value): string
     {
         ob_start();

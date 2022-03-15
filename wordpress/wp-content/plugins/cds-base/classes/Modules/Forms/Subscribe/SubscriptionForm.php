@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Forms\Subscribe;
 
+use CDS\Modules\Forms\Utils;
+
 class SubscriptionForm
 {
     public function __construct()
@@ -46,32 +48,15 @@ class SubscriptionForm
         <div class="gc-form-wrapper">
            <form id="cds-form" method="POST" action="<?php echo $apiEndpoint; ?>">
                 <input type="hidden" name="list_id" value="<?php echo $listId; ?>"/>
-                <?php wp_nonce_field('list_manager_nonce_action', 'list_manager'); ?>
 
                 <?php wp_nonce_field(
                     'cds_form_nonce_action',
                     'cds-form-nonce',
                 ); ?>
 
-                <!-- start email -->
-                <div class="focus-group">
-                    <label class="gc-label" for="email" id="email-label">
-                        <?php echo $emailLabel; ?>
-                    </label>
-                    <input 
-                        type="email" 
-                        class="gc-input-text" 
-                        id="email" 
-                        required 
-                        autocomplete="email"
-                        name="email" 
-                        value=""
-                        placeholder="<?php echo $placeholder; ?>" 
-                    />
-                </div>
-                <!-- end email -->
+                <?php echo Utils::textField('email', $emailLabel, null, null, $placeholder); ?>
 
-                <div class="buttons" style="margin-top: 1.5rem;">
+                <div class="buttons">
                     <button class="gc-button gc-button" type="submit" id="submit">
                         <?php echo $subscribeLabel ; ?>
                     </button>

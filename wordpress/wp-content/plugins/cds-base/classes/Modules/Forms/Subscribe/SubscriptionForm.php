@@ -56,7 +56,7 @@ class SubscriptionForm
                 );
 
                 Utils::textField(id: 'email', label: $emailLabel, placeholder: $placeholder);
-                echo Utils::submitButton($subscribeLabel);
+                Utils::submitButton($subscribeLabel);
             ?>
             </form>
         </div>

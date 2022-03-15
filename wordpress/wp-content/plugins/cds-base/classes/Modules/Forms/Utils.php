@@ -131,7 +131,7 @@ class Utils
         echo $field;
     }
 
-    public static function submitButton(string $label): string
+    public static function submitButton(string $label, ?bool $echo = true)
     {
         ob_start();
         ?>
@@ -142,6 +142,10 @@ class Utils
 
         $field = ob_get_contents();
         ob_end_clean();
-        return $field;
+
+        if (!$echo) {
+            return $field;
+        }
+        echo $field;
     }
 }

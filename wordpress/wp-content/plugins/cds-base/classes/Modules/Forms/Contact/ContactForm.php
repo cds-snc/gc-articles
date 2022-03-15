@@ -192,7 +192,7 @@ class ContactForm
                 </div>
                 <!-- send me a copy -->
 
-                <?php echo Utils::submitButton(__('Submit', 'cds-snc')); ?>
+                <?php Utils::submitButton(__('Submit', 'cds-snc')); ?>
             </form>
         </div>
         <?php

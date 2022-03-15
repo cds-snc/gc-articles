@@ -101,7 +101,7 @@ test('asserts checkboxField returns an "aria-controls" and "expanded" checkbox i
 });
 
 test('asserts submitButton returns a button with the label we want', function () {
-    $field = Utils::submitButton('Press the button');
+    $field = Utils::submitButton('Press the button', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
     expect($field)->toContain('<button class="gc-button" type="submit" id="submit">Press the button</button>');

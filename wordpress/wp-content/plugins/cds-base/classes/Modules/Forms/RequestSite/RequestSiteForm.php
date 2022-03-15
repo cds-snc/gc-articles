@@ -127,7 +127,7 @@ class RequestSiteForm
                 </div>
                 <!-- send me a copy -->
 
-                <?php echo Utils::submitButton(__('Request site', 'cds-snc')); ?>
+                <?php Utils::submitButton(__('Request site', 'cds-snc')); ?>
             </form>
 
 
@@ -206,7 +206,7 @@ class RequestSiteForm
                         ?>
                     </div>
                     <div id="optional-usage" aria-hidden="false">
-                        <?php echo Utils::textField(id: 'usage-optional', label: __('Other usage', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'usage-optional', label: __('Other usage', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -256,7 +256,7 @@ class RequestSiteForm
                     ?>
                     </div>
                     <div id="optional-target" aria-hidden="false">
-                        <?php echo Utils::textField(id: 'target-optional', label: __('Other target audience', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'target-optional', label: __('Other target audience', 'cds-snc')); ?>
                     </div>
                 </div>
 
@@ -278,7 +278,7 @@ class RequestSiteForm
                     ><?php echo $all_values['timeline']; ?></textarea>
                 </div>
 
-                <?php echo Utils::submitButton(__('Next', 'cds-snc')); ?>
+                <?php Utils::submitButton(__('Next', 'cds-snc')); ?>
             </form>
             <?php }  // end of the big if ?>
         </div>

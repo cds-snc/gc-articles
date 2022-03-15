@@ -1,201 +1,208 @@
-# Copyright (C) 2022 CDS
-# This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS Default 2.18.2\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2022-01-11T18:00:25+00:00\n"
+"PO-Revision-Date: 2021-09-09 12:02-0400\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-03-14T20:40:20+00:00\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
+"X-Generator: Poedit 3.0\n"
 "X-Domain: cds-snc\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Theme Name of the theme
 msgid "CDS Default"
-msgstr ""
+msgstr "Le base thème du SNC"
 
 #. Description of the theme
 msgid "WET styled Starter Theme"
-msgstr ""
+msgstr "Thème de démarrage dans le style de WET-BOEW"
 
 #. Author of the theme
 msgid "CDS"
-msgstr ""
+msgstr "SNC"
 
 #: 404.php:18
 msgid "Page not found."
-msgstr ""
+msgstr "la page n'a pas été trouvée"
 
 #: 404.php:25
 msgid "It looks like nothing was found at this location."
-msgstr ""
+msgstr "Rien n'a été trouvé à cette adresse."
 
 #: functions.php:78
 msgid "Primary"
-msgstr ""
+msgstr "La navigation principale"
 
 #: functions.php:79
 msgid "Footer"
-msgstr ""
+msgstr "La navigation en pied de page"
 
 #: functions.php:98
 msgid "Black"
-msgstr ""
+msgstr "Noir"
 
 #: functions.php:103
 msgid "White"
-msgstr ""
+msgstr "Blanc"
 
 #: functions.php:108
 msgid "Primary Blue"
-msgstr ""
+msgstr "bleu primaire"
 
 #: functions.php:113
 msgid "Dark Blue"
-msgstr ""
+msgstr "bleu foncé"
 
 #: functions.php:118
 msgid "Light Blue"
-msgstr ""
+msgstr "bleu clair"
 
 #: functions.php:123
 msgid "Dark Grey"
-msgstr ""
+msgstr "gris foncé"
 
 #: functions.php:128
 msgid "Grey"
-msgstr ""
+msgstr "gris"
 
 #: functions.php:133
 msgid "Orange"
-msgstr ""
+msgstr "orange"
 
 #: functions.php:138
 msgid "Green"
-msgstr ""
+msgstr "vert"
 
 #: functions.php:143
 msgid "Red"
-msgstr ""
+msgstr "rouge"
 
 #: functions.php:202
 msgid "GC Homepage"
-msgstr ""
+msgstr "Page d'accueil GC"
 
 #: functions.php:219
 msgid "Default homepage"
-msgstr ""
+msgstr "Page d'accueil par défaut"
 
 #: header.php:37
 msgid "Skip to content"
-msgstr ""
+msgstr "Aller au contenu"
 
-#: header.php:70
-#: header.php:77
-#: header.php:82
-#: header.php:91
+#: header.php:70 header.php:77 header.php:82 header.php:91
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
-#: header.php:110
-#: header.php:113
+#: header.php:110 header.php:113
 msgid "Menu"
-msgstr ""
+msgstr "Le menu"
 
 #: header.php:112
 msgid "Main"
-msgstr ""
+msgstr "le bloc principal"
 
 #: inc/template-functions.php:32
 msgid "Document navigation"
-msgstr ""
+msgstr "Navigation dans les documents"
 
 #: inc/template-functions.php:37
 msgid "Next blog post"
-msgstr ""
+msgstr "le prochain article de blog"
 
 #: inc/template-functions.php:48
 msgid "Previous blog post"
-msgstr ""
+msgstr "l'article de blog précédent"
 
 #: inc/template-functions.php:93
 msgid "Older posts"
-msgstr ""
+msgstr "articles passés"
 
 #: inc/template-functions.php:94
 msgid "Newer posts"
-msgstr ""
+msgstr "articles suivants"
 
 #: inc/template-functions.php:95
 msgid "Posts navigation"
-msgstr ""
+msgstr "navigation dans les articles"
 
 #: inc/template-functions.php:96
 msgid "Posts"
-msgstr ""
+msgstr "Articles"
 
-#: inc/template-functions.php:168
+#: inc/template-functions.php:167
 msgid "Breadcrumbs"
-msgstr ""
+msgstr "Fil d'Ariane"
 
-#: inc/template-functions.php:170
+#: inc/template-functions.php:169
 msgid "You are here:"
-msgstr ""
+msgstr "Tu es là"
+
+#: inc/template-functions.php:396
+msgid "Top menu"
+msgstr "navigation supérieure"
 
 #: inc/template-functions.php:397
-msgid "Top menu"
-msgstr ""
-
-#: inc/template-functions.php:398
 msgid "submenu"
-msgstr ""
+msgstr "sous-navigation"
 
 #. translators: %s: post author.
 #: inc/template-tags.php:44
 msgctxt "post author"
 msgid "by %s"
-msgstr ""
+msgstr "par %s"
 
 #: maintenance.php:5
 msgid "We're currently working on this"
-msgstr ""
+msgstr "Actuellement, cet endroit est en travaux."
 
 #. translators: %s: search query.
 #: search.php:23
 msgid "Search Results for: %s"
-msgstr ""
+msgstr "les résultats de la recherche de: %s"
 
 #: template-parts/content-none.php:17
 msgid "Nothing Found"
-msgstr ""
+msgstr "Il n'y avait rien trouvé"
 
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content-none.php:26
-msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgid ""
+"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
+"Êtes-vous prêt à publier votre premier message ?  <a href=\"%1$s\">Commencez "
+"ici</a> "
 
 #: template-parts/content-none.php:38
-msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
 msgstr ""
+"Désolé, rien n'a été trouvé avec votre recherche. Veuillez réessayer avec "
+"d'autres mots-clés."
 
 #: template-parts/content-none.php:44
 msgid "Nothing found! Perhaps searching can help."
-msgstr ""
+msgstr "Rien n'a été trouvé. s'il vous plaît essayez de rechercher"
 
 #: template-parts/content-page.php:26
 msgid "Pages:"
-msgstr ""
+msgstr "les pages"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content-page.php:40
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr ""
+msgstr "Éditer <span class=\"screen-reader-text\">%s</span>"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content.php:35
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""
+"Continuez à lire le post <span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#~ msgid "Search Canada.ca"
+#~ msgstr "Rechercher dans Canada.ca"

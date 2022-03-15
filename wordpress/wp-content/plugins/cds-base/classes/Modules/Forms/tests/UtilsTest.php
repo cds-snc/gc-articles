@@ -15,7 +15,7 @@ afterAll(function () {
 });
 
 test('asserts textField returns a text input with expected values', function () {
-    $field = Utils::textField('myId', 'Enter your name');
+    $field = Utils::textField('myId', 'Enter your name', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
     expect($field)->toContain('<label class="gc-label" for="myId" id="myId-label">Enter your name</label>');
@@ -23,7 +23,7 @@ test('asserts textField returns a text input with expected values', function () 
 });
 
 test('asserts textField returns a text input that is not required when id ends with "optional"', function () {
-    $field = Utils::textField('myId-optional', 'Enter your middle name');
+    $field = Utils::textField('myId-optional', 'Enter your middle name', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
     expect($field)->toContain('<label class="gc-label" for="myId-optional" id="myId-optional-label">Enter your middle name</label>');
@@ -31,7 +31,7 @@ test('asserts textField returns a text input that is not required when id ends w
 });
 
 test('asserts textField returns an email input when id is "email"', function () {
-    $field = Utils::textField('email', 'Enter your email');
+    $field = Utils::textField('email', 'Enter your email', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
     expect($field)->toContain('<label class="gc-label" for="email" id="email-label">Enter your email</label>');
@@ -39,24 +39,24 @@ test('asserts textField returns an email input when id is "email"', function () 
 });
 
 test('asserts textField returns a text input with a description', function () {
-    $field = Utils::textField('myId', 'Enter your name', 'Your name is that thing people call you');
+    $field = Utils::textField('myId', 'Enter your name', 'Your name is that thing people call you', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
     expect($field)->toContain('<div id="myId-desc" class="gc-description" data-testid="description">Your name is that thing people call you</div>');
 });
 
 test('asserts textField returns a text input with a filled-in value', function () {
-    $field = Utils::textField('myId', 'Enter your name', null, 'Gino');
+    $field = Utils::textField('myId', 'Enter your name', value: 'Gino', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
     expect($field)->toContain('<input type="text" id="myId" name="myId" value="Gino" required class="gc-input-text" />');
 });
 
 test('asserts textField returns a text input with a placeholder', function () {
-    $field = Utils::textField('myId', 'Enter your name', null, null, 'John Doe');
+    $field = Utils::textField('myId', 'Enter your name', placeholder: 'Your name here', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
-    expect($field)->toContain('<input type="text" id="myId" name="myId" value="" placeholder="John Doe" required class="gc-input-text" />');
+    expect($field)->toContain('<input type="text" id="myId" name="myId" value="" placeholder="Your name here" required class="gc-input-text" />');
 });
 
 test('asserts radioField returns a radio input with expected values', function () {

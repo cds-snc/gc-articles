@@ -23,7 +23,7 @@ class Utils
         return '';
     }
 
-    public static function textField(string $id, string $label, ?string $description = null, ?string $value = '', ?string $placeholder = null): string
+    public static function textField(string $id, string $label, ?string $description = null, ?string $value = '', ?string $placeholder = null, ?bool $echo = true)
     {
         $isEmail = $id === 'email';
         $isRequired = !str_ends_with($id, "optional");
@@ -56,7 +56,11 @@ class Utils
 
         $field = ob_get_contents();
         ob_end_clean();
-        return $field;
+
+        if (!$echo) {
+            return $field;
+        }
+        echo $field;
     }
 
     public static function radioField(string $name, string $id, string $value): string

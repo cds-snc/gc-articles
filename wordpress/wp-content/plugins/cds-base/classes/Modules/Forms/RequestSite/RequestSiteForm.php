@@ -74,12 +74,13 @@ class RequestSiteForm
                     ?>
                 </p>
 
-                <?php wp_nonce_field(
-                    'cds_form_nonce_action',
-                    'cds-form-nonce',
-                );
+                <?php
+                    wp_nonce_field(
+                        'cds_form_nonce_action',
+                        'cds-form-nonce',
+                    );
 
-                // add hidden fields for previous answers
+                    // add hidden fields for previous answers
                 foreach ($all_values as $_key => $_value) {
                     // if is array, iterate through each array value
                     if (is_array($_value)) {
@@ -91,22 +92,19 @@ class RequestSiteForm
                     }
                 }
 
+                    Utils::textField(id: 'fullname', label: __('Full name', 'cds-snc'));
+                    Utils::textField(
+                        id: 'email',
+                        label: __('Email', 'cds-snc'),
+                        description: __('Must be a Government of Canada email address. <br />Currently, we accept email addresses ending in gc.ca, canada.ca, or cds-snc.ca.'),
+                    );
+                    Utils::textField(id: 'role', label: __('Job title or role', 'cds-snc'));
+                    Utils::textField(
+                        id: 'department',
+                        label: __('Department or agency', 'cds-snc'),
+                        description: __('GC Articles is only for government employees.', 'cds-snc')
+                    );
                 ?>
-
-                <?php echo Utils::textField('fullname', __('Full name', 'cds-snc')); ?>
-
-                <!-- start email -->
-                <?php echo Utils::textField(
-                    'email',
-                    __('Email', 'cds-snc'),
-                    __('Must be a Government of Canada email address. <br />Currently, we accept email addresses ending in gc.ca, canada.ca, or cds-snc.ca.'),
-                );
-                ?>
-                <!-- end email -->
-
-                <?php echo Utils::textField('role', __('Job title or role', 'cds-snc')); ?>
-
-                <?php echo Utils::textField('department', __('Department or agency', 'cds-snc'), __('GC Articles is only for government employees.', 'cds-snc')); ?>
 
                 <div class="focus-group">
                     <ul>
@@ -155,11 +153,11 @@ class RequestSiteForm
                 ); ?>
             
                 <!-- start site -->
-                <?php echo Utils::textField(
-                    'site',
-                    __('English title of your site', 'cds-snc'),
-                    __('This title will appear at the top of your site. You can change this later.', 'cds-snc'),
-                    $all_values['site']
+                <?php Utils::textField(
+                    id: 'site',
+                    label: __('English title of your site', 'cds-snc'),
+                    description: __('This title will appear at the top of your site. You can change this later.', 'cds-snc'),
+                    value: $all_values['site']
                 ); ?>
                 <!-- end site -->
 
@@ -207,7 +205,7 @@ class RequestSiteForm
                         ); ?>
                     </div>
                     <div id="optional-usage" aria-hidden="false">
-                        <?php echo Utils::textField('usage-optional', __('Other usage', 'cds-snc')); ?>
+                        <?php echo Utils::textField(id: 'usage-optional', label: __('Other usage', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -255,7 +253,7 @@ class RequestSiteForm
                     ); ?>
                     </div>
                     <div id="optional-target" aria-hidden="false">
-                        <?php echo Utils::textField('target-optional', __('Other target audience', 'cds-snc')); ?>
+                        <?php echo Utils::textField(id: 'target-optional', label: __('Other target audience', 'cds-snc')); ?>
                     </div>
                 </div>
 

@@ -49,14 +49,15 @@ class SubscriptionForm
            <form id="cds-form" method="POST" action="<?php echo $apiEndpoint; ?>">
                 <input type="hidden" name="list_id" value="<?php echo $listId; ?>"/>
 
-                <?php wp_nonce_field(
+            <?php
+                wp_nonce_field(
                     'cds_form_nonce_action',
                     'cds-form-nonce',
-                ); ?>
+                );
 
-                <?php echo Utils::textField('email', $emailLabel, null, null, $placeholder); ?>
-
-                <?php echo Utils::submitButton($subscribeLabel); ?>
+                Utils::textField(id: 'email', label: $emailLabel, placeholder: $placeholder);
+                echo Utils::submitButton($subscribeLabel);
+            ?>
             </form>
         </div>
         <?php

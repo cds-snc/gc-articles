@@ -49,31 +49,33 @@ class ContactForm
                     </div>
 
                     <div class="focus-group">
-                    <?php echo Utils::radioField(
-                        'goal',
-                        'Ask a question.',
-                        __('Ask a question.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::radioField(
-                        'goal',
-                        'Get technical support.',
-                        __('Get technical support.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::radioField(
-                        'goal',
-                        'Give feedback.',
-                        __('Give feedback.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::radioField(
-                        'goal',
-                        'Schedule a demo to learn more about GC Articles.',
-                        __('Schedule a demo to learn more about GC Articles.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::radioField(
-                        'goal',
-                        'Other',
-                        __('Other', 'cds-snc'),
-                    ); ?>
+                    <?php
+                        Utils::radioField(
+                            'goal',
+                            'Ask a question.',
+                            __('Ask a question.', 'cds-snc'),
+                        );
+                        Utils::radioField(
+                            'goal',
+                            'Get technical support.',
+                            __('Get technical support.', 'cds-snc'),
+                        );
+                        Utils::radioField(
+                            'goal',
+                            'Give feedback.',
+                            __('Give feedback.', 'cds-snc'),
+                        );
+                        Utils::radioField(
+                            'goal',
+                            'Schedule a demo to learn more about GC Articles.',
+                            __('Schedule a demo to learn more about GC Articles.', 'cds-snc'),
+                        );
+                        Utils::radioField(
+                            'goal',
+                            'Other',
+                            __('Other', 'cds-snc'),
+                        );
+                    ?>
                 </div>
                 <!-- end goal of your message -->
 

@@ -60,7 +60,7 @@ test('asserts textField returns a text input with a placeholder', function () {
 });
 
 test('asserts radioField returns a radio input with expected values', function () {
-    $field = Utils::radioField('myName', 'myId', 'myValue');
+    $field = Utils::radioField('myName', 'myId', 'myValue', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
     // note that "id" arg is used for value (because we don't want to be translated)

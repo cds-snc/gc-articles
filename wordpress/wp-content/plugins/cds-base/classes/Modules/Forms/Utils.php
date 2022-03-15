@@ -63,7 +63,7 @@ class Utils
         echo $field;
     }
 
-    public static function radioField(string $name, string $id, string $value): string
+    public static function radioField(string $name, string $id, string $value, ?bool $echo = true)
     {
         ob_start();
         ?>
@@ -85,7 +85,11 @@ class Utils
 
         $field = ob_get_contents();
         ob_end_clean();
-        return $field;
+
+        if (!$echo) {
+            return $field;
+        }
+        echo $field;
     }
 
     public static function checkboxField(string $name, string $id, string $value, array|string $vals = null, string $ariaControls = null): string

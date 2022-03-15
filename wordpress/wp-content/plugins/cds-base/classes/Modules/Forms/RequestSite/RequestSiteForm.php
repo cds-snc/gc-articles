@@ -41,7 +41,7 @@ class RequestSiteForm
             <?php
 
             $required_keys = ['site', 'usage', 'target', 'timeline'];
-            $all_keys = array_merge($required_keys, ['usage-other', 'target-other']);
+            $all_keys = array_merge($required_keys, ['usage-optional', 'target-optional']);
             $all_values = [];
             $empty_values = [];
 

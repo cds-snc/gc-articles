@@ -93,27 +93,27 @@ class ContactForm
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Blog.',
-                            label: __('Blog.', 'cds-snc'),
+                            value: __('Blog.', 'cds-snc'),
                         );
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Newsletter archive with emailing to a subscriber list.',
-                            label: __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
+                            value: __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
                         );
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Website.',
-                            label: __('Website.', 'cds-snc'),
+                            value: __('Website.', 'cds-snc'),
                         );
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Internal website.',
-                            label: __('Internal website.', 'cds-snc'),
+                            value: __('Internal website.', 'cds-snc'),
                         );
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Something else.',
-                            label: __('Something else.', 'cds-snc'),
+                            value: __('Something else.', 'cds-snc'),
                             ariaControls: 'optional-usage'
                         );
                     ?>

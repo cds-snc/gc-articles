@@ -8,6 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use PHPUnit\TextUI\Exception;
+use CDS\Modules\Forms\Utils;
 
 class Setup
 {
@@ -96,15 +97,9 @@ class Setup
 
     public function confirmSubscription(): array
     {
-
-        if (!isset($_POST['cds-form-nonce'])) {
-            $message = __('400 Bad Request', 'cds-snc');
-            return ['error' => true, "error_message" => $message];
-        }
-
-        if (!wp_verify_nonce($_POST['cds-form-nonce'], 'cds_form_nonce_action')) {
-            $message = __('400 Bad Request', 'cds-snc');
-            return ['error' => true , "error_message" => $message];
+        $nonceErrorMessage = Utils::isNonceErrorMessage($_POST);
+        if ($nonceErrorMessage) {
+            return ['error' => true, "error_message" => $nonceErrorMessage];
         }
 
         if (!isset($_POST["email"]) || $_POST["email"] === "") {

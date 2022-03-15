@@ -8,6 +8,21 @@ class Utils
     {
     }
 
+    public static function isNonceErrorMessage(array $POST): string
+    {
+        $message = __('400 Bad Request', 'cds-snc');
+
+        if (!isset($POST['cds-form-nonce'])) {
+            return $message;
+        }
+
+        if (!wp_verify_nonce($POST['cds-form-nonce'], 'cds_form_nonce_action')) {
+            return $message;
+        }
+
+        return '';
+    }
+
     public static function radioField(string $name, string $id, string $value): string
     {
         ob_start();

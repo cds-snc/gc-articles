@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Notify;
 
+use CDS\Utils as OptionUtils;
 use CDS\Modules\Notify\Utils;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\ListManager\ListManager;
@@ -39,6 +40,8 @@ class ListManagerSettings
                 return 'manage_list_manager';
             },
         );
+
+        add_action('rest_api_init', [$instance, 'registerRestRoutes']);
 
         $encryptedOptions = ['LIST_MANAGER_NOTIFY_SERVICES'];
 
@@ -296,5 +299,32 @@ class ListManagerSettings
     public function decryptOption($value): string
     {
         return $this->encryptedOption->decryptString($value);
+    }
+
+    public function registerRestRoutes(): void
+    {
+        register_rest_route('list-manager', '/list/save', [
+            'methods' => 'POST',
+            'callback' => [$this, 'saveListValues'],
+            'permission_callback' => function () {
+                return current_user_can('administrator');
+            }
+        ]);
+    }
+
+    /**
+     * Saves list value settinhs
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
+    public function saveListValues($request)
+    {
+        try {
+            OptionUtils::addOrUpdateOption("list_values", json_encode($request['list_values']));
+            return ["success" => true];
+        } catch (\Exception $e) {
+            return ["success" => false, "error_message" => $e->getMessage()];
+        }
     }
 }

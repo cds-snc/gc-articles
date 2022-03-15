@@ -89,37 +89,38 @@ class ContactForm
                     </div>
 
                     <div class="focus-group">
-                    <?php echo Utils::checkboxField(
-                        'usage[]',
-                        'Blog.',
-                        __('Blog.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'usage[]',
-                        'Newsletter archive with emailing to a subscriber list.',
-                        __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'usage[]',
-                        'Website.',
-                        __('Website.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'usage[]',
-                        'Internal website.',
-                        __('Internal website.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'usage[]',
-                        'Something else.',
-                        __('Something else.', 'cds-snc'),
-                        null, // we don't have previous values to pass in
-                        'optional-usage'
-                    ); ?>
+                    <?php
+                        Utils::checkboxField(
+                            name: 'usage[]',
+                            id: 'Blog.',
+                            label: __('Blog.', 'cds-snc'),
+                        );
+                        Utils::checkboxField(
+                            name: 'usage[]',
+                            id: 'Newsletter archive with emailing to a subscriber list.',
+                            label: __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
+                        );
+                        Utils::checkboxField(
+                            name: 'usage[]',
+                            id: 'Website.',
+                            label: __('Website.', 'cds-snc'),
+                        );
+                        Utils::checkboxField(
+                            name: 'usage[]',
+                            id: 'Internal website.',
+                            label: __('Internal website.', 'cds-snc'),
+                        );
+                        Utils::checkboxField(
+                            name: 'usage[]',
+                            id: 'Something else.',
+                            label: __('Something else.', 'cds-snc'),
+                            ariaControls: 'optional-usage'
+                        );
+                    ?>
                     </div>
                     
                     <div id="optional-usage">
-                        <?php echo Utils::textField(id: 'usage-optional', label: __('Other usage', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'usage-optional', label: __('Other usage', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -134,36 +135,37 @@ class ContactForm
                     </div>
                     
                     <div class="focus-group">
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'People who use your programs and services.',
-                        __('People who use your programs and services.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'General public.',
-                        __('General public.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'Subscribers.',
-                        __('Subscribers.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'Internal employees and/or community volunteers.',
-                        __('Internal employees and/or community volunteers.', 'cds-snc'),
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'Other people.',
-                        __('Other people.', 'cds-snc'),
-                        null, // we don't have previous values to pass in
-                        'optional-target'
-                    ); ?>
+                    <?php
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'People who use your programs and services.',
+                            value: __('People who use your programs and services.', 'cds-snc'),
+                        );
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'General public.',
+                            value: __('General public.', 'cds-snc'),
+                        );
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'Subscribers.',
+                            value: __('Subscribers.', 'cds-snc'),
+                        );
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'Internal employees and/or community volunteers.',
+                            value: __('Internal employees and/or community volunteers.', 'cds-snc'),
+                        );
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'Other people.',
+                            value: __('Other people.', 'cds-snc'),
+                            ariaControls: 'optional-target'
+                        );
+                    ?>
                     </div>
                     <div id="optional-target">
-                        <?php echo Utils::textField(id: 'target-optional', label: __('Other target audience', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'target-optional', label: __('Other target audience', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- target -->
@@ -182,7 +184,7 @@ class ContactForm
 
                 <!-- send me a copy -->
                 <div>
-                    <?php echo Utils::checkboxField(
+                    <?php Utils::checkboxField(
                         'cc',
                         'Send a copy to your email.',
                         __('Send a copy to your email.', 'cds-snc'),

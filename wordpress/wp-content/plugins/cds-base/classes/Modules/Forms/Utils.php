@@ -92,7 +92,7 @@ class Utils
         echo $field;
     }
 
-    public static function checkboxField(string $name, string $id, string $value, array|string $vals = null, string $ariaControls = null): string
+    public static function checkboxField(string $name, string $id, string $value, array|string $vals = null, string $ariaControls = null, ?bool $echo = true)
     {
         // set to empty array if a non-array is passed in
         $vals = is_array($vals) ? $vals : [];
@@ -124,7 +124,11 @@ class Utils
 
         $field = ob_get_contents();
         ob_end_clean();
-        return $field;
+
+        if (!$echo) {
+            return $field;
+        }
+        echo $field;
     }
 
     public static function submitButton(string $label): string

@@ -2,6 +2,8 @@
 
 namespace CDS\Modules\Releases;
 
+use wp_remote_get;
+
 class Releases
 {
     public function __construct()
@@ -46,15 +48,16 @@ class Releases
 
     public function getEmbedPage()
     {
-        // set the page name we want to pull content from
-        $page = get_page_by_path("updates");
-        if (!$page) {
-            echo "";
-            return ;
+        $response = wp_remote_get("https://articles.alpha.canada.ca/wp-json/wp/v2/pages/?slug=updates");
+        $responseBody = wp_remote_retrieve_body($response);
+        $result = json_decode($responseBody);
+        if (is_array($result) && ! is_wp_error($result)) {
+            $content = $result[0]->content->rendered;
+            $content = apply_filters('the_content', $content);
+            return $content;
+        } else {
+            return __('Something went wrong', 'cds-snc');
         }
-
-        $content = apply_filters('the_content', get_the_content(null, null, $page->ID));
-        return $content;
     }
 
     public function getVersion($prefix): string

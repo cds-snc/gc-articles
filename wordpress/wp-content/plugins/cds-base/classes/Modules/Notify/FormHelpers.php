@@ -17,14 +17,21 @@ class FormHelpers
         <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
         <form id="notify_template_sender_form" name="notify_template_sender_form" method="post" action="<?php echo $action; ?>">
             <?php wp_nonce_field('wp_rest', '_wpnonce'); ?>
-          <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
-          <input type="hidden" name="service_id" value="<?php echo Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY')); ?>" />
+          <input type="hidden" name="page" value="<?php echo $_REQUEST[
+              'page'
+            ]; ?>" />
+          <input type="hidden" name="service_id" value="<?php echo Utils::extractServiceIdFromApiKey(
+              get_option('NOTIFY_API_KEY'),
+                                                        ); ?>" />
           <table class="form-table" role="presentation">
             <tbody>
             <!-- Template ID -->
             <tr>
               <th scope="row">
-                <label for="template_id"><?php _e('Template ID', 'cds-snc'); ?></label>
+                <label for="template_id"><?php _e(
+                    'Template ID',
+                    'cds-snc',
+                                         ); ?></label>
               </th>
               <td>
                 <input type="text" class="regular-text" name="template_id" value="" />
@@ -39,11 +46,11 @@ class FormHelpers
               <td>
                 <select name="list_id" id="list_id">
                     <?php try {
-                        self::renderListOptions($data["list_values"]);
+                        self::renderListOptions($data['list_values']);
                     } catch (Exception $e) {
                         echo '<option value="">' .
-                             __('No lists found', 'cds-snc') .
-                             '</option>';
+                            __('No lists found', 'cds-snc') .
+                            '</option>';
                     } ?>
                 </select>
               </td>
@@ -62,12 +69,15 @@ class FormHelpers
         </form>
 
         <div id="notify-panel"></div>
-
           <?php
-            $service_id = Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
-            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $service_id . '"});';
-            wp_add_inline_script('cds-snc-admin-js', $data, 'after');
-            ?>
+            $service_id = Utils::extractServiceIdFromApiKey(
+                get_option('NOTIFY_API_KEY'),
+            );
+          $data =
+              'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' .
+              $service_id .
+              '"});';
+          wp_add_inline_script('cds-snc-admin-js', $data, 'after');?>
       </div>
         <?php
     }
@@ -78,12 +88,12 @@ class FormHelpers
 
         foreach ($data as &$value) {
             echo '<option value="' .
-                 $value['id'] .
-                 '~' .
-                 $value['type'] .
-                 '">' .
-                 $value['label'] .
-                 '</option>';
+                $value['id'] .
+                '~' .
+                $value['type'] .
+                '">' .
+                $value['label'] .
+                '</option>';
         }
     }
 }

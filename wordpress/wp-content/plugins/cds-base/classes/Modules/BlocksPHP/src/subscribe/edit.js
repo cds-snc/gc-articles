@@ -10,7 +10,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
 	const blockProps = useBlockProps();
 
-	let listValues = CDS_VARS.notify_list_ids || [];
+	let listValues = [{id: "",label: __("Select a list") }, ...CDS_VARS.notify_list_ids] || [];
 
 	listValues = listValues.map((item) => {
 		return { value: item?.id, label: item?.label }

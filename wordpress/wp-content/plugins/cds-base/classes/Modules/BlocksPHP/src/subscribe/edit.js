@@ -42,7 +42,7 @@ const Edit = ({ attributes, setAttributes }) => {
 						})}
 					/>
 					<SelectControl
-						label={__("List ID", "cds-snc")}
+						label={__("List", "cds-snc")}
 						value={listId}
 						onChange={(value) => setAttributes({
 							listId: value,

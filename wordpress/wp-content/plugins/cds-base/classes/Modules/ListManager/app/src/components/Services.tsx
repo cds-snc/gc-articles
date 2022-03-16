@@ -12,12 +12,11 @@ export const Services = () => {
     const { state: { serviceData } } = useList();
 
     if(!serviceData || serviceData?.length <1){
-        return  <><h3>Your Services</h3><p>No services found.</p></>
+        return  <><p>No services found.</p></>
     }
 
     return (
         <div>
-            <h3>Your Services</h3>
             {serviceData && serviceData.map((service) => {
                 return <div key={service.service_id}>
                     <StyledLink>

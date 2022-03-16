@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\Notify;
 
 use CDS\Modules\Notify\NotifyTemplateSender;
+use CDS\Modules\Notify\Utils;
 use Exception;
 
 class FormHelpers
@@ -17,26 +18,9 @@ class FormHelpers
         <form id="notify_template_sender_form" name="notify_template_sender_form" method="post" action="<?php echo $action; ?>">
             <?php wp_nonce_field('wp_rest', '_wpnonce'); ?>
           <input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
+          <input type="hidden" name="service_id" value="<?php echo Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY')); ?>" />
           <table class="form-table" role="presentation">
             <tbody>
-            <!-- Service ID -->
-            <tr>
-              <th scope="row">
-                <label for="list_id"><?php _e('Service ID', 'cds-snc'); ?></label>
-              </th>
-              <td>
-                <select name="service_id" id="service_id">
-                    <?php try {
-                        self::renderServiceIdOptions($data["service_ids"]);
-                    } catch (Exception $e) {
-                        echo '<option value="">' .
-                             __('No service ids found', 'cds-snc') .
-                             '</option>';
-                    } ?>
-                </select>
-              </td>
-            </tr>
-            <!-- End Service ID -->
             <!-- Template ID -->
             <tr>
               <th scope="row">
@@ -80,34 +64,12 @@ class FormHelpers
         <div id="notify-panel"></div>
 
           <?php
-            $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-            $services = Utils::deserializeServiceIds($serviceIdData);
-
-            $serviceIds = [];
-            foreach ($services as $key => $value) {
-                array_push($serviceIds, $value['service_id']);
-            }
-
-            $defaultServiceId = $serviceIds[0] ?? '';
-
-            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $defaultServiceId . '"});';
+            $service_id = Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
+            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :false , serviceId: "' . $service_id . '"});';
             wp_add_inline_script('cds-snc-admin-js', $data, 'after');
             ?>
       </div>
         <?php
-    }
-
-    public static function renderServiceIdOptions($data)
-    {
-        echo '<option value="">' . __('Select a service name') . '</option>';
-
-        foreach ($data as $key => $value) {
-            echo '<option value="' .
-                 trim($value['service_id']) .
-                 '">' .
-                 trim($key) .
-                 '</option>';
-        }
     }
 
     public static function renderListOptions($data)

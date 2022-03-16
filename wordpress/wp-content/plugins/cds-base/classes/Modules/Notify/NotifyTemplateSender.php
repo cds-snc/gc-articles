@@ -94,16 +94,13 @@ class NotifyTemplateSender
     {
         try {
             $sanitized = $this->validate($data);
-
             $this->send(
-                $sanitized['api_key'],
                 $sanitized['template_id'],
                 $sanitized['list_id'],
                 $sanitized['list_type'],
                 'WP Bulk send',
             );
-            $serviceId = Utils::deserializeServiceIds($sanitized['api_key']);
-            wp_redirect($this->baseRedirect() . '&status=200&serviceId=' . $serviceId);
+            wp_redirect($this->baseRedirect() . '&status=200');
             exit();
         } catch (ClientException $e) {
             $this->handleValidationException($e);
@@ -115,14 +112,12 @@ class NotifyTemplateSender
     }
 
     #[ArrayShape([
-        'api_key' => "string",
         'template_id' => "mixed",
         'list_id' => "mixed|string",
         'list_type' => "mixed|string"
     ])] public function validate($data): array
     {
         $template_id = $data['template_id'];
-        $api_key = $this->findApiKey($data['service_id']);
 
         if (empty($template_id)) {
             wp_redirect($this->baseRedirect() . '&status=400');
@@ -139,21 +134,7 @@ class NotifyTemplateSender
         $list_id = $parts[0];
         $list_type = $parts[1];
 
-        return ['api_key' => $api_key, 'template_id' => $template_id, 'list_id' => $list_id, 'list_type' => $list_type];
-    }
-
-    public function findApiKey($service_id): string
-    {
-        $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $service_ids = Utils::deserializeServiceIds($serviceIdData);
-        $api_key = "";
-        foreach ($service_ids as $key => $value) {
-            if (trim($service_id) == trim($value['service_id'])) {
-                $api_key = $value['api_key'];
-            }
-        }
-
-        return $api_key;
+        return ['template_id' => $template_id, 'list_id' => $list_id, 'list_type' => $list_type];
     }
 
     public function baseRedirect(): string
@@ -161,7 +142,7 @@ class NotifyTemplateSender
         return get_admin_url() . 'admin.php?page=' . $this->admin_page;
     }
 
-    public function send($api_key, $template_id, $list_id, $template_type, $ref)
+    public function send($template_id, $list_id, $template_type, $ref)
     {
         $client = new Client([
             'headers' => [
@@ -169,6 +150,7 @@ class NotifyTemplateSender
             ]
         ]);
 
+        $api_key = get_option('NOTIFY_API_KEY');
         $endpoint = getenv('LIST_MANAGER_ENDPOINT');
 
         return $client->request('POST', $endpoint . '/send', [
@@ -225,11 +207,9 @@ class NotifyTemplateSender
             Notices::handleNotice($_GET['status']);
         }
 
-        $serviceIds = Utils::deserializeServiceIds(get_option('LIST_MANAGER_NOTIFY_SERVICES'));
         $listValues = self::parseJsonOptions(get_option('list_values'));
 
         FormHelpers::render([
-            "service_ids" => $serviceIds,
             "list_values" => $listValues
         ]);
     }

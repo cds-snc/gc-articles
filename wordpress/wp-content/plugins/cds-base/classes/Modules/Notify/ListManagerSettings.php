@@ -12,12 +12,7 @@ use InvalidArgumentException;
 
 class ListManagerSettings
 {
-    protected EncryptedOption $encryptedOption;
     protected string $admin_page = 'cds_notify_send';
-
-    private string $LIST_MANAGER_NOTIFY_SERVICES;
-    private string $list_values;
-
     public function __construct(EncryptedOption $encryptedOption)
     {
         $this->encryptedOption = $encryptedOption;
@@ -31,8 +26,6 @@ class ListManagerSettings
             $instance,
             'listManagerSettingsAddPluginPage',
         ]);
-        add_action('admin_init', [$instance, 'listManagerSettingsPageInit']);
-        add_action('admin_head', [$instance, 'addStyles']); // @TODO
 
         add_filter(
             'option_page_capability_list_manager_settings_option_group',
@@ -41,81 +34,27 @@ class ListManagerSettings
             },
         );
 
-        add_action('rest_api_init', [$instance, 'registerRestRoutes']);
-
-        $encryptedOptions = ['LIST_MANAGER_NOTIFY_SERVICES'];
-
-        if (!\CDS\Utils::isWpEnv()) {
-            foreach ($encryptedOptions as $option) {
-                add_filter("pre_update_option_{$option}", [
-                    $instance,
-                    'encryptOption',
-                ]);
-                add_filter("option_{$option}", [$instance, 'decryptOption']);
-            }
-        }
-
         ListManager::register();
     }
 
     public function listManagerSettingsAddPluginPage()
     {
-        add_submenu_page(
-            $this->admin_page,
-            __('List Manager', 'cds-snc'),
-            __('Settings', 'cds-snc'),
-            'manage_list_manager',
-            'cds_list_manager_settings',
-            [$this, 'listManagerSettingsCreateAdminPage'],
-        );
-
         if (is_super_admin()) {
             add_submenu_page(
                 $this->admin_page,
-                __('List Manager', 'cds-snc'),
-                __('List Manager', 'cds-snc'),
+                __('Lists', 'cds-snc'),
+                __('Lists', 'cds-snc'),
                 'manage_list_manager',
-                'cds_list_manager_app',
-                [$this, 'listManagerAdminPage'],
+                'lists',
+                [$this, 'listManagerAppPage'],
             );
         }
     }
 
-    public function listManagerSettingsCreateAdminPage()
+    public function listManagerAppPage()
     {
-        $this->LIST_MANAGER_NOTIFY_SERVICES =
-            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        $this->list_values = get_option('list_values') ?: '';
-        ?>
-
-        <div class="wrap">
-            <h1><?php _e('List Manager Settings', 'cds-snc'); ?></h1>
-            <p></p>
-            <?php settings_errors(); ?>
-
-            <form method="post" action="options.php" id="list_manager_settings_form" class="gc-form-wrapper">
-                <?php
-                settings_fields('list_manager_settings_option_group');
-                do_settings_sections('list-manager-settings-admin');
-                submit_button();?>
-            </form>
-        </div>
-        <?php
-    }
-
-    public function listManagerAdminPage()
-    {
-        $this->LIST_MANAGER_NOTIFY_SERVICES =
-            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        $this->list_values = get_option('list_values') ?: '';
-
-        $serviceIds = Utils::deserializeServiceIds(get_option('LIST_MANAGER_NOTIFY_SERVICES'));
-        $services = [];
-        foreach ($serviceIds as $key => $val) {
-            $services[] = ["name" => $key , "service_id" => $val["service_id"]];
-        }
+        $serviceId = Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
+        $services[] = ["name" => __("Your Lists", "cds-snc") , "service_id" => $serviceId];
         ?>
         <!-- app -->
         <div class="wrap">

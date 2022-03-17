@@ -47,12 +47,22 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <td>
                         <div className={errors.language ? "error-wrapper" : ""}>
                             {errors.language && <span className="validation-error">{errors.language?.message || __("Language is required", "cds-snc")}</span>}
-                            <input id="language" style={textWidth} type="text" {...register("language", { required: true })} />
+                            <fieldset>
+                                <label htmlFor="en">
+                                    <input id="en" {...register("language", { required: true })} type="radio" value="en" />
+                                    {" "}English
+                                </label>
+                                <br />
+                                <label htmlFor="fr">
+                                    <input id="fr" {...register("language", { required: true })} type="radio" value="fr" />
+                                    {" "}French
+                                </label>
+                            </fieldset>
                         </div>
                     </td>
                 </tr>
                 <tr>
-                    <th><label className="required" htmlFor="subscribe_email_template_id">{__("Subscribe email template id", "cds-snc")}</label></th>
+                    <th><label htmlFor="subscribe_email_template_id">{__("Subscribe template id", "cds-snc")}</label></th>
                     <td>
                         <div className={errors.subscribe_email_template_id ? "error-wrapper" : ""}>
                             {errors.subscribe_email_template_id && <span className="validation-error">{errors.subscribe_email_template_id?.message}</span>}
@@ -61,7 +71,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     </td>
                 </tr>
                 <tr>
-                    <th><label className="required" htmlFor="unsubscribe_email_template_id">{__("Unsubscribe email template id", "cds-snc")}</label></th>
+                    <th><label htmlFor="unsubscribe_email_template_id">{__("Unsubscribe template id", "cds-snc")}</label></th>
                     <td>
                         <div className={errors.unsubscribe_email_template_id ? "error-wrapper" : ""}>
                             {errors.unsubscribe_email_template_id && <span className="validation-error">{errors.unsubscribe_email_template_id?.message}</span>}
@@ -70,7 +80,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     </td>
                 </tr>
                 <tr>
-                    <th><label className="gc-label required" htmlFor="subscribe_redirect_url">{__("Subscribe redirect url", "cds-snc")}</label></th>
+                    <th><label className="gc-label" htmlFor="subscribe_redirect_url">{__("Subscribe redirect url", "cds-snc")}</label></th>
                     <td>
                         <div className={errors.subscribe_redirect_url ? "error-wrapper" : ""}>
                             {errors.subscribe_redirect_url && <span className="validation-error">{errors.subscribe_redirect_url?.message}</span>}
@@ -79,7 +89,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     </td>
                 </tr>
                 <tr>
-                    <th><label className="required" htmlFor="unsubscribe_redirect_url">{__("Unsubscribe redirect url", "cds-snc")}</label></th>
+                    <th><label htmlFor="unsubscribe_redirect_url">{__("Unsubscribe redirect url", "cds-snc")}</label></th>
                     <td>
                         <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
                             {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
@@ -88,7 +98,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     </td>
                 </tr>
                 <tr>
-                    <th><label className="required" htmlFor="confirm_redirect_url">{__("Confirm redirect url", "cds-snc")}</label></th>
+                    <th><label htmlFor="confirm_redirect_url">{__("Confirm redirect url", "cds-snc")}</label></th>
                     <td>
                         <div className={errors.confirm_redirect_url ? "error-wrapper" : ""}>
                             {errors.confirm_redirect_url && <span className="validation-error">{errors.confirm_redirect_url?.message}</span>}

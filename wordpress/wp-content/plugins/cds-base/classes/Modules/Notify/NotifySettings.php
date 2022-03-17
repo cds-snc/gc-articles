@@ -170,7 +170,7 @@ class NotifySettings
         printf('<div class="role-desc description">
         <details>
             <summary>%s. (%s)</summary>
-            <code>my_notify_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0</code>
+            <code>example_notify_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0</code>
         </details>
         <p class="description">%s</p>', __('Enter your API Key', 'cds-snc'), __('See example key format.', 'cds-snc'), $link);
     }
@@ -186,7 +186,7 @@ class NotifySettings
         printf('<div class="role-desc description">
         <details>
             <summary>%s. (%s)</summary>
-            <code>7edc2402-d248-4661-a3d6-0647167e3720</code>
+            <code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
         </details>
         <p class="description">%s</p>', __('Enter your generic Email Template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link);
     }

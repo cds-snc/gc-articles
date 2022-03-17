@@ -69,7 +69,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                             <input id="subscribe_email_template_id" style={textWidth} type="text" {...register("subscribe_email_template_id")} />
                             <div className="role-desc description">
                                 <details>
-                                    <summary>{__("See example template ID format.", "cds-snc")}</summary><code>7edc2402-d248-4661-a3d6-0647167e3720</code>
+                                    <summary>{__("See example template ID format.", "cds-snc")}</summary><code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
                                 </details>
                             </div>
                         </div>
@@ -83,7 +83,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                             <input id="unsubscribe_email_template_id" style={textWidth} type="text" {...register("unsubscribe_email_template_id")} />
                             <div className="role-desc description">
                                 <details>
-                                    <summary>{__("See example template ID format.", "cds-snc")}</summary><code>7edc2402-d248-4661-a3d6-0647167e3720</code>
+                                    <summary>{__("See example template ID format.", "cds-snc")}</summary><code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
                                 </details>
                             </div>
                         </div>

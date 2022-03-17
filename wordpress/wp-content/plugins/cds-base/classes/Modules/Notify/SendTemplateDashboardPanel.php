@@ -29,9 +29,11 @@ class SendTemplateDashboardPanel
 
     public function notifyPanelHandler(): void
     {
-        $service_id = Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
-        echo '<div id="notify-panel"></div>';
-        $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :true , serviceId: "' . $service_id . '"});';
-        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
+        if ($notifyApiKey = get_option('NOTIFY_API_KEY')) {
+            $service_id = Utils::extractServiceIdFromApiKey($notifyApiKey);
+            echo '<div id="notify-panel"></div>';
+            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :true , serviceId: "' . $service_id . '"});';
+            wp_add_inline_script('cds-snc-admin-js', $data, 'after');
+        }
     }
 }

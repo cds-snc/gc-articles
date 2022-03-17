@@ -166,8 +166,13 @@ class NotifySettings
             '<input class="regular-text" type="text" name="NOTIFY_API_KEY" id="notify_api_key" aria-describedby="notify_api_key_value" value="">'
         );
 
-        $link = __('For more information visit <a href="https://documentation.notification.canada.ca/en/keys.html">API keys</a>.', 'cds-snc');
-        printf('<p class="role-desc description">%s <abbr title="my_notify_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0">%s</abbr> . %s</p>', __('Enter your', 'cds-snc'), __('API Key', 'cds-snc'), $link);
+        $link = __('Read <a href="https://documentation.notification.canada.ca/en/keys.html" target="_blank">API keys</a> for details.', 'cds-snc');
+        printf('<div class="role-desc description">
+        <details>
+            <summary>%s. (%s)</summary>
+            <code>my_notify_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0</code>
+        </details>
+        <p class="description">%s</p>', __('Enter your API Key', 'cds-snc'), __('See example key format.', 'cds-snc'), $link);
     }
 
     public function notifyGenericTemplateIdCallback()
@@ -177,8 +182,13 @@ class NotifySettings
             $this->NOTIFY_GENERIC_TEMPLATE_ID ? $this->NOTIFY_GENERIC_TEMPLATE_ID : ''
         );
 
-        $link = __('For more information visit <a href="https://notification.canada.ca/format">Email formatting guide</a>.', 'cds-snc');
-            printf('<p class="role-desc description">%s <abbr title="7edc2402-d248-4661-a3d6-0647167e3720">%s</abbr> . %s</p>', __('Enter your Generic email', 'cds-snc'), __('template ID', 'cds-snc'), $link);
+        $link = __('Read the <a href="https://notification.canada.ca/format" target="_blank">Email formatting guide</a> for details.', 'cds-snc');
+        printf('<div class="role-desc description">
+        <details>
+            <summary>%s. (%s)</summary>
+            <code>7edc2402-d248-4661-a3d6-0647167e3720</code>
+        </details>
+        <p class="description">%s</p>', __('Enter your generic Email Template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link);
     }
 
     public function addStyles()

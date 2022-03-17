@@ -13,7 +13,7 @@ import { useListFetch } from '../store/UseListFetch';
 import { useParams } from "react-router-dom";
 
 const TemplateGroupStyles = styled.div`
-  margin: 1rem;
+  margin: 1rem 0rem 1rem .8rem;
 `
 
 const DetailsLinkStyles = styled.div`

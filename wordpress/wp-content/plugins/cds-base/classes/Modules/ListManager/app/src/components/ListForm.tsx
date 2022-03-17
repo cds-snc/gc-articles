@@ -67,6 +67,11 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         <div className={errors.subscribe_email_template_id ? "error-wrapper" : ""}>
                             {errors.subscribe_email_template_id && <span className="validation-error">{errors.subscribe_email_template_id?.message}</span>}
                             <input id="subscribe_email_template_id" style={textWidth} type="text" {...register("subscribe_email_template_id")} />
+                            <div className="role-desc description">
+                                <details>
+                                    <summary>{__("See example template ID format.", "cds-snc")}</summary><code>7edc2402-d248-4661-a3d6-0647167e3720</code>
+                                </details>
+                            </div>
                         </div>
                     </td>
                 </tr>
@@ -76,6 +81,11 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         <div className={errors.unsubscribe_email_template_id ? "error-wrapper" : ""}>
                             {errors.unsubscribe_email_template_id && <span className="validation-error">{errors.unsubscribe_email_template_id?.message}</span>}
                             <input id="unsubscribe_email_template_id" style={textWidth} type="text" {...register("unsubscribe_email_template_id")} />
+                            <div className="role-desc description">
+                                <details>
+                                    <summary>{__("See example template ID format.", "cds-snc")}</summary><code>7edc2402-d248-4661-a3d6-0647167e3720</code>
+                                </details>
+                            </div>
                         </div>
                     </td>
                 </tr>

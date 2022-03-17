@@ -127,6 +127,26 @@ details ul li, details ol li {
   margin-bottom: 0;
 }
 
+.description * {
+  font-size: 14.5px;
+  color: #646970;
+}
+
+.description details {
+  display: inline-block;
+  padding-left: 0;
+  margin-left: 0;
+  margin-top: 4px;
+}
+
+.description details summary:focus {
+  outline: 0;
+}
+
+.description details[open] summary {
+  margin-bottom: 8px;
+}
+
 /* screen reader shortcuts */
 .screen-reader-shortcut:focus {
   color: #0535d2;

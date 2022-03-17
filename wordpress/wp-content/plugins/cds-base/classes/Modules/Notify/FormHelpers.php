@@ -17,9 +17,10 @@ class FormHelpers
             <p>
               <?php
                 echo sprintf(
-                  __('You must configure your <a href="%s">Notify API Key</a>', 'cds-snc'), admin_url("options-general.php?page=notify-settings")
+                    __('You must configure your <a href="%s">Notify API Key</a>', 'cds-snc'),
+                    admin_url("options-general.php?page=notify-settings")
                 );
-              ?>
+                ?>
             </p>
         <?php
     }

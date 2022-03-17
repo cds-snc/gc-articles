@@ -13,6 +13,7 @@ use WP_REST_Response;
 class ListManagerSettings
 {
     protected string $admin_page = 'cds_notify_send';
+
     public function __construct(EncryptedOption $encryptedOption)
     {
         $this->encryptedOption = $encryptedOption;
@@ -55,16 +56,36 @@ class ListManagerSettings
 
     public function listManagerAppPage()
     {
-        $serviceId = Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
-        $services[] = ["name" => __("Your Lists", "cds-snc") , "service_id" => $serviceId];
-        ?>
-        <!-- app -->
-        <div class="wrap">
-            <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
-            <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>
-            </div>
-        </div>
-        <?php
+        if ($notifyApiKey = get_option('NOTIFY_API_KEY')) {
+            $serviceId = Utils::extractServiceIdFromApiKey($notifyApiKey);
+
+            $services[] = ["name" => __("Your Lists", "cds-snc"), "service_id" => $serviceId];
+
+            ?>
+              <!-- app -->dd
+              <div class="wrap">
+                <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+                <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>
+                </div>
+              </div>
+            <?php
+        } else {
+            ?>
+              <!-- app -->
+              <div class="wrap">
+                <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+                <p>
+                  <?php
+                    echo sprintf(
+                        __('You must configure your <a href="%s">Notify API Key</a>', 'cds-snc'),
+                        admin_url("options-general.php?page=notify-settings")
+                    );
+                    ?>
+                </p>
+
+              </div>
+            <?php
+        }
     }
 
     public function registerRestRoutes(): void

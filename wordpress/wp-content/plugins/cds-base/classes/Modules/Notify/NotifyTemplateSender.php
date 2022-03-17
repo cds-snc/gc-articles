@@ -203,15 +203,19 @@ class NotifyTemplateSender
 
     public function renderForm(): void
     {
-        if (isset($_GET['status'])) {
-            Notices::handleNotice($_GET['status']);
+        if (!get_option('NOTIFY_API_KEY')) {
+            FormHelpers::noApiKey();
+        } else {
+            if (isset($_GET['status'])) {
+                Notices::handleNotice($_GET['status']);
+            }
+
+            $listValues = self::parseJsonOptions(get_option('list_values'));
+
+            FormHelpers::render([
+                "list_values" => $listValues
+            ]);
         }
-
-        $listValues = self::parseJsonOptions(get_option('list_values'));
-
-        FormHelpers::render([
-            "list_values" => $listValues
-        ]);
     }
 
     public static function parseJsonOptions($data)

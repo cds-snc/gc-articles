@@ -29,7 +29,7 @@ export const CreateList = () => {
 
     const onSubmit: SubmitHandler<List> = data => createList(data);
 
-    return data.id ? <Navigate to={`/service/${serviceId}`} replace={true} /> : <ListForm formData={{}} serverErrors={[]} handler={onSubmit} />
+    return data.id ? <Navigate to={`/service/${serviceId}`} replace={true} /> : <ListForm formData={{ service_id: serviceId }} serverErrors={[]} handler={onSubmit} />
 }
 
 export default CreateList;

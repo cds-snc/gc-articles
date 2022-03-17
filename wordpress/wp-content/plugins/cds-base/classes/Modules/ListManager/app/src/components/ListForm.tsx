@@ -31,6 +31,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
 
     return (
         <form onSubmit={handleSubmit(handler)}>
+            <input id="service_id" type="hidden" {...register("service_id", { required: true })} />
             <table id="form-table" className="form-table">
                 <tr>
                     <th><label className="required" htmlFor="name"><Asterisk />{__("Name", "cds-snc")}</label></th>
@@ -51,15 +52,6 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     </td>
                 </tr>
                 <tr>
-                    <th><label className="required" htmlFor="service_id"><Asterisk />{__("Service Id", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.service_id ? "error-wrapper" : ""}>
-                            {errors.service_id && <span className="validation-error">{errors.service_id?.message || __("Service ID is required", "cds-snc")}</span>}
-                            <input id="service_id" style={textWidth} type="text" {...register("service_id", { required: true })} />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
                     <th><label className="required" htmlFor="subscribe_email_template_id">{__("Subscribe email template id", "cds-snc")}</label></th>
                     <td>
                         <div className={errors.subscribe_email_template_id ? "error-wrapper" : ""}>
@@ -74,24 +66,6 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         <div className={errors.unsubscribe_email_template_id ? "error-wrapper" : ""}>
                             {errors.unsubscribe_email_template_id && <span className="validation-error">{errors.unsubscribe_email_template_id?.message}</span>}
                             <input id="unsubscribe_email_template_id" style={textWidth} type="text" {...register("unsubscribe_email_template_id")} />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label className="required" htmlFor="subscribe_phone_template_id">{__("Subscribe phone template id", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.subscribe_phone_template_id ? "error-wrapper" : ""}>
-                            {errors.subscribe_phone_template_id && <span className="validation-error">{errors.subscribe_phone_template_id?.message}</span>}
-                            <input id="subscribe_phone_template_id" style={textWidth} type="text" {...register("subscribe_phone_template_id")} />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label className="required" htmlFor="unsubscribe_phone_template_id">{__("Unsubscribe phone template id", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.unsubscribe_phone_template_id ? "error-wrapper" : ""}>
-                            {errors.unsubscribe_phone_template_id && <span className="validation-error">{errors.unsubscribe_phone_template_id?.message}</span>}
-                            <input id="unsubscribe_phone_template_id" style={textWidth} type="text" {...register("unsubscribe_phone_template_id")} />
                         </div>
                     </td>
                 </tr>

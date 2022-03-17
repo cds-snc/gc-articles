@@ -20,18 +20,13 @@ class FormHelpers
           <input type="hidden" name="page" value="<?php echo $_REQUEST[
               'page'
             ]; ?>" />
-          <input type="hidden" name="service_id" value="<?php echo Utils::extractServiceIdFromApiKey(
-              get_option('NOTIFY_API_KEY'),
-                                                        ); ?>" />
+          <input type="hidden" name="service_id" value="<?php echo Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY')); ?>" />
           <table class="form-table" role="presentation">
             <tbody>
             <!-- Template ID -->
             <tr>
               <th scope="row">
-                <label for="template_id"><?php _e(
-                    'Template ID',
-                    'cds-snc',
-                                         ); ?></label>
+                <label for="template_id"><?php _e('Template ID', 'cds-snc'); ?></label>
               </th>
               <td>
                 <input type="text" class="regular-text" name="template_id" value="" />

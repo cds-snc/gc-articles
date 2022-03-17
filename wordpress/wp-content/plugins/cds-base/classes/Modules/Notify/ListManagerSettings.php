@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace CDS\Modules\Notify;
 
 use CDS\Utils as OptionUtils;
-use CDS\Modules\Notify\Utils;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\ListManager\ListManager;
-use InvalidArgumentException;
+use WP_REST_Request;
+use WP_REST_Response;
 
 class ListManagerSettings
 {
@@ -85,13 +85,13 @@ class ListManagerSettings
      *
      * @return WP_REST_Response
      */
-    public function saveListValues($request)
+    public function saveListValues(WP_REST_Request $request): WP_REST_Response
     {
         try {
             OptionUtils::addOrUpdateOption("list_values", json_encode($request['list_values']));
-            return ["success" => true];
+            return new WP_REST_Response(["success" => true]);
         } catch (\Exception $e) {
-            return ["success" => false, "error_message" => $e->getMessage()];
+            return new WP_REST_Response(["success" => false, "error_message" => $e->getMessage()]);
         }
     }
 }

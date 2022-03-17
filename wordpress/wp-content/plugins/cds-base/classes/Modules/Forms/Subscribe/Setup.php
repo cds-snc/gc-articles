@@ -124,6 +124,6 @@ class Setup
         $email = sanitize_email($_POST["email"]);
         $listId = sanitize_text_field($_POST['list_id']);
 
-        return json_encode($this->subscribe($email, $listId));
+        return $this->subscribe($email, $listId);
     }
 }

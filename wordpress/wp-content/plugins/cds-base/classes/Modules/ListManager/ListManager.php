@@ -65,8 +65,7 @@ class ListManager
             'methods'             => \WP_REST_Server::ALLMETHODS,
             'callback'            => [$this, 'proxyRequest'],
             'permission_callback' => function () {
-                return true;
-                //return current_user_can('list_manager_bulk_send');
+                return current_user_can('list_manager_bulk_send');
             }
         ]);
     }

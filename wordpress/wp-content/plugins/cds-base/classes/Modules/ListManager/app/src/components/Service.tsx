@@ -25,7 +25,6 @@ export const Service = () => {
     return (
         <div>
             <Messages />
-            <h2>{getServiceName(serviceData, params?.serviceId)}</h2>
             <ListViewTable />
         </div>
     )

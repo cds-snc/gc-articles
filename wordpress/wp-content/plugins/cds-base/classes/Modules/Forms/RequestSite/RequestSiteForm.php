@@ -41,7 +41,7 @@ class RequestSiteForm
             <?php
 
             $required_keys = ['site', 'usage', 'target', 'timeline'];
-            $all_keys = array_merge($required_keys, ['usage-other', 'target-other']);
+            $all_keys = array_merge($required_keys, ['usage-optional', 'target-optional']);
             $all_values = [];
             $empty_values = [];
 
@@ -74,12 +74,13 @@ class RequestSiteForm
                     ?>
                 </p>
 
-                <?php wp_nonce_field(
-                    'cds_form_nonce_action',
-                    'cds-form-nonce',
-                );
+                <?php
+                    wp_nonce_field(
+                        'cds_form_nonce_action',
+                        'cds-form-nonce',
+                    );
 
-                // add hidden fields for previous answers
+                    // add hidden fields for previous answers
                 foreach ($all_values as $_key => $_value) {
                     // if is array, iterate through each array value
                     if (is_array($_value)) {
@@ -91,22 +92,19 @@ class RequestSiteForm
                     }
                 }
 
+                    Utils::textField(id: 'fullname', label: __('Full name', 'cds-snc'));
+                    Utils::textField(
+                        id: 'email',
+                        label: __('Email', 'cds-snc'),
+                        description: __('Must be a Government of Canada email address. <br />Currently, we accept email addresses ending in gc.ca, canada.ca, or cds-snc.ca.'),
+                    );
+                    Utils::textField(id: 'role', label: __('Job title or role', 'cds-snc'));
+                    Utils::textField(
+                        id: 'department',
+                        label: __('Department or agency', 'cds-snc'),
+                        description: __('GC Articles is only for government employees.', 'cds-snc')
+                    );
                 ?>
-
-                <?php echo Utils::textField('fullname', __('Full name', 'cds-snc')); ?>
-
-                <!-- start email -->
-                <?php echo Utils::textField(
-                    'email',
-                    __('Email', 'cds-snc'),
-                    __('Must be a Government of Canada email address. <br />Currently, we accept email addresses ending in gc.ca, canada.ca, or cds-snc.ca.'),
-                );
-                ?>
-                <!-- end email -->
-
-                <?php echo Utils::textField('role', __('Job title or role', 'cds-snc')); ?>
-
-                <?php echo Utils::textField('department', __('Department or agency', 'cds-snc'), __('GC Articles is only for government employees.', 'cds-snc')); ?>
 
                 <div class="focus-group">
                     <ul>
@@ -121,7 +119,7 @@ class RequestSiteForm
 
                 <!-- send me a copy -->
                 <div>
-                    <?php echo Utils::checkboxField(
+                    <?php Utils::checkboxField(
                         'cc',
                         'Send a copy to your email.',
                         __('Send a copy to your email.', 'cds-snc'),
@@ -129,7 +127,7 @@ class RequestSiteForm
                 </div>
                 <!-- send me a copy -->
 
-                <?php echo Utils::submitButton(__('Request site', 'cds-snc')); ?>
+                <?php Utils::submitButton(__('Request site', 'cds-snc')); ?>
             </form>
 
 
@@ -155,11 +153,11 @@ class RequestSiteForm
                 ); ?>
             
                 <!-- start site -->
-                <?php echo Utils::textField(
-                    'site',
-                    __('English title of your site', 'cds-snc'),
-                    __('This title will appear at the top of your site. You can change this later.', 'cds-snc'),
-                    $all_values['site']
+                <?php Utils::textField(
+                    id: 'site',
+                    label: __('English title of your site', 'cds-snc'),
+                    description: __('This title will appear at the top of your site. You can change this later.', 'cds-snc'),
+                    value: $all_values['site']
                 ); ?>
                 <!-- end site -->
 
@@ -173,41 +171,42 @@ class RequestSiteForm
                     </div>
                     
                     <div class="focus-group">
-                        <?php echo Utils::checkboxField(
-                            'usage[]',
-                            'Blog.',
-                            __('Blog.', 'cds-snc'),
-                            $all_values['usage']
-                        ); ?>
-                        <?php echo Utils::checkboxField(
-                            'usage[]',
-                            'Newsletter archive with emailing to a subscriber list.',
-                            __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
-                            $all_values['usage']
-                        ); ?>
-                        <?php echo Utils::checkboxField(
-                            'usage[]',
-                            'Website.',
-                            __('Website.', 'cds-snc'),
-                            $all_values['usage']
-                        ); ?>
-                        <?php echo Utils::checkboxField(
-                            'usage[]',
-                            'Internal website.',
-                            __('Internal website.', 'cds-snc'),
-                            $all_values['usage'],
-                        ); ?>
-
-                        <?php echo Utils::checkboxField(
-                            'usage[]',
-                            'Something else.',
-                            __('Something else.', 'cds-snc'),
-                            $all_values['usage'],
-                            'optional-usage'
-                        ); ?>
+                        <?php
+                            Utils::checkboxField(
+                                name: 'usage[]',
+                                id: 'Blog.',
+                                value: __('Blog.', 'cds-snc'),
+                                vals: $all_values['usage']
+                            );
+                            Utils::checkboxField(
+                                name: 'usage[]',
+                                id: 'Newsletter archive with emailing to a subscriber list.',
+                                value: __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
+                                vals: $all_values['usage']
+                            );
+                            Utils::checkboxField(
+                                name: 'usage[]',
+                                id: 'Website.',
+                                value: __('Website.', 'cds-snc'),
+                                vals: $all_values['usage']
+                            );
+                            Utils::checkboxField(
+                                name: 'usage[]',
+                                id: 'Internal website.',
+                                value: __('Internal website.', 'cds-snc'),
+                                vals: $all_values['usage']
+                            );
+                            Utils::checkboxField(
+                                name: 'usage[]',
+                                id: 'Something else.',
+                                value: __('Something else.', 'cds-snc'),
+                                vals: $all_values['usage'],
+                                ariaControls: 'optional-usage'
+                            );
+                        ?>
                     </div>
                     <div id="optional-usage" aria-hidden="false">
-                        <?php echo Utils::textField('usage-optional', __('Other usage', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'usage-optional', label: __('Other usage', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -222,40 +221,42 @@ class RequestSiteForm
                     </div>
                     
                     <div class="focus-group">
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'People who use your programs and services.',
-                        __('People who use your programs and services.', 'cds-snc'),
-                        $all_values['target']
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'General public.',
-                        __('General public.', 'cds-snc'),
-                        $all_values['target']
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'Subscribers.',
-                        __('Subscribers.', 'cds-snc'),
-                        $all_values['target']
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'Internal employees and/or community volunteers.',
-                        __('Internal employees and/or community volunteers.', 'cds-snc'),
-                        $all_values['target']
-                    ); ?>
-                    <?php echo Utils::checkboxField(
-                        'target[]',
-                        'Other people.',
-                        __('Other people.', 'cds-snc'),
-                        $all_values['target'],
-                        'optional-target'
-                    ); ?>
+                    <?php
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'People who use your programs and services.',
+                            value: __('People who use your programs and services.', 'cds-snc'),
+                            vals: $all_values['target']
+                        );
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'General public.',
+                            value: __('General public.', 'cds-snc'),
+                            vals: $all_values['target']
+                        );
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'Subscribers.',
+                            value: __('Subscribers.', 'cds-snc'),
+                            vals: $all_values['target']
+                        );
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'Internal employees and/or community volunteers.',
+                            value: __('Internal employees and/or community volunteers.', 'cds-snc'),
+                            vals: $all_values['target']
+                        );
+                        Utils::checkboxField(
+                            name: 'target[]',
+                            id: 'Other people.',
+                            value: __('Other people.', 'cds-snc'),
+                            vals: $all_values['target'],
+                            ariaControls: 'optional-target'
+                        );
+                    ?>
                     </div>
                     <div id="optional-target" aria-hidden="false">
-                        <?php echo Utils::textField('target-optional', __('Other target audience', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'target-optional', label: __('Other target audience', 'cds-snc')); ?>
                     </div>
                 </div>
 
@@ -277,7 +278,7 @@ class RequestSiteForm
                     ><?php echo $all_values['timeline']; ?></textarea>
                 </div>
 
-                <?php echo Utils::submitButton(__('Next', 'cds-snc')); ?>
+                <?php Utils::submitButton(__('Next', 'cds-snc')); ?>
             </form>
             <?php }  // end of the big if ?>
         </div>

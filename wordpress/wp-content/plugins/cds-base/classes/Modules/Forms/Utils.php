@@ -23,7 +23,7 @@ class Utils
         return '';
     }
 
-    public static function textField(string $id, string $label, ?string $description = null, ?string $value = '', ?string $placeholder = null): string
+    public static function textField(string $id, string $label, ?string $description = null, ?string $value = '', ?string $placeholder = null, ?bool $echo = true)
     {
         $isEmail = $id === 'email';
         $isRequired = !str_ends_with($id, "optional");
@@ -56,10 +56,14 @@ class Utils
 
         $field = ob_get_contents();
         ob_end_clean();
-        return $field;
+
+        if (!$echo) {
+            return $field;
+        }
+        echo $field;
     }
 
-    public static function radioField(string $name, string $id, string $value): string
+    public static function radioField(string $name, string $id, string $value, ?bool $echo = true)
     {
         ob_start();
         ?>
@@ -81,10 +85,14 @@ class Utils
 
         $field = ob_get_contents();
         ob_end_clean();
-        return $field;
+
+        if (!$echo) {
+            return $field;
+        }
+        echo $field;
     }
 
-    public static function checkboxField(string $name, string $id, string $value, array|string $vals = null, string $ariaControls = null): string
+    public static function checkboxField(string $name, string $id, string $value, array|string $vals = null, string $ariaControls = null, ?bool $echo = true)
     {
         // set to empty array if a non-array is passed in
         $vals = is_array($vals) ? $vals : [];
@@ -116,10 +124,14 @@ class Utils
 
         $field = ob_get_contents();
         ob_end_clean();
-        return $field;
+
+        if (!$echo) {
+            return $field;
+        }
+        echo $field;
     }
 
-    public static function submitButton(string $label): string
+    public static function submitButton(string $label, ?bool $echo = true)
     {
         ob_start();
         ?>
@@ -130,6 +142,10 @@ class Utils
 
         $field = ob_get_contents();
         ob_end_clean();
-        return $field;
+
+        if (!$echo) {
+            return $field;
+        }
+        echo $field;
     }
 }

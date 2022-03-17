@@ -75,11 +75,11 @@ class Setup
             }
         }
 
-        if (isset($_POST['usage-other']) && $_POST['usage-other'] !== '') {
+        if (isset($_POST['usage-optional']) && $_POST['usage-optional'] !== '') {
             $message .=
                 "\n" .
                 '(Other) ' .
-                sanitize_text_field($_POST['usage-other']) .
+                sanitize_text_field($_POST['usage-optional']) .
                 "\n";
         }
 
@@ -93,11 +93,11 @@ class Setup
             }
         }
 
-        if (isset($_POST['target-other']) && $_POST['target-other'] !== '') {
+        if (isset($_POST['target-optional']) && $_POST['target-optional'] !== '') {
             $message .=
                 "\n" .
                 '(Other) ' .
-                sanitize_text_field($_POST['target-other']) .
+                sanitize_text_field($_POST['target-optional']) .
                 "\n";
         }
 

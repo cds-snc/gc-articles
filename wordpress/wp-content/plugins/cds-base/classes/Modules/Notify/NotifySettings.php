@@ -122,7 +122,7 @@ class NotifySettings
 
         add_settings_field(
             'notify_generic_template_id', // id
-            __('Notify Generic TemplateId', 'cds-snc'), // title
+            __('Notify Generic<br />Template ID', 'cds-snc'), // title
             array( $this, 'notifyGenericTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section', // section

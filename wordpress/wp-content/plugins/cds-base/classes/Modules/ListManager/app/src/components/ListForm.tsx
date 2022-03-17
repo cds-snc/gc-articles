@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { List, FieldError } from "../types";
 import { __ } from "@wordpress/i18n";
+import { Back } from "./Back";
 
 const textWidth = { width: "25em" }
 
@@ -118,7 +119,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                 </tr>
                 <tr>
                     <th></th>
-                    <td><input className="button button-primary" type="submit" /></td>
+                    <td><input className="button button-primary" type="submit" /><Back /></td>
                 </tr>
             </table>
         </form>

@@ -62,7 +62,7 @@ class ListManagerSettings
             $services[] = ["name" => __("Your Lists", "cds-snc"), "service_id" => $serviceId];
 
             ?>
-              <!-- app -->dd
+              <!-- app -->
               <div class="wrap">
                 <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
                 <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>

@@ -25,7 +25,14 @@ class Setup
             ]);
         });
 
+        add_action('wp_enqueue_scripts', [$this, 'enqueue']);
+
         new RequestSiteForm();
+    }
+
+    public function enqueue()
+    {
+        wp_enqueue_script('cds-url-typer-js', plugin_dir_url(__FILE__) . './src/url-typer.js', ['jquery'], "1.0.0", true);
     }
 
     protected function removeslashes($str)

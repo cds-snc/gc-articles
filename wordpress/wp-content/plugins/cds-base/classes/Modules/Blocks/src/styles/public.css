@@ -104,13 +104,9 @@ form * {
 }
 
 .gc-form-wrapper form .gc-description,
-.gc-form-wrapper form .gc-description ul li {
+.gc-form-wrapper form .gc-description * {
   font-size: 18px;
   line-height: 24px;
-}
-
-.gc-form-wrapper form .gc-description ul li {
-  margin-top: 5px;
 }
 
 .gc-form-wrapper form .gc-textarea {
@@ -146,3 +142,9 @@ form button.gc-button[disabled] {
   opacity: .7;
   cursor: progress;
 }
+
+/* URL Typer */
+.gc-form-wrapper div.url-typer {
+  margin-top: -.5em;
+  margin-bottom: 1.5em;
+} 

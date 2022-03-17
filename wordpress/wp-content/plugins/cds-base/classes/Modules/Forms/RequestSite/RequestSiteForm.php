@@ -153,12 +153,27 @@ class RequestSiteForm
                 ); ?>
             
                 <!-- start site -->
-                <?php Utils::textField(
-                    id: 'site',
-                    label: __('English title of your site', 'cds-snc'),
-                    description: __('This title will appear at the top of your site. You can change this later.', 'cds-snc'),
-                    value: $all_values['site']
-                ); ?>
+                <div class="focus-group">
+                    <label class="gc-label" for="site" id="site-label">
+                        <?php _e('English title of your site', 'cds-snc'); ?>
+                    </label>
+                    <div id="site-desc" class="gc-description" data-testid="description">
+                        <?php _e('This title will appear at the top of your site. You can change this later.', 'cds-snc'); ?>
+                    </div>
+                    <input 
+                        type="text" 
+                        class="gc-input-text" 
+                        id="site" 
+                        name="site" 
+                        value="<?php echo $all_values['site']; ?>"
+                        aria-describedby="url-typer"
+                        required
+                    />
+                    <div id="url-typer" class="url-typer gc-description" aria-live="polite" aria-atomic="true">
+                        <div class="url-typer--empty"><?php _e('Enter a title to preview your URL'); ?></div>
+                        <div class="url-typer--message displayNone"><?php _e('Your URL preview:'); ?> <strong>articles.alpha.canada.ca/<span id="url-typer__preview"></span></strong></div>
+                    </div>
+                </div>
                 <!-- end site -->
 
                 <!-- usage -->

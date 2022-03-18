@@ -24,8 +24,6 @@ class SiteSetup
         add_action('rest_api_init', [$this, 'registerRestRoutes']);
     }
 
-
-
     public function enqueue()
     {
         wp_enqueue_style(
@@ -56,6 +54,14 @@ class SiteSetup
                 return current_user_can('administrator');
             }
         ]);
+
+        register_rest_route('setup/v1', '/dismiss-options', [
+            'methods' => 'POST',
+            'callback' => [$this, 'dismissOptions'],
+            'permission_callback' => function () {
+                return current_user_can('administrator');
+            }
+        ]);
     }
 
     public function setOptions()
@@ -67,8 +73,9 @@ class SiteSetup
             update_option("collection_mode", "maintenance");
             update_option("blog_public", 0);
             update_option("options_set", 1);
-            update_option("options_set", 1);
             update_option("blogdescription", get_bloginfo("name"));
+            update_option("show_search", "on");
+            update_option("show_breadcrumbs", "on");
 
             if (isset($_POST['homeId'])) {
                 $homeId = intval($_POST['homeId']);
@@ -84,6 +91,12 @@ class SiteSetup
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public function dismissOptions()
+    {
+        update_option("options_set", 1);
+        return "options_set";
     }
 
     public function finishPanel()
@@ -106,8 +119,9 @@ class SiteSetup
         } ?>
         <div class="wrap">
             <div class="finish-setup-content">
+                <span id="finish-setup-dismiss" class="notice-dismiss"><span class="screen-reader-text"><?php _e("Dismiss", 'cds'); ?></span></span>
                 <h3><?php _e('Finish Site Setup', 'cds-snc'); ?></h3>
-                <p><?php _e("Your almost done.  Let's create some pages, articles and default settings.", 'cds-snc'); ?></p>
+                <p><?php _e("Your almost done.  Let's create some pages and default settings.", 'cds-snc'); ?></p>
                 <div class="actions">
                     <a class="button" id="add-pages" href="#"><?php _e("Let's go!", 'cds'); ?></a>
                 </div>
@@ -117,7 +131,6 @@ class SiteSetup
                         <div class="loader"></div>
                     </div>
                 </div>
-
             </div>
         </div>
         <?php

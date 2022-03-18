@@ -1,4 +1,5 @@
 .finish-setup-content {
+  position: relative;
   background-color: #26374a;
   padding: 1rem;
   margin: 16px 0;
@@ -7,9 +8,21 @@
   min-height:200px;
 }
 
+.finish-setup-content.notice-dismiss{
+  position: absolute;
+}
+
 .finish-setup-content h3 {
   margin: 0;
   font-size: 28px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #fff;
+}
+
+.finish-setup-content h4 {
+  margin: 0;
+  font-size: 22px;
   font-weight: 600;
   line-height: 1.25;
   color: #fff;

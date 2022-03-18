@@ -115,6 +115,11 @@ class SiteSettings
 
         register_setting(
             'site_settings_group', // option_group
+            'show_wet_menu',
+        );
+
+        register_setting(
+            'site_settings_group', // option_group
             'show_search',
         );
 
@@ -193,6 +198,17 @@ class SiteSettings
 
         // add fields MAINTENANCE
         add_settings_field(
+            'show_wet_menu', // id
+            __('Canada.ca top menu', 'cds-snc'), // title
+            array( $this, 'wetMenuCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_config', // section
+            [
+                'label_for' => 'show_wet_menu'
+            ]
+        );
+
+        add_settings_field(
             'show_search', // id
             __('Search bar', 'cds-snc'), // title
             array( $this, 'showSearchCallback'), // callback
@@ -227,6 +243,14 @@ class SiteSettings
 
         printf('<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">%s</label><br />', checked('maintenance', $collection_mode, false), __('Turn on', "cds-snc"));
         printf('<input type="radio" name="collection_mode" id="collection_live" value="live" %s /> <label for="collection_live">%s</label><br />', checked('live', $collection_mode, false), __('Turn off', "cds-snc"));
+    }
+
+    public function wetMenuCallback()
+    {
+        $show_wet_menu = get_option('show_wet_menu');
+
+        printf('<input type="radio" name="show_wet_menu" id="show_wet_menu_on" value="on" %s /> <label for="show_wet_menu_on">%s</label><br />', checked("on", $show_wet_menu, false), __('Show Canada.ca menu', "cds-snc"));
+        printf('<input type="radio" name="show_wet_menu" id="show_wet_menu_off" value="off" %s /> <label for="show_wet_menu_off">%s</label><br />', checked("off", $show_wet_menu, false), __('Hide Canada.ca menu', "cds-snc"));
     }
 
     public function showSearchCallback()

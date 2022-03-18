@@ -23,6 +23,12 @@ class SettingsFunctions
 
     public function addBodyClasses($classes)
     {
+        $showWetMenu = get_option('show_wet_menu');
+
+        if ($showWetMenu === 'off') {
+            $classes[] = 'hide-wet-menu';
+        }
+
         $showSearch = get_option('show_search');
 
         if ($showSearch === 'off') {

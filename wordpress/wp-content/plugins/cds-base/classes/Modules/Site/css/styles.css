@@ -10,7 +10,18 @@
 
 .finish-setup-content.notice-dismiss{
   position: absolute;
+  
 }
+
+#finish-setup-dismiss:before {
+  color: #fff !important;
+}
+
+#finish-setup-dismiss:hover:before {
+  color: #b3e3ff !important;
+}
+  
+  
 
 .finish-setup-content h3 {
   margin: 0;

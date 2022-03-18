@@ -87,6 +87,21 @@ API.setOptions = async ($, data) => {
    });
 }
 
+API.dismissOptions = async ($) => {
+   const endpoint = window.ADMIN_REST.ENDPOINT;
+   return new Promise(async (resolve, reject) => {
+      const result = await $.ajax({
+         type: "POST",
+         headers: {
+            'X-WP-Nonce': CDS_VARS.rest_nonce
+         },
+         url: endpoint + `/wp-json/setup/v1/dismiss-options`,
+      });
+      resolve(result);
+      $(".finish-setup-content").hide();
+   });
+}
+
 (function ($) {
 
    const BASE_SITE = "/template-site" // this is the site to pull content from
@@ -116,7 +131,12 @@ API.setOptions = async ($, data) => {
          await API.translatePage($, BASE_SITE, { post_id: maintenanceId, fr_slug: "maintenance-fr" });
 
          $('.loader-container').fadeOut();
-         $('.text-status').html(`Finished. You can now <a href="users.php?page=users-add">add a user</a>.`);
+         $('.text-status').html(`<h4>Finished 🎉</h4> 
+         <p>Next steps:<br><ul>
+         <li>Check <a href="options-general.php?page=collection-settings">site settings</a></li>
+         <li>Add <a href="users.php?page=users-add">user</a></li>
+         </ul></p>
+         `);
 
       } catch (e) {
          $('.text-status').text(`⚠️ Error: ${e.message}`);
@@ -137,5 +157,9 @@ API.setOptions = async ($, data) => {
             initSetup();
          });
       });
+   });
+
+   $(document).on("click", "#finish-setup-dismiss", async () => {
+      API.dismissOptions($);
    });
 })(jQuery);

@@ -13,7 +13,7 @@ Cypress.Commands.add('testSetup', ({ theme = 'cds-default' } = {}) => {
 
     cy.exec('npm run wp-env:clean', options);
     cy.exec('wp-env run tests-cli wp option delete list_values', options);
-    cy.exec('wp-env run tests-cli wp option add NOTIFY_API_KEY gc-articles-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
+    cy.exec('wp-env run tests-cli wp option add NOTIFY_API_KEY gc-articles-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx', options)
     cy.exec('wp-env run tests-cli wp option set list_values --format=json < ./cypress/fixtures/notify-list-data.json', options)
     cy.exec('wp-env run tests-cli wp plugin activate sitepress-multilingual-cms cds-base two-factor;', options)
     cy.exec('wp-env run tests-cli wp plugin activate s3-uploads disable-user-login;', options) // wps-hide-login

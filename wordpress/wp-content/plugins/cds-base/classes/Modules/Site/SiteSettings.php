@@ -249,8 +249,12 @@ class SiteSettings
     {
         $show_wet_menu = get_option('show_wet_menu');
 
+        printf('<div class="settings-warning">⚠️ <span>%s</span></div>', __('This setting will have no effect because you have a custom menu activated.', "cds-snc"));
+
+        printf('<div>');
         printf('<input type="radio" name="show_wet_menu" id="show_wet_menu_on" value="on" %s /> <label for="show_wet_menu_on">%s</label><br />', checked("on", $show_wet_menu, false), __('Show Canada.ca menu', "cds-snc"));
         printf('<input type="radio" name="show_wet_menu" id="show_wet_menu_off" value="off" %s /> <label for="show_wet_menu_off">%s</label><br />', checked("off", $show_wet_menu, false), __('Hide Canada.ca menu', "cds-snc"));
+        printf('</div>');
     }
 
     public function showSearchCallback()

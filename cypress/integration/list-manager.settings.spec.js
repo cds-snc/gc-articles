@@ -7,7 +7,7 @@ describe('List Manager Settings', () => {
     cy.login();
   });
 
-  it('Displays settings screen', () => {
+  it.skip('Displays settings screen', () => {
     cy.visit('/wp-admin/admin.php?page=cds_list_manager_settings');
 
     cy.get('h1').should('have.text', 'List Manager Settings');
@@ -15,7 +15,7 @@ describe('List Manager Settings', () => {
     cy.get('.api-key').should('be.empty');
   });
 
-  it('Can save settings', () => {
+  it.skip('Can save settings', () => {
     cy.visit('/wp-admin/admin.php?page=cds_list_manager_settings');
 
     // @todo update test

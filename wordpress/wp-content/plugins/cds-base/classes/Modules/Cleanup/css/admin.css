@@ -350,3 +350,30 @@ th.column-disable_user_login {
 .field-xfn, .field-description{
   display:none;
 }
+
+.edit-php .subsubsub{
+  display:none;
+}
+
+.icl_subsubsub{
+  font-size:18px;
+}
+
+.language_all{
+  display:none !important;
+}
+
+.icl_lang_menu{
+  font-size:18px;
+  position: relative;
+}
+
+.icl_lang_menu::after{
+  font-family: "dashicons";
+  position: absolute;
+  top:0px;
+  right:0px;
+  content: "\f349";
+  color: #26374a;
+}
+

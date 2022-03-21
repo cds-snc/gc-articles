@@ -18,7 +18,7 @@ class SettingsFunctions
 
     public function addActions()
     {
-        add_action('init', [$this, 'dequeuePrimaryMenu'], 999);
+        add_action('admin_head', [$this, 'dequeuePrimaryMenu']);
 
         add_filter('body_class', [$this, 'addBodyClasses']);
     }
@@ -53,7 +53,7 @@ class SettingsFunctions
 
         if (
             $showWetMenu === 'off' &&                   // if we _don't_ want to show the "wet menu"
-            array_key_exists('header', $locations) &&   // if there _is_ a header 'location'
+            array_key_exists('header', $locations) &&   // if there _is_ a 'header' location
             is_int($locations['header'])                // if 'header' is assigned to an integer
         ) {
             $current_page_path = $_SERVER['REQUEST_URI'];

@@ -5,6 +5,8 @@ const NEW_TAB_REL_DEFAULT_VALUE = 'noreferrer noopener';
 describe('Notify Panel', () => {
     before(() => {
         cy.testSetup();
+
+        // Setting this only for test runs that need it
         cy.exec('wp-env run tests-cli wp set_encrypted_option NOTIFY_API_KEY gc-articles-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
     });
 

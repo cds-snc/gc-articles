@@ -35,7 +35,7 @@ class Setup
             return ['error' => true, "error_message" => $nonceErrorMessage];
         }
 
-        $required_keys = ['fullname', 'email', 'goal', 'message'];
+        $required_keys = ['fullname', 'email', 'department', 'goal', 'message'];
         $empty_keys = [];
 
         foreach ($required_keys as $_key) {
@@ -61,10 +61,15 @@ class Setup
 
         $fullname = sanitize_text_field($_POST['fullname']);
         $email = sanitize_email($_POST['email']);
+        $department  = sanitize_text_field($_POST['department']);
+
         $goal = sanitize_text_field($_POST['goal']);
 
         $message = 'Goal of your message:' . "\n";
         $message .= $goal . "\n\n";
+
+        $message .= 'Department:' . "\n";
+        $message .= $department . "\n";
 
         if (isset($_POST['usage'])) {
             $message .=

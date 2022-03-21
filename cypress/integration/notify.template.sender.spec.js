@@ -6,7 +6,7 @@ describe('Notify Template Sender', () => {
     before(() => {
         cy.testSetup();
 
-        // Setting this only for test runs that need it
+        // Setting this only for test runs that need it so we don't cause Invalid ServiceID errors in other tests
         cy.exec('wp-env run tests-cli wp set_encrypted_option NOTIFY_API_KEY gc-articles-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx')
     });
 

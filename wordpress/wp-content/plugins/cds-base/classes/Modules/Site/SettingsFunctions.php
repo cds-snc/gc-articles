@@ -18,6 +18,8 @@ class SettingsFunctions
 
     public function addActions()
     {
+        add_action('init', [$this, 'dequeuePrimaryMenu'], 999);
+
         add_filter('body_class', [$this, 'addBodyClasses']);
     }
 
@@ -42,5 +44,28 @@ class SettingsFunctions
         }
 
         return $classes;
+    }
+
+    public function dequeuePrimaryMenu()
+    {
+        $showWetMenu = get_option('show_wet_menu');
+        $locations = get_nav_menu_locations();
+
+        if (
+            $showWetMenu === 'off' &&                   // if we _don't_ want to show the "wet menu"
+            array_key_exists('header', $locations) &&   // if there _is_ a header 'location'
+            is_int($locations['header'])                // if 'header' is assigned to an integer
+        ) {
+            $current_page_path = $_SERVER['REQUEST_URI'];
+
+            // if we are explicitly setting a menu, turn on the "show canada.ca menu" option
+            if (str_contains($current_page_path, "nav-menus.php")) {
+                update_option('show_wet_menu', 'on');
+            } else {
+                // if not, remove 'header' menu
+                $locations['header'] = null; // remove assigned menu
+                set_theme_mod('nav_menu_locations', $locations); // save the new "locations" array
+            }
+        }
     }
 }

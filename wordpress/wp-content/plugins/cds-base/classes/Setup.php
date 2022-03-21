@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS;
 
 use CDS\Modules\Cache\Cache;
+use CDS\Modules\Cli\EncryptedOptionCLI;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\Blocks\Blocks;
 use CDS\Modules\BlocksPHP\BlocksPHP;
@@ -159,5 +160,6 @@ class Setup
     public function setupCli()
     {
         GenerateEncryptionKey::register($this->encryptedOption);
+        EncryptedOptionCLI::register($this->encryptedOption);
     }
 }

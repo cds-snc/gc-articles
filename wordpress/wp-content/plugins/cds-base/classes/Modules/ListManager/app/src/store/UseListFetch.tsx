@@ -31,7 +31,7 @@ export const useListFetch = () => {
             })
             const REST_URL = window.CDS_VARS.rest_url;
             const REST_NONCE = window.CDS_VARS.rest_nonce;
-            await sendListData(`${REST_URL}list-manager/list/save`, REST_NONCE, { "list_values": lists });
+            await sendListData(`${REST_URL}list-manager-settings/list/save`, REST_NONCE, { "list_values": lists });
         }
 
         fetchData();

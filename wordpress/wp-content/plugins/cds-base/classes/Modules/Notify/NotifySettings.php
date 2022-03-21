@@ -62,7 +62,7 @@ class NotifySettings
         ?>
 
         <div class="wrap">
-            <h1><?php _e('Notify API Settings', 'cds-snc') ?></h1>
+            <h1><?php _e('Notify API Settings', 'cds-snc'); ?></h1>
             <p></p>
             <?php settings_errors(); ?>
 
@@ -122,7 +122,7 @@ class NotifySettings
 
         add_settings_field(
             'notify_generic_template_id', // id
-            __('Notify Generic TemplateId', 'cds-snc'), // title
+            __('Notify Generic<br />Template ID', 'cds-snc'), // title
             array( $this, 'notifyGenericTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section', // section
@@ -161,9 +161,18 @@ class NotifySettings
         if ($string = $this->NOTIFY_API_KEY) {
             $this->getObfuscatedOutputLabel($string, 'notify_api_key_value');
         }
+
         printf(
             '<input class="regular-text" type="text" name="NOTIFY_API_KEY" id="notify_api_key" aria-describedby="notify_api_key_value" value="">'
         );
+
+        $link = __('Read <a href="https://documentation.notification.canada.ca/en/keys.html" target="_blank">API keys</a> for details.', 'cds-snc');
+        printf('<div class="role-desc description">
+        <details>
+            <summary>%s. (%s)</summary>
+            <code>example_notify_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0</code>
+        </details>
+        <p class="description">%s</p>', __('Enter your API Key', 'cds-snc'), __('See example key format.', 'cds-snc'), $link);
     }
 
     public function notifyGenericTemplateIdCallback()
@@ -172,6 +181,14 @@ class NotifySettings
             '<input class="regular-text" type="text" name="NOTIFY_GENERIC_TEMPLATE_ID" id="notify_generic_template_id" value="%s">',
             $this->NOTIFY_GENERIC_TEMPLATE_ID ? $this->NOTIFY_GENERIC_TEMPLATE_ID : ''
         );
+
+        $link = __('Read the <a href="https://notification.canada.ca/format" target="_blank">Email formatting guide</a> for details.', 'cds-snc');
+        printf('<div class="role-desc description">
+        <details>
+            <summary>%s. (%s)</summary>
+            <code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
+        </details>
+        <p class="description">%s</p>', __('Enter your generic Email Template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link);
     }
 
     public function addStyles()

@@ -43,6 +43,12 @@ class SubscriptionForm
 
         $apiEndpoint = site_url() . '/wp-json/subscribe/v1/process';
 
+        if (!$listId) {
+            if (is_user_logged_in()) {
+                return __("No list selected", "cds-snc");
+            }
+            return "<!-- error no list selected -->";
+        }
         ob_start();
         ?>
         <div class="gc-form-wrapper">

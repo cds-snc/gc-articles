@@ -28,8 +28,17 @@ export const CreateList = () => {
     }, [response, request, cache, dispatch]);
 
     const onSubmit: SubmitHandler<List> = data => createList(data);
+    const formData = { 
+        service_id: serviceId, 
+        language: "en",
+        subscribe_redirect_url: "https://articles.alpha.canada.ca/thanks-for-subscribing-merci-pour-votre-labonnement",
+        unsubscribe_redirect_url: "https://articles.alpha.canada.ca/unsubscribed-from-mailing-list-labonnement-supprime",
+        confirm_redirect_url: "https://articles.alpha.canada.ca/confirmation"
+    }
 
-    return data.id ? <Navigate to={`/service/${serviceId}`} replace={true} /> : <ListForm formData={{}} serverErrors={[]} handler={onSubmit} />
+    
+
+    return data.id ? <Navigate to={`/service/${serviceId}`} replace={true} /> : <ListForm formData={formData} serverErrors={[]} handler={onSubmit} />
 }
 
 export default CreateList;

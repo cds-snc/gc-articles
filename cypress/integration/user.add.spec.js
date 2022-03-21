@@ -16,7 +16,7 @@ const assertRoleErrors = (cy) => {
 
 describe('Add user', () => {
   before(() => {
-    cy.testSetup();;
+    cy.testSetup();
   });
 
   after(() => { });

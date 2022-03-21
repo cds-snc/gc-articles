@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\Notify;
 
 use CDS\Modules\Notify\NotifyTemplateSender;
+use CDS\Modules\Notify\Utils;
 
 class SendTemplateDashboardPanel
 {
@@ -28,25 +29,11 @@ class SendTemplateDashboardPanel
 
     public function notifyPanelHandler(): void
     {
-        $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $serviceIds = [];
-
-        $services = Utils::deserializeServiceIds($serviceIdData);
-
-        foreach ($services as $key => $value) {
-            array_push($serviceIds, $value['service_id']);
+        if ($notifyApiKey = get_option('NOTIFY_API_KEY')) {
+            $service_id = Utils::extractServiceIdFromApiKey($notifyApiKey);
+            echo '<div id="notify-panel"></div>';
+            $data = 'CDS.Notify.renderPanel({ "sendTemplateLink" :true , serviceId: "' . $service_id . '"});';
+            wp_add_inline_script('cds-snc-admin-js', $data, 'after');
         }
-
-        // catch and add empty id
-        if (empty($serviceIds)) {
-            array_push($serviceIds, '');
-        }
-
-        echo '<div id="notify-panel"></div>';
-        $data =
-            'CDS.Notify.renderPanel({ "sendTemplateLink" :true , serviceId: "' .
-            $serviceIds[0] .
-            '"});';
-        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
     }
 }

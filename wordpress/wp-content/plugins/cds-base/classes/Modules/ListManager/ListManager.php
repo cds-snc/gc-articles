@@ -9,7 +9,7 @@ use WP_REST_Response;
 
 class ListManager
 {
-    protected string $listManagerAdminScreenName = 'bulk-send_page_cds_list_manager_app';
+    protected string $listManagerAdminScreenName = 'bulk-send_page_lists';
 
     public function __construct()
     {
@@ -38,7 +38,6 @@ class ListManager
                 $files = $data['files'];
 
                 wp_enqueue_style('list-manager', $files['main.css'], null, '1.0.0');
-
 
                 wp_enqueue_script(
                     'list-manager',

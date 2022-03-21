@@ -5,18 +5,14 @@ declare(strict_types=1);
 namespace CDS\Modules\Notify;
 
 use CDS\Utils as OptionUtils;
-use CDS\Modules\Notify\Utils;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\ListManager\ListManager;
-use InvalidArgumentException;
+use WP_REST_Request;
+use WP_REST_Response;
 
 class ListManagerSettings
 {
-    protected EncryptedOption $encryptedOption;
     protected string $admin_page = 'cds_notify_send';
-
-    private string $LIST_MANAGER_NOTIFY_SERVICES;
-    private string $list_values;
 
     public function __construct(EncryptedOption $encryptedOption)
     {
@@ -31,8 +27,6 @@ class ListManagerSettings
             $instance,
             'listManagerSettingsAddPluginPage',
         ]);
-        add_action('admin_init', [$instance, 'listManagerSettingsPageInit']);
-        add_action('admin_head', [$instance, 'addStyles']); // @TODO
 
         add_filter(
             'option_page_capability_list_manager_settings_option_group',
@@ -43,271 +37,65 @@ class ListManagerSettings
 
         add_action('rest_api_init', [$instance, 'registerRestRoutes']);
 
-        $encryptedOptions = ['LIST_MANAGER_NOTIFY_SERVICES'];
-
-        if (!\CDS\Utils::isWpEnv()) {
-            foreach ($encryptedOptions as $option) {
-                add_filter("pre_update_option_{$option}", [
-                    $instance,
-                    'encryptOption',
-                ]);
-                add_filter("option_{$option}", [$instance, 'decryptOption']);
-            }
-        }
-
         ListManager::register();
     }
 
     public function listManagerSettingsAddPluginPage()
     {
-        add_submenu_page(
-            $this->admin_page,
-            __('List Manager', 'cds-snc'),
-            __('Settings', 'cds-snc'),
-            'manage_list_manager',
-            'cds_list_manager_settings',
-            [$this, 'listManagerSettingsCreateAdminPage'],
-        );
-
         if (is_super_admin()) {
             add_submenu_page(
                 $this->admin_page,
-                __('List Manager', 'cds-snc'),
-                __('List Manager', 'cds-snc'),
+                __('Lists', 'cds-snc'),
+                __('Lists', 'cds-snc'),
                 'manage_list_manager',
-                'cds_list_manager_app',
-                [$this, 'listManagerAdminPage'],
+                'lists',
+                [$this, 'listManagerAppPage'],
             );
         }
     }
 
-    public function listManagerSettingsCreateAdminPage()
+    public function listManagerAppPage()
     {
-        $this->LIST_MANAGER_NOTIFY_SERVICES =
-            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        $this->list_values = get_option('list_values') ?: '';
-        ?>
+        if ($notifyApiKey = get_option('NOTIFY_API_KEY')) {
+            $serviceId = Utils::extractServiceIdFromApiKey($notifyApiKey);
 
-        <div class="wrap">
-            <h1><?php _e('List Manager Settings', 'cds-snc'); ?></h1>
-            <p></p>
-            <?php settings_errors(); ?>
+            $services[] = ["name" => __("Your Lists", "cds-snc"), "service_id" => $serviceId];
 
-            <form method="post" action="options.php" id="list_manager_settings_form" class="gc-form-wrapper">
-                <?php
-                settings_fields('list_manager_settings_option_group');
-                do_settings_sections('list-manager-settings-admin');
-                submit_button();?>
-            </form>
-        </div>
-        <?php
-    }
+            ?>
+              <!-- app -->
+              <div class="wrap">
+                <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+                <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>
+                </div>
+              </div>
+            <?php
+        } else {
+            ?>
+              <!-- app -->
+              <div class="wrap">
+                <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+                <p>
+                  <?php
+                    echo sprintf(
+                        __('You must configure your <a href="%s">Notify API Key</a>', 'cds-snc'),
+                        admin_url("options-general.php?page=notify-settings")
+                    );
+                    ?>
+                </p>
 
-    public function listManagerAdminPage()
-    {
-        $this->LIST_MANAGER_NOTIFY_SERVICES =
-            get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        get_option('LIST_MANAGER_NOTIFY_SERVICES') ?: '';
-        $this->list_values = get_option('list_values') ?: '';
-
-        $serviceIds = Utils::deserializeServiceIds(get_option('LIST_MANAGER_NOTIFY_SERVICES'));
-        $services = [];
-        foreach ($serviceIds as $key => $val) {
-            $services[] = ["name" => $key , "service_id" => $val["service_id"]];
+              </div>
+            <?php
         }
-        ?>
-        <!-- app -->
-        <div class="wrap">
-            <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
-            <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>
-            </div>
-        </div>
-        <?php
-    }
-
-    public function listManagerSettingsPageInit()
-    {
-        register_setting('list_manager_settings_option_group', 'list_values');
-
-        register_setting(
-            'list_manager_settings_option_group', // option_group
-            'LIST_MANAGER_NOTIFY_SERVICES',
-            function ($input) {
-                return Utils::mergeListManagerServicesString(
-                    sanitize_text_field($input),
-                    get_option('LIST_MANAGER_NOTIFY_SERVICES'),
-                );
-            },
-        );
-
-        add_settings_section(
-            'list_manager_settings_section', // id
-            __('List manager', 'cds-snc'), // title
-            [$this, 'listManagerSettingsSectionInfo'], // callback
-            'list-manager-settings-admin', // page
-        );
-
-        add_settings_field(
-            'list_values', // id
-            __('List details', 'cds-snc'), // title
-            [$this, 'listValuesCallback'], // callback
-            'list-manager-settings-admin', // page
-            'list_manager_settings_section', // section
-            [
-                'label_for' => 'list_values',
-            ],
-        );
-
-        add_settings_field(
-            'list_manager_notify_services', // id
-            __('Notify Services', 'cds-snc'), // title
-            [$this, 'listManagerNotifyServicesCallback'], // callback
-            'list-manager-settings-admin', // page
-            'list_manager_settings_section', // section
-            [
-                'label_for' => 'list_manager_notify_services',
-            ],
-        );
-    }
-
-    public function listManagerSettingsSectionInfo()
-    {
-    }
-
-    public function getObfuscatedOutputLabel($string, $labelId, $print = true)
-    {
-        $startsWith = substr($string, 0, 4);
-        $endsWith = substr($string, -4);
-
-        $hint = sprintf(
-            __(
-                '<span class="hidden_keys" id="%1$s">Current value: <span class="sr-only">Starts with </span>%2$s<span aria-hidden="true"> … </span><span class="sr-only"> and ends with</span>%3$s</span>',
-                'cds-snc',
-            ),
-            $labelId,
-            $startsWith,
-            $endsWith,
-        );
-
-        if ($print) {
-            echo $hint;
-            return;
-        }
-
-        return $hint;
-    }
-
-    public function listManagerNotifyServicesCallback()
-    {
-        $serviceIdData = get_option('LIST_MANAGER_NOTIFY_SERVICES');
-        $service_ids = Utils::deserializeServiceIds($serviceIdData);
-
-        $values = [];
-        $i = 0;
-        foreach ($service_ids as $key => $value) {
-            $hint = '';
-
-            // get obfuscated `hint` label
-            if (isset($value['api_key'])) {
-                $hint = $this->getObfuscatedOutputLabel(
-                    $value['api_key'],
-                    'list_manager_notify_services_value',
-                    false,
-                );
-            }
-
-            array_push($values, [
-                'id' => $i,
-                'apiKey' => '', // don't re-display in form field
-                'name' => $key,
-                'hint' => $hint,
-            ]);
-            $i++;
-        }
-
-        if (count($values) < 1) {
-            array_push($values, [
-                'id' => '',
-                'apiKey' => '',
-                'name' => '',
-                'hint' => '',
-            ]);
-        }
-
-        $values = json_encode($values);
-
-        printf(
-            '<p class="desc">' .
-                __(
-                    "Add the <a href='%s'>sending service</a> for your subscription lists.",
-                    'cds-snc',
-                ) .
-                '</p>',
-            'https://notification.canada.ca/accounts',
-        );
-
-        printf(
-            '<div id="notify-services-repeater-form" style="margin-top:20px;">notify services</div>',
-        );
-        $data = 'CDS.renderNotifyServicesRepeaterForm(' . $values . ');';
-        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
-    }
-
-    public function listValuesCallback()
-    {
-        $values = [];
-
-        if ($this->list_values) {
-            $values = json_decode($this->list_values);
-        }
-
-        if (count($values) < 1) {
-            array_push($values, [
-                'id' => '',
-                'label' => '',
-                'type' => '',
-            ]);
-        }
-
-        $values = json_encode($values);
-        printf(
-            "<p class='desc'>%s</p>",
-            __('Add details for each of your subscription lists.', 'cds-snc'),
-        );
-        printf('<div id="list-values-repeater-form"></div>');
-        $data = 'CDS.renderListValuesRepeaterForm(' . $values . ');';
-        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
-    }
-
-    public function addStyles()
-    {
-        ?><style type="text/css">
-        .hidden_keys {
-            padding-bottom: 3px;
-            display: block;
-            color: grey;
-        }
-    </style><?php
-    }
-
-    public function encryptOption($value): string
-    {
-        return $this->encryptedOption->encryptString($value);
-    }
-
-    public function decryptOption($value): string
-    {
-        return $this->encryptedOption->decryptString($value);
     }
 
     public function registerRestRoutes(): void
     {
-        register_rest_route('list-manager', '/list/save', [
+        register_rest_route('list-manager-settings', '/list/save', [
             'methods' => 'POST',
             'callback' => [$this, 'saveListValues'],
             'permission_callback' => function () {
-                return current_user_can('administrator');
+                return true;
+                #return current_user_can('administrator');
             }
         ]);
     }
@@ -318,13 +106,13 @@ class ListManagerSettings
      *
      * @return WP_REST_Response
      */
-    public function saveListValues($request)
+    public function saveListValues(WP_REST_Request $request): WP_REST_Response
     {
         try {
             OptionUtils::addOrUpdateOption("list_values", json_encode($request['list_values']));
-            return ["success" => true];
+            return new WP_REST_Response(["success" => true]);
         } catch (\Exception $e) {
-            return ["success" => false, "error_message" => $e->getMessage()];
+            return new WP_REST_Response(["success" => false, "error_message" => $e->getMessage()]);
         }
     }
 }

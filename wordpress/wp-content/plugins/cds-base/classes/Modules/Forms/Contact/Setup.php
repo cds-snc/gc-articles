@@ -61,7 +61,7 @@ class Setup
 
         $fullname = sanitize_text_field($_POST['fullname']);
         $email = sanitize_email($_POST['email']);
-        $department  = sanitize_text_field($_POST['department ']);
+        $department  = sanitize_text_field($_POST['department']);
 
         $goal = sanitize_text_field($_POST['goal']);
 

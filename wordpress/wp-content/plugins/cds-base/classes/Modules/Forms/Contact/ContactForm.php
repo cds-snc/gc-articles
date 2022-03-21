@@ -37,6 +37,7 @@ class ContactForm
 
                     Utils::textField(id: 'fullname', label: __('Full name', 'cds-snc'));
                     Utils::textField(id: 'email', label: __('Email', 'cds-snc'));
+                    Utils::textField(id: 'department', label: __('Department ', 'cds-snc'));
                 ?>
             
                 <!-- goal of your message -->

@@ -9,9 +9,14 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use PHPUnit\TextUI\Exception;
 use CDS\Modules\Forms\Utils;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
 class Setup
 {
+    protected string $redirect = '';
+
     public function __construct()
     {
         /*
@@ -83,10 +88,19 @@ class Setup
                     "email" => $email,
                     "list_id" => $listId,
                     "service_api_key" => get_option('NOTIFY_API_KEY')
+                ],
+                'allow_redirects' => [
+                    'on_redirect' => function (
+                        RequestInterface $request,
+                        ResponseInterface $response,
+                        UriInterface $uri
+                    ) {
+                        $this->redirect = strval($uri);
+                    }
                 ]
             ]);
 
-            return ["success" => __("Thanks for subscribing", "cds-snc")];
+            return ["success" => __("Thanks for subscribing", "cds-snc"), "redirect" => $this->redirect];
         } catch (ClientException $exception) {
             $error = $this->handleException($exception);
             return ["error" => $error];
@@ -124,6 +138,6 @@ class Setup
         $email = sanitize_email($_POST["email"]);
         $listId = sanitize_text_field($_POST['list_id']);
 
-        return json_encode($this->subscribe($email, $listId));
+        return $this->subscribe($email, $listId);
     }
 }

@@ -60,3 +60,25 @@ test('asserts createTicket returns Zendesk server error generic exception', func
             'error_message' => 'ZenDesk server error']
     );
 });
+
+test('asserts adds Demo tag for demo requests', function () {
+    $messenger = new Messenger();
+    $goal = "I'm looking for a demo of GC Articles";
+    $tags = $messenger->mergeTags($goal);
+    expect($tags)->toMatchArray(["articles_api","demo_request"]);
+
+    $goal = "Je cherche une démo de GC Articles";
+    $tags = $messenger->mergeTags($goal);
+    expect($tags)->toMatchArray(["articles_api","demo_request"]);    
+});
+
+test('asserts no demo tag added when not requested', function () {
+    $messenger = new Messenger();
+    $goal = "I'm looking for contact information";
+    $tags = $messenger->mergeTags($goal);
+    expect($tags)->toMatchArray(["articles_api"]);
+
+    $goal = "je recherche des coordonnées";
+    $tags = $messenger->mergeTags($goal);
+    expect($tags)->toMatchArray(["articles_api"]);
+});

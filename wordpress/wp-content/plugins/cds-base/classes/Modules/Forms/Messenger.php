@@ -63,15 +63,32 @@ class Messenger
         }
     }
 
+    public function detectTags($str)
+    {
+        if (str_contains($str, 'demo')) {
+            return ['demo_request'];
+        }
+
+        if (str_contains($str, 'démo')) {
+            return ['demo_request'];
+        }
+
+        return [];
+    }
+
+    public function mergeTags($goal)
+    {
+        return array_merge(['articles_api'], $this->detectTags($goal));
+    }
+
     public function createTicket(
         string $goal,
         string $fullname,
         string $email,
-        string $message,
+        string $message
     ): array {
         try {
             $client = $this->getGuzzleClient();
-
             $response = $client->request('POST', getenv('ZENDESK_API_URL') . '/api/v2/requests', [
                 'json' =>  [
                     'request' => [
@@ -80,7 +97,7 @@ class Messenger
                         'email' => $email,
                         'comment' => ['body' => $message],
                         'requester' => ['name' => $fullname, 'email' => $email],
-                        'tags' => ['articles_api'],
+                        'tags' => $this->mergeTags($goal),
                         'is_public' => true,
                         'recipient' => 'platform-mvp@cds-snc.ca',
                         'type' => 'question'

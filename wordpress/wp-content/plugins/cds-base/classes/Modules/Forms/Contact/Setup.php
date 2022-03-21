@@ -69,7 +69,7 @@ class Setup
         $message .= $goal . "\n\n";
 
         $message .= 'Department:' . "\n";
-        $message .= $department;
+        $message .= $department . "\n";
 
         if (isset($_POST['usage'])) {
             $message .=

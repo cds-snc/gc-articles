@@ -99,8 +99,6 @@ class ListManager
         $response_code = $proxy_response["response"]["code"];
         $response_body = $proxy_response["body"];
 
-        error_log(serialize($response_code));
-
         // Return response and code
         $response = new WP_REST_Response(json_decode($response_body));
         $response->set_status($response_code);

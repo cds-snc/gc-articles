@@ -95,10 +95,11 @@ class ListManager
 
         // Proxy request to list-manager
         $proxy_response = wp_remote_request($url, $args);
-
         // Retrieve information
         $response_code = $proxy_response["response"]["code"];
         $response_body = $proxy_response["body"];
+
+        error_log(serialize($response_code));
 
         // Return response and code
         $response = new WP_REST_Response(json_decode($response_body));

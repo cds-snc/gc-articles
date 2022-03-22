@@ -195,6 +195,12 @@ function get_language_text($lang = ''): array
     return ['full' => 'English', 'abbr' => 'en'];
 }
 
+function get_fip_url(): string
+{
+    $fipUrl = get_option('fip_href');
+    return $fipUrl ? esc_url($fipUrl) : home_url();
+}
+
 function get_active_language(): string
 {
     if (function_exists('icl_get_languages')) {

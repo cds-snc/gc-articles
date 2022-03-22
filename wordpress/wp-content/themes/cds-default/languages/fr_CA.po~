@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-01-11T18:00:25+00:00\n"
+"POT-Creation-Date: 2022-03-14T20:40:20+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,11 +28,11 @@ msgstr "SNC"
 
 #: 404.php:18
 msgid "Page not found."
-msgstr "la page n'a pas été trouvée"
+msgstr "la page n’a pas été trouvée"
 
 #: 404.php:25
 msgid "It looks like nothing was found at this location."
-msgstr "Rien n'a été trouvé à cette adresse."
+msgstr "Rien n’a été trouvé à cette adresse."
 
 #: functions.php:78
 msgid "Primary"
@@ -84,11 +84,11 @@ msgstr "rouge"
 
 #: functions.php:202
 msgid "GC Homepage"
-msgstr "Page d'accueil GC"
+msgstr "Page d’accueil GC"
 
 #: functions.php:219
 msgid "Default homepage"
-msgstr "Page d'accueil par défaut"
+msgstr "Page d’accueil par défaut"
 
 #: header.php:37
 msgid "Skip to content"
@@ -116,7 +116,7 @@ msgstr "le prochain article de blog"
 
 #: inc/template-functions.php:48
 msgid "Previous blog post"
-msgstr "l'article de blog précédent"
+msgstr "l’article de blog précédent"
 
 #: inc/template-functions.php:93
 msgid "Older posts"
@@ -134,19 +134,19 @@ msgstr "navigation dans les articles"
 msgid "Posts"
 msgstr "Articles"
 
-#: inc/template-functions.php:167
+#: inc/template-functions.php:168
 msgid "Breadcrumbs"
-msgstr "Fil d'Ariane"
+msgstr "Fil d’Ariane"
 
-#: inc/template-functions.php:169
+#: inc/template-functions.php:170
 msgid "You are here:"
 msgstr "Tu es là"
 
-#: inc/template-functions.php:396
+#: inc/template-functions.php:397
 msgid "Top menu"
 msgstr "navigation supérieure"
 
-#: inc/template-functions.php:397
+#: inc/template-functions.php:398
 msgid "submenu"
 msgstr "sous-navigation"
 
@@ -167,7 +167,7 @@ msgstr "les résultats de la recherche de: %s"
 
 #: template-parts/content-none.php:17
 msgid "Nothing Found"
-msgstr "Il n'y avait rien trouvé"
+msgstr "Il n’y avait rien trouvé"
 
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content-none.php:26
@@ -182,12 +182,12 @@ msgid ""
 "Sorry, but nothing matched your search terms. Please try again with some "
 "different keywords."
 msgstr ""
-"Désolé, rien n'a été trouvé avec votre recherche. Veuillez réessayer avec "
-"d'autres mots-clés."
+"Désolé, rien n’a été trouvé avec votre recherche. Veuillez réessayer avec "
+"d’autres mots-clés."
 
 #: template-parts/content-none.php:44
 msgid "Nothing found! Perhaps searching can help."
-msgstr "Rien n'a été trouvé. s'il vous plaît essayez de rechercher"
+msgstr "Rien n’a été trouvé. s’il vous plaît essayez de rechercher"
 
 #: template-parts/content-page.php:26
 msgid "Pages:"

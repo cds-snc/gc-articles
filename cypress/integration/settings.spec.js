@@ -31,6 +31,6 @@ describe('Site Settings', () => {
     
     // should be logged out
     cy.visit('/')
-    cy.get('h1').should('have.text', "We're currently working on this");
+    cy.get('h1').should('have.text', "We’re currently working on this");
   })
 });

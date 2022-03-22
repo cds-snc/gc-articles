@@ -69,7 +69,7 @@ class RequestSiteForm
                 <form id="cds-form" method="POST" action="/wp-json/request/v1/process">
                 <p>
                     <?php
-                    echo _e('Site administrator details. ', 'cds-snc');
+                    echo _e('Site administrator details.', 'cds-snc');
                     echo _e('(Step 2 of 2)', 'cds-snc');
                     ?>
                 </p>
@@ -112,7 +112,7 @@ class RequestSiteForm
                             <?php _e('Reminder: Only use GC Articles for information that is not sensitive and can be shared publicly.', 'cds-snc'); ?>
                         </li>
                         <li>
-                            <?php _e('Make sure you’re allowed to publsh this information on behalf of the Government of Canada.', 'cds-snc'); ?>
+                            <?php _e('Make sure you’re allowed to publish this information on behalf of the Government of Canada.', 'cds-snc'); ?>
                         </li>
                     </ul>
                 </div>
@@ -170,8 +170,8 @@ class RequestSiteForm
                         required
                     />
                     <div id="url-typer" class="url-typer gc-description" aria-live="polite" aria-atomic="true">
-                        <div class="url-typer--empty"><?php _e('Enter a title to preview your URL'); ?></div>
-                        <div class="url-typer--message displayNone"><?php _e('Your URL preview:'); ?> <strong>articles.alpha.canada.ca/<span id="url-typer__preview"></span></strong></div>
+                        <div class="url-typer--empty"><?php _e('Enter a title to preview your URL', 'cds-snc'); ?></div>
+                        <div class="url-typer--message displayNone"><?php _e('Your URL preview:', 'cds-snc'); ?> <strong>articles.alpha.canada.ca/<span id="url-typer__preview"></span></strong></div>
                     </div>
                 </div>
                 <!-- end site -->

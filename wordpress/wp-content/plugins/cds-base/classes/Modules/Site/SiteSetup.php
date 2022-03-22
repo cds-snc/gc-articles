@@ -121,7 +121,7 @@ class SiteSetup
             <div class="finish-setup-content">
                 <span id="finish-setup-dismiss" class="notice-dismiss"><span class="screen-reader-text"><?php _e("Dismiss", 'cds'); ?></span></span>
                 <h3><?php _e('Finish Site Setup', 'cds-snc'); ?></h3>
-                <p><?php _e("You're almost done.  Let's create some pages and default settings.", 'cds-snc'); ?></p>
+                <p><?php _e("You’re almost done.  Let’s create some pages and default settings.", 'cds-snc'); ?></p>
                 <div class="actions">
                     <a class="button" id="add-pages" href="#"><?php _e("Let's go!", 'cds'); ?></a>
                 </div>

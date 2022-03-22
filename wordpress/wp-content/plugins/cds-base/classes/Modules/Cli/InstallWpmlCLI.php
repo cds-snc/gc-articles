@@ -21,7 +21,7 @@ class InstallWpmlCLI
         $instance = new self($wpml);
 
         add_action('cli_init', function () use ($instance) {
-            WP_CLI::add_command('install-wpml', [$instance, 'installWpml']);
+            WP_CLI::add_command('configure-wpml', [$instance, 'installWpml']);
         });
     }
 

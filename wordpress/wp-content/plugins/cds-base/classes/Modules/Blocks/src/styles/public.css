@@ -97,6 +97,11 @@ header .gcweb-menu {
   display: none;
 }
 
+/* Hide menu (keeps the blue bar) */
+.hide-wet-menu .gcweb-menu .container {
+  display: none;
+}
+
 /* Forms */
 form * {
   font-size: 20px;

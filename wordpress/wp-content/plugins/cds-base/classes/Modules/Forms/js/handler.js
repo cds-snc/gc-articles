@@ -43,6 +43,12 @@
             url: url,
             data: $form.serialize(), // serializes the form's elements.
             success: function (data) {
+                // handle redirect if provided
+                if(data.redirect) {
+                    window.location.href = data.redirect
+                    return;
+                }
+
                 // re-enable button
                 $button.prop('disabled', false);
 

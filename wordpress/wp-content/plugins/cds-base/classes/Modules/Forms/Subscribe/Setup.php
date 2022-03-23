@@ -24,6 +24,24 @@ class Setup
                     return '';
                 }
             ]);
+
+            $unsubscribe = new Unsubscribe();
+            register_rest_route('subscribe/v1', '/unsubscribe/(?P<id>[a-z0-9\-_/]*)', [
+                'methods' => 'GET',
+                'callback' => [$unsubscribe, 'unsubscribe'],
+                'permission_callback' => function () {
+                    return '';
+                }
+            ]);
+
+            $confirm = new Confirm();
+            register_rest_route('subscribe/v1', '/confirm/(?P<id>[a-z0-9\-_/]*)', [
+                'methods' => 'GET',
+                'callback' => [$confirm, 'confirm'],
+                'permission_callback' => function () {
+                    return '';
+                }
+            ]);
         });
 
         new SubscriptionForm();

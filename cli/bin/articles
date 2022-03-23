@@ -149,7 +149,6 @@ if [ $# -gt 0 ]; then
 
         if [ "$EXEC" == "yes" ]; then
             docker-compose exec \
-                -u sail \
                 "$CLI_SERVICE" \
                 bash "$@"
         else
@@ -180,6 +179,11 @@ if [ $# -gt 0 ]; then
           "$CLI_SERVICE" \
           bash < ./cli/bin/db-cleanup-list.sh
       fi
+
+    elif [ "$1" == "configure-wpml" ]; then
+        docker exec -i \
+          "$CLI_SERVICE" \
+          bash < ./cli/bin/configure-wpml.sh
 
     # Pass unknown commands to the "docker-compose" binary...
     else

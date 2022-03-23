@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Wpml;
 
+use CDS\Modules\Cli\InstallWpmlCLI;
 use WPML\Collect\Support\Collection;
 use WPML\Media\Setup\Endpoint\PrepareSetup;
 use WPML\Media\Translate\Endpoint\DuplicateFeaturedImages;
@@ -115,6 +116,8 @@ class Installer
     {
         $instance = new self();
 
+        InstallWpmlCLI::register($instance);
+
         add_action('wp_initialize_site', [$instance, 'onInit']);
     }
 
@@ -143,8 +146,17 @@ class Installer
     {
         switch_to_blog($newSite->id);
 
+        $this->installWpml();
+
+        restore_current_blog();
+    }
+
+    public function installWpml()
+    {
         // If this doesn't exist, WPML doesn't exist
         if (function_exists('icl_sitepress_activate')) {
+            $this->updateLangLocale();
+
             // Activates the plugin and installs database tables for new site
             icl_sitepress_activate();
 
@@ -153,10 +165,6 @@ class Installer
                 $this->runAction($step['endpoint'], new Collection($step['data']));
             }
         }
-
-        $this->updateLangLocale();
-
-        restore_current_blog();
     }
 
     /**
@@ -174,7 +182,7 @@ class Installer
     /**
      * Updates the default WPML en/fr language locales to CA
      */
-    protected function updateLangLocale()
+    public function updateLangLocale()
     {
         global $wpdb;
 

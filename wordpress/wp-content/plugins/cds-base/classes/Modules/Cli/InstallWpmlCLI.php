@@ -27,6 +27,12 @@ class InstallWpmlCLI
 
     public function installWpml()
     {
+        if (!getenv("WPML_SITE_KEY")) {
+            WP_CLI::error("You must set your WPML_SITE_KEY in your environment");
+            exit;
+        }
+
         $this->wpml->installWpml();
+        WP_CLI::success("WPML has been installed");
     }
 }

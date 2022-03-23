@@ -6,6 +6,7 @@ namespace CDS\Modules\Forms\Subscribe;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use WP_REST_Request;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -39,17 +40,18 @@ class Confirm
                     }
                 ]
             ]);
-        } catch (ClientException $e) {
-            // @TODO: handle error responses (including 404 not found)
+        } catch (ClientException $e) { // @TODO: handle 400 level error responses
             error_log($e->getMessage());
-        }
+        } catch (ServerException $e) { // @TODO: handle 500 level error responses
+            error_log($e->getMessage());
+        } // @TODO: handle GuzzleHttp\Exception\ConnectException (retry?)
 
         if ($this->redirect) {
             wp_redirect($this->redirect);
             exit();
         }
 
-        // @TODO: What do we do if no redirect set?
+        // @TODO: What do we do if no redirect set? Or default action on error?
         error_log($request['id']);
     }
 }

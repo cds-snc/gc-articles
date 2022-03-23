@@ -26,7 +26,7 @@ class Setup
             ]);
 
             $unsubscribe = new Unsubscribe();
-            register_rest_route('subscribe/v1', '/unsubscribe/(?P<id>[a-z0-9\-_/]*)', [
+            register_rest_route('subscription', '/(?P<id>[a-z0-9\-_/]*)/unsubscribe', [
                 'methods' => 'GET',
                 'callback' => [$unsubscribe, 'unsubscribe'],
                 'permission_callback' => function () {
@@ -35,7 +35,7 @@ class Setup
             ]);
 
             $confirm = new Confirm();
-            register_rest_route('subscribe/v1', '/confirm/(?P<id>[a-z0-9\-_/]*)', [
+            register_rest_route('subscription', '/(?P<id>[a-z0-9\-_/]*)/confirm', [
                 'methods' => 'GET',
                 'callback' => [$confirm, 'confirm'],
                 'permission_callback' => function () {

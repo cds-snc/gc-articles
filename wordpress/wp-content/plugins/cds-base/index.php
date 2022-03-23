@@ -7,6 +7,8 @@
  * Version: 2.19.0
  * Update URI: false
  * Author: CDS-SNC
+ * Text Domain: cds-snc
+ * Domain Path: /languages
  *
  * @package cds-snc-base
  */

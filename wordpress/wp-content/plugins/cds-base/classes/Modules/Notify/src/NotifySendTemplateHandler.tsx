@@ -22,7 +22,7 @@ const handleSubmit = async ({
       __('This list has ', 'cds-snc') +
       list.subscriber_count +
       __(' subscribers.  ', 'cds-snc');
-    text += __("You won't be able to revert this", 'cds-snc');
+    text += __("You won’t be able to revert this", 'cds-snc');
 
     let confirmed = await confirmSend(text);
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-$title = __("We're currently working on this", "cds-snc");
+$title = __("We’re currently working on this", "cds-snc");
 $content = "";
 $maintenance_page_id = get_option('collection_mode_maintenance_page');
 

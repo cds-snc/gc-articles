@@ -40,18 +40,23 @@ class Confirm
                     }
                 ]
             ]);
-        } catch (ClientException $e) { // @TODO: handle 400 level error responses
+        } catch (ClientException $e) {
             error_log($e->getMessage());
-        } catch (ServerException $e) { // @TODO: handle 500 level error responses
+            wp_redirect('/list-manager-error');
+            exit();
+        } catch (ServerException $e) {
             error_log($e->getMessage());
-        } // @TODO: handle GuzzleHttp\Exception\ConnectException (retry?)
+            wp_redirect('/list-manager-error');
+            exit();
+        }
 
+        // If a redirect was returned from the endpoint, handle it
         if ($this->redirect) {
             wp_redirect($this->redirect);
             exit();
         }
 
-        // @TODO: What do we do if no redirect set? Or default action on error?
-        error_log($request['id']);
+        // Default redirect
+        wp_redirect('/confirmation');
     }
 }

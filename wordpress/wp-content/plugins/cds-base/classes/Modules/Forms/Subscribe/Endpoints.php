@@ -14,7 +14,6 @@ class Endpoints
          */
         add_action('rest_api_init', function () {
             $subscribe = new Subscribe();
-
             register_rest_route('subscribe/v1', '/process/', [
                 'methods' => 'POST',
                 'callback' => [$subscribe, 'confirmSubscription'],

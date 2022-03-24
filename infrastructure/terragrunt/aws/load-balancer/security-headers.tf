@@ -8,10 +8,6 @@ resource "aws_cloudfront_response_headers_policy" "security_headers_policy" {
       frame_option = "SAMEORIGIN"
       override     = true
     }
-    # referrer_policy {
-    #   referrer_policy = "same-origin"
-    #   override        = true
-    # }
     xss_protection {
       mode_block = true
       protection = true
@@ -23,9 +19,9 @@ resource "aws_cloudfront_response_headers_policy" "security_headers_policy" {
       preload                    = true
       override                   = true
     }
-    content_security_policy {
-      content_security_policy = "frame-ancestors 'none'; default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'"
-      override                = true
-    }
+    # content_security_policy {
+    #   content_security_policy = "frame-ancestors 'none'; default-src 'none'; img-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'"
+    #   override                = true
+    # }
   }
 }

@@ -17,7 +17,7 @@ class Setup
     {
         new SetupRequestSiteForm();
         new SetupContactForm();
-        new SetupSubscribeForm();
+        SetupSubscribeForm::register();
 
         add_action('wp_enqueue_scripts', [$this, 'enqueue']);
     }

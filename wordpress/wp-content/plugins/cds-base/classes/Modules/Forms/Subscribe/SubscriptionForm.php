@@ -8,12 +8,13 @@ use CDS\Modules\Forms\Utils;
 
 class SubscriptionForm
 {
-    public function __construct()
+    public static function register()
     {
-        add_action('init', [$this, 'register']);
+        $instance = new self();
+        add_action('init', [$instance, 'registerShortCode']);
     }
 
-    public function register()
+    public function registerShortCode()
     {
         add_shortcode('subscribe', [$this, 'render']);
     }

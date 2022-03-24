@@ -60,6 +60,8 @@ resource "aws_cloudfront_distribution" "wordpress" {
     default_ttl            = 86400
     max_ttl                = 31536000
     compress               = true
+
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy.id
   }
 
   ordered_cache_behavior {

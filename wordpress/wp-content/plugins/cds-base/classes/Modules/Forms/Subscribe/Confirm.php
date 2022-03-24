@@ -20,11 +20,7 @@ class Confirm
     {
         $subscriptionId = $request['id'];
 
-        $client = new Client([
-            'headers' => [
-                "Authorization" => getenv('DEFAULT_LIST_MANAGER_API_KEY')
-            ]
-        ]);
+        $client = new Client();
 
         $endpoint = getenv('LIST_MANAGER_ENDPOINT');
 

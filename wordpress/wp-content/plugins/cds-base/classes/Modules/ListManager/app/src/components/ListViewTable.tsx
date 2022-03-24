@@ -68,7 +68,7 @@ const CreateListLink = () => {
     return <Link className="button button-primary" to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
-const UploadListLink = ({ name, listId, serviceId }: { name: string, listId: string, serviceId: string|undefined }) => {
+const UploadListLink = ({ name, listId, serviceId }: { name: string, listId: string, serviceId: string | undefined }) => {
     return <Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/service/${serviceId}/list/${listId}/upload` }}>Upload List</Link>
 }
 
@@ -138,13 +138,6 @@ export const ListViewTable = () => {
                                         <DetailsLinkStyles><a href={templateLink(values.serviceId, values.subscribe_email_template_id)}>Subscribe</a></DetailsLinkStyles>
                                         <DetailsLinkStyles><a href={templateLink(values.serviceId, values.unsubscribe_email_template_id)}>Unsubscribe</a></DetailsLinkStyles>
                                     </TemplateGroupStyles>
-
-                                    <TemplateGroupStyles>
-                                        <div><strong>Phone</strong></div>
-                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.subscribe_phone_template_id)}>Subscribe</a></DetailsLinkStyles>
-                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.unsubscribe_phone_template_id)}>Unsubscribe</a></DetailsLinkStyles>
-                                    </TemplateGroupStyles>
-
                                     <TemplateGroupStyles>
                                         <div><strong>Confirm Url</strong></div>
                                         <DetailsLinkStyles><a href={values.confirm_redirect_url}>Confirm</a></DetailsLinkStyles>

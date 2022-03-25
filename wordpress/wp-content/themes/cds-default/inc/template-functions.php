@@ -198,7 +198,8 @@ function get_language_text($lang = ''): array
 function get_fip_url(): string
 {
     $fipUrl = get_option('fip_href');
-    return $fipUrl ? esc_url($fipUrl) : home_url();
+    $value = $fipUrl ? esc_url($fipUrl) : home_url();
+    return str_replace('http://', 'https://', $value);
 }
 
 function get_active_language(): string

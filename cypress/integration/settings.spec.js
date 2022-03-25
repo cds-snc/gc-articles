@@ -27,7 +27,7 @@ describe('Site Settings', () => {
 
     cy.visit('/');
 
-    cy.get('header .brand a').should("have.attr", "href", "http://canada.ca/en.html");
+    cy.get('header .brand a').should("have.attr", "href", "https://canada.ca/en.html");
   });
 
   it('Can save collection settings and show maintenance page', () => {

@@ -289,6 +289,7 @@ class SiteSettings
     {
         $fipUrl = get_option("fip_href", "");
         $value = $fipUrl ? esc_url($fipUrl) : home_url();
+        $value = str_replace('http://', 'https://', $value);
 
         ?>
         <input name="fip_href" type="text" id="fip_href" class="regular-text" value="<?php echo $value; ?>">

@@ -15,10 +15,10 @@ class Markdown
         add_action('rest_api_init', [$instance, 'addMarkdownToPages']);
     }
 
-    public static function render($post)
+    public static function render($content)
     {
         $converter = new HtmlConverter(array('header_style' => 'atx'));
-        return $converter->convert($post['content']['rendered']);
+        return $converter->convert($content);
     }
 
     public function addMarkdownToPages()
@@ -27,15 +27,18 @@ class Markdown
          * Add a 'markdown' field to the REST response for a page
          * Returns content rendered in Markdown format
          */
-        register_rest_field('page', 'markdown', array(
+         register_rest_field('page', 'markdown', array(
             'get_callback' => function ($post, $field_name, $request) {
-                return ["rendered" => Markdown::render($post)];
+                return [
+                    'excerpt' => ["rendered" => Markdown::render($post['excerpt']['rendered'])],
+                    'content' => ["rendered" => Markdown::render($post['content']['rendered'])]
+                ];
             },
             'update_callback' => null,
             'schema' => array(
                 'description' => __('Page content markdown', 'cds-snc'),
                 'type'        => 'string'
             ),
-        ));
+         ));
     }
 }

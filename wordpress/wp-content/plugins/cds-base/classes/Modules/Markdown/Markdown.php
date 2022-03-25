@@ -12,7 +12,7 @@ class Markdown
     {
         $instance = new self();
 
-        add_action('rest_api_init', [$instance, 'addMarkdownToPages']);
+        add_action('rest_api_init', [$instance, 'addMarkdownToPagesAndPosts']);
     }
 
     public static function render($content)
@@ -21,7 +21,15 @@ class Markdown
         return $converter->convert($content);
     }
 
-    public function addMarkdownToPages()
+    public function post2Markdown($post): array
+    {
+        return [
+            'excerpt' => ["rendered" => Markdown::render($post['excerpt']['rendered'])],
+            'content' => ["rendered" => Markdown::render($post['content']['rendered'])]
+        ];
+    }
+
+    public function addMarkdownToPagesAndPosts()
     {
 
         $markdown = false;
@@ -38,18 +46,26 @@ class Markdown
          * Add a 'markdown' field to the REST response for a page
          * Returns content rendered in Markdown format
          */
-         register_rest_field('page', 'markdown', array(
+        register_rest_field('page', 'markdown', array(
             'get_callback' => function ($post, $field_name, $request) {
-                return [
-                    'excerpt' => ["rendered" => Markdown::render($post['excerpt']['rendered'])],
-                    'content' => ["rendered" => Markdown::render($post['content']['rendered'])]
-                ];
+                return $this->post2Markdown($post);
             },
             'update_callback' => null,
             'schema' => array(
-                'description' => __('Page content markdown', 'cds-snc'),
+                'description' => __('Page content as markdown', 'cds-snc'),
                 'type'        => 'string'
             ),
-         ));
+        ));
+
+        register_rest_field('post', 'markdown', array(
+            'get_callback' => function ($post, $field_name, $request) {
+                return $this->post2Markdown($post);
+            },
+            'update_callback' => null,
+            'schema' => array(
+                'description' => __('Post content as markdown', 'cds-snc'),
+                'type'        => 'string'
+            ),
+        ));
     }
 }

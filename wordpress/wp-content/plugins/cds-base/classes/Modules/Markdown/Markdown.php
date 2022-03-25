@@ -25,11 +25,11 @@ class Markdown
     {
         /**
          * Add a 'markdown' field to the REST response for a page
-         * Returns a `rendered` content in Markdown format
+         * Returns content rendered in Markdown format
          */
         register_rest_field('page', 'markdown', array(
             'get_callback' => function ($post, $field_name, $request) {
-                return Markdown::render($post);
+                return ["rendered" => Markdown::render($post)];
             },
             'update_callback' => null,
             'schema' => array(

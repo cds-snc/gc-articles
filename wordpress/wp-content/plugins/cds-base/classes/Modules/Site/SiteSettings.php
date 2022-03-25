@@ -128,6 +128,11 @@ class SiteSettings
             'show_breadcrumbs',
         );
 
+        register_setting(
+            'site_settings_group', // option_group
+            'fip_href',
+        );
+
         // add fields GENERAL
         add_settings_field(
             'blogname', // id
@@ -235,6 +240,17 @@ class SiteSettings
                 'label_for' => 'show_breadcrumbs'
             ]
         );
+
+        add_settings_field(
+            'fip_href', // id
+            __('Where should the Canada.ca header link to?', 'cds-snc'), // title
+            array( $this, 'fipHrefCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_config', // section
+            [
+                'label_for' => 'fip_href'
+            ]
+        );
     }
 
     public function collectionModeCallback()
@@ -268,6 +284,18 @@ class SiteSettings
         printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_on" value="on" %s /> <label for="show_breadcrumbs_on">%s</label><br />', checked("on", $show_breadcrumbs, false), __('Show breadcrumbs', "cds-snc"));
         printf('<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_off" value="off" %s /> <label for="show_breadcrumbs_off">%s</label><br />', checked("off", $show_breadcrumbs, false), __('Hide breadcrumbs', "cds-snc"));
     }
+
+    public function fipHrefCallback()
+    {
+        $fipUrl = get_option("fip_href", "");
+        $value = $fipUrl ? esc_url($fipUrl) : home_url();
+        $value = str_replace('http://', 'https://', $value);
+
+        ?>
+        <input name="fip_href" type="text" id="fip_href" class="regular-text" value="<?php echo $value; ?>">
+        <?php
+    }
+
 
     public function collectionMaintenancePageCallback()
     {

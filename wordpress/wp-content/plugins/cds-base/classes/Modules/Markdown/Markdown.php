@@ -23,6 +23,17 @@ class Markdown
 
     public function addMarkdownToPages()
     {
+
+        $markdown = false;
+
+        if (isset($_GET["markdown"])) {
+            $markdown = filter_var($_GET["markdown"], FILTER_VALIDATE_BOOLEAN);
+        }
+
+        if (!$markdown) {
+            return;
+        }
+
         /**
          * Add a 'markdown' field to the REST response for a page
          * Returns content rendered in Markdown format

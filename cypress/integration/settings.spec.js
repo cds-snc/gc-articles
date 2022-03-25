@@ -16,6 +16,20 @@ describe('Site Settings', () => {
     cy.get('#collection_live').should('be.empty');
   });
 
+  it('Changes FIP link', () => {
+    cy.visit('/wp-admin/options-general.php?page=collection-settings');
+
+    cy.get('h1').should('have.text', 'Site Settings');
+
+    cy.get('input#fip_href').clear().type("canada.ca/en.html");
+    cy.get('#submit').click();
+    cy.get('#setting-error-settings_updated').should('contain.text', 'Settings saved');
+
+    cy.visit('/');
+
+    cy.get('header .brand a').should("have.attr", "href", "http://canada.ca/en.html");
+  });
+
   it('Can save collection settings and show maintenance page', () => {
     cy.visit('/wp-admin/options-general.php?page=collection-settings');
     cy.get('#collection_maintenance').check();

@@ -96,7 +96,8 @@
     "digitalcube/c3-cloudfront-clear-cache": "dev-master",
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",
     "yoast/duplicate-post": "^4.4",
-    "shawnhooper/delete-orphaned-multisite-tables": "1.0"
+    "shawnhooper/delete-orphaned-multisite-tables": "1.0",
+    "league/html-to-markdown": "^5.1"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

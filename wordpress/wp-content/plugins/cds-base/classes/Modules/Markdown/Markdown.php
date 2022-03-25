@@ -17,7 +17,7 @@ class Markdown
 
     public static function render($post)
     {
-        $converter = new HtmlConverter();
+        $converter = new HtmlConverter(array('header_style' => 'atx'));
         return $converter->convert($post['content']['rendered']);
     }
 

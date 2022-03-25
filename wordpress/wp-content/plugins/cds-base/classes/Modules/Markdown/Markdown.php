@@ -23,7 +23,6 @@ class Markdown
 
     public function addMarkdownToPages()
     {
-
         /**
          * Add a 'markdown' field to the REST response for a page
          * Returns a `rendered` content in Markdown format

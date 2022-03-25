@@ -39,6 +39,7 @@ use CDS\Modules\Site\SettingsFunctions;
 use CDS\Modules\Site\SiteSetup;
 use CDS\Modules\Wpml\Wpml;
 use CDS\Modules\Users\EmailDomains;
+use CDS\Modules\Markdown\Markdown;
 use Exception;
 
 class Setup
@@ -67,6 +68,7 @@ class Setup
         Cache::register();
         Wpml::register();
         EmailDomains::register();
+        Markdown::register();
 
         new SetupForms();
         new Styles();

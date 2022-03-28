@@ -51,25 +51,6 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_us_east" {
 }
 
 #
-# S3 waf log destination
-#
-module "firehose_waf_log_bucket" {
-  source            = "github.com/cds-snc/terraform-modules?ref=v0.0.33//S3"
-  bucket_name       = "platform-ircc-${var.env}-waf-logs"
-  billing_tag_value = var.billing_tag_value
-
-  lifecycle_rule = [
-    {
-      id      = "expire"
-      enabled = true
-      expiration = {
-        days = 30
-      }
-    }
-  ]
-}
-
-#
 # IAM
 #
 resource "aws_iam_role" "firehose_waf_logs" {

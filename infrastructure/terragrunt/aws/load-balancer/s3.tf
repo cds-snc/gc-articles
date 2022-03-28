@@ -40,22 +40,3 @@ resource "aws_s3_bucket_public_access_block" "cloudfront_logs" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
-
-#
-# Load balancer logs
-#
-module "wordpress_lb_logs" {
-  source            = "github.com/cds-snc/terraform-modules?ref=v0.0.33//S3"
-  bucket_name       = "platform-ircc-${var.env}-lb-logs"
-  billing_tag_value = var.billing_tag_value
-
-  lifecycle_rule = [
-    {
-      id      = "expire"
-      enabled = true
-      expiration = {
-        days = 30
-      }
-    }
-  ]
-}

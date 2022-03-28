@@ -1,9 +1,16 @@
 # Apache sidecar deployment
 
 Making changes to any files in this directory and merging to main through a PR will trigger a new Apache container
-build and deploy. Along with any changes, you must update the version in the following files:
+build and deploy. 
 
-- wordpress/docker/apache/VERSION
-- infrastructure/terragrunt/env/staging/ecs/terragrunt.hcl
+In order to deploy the new container, you will need to create a separate PR updating the Apache entry in the
+`infrastructure/environments.yml` file.
 
-The first is used to set the tag on the docker container, the second tells ECS to pull in the new container.
+## Steps to deploy
+- Create PR for updates (ex. container version or config changes)
+- Make changes in `wordpress/docker/apache/`
+- Bump version in `wordpress/docker/apache/VERSION`
+- Merge PR (New container is deployed with tag from VERSION file)
+- Create Release PR
+- Bump version(s) in `infrastructure/environments.yml`
+- Merge PR (New container is deployed to the environment(s))

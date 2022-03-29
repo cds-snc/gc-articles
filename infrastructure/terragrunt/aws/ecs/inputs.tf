@@ -53,7 +53,7 @@ variable "list_manager_endpoint" {
 }
 
 variable "default_list_manager_api_key" {
-  description = "API key used for Platform ListManager request auth"
+  description = "API key used for Platform ListManager request authentication"
   type        = string
   sensitive   = true
 }

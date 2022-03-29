@@ -15,6 +15,7 @@ class Login
         add_action('wp_login_failed', [$this, 'loginFailed']);
         add_filter('login_redirect', [$this, 'loginRedirect'], 10, 3);
         add_filter('login_message', [$this, 'addLangLink']);
+        add_action('lostpassword_post', [$this, 'redirectToSuccessPageIfNoUser'], 10, 2);
 
         add_action('admin_page_access_denied', [$this, 'redirectToNewestBlog'], 98);
     }
@@ -161,5 +162,14 @@ class Login
     {
         $siteName = __("GC Articles", "cds-snc");
         return str_replace(array('&lsaquo;', 'WordPress'), array( '', $siteName), $login_title);
+    }
+
+    public function redirectToSuccessPageIfNoUser($errors, $user_data)
+    {
+        // if no $user_data (bad user id or bad email), immediately return to success page
+        // by doing this, we avoid error messages exposing which accounts and emails are valid
+        if (! $user_data) {
+            return wp_safe_redirect('wp-login.php?checkemail=confirm');
+        }
     }
 }

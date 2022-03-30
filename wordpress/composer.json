@@ -122,5 +122,12 @@
     "psr-4": {
       "CDS\\": "wp-content/plugins/cds-base/classes/"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true,
+      "ffraenz/private-composer-installer": true,
+      "pestphp/pest-plugin": true
+    }
   }
 }

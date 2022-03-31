@@ -16,8 +16,10 @@ class Headers
     {
         $headers['X-XSS-Protection'] = '1; mode=block';
         $headers['X-Content-Type-Options'] = 'nosniff';
+        $headers['X-Frame-Options'] = 'SAMEORIGIN';
+        $headers['Strict-Transport-Security'] = 'max-age=31536000; includeSubdomains; preload';
 
-        // Don't add CSP for logged in users or admin pages
+        // Only add CSP for front-end not-logged-in users
         if (!is_admin() && !is_user_logged_in()) {
             $headers['X-Content-Security-Policy'] = $this->getCSPHeaders();
         }

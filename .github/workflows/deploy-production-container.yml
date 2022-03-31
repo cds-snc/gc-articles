@@ -122,8 +122,6 @@ jobs:
           chmod +x bin/*
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
-      # Load-balancer & database dependency
       - name: Terragrunt apply ecs
-        if: ${{ needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production' }}
         working-directory: infrastructure/terragrunt/env/prod/ecs
         run: terragrunt apply --terragrunt-non-interactive -auto-approve

@@ -23,6 +23,7 @@ use CDS\Modules\Cleanup\CreateSites;
 use CDS\Modules\Cleanup\Media;
 use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\Forms\Setup as SetupForms;
+use CDS\Modules\Http\Headers;
 use CDS\Modules\Meta\Favicon;
 use CDS\Modules\Meta\MetaTags;
 use CDS\Modules\Notify\SendTemplateDashboardPanel;
@@ -59,6 +60,7 @@ class Setup
         $this->setupMeta();
         $this->setupCli();
 
+        Headers::register();
         TrackLogins::register();
         DBInsights::register();
         Releases::register();

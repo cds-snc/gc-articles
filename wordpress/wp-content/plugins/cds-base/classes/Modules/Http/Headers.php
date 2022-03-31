@@ -36,9 +36,10 @@ class Headers
         $csp .= "manifest-src 'self';";
         $csp .= "media-src 'self';";
         $csp .= "object-src 'none';";
-        $csp .= "script-src 'report-sample' 'self' https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js https://www.canada.ca/etc/designs/canada/wet-boew/js/wet-boew.min.js;";
-        $csp .= "style-src 'report-sample' 'self' https://use.fontawesome.com https://www.canada.ca;";
+        $csp .= "script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js https://www.canada.ca/etc/designs/canada/wet-boew/js/wet-boew.min.js;";
+        $csp .= "style-src 'unsafe-inline' 'self' https://use.fontawesome.com https://www.canada.ca;";
         $csp .= "worker-src 'none';";
+
         return $csp;
     }
 }

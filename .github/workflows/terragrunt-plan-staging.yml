@@ -3,7 +3,6 @@ name: "Terragrunt plan STAGING"
 on:
   pull_request:
     paths:
-      - "infrastructure/environments.yml"
       - "infrastructure/terragrunt/aws/**"
       - "infrastructure/terragrunt/env/staging/**"
       - "infrastructure/terragrunt/env/common/**"
@@ -166,7 +165,7 @@ jobs:
 
       # Load-balancer & database dependency
       - name: Terragrunt plan ecs
-        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' || needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'staging' }}
+        if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
         uses: cds-snc/terraform-plan@v1
         with:
           directory: "infrastructure/terragrunt/env/staging/ecs"

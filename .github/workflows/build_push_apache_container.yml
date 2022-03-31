@@ -14,7 +14,7 @@ env:
   STAGING_ECR_REGISTRY: 729164266357.dkr.ecr.ca-central-1.amazonaws.com
 
 jobs:
-  build-push-container:
+  build-push-staging-container:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -49,6 +49,46 @@ jobs:
       - name: Push containers to ECR
         run: |
           docker push ${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
+
+      - name: Logout of ECR
+        if: always()
+        run: docker logout ${{ steps.login-ecr.outputs.registry }}
+
+  build-push-production-container:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        id: aws-creds
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.PRODUCTION_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PRODUCTION_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ca-central-1
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Docker image tag
+        run: |
+          VERSION=$(cat wordpress/docker/apache/VERSION | xargs)
+          echo "IMAGE_TAG=v$VERSION" >> $GITHUB_ENV
+
+      - name: Build container
+        run: |
+          docker build \
+          --build-arg git_sha="$GITHUB_SHA" \
+          --build-arg APACHE_KEY="${{ secrets.PRODUCTION_WORDPRESS_APACHE_KEY }}" \
+          --build-arg APACHE_CERT="${{ secrets.PRODUCTION_WORDPRESS_APACHE_CERT }}" \
+          -t "${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
+          -f ./wordpress/docker/apache/Dockerfile .
+
+      - name: Push containers to ECR
+        run: |
+          docker push ${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
 
       - name: Logout of ECR
         if: always()

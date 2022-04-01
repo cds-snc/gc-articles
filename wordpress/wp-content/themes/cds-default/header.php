@@ -32,6 +32,18 @@ declare(strict_types=1);
 </head>
 
 <body <?php body_class(); ?> vocab="http://schema.org/" resource="#wb-webpage" typeof="WebPage">
+<?php if (cds_is_maintenance_mode_admin_user()) {
+    $tag = "<span class='maintenance-tag'>PRIVATE</span>";
+    $maintenanceText = __("Your site is currently in maintenance mode. Only logged in users will be able to see this page.", "cds-snc");
+
+    $siteSettingsLink = sprintf(
+        __('To make your site live <a href="%s">update your site settings</a>.', 'cds-snc'),
+        esc_url('options-general.php?page=collection-settings')
+    );
+
+    printf("<div class='container'><div class='row'><div class='maintenance-banner'>%s %s %s</div></div></div>", $tag, $maintenanceText, $siteSettingsLink);
+}
+?>
 <?php wp_body_open(); ?>
 
 <a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e(
@@ -130,5 +142,7 @@ declare(strict_types=1);
     </div>
   </nav>
     <?php endif; ?>
+
   <?php echo cds_breadcrumb(); ?>
 </header>
+

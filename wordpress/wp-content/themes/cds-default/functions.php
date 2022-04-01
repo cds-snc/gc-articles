@@ -259,6 +259,20 @@ if (! function_exists('cds_is_maintenance_mode')) :
     }
 endif;
 
+
+if (! function_exists('cds_is_maintenance_mode_admin_user')) :
+    function cds_is_maintenance_mode_admin_user()
+    {
+        $collection_mode = get_option('collection_mode');
+
+        if ($collection_mode === "maintenance" && is_user_logged_in()) {
+            return true;
+        }
+
+        return false;
+    }
+endif;
+
 add_filter('auto_update_plugin', '__return_false');
 add_filter('auto_update_theme', '__return_false');
 add_filter('template_include', 'maintenance_mode');

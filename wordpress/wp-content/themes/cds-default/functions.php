@@ -322,3 +322,9 @@ function fix_svg()
 }
 
 add_action('admin_head', 'fix_svg');
+
+/**
+ * Remove global-styles-inline-css and Gutenberg/duotone svg that appears under the body tag
+ */
+remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');

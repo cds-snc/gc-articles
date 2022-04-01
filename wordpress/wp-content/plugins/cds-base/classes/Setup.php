@@ -37,6 +37,7 @@ use CDS\Modules\Releases\Releases;
 use CDS\Modules\Site\SiteSettings;
 use CDS\Modules\Site\SettingsFunctions;
 use CDS\Modules\Site\SiteSetup;
+use CDS\Modules\Site\SiteStatus;
 use CDS\Modules\Wpml\Wpml;
 use CDS\Modules\Users\EmailDomains;
 use CDS\Modules\Markdown\Markdown;
@@ -63,6 +64,7 @@ class Setup
         DBInsights::register();
         Releases::register();
         SiteSettings::register();
+        SiteStatus::register();
         SettingsFunctions::register();
         SiteSetup::register();
         Cache::register();

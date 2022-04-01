@@ -8,7 +8,7 @@ $footerMenu = '';
 
 ?>
 
-<div style="display:none;" id="version" style="margin-top:30px;"><?php echo _S_VERSION; ?></div>
+<div class="hidden" id="version"><?php echo _S_VERSION; ?></div>
 <footer id="wb-info">
     <div class="landscape">
         <nav class="container wb-navcurr" aria-labelledby="footerNavAboutGovernment">

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d621106f133b15e69094fd20c5295eb",
+    "content-hash": "252bbd173786202a5169ce48cd76752b",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -3927,6 +3927,24 @@
             "homepage": "https://wordpress.org/plugins/login-lockdown/"
         },
         {
+            "name": "wpackagist-plugin/publishpress-checklists",
+            "version": "2.7.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
+                "reference": "tags/2.7.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.7.0.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/publishpress-checklists/"
+        },
+        {
             "name": "wpackagist-plugin/two-factor",
             "version": "0.7.1",
             "source": {
@@ -7504,5 +7522,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

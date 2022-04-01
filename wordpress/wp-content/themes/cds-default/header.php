@@ -44,7 +44,7 @@ declare(strict_types=1);
       <section id="wb-lng" class="col-xs-3 col-sm-12 pull-right text-right">
         <h2 class="wb-inv"><?php _e('Language selection'); ?></h2>
         <ul class="list-inline mrgn-bttm-0">
-          <li style="padding-right:10px;">
+          <li class="mrgn-rght-md">
               <?php if (is_user_logged_in()) { ?>
                 <a href="<?php echo wp_logout_url(); ?>"><?php _e('Sign out', 'cds-snc')?></a>
               <?php } else { ?>

@@ -61,7 +61,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
     max_ttl                = 31536000
     compress               = true
 
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy.id
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_frontend.id
   }
 
   ordered_cache_behavior {
@@ -104,6 +104,8 @@ resource "aws_cloudfront_distribution" "wordpress" {
     max_ttl                = 0
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
+
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_admin.id
   }
 
   ordered_cache_behavior {

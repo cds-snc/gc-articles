@@ -324,12 +324,14 @@ function fix_svg()
 add_action('admin_head', 'fix_svg');
 
 /**
- * Remove global-styles-inline-css and Gutenberg/duotone svg that appears under the body tag
+ * Remove global-styles-inline-css and Gutenberg/duotone svg
  */
 remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
 remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
 
-// REMOVE WP EMOJI
+/**
+ * Remove WP EMOJI
+ */
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
 

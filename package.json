@@ -1,7 +1,7 @@
 {
   "name": "platform-mvp",
   "type": "module",
-  "version": "2.20.0",
+  "version": "2.21.0",
   "scripts": {
     "update-version": "node ./scripts/prepare-release.js --version_num",
     "tag-release": "node ./scripts/prepare-release.js --tag",

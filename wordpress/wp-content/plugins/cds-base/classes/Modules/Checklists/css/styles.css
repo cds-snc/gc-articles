@@ -1,0 +1,9 @@
+/* Checklists plugin (revisit if we get "Pro") */
+
+.toplevel_page_ppch-checklists footer, /* Footer on "checklists" page */
+.checklists_page_ppch-settings footer, /* Footer on "settings" page */
+.pp-version-notice-bold-purple, /* "Upgrade to pro" notice in header */
+.publishpress-checklists-wp-reviews-notice /* Asking for reviews */
+{
+  display: none;
+}

@@ -29,6 +29,9 @@ declare(strict_types=1);
   <?php wp_head(); ?>
   <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/wet-boew/css/wet-boew.min.css" />
   <link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/wet-boew/css/theme.min.css" />
+
+  <meta name="rest_url" content="<?php echo esc_url_raw(rest_url()) ?>">
+  <meta name="rest_nonce" content="<?php echo wp_create_nonce("wp_rest") ?>">
 </head>
 
 <body <?php body_class(); ?> vocab="http://schema.org/" resource="#wb-webpage" typeof="WebPage">

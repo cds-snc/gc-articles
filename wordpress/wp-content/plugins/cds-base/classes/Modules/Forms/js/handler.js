@@ -1,10 +1,22 @@
 (function ($) {
+    function initVars() {
+        try{
+            const rest_url = document.querySelector('meta[name="rest_url"]').content;
+            const rest_nonce = document.querySelector('meta[name="rest_nonce"]').content;
+            window.CDS_VARS = {rest_nonce: rest_nonce, rest_url: rest_url};
+        }catch(e){
+            console.log("meta not set");
+        }
+    }
+
+    initVars();
+
     function toggleOptional($el) {
         $controlsElement = $('#' + $el.attr('aria-controls'));
 
         // only change attributes if "aria-controls" element exists
-        if($controlsElement) {
-            if($el.is(':checked')) {
+        if ($controlsElement) {
+            if ($el.is(':checked')) {
                 //show element
                 $el.attr('aria-expanded', true);
                 $controlsElement.removeClass('displayNone');
@@ -19,7 +31,7 @@
     $('input[aria-controls]').on("click", function (e) {
         // add click handler
         toggleOptional($(e.target));
-    }).each(function() {
+    }).each(function () {
         // run it once on page load
         toggleOptional($(this));
     });
@@ -44,7 +56,7 @@
             data: $form.serialize(), // serializes the form's elements.
             success: function (data) {
                 // handle redirect if provided
-                if(data.redirect) {
+                if (data.redirect) {
                     window.location.href = data.redirect
                     return;
                 }
@@ -56,10 +68,10 @@
                     var errorEl = '<div id="cds-form-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
                     errorEl += '<div class="gc-alert__body">';
                     errorEl += '<h2 class="gc-h3">' + data.error_message + '</h2>';
-                    if(data['keys']) {
+                    if (data['keys']) {
                         errorEl += '<ol class="gc-ordered-list">';
                         data['keys'].forEach(key => {
-                            errorEl += '<li><a href="#' + key + '" class="gc-error-link">' + key +'</li>'
+                            errorEl += '<li><a href="#' + key + '" class="gc-error-link">' + key + '</li>'
 
                             var $validationMsg = '<p data-testid="errorMessage" class="gc-error-message" role="alert">' + data.error_message + '</p>'
                             $($validationMsg).insertBefore('#' + key);

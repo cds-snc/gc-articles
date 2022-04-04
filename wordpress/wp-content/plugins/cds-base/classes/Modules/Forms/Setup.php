@@ -25,10 +25,5 @@ class Setup
     public function enqueue()
     {
         wp_enqueue_script('cds-blocks-js', plugin_dir_url(__FILE__) . 'js/handler.js', ['jquery'], "1.0.0", true);
-
-        wp_localize_script("cds-blocks-js", "CDS_VARS", array(
-            "rest_url" => esc_url_raw(rest_url()),
-            "rest_nonce" => wp_create_nonce("wp_rest"),
-        ));
     }
 }

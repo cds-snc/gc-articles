@@ -7,6 +7,10 @@ In order to deploy the new container, you will need to create a separate PR upda
 `infrastructure/environments.yml` file.
 
 ## Steps to deploy
+
+**NOTE**: You can only deploy to one environment at a time. So during Step 2, ensure you're only updating either the
+Production or the Staging version.
+
 ### 1. Prepare container(s)
 - Make changes to any files in `wordpress/docker/apache/`
 - Bump version in `wordpress/docker/apache/VERSION`

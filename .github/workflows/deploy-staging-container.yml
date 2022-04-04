@@ -1,4 +1,4 @@
-name: "Terragrunt deploy PRODUCTION container"
+name: "Terragrunt deploy STAGING container"
 
 on:
   push:

@@ -26,6 +26,7 @@ class TestEmailDomains extends \WP_Mock\Tools\TestCase
             "no TLD" => ['justin.trudeau@cds-snc'],
             "no @" => ['justin.trudeaucds-snc.ca'],
             "no username" => ['@cds-snc.ca'],
+            "onmicrosoft without domain" => ['justin.trudeau@onmicrosoft.com'],
             'empty' => [''],
         ];
     }
@@ -49,7 +50,7 @@ class TestEmailDomains extends \WP_Mock\Tools\TestCase
             'Service Canada domain' => ['justin.trudeau@servicecanada.ca'],
             'random Canada domain' => ['justin.trudeau@hockey.night.in.canada.ca'],
             '‘innovation’ government domain @ PSPC' => ['justin.trudeau@pspcinnovation.onmicrosoft.com'],
-            'random ‘innovation’ Canada domain' => ['justin.trudeau@onmicrosoft.com'],
+            'random ‘innovation’ Canada domain' => ['justin.trudeau@esdc-innovation.onmicrosoft.com'],
         ];
     }
 

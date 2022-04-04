@@ -61,7 +61,7 @@ msgstr "Erreur"
 
 #: classes/Modules/Cleanup/AdminBar.php:161
 msgid "My Sites"
-msgstr ""
+msgstr "Mes sites"
 
 #: classes/Modules/Cleanup/AdminBar.php:190
 msgid " (current)"
@@ -83,7 +83,6 @@ msgid "Admin Email <strong>must be</strong> a current Super Admin"
 msgstr "L’adresse courriel de l’administrateur <strong>doit correspondre</strong> à celui d’un super administrateur"
 
 #: classes/Modules/Cleanup/CreateSites.php:20
-#, fuzzy
 msgid "or else a new Site won’t be created"
 msgstr "sinon le site ne peut être créé."
 

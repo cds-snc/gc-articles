@@ -29,6 +29,10 @@ export const useListFetch = () => {
                 setStatus("error")
             }
 
+            if (process.env.NODE_ENV === "development") {
+                return;
+            }
+
             // sync list from List Manager API to local WP Option
             const listData = await response.json();
             const lists = listData.map((list: any) => {

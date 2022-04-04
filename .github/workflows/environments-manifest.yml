@@ -1,8 +1,13 @@
 name: "Environments version manifest"
 
 # Gets the following content from the `environments.yml` manifest:
-# 1. [ENV]_WORDPRESS: the target version for the Terraform plan and apply on Staging.
-# 2. PREV_[ENV]_WORDPRESS: the previously deployed Terraform version.
+# [ENV]_WORDPRESS: the target version for the WordPress container on [ENV]
+# PREV_[ENV]_WORDPRESS: the previously deployed WordPress container on [ENV]
+# [ENV]_APACHE: the target version for the Apache container on [ENV]
+# PREV_[ENV]_APACHE: the previously deployed Apache container on [ENV]
+# CONTAINER_DEPLOYMENT: [staging|production|false] indicates if this is a Container deployment
+# PROD_INFRASTRUCTURE: the target version for the Production infrastructure
+# PREV_PROD_INFRASTRUCTURE: the previously deployed Production infrastructure
 
 on:
   workflow_call:
@@ -19,6 +24,18 @@ on:
       PREV_PROD_WORDPRESS:
         description: "The previous version of the Production Wordpress container"
         value: ${{ jobs.environments-manifest.outputs.PREV_PROD_WORDPRESS }}
+      STAG_APACHE:
+        description: "The current version of the Staging Apache container"
+        value: ${{ jobs.environments-manifest.outputs.STAG_APACHE }}
+      PREV_STAG_APACHE:
+        description: "The previous version of the Staging Apache container"
+        value: ${{ jobs.environments-manifest.outputs.PREV_STAG_APACHE }}
+      PROD_APACHE:
+        description: "The current version of the Production Apache container"
+        value: ${{ jobs.environments-manifest.outputs.PROD_APACHE }}
+      PREV_PROD_APACHE:
+        description: "The previous version of the Production Apache container"
+        value: ${{ jobs.environments-manifest.outputs.PREV_PROD_APACHE }}
       PROD_INFRASTRUCTURE:
         description: "The current version of the Production infrastructure"
         value: ${{ jobs.environments-manifest.outputs.PROD_INFRASTRUCTURE }}
@@ -34,11 +51,15 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       PROD_WORDPRESS: ${{ steps.versions.outputs.PROD_WORDPRESS }}
-      PROD_INFRASTRUCTURE: ${{ steps.versions.outputs.PROD_INFRASTRUCTURE }}
-      STAG_WORDPRESS: ${{ steps.versions.outputs.STAG_WORDPRESS }}
       PREV_PROD_WORDPRESS: ${{ steps.previous.outputs.PROD_WORDPRESS }}
-      PREV_PROD_INFRASTRUCTURE: ${{ steps.previous.outputs.PROD_INFRASTRUCTURE }}
+      STAG_WORDPRESS: ${{ steps.versions.outputs.STAG_WORDPRESS }}
       PREV_STAG_WORDPRESS: ${{ steps.previous.outputs.STAG_WORDPRESS }}
+      PROD_APACHE: ${{ steps.versions.outputs.PROD_APACHE }}
+      PREV_PROD_APACHE: ${{ steps.previous.outputs.PROD_APACHE }}
+      STAG_APACHE: ${{ steps.versions.outputs.STAG_APACHE }}
+      PREV_STAG_APACHE: ${{ steps.previous.outputs.STAG_APACHE }}
+      PROD_INFRASTRUCTURE: ${{ steps.versions.outputs.PROD_INFRASTRUCTURE }}
+      PREV_PROD_INFRASTRUCTURE: ${{ steps.previous.outputs.PROD_INFRASTRUCTURE }}
       CONTAINER_DEPLOYMENT: ${{ steps.environment.outputs.CONTAINER_DEPLOYMENT }}
     steps:
       - name: Checkout
@@ -51,10 +72,14 @@ jobs:
         run: |
           PROD_WORDPRESS=v$(yq '.production.wordpress' < ./infrastructure/environments.yml)
           STAG_WORDPRESS=v$(yq '.staging.wordpress' < ./infrastructure/environments.yml)
+          PROD_APACHE=v$(yq '.production.apache' < ./infrastructure/environments.yml)
+          STAG_APACHE=v$(yq '.staging.apache' < ./infrastructure/environments.yml)
           PROD_INFRASTRUCTURE=v$(yq '.production.infrastructure' < ./infrastructure/environments.yml)
           echo "$(cat ./infrastructure/environments.yml)"
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
+          echo "::set-output name=PROD_APACHE::${PROD_APACHE}"
+          echo "::set-output name=STAG_APACHE::${STAG_APACHE}"
           echo "::set-output name=PROD_INFRASTRUCTURE::infrastructure/${PROD_INFRASTRUCTURE}"
 
       - name: Checkout
@@ -75,18 +100,28 @@ jobs:
           echo "$PREV_ENVIRONMENTS_YML"
           PROD_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.wordpress' -)
           STAG_WORDPRESS=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.wordpress' -)
+          PROD_APACHE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.apache' -)
+          STAG_APACHE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.apache' -)
           PROD_INFRASTRUCTURE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.infrastructure' -)
           echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
           echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
+          echo "::set-output name=PROD_APACHE::${PROD_APACHE}"
+          echo "::set-output name=STAG_APACHE::${STAG_APACHE}"
           echo "::set-output name=PROD_INFRASTRUCTURE::infrastructure/${PROD_INFRASTRUCTURE}"
           
-      - name: Deploy environment
+      - name: Container deploy environment
         id: environment
         run: |
           if [ ${{ steps.previous.outputs.PROD_WORDPRESS }} != ${{ steps.versions.outputs.PROD_WORDPRESS }} ]; then
             echo "CONTAINER_DEPLOYMENT=production"
             echo "::set-output name=CONTAINER_DEPLOYMENT::production"
           elif [ ${{ steps.previous.outputs.STAG_WORDPRESS }} != ${{ steps.versions.outputs.STAG_WORDPRESS }} ]; then
+            echo "CONTAINER_DEPLOYMENT=staging"
+            echo "::set-output name=CONTAINER_DEPLOYMENT::staging"
+          elif [ ${{ steps.previous.outputs.PROD_APACHE }} != ${{ steps.versions.outputs.PROD_APACHE }} ]; then
+            echo "CONTAINER_DEPLOYMENT=production"
+            echo "::set-output name=CONTAINER_DEPLOYMENT::production"
+          elif [ ${{ steps.previous.outputs.STAG_APACHE }} != ${{ steps.versions.outputs.STAG_APACHE }} ]; then
             echo "CONTAINER_DEPLOYMENT=staging"
             echo "::set-output name=CONTAINER_DEPLOYMENT::staging"
           else

@@ -79,15 +79,6 @@ jobs:
           chmod +x bin/*
           echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
 
-      - name: Install Conftest
-        run: |
-          wget "https://github.com/open-policy-agent/conftest/releases/download/v${{ env.CONFTEST_VERSION }}/conftest_${{ env.CONFTEST_VERSION }}_Linux_x86_64.tar.gz" \
-          && wget "https://github.com/open-policy-agent/conftest/releases/download/v${{ env.CONFTEST_VERSION }}/checksums.txt" \
-          && grep 'Linux_x86_64.tar.gz' < checksums.txt | sha256sum --check  --status \
-          && tar -zxvf "conftest_${{ env.CONFTEST_VERSION }}_Linux_x86_64.tar.gz" conftest \
-          && mv conftest /usr/local/bin \
-          && rm "conftest_${{ env.CONFTEST_VERSION }}_Linux_x86_64.tar.gz" checksums.txt
-
       # Load-balancer & database dependency
       - name: Terragrunt plan ecs
         if: ${{ needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production' }}

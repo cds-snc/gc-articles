@@ -4,21 +4,6 @@ use CDS\Modules\Users\EmailDomains;
 
 class TestEmailDomains extends \WP_Mock\Tools\TestCase
 {
-    private $badEmails = [
-        'justin.trudeau@gmail.com',
-        'justin.trudeau@cds-snc',
-        'justin.trudeaucds-snc.ca',
-        'cds-snc.ca',
-        '@cds-snc.ca',
-        ''
-    ];
-
-    private $goodEmails = [
-        'justin.trudeau@cds-snc.ca',
-        'justin.trudeau@tbs-sct.gc.ca',
-        'admin@cds-snc.ca'
-    ];
-
     private $users;
 
     public function setUp(): void
@@ -63,6 +48,8 @@ class TestEmailDomains extends \WP_Mock\Tools\TestCase
             'Canada domain' => ['justin.trudeau@canada.ca'],
             'Service Canada domain' => ['justin.trudeau@servicecanada.ca'],
             'random Canada domain' => ['justin.trudeau@hockey.night.in.canada.ca'],
+            '‘innovation’ government domain @ PSPC' => ['justin.trudeau@pspcinnovation.onmicrosoft.com'],
+            'random ‘innovation’ Canada domain' => ['justin.trudeau@onmicrosoft.com'],
         ];
     }
 

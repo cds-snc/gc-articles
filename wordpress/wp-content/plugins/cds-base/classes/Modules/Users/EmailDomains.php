@@ -8,8 +8,7 @@ use WP_Error;
 
 class EmailDomains
 {
-    public const ALLOWED_EMAIL_DOMAINS = ['cds-snc.ca', 'gc.ca', 'canada.ca'];
-
+    public const ALLOWED_EMAIL_DOMAINS = ['cds-snc.ca', 'gc.ca', 'canada.ca', 'onmicrosoft.com'];
 
     public function __construct()
     {

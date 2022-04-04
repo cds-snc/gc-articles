@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-01-11T18:00:25+00:00\n"
+"POT-Creation-Date: 2022-04-04T15:55:10+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -91,18 +91,34 @@ msgid "Default homepage"
 msgstr "Page d’accueil par défaut"
 
 #: header.php:37
+msgid "Your site is currently in maintenance mode. Only logged in users will be able to see this page."
+msgstr ""
+
+#: header.php:40
+msgid "To make your site live <a href=\"%s\">update your site settings</a>."
+msgstr ""
+
+#: header.php:49
 msgid "Skip to content"
 msgstr "Aller au contenu"
 
-#: header.php:70 header.php:77 header.php:82 header.php:91
+#: header.php:61
+msgid "Sign out"
+msgstr ""
+
+#: header.php:63
+msgid "Sign in"
+msgstr ""
+
+#: header.php:89 header.php:96 header.php:101 header.php:110
 msgid "Search"
 msgstr "Rechercher"
 
-#: header.php:110 header.php:113
+#: header.php:129 header.php:132
 msgid "Menu"
 msgstr "Menu"
 
-#: header.php:112
+#: header.php:131
 msgid "Main"
 msgstr "Principal"
 
@@ -134,19 +150,19 @@ msgstr "Navigation dans les articles"
 msgid "Posts"
 msgstr "Articles"
 
-#: inc/template-functions.php:167
+#: inc/template-functions.php:168
 msgid "Breadcrumbs"
 msgstr "Fil d’Ariane"
 
-#: inc/template-functions.php:169
+#: inc/template-functions.php:170
 msgid "You are here:"
 msgstr "Vous êtes ici :"
 
-#: inc/template-functions.php:396
+#: inc/template-functions.php:404
 msgid "Top menu"
 msgstr "Menu supérieur"
 
-#: inc/template-functions.php:397
+#: inc/template-functions.php:405
 msgid "submenu"
 msgstr "Sous-menu"
 
@@ -157,8 +173,8 @@ msgid "by %s"
 msgstr "par %s"
 
 #: maintenance.php:5
-msgid "We're currently working on this"
-msgstr "En construction"
+msgid "We’re currently working on this"
+msgstr ""
 
 #. translators: %s: search query.
 #: search.php:23
@@ -171,14 +187,11 @@ msgstr "Aucun résultat"
 
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content-none.php:26
-msgid ""
-"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr "Êtes-vous prêt à publier votre premier article? <a href=\"%1$s\">Commencez ici</a>."
 
 #: template-parts/content-none.php:38
-msgid ""
-"Sorry, but nothing matched your search terms. Please try again with some "
-"different keywords."
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
 msgstr "Désolé, aucun résultat ne correspond à votre recherche. Veuillez réessayer avec d’autres mots-clés."
 
 #: template-parts/content-none.php:44
@@ -199,3 +212,5 @@ msgstr "Modifier <span class=\"screen-reader-text\">%s</span>"
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "Continuer à lire <span class=\"screen-reader-text\"> \"%s\"</span>"
 
+#~ msgid "We're currently working on this"
+#~ msgstr "En construction"

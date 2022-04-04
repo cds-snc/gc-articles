@@ -131,6 +131,3 @@ debug-this/
 
 auth.json
 vendor
-
-# Backup i18n files
-*.po~

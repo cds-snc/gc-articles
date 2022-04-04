@@ -152,7 +152,7 @@ msgstr "Alpha"
 #: classes/Modules/Forms/Contact/ContactForm.php:38
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:95
 msgid "Full name"
-msgstr ""
+msgstr "Nom complet"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:39
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:98 build/index.js:4458
@@ -162,15 +162,15 @@ msgstr "Adresse courriel"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:40
 msgid "Department"
-msgstr ""
+msgstr "Département"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:46
 msgid "Goal of your message"
-msgstr ""
+msgstr "Objectif de votre message"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:49
 msgid "Your answer helps us make sure your message gets to the right people."
-msgstr ""
+msgstr "Votre réponse nous aide à transmettre votre message au bon endroit"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:57
 msgid "Ask a question."
@@ -194,24 +194,24 @@ msgstr "Autre"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:86
 msgid "What are you thinking about using GC Articles for? (optional)"
-msgstr ""
+msgstr "Pourquoi envisagez-vous d’utiliser les Articles GC ? (facultatif)"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:89
 #: classes/Modules/Forms/Contact/ContactForm.php:135
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:185
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:235
 msgid "We use this information to improve GC Articles."
-msgstr ""
+msgstr "Nous utilisons ces informations pour améliorer les Articles GC"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:97
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:193
 msgid "Blog."
-msgstr ""
+msgstr "Blog."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:102
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:199
 msgid "Newsletter archive with emailing to a subscriber list."
-msgstr ""
+msgstr "Newsletter avec envoi à une liste d’abonnés."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:107
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:205
@@ -221,31 +221,31 @@ msgstr "Site Web"
 #: classes/Modules/Forms/Contact/ContactForm.php:112
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:211
 msgid "Internal website."
-msgstr ""
+msgstr "Site web interne."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:117
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:217
 msgid "Something else."
-msgstr ""
+msgstr "Autre chose."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:124
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:224
 msgid "Other usage"
-msgstr ""
+msgstr "Autre"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:132
 msgid "Who are the target audiences you’re thinking about? (optional)"
-msgstr ""
+msgstr "Qui sont les publics que vous ciblez ? (facultatif)"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:143
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:243
 msgid "People who use your programs and services."
-msgstr ""
+msgstr "Les personnes qui utilisent vos programmes et services."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:148
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:249
 msgid "General public."
-msgstr ""
+msgstr "Le grand public."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:153
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:255
@@ -255,17 +255,17 @@ msgstr "S’abonner"
 #: classes/Modules/Forms/Contact/ContactForm.php:158
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:261
 msgid "Internal employees and/or community volunteers."
-msgstr ""
+msgstr "Employés internes et/ou bénévoles."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:163
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:267
 msgid "Other people."
-msgstr ""
+msgstr "Autres personnes."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:169
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:274
 msgid "Other target audience"
-msgstr ""
+msgstr "Autre public cible"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:174
 msgid "Your message"
@@ -274,7 +274,7 @@ msgstr "Votre message"
 #: classes/Modules/Forms/Contact/ContactForm.php:191
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:125
 msgid "Send a copy to your email."
-msgstr ""
+msgstr "Envoyez une copie à votre courriel."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:196
 msgid "Submit"
@@ -293,11 +293,11 @@ msgstr "Merci pour le message"
 
 #: classes/Modules/Forms/Messenger.php:40
 msgid "Error sending email"
-msgstr ""
+msgstr "Erreur d’envoi le courriel"
 
 #: classes/Modules/Forms/Messenger.php:61
 msgid "ZenDesk client error"
-msgstr ""
+msgstr "Erreur du client ZenDesk"
 
 #: classes/Modules/Forms/Messenger.php:108 build/index.js:3332
 #: build/index.js:3287
@@ -314,35 +314,35 @@ msgstr "Erreur interne du serveur"
 
 #: classes/Modules/Forms/Messenger.php:113
 msgid "ZenDesk server error"
-msgstr ""
+msgstr "Erreur de serveur ZenDesk"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:72
 msgid "Site administrator details."
-msgstr ""
+msgstr "Détails de l’administrateur du site"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:73
 msgid "(Step 2 of 2)"
-msgstr ""
+msgstr "(Étape 2 de 2)"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:101
 msgid "Job title or role"
-msgstr ""
+msgstr "Titre ou rôle de l’emploi"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:104
 msgid "Department or agency"
-msgstr ""
+msgstr "Département ou agence"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:105
 msgid "GC Articles is only for government employees."
-msgstr ""
+msgstr "Les Articles GC est seulement pour les employés du gouvernement."
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:112
 msgid "Reminder: Only use GC Articles for information that is not sensitive and can be shared publicly."
-msgstr ""
+msgstr "Rappel : N’utilisez les Articles CG que pour les informations qui ne sont pas sensibles et qui peuvent être partagées publiquement."
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:115
 msgid "Make sure you’re allowed to publish this information on behalf of the Government of Canada."
-msgstr ""
+msgstr "Assurez-vous que vous êtes autorisé à publier ces informations au nom du gouvernement du Canada."
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:130
 msgid "Request site"
@@ -350,51 +350,51 @@ msgstr "Demander un site"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:145
 msgid "Tell us about your site. "
-msgstr ""
+msgstr "Décrivez-nous votre site."
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:146
 msgid "(Step 1 of 2)"
-msgstr ""
+msgstr "(Étape 1 de 2)"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:158
 msgid "English title of your site"
-msgstr ""
+msgstr "Titre anglais de votre site"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:161
 msgid "This title will appear at the top of your site. You can change this later."
-msgstr ""
+msgstr "Ce titre sera affiché en haut de votre site. Vous pourrez le modifier plus tard."
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:173
 msgid "Enter a title to preview your URL"
-msgstr ""
+msgstr "Entrez un titre pour prévisualiser votre URL"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:174
 msgid "Your URL preview:"
-msgstr ""
+msgstr "Aperçu de votre URL :"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:182
 msgid "What will you use your site for?"
-msgstr ""
+msgstr "Comment allez-vous utiliser votre site ?"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:232
 msgid "Who are the target audiences for your site?"
-msgstr ""
+msgstr "Quels sont les publics cibles de votre site ?"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:281
 msgid "When do you plan to make your site public?"
-msgstr ""
+msgstr "Quand comptez-vous rendre votre site public ?"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:284
 msgid "We look for sites that will launch in the next 2 months. Sites that linger for longer than 2 months without being made public reduce our ranking in search engines."
-msgstr ""
+msgstr "Nous recherchons des sites qui seront lancés dans les deux prochains mois. Les sites qui traînent pendant plus de deux mois sans être rendus publics réduisent notre classement dans les moteurs de recherche."
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:296
 msgid "Next"
-msgstr ""
+msgstr "Suivant"
 
 #: classes/Modules/Forms/RequestSite/Setup.php:87
 msgid "No name specified"
-msgstr ""
+msgstr "Aucun nom spécifié"
 
 #: classes/Modules/Forms/RequestSite/Setup.php:88
 msgid "Request a site:"
@@ -410,7 +410,7 @@ msgstr "Abonnement inconnu"
 
 #: classes/Modules/Forms/Subscribe/SubscriptionForm.php:49
 msgid "No list selected"
-msgstr ""
+msgstr "Aucune liste trouvée"
 
 #: classes/Modules/Forms/Utils.php:13
 msgid "400 Bad Request"

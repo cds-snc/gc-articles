@@ -15,7 +15,12 @@ export const useListFetch = () => {
     useEffect(() => {
         const fetchData = async () => {
             setStatus("loading")
-            await request.get(`/lists/${serviceId}`);
+
+            if (process.env.NODE_ENV === "development") {
+                await request.get("list.json");
+            } else {
+                await request.get(`/lists/${serviceId}`);
+            }
 
             if (response.ok) {
                 dispatch({ type: "load", payload: await response.json() })
@@ -29,8 +34,8 @@ export const useListFetch = () => {
             const lists = listData.map((list: any) => {
                 return { id: list?.id, label: list?.name, type: "email" }
             })
-            const REST_URL = window.CDS_VARS.rest_url;
-            const REST_NONCE = window.CDS_VARS.rest_nonce;
+            const REST_URL = window?.CDS_VARS?.rest_url;
+            const REST_NONCE = window?.CDS_VARS?.rest_nonce;
             await sendListData(`${REST_URL}list-manager-settings/list/save`, REST_NONCE, { "list_values": lists });
         }
 

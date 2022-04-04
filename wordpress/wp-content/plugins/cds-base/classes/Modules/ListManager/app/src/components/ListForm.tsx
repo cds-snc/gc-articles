@@ -34,93 +34,95 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
         <form onSubmit={handleSubmit(handler)}>
             <input id="service_id" type="hidden" {...register("service_id", { required: true })} />
             <table id="form-table" className="form-table">
-                <tr>
-                    <th><label className="required" htmlFor="name"><Asterisk />{__("Name", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.name ? "error-wrapper" : ""}>
-                            {errors.name && <span className="validation-error">{errors.name?.message || __("Name is required", "cds-snc")}</span>}
-                            <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label className="required" htmlFor="language"><Asterisk />{__("Language", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.language ? "error-wrapper" : ""}>
-                            {errors.language && <span className="validation-error">{errors.language?.message || __("Language is required", "cds-snc")}</span>}
-                            <fieldset>
-                                <label htmlFor="en">
-                                    <input id="en" {...register("language", { required: true })} type="radio" value="en" />
-                                    {" "}English
-                                </label>
-                                <br />
-                                <label htmlFor="fr">
-                                    <input id="fr" {...register("language", { required: true })} type="radio" value="fr" />
-                                    {" "}French
-                                </label>
-                            </fieldset>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label htmlFor="subscribe_email_template_id">{__("Subscribe template id", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.subscribe_email_template_id ? "error-wrapper" : ""}>
-                            {errors.subscribe_email_template_id && <span className="validation-error">{errors.subscribe_email_template_id?.message}</span>}
-                            <input id="subscribe_email_template_id" style={textWidth} type="text" {...register("subscribe_email_template_id")} />
-                            <div className="role-desc description">
-                                <details>
-                                    <summary>{__("See example template ID format.", "cds-snc")}</summary><code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
-                                </details>
+                <tbody>
+                    <tr>
+                        <td><label className="required" htmlFor="name"><Asterisk />{__("Name", "cds-snc")}</label></td>
+                        <td>
+                            <div className={errors.name ? "error-wrapper" : ""}>
+                                {errors.name && <span className="validation-error">{errors.name?.message || __("Name is required", "cds-snc")}</span>}
+                                <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label htmlFor="unsubscribe_email_template_id">{__("Unsubscribe template id", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.unsubscribe_email_template_id ? "error-wrapper" : ""}>
-                            {errors.unsubscribe_email_template_id && <span className="validation-error">{errors.unsubscribe_email_template_id?.message}</span>}
-                            <input id="unsubscribe_email_template_id" style={textWidth} type="text" {...register("unsubscribe_email_template_id")} />
-                            <div className="role-desc description">
-                                <details>
-                                    <summary>{__("See example template ID format.", "cds-snc")}</summary><code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
-                                </details>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label className="required" htmlFor="language"><Asterisk />{__("Language", "cds-snc")}</label></td>
+                        <td>
+                            <div className={errors.language ? "error-wrapper" : ""}>
+                                {errors.language && <span className="validation-error">{errors.language?.message || __("Language is required", "cds-snc")}</span>}
+                                <fieldset>
+                                    <label htmlFor="en">
+                                        <input id="en" {...register("language", { required: true })} type="radio" value="en" />
+                                        {" "}English
+                                    </label>
+                                    <br />
+                                    <label htmlFor="fr">
+                                        <input id="fr" {...register("language", { required: true })} type="radio" value="fr" />
+                                        {" "}French
+                                    </label>
+                                </fieldset>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label className="gc-label" htmlFor="subscribe_redirect_url">{__("Subscribe redirect url", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.subscribe_redirect_url ? "error-wrapper" : ""}>
-                            {errors.subscribe_redirect_url && <span className="validation-error">{errors.subscribe_redirect_url?.message}</span>}
-                            <input id="subscribe_redirect_url" style={textWidth} type="text" {...register("subscribe_redirect_url")} />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label htmlFor="unsubscribe_redirect_url">{__("Unsubscribe redirect url", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
-                            {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
-                            <input id="unsubscribe_redirect_url" style={textWidth} type="text" {...register("unsubscribe_redirect_url")} />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th><label htmlFor="confirm_redirect_url">{__("Confirm redirect url", "cds-snc")}</label></th>
-                    <td>
-                        <div className={errors.confirm_redirect_url ? "error-wrapper" : ""}>
-                            {errors.confirm_redirect_url && <span className="validation-error">{errors.confirm_redirect_url?.message}</span>}
-                            <input id="confirm_redirect_url" style={textWidth} type="text" {...register("confirm_redirect_url")} />
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th></th>
-                    <td><input className="button button-primary" type="submit" /><Back /></td>
-                </tr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label htmlFor="subscribe_email_template_id">{__("Subscribe template id", "cds-snc")}</label></td>
+                        <td>
+                            <div className={errors.subscribe_email_template_id ? "error-wrapper" : ""}>
+                                {errors.subscribe_email_template_id && <span className="validation-error">{errors.subscribe_email_template_id?.message}</span>}
+                                <input id="subscribe_email_template_id" style={textWidth} type="text" {...register("subscribe_email_template_id")} />
+                                <div className="role-desc description">
+                                    <details>
+                                        <summary>{__("See example template ID format.", "cds-snc")}</summary><code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
+                                    </details>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label htmlFor="unsubscribe_email_template_id">{__("Unsubscribe template id", "cds-snc")}</label></td>
+                        <td>
+                            <div className={errors.unsubscribe_email_template_id ? "error-wrapper" : ""}>
+                                {errors.unsubscribe_email_template_id && <span className="validation-error">{errors.unsubscribe_email_template_id?.message}</span>}
+                                <input id="unsubscribe_email_template_id" style={textWidth} type="text" {...register("unsubscribe_email_template_id")} />
+                                <div className="role-desc description">
+                                    <details>
+                                        <summary>{__("See example template ID format.", "cds-snc")}</summary><code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
+                                    </details>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label className="gc-label" htmlFor="subscribe_redirect_url">{__("Subscribe redirect url", "cds-snc")}</label></td>
+                        <td>
+                            <div className={errors.subscribe_redirect_url ? "error-wrapper" : ""}>
+                                {errors.subscribe_redirect_url && <span className="validation-error">{errors.subscribe_redirect_url?.message}</span>}
+                                <input id="subscribe_redirect_url" style={textWidth} type="text" {...register("subscribe_redirect_url")} />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label htmlFor="unsubscribe_redirect_url">{__("Unsubscribe redirect url", "cds-snc")}</label></td>
+                        <td>
+                            <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
+                                {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
+                                <input id="unsubscribe_redirect_url" style={textWidth} type="text" {...register("unsubscribe_redirect_url")} />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label htmlFor="confirm_redirect_url">{__("Confirm redirect url", "cds-snc")}</label></td>
+                        <td>
+                            <div className={errors.confirm_redirect_url ? "error-wrapper" : ""}>
+                                {errors.confirm_redirect_url && <span className="validation-error">{errors.confirm_redirect_url?.message}</span>}
+                                <input id="confirm_redirect_url" style={textWidth} type="text" {...register("confirm_redirect_url")} />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input className="button button-primary" type="submit" /><Back /></td>
+                    </tr>
+                </tbody>
             </table>
         </form>
     );

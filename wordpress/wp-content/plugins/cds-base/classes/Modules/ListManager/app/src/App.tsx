@@ -14,7 +14,11 @@ const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
 const UploadList = React.lazy(() => import("./components/UploadList"));
 
-const endpoint = "/wp-json/list-manager";
+let endpoint = "/wp-json/list-manager";
+
+if(process.env.NODE_ENV === "development"){
+  endpoint = "http://localhost:3000";
+}
 
 const App = ({ serviceData }: { serviceData: ServiceData }) => {
   const options = {

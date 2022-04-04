@@ -41,10 +41,5 @@
     "support": {
         "issues": "https://github.com/Automattic/_s/issues",
         "source": "https://github.com/Automattic/_s"
-    },
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        }
     }
 }

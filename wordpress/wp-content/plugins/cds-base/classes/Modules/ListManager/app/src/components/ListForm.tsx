@@ -36,7 +36,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
             <table id="form-table" className="form-table">
                 <tbody>
                     <tr>
-                        <td><label className="required" htmlFor="name"><Asterisk />{__("Name", "cds-snc")}</label></td>
+                        <th scope="row"><label className="required" htmlFor="name"><Asterisk />{__("Name", "cds-snc")}</label></th>
                         <td>
                             <div className={errors.name ? "error-wrapper" : ""}>
                                 {errors.name && <span className="validation-error">{errors.name?.message || __("Name is required", "cds-snc")}</span>}
@@ -45,7 +45,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         </td>
                     </tr>
                     <tr>
-                        <td><label className="required" htmlFor="language"><Asterisk />{__("Language", "cds-snc")}</label></td>
+                        <th scope="row"><label className="required" htmlFor="language"><Asterisk />{__("Language", "cds-snc")}</label></th>
                         <td>
                             <div className={errors.language ? "error-wrapper" : ""}>
                                 {errors.language && <span className="validation-error">{errors.language?.message || __("Language is required", "cds-snc")}</span>}
@@ -64,7 +64,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         </td>
                     </tr>
                     <tr>
-                        <td><label htmlFor="subscribe_email_template_id">{__("Subscribe template id", "cds-snc")}</label></td>
+                        <th scope="row"><label htmlFor="subscribe_email_template_id">{__("Subscribe template id", "cds-snc")}</label></th>
                         <td>
                             <div className={errors.subscribe_email_template_id ? "error-wrapper" : ""}>
                                 {errors.subscribe_email_template_id && <span className="validation-error">{errors.subscribe_email_template_id?.message}</span>}
@@ -78,7 +78,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         </td>
                     </tr>
                     <tr>
-                        <td><label htmlFor="unsubscribe_email_template_id">{__("Unsubscribe template id", "cds-snc")}</label></td>
+                        <th scope="row"><label htmlFor="unsubscribe_email_template_id">{__("Unsubscribe template id", "cds-snc")}</label></th>
                         <td>
                             <div className={errors.unsubscribe_email_template_id ? "error-wrapper" : ""}>
                                 {errors.unsubscribe_email_template_id && <span className="validation-error">{errors.unsubscribe_email_template_id?.message}</span>}
@@ -92,7 +92,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         </td>
                     </tr>
                     <tr>
-                        <td><label className="gc-label" htmlFor="subscribe_redirect_url">{__("Subscribe redirect url", "cds-snc")}</label></td>
+                        <th scope="row"><label className="gc-label" htmlFor="subscribe_redirect_url">{__("Subscribe redirect url", "cds-snc")}</label></th>
                         <td>
                             <div className={errors.subscribe_redirect_url ? "error-wrapper" : ""}>
                                 {errors.subscribe_redirect_url && <span className="validation-error">{errors.subscribe_redirect_url?.message}</span>}
@@ -101,7 +101,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         </td>
                     </tr>
                     <tr>
-                        <td><label htmlFor="unsubscribe_redirect_url">{__("Unsubscribe redirect url", "cds-snc")}</label></td>
+                        <th scope="row"><label htmlFor="unsubscribe_redirect_url">{__("Unsubscribe redirect url", "cds-snc")}</label></th>
                         <td>
                             <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
                                 {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
@@ -110,7 +110,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         </td>
                     </tr>
                     <tr>
-                        <td><label htmlFor="confirm_redirect_url">{__("Confirm redirect url", "cds-snc")}</label></td>
+                        <th scope="row"><label htmlFor="confirm_redirect_url">{__("Confirm redirect url", "cds-snc")}</label></th>
                         <td>
                             <div className={errors.confirm_redirect_url ? "error-wrapper" : ""}>
                                 {errors.confirm_redirect_url && <span className="validation-error">{errors.confirm_redirect_url?.message}</span>}

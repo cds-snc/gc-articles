@@ -65,7 +65,7 @@ msgstr "Mes sites"
 
 #: classes/Modules/Cleanup/AdminBar.php:190
 msgid " (current)"
-msgstr "(actuel)"
+msgstr " (actuel)"
 
 #: classes/Modules/Cleanup/AdminBar.php:205 build/index.js:4195
 #: build/index.js:4070
@@ -173,19 +173,19 @@ msgstr "Votre réponse nous aide à transmettre votre message au bon endroit"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:57
 msgid "Ask a question."
-msgstr "Posez-nous une question"
+msgstr "Posez-nous une question."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:62
 msgid "Get technical support."
-msgstr "Obtenir du soutien technique"
+msgstr "Obtenir du soutien technique."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:67
 msgid "Give feedback."
-msgstr "Fournir des commentaires"
+msgstr "Fournir des commentaires."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:72
 msgid "Schedule a demo to learn more about GC Articles."
-msgstr "Demander une démonstration pour en savoir plus sur Articles GC"
+msgstr "Demander une démonstration pour en savoir plus sur Articles GC."
 
 #: classes/Modules/Forms/Contact/ContactForm.php:77
 msgid "Other"
@@ -464,7 +464,7 @@ msgstr ""
 #: classes/Modules/Notify/ListManagerSettings.php:76
 #: classes/Modules/Notify/ListManagerUserProfile.php:37
 msgid "List Manager"
-msgstr "Gestionnaire de liste"
+msgstr "Gestionnaire des liste"
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:42
 #: classes/Modules/Notify/NotifyTemplateSender.php:85
@@ -812,7 +812,7 @@ msgstr "Nom de la liste"
 
 #: build/index.js:3789 build/index.js:3704
 msgid "Subscriber Count"
-msgstr "Nombre d’abonné·e·s"
+msgstr "Nombre d’abonnées"
 
 #: build/index.js:3828 build/index.js:3743
 msgid "Send Template"
@@ -824,7 +824,7 @@ msgstr "Cette liste comprend"
 
 #: build/index.js:3914 build/index.js:3819
 msgid " subscribers.  "
-msgstr "abonné·e·s."
+msgstr " abonnées."
 
 #: build/index.js:3915 build/index.js:3820
 msgid "You won’t be able to revert this"

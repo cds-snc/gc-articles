@@ -174,7 +174,7 @@ msgstr "par %s"
 
 #: maintenance.php:5
 msgid "We’re currently working on this"
-msgstr ""
+msgstr "En construction"
 
 #. translators: %s: search query.
 #: search.php:23
@@ -211,6 +211,3 @@ msgstr "Modifier <span class=\"screen-reader-text\">%s</span>"
 #: template-parts/content.php:35
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "Continuer à lire <span class=\"screen-reader-text\"> \"%s\"</span>"
-
-#~ msgid "We're currently working on this"
-#~ msgstr "En construction"

@@ -83,8 +83,9 @@ msgid "Admin Email <strong>must be</strong> a current Super Admin"
 msgstr "L’adresse courriel de l’administrateur <strong>doit correspondre</strong> à celui d’un super administrateur"
 
 #: classes/Modules/Cleanup/CreateSites.php:20
+#, fuzzy
 msgid "or else a new Site won’t be created"
-msgstr ""
+msgstr "sinon le site ne peut être créé."
 
 #: classes/Modules/Cleanup/Login.php:142
 msgid "Canadian Digital Service"
@@ -173,19 +174,19 @@ msgstr ""
 
 #: classes/Modules/Forms/Contact/ContactForm.php:57
 msgid "Ask a question."
-msgstr ""
+msgstr "Posez-nous une question"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:62
 msgid "Get technical support."
-msgstr ""
+msgstr "Obtenir du soutien technique"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:67
 msgid "Give feedback."
-msgstr ""
+msgstr "Fournir des commentaires"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:72
 msgid "Schedule a demo to learn more about GC Articles."
-msgstr ""
+msgstr "Demander une démonstration pour en savoir plus sur Articles GC"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:77
 msgid "Other"
@@ -215,7 +216,7 @@ msgstr ""
 #: classes/Modules/Forms/Contact/ContactForm.php:107
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:205
 msgid "Website."
-msgstr ""
+msgstr "Site Web"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:112
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:211
@@ -249,7 +250,7 @@ msgstr ""
 #: classes/Modules/Forms/Contact/ContactForm.php:153
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:255
 msgid "Subscribers."
-msgstr ""
+msgstr "S’abonner"
 
 #: classes/Modules/Forms/Contact/ContactForm.php:158
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:261
@@ -284,7 +285,7 @@ msgstr "Soumettre"
 #: classes/Modules/Forms/RequestSite/Setup.php:64
 #: classes/Modules/Forms/Subscribe/Subscribe.php:100
 msgid "Please complete the required field(s) to continue"
-msgstr ""
+msgstr "Veuillez remplir le champ obligatoire pour continuer"
 
 #: classes/Modules/Forms/Messenger.php:37
 msgid "Thanks for the message"
@@ -345,7 +346,7 @@ msgstr ""
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:130
 msgid "Request site"
-msgstr ""
+msgstr "Demander un site"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:145
 msgid "Tell us about your site. "
@@ -397,7 +398,7 @@ msgstr ""
 
 #: classes/Modules/Forms/RequestSite/Setup.php:88
 msgid "Request a site:"
-msgstr ""
+msgstr "Demander un site :"
 
 #: classes/Modules/Forms/Subscribe/Subscribe.php:81
 msgid "Thanks for subscribing"
@@ -505,7 +506,7 @@ msgstr "Clé API de Notification GC"
 
 #: classes/Modules/Notify/NotifySettings.php:125
 msgid "Notify Generic<br />Template ID"
-msgstr ""
+msgstr "ID du modèle générique de Notification GC"
 
 #: classes/Modules/Notify/NotifySettings.php:145
 msgid "<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-only\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span class=\"sr-only\"> and ends with</span>%3$s</span>"
@@ -529,7 +530,7 @@ msgstr ""
 
 #: classes/Modules/Notify/NotifySettings.php:191
 msgid "Enter your generic Email Template ID"
-msgstr ""
+msgstr "ID du modèle générique de Notification GC"
 
 #: classes/Modules/Notify/NotifyTemplateSender.php:84
 msgid "Send Notify Template"
@@ -541,7 +542,7 @@ msgstr "Une erreur s’est produite"
 
 #: classes/Modules/Releases/Releases.php:59
 msgid "Something went wrong"
-msgstr ""
+msgstr "Une erreur s’est produite."
 
 #: classes/Modules/Site/SiteSettings.php:67
 msgid "Maintenance mode"
@@ -637,7 +638,7 @@ msgstr "Terminer la configuration du site"
 
 #: classes/Modules/Site/SiteSetup.php:124
 msgid "You’re almost done.  Let’s create some pages and default settings."
-msgstr ""
+msgstr "Vous avez presque terminé. Créons des pages et des articles, et réglons les paramètres par défaut."
 
 #: classes/Modules/Site/SiteStatus.php:39
 msgid "Site Availability"
@@ -653,7 +654,7 @@ msgstr "Maintenance"
 
 #: classes/Modules/Site/SiteStatus.php:50
 msgid "Search Engine Visibility"
-msgstr ""
+msgstr "Visibilité dans les moteurs de recherche"
 
 #: classes/Modules/Site/SiteStatus.php:51
 msgid "On"
@@ -686,15 +687,15 @@ msgstr "Vous ne pouvez pas utiliser ce domaine de courriel pour l’enregistreme
 
 #: classes/Modules/Users/Users.php:63
 msgid "This role has complete control over the articles site and can perform all other roles actions"
-msgstr ""
+msgstr "Ce rôle a le contrôle total sur le site et peut effectuer les actions de tout autre rôle."
 
 #: classes/Modules/Users/Users.php:67
 msgid "This role allows the user to write and publish articles."
-msgstr ""
+msgstr "Ce rôle permet à une personne d’écrire et de publier des articles en ligne sur le site."
 
 #: classes/Modules/Users/Users.php:72
 msgid "This role allows the user to draft articles but not to publish them."
-msgstr ""
+msgstr "Ce rôle permet à une personne d’écrire et de publier des articles en ligne sur le site."
 
 #: classes/Modules/Users/Users.php:228 classes/Modules/Users/Users.php:246
 msgid "Invitation to collaborate on GC Articles"
@@ -754,7 +755,7 @@ msgstr "Êtes-vous sûr·e de vouloir envoyer?"
 
 #: build/index.js:24 classes/Modules/Notify/src/util.js:8 build/index.js:8
 msgid "You won’t be able to revert this!"
-msgstr ""
+msgstr "Vous ne pouvez annuler l’opération!"
 
 #: build/index.js:29 classes/Modules/Notify/src/util.js:13 build/index.js:13
 msgid "Yes, send it!"
@@ -804,7 +805,7 @@ msgstr "Afficher « En savoir plus »"
 
 #: build/index.js:3604 build/index.js:3529
 msgid " Tables exist from deleted sites"
-msgstr ""
+msgstr "Des tables existent à partir de sites supprimés"
 
 #: build/index.js:3787 build/index.js:3702
 msgid "List Name"
@@ -828,7 +829,7 @@ msgstr "abonné·e·s."
 
 #: build/index.js:3915 build/index.js:3820
 msgid "You won’t be able to revert this"
-msgstr ""
+msgstr "Vous ne pouvez annuler l’opération."
 
 #: build/index.js:4091 build/index.js:3976
 msgid "Date"
@@ -839,7 +840,6 @@ msgid "User agent"
 msgstr "Agent utilisateur"
 
 #: build/index.js:4204 build/index.js:4079
-#, fuzzy
 msgid "current"
 msgstr "actuel"
 
@@ -921,7 +921,7 @@ msgstr "Étiquette du bouton S’abonner"
 #: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:45
 msgid "List"
-msgstr ""
+msgstr "Liste"
 
 #: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
@@ -997,158 +997,10 @@ msgstr ""
 #: classes/Modules/BlocksPHP/src/subscribe/block.json
 msgctxt "block title"
 msgid "Subscribe"
-msgstr ""
+msgstr "S’abonner"
 
 #: classes/Modules/BlocksPHP/build/subscribe/block.json
 #: classes/Modules/BlocksPHP/src/subscribe/block.json
 msgctxt "block description"
 msgid "List Mananger subscription"
-msgstr ""
-
-#~ msgid "My Collections"
-#~ msgstr "Mes sites"
-
-#~ msgid "Bulk"
-#~ msgstr "En masse"
-
-#~ msgid "or else a Collection won’t be created"
-#~ msgstr "sinon le site ne peut être créé."
-
-#~ msgid "Request a site"
-#~ msgstr "Demander un site"
-
-#~ msgid "Describe the site you would like"
-#~ msgstr "Décrivez-nous le but du site que vous souhaitez créer"
-
-#~ msgid "Ask a question"
-#~ msgstr "Posez-nous une question"
-
-#~ msgid "Your question"
-#~ msgstr "Votre question"
-
-#~ msgid "Get technical support"
-#~ msgstr "Obtenir du soutien technique"
-
-#~ msgid "Describe the problem."
-#~ msgstr "Décrivez-nous votre problème."
-
-#~ msgid "Give feedback"
-#~ msgstr "Fournir des commentaires"
-
-#~ msgid "How can we do better?"
-#~ msgstr "Comment pouvons-nous faire mieux?"
-
-#~ msgid "Set up a demo to learn more about GC Articles"
-#~ msgstr "Demander une démonstration pour en savoir plus sur Articles GC"
-
-#~ msgid "Your contact information"
-#~ msgstr "Vos coordonnées"
-
-#~ msgid "Tell us more"
-#~ msgstr "Détails additionnels"
-
-#~ msgid "Something went wrong. Please try again."
-#~ msgstr "Une erreur s’est produite. Veuillez réessayer."
-
-#~ msgid "What do you want to name your GC Articles collection?"
-#~ msgstr "Comment voulez-vous nommer votre site Articles GC?"
-
-#~ msgid "How did you hear about GC Articles?"
-#~ msgstr "Comment avez-vous pris connaissance d’Articles GC?"
-
-#~ msgid "What will you use your GC Articles collection for?"
-#~ msgstr "Comment prévoyez-vous utiliser votre site Articles GC?"
-
-#~ msgid "Do you require a GC Notify email sending integration? if yes, what for?\n"
-#~ msgstr "Avez-vous besoin d’une intégration avec Notification GC pour l’envoi de courriels? Si oui, à quelle fin?\n"
-
-#~ msgid "Contact Types"
-#~ msgstr "Types de contacts"
-
-#~ msgid "Continue"
-#~ msgstr "Continuer"
-
-#~ msgid "401 Unauthorized"
-#~ msgstr "401 Non autorisé"
-
-#~ msgid "Please complete all required fields to continue"
-#~ msgstr "Veuillez remplir tous les champs obligatoires pour continuer"
-
-#~ msgid "Please complete the required field to continue"
-#~ msgstr "Veuillez remplir le champ obligatoire pour continuer"
-
-#~ msgid "Service ID"
-#~ msgstr "ID de service"
-
-#~ msgid "No service ids found"
-#~ msgstr "Aucun identifiant de service trouvé"
-
-#~ msgid "List Manager Settings"
-#~ msgstr "Paramètres du gestionnaire de liste"
-
-#~ msgid "List manager"
-#~ msgstr "Gestionnaire de liste"
-
-#~ msgid "List details"
-#~ msgstr "Détails de la liste"
-
-#~ msgid "Notify Services"
-#~ msgstr "Service Notification GC"
-
-#~ msgid "Add the <a href='%s'>sending service</a> for your subscription lists."
-#~ msgstr "Ajoutez le <a href='%s’>service d’envoi</a> à vos listes d’abonnement."
-
-#~ msgid "Add details for each of your subscription lists."
-#~ msgstr "Ajoutez des détails pour chacune de vos listes d’abonnement."
-
-#~ msgid "Notify Generic TemplateId"
-#~ msgstr "ID du modèle générique de Notification GC"
-
-#~ msgid "Mode"
-#~ msgstr "Mode"
-
-#~ msgid "Your almost done.  Let's create some pages, articles and default settings."
-#~ msgstr "Vous avez presque terminé. Créons des pages et des articles, et réglons les paramètres par défaut."
-
-#~ msgid "This role has complete control over the articles collection and can perform all other roles actions"
-#~ msgstr "Ce rôle a le contrôle total sur le site et peut effectuer les actions de tout autre rôle."
-
-#~ msgid "This role is allows the user to write and publish articles online to the collection."
-#~ msgstr "Ce rôle permet à une personne d’écrire et de publier des articles en ligne sur le site."
-
-#~ msgid "You won't be able to revert this!"
-#~ msgstr "Vous ne pouvez annuler l’opération!"
-
-#~ msgid " Tables exist from deleted collections"
-#~ msgstr "Des tables existent à partir de sites supprimés"
-
-#~ msgid "You won't be able to revert this"
-#~ msgstr "Vous ne pouvez annuler l’opération."
-
-#~ msgid "Contact"
-#~ msgstr "Contact"
-
-#~ msgid "Platform team contact form"
-#~ msgstr "Formulaire de contact de l’équipe des plateformes"
-
-#~ msgid "List Mananger subscription"
-#~ msgstr "Abonnement au gestionnaire de liste"
-
-#~ msgctxt "block title"
-#~ msgid "Contact Form"
-#~ msgstr "Formulaire de contact"
-
-#~ msgctxt "block description"
-#~ msgid "Generic contact form"
-#~ msgstr "Formulaire de contact générique"
-
-#~ msgctxt "block title"
-#~ msgid "Subscribe Form"
-#~ msgstr "Formulaire d’abonnement"
-
-#~ msgctxt "block description"
-#~ msgid "Add subscription form"
-#~ msgstr "Ajouter un formulaire d’abonnement"
-
-#~ msgid "Site settings"
-#~ msgstr "les paramètres"
+msgstr "Abonnement au gestionnaire de liste"

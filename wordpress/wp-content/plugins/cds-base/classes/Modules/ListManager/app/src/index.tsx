@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { List } from '../../../Notify/src/Types';
@@ -18,19 +18,23 @@ declare global {
 
 const renderApp = () => {
   if (document.getElementById("list-manager-app")) {
-    const el = document.getElementById("list-manager-app");
-    if (el) {
-      let data = el.getAttribute("data-ids");
+
+    const container = document.getElementById('list-manager-app')!;
+    const root = createRoot(container);
+
+    if (container) {
+      let data = container.getAttribute("data-ids");
       if (data) {
         data = JSON.parse(data);
         const serviceData = data as unknown as ServiceData;
 
-        ReactDOM.render(
+        root.render(
           <React.StrictMode>
             <App serviceData={serviceData} />
-          </React.StrictMode>,
-          document.getElementById("list-manager-app")
+          </React.StrictMode>
         );
+
+
       }
     }
   }

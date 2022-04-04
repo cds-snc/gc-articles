@@ -22,7 +22,7 @@
     "type": "wordpress-plugin",
     "scripts": {
         "make-pot": "wp i18n make-pot --domain=cds-snc . languages/cds-snc.pot",
-        "merge-po": "msgmerge -U ./languages/cds-snc-fr_CA.po ./languages/cds-snc.pot",
+        "merge-po": "msgmerge -U --no-wrap --backup none -N ./languages/cds-snc-fr_CA.po ./languages/cds-snc.pot",
         "compile-mo": "msgfmt -o ./languages/cds-snc-fr_CA.mo ./languages/cds-snc-fr_CA.po",
         "clean-json": "rm ./languages/*.json",
         "compile-json": "wp i18n make-json ./languages/cds-snc-fr_CA.po --no-purge",

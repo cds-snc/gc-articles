@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-03-22T20:11:32+00:00\n"
+"POT-Creation-Date: 2022-04-04T15:55:10+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,11 +16,11 @@ msgstr ""
 
 #. Theme Name of the theme
 msgid "CDS Default"
-msgstr "Le base thème du SNC"
+msgstr "Thème par défaut du SNC"
 
 #. Description of the theme
 msgid "WET styled Starter Theme"
-msgstr "Thème de démarrage dans le style de WET-BOEW"
+msgstr "Thème de démarrage du style BOEW"
 
 #. Author of the theme
 msgid "CDS"
@@ -28,19 +28,19 @@ msgstr "SNC"
 
 #: 404.php:18
 msgid "Page not found."
-msgstr "la page n’a pas été trouvée"
+msgstr "Page introuvable"
 
 #: 404.php:25
 msgid "It looks like nothing was found at this location."
-msgstr "Rien n’a été trouvé à cette adresse."
+msgstr "Rien n’a été trouvé à cet emplacement."
 
 #: functions.php:78
 msgid "Primary"
-msgstr "La navigation principale"
+msgstr "Primaire"
 
 #: functions.php:79
 msgid "Footer"
-msgstr "La navigation en pied de page"
+msgstr "Pied de page"
 
 #: functions.php:98
 msgid "Black"
@@ -52,35 +52,35 @@ msgstr "Blanc"
 
 #: functions.php:108
 msgid "Primary Blue"
-msgstr "bleu primaire"
+msgstr "Bleu primaire"
 
 #: functions.php:113
 msgid "Dark Blue"
-msgstr "bleu foncé"
+msgstr "Bleu foncé"
 
 #: functions.php:118
 msgid "Light Blue"
-msgstr "bleu clair"
+msgstr "Bleu clair"
 
 #: functions.php:123
 msgid "Dark Grey"
-msgstr "gris foncé"
+msgstr "Gris foncé"
 
 #: functions.php:128
 msgid "Grey"
-msgstr "gris"
+msgstr "Gris"
 
 #: functions.php:133
 msgid "Orange"
-msgstr "orange"
+msgstr "Orange"
 
 #: functions.php:138
 msgid "Green"
-msgstr "vert"
+msgstr "Vert"
 
 #: functions.php:143
 msgid "Red"
-msgstr "rouge"
+msgstr "Rouge"
 
 #: functions.php:202
 msgid "GC Homepage"
@@ -91,20 +91,36 @@ msgid "Default homepage"
 msgstr "Page d’accueil par défaut"
 
 #: header.php:37
+msgid "Your site is currently in maintenance mode. Only logged in users will be able to see this page."
+msgstr ""
+
+#: header.php:40
+msgid "To make your site live <a href=\"%s\">update your site settings</a>."
+msgstr ""
+
+#: header.php:49
 msgid "Skip to content"
 msgstr "Aller au contenu"
 
-#: header.php:70 header.php:77 header.php:82 header.php:91
+#: header.php:61
+msgid "Sign out"
+msgstr ""
+
+#: header.php:63
+msgid "Sign in"
+msgstr ""
+
+#: header.php:89 header.php:96 header.php:101 header.php:110
 msgid "Search"
-msgstr "Recherche"
+msgstr "Rechercher"
 
-#: header.php:110 header.php:113
+#: header.php:129 header.php:132
 msgid "Menu"
-msgstr "Le menu"
+msgstr "Menu"
 
-#: header.php:112
+#: header.php:131
 msgid "Main"
-msgstr "le bloc principal"
+msgstr "Principal"
 
 #: inc/template-functions.php:32
 msgid "Document navigation"
@@ -112,23 +128,23 @@ msgstr "Navigation dans les documents"
 
 #: inc/template-functions.php:37
 msgid "Next blog post"
-msgstr "le prochain article de blog"
+msgstr "Prochain article de blogue"
 
 #: inc/template-functions.php:48
 msgid "Previous blog post"
-msgstr "l’article de blog précédent"
+msgstr "Article de blogue précédent"
 
 #: inc/template-functions.php:93
 msgid "Older posts"
-msgstr "articles passés"
+msgstr "Articles précédents"
 
 #: inc/template-functions.php:94
 msgid "Newer posts"
-msgstr "articles suivants"
+msgstr "Articles suivants"
 
 #: inc/template-functions.php:95
 msgid "Posts navigation"
-msgstr "navigation dans les articles"
+msgstr "Navigation dans les articles"
 
 #: inc/template-functions.php:96
 msgid "Posts"
@@ -140,15 +156,15 @@ msgstr "Fil d’Ariane"
 
 #: inc/template-functions.php:170
 msgid "You are here:"
-msgstr "Tu es là"
+msgstr "Vous êtes ici :"
 
-#: inc/template-functions.php:397
+#: inc/template-functions.php:404
 msgid "Top menu"
-msgstr "navigation supérieure"
+msgstr "Menu supérieur"
 
-#: inc/template-functions.php:398
+#: inc/template-functions.php:405
 msgid "submenu"
-msgstr "sous-navigation"
+msgstr "Sous-menu"
 
 #. translators: %s: post author.
 #: inc/template-tags.php:44
@@ -157,53 +173,41 @@ msgid "by %s"
 msgstr "par %s"
 
 #: maintenance.php:5
-#, fuzzy
 msgid "We’re currently working on this"
-msgstr "Actuellement, cet endroit est en travaux."
+msgstr "En construction"
 
 #. translators: %s: search query.
 #: search.php:23
 msgid "Search Results for: %s"
-msgstr "les résultats de la recherche de: %s"
+msgstr "Résultats de la recherche : %s"
 
 #: template-parts/content-none.php:17
 msgid "Nothing Found"
-msgstr "Il n’y avait rien trouvé"
+msgstr "Aucun résultat"
 
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content-none.php:26
-msgid ""
-"Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr ""
-"Êtes-vous prêt à publier votre premier message ?  <a href=\"%1$s\">Commencez "
-"ici</a> "
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Êtes-vous prêt à publier votre premier article? <a href=\"%1$s\">Commencez ici</a>."
 
 #: template-parts/content-none.php:38
-msgid ""
-"Sorry, but nothing matched your search terms. Please try again with some "
-"different keywords."
-msgstr ""
-"Désolé, rien n’a été trouvé avec votre recherche. Veuillez réessayer avec "
-"d’autres mots-clés."
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Désolé, aucun résultat ne correspond à votre recherche. Veuillez réessayer avec d’autres mots-clés."
 
 #: template-parts/content-none.php:44
 msgid "Nothing found! Perhaps searching can help."
-msgstr "Rien n’a été trouvé. s’il vous plaît essayez de rechercher"
+msgstr "Aucun résultat! Veuillez lancer une recherche."
 
 #: template-parts/content-page.php:26
 msgid "Pages:"
-msgstr "les pages"
+msgstr "Pages :"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content-page.php:40
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
-msgstr "Éditer <span class=\"screen-reader-text\">%s</span>"
+msgstr "Modifier <span class=\"screen-reader-text\">%s</span>"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content.php:35
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
-msgstr ""
-"Continuez à lire le post <span class=\"screen-reader-text\"> \"%s\"</span>"
-
-#~ msgid "Search Canada.ca"
-#~ msgstr "Rechercher dans Canada.ca"
+msgstr "Continuer à lire <span class=\"screen-reader-text\"> \"%s\"</span>"

@@ -191,9 +191,7 @@ class Users
                 sprintf("wp-login.php?action=rp&key=%s&login=%s", $unique, rawurlencode($userInfo->user_login)),
                 'login'
             );
-        }
 
-        if (!$userExists) {
             // we don't need to send this for existing users
             $password_message = $uniqueUrl;
         }

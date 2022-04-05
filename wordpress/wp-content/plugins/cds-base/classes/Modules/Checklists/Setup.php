@@ -20,6 +20,13 @@ class Setup
     public function init()
     {
         add_action('wp_loaded', [$this, 'addActions']);
+
+        // Both of these need to be called _before_ wp_loaded
+
+        // called if plugin is active
+        add_action('publishpress_checklists_modules_loaded', [$this, 'addChecklistRole']);
+        // called when plugin is deactivated
+        add_action('deactivate_publishpress-checklists/publishpress-checklists.php', [$this, 'removeChecklistRole']);
     }
 
     public function addActions()
@@ -32,6 +39,32 @@ class Setup
         }
     }
 
+    public function addChecklistRole(): void
+    {
+        $this->modifyChecklistRole(addRole: true);
+    }
+
+    public function removeChecklistRole(): void
+    {
+        $this->modifyChecklistRole(addRole: false);
+    }
+
+    public function modifyChecklistRole(bool $addRole = true): void
+    {
+        $roles = ['administrator', 'gceditor'];
+
+        foreach ($roles as $role) {
+            $roleObj = get_role($role);
+
+            if (!is_null($roleObj)) {
+                if ($addRole) {
+                    $roleObj->add_cap('manage_checklists');
+                } else {
+                    $roleObj->remove_cap('manage_checklists');
+                }
+            }
+        }
+    }
 
     public function removeUpgradeToProLink()
     {

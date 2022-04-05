@@ -38,6 +38,7 @@ class Menus
             "Users",
             "Settings",
             "Bulk Send",
+            "Checklists",
 
             // French menu items
             "Tableau de bord",

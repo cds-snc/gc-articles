@@ -25,6 +25,7 @@ class SubscriptionForm
         $listId = "";
         $emailLabel = __("Enter your email:", "cds-snc");
         $subscribeLabel = __("Subscribe", "cds-snc");
+        $policyLink = "";
 
         if (!empty($attributes['placeholderValue'])) :
             $placeholder = $attributes['placeholderValue'];
@@ -40,6 +41,10 @@ class SubscriptionForm
 
         if (!empty($attributes['subscribeLabel'])) :
             $subscribeLabel = $attributes['subscribeLabel'];
+        endif;
+
+        if (!empty($attributes['policyLink'])) :
+            $policyLink = $attributes['policyLink'];
         endif;
 
         $apiEndpoint = site_url() . '/wp-json/subscribe/v1/process';
@@ -66,6 +71,13 @@ class SubscriptionForm
                 Utils::submitButton($subscribeLabel);
             ?>
             </form>
+
+            <?php
+            if ($policyLink) {
+                $policyLinkText = __('Privacy Policy', 'cds-snc');
+                printf('<p><a href="%s">%s</a></p>', $policyLink, $policyLinkText);
+            }
+            ?>
         </div>
         <?php
         $form = ob_get_contents();

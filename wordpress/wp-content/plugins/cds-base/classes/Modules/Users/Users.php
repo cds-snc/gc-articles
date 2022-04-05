@@ -196,7 +196,8 @@ class Users
             $password_message = $uniqueUrl;
         }
 
-        if($userExists){
+        if($userExists) 
+        {
             $site_url = get_site_url(get_current_blog_id());
         }
 

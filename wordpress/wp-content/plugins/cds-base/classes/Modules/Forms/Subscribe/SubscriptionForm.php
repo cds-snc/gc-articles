@@ -43,8 +43,8 @@ class SubscriptionForm
             $subscribeLabel = $attributes['subscribeLabel'];
         endif;
 
-        if (!empty($attributes['policyLink'])) :
-            $policyLink = $attributes['policyLink'];
+        if (!empty($attributes['privacyLink'])) :
+            $privacyLink = $attributes['privacyLink'];
         endif;
 
         $apiEndpoint = site_url() . '/wp-json/subscribe/v1/process';
@@ -73,9 +73,9 @@ class SubscriptionForm
             </form>
 
             <?php
-            if ($policyLink) {
+            if ($privacyLink) {
                 $policyLinkText = __('Privacy Policy', 'cds-snc');
-                printf('<p><a href="%s">%s</a></p>', $policyLink, $policyLinkText);
+                printf('<p><a href="%s">%s</a></p>', $privacyLink, $policyLinkText);
             }
             ?>
         </div>

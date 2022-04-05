@@ -41,7 +41,7 @@ class BlocksPHP
                 ],
                 'subscribeLabel' => [
                     'type' => 'string',
-                    "default" => "https://articles.alpha.canada.ca/subscriber-privacy-policy"
+                    "default" =>  __("Subscribe:", "cds-snc")
                 ],
                 'privacyLink' => [
                     'type' => 'string',

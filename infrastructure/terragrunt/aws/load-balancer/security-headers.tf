@@ -68,3 +68,22 @@ resource "aws_cloudfront_response_headers_policy" "security_headers_policy_admin
     }
   }
 }
+
+resource "aws_cloudfront_response_headers_policy" "security_headers_policy_api" {
+  name = "gc-articles-security-headers-api"
+  security_headers_config {
+    strict_transport_security {
+      access_control_max_age_sec = "31536000"
+      include_subdomains         = true
+      preload                    = true
+      override                   = true
+    }
+  }
+  custom_headers_config {
+    items {
+      header   = "X-Is-WP-API"
+      override = true
+      value    = "true"
+    }
+  }
+}

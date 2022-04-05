@@ -181,6 +181,7 @@ class Users
     {
 
         $password_message = "";
+        $site_url = "";
 
         if (!$userExists) {
             $userInfo = get_userdata($uId);
@@ -190,11 +191,13 @@ class Users
                 sprintf("wp-login.php?action=rp&key=%s&login=%s", $unique, rawurlencode($userInfo->user_login)),
                 'login'
             );
-        }
 
-        if (!$userExists) {
             // we don't need to send this for existing users
             $password_message = $uniqueUrl;
+        }
+
+        if ($userExists) {
+            $site_url = get_site_url(get_current_blog_id());
         }
 
         try {
@@ -203,7 +206,8 @@ class Users
                 $email,
                 "a11693cb-2b84-4920-9e66-e9eb649fc948",
                 [
-                    "password_message" => $password_message
+                    "password_message" => $password_message,
+                    "site_url" => $site_url
                 ],
             );
         } catch (\Alphagov\Notifications\Exception\NotifyException $e) {

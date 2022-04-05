@@ -20,16 +20,9 @@ resource "aws_cloudfront_response_headers_policy" "security_headers_policy_front
       override                   = true
     }
 
-    # content_security_policy {
-    #   content_security_policy = "base-uri 'self'; connect-src 'self'; default-src 'self'; font-src 'self' https://fonts.gstatic.com https://use.fontawesome.com https://www.canada.ca; frame-src 'self'; img-src 'self' https://canada.ca https://wet-boew.github.io https://www.canada.ca https://secure.gravatar.com; manifest-src 'self'; media-src 'self'; object-src 'none'; script-src 'self' 'sha256-DdN0UNltr41cvBTgBr0owkshPbwM95WknOV9rvTA7pg=' 'sha256-MF5ZCDqcQxsjnFVq0T7A8bpEWUJiuO9Qx1MqSYvCwds=' 'sha256-8//zSBdstORCAlBMo1/Cig3gKc7QlPCh9QfWbRu0OjU=' https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js https://www.canada.ca/etc/designs/canada/wet-boew/js/wet-boew.min.js https://www.canada.ca/etc/designs/canada/wet-boew/js/theme.min.js https://www.canada.ca/etc/designs/canada/wet-boew/js/i18n/en.min.js; style-src 'self' 'unsafe-inline' https://use.fontawesome.com https://www.canada.ca; worker-src 'none';"
-    #   override                = true
-    # }
-  }
-  custom_headers_config {
-    items {
-      header   = "X-Is-WP-Admin"
-      override = true
-      value    = "false"
+    content_security_policy {
+      content_security_policy = "base-uri 'self'; connect-src 'self'; default-src 'self'; font-src 'self' data: https://fonts.gstatic.com https://use.fontawesome.com https://www.canada.ca; frame-src 'self'; img-src 'self' data: https://canada.ca https://wet-boew.github.io https://www.canada.ca https://secure.gravatar.com; manifest-src 'self'; media-src 'self'; object-src 'none'; script-src 'self' 'sha256-DdN0UNltr41cvBTgBr0owkshPbwM95WknOV9rvTA7pg=' 'sha256-MF5ZCDqcQxsjnFVq0T7A8bpEWUJiuO9Qx1MqSYvCwds=' 'sha256-8//zSBdstORCAlBMo1/Cig3gKc7QlPCh9QfWbRu0OjU=' https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js https://www.canada.ca/etc/designs/canada/wet-boew/js/wet-boew.min.js https://www.canada.ca/etc/designs/canada/wet-boew/js/theme.min.js https://www.canada.ca/etc/designs/canada/wet-boew/js/i18n/en.min.js; style-src 'self' 'unsafe-inline' https://use.fontawesome.com https://www.canada.ca; worker-src 'none';"
+      override                = true
     }
   }
 }
@@ -60,13 +53,6 @@ resource "aws_cloudfront_response_headers_policy" "security_headers_policy_admin
     #   override                = true
     # }
   }
-  custom_headers_config {
-    items {
-      header   = "X-Is-WP-Admin"
-      override = true
-      value    = "true"
-    }
-  }
 }
 
 resource "aws_cloudfront_response_headers_policy" "security_headers_policy_api" {
@@ -77,13 +63,6 @@ resource "aws_cloudfront_response_headers_policy" "security_headers_policy_api" 
       include_subdomains         = true
       preload                    = true
       override                   = true
-    }
-  }
-  custom_headers_config {
-    items {
-      header   = "X-Is-WP-API"
-      override = true
-      value    = "true"
     }
   }
 }

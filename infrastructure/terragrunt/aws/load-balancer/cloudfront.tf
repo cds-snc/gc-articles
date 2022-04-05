@@ -64,6 +64,9 @@ resource "aws_cloudfront_distribution" "wordpress" {
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_frontend.id
   }
 
+  #
+  # Subsite sign in path prefix
+  #
   ordered_cache_behavior {
     path_pattern     = "*/sign-in-se-connecter*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
@@ -87,6 +90,9 @@ resource "aws_cloudfront_distribution" "wordpress" {
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_frontend.id
   }
 
+  #
+  # Base site sign in path prefix
+  #
   ordered_cache_behavior {
     path_pattern     = "sign-in-se-connecter*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
@@ -110,6 +116,9 @@ resource "aws_cloudfront_distribution" "wordpress" {
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_frontend.id
   }
 
+  #
+  # Subsite admin path prefix
+  #
   ordered_cache_behavior {
     path_pattern     = "*/wp-admin*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
@@ -133,6 +142,9 @@ resource "aws_cloudfront_distribution" "wordpress" {
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_admin.id
   }
 
+  #
+  # Base site admin path prefix
+  #
   ordered_cache_behavior {
     path_pattern     = "wp-admin*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
@@ -156,6 +168,9 @@ resource "aws_cloudfront_distribution" "wordpress" {
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_admin.id
   }
 
+  #
+  # All sites uploaded files path prefix
+  #
   ordered_cache_behavior {
     path_pattern     = "/uploads/*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
@@ -178,6 +193,9 @@ resource "aws_cloudfront_distribution" "wordpress" {
     viewer_protocol_policy = "redirect-to-https"
   }
 
+  #
+  # Subsite API path prefix
+  #
   ordered_cache_behavior {
     path_pattern     = "*/wp-json*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
@@ -201,6 +219,9 @@ resource "aws_cloudfront_distribution" "wordpress" {
     response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_api.id
   }
 
+  #
+  # Base site API path prefix
+  #
   ordered_cache_behavior {
     path_pattern     = "wp-json*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]

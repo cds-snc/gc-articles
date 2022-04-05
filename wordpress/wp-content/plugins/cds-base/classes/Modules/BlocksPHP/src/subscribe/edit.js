@@ -6,7 +6,7 @@ import { name } from './block.json';
 
 const Edit = ({ attributes, setAttributes }) => {
 
-	const { placeholderValue, listId, emailLabel, subscribeLabel } = attributes;
+	const { placeholderValue, listId, emailLabel, subscribeLabel, policyLink } = attributes;
 
 	const blockProps = useBlockProps();
 
@@ -48,6 +48,14 @@ const Edit = ({ attributes, setAttributes }) => {
 							listId: value,
 						})}
 						options={listValues} />
+
+					<TextControl
+						label={__("Privacy policy link", "cds-snc")}
+						value={policyLink}
+						onChange={(value) => setAttributes({
+							policyLink: value,
+						})}
+					/>
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps}>

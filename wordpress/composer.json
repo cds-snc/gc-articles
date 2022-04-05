@@ -91,7 +91,7 @@
     "humanmade/s3-uploads": "^3.0",
     "cds-snc/cds-base": "dev-main",
     "cds-snc/cds-default": "dev-main",
-    "yoast/wordpress-seo-premium": "^17.7",
+    "yoast/wordpress-seo-premium": "^18.3",
     "wpackagist-plugin/wp-rest-api-v2-menus":"0.10",
     "digitalcube/c3-cloudfront-clear-cache": "dev-master",
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",

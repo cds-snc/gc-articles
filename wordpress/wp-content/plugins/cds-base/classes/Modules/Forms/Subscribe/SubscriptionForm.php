@@ -25,7 +25,7 @@ class SubscriptionForm
         $listId = "";
         $emailLabel = __("Enter your email:", "cds-snc");
         $subscribeLabel = __("Subscribe", "cds-snc");
-        $policyLink = "";
+        $privacyLink = "";
 
         if (!empty($attributes['placeholderValue'])) :
             $placeholder = $attributes['placeholderValue'];

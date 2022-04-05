@@ -45,7 +45,7 @@ class BlocksPHP
                 ],
                 'privacyLink' => [
                     'type' => 'string',
-                    "default" => "https://articles.alpha.canada.ca/subscriber-privacy-policy"
+                    "default" => ''
                 ],
             ]
         ]);

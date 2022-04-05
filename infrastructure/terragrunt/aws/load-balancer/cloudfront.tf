@@ -86,27 +86,27 @@ resource "aws_cloudfront_distribution" "wordpress" {
   }
 
   ordered_cache_behavior {
-      path_pattern     = "*/wp-admin/*"
-      allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
-      cached_methods   = ["GET", "HEAD", "OPTIONS"]
-      target_origin_id = aws_lb.wordpress.name
+    path_pattern     = "*/wp-admin/*"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id = aws_lb.wordpress.name
 
-      forwarded_values {
-        query_string = true
-        headers      = ["Host", "Origin", "User-Agent"]
-        cookies {
-          forward = "all"
-        }
+    forwarded_values {
+      query_string = true
+      headers      = ["Host", "Origin", "User-Agent"]
+      cookies {
+        forward = "all"
       }
-
-      min_ttl                = 0
-      default_ttl            = 0
-      max_ttl                = 0
-      compress               = true
-      viewer_protocol_policy = "redirect-to-https"
-
-      response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_admin.id
     }
+
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 0
+    compress               = true
+    viewer_protocol_policy = "redirect-to-https"
+
+    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_admin.id
+  }
 
   ordered_cache_behavior {
     path_pattern     = "wp-admin/*"

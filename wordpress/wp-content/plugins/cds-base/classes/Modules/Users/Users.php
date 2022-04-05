@@ -208,7 +208,7 @@ class Users
                 $email,
                 "a11693cb-2b84-4920-9e66-e9eb649fc948",
                 [
-                    "password_message" => $password_message
+                    "password_message" => $password_message,
                     "site_url" => $site_url
                 ],
             );

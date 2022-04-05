@@ -88,7 +88,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
   }
 
   ordered_cache_behavior {
-    path_pattern     = "/sign-in-se-connecter*"
+    path_pattern     = "sign-in-se-connecter*"
     allowed_methods  = ["GET", "HEAD", "OPTIONS", "DELETE", "PATCH", "POST", "PUT"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = aws_lb.wordpress.name

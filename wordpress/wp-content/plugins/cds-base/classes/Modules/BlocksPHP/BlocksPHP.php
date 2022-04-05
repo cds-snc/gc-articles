@@ -41,7 +41,11 @@ class BlocksPHP
                 ],
                 'subscribeLabel' => [
                     'type' => 'string',
-                    "default" => __("Subscribe", "cds-snc")
+                    "default" =>  __("Subscribe:", "cds-snc")
+                ],
+                'privacyLink' => [
+                    'type' => 'string',
+                    "default" => ''
                 ],
             ]
         ]);

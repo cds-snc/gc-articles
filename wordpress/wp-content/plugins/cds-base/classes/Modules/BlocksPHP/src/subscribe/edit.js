@@ -6,11 +6,11 @@ import { name } from './block.json';
 
 const Edit = ({ attributes, setAttributes }) => {
 
-	const { placeholderValue, listId, emailLabel, subscribeLabel } = attributes;
+	const { placeholderValue, listId, emailLabel, subscribeLabel, privacyLink } = attributes;
 
 	const blockProps = useBlockProps();
 
-	let listValues = [{id: "",label: __("Select a list") }, ...CDS_VARS.notify_list_ids] || [];
+	let listValues = [{ id: "", label: __("Select a list") }, ...CDS_VARS.notify_list_ids] || [];
 
 	listValues = listValues.map((item) => {
 		return { value: item?.id, label: item?.label }
@@ -48,6 +48,14 @@ const Edit = ({ attributes, setAttributes }) => {
 							listId: value,
 						})}
 						options={listValues} />
+
+					<TextControl
+						label={__("Privacy policy link", "cds-snc")}
+						value={privacyLink}
+						onChange={(value) => setAttributes({
+							privacyLink: value,
+						})}
+					/>
 				</PanelBody>
 			</InspectorControls>
 			<div {...blockProps}>

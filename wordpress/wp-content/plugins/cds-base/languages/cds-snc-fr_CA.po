@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CDS-SNC Base 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
-"POT-Creation-Date: 2022-04-04T15:39:50+00:00\n"
+"POT-Creation-Date: 2022-04-06T17:14:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,9 +41,8 @@ msgid "Enter your email:"
 msgstr "Entrer une adresse courriel :"
 
 #: classes/Modules/BlocksPHP/BlocksPHP.php:44
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:27
-msgid "Subscribe"
-msgstr "S’abonner"
+msgid "Subscribe:"
+msgstr ""
 
 #: classes/Modules/Cleanup/AdminBar.php:46
 #: classes/Modules/Cleanup/Login.php:163
@@ -90,14 +89,14 @@ msgstr "sinon le site ne peut être créé."
 msgid "Canadian Digital Service"
 msgstr "Service numérique canadien"
 
-#: classes/Modules/Cleanup/Menus.php:147
+#: classes/Modules/Cleanup/Menus.php:148
 #: classes/Modules/Notify/NotifySettings.php:50
 #: classes/Modules/Notify/NotifySettings.php:51
 #: classes/Modules/Notify/NotifySettings.php:65
 msgid "Notify API Settings"
 msgstr "Paramètres de l’API Notification GC"
 
-#: classes/Modules/Cleanup/Menus.php:148
+#: classes/Modules/Cleanup/Menus.php:149
 #: classes/Modules/Site/SiteSettings.php:28
 #: classes/Modules/Site/SiteSettings.php:29
 #: classes/Modules/Site/SiteSettings.php:42
@@ -407,9 +406,17 @@ msgstr "Merci de vous abonner"
 msgid "Unknown subscription"
 msgstr "Abonnement inconnu"
 
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:49
+#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:27
+msgid "Subscribe"
+msgstr "S’abonner"
+
+#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:54
 msgid "No list selected"
 msgstr "Aucune liste trouvée"
+
+#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:77
+msgid "Privacy Policy"
+msgstr ""
 
 #: classes/Modules/Forms/Utils.php:13
 msgid "400 Bad Request"
@@ -434,8 +441,8 @@ msgstr "ID de modèle"
 
 #: classes/Modules/Notify/FormHelpers.php:51
 #: classes/Modules/Notify/NotifySettings.php:191
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "See example template ID format."
 msgstr ""
 
@@ -680,7 +687,7 @@ msgstr "Avis"
 msgid "This can be configured on your <a href=\"%s\">User Profile</a>."
 msgstr "Ce paramètre peut être réglé dans votre <a href=\"%s\">profil de connexion</a>."
 
-#: classes/Modules/Users/EmailDomains.php:83
+#: classes/Modules/Users/EmailDomains.php:82
 msgid "You can’t use this email domain for registration."
 msgstr "Vous ne pouvez pas utiliser ce domaine de courriel pour l’enregistrement."
 
@@ -696,35 +703,35 @@ msgstr "Ce rôle permet à une personne d’écrire et de publier des articles e
 msgid "This role allows the user to draft articles but not to publish them."
 msgstr "Ce rôle permet à une personne d’écrire et de publier des articles en ligne sur le site."
 
-#: classes/Modules/Users/Users.php:228 classes/Modules/Users/Users.php:246
+#: classes/Modules/Users/Users.php:232 classes/Modules/Users/Users.php:250
 msgid "Invitation to collaborate on GC Articles"
 msgstr "Une invitation à collaborer sur dans Articles GC"
 
-#: classes/Modules/Users/Users.php:229
+#: classes/Modules/Users/Users.php:233
 msgid "Someone has invited this email to collaborate on a GC Articles collection site."
 msgstr "Quelqu’un a invité le ou la titulaire de cette adresse courriel à collaborer sur un site Articles GC."
 
-#: classes/Modules/Users/Users.php:230
+#: classes/Modules/Users/Users.php:234
 msgid "If this was a mistake, please ignore this email and the invitation will expire"
 msgstr "S’il s’agit d’une erreur, veuillez ignorer ce message et l’invitation expirera."
 
-#: classes/Modules/Users/Users.php:231
+#: classes/Modules/Users/Users.php:235
 msgid "To set your GC Articles account password, please visit the following address:"
 msgstr "Pour définir le mot de passe de votre compte Articles GC, veuillez vous rendre à l’adresse suivante :"
 
-#: classes/Modules/Users/Users.php:247
+#: classes/Modules/Users/Users.php:251
 msgid "Someone has invited this email to collaborate on a GC Articles — "
 msgstr "Quelqu’un a invité le ou la titulaire de cette adresse courriel à collaborer sur un site Articles GC — "
 
-#: classes/Modules/Users/Users.php:248
+#: classes/Modules/Users/Users.php:252
 msgid "To get started log in here: "
 msgstr "Pour commencer, ouvrez une session :"
 
-#: classes/Modules/Users/Users.php:333 build/index.js:4494 build/index.js:4359
+#: classes/Modules/Users/Users.php:337 build/index.js:4494 build/index.js:4359
 msgid "Add user"
 msgstr "Ajouter un utilisateur"
 
-#: classes/Modules/Users/Users.php:363
+#: classes/Modules/Users/Users.php:367
 msgid "You must enable JavaScript to view this page."
 msgstr "Vous devez activer JavaScript pour visualiser cette page."
 
@@ -843,8 +850,8 @@ msgid "current"
 msgstr "actuel"
 
 #: build/index.js:4220
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 #: build/index.js:4095
 msgid "Name"
 msgstr "Nom"
@@ -922,53 +929,58 @@ msgstr "Étiquette du bouton S’abonner"
 msgid "List"
 msgstr "Liste"
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
+#: classes/Modules/BlocksPHP/src/subscribe/edit.js:53
+msgid "Privacy policy link"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Go back"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Required Field"
 msgstr "Champs requis"
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Name is required"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Language"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Language is required"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Subscribe template id"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Unsubscribe template id"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Subscribe redirect url"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Unsubscribe redirect url"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/71.b0174cbc.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/813.474448ca.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Confirm redirect url"
 msgstr ""
 

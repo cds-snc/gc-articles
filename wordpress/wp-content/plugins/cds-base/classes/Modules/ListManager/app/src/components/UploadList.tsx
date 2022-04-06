@@ -3,16 +3,31 @@ import { useState } from 'react'
 import { Importer, ImporterField } from "react-csv-importer";
 import useFetch from 'use-http';
 import { useParams, Navigate } from "react-router-dom";
+import { ListType } from "../types"
 
 // theme CSS for React CSV Importer
 import "react-csv-importer/dist/index.css";
 
 export const UploadList = () => {
     const [finished, setFinished] = useState<boolean>(false)
-    const { request, cache, response } = useFetch({ data: [] })
     const params = useParams();
     const serviceId = params?.serviceId;
     const listId = params?.listId;
+    const type = params?.type;
+    let uploadType = '';
+
+    switch (type) {
+        case "email":
+            uploadType = ListType.EMAIL;
+            break;
+        case "phone":
+            uploadType = ListType.PHONE;
+            break;
+        default:
+            throw new Error("Invalid field type");
+    }
+
+    const { request, cache, response } = useFetch({ data: [] })
 
     if (finished) {
         return <Navigate to={`/service/${serviceId}`} replace={true} />
@@ -27,20 +42,14 @@ export const UploadList = () => {
             console.log("starting import of file", file, "with fields", fields);
         }}
         processChunk={async (rows) => {
-            // required, receives a list of parsed objects based on defined fields and user column mapping;
-            // may be called several times if file is large
-            // (if this callback returns a promise, the widget will wait for it before parsing more data)
-            // console.log("received batch of rows", rows);
-
-            // await new Promise((resolve) => setTimeout(resolve, 500));
-
             return new Promise(async (resolve) => {
-
-                const emails = rows.map((item) => {
-                    return item.email;
+                const data = rows.map((item) => {
+                    return item[uploadType];
                 });
 
-                await request.post('/listimport', { list_id: listId, emails })
+                const payload = { list_id: listId, [uploadType]: data };
+
+                await request.post('/listimport', payload)
 
                 if (response.ok) {
                     cache.clear();
@@ -48,8 +57,6 @@ export const UploadList = () => {
                     resolve()
                 }
             });
-            // mock timeout to simulate processing
-            // await new Promise((resolve) => setTimeout(resolve, 500));
         }}
         onComplete={({ file, fields }) => {
             // optional, invoked right after import is done (but user did not dismiss/reset the widget yet)
@@ -62,7 +69,8 @@ export const UploadList = () => {
             setFinished(true);
         }}
     >
-        <ImporterField name="email" label="Email" />
+        {uploadType === ListType.EMAIL && <ImporterField name="email" label="Email" />}
+        {uploadType === ListType.PHONE && <ImporterField name="phone" label="Phone" />}
     </Importer >
 }
 

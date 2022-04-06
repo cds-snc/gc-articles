@@ -69,7 +69,7 @@ const CreateListLink = () => {
 }
 
 const UploadListLink = ({ name, listId, serviceId }: { name: string, listId: string, serviceId: string | undefined }) => {
-    return <Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/service/${serviceId}/list/${listId}/upload` }}>Upload List</Link>
+    return <Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/service/${serviceId}/list/${listId}/upload/email` }}>Upload List</Link>
 }
 
 const NOTIFY_UTL = "https://notification.canada.ca";

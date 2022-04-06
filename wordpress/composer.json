@@ -8,7 +8,7 @@
       "type": "package",
       "package": {
         "name": "wpml/sitepress-multilingual-cms",
-        "version": "4.5.2",
+        "version": "4.5.5",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -23,7 +23,7 @@
       "type": "package",
       "package": {
         "name": "wpml/wpml-string-translation",
-        "version": "3.2.0",
+        "version": "3.2.1",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -91,7 +91,7 @@
     "humanmade/s3-uploads": "^3.0",
     "cds-snc/cds-base": "dev-main",
     "cds-snc/cds-default": "dev-main",
-    "yoast/wordpress-seo-premium": "^17.7",
+    "yoast/wordpress-seo-premium": "^18.3",
     "wpackagist-plugin/wp-rest-api-v2-menus":"0.10",
     "digitalcube/c3-cloudfront-clear-cache": "dev-master",
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",

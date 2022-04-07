@@ -52,9 +52,8 @@ export const UploadList = () => {
                             return item[uploadType];
                         });
 
-                        const payload = { list_id: listId, [uploadType]: data };
-                        // @todo --- do we want multiple endpoints ?
-                        await request.post(`/listimport/${uploadType}`, payload)
+                        const payload = { [uploadType]: data };
+                        await request.post(`list/${listId}/import`, payload)
 
                         if (response.ok) {
                             cache.clear();

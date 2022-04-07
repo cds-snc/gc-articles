@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 
-import { List } from "../types"
+import { List, ListType } from "../types"
 import { useList } from "../store/ListContext";
 import { Spinner } from './Spinner';
 import { DeleteActionLink } from './DeleteActionLink';
@@ -24,6 +24,11 @@ const HeaderStyles = styled.div`
     display: flex;
     justify-content: space-between;
 `
+
+const UploadButton = styled.div`
+    margin: 0px .5rem .5rem;
+`
+const capitalize = (s: string) => s && s[0].toUpperCase() + s.slice(1)
 
 const Table = ({ columns, data }: { columns: any, data: List[] }) => {
     const {
@@ -68,8 +73,8 @@ const CreateListLink = () => {
     return <Link className="button button-primary" to={{ pathname: `list/create` }}>Create new list</Link>
 }
 
-const UploadListLink = ({ name, listId, serviceId }: { name: string, listId: string, serviceId: string | undefined }) => {
-    return <Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/service/${serviceId}/list/${listId}/upload/email` }}>Upload List</Link>
+const UploadListLink = ({ name, listId, serviceId, type }: { name: string, listId: string, serviceId: string | undefined, type: ListType }) => {
+    return <UploadButton><Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/service/${serviceId}/list/${listId}/upload/${type}` }}>{capitalize(type)}</Link></UploadButton>
 }
 
 const NOTIFY_UTL = "https://notification.canada.ca";
@@ -169,7 +174,10 @@ export const ListViewTable = () => {
                         Header: 'Upload',
                         accessor: 'active',
                         Cell: ({ row }: { row: any }) => {
-                            return <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} />
+                            return <>
+                                <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.EMAIL} />
+                                <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} />
+                            </>
                         },
                     },
                 ],

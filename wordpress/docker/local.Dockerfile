@@ -1,4 +1,4 @@
-FROM wordpress:5.9.2-php8.0-fpm-alpine
+FROM wordpress:5.9.3-php8.1-fpm-alpine
 
 WORKDIR /usr/src/wordpress
 

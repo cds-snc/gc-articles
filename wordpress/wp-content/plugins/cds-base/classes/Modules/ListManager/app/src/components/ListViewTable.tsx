@@ -11,6 +11,7 @@ import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
 import { useListFetch } from '../store/UseListFetch';
 import { useParams } from "react-router-dom";
+import { capitalize } from "../util";
 
 const TemplateGroupStyles = styled.div`
   margin: 1rem 0rem 1rem .8rem;
@@ -28,7 +29,6 @@ const HeaderStyles = styled.div`
 const UploadButton = styled.div`
     margin: 0px .5rem .5rem;
 `
-const capitalize = (s: string) => s && s[0].toUpperCase() + s.slice(1)
 
 const Table = ({ columns, data }: { columns: any, data: List[] }) => {
     const {

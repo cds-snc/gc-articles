@@ -13,10 +13,11 @@ const Service = React.lazy(() => import("./components/Service"));
 const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
 const UploadList = React.lazy(() => import("./components/UploadList"));
+const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
 
 let endpoint = "/wp-json/list-manager";
 
-if(process.env.NODE_ENV === "development"){
+if (process.env.NODE_ENV === "development") {
   endpoint = "http://localhost:3000";
 }
 
@@ -53,6 +54,11 @@ const App = ({ serviceData }: { serviceData: ServiceData }) => {
               <Route path="/service/:serviceId/list/:listId/update" element={
                 <React.Suspense fallback={<Spinner />}>
                   <UpdateList />
+                </React.Suspense>
+              } />
+              <Route path="/service/:serviceId/send" element={
+                <React.Suspense fallback={<Spinner />}>
+                  <SendTemplate />
                 </React.Suspense>
               } />
               <Route path="/service/:serviceId/list/:listId/upload/:type" element={

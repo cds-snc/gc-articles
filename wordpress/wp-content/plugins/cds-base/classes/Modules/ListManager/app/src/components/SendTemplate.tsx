@@ -5,6 +5,8 @@ import { Editor } from "./Editor";
 import { useList } from "../store/ListContext";
 import { List } from '../types';
 import { StyledSelect } from "./editor/Styles"
+import { Spinner } from './Spinner';
+import { useListFetch } from '../store/UseListFetch';
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     // @todo -- add subscriber_count
@@ -26,6 +28,7 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 
 export const SendTemplate = () => {
     const { request, response } = useFetch({ data: [] });
+    const { status } = useListFetch();
     const [listId, setListId] = useState<String>("");
     const { state } = useList();
     const { lists } = state;
@@ -44,6 +47,10 @@ export const SendTemplate = () => {
 
         console.log(response)
     }, [response, request, listId]);
+
+    if (status === "loading") {
+        return <Spinner />
+    }
 
 
     return (

@@ -55,7 +55,7 @@ class Misc
         return $views;
     }
 
-    function removeCommentsColumn($columns)
+    public function removeCommentsColumn($columns)
     {
         unset($columns['comments']);
         return $columns;

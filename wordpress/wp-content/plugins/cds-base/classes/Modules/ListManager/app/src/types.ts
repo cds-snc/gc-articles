@@ -20,6 +20,11 @@ export type ListId = {
   id: string | null;
 };
 
+export enum ListType{
+  EMAIL = "email",
+  PHONE = "phone"
+};
+
 export type Message = {
   id: string;
   type: string;

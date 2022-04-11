@@ -55,7 +55,7 @@ const App = ({ serviceData }: { serviceData: ServiceData }) => {
                   <UpdateList />
                 </React.Suspense>
               } />
-              <Route path="/service/:serviceId/list/:listId/upload" element={
+              <Route path="/service/:serviceId/list/:listId/upload/:type" element={
                 <React.Suspense fallback={<Spinner />}>
                   <UploadList />
                 </React.Suspense>

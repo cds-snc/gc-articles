@@ -72,7 +72,7 @@ class Setup
             remove_submenu_page('ppch-checklists', 'ppch-checklists-menu-upgrade-link');
     }
 
-    function enqueueGutenbergScripts()
+    public function enqueueGutenbergScripts()
     {
         wp_enqueue_script(
             'cds-base-checklists-gutenberg-js',

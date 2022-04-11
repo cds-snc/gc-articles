@@ -36,6 +36,7 @@ class Setup
             // only add hooks when Checklists plugin is installed
             add_action('admin_enqueue_scripts', [$this, 'enqueue']);
             add_action('admin_init', [$this, 'removeUpgradeToProLink']);
+            add_action('enqueue_block_editor_assets', [$this, 'enqueueGutenbergScripts']);
         }
     }
 
@@ -69,6 +70,16 @@ class Setup
     public function removeUpgradeToProLink()
     {
             remove_submenu_page('ppch-checklists', 'ppch-checklists-menu-upgrade-link');
+    }
+
+    public function enqueueGutenbergScripts()
+    {
+        wp_enqueue_script(
+            'cds-base-checklists-gutenberg-js',
+            plugin_dir_url(__FILE__) . '/js/index.js',
+            array('wp-blocks', 'wp-element'),
+            '1.0.0'
+        );
     }
 
     public function enqueue()

@@ -20,6 +20,9 @@ class Misc
         add_filter('user_row_actions', [$this, 'removeView'], 10, 1);
 
         add_filter('views_edit-post', [$this, "customPostTable"]);
+
+        add_filter("manage_edit-page_columns", [$this,"removeCommentsColumn"]);
+        add_filter("manage_edit-post_columns", [$this,"removeCommentsColumn"]);
     }
 
     public function removeScreenOptions()
@@ -50,5 +53,11 @@ class Misc
         global $wp_list_table;
         $wp_list_table = new PostTable();
         return $views;
+    }
+
+    public function removeCommentsColumn($columns)
+    {
+        unset($columns['comments']);
+        return $columns;
     }
 }

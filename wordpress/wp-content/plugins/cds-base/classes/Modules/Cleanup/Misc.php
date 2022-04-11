@@ -22,6 +22,7 @@ class Misc
         add_filter('views_edit-post', [$this, "customPostTable"]);
 
         add_filter("manage_edit-page_columns", [$this,"remove_columns_col"]);
+        add_filter("manage_edit-post_columns", [$this,"remove_columns_col"]);
     }
 
     public function removeScreenOptions()

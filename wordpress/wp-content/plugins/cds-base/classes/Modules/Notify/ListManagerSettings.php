@@ -59,8 +59,10 @@ class ListManagerSettings
         if ($notifyApiKey = get_option('NOTIFY_API_KEY')) {
             $serviceId = Utils::extractServiceIdFromApiKey($notifyApiKey);
 
-            $services[] = ["name" => __("Your Lists", "cds-snc"), "service_id" => $serviceId];
-
+            $services[] = [
+                'name' => __('Your Lists', 'cds-snc'),
+                'service_id' => $serviceId,
+            ];
             ?>
               <!-- app -->
               <div class="wrap">
@@ -75,12 +77,13 @@ class ListManagerSettings
               <div class="wrap">
                 <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
                 <p>
-                  <?php
-                    echo sprintf(
-                        __('You must configure your <a href="%s">Notify API Key</a>', 'cds-snc'),
-                        admin_url("options-general.php?page=notify-settings")
-                    );
-                    ?>
+                  <?php echo sprintf(
+                      __(
+                          'You must configure your <a href="%s">Notify API Key</a>',
+                          'cds-snc',
+                      ),
+                      admin_url('options-general.php?page=notify-settings'),
+                  ); ?>
                 </p>
 
               </div>
@@ -94,9 +97,8 @@ class ListManagerSettings
             'methods' => 'POST',
             'callback' => [$this, 'saveListValues'],
             'permission_callback' => function () {
-                return true;
-                #return current_user_can('administrator');
-            }
+                return current_user_can('administrator');
+            },
         ]);
     }
 
@@ -109,10 +111,16 @@ class ListManagerSettings
     public function saveListValues(WP_REST_Request $request): WP_REST_Response
     {
         try {
-            OptionUtils::addOrUpdateOption("list_values", json_encode($request['list_values']));
-            return new WP_REST_Response(["success" => true]);
+            OptionUtils::addOrUpdateOption(
+                'list_values',
+                json_encode($request['list_values']),
+            );
+            return new WP_REST_Response(['success' => true]);
         } catch (\Exception $e) {
-            return new WP_REST_Response(["success" => false, "error_message" => $e->getMessage()]);
+            return new WP_REST_Response([
+                'success' => false,
+                'error_message' => $e->getMessage(),
+            ]);
         }
     }
 }

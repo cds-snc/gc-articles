@@ -45,19 +45,19 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><label className="required" htmlFor="language"><Asterisk />{__("Language", "cds-snc")}</label></th>
+                        <th scope="row"><label className="required" htmlFor="language"><Asterisk />{__("List type", "cds-snc")}</label></th>
                         <td>
                             <div className={errors.language ? "error-wrapper" : ""}>
-                                {errors.language && <span className="validation-error">{errors.language?.message || __("Language is required", "cds-snc")}</span>}
+                                {errors.language && <span className="validation-error">{errors.language?.message || __("Type is required", "cds-snc")}</span>}
                                 <fieldset>
                                     <label htmlFor="en">
                                         <input id="en" {...register("language", { required: true })} type="radio" value="en" />
-                                        {" "}English
+                                        {" "}Email
                                     </label>
                                     <br />
                                     <label htmlFor="fr">
                                         <input id="fr" {...register("language", { required: true })} type="radio" value="fr" />
-                                        {" "}French
+                                        {" "}Phone
                                     </label>
                                 </fieldset>
                             </div>

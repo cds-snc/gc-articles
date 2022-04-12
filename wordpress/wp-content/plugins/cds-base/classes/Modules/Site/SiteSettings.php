@@ -16,10 +16,34 @@ class SiteSettings
 
         add_action('admin_menu', [$instance, 'collectionSettingsAddPluginPage'], 99);
         add_action('admin_init', [$instance, 'collectionSettingsPageInit']);
+        add_action('update_option', [$instance, 'logChangedOption'], 10, 4);
 
         add_filter('collection_settings_option_group', function ($capability) {
             return user_can('manage_options');
         });
+    }
+
+    public function logChangedOption($option, $old_value, $value)
+    {
+        $filterOptions = [
+            'collection_mode',
+            'collection_mode_maintenance_page' .
+            'show_on_front',
+            'page_on_front',
+            'collection_mode',
+            'blogname',
+            'blogdescription',
+            'show_wet_menu',
+            'show_search',
+            'show_breadcrumbs',
+            'fip_href',
+        ];
+
+        if (function_exists("SimpleLogger")) {
+            if (in_array($option, $filterOptions)) {
+                SimpleLogger()->info("$option changed from $old_value to $value");
+            }
+        }
     }
 
     public function collectionSettingsAddPluginPage()

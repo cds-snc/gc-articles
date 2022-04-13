@@ -3,6 +3,7 @@ import useFetch from 'use-http';
 import { useParams } from "react-router-dom";
 import { useList } from "../store/ListContext";
 import { sendListData } from "./SaveListData"
+import { getListType } from "../util";
 
 export const useListFetch = () => {
     const { dispatch } = useList();
@@ -36,7 +37,8 @@ export const useListFetch = () => {
             // sync list from List Manager API to local WP Option
             const listData = await response.json();
             const lists = listData.map((list: any) => {
-                return { id: list?.id, label: list?.name, type: "email" }
+                //@todo --- temporary... note we're using language here -> en=email, fr=phone 
+                return { id: list?.id, label: list?.name, type: getListType(list?.language) }
             })
             const REST_URL = window?.CDS_VARS?.rest_url;
             const REST_NONCE = window?.CDS_VARS?.rest_nonce;

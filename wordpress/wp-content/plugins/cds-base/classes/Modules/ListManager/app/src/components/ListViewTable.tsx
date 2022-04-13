@@ -11,7 +11,7 @@ import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
 import { useListFetch } from '../store/UseListFetch';
 import { useParams } from "react-router-dom";
-import { capitalize } from "../util";
+import { capitalize, getListType } from "../util";
 
 const TemplateGroupStyles = styled.div`
   margin: 1rem 0rem 1rem .8rem;
@@ -123,12 +123,14 @@ export const ListViewTable = () => {
                         Header: 'List Id',
                         accessor: 'id',
                     },
-
                     {
-                        Header: 'Language',
+                        Header: 'List Type',
                         accessor: 'language',
+                        Cell: ({ row }: { row: any }) => {
+                            const values = row?.original;
+                            return (getListType(values.language))
+                        },
                     },
-
                     {
                         Header: 'Templates',
                         accessor: 'subscribe_email_template_id',

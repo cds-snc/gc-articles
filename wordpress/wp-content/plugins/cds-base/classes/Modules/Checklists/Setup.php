@@ -81,6 +81,13 @@ class Setup
             array('wp-blocks', 'wp-element'),
             '1.0.0'
         );
+
+        wp_enqueue_script(
+            'cds-base-checklists-meta-box-js',
+            plugin_dir_url(__FILE__) . '/js/meta-box.js',
+            array('jquery'),
+            '1.0.0'
+        );
     }
 
     public function enqueue()

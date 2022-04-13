@@ -1,14 +1,25 @@
-jQuery(document).ready(
-    function() {
-        /* Assigning vars */
-        var ppc_publish_flag = 0;
+jQuery(document).ready(    
+    function($) {
+
+        /* Assigning vars: Their vars (get rid of these) */
         var ppc_checkboxes = jQuery('.ppc_checkboxes[type="checkbox"]');
         var ppc_checkboxes_length = jQuery('.ppc_checkboxes[type="checkbox"]').length;
         var countCheckedppc_checkboxes = ppc_checkboxes.filter(':checked').length;
-        var ppc_percentage_completed = (countCheckedppc_checkboxes / ppc_checkboxes_length) * 100;
-        jQuery('.ppc-percentage').attr('style', 'width:' + ppc_percentage_completed + '%');
-        jQuery(".ppc-percentage-value").html(Math.round(ppc_percentage_completed) + "%");
 
+        /* ~TESTED */
+
+        /* Assigning vars: Our vars */
+        const ppc_error_level = {option: 1}; // 1 is "required", 2 is "recommended"
+        const $items = $('.pp-checklists-req')
+        const numItems = $items.length
+        const $requiredItems = $items.filter('.pp-checklists-block')
+        const numRequiredItems = $requiredItems.length
+        const $recommendedItems = $items.filter('.pp-checklists-warning')
+        const numRecommendedItems = $recommendedItems.length
+        const metaboxID = '#pp_checklist_meta'
+
+        console.log('items', $items)
+        console.log('numItems', numItems)
 
         // .editor-post-publish-panel__toggle   = "publish" button for unpublished posts 
         // .editor-post-publish-button          = "update" button for already-published posts
@@ -16,10 +27,16 @@ jQuery(document).ready(
         //function to be executed when the itemlist changes.
         
         var ppc_checkbox_function = function() {
-            var ppc_checkboxes = jQuery('.ppc_checkboxes[type="checkbox"]');
-            var ppc_checkboxes_length = jQuery('.ppc_checkboxes[type="checkbox"]').length;
-            var countCheckedppc_checkboxes = ppc_checkboxes.filter(':checked').length;
-            if (ppc_checkboxes_length == countCheckedppc_checkboxes) { // if all the checkboxes are checked (lets publish!!)
+            // check if all the required && recommended checklists are checked
+            console.log('ppc_checkbox_function called')
+            // TODO: this length is off, it happens too quickly
+            numCheckedItems = $items.filter('.status-yes').length
+            console.log('numCheckedItems', numCheckedItems)
+
+            /* ~END TESTED */
+
+            if (numItems === numCheckedItems) { // if all the checkboxes are checked (lets publish!!)
+                console.log('all items are checked')
                 if (jQuery('.editor-post-publish-panel__toggle').length == 1) {
                     jQuery('.edit-post-header__settings').children(jQuery('#ppc-update').attr('style', 'display:none')); // Hide the custom "Update" button
                     jQuery('.edit-post-header__settings').children(jQuery('#ppc-publish').attr('style', 'display:none')); // Hide the custom "Publish" button
@@ -29,27 +46,36 @@ jQuery(document).ready(
                     jQuery('.editor-post-publish-button').attr('style', 'display:inline-flex'); // Show the regular "Publish" button
                 }
             // if not all the checkboxes are checked (lets not publish!!)
-            } else if (ppc_checkboxes_length != countCheckedppc_checkboxes) { 
+            } else if (numItems !== numCheckedItems) { 
+                console.log('all items are NOT checked')
+
                 // if not all the checkboxes are checked (lets not publish!!)
                 if (jQuery('.editor-post-publish-panel__toggle').length == 1) {
+                    console.log('toggle length == 1')
+
                     jQuery('#ppc-update').attr('style', 'display:none'); // hide the custom "update" button
                     jQuery('.editor-post-publish-panel__toggle').attr('style', 'display:none'); // hide the "publish" button
                     jQuery('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after(jQuery('#ppc-publish').attr('style', 'display:inline-flex')); // (I think) show the custom "Publish" button
                     // Add the (custom) publish button
                     if (jQuery('#ppc-publish').length == 0) {
-                        jQuery('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-publish">Publish...</button>');
+                        jQuery('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-publish">Publish…</button>');
                     }
                 // I am pretty sure this is the difference between an already published post and a new post
                 } else if (jQuery('.editor-post-publish-button').length == 1) {
+                    /* ~TESTED */
                     jQuery('.editor-post-publish-button').attr('style', 'display:none');
                     jQuery('.edit-post-header__settings').find('.editor-post-publish-button').after(jQuery('#ppc-update').attr('style', 'display:inline-flex'));
                     if (jQuery('#ppc-update').length == 0) {
                         // Add the (custom) "update" button
-                        jQuery('.edit-post-header__settings').children(':eq(2)').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-update">Update</button>');
+                        jQuery('.edit-post-header__settings').children(':eq(2)').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-update">Update…</button>');
                     }
                 }
             }
         }
+
+
+        setTimeout(ppc_checkbox_function, 1000);
+        /* ~END TESTED */
 
         // Click "switch to draft" button (unpublish a post)
         jQuery(document).on('click', '.editor-post-switch-to-draft', function() {
@@ -63,7 +89,7 @@ jQuery(document).ready(
         if (jQuery('#publish').length !== 1) {
             setTimeout(
                 function() {
-                    if (ppc_error_level.option != 3 && (ppc_checkboxes_length != countCheckedppc_checkboxes)) {
+                    if (ppc_checkboxes_length != countCheckedppc_checkboxes) {
                         // new article
                         if (jQuery('.editor-post-publish-panel__toggle').length == 1) {
                             jQuery('.editor-post-publish-panel__toggle').attr('style', 'display:none'); // hide "publish" the button
@@ -72,13 +98,13 @@ jQuery(document).ready(
                         }
                         if (jQuery('.edit-post-header__settings').find('.editor-post-save-draft').length != 0) { // if "save draft"
                             // add a custom "publish" button
-                            jQuery('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-publish">Publish...</button>');
+                            jQuery('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-publish">Publish…</button>');
                         } else if (jQuery('.edit-post-header__settings').find('.editor-post-switch-to-draft').length == 1) { // if "switch to draft"
                             // add a custom "update" button
-                            jQuery('.edit-post-header__settings').find('.editor-post-publish-button').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-update">Update</button>');
+                            jQuery('.edit-post-header__settings').find('.editor-post-publish-button').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-update">Update…</button>');
                         } else if (jQuery('.edit-post-header__settings').find('.editor-post-switch-to-draft').length == 0) {  // if no "switch to draft"
                             // add a custom "publish" button
-                            jQuery('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-publish">Publish...</button>');
+                            jQuery('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-publish">Publish…</button>');
                         }
                     }
                 }, 10
@@ -95,42 +121,16 @@ jQuery(document).ready(
                 // run "ppc_checkbox_function" when the checkboxes are updated 
                 ppc_checkboxes.change(ppc_checkbox_function);
             }
-            else if (ppc_error_level.option == 3) {
-                /* 
-                This block of code seems to update the "title" of the publish button or the update button 
-                */
-                var ppc_checkboxes = jQuery('.ppc_checkboxes[type="checkbox"]');
-                var countCheckedppc_checkboxes = ppc_checkboxes.filter(':checked').length;
-                ppc_checkboxes.change(
-                    function() {
-                        var countCheckedppc_checkboxes = ppc_checkboxes.filter(':checked').length;
-                        var countCheckedppc_checkboxes = ppc_checkboxes.filter(':checked').length;
-                        if (ppc_checkboxes.length == countCheckedppc_checkboxes) {
-                            //all checkboxes are checked
-                            if (jQuery('.editor-post-publish-panel__toggle').length == 1) {
-                                jQuery('.editor-post-publish-panel__toggle').prop('title', 'All items checked ! You are good to publish');
-                            } else if (jQuery('.editor-post-publish-button').length == 1) {
-                                jQuery('.editor-post-publish-button').prop('title', 'All items checked ! You are good to publish');
-                            }
-                        } else if (ppc_checkboxes.length != countCheckedppc_checkboxes) {
-                            // All ppc_checkboxes are not yet checked                                
-                            if (jQuery('.editor-post-publish-panel__toggle').length == 1) {
-                                jQuery('.editor-post-publish-panel__toggle').prop('title', 'Pre-Publish-Checklist some items still remaining ');
-                            } else if (jQuery('.editor-post-publish-button').length == 1) {
-                                jQuery('.editor-post-publish-button').prop('title', 'Pre-Publish-Checklist some items still remaining !');
-                            }
-                        }
-                    }
-                );
-            }
         }
 
         //  Warn User Before Publishing
         if (ppc_error_level.option == 2) {
             // Show the "warning" modal
+            /* ~TESTED */
             jQuery(document).on('click', "#ppc-update", function() {
                 jQuery('.ppc-modal-warn').attr('style', 'display:block');
             });
+            /* ~END TESTED */
             jQuery(document).on('click', "#ppc-publish", function() {
                 jQuery('.ppc-modal-warn').attr('style', 'display:block');
             });
@@ -142,7 +142,6 @@ jQuery(document).ready(
             });
             jQuery(document).on('click', "#ppc-publish", function() {
                 jQuery('.ppc-modal-prevent').attr('style', 'display:block');
-                jQuery("#ppc_custom_meta_box").html();
             });
         }
         // Click "Publish anyway" on the "warning" modal
@@ -178,52 +177,51 @@ jQuery(document).ready(
                 jQuery('#publish').trigger('click', 'publish');
             }
         });
+        
+        /* ~TESTED */
+        const scrollToMetabox = (_metaboxID) => {
+            document.querySelector(_metaboxID).scrollIntoView({
+                behavior: 'smooth',
+                block: 'end',
+                inline: 'nearest'
+            });
+            $(_metaboxID).scrollTop += 50;
+            // focus the metabox
+            $(_metaboxID).focus();
+            // Add class that gives the metabox a yellow background which fades
+            $(metaboxID).addClass('ppc-metabox-background');
+            setTimeout(function() {
+                $(metaboxID).removeClass('ppc-metabox-background');
+            }, 1000)
+        }
+
         // Click "Don't publish" on the "warning" modal
         jQuery(document).on('click', ".ppc-popup-option-dontpublish", function() {
             // click the "Post" tab in the gutenberg side panel (as opposed to the "block" tab)
             jQuery('.edit-post-sidebar__panel-tab').first().trigger('click', 'publish');
-            if (jQuery('#ppc_custom_meta_box').attr("class") == 'postbox closed') {
+            if (jQuery(metaboxID).attr("class") === 'postbox closed') {
                 // Open the "pre-publish checklists" metabox
-                jQuery('#ppc_custom_meta_box').attr('class', 'postbox');
+                jQuery(metaboxID).attr('class', 'postbox');
             }
             // Hide the "warning" modal
             jQuery('.ppc-modal-warn').attr('style', 'display:none');
             // scroll the "pre-publish checklists" metabox into view
-            document.querySelector('#ppc_custom_meta_box').scrollIntoView({
-                behavior: 'smooth',
-                block: "end",
-                inline: "nearest"
-            });
-            jQuery("#ppc_custom_meta_box").scrollTop += 50;
-            // focus the "pre-publish checklists" metabox
-            jQuery('#ppc_custom_meta_box').focus();
-            // Add class that gives the custom metabox a yellow background which fades
-            jQuery('#ppc_custom_meta_box').addClass('ppc-metabox-background');
-            setTimeout(function() {
-                jQuery('#ppc_custom_meta_box').removeClass('ppc-metabox-background');
-            }, 1000)
+            scrollToMetabox(metaboxID);
         });
+
         // Click "Okay" on the "not allowed to publish" modal
         jQuery(document).on('click', ".ppc-popup-option-okay", function() {
             // click the "Post" tab in the gutenberg side panel (as opposed to the "block" tab)
             jQuery('.edit-post-sidebar__panel-tab').first().trigger('click', 'publish');
-            if (jQuery('#ppc_custom_meta_box').attr("class") == 'postbox closed') {
+            if (jQuery(metaboxID).attr("class") === 'postbox closed') {
                 // Open the "pre-publish checklists" metabox
-                jQuery('#ppc_custom_meta_box').attr('class', 'postbox');
+                jQuery(metaboxID).attr('class', 'postbox');
             }
             // Hide the "not allowed to publish modal"
             jQuery('.ppc-modal-prevent').attr('style', 'display:none');
             // scroll the "pre-publish checklists" metabox into view
-            document.querySelector('#ppc_custom_meta_box').scrollIntoView({
-                behavior: 'smooth',
-                block: "end",
-                inline: "nearest"
-            });
-            // Add class that gives the custom metabox a yellow background which fades
-            jQuery('#ppc_custom_meta_box').addClass('ppc-metabox-background');
-            setTimeout(function() {
-                jQuery('#ppc_custom_meta_box').removeClass('ppc-metabox-background');
-            }, 1000)
+            scrollToMetabox(metaboxID);
         });
     }
 );
+/* ~END TESTED */

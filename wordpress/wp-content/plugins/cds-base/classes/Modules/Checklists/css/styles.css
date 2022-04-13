@@ -7,3 +7,154 @@
 {
   display: none;
 }
+
+/* All the CSS needed for the modal */
+#ppc-update{
+  padding: 0 12px 2px;
+  height: 33px;
+  line-height: 32px;
+  font-size: 13px;
+  margin: 0 12px 0 3px;
+}
+
+#ppc-publish{
+  padding: 0 12px 2px;
+  height: 33px;
+  line-height: 32px;
+  font-size: 13px;
+  padding: 0 12px 2px;
+  margin: 0 12px 0 3px;
+}
+
+.ppc-popup-warn  {
+  width: 400px;
+  text-align: center;
+  box-shadow: 0px 0px 15px -6px rgba(0,0,0,0.75);
+  background-color: #ffffff;
+  transition: opacity 0.8s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -70%);
+  position: absolute;
+  z-index: 99;
+  border-radius: 5px;
+  margin-top: 50;
+  margin-left: 50;
+}
+
+.ppc-popup-prevent {
+  width: 400px;
+  text-align: center;
+  box-shadow: 0px 0px 15px -6px rgba(0,0,0,0.75);
+  background-color: #ffffff;
+  transition: opacity 0.8s;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50% , -70%);
+  position: absolute;
+  z-index: 99;
+  border-radius: 5px;
+  margin-top: 50;
+  margin-left: 50;
+}
+
+.ppc-modal-warn {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-transition: 0.5s;
+  overflow: auto;
+  transition: all 0.3s linear;
+}
+
+.ppc-modal-prevent{
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-transition: 0.5s;
+  overflow: auto;
+  transition: all 0.3s linear;
+}
+
+.ppc-popup-option-dontpublish:hover {
+  background-color: #e5e5e5;
+  color: #444;
+}
+
+.ppc-popup-options-publishanyway:hover {
+  background-color: #e5e5e5;
+  color: #444;
+}
+
+.ppc-popup-option-okay:hover {
+  background-color: #e5e5e5;
+  color: #444;
+}
+
+.ppc-popup-option-okay {
+  display: block;
+  padding: 15px 0 15px 0px;
+  cursor: pointer;
+  background: #f1f1f1;
+  border-right: 1px solid #ccc;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.ppc-prevent-button-wrapper {
+  margin-top: 50px;
+  border-top: 1px solid #ccc;
+}
+
+.ppc-popup-option-dontpublish {
+  display: inline-block;
+  width: 50%;
+  padding: 15px 0 15px 0px;
+  cursor: pointer;
+  background: #f1f1f1;
+  border-right: 1px solid #ccc;
+  border-radius: 0px 0px 0px 5px;
+}
+
+.ppc-popup-options-publishanyway {
+  display: inline;
+  width: 50%;
+  padding: 15px 0 15px 0px;
+  cursor: pointer;
+  background: #f1f1f1;
+  border-radius: 0px 0px 5px 0px;
+}
+
+.ppc-button-wrapper {
+  display: flex;
+  margin-top: 50px;
+  border-top: 1px solid #ccc;
+}
+
+div#ppc_custom_meta_box {
+  transition:1.0s ease;
+  -moz-transition:1.0s ease;
+  -webkit-transition:1.0s ease;
+}
+
+.ppc-metabox-background {
+  background:  #fff8e5;
+  transition:1.0s ease;
+  -moz-transition:1.0s ease;
+  -webkit-transition:1.0s ease;
+}
+
+p.ppc-popup-description {
+  padding: 0px 20px 0px 20px;
+}

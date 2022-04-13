@@ -10,8 +10,6 @@ import { useListFetch } from '../store/UseListFetch';
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     // @todo -- add subscriber_count
-    // find out why hitting this route direct doesn't load the dropdown
-    
     return (
         <StyledSelect name="lists" id="lists" onChange={(evt) => {
             handleChange(evt.target.value);
@@ -51,7 +49,6 @@ export const SendTemplate = () => {
     if (status === "loading") {
         return <Spinner />
     }
-
 
     return (
         <>

@@ -1,39 +1,24 @@
 jQuery(document).ready(    
     function($) {
 
-        /* Assigning vars: Their vars (get rid of these) */
-        var ppc_checkboxes = jQuery('.ppc_checkboxes[type="checkbox"]');
-        var ppc_checkboxes_length = jQuery('.ppc_checkboxes[type="checkbox"]').length;
-        var countCheckedppc_checkboxes = ppc_checkboxes.filter(':checked').length;
 
-        /* ~TESTED */
 
         /* Assigning vars: Our vars */
-        const ppc_error_level = {option: 2}; // 1 is "required", 2 is "recommended"
+        const ppc_error_level = {option: 1}; // 1 is "required", 2 is "recommended"
         const $items = $('.pp-checklists-req')
         const numItems = $items.length
-        const $requiredItems = $items.filter('.pp-checklists-block')
-        const numRequiredItems = $requiredItems.length
-        const $recommendedItems = $items.filter('.pp-checklists-warning')
-        const numRecommendedItems = $recommendedItems.length
         const metaboxID = '#pp_checklist_meta'
-
-        console.log('items', $items)
-        console.log('numItems', numItems)
 
         // .editor-post-publish-panel__toggle   = "publish" button for unpublished posts 
         // .editor-post-publish-button          = "update" button for already-published posts
 
         //function to be executed when the itemlist changes.
-        
         var ppc_checkbox_function = function() {
             // check if all the required && recommended checklists are checked
-            console.log('ppc_checkbox_function called')
+
             // TODO: this length is off, it happens too quickly
             numCheckedItems = $items.filter('.status-yes').length
             console.log('numCheckedItems', numCheckedItems)
-
-            /* ~END TESTED */
 
             if (numItems === numCheckedItems) { // if all the checkboxes are checked (lets publish!!)
                 console.log('all items are checked')
@@ -41,19 +26,17 @@ jQuery(document).ready(
                     jQuery('.edit-post-header__settings').children(jQuery('#ppc-update').attr('style', 'display:none')); // Hide the custom "Update" button
                     jQuery('.edit-post-header__settings').children(jQuery('#ppc-publish').attr('style', 'display:none')); // Hide the custom "Publish" button
                     jQuery('.editor-post-publish-panel__toggle').attr('style', 'display:inline-flex'); // Show the regular "Publish" button
-                } else if (jQuery('.editor-post-publish-button').length == 1) {
-                    jQuery('.edit-post-header__settings').children(':eq(2)').after(jQuery('#ppc-update').attr('style', 'display:none')); // (I think) Hide the custom "Publish" button
-                    jQuery('.editor-post-publish-button').attr('style', 'display:inline-flex'); // Show the regular "Publish" button
+                } else if (jQuery('.editor-post-publish-button').length == 1) { // if "Update"
+                    jQuery('.edit-post-header__settings').children(':eq(2)').after(jQuery('#ppc-update').attr('style', 'display:none')); // (I think) Hide the custom "Update" button
+                    jQuery('.editor-post-publish-button').attr('style', 'display:inline-flex'); // Show the regular "Update" button
                 }
-            /* ~TESTED */
+
             // if not all the checkboxes are checked (lets not publish!!)
             } else if (numItems !== numCheckedItems) { 
                 console.log('all items are NOT checked')
 
                 // if NOT all the checkboxes are checked (don't publish!!)
                 if (jQuery('.editor-post-publish-panel__toggle').length == 1) {
-                    console.log('toggle length == 1')
-
                     jQuery('#ppc-update').attr('style', 'display:none'); // hide the custom "update" button
                     jQuery('.editor-post-publish-panel__toggle').attr('style', 'display:none'); // hide the "publish" button
                     jQuery('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after(jQuery('#ppc-publish').attr('style', 'display:inline-flex')); // (I think) show the custom "Publish" button
@@ -72,7 +55,6 @@ jQuery(document).ready(
                 }
             }
         }
-
 
         setTimeout(ppc_checkbox_function, 1000);
         /* ~END TESTED */

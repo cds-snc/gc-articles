@@ -69,6 +69,13 @@ class ListManagerSettings
               <!-- app -->
               <div class="wrap">
                 <h1><?php _e('GC Lists', 'cds-snc'); ?></h1>
+                <?php
+                echo "<!--";
+                echo "manage_list_manager-" . current_user_can('manage_list_manager');
+                echo current_user_can('list_manager_bulk_send');
+                echo current_user_can('list_manager_bulk_send_sms');
+                echo "-->";
+                ?>
                 <div id="list-manager-app" data-user='<?php echo json_encode($user); ?>' data-ids='<?php echo json_encode($services); ?>'>
                 </div>
               </div>
@@ -99,7 +106,7 @@ class ListManagerSettings
             'methods' => 'POST',
             'callback' => [$this, 'saveListValues'],
             'permission_callback' => function () {
-                return current_user_can('administrator');
+                return current_user_can('manage_list_manager');
             },
         ]);
     }

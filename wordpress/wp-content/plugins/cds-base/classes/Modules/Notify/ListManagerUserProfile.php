@@ -79,7 +79,7 @@ class ListManagerUserProfile
 
         $user = new WP_User($userId);
         $user->remove_cap('list_manager_bulk_send');
-        $user->remove_cap('list_manager_bulk_send_send');
+        $user->remove_cap('list_manager_bulk_send_sms');
 
         if (isset($_POST['list_manager_bulk_send']) && $_POST['list_manager_bulk_send'] === "true") {
             $user->add_cap('list_manager_bulk_send');

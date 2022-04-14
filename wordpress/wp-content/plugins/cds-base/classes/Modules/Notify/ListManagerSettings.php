@@ -63,11 +63,15 @@ class ListManagerSettings
                 'name' => __('Your Lists', 'cds-snc'),
                 'service_id' => $serviceId,
             ];
+
+            $user = new \stdClass();
+            $user->hasEmail = current_user_can('list_manager_bulk_send');
+            $user->hasPhone = current_user_can('list_manager_bulk_send_sms');
             ?>
               <!-- app -->
               <div class="wrap">
                 <h1><?php _e('GC Lists', 'cds-snc'); ?></h1>
-                <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>
+                <div id="list-manager-app" data-user='<?php echo json_encode($user); ?>' data-ids='<?php echo json_encode($services); ?>'>
                 </div>
               </div>
             <?php

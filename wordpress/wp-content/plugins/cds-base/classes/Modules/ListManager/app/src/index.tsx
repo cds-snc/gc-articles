@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { List } from '../../../Notify/src/Types';
-import { ServiceData } from "./types"
+import { ServiceData, User } from "./types"
 declare global {
   interface Window {
     CDS_LIST_MANAGER: { endpoint: string },
@@ -24,13 +24,18 @@ const renderApp = () => {
 
     if (container) {
       let data = container.getAttribute("data-ids");
-      if (data) {
+      let user = container.getAttribute("data-user");
+      if (data && user) {
         data = JSON.parse(data);
         const serviceData = data as unknown as ServiceData;
 
+        user = JSON.parse(user);
+        console.log(user);
+        const userData = user as unknown as User;
+
         root.render(
           <React.StrictMode>
-            <App serviceData={serviceData} />
+            <App serviceData={serviceData} user={userData} />
           </React.StrictMode>
         );
 

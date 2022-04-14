@@ -66,7 +66,7 @@ class ListManagerSettings
             ?>
               <!-- app -->
               <div class="wrap">
-                <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+                <h1><?php _e('GC Lists', 'cds-snc'); ?></h1>
                 <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>
                 </div>
               </div>
@@ -75,7 +75,7 @@ class ListManagerSettings
             ?>
               <!-- app -->
               <div class="wrap">
-                <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+                <h1><?php _e('GC Lists', 'cds-snc'); ?></h1>
                 <p>
                   <?php echo sprintf(
                       __(

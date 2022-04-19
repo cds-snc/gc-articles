@@ -1,16 +1,19 @@
 jQuery(document).ready(    
     function($) {
 
-        // TODOs:
-        // - ✅ Open settings if closed
-        // - ✅ Detect when a checkbox is clicked
-        // - ✅ Detect when a condition is met
-        // - ❌ Detect when unpublished
-        // - Check when checkboxes are required or recommended
-
+        /**
+         * "ppc_error_level.option" is in the plugin settings
+         *
+         * - 1: Prevent User from Publishing Page/Post
+         * - 2: Warn User Before Publishing
+         * - 3: Do Nothing and Publish
+         */
 
         /* Assigning vars: Our vars */
-        const ppc_error_level = {option: 1}; // 1 is "required", 2 is "recommended"
+        const REQUIRED = {option: 1};
+        const RECOMMENDED = {option: 2};
+        let ppc_error_level = REQUIRED; // default to 'required'
+
         const metaboxID = '#pp_checklist_meta'
         const $itemsContainer = $('#pp-checklists-req-box')
         const $items = $itemsContainer.find('.pp-checklists-req')
@@ -22,13 +25,10 @@ jQuery(document).ready(
         //function to be executed when the itemlist changes.
         var ppc_checkbox_function = function() {
             // check if all the required && recommended checklists are checked
-
-            // TODO: this length is off, it happens too quickly
             numCheckedItems = $items.filter('.status-yes').length
-            console.log('numCheckedItems', numCheckedItems)
 
-            if (numItems === numCheckedItems) { // if all the checkboxes are checked (lets publish!!)
-                console.log('all items are checked')
+            // if all the checkboxes are checked (lets publish!!)
+            if (numItems === numCheckedItems) {
                 if (jQuery('.editor-post-publish-panel__toggle').length == 1) {
                     jQuery('.edit-post-header__settings').children(jQuery('#ppc-update').attr('style', 'display:none')); // Hide the custom "Update" button
                     jQuery('.edit-post-header__settings').children(jQuery('#ppc-publish').attr('style', 'display:none')); // Hide the custom "Publish" button
@@ -39,8 +39,10 @@ jQuery(document).ready(
                 }
 
             // if not all the checkboxes are checked (lets not publish!!)
-            } else if (numItems !== numCheckedItems) { 
-                console.log('all items are NOT checked')
+            } else if (numItems !== numCheckedItems) {
+
+                // check number of required checkboxes still unchecked
+                ppc_error_level = $items.filter('.pp-checklists-block.status-no').length ? REQUIRED : RECOMMENDED;
 
                 // if NOT all the checkboxes are checked (don't publish!!)
                 if (jQuery('.editor-post-publish-panel__toggle').length == 1) {
@@ -72,32 +74,17 @@ jQuery(document).ready(
             attributeFilter: ['class']}
         );
 
-        /**
-         * "ppc_error_level.option" is in the plugin settings
-         *
-         * - 1: Prevent User from Publishing Page/Post
-         * - 2: Warn User Before Publishing
-         * - 3: Do Nothing and Publish
-         */
-        //  Warn User Before Publishing
-        if (ppc_error_level.option == 2) {
-            // Show the "warning" modal
-            jQuery(document).on('click', "#ppc-update", function() {
+
+        $(document).on('click', "#ppc-update, #ppc-publish", function() {
+            if(ppc_error_level.option == REQUIRED.option) {
+                // Prevent User from Publishing Page/Post
+                $('.ppc-modal-prevent').attr('style', 'display:block');
+            }
+            else {
+                // Warn User Before Publishing
                 jQuery('.ppc-modal-warn').attr('style', 'display:block');
-            });
-            jQuery(document).on('click', "#ppc-publish", function() {
-                jQuery('.ppc-modal-warn').attr('style', 'display:block');
-            });
-        // Prevent User from Publishing Page/Post
-        } else if (ppc_error_level.option == 1) {
-            // Show the "prevent publishing" modal
-            jQuery(document).on('click', "#ppc-update", function() {
-                jQuery('.ppc-modal-prevent').attr('style', 'display:inline-block');
-            });
-            jQuery(document).on('click', "#ppc-publish", function() {
-                jQuery('.ppc-modal-prevent').attr('style', 'display:block');
-            });
-        }
+            }
+        })
 
         // Click "Publish anyway" on the "warning" modal
         jQuery(document).on('click', ".ppc-popup-options-publishanyway", function() {
@@ -183,6 +170,7 @@ jQuery(document).ready(
 
             // Hide the "warning" modal
             jQuery('.ppc-modal-warn').attr('style', 'display:none');
+
             // scroll the "pre-publish checklists" metabox into view
             scrollToMetabox(metaboxID);
         });
@@ -193,6 +181,7 @@ jQuery(document).ready(
 
             // Hide the "not allowed to publish modal"
             jQuery('.ppc-modal-prevent').attr('style', 'display:none');
+
             // scroll the "pre-publish checklists" metabox into view
             scrollToMetabox(metaboxID);
         });

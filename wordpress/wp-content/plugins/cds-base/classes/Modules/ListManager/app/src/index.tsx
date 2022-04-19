@@ -30,7 +30,6 @@ const renderApp = () => {
         const serviceData = data as unknown as ServiceData;
 
         user = JSON.parse(user);
-        console.log(user);
         const userData = user as unknown as User;
 
         root.render(

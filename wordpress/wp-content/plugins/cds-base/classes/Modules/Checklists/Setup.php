@@ -37,7 +37,7 @@ class Setup
             add_action('admin_enqueue_scripts', [$this, 'enqueue']);
             add_action('admin_init', [$this, 'removeUpgradeToProLink']);
             add_action('enqueue_block_editor_assets', [$this, 'enqueueGutenbergScripts']);
-            add_action('admin_footer', [$this, 'ppc_markup']);
+            add_action('admin_footer', [$this, 'ppcMarkup']);
         }
     }
 
@@ -107,7 +107,7 @@ class Setup
      *
      * @since 1.0.0
      */
-    public function ppc_markup()
+    public function ppcMarkup()
     {
         $ppc_screen = get_current_screen();
         // If not edit or add new page, post or custom post type window then return.

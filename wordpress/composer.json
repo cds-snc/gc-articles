@@ -98,7 +98,8 @@
     "yoast/duplicate-post": "^4.4",
     "shawnhooper/delete-orphaned-multisite-tables": "1.0",
     "league/html-to-markdown": "^5.1",
-    "wpackagist-plugin/publishpress-checklists": "^2.7"
+    "wpackagist-plugin/publishpress-checklists": "^2.7",
+    "wpackagist-plugin/simple-history": "^3.2"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

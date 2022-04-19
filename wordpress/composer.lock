@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aa841d24ac5a60293880dde3ad69c661",
+    "content-hash": "4120214c784e7c71135e1530b4e604df",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -328,7 +328,7 @@
             "dist": {
                 "type": "path",
                 "url": "wp-content/themes/cds-default",
-                "reference": "fe05215494044ac9aaadcaf0f3bee3e606339821"
+                "reference": "ff6db1b6b764e0deb42aca033e899fede69ee7d8"
             },
             "require": {
                 "paquettg/php-html-parser": "^3.0.1",
@@ -3939,6 +3939,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/publishpress-checklists/"
+        },
+        {
+            "name": "wpackagist-plugin/simple-history",
+            "version": "3.2.0",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/simple-history/",
+                "reference": "tags/3.2.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/simple-history.3.2.0.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/simple-history/"
         },
         {
             "name": "wpackagist-plugin/two-factor",

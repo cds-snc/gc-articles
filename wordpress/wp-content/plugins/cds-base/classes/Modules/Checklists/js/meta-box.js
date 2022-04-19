@@ -3,17 +3,18 @@ jQuery(document).ready(
 
         // TODOs:
         // - ✅ Open settings if closed
-        // - Detect when a checkbox is clicked
-        // - Detect when a condition is met
+        // - ✅ Detect when a checkbox is clicked
+        // - ✅ Detect when a condition is met
         // - Detect when unpublished
         // - Check when checkboxes are required or recommended
 
 
         /* Assigning vars: Our vars */
         const ppc_error_level = {option: 1}; // 1 is "required", 2 is "recommended"
-        const $items = $('.pp-checklists-req')
-        const numItems = $items.length
         const metaboxID = '#pp_checklist_meta'
+        const $itemsContainer = $('#pp-checklists-req-box')
+        const $items = $itemsContainer.find('.pp-checklists-req')
+        const numItems = $items.length
 
         // .editor-post-publish-panel__toggle   = "publish" button for unpublished posts 
         // .editor-post-publish-button          = "update" button for already-published posts
@@ -63,6 +64,13 @@ jQuery(document).ready(
         }
 
         setTimeout(ppc_checkbox_function, 1000);
+
+        /* Observer that triggers whenever a checkbox's state changes */
+        const observer = new MutationObserver((e) => ppc_checkbox_function());
+        observer.observe($itemsContainer[0], {
+            subtree: true,
+            attributeFilter: ['class']}
+        );
 
         /* NOT WORKING */
         // Click "switch to draft" button (unpublish a post)

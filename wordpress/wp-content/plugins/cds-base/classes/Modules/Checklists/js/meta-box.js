@@ -1,6 +1,12 @@
 jQuery(document).ready(    
     function($) {
 
+        // TODOs:
+        // - ✅ Open settings if closed
+        // - Detect when a checkbox is clicked
+        // - Detect when a condition is met
+        // - Detect when unpublished
+        // - Check when checkboxes are required or recommended
 
 
         /* Assigning vars: Our vars */
@@ -57,19 +63,18 @@ jQuery(document).ready(
         }
 
         setTimeout(ppc_checkbox_function, 1000);
-        /* ~END TESTED */
 
         /* NOT WORKING */
         // Click "switch to draft" button (unpublish a post)
-        jQuery(document).on('click', '.editor-post-switch-to-draft', function() {
-            console.log('CLICK')
+        jQuery(document).on('click change', '.editor-post-switch-to-draft', function() {
+            console.log('SWITCHED TO DRAFT')
             // remove the custom "update" button, show the custom "publish" button
-            jQuery('#ppc_update').attr('style', 'display:none');
-            jQuery('#ppc_publish').attr('style', 'display:inline-block');
-            ppc_checkbox_function();
+            // jQuery('#ppc_update').attr('style', 'display:none');
+            // jQuery('#ppc_publish').attr('style', 'display:inline-block');
+            // ppc_checkbox_function();
         });
+        /* END NOT WORKING */
 
-        /* ~TESTED */
 
         /**
          * "ppc_error_level.option" is in the plugin settings
@@ -78,7 +83,6 @@ jQuery(document).ready(
          * - 2: Warn User Before Publishing
          * - 3: Do Nothing and Publish
          */
-
         //  Warn User Before Publishing
         if (ppc_error_level.option == 2) {
             // Show the "warning" modal
@@ -136,6 +140,31 @@ jQuery(document).ready(
             }
         });
         
+        /**
+         * Open the "settings" panel if it is closed
+         * Switch to the "Post" tab if we are on the "Block" tab
+         * Open the "Checklist" bix if it is collapsed
+         */
+        const openPanel = () => {
+            // Open the "Settings" panel if it is closed
+            const $settingsButton = $('.edit-post-header__settings button[aria-label="Settings"]')
+            if($settingsButton.attr('aria-expanded') === 'false') {
+                $settingsButton.trigger('click');
+            }
+
+            // click the "Post" tab in the gutenberg side panel (as opposed to the "block" tab)
+            $('.edit-post-sidebar__panel-tab').first().trigger('click', 'publish');
+            if ($(metaboxID).attr("class") === 'postbox closed') {
+                // Open the "pre-publish checklists" metabox
+                $(metaboxID).attr('class', 'postbox');
+            }
+        }
+
+        /**
+         * Scroll to the metabox and apply temp background colour to draw attention
+         *
+         * @param string _metaboxID The id attr of the "Checklists" metabox
+         */
         const scrollToMetabox = (_metaboxID) => {
             document.querySelector(_metaboxID).scrollIntoView({
                 behavior: 'smooth',
@@ -154,12 +183,8 @@ jQuery(document).ready(
 
         // Click "Don't publish" on the "warning" modal
         jQuery(document).on('click', ".ppc-popup-option-dontpublish", function() {
-            // click the "Post" tab in the gutenberg side panel (as opposed to the "block" tab)
-            jQuery('.edit-post-sidebar__panel-tab').first().trigger('click', 'publish');
-            if (jQuery(metaboxID).attr("class") === 'postbox closed') {
-                // Open the "pre-publish checklists" metabox
-                jQuery(metaboxID).attr('class', 'postbox');
-            }
+            openPanel();
+
             // Hide the "warning" modal
             jQuery('.ppc-modal-warn').attr('style', 'display:none');
             // scroll the "pre-publish checklists" metabox into view
@@ -168,12 +193,8 @@ jQuery(document).ready(
 
         // Click "Okay" on the "not allowed to publish" modal
         jQuery(document).on('click', ".ppc-popup-option-okay", function() {
-            // click the "Post" tab in the gutenberg side panel (as opposed to the "block" tab)
-            jQuery('.edit-post-sidebar__panel-tab').first().trigger('click', 'publish');
-            if (jQuery(metaboxID).attr("class") === 'postbox closed') {
-                // Open the "pre-publish checklists" metabox
-                jQuery(metaboxID).attr('class', 'postbox');
-            }
+            openPanel();
+
             // Hide the "not allowed to publish modal"
             jQuery('.ppc-modal-prevent').attr('style', 'display:none');
             // scroll the "pre-publish checklists" metabox into view
@@ -181,4 +202,3 @@ jQuery(document).ready(
         });
     }
 );
-/* ~END TESTED */

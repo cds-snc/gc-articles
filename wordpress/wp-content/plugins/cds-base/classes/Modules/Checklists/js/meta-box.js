@@ -5,7 +5,7 @@ jQuery(document).ready(
         // - ✅ Open settings if closed
         // - ✅ Detect when a checkbox is clicked
         // - ✅ Detect when a condition is met
-        // - Detect when unpublished
+        // - ❌ Detect when unpublished
         // - Check when checkboxes are required or recommended
 
 
@@ -66,23 +66,11 @@ jQuery(document).ready(
         setTimeout(ppc_checkbox_function, 1000);
 
         /* Observer that triggers whenever a checkbox's state changes */
-        const observer = new MutationObserver((e) => ppc_checkbox_function());
-        observer.observe($itemsContainer[0], {
+        const checkboxObserver = new MutationObserver((e) => ppc_checkbox_function());
+        checkboxObserver.observe($itemsContainer[0], {
             subtree: true,
             attributeFilter: ['class']}
         );
-
-        /* NOT WORKING */
-        // Click "switch to draft" button (unpublish a post)
-        jQuery(document).on('click change', '.editor-post-switch-to-draft', function() {
-            console.log('SWITCHED TO DRAFT')
-            // remove the custom "update" button, show the custom "publish" button
-            // jQuery('#ppc_update').attr('style', 'display:none');
-            // jQuery('#ppc_publish').attr('style', 'display:inline-block');
-            // ppc_checkbox_function();
-        });
-        /* END NOT WORKING */
-
 
         /**
          * "ppc_error_level.option" is in the plugin settings

@@ -20,10 +20,10 @@ export type ListId = {
   id: string | null;
 };
 
-export enum ListType{
-  EMAIL = "email",
-  PHONE = "phone"
-};
+export enum ListType {
+  EMAIL = 'email',
+  PHONE = 'phone',
+}
 
 export type Message = {
   id: string;
@@ -35,10 +35,16 @@ export type Service = { name: string; service_id: string };
 
 export type ServiceData = Service[] | null;
 
+export type User = {
+  hasPhone: boolean;
+  hasEmail: boolean;
+};
+
 export type State = {
   loading: boolean;
   lists: List[] | [];
   messages: Message[] | [];
+  user: User;
   serviceData: ServiceData;
 };
 
@@ -72,5 +78,6 @@ export type CSVData = {
 
 export type ListProviderProps = {
   serviceData: ServiceData;
+  user: User;
   children: React.ReactNode;
 };

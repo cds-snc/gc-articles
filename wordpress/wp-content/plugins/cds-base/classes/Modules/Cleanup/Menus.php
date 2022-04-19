@@ -38,6 +38,7 @@ class Menus
             "Users",
             "Settings",
             "Bulk Send",
+            "Lists",
             "Checklists",
 
             // French menu items

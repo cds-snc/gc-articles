@@ -89,7 +89,7 @@ const updateLink = (serviceId: string | undefined, listId: string) => {
 
 export const ListViewTable = () => {
     const { state } = useList();
-    const { lists } = state;
+    const { lists, user } = state;
     const { status } = useListFetch();
     const params = useParams();
     const serviceId = params?.serviceId;
@@ -178,14 +178,14 @@ export const ListViewTable = () => {
                         Cell: ({ row }: { row: any }) => {
                             return <>
                                 <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.EMAIL} />
-                                <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} />
+                                {user?.hasPhone && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} />}
                             </>
                         },
                     },
                 ],
             },
         ],
-        [serviceId]);
+        [serviceId, user?.hasPhone]);
 
 
     if (status === "error") {

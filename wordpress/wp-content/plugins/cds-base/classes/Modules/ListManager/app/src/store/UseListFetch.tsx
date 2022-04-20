@@ -64,7 +64,7 @@ export const useListFetch = () => {
 
         fetchData();
 
-    }, [request, response, dispatch, serviceId]);
+    }, [request, response, dispatch, serviceId, user?.hasEmail, user?.hasPhone]);
 
     return { status };
 };

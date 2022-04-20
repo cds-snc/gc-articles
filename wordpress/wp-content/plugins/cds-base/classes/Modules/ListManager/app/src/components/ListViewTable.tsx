@@ -13,14 +13,6 @@ import { useListFetch } from '../store/UseListFetch';
 import { useParams } from "react-router-dom";
 import { capitalize, getListType } from "../util";
 
-const TemplateGroupStyles = styled.div`
-  margin: 1rem 0rem 1rem .8rem;
-`
-
-const DetailsLinkStyles = styled.div`
-    margin: .5rem 0;
-`
-
 const HeaderStyles = styled.div`
     display: flex;
     justify-content: space-between;
@@ -78,10 +70,6 @@ const UploadListLink = ({ name, listId, serviceId, type }: { name: string, listI
 }
 
 const NOTIFY_UTL = "https://notification.canada.ca";
-
-const templateLink = (serviceId: string, templateId: string) => {
-    return `${NOTIFY_UTL}/services/${serviceId}/templates/${templateId}`;
-}
 
 const updateLink = (serviceId: string | undefined, listId: string) => {
     return `/service/${serviceId}/list/${listId}/update`;

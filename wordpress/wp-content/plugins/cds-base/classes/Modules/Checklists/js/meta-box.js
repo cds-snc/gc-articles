@@ -60,11 +60,11 @@ jQuery(document).ready(
         }
 
         const showWarningModal = () => {
-            $('.ppc-modal-warn').attr('style', 'display:block'); // Modal warning you before publishing or updating
+            $('.ppc-modal-warn').attr('style', 'display:block').find('*[tabindex]').first().focus(); // Modal warning you before publishing or updating
         }
 
         const showPreventModal = () => {
-            $('.ppc-modal-prevent').attr('style', 'display:block'); // Modal preventing you from publishing or updating
+            $('.ppc-modal-prevent').attr('style', 'display:block').find('*[tabindex]').first().focus(); // Modal preventing you from publishing or updating
         }
 
         const hideModals = () => {
@@ -191,6 +191,13 @@ jQuery(document).ready(
                 }
             }
         });
+
+        $(document).on('click', '.ppc-modal-warn', function(e) {
+            // only if they click the grey background (outside) of the modal
+            if(e.currentTarget === e.target) {
+                hideModals(); // Hide the "warning"/"prevent" modal
+            }
+        })
 
         // Warning modal: click "Don't publish"
         // Prevent modal: click "Okay"

@@ -78,7 +78,7 @@ jQuery(document).ready(
          */
          const openSettingsPanel = () => {
             // Open the "Settings" panel if it is closed
-            const $settingsButton = $('.edit-post-header__settings button[aria-label="Settings"]')
+            const $settingsButton = $('.edit-post-header__settings button:is([aria-label="Settings"], [aria-label="Réglages"])')
             if($settingsButton.attr('aria-expanded') === 'false') {
                 $settingsButton.trigger('click');
             }
@@ -176,7 +176,7 @@ jQuery(document).ready(
 
                 // check if a slide-out panel with a publish button appears
                 const $publishButton = $('.interface-interface-skeleton__actions').find('.editor-post-publish-panel .editor-post-publish-button');
-                if($publishButton.length && $publishButton.text() === 'Publish') {
+                if($publishButton.length) {
                     $publishButton.trigger('click'); // Click the "publish" button in the slideout panel
                 }
             }

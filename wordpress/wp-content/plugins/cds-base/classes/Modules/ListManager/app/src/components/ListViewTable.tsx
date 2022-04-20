@@ -118,39 +118,6 @@ export const ListViewTable = () => {
                             )
                         },
                     },
-
-                    {
-                        Header: 'List Id',
-                        accessor: 'id',
-                    },
-                    {
-                        Header: 'List Type',
-                        accessor: 'language',
-                        Cell: ({ row }: { row: any }) => {
-                            const values = row?.original;
-                            return (getListType(values.language))
-                        },
-                    },
-                    {
-                        Header: 'Templates',
-                        accessor: 'subscribe_email_template_id',
-                        Cell: ({ row }: { row: any }) => {
-                            const values = row?.original;
-                            return getListType(values?.language) === "email" ?
-                                <details>
-                                    <summary>Details</summary>
-                                    <TemplateGroupStyles>
-                                        <div><strong>Email</strong></div>
-                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.subscribe_email_template_id)}>Subscribe</a></DetailsLinkStyles>
-                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.unsubscribe_email_template_id)}>Unsubscribe</a></DetailsLinkStyles>
-                                    </TemplateGroupStyles>
-                                    <TemplateGroupStyles>
-                                        <div><strong>Confirm Url</strong></div>
-                                        <DetailsLinkStyles><a href={values.confirm_redirect_url}>Confirm</a></DetailsLinkStyles>
-                                    </TemplateGroupStyles>
-                                </details> : null
-                        },
-                    },
                     {
                         Header: 'Subscribers',
                         accessor: 'subscriber_count',
@@ -176,7 +143,7 @@ export const ListViewTable = () => {
                         Cell: ({ row }: { row: any }) => {
                             return <>
                                 {getListType(row?.values?.language) === "email" && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.EMAIL} />}
-                                {getListType(row?.values?.language) === "phone" && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} />}
+                                {getListType(row?.values?.language) === "phone" && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} /> : null}
                             </>
                         },
                     },

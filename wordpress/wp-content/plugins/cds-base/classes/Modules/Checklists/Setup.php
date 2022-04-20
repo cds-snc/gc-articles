@@ -114,8 +114,6 @@ class Setup
         if (! isset($ppc_screen->parent_base) || ( isset($ppc_screen->parent_base) && 'edit' !== $ppc_screen->parent_base )) {
             return;
         }
-        // wp_enqueue_script( 'ppc_backend_checkbox_js' );
-        // wp_enqueue_style( 'ppc_backend_css' );
         ?>
         <div class="ppc-modal-warn">
             <div id="ppc_notifications" class="ppc-popup-warn">

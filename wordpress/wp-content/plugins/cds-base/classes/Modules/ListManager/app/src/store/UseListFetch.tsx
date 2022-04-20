@@ -32,7 +32,7 @@ export const useListFetch = () => {
                     if (listType === ListType.EMAIL && user?.hasEmail) {
                         return true
                     }
-                    if (listType == ListType.PHONE && user?.hasPhone) {
+                    if (listType === ListType.PHONE && user?.hasPhone) {
                         return true
                     }
                     return false

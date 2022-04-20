@@ -135,9 +135,8 @@ export const ListViewTable = () => {
                         Header: 'Templates',
                         accessor: 'subscribe_email_template_id',
                         Cell: ({ row }: { row: any }) => {
-
                             const values = row?.original;
-                            return (
+                            return getListType(values?.language) === "email" ?
                                 <details>
                                     <summary>Details</summary>
                                     <TemplateGroupStyles>
@@ -149,8 +148,7 @@ export const ListViewTable = () => {
                                         <div><strong>Confirm Url</strong></div>
                                         <DetailsLinkStyles><a href={values.confirm_redirect_url}>Confirm</a></DetailsLinkStyles>
                                     </TemplateGroupStyles>
-                                </details>)
-
+                                </details> : null
                         },
                     },
                     {
@@ -177,8 +175,8 @@ export const ListViewTable = () => {
                         accessor: 'active',
                         Cell: ({ row }: { row: any }) => {
                             return <>
-                                <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.EMAIL} />
-                                {user?.hasPhone && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} />}
+                                {getListType(row?.values?.language) === "email" && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.EMAIL} />}
+                                {getListType(row?.values?.language) === "phone" && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} />}
                             </>
                         },
                     },

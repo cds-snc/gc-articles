@@ -69,8 +69,6 @@ const UploadListLink = ({ name, listId, serviceId, type }: { name: string, listI
     return <UploadButton><Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/service/${serviceId}/list/${listId}/upload/${type}` }}>{capitalize(type)}</Link></UploadButton>
 }
 
-const NOTIFY_UTL = "https://notification.canada.ca";
-
 const updateLink = (serviceId: string | undefined, listId: string) => {
     return `/service/${serviceId}/list/${listId}/update`;
 }

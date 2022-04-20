@@ -66,6 +66,7 @@
 
 .ppc-popup-option-okay {
   display: block;
+  width: 100%;
   border-right: 1px solid #ccc;
   border-radius: 0px 0px 5px 5px;
 }
@@ -93,7 +94,7 @@
   display: flex;
 }
 
-div#ppc_custom_meta_box,
+#ppc_custom_meta_box,
 .ppc-metabox-background
  {
   transition:1.0s ease;
@@ -105,6 +106,6 @@ div#ppc_custom_meta_box,
   background:  #fff8e5;
 }
 
-p.ppc-popup-description {
+.ppc-popup-description {
   padding: 0px 20px 0px 20px;
 }

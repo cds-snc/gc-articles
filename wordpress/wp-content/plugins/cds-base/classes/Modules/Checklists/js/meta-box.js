@@ -143,7 +143,7 @@ jQuery(document).ready(
         wp.data.subscribe(() => {
             const newPostStatus = getPostStatus();
             if(postStatus !== newPostStatus) {
-                // Run when post status changes
+                // Run when post status changes (also runs on pageloads (original post status is 'undefined'))
                 setTimeout(ppc_checkbox_function, 1000);
             }
             postStatus = newPostStatus;

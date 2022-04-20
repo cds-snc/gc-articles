@@ -85,7 +85,7 @@ class Setup
         wp_enqueue_script(
             'cds-base-checklists-meta-box-js',
             plugin_dir_url(__FILE__) . '/js/meta-box.js',
-            array('jquery'),
+            array('jquery', 'wp-blocks', 'wp-element'),
             '1.0.0'
         );
     }
@@ -115,22 +115,22 @@ class Setup
             return;
         }
         ?>
-        <div class="ppc-modal-warn">
-            <div id="ppc_notifications" class="ppc-popup-warn">
+        <div class="ppc-modal-warn" >
+            <div id="ppc_notifications" class="ppc-popup-warn" tabindex="-1">
                 <h2><?php esc_html_e('Pre-Publish Checklist', 'pre-publish-checklist'); ?></h2>
                 <p class="ppc-popup-description"><?php esc_html_e('Your Pre-Publish Checklist is incomplete. What would you like to do?', 'pre-publish-checklist'); ?></p>
                 <div class="ppc-button-wrapper">
-                    <div class="ppc-popup-option-dontpublish"><?php esc_html_e("Don't Publish", 'pre-publish-checklist'); ?></div>
-                    <div class="ppc-popup-options-publishanyway"><?php esc_html_e('Publish Anyway', 'pre-publish-checklist'); ?></div>
+                    <button class="ppc-popup-option-dontpublish"><?php esc_html_e("Don't Publish", 'pre-publish-checklist'); ?></button>
+                    <button class="ppc-popup-options-publishanyway"><?php esc_html_e('Publish Anyway', 'pre-publish-checklist'); ?></button>
                 </div>
             </div>
         </div>
         <div class="ppc-modal-prevent">
-            <div id="ppc_notifications" class="ppc-popup-prevent">
+            <div id="ppc_notifications" class="ppc-popup-prevent" tabindex="-1">
                 <h2><?php esc_html_e('Pre-Publish Checklist', 'pre-publish-checklist'); ?></h2>
                 <p class="ppc-popup-description"> <?php esc_html_e('Please check all the checklist items before publishing.', 'pre-publish-checklist'); ?></p>
                 <div class="ppc-prevent-button-wrapper">
-                    <div class="ppc-popup-option-okay"><?php esc_html_e('Okay, Take Me to the List!', 'pre-publish-checklist'); ?></div>
+                    <button class="ppc-popup-option-okay"><?php esc_html_e('Okay, Take Me to the List!', 'pre-publish-checklist'); ?></button>
                 </div>
             </div>
         </div>

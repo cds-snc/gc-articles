@@ -136,8 +136,18 @@ jQuery(document).ready(
             }
         }
 
-        // Run on pageload, after interface has loaded (less than 500ms and the Publish/Update buttons aren't there)
-        setTimeout(ppc_checkbox_function, 1200);
+        /* ====== Publish / Send to draft ====== */
+        const getPostStatus = () => wp.data.select('core/editor').getEditedPostAttribute('status');
+        let postStatus = getPostStatus();
+
+        wp.data.subscribe(() => {
+            const newPostStatus = getPostStatus();
+            if(postStatus !== newPostStatus) {
+                // Run when post status changes
+                setTimeout(ppc_checkbox_function, 1000);
+            }
+            postStatus = newPostStatus;
+        });
 
         /* ====== Events ====== */
 

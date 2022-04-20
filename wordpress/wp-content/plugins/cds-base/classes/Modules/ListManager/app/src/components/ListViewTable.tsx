@@ -13,14 +13,6 @@ import { useListFetch } from '../store/UseListFetch';
 import { useParams } from "react-router-dom";
 import { capitalize, getListType } from "../util";
 
-const TemplateGroupStyles = styled.div`
-  margin: 1rem 0rem 1rem .8rem;
-`
-
-const DetailsLinkStyles = styled.div`
-    margin: .5rem 0;
-`
-
 const HeaderStyles = styled.div`
     display: flex;
     justify-content: space-between;
@@ -77,12 +69,6 @@ const UploadListLink = ({ name, listId, serviceId, type }: { name: string, listI
     return <UploadButton><Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/service/${serviceId}/list/${listId}/upload/${type}` }}>{capitalize(type)}</Link></UploadButton>
 }
 
-const NOTIFY_UTL = "https://notification.canada.ca";
-
-const templateLink = (serviceId: string, templateId: string) => {
-    return `${NOTIFY_UTL}/services/${serviceId}/templates/${templateId}`;
-}
-
 const updateLink = (serviceId: string | undefined, listId: string) => {
     return `/service/${serviceId}/list/${listId}/update`;
 }
@@ -118,41 +104,6 @@ export const ListViewTable = () => {
                             )
                         },
                     },
-
-                    {
-                        Header: 'List Id',
-                        accessor: 'id',
-                    },
-                    {
-                        Header: 'List Type',
-                        accessor: 'language',
-                        Cell: ({ row }: { row: any }) => {
-                            const values = row?.original;
-                            return (getListType(values.language))
-                        },
-                    },
-                    {
-                        Header: 'Templates',
-                        accessor: 'subscribe_email_template_id',
-                        Cell: ({ row }: { row: any }) => {
-
-                            const values = row?.original;
-                            return (
-                                <details>
-                                    <summary>Details</summary>
-                                    <TemplateGroupStyles>
-                                        <div><strong>Email</strong></div>
-                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.subscribe_email_template_id)}>Subscribe</a></DetailsLinkStyles>
-                                        <DetailsLinkStyles><a href={templateLink(values.serviceId, values.unsubscribe_email_template_id)}>Unsubscribe</a></DetailsLinkStyles>
-                                    </TemplateGroupStyles>
-                                    <TemplateGroupStyles>
-                                        <div><strong>Confirm Url</strong></div>
-                                        <DetailsLinkStyles><a href={values.confirm_redirect_url}>Confirm</a></DetailsLinkStyles>
-                                    </TemplateGroupStyles>
-                                </details>)
-
-                        },
-                    },
                     {
                         Header: 'Subscribers',
                         accessor: 'subscriber_count',
@@ -177,8 +128,8 @@ export const ListViewTable = () => {
                         accessor: 'active',
                         Cell: ({ row }: { row: any }) => {
                             return <>
-                                <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.EMAIL} />
-                                {user?.hasPhone && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} />}
+                                {getListType(row?.values?.language) === "email" && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.EMAIL} />}
+                                {getListType(row?.values?.language) === "phone" && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} /> : null}
                             </>
                         },
                     },

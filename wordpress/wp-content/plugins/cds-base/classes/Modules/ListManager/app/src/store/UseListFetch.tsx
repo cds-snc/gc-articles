@@ -4,9 +4,11 @@ import { useParams } from "react-router-dom";
 import { useList } from "../store/ListContext";
 import { sendListData } from "./SaveListData"
 import { getListType } from "../util";
+import { List, ListType } from '../types';
 
 export const useListFetch = () => {
-    const { dispatch } = useList();
+    const { dispatch, state } = useList();
+    const { user } = state;
     const params = useParams();
     const serviceId = params?.serviceId;
 
@@ -24,7 +26,18 @@ export const useListFetch = () => {
             }
 
             if (response.ok) {
-                dispatch({ type: "load", payload: await response.json() })
+                let lists = await response.json()
+                lists = lists.filter((list:List) => {
+                    const listType = getListType(list.language)
+                    if (listType === ListType.EMAIL && user?.hasEmail) {
+                        return true
+                    }
+                    if (listType === ListType.PHONE && user?.hasPhone) {
+                        return true
+                    }
+                    return false
+                })
+                dispatch({ type: "load", payload: lists })
                 setStatus("idle")
             } else {
                 setStatus("error")
@@ -51,7 +64,7 @@ export const useListFetch = () => {
 
         fetchData();
 
-    }, [request, response, dispatch, serviceId]);
+    }, [request, response, dispatch, serviceId, user?.hasEmail, user?.hasPhone]);
 
     return { status };
 };

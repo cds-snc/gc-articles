@@ -1,33 +1,22 @@
 jQuery(document).ready(
     function($) {
 
-        /**
-         * "ppc_error_level.option" is in the plugin settings
-         *
-         * - 1: Prevent User from Publishing Page/Post
-         * - 2: Warn User Before Publishing
-         * - 3: Do Nothing and Publish
-         */
-
-        /* Assigning vars: Our vars */
-        const REQUIRED = {option: 1};
-        const RECOMMENDED = {option: 2};
-        let ppc_error_level = REQUIRED; // default to 'required'
+        /* ====== Vars ====== */
+        const REQUIRED = 1;
+        const RECOMMENDED = 2;
+        let errorLevel = REQUIRED; // default to 'required'
 
         const metaboxID = '#pp_checklist_meta'
         const $itemsContainer = $('#pp-checklists-req-box')
         const $items = $itemsContainer.find('.pp-checklists-req')
-        const numItems = $items.length
+
+        /* ====== Utility functions: for updating components in the publishing interface ====== */
 
         const isPublished = () => {
-            // .editor-post-publish-panel__toggle   = "publish" button for unpublished posts 
+            // .editor-post-publish-panel__toggle   = "publish" button for unpublished posts
             // .editor-post-publish-button          = "update" button for already-published posts
 
             return $('.editor-post-publish-button').length == 1 // if "Update" button exists, post is already published
-        }
-
-        const hideCustomButtons = () => {
-            $('.edit-post-header__settings').children($('#ppc-update, #ppc-publish').attr('style', 'display:none')); // Hide the custom "Update" and "Publish" buttons
         }
 
         showCustomPublishButton = () => {
@@ -50,6 +39,10 @@ jQuery(document).ready(
             }
         }
 
+        const hideCustomButtons = () => {
+            $('.edit-post-header__settings').children($('#ppc-update, #ppc-publish').attr('style', 'display:none')); // Hide the custom "Update" and "Publish" buttons
+        }
+
         const showPublishButton = () => {
             $('.editor-post-publish-panel__toggle').attr('style', 'display:inline-flex'); // Show the regular "Publish" button
         }
@@ -59,100 +52,31 @@ jQuery(document).ready(
         }
 
         const showUpdateButton = () => {
-            $('.editor-post-publish-button').attr('style', 'display:inline-flex'); // Show the regular "Publish" button
+            $('.editor-post-publish-button').attr('style', 'display:inline-flex'); // Show the regular "Update" button
         }
 
         const hideUpdateButton = () => {
-            $('.editor-post-publish-button').attr('style', 'display:none'); // Show the regular "Publish" button
+            $('.editor-post-publish-button').attr('style', 'display:none'); // Hide the regular "Update" button
         }
 
         const showWarningModal = () => {
-            $('.ppc-modal-warn').attr('style', 'display:block');
+            $('.ppc-modal-warn').attr('style', 'display:block'); // Modal warning you before publishing or updating
         }
 
         const showPreventModal = () => {
-            $('.ppc-modal-prevent').attr('style', 'display:block');
+            $('.ppc-modal-prevent').attr('style', 'display:block'); // Modal preventing you from publishing or updating
         }
 
         const hideModals = () => {
             $('.ppc-modal-prevent').add('.ppc-modal-warn').attr('style', 'display:none');
         }
 
-        //function to be executed when the itemlist changes.
-        var ppc_checkbox_function = function() {
-            // check if all the required && recommended checklists are checked
-            numItemsComplete = $items.filter('.status-yes').length
-
-            // if all the checkboxes are checked (lets publish!!)
-            if (numItems === numItemsComplete) {
-                hideCustomButtons();
-
-                isPublished() ? showUpdateButton() : showPublishButton()
-
-            // if not all the checkboxes are checked (lets not publish!!)
-            } else {
-                // check number of required checkboxes still unchecked
-                ppc_error_level = $items.filter('.pp-checklists-block.status-no').length ? REQUIRED : RECOMMENDED;
-
-                if (isPublished()) {
-                    hideUpdateButton();
-                    showCustomUpdateButton();
-                } else {
-                    hidePublishButton();
-                    showCustomPublishButton();
-                }
-            }
-        }
-
-        setTimeout(ppc_checkbox_function, 1000);
-
-        /* Observer that triggers whenever a checkbox's state changes */
-        const checkboxObserver = new MutationObserver((e) => ppc_checkbox_function());
-        checkboxObserver.observe($itemsContainer[0], {
-            subtree: true,
-            attributeFilter: ['class']}
-        );
-
-
-        $(document).on('click', "#ppc-update, #ppc-publish", function() {
-            ppc_error_level.option == REQUIRED.option ?
-                showPreventModal() : // Prevent User from Publishing Page/Post
-                showWarningModal() // Warn User Before Publishing
-        })
-
-        // Click "Publish anyway" on the "warning" modal
-        $(document).on('click', ".ppc-popup-options-publishanyway", function() {
-
-            hideModals(); // Hide the warning modal
-
-            // If it's an update to a post
-            if (isPublished()) {
-                hideCustomButtons();
-                showUpdateButton(); // Show the real "Update" button
-                $('.editor-post-publish-button').trigger('click');
-                hideUpdateButton(); // Hide the real "Update" button
-                showCustomUpdateButton(); // Show the custom "Update" button
-
-            // If it's being published
-            } else {
-                hideCustomButtons();
-                showPublishButton(); // Show the real "publish" button
-                $('.editor-post-publish-panel__toggle').trigger('click'); // Click the real "publish" button
-
-                // check if a slide-out panel with a publish button appears
-                const $publishButton = $('.interface-interface-skeleton__actions').find('.editor-post-publish-panel .editor-post-publish-button');
-                if($publishButton.length && $publishButton.text() === 'Publish') {
-                    $publishButton.trigger('click'); // Click the "publish" button in the slideout panel
-                }
-            }
-        });
-        
         /**
-         * Open the "settings" panel if it is closed
-         * Switch to the "Post" tab if we are on the "Block" tab
-         * Open the "Checklist" bix if it is collapsed
+         * - Open the "settings" panel if it is closed
+         * - Switch to the "Post" tab if we are on the "Block" tab
+         * - Open the "Checklist" box if it is collapsed
          */
-        const openPanel = () => {
+         const openSettingsPanel = () => {
             // Open the "Settings" panel if it is closed
             const $settingsButton = $('.edit-post-header__settings button[aria-label="Settings"]')
             if($settingsButton.attr('aria-expanded') === 'false') {
@@ -166,9 +90,9 @@ jQuery(document).ready(
                 $(metaboxID).attr('class', 'postbox');
             }
         }
-
+        
         /**
-         * Scroll to the metabox and apply temp background colour to draw attention
+         * Scroll to the checklists metabox and apply temp background colour to draw attention
          *
          * @param string _metaboxID The id attr of the "Checklists" metabox
          */
@@ -188,9 +112,80 @@ jQuery(document).ready(
             }, 1000)
         }
 
-        // Click "Don't publish" on the "warning" modal, or click "Okay" on the "not allowed to publish" modal
+        /* ====== Active functions: for syncing interface based on the "state" of requirements checklists ====== */
+
+        // Function to be executed when the itemlist changes.
+        var ppc_checkbox_function = function() {
+            // check if all the required && recommended checklists are checked
+            numItemsComplete = $items.filter('.status-yes').length
+
+            if ($items.length === numItemsComplete) { // if all checkboxes are complete, ready to publish or update
+                hideCustomButtons();
+                isPublished() ? showUpdateButton() : showPublishButton()
+            } else { // if not all checkboxes are complete, don't publish or update
+                // see if 'required' checkboxes are still unchecked
+                errorLevel = $items.filter('.pp-checklists-block.status-no').length ? REQUIRED : RECOMMENDED;
+
+                if (isPublished()) {
+                    hideUpdateButton();
+                    showCustomUpdateButton();
+                } else {
+                    hidePublishButton();
+                    showCustomPublishButton();
+                }
+            }
+        }
+
+        // Run on pageload, after interface has loaded (less than 500ms and the Publish/Update buttons aren't there)
+        setTimeout(ppc_checkbox_function, 1200);
+
+        /* ====== Events ====== */
+
+        /* Observer that triggers whenever a checkbox's state changes */
+        const checkboxObserver = new MutationObserver((e) => ppc_checkbox_function());
+        checkboxObserver.observe($itemsContainer[0], {
+            subtree: true,
+            attributeFilter: ['class']}
+        );
+
+        // Trigger whenever the custom "publish" or "update" buttons are clicked
+        $(document).on('click', "#ppc-update, #ppc-publish", function() {
+            errorLevel === REQUIRED ?
+                showPreventModal() : // Prevent User from Publishing Page/Post
+                showWarningModal() // Warn User Before Publishing
+        })
+
+        // Warning modal: click "Publish anyway"
+        $(document).on('click', ".ppc-popup-options-publishanyway", function() {
+
+            hideModals(); // Hide the warning modal
+
+            // If it's an update to a post
+            if (isPublished()) {
+                hideCustomButtons();
+                showUpdateButton(); // Show the "Update" button
+                $('.editor-post-publish-button').trigger('click'); // Click the "Update" button
+                hideUpdateButton(); // Hide the "Update" button
+                showCustomUpdateButton(); // Show the custom "Update" button
+
+            // If it's being published
+            } else {
+                hideCustomButtons();
+                showPublishButton(); // Show the real "publish" button
+                $('.editor-post-publish-panel__toggle').trigger('click'); // Click the real "publish" button
+
+                // check if a slide-out panel with a publish button appears
+                const $publishButton = $('.interface-interface-skeleton__actions').find('.editor-post-publish-panel .editor-post-publish-button');
+                if($publishButton.length && $publishButton.text() === 'Publish') {
+                    $publishButton.trigger('click'); // Click the "publish" button in the slideout panel
+                }
+            }
+        });
+
+        // Warning modal: click "Don't publish"
+        // Prevent modal: click "Okay"
         $(document).on('click', ".ppc-popup-option-dontpublish, .ppc-popup-option-okay", function() {
-            openPanel();
+            openSettingsPanel();
             hideModals(); // Hide the "warning"/"prevent" modal
             scrollToMetabox(metaboxID); // scroll the "pre-publish checklists" metabox into view
         });

@@ -194,7 +194,7 @@ jQuery(document).ready(
             }
         });
 
-        $(document).on('click', '.ppc-modal-warn', function(e) {
+        $(document).on('click', '.ppc-modal-warn, .ppc-modal-prevent', function(e) {
             // only if they click the grey background (outside) of the modal
             if(e.currentTarget === e.target) {
                 hideModals(); // Hide the "warning"/"prevent" modal

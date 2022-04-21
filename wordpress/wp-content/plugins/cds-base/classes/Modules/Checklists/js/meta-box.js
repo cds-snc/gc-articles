@@ -23,9 +23,10 @@ jQuery(document).ready(
             $('#ppc-update').attr('style', 'display:none'); // Hide custom "Update" button
             $('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after($('#ppc-publish').attr('style', 'display:inline-flex')); // Show the custom "Publish" button
 
-            // if "Publish" button doesn't exist yet, add it
-            if ($('#ppc-publish').length == 0) {
-                $('.edit-post-header__settings').find('.editor-post-publish-panel__toggle').after('<button type="button" class="components-button is-button is-primary ppc-publish" id="ppc-publish">Publish…</button>');
+            // if custom "Publish" button doesn't exist inside of wp-content, detatch it from elsewhere and append it after "Publish" button
+            if ($('#wp-content #ppc-publish').length == 0) {
+                $button = $(document).find('#ppc-publish').remove()
+                $button.insertAfter($('.edit-post-header__settings').find('.editor-post-publish-panel__toggle'));
             }
         }
 
@@ -35,7 +36,8 @@ jQuery(document).ready(
 
             // if "Update" button doesn't exist yet, add it
             if ($('#ppc-update').length == 0) {
-                $('.edit-post-header__settings').children(':eq(2)').after('<button type="button" class="components-button  is-button is-primary ppc-publish" id="ppc-update">Update…</button>');
+                $button = $(document).find('#ppc-update').remove()
+                $button.insertAfter($('.edit-post-header__settings').children(':eq(2)'))
             }
         }
 

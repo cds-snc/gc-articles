@@ -95,7 +95,7 @@ export const ListViewTable = () => {
                                     <Link
                                         className="row-title"
                                         to={{
-                                            pathname: updateLink(serviceId, row?.values?.id),
+                                            pathname: updateLink(serviceId, row?.original?.id),
                                         }}
                                     >
                                         {row?.values?.name}
@@ -112,14 +112,14 @@ export const ListViewTable = () => {
                         Header: 'Delete',
                         accessor: 'delete',
                         Cell: ({ row }: { row: any }) => {
-                            return (<DeleteActionLink id={`${row?.values?.id}`} />)
+                            return (<DeleteActionLink id={`${row?.original?.id}`} />)
                         },
                     },
                     {
                         Header: 'Reset',
                         accessor: 'reset',
                         Cell: ({ row }: { row: any }) => {
-                            return (<ResetActionLink id={`${row?.values?.id}`} />);
+                            return (<ResetActionLink id={`${row?.original?.id}`} />);
                         },
                     },
 
@@ -128,8 +128,8 @@ export const ListViewTable = () => {
                         accessor: 'active',
                         Cell: ({ row }: { row: any }) => {
                             return <>
-                                {getListType(row?.values?.language) === "email" && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.EMAIL} />}
-                                {getListType(row?.values?.language) === "phone" && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.values?.id}`} serviceId={serviceId} type={ListType.PHONE} /> : null}
+                                {getListType(row?.values?.language) === "email" && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} serviceId={serviceId} type={ListType.EMAIL} />}
+                                {getListType(row?.values?.language) === "phone" && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} serviceId={serviceId} type={ListType.PHONE} /> : null}
                             </>
                         },
                     },

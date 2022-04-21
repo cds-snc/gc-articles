@@ -26,8 +26,8 @@ export const useListFetch = () => {
             }
 
             if (response.ok) {
-                let lists = await response.json()
-                lists = lists.filter((list:List) => {
+                let lists = await response.json();
+                lists = lists.filter((list: List) => {
                     const listType = getListType(list.language)
                     if (listType === ListType.EMAIL && user?.hasEmail) {
                         return true
@@ -37,6 +37,7 @@ export const useListFetch = () => {
                     }
                     return false
                 })
+
                 dispatch({ type: "load", payload: lists })
                 setStatus("idle")
             } else {

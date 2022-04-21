@@ -117,20 +117,20 @@ class Setup
         ?>
         <div class="ppc-modal-warn" >
             <div id="ppc_notifications" class="ppc-popup-warn" tabindex="-1">
-                <h2><?php _e('Pre-Publish Checklist', 'cds-snc'); ?></h2>
-                <p class="ppc-popup-description"><?php _e('Your Pre-Publish Checklist is incomplete. What would you like to do?', 'cds-snc'); ?></p>
+                <h2><?php _e('Are you sure you want to publish?', 'cds-snc'); ?></h2>
+                <p class="ppc-popup-description"><?php _e('There are still recommended items remaining on your checklist. What would you like to do?', 'cds-snc'); ?></p>
                 <div class="ppc-button-wrapper">
-                    <button class="ppc-popup-option-dontpublish"><?php _e("Don't Publish", 'cds-snc'); ?></button>
-                    <button class="ppc-popup-options-publishanyway"><?php _e('Publish Anyway', 'cds-snc'); ?></button>
+                    <button class="ppc-popup-option-dontpublish"><?php _e('Don’t publish', 'cds-snc'); ?></button>
+                    <button class="ppc-popup-options-publishanyway"><?php _e('Publish anyway', 'cds-snc'); ?></button>
                 </div>
             </div>
         </div>
         <div class="ppc-modal-prevent">
             <div id="ppc_notifications" class="ppc-popup-prevent" tabindex="-1">
-                <h2><?php _e('Pre-Publish Checklist', 'cds-snc'); ?></h2>
-                <p class="ppc-popup-description"> <?php _e('Please check all the checklist items before publishing.', 'cds-snc'); ?></p>
+                <h2><?php _e('Publishing not allowed', 'cds-snc'); ?></h2>
+                <p class="ppc-popup-description"> <?php _e('Please complete all the required checklist items before publishing.', 'cds-snc'); ?></p>
                 <div class="ppc-prevent-button-wrapper">
-                    <button class="ppc-popup-option-okay"><?php _e('Okay, Take Me to the List!', 'cds-snc'); ?></button>
+                    <button class="ppc-popup-option-okay"><?php _e('Okay, take me to the list.', 'cds-snc'); ?></button>
                 </div>
             </div>
         </div>

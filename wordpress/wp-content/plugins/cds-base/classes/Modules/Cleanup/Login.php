@@ -18,6 +18,8 @@ class Login
         add_action('lostpassword_post', [$this, 'redirectToSuccessPageIfNoUser'], 10, 2);
 
         add_action('admin_page_access_denied', [$this, 'redirectToNewestBlog'], 98);
+
+        add_filter('login_url', [$this, 'loginUrl'], 15, 3);
     }
 
     public function redirectToNewestBlog(): void
@@ -171,5 +173,40 @@ class Login
         if (! $user_data) {
             return wp_safe_redirect('wp-login.php?checkemail=confirm');
         }
+    }
+
+    /**
+     *
+     * This hook overrides the login_url hook from WPS Hide Login plugin. For some reason,
+     * the plugin version specifically returns '#' on the 404 page. This override will
+     * return `login` for localhost sites, and `sign-in-se-connecter` on the server.
+     *
+     * @param $login_url
+     * @param $redirect
+     * @param $force_reauth
+     *
+     * @return string
+     */
+    public function loginUrl($login_url, $redirect, $force_reauth)
+    {
+        if (is_404()) {
+            return get_site_url() . '/' . get_option('whl_page', 'login');
+        }
+
+        if ($force_reauth === false) {
+            return $login_url;
+        }
+
+        if (empty($redirect)) {
+            return $login_url;
+        }
+
+        $redirect = explode('?', $redirect);
+
+        if ($redirect[0] === admin_url('options.php')) {
+            $login_url = admin_url();
+        }
+
+        return $login_url;
     }
 }

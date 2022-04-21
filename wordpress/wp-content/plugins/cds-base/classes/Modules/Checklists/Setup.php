@@ -37,6 +37,7 @@ class Setup
             add_action('admin_enqueue_scripts', [$this, 'enqueue']);
             add_action('admin_init', [$this, 'removeUpgradeToProLink']);
             add_action('enqueue_block_editor_assets', [$this, 'enqueueGutenbergScripts']);
+            add_action('admin_footer', [$this, 'ppcMarkup']);
         }
     }
 
@@ -80,6 +81,13 @@ class Setup
             array('wp-blocks', 'wp-element'),
             '1.0.0'
         );
+
+        wp_enqueue_script(
+            'cds-base-checklists-meta-box-js',
+            plugin_dir_url(__FILE__) . '/js/meta-box.js',
+            array('jquery', 'wp-blocks', 'wp-element'),
+            '1.0.0'
+        );
     }
 
     public function enqueue()
@@ -90,5 +98,42 @@ class Setup
             null,
             '1.0.0',
         );
+    }
+
+    /**
+     * Function for HTML markup of notification.
+     *
+     * Shows the pop-up of warning a user or preventing a user.
+     *
+     * @since 1.0.0
+     */
+    public function ppcMarkup()
+    {
+        $ppc_screen = get_current_screen();
+        // If not edit or add new page, post or custom post type window then return.
+        if (! isset($ppc_screen->parent_base) || ( isset($ppc_screen->parent_base) && 'edit' !== $ppc_screen->parent_base )) {
+            return;
+        }
+        ?>
+        <div class="ppc-modal-warn" >
+            <div id="ppc_notifications" class="ppc-popup-warn" tabindex="-1">
+                <h2><?php esc_html_e('Pre-Publish Checklist', 'pre-publish-checklist'); ?></h2>
+                <p class="ppc-popup-description"><?php esc_html_e('Your Pre-Publish Checklist is incomplete. What would you like to do?', 'pre-publish-checklist'); ?></p>
+                <div class="ppc-button-wrapper">
+                    <button class="ppc-popup-option-dontpublish"><?php esc_html_e("Don't Publish", 'pre-publish-checklist'); ?></button>
+                    <button class="ppc-popup-options-publishanyway"><?php esc_html_e('Publish Anyway', 'pre-publish-checklist'); ?></button>
+                </div>
+            </div>
+        </div>
+        <div class="ppc-modal-prevent">
+            <div id="ppc_notifications" class="ppc-popup-prevent" tabindex="-1">
+                <h2><?php esc_html_e('Pre-Publish Checklist', 'pre-publish-checklist'); ?></h2>
+                <p class="ppc-popup-description"> <?php esc_html_e('Please check all the checklist items before publishing.', 'pre-publish-checklist'); ?></p>
+                <div class="ppc-prevent-button-wrapper">
+                    <button class="ppc-popup-option-okay"><?php esc_html_e('Okay, Take Me to the List!', 'pre-publish-checklist'); ?></button>
+                </div>
+            </div>
+        </div>
+        <?php
     }
 }

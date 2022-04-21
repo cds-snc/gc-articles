@@ -179,7 +179,7 @@ class Login
      *
      * This hook overrides the login_url hook from WPS Hide Login plugin. For some reason,
      * the plugin version specifically returns '#' on the 404 page. This override will
-     * return `login` for localhost sites, and `sign-in-se-connecter` on the server.
+     * return the configured path or the default `/login`.
      *
      * @param $login_url
      * @param $redirect

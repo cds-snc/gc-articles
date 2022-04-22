@@ -220,6 +220,11 @@ if (! function_exists('cds_register_block_patterns')) :
                 'categories'    => array( 'homepage' ),
                 'content'       => cds_get_block_pattern_markup('homepage/landing'),
             ),
+            'cds/toc' => array(
+                'title'         => esc_html__('Table of contents', 'cds-snc'),
+                'categories'    => array( 'homepage' ),
+                'content'       => cds_get_block_pattern_markup('homepage/toc'),
+            ),
         ));
 
         // Register block patterns.

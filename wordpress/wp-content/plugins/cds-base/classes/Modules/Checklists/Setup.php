@@ -117,22 +117,26 @@ class Setup
         ?>
         <div class="ppc-modal-warn" >
             <div id="ppc_notifications" class="ppc-popup-warn" tabindex="-1">
-                <h2><?php esc_html_e('Pre-Publish Checklist', 'pre-publish-checklist'); ?></h2>
-                <p class="ppc-popup-description"><?php esc_html_e('Your Pre-Publish Checklist is incomplete. What would you like to do?', 'pre-publish-checklist'); ?></p>
+                <h2><?php _e('Are you sure you want to publish?', 'cds-snc'); ?></h2>
+                <p class="ppc-popup-description"><?php _e('There are still recommended items remaining on your checklist. What would you like to do?', 'cds-snc'); ?></p>
                 <div class="ppc-button-wrapper">
-                    <button class="ppc-popup-option-dontpublish"><?php esc_html_e("Don't Publish", 'pre-publish-checklist'); ?></button>
-                    <button class="ppc-popup-options-publishanyway"><?php esc_html_e('Publish Anyway', 'pre-publish-checklist'); ?></button>
+                    <button class="ppc-popup-option-dontpublish"><?php _e('Don’t publish', 'cds-snc'); ?></button>
+                    <button class="ppc-popup-options-publishanyway"><?php _e('Publish anyway', 'cds-snc'); ?></button>
                 </div>
             </div>
         </div>
         <div class="ppc-modal-prevent">
             <div id="ppc_notifications" class="ppc-popup-prevent" tabindex="-1">
-                <h2><?php esc_html_e('Pre-Publish Checklist', 'pre-publish-checklist'); ?></h2>
-                <p class="ppc-popup-description"> <?php esc_html_e('Please check all the checklist items before publishing.', 'pre-publish-checklist'); ?></p>
+                <h2><?php _e('Publishing not allowed', 'cds-snc'); ?></h2>
+                <p class="ppc-popup-description"> <?php _e('Please complete all the required checklist items before publishing.', 'cds-snc'); ?></p>
                 <div class="ppc-prevent-button-wrapper">
-                    <button class="ppc-popup-option-okay"><?php esc_html_e('Okay, Take Me to the List!', 'pre-publish-checklist'); ?></button>
+                    <button class="ppc-popup-option-okay"><?php _e('Okay, take me to the list.', 'cds-snc'); ?></button>
                 </div>
             </div>
+        </div>
+        <div class="ppc-button-container">
+            <button type="button" class="components-button is-button is-primary ppc-publish" id="ppc-publish"><?php _e('Publish…', 'cds-snc'); ?></button>
+            <button type="button" class="components-button is-button is-primary ppc-publish" id="ppc-update"><?php _e('Update…', 'cds-snc'); ?></button>
         </div>
         <?php
     }

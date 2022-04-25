@@ -157,6 +157,11 @@ class SiteSettings
             'fip_href',
         );
 
+        register_setting(
+            'site_settings_group', // option_group
+            'analytics_id',
+        );
+
         // add fields GENERAL
         add_settings_field(
             'blogname', // id
@@ -275,6 +280,25 @@ class SiteSettings
                 'label_for' => 'fip_href'
             ]
         );
+
+        // add section Analytics
+        add_settings_section(
+            'collection_settings_section_analytics', // id
+            __("Analytics"), // title
+            null, // callback
+            'collection-settings-admin' // page
+        );
+
+        add_settings_field(
+            'analytics_id', // id
+            __('Analytics id', 'cds-snc'), // title
+            array( $this, 'analyticsCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_analytics', // section
+            [
+                'label_for' => 'analytics_id'
+            ]
+        );
     }
 
     public function collectionModeCallback()
@@ -317,6 +341,14 @@ class SiteSettings
 
         ?>
         <input name="fip_href" type="text" id="fip_href" class="regular-text" value="<?php echo $value; ?>">
+        <?php
+    }
+
+    public function analyticsCallback()
+    {
+        $analyticsId = get_option("analytics_id", "");
+        ?>
+        <input name="analytics_id" type="text" id="analytics_id" class="regular-text" value="<?php echo $analyticsId; ?>">
         <?php
     }
 

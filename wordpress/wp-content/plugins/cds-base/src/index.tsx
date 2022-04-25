@@ -98,6 +98,13 @@ window.CDS.renderListValuesRepeaterForm = renderListValuesRepeaterForm;
 window.CDS.renderNotifyServicesRepeaterForm = renderNotifyServicesRepeaterForm;
 window.CDS.renderDBInsightsPanel = renderDBInsightsPanel;
 
+const hiddenBlocks = ['yoast-seo/table-of-contents'];
+
+window.wp.blocks.getBlockTypes().forEach(function (block) {
+  if (block.name && hiddenBlocks.includes(block.name)) {
+    window.wp.blocks.unregisterBlockType(block.name);
+  }
+});
 
 window.wp.hooks.addFilter(
   'editor.PostPreview.interstitialMarkup',

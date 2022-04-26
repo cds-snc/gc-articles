@@ -38,6 +38,22 @@ class Setup
             add_action('admin_init', [$this, 'removeUpgradeToProLink']);
             add_action('enqueue_block_editor_assets', [$this, 'enqueueGutenbergScripts']);
             add_action('admin_footer', [$this, 'ppcMarkup']);
+
+            // Keep until issue is solved: https://github.com/publishpress/PublishPress-Checklists/issues/369
+            add_action('admin_init', [$this, 'defaultGETparam'], 99);
+        }
+    }
+
+
+    public function defaultGETparam()
+    {
+        if (!isset($_POST['action'], $_POST['_wpnonce'], $_POST['option_page'], $_POST['_wp_http_referer'], $_POST['submit']) || !is_admin()) {
+            return false;
+        }
+
+        if (!isset($_GET['page'])) {
+            // set a default GET['page'] param if none exists
+            $_GET = array_merge($_GET, array( 'page' => 'cds-default' ));
         }
     }
 

@@ -7,6 +7,7 @@ import "../classes/Modules/Blocks/src/latestPosts";
 import { render } from "@wordpress/element";
 import { LoginsPanel } from "../classes/Modules/TrackLogins/src/LoginsPanel";
 import { DBInsightsPanel } from "../classes/Modules/DBInsights/src/DBInsights";
+import { DBActivityPanel } from "../classes/Modules/DBInsights/src/DBActivity";
 
 import { CollectionsPanel } from "../classes/Modules/UserCollections/src/CollectionsPanel";
 import { NotifyPanel } from "../classes/Modules/Notify/src/NotifyPanel";
@@ -34,6 +35,7 @@ declare global {
       renderUserForm?: ({ isSuperAdmin }, { isSuperAdmin: boolean }) => void;
       writeInterstitialMessage?: () => void;
       renderDBInsightsPanel?: () => void;
+      renderDBActivityPanel?: () => void;
     };
     CDS_VARS: {
       rest_url?: string;
@@ -55,6 +57,11 @@ export const renderCollectionsPanel = () => {
 export const renderDBInsightsPanel = () => {
   render(<DBInsightsPanel />, document.getElementById("db-insignts-panel"));
 };
+
+export const renderDBActivityPanel = () => {
+  render(<DBActivityPanel />, document.getElementById("db-activity-panel"));
+};
+
 
 export const renderNotifyPanel = ({
   sendTemplateLink,
@@ -97,6 +104,7 @@ window.CDS.writeInterstitialMessage = writeInterstitialMessage;
 window.CDS.renderListValuesRepeaterForm = renderListValuesRepeaterForm;
 window.CDS.renderNotifyServicesRepeaterForm = renderNotifyServicesRepeaterForm;
 window.CDS.renderDBInsightsPanel = renderDBInsightsPanel;
+window.CDS.renderDBActivityPanel = renderDBActivityPanel;
 
 const hiddenBlocks = ['yoast-seo/table-of-contents'];
 

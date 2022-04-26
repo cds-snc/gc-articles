@@ -126,8 +126,8 @@ class DBInsights
         switch_to_blog($id);
         $recent_pages_args = [
             'post_type' => $type,
-        'posts_per_page' => 1,
-        'post_status' => ['publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash']
+            'posts_per_page' => 1,
+            'post_status' => ['publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash']
         ];
         $recent_pages = new WP_Query($recent_pages_args);
 

@@ -21,6 +21,8 @@
 	"dependencies": {
 		"@wordpress/block-editor": "^8.2.0",
 		"@wordpress/components": "^19.5.0",
-		"@wordpress/server-side-render": "^3.0.2"
+		"@wordpress/server-side-render": "^3.0.2",
+		"cd": "^0.3.3",
+		"gc-list-manager": "file:../ListManager/app"
 	}
 }

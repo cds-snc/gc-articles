@@ -121,9 +121,14 @@ class DBInsights
         }
     }
 
-    public function getRecent($type)
+    public function getRecent($id, $type)
     {
-        $recent_pages_args = array( 'post_type' => $type, 'posts_per_page' => 1);
+        switch_to_blog($id);
+        $recent_pages_args = [
+            'post_type' => $type,
+            'posts_per_page' => 1,
+            'post_status' => ['publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash']
+        ];
         $recent_pages = new WP_Query($recent_pages_args);
 
         if ($recent_pages->have_posts()) {
@@ -131,9 +136,11 @@ class DBInsights
             while ($recent_pages->have_posts()) {
                 $recent_pages->the_post();
                 $title = get_the_title();
+                $status = get_post_status();
                 $date = get_the_date();
-                $str .= sprintf('%s %s', $title, $date);
+                $str .= sprintf('%s [%s] %s', $title, $status, $date);
             }
+            wp_reset_postdata();
             return $str;
         } else {
             return __("not found", "cds-snc");
@@ -151,8 +158,8 @@ class DBInsights
                 $payload = new \stdClass();
                 $name = get_blog_details($id)->blogname;
                 $payload->name = $name;
-                $payload->page = $this->getRecent("page");
-                $payload->post = $this->getRecent("post");
+                $payload->page = $this->getRecent($id, "page");
+                $payload->post = $this->getRecent($id, "post");
                 array_push($data, $payload);
             }
 

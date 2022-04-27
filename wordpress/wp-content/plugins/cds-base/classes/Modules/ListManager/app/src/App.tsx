@@ -13,7 +13,7 @@ const Service = React.lazy(() => import("./components/Service"));
 const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
 const UploadList = React.lazy(() => import("./components/UploadList"));
-// const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
+const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
 
 let endpoint = "/wp-json/list-manager";
 
@@ -71,6 +71,11 @@ const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) =>
                   <UploadList />
                 </React.Suspense>
               } />
+              <Route path="/service/:serviceId/send" element={
+                <React.Suspense fallback={<Spinner />}>
+                  <SendTemplate />
+                </React.Suspense>
+              } />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </ListProvider>
@@ -81,11 +86,3 @@ const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) =>
 }
 
 export default App;
-
-/*
-<Route path="/service/:serviceId/send" element={
-                <React.Suspense fallback={<Spinner />}>
-                  <SendTemplate />
-                </React.Suspense>
-              } />
-*/

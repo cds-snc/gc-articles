@@ -38,8 +38,10 @@
   },
   "scripts": {
     "build": "webpack",
+    "postbuild": "cd classes/Modules/ListManager/app && npm install --force",
     "start": "webpack --watch",
     "packages-update": "wp-scripts packages-update",
-    "preinstall": "cd classes/Modules/BlocksPHP && npm install && cd ../ListManager/app && npm install"
+    "preinstall": "cd classes/Modules/BlocksPHP && npm install",
+    "postinstall": "npm run build"
   }
 }

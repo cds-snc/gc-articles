@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useList } from "../store/ListContext";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { List, FieldError } from "../types";
@@ -17,6 +18,8 @@ const Asterisk = () => {
 }
 
 export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handler: (list: List) => void, formData: {} | List, serverErrors: FieldError[] }) => {
+    const { state } = useList();
+    const { user } = state;
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
 
     useEffect(() => {
@@ -33,6 +36,8 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
     return (
         <form onSubmit={handleSubmit(handler)}>
             <input id="service_id" type="hidden" {...register("service_id", { required: true })} />
+            {/* @todo np phone access use default language field will be replaced with "list_type" field */}
+            {!user?.hasPhone && <input type="hidden" name="language" value="en" />}
             <table id="form-table" className="form-table">
                 <tbody>
                     <tr>
@@ -43,26 +48,28 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                                 <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
                             </div>
                         </td>
+                        {/* @todo language field will be replaced with "list_type" field */}
                     </tr>
-                    <tr>
-                        <th scope="row"><label className="required" htmlFor="language"><Asterisk />{__("List type", "cds-snc")}</label></th>
-                        <td>
-                            <div className={errors.language ? "error-wrapper" : ""}>
-                                {errors.language && <span className="validation-error">{errors.language?.message || __("Type is required", "cds-snc")}</span>}
-                                <fieldset>
-                                    <label htmlFor="en">
-                                        <input id="en" {...register("language", { required: true })} type="radio" value="en" />
-                                        {" "}Email
-                                    </label>
-                                    <br />
-                                    <label htmlFor="fr">
-                                        <input id="fr" {...register("language", { required: true })} type="radio" value="fr" />
-                                        {" "}Phone
-                                    </label>
-                                </fieldset>
-                            </div>
-                        </td>
-                    </tr>
+                    {
+                        user?.hasPhone && <tr>
+                            <th scope="row"><label className="required" htmlFor="language"><Asterisk />{__("List type", "cds-snc")}</label></th>
+                            <td>
+                                <div className={errors.language ? "error-wrapper" : ""}>
+                                    {errors.language && <span className="validation-error">{errors.language?.message || __("Type is required", "cds-snc")}</span>}
+                                    <fieldset>
+                                        <label htmlFor="en">
+                                            <input id="en" {...register("language", { required: true })} type="radio" value="en" />
+                                            {" "}Email
+                                        </label>
+                                        <br />
+                                        <label htmlFor="fr">
+                                            <input id="fr" {...register("language", { required: true })} type="radio" value="fr" />
+                                            {" "}Phone
+                                        </label>
+                                    </fieldset>
+                                </div>
+                            </td>
+                        </tr>}
                     <tr>
                         <th scope="row"><label htmlFor="subscribe_email_template_id">{__("Subscribe template id", "cds-snc")}</label></th>
                         <td>
@@ -124,6 +131,6 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     </tr>
                 </tbody>
             </table>
-        </form>
+        </form >
     );
 }

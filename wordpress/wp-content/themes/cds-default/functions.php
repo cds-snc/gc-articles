@@ -17,7 +17,7 @@ require_once __DIR__ . '/inc/template-filters.php';
 // phpcs:disable
 if (!defined('_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_S_VERSION', '2.21.3');
+    define('_S_VERSION', '2.25.1');
 }
 
 if (!defined('THEME_NAMESPACE')) {
@@ -219,6 +219,11 @@ if (! function_exists('cds_register_block_patterns')) :
                 'title'         => esc_html__('Default homepage', 'cds-snc'),
                 'categories'    => array( 'homepage' ),
                 'content'       => cds_get_block_pattern_markup('homepage/landing'),
+            ),
+            'cds/toc' => array(
+                'title'         => esc_html__('Table of contents', 'cds-snc'),
+                'categories'    => array( 'homepage' ),
+                'content'       => cds_get_block_pattern_markup('homepage/toc'),
             ),
         ));
 

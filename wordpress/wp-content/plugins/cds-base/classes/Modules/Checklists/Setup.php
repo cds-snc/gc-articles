@@ -37,6 +37,7 @@ class Setup
             add_action('admin_enqueue_scripts', [$this, 'enqueue']);
             add_action('admin_init', [$this, 'removeUpgradeToProLink']);
             add_action('enqueue_block_editor_assets', [$this, 'enqueueGutenbergScripts']);
+            add_action('admin_footer', [$this, 'ppcMarkup']);
         }
     }
 
@@ -80,6 +81,13 @@ class Setup
             array('wp-blocks', 'wp-element'),
             '1.0.0'
         );
+
+        wp_enqueue_script(
+            'cds-base-checklists-meta-box-js',
+            plugin_dir_url(__FILE__) . '/js/meta-box.js',
+            array('jquery', 'wp-blocks', 'wp-element'),
+            '1.0.0'
+        );
     }
 
     public function enqueue()
@@ -90,5 +98,46 @@ class Setup
             null,
             '1.0.0',
         );
+    }
+
+    /**
+     * Function for HTML markup of notification.
+     *
+     * Shows the pop-up of warning a user or preventing a user.
+     *
+     * @since 1.0.0
+     */
+    public function ppcMarkup()
+    {
+        $ppc_screen = get_current_screen();
+        // If not edit or add new page, post or custom post type window then return.
+        if (! isset($ppc_screen->parent_base) || ( isset($ppc_screen->parent_base) && 'edit' !== $ppc_screen->parent_base )) {
+            return;
+        }
+        ?>
+        <div class="ppc-modal-warn" >
+            <div id="ppc_notifications" class="ppc-popup-warn" tabindex="-1">
+                <h2><?php _e('Are you sure you want to publish?', 'cds-snc'); ?></h2>
+                <p class="ppc-popup-description"><?php _e('There are still recommended items remaining on your checklist. What would you like to do?', 'cds-snc'); ?></p>
+                <div class="ppc-button-wrapper">
+                    <button class="ppc-popup-option-dontpublish"><?php _e('Don’t publish', 'cds-snc'); ?></button>
+                    <button class="ppc-popup-options-publishanyway"><?php _e('Publish anyway', 'cds-snc'); ?></button>
+                </div>
+            </div>
+        </div>
+        <div class="ppc-modal-prevent">
+            <div id="ppc_notifications" class="ppc-popup-prevent" tabindex="-1">
+                <h2><?php _e('Publishing not allowed', 'cds-snc'); ?></h2>
+                <p class="ppc-popup-description"> <?php _e('Please complete all the required checklist items before publishing.', 'cds-snc'); ?></p>
+                <div class="ppc-prevent-button-wrapper">
+                    <button class="ppc-popup-option-okay"><?php _e('Okay, take me to the list.', 'cds-snc'); ?></button>
+                </div>
+            </div>
+        </div>
+        <div class="ppc-button-container">
+            <button type="button" class="components-button is-button is-primary ppc-publish" id="ppc-publish"><?php _e('Publish…', 'cds-snc'); ?></button>
+            <button type="button" class="components-button is-button is-primary ppc-publish" id="ppc-update"><?php _e('Update…', 'cds-snc'); ?></button>
+        </div>
+        <?php
     }
 }

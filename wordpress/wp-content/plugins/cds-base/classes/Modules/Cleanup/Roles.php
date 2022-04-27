@@ -8,7 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.1.6', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.1.7', function () {
             if (is_blog_installed()) {
                 $wp_roles = wp_roles();
                 $allRoles = array_keys($wp_roles->roles); // array_keys returns only the slug
@@ -53,6 +53,7 @@ class Roles
                 'manage_notify' => 1,
                 'manage_list_manager' => 1,  // by default this is off
                 'list_manager_bulk_send' => 0, // this is managed per user (see user profile)
+                'list_manager_bulk_send_sms' => 0, // this is managed per user (see user profile)
                 'manage_categories' => 1,
                 'read' => 1,
                 'level_1' => 1,

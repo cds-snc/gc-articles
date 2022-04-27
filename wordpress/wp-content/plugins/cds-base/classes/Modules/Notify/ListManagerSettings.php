@@ -42,16 +42,14 @@ class ListManagerSettings
 
     public function listManagerSettingsAddPluginPage()
     {
-        if (is_super_admin()) {
-            add_submenu_page(
-                $this->admin_page,
-                __('Lists', 'cds-snc'),
-                __('Lists', 'cds-snc'),
-                'manage_list_manager',
-                'lists',
-                [$this, 'listManagerAppPage'],
-            );
-        }
+        add_submenu_page(
+            $this->admin_page,
+            __('Lists', 'cds-snc'),
+            __('Lists', 'cds-snc'),
+            'manage_list_manager',
+            'lists',
+            [$this, 'listManagerAppPage'],
+        );
     }
 
     public function listManagerAppPage()
@@ -63,11 +61,22 @@ class ListManagerSettings
                 'name' => __('Your Lists', 'cds-snc'),
                 'service_id' => $serviceId,
             ];
+
+            $user = new \stdClass();
+            $user->hasEmail = current_user_can('list_manager_bulk_send');
+            $user->hasPhone = current_user_can('list_manager_bulk_send_sms');
             ?>
               <!-- app -->
               <div class="wrap">
-                <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
-                <div id="list-manager-app" data-ids='<?php echo json_encode($services); ?>'>
+                <h1><?php _e('GC Lists', 'cds-snc'); ?></h1>
+                <?php
+                echo "<!--";
+                echo "manage_list_manager-" . current_user_can('manage_list_manager');
+                echo current_user_can('list_manager_bulk_send');
+                echo current_user_can('list_manager_bulk_send_sms');
+                echo "-->";
+                ?>
+                <div id="list-manager-app" data-user='<?php echo json_encode($user); ?>' data-ids='<?php echo json_encode($services); ?>'>
                 </div>
               </div>
             <?php
@@ -75,7 +84,7 @@ class ListManagerSettings
             ?>
               <!-- app -->
               <div class="wrap">
-                <h1><?php _e('List Manager', 'cds-snc'); ?></h1>
+                <h1><?php _e('GC Lists', 'cds-snc'); ?></h1>
                 <p>
                   <?php echo sprintf(
                       __(
@@ -97,7 +106,7 @@ class ListManagerSettings
             'methods' => 'POST',
             'callback' => [$this, 'saveListValues'],
             'permission_callback' => function () {
-                return current_user_can('administrator');
+                return current_user_can('manage_list_manager');
             },
         ]);
     }

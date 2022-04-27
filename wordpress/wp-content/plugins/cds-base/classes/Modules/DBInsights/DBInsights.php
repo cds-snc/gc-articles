@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Modules\DBInsights;
 
 use wpdb;
+use WP_Query;
 
 class DBInsights
 {
@@ -36,6 +37,14 @@ class DBInsights
         register_rest_route('maintenance/v1', '/deleted-site-tables', [
             'methods' => 'GET',
             'callback' => [$this, 'cleanupDbTables'],
+            'permission_callback' => function () {
+                return current_user_can('administrator');
+            }
+        ]);
+
+        register_rest_route('maintenance/v1', '/site-activity', [
+            'methods' => 'GET',
+            'callback' => [$this, 'siteActivity'],
             'permission_callback' => function () {
                 return current_user_can('administrator');
             }
@@ -112,6 +121,54 @@ class DBInsights
         }
     }
 
+    public function getRecent($id, $type)
+    {
+        switch_to_blog($id);
+        $recent_pages_args = [
+            'post_type' => $type,
+            'posts_per_page' => 1,
+            'post_status' => ['publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit', 'trash']
+        ];
+        $recent_pages = new WP_Query($recent_pages_args);
+
+        if ($recent_pages->have_posts()) {
+            $str = "";
+            while ($recent_pages->have_posts()) {
+                $recent_pages->the_post();
+                $title = get_the_title();
+                $status = get_post_status();
+                $date = get_the_date();
+                $str .= sprintf('%s [%s] %s', $title, $status, $date);
+            }
+            wp_reset_postdata();
+            return $str;
+        } else {
+            return __("not found", "cds-snc");
+        }
+    }
+
+    public function siteActivity()
+    {
+        try {
+            $blogIds = $this->getBlogIds();
+
+            $data = [];
+
+            foreach ($blogIds as $id) {
+                $payload = new \stdClass();
+                $name = get_blog_details($id)->blogname;
+                $payload->name = $name;
+                $payload->page = $this->getRecent($id, "page");
+                $payload->post = $this->getRecent($id, "post");
+                array_push($data, $payload);
+            }
+
+            return $data;
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
     public function dashboardWidget(): void
     {
         if (!is_super_admin()) {
@@ -123,12 +180,25 @@ class DBInsights
             __('Database Insights', 'cds') . "<span class='alpha'>" . __("Alpha", "cds-snc") . "</span>",
             [$this, 'dbInsightsPanelHandler'],
         );
+
+        wp_add_dashboard_widget(
+            'cds_db_activity_widget',
+            __('Website activity', 'cds') . "<span class='alpha'>" . __("Alpha", "cds-snc") . "</span>",
+            [$this, 'dbActivityPanelHandler'],
+        );
     }
 
     public function dbInsightsPanelHandler(): void
     {
         echo '<div id="db-insignts-panel"></div>';
         $data = 'CDS.renderDBInsightsPanel();';
+        wp_add_inline_script('cds-snc-admin-js', $data, 'after');
+    }
+
+    public function dbActivityPanelHandler(): void
+    {
+        echo '<div id="db-activity-panel"></div>';
+        $data = 'CDS.renderDBActivityPanel();';
         wp_add_inline_script('cds-snc-admin-js', $data, 'after');
     }
 }

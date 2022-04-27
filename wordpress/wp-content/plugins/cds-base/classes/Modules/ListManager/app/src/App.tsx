@@ -86,3 +86,11 @@ const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) =>
 }
 
 export default App;
+
+/*
+<Route path="/service/:serviceId/send" element={
+                <React.Suspense fallback={<Spinner />}>
+                  <SendTemplate />
+                </React.Suspense>
+              } />
+*/

@@ -24,7 +24,11 @@
     "typescript": "^4.6.3",
     "use-http": "^1.0.26",
     "uuid": "^8.3.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "prismjs": "^1.28.0",
+    "slate": "^0.78.0",
+    "slate-history": "^0.66.0",
+    "slate-react": "^0.77.4"
   },
   "scripts": {
     "start": "react-scripts start",

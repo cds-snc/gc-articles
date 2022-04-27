@@ -11,5 +11,8 @@
     "paths": {
       "util": ["/src/util/*"]
     }
-  }
+  },
+  "exclude": [
+    "**/ListManager/**",
+  ]
 }

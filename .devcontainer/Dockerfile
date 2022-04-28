@@ -12,6 +12,7 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
         openssh \
         rsync \
         git \
+        subversion \
         composer \
         nodejs \
         npm \

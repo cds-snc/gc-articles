@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { useCallback, useState } from 'react'
-import useFetch from 'use-http';
-import { Editor } from "./Editor";
+import { useState } from 'react'
+import { Editor } from "./editor/Editor";
 import { useList } from "../store/ListContext";
 import { List } from '../types';
 import { StyledSelect } from "./editor/Styles"
 import { Spinner } from './Spinner';
 import { useListFetch } from '../store/UseListFetch';
+import useSendTemplate from './editor/useSendTemplate';
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     // @todo -- add subscriber_count
@@ -25,26 +25,11 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 }
 
 export const SendTemplate = () => {
-    const { request, response } = useFetch({ data: [] });
     const { status } = useListFetch();
     const [listId, setListId] = useState<String>("");
     const { state } = useList();
     const { lists } = state;
-
-    const send = useCallback(async (data: string) => {
-        let endpoint = "/send"
-        let post_data = {
-            list_id: listId,
-            template_id: '40454604-8702-4eeb-9b38-1ed3104fb960', // @todo this will come form WP
-            template_type: 'email',
-            job_name: 'el-jobbo',
-            personalisation: JSON.stringify({ message: data, subject: 'Huzzah!' }),
-        }
-
-        await request.post(endpoint, post_data)
-
-        console.log(response)
-    }, [response, request, listId]);
+    const sendTemplate = useSendTemplate(listId);
 
     if (status === "loading") {
         return <Spinner />
@@ -56,7 +41,8 @@ export const SendTemplate = () => {
             {lists.length >= 1 && <ListSelect lists={lists} handleChange={(val: string) => {
                 setListId(val)
             }} />}
-            <Editor onSend={send} />
+            <Editor />
+            <button className="button" onClick={sendTemplate}>Send Email</button>
         </>)
 }
 

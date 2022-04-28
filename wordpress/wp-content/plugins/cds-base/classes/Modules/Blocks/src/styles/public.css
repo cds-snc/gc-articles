@@ -79,6 +79,11 @@ header .gcweb-menu {
   height: auto;
 }
 
+/* Search bar */
+header #wb-srch .submit {
+  top: 16px;
+}
+
 /* Hide search bar */
 .hide-search-bar header .brand {
   margin-bottom: 20px;

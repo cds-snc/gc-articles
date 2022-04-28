@@ -27,9 +27,9 @@ jobs:
       - run: cd wordpress && composer install --prefer-dist --no-progress --no-suggest
       - run: cd wordpress && ./vendor/bin/pest
 
-  new-tests:
+  gc-lists-php-tests:
     runs-on: ubuntu-latest
-    name: WP PHPUnit Tests
+    name: GC Lists PHPUnit Tests
     env:
       DB_DATABASE: wordpress_test
       DB_USER: root
@@ -52,7 +52,7 @@ jobs:
           cd wordpress/wp-content/plugins/gc-lists
           bash bin/install-wp-tests.sh wordpress_test root 'root' localhost $WP_VERSION
           composer install
-          
+
       - name: Run the tests
         run: |
           cd wordpress/wp-content/plugins/gc-lists

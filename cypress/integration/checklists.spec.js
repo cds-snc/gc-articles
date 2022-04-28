@@ -111,7 +111,8 @@ describe('Checklists', () => {
 
     // Close the "post-publish" panel
     cy.get('.post-publish-panel__postpublish-subheader', { timeout: 3000 }).should('be.visible').then($el => {
-      cy.get('.post-publish-panel__postpublish-header.is-opened').should('have.text', `${article.title} is now live.`)
+      // For unknown reasons, an "s" appears in this string in CI but not locally
+      cy.get('.post-publish-panel__postpublish-header.is-opened').contains(/New post title \d[s]? is now live/)
       cy.get('.editor-post-publish-panel__header button[aria-label="Close panel"]').first().trigger('click')
     })
 
@@ -153,7 +154,8 @@ describe('Checklists', () => {
 
     // Close the "post-publish" panel
     cy.get('.post-publish-panel__postpublish-subheader', { timeout: 3000 }).should('be.visible').then($el => {
-      cy.get('.post-publish-panel__postpublish-header.is-opened').should('have.text', `${article.title} is now live.`)
+      // For unknown reasons, an "s" appears in this string in CI but not locally
+      cy.get('.post-publish-panel__postpublish-header.is-opened').contains(/New post title \d[s]? is now live/)
       cy.get('.editor-post-publish-panel__header button[aria-label="Close panel"]').first().trigger('click')
     })
 

@@ -13,10 +13,12 @@ do
     echo ""
     echo "[PHPCBF] ${file}"
 
-    # PHPCBF
-    ./wordpress/vendor/bin/phpcbf -n --standard=PSR12 --extensions=php --ignore=vendor,node_modules,tests ${file} || true
+    if [ -f "${file}" ]; then
+      # PHPCBF
+      ./wordpress/vendor/bin/phpcbf -n --standard=PSR12 --extensions=php --ignore=vendor,node_modules,tests ${file} || true
 
-    # Add the cleaned file
-    git add -A $file
+      # Add the cleaned file
+      git add -A $file
+    fi
   fi
 done

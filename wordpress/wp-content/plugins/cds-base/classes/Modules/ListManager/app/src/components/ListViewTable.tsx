@@ -128,8 +128,8 @@ export const ListViewTable = () => {
                         accessor: 'active',
                         Cell: ({ row }: { row: any }) => {
                             return <>
-                                {getListType(row?.values?.language) === "email" && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} serviceId={serviceId} type={ListType.EMAIL} />}
-                                {getListType(row?.values?.language) === "phone" && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} serviceId={serviceId} type={ListType.PHONE} /> : null}
+                                {getListType(row?.original?.language) === ListType.EMAIL && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} serviceId={serviceId} type={ListType.EMAIL} />}
+                                {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} serviceId={serviceId} type={ListType.PHONE} /> : null}
                             </>
                         },
                     },

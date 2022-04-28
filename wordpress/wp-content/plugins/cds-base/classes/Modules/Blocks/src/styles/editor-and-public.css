@@ -88,6 +88,12 @@ body:not(.wp-admin) table tbody tr td,
   margin: 10px 0 20px 0;
 }
 
+/* has-background divs: usually people use these as little panels */
+.has-background {
+  padding: 11.5px 11.5px 6.25px 11.5px; /* 11.25 is the bottom margin of our paragraphs */
+  border-radius: 2px;
+}
+
 /* Details */
 /* Remove bottom margin on open details elements and open alerts */
 section[class^="wp-block"] details[open],

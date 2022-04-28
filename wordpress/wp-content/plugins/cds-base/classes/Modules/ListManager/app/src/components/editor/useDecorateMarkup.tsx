@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import { Text } from "slate";
 import Prism from "prismjs";
 // eslint-disable-next-line

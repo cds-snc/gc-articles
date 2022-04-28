@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import useTemplateApi from "./useTemplateApi";
 import { serialize } from "./utils";
 import useFetch from 'use-http';
@@ -14,7 +14,7 @@ function useSendTemplate(listId) {
             list_id: listId,
             template_id: '40454604-8702-4eeb-9b38-1ed3104fb960', // @todo this will come form WP
             template_type: 'email',
-            job_name: 'el-jobbo',
+            job_name: 'job',
             personalisation: JSON.stringify({ message: data, subject: 'Huzzah!' }),
         }
 

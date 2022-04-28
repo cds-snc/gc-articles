@@ -52,6 +52,10 @@ jobs:
           cd wordpress/wp-content/plugins/gc-lists
           bash bin/install-wp-tests.sh wordpress_test root 'root' localhost $WP_VERSION
           composer install
+          
+      - name: Run the tests
+        run: |
+          cd wordpress/wp-content/plugins/gc-lists
           ./vendor/bin/phpunit
   phpcs:
     runs-on: ubuntu-latest

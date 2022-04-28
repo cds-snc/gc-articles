@@ -56,7 +56,7 @@ jobs:
       - name: Run the tests
         run: |
           cd wordpress/wp-content/plugins/gc-lists
-          ./vendor/bin/phpunit
+          ./vendor/bin/pest
   phpcs:
     runs-on: ubuntu-latest
     name: Code quality

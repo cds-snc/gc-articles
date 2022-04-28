@@ -26,20 +26,31 @@ jobs:
 
       - run: cd wordpress && composer install --prefer-dist --no-progress --no-suggest
       - run: cd wordpress && ./vendor/bin/pest
+
   new-tests:
     runs-on: ubuntu-latest
     name: WP PHPUnit Tests
+    env:
+      DB_DATABASE: wordpress_test
+      DB_USER: root
+      DB_PASSWORD: root
     steps:
       - uses: actions/checkout@v2.3.4
-      - uses: shivammathur/setup-php@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
+
+      - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql start
 
       - name: Setup test environment
         run: |
           export PATH="$HOME/.composer/vendor/bin:$PATH"
           cd wordpress/wp-content/plugins/gc-lists
-          bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+          bash bin/install-wp-tests.sh wordpress_test root 'root' localhost $WP_VERSION
           composer global require "phpunit/phpunit=4.8.*|5.7.*"
           phpunit
   phpcs:

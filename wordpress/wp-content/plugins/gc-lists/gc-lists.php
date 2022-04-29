@@ -13,4 +13,11 @@
  * @package         Gc_Lists
  */
 
-// Your code starts here.
+use GCLists\GCLists;
+
+if (is_readable(__DIR__ . '/vendor/autoload.php')) {
+    require __DIR__ . '/vendor/autoload.php';
+}
+
+add_action('plugins_loaded', [GCLists::class, 'register']);
+register_activation_hook(__FILE__, [GCLists::class, 'install']);

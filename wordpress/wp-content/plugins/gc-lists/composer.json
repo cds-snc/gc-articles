@@ -4,6 +4,11 @@
         "yoast/phpunit-polyfills": "^1.0",
         "pestphp/pest": "^1.21"
     },
+    "autoload": {
+      "psr-4": {
+        "GCLists\\": "src/"
+      }
+    },
     "config": {
         "allow-plugins": {
             "pestphp/pest-plugin": true

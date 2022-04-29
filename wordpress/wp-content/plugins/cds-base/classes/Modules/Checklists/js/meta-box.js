@@ -104,13 +104,14 @@ jQuery(document).ready(
                 block: 'end',
                 inline: 'nearest'
             });
-            $(_metaboxID).scrollTop += 50;
+            $metabox = $(_metaboxID)
+            $metabox.scrollTop += 50;
             // focus the metabox
-            $(_metaboxID).focus();
+            $metabox.focus();
             // Add class that gives the metabox a yellow background which fades
-            $(metaboxID).addClass('ppc-metabox-background');
+            $metabox.addClass('ppc-metabox-background');
             setTimeout(function() {
-                $(metaboxID).removeClass('ppc-metabox-background');
+                $metabox.removeClass('ppc-metabox-background');
             }, 1000)
         }
 

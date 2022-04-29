@@ -16,6 +16,7 @@ wp-env run tests-cli wp theme activate cds-default
 wp-env run tests-cli wp plugin activate sitepress-multilingual-cms cds-base two-factor;
 wp-env run tests-cli wp plugin activate s3-uploads disable-user-login; # wps-hide-login
 wp-env run tests-cli wp plugin activate wordpress-seo wordpress-seo-premium wp-rest-api-v2-menus;
+wp-env run tests-cli wp plugin activate publishpress-checklists;
 # wp-env run tests-cli wp plugin activate jwt-authentication-for-wp-rest-api;
 
 wp-env run tests-cli wp rewrite structure "/%postname%/";

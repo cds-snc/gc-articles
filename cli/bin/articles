@@ -186,6 +186,12 @@ if [ $# -gt 0 ]; then
           bash < ./cli/bin/configure-wpml.sh
 
     # Pass unknown commands to the "docker-compose" binary...
+    elif [ "$1" == "wp" ]; then
+        shift 1
+
+        docker exec -i \
+          "$CLI_SERVICE" \
+          bash -c "cd /usr/src/wordpress && wp $@"
     else
         docker-compose "$@"
     fi

@@ -41,11 +41,17 @@ export SAIL_SHARE_SERVER_HOST=${SAIL_SHARE_SERVER_HOST:-"laravel-sail.site"}
 export SAIL_SHARE_SERVER_PORT=${SAIL_SHARE_SERVER_PORT:-8080}
 export SAIL_SHARE_SUBDOMAIN=${SAIL_SHARE_SUBDOMAIN:-""}
 
+if docker-compose ps | grep CLI_SERVICE | grep 'Exit'; then
+    EXEC_OR_RUN="exec"
+else
+    EXEC_OR_RUN="run"
+fi
+
 # Function that outputs Sail is not running...
 function sail_is_not_running {
-    echo -e "${WHITE}Sail is not running.${NC}" >&2
+    echo -e "${WHITE}Articles is not running.${NC}" >&2
     echo "" >&2
-    echo -e "${WHITE}You may Sail using the following commands:${NC} './vendor/bin/sail up' or './vendor/bin/sail up -d'" >&2
+    echo -e "${WHITE}You may start Articles using the following commands:${NC} './vendor/bin/articles up' or './vendor/bin/articles up -d'" >&2
 
     exit 1
 }
@@ -58,10 +64,10 @@ if [ -z "$SAIL_SKIP_CHECKS" ]; then
         exit 1
     fi
 
-    # Determine if Sail is currently up...
+    # Determine if Articles is currently up...
     PSRESULT="$(docker-compose ps -q)"
     if docker-compose ps | grep $APP_SERVICE | grep 'Exit'; then
-        echo -e "${WHITE}Shutting down old Sail processes...${NC}" >&2
+        echo -e "${WHITE}Shutting down old Articles processes...${NC}" >&2
 
         docker-compose down > /dev/null 2>&1
 
@@ -89,7 +95,7 @@ if [ $# -gt 0 ]; then
 
     elif [ "$1" == "install" ] || [ "$1" == "update" ]; then
 
-      docker-compose run \
+      docker-compose $EXEC_OR_RUN \
           "$CLI_SERVICE" \
           bash -c "composer config -g http-basic.my.yoast.com token ${COMPOSER_YOAST_TOKEN} && cd wordpress && composer $@"
 
@@ -99,15 +105,21 @@ if [ $# -gt 0 ]; then
         if [ "$1" == "install" ]; then
           docker-compose run install
         else
-          echo "error"
+          echo "Invalid subcommand"
         fi
-    # Proxy the "test" command to the "php artisan test" Artisan command...
+    # Proxy the "test" command to the CLI container
     elif [ "$1" == "test" ]; then
         shift 1
 
-        docker-compose run \
+        docker-compose $EXEC_OR_RUN \
             "$CLI_SERVICE" \
             bash -c "cd wordpress && ./vendor/bin/pest"
+
+        # This will run gc-lists tests but would prefer to combine with previous (tbd)
+        # Problem is this test run needs some setup (see gc-lists/bin/install-wp-tests.sh)
+        # docker-compose $EXEC_OR_RUN \
+        #    "$CLI_SERVICE" \
+        #    bash -c "cd /usr/src/wordpress/wp-content/plugins/gc-lists && ./vendor/bin/pest"
 
     # Proxy Node commands to the "node" binary on the application container...
     elif [ "$1" == "node" ]; then
@@ -115,7 +127,6 @@ if [ $# -gt 0 ]; then
 
         if [ "$EXEC" == "yes" ]; then
             docker-compose exec \
-                -u sail \
                 "$CLI_SERVICE" \
                 node "$@"
         else
@@ -126,7 +137,7 @@ if [ $# -gt 0 ]; then
     elif [ "$1" == "npm" ]; then
         shift 1
 
-        docker-compose run \
+        docker-compose exec \
             "$CLI_SERVICE" \
             npm "$@"
 
@@ -136,7 +147,6 @@ if [ $# -gt 0 ]; then
 
         if [ "$EXEC" == "yes" ]; then
             docker-compose exec \
-                -u sail \
                 "$CLI_SERVICE" \
                 npx "$@"
         else
@@ -150,19 +160,7 @@ if [ $# -gt 0 ]; then
         if [ "$EXEC" == "yes" ]; then
             docker-compose exec \
                 "$CLI_SERVICE" \
-                bash "$@"
-        else
-            sail_is_not_running
-        fi
-
-    # Initiate a root user Bash shell within the application container...
-    elif [ "$1" == "root-shell" ] ; then
-        shift 1
-
-        if [ "$EXEC" == "yes" ]; then
-            docker-compose exec \
-                "$CLI_SERVICE" \
-                bash "$@"
+                /bin/zsh "$@"
         else
             sail_is_not_running
         fi
@@ -185,8 +183,14 @@ if [ $# -gt 0 ]; then
           "$CLI_SERVICE" \
           bash < ./cli/bin/configure-wpml.sh
 
-    # Pass unknown commands to the "docker-compose" binary...
+    elif [ "$1" == "wp" ]; then
+        shift 1
+
+        docker exec -i \
+          "$CLI_SERVICE" \
+          bash -c "cd /usr/src/wordpress && wp $@"
     else
+        # Pass unknown commands to the "docker-compose" binary...
         docker-compose "$@"
     fi
 else

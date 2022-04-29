@@ -8,7 +8,7 @@ class GCLists
 {
     protected static $instance;
 
-    public static function register()
+    public static function register(): GCLists
     {
         is_null(self::$instance) and self::$instance = new self();
         return self::$instance;

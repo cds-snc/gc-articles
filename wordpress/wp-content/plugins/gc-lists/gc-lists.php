@@ -1,11 +1,10 @@
 <?php
 
 /**
- * Plugin Name:     Gc Lists
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     PLUGIN DESCRIPTION HERE
- * Author:          YOUR NAME HERE
- * Author URI:      YOUR SITE HERE
+ * Plugin Name:     GC Lists
+ * Description:     Plugin for GC Lists
+ * Author:          Canadian Digital Service
+ * Author URI:      https://digital.canada.ca
  * Text Domain:     gc-lists
  * Domain Path:     /languages
  * Version:         0.1.0

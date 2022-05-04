@@ -6,7 +6,8 @@ namespace GCLists;
 
 class Install
 {
-    protected $tableName;
+    protected static $instance;
+    protected string $tableName;
     protected $wpdb;
 
     public function __construct()
@@ -14,6 +15,12 @@ class Install
         global $wpdb;
         $this->wpdb = $wpdb;
         $this->tableName = $wpdb->prefix . "messages";
+    }
+
+    public static function get_instance(): Install
+    {
+        is_null(self::$instance) and self::$instance = new self();
+        return self::$instance;
     }
 
     public function install()

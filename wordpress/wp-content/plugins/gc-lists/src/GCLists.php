@@ -4,24 +4,35 @@ declare(strict_types=1);
 
 namespace GCLists;
 
+use GCLists\Api\Messages;
+
 class GCLists
 {
     protected static $instance;
+    protected $installer;
 
-    public static function register(): GCLists
+    public static function get_instance(): GCLists
     {
         is_null(self::$instance) and self::$instance = new self();
-
-        self::$instance->registerHooks();
-
         return self::$instance;
+    }
+
+    public function setup()
+    {
+        $this->registerHooks();
+        $this->registerRestRoutes();
     }
 
     public function registerHooks()
     {
-        $installer = new Install();
+        $installer = Install::get_instance();
 
         register_activation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$installer, 'install']);
         register_deactivation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$installer, 'uninstall']);
+    }
+
+    public function registerRestRoutes()
+    {
+        $messages = Messages::get_instance();
     }
 }

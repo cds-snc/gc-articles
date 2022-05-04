@@ -33,9 +33,15 @@ class Roles
         add_filter('map_meta_cap', [$this, 'addUnfilteredHTMLRole'], 1, 3);
     }
 
-    function addUnfilteredHTMLRole($caps, $cap, $user_id)
+    public function addUnfilteredHTMLRole($caps, $cap, $user_id)
     {
-        if ('unfiltered_html' === $cap && user_can($user_id, 'administrator')) {
+        if (
+            'unfiltered_html' === $cap && (
+                    user_can($user_id, 'administrator') ||
+                    user_can($user_id, 'gceditor') ||
+                    user_can($user_id, 'gcwriter')
+                )
+        ) {
             $caps = array('unfiltered_html');
         }
         return $caps;

@@ -28,6 +28,17 @@ class Roles
         });
 
         add_action('wpseo_activate', [$this, 'removeSEORoles'], 99);
+
+        // Add "unfiltered_html" role to GC Admins
+        add_filter('map_meta_cap', [$this, 'addUnfilteredHTMLRole'], 1, 3);
+    }
+
+    function addUnfilteredHTMLRole($caps, $cap, $user_id)
+    {
+        if ('unfiltered_html' === $cap && user_can($user_id, 'administrator')) {
+            $caps = array('unfiltered_html');
+        }
+        return $caps;
     }
 
     public function removeSEORoles()

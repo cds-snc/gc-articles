@@ -14,8 +14,6 @@ namespace GCLists;
  * @package         Gc_Lists
  */
 
-use GCLists\GCLists;
-
 /**
  * Autoloader
  */
@@ -30,4 +28,4 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
  */
 define('GC_LISTS_PLUGIN_FILE_PATH', __FILE__);
 
-$instance = GCLists::register();
+GCLists::register();

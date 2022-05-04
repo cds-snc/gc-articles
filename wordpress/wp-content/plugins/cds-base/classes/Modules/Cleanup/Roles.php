@@ -8,7 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.1.7', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.1.8', function () {
             if (is_blog_installed()) {
                 $wp_roles = wp_roles();
                 $allRoles = array_keys($wp_roles->roles); // array_keys returns only the slug
@@ -29,7 +29,7 @@ class Roles
 
         add_action('wpseo_activate', [$this, 'removeSEORoles'], 99);
 
-        // Add "unfiltered_html" role to GC Admins
+        // Add "unfiltered_html" role to GC Admins, GC Editors, GC Writers
         add_filter('map_meta_cap', [$this, 'addUnfilteredHTMLRole'], 1, 3);
     }
 
@@ -37,10 +37,10 @@ class Roles
     {
         if (
             'unfiltered_html' === $cap && (
-                    user_can($user_id, 'administrator') ||
-                    user_can($user_id, 'gceditor') ||
-                    user_can($user_id, 'gcwriter')
-                )
+                user_can($user_id, 'administrator') ||
+                user_can($user_id, 'gceditor') ||
+                user_can($user_id, 'gcwriter')
+            )
         ) {
             $caps = array('unfiltered_html');
         }
@@ -97,7 +97,8 @@ class Roles
                 'delete_others_pages' => 1,
                 'delete_published_pages' => 1,
                 'upload_files' => 1,
-                'edit_theme_options' => 1 // allows editing the "menu" options
+                'edit_theme_options' => 1, // allows editing the "menu" options
+                'unfiltered_html' => 1
             ],
             'editor' => [
                 'moderate_comments' => 1,
@@ -184,7 +185,8 @@ class Roles
                 'delete_others_pages' => 1,
                 'delete_published_pages' => 1,
                 'upload_files' => 1,
-                'edit_theme_options' => 1 // allows editing the "menu" options
+                'edit_theme_options' => 1, // allows editing the "menu" options
+                'unfiltered_html' => 1
             ],
             'gcwriter' => [
                 'read' => 1,
@@ -212,7 +214,8 @@ class Roles
                 'delete_others_pages' => 0,
                 'delete_published_pages' => 0,
                 'upload_files' => 0,
-                'edit_theme_options' => 0 // allows editing the "menu" options
+                'edit_theme_options' => 0, // allows editing the "menu" options
+                'unfiltered_html' => 1
             ],
             'display_name' => [
                 'administrator' => 'GC Admin',

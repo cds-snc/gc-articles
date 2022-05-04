@@ -1,5 +1,7 @@
 <?php
 
+namespace GCLists;
+
 /**
  * Plugin Name:     GC Lists
  * Description:     Plugin for GC Lists
@@ -14,9 +16,18 @@
 
 use GCLists\GCLists;
 
-if (is_readable(__DIR__ . '/vendor/autoload.php')) {
+/**
+ * Autoloader
+ */
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require __DIR__ . '/vendor/autoload.php';
+} else {
+    throw new Exception('Autoload does not exist. You probably need to run composer install');
 }
 
-add_action('plugins_loaded', [GCLists::class, 'register']);
-register_activation_hook(__FILE__, [GCLists::class, 'install']);
+/**
+ * Basic Constants
+ */
+define('GC_LISTS_PLUGIN_FILE_PATH', __FILE__);
+
+$instance = GCLists::register();

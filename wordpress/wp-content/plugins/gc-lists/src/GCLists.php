@@ -11,11 +11,17 @@ class GCLists
     public static function register(): GCLists
     {
         is_null(self::$instance) and self::$instance = new self();
+
+        self::$instance->registerHooks();
+
         return self::$instance;
     }
 
-    public static function install()
+    public function registerHooks()
     {
-        // db install stuff
+        $installer = new Install();
+
+        register_activation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$installer, 'install']);
+        register_deactivation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$installer, 'uninstall']);
     }
 }

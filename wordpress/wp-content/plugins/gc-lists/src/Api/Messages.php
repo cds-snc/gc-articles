@@ -16,7 +16,7 @@ class Messages
         $this->namespace = "gc-lists";
     }
 
-    public static function get_instance(): Messages
+    public static function getInstance(): Messages
     {
         is_null(self::$instance) and self::$instance = new self();
         return self::$instance;

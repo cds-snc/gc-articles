@@ -28,5 +28,5 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
  */
 define('GC_LISTS_PLUGIN_FILE_PATH', __FILE__);
 
-$plugin = GCLists::get_instance();
+$plugin = GCLists::getInstance();
 $plugin->setup();

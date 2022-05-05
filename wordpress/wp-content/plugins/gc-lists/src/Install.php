@@ -17,7 +17,7 @@ class Install
         $this->tableName = $wpdb->prefix . "messages";
     }
 
-    public static function get_instance(): Install
+    public static function getInstance(): Install
     {
         is_null(self::$instance) and self::$instance = new self();
         return self::$instance;

@@ -11,7 +11,7 @@ class GCLists
     protected static $instance;
     protected $installer;
 
-    public static function get_instance(): GCLists
+    public static function getInstance(): GCLists
     {
         is_null(self::$instance) and self::$instance = new self();
         return self::$instance;
@@ -25,7 +25,7 @@ class GCLists
 
     public function registerHooks()
     {
-        $installer = Install::get_instance();
+        $installer = Install::getInstance();
 
         register_activation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$installer, 'install']);
         register_deactivation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$installer, 'uninstall']);
@@ -33,7 +33,7 @@ class GCLists
 
     public function registerRestRoutes()
     {
-        $messages = Messages::get_instance();
+        $messages = Messages::getInstance();
         add_action('rest_api_init', [$messages, 'registerRestRoutes']);
     }
 }

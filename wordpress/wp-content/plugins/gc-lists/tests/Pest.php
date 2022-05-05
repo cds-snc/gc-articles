@@ -11,7 +11,17 @@
 |
 */
 
-// uses(Tests\TestCase::class)->in('Feature');
+uses()->group('integration')->in('Integration');
+uses()->group('unit')->in('Unit');
+
+/**
+ * Not sure why, but seems the bootstrap.php specified in phpunit.xml is not available
+ * yet when running these tests, resulting in WP_UnitTestCase not found. Including
+ * the bootstrap.php here fixes the issue.
+ */
+require_once('bootstrap.php');
+
+uses(\WP_UnitTestCase::class)->in('Integration');
 
 /*
 |--------------------------------------------------------------------------

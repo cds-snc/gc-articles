@@ -33,7 +33,7 @@ class Messages
             'methods'             => 'GET',
             'callback'            => [$this, 'all'],
             'permission_callback' => function () {
-                return true; // $this->hasPermission();
+                return $this->hasPermission();
             }
         ]);
 
@@ -41,7 +41,7 @@ class Messages
             'methods'             => 'GET',
             'callback'            => [$this, 'sent'],
             'permission_callback' => function () {
-                return true; // $this->hasPermission();
+                return $this->hasPermission();
             }
         ]);
 

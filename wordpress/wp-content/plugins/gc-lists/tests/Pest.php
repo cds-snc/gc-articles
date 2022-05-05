@@ -11,6 +11,8 @@
 |
 */
 
+use GCLists\Install;
+
 uses()->group('integration')->in('Integration');
 uses()->group('unit')->in('Unit');
 
@@ -21,7 +23,15 @@ uses()->group('unit')->in('Unit');
  */
 require_once('bootstrap.php');
 
-uses(\WP_UnitTestCase::class)->in('Integration');
+/**
+ * Because bootstrap.php loads the plugin in mu-plugins, activation hooks don't fire
+ * and database tables don't get created, so we must manually trigger the install.
+ */
+$installer = Install::getInstance();
+
+uses(\WP_UnitTestCase::class)
+	->beforeAll(fn () => $installer->install())
+	->in('Integration');
 
 /*
 |--------------------------------------------------------------------------

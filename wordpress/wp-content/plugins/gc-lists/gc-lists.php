@@ -20,7 +20,7 @@ namespace GCLists;
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require __DIR__ . '/vendor/autoload.php';
 } else {
-    throw new Exception('Autoload does not exist. You probably need to run composer install');
+    throw new Exception('[GC Lists] Autoload does not exist. You probably need to run composer install');
 }
 
 /**

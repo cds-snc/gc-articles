@@ -1,7 +1,5 @@
 <?php
 
-namespace GCLists;
-
 /**
  * Plugin Name:     GC Lists
  * Description:     Plugin for GC Lists
@@ -13,6 +11,8 @@ namespace GCLists;
  *
  * @package         Gc_Lists
  */
+
+namespace GCLists;
 
 /**
  * Autoloader

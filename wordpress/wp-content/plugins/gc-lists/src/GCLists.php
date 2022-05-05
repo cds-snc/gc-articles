@@ -34,5 +34,6 @@ class GCLists
     public function registerRestRoutes()
     {
         $messages = Messages::get_instance();
+        add_action('rest_api_init', [$messages, 'registerRestRoutes']);
     }
 }

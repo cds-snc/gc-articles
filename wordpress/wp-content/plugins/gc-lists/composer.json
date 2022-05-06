@@ -15,8 +15,7 @@
     },
     "autoload": {
       "psr-4": {
-          "GCLists\\": "src/",
-          "Database\\Factories\\": "tests/factories/"
+          "GCLists\\": "src/"
       }
     },
     "config": {

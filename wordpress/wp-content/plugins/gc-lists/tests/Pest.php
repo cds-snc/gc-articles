@@ -12,7 +12,7 @@
 */
 
 use GCLists\Install;
-use Database\Factories\MessageFactory;
+use GCLists\Database\Factories\MessageFactory;
 
 uses()->group('integration')->in('Integration');
 uses()->group('unit')->in('Unit');
@@ -40,6 +40,10 @@ uses(\WP_UnitTestCase::class)
 	->beforeAll(fn () => $installer->install())
 	->beforeEach(fn () => $this->factory->message = new MessageFactory( $this->factory ))
 	->in('Integration');
+
+uses(\WP_UnitTestCase::class)
+    ->beforeEach(fn () => $this->factory->message = new MessageFactory( $this->factory ))
+    ->in('Unit');
 
 /*
 |--------------------------------------------------------------------------

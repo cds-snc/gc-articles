@@ -15,7 +15,11 @@ test('Database table is installed', function() {
 /**
  * This is just an example of how to use a factory. The factory is provided by WP_UnitTestCase.
  */
-test('Use a factory to create a User', function() {
-	$user_id = $this->factory->user->create();
-	$this->assertEquals($user_id, 2);
+test('Use a factory to create a Message', function() {
+	$message = $this->factory->message->create_and_get();
+	$this->assertTrue(is_object($message));
+
+	$this->assertObjectHasAttribute('name', $message);
+	$this->assertEquals('This is a message', $message->name);
+	$this->assertTrue(true);
 });

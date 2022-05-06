@@ -8,11 +8,17 @@ use WP_REST_Response;
 
 class Messages
 {
-    protected $namespace;
+    protected $wpdb;
+    protected string $namespace;
+    protected string $tableName;
     protected static $instance;
 
     public function __construct()
     {
+        global $wpdb;
+        $this->wpdb = $wpdb;
+        $this->tableName = $wpdb->prefix . "messages";
+
         $this->namespace = "gc-lists";
     }
 
@@ -80,7 +86,11 @@ class Messages
 
     public function all()
     {
-        $response = new WP_REST_Response([]);
+        $results = $this->wpdb->get_results(
+            "SELECT * FROM {$this->tableName} WHERE original_message_id IS NULL"
+        );
+
+        $response = new WP_REST_Response($results);
 
         $response->set_status(200);
 
@@ -89,7 +99,11 @@ class Messages
 
     public function sent()
     {
-        $response = new WP_REST_Response([]);
+        $results = $this->wpdb->get_results(
+            "SELECT * FROM {$this->tableName} WHERE original_message_id IS NOT NULL"
+        );
+
+        $response = new WP_REST_Response($results);
 
         $response->set_status(200);
 

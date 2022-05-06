@@ -50,21 +50,55 @@ test('Get one messages', function() {
 
 test('Create a message', function() {
 	$request  = new WP_REST_Request( 'POST', '/gc-lists/messages' );
+	$request->set_query_params([
+		'name' => 'Name of the message',
+		'subject' => 'Subject of the message',
+		'body' => 'Body of the message',
+		'message_type' => 'email'
+	]);
+
 	$response = $this->server->dispatch( $request );
 
-	$this->assertEquals( 200, $response->get_status() );
+	$this->assertEquals(200, $response->get_status());
+	$this->assertIsObject($response->get_data());
+	$this->assertObjectHasAttribute('name', $response->get_data());
+	$this->assertEquals('Name of the message', $response->get_data()->name);
 });
 
 test('Update a message', function() {
-	$request  = new WP_REST_Request( 'PUT', '/gc-lists/messages/1' );
+	$message = $this->factory->message->create_and_get([
+		'name' => 'This is the message name'
+	]);
+
+	$this->assertEquals('This is the message name', $message->name);
+
+	$request  = new WP_REST_Request( 'PUT', "/gc-lists/messages/{$message->id}" );
+	$request->set_query_params([
+		'id' => $message->id,
+		'name' => 'Name of the message',
+		'subject' => 'Subject of the message',
+		'body' => 'Body of the message',
+	]);
+
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
+	$this->assertIsObject($response->get_data());
+	$this->assertObjectHasAttribute('name', $response->get_data());
+	$this->assertEquals('Name of the message', $response->get_data()->name);
 });
 
 test('Delete a message', function() {
-	$request  = new WP_REST_Request( 'DELETE', '/gc-lists/messages/1' );
+	$message_ids = $this->factory->message->create_many(5);
+
+	global $wpdb;
+	$count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}messages");
+	$this->assertEquals(5, $count);
+
+	$request  = new WP_REST_Request( 'DELETE', "/gc-lists/messages/{$message_ids[2]}" );
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
+	$count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}messages");
+	$this->assertEquals(4, $count);
 });

@@ -124,18 +124,60 @@ class Messages
         return $response;
     }
 
-    public function create(): WP_REST_Response
+    public function create(WP_REST_Request $request): WP_REST_Response
     {
-        $response = new WP_REST_Response([]);
+        // @TODO: data validation and sanitation
+        $result = $this->wpdb->insert(
+            $this->tableName,
+            [
+                'name' => $request['name'],
+                'subject' => $request['subject'],
+                'body' => $request['body'],
+                'message_type' => $request['message_type']
+            ]
+        );
 
-        $response->set_status(200);
+        if ($result) {
+            $id = $this->wpdb->insert_id;
+            $message = $this->wpdb->get_row(
+                $this->wpdb->prepare("SELECT * FROM {$this->tableName} WHERE id = %d", $id)
+            );
+
+            $response = new WP_REST_Response($message);
+
+            $response->set_status(200);
+
+            return $response;
+        }
+
+        $response = new WP_REST_Response([
+            'error' => 'There was an unspecified error'
+        ]);
+
+        $response->set_status(500);
 
         return $response;
     }
 
     public function update(WP_REST_Request $request): WP_REST_Response
     {
-        $response = new WP_REST_Response([]);
+        $result = $this->wpdb->update(
+            $this->tableName,
+            [
+                'name' => $request['name'],
+                'subject' => $request['subject'],
+                'body' => $request['body']
+            ],
+            [
+                'id' => $request['id']
+            ]
+        );
+
+        $message = $this->wpdb->get_row(
+            $this->wpdb->prepare("SELECT * FROM {$this->tableName} WHERE id = %d", $request['id'])
+        );
+
+        $response = new WP_REST_Response($message);
 
         $response->set_status(200);
 
@@ -144,9 +186,21 @@ class Messages
 
     public function delete(WP_REST_Request $request): WP_REST_Response
     {
-        $response = new WP_REST_Response([]);
+        $result = $this->wpdb->delete($this->tableName, ['id' => $request['id']]);
 
-        $response->set_status(200);
+        if ($result) {
+            $response = new WP_REST_Response([]);
+
+            $response->set_status(200);
+
+            return $response;
+        }
+
+        $response = new WP_REST_Response([
+            'error' => 'There has been an unspecified error'
+        ]);
+
+        $response->set_status(500);
 
         return $response;
     }

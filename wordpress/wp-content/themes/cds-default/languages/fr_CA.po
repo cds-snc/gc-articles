@@ -92,11 +92,11 @@ msgstr "Page d’accueil par défaut"
 
 #: header.php:40
 msgid "Your site is currently in maintenance mode. Only logged in users will be able to see this page."
-msgstr ""
+msgstr "Votre site est en mode maintenance. Seuls les utilisateurs connectés pourront voir cette page."
 
 #: header.php:43
 msgid "To make your site live <a href=\"%s\">update your site settings</a>."
-msgstr ""
+msgstr "Pour activer votre site <a href=\"%s\">modifier les paramètres de votre site</a>."
 
 #: header.php:52
 msgid "Skip to content"
@@ -104,11 +104,11 @@ msgstr "Aller au contenu"
 
 #: header.php:64
 msgid "Sign out"
-msgstr ""
+msgstr "Se déconnecter"
 
 #: header.php:66
 msgid "Sign in"
-msgstr ""
+msgstr "Se Connecter"
 
 #: header.php:92 header.php:99 header.php:104 header.php:113
 msgid "Search"
@@ -200,7 +200,7 @@ msgstr "Aucun résultat! Veuillez lancer une recherche."
 
 #: template-parts/content-page.php:26
 msgid "Pages:"
-msgstr "Pages :"
+msgstr "Pages:"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content-page.php:40

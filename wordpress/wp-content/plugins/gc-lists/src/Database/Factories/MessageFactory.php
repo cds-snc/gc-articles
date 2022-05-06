@@ -7,7 +7,7 @@ class MessageFactory extends \WP_UnitTest_Factory_For_Thing
     protected $tableName;
     protected $wpdb;
 
-    function __construct($factory = null)
+    public function __construct($factory = null)
     {
         parent::__construct($factory);
 
@@ -23,21 +23,21 @@ class MessageFactory extends \WP_UnitTest_Factory_For_Thing
         );
     }
 
-    function create_object($args)
+    public function create_object($args) // @codingStandardsIgnoreLine
     {
         $this->wpdb->insert($this->tableName, $args);
         $message_id = $this->wpdb->insert_id;
         return $message_id;
     }
 
-    function update_object($post_id, $fields)
+    public function update_object($post_id, $fields) // @codingStandardsIgnoreLine
     {
         $fields['ID'] = $post_id;
         $this->wpdb->update($this->tableName, $fields);
         return $post_id;
     }
 
-    function get_object_by_id($message_id)
+    public function get_object_by_id($message_id) // @codingStandardsIgnoreLine
     {
         return $this->wpdb->get_row(
             $this->wpdb->prepare("SELECT * FROM {$this->tableName} WHERE id=%d", $message_id)

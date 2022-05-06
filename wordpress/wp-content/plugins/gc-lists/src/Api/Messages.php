@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GCLists\Api;
 
 use WP_REST_Response;
+use WP_REST_Request;
 
 class Messages
 {
@@ -84,7 +85,7 @@ class Messages
         ]);
     }
 
-    public function all()
+    public function all(): WP_REST_Response
     {
         $results = $this->wpdb->get_results(
             "SELECT * FROM {$this->tableName} WHERE original_message_id IS NULL"
@@ -97,7 +98,7 @@ class Messages
         return $response;
     }
 
-    public function sent()
+    public function sent(): WP_REST_Response
     {
         $results = $this->wpdb->get_results(
             "SELECT * FROM {$this->tableName} WHERE original_message_id IS NOT NULL"
@@ -110,7 +111,20 @@ class Messages
         return $response;
     }
 
-    public function get($id)
+    public function get(WP_REST_Request $request): WP_REST_Response
+    {
+        $results = $this->wpdb->get_row(
+            $this->wpdb->prepare("SELECT * FROM {$this->tableName} WHERE id = %d", $request["id"])
+        );
+
+        $response = new WP_REST_Response($results);
+
+        $response->set_status(200);
+
+        return $response;
+    }
+
+    public function create(): WP_REST_Response
     {
         $response = new WP_REST_Response([]);
 
@@ -119,7 +133,7 @@ class Messages
         return $response;
     }
 
-    public function create()
+    public function update(WP_REST_Request $request): WP_REST_Response
     {
         $response = new WP_REST_Response([]);
 
@@ -128,16 +142,7 @@ class Messages
         return $response;
     }
 
-    public function update($id)
-    {
-        $response = new WP_REST_Response([]);
-
-        $response->set_status(200);
-
-        return $response;
-    }
-
-    public function delete($id)
+    public function delete(WP_REST_Request $request): WP_REST_Response
     {
         $response = new WP_REST_Response([]);
 

@@ -35,10 +35,17 @@ test('Get sent messages', function() {
 });
 
 test('Get one messages', function() {
-	$request  = new WP_REST_Request( 'GET', '/gc-lists/messages/1' );
+	$message = $this->factory->message->create_and_get([
+		'name' => 'This is the message name'
+	]);
+
+	$request  = new WP_REST_Request( 'GET', "/gc-lists/messages/{$message->id}" );
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
+	$this->assertIsObject($response->get_data());
+	$this->assertObjectHasAttribute('name', $response->get_data());
+	$this->assertEquals('This is the message name', $response->get_data()->name);
 });
 
 test('Create a message', function() {

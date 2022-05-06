@@ -42,7 +42,7 @@ msgstr "Entrer une adresse courriel :"
 
 #: classes/Modules/BlocksPHP/BlocksPHP.php:44
 msgid "Subscribe:"
-msgstr ""
+msgstr "S'abonner:"
 
 #: classes/Modules/Cleanup/AdminBar.php:46
 #: classes/Modules/Cleanup/Login.php:163
@@ -396,7 +396,7 @@ msgstr "Aucun nom spécifié"
 
 #: classes/Modules/Forms/RequestSite/Setup.php:88
 msgid "Request a site:"
-msgstr "Demander un site :"
+msgstr "Demander un site:"
 
 #: classes/Modules/Forms/Subscribe/Subscribe.php:81
 msgid "Thanks for subscribing"
@@ -416,7 +416,7 @@ msgstr "Aucune liste trouvée"
 
 #: classes/Modules/Forms/Subscribe/SubscriptionForm.php:77
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Confidentialité"
 
 #: classes/Modules/Forms/Utils.php:13
 msgid "400 Bad Request"
@@ -424,16 +424,16 @@ msgstr "400 Demande incorrecte"
 
 #: classes/Modules/Markdown/Markdown.php:55
 msgid "Page content as markdown"
-msgstr ""
+msgstr "le contenu de la page comme démarque"
 
 #: classes/Modules/Markdown/Markdown.php:66
 msgid "Post content as markdown"
-msgstr ""
+msgstr "le contenu de la publication comme démarque"
 
 #: classes/Modules/Notify/FormHelpers.php:20
 #: classes/Modules/Notify/ListManagerSettings.php:80
 msgid "You must configure your <a href=\"%s\">Notify API Key</a>"
-msgstr ""
+msgstr "Vous devez configurer votre <a href=\"%s\">Notification la clé API</a>"
 
 #: classes/Modules/Notify/FormHelpers.php:44
 msgid "Template ID"
@@ -444,7 +444,7 @@ msgstr "ID de modèle"
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "See example template ID format."
-msgstr ""
+msgstr "Voir l'exemple de format d'ID de modèle."
 
 #: classes/Modules/Notify/FormHelpers.php:60
 msgid "List ID"
@@ -461,11 +461,11 @@ msgstr "Envoyer le modèle à la liste"
 #: classes/Modules/Notify/ListManagerSettings.php:48
 #: classes/Modules/Notify/ListManagerSettings.php:49
 msgid "Lists"
-msgstr ""
+msgstr "listes"
 
 #: classes/Modules/Notify/ListManagerSettings.php:62
 msgid "Your Lists"
-msgstr ""
+msgstr "Vos listes"
 
 #: classes/Modules/Notify/ListManagerSettings.php:67
 #: classes/Modules/Notify/ListManagerSettings.php:76
@@ -488,7 +488,7 @@ msgstr "&nbsp;&nbsp;<a href='%s’>Afficher</a> les journaux d’envoi dans Noti
 
 #: classes/Modules/Notify/Notices.php:56
 msgid "Sent."
-msgstr "Expédié"
+msgstr "envoyé"
 
 #: classes/Modules/Notify/Notices.php:65
 msgid "Template ID is required"
@@ -520,19 +520,19 @@ msgstr "<span class=\"hidden_keys\" id=\"%1$s\">Valeur actuelle : <span class=\"
 
 #: classes/Modules/Notify/NotifySettings.php:169
 msgid "Read <a href=\"https://documentation.notification.canada.ca/en/keys.html\" target=\"_blank\">API keys</a> for details."
-msgstr ""
+msgstr "Lisez <a href=\"https://documentation.notification.canada.ca/en/keys.html\" target=\"_blank\">la clé API </a> pour plus de détails"
 
 #: classes/Modules/Notify/NotifySettings.php:175
 msgid "Enter your API Key"
-msgstr ""
+msgstr "entrez votre clé api"
 
 #: classes/Modules/Notify/NotifySettings.php:175
 msgid "See example key format."
-msgstr ""
+msgstr "Voir l'exemple de format de clé."
 
 #: classes/Modules/Notify/NotifySettings.php:185
 msgid "Read the <a href=\"https://notification.canada.ca/format\" target=\"_blank\">Email formatting guide</a> for details."
-msgstr ""
+msgstr "Lisez le <a href=\"https://notification.canada.ca/format\" target=\"_blank\">Guide de formatage des courriels</a> pour plus de détails"
 
 #: classes/Modules/Notify/NotifySettings.php:191
 msgid "Enter your generic Email Template ID"
@@ -552,11 +552,11 @@ msgstr "Une erreur s’est produite."
 
 #: classes/Modules/Site/SiteSettings.php:67
 msgid "Maintenance mode"
-msgstr ""
+msgstr "en construction"
 
 #: classes/Modules/Site/SiteSettings.php:75
 msgid "Site configuration"
-msgstr ""
+msgstr "Configuration du site"
 
 #: classes/Modules/Site/SiteSettings.php:139
 msgid "Site Name"
@@ -572,7 +572,7 @@ msgstr "Page d’accueil"
 
 #: classes/Modules/Site/SiteSettings.php:173
 msgid "Activate maintenance mode"
-msgstr ""
+msgstr "lieu en construction"
 
 #: classes/Modules/Site/SiteSettings.php:184
 msgid "Maintenance Page"
@@ -584,59 +584,59 @@ msgstr "Visibilité dans les moteurs de recherche"
 
 #: classes/Modules/Site/SiteSettings.php:207
 msgid "Canada.ca top menu"
-msgstr ""
+msgstr "Menu Canada.ca"
 
 #: classes/Modules/Site/SiteSettings.php:218
 msgid "Search bar"
-msgstr ""
+msgstr "Barre de recherche"
 
 #: classes/Modules/Site/SiteSettings.php:235
 msgid "Breadcrumbs"
-msgstr ""
+msgstr "fil d'Ariane"
 
 #: classes/Modules/Site/SiteSettings.php:246
 msgid "Where should the Canada.ca header link to?"
-msgstr ""
+msgstr "Où la bannière Canada.ca devrait-elle renvoyer?"
 
 #: classes/Modules/Site/SiteSettings.php:260
 msgid "Turn on"
-msgstr ""
+msgstr "Démarrer"
 
 #: classes/Modules/Site/SiteSettings.php:261
 msgid "Turn off"
-msgstr ""
+msgstr "arrêter"
 
 #: classes/Modules/Site/SiteSettings.php:268
 msgid "Show Canada.ca menu"
-msgstr ""
+msgstr "Afficher le menu Canada.ca"
 
 #: classes/Modules/Site/SiteSettings.php:269
 msgid "Hide Canada.ca menu"
-msgstr ""
+msgstr "Masquer le menu Canada.ca"
 
 #: classes/Modules/Site/SiteSettings.php:276
 msgid "Show the search bar"
-msgstr ""
+msgstr "Masquer la barre de recherche"
 
 #: classes/Modules/Site/SiteSettings.php:277
 msgid "Hide the search bar"
-msgstr ""
+msgstr "Afficher la barre de recherche"
 
 #: classes/Modules/Site/SiteSettings.php:284
 msgid "Show breadcrumbs"
-msgstr ""
+msgstr "Afficher fil d'Ariane"
 
 #: classes/Modules/Site/SiteSettings.php:285
 msgid "Hide breadcrumbs"
-msgstr ""
+msgstr "Masquer fil d'Ariane"
 
 #: classes/Modules/Site/SiteSettings.php:354
 msgid "In maintenance mode, pages and articles you publish will <strong>not</strong> be publicly visible."
-msgstr ""
+msgstr "lorsqu'ils sont en construction, les pages et les articles que vous publiez ne seront <strong>pas</strong> visibles publiquement."
 
 #: classes/Modules/Site/SiteSettings.php:356
 msgid "Logged-in users will be able to create and view content, but all other visitors will be redirected to the maintenance page."
-msgstr ""
+msgstr "les utilisateurs connectés pourront créer et visualiser du contenu, mais tous les autres visiteurs seront dirigés vers un panneau de construction"
 
 #: classes/Modules/Site/SiteSetup.php:123
 msgid "Finish Site Setup"
@@ -648,7 +648,7 @@ msgstr "Vous avez presque terminé. Créons des pages et des articles, et réglo
 
 #: classes/Modules/Site/SiteStatus.php:39
 msgid "Site Availability"
-msgstr ""
+msgstr "Disponibilité du site"
 
 #: classes/Modules/Site/SiteStatus.php:40
 msgid "Live"
@@ -664,15 +664,15 @@ msgstr "Visibilité dans les moteurs de recherche"
 
 #: classes/Modules/Site/SiteStatus.php:51
 msgid "On"
-msgstr ""
+msgstr "ouvrir"
 
 #: classes/Modules/Site/SiteStatus.php:53
 msgid "Off"
-msgstr ""
+msgstr "fermer"
 
 #: classes/Modules/Site/SiteStatus.php:64
 msgid "Update your <a href=\"%s\">site settings</a>."
-msgstr ""
+msgstr "Mettez à jour les <a href=\"%s\">paramètres de votre site</a>"
 
 #: classes/Modules/TwoFactor/TwoFactor.php:42
 msgid "Two factor authentication"
@@ -886,15 +886,15 @@ msgstr "Rôle"
 
 #: build/index.js:4486 build/index.js:4351
 msgid "Confirmation type"
-msgstr ""
+msgstr "Type de confirmation"
 
 #: build/index.js:4490 build/index.js:4355
 msgid "Welcome"
-msgstr ""
+msgstr "Bienvenue"
 
 #: build/index.js:4493 build/index.js:4358
 msgid "Default"
-msgstr ""
+msgstr "par défaut"
 
 #: build/index.js:4591 build/index.js:4436
 msgid "Add List"
@@ -932,12 +932,12 @@ msgstr "Liste"
 #: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:53
 msgid "Privacy policy link"
-msgstr ""
+msgstr "Lien de confidentialité"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Go back"
-msgstr ""
+msgstr "retourner"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
@@ -947,48 +947,48 @@ msgstr "Champs requis"
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Name is required"
-msgstr ""
+msgstr "Le nom est requis"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Language"
-msgstr ""
+msgstr "La Langue"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Language is required"
-msgstr ""
+msgstr "La langue est requise"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Subscribe template id"
-msgstr ""
+msgstr "ID de gabarit pour l'abonnement"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Unsubscribe template id"
-msgstr ""
+msgstr "ID de gabarit pour la désinscription"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Subscribe redirect url"
-msgstr ""
+msgstr "le lien de redirection après souscription"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Unsubscribe redirect url"
-msgstr ""
+msgstr "le lien de redirection après désinscription"
 
 #: classes/Modules/ListManager/app/build/static/js/799.924e2003.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/813.91a6c3c1.chunk.js:1
 msgid "Confirm redirect url"
-msgstr ""
+msgstr "Le lien pour ridection après confirmation"
 
 #: classes/Modules/BlocksPHP/build/contact/block.json
 #: classes/Modules/BlocksPHP/src/contact/block.json
 msgctxt "block title"
 msgid "GC Articles Contact"
-msgstr ""
+msgstr "GC Articles Contactez"
 
 #: classes/Modules/BlocksPHP/build/contact/block.json
 #: classes/Modules/BlocksPHP/build/request/block.json
@@ -996,13 +996,13 @@ msgstr ""
 #: classes/Modules/BlocksPHP/src/request/block.json
 msgctxt "block description"
 msgid "Internal Contact form for GC Articles"
-msgstr ""
+msgstr "GC Articles Contactez nous"
 
 #: classes/Modules/BlocksPHP/build/request/block.json
 #: classes/Modules/BlocksPHP/src/request/block.json
 msgctxt "block title"
 msgid "GC Articles Request a site"
-msgstr ""
+msgstr "Articles GC Demander un site"
 
 #: classes/Modules/BlocksPHP/build/subscribe/block.json
 #: classes/Modules/BlocksPHP/src/subscribe/block.json

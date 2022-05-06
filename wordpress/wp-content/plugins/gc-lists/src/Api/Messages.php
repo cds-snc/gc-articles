@@ -7,21 +7,9 @@ namespace GCLists\Api;
 use WP_REST_Response;
 use WP_REST_Request;
 
-class Messages
+class Messages extends BaseEndpoint
 {
-    protected $wpdb;
-    protected string $namespace;
-    protected string $tableName;
     protected static $instance;
-
-    public function __construct()
-    {
-        global $wpdb;
-        $this->wpdb = $wpdb;
-        $this->tableName = $wpdb->prefix . "messages";
-
-        $this->namespace = "gc-lists";
-    }
 
     public static function getInstance(): Messages
     {
@@ -29,7 +17,7 @@ class Messages
         return self::$instance;
     }
 
-    public function hasPermission()
+    public function hasPermission(): bool
     {
         return true; // current_user_can('delete_posts');
     }
@@ -85,6 +73,11 @@ class Messages
         ]);
     }
 
+    /**
+     * Get all Message templates
+     *
+     * @return WP_REST_Response
+     */
     public function all(): WP_REST_Response
     {
         $results = $this->wpdb->get_results(
@@ -98,6 +91,11 @@ class Messages
         return $response;
     }
 
+    /**
+     * Get sent Messages
+     *
+     * @return WP_REST_Response
+     */
     public function sent(): WP_REST_Response
     {
         $results = $this->wpdb->get_results(
@@ -111,6 +109,13 @@ class Messages
         return $response;
     }
 
+    /**
+     * Get a Message
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
     public function get(WP_REST_Request $request): WP_REST_Response
     {
         $results = $this->wpdb->get_row(
@@ -124,6 +129,13 @@ class Messages
         return $response;
     }
 
+    /**
+     * Create a Message
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
     public function create(WP_REST_Request $request): WP_REST_Response
     {
         // @TODO: data validation and sanitation
@@ -159,6 +171,13 @@ class Messages
         return $response;
     }
 
+    /**
+     * Update a Message
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
     public function update(WP_REST_Request $request): WP_REST_Response
     {
         $result = $this->wpdb->update(
@@ -184,6 +203,13 @@ class Messages
         return $response;
     }
 
+    /**
+     * Delete a Message
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
     public function delete(WP_REST_Request $request): WP_REST_Response
     {
         $result = $this->wpdb->delete($this->tableName, ['id' => $request['id']]);

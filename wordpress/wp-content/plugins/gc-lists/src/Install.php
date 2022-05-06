@@ -33,7 +33,7 @@ class Install
     	subject text,
     	body text,
     	message_type varchar(20) NOT NULL DEFAULT 'email',
-    	sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    	sent_at TIMESTAMP,
     	sent_to_list_id varchar(50) NULL,
     	sent_to_list_name varchar(255) NULL,
     	sent_by_id bigint(20) NULL,

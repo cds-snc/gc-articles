@@ -12,6 +12,7 @@
 */
 
 use GCLists\Install;
+use Database\Factories\MessageFactory;
 
 uses()->group('integration')->in('Integration');
 uses()->group('unit')->in('Unit');
@@ -29,8 +30,15 @@ require_once('bootstrap.php');
  */
 $installer = Install::getInstance();
 
+/**
+ * This is where we setup or parent TestCase - in this case, we're extending from
+ * WP_UnitTestCase which is provided by bootstrap.php. We also ensure the plugin
+ * is installed, and we bind our Message factory to the TestCase.
+ *
+ */
 uses(\WP_UnitTestCase::class)
 	->beforeAll(fn () => $installer->install())
+	->beforeEach(fn () => $this->factory->message = new MessageFactory( $this->factory ))
 	->in('Integration');
 
 /*

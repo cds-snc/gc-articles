@@ -13,7 +13,7 @@ class GCLists
 
     public static function getInstance(): GCLists
     {
-        is_null(self::$instance) and self::$instance = new self();
+        is_null(self::$instance) && self::$instance = new self();
         return self::$instance;
     }
 

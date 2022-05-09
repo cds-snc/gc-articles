@@ -80,6 +80,7 @@ class Messages extends BaseEndpoint
      */
     public function all(): WP_REST_Response
     {
+        // @TODO: revisit the SELECT * on all these queries
         $results = $this->wpdb->get_results(
             "SELECT * FROM {$this->tableName} WHERE original_message_id IS NULL"
         );

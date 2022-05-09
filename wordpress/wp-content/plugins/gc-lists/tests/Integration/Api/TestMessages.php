@@ -5,6 +5,9 @@ beforeEach(function() {
 	$this->server = $wp_rest_server = new \WP_REST_Server();
 	$this->baseRoute = 'gc-lists/messages';
 
+	global $wpdb;
+	$this->tableName = $wpdb->prefix . "messages";
+
 	do_action( 'rest_api_init' );
 });
 
@@ -92,13 +95,13 @@ test('Delete a message', function() {
 	$message_ids = $this->factory->message->create_many(5);
 
 	global $wpdb;
-	$count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}messages");
+	$count = $wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
 	$this->assertEquals(5, $count);
 
 	$request  = new WP_REST_Request( 'DELETE', "/gc-lists/messages/{$message_ids[2]}" );
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
-	$count = $wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->prefix}messages");
+	$count = $wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
 	$this->assertEquals(4, $count);
 });

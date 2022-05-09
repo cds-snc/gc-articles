@@ -21,5 +21,4 @@ test('Use a factory to create a Message', function() {
 
 	$this->assertObjectHasAttribute('name', $message);
 	$this->assertEquals('This is a message', $message->name);
-	$this->assertTrue(true);
 });

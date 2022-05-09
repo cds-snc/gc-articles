@@ -117,9 +117,11 @@ if [ $# -gt 0 ]; then
 
         # This will run gc-lists tests but would prefer to combine with previous (tbd)
         # Problem is this test run needs some setup (see gc-lists/bin/install-wp-tests.sh)
-        # docker-compose $EXEC_OR_RUN \
-        #    "$CLI_SERVICE" \
-        #    bash -c "cd /usr/src/wordpress/wp-content/plugins/gc-lists && ./vendor/bin/pest"
+        # ./bin/install-wp-tests.sh wordpress_testing root secret db
+        # /tmp/wordpress-tests-lib/includes/functions.php
+         docker-compose $EXEC_OR_RUN \
+            "$CLI_SERVICE" \
+            bash < ./cli/bin/setup-and-run-gc-lists-tests.sh
 
     # Proxy Node commands to the "node" binary on the application container...
     elif [ "$1" == "node" ]; then

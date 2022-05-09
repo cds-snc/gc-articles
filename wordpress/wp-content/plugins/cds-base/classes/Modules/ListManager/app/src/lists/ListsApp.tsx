@@ -21,7 +21,7 @@ if (process.env.NODE_ENV === "development") {
   endpoint = "http://localhost:3000";
 }
 
-const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) => {
+const ListsApp = ({ serviceData, user }: { serviceData: ServiceData, user: User }) => {
   const options = {
     interceptors: {
       request: async ({ options }: { options: any }) => {
@@ -85,4 +85,4 @@ const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) =>
   )
 }
 
-export default App;
+export default ListsApp;

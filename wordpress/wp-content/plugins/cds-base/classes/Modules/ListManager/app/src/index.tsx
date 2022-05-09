@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
-import App from './App';
+import './lists/index.css';
+import ListsApp from './lists/ListsApp';
 import { List } from '../../../Notify/src/Types';
-import { ServiceData, User } from "./types"
+import { ServiceData, User } from "./lists/types"
 declare global {
   interface Window {
     CDS_LIST_MANAGER: { endpoint: string },
@@ -34,11 +34,9 @@ const renderApp = () => {
 
         root.render(
           <React.StrictMode>
-            <App serviceData={serviceData} user={userData} />
+            <ListsApp serviceData={serviceData} user={userData} />
           </React.StrictMode>
         );
-
-
       }
     }
   }

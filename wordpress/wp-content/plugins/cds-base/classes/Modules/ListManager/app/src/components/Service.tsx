@@ -2,13 +2,12 @@ import * as React from 'react';
 import { ListViewTable } from "./ListViewTable";
 import { Messages } from "./Messages";
 import { useList } from "../store/ListContext";
-import { useParams } from "react-router-dom";
+import { useService } from '../util/useService';
 import { Error } from "./Error";
 
 export const Service = () => {
     const { state: { serviceData } } = useList();
-    const params = useParams();
-    const serviceId = params?.serviceId;
+    const { serviceId } = useService();
 
     if (!serviceData) {
         return <Error />;

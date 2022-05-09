@@ -2,20 +2,18 @@ import * as React from 'react';
 import { useState } from 'react'
 import { Importer, ImporterField } from "react-csv-importer";
 import useFetch from 'use-http';
-import { useParams, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { ListType } from "../types"
 import { Back } from "./Back";
 import { capitalize } from "../util";
+import { useService } from '../util/useService';
 
 // theme CSS for React CSV Importer
 import "react-csv-importer/dist/index.css";
 
 export const UploadList = () => {
     const [finished, setFinished] = useState<boolean>(false)
-    const params = useParams();
-    const serviceId = params?.serviceId;
-    const listId = params?.listId;
-    const type = params?.type;
+    const { serviceId, listId, type } = useService();
     let uploadType = '';
 
     switch (type) {

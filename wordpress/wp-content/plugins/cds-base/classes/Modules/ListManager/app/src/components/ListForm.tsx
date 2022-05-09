@@ -18,8 +18,7 @@ const Asterisk = () => {
 }
 
 export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handler: (list: List) => void, formData: {} | List, serverErrors: FieldError[] }) => {
-    const { state } = useList();
-    const { user } = state;
+    const { state: { user } } = useList();
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
 
     useEffect(() => {

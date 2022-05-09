@@ -27,8 +27,7 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 export const SendTemplate = () => {
     const { status } = useListFetch();
     const [listId, setListId] = useState<String>("");
-    const { state } = useList();
-    const { lists } = state;
+    const { state: { lists } } = useList();
     const sendTemplate = useSendTemplate(listId);
 
     if (status === "loading") {

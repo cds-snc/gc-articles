@@ -10,7 +10,7 @@ import { Spinner } from './Spinner';
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
 import { useListFetch } from '../store/UseListFetch';
-import { useParams } from "react-router-dom";
+import { useService } from '../util/useService';
 import { capitalize, getListType } from "../util";
 
 const HeaderStyles = styled.div`
@@ -74,12 +74,9 @@ const updateLink = (serviceId: string | undefined, listId: string) => {
 }
 
 export const ListViewTable = () => {
-    const { state } = useList();
-    const { lists, user } = state;
+    const { state: { lists, user } } = useList();
     const { status } = useListFetch();
-    const params = useParams();
-    const serviceId = params?.serviceId;
-
+    const { serviceId } = useService();
     const columns = React.useMemo(
         () => [
             {

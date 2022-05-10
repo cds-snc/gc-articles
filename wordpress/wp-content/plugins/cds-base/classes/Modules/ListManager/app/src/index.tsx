@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
 import './lists/index.css';
-import ListsApp from './lists/ListsApp';
+import App from './App';
 import { List } from '../../../Notify/src/Types';
 import { ServiceData, User } from "./lists/types"
 declare global {
@@ -34,7 +34,7 @@ const renderApp = () => {
 
         root.render(
           <React.StrictMode>
-            <ListsApp serviceData={serviceData} user={userData} />
+            <App serviceData={serviceData} user={userData} />
           </React.StrictMode>
         );
       }

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Suspense } from 'react'
 import { Provider } from 'use-http';
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { Services } from './components/Services';
 
 import { Spinner } from './components/Spinner';
 import { ListProvider } from "./store/ListContext"
-import { Services } from './components/Services';
-import { NotFound } from './components/NotFound';
 import { ServiceData, User } from "./types";
 import './App.css';
 const Service = React.lazy(() => import("./components/Service"));
@@ -33,55 +32,43 @@ const ListsApp = ({ serviceData, user }: { serviceData: ServiceData, user: User 
     }
   }
 
-  if (!user?.hasEmail && !user?.hasPhone) {
-    return (
-      <HashRouter>
-        <Routes>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </HashRouter>
-    )
-  }
-
   return (
-    <HashRouter>
-      <Provider url={endpoint} options={options}>
-        <Suspense fallback={<Spinner />}>
-          <ListProvider serviceData={serviceData} user={user}>
-            <Routes>
-              <Route path="/" element={<Services />} />
-              <Route path="/service/:serviceId" element={
-                <React.Suspense fallback={<Spinner />}>
-                  <Service />
-                </React.Suspense>
-              }
-              />
-              <Route path="/service/:serviceId/list/create" element={
-                <React.Suspense fallback={<Spinner />}>
-                  <CreateList />
-                </React.Suspense>
-              } />
-              <Route path="/service/:serviceId/list/:listId/update" element={
-                <React.Suspense fallback={<Spinner />}>
-                  <UpdateList />
-                </React.Suspense>
-              } />
-              <Route path="/service/:serviceId/list/:listId/upload/:type" element={
-                <React.Suspense fallback={<Spinner />}>
-                  <UploadList />
-                </React.Suspense>
-              } />
-              <Route path="/service/:serviceId/send" element={
-                <React.Suspense fallback={<Spinner />}>
-                  <SendTemplate />
-                </React.Suspense>
-              } />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </ListProvider>
-        </Suspense>
-      </Provider>
-    </HashRouter>
+    <Provider url={endpoint} options={options}>
+      <Suspense fallback={<Spinner />}>
+        <ListProvider serviceData={serviceData} user={user}>
+          <Routes>
+            <Route path="/" element={<Services />} />
+            <Route path=":serviceId" element={
+              <React.Suspense fallback={<Spinner />}>
+                <Service />
+              </React.Suspense>
+            }
+            />
+            <Route path=":serviceId/list/create" element={
+              <React.Suspense fallback={<Spinner />}>
+                <CreateList />
+              </React.Suspense>
+            } />
+            <Route path=":serviceId/list/:listId/update" element={
+              <React.Suspense fallback={<Spinner />}>
+                <UpdateList />
+              </React.Suspense>
+            } />
+            <Route path=":serviceId/list/:listId/upload/:type" element={
+              <React.Suspense fallback={<Spinner />}>
+                <UploadList />
+              </React.Suspense>
+            } />
+            <Route path=":serviceId/send" element={
+              <React.Suspense fallback={<Spinner />}>
+                <SendTemplate />
+              </React.Suspense>
+            } />
+          </Routes>
+        </ListProvider>
+      </Suspense>
+    </Provider>
+
   )
 }
 

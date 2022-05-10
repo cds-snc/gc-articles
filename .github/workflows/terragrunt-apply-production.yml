@@ -61,7 +61,7 @@ jobs:
         with:
           ref: ${{ env.TARGET_VERSION }}
 
-      - name: setup terraform tools
+      - name: Setup terraform tools
         uses: cds-snc/terraform-tools-setup@v1
 
       - uses: cds-snc/paths-filter@v2.10.3

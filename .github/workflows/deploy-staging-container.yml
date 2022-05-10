@@ -97,18 +97,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.0
-        with:
-          terraform_version: ${{ env.TERRAFORM_VERSION }}
-          terraform_wrapper: false
-
-      - name: Setup Terragrunt
-        run: |
-          mkdir bin
-          wget -O bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v$TERRAGRUNT_VERSION/terragrunt_linux_amd64
-          chmod +x bin/*
-          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+      - name: setup terraform tools
+        uses: cds-snc/terraform-tools-setup@v1
 
       - name: Terragrunt apply ecs
         working-directory: infrastructure/terragrunt/env/staging/ecs

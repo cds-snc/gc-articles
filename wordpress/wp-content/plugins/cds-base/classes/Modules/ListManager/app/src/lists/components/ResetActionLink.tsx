@@ -1,7 +1,7 @@
 import * as React from 'react';
 import useFetch from "use-http";
-import { useList } from "../store/ListContext";
-import { ConfirmActionLink } from "./ConfirmActionLink"
+import { ConfirmActionLink } from "./ConfirmActionLink";
+import { useList } from "../../store/ListContext";
 
 export const ResetActionLink = ({ id = '' }: { id: string }) => {
     const { request, response } = useFetch({ data: [] })

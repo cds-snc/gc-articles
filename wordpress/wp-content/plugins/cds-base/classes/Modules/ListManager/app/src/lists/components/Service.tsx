@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ListViewTable } from "./ListViewTable";
 import { Messages } from "./Messages";
-import { useList } from "../store/ListContext";
-import { useService } from '../util/useService';
 import { Error } from "./Error";
+import { useList } from "../../store/ListContext";
+import { useService } from '../../util/useService';
 
 export const Service = () => {
     const { state: { serviceData } } = useList();

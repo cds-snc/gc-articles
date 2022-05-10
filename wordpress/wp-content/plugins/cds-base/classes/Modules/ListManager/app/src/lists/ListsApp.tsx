@@ -3,16 +3,12 @@ import { Suspense } from 'react'
 import { Provider } from 'use-http';
 import { Routes, Route } from "react-router-dom";
 import { Services } from './components/Services';
-
-import { Spinner } from './components/Spinner';
-import { ListProvider } from "./store/ListContext"
-import { ServiceData, User } from "./types";
+import { Spinner } from '../common/Spinner';
 import './App.css';
 const Service = React.lazy(() => import("./components/Service"));
 const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
 const UploadList = React.lazy(() => import("./components/UploadList"));
-const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
 
 let endpoint = "/wp-json/list-manager";
 
@@ -20,7 +16,7 @@ if (process.env.NODE_ENV === "development") {
   endpoint = "http://localhost:3000";
 }
 
-const ListsApp = ({ serviceData, user }: { serviceData: ServiceData, user: User }) => {
+const ListsApp = () => {
   const options = {
     interceptors: {
       request: async ({ options }: { options: any }) => {
@@ -35,7 +31,6 @@ const ListsApp = ({ serviceData, user }: { serviceData: ServiceData, user: User 
   return (
     <Provider url={endpoint} options={options}>
       <Suspense fallback={<Spinner />}>
-        <ListProvider serviceData={serviceData} user={user}>
           <Routes>
             <Route path="/" element={<Services />} />
             <Route path=":serviceId" element={
@@ -59,13 +54,8 @@ const ListsApp = ({ serviceData, user }: { serviceData: ServiceData, user: User 
                 <UploadList />
               </React.Suspense>
             } />
-            <Route path=":serviceId/send" element={
-              <React.Suspense fallback={<Spinner />}>
-                <SendTemplate />
-              </React.Suspense>
-            } />
           </Routes>
-        </ListProvider>
+       
       </Suspense>
     </Provider>
 

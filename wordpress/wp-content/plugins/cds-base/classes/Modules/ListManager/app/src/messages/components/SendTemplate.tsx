@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { useState } from 'react'
-import { Editor } from "./editor/Editor";
-import { useList } from "../store/ListContext";
-import { List } from '../types';
-import { StyledSelect } from "./editor/Styles"
-import { Spinner } from './Spinner';
-import { useListFetch } from '../store/UseListFetch';
-import useSendTemplate from './editor/useSendTemplate';
+
+import { Spinner } from '../../common/Spinner';
+import { useList } from "../../store/ListContext";
+import { List } from '../../types';
+import { useListFetch } from '../../store/UseListFetch';
+import { StyledSelect } from "../editor/Styles"
+import { Editor } from "../editor/Editor";
+import useSendTemplate from '../editor/useSendTemplate';
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     // @todo -- add subscriber_count

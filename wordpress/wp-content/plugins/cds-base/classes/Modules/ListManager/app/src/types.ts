@@ -81,3 +81,10 @@ export type ListProviderProps = {
   user: User;
   children: React.ReactNode;
 };
+
+export interface NotifyList {
+  id: string;
+  label: string;
+  subscriber_count?: number;
+  list_id?: string;
+}

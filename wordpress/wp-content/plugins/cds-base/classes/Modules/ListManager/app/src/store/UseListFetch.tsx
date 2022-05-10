@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import useFetch from 'use-http';
 import { useList } from "../store/ListContext";
-import { sendListData } from "./SaveListData"
-import { getListType } from "../util";
 import { List, ListType } from '../types';
+import { getListType } from "../util/functions";
 import { useService } from '../util/useService';
+import { sendListData } from "./SaveListData";
 
 export const useListFetch = () => {
     const { dispatch, state: { user } } = useList();

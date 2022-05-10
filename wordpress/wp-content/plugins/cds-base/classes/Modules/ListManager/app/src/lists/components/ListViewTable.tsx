@@ -4,14 +4,14 @@ import styled from 'styled-components';
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 
-import { List, ListType } from "../types"
-import { useList } from "../store/ListContext";
-import { Spinner } from './Spinner';
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
-import { useListFetch } from '../store/UseListFetch';
-import { useService } from '../util/useService';
-import { capitalize, getListType } from "../util";
+import { useListFetch } from '../../store/UseListFetch';
+import { Spinner } from '../../common/Spinner';
+import { List, ListType } from "../../types"
+import { useList } from "../../store/ListContext";
+import { capitalize, getListType } from "../../util/functions";
+import { useService } from '../../util/useService';
 
 const HeaderStyles = styled.div`
     display: flex;

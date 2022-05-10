@@ -79,6 +79,9 @@ class ListManagerSettings
                 <div id="list-manager-app" data-user='<?php echo json_encode($user); ?>' data-ids='<?php echo json_encode($services); ?>'>
                 </div>
               </div>
+              <script>
+                  window.location = "#/service";
+              </script>
             <?php
         } else {
             ?>

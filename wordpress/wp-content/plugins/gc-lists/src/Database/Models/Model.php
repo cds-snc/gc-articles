@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 namespace GCLists\Database\Models;
 
+use Carbon\Carbon;
+
 class Model
 {
+    public int $id;
+    public bool $exists = false;
+
     protected $wpdb;
     protected string $tableName;
     protected array $attributes = [];
@@ -14,7 +19,7 @@ class Model
     {
         global $wpdb;
         $this->wpdb = $wpdb;
-        $this->tableName = $this->wpdb->prefix . $this->tableName;
+        $this->tableName = $this->wpdb->prefix . $this->table;
 
         $this->fill($attributes);
     }
@@ -54,44 +59,91 @@ class Model
         return $this->attributes[$key] ?? null;
     }
 
+    protected function performUpdate()
+    {
+        $time = Carbon::now()->timestamp;
+        $this->updateUpdatedTimestamp($time);
+
+        $this->wpdb->update($this->tableName, $this->attributes, [
+            'id' => $this->id,
+        ]);
+
+        return $this;
+    }
+
+    protected function performInsert()
+    {
+        $time = Carbon::now()->timestamp;
+        $this->updateCreatedTimestamp($time);
+        $this->updateUpdatedTimestamp($time);
+
+        $this->wpdb->insert($this->tableName, $this->attributes);
+
+        $this->exists = true;
+        $this->id = $this->wpdb->insert_id;
+
+        return $this;
+    }
+
+    protected function updateCreatedTimestamp($time)
+    {
+        $this->created_at = $time;
+    }
+
+    protected function updateUpdatedTimestamp($time)
+    {
+        $this->updated_at = $time;
+    }
+
     /**
-     *  Actions
+     * Instance actions
+     */
+    public function delete()
+    {
+        return $this->wpdb->delete(
+            $this->tableName,
+            ['id' => $this->attributes["id"]]
+        );
+    }
+
+    public function save()
+    {
+        if ($this->exists) {
+            return $this->performUpdate();
+        } else {
+            return $this->performInsert();
+        }
+    }
+
+    /**
+     *  Static actions
      */
 
     public static function find($id)
     {
         $instance = new static();
 
-        $result = $instance->wpdb->get_row(
+        $data = $instance->wpdb->get_row(
             $instance->wpdb->prepare("SELECT * FROM {$instance->tableName} WHERE id = %s", $id)
         );
 
-        if (!$result) {
+        if (!$data) {
             return null;
         }
 
-        return new Message((array) $result);
+        $class = get_called_class();
+
+        $model = new $class((array) $data);
+        $model->exists = true;
+        return $model;
     }
 
-    public static function delete($id)
+    public static function create(array $attributes = [])
     {
         $instance = new static();
 
-        return $instance->wpdb->delete(
-            $instance->tableName,
-            ['id' => $id]
-        );
-    }
+        $instance->fill($attributes)->save();
 
-    public function save(array $options = [])
-    {
-        //
-    }
-
-    public static function update(array $attributes = [], array $options = [])
-    {
-        $instance = new static();
-
-        return $instance->fill($attributes)->save($options);
+        return $instance;
     }
 }

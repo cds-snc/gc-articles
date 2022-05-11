@@ -23,5 +23,8 @@
             "pestphp/pest-plugin": true,
             "composer/installers": true
         }
+    },
+    "require": {
+        "nesbot/carbon": "^2.58"
     }
 }

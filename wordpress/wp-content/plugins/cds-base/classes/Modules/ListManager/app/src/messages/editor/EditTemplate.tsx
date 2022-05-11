@@ -20,7 +20,7 @@ export const EditTemplate = () => {
             <Editor />
             <button className="button" onClick={() => { }}>Send message to list</button>
             <button className="button" onClick={() => { }}>Save template</button>
-            <a href="#">Delete this message template</a>
+            {/* <a href="#">Delete this message template</a> */}
         </>
     )
 }

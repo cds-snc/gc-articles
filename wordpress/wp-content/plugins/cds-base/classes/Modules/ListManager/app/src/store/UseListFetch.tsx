@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
 import useFetch from 'use-http';
-import { useParams } from "react-router-dom";
 import { useList } from "../store/ListContext";
-import { sendListData } from "./SaveListData"
-import { getListType } from "../util";
 import { List, ListType } from '../types';
+import { getListType } from "../util/functions";
+import { useService } from '../util/useService';
+import { sendListData } from "./SaveListData";
 
 export const useListFetch = () => {
-    const { dispatch, state } = useList();
-    const { user } = state;
-    const params = useParams();
-    const serviceId = params?.serviceId;
-
+    const { dispatch, state: { user } } = useList();
+    const { serviceId } = useService();
     const [status, setStatus] = useState('idle');
     const { request, response } = useFetch({ data: [] })
 

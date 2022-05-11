@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-import { useList } from "../store/ListContext";
+import { useList } from "../../store/ListContext";
 
 type Message = {
     id: string,
@@ -22,11 +22,11 @@ const Toast = Swal.mixin({
 
 
 export const Messages = () => {
-    const { state } = useList();
+    const { state: { messages } } = useList();
 
-    if (state.messages && state.messages.length >= 1) {
+    if (messages && messages.length >= 1) {
 
-        state.messages.map((item: Message) => {
+        messages.map((item: Message) => {
             if (item.type === "add" || item.type === "delete" || item.type === "reset") {
 
                 Toast.fire({

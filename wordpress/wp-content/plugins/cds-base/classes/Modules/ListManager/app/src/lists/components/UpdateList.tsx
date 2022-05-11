@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { useState, useCallback } from 'react'
 import useFetch from 'use-http';
-import { useParams } from "react-router-dom";
 import { SubmitHandler } from "react-hook-form";
 import { Navigate } from "react-router-dom";
-import { useList } from "../store/ListContext";
+
 import { ListForm } from "./ListForm";
-import { useListFetch } from '../store/UseListFetch';
-import { ErrorResponse, ServerErrors, FieldError, List, ListId } from "../types";
+import { useList } from "../../store/ListContext";
+import { useListFetch } from '../../store/UseListFetch';
+import { useService } from '../../util/useService';
+import { ErrorResponse, ServerErrors, FieldError, List, ListId } from "../../types";
 
 const parseError = async (response: Response) => {
   try {
@@ -25,13 +26,9 @@ export const UpdateList = () => {
   const { request, cache, response } = useFetch({ data: [] });
   const [responseData, setResponseData] = useState<ListId>({ id: null });
   const [errors, setErrors] = useState<ServerErrors>([]);
-  const { state } = useList();
-
+  const { state: { lists } } = useList();
+  const { serviceId, listId } = useService()
   useListFetch();
-
-  const params = useParams();
-  const serviceId = params?.serviceId;
-  const listId = params?.listId;
 
   const onSubmit: SubmitHandler<List> = data => updateList(listId, data);
 
@@ -52,7 +49,7 @@ export const UpdateList = () => {
 
   }, [response, request, cache]);
 
-  const list = state.lists.filter((list: any) => {
+  const list = lists.filter((list: any) => {
     return list.id === listId
   })[0];
 

@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useList } from "../store/ListContext";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { List, FieldError } from "../types";
 import { __ } from "@wordpress/i18n";
 import { Back } from "./Back";
+import { List, FieldError } from "../../types";
+import { useList } from "../../store/ListContext";
 
 const textWidth = { width: "25em" }
 
@@ -18,8 +18,7 @@ const Asterisk = () => {
 }
 
 export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handler: (list: List) => void, formData: {} | List, serverErrors: FieldError[] }) => {
-    const { state } = useList();
-    const { user } = state;
+    const { state: { user } } = useList();
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
 
     useEffect(() => {

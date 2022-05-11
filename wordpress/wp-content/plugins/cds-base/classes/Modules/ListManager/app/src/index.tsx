@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
-import './index.css';
+import './lists/index.css';
 import App from './App';
-import { List } from '../../../Notify/src/Types';
-import { ServiceData, User } from "./types"
+import { ServiceData, User, NotifyList } from "./types";
 declare global {
   interface Window {
     CDS_LIST_MANAGER: { endpoint: string },
@@ -11,7 +10,7 @@ declare global {
     CDS_VARS: {
       rest_url?: string;
       rest_nonce?: string;
-      notify_list_ids?: List[];
+      notify_list_ids?: NotifyList[];
     }
   }
 }
@@ -37,8 +36,6 @@ const renderApp = () => {
             <App serviceData={serviceData} user={userData} />
           </React.StrictMode>
         );
-
-
       }
     }
   }

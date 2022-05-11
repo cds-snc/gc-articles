@@ -146,4 +146,50 @@ class Model
 
         return $instance;
     }
+
+    public static function all()
+    {
+        $instance = new static();
+
+        $data = $instance->wpdb->get_results(
+            "SELECT * FROM {$instance->tableName}"
+        );
+
+        if (!$data) {
+            return null;
+        }
+
+        $class = get_called_class();
+
+        $func = function ($data) use ($class) {
+            return new $class((array) $data);
+        };
+
+        return array_map($func, $data);
+    }
+
+    public static function whereEquals(array $params)
+    {
+        $instance = new static();
+
+        $query = "SELECT * FROM {$instance->tableName} WHERE 1=1";
+
+        foreach ($params as $key => $value) {
+            $query .= $instance->wpdb->prepare(" AND {$key} = %s", $value);
+        }
+
+        $data = $instance->wpdb->get_results($query);
+
+        if (!$data) {
+            return null;
+        }
+
+        $class = get_called_class();
+
+        $func = function ($data) use ($class) {
+            return new $class((array) $data);
+        };
+
+        return array_map($func, $data);
+    }
 }

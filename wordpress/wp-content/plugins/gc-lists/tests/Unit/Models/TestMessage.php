@@ -100,3 +100,30 @@ test('Delete a model', function() {
     $count = $this->wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
     $this->assertEquals(4, $count);
 });
+
+test('Retrieve all models', function() {
+    $this->factory->message->create_many(5);
+
+    $messages = Message::all();
+
+    // We should get back an array of Message models
+    foreach($messages as $message) {
+        $this->assertTrue($message instanceof Message);
+    }
+});
+
+test('Retrieve some models', function() {
+    $message_ids = $this->factory->message->create_many(5);
+
+    // should only return one model
+    $messages = Message::whereEquals([
+        'id' => $message_ids[0]
+    ]);
+
+    $this->assertEquals(1, count($messages));
+
+    // We should get back an array of Message models
+    foreach($messages as $message) {
+        $this->assertTrue($message instanceof Message);
+    }
+});

@@ -35,14 +35,11 @@ class Roles
 
     public function addUnfilteredHTMLRole($caps, $cap, $user_id)
     {
-        if (
-            'unfiltered_html' === $cap && (
-                user_can($user_id, 'administrator') ||
-                user_can($user_id, 'gceditor') ||
-                user_can($user_id, 'gcwriter')
-            )
-        ) {
-            $caps = array('unfiltered_html');
+        if ('unfiltered_html' === $cap) {
+            // Checking for "unfiltered_html" here causes an infinite loop
+            if (is_super_admin() || user_can($user_id, "allow_unfiltered_html")) {
+                $caps = array('unfiltered_html');
+            }
         }
         return $caps;
     }
@@ -98,7 +95,8 @@ class Roles
                 'delete_published_pages' => 1,
                 'upload_files' => 1,
                 'edit_theme_options' => 1, // allows editing the "menu" options
-                'unfiltered_html' => 1
+                'unfiltered_html' => 0,
+                'allow_unfiltered_html' => 0
             ],
             'editor' => [
                 'moderate_comments' => 1,
@@ -186,7 +184,8 @@ class Roles
                 'delete_published_pages' => 1,
                 'upload_files' => 1,
                 'edit_theme_options' => 1, // allows editing the "menu" options
-                'unfiltered_html' => 1
+                'unfiltered_html' => 0,
+                'allow_unfiltered_html' => 0
             ],
             'gcwriter' => [
                 'read' => 1,
@@ -215,7 +214,8 @@ class Roles
                 'delete_published_pages' => 0,
                 'upload_files' => 0,
                 'edit_theme_options' => 0, // allows editing the "menu" options
-                'unfiltered_html' => 1
+                'unfiltered_html' => 0,
+                'allow_unfiltered_html' => 0
             ],
             'display_name' => [
                 'administrator' => 'GC Admin',

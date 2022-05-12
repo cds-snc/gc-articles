@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Spinner } from '../../common/Spinner';
 import { useList } from "../../store/ListContext";
 import { List } from '../../types';
 import { useListFetch } from '../../store/UseListFetch';
 import { StyledSelect } from "../editor/Styles"
-import { Editor } from "../editor/Editor";
 import useSendTemplate from '../editor/useSendTemplate';
+import useTemplateApi from '../../store/useTemplateApi';
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     // @todo -- add subscriber_count
@@ -27,9 +27,21 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 
 export const SendTemplate = () => {
     const { status } = useListFetch();
-    const [listId, setListId] = useState<String>("");
+    const [content, setContent] = useState<String>();
+    const [listId, setListId] = useState<String>();
     const { state: { lists } } = useList();
-    const sendTemplate = useSendTemplate(listId);
+    const sendTemplate = useSendTemplate({ listId, content });
+    const { templateId, getTemplate } = useTemplateApi();
+
+    useEffect(() => {
+        const loadTemplate = async () => {
+            if (templateId) {
+                const template = await getTemplate(templateId);
+                setContent(template.content);
+            }
+        }
+        loadTemplate();
+    }, [templateId, getTemplate]);
 
     if (status === "loading") {
         return <Spinner />
@@ -41,7 +53,9 @@ export const SendTemplate = () => {
             {lists.length >= 1 && <ListSelect lists={lists} handleChange={(val: string) => {
                 setListId(val)
             }} />}
-            <Editor />
+
+            {content}
+
             <button className="button" onClick={sendTemplate}>Send Email</button>
         </>)
 }

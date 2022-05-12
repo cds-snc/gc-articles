@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Suspense } from 'react'
-import { Provider } from 'use-http';
 import { Routes, Route } from "react-router-dom";
 import { Services } from './components/Services';
 import { Spinner } from '../common/Spinner';
@@ -10,26 +9,8 @@ const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));
 const UploadList = React.lazy(() => import("./components/UploadList"));
 
-let endpoint = "/wp-json/list-manager";
-
-if (process.env.NODE_ENV === "development") {
-  endpoint = "http://localhost:3000";
-}
-
 const ListsApp = () => {
-  const options = {
-    interceptors: {
-      request: async ({ options }: { options: any }) => {
-        if (window?.CDS_VARS?.rest_nonce) {
-          options.headers["X-WP-Nonce"] = window.CDS_VARS.rest_nonce;
-        }
-        return options
-      },
-    }
-  }
-
-  return (
-    <Provider url={endpoint} options={options}>
+ return (
       <Suspense fallback={<Spinner />}>
           <Routes>
             <Route path="/" element={<Services />} />
@@ -57,7 +38,6 @@ const ListsApp = () => {
           </Routes>
        
       </Suspense>
-    </Provider>
 
   )
 }

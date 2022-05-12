@@ -6,11 +6,9 @@ import { withHistory } from "slate-history";
 
 import { TextWrapper, Label, Hint } from "./Styles";
 import { Leaf } from "./Leaf"
-import useTemplateApi from "./useTemplateApi";
 import useDecorateMarkup from "./useDecorateMarkup";
 
-export const Editor = () => {
-    const [template, saveTemplate] = useTemplateApi();
+export const Editor = ({ template, handleChange }) => {
     const decorate = useDecorateMarkup();
     const renderLeaf = useCallback((props) => <Leaf {...props} />, []);
     const editor = useMemo(() => withHistory(withReact(createEditor())), []);
@@ -20,7 +18,7 @@ export const Editor = () => {
             <Hint>Use the email <a href="https://notification.canada.ca/format">formatting guide</a> (Opens in a new tab) to craft your message.</Hint>
             <TextWrapper>
                 <Slate editor={editor} value={template} onChange={value => {
-                    saveTemplate(value)
+                    handleChange(value)
                 }}>
                     <Editable
                         decorate={decorate}

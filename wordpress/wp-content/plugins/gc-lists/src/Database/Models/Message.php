@@ -4,7 +4,29 @@ namespace GCLists\Database\Models;
 
 class Message extends Model
 {
-    protected $table = "messages";
+    protected string $tableSuffix = "messages";
+
+    protected array $visible = [
+        'id',
+        'name',
+        'subject',
+        'body',
+        'message_type',
+        'sent_at',
+        'sent_to_list_name',
+        'sent_by_email',
+        'original_message_id',
+        'version_id',
+        'created_at',
+        'updated_at',
+    ];
+
+    protected array $fillable = [
+        'name',
+        'subject',
+        'body',
+        'message_type',
+    ];
 
     public function send()
     {

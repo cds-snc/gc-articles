@@ -8,21 +8,50 @@ use Carbon\Carbon;
 
 class Model
 {
-    public int $id;
+    /**
+     * The visible columns of the model (for queries)
+     *
+     * @var array
+     */
+    protected array $visible;
+
+    /**
+     * Indicates if the model exists (edit) or not (create)
+     *
+     * @var bool
+     */
     public bool $exists = false;
 
+    /**
+     * The table associated with the model
+     *
+     * @var string
+     */
     protected string $tableName;
+
+    /**
+     * The model's attributes
+     *
+     * @var array
+     */
     protected array $attributes = [];
 
+    /**
+     * Create a new model instance
+     *
+     * @param  array  $attributes
+     */
     public function __construct(array $attributes = [])
     {
         global $wpdb;
-        $this->tableName = $wpdb->prefix . $this->table;
+        $this->tableName = $wpdb->prefix . $this->tableSuffix;
 
         $this->fill($attributes);
     }
 
     /**
+     * Take an array of db results and turn it into an array of models
+     *
      * @param $data
      *
      * @return array
@@ -38,17 +67,45 @@ class Model
         return array_map($func, $data);
     }
 
+    /**
+     * Retrieve an imploded (comma-separated) list of visible columns for querying
+     *
+     * @return string
+     */
+    protected function getVisibleColumns(): string
+    {
+        return implode(',', $this->visible);
+    }
+
+    /**
+     * Dynamically retrieve attributes on the model
+     *
+     * @param $key
+     * @return mixed|void|null
+     */
     public function __get($key)
     {
         return $this->getAttribute($key);
     }
 
+    /**
+     * Dynamically set attributes on the model
+     *
+     * @param $key
+     * @param $value
+     */
     public function __set($key, $value)
     {
         $this->setAttribute($key, $value);
     }
 
-    public function fill(array $attributes)
+    /**
+     * Fill the model with an array of attributes
+     *
+     * @param  array  $attributes
+     * @return $this
+     */
+    public function fill(array $attributes): static
     {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
@@ -57,13 +114,27 @@ class Model
         return $this;
     }
 
-    public function setAttribute($key, $value)
+    /**
+     * Set an attribute on the model
+     *
+     * @param $key
+     * @param $value
+     *
+     * @return $this
+     */
+    public function setAttribute($key, $value): static
     {
         $this->attributes[$key] = $value;
 
         return $this;
     }
 
+    /**
+     * Get an attribute on the model
+     *
+     * @param $key
+     * @return mixed|void|null
+     */
     public function getAttribute($key)
     {
         if (! $key) {
@@ -73,7 +144,12 @@ class Model
         return $this->attributes[$key] ?? null;
     }
 
-    protected function performUpdate()
+    /**
+     * Perform a model update
+     *
+     * @return $this
+     */
+    protected function performUpdate(): static
     {
         global $wpdb;
         $time = Carbon::now()->timestamp;
@@ -86,7 +162,12 @@ class Model
         return $this;
     }
 
-    protected function performInsert()
+    /**
+     * Perform a model insert
+     *
+     * @return $this
+     */
+    protected function performInsert(): static
     {
         global $wpdb;
         $time = Carbon::now()->timestamp;
@@ -101,18 +182,34 @@ class Model
         return $this;
     }
 
+    /**
+     * Update the created_at timestamp on the model
+     *
+     * @param $time
+     */
     protected function updateCreatedTimestamp($time)
     {
         $this->created_at = $time;
     }
 
+    /**
+     * Update the updated_at timestamp on the model
+     *
+     * @param $time
+     */
     protected function updateUpdatedTimestamp($time)
     {
         $this->updated_at = $time;
     }
 
+    /**
+     * How to serialize the model
+     *
+     * @return array
+     */
     public function __serialize(): array
     {
+        // @TODO: this should probably use $model->visible
         $model = [];
         foreach ($this->attributes as $attribute => $value) {
             $model[$attribute] = $value;
@@ -122,9 +219,11 @@ class Model
     }
 
     /**
-     * Instance actions
+     * Delete the model from the database
+     *
+     * @return mixed
      */
-    public function delete()
+    public function delete(): mixed
     {
         global $wpdb;
 
@@ -134,7 +233,12 @@ class Model
         );
     }
 
-    public function save()
+    /**
+     * Save the model to the database
+     *
+     * @return $this
+     */
+    public function save(): static
     {
         if ($this->exists) {
             return $this->performUpdate();
@@ -143,22 +247,31 @@ class Model
         }
     }
 
-    public function asJson()
+    /**
+     * Serialize the model to Json
+     *
+     * @return false|string
+     */
+    public function asJson(): bool|string
     {
+        // @TODO: This should use $model->visible
         return json_encode($this->attributes);
     }
 
-    /**
-     *  Static actions
-     */
 
-    public static function find($id)
+    /**
+     * Find a model by ID
+     *
+     * @param $id
+     * @return mixed|null
+     */
+    public static function find($id): mixed
     {
         global $wpdb;
         $instance = new static();
 
         $data = $wpdb->get_row(
-            $wpdb->prepare("SELECT * FROM {$instance->tableName} WHERE id = %s", $id)
+            $wpdb->prepare("SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName} WHERE id = %s", $id)
         );
 
         if (!$data) {
@@ -173,7 +286,13 @@ class Model
         return $model;
     }
 
-    public static function create(array $attributes = [])
+    /**
+     * Create a model from attributes
+     *
+     * @param  array  $attributes
+     * @return static
+     */
+    public static function create(array $attributes = []): static
     {
         $instance = new static();
 
@@ -182,14 +301,18 @@ class Model
         return $instance;
     }
 
-    public static function all()
+    /**
+     * Get all models from db
+     *
+     * @return array|null
+     */
+    public static function all(): ?array
     {
         global $wpdb;
-
         $instance = new static();
 
         $data = $wpdb->get_results(
-            "SELECT * FROM {$instance->tableName}"
+            "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName}"
         );
 
         if (!$data) {
@@ -199,12 +322,18 @@ class Model
         return self::loadModels($data);
     }
 
-    public static function whereEquals(array $params)
+    /**
+     * Simple query filter accepts an array of attribute => value pairs.
+     *
+     * @param  array  $params
+     * @return array|null
+     */
+    public static function whereEquals(array $params): ?array
     {
         global $wpdb;
         $instance = new static();
 
-        $query = "SELECT * FROM {$instance->tableName} WHERE 1=1";
+        $query = "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName} WHERE 1=1";
 
         foreach ($params as $key => $value) {
             $query .= $wpdb->prepare(" AND {$key} = %s", $value);
@@ -219,7 +348,13 @@ class Model
         return self::loadModels($data);
     }
 
-    public static function whereNotNull($columns)
+    /**
+     * Simple NOT NULL query accepts an array of attributes that must be NOT NULL
+     *
+     * @param $columns
+     * @return array|null
+     */
+    public static function whereNotNull($columns): ?array
     {
         global $wpdb;
 
@@ -229,7 +364,7 @@ class Model
 
         $instance = new static();
 
-        $query = "SELECT * FROM {$instance->tableName} WHERE 1=1";
+        $query = "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName} WHERE 1=1";
 
         foreach ($columns as $column) {
             $query .= " AND {$column} IS NOT NULL";
@@ -244,7 +379,13 @@ class Model
         return self::loadModels($data);
     }
 
-    public static function whereNull($columns)
+    /**
+     * Simple IS NULL query accepts an array of attributes that must be NULL
+     *
+     * @param $columns
+     * @return array|null
+     */
+    public static function whereNull($columns): ?array
     {
         global $wpdb;
 
@@ -254,7 +395,7 @@ class Model
 
         $instance = new static();
 
-        $query = "SELECT * FROM {$instance->tableName} WHERE 1=1";
+        $query = "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName} WHERE 1=1";
 
         foreach ($columns as $column) {
             $query .= " AND {$column} IS NULL";

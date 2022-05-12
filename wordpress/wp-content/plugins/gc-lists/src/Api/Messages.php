@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GCLists\Api;
 
+use GCLists\Database\Models\Message;
 use WP_REST_Response;
 use WP_REST_Request;
 
@@ -80,10 +81,7 @@ class Messages extends BaseEndpoint
      */
     public function all(): WP_REST_Response
     {
-        // @TODO: revisit the SELECT * on all these queries
-        $results = $this->wpdb->get_results(
-            "SELECT * FROM {$this->tableName} WHERE original_message_id IS NULL"
-        );
+        $results = Message::all();
 
         $response = new WP_REST_Response($results);
 
@@ -99,9 +97,7 @@ class Messages extends BaseEndpoint
      */
     public function sent(): WP_REST_Response
     {
-        $results = $this->wpdb->get_results(
-            "SELECT * FROM {$this->tableName} WHERE original_message_id IS NOT NULL"
-        );
+        $results = Message::whereNotNull('original_message_id');
 
         $response = new WP_REST_Response($results);
 
@@ -119,9 +115,7 @@ class Messages extends BaseEndpoint
      */
     public function get(WP_REST_Request $request): WP_REST_Response
     {
-        $results = $this->wpdb->get_row(
-            $this->wpdb->prepare("SELECT * FROM {$this->tableName} WHERE id = %d", $request["id"])
-        );
+        $results = Message::find($request['id'])->asJson();
 
         $response = new WP_REST_Response($results);
 

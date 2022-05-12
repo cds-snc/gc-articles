@@ -69,7 +69,8 @@ class Model
         $class = get_called_class();
 
         $func = function ($data) use ($class) {
-            return new $class((array)$data);
+            $model = new $class();
+            return $model->forceFill((array)$data);
         };
 
         return array_map($func, $data);
@@ -127,6 +128,21 @@ class Model
                     )
                 );
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Fill the model with an array of attributes. Force mass assignment.
+     *
+     * @param  array  $attributes
+     * @return $this
+     */
+    public function forceFill(array $attributes)
+    {
+        foreach ($attributes as $key => $value) {
+            $this->setAttribute($key, $value);
         }
 
         return $this;
@@ -327,7 +343,8 @@ class Model
 
         $class = get_called_class();
 
-        $model = new $class((array) $data);
+        $model = new $class();
+        $model->forceFill((array) $data);
         $model->exists = true;
 
         return $model;

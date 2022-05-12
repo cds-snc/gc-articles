@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import { useCallback } from 'react';
 import { Descendant } from "slate";
+
 import { serialize, deserialize } from "../messages/editor/utils";
 import { TemplateType } from "../types";
 
@@ -34,20 +35,24 @@ function useTemplateApi() {
         if (!content) return;
 
         const tId = templateId ? templateId : uuidv4();
-
-        const result = await storage.setItem(tId, {
+        await storage.setItem(tId, {
             name,
             subject,
             content: serialize(content),
             timestamp: new Date().getTime()
         });
-
-        console.log(result)
     },
         [storage],
     );
 
-    return { templateId, getTemplate, getTemplates, saveTemplate }
+    const deleteTemplate = useCallback(async ({ templateId }: { templateId: string | undefined }) => {
+        if (!templateId) return;
+        await storage.removeItem(templateId);
+    },
+        [storage],
+    );
+
+    return { templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate }
 }
 
 export default useTemplateApi;

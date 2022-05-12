@@ -203,3 +203,20 @@ test('Model instance doesnt save invalid attributes', function() {
     $this->assertObjectNotHasAttribute('notacolumn', $message);
     $this->assertEquals('New name of the message', $message->name);
 });
+
+test('Retrieve versions of a Message', function() {
+    $message_id = $this->factory->message->create();
+
+    $this->factory->message->create_many(5, [
+        'original_message_id' => $message_id
+    ]);
+
+    $message = Message::find($message_id);
+
+    $this->assertEquals(5, count($message->versions()));
+    $this->assertIsArray($message->versions());
+
+    foreach($message->versions() as $version) {
+        $this->assertTrue($version instanceof Message);
+    }
+})->group('test');

@@ -33,14 +33,14 @@ class Message extends Model
         // this will send a message
     }
 
-    public function sentMessages()
+    public function sent()
     {
         // get all sent versions of this model
     }
 
-    public function previousVersions()
+    public function versions()
     {
-        // versions of current model
+        return static::whereEquals(['original_message_id' => $this->id]);
     }
 
     public function createNewVersion()
@@ -48,8 +48,28 @@ class Message extends Model
         // create a new version of current model
     }
 
-    public static function sent()
+    /**
+     * Static methods
+     */
+
+    public static function templates(array $options = ['limit' => 5])
+    {
+        // get all "templates" (no original_message_id)
+    }
+
+    public static function messages(array $options = ['limit' => 5])
     {
         // static method to get all sent Messages
+    }
+
+    public static function get($original_message_id)
+    {
+        $message = Message::find($original_message_id);
+
+        if ($versions = $message->versions()) {
+            return end($versions);
+        }
+
+        return $message;
     }
 }

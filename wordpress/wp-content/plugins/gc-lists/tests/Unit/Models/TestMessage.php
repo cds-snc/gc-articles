@@ -1,6 +1,7 @@
 <?php
 
 use GCLists\Database\Models\Message;
+use GCLists\Exceptions\InvalidAttributeException;
 
 beforeEach(function() {
     global $wpdb;
@@ -174,4 +175,31 @@ test('Retrieve whereNull param', function() {
     foreach($messages as $message) {
         $this->assertTrue($message instanceof Message);
     }
+});
+
+test('Create a model with invalid attribute', function() {
+    $this->expectException(InvalidAttributeException::class);
+
+    Message::create([
+        'name' => 'Name of the message',
+        'subject' => 'Subject of the message',
+        'body' => 'Body of the message',
+        'notacolumn' => 'This column doesnt exist',
+    ]);
+});
+
+test('Model instance doesnt save invalid attributes', function() {
+    $message = Message::create([
+        'name' => 'Name of the message',
+        'subject' => 'Subject of the message',
+        'body' => 'Body of the message'
+    ]);
+
+    $message->name = 'New name of the message';
+    $message->notacolumn = "Huzzah";
+    $message->save();
+
+    $this->assertTrue($message instanceof Message);
+    $this->assertObjectNotHasAttribute('notacolumn', $message);
+    $this->assertEquals('New name of the message', $message->name);
 });

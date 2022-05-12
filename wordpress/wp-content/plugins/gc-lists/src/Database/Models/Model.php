@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GCLists\Database\Models;
 
 use Carbon\Carbon;
+use GCLists\Exceptions\InvalidAttributeException;
 
 class Model
 {
@@ -14,6 +15,13 @@ class Model
      * @var array
      */
     protected array $visible;
+
+    /**
+     * The attributes that are fillable on the model
+     *
+     * @var array
+     */
+    protected array $fillable;
 
     /**
      * Indicates if the model exists (edit) or not (create)
@@ -108,10 +116,37 @@ class Model
     public function fill(array $attributes): static
     {
         foreach ($attributes as $key => $value) {
-            $this->setAttribute($key, $value);
+            if ($this->isFillable($key)) {
+                $this->setAttribute($key, $value);
+            } else {
+                throw new InvalidAttributeException(
+                    sprintf(
+                        '[%s] does not exist as a fillable property on the model [%s]',
+                        $key,
+                        get_class($this)
+                    )
+                );
+            }
         }
 
         return $this;
+    }
+
+    protected function isFillable($key)
+    {
+        if (in_array($key, $this->fillable)) {
+            return true;
+        }
+        return false;
+    }
+
+    protected function getFillableFromArray(array $attributes): array
+    {
+        if (count($this->fillable)) {
+            return array_intersect_key($attributes, array_flip($this->fillable));
+        }
+
+        return $attributes;
     }
 
     /**
@@ -155,7 +190,7 @@ class Model
         $time = Carbon::now()->timestamp;
         $this->updateUpdatedTimestamp($time);
 
-        $wpdb->update($this->tableName, $this->attributes, [
+        $wpdb->update($this->tableName, $this->getFillableFromArray($this->attributes), [
             'id' => $this->id,
         ]);
 
@@ -174,7 +209,7 @@ class Model
         $this->updateCreatedTimestamp($time);
         $this->updateUpdatedTimestamp($time);
 
-        $wpdb->insert($this->tableName, $this->attributes);
+        $wpdb->insert($this->tableName, $this->getFillableFromArray($this->attributes));
 
         $this->exists = true;
         $this->id = $wpdb->insert_id;

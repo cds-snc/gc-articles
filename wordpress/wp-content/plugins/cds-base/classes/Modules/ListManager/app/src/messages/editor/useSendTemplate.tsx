@@ -1,12 +1,10 @@
 // @ts-nocheck
 import { useCallback } from "react";
-import useTemplateApi from "./useTemplateApi";
-import { serialize } from "./utils";
 import useFetch from 'use-http';
 
-function useSendTemplate(listId) {
+function useSendTemplate({ listId, content }) {
     const { request, response } = useFetch({ data: [] });
-    const [template,] = useTemplateApi();
+
 
     const send = useCallback(async (data: string) => {
         let endpoint = "/send"
@@ -15,7 +13,7 @@ function useSendTemplate(listId) {
             template_id: '40454604-8702-4eeb-9b38-1ed3104fb960', // @todo this will come form WP
             template_type: 'email',
             job_name: 'job',
-            personalisation: JSON.stringify({ message: data, subject: 'Huzzah!' }),
+            personalisation: JSON.stringify({ message: content, subject: 'Huzzah!' }),
         }
 
         await request.post(endpoint, post_data)
@@ -26,10 +24,10 @@ function useSendTemplate(listId) {
     // send the template
     const sendTemplate = useCallback(
         () => {
-            if (!template) return;
-            send(serialize(template))
+            if (!content) return;
+            send(content);
         },
-        [template, send],
+        [content, send],
     );
 
     return sendTemplate;

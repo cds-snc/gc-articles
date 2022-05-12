@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Descendant } from "slate";
+import { Link } from "react-router-dom";
 
 import { Editor } from "../editor/Editor";
 import useTemplateApi from '../../store/useTemplateApi';
 import { deserialize } from "../editor/utils";
+import { useService } from '../../util/useService';
 
 export const EditTemplate = () => {
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
     const { templateId, getTemplate, saveTemplate } = useTemplateApi();
+    const { serviceId } = useService();
     useEffect(() => {
         const loadTemplate = async () => {
             if (templateId) {
@@ -17,7 +20,7 @@ export const EditTemplate = () => {
             }
         }
         loadTemplate();
-    }, [])
+    }, []);
     return (
         <>
             <div>
@@ -32,7 +35,9 @@ export const EditTemplate = () => {
                 <input type="text" id="subject" name="subject"></input>
             </div>
             {currentTemplate && <Editor template={currentTemplate} handleChange={setCurrentTemplate} />}
-            <button className="button" onClick={() => { }}>Send message to list</button>
+
+            <Link to={{ pathname: `/messages/${serviceId}/send/${templateId}` }}>Send Template</Link>
+
             <button className="button" onClick={() => {
                 saveTemplate({ templateId, name: "name", subject: "title", content: currentTemplate })
             }}>Save template</button>

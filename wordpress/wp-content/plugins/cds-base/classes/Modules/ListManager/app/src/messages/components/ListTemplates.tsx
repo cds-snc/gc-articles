@@ -14,7 +14,7 @@ export const ListTemplates = () => {
             setTemplates(await getTemplates());
         }
         fetchTempates();
-    }, [])
+    }, [getTemplates])
 
     return (
         <>

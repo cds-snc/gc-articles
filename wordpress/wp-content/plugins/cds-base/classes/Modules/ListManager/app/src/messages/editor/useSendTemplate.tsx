@@ -19,7 +19,7 @@ function useSendTemplate({ listId, content }) {
         await request.post(endpoint, post_data)
 
         console.log(response)
-    }, [response, request, listId]);
+    }, [response, request, listId, content]);
 
     // send the template
     const sendTemplate = useCallback(

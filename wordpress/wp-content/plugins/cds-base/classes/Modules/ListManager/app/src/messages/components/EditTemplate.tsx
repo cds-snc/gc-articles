@@ -20,6 +20,7 @@ export const EditTemplate = () => {
             }
         }
         loadTemplate();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
         <>

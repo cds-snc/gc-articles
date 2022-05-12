@@ -45,7 +45,7 @@ export const EditTemplate = () => {
         saveTemplate({ templateId, name, subject, content: currentTemplate })
 
         if (errorSummary?.current) {
-            { /* @ts-ignore */ }
+            // @ts-ignore
             errorSummary.current.focus();
         }
 

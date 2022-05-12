@@ -20,7 +20,11 @@ export const ListTemplates = () => {
         <>
             <Link to={{ pathname: `/messages/${serviceId}/edit/${uuidv4()}` }}>Create Template</Link>
             {templates.map((templateId) => {
-                return <div key={templateId}><Link to={{ pathname: `/messages/${serviceId}/edit/${templateId}` }}>{templateId}</Link></div>
+                return <div key={templateId}>
+                    {templateId}
+                    <Link to={{ pathname: `/messages/${serviceId}/edit/${templateId}` }}>Edit</Link>
+                    <Link to={{ pathname: `/messages/${serviceId}/send/${templateId}` }}>Send Template</Link>
+                    </div>
             })}
         </>
     )

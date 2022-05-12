@@ -127,3 +127,51 @@ test('Retrieve some models', function() {
         $this->assertTrue($message instanceof Message);
     }
 });
+
+test('Retrieve whereNotNull param', function() {
+    $message_ids = $this->factory->message->create_many(5);
+
+    // one column
+    $messages = Message::whereNotNull('created_at');
+
+    $this->assertEquals(5, count($messages));
+
+    // We should get back an array of Message models
+    foreach($messages as $message) {
+        $this->assertTrue($message instanceof Message);
+    }
+
+    // multiple columns
+    $messages = Message::whereNotNull(['created_at', 'updated_at']);
+
+    $this->assertEquals(5, count($messages));
+
+    // We should get back an array of Message models
+    foreach($messages as $message) {
+        $this->assertTrue($message instanceof Message);
+    }
+});
+
+test('Retrieve whereNull param', function() {
+    $message_ids = $this->factory->message->create_many(5);
+
+    // one column
+    $messages = Message::whereNull('original_message_id');
+
+    $this->assertEquals(5, count($messages));
+
+    // We should get back an array of Message models
+    foreach($messages as $message) {
+        $this->assertTrue($message instanceof Message);
+    }
+
+    // multiple columns
+    $messages = Message::whereNull(['original_message_id']);
+
+    $this->assertEquals(5, count($messages));
+
+    // We should get back an array of Message models
+    foreach($messages as $message) {
+        $this->assertTrue($message instanceof Message);
+    }
+});

@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 beforeEach(function() {
 	global $wp_rest_server;
 	$this->server = $wp_rest_server = new \WP_REST_Server();
@@ -26,7 +28,8 @@ test('Get sent messages', function() {
 	$template = $this->factory->message->create_and_get();
 
 	$this->factory->message->create_many(5, [
-		'original_message_id' => $template->id
+		'original_message_id' => $template->id,
+        'sent_at' => Carbon::now()->timestamp
 	]);
 
 	$request  = new WP_REST_Request( 'GET', '/gc-lists/messages/sent' );
@@ -37,7 +40,7 @@ test('Get sent messages', function() {
 	$this->assertCount(5, $response->get_data());
 });
 
-test('Get one messages', function() {
+test('Get one message', function() {
 	$message = $this->factory->message->create_and_get([
 		'name' => 'This is the message name'
 	]);
@@ -45,10 +48,11 @@ test('Get one messages', function() {
 	$request  = new WP_REST_Request( 'GET', "/gc-lists/messages/{$message->id}" );
 	$response = $this->server->dispatch( $request );
 
-	$this->assertEquals( 200, $response->get_status() );
-	$this->assertIsObject($response->get_data());
-	$this->assertObjectHasAttribute('name', $response->get_data());
-	$this->assertEquals('This is the message name', $response->get_data()->name);
+    $this->assertEquals( 200, $response->get_status() );
+	$this->assertJson($response->get_data());
+
+    $message = json_decode($response->get_data());
+	$this->assertEquals('This is the message name', $message->name);
 });
 
 test('Create a message', function() {

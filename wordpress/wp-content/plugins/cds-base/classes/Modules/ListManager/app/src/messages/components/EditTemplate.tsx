@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { Descendant } from "slate";
 
 import { Editor } from "../editor/Editor";
-import useTemplateApi from './useTemplateApi';
-import { deserialize } from "./utils";
+import useTemplateApi from '../../store/useTemplateApi';
+import { deserialize } from "../editor/utils";
 
 export const EditTemplate = () => {
-    const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>()
+    const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
     const { templateId, getTemplate, saveTemplate } = useTemplateApi();
     useEffect(() => {
         const loadTemplate = async () => {
@@ -17,7 +17,7 @@ export const EditTemplate = () => {
             }
         }
         loadTemplate();
-    }, [templateId, getTemplate, setCurrentTemplate])
+    }, [])
     return (
         <>
             <div>
@@ -33,7 +33,9 @@ export const EditTemplate = () => {
             </div>
             {currentTemplate && <Editor template={currentTemplate} handleChange={setCurrentTemplate} />}
             <button className="button" onClick={() => { }}>Send message to list</button>
-            <button className="button" onClick={() => { saveTemplate("name", "title", currentTemplate) }}>Save template</button>
+            <button className="button" onClick={() => {
+                saveTemplate({ templateId, name: "name", subject: "title", content: currentTemplate })
+            }}>Save template</button>
             {/* <a href="#">Delete this message template</a> */}
         </>
     )

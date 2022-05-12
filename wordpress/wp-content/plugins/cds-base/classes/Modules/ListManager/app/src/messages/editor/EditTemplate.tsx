@@ -1,8 +1,23 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
+import { Descendant } from "slate";
+
 import { Editor } from "../editor/Editor";
+import useTemplateApi from './useTemplateApi';
+import { deserialize } from "./utils";
 
 export const EditTemplate = () => {
-    // fetch template
+    const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>()
+    const { templateId, getTemplate, saveTemplate } = useTemplateApi();
+    useEffect(() => {
+        const loadTemplate = async () => {
+            if (templateId) {
+                const template = await getTemplate(templateId);
+                setCurrentTemplate(deserialize(template.content || ""));
+            }
+        }
+        loadTemplate();
+    }, [templateId, getTemplate, setCurrentTemplate])
     return (
         <>
             <div>
@@ -16,10 +31,9 @@ export const EditTemplate = () => {
                 <p>Tell recipients what the message is about. Try to keep it shorter than 10 words.</p>
                 <input type="text" id="subject" name="subject"></input>
             </div>
-
-            <Editor />
+            {currentTemplate && <Editor template={currentTemplate} handleChange={setCurrentTemplate} />}
             <button className="button" onClick={() => { }}>Send message to list</button>
-            <button className="button" onClick={() => { }}>Save template</button>
+            <button className="button" onClick={() => { saveTemplate("name", "title", currentTemplate) }}>Save template</button>
             {/* <a href="#">Delete this message template</a> */}
         </>
     )

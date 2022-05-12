@@ -41,7 +41,7 @@ export const SendTemplate = () => {
             {lists.length >= 1 && <ListSelect lists={lists} handleChange={(val: string) => {
                 setListId(val)
             }} />}
-            <Editor />
+            
             <button className="button" onClick={sendTemplate}>Send Email</button>
         </>)
 }

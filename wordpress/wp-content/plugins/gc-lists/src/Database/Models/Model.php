@@ -132,6 +132,12 @@ class Model
         return $this;
     }
 
+    /**
+     * Determine if the given attribute can be mass assigned
+     *
+     * @param $key
+     * @return bool
+     */
     protected function isFillable($key)
     {
         if (in_array($key, $this->fillable)) {
@@ -140,6 +146,12 @@ class Model
         return false;
     }
 
+    /**
+     * Get fillable attributes from array
+     *
+     * @param  array  $attributes
+     * @return array
+     */
     protected function getFillableFromArray(array $attributes): array
     {
         if (count($this->fillable)) {

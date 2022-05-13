@@ -40,7 +40,7 @@ class Message extends Model
      *
      * @return Collection
      */
-    public function sent()
+    public function sent(): Collection
     {
         return $this->versions()->filter(function ($item) {
             return (bool)$item->attributes["sent_at"];

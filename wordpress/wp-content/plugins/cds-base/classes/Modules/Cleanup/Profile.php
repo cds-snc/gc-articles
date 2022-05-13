@@ -33,8 +33,6 @@ class Profile
         $html = ob_get_contents();
         ob_end_clean();
 
-        // note suppressing warning here: libxml_disable_entity_loader() deprecated
-        // see https://github.com/wasinger/htmlpagedom/issues/35
         $crawler = @new HtmlPage($html);
 
         // add IDs to headings

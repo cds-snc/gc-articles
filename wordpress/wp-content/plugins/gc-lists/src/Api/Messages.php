@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GCLists\Api;
 
 use GCLists\Database\Models\Message;
+use Illuminate\Support\Collection;
 use WP_REST_Response;
 use WP_REST_Request;
 
@@ -81,7 +82,9 @@ class Messages extends BaseEndpoint
      */
     public function all(): WP_REST_Response
     {
-        $results = Message::all()->toJson();
+        $results = Message::all();
+
+        $results = $this->transformCollectionOfModelsToJson($results);
 
         $response = new WP_REST_Response($results);
 
@@ -99,6 +102,8 @@ class Messages extends BaseEndpoint
     {
         $results = Message::whereNotNull('original_message_id');
 
+        $results = $this->transformCollectionOfModelsToJson($results);
+
         $response = new WP_REST_Response($results);
 
         $response->set_status(200);
@@ -115,7 +120,7 @@ class Messages extends BaseEndpoint
      */
     public function get(WP_REST_Request $request): WP_REST_Response
     {
-        $results = Message::find($request['id'])->asJson();
+        $results = Message::find($request['id'])->toJson();
 
         $response = new WP_REST_Response($results);
 
@@ -224,5 +229,19 @@ class Messages extends BaseEndpoint
         $response->set_status(500);
 
         return $response;
+    }
+
+    /**
+     * @param  Collection  $results
+     *
+     * @return string
+     */
+    protected function transformCollectionOfModelsToJson(Collection $results): string
+    {
+        $results->transform(function ($item) {
+            return $item->toJson();
+        });
+
+        return $results->toJson();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace GCLists\Database\Models;
 
+use Illuminate\Support\Collection;
+
 class Message extends Model
 {
     protected string $tableSuffix = "messages";
@@ -35,15 +37,31 @@ class Message extends Model
 
     public function sent()
     {
-        // get all sent versions of this model
+        // get sent versions of this model
     }
 
-    public function versions()
+    public function versions(): ?Collection
     {
         return static::whereEquals(['original_message_id' => $this->id]);
     }
 
-    public function createNewVersion()
+    /**
+     * Get the Original message
+     *
+     * @return Message|null
+     */
+    public function original(): Message|null
+    {
+        if (!$this->original_message_id) {
+            return null;
+        }
+
+        $original = static::whereEquals(['id' => $this->original_message_id]);
+
+        return $original->first();
+    }
+
+    public function saveVersion()
     {
         // create a new version of current model
     }
@@ -62,12 +80,19 @@ class Message extends Model
         // static method to get all sent Messages
     }
 
-    public static function get($original_message_id)
+    /**
+     * Retrieve the most recent version of a Message
+     *
+     * @param $original_message_id
+     *
+     * @return Message
+     */
+    public static function get($original_message_id): Message
     {
         $message = Message::find($original_message_id);
 
         if ($versions = $message->versions()) {
-            return end($versions);
+            return $versions->last();
         }
 
         return $message;

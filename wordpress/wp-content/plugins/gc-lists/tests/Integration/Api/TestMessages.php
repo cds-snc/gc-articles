@@ -23,6 +23,7 @@ test('Get all messages', function() {
 	$this->assertEquals( 200, $response->get_status() );
 	$this->assertJson($response->get_data());
 	$this->assertCount(5, json_decode($response->get_data()));
+
 });
 
 test('Get sent messages', function() {
@@ -37,8 +38,8 @@ test('Get sent messages', function() {
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
-	$this->assertIsArray($response->get_data());
-	$this->assertCount(5, $response->get_data());
+	$this->assertJson($response->get_data());
+	$this->assertCount(5, json_decode($response->get_data()));
 });
 
 test('Get one message', function() {

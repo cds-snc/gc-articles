@@ -6,8 +6,11 @@ namespace GCLists\Database\Models;
 
 use Carbon\Carbon;
 use GCLists\Exceptions\InvalidAttributeException;
+use GCLists\Exceptions\JsonEncodingException;
+use Illuminate\Support\Collection;
+use JsonSerializable;
 
-class Model
+class Model implements JsonSerializable
 {
     /**
      * The visible columns of the model (for queries)
@@ -311,16 +314,23 @@ class Model
     }
 
     /**
-     * Serialize the model to Json
+     * Convert the model instance to JSON.
      *
-     * @return false|string
+     * @param  int  $options
+     * @return string
+     *
+     * @throws JsonEncodingException
      */
-    public function asJson(): bool|string
+    public function toJson($options = 0): string
     {
-        // @TODO: This should use $model->visible
-        return json_encode($this->attributes);
-    }
+        $json = json_encode($this->jsonSerialize(), $options);
 
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw JsonEncodingException::forModel($this, json_last_error_msg());
+        }
+
+        return $json;
+    }
 
     /**
      * Find a model by ID
@@ -368,9 +378,9 @@ class Model
     /**
      * Get all models from db
      *
-     * @return array|null
+     * @return Collection|null
      */
-    public static function all()
+    public static function all(): ?Collection
     {
         global $wpdb;
         $instance = new static();
@@ -383,17 +393,16 @@ class Model
             return null;
         }
 
-        // @TODO: should filter the columns by $visible
-        return collect($data);
+        return collect(self::loadModels($data));
     }
 
     /**
      * Simple query filter accepts an array of attribute => value pairs.
      *
      * @param  array  $params
-     * @return array|null
+     * @return Collection|null
      */
-    public static function whereEquals(array $params): ?array
+    public static function whereEquals(array $params): ?Collection
     {
         global $wpdb;
         $instance = new static();
@@ -410,16 +419,16 @@ class Model
             return null;
         }
 
-        return self::loadModels($data);
+        return collect(self::loadModels($data));
     }
 
     /**
      * Simple NOT NULL query accepts an array of attributes that must be NOT NULL
      *
      * @param $columns
-     * @return array|null
+     * @return Collection|null
      */
-    public static function whereNotNull($columns): ?array
+    public static function whereNotNull($columns): ?Collection
     {
         global $wpdb;
 
@@ -441,16 +450,16 @@ class Model
             return null;
         }
 
-        return self::loadModels($data);
+        return collect(self::loadModels($data));
     }
 
     /**
      * Simple IS NULL query accepts an array of attributes that must be NULL
      *
      * @param $columns
-     * @return array|null
+     * @return Collection|null
      */
-    public static function whereNull($columns): ?array
+    public static function whereNull($columns): ?Collection
     {
         global $wpdb;
 
@@ -472,6 +481,26 @@ class Model
             return null;
         }
 
-        return self::loadModels($data);
+        return collect(self::loadModels($data));
+    }
+
+    /**
+     * Returns the Model instance as an array
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * Convert the object into something JSON serializable
+     *
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->toArray();
     }
 }

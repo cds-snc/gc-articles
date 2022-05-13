@@ -2,6 +2,7 @@
 
 use GCLists\Database\Models\Message;
 use GCLists\Exceptions\InvalidAttributeException;
+use Illuminate\Support\Collection;
 
 beforeEach(function() {
     global $wpdb;
@@ -214,9 +215,45 @@ test('Retrieve versions of a Message', function() {
     $message = Message::find($message_id);
 
     $this->assertEquals(5, count($message->versions()));
-    $this->assertIsArray($message->versions());
+    $this->assertTrue($message->versions() instanceof Collection);
 
     foreach($message->versions() as $version) {
         $this->assertTrue($version instanceof Message);
     }
+});
+
+test('Retrieve the most recent version of a Message', function() {
+    $message_id = $this->factory->message->create();
+
+    for($version_id = 1; $version_id <= 5; $version_id++) {
+        $this->factory->message->create([
+            'original_message_id' => $message_id,
+            'version_id' => $version_id
+        ]);
+    }
+
+    $message = Message::get($message_id);
+
+    $this->assertTrue($message instanceof Message);
+    $this->assertEquals(5, $message->version_id);
+})->group('test');
+
+test('Retrieve the original of the Message version', function() {
+    $message_id = $this->factory->message->create();
+
+    for($version_id = 1; $version_id <= 5; $version_id++) {
+        $this->factory->message->create([
+            'original_message_id' => $message_id,
+            'version_id' => $version_id
+        ]);
+    }
+
+    // Get the latest version
+    $message = Message::get($message_id);
+
+    // Get original
+    $original = $message->original();
+    // var_dump($original);
+
+    $this->assertTrue($original instanceof Message);
 })->group('test');

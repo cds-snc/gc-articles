@@ -68,7 +68,6 @@ class ListManagerSettings
             ?>
               <!-- app -->
               <div class="wrap">
-                <h1><?php _e('GC Lists', 'cds-snc'); ?></h1>
                 <?php
                 echo "<!--";
                 echo "manage_list_manager-" . current_user_can('manage_list_manager');

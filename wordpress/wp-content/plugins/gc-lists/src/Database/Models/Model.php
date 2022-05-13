@@ -142,7 +142,7 @@ class Model implements JsonSerializable
      * @param  array  $attributes
      * @return $this
      */
-    public function forceFill(array $attributes)
+    public function forceFill(array $attributes): static
     {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
@@ -157,7 +157,7 @@ class Model implements JsonSerializable
      * @param $key
      * @return bool
      */
-    protected function isFillable($key)
+    protected function isFillable($key): bool
     {
         if (in_array($key, $this->fillable)) {
             return true;
@@ -336,7 +336,8 @@ class Model implements JsonSerializable
      * Find a model by ID
      *
      * @param $id
-     * @return mixed|null
+     *
+     * @return mixed
      */
     public static function find($id): mixed
     {
@@ -497,9 +498,9 @@ class Model implements JsonSerializable
     /**
      * Convert the object into something JSON serializable
      *
-     * @return mixed
+     * @return array
      */
-    public function jsonSerialize(): mixed
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

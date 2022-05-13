@@ -35,11 +35,23 @@ class Message extends Model
         // this will send a message
     }
 
+    /**
+     * Get sent versions of the current Message
+     *
+     * @return Collection
+     */
     public function sent()
     {
-        // get sent versions of this model
+        return $this->versions()->filter(function ($item) {
+            return (bool)$item->attributes["sent_at"];
+        });
     }
 
+    /**
+     * Get all versions of the current Message
+     *
+     * @return Collection|null
+     */
     public function versions(): ?Collection
     {
         return static::whereEquals(['original_message_id' => $this->id]);

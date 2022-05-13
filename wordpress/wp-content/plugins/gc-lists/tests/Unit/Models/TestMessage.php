@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use GCLists\Database\Models\Message;
 use GCLists\Exceptions\InvalidAttributeException;
 use Illuminate\Support\Collection;
@@ -255,4 +256,30 @@ test('Retrieve the original of the Message version', function() {
     $original = $message->original();
 
     $this->assertTrue($original instanceof Message);
+});
+
+test('Retrieve sent versions of a message', function() {
+    $message_id = $this->factory->message->create();
+
+    // Generate versions, odd = sent (3)
+    for($version_id = 1; $version_id <= 5; $version_id++) {
+        $timestamp = Carbon::now()->toDateTimeString();
+
+        $this->factory->message->create([
+            'original_message_id' => $message_id,
+            'version_id' => $version_id,
+            'sent_at' => ($version_id %2 ? $timestamp : NULL)
+        ]);
+    }
+
+    $message = Message::find($message_id);
+
+    $sent = $message->sent();
+
+    $this->assertInstanceOf(Collection::class, $sent);
+    $this->assertCount(3, $sent);
+
+    $message->sent()->each(function ($version) {
+        $this->assertInstanceOf(Message::class, $version);
+    });
 });

@@ -1,6 +1,7 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 beforeEach(function() {
 	global $wp_rest_server;
@@ -20,8 +21,8 @@ test('Get all messages', function() {
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
-	$this->assertIsArray($response->get_data());
-	$this->assertCount(5, $response->get_data());
+	$this->assertJson($response->get_data());
+	$this->assertCount(5, json_decode($response->get_data()));
 });
 
 test('Get sent messages', function() {

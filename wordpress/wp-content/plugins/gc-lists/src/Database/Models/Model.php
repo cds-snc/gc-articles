@@ -370,7 +370,7 @@ class Model
      *
      * @return array|null
      */
-    public static function all(): ?array
+    public static function all()
     {
         global $wpdb;
         $instance = new static();
@@ -383,7 +383,8 @@ class Model
             return null;
         }
 
-        return self::loadModels($data);
+        // @TODO: should filter the columns by $visible
+        return collect($data);
     }
 
     /**

@@ -81,7 +81,7 @@ class Messages extends BaseEndpoint
      */
     public function all(): WP_REST_Response
     {
-        $results = Message::all();
+        $results = Message::all()->toJson();
 
         $response = new WP_REST_Response($results);
 

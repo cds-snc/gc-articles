@@ -84,8 +84,6 @@ class Messages extends BaseEndpoint
     {
         $results = Message::all();
 
-        $results = $this->transformCollectionOfModelsToJson($results);
-
         $response = new WP_REST_Response($results);
 
         $response->set_status(200);
@@ -101,8 +99,6 @@ class Messages extends BaseEndpoint
     public function sent(): WP_REST_Response
     {
         $results = Message::whereNotNull('original_message_id');
-
-        $results = $this->transformCollectionOfModelsToJson($results);
 
         $response = new WP_REST_Response($results);
 
@@ -229,19 +225,5 @@ class Messages extends BaseEndpoint
         $response->set_status(500);
 
         return $response;
-    }
-
-    /**
-     * @param  Collection  $results
-     *
-     * @return string
-     */
-    protected function transformCollectionOfModelsToJson(Collection $results): string
-    {
-        $results->transform(function ($item) {
-            return $item->toJson();
-        });
-
-        return $results->toJson();
     }
 }

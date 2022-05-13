@@ -236,7 +236,7 @@ test('Retrieve the most recent version of a Message', function() {
 
     $this->assertTrue($message instanceof Message);
     $this->assertEquals(5, $message->version_id);
-})->group('test');
+});
 
 test('Retrieve the original of the Message version', function() {
     $message_id = $this->factory->message->create();
@@ -253,7 +253,6 @@ test('Retrieve the original of the Message version', function() {
 
     // Get original
     $original = $message->original();
-    // var_dump($original);
 
     $this->assertTrue($original instanceof Message);
-})->group('test');
+});

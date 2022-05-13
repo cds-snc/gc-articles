@@ -25,7 +25,7 @@ const StyledLink = styled(Link)`
         text-decoration:none !important;
     }
 `
-const StyledButton = styled.button`
+const StyledDeleteButton = styled.button`
     color: #D3080C;
     background: none;
     border: none;
@@ -149,14 +149,14 @@ export const ListTemplates = () => {
                                 {__("Edit")}
                             </StyledLink>
                             <StyledDivider>|</StyledDivider>
-                            <StyledButton
+                            <StyledDeleteButton
                                 onClick={async () => {
                                     await deleteTemplate({ templateId: tId });
                                     fetchTempates();
                                 }}
                             >
                                 {__("Delete")}
-                            </StyledButton>
+                            </StyledDeleteButton>
                             <StyledDivider>|</StyledDivider>
                             <StyledLink to={{ pathname: `/messages/${serviceId}/send/${tId}` }}>
                                 {__("Send Template")}

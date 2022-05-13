@@ -6,34 +6,30 @@ export const Label = styled.label`
     line-height: 1.25;
 `
 
-export const Hint = styled.span`
-    padding-bottom: 2px;
-    font-size: 19px;
-    line-height: 1.25;
-    font-weight: 400;
-    display: block;
-    color: rgb(89, 89, 89);
-`
-
 export const StyledSelect = styled.select`
     display:block;
     margin-bottom:20px;
 `
 
 export const TextWrapper = styled.div`
- max-width:823px;
- min-height:212px;
- font-size: 19px;
+ max-width:700px;
  margin-bottom:20px;
+ min-height: 258px;
 
  & > div[role=textbox]{
+    border: 1px solid #1d2327;
+    border-radius: 4px;
     padding:10px;
-    border: 2px solid #000;
+    width:700px;
+    height:100%;
+    min-height: 258px;
 
     &:focus {
-        box-shadow: 0 0 0 3px #ffbf47;
-    }
+        border: 1px solid #1d2327 !important;
+        outline: 2px solid #0535d2 !important;
+     }
  }
+ 
  `
 
 export const StyledSpan = styled.span`

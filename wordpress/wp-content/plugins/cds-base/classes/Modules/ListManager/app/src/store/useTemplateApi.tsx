@@ -24,9 +24,9 @@ function useTemplateApi() {
     }, [storage])
 
     const getTemplates = useCallback(async () => {
-        let templates: string[] = [];
-        await storage.iterate((value, key) => {
-            templates.push(key)
+        let templates: any = [];
+        await storage.iterate((value: {}, key) => {
+            templates.push({ templateId: key, type: "email", ...value });
         });
         return templates;
     }, [storage])

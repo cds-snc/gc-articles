@@ -67,7 +67,6 @@ export const SendTemplate = () => {
             {lists.length >= 1 && <ListSelect lists={lists} handleChange={(val: string) => {
                 setListId(val)
             }} />}
-            {content}
             <button style={{ marginRight: "20px" }} className="button button-primary" onClick={sendTemplate}>{__("Send Email")}</button>
             <button className="button">{__("Cancel")}</button>
             <CreateNewList />

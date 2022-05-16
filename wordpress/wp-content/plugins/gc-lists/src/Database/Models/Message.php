@@ -73,6 +73,11 @@ class Message extends Model
         return $original->first();
     }
 
+    /**
+     * Get the latest version of the current message
+     *
+     * @return static
+     */
     public function latest(): static
     {
         if ($versions = $this->versions()) {

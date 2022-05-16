@@ -29,13 +29,15 @@ export const EditTemplate = () => {
     const navigate = useNavigate();
     const { templateId, getTemplate, saveTemplate, deleteTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
-    const { register, setValue, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { subject: "", name: "", template: "" } });
+    const { register, setValue, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
     const { serviceId } = useService();
     useEffect(() => {
         const loadTemplate = async () => {
             if (templateId) {
                 const template = await getTemplate(templateId);
                 setCurrentTemplate(deserialize(template.content || ""));
+                setValue("name", template?.name || "")
+                setValue("subject", template?.subject || "");
             }
         }
         loadTemplate();

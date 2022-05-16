@@ -418,14 +418,18 @@ class Model implements JsonSerializable
      *
      * @return Collection|null
      */
-    public static function all(): ?Collection
+    public static function all(array $options = []): ?Collection
     {
         global $wpdb;
         $instance = new static();
 
-        $data = $wpdb->get_results(
-            "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName}"
-        );
+        $query = "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName}";
+
+        if (isset($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
+        }
+
+        $data = $wpdb->get_results($query);
 
         if (!$data) {
             return null;
@@ -440,7 +444,7 @@ class Model implements JsonSerializable
      * @param  array  $params
      * @return Collection|null
      */
-    public static function whereEquals(array $params): ?Collection
+    public static function whereEquals(array $params, array $options = []): ?Collection
     {
         global $wpdb;
         $instance = new static();
@@ -449,6 +453,10 @@ class Model implements JsonSerializable
 
         foreach ($params as $key => $value) {
             $query .= $wpdb->prepare(" AND {$key} = %s", $value);
+        }
+
+        if (isset($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
         }
 
         $data = $wpdb->get_results($query);
@@ -466,7 +474,7 @@ class Model implements JsonSerializable
      * @param $columns
      * @return Collection|null
      */
-    public static function whereNotNull($columns): ?Collection
+    public static function whereNotNull($columns, array $options = []): ?Collection
     {
         global $wpdb;
 
@@ -480,6 +488,10 @@ class Model implements JsonSerializable
 
         foreach ($columns as $column) {
             $query .= " AND {$column} IS NOT NULL";
+        }
+
+        if (isset($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
         }
 
         $data = $wpdb->get_results($query);
@@ -497,7 +509,7 @@ class Model implements JsonSerializable
      * @param $columns
      * @return Collection|null
      */
-    public static function whereNull($columns): ?Collection
+    public static function whereNull($columns, array $options = []): ?Collection
     {
         global $wpdb;
 
@@ -511,6 +523,10 @@ class Model implements JsonSerializable
 
         foreach ($columns as $column) {
             $query .= " AND {$column} IS NULL";
+        }
+
+        if (isset($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
         }
 
         $data = $wpdb->get_results($query);

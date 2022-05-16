@@ -116,6 +116,14 @@ test('Retrieve all models', function() {
     }
 });
 
+test('Retrieve all models with limit', function() {
+    $this->factory->message->create_many(20);
+
+    $messages = Message::all(['limit' => 5]);
+
+    $this->assertCount(5, $messages);
+});
+
 test('Retrieve some models', function() {
     $message_ids = $this->factory->message->create_many(5);
 
@@ -132,8 +140,8 @@ test('Retrieve some models', function() {
     }
 });
 
-test('Retrieve whereNotNull param', function() {
-    $message_ids = $this->factory->message->create_many(5);
+test('Retrieve using whereNotNull param', function() {
+    $this->factory->message->create_many(5);
 
     // one column
     $messages = Message::whereNotNull('created_at');
@@ -156,8 +164,14 @@ test('Retrieve whereNotNull param', function() {
     }
 });
 
-test('Retrieve whereNull param', function() {
-    $message_ids = $this->factory->message->create_many(5);
+test('Retrieve using whereNotNull param and Limit', function() {
+    $this->factory->message->create_many(20);
+    $messages = Message::whereNotNull('created_at', ['limit' => 5]);
+    $this->assertEquals(5, count($messages));
+});
+
+test('Retrieve using whereNull param', function() {
+    $this->factory->message->create_many(5);
 
     // one column
     $messages = Message::whereNull('original_message_id');
@@ -178,6 +192,12 @@ test('Retrieve whereNull param', function() {
     foreach($messages as $message) {
         $this->assertTrue($message instanceof Message);
     }
+});
+
+test('Retrieve using whereNull param and Limit', function() {
+    $this->factory->message->create_many(20);
+    $messages = Message::whereNull('original_message_id', ['limit' => 5]);
+    $this->assertEquals(5, count($messages));
 });
 
 test('Create a model with invalid attribute throws InvalidAttributeException', function() {
@@ -334,4 +354,8 @@ test('Save a new version of a message', function() {
     $this->assertCount(2, $message->versions());
     $this->assertSame('This is a another new name', $version->name);
     $this->assertSame('This is a another new body', $version->body);
+});
+
+test('Retrieve all Message templates', function() {
+
 });

@@ -31,8 +31,9 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 
 export const SendTemplate = () => {
     const { status } = useListFetch();
-    const [content, setContent] = useState<String>();
-    const [listId, setListId] = useState<String>();
+    const [content, setContent] = useState<string>();
+    const [listId, setListId] = useState<string>();
+    const [subscriberCount, setSubscriberCount] = useState<number>(0);
     const { state: { lists } } = useList();
     const { sendTemplate, success, errors } = useSendTemplate({ listId, content });
     const { templateId, getTemplate } = useTemplateApi();
@@ -47,6 +48,14 @@ export const SendTemplate = () => {
         loadTemplate();
     }, [templateId, getTemplate]);
 
+    useEffect(() => {
+        console.log(listId)
+        const listData = lists.filter((list: any) => list.id === listId)[0];
+        const subscriberCount = listData?.subscriber_count || 0;
+        console.log("subscriberCount", subscriberCount)
+        setSubscriberCount(Number(subscriberCount));
+    }, [listId, lists]);
+
     if (status === "loading") {
         return <Spinner />
     }
@@ -56,7 +65,7 @@ export const SendTemplate = () => {
     }
 
     if (success) {
-        return <MessageSent count={201} />
+        return <MessageSent count={subscriberCount} />
     }
 
     return (
@@ -66,7 +75,7 @@ export const SendTemplate = () => {
             <p>{__("Choose a group to send this message to.", "cds-snc")}</p>
             {lists.length >= 1 && <ListSelect lists={lists} handleChange={(val: string) => {
                 setListId(val)
-            }} />}
+            }} />} {`${subscriberCount}`}
             <button style={{ marginRight: "20px" }} className="button button-primary" onClick={sendTemplate}>{__("Send Email")}</button>
             <button className="button">{__("Cancel")}</button>
             <CreateNewList />

@@ -9,14 +9,14 @@
         "confirm_redirect_url": "https:\/\/articles.alpha.canada.ca\/confirmation",
         "unsubscribe_redirect_url": "https:\/\/articles.alpha.canada.ca\/unsubscribed-from-mailing-list-labonnement-supprime",
         "id": "10883abf-9bcf-4466-a641-ca433043ef48",
-        "subscriber_count": 0
+        "subscriber_count": 2
     },
     {
         "name": "List 2",
         "language": "en",
         "service_id": "c7902fc7-37f0-419c-84c8-3ab499ee24c8",
         "id": "6c0dbe26-d842-49e8-9139-5f28b5c2aefa",
-        "subscriber_count": 0
+        "subscriber_count": 5
     },
     {
         "name": "List 3",
@@ -28,7 +28,7 @@
         "confirm_redirect_url": "https:\/\/articles.alpha.canada.ca\/confirmation",
         "unsubscribe_redirect_url": "https:\/\/articles.alpha.canada.ca\/unsubscribed-from-mailing-list-labonnement-supprime",
         "id": "d6313e29-721d-4263-b0bb-58bed90571f4",
-        "subscriber_count": 0
+        "subscriber_count": 10
     },
     {
         "name": "List 4",

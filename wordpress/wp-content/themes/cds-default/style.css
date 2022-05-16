@@ -513,3 +513,8 @@ nav.nav--about li a:focus {
     margin-bottom:20px;
     line-height: 1.7em;
 }
+
+/* Date modified */
+#wb-dtmd {
+    font-size: 16px;
+}

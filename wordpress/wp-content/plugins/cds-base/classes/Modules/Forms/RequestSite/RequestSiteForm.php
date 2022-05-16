@@ -18,19 +18,6 @@ class RequestSiteForm
         add_shortcode('request-site-form', [$this, 'render']);
     }
 
-    public function errorMessage(array $error_ids): string
-    {
-        $errorEl = '<div id="request-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
-        $errorEl .= '<div class="gc-alert__body">';
-        $errorEl .= '<h2 class="gc-h3">' . __('Please complete the required field(s) to continue', 'cds-snc') . '</h2>';
-        $errorEl .= '<ol class="gc-ordered-list">';
-        foreach ($error_ids as $id) {
-            $errorEl .= '<li><a href="#' . $id . '" class="gc-error-link">' . $id . '</a></li>';
-        }
-        $errorEl .= '</ol></div></div>';
-        return $errorEl;
-    }
-
     public function render($atts, $content = null): string
     {
         global $wp;
@@ -41,7 +28,7 @@ class RequestSiteForm
             <?php
 
             $required_keys = ['site', 'usage', 'target', 'timeline'];
-            $all_keys = array_merge($required_keys, ['usage-optional', 'target-optional']);
+            $all_keys = array_merge($required_keys, ['optional-usage-value', 'optional-target-value']);
             $all_values = [];
             $empty_values = [];
 
@@ -136,7 +123,7 @@ class RequestSiteForm
 
                 <?php
                 if ($is_error) {
-                    echo $this->errorMessage($empty_values);
+                    Utils::errorMessage($empty_values);
                 }
                 ?>
             <form id="cds-form-step-1" method="POST" action="<?php echo $current_url; ?>">
@@ -177,7 +164,7 @@ class RequestSiteForm
                 <!-- end site -->
 
                 <!-- usage -->
-                <div role="group" aria-labelledby="usage_types">
+                <div role="group" aria-labelledby="usage_types" id="usage">
                     <label class="gc-label" for="usage" id="usage_types">
                         <?php _e('What will you use your site for?', 'cds-snc'); ?>
                     </label>
@@ -221,13 +208,13 @@ class RequestSiteForm
                         ?>
                     </div>
                     <div id="optional-usage" aria-hidden="false">
-                        <?php Utils::textField(id: 'usage-optional', label: __('Other usage', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'optional-usage-value', label: __('Other usage', 'cds-snc')); ?>
                     </div>
                 </div>
                 <!-- end usage -->
 
                 <!-- target -->
-                <div role="group" aria-labelledby="target_types">
+                <div role="group" aria-labelledby="target_types" id="target">
                     <label class="gc-label" for="target" id="target_types">
                         <?php _e('Who are the target audiences for your site?', 'cds-snc'); ?>
                     </label>
@@ -271,7 +258,7 @@ class RequestSiteForm
                     ?>
                     </div>
                     <div id="optional-target" aria-hidden="false">
-                        <?php Utils::textField(id: 'target-optional', label: __('Other target audience', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'optional-target-value', label: __('Other target audience', 'cds-snc')); ?>
                     </div>
                 </div>
 

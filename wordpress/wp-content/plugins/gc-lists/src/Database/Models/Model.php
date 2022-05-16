@@ -272,6 +272,20 @@ class Model implements JsonSerializable
     }
 
     /**
+     * Reload a fresh model instance from the database
+     *
+     * @return static
+     */
+    public function fresh(): static
+    {
+        if (!$this->exists) {
+            return $this;
+        }
+
+        return static::find($this->getAttribute('id'));
+    }
+
+    /**
      * Update the created_at timestamp on the model
      *
      * @param $time

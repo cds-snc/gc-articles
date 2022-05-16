@@ -108,7 +108,8 @@ class Message extends Model
 
         $version->performInsert();
 
-        return $this;
+        // Return a fresh model
+        return $this->fresh();
     }
 
     /**

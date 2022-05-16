@@ -303,7 +303,10 @@ test('Retrieve sent versions of a message', function() {
 });
 
 test('Save a new version of a message', function() {
-    $message_id = $this->factory->message->create();
+    $message_id = $this->factory->message->create([
+        'name' => 'Original name',
+        'body' => 'Original body',
+    ]);
     $message = Message::find($message_id);
 
     // Save a version
@@ -311,12 +314,24 @@ test('Save a new version of a message', function() {
     $message->body = 'This is a new body';
     $message = $message->saveVersion();
 
+    // Original model unchanged
+    $this->assertSame('Original name', $message->name);
+    $this->assertSame('Original body', $message->body);
+
+    // Check the version
+    $version = $message->latest();
     $this->assertCount(1, $message->versions());
+    $this->assertSame('This is a new name', $version->name);
+    $this->assertSame('This is a new body', $version->body);
 
     // Save another version
     $message->name = 'This is a another new name';
     $message->body = 'This is a another new body';
     $message = $message->saveVersion();
 
+    // Check the new version
+    $version = $message->latest();
     $this->assertCount(2, $message->versions());
+    $this->assertSame('This is a another new name', $version->name);
+    $this->assertSame('This is a another new body', $version->body);
 });

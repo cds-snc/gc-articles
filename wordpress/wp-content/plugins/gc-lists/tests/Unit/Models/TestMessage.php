@@ -270,13 +270,14 @@ test('Retrieve the most recent version of a Message', function() {
         ]);
     }
 
-    $message = Message::get($message_id);
+    $message = Message::find($message_id);
+    $latest = $message->latest();
 
     $this->assertTrue($message instanceof Message);
-    $this->assertEquals(5, $message->version_id);
+    $this->assertEquals(5, $latest->version_id);
 });
 
-test('Retrieve the original of the Message version', function() {
+test('Retrieve the original of a Message version', function() {
     $message_id = $this->factory->message->create();
 
     // Generate 5 versions
@@ -287,13 +288,20 @@ test('Retrieve the original of the Message version', function() {
         ]);
     }
 
-    // Get the latest version
-    $message = Message::get($message_id);
+    // Get the message
+    $message = Message::find($message_id);
 
     // Get original
     $original = $message->original();
-
     $this->assertTrue($original instanceof Message);
+
+    // In this case, the original and message are the same object
+    $this->assertSame($original, $message);
+
+    // Grab a random version and check its original against the message
+    $version = $message->versions()->random();
+    $this->assertTrue($version instanceof Message);
+    $this->assertEquals($version->original(), $message);
 });
 
 test('Retrieve sent versions of a message', function() {

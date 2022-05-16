@@ -207,7 +207,17 @@ class Model implements JsonSerializable
             return;
         }
 
-        return $this->attributes[$key] ?? null;
+        return $this->getAttributes()[$key] ?? null;
+    }
+
+    /**
+     * Get all of the current attributes on the model.
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 
     /**
@@ -221,7 +231,7 @@ class Model implements JsonSerializable
         $time = Carbon::now()->timestamp;
         $this->updateUpdatedTimestamp($time);
 
-        $wpdb->update($this->tableName, $this->getFillableFromArray($this->attributes), [
+        $wpdb->update($this->tableName, $this->getFillableFromArray($this->getAttributes()), [
             'id' => $this->id,
         ]);
 
@@ -240,7 +250,7 @@ class Model implements JsonSerializable
         $this->updateCreatedTimestamp($time);
         $this->updateUpdatedTimestamp($time);
 
-        $wpdb->insert($this->tableName, $this->getFillableFromArray($this->attributes));
+        $wpdb->insert($this->tableName, $this->getFillableFromArray($this->getAttributes()));
 
         $this->exists = true;
         $this->id = $wpdb->insert_id;
@@ -277,7 +287,7 @@ class Model implements JsonSerializable
     {
         // @TODO: this should probably use $model->visible
         $model = [];
-        foreach ($this->attributes as $attribute => $value) {
+        foreach ($this->getAttributes() as $attribute => $value) {
             $model[$attribute] = $value;
         }
 
@@ -492,7 +502,7 @@ class Model implements JsonSerializable
      */
     public function toArray(): array
     {
-        return $this->attributes;
+        return $this->getAttributes();
     }
 
     /**

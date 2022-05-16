@@ -7,6 +7,7 @@ namespace GCLists\Database\Models;
 use Carbon\Carbon;
 use GCLists\Exceptions\InvalidAttributeException;
 use GCLists\Exceptions\JsonEncodingException;
+use GCLists\Exceptions\QueryException;
 use Illuminate\Support\Collection;
 use JsonSerializable;
 
@@ -228,12 +229,18 @@ class Model implements JsonSerializable
     protected function performUpdate(): static
     {
         global $wpdb;
+        $wpdb->suppress_errors(true);
+
         $time = Carbon::now()->timestamp;
         $this->updateUpdatedTimestamp($time);
 
-        $wpdb->update($this->tableName, $this->getFillableFromArray($this->getAttributes()), [
+        $updated = $wpdb->update($this->tableName, $this->getAttributes(), [
             'id' => $this->id,
         ]);
+
+        if (false === $updated) {
+            throw new QueryException($wpdb->last_error);
+        }
 
         return $this;
     }
@@ -246,11 +253,17 @@ class Model implements JsonSerializable
     protected function performInsert(): static
     {
         global $wpdb;
+        $wpdb->suppress_errors(true);
+
         $time = Carbon::now()->timestamp;
         $this->updateCreatedTimestamp($time);
         $this->updateUpdatedTimestamp($time);
 
-        $wpdb->insert($this->tableName, $this->getFillableFromArray($this->getAttributes()));
+        $inserted = $wpdb->insert($this->tableName, $this->getAttributes());
+
+        if (false === $inserted) {
+            throw new QueryException($wpdb->last_error);
+        }
 
         $this->exists = true;
         $this->id = $wpdb->insert_id;

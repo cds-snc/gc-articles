@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use GCLists\Database\Models\Message;
 use GCLists\Exceptions\InvalidAttributeException;
+use GCLists\Exceptions\QueryException;
 use Illuminate\Support\Collection;
 
 beforeEach(function() {
@@ -179,7 +180,7 @@ test('Retrieve whereNull param', function() {
     }
 });
 
-test('Create a model with invalid attribute', function() {
+test('Create a model with invalid attribute throws InvalidAttributeException', function() {
     $this->expectException(InvalidAttributeException::class);
 
     Message::create([
@@ -190,20 +191,35 @@ test('Create a model with invalid attribute', function() {
     ]);
 });
 
-test('Model instance doesnt save invalid attributes', function() {
+test('Existing model instance throws QueryException on update with invalid attributes', function() {
     $message = Message::create([
         'name' => 'Name of the message',
         'subject' => 'Subject of the message',
         'body' => 'Body of the message'
     ]);
 
+    $this->expectException(QueryException::class);
+
     $message->name = 'New name of the message';
-    $message->notacolumn = "Huzzah";
+    $message->foo = "Bar";
     $message->save();
 
     $this->assertTrue($message instanceof Message);
     $this->assertObjectNotHasAttribute('notacolumn', $message);
     $this->assertEquals('New name of the message', $message->name);
+});
+
+test('New model throws QueryException on save with invalid attributes', function() {
+    $message = new Message([
+        'name' => 'Name of the message',
+        'subject' => 'Subject of the message',
+        'body' => 'Body of the message',
+    ]);
+
+    $message->foo = 'Bar';
+
+    $this->expectException(QueryException::class);
+    $message->save();
 });
 
 test('Retrieve versions of a Message', function() {
@@ -226,6 +242,7 @@ test('Retrieve versions of a Message', function() {
 test('Retrieve the most recent version of a Message', function() {
     $message_id = $this->factory->message->create();
 
+    // Generate 5 versions
     for($version_id = 1; $version_id <= 5; $version_id++) {
         $this->factory->message->create([
             'original_message_id' => $message_id,
@@ -242,6 +259,7 @@ test('Retrieve the most recent version of a Message', function() {
 test('Retrieve the original of the Message version', function() {
     $message_id = $this->factory->message->create();
 
+    // Generate 5 versions
     for($version_id = 1; $version_id <= 5; $version_id++) {
         $this->factory->message->create([
             'original_message_id' => $message_id,
@@ -261,7 +279,7 @@ test('Retrieve the original of the Message version', function() {
 test('Retrieve sent versions of a message', function() {
     $message_id = $this->factory->message->create();
 
-    // Generate versions, odd = sent (3)
+    // Generate 5 versions, odd = sent (3)
     for($version_id = 1; $version_id <= 5; $version_id++) {
         $timestamp = Carbon::now()->toDateTimeString();
 
@@ -283,3 +301,22 @@ test('Retrieve sent versions of a message', function() {
         $this->assertInstanceOf(Message::class, $version);
     });
 });
+
+test('Save a new version of a message', function() {
+    $message_id = $this->factory->message->create();
+    $message = Message::find($message_id);
+
+    // Save a version
+    $message->name = 'This is a new name';
+    $message->body = 'This is a new body';
+    $message = $message->saveVersion();
+
+    $this->assertCount(1, $message->versions());
+
+    // Save another version
+    $message->name = 'This is a another new name';
+    $message->body = 'This is a another new body';
+    $message = $message->saveVersion();
+
+    $this->assertCount(2, $message->versions());
+})->group('version');

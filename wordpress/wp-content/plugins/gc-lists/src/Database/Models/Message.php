@@ -60,12 +60,12 @@ class Message extends Model
     /**
      * Get the Original message
      *
-     * @return Message|null
+     * @return Message
      */
-    public function original(): Message|null
+    public function original(): Message
     {
         if (!$this->original_message_id) {
-            return null;
+            return $this;
         }
 
         $original = static::whereEquals(['id' => $this->getAttribute('original_message_id')]);
@@ -150,23 +150,5 @@ class Message extends Model
         }
 
         return $sent;
-    }
-
-    /**
-     * Retrieve the most recent version of a Message
-     *
-     * @param $original_message_id
-     *
-     * @return Message
-     */
-    public static function get($original_message_id): Message
-    {
-        $message = Message::find($original_message_id);
-
-        if ($versions = $message->versions()) {
-            return $versions->last();
-        }
-
-        return $message;
     }
 }

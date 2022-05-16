@@ -352,6 +352,21 @@ class Model implements JsonSerializable
     }
 
     /**
+     * Update an existing model with provided attributes
+     *
+     * @param  array  $attributes
+     * @return $this
+     */
+    public function update(array $attributes): static
+    {
+        if (!$this->exists) {
+            return false;
+        }
+
+        return $this->fill($attributes)->save();
+    }
+
+    /**
      * Convert the model instance to JSON.
      *
      * @param  int  $options

@@ -62,7 +62,7 @@ test('Create Message using static create method', function() {
     $this->assertEquals('This is the subject', $message->subject);
 });
 
-test('Update an existing Message', function() {
+test('Update an existing Message by save method', function() {
     // create a message
     $message = new Message([
         'name' => 'This is the message name',
@@ -75,6 +75,30 @@ test('Update an existing Message', function() {
     $message->name = 'This is a new message name';
     $message->subject = 'This is a new message subject';
     $message->save();
+
+    // let's get it back from the db
+    $updated = Message::find($message->id);
+    $this->assertEquals('This is a new message name', $updated->name);
+    $this->assertEquals('This is a new message subject', $updated->subject);
+});
+
+test('Update an existing Message using the fill method', function() {
+    // create a message
+    $message = new Message([
+        'name' => 'This is the message name',
+        'subject' => 'This is the message subject',
+        'body' => 'This is the message body'
+    ]);
+    $message->save();
+
+    $message->update([
+        'name' => 'This is a new message name',
+        'subject' => 'This is a new message subject',
+    ]);
+
+    $this->assertEquals('This is a new message name', $message->name);
+    $this->assertEquals('This is a new message subject', $message->subject);
+    $this->assertEquals('This is the message body', $message->body);
 
     // let's get it back from the db
     $updated = Message::find($message->id);

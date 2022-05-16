@@ -54,7 +54,7 @@ class Message extends Model
      */
     public function versions(): ?Collection
     {
-        return static::whereEquals(['original_message_id' => $this->id]);
+        return static::whereEquals(['original_message_id' => $this->getAttribute('id')]);
     }
 
     /**
@@ -68,7 +68,7 @@ class Message extends Model
             return null;
         }
 
-        $original = static::whereEquals(['id' => $this->original_message_id]);
+        $original = static::whereEquals(['id' => $this->getAttribute('original_message_id')]);
 
         return $original->first();
     }
@@ -94,7 +94,7 @@ class Message extends Model
      */
     public function getLastVersionId(): int
     {
-        return $this->latest()->version_id ?? 0;
+        return $this->latest()->getAttribute('version_id') ?? 0;
     }
 
     /**
@@ -123,17 +123,33 @@ class Message extends Model
     }
 
     /**
-     * Static methods
+     * Retrieve Message templates
+     *
+     * @param  array  $options
+     * @return Collection|null
      */
-
-    public static function templates(array $options = ['limit' => 5]): ?Collection
+    public static function templates(array $options = []): ?Collection
     {
-        return static::whereNull('original_message_id');
+        return static::whereNull('original_message_id', $options);
     }
 
-    public static function messages(array $options = ['limit' => 5])
+    /**
+     * Retrieve sent messages
+     *
+     * @param  array  $options
+     * @return Collection|null
+     */
+    public static function sentMessages(array $options = []): ?Collection
     {
-        // static method to get all sent Messages
+        $sent = static::all()->filter(function ($message) {
+            return (bool)$message->attributes['sent_at'];
+        });
+
+        if (isset($options['limit'])) {
+            return $sent->take($options['limit']);
+        }
+
+        return $sent;
     }
 
     /**

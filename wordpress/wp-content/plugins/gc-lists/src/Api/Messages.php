@@ -134,7 +134,7 @@ class Messages extends BaseEndpoint
      */
     public function create(WP_REST_Request $request): WP_REST_Response
     {
-        // @TODO: data validation and sanitation
+        // @TODO: data validation and santitization
         $message = Message::create([
             'name' => $request['name'],
             'subject' => $request['subject'],
@@ -143,16 +143,6 @@ class Messages extends BaseEndpoint
         ]);
 
         // @TODO: Probably need to catch exceptions from Model::create()
-        if (!$message) {
-            $response = new WP_REST_Response([
-                'error' => 'There was an unspecified error'
-            ]);
-
-            $response->set_status(500);
-
-            return $response;
-        }
-
         $response = new WP_REST_Response($message->toJson());
 
         $response->set_status(200);
@@ -169,6 +159,7 @@ class Messages extends BaseEndpoint
      */
     public function update(WP_REST_Request $request): WP_REST_Response
     {
+        // @TODO: data validation and santitization
         $message = Message::find($request['id']);
 
         $message->update([

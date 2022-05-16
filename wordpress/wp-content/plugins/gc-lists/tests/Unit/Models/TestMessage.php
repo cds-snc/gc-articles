@@ -357,5 +357,45 @@ test('Save a new version of a message', function() {
 });
 
 test('Retrieve all Message templates', function() {
+    $this->factory->message->create_many(20);
 
+    $templates = Message::templates();
+    $this->assertCount(20, $templates);
+
+    $templates = Message::templates(['limit' => 5]);
+    $this->assertCount(5, $templates);
+});
+
+test('Retrieve only Sent Messages', function() {
+    // Create a Message template and some versions including sent messages
+    $message_id = $this->factory->message->create();
+
+    // Generate 5 versions, odd = sent (3)
+    for($version_id = 1; $version_id <= 5; $version_id++) {
+        $timestamp = Carbon::now()->toDateTimeString();
+
+        $this->factory->message->create([
+            'original_message_id' => $message_id,
+            'version_id' => $version_id,
+            'sent_at' => ($version_id %2 ? $timestamp : NULL)
+        ]);
+    }
+
+    // Do it again with another Message template
+    $message_id = $this->factory->message->create();
+
+    // Generate 5 versions, even = sent (2)
+    for($version_id = 1; $version_id <= 5; $version_id++) {
+        $timestamp = Carbon::now()->toDateTimeString();
+
+        $this->factory->message->create([
+            'original_message_id' => $message_id,
+            'version_id' => $version_id,
+            'sent_at' => ($version_id %2 ? NULL : $timestamp)
+        ]);
+    }
+
+    $this->assertCount(2, Message::templates());
+    $this->assertCount(5, Message::sentMessages());
+    $this->assertCount(3, Message::sentMessages(['limit' => 3]));
 });

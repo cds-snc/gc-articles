@@ -22,12 +22,12 @@ test('asserts textField returns a text input with expected values', function () 
     expect($field)->toContain('<input type="text" id="myId" name="myId" value="" required class="gc-input-text" />');
 });
 
-test('asserts textField returns a text input that is not required when id ends with "optional"', function () {
-    $field = Utils::textField('myId-optional', 'Enter your middle name', echo: false);
+test('asserts textField returns a text input that is not required when id starts with "optional"', function () {
+    $field = Utils::textField('optional-myID', 'Enter your middle name', echo: false);
     $field = preg_replace('/\s+/', ' ', $field); // remove all whitespace
 
-    expect($field)->toContain('<label class="gc-label" for="myId-optional" id="myId-optional-label">Enter your middle name</label>');
-    expect($field)->toContain('<input type="text" id="myId-optional" name="myId-optional" value="" class="gc-input-text" />');
+    expect($field)->toContain('<label class="gc-label" for="optional-myID" id="optional-myID-label">Enter your middle name</label>');
+    expect($field)->toContain('<input type="text" id="optional-myID" name="optional-myID" value="" class="gc-input-text" />');
 });
 
 test('asserts textField returns an email input when id is "email"', function () {

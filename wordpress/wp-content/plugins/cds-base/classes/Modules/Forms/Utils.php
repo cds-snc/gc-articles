@@ -26,7 +26,7 @@ class Utils
     public static function textField(string $id, string $label, ?string $description = null, ?string $value = '', ?string $placeholder = null, ?bool $echo = true)
     {
         $isEmail = $id === 'email';
-        $isRequired = !str_ends_with($id, "optional");
+        $isRequired = !str_starts_with($id, "optional");
         ob_start();
         ?>
         <div class="focus-group">
@@ -147,5 +147,22 @@ class Utils
             return $field;
         }
         echo $field;
+    }
+
+    public static function errorMessage(array $error_ids, ?bool $echo = true)
+    {
+        $errorEl = '<div id="request-error" class="gc-alert gc-alert--error gc-alert--validation" data-testid="alert" tabindex="0" role="alert">';
+        $errorEl .= '<div class="gc-alert__body">';
+        $errorEl .= '<h2 class="gc-h3">' . __('Please complete the required field(s) to continue', 'cds-snc') . '</h2>';
+        $errorEl .= '<ol class="gc-ordered-list">';
+        foreach ($error_ids as $id) {
+            $errorEl .= '<li><a href="#' . $id . '" class="gc-error-link">' . $id . '</a></li>';
+        }
+        $errorEl .= '</ol></div></div>';
+
+        if (!$echo) {
+            return $errorEl;
+        }
+        echo $errorEl;
     }
 }

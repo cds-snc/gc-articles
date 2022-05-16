@@ -48,7 +48,7 @@ class Setup
             return ['error' => true, "error_message" => $nonceErrorMessage];
         }
 
-        $keys_page_1 = ['site', 'usage', 'usage-optional', 'target', 'target-optional', 'timeline'];
+        $keys_page_1 = ['site', 'usage', 'optional-usage-value', 'target', 'optional-target-value', 'timeline'];
         $keys_page_2 = ['fullname', 'email', 'role', 'department'];
         $empty_keys = [];
 

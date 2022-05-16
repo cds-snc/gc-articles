@@ -68,7 +68,7 @@ class Model implements JsonSerializable
      *
      * @return array
      */
-    protected static function loadModels($data): array
+    protected static function loadModelsFromDbResults($data): array
     {
         $class = get_called_class();
 
@@ -435,7 +435,7 @@ class Model implements JsonSerializable
             return null;
         }
 
-        return collect(self::loadModels($data));
+        return collect(self::loadModelsFromDbResults($data));
     }
 
     /**
@@ -465,7 +465,7 @@ class Model implements JsonSerializable
             return null;
         }
 
-        return collect(self::loadModels($data));
+        return collect(self::loadModelsFromDbResults($data));
     }
 
     /**
@@ -500,7 +500,7 @@ class Model implements JsonSerializable
             return null;
         }
 
-        return collect(self::loadModels($data));
+        return collect(self::loadModelsFromDbResults($data));
     }
 
     /**
@@ -535,7 +535,7 @@ class Model implements JsonSerializable
             return null;
         }
 
-        return collect(self::loadModels($data));
+        return collect(self::loadModelsFromDbResults($data));
     }
 
     /**

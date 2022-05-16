@@ -87,6 +87,11 @@ class Message extends Model
         return $this;
     }
 
+    /**
+     * Get the latest version_id
+     *
+     * @return int
+     */
     public function getLastVersionId(): int
     {
         return $this->latest()->version_id ?? 0;
@@ -121,9 +126,9 @@ class Message extends Model
      * Static methods
      */
 
-    public static function templates(array $options = ['limit' => 5])
+    public static function templates(array $options = ['limit' => 5]): ?Collection
     {
-        // get all "templates" (no original_message_id)
+        return static::whereNull('original_message_id');
     }
 
     public static function messages(array $options = ['limit' => 5])

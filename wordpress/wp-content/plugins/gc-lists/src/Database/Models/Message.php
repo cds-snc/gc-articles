@@ -141,14 +141,6 @@ class Message extends Model
      */
     public static function sentMessages(array $options = []): ?Collection
     {
-        $sent = static::all()->filter(function ($message) {
-            return (bool)$message->attributes['sent_at'];
-        });
-
-        if (isset($options['limit'])) {
-            return $sent->take($options['limit']);
-        }
-
-        return $sent;
+        return static::whereNotNull(['original_message_id', 'sent_at'], $options);
     }
 }

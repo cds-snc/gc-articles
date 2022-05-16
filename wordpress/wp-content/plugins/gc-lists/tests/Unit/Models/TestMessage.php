@@ -319,4 +319,4 @@ test('Save a new version of a message', function() {
     $message = $message->saveVersion();
 
     $this->assertCount(2, $message->versions());
-})->group('version');
+});

@@ -73,9 +73,42 @@ class Message extends Model
         return $original->first();
     }
 
-    public function saveVersion()
+    public function latest(): static
     {
-        // create a new version of current model
+        if ($versions = $this->versions()) {
+            return $versions->last();
+        }
+
+        return $this;
+    }
+
+    public function getLastVersionId(): int
+    {
+        return $this->latest()->version_id ?? 0;
+    }
+
+    /**
+     * Create a new version of this message
+     *
+     * @return $this
+     */
+    public function saveVersion(): static
+    {
+        $latest_version = $this->getLastVersionId();
+        $latest_version++;
+
+        $original = $this->getAttributes();
+
+        $version = new static();
+
+        $version->forceFill(array_merge($this->getFillableFromArray($original), [
+            'original_message_id' => $this->getAttribute('id'),
+            'version_id' => $latest_version,
+        ]));
+
+        $version->performInsert();
+
+        return $this;
     }
 
     /**

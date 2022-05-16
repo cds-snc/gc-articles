@@ -69,9 +69,10 @@ test('Create a message', function() {
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals(200, $response->get_status());
-	$this->assertIsObject($response->get_data());
-	$this->assertObjectHasAttribute('name', $response->get_data());
-	$this->assertEquals('Name of the message', $response->get_data()->name);
+	$this->assertJson($response->get_data());
+
+	$message = json_decode($response->get_data());
+	$this->assertEquals('Name of the message', $message->name);
 });
 
 test('Update a message', function() {
@@ -92,9 +93,10 @@ test('Update a message', function() {
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
-	$this->assertIsObject($response->get_data());
-	$this->assertObjectHasAttribute('name', $response->get_data());
-	$this->assertEquals('Name of the message', $response->get_data()->name);
+	$this->assertJson($response->get_data());
+
+	$message = json_decode($response->get_data());
+	$this->assertEquals('Name of the message', $message->name);
 });
 
 test('Delete a message', function() {
@@ -107,6 +109,7 @@ test('Delete a message', function() {
 	$request  = new WP_REST_Request( 'DELETE', "/gc-lists/messages/{$message_ids[2]}" );
 	$response = $this->server->dispatch( $request );
 
+	// After deleting one, there should be four left
 	$this->assertEquals( 200, $response->get_status() );
 	$count = $wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
 	$this->assertEquals(4, $count);

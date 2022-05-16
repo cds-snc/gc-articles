@@ -24,7 +24,7 @@ test('Get all messages', function() {
 	$this->assertJson($response->get_data());
 	$this->assertCount(5, json_decode($response->get_data()));
 
-})->group('test');
+});
 
 test('Get sent messages', function() {
 	$template = $this->factory->message->create_and_get();

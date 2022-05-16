@@ -74,6 +74,7 @@ class Model implements JsonSerializable
 
         $func = function ($data) use ($class) {
             $model = new $class();
+            $model->exists = true;
             return $model->forceFill((array)$data);
         };
 

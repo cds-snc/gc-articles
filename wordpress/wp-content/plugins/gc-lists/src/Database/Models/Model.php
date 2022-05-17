@@ -172,7 +172,7 @@ class Model implements JsonSerializable
      * @param  array  $attributes
      * @return array
      */
-    protected function getFillableFromArray(array $attributes): array
+    public function getFillableFromArray(array $attributes): array
     {
         if (count($this->fillable)) {
             return array_intersect_key($attributes, array_flip($this->fillable));

@@ -78,11 +78,14 @@ class Messages extends BaseEndpoint
     /**
      * Get all Message templates
      *
+     * @param  WP_REST_Request  $request
      * @return WP_REST_Response
      */
-    public function all(): WP_REST_Response
+    public function all(WP_REST_Request $request): WP_REST_Response
     {
-        $results = Message::all();
+        $options = $this->getOptions($request);
+
+        $results = Message::templates($options);
 
         $response = new WP_REST_Response($results);
 
@@ -94,11 +97,14 @@ class Messages extends BaseEndpoint
     /**
      * Get sent Messages
      *
+     * @param  WP_REST_Request  $request
      * @return WP_REST_Response
      */
-    public function sent(): WP_REST_Response
+    public function sent(WP_REST_Request $request): WP_REST_Response
     {
-        $results = Message::whereNotNull('original_message_id');
+        $options = $this->getOptions($request);
+
+        $results = Message::sentMessages($options);
 
         $response = new WP_REST_Response($results);
 
@@ -192,5 +198,23 @@ class Messages extends BaseEndpoint
         $response->set_status(200);
 
         return $response;
+    }
+
+    /**
+     * Build up an array of valid $options from request params
+     *
+     * @param  WP_REST_Request  $request
+     * @return array
+     */
+    protected function getOptions(WP_REST_Request $request): array
+    {
+        $options = [];
+        $params  = $request->get_params();
+
+        if (isset($params['limit'])) {
+            $options['limit'] = (int)$params['limit'] ?: 5;
+        }
+
+        return $options;
     }
 }

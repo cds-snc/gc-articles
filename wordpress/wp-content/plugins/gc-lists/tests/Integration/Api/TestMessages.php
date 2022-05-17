@@ -1,7 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
+use GCLists\Api\Messages;
 
 beforeEach(function() {
 	global $wp_rest_server;
@@ -12,6 +12,11 @@ beforeEach(function() {
 	$this->tableName = $wpdb->prefix . "messages";
 
 	do_action( 'rest_api_init' );
+});
+
+test('getInstance', function() {
+    $messages = Messages::getInstance();
+    $this->assertInstanceOf(Messages::class, $messages);
 });
 
 test('Get all Message templates', function() {
@@ -55,8 +60,12 @@ test('Get all templates with limit', function() {
     $response = $this->server->dispatch( $request );
 
     $this->assertEquals( 200, $response->get_status() );
-    $this->assertJson($response->get_data());
-    $this->assertCount(5, json_decode($response->get_data()));
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toHaveCount(5);
 });
 
 test('Get all templates with invalid limit returns default 5', function() {
@@ -69,8 +78,12 @@ test('Get all templates with invalid limit returns default 5', function() {
     $response = $this->server->dispatch( $request );
 
     $this->assertEquals( 200, $response->get_status() );
-    $this->assertJson($response->get_data());
-    $this->assertCount(5, json_decode($response->get_data()));
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toHaveCount(5);
 });
 
 test('Get sent messages', function() {
@@ -93,9 +106,13 @@ test('Get sent messages', function() {
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
-	$this->assertJson($response->get_data());
-	$this->assertCount(13, json_decode($response->get_data()));
-})->group('test');
+
+	$body = $response->get_data()->toJson();
+
+	expect($body)
+        ->json()
+        ->toHaveCount(13);
+});
 
 test('Get one message', function() {
 	$message = $this->factory->message->create_and_get([
@@ -106,11 +123,28 @@ test('Get one message', function() {
 	$response = $this->server->dispatch( $request );
 
     $this->assertEquals( 200, $response->get_status() );
-	$this->assertJson($response->get_data());
 
-    $message = json_decode($response->get_data());
-	$this->assertEquals('This is the message name', $message->name);
-});
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toHaveKeys([
+            'id',
+            'name',
+            'subject',
+            'body',
+            'message_type',
+            'sent_at',
+            'sent_to_list_name',
+            'sent_by_email',
+            'original_message_id',
+            'version_id',
+            'created_at',
+            'updated_at'
+        ]);
+
+    $this->assertEquals('This is the message name', $message->name);
+})->group('test');
 
 test('Create a message', function() {
 	$request  = new WP_REST_Request( 'POST', '/gc-lists/messages' );

@@ -80,7 +80,9 @@ class Message extends Model
      */
     public function latest(): static
     {
-        if ($versions = $this->versions()) {
+        $versions = $this->versions();
+
+        if ($versions->count()) {
             return $versions->last();
         }
 

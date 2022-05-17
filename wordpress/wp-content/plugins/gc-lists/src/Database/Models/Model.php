@@ -306,22 +306,6 @@ class Model implements JsonSerializable
     }
 
     /**
-     * How to serialize the model
-     *
-     * @return array
-     */
-    public function __serialize(): array
-    {
-        // @TODO: this should probably use $model->visible
-        $model = [];
-        foreach ($this->getAttributes() as $attribute => $value) {
-            $model[$attribute] = $value;
-        }
-
-        return $model;
-    }
-
-    /**
      * Delete the model from the database
      *
      * @return mixed

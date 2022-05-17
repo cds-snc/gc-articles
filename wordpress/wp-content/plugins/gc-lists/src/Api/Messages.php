@@ -202,7 +202,7 @@ class Messages extends BaseEndpoint
     }
 
     /**
-     * Create a Message
+     * Create a Message template
      *
      * @param  WP_REST_Request  $request
      *
@@ -216,10 +216,10 @@ class Messages extends BaseEndpoint
             'subject' => $request['subject'],
             'body' => $request['body'],
             'message_type' => $request['message_type']
-        ]);
+        ])->fresh();
 
         // @TODO: Probably need to catch exceptions from Model::create()
-        $response = new WP_REST_Response($message->toJson());
+        $response = new WP_REST_Response($message);
 
         $response->set_status(200);
 
@@ -244,7 +244,7 @@ class Messages extends BaseEndpoint
             'body' => $request['body']
         ]);
 
-        $response = new WP_REST_Response($message->toJson());
+        $response = new WP_REST_Response($message);
 
         $response->set_status(200);
 

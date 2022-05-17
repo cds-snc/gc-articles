@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Spinner } from '../common/Spinner';
-const ListTemplates = React.lazy(() => import("./components/ListTemplates"));
+const Home = React.lazy(() => import("./main/Home"));
 const EditTemplate = React.lazy(() => import("./components/EditTemplate"));
 const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
 
@@ -11,7 +11,7 @@ const MessagesApp = () => {
         <Routes>
             <Route path=":serviceId" element={
                 <React.Suspense fallback={<Spinner />}>
-                    <ListTemplates />
+                    <Home />
                 </React.Suspense>
             } />
             <Route path=":serviceId/edit/:templateId" element={

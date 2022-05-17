@@ -91,7 +91,7 @@ class Messages extends BaseEndpoint
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
@@ -110,7 +110,7 @@ class Messages extends BaseEndpoint
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
@@ -122,13 +122,13 @@ class Messages extends BaseEndpoint
      */
     public function get(WP_REST_Request $request): WP_REST_Response
     {
-        $results = Message::find($request['id'])->toJson();
+        $results = Message::find($request['id']);
 
         $response = new WP_REST_Response($results);
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
@@ -153,7 +153,7 @@ class Messages extends BaseEndpoint
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
@@ -178,7 +178,7 @@ class Messages extends BaseEndpoint
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
@@ -197,7 +197,7 @@ class Messages extends BaseEndpoint
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**

@@ -315,10 +315,12 @@ test('Create a message', function() {
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals(200, $response->get_status());
-	$this->assertJson($response->get_data());
 
-	$message = json_decode($response->get_data());
-	$this->assertEquals('Name of the message', $message->name);
+	$body = $response->get_data()->toJson();
+
+	expect($body)
+        ->json()
+        ->toHaveKey('name', 'Name of the message');
 });
 
 test('Update a message', function() {
@@ -339,10 +341,12 @@ test('Update a message', function() {
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
-	$this->assertJson($response->get_data());
 
-	$message = json_decode($response->get_data());
-	$this->assertEquals('Name of the message', $message->name);
+	$body = $response->get_data()->toJson();
+
+	expect($body)
+        ->json()
+        ->toHaveKey('name', 'Name of the message');
 });
 
 test('Delete a message', function() {

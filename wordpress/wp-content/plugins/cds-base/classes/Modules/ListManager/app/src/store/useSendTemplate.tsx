@@ -26,7 +26,6 @@ function useSendTemplate({ listId, content }) {
             setSuccess(true);
         }
 
-
     }, [response, request, listId, content]);
 
     // send the template

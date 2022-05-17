@@ -388,6 +388,47 @@ test('Save a new version of a message', function() {
     $this->assertSame('This is a another new body', $version->body);
 });
 
+test('Save a new version from a version should create a revision of the original', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Original name',
+        'body' => 'Original body',
+    ]);
+
+    $original = Message::find($message_id);
+
+    // Generate 5 versions, odd = sent (3)
+    for($version_id = 1; $version_id <= 5; $version_id++) {
+        $timestamp = Carbon::now()->toDateTimeString();
+
+        $this->factory->message->create([
+            'original_message_id' => $message_id,
+            'version_id' => $version_id,
+            'sent_at' => ($version_id %2 ? $timestamp : NULL)
+        ]);
+    }
+
+    // Select a version from random
+    $version = $original->versions()->random();
+
+    $version->name = 'This is a new name';
+    $version->body = 'This is a new body';
+    $version->saveVersion();
+
+    $inserted_id = $this->wpdb->insert_id;
+    $new_version = Message::find($inserted_id);
+
+    // Assertions about the new version
+    $this->assertEquals('This is a new name', $new_version->name);
+    $this->assertEquals('This is a new body', $new_version->body);
+    $this->assertEquals($original->id, $new_version->original_message_id);
+
+    // New version original and version original should be the same
+    $this->assertEquals($new_version->original(), $version->original());
+
+    // There should now be six versions of the original
+    $this->assertCount(6, $original->versions());
+});
+
 test('Retrieve all Message templates', function() {
     $this->factory->message->create_many(20);
 

@@ -32,7 +32,7 @@ class Message extends Model
 
     public function send()
     {
-        // this will send a message
+        //
     }
 
     /**
@@ -104,15 +104,17 @@ class Message extends Model
      */
     public function saveVersion(): static
     {
-        $latest_version = $this->getLastVersionId();
+        $original = $this->original();
+
+        $latest_version = $original->getLastVersionId();
         $latest_version++;
 
-        $original = $this->getAttributes();
+        $attributes = $this->getAttributes();
 
         $version = new static();
 
-        $version->forceFill(array_merge($this->getFillableFromArray($original), [
-            'original_message_id' => $this->getAttribute('id'),
+        $version->forceFill(array_merge($original->getFillableFromArray($attributes), [
+            'original_message_id' => $original->getAttribute('id'),
             'version_id' => $latest_version,
         ]));
 

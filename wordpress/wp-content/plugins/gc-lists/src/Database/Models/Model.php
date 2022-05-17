@@ -65,7 +65,6 @@ class Model implements JsonSerializable
      * Take an array of db results and turn it into an array of models
      *
      * @param $data
-     *
      * @return array
      */
     protected static function loadModelsFromDbResults($data): array

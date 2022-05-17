@@ -11,9 +11,9 @@ $lang = cds_get_active_language();
 $redirectHost = cds_get_theme_option("redirect_url");
 $pageName = sprintf("/%s?lang=%s", $wp->request, $lang);
 
-if (isset($_GET['page_id']) && isset($_GET['preview'])) {
+if (isset($_GET['preview_id']) && isset($_GET['preview'])) {
     // handles incoming "draft" links from wp table (list view)
-    $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['page_id']), $lang);
+    $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['preview_id']), $lang);
 }
 
 if (

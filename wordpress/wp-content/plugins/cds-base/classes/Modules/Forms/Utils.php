@@ -63,8 +63,10 @@ class Utils
         echo $field;
     }
 
-    public static function radioField(string $name, string $id, string $value, ?bool $echo = true)
+    public static function radioField(string $name, string $id, string $value, string $val = null, ?bool $echo = true)
     {
+        $checked = $id === $val;
+
         ob_start();
         ?>
         <div class="gc-input-radio">
@@ -73,6 +75,9 @@ class Utils
                 name="<?php echo $name; ?>"
                 id="<?php echo sanitize_title($id); ?>"
                 value="<?php echo $id; ?>"
+                <?php if ($checked) {
+                    echo 'checked';
+                } ?>
                 class="gc-radio__input"
                 required
             />
@@ -96,7 +101,7 @@ class Utils
     {
         // set to empty array if a non-array is passed in
         $vals = is_array($vals) ? $vals : [];
-        $checked = in_array($value, $vals);
+        $checked = in_array($id, $vals);
 
         ob_start();
         ?>

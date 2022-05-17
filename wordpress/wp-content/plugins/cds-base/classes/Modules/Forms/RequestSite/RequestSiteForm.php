@@ -208,7 +208,7 @@ class RequestSiteForm
                         ?>
                     </div>
                     <div id="optional-usage" aria-hidden="false">
-                        <?php Utils::textField(id: 'optional-usage-value', label: __('Other usage', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'optional-usage-value', label: __('Other usage', 'cds-snc'), value: $all_values['optional-usage-value']); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -258,7 +258,7 @@ class RequestSiteForm
                     ?>
                     </div>
                     <div id="optional-target" aria-hidden="false">
-                        <?php Utils::textField(id: 'optional-target-value', label: __('Other target audience', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'optional-target-value', label: __('Other target audience', 'cds-snc'), value: $all_values['optional-target-value']); ?>
                     </div>
                 </div>
 

@@ -110,6 +110,14 @@ class Setup
         $message .= "\n\n" . 'Message:' . "\n";
         $message .= sanitize_text_field($_POST['message']);
 
+        // Add the submitted URL to the message text
+        if (isset($_POST['url']) && $_POST['url'] !== '') {
+            $message .=
+            "\n\n" .
+            'URL: ' .
+            sanitize_text_field($_POST['url']);
+        }
+
         $messenger = new Messenger();
         $response = $messenger->createTicket($goal, $fullname, $email, $message);
 

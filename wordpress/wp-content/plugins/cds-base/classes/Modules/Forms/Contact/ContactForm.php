@@ -68,6 +68,9 @@ class ContactForm
                 }
             }
 
+                // Add current URL and path to request
+                echo '<input type="hidden" name="url" value="' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '" />';
+
                 wp_nonce_field(
                     'cds_form_nonce_action',
                     'cds-form-nonce',

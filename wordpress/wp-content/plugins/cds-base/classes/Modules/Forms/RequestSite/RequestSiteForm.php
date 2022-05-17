@@ -79,6 +79,9 @@ class RequestSiteForm
                     }
                 }
 
+                    // Add current URL and path to request
+                    echo '<input type="hidden" name="url" value="' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '" />';
+
                     Utils::textField(id: 'fullname', label: __('Full name', 'cds-snc'));
                     Utils::textField(
                         id: 'email',

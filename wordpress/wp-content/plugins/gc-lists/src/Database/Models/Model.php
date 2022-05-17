@@ -447,7 +447,7 @@ class Model implements JsonSerializable
         $data = $wpdb->get_results($query);
 
         if (!$data) {
-            return null;
+            return collect();
         }
 
         return collect(self::loadModelsFromDbResults($data));
@@ -477,7 +477,7 @@ class Model implements JsonSerializable
         $data = $wpdb->get_results($query);
 
         if (!$data) {
-            return null;
+            return collect();
         }
 
         return collect(self::loadModelsFromDbResults($data));
@@ -512,7 +512,7 @@ class Model implements JsonSerializable
         $data = $wpdb->get_results($query);
 
         if (!$data) {
-            return null;
+            return collect();
         }
 
         return collect(self::loadModelsFromDbResults($data));
@@ -547,7 +547,7 @@ class Model implements JsonSerializable
         $data = $wpdb->get_results($query);
 
         if (!$data) {
-            return null;
+            return collect();
         }
 
         return collect(self::loadModelsFromDbResults($data));

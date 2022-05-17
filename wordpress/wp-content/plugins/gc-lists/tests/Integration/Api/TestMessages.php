@@ -125,7 +125,7 @@ test('Get all sent messages', function() {
         ->toHaveKeys($this->messageAttributes);
 });
 
-test('Get one message', function() {
+test('Get a message', function() {
 	$message = $this->factory->message->create_and_get([
 		'name' => 'This is the message name'
 	]);
@@ -142,6 +142,55 @@ test('Get one message', function() {
         ->toHaveKeys($this->messageAttributes);
 
     $this->assertEquals('This is the message name', $message->name);
+});
+
+test('Get a message returns the latest version if there are versions', function() {
+    $message = $this->factory->message->create_and_get([
+        'name' => 'This is the message name'
+    ]);
+
+    // Create some versions
+    $versions = $this->factory->message->create_many(5, [
+        'original_message_id' => $message->id
+    ]);
+
+    $version_id = collect($versions)->random();
+
+    $request  = new WP_REST_Request( 'GET', "/gc-lists/messages/{$version_id}" );
+    $response = $this->server->dispatch( $request );
+
+    $this->assertEquals( 200, $response->get_status() );
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toHaveKeys($this->messageAttributes)
+        ->toHaveKey('original_message_id', $message->id);
+});
+
+test('Get a message adding `original` query param returns the original version', function() {
+    $message_id = $this->factory->message->create();
+
+    // Create some versions
+    $this->factory->message->create_many(5, [
+        'original_message_id' => $message_id
+    ]);
+
+    $request  = new WP_REST_Request( 'GET', "/gc-lists/messages/{$message_id}" );
+    $request->set_query_params([
+        'original' => true,
+    ]);
+    $response = $this->server->dispatch( $request );
+
+    $this->assertEquals( 200, $response->get_status() );
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toHaveKeys($this->messageAttributes)
+        ->toHaveKey('id', $message_id);
 });
 
 test('Get versions of a message', function() {

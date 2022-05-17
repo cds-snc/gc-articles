@@ -137,7 +137,19 @@ class Messages extends BaseEndpoint
      */
     public function get(WP_REST_Request $request): WP_REST_Response
     {
-        $message = Message::find($request['id']);
+        $params  = $request->get_params();
+
+        if (isset($params['original'])) {
+            $message = Message::find($request['id'])->original();
+
+            $response = new WP_REST_Response($message);
+
+            $response->set_status(200);
+
+            return rest_ensure_response($response);
+        }
+
+        $message = Message::find($request['id'])->original()->latest();
 
         $response = new WP_REST_Response($message);
 

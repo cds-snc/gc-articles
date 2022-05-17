@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-04-06T17:14:11+00:00\n"
+"POT-Creation-Date: 2022-05-17T21:42:52+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -90,6 +90,10 @@ msgstr "Page d’accueil GC"
 msgid "Default homepage"
 msgstr "Page d’accueil par défaut"
 
+#: functions.php:224
+msgid "Table of contents"
+msgstr ""
+
 #: header.php:40
 msgid "Your site is currently in maintenance mode. Only logged in users will be able to see this page."
 msgstr "Votre site est en mode maintenance. Seuls les utilisateurs connectés pourront voir cette page."
@@ -102,23 +106,23 @@ msgstr "Pour activer votre site <a href=\"%s\">modifier les paramètres de votre
 msgid "Skip to content"
 msgstr "Aller au contenu"
 
-#: header.php:64
+#: header.php:65
 msgid "Sign out"
 msgstr "Se déconnecter"
 
-#: header.php:66
+#: header.php:67
 msgid "Sign in"
 msgstr "Se Connecter"
 
-#: header.php:92 header.php:99 header.php:104 header.php:113
+#: header.php:94 header.php:101 header.php:106 header.php:115
 msgid "Search"
 msgstr "Rechercher"
 
-#: header.php:132 header.php:135
+#: header.php:134 header.php:137
 msgid "Menu"
 msgstr "Menu"
 
-#: header.php:134
+#: header.php:136
 msgid "Main"
 msgstr "Principal"
 

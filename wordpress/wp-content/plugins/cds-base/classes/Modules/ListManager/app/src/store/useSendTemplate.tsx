@@ -1,11 +1,11 @@
 // @ts-nocheck
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import useFetch from 'use-http';
 
 function useSendTemplate({ listId, content }) {
     const { request, response } = useFetch({ data: [] });
-
-
+    const [errors, setErrors] = useState(false);
+    const [success, setSuccess] = useState(false);
     const send = useCallback(async (data: string) => {
         let endpoint = "/send"
         let post_data = {
@@ -16,9 +16,16 @@ function useSendTemplate({ listId, content }) {
             personalisation: JSON.stringify({ message: content, subject: 'Huzzah!' }),
         }
 
-        await request.post(endpoint, post_data)
+        await request.post(endpoint, post_data);
 
-        console.log(response)
+        if (response && response.status !== 200) {
+            setErrors(true);
+        }
+
+        if (response && response.status === 200) {
+            setSuccess(true);
+        }
+
     }, [response, request, listId, content]);
 
     // send the template
@@ -30,7 +37,7 @@ function useSendTemplate({ listId, content }) {
         [content, send],
     );
 
-    return sendTemplate;
+    return { sendTemplate, errors, success };
 }
 
 export default useSendTemplate;

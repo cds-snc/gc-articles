@@ -9,7 +9,7 @@ const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
 const MessagesApp = () => {
     return (
         <Routes>
-            <Route path="/*" element={
+            <Route path=":serviceId" element={
                 <React.Suspense fallback={<Spinner />}>
                     <ListTemplates />
                 </React.Suspense>

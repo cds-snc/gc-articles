@@ -9,6 +9,7 @@ export const Label = styled.label`
 export const StyledSelect = styled.select`
     display:block;
     margin-bottom:20px;
+    min-width:250px;
 `
 
 export const TextWrapper = styled.div`

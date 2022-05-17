@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpMultipleClassDeclarationsInspection */
 
 use Carbon\Carbon;
 use GCLists\Api\Messages;
@@ -12,6 +12,21 @@ beforeEach(function() {
 	$this->tableName = $wpdb->prefix . "messages";
 
 	do_action( 'rest_api_init' );
+
+    $this->messageAttributes = [
+        'id',
+        'name',
+        'subject',
+        'body',
+        'message_type',
+        'sent_at',
+        'sent_to_list_name',
+        'sent_by_email',
+        'original_message_id',
+        'version_id',
+        'created_at',
+        'updated_at'
+    ];
 });
 
 test('getInstance', function() {
@@ -29,25 +44,15 @@ test('Get all Message templates', function() {
 	$this->assertJson($response->get_data());
 	$this->assertCount(5, json_decode($response->get_data()));
 
-    // Assertions about the array of Messages
-    $messages = json_decode($response->get_data());
-    $this->assertIsArray($messages);
+    $body = $response->get_data()->toJson();
 
-    // Assertions about a message
-    $message = collect($messages)->random();
-    $this->assertIsObject($message);
-    $this->assertObjectHasAttribute('id', $message);
-    $this->assertObjectHasAttribute('name', $message);
-    $this->assertObjectHasAttribute('subject', $message);
-    $this->assertObjectHasAttribute('body', $message);
-    $this->assertObjectHasAttribute('message_type', $message);
-    $this->assertObjectHasAttribute('sent_at', $message);
-    $this->assertObjectHasAttribute('sent_to_list_name', $message);
-    $this->assertObjectHasAttribute('sent_by_email', $message);
-    $this->assertObjectHasAttribute('original_message_id', $message);
-    $this->assertObjectHasAttribute('version_id', $message);
-    $this->assertObjectHasAttribute('created_at', $message);
-    $this->assertObjectHasAttribute('updated_at', $message);
+    expect($body)
+        ->toBeJson()
+        ->json()
+        ->toHaveCount(5)
+        ->each
+        ->toBeArray()
+        ->toHaveKeys($this->messageAttributes);
 });
 
 test('Get all templates with limit', function() {
@@ -65,7 +70,10 @@ test('Get all templates with limit', function() {
 
     expect($body)
         ->json()
-        ->toHaveCount(5);
+        ->toHaveCount(5)
+        ->each
+        ->toBeArray()
+        ->toHaveKeys($this->messageAttributes);
 });
 
 test('Get all templates with invalid limit returns default 5', function() {
@@ -86,7 +94,7 @@ test('Get all templates with invalid limit returns default 5', function() {
         ->toHaveCount(5);
 });
 
-test('Get sent messages', function() {
+test('Get all sent messages', function() {
     // Create some templates and versions
 	$template = $this->factory->message->create_and_get();
 
@@ -111,7 +119,10 @@ test('Get sent messages', function() {
 
 	expect($body)
         ->json()
-        ->toHaveCount(13);
+        ->toHaveCount(13)
+        ->each
+        ->toBeArray()
+        ->toHaveKeys($this->messageAttributes);
 });
 
 test('Get one message', function() {
@@ -128,23 +139,80 @@ test('Get one message', function() {
 
     expect($body)
         ->json()
-        ->toHaveKeys([
-            'id',
-            'name',
-            'subject',
-            'body',
-            'message_type',
-            'sent_at',
-            'sent_to_list_name',
-            'sent_by_email',
-            'original_message_id',
-            'version_id',
-            'created_at',
-            'updated_at'
-        ]);
+        ->toHaveKeys($this->messageAttributes);
 
     $this->assertEquals('This is the message name', $message->name);
-})->group('test');
+});
+
+test('Get versions of a message', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'This is the message name'
+    ]);
+
+    // Generate 5 versions, odd = sent (5)
+    for($version_id = 1; $version_id <= 10; $version_id++) {
+        $timestamp = Carbon::now()->toDateTimeString();
+
+        $this->factory->message->create([
+            'original_message_id' => $message_id,
+            'version_id' => $version_id,
+            'sent_at' => ($version_id %2 ? $timestamp : NULL)
+        ]);
+    }
+
+    $request = new WP_REST_Request('GET', "/gc-lists/messages/{$message_id}/versions");
+    $request->set_query_params([
+        'limit' => 5,
+    ]);
+    $response = $this->server->dispatch($request);
+
+    $this->assertEquals(200, $response->get_status());
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toBeArray()
+        ->toHaveCount(5)
+        ->each
+        ->toHaveKeys($this->messageAttributes);
+});
+
+test('Get sent versions of a message', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'This is the message name'
+    ]);
+
+    // Generate 5 versions, odd = sent (5)
+    for($version_id = 1; $version_id <= 10; $version_id++) {
+        $timestamp = Carbon::now()->toDateTimeString();
+
+        $this->factory->message->create([
+            'original_message_id' => $message_id,
+            'version_id' => $version_id,
+            'sent_at' => ($version_id %2 ? $timestamp : NULL)
+        ]);
+    }
+
+    $request = new WP_REST_Request('GET', "/gc-lists/messages/{$message_id}/sent");
+    $request->set_query_params([
+        'limit' => 4,
+    ]);
+    $response = $this->server->dispatch($request);
+
+    $this->assertEquals(200, $response->get_status());
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toBeArray()
+        ->toHaveCount(4)
+        ->each
+        ->toHaveKeys($this->messageAttributes)
+        ->toHaveKey('original_message_id', $message_id)
+        ->toHaveKey('sent_at', $timestamp);
+});
 
 test('Create a message', function() {
 	$request  = new WP_REST_Request( 'POST', '/gc-lists/messages' );

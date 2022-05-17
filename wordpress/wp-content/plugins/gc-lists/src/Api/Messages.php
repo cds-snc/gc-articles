@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GCLists\Api;
 
 use GCLists\Database\Models\Message;
-use Illuminate\Support\Collection;
 use WP_REST_Response;
 use WP_REST_Request;
 
@@ -45,6 +44,22 @@ class Messages extends BaseEndpoint
         register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)', [
             'methods'             => 'GET',
             'callback'            => [$this, 'get'],
+            'permission_callback' => function () {
+                return $this->hasPermission();
+            }
+        ]);
+
+        register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)/versions', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'getVersions'],
+            'permission_callback' => function () {
+                return $this->hasPermission();
+            }
+        ]);
+
+        register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)/sent', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'getSentVersions'],
             'permission_callback' => function () {
                 return $this->hasPermission();
             }
@@ -122,9 +137,51 @@ class Messages extends BaseEndpoint
      */
     public function get(WP_REST_Request $request): WP_REST_Response
     {
-        $results = Message::find($request['id']);
+        $message = Message::find($request['id']);
 
-        $response = new WP_REST_Response($results);
+        $response = new WP_REST_Response($message);
+
+        $response->set_status(200);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Get versions of a Message template
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
+    public function getVersions(WP_REST_Request $request): WP_REST_Response
+    {
+        $options = $this->getOptions($request);
+
+        $message = Message::find($request['id']);
+        $versions = $message->versions($options);
+
+        $response = new WP_REST_Response($versions);
+
+        $response->set_status(200);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Get sent versions of a Message template
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
+    public function getSentVersions(WP_REST_Request $request): WP_REST_Response
+    {
+        $options = $this->getOptions($request);
+
+        $message = Message::find($request['id']);
+        $versions = $message->sent($options);
+
+        $response = new WP_REST_Response($versions);
 
         $response->set_status(200);
 

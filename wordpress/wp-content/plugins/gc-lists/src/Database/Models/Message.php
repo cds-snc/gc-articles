@@ -38,23 +38,31 @@ class Message extends Model
     /**
      * Get sent versions of the current Message
      *
+     * @param  array  $options
      * @return Collection
      */
-    public function sent(): Collection
+    public function sent(array $options = []): Collection
     {
-        return $this->versions()->filter(function ($item) {
+        $sent = $this->versions()->filter(function ($item) {
             return (bool)$item->attributes["sent_at"];
         });
+
+        if (isset($options['limit'])) {
+            return $sent->take($options['limit']);
+        }
+
+        return $sent;
     }
 
     /**
      * Get all versions of the current Message
      *
+     * @param  array  $options
      * @return Collection|null
      */
-    public function versions(): ?Collection
+    public function versions(array $options = []): ?Collection
     {
-        return static::whereEquals(['original_message_id' => $this->getAttribute('id')]);
+        return static::whereEquals(['original_message_id' => $this->getAttribute('id')], $options);
     }
 
     /**

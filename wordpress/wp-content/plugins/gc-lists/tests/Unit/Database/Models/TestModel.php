@@ -22,7 +22,7 @@ test('toJson fails on unencodeable data', function() {
 
     $this->expectException(JsonEncodingException::class);
     $model->toJson();
-})->group('model');
+});
 
 test('Attribute manipulation', function() {
     $model = new ModelStub;
@@ -49,7 +49,7 @@ test('Fill with attributes', function() {
 
     $this->assertIsObject($model);
     $this->assertTrue($model instanceof ModelStub);
-})->group('model');
+});
 
 test('Fill with invalid attribute', function() {
     $model = new ModelStub;
@@ -60,7 +60,7 @@ test('Fill with invalid attribute', function() {
         'message' => 'This is a message',
         'notvalid' => 'This is not a fillable attribute'
     ]);
-})->group('model');
+});
 
 test('Serialize model toJson', function() {
     $model = new ModelStub;
@@ -75,8 +75,31 @@ test('Serialize model toJson', function() {
         ->toBeJson()
         ->json()
         ->toHaveKeys(['title', 'message']);
-})->group('model');
+});
 
+test('getFillableFromArray', function() {
+    $model = new ModelStub;
+    $array = $model->getFillableFromArray([
+        'title' => 'Foo',
+        'message' => 'Bar',
+        'notvalid' => 'Baz',
+    ]);
+
+    expect($array)
+        ->toBeArray()
+        ->toHaveKeys(['title', 'message'])
+        ->not()->toHaveKey('notvalid');
+});
+
+test('getAttribute', function() {
+    $model = new ModelStub([
+        'title' => 'Foo',
+        'message' => 'Bar',
+    ]);
+
+    $this->assertEquals('Foo', $model->getAttribute('title'));
+    $this->assertEquals('Bar', $model->getAttribute('message'));
+});
 
 /**
  * Model stub for testing the base Model

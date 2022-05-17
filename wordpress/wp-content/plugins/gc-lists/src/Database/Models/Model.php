@@ -6,8 +6,12 @@ namespace GCLists\Database\Models;
 
 use Carbon\Carbon;
 use GCLists\Exceptions\InvalidAttributeException;
+use GCLists\Exceptions\JsonEncodingException;
+use GCLists\Exceptions\QueryException;
+use Illuminate\Support\Collection;
+use JsonSerializable;
 
-class Model
+class Model implements JsonSerializable
 {
     /**
      * The visible columns of the model (for queries)
@@ -61,15 +65,15 @@ class Model
      * Take an array of db results and turn it into an array of models
      *
      * @param $data
-     *
      * @return array
      */
-    protected static function loadModels($data): array
+    protected static function loadModelsFromDbResults($data): array
     {
         $class = get_called_class();
 
         $func = function ($data) use ($class) {
             $model = new $class();
+            $model->exists = true;
             return $model->forceFill((array)$data);
         };
 
@@ -139,7 +143,7 @@ class Model
      * @param  array  $attributes
      * @return $this
      */
-    public function forceFill(array $attributes)
+    public function forceFill(array $attributes): static
     {
         foreach ($attributes as $key => $value) {
             $this->setAttribute($key, $value);
@@ -154,7 +158,7 @@ class Model
      * @param $key
      * @return bool
      */
-    protected function isFillable($key)
+    protected function isFillable($key): bool
     {
         if (in_array($key, $this->fillable)) {
             return true;
@@ -204,7 +208,17 @@ class Model
             return;
         }
 
-        return $this->attributes[$key] ?? null;
+        return $this->getAttributes()[$key] ?? null;
+    }
+
+    /**
+     * Get all of the current attributes on the model.
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 
     /**
@@ -215,12 +229,18 @@ class Model
     protected function performUpdate(): static
     {
         global $wpdb;
+        $wpdb->suppress_errors(true);
+
         $time = Carbon::now()->timestamp;
         $this->updateUpdatedTimestamp($time);
 
-        $wpdb->update($this->tableName, $this->getFillableFromArray($this->attributes), [
+        $updated = $wpdb->update($this->tableName, $this->getAttributes(), [
             'id' => $this->id,
         ]);
+
+        if (false === $updated) {
+            throw new QueryException($wpdb->last_error);
+        }
 
         return $this;
     }
@@ -233,16 +253,36 @@ class Model
     protected function performInsert(): static
     {
         global $wpdb;
+        $wpdb->suppress_errors(true);
+
         $time = Carbon::now()->timestamp;
         $this->updateCreatedTimestamp($time);
         $this->updateUpdatedTimestamp($time);
 
-        $wpdb->insert($this->tableName, $this->getFillableFromArray($this->attributes));
+        $inserted = $wpdb->insert($this->tableName, $this->getAttributes());
+
+        if (false === $inserted) {
+            throw new QueryException($wpdb->last_error);
+        }
 
         $this->exists = true;
         $this->id = $wpdb->insert_id;
 
         return $this;
+    }
+
+    /**
+     * Reload a fresh model instance from the database
+     *
+     * @return static
+     */
+    public function fresh(): static
+    {
+        if (!$this->exists) {
+            return $this;
+        }
+
+        return static::find($this->getAttribute('id'));
     }
 
     /**
@@ -274,7 +314,7 @@ class Model
     {
         // @TODO: this should probably use $model->visible
         $model = [];
-        foreach ($this->attributes as $attribute => $value) {
+        foreach ($this->getAttributes() as $attribute => $value) {
             $model[$attribute] = $value;
         }
 
@@ -311,22 +351,45 @@ class Model
     }
 
     /**
-     * Serialize the model to Json
+     * Update an existing model with provided attributes
      *
-     * @return false|string
+     * @param  array  $attributes
+     * @return $this
      */
-    public function asJson(): bool|string
+    public function update(array $attributes): static
     {
-        // @TODO: This should use $model->visible
-        return json_encode($this->attributes);
+        if (!$this->exists) {
+            return false;
+        }
+
+        return $this->fill($attributes)->save();
     }
 
+    /**
+     * Convert the model instance to JSON.
+     *
+     * @param  int  $options
+     * @return string
+     *
+     * @throws JsonEncodingException
+     */
+    public function toJson($options = 0): string
+    {
+        $json = json_encode($this->jsonSerialize(), $options);
+
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw JsonEncodingException::forModel($this, json_last_error_msg());
+        }
+
+        return $json;
+    }
 
     /**
      * Find a model by ID
      *
      * @param $id
-     * @return mixed|null
+     *
+     * @return mixed
      */
     public static function find($id): mixed
     {
@@ -368,31 +431,35 @@ class Model
     /**
      * Get all models from db
      *
-     * @return array|null
+     * @return Collection|null
      */
-    public static function all(): ?array
+    public static function all(array $options = []): ?Collection
     {
         global $wpdb;
         $instance = new static();
 
-        $data = $wpdb->get_results(
-            "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName}"
-        );
+        $query = "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName}";
+
+        if (isset($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
+        }
+
+        $data = $wpdb->get_results($query);
 
         if (!$data) {
             return null;
         }
 
-        return self::loadModels($data);
+        return collect(self::loadModelsFromDbResults($data));
     }
 
     /**
      * Simple query filter accepts an array of attribute => value pairs.
      *
      * @param  array  $params
-     * @return array|null
+     * @return Collection|null
      */
-    public static function whereEquals(array $params): ?array
+    public static function whereEquals(array $params, array $options = []): ?Collection
     {
         global $wpdb;
         $instance = new static();
@@ -403,22 +470,26 @@ class Model
             $query .= $wpdb->prepare(" AND {$key} = %s", $value);
         }
 
+        if (isset($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
+        }
+
         $data = $wpdb->get_results($query);
 
         if (!$data) {
             return null;
         }
 
-        return self::loadModels($data);
+        return collect(self::loadModelsFromDbResults($data));
     }
 
     /**
      * Simple NOT NULL query accepts an array of attributes that must be NOT NULL
      *
      * @param $columns
-     * @return array|null
+     * @return Collection|null
      */
-    public static function whereNotNull($columns): ?array
+    public static function whereNotNull($columns, array $options = []): ?Collection
     {
         global $wpdb;
 
@@ -434,22 +505,26 @@ class Model
             $query .= " AND {$column} IS NOT NULL";
         }
 
+        if (isset($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
+        }
+
         $data = $wpdb->get_results($query);
 
         if (!$data) {
             return null;
         }
 
-        return self::loadModels($data);
+        return collect(self::loadModelsFromDbResults($data));
     }
 
     /**
      * Simple IS NULL query accepts an array of attributes that must be NULL
      *
      * @param $columns
-     * @return array|null
+     * @return Collection|null
      */
-    public static function whereNull($columns): ?array
+    public static function whereNull($columns, array $options = []): ?Collection
     {
         global $wpdb;
 
@@ -465,12 +540,36 @@ class Model
             $query .= " AND {$column} IS NULL";
         }
 
+        if (isset($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
+        }
+
         $data = $wpdb->get_results($query);
 
         if (!$data) {
             return null;
         }
 
-        return self::loadModels($data);
+        return collect(self::loadModelsFromDbResults($data));
+    }
+
+    /**
+     * Returns the Model instance as an array
+     *
+     * @return array
+     */
+    public function toArray(): array
+    {
+        return $this->getAttributes();
+    }
+
+    /**
+     * Convert the object into something JSON serializable
+     *
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

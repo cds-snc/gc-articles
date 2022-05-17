@@ -25,6 +25,7 @@
         }
     },
     "require": {
-        "nesbot/carbon": "^2.58"
+        "nesbot/carbon": "^2.58",
+        "illuminate/collections": "^9.12"
     }
 }

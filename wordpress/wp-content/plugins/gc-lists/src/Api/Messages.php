@@ -129,7 +129,7 @@ class Messages extends BaseEndpoint
     }
 
     /**
-     * Get a Message
+     * Get a Message (defaults to latest add ?original to get original)
      *
      * @param  WP_REST_Request  $request
      *
@@ -149,6 +149,7 @@ class Messages extends BaseEndpoint
             return rest_ensure_response($response);
         }
 
+        // Whether we have a version or the original, return the latest version
         $message = Message::find($request['id'])->original()->latest();
 
         $response = new WP_REST_Response($message);

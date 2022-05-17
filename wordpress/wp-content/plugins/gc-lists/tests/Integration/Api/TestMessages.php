@@ -178,6 +178,24 @@ test('Get versions of a message', function() {
         ->toHaveKeys($this->messageAttributes);
 });
 
+test('No versions available', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'This is the message name'
+    ]);
+
+    $request = new WP_REST_Request('GET', "/gc-lists/messages/{$message_id}/versions");
+    $response = $this->server->dispatch($request);
+
+    $this->assertEquals(200, $response->get_status());
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toBeArray()
+        ->toBeEmpty();
+});
+
 test('Get sent versions of a message', function() {
     $message_id = $this->factory->message->create([
         'name' => 'This is the message name'
@@ -212,6 +230,28 @@ test('Get sent versions of a message', function() {
         ->toHaveKeys($this->messageAttributes)
         ->toHaveKey('original_message_id', $message_id)
         ->toHaveKey('sent_at', $timestamp);
+});
+
+test('No sent versions available', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'This is the message name'
+    ]);
+
+    $this->factory->message->create_many(5, [
+        'original_message_id' => $message_id
+    ]);
+
+    $request = new WP_REST_Request('GET', "/gc-lists/messages/{$message_id}/sent");
+    $response = $this->server->dispatch($request);
+
+    $this->assertEquals(200, $response->get_status());
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toBeArray()
+        ->toBeEmpty();
 });
 
 test('Create a message', function() {

@@ -11,7 +11,39 @@
 |
 */
 
-// uses(Tests\TestCase::class)->in('Feature');
+use GCLists\Install;
+use GCLists\Database\Factories\MessageFactory;
+
+uses()->group('integration')->in('Integration');
+uses()->group('unit')->in('Unit');
+
+/**
+ * Not sure why, but seems the bootstrap.php specified in phpunit.xml is not available
+ * yet when running these tests, resulting in WP_UnitTestCase not found. Including
+ * the bootstrap.php here fixes the issue.
+ */
+require_once('bootstrap.php');
+
+/**
+ * Because bootstrap.php loads the plugin in mu-plugins, activation hooks don't fire
+ * and database tables don't get created, so we must manually trigger the install.
+ */
+$installer = Install::getInstance();
+
+/**
+ * This is where we setup or parent TestCase - in this case, we're extending from
+ * WP_UnitTestCase which is provided by bootstrap.php. We also ensure the plugin
+ * is installed, and we bind our Message factory to the TestCase.
+ *
+ */
+uses(\WP_UnitTestCase::class)
+	->beforeAll(fn () => $installer->install())
+	->beforeEach(fn () => $this->factory->message = new MessageFactory( $this->factory ))
+	->in('Integration');
+
+uses(\WP_UnitTestCase::class)
+    ->beforeEach(fn () => $this->factory->message = new MessageFactory( $this->factory ))
+    ->in('Unit');
 
 /*
 |--------------------------------------------------------------------------

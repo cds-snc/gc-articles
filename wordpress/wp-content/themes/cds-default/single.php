@@ -32,8 +32,9 @@ get_header();
             );
             */
         } // End of the loop.
-        ?>
 
+        cds_last_modified_date();
+        ?>
     </main><!-- #main -->
 
 <?php

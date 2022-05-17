@@ -431,3 +431,17 @@ function get_top_nav(): string
 
     return '';
 }
+
+function cds_last_modified_date()
+{
+    ?>
+    <dl id="wb-dtmd">
+        <dt>Date modified:</dt>
+        <dd>
+            <time property="dateModified" datetime="<?php the_modified_time('Y-m-d'); ?>">
+                <?php the_modified_time('Y-m-d'); ?>
+            </time>
+        </dd>
+    </dl>
+    <?php
+}

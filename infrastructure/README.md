@@ -34,6 +34,7 @@ The following Terraform variables are required:
 * `default_notify_api_key`: Default Notify API key used before a site has one configured
 * `slack_webhook_url`: Slack incoming webhook to post SNS notifications to
 * `wpml_site_key`: Site Key from WPML
+* `zendesk_api_url`: URL for zendesk api
 
 WordPress [generated secret keys](https://api.wordpress.org/secret-key/1.1/salt/):
 * `wordpress_auth_key`

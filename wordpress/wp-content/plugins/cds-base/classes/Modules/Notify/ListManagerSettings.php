@@ -68,7 +68,6 @@ class ListManagerSettings
             ?>
               <!-- app -->
               <div class="wrap">
-                <h1><?php _e('GC Lists', 'cds-snc'); ?></h1>
                 <?php
                 echo "<!--";
                 echo "manage_list_manager-" . current_user_can('manage_list_manager');
@@ -79,6 +78,9 @@ class ListManagerSettings
                 <div id="list-manager-app" data-user='<?php echo json_encode($user); ?>' data-ids='<?php echo json_encode($services); ?>'>
                 </div>
               </div>
+              <script>
+                  window.location = "#/service";
+              </script>
             <?php
         } else {
             ?>

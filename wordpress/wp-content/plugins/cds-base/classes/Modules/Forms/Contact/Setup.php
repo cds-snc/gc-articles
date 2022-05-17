@@ -35,10 +35,11 @@ class Setup
             return ['error' => true, "error_message" => $nonceErrorMessage];
         }
 
-        $required_keys = ['fullname', 'email', 'department', 'goal', 'message'];
+        $keys_page_1 = ['goal', 'usage', 'optional-usage-value', 'target', 'optional-target-value', 'message'];
+        $keys_page_2 = ['fullname', 'email', 'department'];
         $empty_keys = [];
 
-        foreach ($required_keys as $_key) {
+        foreach ($keys_page_2 as $_key) {
             if (!isset($_POST[$_key]) || $_POST[$_key] === '') {
                 array_push($empty_keys, $_key);
             }
@@ -69,7 +70,7 @@ class Setup
         $message .= $goal . "\n\n";
 
         $message .= 'Department:' . "\n";
-        $message .= $department . "\n";
+        $message .= $department . "\n\n";
 
         if (isset($_POST['usage'])) {
             $message .=
@@ -80,11 +81,11 @@ class Setup
             }
         }
 
-        if (isset($_POST['usage-optional']) && $_POST['usage-optional'] !== '') {
+        if (isset($_POST['optional-usage-value']) && $_POST['optional-usage-value'] !== '') {
             $message .=
                 "\n" .
                 '(Other) ' .
-                sanitize_text_field($_POST['usage-optional']) .
+                sanitize_text_field($_POST['optional-usage-value']) .
                 "\n";
         }
 
@@ -98,11 +99,11 @@ class Setup
             }
         }
 
-        if (isset($_POST['target-optional']) && $_POST['target-optional'] !== '') {
+        if (isset($_POST['optional-target-value']) && $_POST['optional-target-value'] !== '') {
             $message .=
                 "\n" .
                 '(Other) ' .
-                sanitize_text_field($_POST['target-optional']) .
+                sanitize_text_field($_POST['optional-target-value']) .
                 "\n";
         }
 

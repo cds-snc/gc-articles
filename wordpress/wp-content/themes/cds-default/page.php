@@ -47,6 +47,7 @@ get_header();
             </div><!--end of .wp-block-columns -->
         <?php } ?>
 
+    <?php cds_last_modified_date(); ?>
     </main><!-- #main -->
 
 <?php

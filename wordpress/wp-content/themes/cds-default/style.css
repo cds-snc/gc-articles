@@ -4,7 +4,7 @@
  * Author: CDS
  * Text Domain: cds-snc
  * Domain Path: /languages
- * Version: 2.25.2
+ * Version: 2.26.0
 */
 
 /* https://jsonformatter.org/sass-to-css */
@@ -512,4 +512,9 @@ nav.nav--about li a:focus {
     padding: 10px;
     margin-bottom:20px;
     line-height: 1.7em;
+}
+
+/* Date modified */
+#wb-dtmd {
+    font-size: 16px;
 }

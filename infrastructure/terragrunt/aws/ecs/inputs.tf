@@ -116,6 +116,11 @@ variable "jwt_auth_secret_key" {
   type        = string
 }
 
+variable "zendesk_api_url" {
+  description = "URL for the zendesk API"
+  type        = string
+}
+
 variable "memory" {
   type = string
 }

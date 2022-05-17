@@ -15,6 +15,9 @@ class Profile
         add_action('wpml_user_profile_options', [$this, 'wpmlOptions']);
         add_action('additional_capabilities_display', [$this, 'yoastOptions']);
 
+        add_action('edit_user_profile', [$this, 'displayUnfilteredHTMLMeta']);
+        add_action('edit_user_profile_update', [$this,'updateUnfilteredHTMLMeta']);
+
         if (is_admin()) {
             remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
             remove_action('personal_options', 'wpml_show_user_options');
@@ -30,8 +33,6 @@ class Profile
         $html = ob_get_contents();
         ob_end_clean();
 
-        // note suppressing warning here: libxml_disable_entity_loader() deprecated
-        // see https://github.com/wasinger/htmlpagedom/issues/35
         $crawler = @new HtmlPage($html);
 
         // add IDs to headings
@@ -155,5 +156,54 @@ class Profile
         echo '<input type="hidden" id="icl_admin_language_for_edit" name="icl_admin_language_for_edit" value="0">';
         echo '<input type="hidden" id="icl_show_hidden_languages" name="icl_show_hidden_languages" value="1">';
         echo '<input type="hidden" id="icl_user_admin_language" name="icl_user_admin_language" value="en">';
+    }
+
+    public function displayUnfilteredHTMLMeta($user)
+    {
+        if (!is_super_admin()) {
+            return;
+        }
+
+        printf('<h3>%s</h3>', __('Unsafe HTML permissions', 'cds-snc'));
+        print "<table class='form-table'>";
+
+        print '<tr>';
+        $allow_unfiltered_html = user_can($user, "allow_unfiltered_html");
+
+        if ($allow_unfiltered_html) {
+            $checked = 'checked';
+        } else {
+            $checked = '';
+        }
+
+        printf(
+            "<th><label for='allow_unfiltered_html'>%s</label></th>",
+            __('Unsafe HTML', 'cds-snc'),
+        );
+        printf(
+            "<td><input value='true' type='checkbox' name='allow_unfiltered_html' id='allow_unfiltered_html' %s /> %s</td>",
+            $checked,
+            __('Allow iFrames', 'cds-snc'),
+        );
+
+        print '</tr>';
+        print '</table>';
+    }
+
+    public function updateUnfilteredHTMLMeta($userId)
+    {
+        if (!is_super_admin()) {
+            return;
+        }
+
+        $user = get_user_by('id', $userId);
+        // these have to both be set for the 'unfiltered html' permission to work
+        $user->remove_cap('unfiltered_html');
+        $user->remove_cap('allow_unfiltered_html');
+
+        if (isset($_POST['allow_unfiltered_html']) && $_POST['allow_unfiltered_html'] === "true") {
+            $user->add_cap('unfiltered_html');
+            $user->add_cap('allow_unfiltered_html');
+        }
     }
 }

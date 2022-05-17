@@ -123,6 +123,12 @@ form * {
   margin-top: .75em;
 }
 
+form div[role="group"][id]:focus {
+  outline: 2px solid blue;
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+
 form .focus-group {
   margin-bottom: 1em;
 }

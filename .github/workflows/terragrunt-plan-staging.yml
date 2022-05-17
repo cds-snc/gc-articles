@@ -41,6 +41,7 @@ env:
   TF_VAR_wordpress_nonce_salt: ${{ secrets.STAGING_WORDPRESS_NONCE_SALT }}
   TF_VAR_jwt_auth_secret_key: ${{ secrets.STAGING_JWT_AUTH_SECRET_KEY }}
   TF_VAR_wpml_site_key: ${{ secrets.STAGING_WPML_SITE_KEY }}
+  TF_VAR_zendesk_api_url: ${{ secrets.ZENDESK_API_URL }}
 
 jobs:
   terragrunt-plan-staging:
@@ -50,18 +51,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@3d8debd658c92063839bc97da5c2427100420dec # v1.3.2
-        with:
-          terraform_version: ${{ env.TERRAFORM_VERSION }}
-          terraform_wrapper: false
-
-      - name: Setup Terragrunt
-        run: |
-          mkdir bin
-          wget -O bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v$TERRAGRUNT_VERSION/terragrunt_linux_amd64
-          chmod +x bin/*
-          echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+      - name: Setup terraform tools
+        uses: cds-snc/terraform-tools-setup@v1
 
       - uses: cds-snc/paths-filter@v2.10.3
         id: filter

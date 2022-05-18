@@ -436,7 +436,7 @@ function cds_last_modified_date()
 {
     ?>
     <dl id="wb-dtmd">
-        <dt>Date modified:</dt>
+        <dt><?php _e('Date modified:', 'cds-snc') ?></dt>
         <dd>
             <time property="dateModified" datetime="<?php the_modified_time('Y-m-d'); ?>">
                 <?php the_modified_time('Y-m-d'); ?>

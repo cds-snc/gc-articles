@@ -68,6 +68,9 @@ class ContactForm
                 }
             }
 
+                // Add current URL and path to request
+                echo '<input type="hidden" name="url" value="' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . '" />';
+
                 wp_nonce_field(
                     'cds_form_nonce_action',
                     'cds-form-nonce',
@@ -130,26 +133,31 @@ class ContactForm
                             'goal',
                             'Ask a question.',
                             __('Ask a question.', 'cds-snc'),
+                            val: $all_values['goal']
                         );
                         Utils::radioField(
                             'goal',
                             'Get technical support.',
                             __('Get technical support.', 'cds-snc'),
+                            val: $all_values['goal']
                         );
                         Utils::radioField(
                             'goal',
                             'Give feedback.',
                             __('Give feedback.', 'cds-snc'),
+                            val: $all_values['goal']
                         );
                         Utils::radioField(
                             'goal',
                             'Schedule a demo to learn more about GC Articles.',
                             __('Schedule a demo to learn more about GC Articles.', 'cds-snc'),
+                            val: $all_values['goal']
                         );
                         Utils::radioField(
                             'goal',
                             'Other',
                             __('Other', 'cds-snc'),
+                            val: $all_values['goal']
                         );
                     ?>
                     </div>
@@ -171,33 +179,38 @@ class ContactForm
                             name: 'usage[]',
                             id: 'Blog.',
                             value: __('Blog.', 'cds-snc'),
+                            vals: $all_values['usage']
                         );
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Newsletter archive with emailing to a subscriber list.',
                             value: __('Newsletter archive with emailing to a subscriber list.', 'cds-snc'),
+                            vals: $all_values['usage']
                         );
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Website.',
                             value: __('Website.', 'cds-snc'),
+                            vals: $all_values['usage']
                         );
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Internal website.',
                             value: __('Internal website.', 'cds-snc'),
+                            vals: $all_values['usage']
                         );
                         Utils::checkboxField(
                             name: 'usage[]',
                             id: 'Something else.',
                             value: __('Something else.', 'cds-snc'),
+                            vals: $all_values['usage'],
                             ariaControls: 'optional-usage'
                         );
                     ?>
                     </div>
                     
                     <div id="optional-usage">
-                        <?php Utils::textField(id: 'optional-usage-value', label: __('Other usage', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'optional-usage-value', label: __('Other usage', 'cds-snc'), value: $all_values['optional-usage-value']); ?>
                     </div>
                 </div>
                 <!-- end usage -->
@@ -217,32 +230,37 @@ class ContactForm
                             name: 'target[]',
                             id: 'People who use your programs and services.',
                             value: __('People who use your programs and services.', 'cds-snc'),
+                            vals: $all_values['target']
                         );
                         Utils::checkboxField(
                             name: 'target[]',
                             id: 'General public.',
                             value: __('General public.', 'cds-snc'),
+                            vals: $all_values['target']
                         );
                         Utils::checkboxField(
                             name: 'target[]',
                             id: 'Subscribers.',
                             value: __('Subscribers.', 'cds-snc'),
+                            vals: $all_values['target']
                         );
                         Utils::checkboxField(
                             name: 'target[]',
                             id: 'Internal employees and/or community volunteers.',
                             value: __('Internal employees and/or community volunteers.', 'cds-snc'),
+                            vals: $all_values['target']
                         );
                         Utils::checkboxField(
                             name: 'target[]',
                             id: 'Other people.',
                             value: __('Other people.', 'cds-snc'),
+                            vals: $all_values['target'],
                             ariaControls: 'optional-target'
                         );
                     ?>
                     </div>
                     <div id="optional-target">
-                        <?php Utils::textField(id: 'optional-target-value', label: __('Other target audience', 'cds-snc')); ?>
+                        <?php Utils::textField(id: 'optional-target-value', label: __('Other target audience', 'cds-snc'), value: $all_values['optional-target-value']); ?>
                     </div>
                 </div>
                 <!-- target -->
@@ -256,7 +274,7 @@ class ContactForm
                     required
                     placeholder=""
                     name="message"
-                ></textarea>
+                ><?php echo $all_values['message']; ?></textarea>
 
                 <?php Utils::submitButton(__('Next', 'cds-snc')); ?>
             </form>

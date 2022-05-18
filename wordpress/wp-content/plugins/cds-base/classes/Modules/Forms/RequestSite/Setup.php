@@ -84,6 +84,14 @@ class Setup
             }
         }
 
+        // Add the submitted URL to the message text
+        if (isset($_POST['url']) && $_POST['url'] !== '') {
+            $message .=
+            "\n\n" .
+            'URL: ' .
+            sanitize_text_field($_POST['url']);
+        }
+
         $site = $_POST['site'] ?? __('No name specified', 'cds-snc');
         $goal = __('Request a site:', 'cds-snc') . ' ' . $this->removeslashes($site);
         $fullname = $_POST['fullname'];

@@ -70,7 +70,32 @@ class Messages extends BaseEndpoint
             'callback'            => [$this, 'create'],
             'permission_callback' => function () {
                 return $this->hasPermission();
-            }
+            },
+            'args' => [
+                'name' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Name of the Message'
+                ],
+                'subject' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Subject of the Message'
+                ],
+                'body' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Body of the Message'
+                ],
+                'message_type' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Type of message',
+                    'validate_callback' => function ($param, $request, $key) {
+                        return in_array($param, ['email', 'phone']);
+                    }
+                ]
+            ]
         ]);
 
         register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)', [

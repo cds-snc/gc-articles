@@ -323,6 +323,49 @@ test('Create a message', function() {
         ->toHaveKey('name', 'Name of the message');
 });
 
+test('Create a message with Validation errors', function() {
+    $request  = new WP_REST_Request( 'POST', '/gc-lists/messages' );
+    $request->set_query_params([
+        'subject' => 'Subject of the message',
+        'message_type' => 'email'
+    ]);
+
+    $response = $this->server->dispatch( $request );
+
+    $body = $response->get_data();
+
+    $this->assertEquals(400, $response->get_status());
+
+    // missing name, body
+    expect($body)
+        ->toBeArray()
+        ->toHaveKey('code', 'rest_missing_callback_param')
+        ->toHaveKey('data.status', 400)
+        ->toHaveKey('data.params', ['name', 'body']);
+
+
+    // Again with no missing params but invalid message_type
+    $request->set_query_params([
+        'name' => 'Name of the message',
+        'subject' => 'Subject of the message',
+        'body' => 'Body of the message',
+        'message_type' => 'xx'
+    ]);
+
+    $response = $this->server->dispatch( $request );
+
+    $body = $response->get_data();
+
+    $this->assertEquals(400, $response->get_status());
+
+    // missing name, body
+    expect($body)
+        ->toBeArray()
+        ->toHaveKey('code', 'rest_invalid_param')
+        ->toHaveKey('data.status', 400)
+        ->toHaveKey('data.params.message_type');
+})->group('validation');
+
 test('Update a message', function() {
 	$message = $this->factory->message->create_and_get([
 		'name' => 'This is the message name'

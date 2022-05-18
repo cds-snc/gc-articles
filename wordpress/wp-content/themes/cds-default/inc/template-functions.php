@@ -401,7 +401,7 @@ function get_top_nav(): string
         $headerMenu = str_replace('<nav class="nav--primary__container">', '<nav class="nav--primary__container"><div class="container"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . $menuID . '" aria-controls="' . $menuID . '" aria-expanded="false">Menu</button></div>', $headerMenu);
 
         // Insert a button to open/close submenus
-        $headerMenu = str_replace('<ul class="sub-menu">', '<button aria-expanded="false"><span class="sr-only">Open</span></button><ul class="sub-menu">', $headerMenu);
+        $headerMenu = str_replace('<ul class="sub-menu">', '<button aria-expanded="false" class="sub-menu--button"><span class="sr-only">Open</span></button><ul class="sub-menu">', $headerMenu);
 
         try {
             $topMenu = __('Top menu', 'cds-snc');
@@ -415,16 +415,14 @@ function get_top_nav(): string
             $dom->find('.nav--primary__container')->setAttribute('aria-label', $topMenu);
 
             // Insert aria-label for submenu
-            // $submenuNode = $dom->find('.sub-menu')[0];
-            // if ($submenuNode) {
-            //     $submenuNode->setAttribute('aria-label', $submenu);
-            // }
-
-            // Insert aria-expanded for link with submenu
-            // $menuItemNode = $dom->find('.menu-item-has-children')[0];
-            // if ($menuItemNode) {
-            //     $menuItemNode->setAttribute('aria-expanded', "false");
-            // }
+            $submenuNodes = $dom->find('.sub-menu');
+            $submenuCount = 0;
+            foreach ($submenuNodes as $node) {
+                $submenuID = 'sub-menu-' . ++$submenuCount;
+                $node->setAttribute('aria-label', $submenu);
+                $node->setAttribute('id', $submenuID);
+                $node->getParent()->find('.sub-menu--button')->setAttribute('aria-controls', $submenuID);
+            }
 
             return $dom->outerHTML;
         } catch (Exception) {

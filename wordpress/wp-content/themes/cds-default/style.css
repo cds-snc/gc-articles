@@ -131,8 +131,8 @@ nav ul, .sub-menu {
     padding: 10px 15px 10px 11px;
 }
 
-.menu-item-has-children a {
-    padding-right: 25px;
+.nav > li.menu-item-has-children > a {
+    padding-right: 10px;
 }
 
 .menu-item-has-children button {
@@ -241,6 +241,10 @@ button.navbar-toggler[aria-expanded='true']::after {
 
 /* Small screens */
 @media screen and (max-width: 599px) {
+    li.menu-item-has-children .sub-menu--button {
+        display: none;
+    }
+
     .nav.nav--primary:not(.show) {
         display: none;
     }

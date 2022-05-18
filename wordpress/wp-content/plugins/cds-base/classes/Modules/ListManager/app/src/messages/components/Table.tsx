@@ -17,14 +17,15 @@ export const Table = ({ columns, data }: { columns: any, data: any }) => {
         prepareRow,
         headerGroups,
         // @ts-ignore
-        state: { pageIndex, pageSize },
+        state: { pageIndex, pageSize  },
+        state,
     } = useTable({
         columns,
         data,
         // @ts-ignore
         initialState: { pageSize: 6 },
     }, usePagination)
-
+    
     return (
         <>
             <table {...getTableProps()} className="wp-list-table widefat fixed striped table-view-list users">

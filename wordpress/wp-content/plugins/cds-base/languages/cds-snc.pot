@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-05-17T21:42:53+00:00\n"
+"POT-Creation-Date: 2022-05-17T21:50:35+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: cds-snc\n"
@@ -501,6 +501,8 @@ msgstr ""
 
 #: classes/Modules/Notify/FormHelpers.php:51
 #: classes/Modules/Notify/NotifySettings.php:191
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "See example template ID format."
 msgstr ""
 
@@ -971,6 +973,8 @@ msgid "current"
 msgstr ""
 
 #: build/index.js:4336
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 #: build/index.js:4201
 msgid "Name"
 msgstr ""
@@ -991,6 +995,7 @@ msgid "Success!"
 msgstr ""
 
 #: build/index.js:4468
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
 #: build/index.js:4323
 msgid "There is a problem"
 msgstr ""
@@ -1035,51 +1040,220 @@ msgstr ""
 msgid "Add Service"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:22
 msgid "Subscribe form settings"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:24
 msgid "Placeholder text"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:31
 msgid "Email field label"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:38
 msgid "Subscribe button label"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:45
 msgid "List"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:53
 msgid "Privacy policy link"
 msgstr ""
 
+#: classes/Modules/ListManager/app/build/static/js/295.5377ffa5.chunk.js:1
+msgid "Showing"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/295.5377ffa5.chunk.js:1
+msgid "Messages"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/295.5377ffa5.chunk.js:1
+msgid "Message templates"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/958.f540b6f4.chunk.js:1
+msgid "Go back"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "Required Field"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Name is required"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "List type"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "Type is required"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "Subscribe template id"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "Unsubscribe template id"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "Subscribe redirect url"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "Unsubscribe redirect url"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "Confirm redirect url"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Edit email message"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Message name"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Your recipients will not see this message name."
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Subject line of the email"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Tell recipients what the message is about. Try to keep it shorter than 10 words."
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Subject is required"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Message"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Message is required"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Send message to a list"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Save template"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
+msgid "Delete this message template"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Message preview"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Subject"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "The message was sent to the the subscribers in the list below."
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Sending to:"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Message sent"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Send a new message"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Return to messages"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Create a new list."
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "A subscriber list allows you to collect a group of subscribers that you can send a message to."
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Subscriber list"
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Choose a group to send this message to."
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/818.1cbe599b.chunk.js:1
+msgid "Send message"
+msgstr ""
+
+#: classes/Modules/BlocksPHP/build/contact/block.json
 #: classes/Modules/BlocksPHP/src/contact/block.json
 msgctxt "block title"
 msgid "GC Articles Contact"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/contact/block.json
+#: classes/Modules/BlocksPHP/build/request/block.json
 #: classes/Modules/BlocksPHP/src/contact/block.json
 #: classes/Modules/BlocksPHP/src/request/block.json
 msgctxt "block description"
 msgid "Internal Contact form for GC Articles"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/request/block.json
 #: classes/Modules/BlocksPHP/src/request/block.json
 msgctxt "block title"
 msgid "GC Articles Request a site"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/subscribe/block.json
 #: classes/Modules/BlocksPHP/src/subscribe/block.json
 msgctxt "block title"
 msgid "Subscribe"
 msgstr ""
 
+#: classes/Modules/BlocksPHP/build/subscribe/block.json
 #: classes/Modules/BlocksPHP/src/subscribe/block.json
 msgctxt "block description"
 msgid "List Mananger subscription"

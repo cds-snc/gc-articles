@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GCLists\Api;
 
 use GCLists\Database\Models\Message;
-use Illuminate\Support\Collection;
 use WP_REST_Response;
 use WP_REST_Request;
 
@@ -50,6 +49,22 @@ class Messages extends BaseEndpoint
             }
         ]);
 
+        register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)/versions', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'getVersions'],
+            'permission_callback' => function () {
+                return $this->hasPermission();
+            }
+        ]);
+
+        register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)/sent', [
+            'methods'             => 'GET',
+            'callback'            => [$this, 'getSentVersions'],
+            'permission_callback' => function () {
+                return $this->hasPermission();
+            }
+        ]);
+
         register_rest_route($this->namespace, '/messages', [
             'methods'             => 'POST',
             'callback'            => [$this, 'create'],
@@ -78,37 +93,43 @@ class Messages extends BaseEndpoint
     /**
      * Get all Message templates
      *
+     * @param  WP_REST_Request  $request
      * @return WP_REST_Response
      */
-    public function all(): WP_REST_Response
+    public function all(WP_REST_Request $request): WP_REST_Response
     {
-        $results = Message::all();
+        $options = $this->getOptions($request);
+
+        $results = Message::templates($options);
 
         $response = new WP_REST_Response($results);
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
      * Get sent Messages
      *
+     * @param  WP_REST_Request  $request
      * @return WP_REST_Response
      */
-    public function sent(): WP_REST_Response
+    public function sent(WP_REST_Request $request): WP_REST_Response
     {
-        $results = Message::whereNotNull('original_message_id');
+        $options = $this->getOptions($request);
+
+        $results = Message::sentMessages($options);
 
         $response = new WP_REST_Response($results);
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
-     * Get a Message
+     * Get a Message (defaults to latest add ?original to get original)
      *
      * @param  WP_REST_Request  $request
      *
@@ -116,17 +137,72 @@ class Messages extends BaseEndpoint
      */
     public function get(WP_REST_Request $request): WP_REST_Response
     {
-        $results = Message::find($request['id'])->toJson();
+        $params  = $request->get_params();
 
-        $response = new WP_REST_Response($results);
+        if (isset($params['original'])) {
+            $message = Message::find($request['id'])->original();
+
+            $response = new WP_REST_Response($message);
+
+            $response->set_status(200);
+
+            return rest_ensure_response($response);
+        }
+
+        // Whether we have a version or the original, return the latest version
+        $message = Message::find($request['id'])->original()->latest();
+
+        $response = new WP_REST_Response($message);
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
-     * Create a Message
+     * Get versions of a Message template
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
+    public function getVersions(WP_REST_Request $request): WP_REST_Response
+    {
+        $options = $this->getOptions($request);
+
+        $message = Message::find($request['id']);
+        $versions = $message->versions($options);
+
+        $response = new WP_REST_Response($versions);
+
+        $response->set_status(200);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Get sent versions of a Message template
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return WP_REST_Response
+     */
+    public function getSentVersions(WP_REST_Request $request): WP_REST_Response
+    {
+        $options = $this->getOptions($request);
+
+        $message = Message::find($request['id']);
+        $versions = $message->sent($options);
+
+        $response = new WP_REST_Response($versions);
+
+        $response->set_status(200);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Create a Message template
      *
      * @param  WP_REST_Request  $request
      *
@@ -140,14 +216,14 @@ class Messages extends BaseEndpoint
             'subject' => $request['subject'],
             'body' => $request['body'],
             'message_type' => $request['message_type']
-        ]);
+        ])->fresh();
 
         // @TODO: Probably need to catch exceptions from Model::create()
-        $response = new WP_REST_Response($message->toJson());
+        $response = new WP_REST_Response($message);
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
@@ -168,11 +244,11 @@ class Messages extends BaseEndpoint
             'body' => $request['body']
         ]);
 
-        $response = new WP_REST_Response($message->toJson());
+        $response = new WP_REST_Response($message);
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
     }
 
     /**
@@ -191,6 +267,24 @@ class Messages extends BaseEndpoint
 
         $response->set_status(200);
 
-        return $response;
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Build up an array of valid $options from request params
+     *
+     * @param  WP_REST_Request  $request
+     * @return array
+     */
+    protected function getOptions(WP_REST_Request $request): array
+    {
+        $options = [];
+        $params  = $request->get_params();
+
+        if (isset($params['limit'])) {
+            $options['limit'] = (int)$params['limit'] ?: 5;
+        }
+
+        return $options;
     }
 }

@@ -172,7 +172,7 @@ class Model implements JsonSerializable
      * @param  array  $attributes
      * @return array
      */
-    protected function getFillableFromArray(array $attributes): array
+    public function getFillableFromArray(array $attributes): array
     {
         if (count($this->fillable)) {
             return array_intersect_key($attributes, array_flip($this->fillable));
@@ -231,7 +231,7 @@ class Model implements JsonSerializable
         global $wpdb;
         $wpdb->suppress_errors(true);
 
-        $time = Carbon::now()->timestamp;
+        $time = Carbon::now()->toDateTimeString();
         $this->updateUpdatedTimestamp($time);
 
         $updated = $wpdb->update($this->tableName, $this->getAttributes(), [
@@ -255,7 +255,7 @@ class Model implements JsonSerializable
         global $wpdb;
         $wpdb->suppress_errors(true);
 
-        $time = Carbon::now()->timestamp;
+        $time = Carbon::now()->toDateTimeString();
         $this->updateCreatedTimestamp($time);
         $this->updateUpdatedTimestamp($time);
 
@@ -303,22 +303,6 @@ class Model implements JsonSerializable
     protected function updateUpdatedTimestamp($time)
     {
         $this->updated_at = $time;
-    }
-
-    /**
-     * How to serialize the model
-     *
-     * @return array
-     */
-    public function __serialize(): array
-    {
-        // @TODO: this should probably use $model->visible
-        $model = [];
-        foreach ($this->getAttributes() as $attribute => $value) {
-            $model[$attribute] = $value;
-        }
-
-        return $model;
     }
 
     /**
@@ -447,7 +431,7 @@ class Model implements JsonSerializable
         $data = $wpdb->get_results($query);
 
         if (!$data) {
-            return null;
+            return collect();
         }
 
         return collect(self::loadModelsFromDbResults($data));
@@ -477,7 +461,7 @@ class Model implements JsonSerializable
         $data = $wpdb->get_results($query);
 
         if (!$data) {
-            return null;
+            return collect();
         }
 
         return collect(self::loadModelsFromDbResults($data));
@@ -512,7 +496,7 @@ class Model implements JsonSerializable
         $data = $wpdb->get_results($query);
 
         if (!$data) {
-            return null;
+            return collect();
         }
 
         return collect(self::loadModelsFromDbResults($data));
@@ -547,7 +531,7 @@ class Model implements JsonSerializable
         $data = $wpdb->get_results($query);
 
         if (!$data) {
-            return null;
+            return collect();
         }
 
         return collect(self::loadModelsFromDbResults($data));

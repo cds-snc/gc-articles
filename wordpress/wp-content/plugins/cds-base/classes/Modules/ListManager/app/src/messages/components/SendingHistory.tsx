@@ -3,10 +3,10 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Table } from "./Table";
 import { __ } from "@wordpress/i18n";
-import useFetch from 'use-http';
+// import useFetch from 'use-http';
 
 export const SendingHistory = () => {
-    const { request, response } = useFetch({ data: [] });
+    // const { request, response } = useFetch({ data: [] });
     const [data, setData] = useState([]);
 
 

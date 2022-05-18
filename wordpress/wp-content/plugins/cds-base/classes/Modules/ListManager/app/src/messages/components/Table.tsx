@@ -18,7 +18,6 @@ export const Table = ({ columns, data }: { columns: any, data: any }) => {
         headerGroups,
         // @ts-ignore
         state: { pageIndex, pageSize  },
-        state,
     } = useTable({
         columns,
         data,

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-05-17T21:42:52+00:00\n"
+"POT-Creation-Date: 2022-05-18T15:18:06+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -169,6 +169,10 @@ msgstr "Menu supérieur"
 #: inc/template-functions.php:405
 msgid "submenu"
 msgstr "Sous-menu"
+
+#: inc/template-functions.php:439
+msgid "Date modified:"
+msgstr "Date de modification :"
 
 #. translators: %s: post author.
 #: inc/template-tags.php:44

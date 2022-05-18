@@ -391,7 +391,7 @@ test('Update a message creates a new version', function() {
         ->toHaveKey('subject', 'Subject of the new message')
         ->toHaveKey('body', 'Body of the new message')
         ->toHaveKey('original_message_id', $message->id);
-})->group('update');
+});
 
 test('Delete a message', function() {
 	$message_ids = $this->factory->message->create_many(5);

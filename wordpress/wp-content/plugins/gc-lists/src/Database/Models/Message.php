@@ -114,21 +114,25 @@ class Message extends Model
      */
     public function saveVersion(): static
     {
+        // a version should always reference the original
         $original = $this->original();
 
+        // get the latest version_id to increment
         $latest_version = $original->getLastVersionId();
         $latest_version++;
 
-        $attributes = $this->getAttributes();
-
+        // new model instance for the version
         $version = new static();
 
-        $version->forceFill(array_merge($original->getFillableFromArray($attributes), [
+        $version->forceFill(array_merge($original->getFillableFromArray($this->getAttributes()), [
             'original_message_id' => $original->getAttribute('id'),
             'version_id' => $latest_version,
         ]));
 
         $version->performInsert();
+
+        // Once we've created the version, touch the updated_at on a fresh original
+        $original->fresh()->touch();
 
         // Return a fresh model
         return $this->fresh();

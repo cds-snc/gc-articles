@@ -388,6 +388,28 @@ test('Save a new version of a message', function() {
     $this->assertSame('This is a another new body', $version->body);
 });
 
+test('Saving a version touches the original updated_at timestamp', function() {
+    Carbon::setTestNow(Carbon::now());
+
+    $message_id = $this->factory->message->create([
+        'name' => 'Original name',
+        'body' => 'Original body',
+    ]);
+    $original = Message::find($message_id);
+    $original_updated = $original->updated_at;
+
+    // Let's go to the future!
+    Carbon::setTestNow(Carbon::now()->addMinutes(5));
+
+    $original = $original->fill([
+        'name' => 'This is a new name',
+        'body' => 'This is a new body'
+    ])->saveVersion();
+
+    $this->assertNotEquals($original_updated, $original->updated_at);
+    $this->assertGreaterThan($original_updated, $original->updated_at);
+});
+
 test('Save a new version from a version should create a revision of the original', function() {
     $message_id = $this->factory->message->create([
         'name' => 'Original name',

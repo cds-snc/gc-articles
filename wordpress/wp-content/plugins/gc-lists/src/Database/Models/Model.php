@@ -231,7 +231,7 @@ class Model implements JsonSerializable
         global $wpdb;
         $wpdb->suppress_errors(true);
 
-        $time = Carbon::now()->toDateTimeString();
+        $time = $this->freshTimestamp();
         $this->updateUpdatedTimestamp($time);
 
         $updated = $wpdb->update($this->tableName, $this->getAttributes(), [
@@ -255,7 +255,7 @@ class Model implements JsonSerializable
         global $wpdb;
         $wpdb->suppress_errors(true);
 
-        $time = Carbon::now()->toDateTimeString();
+        $time = $this->freshTimestamp();
         $this->updateCreatedTimestamp($time);
         $this->updateUpdatedTimestamp($time);
 
@@ -289,20 +289,44 @@ class Model implements JsonSerializable
      * Update the created_at timestamp on the model
      *
      * @param $time
+     * @return Model
      */
-    protected function updateCreatedTimestamp($time)
+    protected function updateCreatedTimestamp($time): static
     {
         $this->created_at = $time;
+        return $this;
     }
 
     /**
      * Update the updated_at timestamp on the model
      *
      * @param $time
+     * @return Model
      */
-    protected function updateUpdatedTimestamp($time)
+    protected function updateUpdatedTimestamp($time): static
     {
         $this->updated_at = $time;
+        return $this;
+    }
+
+    /**
+     * Get a fresh timestamp
+     *
+     * @return string
+     */
+    protected function freshTimestamp()
+    {
+        return Carbon::now()->toDateTimeString();
+    }
+
+    /**
+     * Update
+     */
+    protected function touch(): static
+    {
+        $this->updateUpdatedTimestamp($this->freshTimestamp());
+
+        return $this->save();
     }
 
     /**

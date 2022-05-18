@@ -366,19 +366,17 @@ test('Create a message with Validation errors', function() {
         ->toHaveKey('data.params.message_type');
 });
 
-test('Update a message', function() {
+test('Update a message creates a new version', function() {
 	$message = $this->factory->message->create_and_get([
-		'name' => 'This is the message name'
+		'name' => 'This is the original message name'
 	]);
-
-	$this->assertEquals('This is the message name', $message->name);
 
 	$request  = new WP_REST_Request( 'PUT', "/gc-lists/messages/{$message->id}" );
 	$request->set_query_params([
 		'id' => $message->id,
-		'name' => 'Name of the message',
-		'subject' => 'Subject of the message',
-		'body' => 'Body of the message',
+		'name' => 'Name of the new version of the message',
+		'subject' => 'Subject of the new message',
+		'body' => 'Body of the new message',
 	]);
 
 	$response = $this->server->dispatch( $request );
@@ -389,8 +387,11 @@ test('Update a message', function() {
 
 	expect($body)
         ->json()
-        ->toHaveKey('name', 'Name of the message');
-});
+        ->toHaveKey('name', 'Name of the new version of the message')
+        ->toHaveKey('subject', 'Subject of the new message')
+        ->toHaveKey('body', 'Body of the new message')
+        ->toHaveKey('original_message_id', $message->id);
+})->group('update');
 
 test('Delete a message', function() {
 	$message_ids = $this->factory->message->create_many(5);

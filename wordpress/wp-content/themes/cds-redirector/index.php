@@ -11,9 +11,19 @@ $lang = cds_get_active_language();
 $redirectHost = cds_get_theme_option("redirect_url");
 $pageName = sprintf("/%s?lang=%s", $wp->request, $lang);
 
-if (isset($_GET['preview_id']) && isset($_GET['preview'])) {
+if (isset($_GET['preview'])) {
+    $previewID = 0;
+
+    if (isset($_GET['preview_id'])) {
+        // for pages/articles that have already been published
+        $previewID = intval($_GET['preview_id']);
+    } else if (isset($_GET['p'])) {
+        // for pages/articles that are still in draft
+        $previewID = intval($_GET['p']);
+    }
+
     // handles incoming "draft" links from wp table (list view)
-    $pageName = sprintf('/preview?id=%s&lang=%s', intval($_GET['preview_id']), $lang);
+    $pageName = sprintf('/preview?id=%s&lang=%s', $previewID, $lang);
 }
 
 if (

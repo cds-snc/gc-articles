@@ -30,7 +30,8 @@ function createToc() {
 (function ($) {
 
   const $menuToggle = $('button.navbar-toggler');
-  const $itemWithSubmenu = $('.menu-item-has-children');
+  //const $itemWithSubmenu = $('.menu-item-has-children');
+  const $submenuButton = $('.menu-item-has-children button');
 
   $menuToggle.on('click', function (e) {
     // toggle "aria-expanded"
@@ -47,6 +48,25 @@ function createToc() {
     $menu.toggleClass('show');
   })
 
+  $submenuButton.on('click', function (e) {
+    $itemWithSubmenu = $(e.target).parent();
+    isOpen = $itemWithSubmenu.find('ul.sub-menu').hasClass('open');
+
+    if(isOpen) {
+      $itemWithSubmenu.find('ul.sub-menu').removeClass('open');
+      $itemWithSubmenu.find('> a').attr("aria-expanded", 'false');
+      $itemWithSubmenu.find('> button').attr("aria-expanded", 'false');
+      $itemWithSubmenu.find('> button span').text('Open');
+    } else {
+      $itemWithSubmenu.find('ul.sub-menu').addClass('open');
+      $itemWithSubmenu.find('> a').attr("aria-expanded", 'true');
+      $itemWithSubmenu.find('> button').attr("aria-expanded", 'true');
+      $itemWithSubmenu.find('> button span').text('Close');
+    }
+  })
+
+
+  /*
   $itemWithSubmenu.on(
     'focusin mouseover', function (e) {
       // if target is within submenu, "aria-expanded" is true
@@ -59,6 +79,7 @@ function createToc() {
         $itemWithSubmenu.attr('aria-expanded', false);
       }
     })
+  */
 
   createToc();
 

@@ -75,24 +75,33 @@ class Messages extends BaseEndpoint
                 'name' => [
                     'required' => true,
                     'type' => 'string',
-                    'description' => 'Name of the Message'
+                    'description' => 'Name of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
                 ],
                 'subject' => [
                     'required' => true,
                     'type' => 'string',
-                    'description' => 'Subject of the Message'
+                    'description' => 'Subject of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
                 ],
                 'body' => [
                     'required' => true,
                     'type' => 'string',
-                    'description' => 'Body of the Message'
+                    'description' => 'Body of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_textarea_field($value);
+                    }
                 ],
                 'message_type' => [
                     'required' => true,
                     'type' => 'string',
                     'description' => 'Type of message',
-                    'validate_callback' => function ($param, $request, $key) {
-                        return in_array($param, ['email', 'phone']);
+                    'validate_callback' => function ($value, $request, $param) {
+                        return in_array($value, ['email', 'phone']);
                     }
                 ]
             ]

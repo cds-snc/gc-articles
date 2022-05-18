@@ -364,7 +364,7 @@ test('Create a message with Validation errors', function() {
         ->toHaveKey('code', 'rest_invalid_param')
         ->toHaveKey('data.status', 400)
         ->toHaveKey('data.params.message_type');
-})->group('validation');
+});
 
 test('Update a message', function() {
 	$message = $this->factory->message->create_and_get([

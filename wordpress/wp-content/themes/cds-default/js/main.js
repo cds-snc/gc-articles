@@ -83,7 +83,6 @@ function createToc() {
     $itemWithSubmenu.find('ul.sub-menu').addClass('open');
     $itemWithSubmenu.find('> a').attr("aria-expanded", 'true');
     $itemWithSubmenu.find('> button').attr("aria-expanded", 'true');
-    $itemWithSubmenu.find('> button span').text('Close submenu');
 
     if(isMouseEnter) {
       $itemWithSubmenu.find('ul.sub-menu').addClass('mouseenter');
@@ -94,7 +93,6 @@ function createToc() {
     $itemWithSubmenu.find('ul.sub-menu').removeClass('open').removeClass('mouseenter');
     $itemWithSubmenu.find('> a').attr("aria-expanded", 'false');
     $itemWithSubmenu.find('> button').attr("aria-expanded", 'false');
-    $itemWithSubmenu.find('> button span').text('Open submenu');
   }
 
   createToc();

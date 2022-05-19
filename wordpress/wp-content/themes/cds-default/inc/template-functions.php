@@ -401,7 +401,7 @@ function get_top_nav(): string
         $headerMenu = str_replace('<nav class="nav--primary__container">', '<nav class="nav--primary__container"><div class="container"><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#' . $menuID . '" aria-controls="' . $menuID . '" aria-expanded="false">Menu</button></div>', $headerMenu);
 
         // Insert a button to open/close submenus
-        $headerMenu = str_replace('<ul class="sub-menu">', '<button aria-expanded="false" class="sub-menu--button"><span class="sr-only">Open</span></button><ul class="sub-menu">', $headerMenu);
+        $headerMenu = str_replace('<ul class="sub-menu">', '<button aria-expanded="false" class="sub-menu--button"><span class="sr-only">' .  __('Toggle submenu', 'cds-snc') . '</span></button><ul class="sub-menu">', $headerMenu);
 
         try {
             $topMenu = __('Top menu', 'cds-snc');
@@ -421,7 +421,12 @@ function get_top_nav(): string
                 $submenuID = 'sub-menu-' . ++$submenuCount;
                 $node->setAttribute('aria-label', $submenu);
                 $node->setAttribute('id', $submenuID);
-                $node->getParent()->find('.sub-menu--button')->setAttribute('aria-controls', $submenuID);
+
+                $button = $node->getParent()->find('.sub-menu--button');
+                $button->setAttribute('aria-controls', $submenuID);
+
+                $linkText = $node->getParent()->find('a')[0]->text;
+                $button->find('span')->firstChild()->setText(__('Toggle submenu for ', 'cds-snc') . $linkText);
             }
 
             return $dom->outerHTML;

@@ -30,9 +30,32 @@ class Message extends Model
         'message_type',
     ];
 
-    public function send()
+    /**
+     * Mark a message as sent
+     *
+     * @param  string  $sent_to_list_id
+     * @param  string  $sent_to_list_name
+     * @param  int  $sent_by_id
+     * @param  string  $sent_by_email
+     *
+     * @return $this
+     */
+    public function send(string $sent_to_list_id, string $sent_to_list_name, int $sent_by_id, string $sent_by_email): static
     {
-        //
+        $timestamp = $this->freshTimestamp();
+
+        $this->updateUpdatedTimestamp($timestamp);
+
+        $this->forceFill([
+            'sent_at' => $this->freshTimestamp(),
+            'sent_to_list_id' => $sent_to_list_id,
+            'sent_to_list_name' => $sent_to_list_name,
+            'sent_by_id' => $sent_by_id,
+            'sent_by_email' => $sent_by_email
+        ]);
+
+        // @TODO: need to wire this up to the actual send
+        return $this->saveVersion();
     }
 
     /**
@@ -124,7 +147,12 @@ class Message extends Model
         // new model instance for the version
         $version = new static();
 
-        $version->forceFill(array_merge($original->getFillableFromArray($this->getAttributes()), [
+        $attributes = $this->getAttributes();
+
+        // Don't copy the id obvi
+        unset($attributes['id']);
+
+        $version->forceFill(array_merge($attributes, [
             'original_message_id' => $original->getAttribute('id'),
             'version_id' => $latest_version,
         ]));

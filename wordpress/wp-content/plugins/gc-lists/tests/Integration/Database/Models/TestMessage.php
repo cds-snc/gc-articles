@@ -5,6 +5,7 @@ use GCLists\Database\Models\Message;
 use GCLists\Exceptions\InvalidAttributeException;
 use GCLists\Exceptions\QueryException;
 use Illuminate\Support\Collection;
+use function Pest\Faker\faker;
 
 beforeEach(function() {
     global $wpdb;
@@ -505,4 +506,30 @@ test('Retrieve only Sent Messages', function() {
     $this->assertCount(2, Message::templates());
     $this->assertCount(5, Message::sentMessages());
     $this->assertCount(3, Message::sentMessages(['limit' => 3]));
+});
+
+test('Message send', function() {
+    $message_id = $this->factory->message->create();
+    $message = Message::find($message_id);
+
+    $timestamp = Carbon::now()->toDateTimeString();
+    Carbon::setTestNow($timestamp);
+
+    $uuid = faker()->uuid();
+    $email = faker()->email;
+    $listName = 'This is a list name';
+
+    $message = $message->send($uuid, $listName, 1, $email);
+
+    expect($message)
+        ->toBeInstanceOf(Message::class)
+        ->toHaveKey('sent_at', NULL);
+
+    expect($message->sent())
+        ->toBeInstanceOf(Collection::class)
+        ->each
+        ->toBeInstanceOf(Message::class)
+        ->toHaveKey('sent_at', $timestamp)
+        ->toHaveKey('sent_by_email', $email)
+        ->toHaveKey('sent_to_list_name', $listName);
 });

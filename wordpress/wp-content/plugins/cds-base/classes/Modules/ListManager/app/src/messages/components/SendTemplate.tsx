@@ -39,8 +39,12 @@ export const SendTemplate = () => {
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
     const { state: { lists } } = useList();
-    const { sendTemplate, success, errors } = useSendTemplate({ listId, content });
+    const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content });
     const { templateId, getTemplate } = useTemplateApi();
+
+    useEffect(() => {
+        reset();
+    }, [reset]);
 
     useEffect(() => {
         const loadTemplate = async () => {

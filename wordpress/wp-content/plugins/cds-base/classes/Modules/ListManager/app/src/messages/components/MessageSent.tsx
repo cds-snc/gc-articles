@@ -33,8 +33,19 @@ export const MessageSent = ({ name, count }: { name: string | undefined, count: 
 
             <SendToList sending={false} name={name} count={count} />
             <StyledActionContainer>
-                <Link to={`/messages/${serviceId}/edit/${uuidv4()}`} style={{ marginRight: "20px" }} className="button button-primary" >{__("Send a new message", "cds-snc")}</Link>
-                <Link to={`/messages/${serviceId}`} className="button">{__("Return to messages", "cds-snc")}</Link>
+                <Link
+                    to={`/messages/${serviceId}/edit/${uuidv4()}`}
+                    style={{ marginRight: "20px" }}
+                    className="button button-primary"
+                >
+                    {__("Send a new message", "cds-snc")}
+                </Link>
+                <Link
+                    to={`/messages/${serviceId}`}
+                    className="button"
+                >
+                    {__("Return to messages", "cds-snc")}
+                </Link>
             </StyledActionContainer>
         </>
     )

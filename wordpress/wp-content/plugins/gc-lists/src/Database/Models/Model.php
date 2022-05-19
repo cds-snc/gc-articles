@@ -320,7 +320,7 @@ class Model implements JsonSerializable
     }
 
     /**
-     * Update
+     * Update the model's updated_at timestamp
      */
     protected function touch(): static
     {
@@ -332,16 +332,24 @@ class Model implements JsonSerializable
     /**
      * Delete the model from the database
      *
-     * @return mixed
+     * @return bool
      */
-    public function delete(): mixed
+    public function delete(): bool
     {
+        if (!$this->exists) {
+            return false;
+        }
+
         global $wpdb;
 
-        return $wpdb->delete(
+        $wpdb->delete(
             $this->tableName,
             ['id' => $this->attributes["id"]]
         );
+
+        $this->exists = false;
+
+        return true;
     }
 
     /**

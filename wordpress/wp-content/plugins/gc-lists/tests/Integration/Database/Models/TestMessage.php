@@ -115,18 +115,30 @@ test('Find a model', function() {
 });
 
 test('Delete a model', function() {
-    $message_ids = $this->factory->message->create_many(5);
+    $message_ids = collect($this->factory->message->create_many(5));
 
     $count = $this->wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
     $this->assertEquals(5, $count);
 
-    $message = Message::find($message_ids[1]);
+    $message = Message::find($message_ids->random());
     $this->assertTrue($message instanceof Message);
 
-    $message->delete();
+    $this->assertTrue($message->delete());
+
+    $this->assertFalse($message->exists);
 
     $count = $this->wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
     $this->assertEquals(4, $count);
+});
+
+test('Deleting a non-existent model returns false', function() {
+    $message = new Message([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz'
+    ]);
+
+    $this->assertFalse($message->delete());
 });
 
 test('Retrieve all models', function() {

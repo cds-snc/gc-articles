@@ -39,7 +39,7 @@ class Model implements JsonSerializable
      *
      * @var string
      */
-    protected string $tableName;
+    public string $tableName;
 
     /**
      * The model's attributes

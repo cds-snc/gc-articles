@@ -110,8 +110,11 @@ nav ul, .sub-menu {
     border-left: 4px solid #284162;
 }
 
+/*
 .nav--primary li:hover > .sub-menu,
 .nav--primary li:focus-within > .sub-menu,
+*/
+.nav--primary li > .sub-menu.open,
 .nav--primary li > .sub-menu:hover,
 .nav--primary li > .sub-menu:focus {
    visibility: visible;
@@ -128,8 +131,19 @@ nav ul, .sub-menu {
     padding: 10px 15px 10px 11px;
 }
 
-.menu-item-has-children a {
-    padding-right: 25px;
+.nav > li.menu-item-has-children > a {
+    padding-right: 10px;
+}
+
+.menu-item-has-children button {
+    padding: 14px 14px;
+    margin-left: -4px;
+}
+
+.menu-item-has-children:hover button,
+.menu-item-has-children > a:focus + button,
+.menu-item-has-children > button:focus {
+        background: #e2e2e2;
 }
 
 button.navbar-toggler {
@@ -144,7 +158,6 @@ button.navbar-toggler:hover {
     color: #0535d2;
     background: #d4d6da;
 }
-
 
 button.navbar-toggler[aria-expanded]::after {
     color: currentColor;
@@ -202,14 +215,13 @@ button.navbar-toggler[aria-expanded='true']::after {
         background: #e1e1e1;
     }
 
-    .nav--primary > .menu-item-has-children > a::after {
+    .nav--primary > .menu-item-has-children > button::after {
         color: currentColor;
         border-style: solid;
         border-width: 2px 2px 0 0;
         content: '';
         display: inline-block;
         height: 8px;
-        left: 10px;
         position: relative;
         top: -3px;
         transform: rotate(-225deg);
@@ -218,8 +230,7 @@ button.navbar-toggler[aria-expanded='true']::after {
         transition: all 0.2s ease;
     }
     
-    .nav--primary > .menu-item-has-children:hover > a::after,
-    .nav--primary > .menu-item-has-children:focus-within > a::after {
+    .nav--primary > .menu-item-has-children > button[aria-expanded="true"]::after {
         transform: rotate(-45deg);
     }
 
@@ -230,6 +241,10 @@ button.navbar-toggler[aria-expanded='true']::after {
 
 /* Small screens */
 @media screen and (max-width: 599px) {
+    li.menu-item-has-children .sub-menu--button {
+        display: none;
+    }
+
     .nav.nav--primary:not(.show) {
         display: none;
     }

@@ -464,6 +464,21 @@ test('Save a new version from a version should create a revision of the original
     $this->assertCount(6, $original->versions());
 });
 
+test('Saving a version with invalid attribute should throw exception', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Original name',
+        'body' => 'Original body',
+    ]);
+
+    $original = Message::find($message_id);
+
+    $original->name = 'New name';
+    $original->foo = 'Bar';
+
+    $this->expectException(QueryException::class);
+    $original->saveVersion();
+});
+
 test('Retrieve all Message templates', function() {
     $this->factory->message->create_many(20);
 

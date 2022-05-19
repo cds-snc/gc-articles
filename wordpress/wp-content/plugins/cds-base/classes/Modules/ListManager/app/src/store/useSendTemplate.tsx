@@ -37,7 +37,15 @@ function useSendTemplate({ listId, content }) {
         [content, send],
     );
 
-    return { sendTemplate, errors, success };
+    const reset = useCallback(
+        () => {
+            setErrors(false);
+            setSuccess(false);
+        },
+        [setErrors, setSuccess],
+    );
+
+    return { sendTemplate, errors, success, reset };
 }
 
 export default useSendTemplate;

@@ -14,6 +14,7 @@ import { useListFetch } from '../../store/UseListFetch';
 import { StyledSelect } from "../editor/Styles"
 import useSendTemplate from '../../store/useSendTemplate';
 import useTemplateApi from '../../store/useTemplateApi';
+import { ConfirmSend } from "./ConfirmSend";
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     return (
@@ -81,7 +82,17 @@ export const SendTemplate = () => {
             }} />}
 
             <SendToList sending={true} name={name} count={subscriberCount} />
-            <button style={{ marginRight: "20px" }} className="button button-primary" onClick={sendTemplate}>{__("Send message", "cds-snc")}</button>
+            <button
+                style={{ marginRight: "20px" }}
+                className="button button-primary"
+                onClick={async () => {
+                    const result = await ConfirmSend({ count: subscriberCount });
+                    if (result) {
+                        sendTemplate();
+                    }
+                }}>
+                {__("Send message", "cds-snc")}
+            </button>
             <button className="button">{__("Cancel")}</button>
             <CreateNewList />
             <MessagePreview subject={subject} content={content} />

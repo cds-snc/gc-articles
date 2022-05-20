@@ -886,11 +886,11 @@ msgstr "Afficher « En savoir plus »"
 
 #: build/index.js:3608 build/index.js:3533
 msgid "Latest Page"
-msgstr ""
+msgstr "la page la plus récente"
 
 #: build/index.js:3610 build/index.js:3535
 msgid "Latest Article"
-msgstr ""
+msgstr "l'article la plus récente"
 
 #: build/index.js:3720 build/index.js:3635
 msgid " Tables exist from deleted sites"

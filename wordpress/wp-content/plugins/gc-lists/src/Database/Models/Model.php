@@ -39,7 +39,7 @@ class Model implements JsonSerializable
      *
      * @var string
      */
-    protected string $tableName;
+    public string $tableName;
 
     /**
      * The model's attributes
@@ -231,7 +231,7 @@ class Model implements JsonSerializable
         global $wpdb;
         $wpdb->suppress_errors(true);
 
-        $time = Carbon::now()->toDateTimeString();
+        $time = $this->freshTimestamp();
         $this->updateUpdatedTimestamp($time);
 
         $updated = $wpdb->update($this->tableName, $this->getAttributes(), [
@@ -255,7 +255,7 @@ class Model implements JsonSerializable
         global $wpdb;
         $wpdb->suppress_errors(true);
 
-        $time = Carbon::now()->toDateTimeString();
+        $time = $this->freshTimestamp();
         $this->updateCreatedTimestamp($time);
         $this->updateUpdatedTimestamp($time);
 
@@ -289,35 +289,67 @@ class Model implements JsonSerializable
      * Update the created_at timestamp on the model
      *
      * @param $time
+     * @return Model
      */
-    protected function updateCreatedTimestamp($time)
+    protected function updateCreatedTimestamp($time): static
     {
         $this->created_at = $time;
+        return $this;
     }
 
     /**
      * Update the updated_at timestamp on the model
      *
      * @param $time
+     * @return Model
      */
-    protected function updateUpdatedTimestamp($time)
+    protected function updateUpdatedTimestamp($time): static
     {
         $this->updated_at = $time;
+        return $this;
+    }
+
+    /**
+     * Get a fresh timestamp
+     *
+     * @return string
+     */
+    protected function freshTimestamp()
+    {
+        return Carbon::now()->toDateTimeString();
+    }
+
+    /**
+     * Update the model's updated_at timestamp
+     */
+    protected function touch(): static
+    {
+        $this->updateUpdatedTimestamp($this->freshTimestamp());
+
+        return $this->save();
     }
 
     /**
      * Delete the model from the database
      *
-     * @return mixed
+     * @return bool
      */
-    public function delete(): mixed
+    public function delete(): bool
     {
+        if (!$this->exists) {
+            return false;
+        }
+
         global $wpdb;
 
-        return $wpdb->delete(
+        $wpdb->delete(
             $this->tableName,
             ['id' => $this->attributes["id"]]
         );
+
+        $this->exists = false;
+
+        return true;
     }
 
     /**

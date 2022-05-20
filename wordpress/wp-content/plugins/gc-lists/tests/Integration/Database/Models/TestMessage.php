@@ -5,6 +5,7 @@ use GCLists\Database\Models\Message;
 use GCLists\Exceptions\InvalidAttributeException;
 use GCLists\Exceptions\QueryException;
 use Illuminate\Support\Collection;
+use function Pest\Faker\faker;
 
 beforeEach(function() {
     global $wpdb;
@@ -115,18 +116,30 @@ test('Find a model', function() {
 });
 
 test('Delete a model', function() {
-    $message_ids = $this->factory->message->create_many(5);
+    $message_ids = collect($this->factory->message->create_many(5));
 
     $count = $this->wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
     $this->assertEquals(5, $count);
 
-    $message = Message::find($message_ids[1]);
+    $message = Message::find($message_ids->random());
     $this->assertTrue($message instanceof Message);
 
-    $message->delete();
+    $this->assertTrue($message->delete());
+
+    $this->assertFalse($message->exists);
 
     $count = $this->wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
     $this->assertEquals(4, $count);
+});
+
+test('Deleting a non-existent model returns false', function() {
+    $message = new Message([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz'
+    ]);
+
+    $this->assertFalse($message->delete());
 });
 
 test('Retrieve all models', function() {
@@ -388,6 +401,28 @@ test('Save a new version of a message', function() {
     $this->assertSame('This is a another new body', $version->body);
 });
 
+test('Saving a version touches the original updated_at timestamp', function() {
+    Carbon::setTestNow(Carbon::now());
+
+    $message_id = $this->factory->message->create([
+        'name' => 'Original name',
+        'body' => 'Original body',
+    ]);
+    $original = Message::find($message_id);
+    $original_updated = $original->updated_at;
+
+    // Let's go to the future!
+    Carbon::setTestNow(Carbon::now()->addMinutes(5));
+
+    $original = $original->fill([
+        'name' => 'This is a new name',
+        'body' => 'This is a new body'
+    ])->saveVersion();
+
+    $this->assertNotEquals($original_updated, $original->updated_at);
+    $this->assertGreaterThan($original_updated, $original->updated_at);
+});
+
 test('Save a new version from a version should create a revision of the original', function() {
     $message_id = $this->factory->message->create([
         'name' => 'Original name',
@@ -427,6 +462,21 @@ test('Save a new version from a version should create a revision of the original
 
     // There should now be six versions of the original
     $this->assertCount(6, $original->versions());
+});
+
+test('Saving a version with invalid attribute should throw exception', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Original name',
+        'body' => 'Original body',
+    ]);
+
+    $original = Message::find($message_id);
+
+    $original->name = 'New name';
+    $original->foo = 'Bar';
+
+    $this->expectException(QueryException::class);
+    $original->saveVersion();
 });
 
 test('Retrieve all Message templates', function() {
@@ -471,4 +521,30 @@ test('Retrieve only Sent Messages', function() {
     $this->assertCount(2, Message::templates());
     $this->assertCount(5, Message::sentMessages());
     $this->assertCount(3, Message::sentMessages(['limit' => 3]));
+});
+
+test('Message send', function() {
+    $message_id = $this->factory->message->create();
+    $message = Message::find($message_id);
+
+    $timestamp = Carbon::now()->toDateTimeString();
+    Carbon::setTestNow($timestamp);
+
+    $uuid = faker()->uuid();
+    $email = faker()->email;
+    $listName = 'This is a list name';
+
+    $message = $message->send($uuid, $listName, 1, $email);
+
+    expect($message)
+        ->toBeInstanceOf(Message::class)
+        ->toHaveKey('sent_at', NULL);
+
+    expect($message->sent())
+        ->toBeInstanceOf(Collection::class)
+        ->each
+        ->toBeInstanceOf(Message::class)
+        ->toHaveKey('sent_at', $timestamp)
+        ->toHaveKey('sent_by_email', $email)
+        ->toHaveKey('sent_to_list_name', $listName);
 });

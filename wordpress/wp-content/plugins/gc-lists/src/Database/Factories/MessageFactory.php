@@ -2,6 +2,8 @@
 
 namespace GCLists\Database\Factories;
 
+use Carbon\Carbon;
+
 class MessageFactory extends \WP_UnitTest_Factory_For_Thing
 {
     protected $tableName;
@@ -19,7 +21,9 @@ class MessageFactory extends \WP_UnitTest_Factory_For_Thing
             'name' => 'This is a message',
             'subject' => 'Subject of the message',
             'body' => 'This is the body of the message it can be very long',
-            'message_type' => 'email'
+            'message_type' => 'email',
+            'updated_at' => Carbon::now()->toDateTimeString(),
+            'created_at' => Carbon::now()->toDateTimeString(),
         );
     }
 

@@ -70,7 +70,41 @@ class Messages extends BaseEndpoint
             'callback'            => [$this, 'create'],
             'permission_callback' => function () {
                 return $this->hasPermission();
-            }
+            },
+            'args' => [
+                'name' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Name of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'subject' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Subject of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'body' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Body of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_textarea_field($value);
+                    }
+                ],
+                'message_type' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Type of message',
+                    'validate_callback' => function ($value, $request, $param) {
+                        return in_array($value, ['email', 'phone']);
+                    }
+                ]
+            ]
         ]);
 
         register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)', [
@@ -78,7 +112,33 @@ class Messages extends BaseEndpoint
             'callback'            => [$this, 'update'],
             'permission_callback' => function () {
                 return $this->hasPermission();
-            }
+            },
+            'args' => [
+                'name' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Name of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'subject' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Subject of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'body' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Body of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_textarea_field($value);
+                    }
+                ]
+            ]
         ]);
 
         register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)', [
@@ -210,7 +270,6 @@ class Messages extends BaseEndpoint
      */
     public function create(WP_REST_Request $request): WP_REST_Response
     {
-        // @TODO: data validation and santitization
         $message = Message::create([
             'name' => $request['name'],
             'subject' => $request['subject'],
@@ -235,16 +294,17 @@ class Messages extends BaseEndpoint
      */
     public function update(WP_REST_Request $request): WP_REST_Response
     {
-        // @TODO: data validation and santitization
         $message = Message::find($request['id']);
 
-        $message->update([
+        $message->fill([
             'name' => $request['name'],
             'subject' => $request['subject'],
             'body' => $request['body']
         ]);
 
-        $response = new WP_REST_Response($message);
+        $message->saveVersion();
+
+        $response = new WP_REST_Response($message->latest());
 
         $response->set_status(200);
 

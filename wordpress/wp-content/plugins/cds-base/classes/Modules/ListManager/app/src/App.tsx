@@ -7,7 +7,7 @@ import { NotFound } from './lists/components/NotFound';
 import { ListProvider } from "./store/ListContext"
 import { Provider } from 'use-http';
 
-let endpoint = "/wp-json/list-manager";
+let endpoint = "/wp-json/gc-lists";
 
 if (process.env.NODE_ENV === "development") {
     endpoint = "http://localhost/wp-json/gc-lists";

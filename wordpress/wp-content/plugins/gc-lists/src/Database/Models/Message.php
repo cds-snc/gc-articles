@@ -85,6 +85,8 @@ class Message extends Model
      */
     public function versions(array $options = []): ?Collection
     {
+        // @TODO: what if this instance is a version of a message?
+        // Probably need something like $this->getAttribute('original_message_id') ?: $this->getAttribute('id')
         return static::whereEquals(['original_message_id' => $this->getAttribute('id')], $options);
     }
 
@@ -167,14 +169,14 @@ class Message extends Model
     }
 
     /**
-     * Retrieve Message templates
+     * Retrieve starred messages
      *
      * @param  array  $options
      * @return Collection|null
      */
-    public static function templates(array $options = []): ?Collection
+    public static function saved(array $options = []): ?Collection
     {
-        return static::whereNull('original_message_id', $options);
+        return static::whereNotNull('saved', $options);
     }
 
     /**

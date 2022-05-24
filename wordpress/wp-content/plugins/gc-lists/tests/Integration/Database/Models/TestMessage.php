@@ -479,19 +479,23 @@ test('Saving a version with invalid attribute should throw exception', function(
     $original->saveVersion();
 });
 
-test('Retrieve all Message templates', function() {
-    $this->factory->message->create_many(20);
+test('Retrieve all saved Message templates', function() {
+    $this->factory->message->create_many(10, [
+        'saved' => 1
+    ]);
 
-    $templates = Message::templates();
-    $this->assertCount(20, $templates);
+    $templates = Message::saved();
+    $this->assertCount(10, $templates);
 
-    $templates = Message::templates(['limit' => 5]);
+    $templates = Message::saved(['limit' => 5]);
     $this->assertCount(5, $templates);
-});
+})->group('test');
 
 test('Retrieve only Sent Messages', function() {
     // Create a Message template and some versions including sent messages
-    $message_id = $this->factory->message->create();
+    $message_id = $this->factory->message->create([
+        'saved' => 1
+    ]);
 
     // Generate 5 versions, odd = sent (3)
     for($version_id = 1; $version_id <= 5; $version_id++) {
@@ -505,7 +509,9 @@ test('Retrieve only Sent Messages', function() {
     }
 
     // Do it again with another Message template
-    $message_id = $this->factory->message->create();
+    $message_id = $this->factory->message->create([
+        'saved' => 1
+    ]);
 
     // Generate 5 versions, even = sent (2)
     for($version_id = 1; $version_id <= 5; $version_id++) {
@@ -518,10 +524,10 @@ test('Retrieve only Sent Messages', function() {
         ]);
     }
 
-    $this->assertCount(2, Message::templates());
+    $this->assertCount(2, Message::saved());
     $this->assertCount(5, Message::sentMessages());
     $this->assertCount(3, Message::sentMessages(['limit' => 3]));
-});
+})->group('test');
 
 test('Message send', function() {
     $message_id = $this->factory->message->create();

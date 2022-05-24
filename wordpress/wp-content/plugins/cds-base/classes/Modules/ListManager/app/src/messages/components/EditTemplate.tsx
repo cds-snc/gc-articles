@@ -33,11 +33,13 @@ export const EditTemplate = () => {
     const { serviceId } = useService();
     useEffect(() => {
         const loadTemplate = async () => {
-            if (templateId) {
+            if (templateId && templateId !== 'new') {
                 const template = await getTemplate(templateId);
-                setCurrentTemplate(deserialize(template.content || ""));
+                setCurrentTemplate(deserialize(template.body || ""));
                 setValue("name", template?.name || "")
                 setValue("subject", template?.subject || "");
+            } else {
+                setCurrentTemplate(deserialize(""))
             }
         }
         loadTemplate();
@@ -115,12 +117,12 @@ export const EditTemplate = () => {
                 }}>{__('Save template', 'cds-snc')}</button>
             </div>
             <div>
-                <StyledDeleteButton onClick={async () => {
-                    await deleteTemplate({ templateId });
-                    navigate(`/messages/${serviceId}`);
-                }}>
-                    {__('Delete this message template', 'cds-snc')}
-                </StyledDeleteButton>
+                {/*<StyledDeleteButton onClick={async () => {*/}
+                {/*    await deleteTemplate({ templateId });*/}
+                {/*    navigate(`/messages/${serviceId}`);*/}
+                {/*}}>*/}
+                {/*    {__('Delete this message template', 'cds-snc')}*/}
+                {/*</StyledDeleteButton>*/}
             </div>
         </>
     )

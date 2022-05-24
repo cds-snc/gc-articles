@@ -76,8 +76,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                     // const time = format(new Date(t), "hh:mm a");
                     return (
                         <>
-                            {/*{`${date} at ${time}`}*/}
-                          {t}
+                            {t}
                         </>
                     )
                 },
@@ -122,7 +121,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
             <StyledH1>{__('Messages', 'cds-snc')}</StyledH1>
             <Link
                 className="button button-primary"
-                to={`/messages/${serviceId}/edit/${uuidv4()}`}
+                to={`/messages/${serviceId}/edit/new`}
             >
                 {__("Create Template", "cds-snc")}
             </Link>

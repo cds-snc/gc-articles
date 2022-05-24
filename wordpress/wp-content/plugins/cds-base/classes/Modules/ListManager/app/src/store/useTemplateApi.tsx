@@ -8,22 +8,19 @@ import { serialize, deserialize } from "../messages/editor/utils";
 import { TemplateType } from "../types";
 import useFetch from 'use-http';
 
-const connect = () => {
-    const db = localForage.createInstance({ name: "gclists" });
-    return db;
-}
-
 function useTemplateApi() {
     const params = useParams();
-    const storage = connect();
     const templateId = params?.templateId;
     const { request, response } = useFetch({ data: [] })
 
     const getTemplate = useCallback(async (templateId: string) => {
-        const template: TemplateType | null = await storage.getItem(templateId);
-        const parsedContent = deserialize(template?.content || "");
+        await request.get(`/messages/${templateId}`)
+        const result = await response.json();
+        const template: TemplateType | null = result;
+        // const template: TemplateType | null = await storage.getItem(templateId);
+        const parsedContent = deserialize(template?.body || "");
         return { ...template, parsedContent };
-    }, [storage])
+    }, [])
 
     const getTemplates = useCallback(async () => {
         let templates: any = [];
@@ -40,32 +37,53 @@ function useTemplateApi() {
                 })
             })
         }
-
-        // await storage.iterate((value: {}, key) => {
-        //     templates.push({ templateId: key, type: "email", ...value });
-        // });
         return templates;
-    }, [storage])
+    }, [])
 
     const saveTemplate = useCallback(async ({ templateId, name, subject, content }: { templateId: string | undefined, name: string, subject: string, content: Descendant[] | undefined }) => {
         if (!content) return;
 
-        const tId = templateId ? templateId : uuidv4();
-        await storage.setItem(tId, {
-            name,
-            subject,
-            content: serialize(content),
-            timestamp: new Date().getTime()
+        if (templateId === 'new') {
+            await request.post('/messages', {
+                'name': name,
+                'subject': subject,
+                'body': serialize(content),
+                'message_type': 'email'
+            });
+
+            const result = await response.json();
+            console.log("created", result);
+
+            return result;
+        }
+
+        await request.put(`/messages/${templateId}`, {
+            'name': name,
+            'subject': subject,
+            'body': serialize(content),
+            'message_type': 'email'
         });
+
+        const result = await response.json();
+
+        console.log("updated", result)
+
+        // @TODO: redirect back
+        return result;
     },
-        [storage],
+        [],
     );
 
     const deleteTemplate = useCallback(async ({ templateId }: { templateId: string | undefined }) => {
         if (!templateId) return;
-        await storage.removeItem(templateId);
+
+        await request.delete(`/messages/${templateId}`);
+
+        const result = await response.json();
+
+        // @TODO: refresh table
     },
-        [storage],
+        [],
     );
 
     return { templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate }

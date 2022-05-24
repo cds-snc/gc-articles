@@ -36,7 +36,7 @@ const StyledDeleteButton = styled.button`
     }
 `;
 
-export const ListTemplates = () => {
+export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     const [templates, setTemplates] = useState([]);
     const { getTemplates, deleteTemplate } = useTemplateApi();
     const { serviceId } = useService();
@@ -129,7 +129,7 @@ export const ListTemplates = () => {
                 templates?.length ?
                     <>
                         <h2>{__('Message templates', 'cds-snc')}</h2>
-                        <Table columns={columns} data={templates} perPage={6} pageNav={false} />
+                        <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
                     </> : null
             }
         </>

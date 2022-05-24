@@ -29,6 +29,10 @@ export const StyledButton = styled.button`
         text-decoration:none;
     }
 
+    :disabled{
+        display:none;
+    }
+
     span{
         position:relative;
         padding: 5px;
@@ -99,12 +103,15 @@ export const Table = ({ columns, data, perPage = 6, pageNav = false }: { columns
 
             {pageNav &&
                 <StyledPaging>
+                    
                     <StyledButton onClick={() => previousPage()} disabled={!canPreviousPage}>
                         <Back /> <span>{__("previous", "cds-snc")}</span>
                     </StyledButton>{' '}
+                    
                     <StyledButton onClick={() => nextPage()} disabled={!canNextPage}>
                         <span>{__("next", "cds-snc")}</span><Next />
                     </StyledButton>
+                
                 </StyledPaging>}
         </>
     )

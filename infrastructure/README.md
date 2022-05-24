@@ -1,6 +1,6 @@
-# IRCC WordPress Infrastructure
+# GC Articles WordPress Infrastructure
 
-Host the IRCC WordPress site in an Amazon Elastic Container Service (ECS) Fargate cluster with the following architecture:
+Host the GC Articles WordPress site in an Amazon Elastic Container Service (ECS) Fargate cluster with the following architecture:
 
 ![AWS infrastructure diagram.  Full text description follows.](docs/architecture-aws-wordpress-fargate.png)
 

@@ -40,6 +40,7 @@ class Install
     	sent_by_email varchar(100) NULL,
     	original_message_id bigint(20) NULL,
         version_id bigint(20) NULL,
+        saved boolean NOT NULL DEFAULT 0,
     	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     	updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     	) $charsetCollate;";

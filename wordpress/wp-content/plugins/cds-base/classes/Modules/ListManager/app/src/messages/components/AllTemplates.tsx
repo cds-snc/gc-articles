@@ -3,7 +3,7 @@ import { ListTemplates } from "./ListTemplates";
 export const AllTemplates = () => {
     return (
         <>
-            <ListTemplates perPage={2} pageNav={true} />
+            <ListTemplates perPage={10} pageNav={true} />
         </>
     )
 }

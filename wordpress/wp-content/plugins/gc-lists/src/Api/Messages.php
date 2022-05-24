@@ -210,6 +210,30 @@ class Messages extends BaseEndpoint
                 return $this->hasPermission();
             },
             'args' => [
+                'name' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Name of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'subject' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Subject of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'body' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Body of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_textarea_field($value);
+                    }
+                ],
                 'sent_to_list_id' => [
                     'required' => true,
                     'type' => 'string',
@@ -445,6 +469,12 @@ class Messages extends BaseEndpoint
     {
         $current_user = wp_get_current_user();
         $message = Message::find($request['id']);
+
+        $message->fill([
+            'name' => $request['name'],
+            'subject' => $request['subject'],
+            'body' => $request['body'],
+        ]);
 
         $message = $message->send(
             $request['sent_to_list_id'],

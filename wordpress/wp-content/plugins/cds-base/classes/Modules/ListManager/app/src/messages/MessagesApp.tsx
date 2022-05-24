@@ -4,6 +4,7 @@ import { Spinner } from '../common/Spinner';
 const Home = React.lazy(() => import("./main/Home"));
 const EditTemplate = React.lazy(() => import("./components/EditTemplate"));
 const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
+const AllSendingHistory = React.lazy(() => import("./components/AllSendingHistory"));
 
 // route http://localhost:3000/#/messages/123/edit/123
 const MessagesApp = () => {
@@ -22,6 +23,11 @@ const MessagesApp = () => {
             <Route path=":serviceId/send/:templateId" element={
                 <React.Suspense fallback={<Spinner />}>
                     <SendTemplate />
+                </React.Suspense>
+            } />
+            <Route path=":serviceId/history" element={
+                <React.Suspense fallback={<Spinner />}>
+                    <AllSendingHistory />
                 </React.Suspense>
             } />
         </Routes>

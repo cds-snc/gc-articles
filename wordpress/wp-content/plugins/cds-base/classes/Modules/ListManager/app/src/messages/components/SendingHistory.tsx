@@ -5,7 +5,7 @@ import { Table } from "./Table";
 import { __ } from "@wordpress/i18n";
 // import useFetch from 'use-http';
 
-export const SendingHistory = () => {
+export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     // const { request, response } = useFetch({ data: [] });
     const [data, setData] = useState([]);
 
@@ -58,7 +58,7 @@ export const SendingHistory = () => {
     return (
         <>
             <h2>{__("Sending History", "cds-snc")}</h2>
-            <Table columns={columns} data={data} />
+            <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
         </>
     )
 }

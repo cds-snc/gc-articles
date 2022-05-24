@@ -129,7 +129,7 @@ export const ListTemplates = () => {
                 templates?.length ?
                     <>
                         <h2>{__('Message templates', 'cds-snc')}</h2>
-                        <Table columns={columns} data={templates} />
+                        <Table columns={columns} data={templates} perPage={6} pageNav={false} />
                     </> : null
             }
         </>

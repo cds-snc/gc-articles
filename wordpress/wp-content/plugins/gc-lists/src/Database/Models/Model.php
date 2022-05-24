@@ -216,7 +216,7 @@ class Model implements JsonSerializable
      *
      * @return array
      */
-    public function getAttributes()
+    public function getAttributes(): array
     {
         return $this->attributes;
     }
@@ -314,7 +314,7 @@ class Model implements JsonSerializable
      *
      * @return string
      */
-    protected function freshTimestamp()
+    protected function freshTimestamp(): string
     {
         return Carbon::now()->toDateTimeString();
     }

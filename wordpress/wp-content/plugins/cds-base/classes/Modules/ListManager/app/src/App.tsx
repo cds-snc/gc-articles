@@ -10,7 +10,7 @@ import { Provider } from 'use-http';
 let endpoint = "/wp-json/list-manager";
 
 if (process.env.NODE_ENV === "development") {
-    endpoint = "http://localhost:3000";
+    endpoint = "http://localhost/wp-json/gc-lists";
 }
 
 const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) => {

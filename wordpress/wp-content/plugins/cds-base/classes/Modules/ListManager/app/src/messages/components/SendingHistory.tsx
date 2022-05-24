@@ -3,28 +3,20 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { Table } from "./Table";
 import { __ } from "@wordpress/i18n";
+import useFetch from 'use-http';
 // import useFetch from 'use-http';
 
 export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
-    // const { request, response } = useFetch({ data: [] });
     const [data, setData] = useState([]);
-
+    const { request, response } = useFetch({ data: [] })
 
     useEffect(() => {
         const getSentMessages = async () => {
-            // await request.get(`/mesasages/`);
-            const response = { ok: true }
+          await request.get("/messages/sent");
+
+          const result = await response.json()
             if (response.ok) {
-                setData([
-                    { name: "GC news feed - April 2022 (FR)", date: "2022/04/20 at 7:56 pm", list: "Newsletter monthly sendout (125 subscribers)", sender: "gcadmin@cds-snc.ca" },
-                    { name: "GC news feed - Mar 2022 (FR)", date: "2022/03/20 at 7:56 pm", list: "Newsletter monthly sendout (125 subscribers)", sender: "gcadmin@cds-snc.ca" },
-                    { name: "GC news feed - Feb 2022 (FR)", date: "2022/02/20 at 7:56 pm", list: "Newsletter monthly sendout (125 subscribers)", sender: "gcadmin@cds-snc.ca" },
-                    { name: "GC news feed - Jan 2022 (FR)", date: "2022/01/20 at 7:56 pm", list: "Newsletter monthly sendout (125 subscribers)", sender: "gcadmin@cds-snc.ca" },
-                    { name: "All about Hot Dogs (EN)", date: "2022/02/20 at 7:56 pm", list: "Newsletter monthly sendout (6.1 million subscribers)", sender: "gcadmin@cds-snc.ca" },
-                    { name: "Top Hot Dog vendors (EN)", date: "2022/01/20 at 7:56 pm", list: "Newsletter monthly sendout (6 million subscribers", sender: "gcadmin@cds-snc.ca" }
-
-                ]);
-
+                setData(result);
             }
         }
         getSentMessages();
@@ -41,15 +33,15 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
             },
             {
                 Header: __('Date sent', "cds-snc"),
-                accessor: 'date',
+                accessor: 'created_at',
             },
             {
                 Header: __('List name', "cds-snc"),
-                accessor: 'list',
+                accessor: 'sent_to_list_name',
             },
             {
                 Header: __('Sender', "cds-snc"),
-                accessor: 'sender',
+                accessor: 'sent_by_email',
             },
         ],
         []

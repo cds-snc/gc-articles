@@ -6,6 +6,7 @@ import { Descendant } from "slate";
 
 import { serialize, deserialize } from "../messages/editor/utils";
 import { TemplateType } from "../types";
+import useFetch from 'use-http';
 
 const connect = () => {
     const db = localForage.createInstance({ name: "gclists" });
@@ -16,6 +17,7 @@ function useTemplateApi() {
     const params = useParams();
     const storage = connect();
     const templateId = params?.templateId;
+    const { request, response } = useFetch({ data: [] })
 
     const getTemplate = useCallback(async (templateId: string) => {
         const template: TemplateType | null = await storage.getItem(templateId);
@@ -25,9 +27,23 @@ function useTemplateApi() {
 
     const getTemplates = useCallback(async () => {
         let templates: any = [];
-        await storage.iterate((value: {}, key) => {
-            templates.push({ templateId: key, type: "email", ...value });
-        });
+
+        await request.get("/messages");
+
+        if (response.ok) {
+            const result = await response.json()
+            result.forEach((item: any) => {
+                templates.push({
+                    templateId: item.id,
+                    type: item.message_type,
+                    ...item
+                })
+            })
+        }
+
+        // await storage.iterate((value: {}, key) => {
+        //     templates.push({ templateId: key, type: "email", ...value });
+        // });
         return templates;
     }, [storage])
 

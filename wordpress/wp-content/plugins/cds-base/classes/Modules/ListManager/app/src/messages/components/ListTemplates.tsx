@@ -69,14 +69,15 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
             },
             {
                 Header: __('Last modified', "cds-snc"),
-                accessor: 'timestamp',
+                accessor: 'updated_at',
                 Cell: ({ row }: { row: any }) => {
-                    const t = row?.original?.timestamp;
-                    const date = format(new Date(t), "yyyy/mm/dd");
-                    const time = format(new Date(t), "hh:mm a");
+                    const t = row?.original?.updated_at;
+                    // const date = format(new Date(t), "yyyy/mm/dd");
+                    // const time = format(new Date(t), "hh:mm a");
                     return (
                         <>
-                            {`${date} at ${time}`}
+                            {/*{`${date} at ${time}`}*/}
+                          {t}
                         </>
                     )
                 },

@@ -105,6 +105,16 @@ class Message extends Model
     }
 
     /**
+     * Is this message the original?
+     *
+     * @return bool
+     */
+    public function isOriginal(): bool
+    {
+        return $this->getAttribute('original_message_id') === null;
+    }
+
+    /**
      * Get the latest version of the current message
      *
      * @return static
@@ -185,6 +195,6 @@ class Message extends Model
      */
     public static function sentMessages(array $options = []): ?Collection
     {
-        return static::whereNotNull(['original_message_id', 'sent_at'], $options);
+        return static::whereNotNull(['sent_at'], $options);
     }
 }

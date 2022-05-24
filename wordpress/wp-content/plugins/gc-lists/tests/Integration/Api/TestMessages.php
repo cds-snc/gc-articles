@@ -2,6 +2,8 @@
 
 use Carbon\Carbon;
 use GCLists\Api\Messages;
+use GCLists\Database\Models\Message;
+use function Pest\Faker\faker;
 
 beforeEach(function() {
 	global $wp_rest_server;
@@ -407,4 +409,64 @@ test('Delete a message', function() {
 	$this->assertEquals( 200, $response->get_status() );
 	$count = $wpdb->get_var("SELECT COUNT(*) FROM {$this->tableName}");
 	$this->assertEquals(4, $count);
+});
+
+test('Send an existing message', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz'
+    ]);
+    $list_id = faker()->uuid();
+
+    $user_id = $this->factory->user->create();
+    wp_set_current_user( $user_id );
+
+    $request  = new WP_REST_Request( 'POST', "/gc-lists/messages/{$message_id}/send" );
+    $request->set_query_params([
+        'sent_to_list_id' => $list_id,
+        'sent_to_list_name' => 'The list',
+    ]);
+
+    $response = $this->server->dispatch( $request );
+
+    $this->assertEquals( 200, $response->get_status() );
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toHaveKey('name', 'Foo')
+        ->toHaveKey('subject', 'Bar')
+        ->toHaveKey('body', 'Baz')
+        ->toHaveKey('original_message_id', $message_id);
+});
+
+test('Send a message directly from input', function() {
+    $list_id = faker()->uuid();
+    $user_id = $this->factory->user->create();
+    wp_set_current_user( $user_id );
+
+    $request  = new WP_REST_Request( 'POST', "/gc-lists/messages/send" );
+    $request->set_query_params([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz',
+        'message_type' => 'email',
+        'sent_to_list_id' => $list_id,
+        'sent_to_list_name' => 'The list',
+    ]);
+
+    $response = $this->server->dispatch( $request );
+
+    $this->assertEquals( 200, $response->get_status() );
+
+    $body = $response->get_data()->toJson();
+
+    expect($body)
+        ->json()
+        ->toHaveKey('name', 'Foo')
+        ->toHaveKey('subject', 'Bar')
+        ->toHaveKey('body', 'Baz')
+        ->toHaveKey('original_message_id', NULL);
 });

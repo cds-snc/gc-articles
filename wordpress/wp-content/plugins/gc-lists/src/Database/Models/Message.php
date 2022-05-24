@@ -111,7 +111,7 @@ class Message extends Model
      */
     public function isOriginal(): bool
     {
-        return $this->getAttribute('original_message_id') === NULL;
+        return $this->getAttribute('original_message_id') === null;
     }
 
     /**

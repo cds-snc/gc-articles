@@ -242,7 +242,7 @@ class Model implements JsonSerializable
             throw new QueryException($wpdb->last_error);
         }
 
-        return $this;
+        return $this->fresh();
     }
 
     /**
@@ -268,7 +268,7 @@ class Model implements JsonSerializable
         $this->exists = true;
         $this->id = $wpdb->insert_id;
 
-        return $this;
+        return $this->fresh();
     }
 
     /**

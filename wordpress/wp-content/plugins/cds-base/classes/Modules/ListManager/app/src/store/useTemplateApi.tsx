@@ -40,11 +40,7 @@ function useTemplateApi() {
     const getTemplates = useCallback(async () => {
         let templates: any = [];
 
-        await request.get(`/messages?c=${uuidv4()}`);
-
-        console.log("getTemplates fetch", await response.json());
-
-        console.log(response);
+        await request.get(`/messages?c=${uuidv4()}`)
 
         if (response.ok) {
             const result = await response.json()

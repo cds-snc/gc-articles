@@ -17,11 +17,22 @@ function useTemplateApi() {
         if (response.ok) {
             const result = await response.json();
             const template: TemplateType | null = result;
+
             if (!template || !template.body) {
                 return { name: "", subject: "", body: "" }
             }
-            const parsedContent = deserialize(template?.body || "");
-            return { ...template, parsedContent };
+
+
+            let parsedContent;
+
+            try {
+                parsedContent = deserialize(template?.body || "");
+                return { ...template, parsedContent };
+            } catch (e) {
+                //console.log(e);
+                return { name: "", subject: "", body: "" }
+            }
+
         }
     }, [request, response])
 
@@ -29,6 +40,8 @@ function useTemplateApi() {
         let templates: any = [];
 
         await request.get("/messages");
+
+        console.log("getTemplates", await response.json());
 
         if (response.ok) {
             const result = await response.json()
@@ -70,7 +83,7 @@ function useTemplateApi() {
             return result;
         }
 
-        return false;   
+        return false;
     },
         [request, response],
     );
@@ -79,6 +92,8 @@ function useTemplateApi() {
         if (!templateId) return;
 
         await request.delete(`/messages/${templateId}`);
+
+        console.log(response);
 
         if (response.ok) {
             return await response.json();

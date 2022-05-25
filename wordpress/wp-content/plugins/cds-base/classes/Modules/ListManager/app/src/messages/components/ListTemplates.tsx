@@ -40,13 +40,18 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
     const { serviceId } = useService();
 
     const fetchTempates = useCallback(async () => {
-        setTemplates(await getTemplates());
+        try {
+            const result = await getTemplates();
+            setTemplates(result);
+        } catch (e) {
+            console.log(e);
+        }
     }, [getTemplates]);
 
     useEffect(() => {
         fetchTempates();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [templates]);
+    }, []);
 
     const columns = React.useMemo(
         () => [
@@ -92,7 +97,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                                 {__("Edit", "cds-snc")}
                             </StyledLink>
                             <StyledDivider>|</StyledDivider>
-                            <StyledDeleteButton
+                            <StyledDeleteButton data-tid={tId}
                                 onClick={async () => {
                                     await deleteTemplate({ templateId: tId });
                                     await fetchTempates();

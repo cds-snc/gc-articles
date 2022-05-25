@@ -1,0 +1,52 @@
+name: Generate SBOM
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - wordpress/**/composer.json
+      - wordpress/**/package.json
+      - .github/workflows/generate-sbom.yml
+  push:
+    branches:
+      - main
+    paths:
+      - wordpress/**/composer.json
+      - wordpress/**/package.json
+      - .github/workflows/generate-sbom.yml
+
+jobs:
+  generate-sbom:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - component: gc-articles/wordpress
+            directory: ./wordpress
+            type: php
+          - component: gc-articles/wordpress/plugin/cds-base
+            directory: ./wordpress/wp-content/plugins/cds-base
+            type: php
+          - component: gc-articles/wordpress/plugin/cds-base/frontend
+            directory: ./wordpress/wp-content/plugins/cds-base
+            type: node
+          - component: gc-articles/wordpress/plugin/gc-lists
+            directory: ./wordpress/wp-content/plugins/gc-lists
+            type: php
+          - component: gc-articles/wordpress/theme/cds-default
+            directory: ./wordpress/wp-content/themes/cds-default
+            type: php
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Generate ${{ matrix.component }} SBOM
+        uses: cds-snc/security-tools/.github/actions/generate-sbom@14ab23f07437d642594c56003db1f4bd34e54bbb
+        with:
+          dependency_track_api_key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
+          project_name: ${{ matrix.component }}
+          project_type: ${{ matrix.type }}
+          working_directory: ${{ matrix.directory }}

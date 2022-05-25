@@ -43,7 +43,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721
+        id: changes
+        with:
+          filters: |
+            lock: 
+              - '${{ matrix.directory }}/composer.lock'
+              - '${{ matrix.directory }}/package-lock.json'
+
       - name: Generate ${{ matrix.component }} SBOM
+        if: steps.changes.outputs.lock == 'true'
         uses: cds-snc/security-tools/.github/actions/generate-sbom@14ab23f07437d642594c56003db1f4bd34e54bbb
         with:
           dependency_track_api_key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}

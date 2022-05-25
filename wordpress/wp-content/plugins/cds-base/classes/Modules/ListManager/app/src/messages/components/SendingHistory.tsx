@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Table } from "./Table";
 import { __ } from "@wordpress/i18n";
 import useFetch from 'use-http';
+import { v4 as uuidv4 } from "uuid";
 // import useFetch from 'use-http';
 
 export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
@@ -12,7 +13,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
 
     useEffect(() => {
         const getSentMessages = async () => {
-            await request.get("/messages/sent");
+            await request.get(`/messages/sent?c=${uuidv4()}`);
             if (response.ok) {
                 setData(await response.json());
             }

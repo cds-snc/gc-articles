@@ -40,7 +40,7 @@ export const SendTemplate = () => {
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
     const { state: { lists } } = useList();
     const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content });
-    const { templateId, getTemplate } = useTemplateApi();
+    const { templateId, getTemplate, recordSent } = useTemplateApi();
 
     useEffect(() => {
         reset();
@@ -90,9 +90,12 @@ export const SendTemplate = () => {
                 style={{ marginRight: "20px" }}
                 className="button button-primary"
                 onClick={async () => {
-                    const result = await ConfirmSend({ count: subscriberCount });
-                    if (result) {
-                        sendTemplate();
+                    const confirmed = await ConfirmSend({ count: subscriberCount });
+                    if (confirmed) {
+                        const result = await sendTemplate();
+                        if (result) {
+                          await recordSent(templateId, listId, name);
+                        }
                     }
                 }}>
                 {__("Send message", "cds-snc")}

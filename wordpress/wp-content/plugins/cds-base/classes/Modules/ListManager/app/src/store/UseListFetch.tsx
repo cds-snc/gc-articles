@@ -16,11 +16,11 @@ export const useListFetch = () => {
     useEffect(() => {
         const fetchData = async () => {
             setStatus("loading")
-
             await request.get(`/lists/${serviceId}`);
 
             if (response.ok) {
                 let lists = await response.json();
+
                 lists = lists.filter((list: List) => {
                     const listType = getListType(list.language)
                     if (listType === ListType.EMAIL && user?.hasEmail) {

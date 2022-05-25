@@ -105,7 +105,21 @@ function useTemplateApi() {
         [request, response],
     );
 
-    return { templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate }
+    const recordSent = useCallback(async (templateId: string|undefined, listId: string|undefined, listName: string|undefined) => {
+        await request.post(`/messages/${templateId}/send`, {
+            'sent_to_list_id': listId,
+            'sent_to_list_name': listName,
+        })
+
+        if (response.ok) {
+            const result = await response.json();
+
+            return true;
+        }
+        return false;
+    }, [request, response])
+
+    return { templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
 }
 
 export default useTemplateApi;

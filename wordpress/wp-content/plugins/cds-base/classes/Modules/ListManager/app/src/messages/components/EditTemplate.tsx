@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { __, sprintf } from "@wordpress/i18n";
-import styled from 'styled-components';
 import { useEffect, useState, useCallback } from 'react';
 import { Descendant } from "slate";
 import { useNavigate } from "react-router-dom";
@@ -10,32 +9,23 @@ import useTemplateApi from '../../store/useTemplateApi';
 import { deserialize, serialize } from "../editor/utils";
 import { useService } from '../../util/useService';
 import { useForm } from "react-hook-form";
+import { Success } from "./Notice";
 
 const textWidth = { width: "25em" }
 
-const StyledDeleteButton = styled.button`
-    margin-top:30px;
-    color: #D3080C;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-decoration:underline;
-    :hover{
-        text-decoration:none;
-    }
-`;
-
 export const EditTemplate = () => {
     const navigate = useNavigate();
-    const { templateId, getTemplate, saveTemplate, deleteTemplate } = useTemplateApi();
+    const [saved, setSaved] = useState(false);
+    const { templateId, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
+
     const { register, setValue, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
     const { serviceId } = useService();
     useEffect(() => {
         const loadTemplate = async () => {
             if (templateId && templateId !== 'new') {
                 const template = await getTemplate(templateId);
-                setCurrentTemplate(deserialize(template.body || ""));
+                setCurrentTemplate(deserialize(template?.body || ""));
                 setValue("name", template?.name || "")
                 setValue("subject", template?.subject || "");
             } else {
@@ -47,8 +37,13 @@ export const EditTemplate = () => {
     }, []);
 
     const handleFormData = useCallback(async (formData: any) => {
+        setSaved(false);
         const { name, subject } = formData;
-        saveTemplate({ templateId, name, subject, content: currentTemplate })
+        const result = await saveTemplate({ templateId, name, subject, content: currentTemplate });
+        if (result) {
+            setSaved(true);
+        }
+
     }, [saveTemplate, currentTemplate, templateId]);
 
     return (
@@ -98,6 +93,10 @@ export const EditTemplate = () => {
                     </tbody>
                 </table>
             </form>
+
+
+            {saved && <Success message={"Message saved"} />}
+
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
@@ -115,14 +114,6 @@ export const EditTemplate = () => {
                         console.log("oh no!")
                     })();
                 }}>{__('Save template', 'cds-snc')}</button>
-            </div>
-            <div>
-                {/*<StyledDeleteButton onClick={async () => {*/}
-                {/*    await deleteTemplate({ templateId });*/}
-                {/*    navigate(`/messages/${serviceId}`);*/}
-                {/*}}>*/}
-                {/*    {__('Delete this message template', 'cds-snc')}*/}
-                {/*</StyledDeleteButton>*/}
             </div>
         </>
     )

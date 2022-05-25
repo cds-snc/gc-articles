@@ -50,8 +50,8 @@ export const SendTemplate = () => {
         const loadTemplate = async () => {
             if (templateId) {
                 const template = await getTemplate(templateId);
-                setContent(template.body);
-                setSubject(template.subject)
+                setContent(template?.body);
+                setSubject(template?.subject)
             }
         }
         loadTemplate();

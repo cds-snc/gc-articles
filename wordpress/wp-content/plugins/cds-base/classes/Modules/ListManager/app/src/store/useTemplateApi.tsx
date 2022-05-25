@@ -1,6 +1,4 @@
-import localForage from "localforage";
 import { useParams } from "react-router-dom";
-import { v4 as uuidv4 } from 'uuid';
 import { useCallback } from 'react';
 import { Descendant } from "slate";
 
@@ -15,12 +13,17 @@ function useTemplateApi() {
 
     const getTemplate = useCallback(async (templateId: string) => {
         await request.get(`/messages/${templateId}`)
-        const result = await response.json();
-        const template: TemplateType | null = result;
-        // const template: TemplateType | null = await storage.getItem(templateId);
-        const parsedContent = deserialize(template?.body || "");
-        return { ...template, parsedContent };
-    }, [])
+
+        if (response.ok) {
+            const result = await response.json();
+            const template: TemplateType | null = result;
+            if (!template || !template.body) {
+                return { name: "", subject: "", body: "" }
+            }
+            const parsedContent = deserialize(template?.body || "");
+            return { ...template, parsedContent };
+        }
+    }, [request, response])
 
     const getTemplates = useCallback(async () => {
         let templates: any = [];
@@ -35,10 +38,10 @@ function useTemplateApi() {
                     type: item.message_type,
                     ...item
                 })
-            })
+            });
         }
         return templates;
-    }, [])
+    }, [request, response])
 
     const saveTemplate = useCallback(async ({ templateId, name, subject, content }: { templateId: string | undefined, name: string, subject: string, content: Descendant[] | undefined }) => {
         if (!content) return;
@@ -52,8 +55,6 @@ function useTemplateApi() {
             });
 
             const result = await response.json();
-            console.log("created", result);
-
             return result;
         }
 
@@ -64,14 +65,14 @@ function useTemplateApi() {
             'message_type': 'email'
         });
 
-        const result = await response.json();
+        if (response.ok) {
+            const result = await response.json();
+            return result;
+        }
 
-        console.log("updated", result)
-
-        // @TODO: redirect back
-        return result;
+        return false;   
     },
-        [],
+        [request, response],
     );
 
     const deleteTemplate = useCallback(async ({ templateId }: { templateId: string | undefined }) => {
@@ -79,11 +80,15 @@ function useTemplateApi() {
 
         await request.delete(`/messages/${templateId}`);
 
-        const result = await response.json();
+        if (response.ok) {
+            return await response.json();
+        }
+
+        return false;
 
         // @TODO: refresh table
     },
-        [],
+        [request, response],
     );
 
     return { templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate }

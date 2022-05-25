@@ -2,9 +2,7 @@ import * as React from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
 import { Link } from "react-router-dom";
-import { format } from "date-fns";
 
 import { Table } from "./Table";
 import { useService } from '../../util/useService';
@@ -48,7 +46,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
     useEffect(() => {
         fetchTempates();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [templates]);
 
     const columns = React.useMemo(
         () => [
@@ -97,7 +95,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                             <StyledDeleteButton
                                 onClick={async () => {
                                     await deleteTemplate({ templateId: tId });
-                                    fetchTempates();
+                                    await fetchTempates();
                                 }}
                             >
                                 {__("Delete", "cds-snc")}

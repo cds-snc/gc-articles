@@ -12,11 +12,9 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
 
     useEffect(() => {
         const getSentMessages = async () => {
-          await request.get("/messages/sent");
-
-          const result = await response.json()
+            await request.get("/messages/sent");
             if (response.ok) {
-                setData(result);
+                setData(await response.json());
             }
         }
         getSentMessages();

@@ -10,17 +10,16 @@ export const useListFetch = () => {
     const { dispatch, state: { user } } = useList();
     const { serviceId } = useService();
     const [status, setStatus] = useState('idle');
-    const { request, response } = useFetch({ data: [] })
+
+    const REST_URL = window?.CDS_VARS?.rest_url;
+    console.log("REST_URL", REST_URL)
+    const { request, response } = useFetch("http://localhost/wp-json/list-manager", { data: [] })
 
     useEffect(() => {
         const fetchData = async () => {
             setStatus("loading")
 
-            if (process.env.NODE_ENV === "development") {
-                await request.get("list.json");
-            } else {
-                await request.get(`/lists/${serviceId}`);
-            }
+            await request.get(`/lists/${serviceId}`);
 
             if (response.ok) {
                 let lists = await response.json();
@@ -46,6 +45,8 @@ export const useListFetch = () => {
             }
 
             // sync list from List Manager API to local WP Option
+            
+            /*
             try {
                 const listData = await response.json();
                 const lists = listData?.map((list: any) => {
@@ -58,6 +59,7 @@ export const useListFetch = () => {
             } catch (e) {
                 console.log(e)
             }
+            */
         }
 
         fetchData();

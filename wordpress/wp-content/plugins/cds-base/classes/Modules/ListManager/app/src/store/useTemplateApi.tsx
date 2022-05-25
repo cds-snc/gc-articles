@@ -1,10 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useCallback } from 'react';
 import { Descendant } from "slate";
+import { v4 as uuidv4 } from "uuid";
+import useFetch from 'use-http';
 
 import { serialize, deserialize } from "../messages/editor/utils";
 import { TemplateType } from "../types";
-import useFetch from 'use-http';
+
 
 function useTemplateApi() {
     const params = useParams();
@@ -22,7 +24,6 @@ function useTemplateApi() {
                 return { name: "", subject: "", body: "" }
             }
 
-
             let parsedContent;
 
             try {
@@ -39,9 +40,11 @@ function useTemplateApi() {
     const getTemplates = useCallback(async () => {
         let templates: any = [];
 
-        await request.get("/messages");
+        await request.get(`/messages?c=${uuidv4()}`);
 
-        console.log("getTemplates", await response.json());
+        console.log("getTemplates fetch", await response.json());
+
+        console.log(response);
 
         if (response.ok) {
             const result = await response.json()

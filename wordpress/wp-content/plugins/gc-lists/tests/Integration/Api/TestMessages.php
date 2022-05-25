@@ -424,9 +424,6 @@ test('Send an existing message', function() {
 
     $request  = new WP_REST_Request( 'POST', "/gc-lists/messages/{$message_id}/send" );
     $request->set_query_params([
-        'name' => 'Foo sent',
-        'subject' => 'Bar sent',
-        'body' => 'Baz sent',
         'sent_to_list_id' => $list_id,
         'sent_to_list_name' => 'The list',
     ]);
@@ -439,9 +436,9 @@ test('Send an existing message', function() {
 
     expect($body)
         ->json()
-        ->toHaveKey('name', 'Foo sent')
-        ->toHaveKey('subject', 'Bar sent')
-        ->toHaveKey('body', 'Baz sent')
+        ->toHaveKey('name', 'Foo')
+        ->toHaveKey('subject', 'Bar')
+        ->toHaveKey('body', 'Baz')
         ->toHaveKey('original_message_id', $message_id);
 });
 

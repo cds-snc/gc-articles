@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import { Descendant } from "slate";
 import { v4 as uuidv4 } from "uuid";
 import useFetch from 'use-http';
@@ -7,13 +7,15 @@ import useFetch from 'use-http';
 import { serialize, deserialize } from "../messages/editor/utils";
 import { TemplateType } from "../types";
 
-
 function useTemplateApi() {
     const params = useParams();
     const templateId = params?.templateId;
-    const { request, response } = useFetch({ data: [] })
+    const { request, response } = useFetch({ data: [] });
+    const [templates, setTemplates] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const getTemplate = useCallback(async (templateId: string) => {
+
         await request.get(`/messages/${templateId}`)
 
         if (response.ok) {
@@ -37,10 +39,10 @@ function useTemplateApi() {
         }
     }, [request, response])
 
-    const getTemplates = useCallback(async () => {
+    const getTemplates = async () => {
+        setLoading(true);
         let templates: any = [];
-
-        await request.get(`/messages?c=${uuidv4()}`)
+        await request.get(`/messages?c=${uuidv4()}`);
 
         if (response.ok) {
             const result = await response.json()
@@ -51,9 +53,11 @@ function useTemplateApi() {
                     ...item
                 })
             });
+
+            setTemplates(templates);
+            setLoading(false);
         }
-        return templates;
-    }, [request, response])
+    };
 
     const saveTemplate = useCallback(async ({ templateId, name, subject, content }: { templateId: string | undefined, name: string, subject: string, content: Descendant[] | undefined }) => {
         if (!content) return;
@@ -105,21 +109,20 @@ function useTemplateApi() {
         [request, response],
     );
 
-    const recordSent = useCallback(async (templateId: string|undefined, listId: string|undefined, listName: string|undefined) => {
+    const recordSent = useCallback(async (templateId: string | undefined, listId: string | undefined, listName: string | undefined) => {
         await request.post(`/messages/${templateId}/send`, {
             'sent_to_list_id': listId,
             'sent_to_list_name': listName,
         })
 
         if (response.ok) {
-            const result = await response.json();
-
+            await response.json();
             return true;
         }
         return false;
     }, [request, response])
 
-    return { templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
+    return { templates, loading, templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
 }
 
 export default useTemplateApi;

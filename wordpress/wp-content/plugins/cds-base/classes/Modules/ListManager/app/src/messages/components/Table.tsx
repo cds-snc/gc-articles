@@ -1,8 +1,14 @@
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
 import { useTable, usePagination } from 'react-table';
+import { Link } from "react-router-dom";
+
 import { Back } from "./icons/Back";
 import { Next } from "./icons/Next";
+
+export const StyledH1 = styled.h1`
+   margin-bottom:30px !important;
+`
 
 export const StyledPaging = styled.div`
    font-size:16px;
@@ -39,6 +45,23 @@ export const StyledButton = styled.button`
         top:-1px;
     }
 `;
+
+export const StyledLink = styled(Link)`
+    position:relative;
+    display:block;
+    margin-top:20px;
+    span{
+        display:inline-block;
+        text-decoration:underline !important;
+        position:relative;
+        top:-1px;
+        margin-right:10px;
+
+        :hover{
+            text-decoration:none !important;
+        }
+    }
+`
 
 export const Table = ({ columns, data, perPage = 6, pageNav = false }: { columns: any, data: any, perPage?: number, pageNav?: boolean }) => {
     const {
@@ -103,15 +126,13 @@ export const Table = ({ columns, data, perPage = 6, pageNav = false }: { columns
 
             {pageNav &&
                 <StyledPaging>
-                    
                     <StyledButton onClick={() => previousPage()} disabled={!canPreviousPage}>
                         <Back /> <span>{__("previous", "cds-snc")}</span>
                     </StyledButton>{' '}
-                    
+
                     <StyledButton onClick={() => nextPage()} disabled={!canNextPage}>
                         <span>{__("next", "cds-snc")}</span><Next />
                     </StyledButton>
-                
                 </StyledPaging>}
         </>
     )

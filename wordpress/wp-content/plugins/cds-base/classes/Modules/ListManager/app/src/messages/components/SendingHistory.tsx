@@ -1,21 +1,28 @@
 // @ts-nocheck
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { Table } from "./Table";
+
 import { __ } from "@wordpress/i18n";
 import useFetch from 'use-http';
 import { v4 as uuidv4 } from "uuid";
-// import useFetch from 'use-http';
+
+import { Table, StyledPaging, StyledLink } from "./Table";
+import { Next } from "./icons/Next";
+import { useService } from '../../util/useService';
 
 export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
+    const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
+    const { serviceId } = useService();
     const { request, response } = useFetch({ data: [] })
 
     useEffect(() => {
         const getSentMessages = async () => {
+            setLoading(true);
             await request.get(`/messages/sent?c=${uuidv4()}`);
             if (response.ok) {
                 setData(await response.json());
+                setLoading(false)
             }
         }
         getSentMessages();
@@ -46,10 +53,18 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
         []
     )
 
-    return (
+    if (loading) {
+        return null;
+    }
+
+    return data.length ?
         <>
-            <h2>{__("Sending History", "cds-snc")}</h2>
+            <h2> {__("Sending History", "cds-snc")}</h2 >
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
-        </>
-    )
+            <StyledPaging>
+                <StyledLink to={`/messages/${serviceId}/history`} >
+                    <span> {__("All sending history", "cds-snc")} </span><Next />
+                </StyledLink>
+            </StyledPaging>
+        </> : null
 }

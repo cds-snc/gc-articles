@@ -40,21 +40,19 @@ export const SendTemplate = () => {
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
     const { state: { lists } } = useList();
     const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content });
-    const { templateId, getTemplate, recordSent } = useTemplateApi();
+    const { template, templateId, getTemplate, recordSent } = useTemplateApi();
 
     useEffect(() => {
         reset();
     }, [reset]);
 
     useEffect(() => {
-        const loadTemplate = async () => {
-            if (templateId) {
-                const template = await getTemplate(templateId);
-                setContent(template?.body);
-                setSubject(template?.subject)
-            }
-        }
-        loadTemplate();
+        setContent(template?.body);
+        setSubject(template?.subject)
+    }, [template]);
+
+    useEffect(() => {
+        getTemplate(templateId);
     }, [templateId, getTemplate]);
 
     useEffect(() => {
@@ -94,7 +92,7 @@ export const SendTemplate = () => {
                     if (confirmed) {
                         const result = await sendTemplate();
                         if (result) {
-                          await recordSent(templateId, listId, name);
+                            await recordSent(templateId, listId, name);
                         }
                     }
                 }}>

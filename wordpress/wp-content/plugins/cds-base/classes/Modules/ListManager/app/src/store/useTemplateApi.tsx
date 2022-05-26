@@ -12,10 +12,14 @@ function useTemplateApi() {
     const templateId = params?.templateId;
     const { request, response } = useFetch({ data: [] });
     const [templates, setTemplates] = useState([]);
+    const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: false });
     const [loading, setLoading] = useState(false);
+    const [loadingTemplate, setLoadingTemplate] = useState(false);
 
-    const getTemplate = useCallback(async (templateId: string) => {
+    const getTemplate = useCallback(async (templateId: string | undefined) => {
+        if (!templateId) return;
 
+        setLoadingTemplate(true);
         await request.get(`/messages/${templateId}`)
 
         if (response.ok) {
@@ -23,18 +27,21 @@ function useTemplateApi() {
             const template: TemplateType | null = result;
 
             if (!template || !template.body) {
-                return { name: "", subject: "", body: "" }
+                setTemplate({ name: "", subject: "", body: "", parsedContent: false })
             }
 
             let parsedContent;
 
             try {
                 parsedContent = deserialize(template?.body || "");
-                return { ...template, parsedContent };
+                // @ts-ignore
+                setTemplate({ ...template, parsedContent })
             } catch (e) {
                 //console.log(e);
                 return { name: "", subject: "", body: "" }
             }
+
+            setLoadingTemplate(false);
 
         }
     }, [request, response])
@@ -122,7 +129,7 @@ function useTemplateApi() {
         return false;
     }, [request, response])
 
-    return { templates, loading, templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
+    return { template, loadingTemplate, templates, loading, templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
 }
 
 export default useTemplateApi;

@@ -6,33 +6,30 @@ import { useNavigate } from "react-router-dom";
 
 import { Editor } from "../editor/Editor";
 import useTemplateApi from '../../store/useTemplateApi';
-import { deserialize, serialize } from "../editor/utils";
+import { serialize } from "../editor/utils";
 import { useService } from '../../util/useService';
 import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
+import { Spinner } from '../../common/Spinner';
 
 const textWidth = { width: "25em" }
 
 export const EditTemplate = () => {
     const navigate = useNavigate();
     const [saved, setSaved] = useState(false);
-    const { templateId, getTemplate, saveTemplate } = useTemplateApi();
+    const { template, loadingTemplate, templateId, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
 
     const { register, setValue, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
     const { serviceId } = useService();
+
     useEffect(() => {
-        const loadTemplate = async () => {
-            if (templateId && templateId !== 'new') {
-                const template = await getTemplate(templateId);
-                setCurrentTemplate(deserialize(template?.body || ""));
-                setValue("name", template?.name || "")
-                setValue("subject", template?.subject || "");
-            } else {
-                setCurrentTemplate(deserialize(""))
-            }
-        }
-        loadTemplate();
+        setValue("name", template?.name || "")
+        setValue("subject", template?.subject || "");
+    }, [template, setValue]);
+
+    useEffect(() => {
+        getTemplate(templateId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -46,9 +43,20 @@ export const EditTemplate = () => {
 
     }, [saveTemplate, currentTemplate, templateId]);
 
+    const heading = <h1>{__("Edit email message", "cds-snc")}</h1>;
+
+    if (loadingTemplate) {
+        return (
+            <>
+                {heading}
+                <Spinner />
+            </>
+        )
+    }
+
     return (
         <>
-            <h1>{__("Edit email message", "cds-snc")}</h1>
+            {heading}
             <form>
                 <input type="hidden" {...register("template", { required: true })} />
                 <table className="form-table">
@@ -79,8 +87,8 @@ export const EditTemplate = () => {
                                 <p>{sprintf("Use the email formatting guide (Opens in a new tab) to craft your message.", "cds-snc")}</p>
                                 <div className={errors.template ? "error-wrapper" : ""}>
                                     {errors.template && <span className="validation-error">{errors.template?.message || __("Message is required", "cds-snc")}</span>}
-                                    {currentTemplate ?
-                                        <Editor template={currentTemplate}
+                                    {template.parsedContent ?
+                                        <Editor template={template.parsedContent}
                                             handleValidate={(value: any) => {
                                                 setValue('template', serialize(value));
                                                 clearErrors("template");

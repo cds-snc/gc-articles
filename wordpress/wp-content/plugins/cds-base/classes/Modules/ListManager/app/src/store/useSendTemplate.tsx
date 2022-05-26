@@ -1,18 +1,20 @@
 // @ts-nocheck
 import { useCallback, useState } from "react";
 import useFetch from 'use-http';
+import { useList } from './ListContext';
 
 function useSendTemplate({ listId, content }) {
     const REST_URL = window?.CDS_VARS?.rest_url;
     const { request, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
     const [errors, setErrors] = useState(false);
     const [success, setSuccess] = useState(false);
+    const { state } = useList();
+
     const send = useCallback(async (data: string) => {
         let endpoint = "/send"
-
         let post_data = {
             list_id: listId,
-            template_id: '40454604-8702-4eeb-9b38-1ed3104fb960', // @todo this will come form WP
+            template_id: state.serviceData[0].sendingTemplate,
             template_type: 'email',
             job_name: 'job',
             personalisation: JSON.stringify({ message: content, subject: 'Huzzah!' }),
@@ -30,7 +32,7 @@ function useSendTemplate({ listId, content }) {
             return true;
         }
 
-    }, [response, request, listId, content]);
+    }, [response, request, listId, content, state]);
 
     // send the template
     const sendTemplate = useCallback(

@@ -31,7 +31,7 @@ export type Message = {
   message: string;
 };
 
-export type Service = { name: string; service_id: string };
+export type Service = { name: string; service_id: string; sendingTemplate: string };
 
 export type ServiceData = Service[] | null;
 

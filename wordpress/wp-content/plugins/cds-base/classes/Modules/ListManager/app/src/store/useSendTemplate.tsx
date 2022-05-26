@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { useCallback, useState } from "react";
+import { useLocation } from "react-router-dom";
 import useFetch from 'use-http';
 import { useList } from './ListContext';
 
@@ -9,6 +10,12 @@ function useSendTemplate({ listId, content }) {
     const [errors, setErrors] = useState(false);
     const [success, setSuccess] = useState(false);
     const { state } = useList();
+
+    const { state: { subject, name, template: editorTemplate } } = useLocation();
+
+    console.log(name, subject, editorTemplate)
+
+
 
     const send = useCallback(async (data: string) => {
         let endpoint = "/send"

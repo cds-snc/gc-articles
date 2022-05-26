@@ -20,7 +20,7 @@ export const EditTemplate = () => {
     const { template, loadingTemplate, templateId, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
 
-    const { register, setValue, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
+    const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
     const { serviceId } = useService();
 
     useEffect(() => {
@@ -108,11 +108,11 @@ export const EditTemplate = () => {
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
-                        await handleSubmit(handleFormData, () => {
-                            console.log("oh no", handleFormData)
+                        await handleSubmit(handleFormData, (data) => {
+                            console.log("oh no")
                             return false;
                         })();
-                        navigate(`/messages/${serviceId}/send/${templateId}`);
+                        navigate(`/messages/${serviceId}/send/${templateId}`, { state: getValues() });
                     }}
                     className="button button-primary">
                     {__('Send message to a list', 'cds-snc')}

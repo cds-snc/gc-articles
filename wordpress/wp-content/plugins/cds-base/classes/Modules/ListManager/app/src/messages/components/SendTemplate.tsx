@@ -40,7 +40,7 @@ export const SendTemplate = () => {
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
     const { state: { lists } } = useList();
     const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content });
-    const { template, templateId, getTemplate, recordSent } = useTemplateApi();
+    const { template, templateId, getTemplate, recordSent } = useTemplateApi()
 
     useEffect(() => {
         reset();

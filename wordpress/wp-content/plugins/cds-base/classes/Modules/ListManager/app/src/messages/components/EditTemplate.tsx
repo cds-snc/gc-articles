@@ -109,7 +109,8 @@ export const EditTemplate = () => {
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
                         await handleSubmit(handleFormData, () => {
-                            console.log("oh no")
+                            console.log("oh no", handleFormData)
+                            return false;
                         })();
                         navigate(`/messages/${serviceId}/send/${templateId}`);
                     }}
@@ -119,7 +120,8 @@ export const EditTemplate = () => {
 
                 <button className="button" onClick={async () => {
                     handleSubmit(handleFormData, () => {
-                        console.log("oh no!")
+                        console.log("oh no", handleFormData);
+                        return false;
                     })();
                 }}>{__('Save template', 'cds-snc')}</button>
             </div>

@@ -15,6 +15,7 @@ import { StyledSelect } from "../editor/Styles"
 import useSendTemplate from '../../store/useSendTemplate';
 import useTemplateApi from '../../store/useTemplateApi';
 import { ConfirmSend } from "./ConfirmSend";
+import { useLocation } from 'react-router-dom';
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     return (
@@ -39,8 +40,19 @@ export const SendTemplate = () => {
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
     const { state: { lists } } = useList();
-    const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content });
+    const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content, subject });
     const { template, templateId, getTemplate, recordSent } = useTemplateApi()
+
+    // @ts-ignore
+    // const { state: { subject: editorSubject, name: editorName, template: editorTemplate } } = useLocation();
+
+    // @TODO: need to get subject from existing message flow
+
+    const editorName = ''
+    const editorSubject = ''
+    const editorTemplate = ''
+
+    console.log(editorName, editorSubject, editorTemplate, content)
 
     useEffect(() => {
         reset();
@@ -52,7 +64,13 @@ export const SendTemplate = () => {
     }, [template]);
 
     useEffect(() => {
-        getTemplate(templateId);
+        if (templateId === 'new') {
+            setContent(editorTemplate)
+            setSubject(editorSubject)
+            setName(editorName)
+        } else {
+            getTemplate(templateId);
+        }
     }, [templateId, getTemplate]);
 
     useEffect(() => {

@@ -118,6 +118,7 @@ function useTemplateApi() {
     );
 
     const recordSent = useCallback(async (templateId: string | undefined, listId: string | undefined, listName: string | undefined) => {
+
         await request.post(`/messages/${templateId}/send`, {
             'sent_to_list_id': listId,
             'sent_to_list_name': listName,

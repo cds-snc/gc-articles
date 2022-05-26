@@ -4,18 +4,12 @@ import { useLocation } from "react-router-dom";
 import useFetch from 'use-http';
 import { useList } from './ListContext';
 
-function useSendTemplate({ listId, content }) {
+function useSendTemplate({ listId, content, subject }) {
     const REST_URL = window?.CDS_VARS?.rest_url;
     const { request, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
     const [errors, setErrors] = useState(false);
     const [success, setSuccess] = useState(false);
     const { state } = useList();
-
-    const { state: { subject, name, template: editorTemplate } } = useLocation();
-
-    console.log(name, subject, editorTemplate)
-
-
 
     const send = useCallback(async (data: string) => {
         let endpoint = "/send"
@@ -24,7 +18,7 @@ function useSendTemplate({ listId, content }) {
             template_id: state.serviceData[0].sendingTemplate,
             template_type: 'email',
             job_name: 'job',
-            personalisation: JSON.stringify({ message: content, subject: 'Huzzah!' }),
+            personalisation: JSON.stringify({ message: content, subject: subject }),
         }
 
         await request.post(endpoint, post_data);

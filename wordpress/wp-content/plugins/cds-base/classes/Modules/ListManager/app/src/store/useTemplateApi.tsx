@@ -12,12 +12,13 @@ function useTemplateApi() {
     const templateId = params?.templateId;
     const { request, response } = useFetch({ data: [] });
     const [templates, setTemplates] = useState([]);
-    const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: false });
+    // @ts-ignore
+    const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: deserialize("") });
     const [loading, setLoading] = useState(false);
     const [loadingTemplate, setLoadingTemplate] = useState(false);
 
     const getTemplate = useCallback(async (templateId: string | undefined) => {
-        if (!templateId) return;
+        if (!templateId || templateId === 'new') return;
 
         setLoadingTemplate(true);
         await request.get(`/messages/${templateId}`)
@@ -27,7 +28,7 @@ function useTemplateApi() {
             const template: TemplateType | null = result;
 
             if (!template || !template.body) {
-                setTemplate({ name: "", subject: "", body: "", parsedContent: false })
+                setTemplate({ name: "", subject: "", body: "", parsedContent: deserialize("") })
             }
 
             let parsedContent;

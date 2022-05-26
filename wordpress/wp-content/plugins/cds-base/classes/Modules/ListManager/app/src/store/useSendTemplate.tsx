@@ -1,6 +1,5 @@
 // @ts-nocheck
 import { useCallback, useState } from "react";
-import { useLocation } from "react-router-dom";
 import useFetch from 'use-http';
 import { useList } from './ListContext';
 
@@ -33,7 +32,7 @@ function useSendTemplate({ listId, content, subject }) {
             return true;
         }
 
-    }, [response, request, listId, content, state]);
+    }, [response, request, listId, content, state, subject]);
 
     // send the template
     const sendTemplate = useCallback(

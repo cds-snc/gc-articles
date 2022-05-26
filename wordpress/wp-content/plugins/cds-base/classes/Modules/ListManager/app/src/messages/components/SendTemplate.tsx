@@ -34,9 +34,9 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 
 export const SendTemplate = () => {
     const { status } = useListFetch();
-    const [content, setContent] = useState<string>();
-    const [name, setName] = useState<string>();
-    const [subject, setSubject] = useState<string>();
+    const [content, setContent] = useState<string>("");
+    const [name, setName] = useState<string>("");
+    const [subject, setSubject] = useState<string>("");
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
     const { state: { lists } } = useList();
@@ -44,15 +44,15 @@ export const SendTemplate = () => {
     const { template, templateId, getTemplate, recordSent } = useTemplateApi()
 
     // @ts-ignore
-    // const { state: { subject: editorSubject, name: editorName, template: editorTemplate } } = useLocation();
+    const { state = {} } = useLocation();
+    // @ts-ignore
+    const editorName = state?.name || "";
+    // @ts-ignore
+    const editorSubject = state?.subject || "";
+    // @ts-ignore
+    const editorTemplate = state?.template || "";
 
-    // @TODO: need to get subject from existing message flow
-
-    const editorName = ''
-    const editorSubject = ''
-    const editorTemplate = ''
-
-    console.log(editorName, editorSubject, editorTemplate, content)
+    console.log("editorName:", editorName, "editorSubject:", editorSubject, "editorTemplate:", editorTemplate, "content:", content, "subject:", subject, "name:", name)
 
     useEffect(() => {
         reset();
@@ -71,7 +71,7 @@ export const SendTemplate = () => {
         } else {
             getTemplate(templateId);
         }
-    }, [templateId, getTemplate]);
+    }, [templateId, getTemplate, editorTemplate, editorSubject, editorName]);
 
     useEffect(() => {
         const listData = lists.filter((list: any) => list.id === listId)[0];

@@ -31,7 +31,6 @@ export const StyledContent = styled.div`
 export const MessagePreview = ({ content, subject }: { content: string | undefined, subject: string | undefined }) => {
     return (
         <>
-            <h2>{__("Message preview", "cds-snc")}</h2>
             <StyledSubject>
                 <strong>{__("Subject", "cds-snc")}</strong>
                 {subject}

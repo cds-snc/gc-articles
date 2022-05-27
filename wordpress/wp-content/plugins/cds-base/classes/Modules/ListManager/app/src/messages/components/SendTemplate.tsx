@@ -48,7 +48,7 @@ export const SendTemplate = () => {
     const [content, setContent] = useState<string>("");
 
     const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content, subject });
-    const { template, templateId, getTemplate, recordSent } = useTemplateApi();
+    const { template, templateId, getTemplate, recordSent, getTemplates } = useTemplateApi();
 
     const navigate = useNavigate();
 
@@ -120,10 +120,10 @@ export const SendTemplate = () => {
                         onClick={async () => {
                             const confirmed = await ConfirmSend({ count: subscriberCount });
                             if (confirmed) {
-                                const result = await sendTemplate();
-                                if (result) {
-                                    await recordSent(templateId, listId, listName, name, subject, content); // @Here
-                                }
+                                // const result = await sendTemplate();
+                                // if (result) {
+                                    await recordSent(templateId, listId, listName, name, subject, content);
+                                // }
                             }
                         }}>
                         {__("Send message", "cds-snc")}
@@ -136,6 +136,7 @@ export const SendTemplate = () => {
                 <Spinner />
             }
             <CreateNewList />
+            <h2>{__("Message preview", "cds-snc")}</h2>
             <MessagePreview subject={subject} content={content} />
         </>)
 }

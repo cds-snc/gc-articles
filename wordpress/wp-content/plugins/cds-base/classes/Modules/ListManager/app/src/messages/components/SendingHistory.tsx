@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 
 import { __ } from "@wordpress/i18n";
 import useFetch from 'use-http';
+import styled from 'styled-components';
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 import { Table, StyledPaging, StyledLink } from "./Table";
@@ -28,6 +30,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
             setLoading(true);
             await request.get(`/messages/sent?c=${uuidv4()}`);
             if (response.ok) {
+                console.log(await response.json());
                 setData(await response.json());
                 setLoading(false)
             }
@@ -44,12 +47,12 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
                 Header: __('Message name', "cds-snc"),
                 accessor: 'name',
                 Cell: ({ row }: { row: any }) => {
-                    const tId = row?.original?.templateId;
-                    const name = row?.original?.templateId;
+                    const messageId = row?.original?.id;
+                    const name = row?.original?.name;
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/${serviceId}/versions/${tId}`}
+                                to={`/messages/${serviceId}/${messageId}/versions`}
                             >
                                 {name}
                             </StyledTableLink>

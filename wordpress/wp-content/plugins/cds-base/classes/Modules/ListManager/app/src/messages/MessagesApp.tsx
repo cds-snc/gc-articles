@@ -38,7 +38,7 @@ const MessagesApp = () => {
                 </React.Suspense>
             } />
 
-            <Route path=":serviceId/:templateId/versions/" element={
+            <Route path=":serviceId/:messageId/versions/" element={
                 <React.Suspense fallback={<Spinner />}>
                     <Versions />
                 </React.Suspense>

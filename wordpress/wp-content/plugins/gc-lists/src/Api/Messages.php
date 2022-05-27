@@ -468,44 +468,59 @@ class Messages extends BaseEndpoint
      */
     public function send(WP_REST_Request $request): WP_REST_Response
     {
-        $wpRestServer = new \WP_REST_Server();
-
-        $listManagerRequest = new WP_REST_Request('POST', "/wp-json/list-manager/send");
-        $listManagerRequest->set_query_params([
-            'job_name' => "gc-lists",
-            'list_id' => $request['sent_to_list_id'],
-            'personalisation' => json_encode([
-                'subject' => $request['subject'],
-                'message' => $request['body'],
+        $url = LIST_MANAGER_ENDPOINT . '/send';
+        $args = [
+            'method' => 'POST',
+            'headers' => [
+                'Authorization' => DEFAULT_LIST_MANAGER_API_KEY,
+                'Content-Type' => 'application/json'
+            ],
+            'body' => json_encode([
+                'job_name' => "gc-lists",
+                'list_id' => $request['sent_to_list_id'],
+                'personalisation' => json_encode([
+                    'subject' => $request['subject'],
+                    'message' => $request['body'],
+                ]),
+                'template_id' => get_option('NOTIFY_GENERIC_TEMPLATE_ID'),
+                'template_type' => "email",
             ]),
-            'template_id' => get_option('NOTIFY_GENERIC_TEMPLATE_ID'),
-            'template_type' => "email",
+        ];
+
+        // Proxy request to list-manager
+        $response = json_decode(wp_remote_retrieve_body(wp_remote_request($url, $args)));
+
+        if ($response->status === 'OK') {
+            $current_user = wp_get_current_user();
+            $message      = Message::find($request['id']);
+
+            $message->fill([
+                'name'    => $request['name'] ?: $message->name,
+                'subject' => $request['subject'] ?: $message->subject,
+                'body'    => $request['body'] ?: $message->body,
+            ]);
+
+            $message = $message->send(
+                $request['sent_to_list_id'],
+                $request['sent_to_list_name'],
+                $current_user->ID,
+                $current_user->user_email
+            );
+
+            // Return the sent version
+            $response = new WP_REST_Response($message->sent()->last());
+
+            $response->set_status(200);
+
+            return rest_ensure_response($response);
+        }
+
+        // @TODO: should better handle errors coming back from list-manager api
+        $response = new WP_REST_Response([
+            "error" => "There was an error sending the message"
         ]);
 
-        $response = $wpRestServer->dispatch($request);
-
-        error_log((string)var_dump($response));
-
-        $current_user = wp_get_current_user();
-        $message = Message::find($request['id']);
-
-        $message->fill([
-            'name' => $request['name'] ?: $message->name,
-            'subject' => $request['subject'] ?: $message->subject,
-            'body' => $request['body'] ?: $message->body,
-        ]);
-
-        $message = $message->send(
-            $request['sent_to_list_id'],
-            $request['sent_to_list_name'],
-            $current_user->ID,
-            $current_user->user_email
-        );
-
-        // Return the sent version
-        $response = new WP_REST_Response($message->sent()->last());
-
-        $response->set_status(200);
+        $response->set_status(500);
 
         return rest_ensure_response($response);
     }

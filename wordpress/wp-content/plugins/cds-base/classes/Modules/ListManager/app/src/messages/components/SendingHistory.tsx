@@ -73,7 +73,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
                 accessor: 'sent_by_email',
             },
         ],
-        []
+        [serviceId]
     )
 
     if (loading) {

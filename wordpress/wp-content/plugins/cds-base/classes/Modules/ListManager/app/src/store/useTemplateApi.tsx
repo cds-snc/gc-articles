@@ -6,7 +6,6 @@ import useFetch from 'use-http';
 
 import { serialize, deserialize } from "../messages/editor/utils";
 import { TemplateType } from "../types";
-import { useList } from './ListContext';
 
 function useTemplateApi() {
     const params = useParams();
@@ -17,7 +16,6 @@ function useTemplateApi() {
     const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: deserialize("") });
     const [loading, setLoading] = useState(false);
     const [loadingTemplate, setLoadingTemplate] = useState(false);
-    const { state } = useList();
 
     const getTemplate = useCallback(async (templateId: string | undefined) => {
         console.log("getTemplate");
@@ -137,7 +135,7 @@ function useTemplateApi() {
             return true;
         }
         return false;
-    }, [request, response, state])
+    }, [request, response])
 
     return { template, loadingTemplate, templates, loading, templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
 }

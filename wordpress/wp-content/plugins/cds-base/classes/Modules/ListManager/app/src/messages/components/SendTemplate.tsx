@@ -47,8 +47,8 @@ export const SendTemplate = () => {
     const [subject, setSubject] = useState<string>("");
     const [content, setContent] = useState<string>("");
 
-    const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content, subject });
-    const { template, templateId, getTemplate, recordSent, getTemplates } = useTemplateApi();
+    const { success, errors, reset } = useSendTemplate({ listId, content, subject });
+    const { template, templateId, getTemplate, recordSent} = useTemplateApi();
 
     const navigate = useNavigate();
 

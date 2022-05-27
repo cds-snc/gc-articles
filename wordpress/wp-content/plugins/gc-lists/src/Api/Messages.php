@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GCLists\Api;
 
-use CDS\Modules\ListManager\ListManager;
 use GCLists\Database\Models\Message;
 use WP_REST_Response;
 use WP_REST_Request;
@@ -437,25 +436,38 @@ class Messages extends BaseEndpoint
      */
     public function createAndSend(WP_REST_Request $request): WP_REST_Response
     {
-        $current_user = wp_get_current_user();
+        $response = (new SendMessage())($request['sent_to_list_id'], $request['subject'], $request['body']);
 
-        $message = new Message([
-            'name' => $request['name'],
-            'subject' => $request['subject'],
-            'body' => $request['body'],
-            'message_type' => $request['message_type']
+        if ($response->status === 'OK') {
+            $current_user = wp_get_current_user();
+
+            $message = new Message([
+                'name'         => $request['name'],
+                'subject'      => $request['subject'],
+                'body'         => $request['body'],
+                'message_type' => $request['message_type']
+            ]);
+
+            $message = $message->send(
+                $request['sent_to_list_id'],
+                $request['sent_to_list_name'],
+                $current_user->ID,
+                $current_user->user_email
+            );
+
+            $response = new WP_REST_Response($message);
+
+            $response->set_status(200);
+
+            return rest_ensure_response($response);
+        }
+
+        // @TODO: should better handle errors coming back from list-manager api
+        $response = new WP_REST_Response([
+            "error" => "There was an error sending the message"
         ]);
 
-        $message = $message->send(
-            $request['sent_to_list_id'],
-            $request['sent_to_list_name'],
-            $current_user->ID,
-            $current_user->user_email
-        );
-
-        $response = new WP_REST_Response($message);
-
-        $response->set_status(200);
+        $response->set_status(500);
 
         return rest_ensure_response($response);
     }
@@ -468,27 +480,7 @@ class Messages extends BaseEndpoint
      */
     public function send(WP_REST_Request $request): WP_REST_Response
     {
-        $url = LIST_MANAGER_ENDPOINT . '/send';
-        $args = [
-            'method' => 'POST',
-            'headers' => [
-                'Authorization' => DEFAULT_LIST_MANAGER_API_KEY,
-                'Content-Type' => 'application/json'
-            ],
-            'body' => json_encode([
-                'job_name' => "gc-lists",
-                'list_id' => $request['sent_to_list_id'],
-                'personalisation' => json_encode([
-                    'subject' => $request['subject'],
-                    'message' => $request['body'],
-                ]),
-                'template_id' => get_option('NOTIFY_GENERIC_TEMPLATE_ID'),
-                'template_type' => "email",
-            ]),
-        ];
-
-        // Proxy request to list-manager
-        $response = json_decode(wp_remote_retrieve_body(wp_remote_request($url, $args)));
+        $response = (new SendMessage())($request['sent_to_list_id'], $request['subject'], $request['body']);
 
         if ($response->status === 'OK') {
             $current_user = wp_get_current_user();

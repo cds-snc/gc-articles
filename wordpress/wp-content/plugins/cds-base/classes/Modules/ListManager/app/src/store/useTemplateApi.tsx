@@ -122,12 +122,15 @@ function useTemplateApi() {
 
     const recordSent = useCallback(async (templateId: string | undefined, listId: string | undefined, listName: string | undefined, name: string | undefined, subject: string | undefined, body: string | undefined) => {
 
-        await request.post(`/messages/${templateId}/send`, {
+        const endpoint = templateId == 'new' ? '/messages/send' : `/messages/${templateId}/send`;
+
+        await request.post(endpoint, {
             'sent_to_list_id': listId,
             'sent_to_list_name': listName,
             'name': name,
             'subject': subject,
             'body': body,
+            'message_type': 'email',
         });
 
         if (response.ok) {

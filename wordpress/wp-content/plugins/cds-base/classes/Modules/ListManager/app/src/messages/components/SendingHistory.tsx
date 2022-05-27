@@ -82,7 +82,6 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
 
     return data.length ?
         <>
-            <h2> {__("Sending History", "cds-snc")}</h2 >
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
             <StyledPaging>
                 <StyledLink to={`/messages/${serviceId}/history`} >

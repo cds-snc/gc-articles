@@ -12,7 +12,6 @@ import { useList } from "../../store/ListContext";
 import { List } from '../../types';
 import { useListFetch } from '../../store/UseListFetch';
 import { StyledSelect } from "../editor/Styles"
-import useSendTemplate from '../../store/useSendTemplate';
 import useTemplateApi from '../../store/useTemplateApi';
 import { ConfirmSend } from "./ConfirmSend";
 import { useLocation } from 'react-router-dom';
@@ -46,8 +45,9 @@ export const SendTemplate = () => {
     const [listName, setListName] = useState<string>("");
     const [subject, setSubject] = useState<string>("");
     const [content, setContent] = useState<string>("");
+    const [messageSent, setMessageSent] = useState<boolean>(false);
+    const [messageSendingErrors, setMessageSendingErrors] = useState<string>("");
 
-    const { success, errors, reset } = useSendTemplate({ listId, content, subject });
     const { template, templateId, getTemplate, recordSent} = useTemplateApi();
 
     const navigate = useNavigate();
@@ -62,10 +62,6 @@ export const SendTemplate = () => {
     const editorTemplate = state?.template || "";
 
     // console.log("editorName:", editorName, "editorSubject:", editorSubject, "editorTemplate:", editorTemplate, "content:", content, "subject:", subject, "name:", name)
-
-    useEffect(() => {
-        reset();
-    }, [reset]);
 
     useEffect(() => {
         setContent(template?.body);
@@ -93,11 +89,11 @@ export const SendTemplate = () => {
         return <Spinner />
     }
 
-    if (errors) {
+    if (messageSendingErrors) {
         return <SendingError />
     }
 
-    if (success) {
+    if (messageSent) {
         return <MessageSent name={name} count={subscriberCount} />
     }
 
@@ -120,10 +116,13 @@ export const SendTemplate = () => {
                         onClick={async () => {
                             const confirmed = await ConfirmSend({ count: subscriberCount });
                             if (confirmed) {
-                                // const result = await sendTemplate();
-                                // if (result) {
-                                    await recordSent(templateId, listId, listName, name, subject, content);
-                                // }
+                                const result = await recordSent(templateId, listId, listName, name, subject, content);
+                                if(result) {
+                                    setMessageSent(true);
+                                } else {
+                                    // @TODO: get errors from api call
+                                    setMessageSendingErrors("There was an error");
+                                }
                             }
                         }}>
                         {__("Send message", "cds-snc")}

@@ -64,7 +64,7 @@ export const SendTemplate = () => {
     }, [template]);
 
     useEffect(() => {
-        if (templateId === 'new') {
+        if (editorTemplate !== "") {
             setContent(editorTemplate)
             setSubject(editorSubject)
             setName(editorName)

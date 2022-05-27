@@ -46,39 +46,39 @@ msgstr "S'abonner:"
 
 #: classes/Modules/Checklists/Setup.php:136
 msgid "Are you sure you want to publish?"
-msgstr ""
+msgstr "êtes-vous sûr de vouloir publier"
 
 #: classes/Modules/Checklists/Setup.php:137
 msgid "There are still recommended items remaining on your checklist. What would you like to do?"
-msgstr ""
+msgstr "Il reste encore des éléments recommandés sur votre aide-mémoire. Qu'est-ce que tu aimerais faire?"
 
 #: classes/Modules/Checklists/Setup.php:139
 msgid "Don’t publish"
-msgstr ""
+msgstr "Ne pas publier"
 
 #: classes/Modules/Checklists/Setup.php:140
 msgid "Publish anyway"
-msgstr ""
+msgstr "Ignorer, publier quand même"
 
 #: classes/Modules/Checklists/Setup.php:146
 msgid "Publishing not allowed"
-msgstr ""
+msgstr "Publication interdite"
 
 #: classes/Modules/Checklists/Setup.php:147
 msgid "Please complete all the required checklist items before publishing."
-msgstr ""
+msgstr "Veuillez compléter tous les éléments de la aide-mémoire requis avant de publier."
 
 #: classes/Modules/Checklists/Setup.php:149
 msgid "Okay, take me to the list."
-msgstr ""
+msgstr "OK, allez à l'aide-mémoire."
 
 #: classes/Modules/Checklists/Setup.php:154
 msgid "Publish…"
-msgstr ""
+msgstr "Publier…"
 
 #: classes/Modules/Checklists/Setup.php:155
 msgid "Update…"
-msgstr ""
+msgstr "Mise à jour…"
 
 #: classes/Modules/Cleanup/AdminBar.php:46
 #: classes/Modules/Cleanup/Login.php:165
@@ -181,19 +181,19 @@ msgstr "Tous les articles"
 
 #: classes/Modules/Cleanup/Profile.php:167
 msgid "Unsafe HTML permissions"
-msgstr ""
+msgstr "Autorisations HTML non sécurisées"
 
 #: classes/Modules/Cleanup/Profile.php:181
 msgid "Unsafe HTML"
-msgstr ""
+msgstr "HTML non sécurisé"
 
 #: classes/Modules/Cleanup/Profile.php:186
 msgid "Allow iFrames"
-msgstr ""
+msgstr "Autoriser les iFrames"
 
 #: classes/Modules/DBInsights/DBInsights.php:146
 msgid "not found"
-msgstr ""
+msgstr "pas trouvé"
 
 #: classes/Modules/DBInsights/DBInsights.php:180
 #: classes/Modules/DBInsights/DBInsights.php:186
@@ -526,15 +526,15 @@ msgstr "Vos listes"
 #: classes/Modules/Notify/ListManagerSettings.php:89
 #: classes/Modules/Notify/ListManagerUserProfile.php:27
 msgid "GC Lists"
-msgstr ""
+msgstr "GC Listes"
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:42
 msgid "Manage Lists"
-msgstr ""
+msgstr "Gérer les listes"
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:47
 msgid "Can manage lists"
-msgstr ""
+msgstr "Autoriser gérer les listes"
 
 #: classes/Modules/Notify/ListManagerUserProfile.php:64
 #: classes/Modules/Notify/NotifyTemplateSender.php:85
@@ -671,7 +671,7 @@ msgstr "Où la bannière Canada.ca devrait-elle renvoyer?"
 
 #: classes/Modules/Site/SiteSettings.php:294
 msgid "Analytics id"
-msgstr ""
+msgstr "Identifiant d'analyse Google"
 
 #: classes/Modules/Site/SiteSettings.php:308
 msgid "Turn on"
@@ -886,11 +886,11 @@ msgstr "Afficher « En savoir plus »"
 
 #: build/index.js:3608 build/index.js:3533
 msgid "Latest Page"
-msgstr ""
+msgstr "la page la plus récente"
 
 #: build/index.js:3610 build/index.js:3535
 msgid "Latest Article"
-msgstr ""
+msgstr "l'article la plus récente"
 
 #: build/index.js:3720 build/index.js:3635
 msgid " Tables exist from deleted sites"

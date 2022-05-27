@@ -108,10 +108,7 @@ export const EditTemplate = () => {
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
-                        await handleSubmit(handleFormData, (data) => {
-                            console.log("oh no")
-                            return false;
-                        })();
+                        //@todo handle validation
                         navigate(`/messages/${serviceId}/send/${templateId}`, { state: getValues() });
                     }}
                     className="button button-primary">

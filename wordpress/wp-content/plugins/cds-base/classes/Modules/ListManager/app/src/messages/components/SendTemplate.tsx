@@ -33,13 +33,16 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 }
 
 export const SendTemplate = () => {
+
     const { status } = useListFetch();
-    const [content, setContent] = useState<string>("");
-    const [name, setName] = useState<string>("");
-    const [subject, setSubject] = useState<string>("");
+    const { state: { lists } } = useList();
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
-    const { state: { lists } } = useList();
+
+    const [name, setName] = useState<string>("");
+    const [subject, setSubject] = useState<string>("");
+    const [content, setContent] = useState<string>("");
+
     const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content, subject });
     const { template, templateId, getTemplate, recordSent } = useTemplateApi()
 
@@ -97,11 +100,18 @@ export const SendTemplate = () => {
             <h1>{__("Send message to a list", "cds-snc")}</h1>
             <p><strong>{__("Subscriber list", "cds-snc")}</strong></p>
             <p>{__("Choose a group to send this message to.", "cds-snc")}</p>
-            {lists.length >= 1 && <ListSelect lists={lists} handleChange={(val: string) => {
-                setListId(val)
-            }} />}
 
-            <SendToList sending={true} name={name} count={subscriberCount} />
+            {lists.length >= 1 ?
+                <>
+                    <ListSelect lists={lists} handleChange={(val: string) => {
+                        setListId(val)
+                    }} />
+                    <SendToList sending={true} name={name} count={subscriberCount} />
+                </>
+                :
+                <Spinner />
+            }
+
             <button
                 style={{ marginRight: "20px" }}
                 className="button button-primary"

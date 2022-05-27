@@ -107,26 +107,28 @@ export const SendTemplate = () => {
                         setListId(val)
                     }} />
                     <SendToList sending={true} name={name} count={subscriberCount} />
+
+                    <button
+                        style={{ marginRight: "20px" }}
+                        className="button button-primary"
+                        onClick={async () => {
+                            const confirmed = await ConfirmSend({ count: subscriberCount });
+                            if (confirmed) {
+                                const result = await sendTemplate();
+                                if (result) {
+                                    await recordSent(templateId, listId, name);
+                                }
+                            }
+                        }}>
+                        {__("Send message", "cds-snc")}
+                    </button>
+                    <button className="button">{__("Cancel")}</button>
                 </>
                 :
                 <Spinner />
             }
 
-            <button
-                style={{ marginRight: "20px" }}
-                className="button button-primary"
-                onClick={async () => {
-                    const confirmed = await ConfirmSend({ count: subscriberCount });
-                    if (confirmed) {
-                        const result = await sendTemplate();
-                        if (result) {
-                            await recordSent(templateId, listId, name);
-                        }
-                    }
-                }}>
-                {__("Send message", "cds-snc")}
-            </button>
-            <button className="button">{__("Cancel")}</button>
+
             <CreateNewList />
             <MessagePreview subject={subject} content={content} />
         </>)

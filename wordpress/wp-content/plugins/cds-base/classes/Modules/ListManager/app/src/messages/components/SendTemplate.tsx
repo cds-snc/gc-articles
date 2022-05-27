@@ -16,6 +16,8 @@ import useSendTemplate from '../../store/useSendTemplate';
 import useTemplateApi from '../../store/useTemplateApi';
 import { ConfirmSend } from "./ConfirmSend";
 import { useLocation } from 'react-router-dom';
+import { useService } from '../../util/useService';
+import { useNavigate } from "react-router-dom";
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     return (
@@ -38,13 +40,16 @@ export const SendTemplate = () => {
     const { state: { lists } } = useList();
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
+    const { serviceId } = useService();
 
     const [name, setName] = useState<string>("");
     const [subject, setSubject] = useState<string>("");
     const [content, setContent] = useState<string>("");
 
     const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content, subject });
-    const { template, templateId, getTemplate, recordSent } = useTemplateApi()
+    const { template, templateId, getTemplate, recordSent } = useTemplateApi();
+
+    const navigate = useNavigate();
 
     // @ts-ignore
     const { state = {} } = useLocation();
@@ -122,13 +127,13 @@ export const SendTemplate = () => {
                         }}>
                         {__("Send message", "cds-snc")}
                     </button>
-                    <button className="button">{__("Cancel")}</button>
+                    <button className="button" onClick={() => {
+                        navigate(`/messages/${serviceId}`);
+                    }}>{__("Cancel")}</button>
                 </>
                 :
                 <Spinner />
             }
-
-
             <CreateNewList />
             <MessagePreview subject={subject} content={content} />
         </>)

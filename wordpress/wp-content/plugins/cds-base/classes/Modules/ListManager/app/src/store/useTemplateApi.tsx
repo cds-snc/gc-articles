@@ -22,7 +22,7 @@ function useTemplateApi() {
         if (!templateId || templateId === 'new') return;
 
         setLoadingTemplate(true);
-        await request.get(`/messages/${templateId}`)
+        await request.get(`/messages/${templateId}?c=${uuidv4()}`)
 
         if (response.ok) {
             const result = await response.json();
@@ -120,12 +120,15 @@ function useTemplateApi() {
         [request, response],
     );
 
-    const recordSent = useCallback(async (templateId: string | undefined, listId: string | undefined, listName: string | undefined) => {
-        console.log(recordSent)
+    const recordSent = useCallback(async (templateId: string | undefined, listId: string | undefined, listName: string | undefined, name: string | undefined, subject: string | undefined, body: string | undefined) => {
+
         await request.post(`/messages/${templateId}/send`, {
             'sent_to_list_id': listId,
             'sent_to_list_name': listName,
-        })
+            'name': name,
+            'subject': subject,
+            'body': body,
+        });
 
         if (response.ok) {
             await response.json();

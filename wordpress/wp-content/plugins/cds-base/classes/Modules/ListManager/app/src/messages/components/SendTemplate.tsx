@@ -43,6 +43,7 @@ export const SendTemplate = () => {
     const { serviceId } = useService();
 
     const [name, setName] = useState<string>("");
+    const [listName, setListName] = useState<string>("");
     const [subject, setSubject] = useState<string>("");
     const [content, setContent] = useState<string>("");
 
@@ -60,7 +61,7 @@ export const SendTemplate = () => {
     // @ts-ignore
     const editorTemplate = state?.template || "";
 
-    console.log("editorName:", editorName, "editorSubject:", editorSubject, "editorTemplate:", editorTemplate, "content:", content, "subject:", subject, "name:", name)
+    // console.log("editorName:", editorName, "editorSubject:", editorSubject, "editorTemplate:", editorTemplate, "content:", content, "subject:", subject, "name:", name)
 
     useEffect(() => {
         reset();
@@ -84,7 +85,7 @@ export const SendTemplate = () => {
     useEffect(() => {
         const listData = lists.filter((list: any) => list.id === listId)[0];
         const subscriberCount = listData?.subscriber_count || 0;
-        setName(listData?.name);
+        setListName(listData?.name);
         setSubscriberCount(Number(subscriberCount));
     }, [listId, lists]);
 
@@ -121,7 +122,7 @@ export const SendTemplate = () => {
                             if (confirmed) {
                                 const result = await sendTemplate();
                                 if (result) {
-                                    await recordSent(templateId, listId, name);
+                                    await recordSent(templateId, listId, listName, name, subject, content); // @Here
                                 }
                             }
                         }}>

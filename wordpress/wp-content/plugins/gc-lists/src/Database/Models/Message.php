@@ -96,7 +96,9 @@ class Message extends Model
      */
     public function versions(array $options = []): ?Collection
     {
-        return static::whereEquals(['original_message_id' => $this->getAttribute('id')], $options);
+        // @TODO: rewrite
+        $original = $this->original();
+        return static::whereEquals(['original_message_id' => $original->getAttribute('id')], $options);
     }
 
     /**

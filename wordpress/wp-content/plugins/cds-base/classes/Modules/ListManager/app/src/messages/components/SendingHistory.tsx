@@ -10,6 +10,13 @@ import { Table, StyledPaging, StyledLink } from "./Table";
 import { Next } from "./icons/Next";
 import { useService } from '../../util/useService';
 
+const StyledTableLink = styled(Link)`
+    text-decoration:underline !important;
+    :hover{
+        text-decoration:none !important;
+    }
+`
+
 export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
@@ -36,6 +43,19 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
             {
                 Header: __('Message name', "cds-snc"),
                 accessor: 'name',
+                Cell: ({ row }: { row: any }) => {
+                    const tId = row?.original?.templateId;
+                    const name = row?.original?.templateId;
+                    return (
+                        <>
+                            <StyledTableLink
+                                to={`/messages/${serviceId}/versions/${tId}`}
+                            >
+                                {name}
+                            </StyledTableLink>
+                        </>
+                    )
+                },
             },
             {
                 Header: __('Date sent', "cds-snc"),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GCLists\Api;
 
+use CDS\Modules\ListManager\ListManager;
 use GCLists\Database\Models\Message;
 use WP_REST_Response;
 use WP_REST_Request;
@@ -331,7 +332,7 @@ class Messages extends BaseEndpoint
         $message = Message::find($request['id']);
         $versions = $message->versions($options);
 
-        $response = new WP_REST_Response($versions);
+        $response = new WP_REST_Response($versions->toArray());
 
         $response->set_status(200);
 
@@ -352,7 +353,7 @@ class Messages extends BaseEndpoint
         $message = Message::find($request['id']);
         $versions = $message->sent($options);
 
-        $response = new WP_REST_Response($versions);
+        $response = new WP_REST_Response($versions->toArray());
 
         $response->set_status(200);
 
@@ -467,6 +468,24 @@ class Messages extends BaseEndpoint
      */
     public function send(WP_REST_Request $request): WP_REST_Response
     {
+        $wpRestServer = new \WP_REST_Server();
+
+        $listManagerRequest = new WP_REST_Request('POST', "/wp-json/list-manager/send");
+        $listManagerRequest->set_query_params([
+            'job_name' => "gc-lists",
+            'list_id' => $request['sent_to_list_id'],
+            'personalisation' => json_encode([
+                'subject' => $request['subject'],
+                'message' => $request['body'],
+            ]),
+            'template_id' => get_option('NOTIFY_GENERIC_TEMPLATE_ID'),
+            'template_type' => "email",
+        ]);
+
+        $response = $wpRestServer->dispatch($request);
+
+        error_log((string)var_dump($response));
+
         $current_user = wp_get_current_user();
         $message = Message::find($request['id']);
 

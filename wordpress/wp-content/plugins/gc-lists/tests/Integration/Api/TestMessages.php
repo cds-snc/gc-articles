@@ -43,10 +43,9 @@ test('Get all Message templates', function() {
 	$response = $this->server->dispatch( $request );
 
 	$this->assertEquals( 200, $response->get_status() );
-	$this->assertJson($response->get_data());
-	$this->assertCount(5, json_decode($response->get_data()));
+	$this->assertCount(5, $response->get_data());
 
-    $body = $response->get_data()->toJson();
+    $body = json_encode($response->get_data());
 
     expect($body)
         ->toBeJson()
@@ -55,7 +54,7 @@ test('Get all Message templates', function() {
         ->each
         ->toBeArray()
         ->toHaveKeys($this->messageAttributes);
-});
+})->group('test');
 
 test('Get all templates with limit', function() {
     $this->factory->message->create_many(20);
@@ -68,7 +67,7 @@ test('Get all templates with limit', function() {
 
     $this->assertEquals( 200, $response->get_status() );
 
-    $body = $response->get_data()->toJson();
+    $body = json_encode($response->get_data());
 
     expect($body)
         ->json()
@@ -76,7 +75,7 @@ test('Get all templates with limit', function() {
         ->each
         ->toBeArray()
         ->toHaveKeys($this->messageAttributes);
-});
+})->group('test');
 
 test('Get all templates with invalid limit returns default 5', function() {
     $this->factory->message->create_many(20);
@@ -89,12 +88,12 @@ test('Get all templates with invalid limit returns default 5', function() {
 
     $this->assertEquals( 200, $response->get_status() );
 
-    $body = $response->get_data()->toJson();
+    $body = json_encode($response->get_data());
 
     expect($body)
         ->json()
         ->toHaveCount(5);
-});
+})->group('test');
 
 test('Get all sent messages', function() {
     // Create some templates and versions
@@ -117,7 +116,7 @@ test('Get all sent messages', function() {
 
 	$this->assertEquals( 200, $response->get_status() );
 
-	$body = $response->get_data()->toJson();
+	$body = json_encode($response->get_data());
 
 	expect($body)
         ->json()
@@ -219,7 +218,7 @@ test('Get versions of a message', function() {
 
     $this->assertEquals(200, $response->get_status());
 
-    $body = $response->get_data()->toJson();
+    $body = json_encode($response->get_data());
 
     expect($body)
         ->json()
@@ -227,7 +226,7 @@ test('Get versions of a message', function() {
         ->toHaveCount(5)
         ->each
         ->toHaveKeys($this->messageAttributes);
-});
+})->group('test');
 
 test('No versions available', function() {
     $message_id = $this->factory->message->create([
@@ -239,7 +238,7 @@ test('No versions available', function() {
 
     $this->assertEquals(200, $response->get_status());
 
-    $body = $response->get_data()->toJson();
+    $body = json_encode($response->get_data());
 
     expect($body)
         ->json()
@@ -271,7 +270,7 @@ test('Get sent versions of a message', function() {
 
     $this->assertEquals(200, $response->get_status());
 
-    $body = $response->get_data()->toJson();
+    $body = json_encode($response->get_data());
 
     expect($body)
         ->json()
@@ -297,7 +296,7 @@ test('No sent versions available', function() {
 
     $this->assertEquals(200, $response->get_status());
 
-    $body = $response->get_data()->toJson();
+    $body = json_encode($response->get_data());
 
     expect($body)
         ->json()

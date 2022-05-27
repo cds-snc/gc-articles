@@ -261,7 +261,7 @@ class Messages extends BaseEndpoint
 
         $results = Message::templates($options);
 
-        $response = new WP_REST_Response($results);
+        $response = new WP_REST_Response($results->toArray());
 
         $response->set_status(200);
 
@@ -280,7 +280,7 @@ class Messages extends BaseEndpoint
 
         $results = Message::sentMessages($options);
 
-        $response = new WP_REST_Response($results);
+        $response = new WP_REST_Response($results->toArray());
 
         $response->set_status(200);
 

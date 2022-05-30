@@ -46,7 +46,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_5xx_response" {
 resource "aws_cloudwatch_metric_alarm" "alb_target_response_time_average" {
   alarm_name          = "ALBTargetGroupResponseTimeAverage"
   comparison_operator = "GreaterThanThreshold"
-  evaluation_periods  = "1"
+  evaluation_periods  = "2"
   metric_name         = "TargetResponseTime"
   namespace           = "AWS/ApplicationELB"
   period              = "300"
@@ -54,7 +54,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_response_time_average" {
   threshold           = var.alb_target_response_time_average_maximum
   treat_missing_data  = "notBreaching"
 
-  alarm_description = "Average response time (seconds) for the ALB target group to receive a response in a 5 minute period"
+  alarm_description = "Average response time (seconds) for the ALB target group to receive a response in two 5 minute periods"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 

@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace GCLists\Api;
 
+use WP_REST_Response;
+
 class SendMessage
 {
-    public function __invoke($listId, $subject, $body)
+    public static function handle($listId, $subject, $body)
     {
-        $url = LIST_MANAGER_ENDPOINT . '/send';
+        $url = getenv('LIST_MANAGER_ENDPOINT') . '/send';
 
         $args = [
             'method' => 'POST',
             'headers' => [
-                'Authorization' => DEFAULT_LIST_MANAGER_API_KEY,
+                'Authorization' => getenv('DEFAULT_LIST_MANAGER_API_KEY'),
                 'Content-Type' => 'application/json'
             ],
             'body' => json_encode([
@@ -29,8 +31,10 @@ class SendMessage
         ];
 
         // Proxy request to list-manager
-        $response = wp_remote_request($url, $args);
+        $proxy_response = wp_remote_retrieve_body(wp_remote_request($url, $args));
 
-        return json_decode(wp_remote_retrieve_body($response));
+        $response = new WP_REST_Response(json_decode($proxy_response));
+
+        return rest_ensure_response($response);
     }
 }

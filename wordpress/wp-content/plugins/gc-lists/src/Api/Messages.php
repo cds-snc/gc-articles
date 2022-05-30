@@ -480,9 +480,9 @@ class Messages extends BaseEndpoint
      */
     public function send(WP_REST_Request $request): WP_REST_Response
     {
-        $response = (new SendMessage())($request['sent_to_list_id'], $request['subject'], $request['body']);
+        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'])->data;
 
-        if ($response->status === 'OK') {
+        if (isset($response->status) && $response->status === 'OK') {
             $current_user = wp_get_current_user();
             $message      = Message::find($request['id']);
 
@@ -509,7 +509,8 @@ class Messages extends BaseEndpoint
 
         // @TODO: should better handle errors coming back from list-manager api
         $response = new WP_REST_Response([
-            "error" => "There was an error sending the message"
+            "error" => "There was an error sending the message",
+            "details" => $response
         ]);
 
         $response->set_status(500);

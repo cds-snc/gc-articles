@@ -436,9 +436,9 @@ class Messages extends BaseEndpoint
      */
     public function createAndSend(WP_REST_Request $request): WP_REST_Response
     {
-        $response = (new SendMessage())($request['sent_to_list_id'], $request['subject'], $request['body']);
+        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'])->data;
 
-        if ($response->status === 'OK') {
+        if (isset($response->status) && $response->status === 'OK') {
             $current_user = wp_get_current_user();
 
             $message = new Message([

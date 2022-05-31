@@ -47,14 +47,16 @@ export const useListFetch = () => {
 
             // sync list from List Manager API to local WP Option
             try {
-                const listData = await response.json();
-                const lists = listData?.map((list: any) => {
-                    //@todo --- temporary... note we're using language here -> en=email, fr=phone 
-                    return { id: list?.id, label: list?.name, type: getListType(list?.language) }
-                })
-                const REST_URL = window?.CDS_VARS?.rest_url;
-                const REST_NONCE = window?.CDS_VARS?.rest_nonce;
-                await sendListData(`${REST_URL}list-manager-settings/list/save`, REST_NONCE, { "list_values": lists });
+                if(response.ok) {
+                    const listData = response.data;
+                    const lists = listData?.map((list: any) => {
+                        //@todo --- temporary... note we're using language here -> en=email, fr=phone
+                        return { id: list?.id, label: list?.name, type: getListType(list?.language) }
+                    })
+                    const REST_URL = window?.CDS_VARS?.rest_url;
+                    const REST_NONCE = window?.CDS_VARS?.rest_nonce;
+                    await sendListData(`${REST_URL}list-manager-settings/list/save`, REST_NONCE, { "list_values": lists });
+                }
             } catch (e) {
                 console.log(e)
             }

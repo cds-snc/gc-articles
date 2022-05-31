@@ -1,0 +1,65 @@
+name: Generate SBOM
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - wordpress/**/composer.lock
+      - wordpress/**/package-lock.json
+      - .github/workflows/generate-sbom.yml
+  push:
+    branches:
+      - main
+    paths:
+      - wordpress/**/composer.lock
+      - wordpress/**/package-lock.json
+      - .github/workflows/generate-sbom.yml
+
+jobs:
+  generate-sbom:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - component: gc-articles/wordpress
+            directory: ./wordpress
+            manifest: composer.lock
+            type: php
+          - component: gc-articles/wordpress/plugin/cds-base
+            directory: ./wordpress/wp-content/plugins/cds-base
+            manifest: composer.lock
+            type: php
+          - component: gc-articles/wordpress/plugin/cds-base/frontend
+            directory: ./wordpress/wp-content/plugins/cds-base
+            manifest: package-lock.json
+            type: node
+          - component: gc-articles/wordpress/plugin/gc-lists
+            directory: ./wordpress/wp-content/plugins/gc-lists
+            manifest: composer.lock
+            type: php
+          - component: gc-articles/wordpress/theme/cds-default
+            directory: ./wordpress/wp-content/themes/cds-default
+            manifest: composer.lock
+            type: php
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: dorny/paths-filter@b2feaf19c27470162a626bd6fa8438ae5b263721
+        id: changes
+        with:
+          filters: |
+            lock: 
+              - '${{ matrix.directory }}/${{ matrix.manifest }}'
+
+      - name: Generate ${{ matrix.component }} SBOM
+        if: steps.changes.outputs.lock == 'true'
+        uses: cds-snc/security-tools/.github/actions/generate-sbom@4c6b386722985552f3f008d04279a3f01402cc35
+        with:
+          dependency_track_api_key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
+          project_name: ${{ matrix.component }}
+          project_type: ${{ matrix.type }}
+          working_directory: ${{ matrix.directory }}

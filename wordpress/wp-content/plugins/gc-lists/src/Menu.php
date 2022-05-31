@@ -66,7 +66,7 @@ class Menu
     public function renderMessages(): void
     {
         if (!get_option('NOTIFY_API_KEY')) {
-            $this->noApiKey();
+            $this->renderNoApiKey();
             exit;
         }
 
@@ -80,7 +80,7 @@ class Menu
     public function renderSubscribers(): void
     {
         if (!get_option('NOTIFY_API_KEY')) {
-            $this->noApiKey();
+            $this->renderNoApiKey();
             exit;
         }
 
@@ -91,7 +91,7 @@ class Menu
         ]);
     }
 
-    public function noApiKey()
+    public function renderNoApiKey()
     {
         $this->render('no_api_key');
     }

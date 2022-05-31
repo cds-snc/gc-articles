@@ -22,6 +22,7 @@ class Menu
         add_action('admin_menu', [$this, 'addMenu']);
         add_action('admin_menu', [$this, 'addMessagesSubmenuItem']);
         add_action('admin_menu', [$this, 'addSubscriberListsSubmenuItem']);
+        add_action('admin_enqueue_scripts', [$this, 'enqueue']);
     }
 
     public function addMenu()
@@ -70,7 +71,7 @@ class Menu
         $messages = "Hello";
 
         $this->render('messages', [
-            'messages' => $messages
+            'title' => 'Messages'
         ]);
     }
 
@@ -81,16 +82,38 @@ class Menu
             exit;
         }
 
-        $subscribers = "Hello";
-
         $this->render('subscribers', [
-            'subscribers' => $subscribers
+            'title' => 'Subscribers'
         ]);
     }
 
     public function renderNoApiKey()
     {
         $this->render('no_api_key');
+    }
+
+    public function enqueue($hook_suffix)
+    {
+        if (str_contains($hook_suffix, 'gc-lists_')) {
+            try {
+                $path  = plugin_dir_path(__FILE__) . '/../resources/js/build/asset-manifest.json';
+                $json  = file_get_contents($path);
+                $data  = json_decode($json, true);
+                $files = $data['files'];
+
+                // wp_enqueue_style('list-manager', $files['main.css'], null, '1.0.0');
+
+                wp_enqueue_script(
+                    'gc-lists',
+                    $files['main.js'],
+                    null,
+                    '1.0.0',
+                    true,
+                );
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
+            }
+        }
     }
 
     /**

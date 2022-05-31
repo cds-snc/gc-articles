@@ -1,0 +1,65 @@
+{
+  "name": "gc-lists",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "/wp-content/plugins/gc-lists/resources/js/build",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "@testing-library/user-event": "^14.1.1",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^17.0.29",
+    "@types/react": "^18.0.8",
+    "@types/react-dom": "^18.0.0",
+    "@wordpress/i18n": "^4.7.0",
+    "date-fns": "^2.28.0",
+    "localforage": "^1.10.0",
+    "prismjs": "^1.28.0",
+    "react": "^18.1.0",
+    "react-csv-importer": "^0.7.1",
+    "react-dom": "^18.1.0",
+    "react-hook-form": "^7.30.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-table": "^7.7.0",
+    "slate": "^0.78.0",
+    "slate-history": "^0.66.0",
+    "slate-react": "^0.77.4",
+    "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.9",
+    "typescript": "^4.6.3",
+    "use-http": "^1.0.26",
+    "uuid": "^8.3.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "postinstall": "npm run build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-table": "^7.7.11",
+    "@types/styled-components": "^5.1.25",
+    "@types/uuid": "^8.3.4"
+  }
+}

@@ -153,6 +153,104 @@ class Messages extends BaseEndpoint
                 return $this->hasPermission();
             }
         ]);
+
+        // create and send new message
+        register_rest_route($this->namespace, '/messages/send', [
+            'methods' => 'POST',
+            'callback' => [$this, 'createAndSend'],
+            'permission_callback' => function () {
+                return $this->hasPermission();
+            },
+            'args' => [
+                'name' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Name of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'subject' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Subject of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'body' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Body of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_textarea_field($value);
+                    }
+                ],
+                'message_type' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Type of message',
+                    'validate_callback' => function ($value, $request, $param) {
+                        return in_array($value, ['email', 'phone']);
+                    }
+                ],
+                'sent_to_list_id' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'ID of the list'
+                ],
+                'sent_to_list_name' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Name of the list'
+                ],
+            ]
+        ]);
+
+        // send existing message
+        register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)/send', [
+            'methods' => 'POST',
+            'callback' => [$this, 'send'],
+            'permission_callback' => function () {
+                return $this->hasPermission();
+            },
+            'args' => [
+                'name' => [
+                    'required' => false,
+                    'type' => 'string',
+                    'description' => 'Name of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'subject' => [
+                    'required' => false,
+                    'type' => 'string',
+                    'description' => 'Subject of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_text_field($value);
+                    }
+                ],
+                'body' => [
+                    'required' => false,
+                    'type' => 'string',
+                    'description' => 'Body of the Message',
+                    'sanitize_callback' => function ($value, $request, $param) {
+                        return sanitize_textarea_field($value);
+                    }
+                ],
+                'sent_to_list_id' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'ID of the list'
+                ],
+                'sent_to_list_name' => [
+                    'required' => true,
+                    'type' => 'string',
+                    'description' => 'Name of the list'
+                ],
+            ]
+        ]);
     }
 
     /**
@@ -167,7 +265,7 @@ class Messages extends BaseEndpoint
 
         $results = Message::templates($options);
 
-        $response = new WP_REST_Response($results);
+        $response = new WP_REST_Response($results->toArray());
 
         $response->set_status(200);
 
@@ -186,7 +284,7 @@ class Messages extends BaseEndpoint
 
         $results = Message::sentMessages($options);
 
-        $response = new WP_REST_Response($results);
+        $response = new WP_REST_Response($results->toArray());
 
         $response->set_status(200);
 
@@ -238,7 +336,7 @@ class Messages extends BaseEndpoint
         $message = Message::find($request['id']);
         $versions = $message->versions($options);
 
-        $response = new WP_REST_Response($versions);
+        $response = new WP_REST_Response($versions->toArray());
 
         $response->set_status(200);
 
@@ -259,7 +357,7 @@ class Messages extends BaseEndpoint
         $message = Message::find($request['id']);
         $versions = $message->sent($options);
 
-        $response = new WP_REST_Response($versions);
+        $response = new WP_REST_Response($versions->toArray());
 
         $response->set_status(200);
 
@@ -280,7 +378,7 @@ class Messages extends BaseEndpoint
             'subject' => $request['subject'],
             'body' => $request['body'],
             'message_type' => $request['message_type']
-        ])->fresh();
+        ]);
 
         // @TODO: Probably need to catch exceptions from Model::create()
         $response = new WP_REST_Response($message);
@@ -331,6 +429,96 @@ class Messages extends BaseEndpoint
         $response = new WP_REST_Response([]);
 
         $response->set_status(200);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Create and send a message immediately
+     *
+     * @param  WP_REST_Request  $request
+     * @return WP_REST_Response
+     */
+    public function createAndSend(WP_REST_Request $request): WP_REST_Response
+    {
+        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'])->data;
+
+        if (isset($response->status) && $response->status === 'OK') {
+            $current_user = wp_get_current_user();
+
+            $message = new Message([
+                'name'         => $request['name'],
+                'subject'      => $request['subject'],
+                'body'         => $request['body'],
+                'message_type' => $request['message_type']
+            ]);
+
+            $message = $message->send(
+                $request['sent_to_list_id'],
+                $request['sent_to_list_name'],
+                $current_user->ID,
+                $current_user->user_email
+            );
+
+            $response = new WP_REST_Response($message);
+
+            $response->set_status(200);
+
+            return rest_ensure_response($response);
+        }
+
+        // @TODO: should better handle errors coming back from list-manager api
+        $response = new WP_REST_Response([
+            "error" => "There was an error sending the message"
+        ]);
+
+        $response->set_status(500);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Send an existing message
+     *
+     * @param  WP_REST_Request  $request
+     * @return WP_REST_Response
+     */
+    public function send(WP_REST_Request $request): WP_REST_Response
+    {
+        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'])->data;
+
+        if (isset($response->status) && $response->status === 'OK') {
+            $current_user = wp_get_current_user();
+            $message      = Message::find($request['id']);
+
+            $message->fill([
+                'name'    => $request['name'] ?: $message->name,
+                'subject' => $request['subject'] ?: $message->subject,
+                'body'    => $request['body'] ?: $message->body,
+            ]);
+
+            $message = $message->send(
+                $request['sent_to_list_id'],
+                $request['sent_to_list_name'],
+                $current_user->ID,
+                $current_user->user_email
+            );
+
+            // Return the sent version
+            $response = new WP_REST_Response($message->sent()->last());
+
+            $response->set_status(200);
+
+            return rest_ensure_response($response);
+        }
+
+        // @TODO: should better handle errors coming back from list-manager api
+        $response = new WP_REST_Response([
+            "error" => "There was an error sending the message",
+            "details" => $response
+        ]);
+
+        $response->set_status(500);
 
         return rest_ensure_response($response);
     }

@@ -4,26 +4,23 @@ import { useList } from "../store/ListContext";
 import { List, ListType } from '../types';
 import { getListType } from "../util/functions";
 import { useService } from '../util/useService';
-import { sendListData } from "./SaveListData";
 
 export const useListFetch = () => {
     const { dispatch, state: { user } } = useList();
     const { serviceId } = useService();
     const [status, setStatus] = useState('idle');
-    const { request, response } = useFetch({ data: [] })
+
+    const REST_URL = window?.CDS_VARS?.rest_url;
+    const { request, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
 
     useEffect(() => {
         const fetchData = async () => {
             setStatus("loading")
-
-            if (process.env.NODE_ENV === "development") {
-                await request.get("list.json");
-            } else {
-                await request.get(`/lists/${serviceId}`);
-            }
+            await request.get(`/lists/${serviceId}`);
 
             if (response.ok) {
                 let lists = await response.json();
+
                 lists = lists.filter((list: List) => {
                     const listType = getListType(list.language)
                     if (listType === ListType.EMAIL && user?.hasEmail) {
@@ -39,26 +36,6 @@ export const useListFetch = () => {
                 setStatus("idle")
             } else {
                 setStatus("error")
-            }
-
-            if (process.env.NODE_ENV === "development") {
-                return;
-            }
-
-            // sync list from List Manager API to local WP Option
-            try {
-                if(response.ok) {
-                    const listData = response.data;
-                    const lists = listData?.map((list: any) => {
-                        //@todo --- temporary... note we're using language here -> en=email, fr=phone
-                        return { id: list?.id, label: list?.name, type: getListType(list?.language) }
-                    })
-                    const REST_URL = window?.CDS_VARS?.rest_url;
-                    const REST_NONCE = window?.CDS_VARS?.rest_nonce;
-                    await sendListData(`${REST_URL}list-manager-settings/list/save`, REST_NONCE, { "list_values": lists });
-                }
-            } catch (e) {
-                console.log(e)
             }
         }
 

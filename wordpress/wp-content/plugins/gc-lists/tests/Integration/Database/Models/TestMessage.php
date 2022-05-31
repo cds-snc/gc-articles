@@ -523,7 +523,20 @@ test('Retrieve only Sent Messages', function() {
     $this->assertCount(3, Message::sentMessages(['limit' => 3]));
 });
 
-test('Message send', function() {
+test('isOriginal', function() {
+    $original_id = $this->factory->message->create();
+    $version_id = $this->factory->message->create([
+        'original_message_id' => $original_id
+    ]);
+
+    $original = Message::find($original_id);
+    $version = Message::find($version_id);
+
+    $this->assertTrue($original->isOriginal());
+    $this->assertFalse($version->isOriginal());
+});
+
+test('Message send - existing message', function() {
     $message_id = $this->factory->message->create();
     $message = Message::find($message_id);
 
@@ -547,4 +560,34 @@ test('Message send', function() {
         ->toHaveKey('sent_at', $timestamp)
         ->toHaveKey('sent_by_email', $email)
         ->toHaveKey('sent_to_list_name', $listName);
+});
+
+test('Message create and send (new message)', function() {
+    $message = new Message([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz',
+        'message_type' => 'email',
+    ]);
+
+    $timestamp = Carbon::now()->toDateTimeString();
+    Carbon::setTestNow($timestamp);
+
+    $uuid = faker()->uuid();
+    $email = faker()->email;
+    $listName = 'This is a list name';
+
+    $message = $message->send($uuid, $listName, 1, $email);
+
+    expect($message)
+        ->toBeInstanceOf(Message::class)
+        ->toHaveKey('sent_at', $timestamp)
+        ->toHaveKey('original_message_id', NULL)
+        ->toHaveKey('version_id', NULL);
+
+    $sent = Message::sentMessages();
+
+    expect($sent)
+        ->toBeInstanceOf(Collection::class)
+        ->toHaveCount(1);
 });

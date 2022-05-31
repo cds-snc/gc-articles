@@ -94,26 +94,26 @@ class Menu
 
     public function enqueue($hook_suffix)
     {
-        // if ($hook_suffix == $this->subscribersPageSlug) {
-        try {
-            $path  = plugin_dir_path(__FILE__) . '/../resources/js/build/asset-manifest.json';
-            $json  = file_get_contents($path);
-            $data  = json_decode($json, true);
-            $files = $data['files'];
+        if (str_contains($hook_suffix, 'gc-lists_')) {
+            try {
+                $path  = plugin_dir_path(__FILE__) . '/../resources/js/build/asset-manifest.json';
+                $json  = file_get_contents($path);
+                $data  = json_decode($json, true);
+                $files = $data['files'];
 
-            // wp_enqueue_style('list-manager', $files['main.css'], null, '1.0.0');
+                // wp_enqueue_style('list-manager', $files['main.css'], null, '1.0.0');
 
-            wp_enqueue_script(
-                'gc-lists',
-                $files['main.js'],
-                null,
-                '1.0.0',
-                true,
-            );
-        } catch (\Exception $exception) {
-            echo $exception->getMessage();
+                wp_enqueue_script(
+                    'gc-lists',
+                    $files['main.js'],
+                    null,
+                    '1.0.0',
+                    true,
+                );
+            } catch (\Exception $exception) {
+                echo $exception->getMessage();
+            }
         }
-        // }
     }
 
     /**

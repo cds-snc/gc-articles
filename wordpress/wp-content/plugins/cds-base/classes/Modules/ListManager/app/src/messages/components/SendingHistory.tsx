@@ -6,7 +6,6 @@ import { __ } from "@wordpress/i18n";
 import useFetch from 'use-http';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
 import { Table, StyledPaging, StyledLink } from "./Table";
 import { Next } from "./icons/Next";
@@ -28,10 +27,9 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
     useEffect(() => {
         const getSentMessages = async () => {
             setLoading(true);
-            await request.get(`/messages/sent?c=${uuidv4()}`);
+            await request.get("/messages/sent");
             if (response.ok) {
-                console.log(await response.json());
-                setData(await response.json());
+                setData(response.data);
                 setLoading(false)
             }
         }

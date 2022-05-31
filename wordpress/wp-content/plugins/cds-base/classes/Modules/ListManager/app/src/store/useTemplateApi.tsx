@@ -1,8 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useCallback, useState } from 'react';
 import { Descendant } from "slate";
-import { v4 as uuidv4 } from "uuid";
-import useFetch from 'use-http';
+import useFetch, { CachePolicies } from 'use-http';
 
 import { serialize, deserialize } from "../messages/editor/utils";
 import { TemplateType } from "../types";
@@ -10,7 +9,7 @@ import { TemplateType } from "../types";
 function useTemplateApi() {
     const params = useParams();
     const templateId = params?.templateId;
-    const { request, response } = useFetch({ data: [] });
+    const { request, response } = useFetch({ data: [], cachePolicy: CachePolicies.NO_CACHE });
     const [templates, setTemplates] = useState([]);
     // @ts-ignore
     const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: deserialize("") });
@@ -22,11 +21,10 @@ function useTemplateApi() {
         if (!templateId || templateId === 'new') return;
 
         setLoadingTemplate(true);
-        await request.get(`/messages/${templateId}?c=${uuidv4()}`)
+        await request.get(`/messages/${templateId}`)
 
         if (response.ok) {
-            const result = await response.json();
-            const template: TemplateType | null = result;
+            const template: TemplateType | null = response.data;
 
             if (!template || !template.body) {
                 setTemplate({ name: "", subject: "", body: "", parsedContent: deserialize("") })
@@ -52,11 +50,10 @@ function useTemplateApi() {
         console.log("getTemplates");
         setLoading(true);
         let templates: any = [];
-        await request.get(`/messages?c=${uuidv4()}`);
+        await request.get("/messages");
 
         if (response.ok) {
-            const result = await response.json()
-            result.forEach((item: any) => {
+            response.data.forEach((item: any) => {
                 templates.push({
                     templateId: item.id,
                     type: item.message_type,
@@ -81,8 +78,7 @@ function useTemplateApi() {
                 'message_type': 'email'
             });
 
-            const result = await response.json();
-            return result;
+            return response.data;
         }
 
         await request.put(`/messages/${templateId}`, {
@@ -93,8 +89,7 @@ function useTemplateApi() {
         });
 
         if (response.ok) {
-            const result = await response.json();
-            return result;
+            return response.data;
         }
 
         return false;
@@ -110,7 +105,7 @@ function useTemplateApi() {
         console.log(response);
 
         if (response.ok) {
-            return await response.json();
+            return response.data;
         }
 
         return false;
@@ -122,8 +117,7 @@ function useTemplateApi() {
 
     const recordSent = useCallback(async (templateId: string | undefined, listId: string | undefined, listName: string | undefined, name: string | undefined, subject: string | undefined, body: string | undefined) => {
 
-        const endpoint = templateId == 'new' ? '/messages/send' : `/messages/${templateId}/send`;
-
+        const endpoint = templateId === 'new' ? '/messages/send' : `/messages/${templateId}/send`;
         await request.post(endpoint, {
             'sent_to_list_id': listId,
             'sent_to_list_name': listName,
@@ -134,7 +128,6 @@ function useTemplateApi() {
         });
 
         if (response.ok) {
-            await response.json();
             return true;
         }
         return false;

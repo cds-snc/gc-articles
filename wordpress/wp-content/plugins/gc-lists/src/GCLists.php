@@ -9,7 +9,6 @@ use GCLists\Api\Messages;
 class GCLists
 {
     protected static $instance;
-    protected $installer;
 
     public static function getInstance(): GCLists
     {
@@ -21,6 +20,7 @@ class GCLists
     {
         $this->registerHooks();
         $this->registerRestRoutes();
+        $this->registerMenu();
     }
 
     public function registerHooks()
@@ -34,6 +34,12 @@ class GCLists
     public function registerRestRoutes()
     {
         $messages = Messages::getInstance();
-        add_action('rest_api_init', [$messages, 'registerRestRoutes']);
+        $messages->register();
+    }
+
+    public function registerMenu()
+    {
+        $menu = Menu::getInstance();
+        $menu->register();
     }
 }

@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 
 import { Table, StyledPaging, StyledLink } from "./Table";
 import { Next } from "./icons/Next";
-import { useService } from '../../util/useService';
 
 const StyledTableLink = styled(Link)`
     text-decoration:underline !important;

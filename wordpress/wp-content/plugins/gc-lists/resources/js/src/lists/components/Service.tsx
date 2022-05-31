@@ -3,7 +3,6 @@ import { ListViewTable } from "./ListViewTable";
 import { Messages } from "./Messages";
 import { Error } from "./Error";
 import { useList } from "../../store/ListContext";
-import { useService } from '../../util/useService';
 
 export const Service = () => {
     const { state: { serviceData } } = useList();

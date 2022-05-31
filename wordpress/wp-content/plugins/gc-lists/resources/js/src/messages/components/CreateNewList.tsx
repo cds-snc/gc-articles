@@ -1,7 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
-import { useService } from '../../util/useService';
 
 const StyledMessage = styled.div`
  margin-top:60px;

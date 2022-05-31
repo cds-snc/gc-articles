@@ -117,7 +117,8 @@
       "cd wp-content/themes/cds-default && composer compile-translations",
       "cd wp-content/plugins/cds-base && composer compile-translations"
     ],
-    "generate-encryption-key": "CDS\\Modules\\Cli\\GenerateEncryptionKey::generateEncryptionKey"
+    "generate-encryption-key": "CDS\\Modules\\Cli\\GenerateEncryptionKey::generateEncryptionKey",
+    "post-install-cmd": "cd wp-content/plugins/gc-lists && composer install"
   },
   "autoload": {
     "psr-4": {

@@ -14,6 +14,8 @@
 
 namespace GCLists;
 
+use Exception;
+
 /**
  * Autoloader
  */

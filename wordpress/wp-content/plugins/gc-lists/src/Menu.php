@@ -103,8 +103,8 @@ class Menu
      *
      * $args is an associative array of variables available to the template.
      *
-     * @param $template
-     * @param $args
+     * @param  string  $template
+     * @param  array  $args
      */
     public function render(string $template, array $args = [])
     {

@@ -50,6 +50,7 @@ export const StyledLink = styled(Link)`
     position:relative;
     display:block;
     margin-top:20px;
+    margin-bottom: 20px;
     span{
         display:inline-block;
         text-decoration:underline !important;

@@ -60,7 +60,6 @@ class ListManagerSettings
             $services[] = [
                 'name' => __('Your Lists', 'cds-snc'),
                 'service_id' => $serviceId,
-                'sendingTemplate' => get_option('NOTIFY_GENERIC_TEMPLATE_ID', '')
             ];
 
             $user = new \stdClass();

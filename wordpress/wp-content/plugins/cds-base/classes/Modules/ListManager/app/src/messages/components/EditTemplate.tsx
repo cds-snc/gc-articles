@@ -1,62 +1,57 @@
 import * as React from 'react';
 import { __, sprintf } from "@wordpress/i18n";
+import styled from 'styled-components';
 import { useEffect, useState, useCallback } from 'react';
 import { Descendant } from "slate";
 import { useNavigate } from "react-router-dom";
 
 import { Editor } from "../editor/Editor";
 import useTemplateApi from '../../store/useTemplateApi';
-import { serialize } from "../editor/utils";
+import { deserialize, serialize } from "../editor/utils";
 import { useService } from '../../util/useService';
 import { useForm } from "react-hook-form";
-import { Success } from "./Notice";
-import { Spinner } from '../../common/Spinner';
 
 const textWidth = { width: "25em" }
 
+const StyledDeleteButton = styled.button`
+    margin-top:30px;
+    color: #D3080C;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration:underline;
+    :hover{
+        text-decoration:none;
+    }
+`;
+
 export const EditTemplate = () => {
     const navigate = useNavigate();
-    const [saved, setSaved] = useState(false);
-    const { template, loadingTemplate, templateId, getTemplate, saveTemplate } = useTemplateApi();
+    const { templateId, getTemplate, saveTemplate, deleteTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
-
-    const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
+    const { register, setValue, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
     const { serviceId } = useService();
-
     useEffect(() => {
-        setValue("name", template?.name || "")
-        setValue("subject", template?.subject || "");
-    }, [template, setValue]);
-
-    useEffect(() => {
-        getTemplate(templateId);
+        const loadTemplate = async () => {
+            if (templateId) {
+                const template = await getTemplate(templateId);
+                setCurrentTemplate(deserialize(template.content || ""));
+                setValue("name", template?.name || "")
+                setValue("subject", template?.subject || "");
+            }
+        }
+        loadTemplate();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleFormData = useCallback(async (formData: any) => {
-        setSaved(false);
         const { name, subject } = formData;
-        const result = await saveTemplate({ templateId, name, subject, content: currentTemplate });
-        if (result) {
-            setSaved(true);
-        }
-
+        saveTemplate({ templateId, name, subject, content: currentTemplate })
     }, [saveTemplate, currentTemplate, templateId]);
-
-    const heading = <h1>{__("Edit email message", "cds-snc")}</h1>;
-
-    if (loadingTemplate) {
-        return (
-            <>
-                {heading}
-                <Spinner />
-            </>
-        )
-    }
 
     return (
         <>
-            {heading}
+            <h1>{__("Edit email message", "cds-snc")}</h1>
             <form>
                 <input type="hidden" {...register("template", { required: true })} />
                 <table className="form-table">
@@ -87,8 +82,8 @@ export const EditTemplate = () => {
                                 <p>{sprintf("Use the email formatting guide (Opens in a new tab) to craft your message.", "cds-snc")}</p>
                                 <div className={errors.template ? "error-wrapper" : ""}>
                                     {errors.template && <span className="validation-error">{errors.template?.message || __("Message is required", "cds-snc")}</span>}
-                                    {template.parsedContent ?
-                                        <Editor template={template.parsedContent}
+                                    {currentTemplate ?
+                                        <Editor template={currentTemplate}
                                             handleValidate={(value: any) => {
                                                 setValue('template', serialize(value));
                                                 clearErrors("template");
@@ -101,15 +96,13 @@ export const EditTemplate = () => {
                     </tbody>
                 </table>
             </form>
-
-
-            {saved && <Success message={"Message saved"} />}
-
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
-                        //@todo handle validation
-                        navigate(`/messages/${serviceId}/send/${templateId}`, { state: getValues() });
+                        await handleSubmit(handleFormData, () => {
+                            console.log("oh no")
+                        })();
+                        navigate(`/messages/${serviceId}/send/${templateId}`);
                     }}
                     className="button button-primary">
                     {__('Send message to a list', 'cds-snc')}
@@ -117,10 +110,17 @@ export const EditTemplate = () => {
 
                 <button className="button" onClick={async () => {
                     handleSubmit(handleFormData, () => {
-                        console.log("oh no", handleFormData);
-                        return false;
+                        console.log("oh no!")
                     })();
                 }}>{__('Save template', 'cds-snc')}</button>
+            </div>
+            <div>
+                <StyledDeleteButton onClick={async () => {
+                    await deleteTemplate({ templateId });
+                    navigate(`/messages/${serviceId}`);
+                }}>
+                    {__('Delete this message template', 'cds-snc')}
+                </StyledDeleteButton>
             </div>
         </>
     )

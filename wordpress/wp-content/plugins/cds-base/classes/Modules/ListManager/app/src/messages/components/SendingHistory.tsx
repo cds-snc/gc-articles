@@ -1,36 +1,30 @@
 // @ts-nocheck
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-
+import { Table } from "./Table";
 import { __ } from "@wordpress/i18n";
-import useFetch from 'use-http';
-import styled from 'styled-components';
-import { Link } from "react-router-dom";
-
-import { Table, StyledPaging, StyledLink } from "./Table";
-import { Next } from "./icons/Next";
-import { useService } from '../../util/useService';
-
-const StyledTableLink = styled(Link)`
-    text-decoration:underline !important;
-    :hover{
-        text-decoration:none !important;
-    }
-`
+// import useFetch from 'use-http';
 
 export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
-    const [loading, setLoading] = useState(false);
+    // const { request, response } = useFetch({ data: [] });
     const [data, setData] = useState([]);
-    const { serviceId } = useService();
-    const { request, response } = useFetch({ data: [] })
+
 
     useEffect(() => {
         const getSentMessages = async () => {
-            setLoading(true);
-            await request.get("/messages/sent");
+            // await request.get(`/mesasages/`);
+            const response = { ok: true }
             if (response.ok) {
-                setData(response.data);
-                setLoading(false)
+                setData([
+                    { name: "GC news feed - April 2022 (FR)", date: "2022/04/20 at 7:56 pm", list: "Newsletter monthly sendout (125 subscribers)", sender: "gcadmin@cds-snc.ca" },
+                    { name: "GC news feed - Mar 2022 (FR)", date: "2022/03/20 at 7:56 pm", list: "Newsletter monthly sendout (125 subscribers)", sender: "gcadmin@cds-snc.ca" },
+                    { name: "GC news feed - Feb 2022 (FR)", date: "2022/02/20 at 7:56 pm", list: "Newsletter monthly sendout (125 subscribers)", sender: "gcadmin@cds-snc.ca" },
+                    { name: "GC news feed - Jan 2022 (FR)", date: "2022/01/20 at 7:56 pm", list: "Newsletter monthly sendout (125 subscribers)", sender: "gcadmin@cds-snc.ca" },
+                    { name: "All about Hot Dogs (EN)", date: "2022/02/20 at 7:56 pm", list: "Newsletter monthly sendout (6.1 million subscribers)", sender: "gcadmin@cds-snc.ca" },
+                    { name: "Top Hot Dog vendors (EN)", date: "2022/01/20 at 7:56 pm", list: "Newsletter monthly sendout (6 million subscribers", sender: "gcadmin@cds-snc.ca" }
+
+                ]);
+
             }
         }
         getSentMessages();
@@ -44,47 +38,27 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
             {
                 Header: __('Message name', "cds-snc"),
                 accessor: 'name',
-                Cell: ({ row }: { row: any }) => {
-                    const messageId = row?.original?.id;
-                    const name = row?.original?.name;
-                    return (
-                        <>
-                            <StyledTableLink
-                                to={`/messages/${serviceId}/${messageId}/versions`}
-                            >
-                                {name}
-                            </StyledTableLink>
-                        </>
-                    )
-                },
             },
             {
                 Header: __('Date sent', "cds-snc"),
-                accessor: 'created_at',
+                accessor: 'date',
             },
             {
                 Header: __('List name', "cds-snc"),
-                accessor: 'sent_to_list_name',
+                accessor: 'list',
             },
             {
                 Header: __('Sender', "cds-snc"),
-                accessor: 'sent_by_email',
+                accessor: 'sender',
             },
         ],
-        [serviceId]
+        []
     )
 
-    if (loading) {
-        return null;
-    }
-
-    return data.length ?
+    return (
         <>
+            <h2>{__("Sending History", "cds-snc")}</h2>
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
-            <StyledPaging>
-                <StyledLink to={`/messages/${serviceId}/history`} >
-                    <span> {__("All sending history", "cds-snc")} </span><Next />
-                </StyledLink>
-            </StyledPaging>
-        </> : null
+        </>
+    )
 }

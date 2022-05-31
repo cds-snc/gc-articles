@@ -12,11 +12,9 @@ import { useList } from "../../store/ListContext";
 import { List } from '../../types';
 import { useListFetch } from '../../store/UseListFetch';
 import { StyledSelect } from "../editor/Styles"
+import useSendTemplate from '../../store/useSendTemplate';
 import useTemplateApi from '../../store/useTemplateApi';
 import { ConfirmSend } from "./ConfirmSend";
-import { useLocation } from 'react-router-dom';
-import { useService } from '../../util/useService';
-import { useNavigate } from "react-router-dom";
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     return (
@@ -34,54 +32,35 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 }
 
 export const SendTemplate = () => {
-
     const { status } = useListFetch();
-    const { state: { lists } } = useList();
+    const [content, setContent] = useState<string>();
+    const [name, setName] = useState<string>();
+    const [subject, setSubject] = useState<string>();
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
-    const { serviceId } = useService();
-
-    const [name, setName] = useState<string>("");
-    const [listName, setListName] = useState<string>("");
-    const [subject, setSubject] = useState<string>("");
-    const [content, setContent] = useState<string>("");
-    const [messageSent, setMessageSent] = useState<boolean>(false);
-    const [messageSendingErrors, setMessageSendingErrors] = useState<string>("");
-
-    const { template, templateId, getTemplate, recordSent} = useTemplateApi();
-
-    const navigate = useNavigate();
-
-    // @ts-ignore
-    const { state = {} } = useLocation();
-    // @ts-ignore
-    const editorName = state?.name || "";
-    // @ts-ignore
-    const editorSubject = state?.subject || "";
-    // @ts-ignore
-    const editorTemplate = state?.template || "";
-
-    // console.log("editorName:", editorName, "editorSubject:", editorSubject, "editorTemplate:", editorTemplate, "content:", content, "subject:", subject, "name:", name)
+    const { state: { lists } } = useList();
+    const { sendTemplate, success, errors, reset } = useSendTemplate({ listId, content });
+    const { templateId, getTemplate } = useTemplateApi();
 
     useEffect(() => {
-        setContent(template?.body);
-        setSubject(template?.subject)
-    }, [template]);
+        reset();
+    }, [reset]);
 
     useEffect(() => {
-        if (editorTemplate !== "") {
-            setContent(editorTemplate)
-            setSubject(editorSubject)
-            setName(editorName)
-        } else {
-            getTemplate(templateId);
+        const loadTemplate = async () => {
+            if (templateId) {
+                const template = await getTemplate(templateId);
+                setContent(template.content);
+                setSubject(template.subject)
+            }
         }
-    }, [templateId, getTemplate, editorTemplate, editorSubject, editorName]);
+        loadTemplate();
+    }, [templateId, getTemplate]);
 
     useEffect(() => {
         const listData = lists.filter((list: any) => list.id === listId)[0];
         const subscriberCount = listData?.subscriber_count || 0;
-        setListName(listData?.name);
+        setName(listData?.name);
         setSubscriberCount(Number(subscriberCount));
     }, [listId, lists]);
 
@@ -89,11 +68,11 @@ export const SendTemplate = () => {
         return <Spinner />
     }
 
-    if (messageSendingErrors) {
+    if (errors) {
         return <SendingError />
     }
 
-    if (messageSent) {
+    if (success) {
         return <MessageSent name={name} count={subscriberCount} />
     }
 
@@ -102,40 +81,24 @@ export const SendTemplate = () => {
             <h1>{__("Send message to a list", "cds-snc")}</h1>
             <p><strong>{__("Subscriber list", "cds-snc")}</strong></p>
             <p>{__("Choose a group to send this message to.", "cds-snc")}</p>
+            {lists.length >= 1 && <ListSelect lists={lists} handleChange={(val: string) => {
+                setListId(val)
+            }} />}
 
-            {lists.length >= 1 ?
-                <>
-                    <ListSelect lists={lists} handleChange={(val: string) => {
-                        setListId(val)
-                    }} />
-                    <SendToList sending={true} name={name} count={subscriberCount} />
-
-                    <button
-                        style={{ marginRight: "20px" }}
-                        className="button button-primary"
-                        onClick={async () => {
-                            const confirmed = await ConfirmSend({ count: subscriberCount });
-                            if (confirmed) {
-                                const result = await recordSent(templateId, listId, listName, name, subject, content);
-                                if(result) {
-                                    setMessageSent(true);
-                                } else {
-                                    // @TODO: get errors from api call
-                                    setMessageSendingErrors("There was an error");
-                                }
-                            }
-                        }}>
-                        {__("Send message", "cds-snc")}
-                    </button>
-                    <button className="button" onClick={() => {
-                        navigate(`/messages/${serviceId}`);
-                    }}>{__("Cancel")}</button>
-                </>
-                :
-                <Spinner />
-            }
+            <SendToList sending={true} name={name} count={subscriberCount} />
+            <button
+                style={{ marginRight: "20px" }}
+                className="button button-primary"
+                onClick={async () => {
+                    const result = await ConfirmSend({ count: subscriberCount });
+                    if (result) {
+                        sendTemplate();
+                    }
+                }}>
+                {__("Send message", "cds-snc")}
+            </button>
+            <button className="button">{__("Cancel")}</button>
             <CreateNewList />
-            <h2>{__("Message preview", "cds-snc")}</h2>
             <MessagePreview subject={subject} content={content} />
         </>)
 }

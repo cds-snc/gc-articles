@@ -7,8 +7,11 @@ import { NotFound } from './lists/components/NotFound';
 import { ListProvider } from "./store/ListContext"
 import { Provider } from 'use-http';
 
-const REST_URL = window?.CDS_VARS?.rest_url;
-const endpoint = `${REST_URL}gc-lists`;
+let endpoint = "/wp-json/list-manager";
+
+if (process.env.NODE_ENV === "development") {
+    endpoint = "http://localhost:3000";
+}
 
 const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) => {
     const options = {

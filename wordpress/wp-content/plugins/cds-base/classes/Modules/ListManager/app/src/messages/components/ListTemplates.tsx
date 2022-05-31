@@ -1,21 +1,25 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 import { Link } from "react-router-dom";
-import { Spinner } from "../../common/Spinner";
+import { format } from "date-fns";
 
-import { Table, StyledLink, StyledPaging, StyledH1 } from "./Table";
-import { Next } from "./icons/Next";
+import { Table } from "./Table";
 import { useService } from '../../util/useService';
 import useTemplateApi from '../../store/useTemplateApi';
+
+const StyledH1 = styled.h1`
+   margin-bottom:30px !important;
+`
 
 const StyledDivider = styled.span`
     margin-left: 10px;
     margin-right: 10px;
 `
 
-const StyledTableLink = styled(Link)`
+const StyledLink = styled(Link)`
     text-decoration:underline !important;
     :hover{
         text-decoration:none !important;
@@ -33,11 +37,16 @@ const StyledDeleteButton = styled.button`
 `;
 
 export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
-    const { loading, templates, getTemplates, deleteTemplate } = useTemplateApi();
+    const [templates, setTemplates] = useState([]);
+    const { getTemplates, deleteTemplate } = useTemplateApi();
     const { serviceId } = useService();
 
+    const fetchTempates = useCallback(async () => {
+        setTemplates(await getTemplates());
+    }, [getTemplates]);
+
     useEffect(() => {
-        getTemplates();
+        fetchTempates();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -60,14 +69,14 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
             },
             {
                 Header: __('Last modified', "cds-snc"),
-                accessor: 'updated_at',
+                accessor: 'timestamp',
                 Cell: ({ row }: { row: any }) => {
-                    const t = row?.original?.updated_at;
-                    // const date = format(new Date(t), "yyyy/mm/dd");
-                    // const time = format(new Date(t), "hh:mm a");
+                    const t = row?.original?.timestamp;
+                    const date = format(new Date(t), "yyyy/mm/dd");
+                    const time = format(new Date(t), "hh:mm a");
                     return (
                         <>
-                            {t}
+                            {`${date} at ${time}`}
                         </>
                     )
                 },
@@ -79,32 +88,32 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                     const tId = row?.original?.templateId;
                     return (
                         <>
-                            <StyledTableLink
+                            <StyledLink
                                 to={`/messages/${serviceId}/edit/${tId}`}
                             >
                                 {__("Edit", "cds-snc")}
-                            </StyledTableLink>
+                            </StyledLink>
                             <StyledDivider>|</StyledDivider>
-                            <StyledDeleteButton data-tid={tId}
+                            <StyledDeleteButton
                                 onClick={async () => {
                                     await deleteTemplate({ templateId: tId });
-                                    getTemplates();
+                                    fetchTempates();
                                 }}
                             >
                                 {__("Delete", "cds-snc")}
                             </StyledDeleteButton>
                             <StyledDivider>|</StyledDivider>
-                            <StyledTableLink
+                            <StyledLink
                                 to={`/messages/${serviceId}/send/${tId}`}
                             >
                                 {__("Send Template", "cds-snc")}
-                            </StyledTableLink>
+                            </StyledLink>
                         </>
                     )
                 },
             },
         ],
-        [getTemplates, deleteTemplate, serviceId]
+        [deleteTemplate, fetchTempates, serviceId]
     );
 
     return (
@@ -112,24 +121,16 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
             <StyledH1>{__('Messages', 'cds-snc')}</StyledH1>
             <Link
                 className="button button-primary"
-                to={`/messages/${serviceId}/edit/new`}
+                to={`/messages/${serviceId}/edit/${uuidv4()}`}
             >
                 {__("Create Template", "cds-snc")}
             </Link>
-
-            {loading && <Spinner />}
             {
                 templates?.length ?
                     <>
                         <h2>{__('Message templates', 'cds-snc')}</h2>
                         <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
-                        <StyledPaging>
-                            <StyledLink to={`/messages/${serviceId}/all-templates`} >
-                                <span>{__("All message templates", "cds-snc")}</span><Next />
-                            </StyledLink>
-                        </StyledPaging>
-                    </>
-                    : null
+                    </> : null
             }
         </>
     )

@@ -30,6 +30,7 @@ export const MessageSent = ({ name, count }: { name: string | undefined, count: 
             <StyledSuccess>
                 <div><h2>{__("Message sent", "cds-snc")}</h2></div>
             </StyledSuccess>
+
             <SendToList sending={false} name={name} count={count} />
             <StyledActionContainer>
                 <Link

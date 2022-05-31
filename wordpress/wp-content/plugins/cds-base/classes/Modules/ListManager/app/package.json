@@ -2,7 +2,7 @@
   "name": "gc-list-manager",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/wp-content/plugins/gc-lists/resources/js/build",
+  "homepage": "/wp-content/plugins/cds-base/classes/Modules/ListManager/app/build",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
@@ -35,7 +35,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:gc-lists" : "BUILD_PATH='../../../../../gc-lists/resources/js/build' react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "npm run build"

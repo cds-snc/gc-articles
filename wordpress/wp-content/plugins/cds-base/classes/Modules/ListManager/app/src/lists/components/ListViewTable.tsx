@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
 import { useListFetch } from '../../store/UseListFetch';
+import { Spinner } from '../../common/Spinner';
 import { List, ListType } from "../../types"
 import { useList } from "../../store/ListContext";
 import { capitalize, getListType } from "../../util/functions";
@@ -143,6 +144,10 @@ export const ListViewTable = () => {
                 </div>
             </div>
         )
+    }
+
+    if (status === "loading") {
+        return <Spinner />
     }
 
     return (

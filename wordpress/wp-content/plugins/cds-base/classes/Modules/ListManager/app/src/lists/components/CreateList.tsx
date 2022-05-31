@@ -9,8 +9,7 @@ import { List } from "../../types";
 import { useService } from '../../util/useService';
 
 export const CreateList = () => {
-    const REST_URL = window?.CDS_VARS?.rest_url;
-    const { request, cache, response } = useFetch(`${REST_URL}list-manager`,{ data: [] })
+    const { request, cache, response } = useFetch({ data: [] })
     const [data, setData] = useState({ id: null })
     const { dispatch } = useList();
     const { serviceId } = useService();

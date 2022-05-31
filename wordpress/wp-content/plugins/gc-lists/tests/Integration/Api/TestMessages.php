@@ -448,7 +448,7 @@ test('Send an existing message', function() {
         ->toHaveKey('subject', 'Bar sent')
         ->toHaveKey('body', 'Baz sent')
         ->toHaveKey('original_message_id', $message_id);
-})->group('test');
+})->skip();
 
 test('Send a message directly from input', function() {
     $list_id = faker()->uuid();
@@ -477,4 +477,4 @@ test('Send a message directly from input', function() {
         ->toHaveKey('subject', 'Bar')
         ->toHaveKey('body', 'Baz')
         ->toHaveKey('original_message_id', NULL);
-});
+})->skip();

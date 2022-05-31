@@ -12,7 +12,8 @@
         "yoast/phpunit-polyfills": "^1.0",
         "yoast/wp-test-utils": "^1.0",
         "pestphp/pest": "^1.21",
-        "pestphp/pest-plugin-faker": "^1.0"
+        "pestphp/pest-plugin-faker": "^1.0",
+        "mockery/mockery": "^1.5"
     },
     "autoload": {
       "psr-4": {

@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 use GCLists\Api\Messages;
-use GCLists\Database\Models\Message;
+use GCLists\Api\SendMessage;
 use function Pest\Faker\faker;
 
 beforeEach(function() {
@@ -54,7 +54,7 @@ test('Get all Message templates', function() {
         ->each
         ->toBeArray()
         ->toHaveKeys($this->messageAttributes);
-})->group('test');
+});
 
 test('Get all templates with limit', function() {
     $this->factory->message->create_many(20);
@@ -418,6 +418,9 @@ test('Send an existing message', function() {
     ]);
     $list_id = faker()->uuid();
 
+//    $mock = Mockery::mock(SendMessage::class);
+//    $mock->shouldReceive('handle')->withArgs([$list_id, 'Bar', 'Baz'])->andReturn(json_decode('{ "status": "OK" }'));
+
     $user_id = $this->factory->user->create();
     wp_set_current_user( $user_id );
 
@@ -432,6 +435,9 @@ test('Send an existing message', function() {
 
     $response = $this->server->dispatch( $request );
 
+//    var_dump($response);
+//    $mock->shouldHaveBeenCalled();
+
     $this->assertEquals( 200, $response->get_status() );
 
     $body = $response->get_data()->toJson();
@@ -442,7 +448,7 @@ test('Send an existing message', function() {
         ->toHaveKey('subject', 'Bar sent')
         ->toHaveKey('body', 'Baz sent')
         ->toHaveKey('original_message_id', $message_id);
-});
+})->group('test');
 
 test('Send a message directly from input', function() {
     $list_id = faker()->uuid();

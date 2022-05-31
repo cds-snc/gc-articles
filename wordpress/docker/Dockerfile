@@ -23,7 +23,7 @@ RUN npm --unsafe-perm install
 
 ## Release build
 
-FROM wordpress:5.9.3-php8.1-fpm-alpine
+FROM wordpress:6.0.0-php8.1-fpm-alpine
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install pcov \

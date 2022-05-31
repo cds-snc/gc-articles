@@ -1,8 +1,10 @@
-<h2><?php
+<?php
 
 use CDS\Modules\Notify\Utils;
 
-    echo $title ?></h2>
+?>
+
+<h1><?php echo $title ?></h1>
 
 <?php
 $serviceId = Utils::extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));

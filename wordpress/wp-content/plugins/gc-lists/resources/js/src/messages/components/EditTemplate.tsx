@@ -21,7 +21,6 @@ export const EditTemplate = () => {
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
 
     const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
-    const { serviceId } = useService();
 
     useEffect(() => {
         setValue("name", template?.name || "")
@@ -109,7 +108,7 @@ export const EditTemplate = () => {
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
                         //@todo handle validation
-                        navigate(`/messages/${serviceId}/send/${templateId}`, { state: getValues() });
+                        navigate(`/send/${templateId}`, { state: getValues() });
                     }}
                     className="button button-primary">
                     {__('Send message to a list', 'cds-snc')}

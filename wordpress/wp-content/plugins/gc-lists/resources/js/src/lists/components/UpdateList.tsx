@@ -27,7 +27,7 @@ export const UpdateList = () => {
   const [responseData, setResponseData] = useState<ListId>({ id: null });
   const [errors, setErrors] = useState<ServerErrors>([]);
   const { state: { lists } } = useList();
-  const { serviceId, listId } = useService()
+  const { listId } = useService()
   useListFetch();
 
   const onSubmit: SubmitHandler<List> = data => updateList(listId, data);
@@ -54,7 +54,7 @@ export const UpdateList = () => {
   })[0];
 
   if (responseData.id) {
-    return <Navigate to={`/service/${serviceId}`} replace={true} />
+    return <Navigate to={`/lists`} replace={true} />
   }
 
   return list ? <ListForm formData={list} handler={onSubmit} serverErrors={errors} /> : null

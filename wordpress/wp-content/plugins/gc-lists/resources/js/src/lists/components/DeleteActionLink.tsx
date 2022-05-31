@@ -5,13 +5,14 @@ import { useList } from "../../store/ListContext";
 
 
 export const DeleteActionLink = ({ id = '' }: { id: string }) => {
-    const { request, response } = useFetch({ data: [] })
+    const REST_URL = window?.CDS_VARS?.rest_url;
+    const { request, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
     const { dispatch } = useList();
 
     const deleteList = async ({ id = '' }: { id: string }) => {
 
         if (process.env.NODE_ENV !== "development") {
-            await request.delete(`/list/${id}`);
+            await request.delete(`/${id}`);
 
             if (response.ok) {
                 dispatch({ type: "delete", payload: { id } });

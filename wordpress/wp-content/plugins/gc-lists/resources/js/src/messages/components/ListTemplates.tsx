@@ -7,7 +7,6 @@ import { Spinner } from "../../common/Spinner";
 
 import { Table, StyledLink, StyledPaging } from "./Table";
 import { Next } from "./icons/Next";
-import { useService } from '../../util/useService';
 import useTemplateApi from '../../store/useTemplateApi';
 
 const StyledDivider = styled.span`
@@ -34,7 +33,6 @@ const StyledDeleteButton = styled.button`
 
 export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     const { loading, templates, getTemplates, deleteTemplate } = useTemplateApi();
-    const { serviceId } = useService();
 
     useEffect(() => {
         getTemplates();
@@ -80,7 +78,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/${serviceId}/edit/${tId}`}
+                                to={`/messages/edit/${tId}`}
                             >
                                 {__("Edit", "cds-snc")}
                             </StyledTableLink>
@@ -95,7 +93,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                             </StyledDeleteButton>
                             <StyledDivider>|</StyledDivider>
                             <StyledTableLink
-                                to={`/messages/${serviceId}/send/${tId}`}
+                                to={`/messages/send/${tId}`}
                             >
                                 {__("Send Template", "cds-snc")}
                             </StyledTableLink>
@@ -104,14 +102,14 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                 },
             },
         ],
-        [getTemplates, deleteTemplate, serviceId]
+        [getTemplates, deleteTemplate]
     );
 
     return (
         <>
             <Link
                 className="button button-primary"
-                to={`/messages/${serviceId}/edit/new`}
+                to={`/messages/edit/new`}
             >
                 {__("Create Template", "cds-snc")}
             </Link>
@@ -123,7 +121,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                         <h2>{__('Message templates', 'cds-snc')}</h2>
                         <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
                         <StyledPaging>
-                            <StyledLink to={`/messages/${serviceId}/all-templates`} >
+                            <StyledLink to={`/messages/all-templates`} >
                                 <span>{__("All message templates", "cds-snc")}</span><Next />
                             </StyledLink>
                         </StyledPaging>

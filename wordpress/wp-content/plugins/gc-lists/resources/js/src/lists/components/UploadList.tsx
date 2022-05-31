@@ -13,7 +13,7 @@ import "react-csv-importer/dist/index.css";
 
 export const UploadList = () => {
     const [finished, setFinished] = useState<boolean>(false)
-    const { serviceId, listId, type } = useService();
+    const { listId, type } = useService();
     let uploadType = '';
 
     switch (type) {
@@ -30,7 +30,7 @@ export const UploadList = () => {
     const { request, cache, response } = useFetch({ data: [] })
 
     if (finished) {
-        return <Navigate to={`/service/${serviceId}`} replace={true} />
+        return <Navigate to={`/lists`} replace={true} />
     }
 
     return (
@@ -51,7 +51,7 @@ export const UploadList = () => {
                         });
 
                         const payload = { [uploadType]: data };
-                        await request.post(`list/${listId}/import`, payload)
+                        await request.post(`/${listId}/import`, payload)
 
                         if (response.ok) {
                             cache.clear();

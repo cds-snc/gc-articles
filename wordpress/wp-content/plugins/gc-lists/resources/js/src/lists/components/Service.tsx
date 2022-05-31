@@ -7,13 +7,8 @@ import { useService } from '../../util/useService';
 
 export const Service = () => {
     const { state: { serviceData } } = useList();
-    const { serviceId } = useService();
 
     if (!serviceData) {
-        return <Error />;
-    }
-
-    if (serviceData[0]?.service_id !== serviceId) {
         return <Error />;
     }
 

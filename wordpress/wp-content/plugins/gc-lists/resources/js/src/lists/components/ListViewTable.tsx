@@ -10,7 +10,6 @@ import { useListFetch } from '../../store/UseListFetch';
 import { List, ListType } from "../../types"
 import { useList } from "../../store/ListContext";
 import { capitalize, getListType } from "../../util/functions";
-import { useService } from '../../util/useService';
 
 const HeaderStyles = styled.div`
     display: flex;
@@ -61,21 +60,20 @@ const Table = ({ columns, data }: { columns: any, data: List[] }) => {
 }
 
 const CreateListLink = () => {
-    return <Link className="button button-primary" to={{ pathname: `list/create` }}>Create new list</Link>
+    return <Link className="button button-primary" to={{ pathname: `/lists/create` }}>Create new list</Link>
 }
 
-const UploadListLink = ({ name, listId, serviceId, type }: { name: string, listId: string, serviceId: string | undefined, type: ListType }) => {
-    return <UploadButton><Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/service/${serviceId}/list/${listId}/upload/${type}` }}>{capitalize(type)}</Link></UploadButton>
+const UploadListLink = ({ name, listId, type }: { name: string, listId: string, type: ListType }) => {
+    return <UploadButton><Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/lists/${listId}/upload/${type}` }}>{capitalize(type)}</Link></UploadButton>
 }
 
-const updateLink = (serviceId: string | undefined, listId: string) => {
-    return `/service/${serviceId}/list/${listId}/update`;
+const updateLink = (listId: string) => {
+    return `/lists/${listId}/update`;
 }
 
 export const ListViewTable = () => {
     const { state: { lists, user } } = useList();
     const { status } = useListFetch();
-    const { serviceId } = useService();
     const columns = React.useMemo(
         () => [
             {
@@ -91,7 +89,7 @@ export const ListViewTable = () => {
                                     <Link
                                         className="row-title"
                                         to={{
-                                            pathname: updateLink(serviceId, row?.original?.id),
+                                            pathname: updateLink(row?.original?.id),
                                         }}
                                     >
                                         {row?.values?.name}
@@ -124,15 +122,15 @@ export const ListViewTable = () => {
                         accessor: 'active',
                         Cell: ({ row }: { row: any }) => {
                             return <>
-                                {getListType(row?.original?.language) === ListType.EMAIL && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} serviceId={serviceId} type={ListType.EMAIL} />}
-                                {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} serviceId={serviceId} type={ListType.PHONE} /> : null}
+                                {getListType(row?.original?.language) === ListType.EMAIL && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} type={ListType.EMAIL} />}
+                                {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} type={ListType.PHONE} /> : null}
                             </>
                         },
                     },
                 ],
             },
         ],
-        [serviceId, user?.hasPhone]);
+        [user?.hasPhone]);
 
 
     if (status === "error") {

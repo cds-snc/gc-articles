@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import { SendToList } from "./SendToList";
 import { Link } from "react-router-dom";
-import { useService } from '../../util/useService';
 
 const StyledActionContainer = styled.div`
     margin-top:60px;
@@ -24,7 +23,6 @@ const StyledSuccess = styled.div`
 `
 
 export const MessageSent = ({ name, count }: { name: string | undefined, count: number }) => {
-    const { serviceId } = useService();
     return (
         <>
             <StyledSuccess>
@@ -33,14 +31,14 @@ export const MessageSent = ({ name, count }: { name: string | undefined, count: 
             <SendToList sending={false} name={name} count={count} />
             <StyledActionContainer>
                 <Link
-                    to={`/messages/${serviceId}/edit/${uuidv4()}`}
+                    to={`/messages/edit/${uuidv4()}`}
                     style={{ marginRight: "20px" }}
                     className="button button-primary"
                 >
                     {__("Send a new message", "cds-snc")}
                 </Link>
                 <Link
-                    to={`/messages/${serviceId}`}
+                    to={`/messages`}
                     className="button"
                 >
                     {__("Return to messages", "cds-snc")}

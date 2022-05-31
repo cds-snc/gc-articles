@@ -38,7 +38,7 @@ export const CreateList = () => {
 
 
 
-    return data.id ? <Navigate to={`/service/${serviceId}`} replace={true} /> : <ListForm formData={formData} serverErrors={[]} handler={onSubmit} />
+    return data.id ? <Navigate to={`/lists`} replace={true} /> : <ListForm formData={formData} serverErrors={[]} handler={onSubmit} />
 }
 
 export default CreateList;

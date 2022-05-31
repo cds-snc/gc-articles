@@ -30,5 +30,5 @@ $user->hasPhone = current_user_can('list_manager_bulk_send_sms');
     </div>
 </div>
 <script>
-    window.location = "#/service";
+    window.location = "#/lists";
 </script>

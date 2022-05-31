@@ -9,12 +9,11 @@ const StyledMessage = styled.div`
 `;
 
 export const CreateNewList = () => {
-    const { serviceId } = useService();
     return (
         <StyledMessage>
             <p>
                 <strong>
-                    <Link to={`/service/${serviceId}/list/create`}>{__("Create a new list.", "cds-snc")}</Link></strong> <br />
+                    <Link to={`/list/create`}>{__("Create a new list.", "cds-snc")}</Link></strong> <br />
                 {__("A subscriber list allows you to collect a group of subscribers that you can send a message to.", "cds-snc")}
             </p>
         </StyledMessage>

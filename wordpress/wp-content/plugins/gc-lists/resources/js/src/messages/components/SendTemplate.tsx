@@ -39,7 +39,6 @@ export const SendTemplate = () => {
     const { state: { lists } } = useList();
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
-    const { serviceId } = useService();
 
     const [name, setName] = useState<string>("");
     const [listName, setListName] = useState<string>("");
@@ -128,7 +127,7 @@ export const SendTemplate = () => {
                         {__("Send message", "cds-snc")}
                     </button>
                     <button className="button" onClick={() => {
-                        navigate(`/messages/${serviceId}`);
+                        navigate(`/messages`);
                     }}>{__("Cancel")}</button>
                 </>
                 :

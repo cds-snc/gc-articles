@@ -37,7 +37,7 @@ const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) =>
                 <ListProvider serviceData={serviceData} user={user}>
                     <Routes>
                         <Route path="/messages/*" element={<MessagesApp />} />
-                        <Route path="/service/*" element={<ListsApp />} />
+                        <Route path="/lists/*" element={<ListsApp />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </ListProvider>

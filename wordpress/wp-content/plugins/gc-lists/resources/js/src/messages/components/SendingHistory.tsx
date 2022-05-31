@@ -21,7 +21,6 @@ const StyledTableLink = styled(Link)`
 export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
-    const { serviceId } = useService();
     const { request, response } = useFetch({ data: [] })
 
     useEffect(() => {
@@ -50,7 +49,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/${serviceId}/${messageId}/versions`}
+                                to={`/messages/${messageId}/versions`}
                             >
                                 {name}
                             </StyledTableLink>
@@ -71,7 +70,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
                 accessor: 'sent_by_email',
             },
         ],
-        [serviceId]
+        []
     )
 
     if (loading) {
@@ -82,7 +81,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
         <>
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
             <StyledPaging>
-                <StyledLink to={`/messages/${serviceId}/history`} >
+                <StyledLink to={`/messages/history`} >
                     <span> {__("All sending history", "cds-snc")} </span><Next />
                 </StyledLink>
             </StyledPaging>

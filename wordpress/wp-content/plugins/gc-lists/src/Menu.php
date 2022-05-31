@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace GCLists;
 
-use CDS\Modules\Notify\Utils;
-
 class Menu
 {
     protected static $instance;
@@ -63,16 +61,32 @@ class Menu
         );
     }
 
+    /**
+     * Extract ServiceID from API key
+     *
+     * @param $apiKey
+     * @return string
+     */
     public function extractServiceIdFromApiKey($apiKey): string
     {
         return substr($apiKey, -73, 36);
     }
 
+    /**
+     * Get ServiceId
+     *
+     * @return string
+     */
     public function getServiceId()
     {
         return $this->extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
     }
 
+    /**
+     * Get services array
+     *
+     * @return array
+     */
     public function getServices()
     {
         return [
@@ -82,6 +96,11 @@ class Menu
         ];
     }
 
+    /**
+     * Build up a user permissions object for the current user
+     *
+     * @return \stdClass
+     */
     public function getUserPermissions()
     {
         $user = new \stdClass();
@@ -91,6 +110,9 @@ class Menu
         return $user;
     }
 
+    /**
+     * Render messages template
+     */
     public function renderMessages(): void
     {
         if (!get_option('NOTIFY_API_KEY')) {
@@ -105,6 +127,9 @@ class Menu
         ]);
     }
 
+    /**
+     * Render subscribers template
+     */
     public function renderSubscribers(): void
     {
         if (!get_option('NOTIFY_API_KEY')) {
@@ -119,6 +144,9 @@ class Menu
         ]);
     }
 
+    /**
+     * Render NoApiKey error
+     */
     public function renderNoApiKey()
     {
         $this->render('no_api_key', [

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GCLists;
 
+use CDS\Modules\Notify\Utils;
+
 class Menu
 {
     protected static $instance;
@@ -61,6 +63,34 @@ class Menu
         );
     }
 
+    public function extractServiceIdFromApiKey($apiKey): string
+    {
+        return substr($apiKey, -73, 36);
+    }
+
+    public function getServiceId()
+    {
+        return $this->extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
+    }
+
+    public function getServices()
+    {
+        return [
+            'name' => __('Your Lists', 'cds-snc'),
+            'service_id' => $this->getServiceId(),
+            'sendingTemplate' => get_option('NOTIFY_GENERIC_TEMPLATE_ID', '')
+        ];
+    }
+
+    public function getUserPermissions()
+    {
+        $user = new \stdClass();
+        $user->hasEmail = current_user_can('list_manager_bulk_send');
+        $user->hasPhone = current_user_can('list_manager_bulk_send_sms');
+
+        return $user;
+    }
+
     public function renderMessages(): void
     {
         if (!get_option('NOTIFY_API_KEY')) {
@@ -68,10 +98,10 @@ class Menu
             exit;
         }
 
-        $messages = "Hello";
-
         $this->render('messages', [
-            'title' => 'Messages'
+            'title' => __('Messages', 'cds-snc'),
+            'services' => $this->getServices(),
+            'user' => $this->getUserPermissions(),
         ]);
     }
 
@@ -83,13 +113,17 @@ class Menu
         }
 
         $this->render('subscribers', [
-            'title' => 'Subscribers'
+            'title' => __('Subscribers', 'cds-snc'),
+            'services' => $this->getServices(),
+            'user' => $this->getUserPermissions(),
         ]);
     }
 
     public function renderNoApiKey()
     {
-        $this->render('no_api_key');
+        $this->render('no_api_key', [
+            'title' => esc_html(get_admin_page_title())
+        ]);
     }
 
     public function enqueue($hook_suffix)

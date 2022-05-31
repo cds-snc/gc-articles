@@ -35,6 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:gc-lists" : "react-scripts build && mv build gc-lists",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "npm run build"

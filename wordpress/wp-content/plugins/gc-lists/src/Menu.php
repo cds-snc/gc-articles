@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GCLists;
 
-use CDS\Modules\Notify\FormHelpers;
-use CDS\Modules\Notify\Notices;
-
 class Menu
 {
     protected static $instance;

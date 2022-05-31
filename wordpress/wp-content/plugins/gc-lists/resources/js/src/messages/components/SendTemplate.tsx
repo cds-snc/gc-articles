@@ -15,7 +15,6 @@ import { StyledSelect } from "../editor/Styles"
 import useTemplateApi from '../../store/useTemplateApi';
 import { ConfirmSend } from "./ConfirmSend";
 import { useLocation } from 'react-router-dom';
-import { useService } from '../../util/useService';
 import { useNavigate } from "react-router-dom";
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {

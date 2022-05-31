@@ -93,20 +93,20 @@ class Menu
 
     public function noApiKey()
     {
-        ?>
-        <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
-        <p>
-            <?php
-            echo sprintf(
-                __('You must configure your <a href="%s">Notify API Key</a>', 'cds-snc'),
-                admin_url("options-general.php?page=notify-settings")
-            );
-            ?>
-        </p>
-        <?php
+        $this->render('no_api_key');
     }
 
-    public function render($template, $args)
+    /**
+     * Render a php template. Accepts the template name without extension.
+     * Template file must be in the resources folder, ie:
+     * /resources/templates/[template].php
+     *
+     * $args is an associative array of variables available to the template.
+     *
+     * @param $template
+     * @param $args
+     */
+    public function render(string $template, array $args = [])
     {
         extract($args);
         require_once(__DIR__ . "/../resources/templates/{$template}.php");

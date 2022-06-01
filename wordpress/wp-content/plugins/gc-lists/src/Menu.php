@@ -77,7 +77,7 @@ class Menu
      *
      * @return string
      */
-    public function getServiceId()
+    public function getServiceId(): string
     {
         return $this->extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
     }
@@ -87,12 +87,11 @@ class Menu
      *
      * @return array
      */
-    public function getServices()
+    public function getServices(): array
     {
         return [
             'name' => __('Your Lists', 'cds-snc'),
-            'service_id' => $this->getServiceId(),
-            'sendingTemplate' => get_option('NOTIFY_GENERIC_TEMPLATE_ID', '')
+            'service_id' => $this->getServiceId()
         ];
     }
 
@@ -101,7 +100,7 @@ class Menu
      *
      * @return \stdClass
      */
-    public function getUserPermissions()
+    public function getUserPermissions(): \stdClass
     {
         $user = new \stdClass();
         $user->hasEmail = current_user_can('list_manager_bulk_send');

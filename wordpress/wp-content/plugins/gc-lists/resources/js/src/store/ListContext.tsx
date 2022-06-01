@@ -34,8 +34,8 @@ const ListReducer = (state: State, action: Action): State => {
     }
 };
 
-const ListProvider = ({ children, serviceData, user = { hasEmail: true, hasPhone: false } }: ListProviderProps) => {
-    const [state, dispatch] = useReducer(ListReducer, { loading: false, serviceData, lists: [], messages: [], user: user });
+const ListProvider = ({ children, serviceData, user = { hasEmail: true, hasPhone: false }, config = { listManagerApiPrefix: '' } }: ListProviderProps) => {
+    const [state, dispatch] = useReducer(ListReducer, { loading: false, serviceData, lists: [], messages: [], user: user, config });
 
     const value = {
         state,

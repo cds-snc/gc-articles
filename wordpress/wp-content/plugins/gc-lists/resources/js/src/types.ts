@@ -46,6 +46,7 @@ export type State = {
   messages: Message[] | [];
   user: User;
   serviceData: ServiceData;
+  config: Config;
 };
 
 export type Action =
@@ -76,10 +77,15 @@ export type CSVData = {
   email: string;
 };
 
+export type Config = {
+    listManagerApiPrefix: string;
+};
+
 export type ListProviderProps = {
   serviceData: ServiceData;
   user: User;
   children: React.ReactNode;
+  config: Config
 };
 
 export interface NotifyList {

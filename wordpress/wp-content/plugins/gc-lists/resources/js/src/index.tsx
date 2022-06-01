@@ -24,6 +24,8 @@ const renderApp = () => {
     if (container) {
       let data = container.getAttribute("data-ids");
       let user = container.getAttribute("data-user");
+      let baseUrl = container.getAttribute('data-base-url');
+
       if (data && user) {
         data = JSON.parse(data);
         const serviceData = data as unknown as ServiceData;
@@ -33,7 +35,7 @@ const renderApp = () => {
 
         root.render(
           <React.StrictMode>
-            <App serviceData={serviceData} user={userData} />
+            <App serviceData={serviceData} user={userData} baseUrl={baseUrl} />
           </React.StrictMode>
         );
       }

@@ -4,20 +4,13 @@ import { ConfirmActionLink } from "./ConfirmActionLink";
 import { useList } from "../../store/ListContext";
 
 export const ResetActionLink = ({ id = '' }: { id: string }) => {
-    const REST_URL = window?.CDS_VARS?.rest_url;
-    const { request, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
-    const { dispatch } = useList();
+    const { dispatch, state: { user, config: { listManagerApiPrefix } } } = useList();
+    const { request, response } = useFetch(listManagerApiPrefix, { data: [] })
 
     const resetList = async ({ id = '' }: { id: string }) => {
+        await request.put(`/list/${id}/reset`)
 
-        if (process.env.NODE_ENV !== "development") {
-            await request.put(`/${id}/reset`)
-
-            if (response.ok) {
-                dispatch({ type: "reset", payload: { id } });
-            }
-        } else {
-            // for local dev --- dispatch the reset
+        if (response.ok) {
             dispatch({ type: "reset", payload: { id } });
         }
     }

@@ -5,7 +5,7 @@ import { useList } from "../../store/ListContext";
 
 
 export const DeleteActionLink = ({ id = '' }: { id: string }) => {
-    const { dispatch, state: { user, config: { listManagerApiPrefix } } } = useList();
+    const { dispatch, state: { config: { listManagerApiPrefix } } } = useList();
     const { request, response } = useFetch(listManagerApiPrefix, { data: [] })
 
     const deleteList = async ({ id = '' }: { id: string }) => {

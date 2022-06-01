@@ -6,12 +6,12 @@ import { getListType } from "../util/functions";
 import { useService } from '../util/useService';
 
 export const useListFetch = () => {
-    const { dispatch, state: { user } } = useList();
+    const { dispatch, state: { user, config: { listManagerApiPrefix } } } = useList();
     const { serviceId } = useService();
+    console.log("serviceId:", serviceId)
     const [status, setStatus] = useState('idle');
 
-    const REST_URL = window?.CDS_VARS?.rest_url;
-    const { request, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
+    const { request, response } = useFetch(listManagerApiPrefix, { data: [] })
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,7 +19,7 @@ export const useListFetch = () => {
             await request.get(`/lists/${serviceId}`);
 
             if (response.ok) {
-                let lists = await response.json();
+                let lists = response.data;
 
                 lists = lists.filter((list: List) => {
                     const listType = getListType(list.language)

@@ -10,7 +10,7 @@ import { Provider } from 'use-http';
 const REST_URL = window?.CDS_VARS?.rest_url;
 const endpoint = `${REST_URL}gc-lists`;
 
-const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) => {
+const App = ({ serviceData, user, baseUrl }: { serviceData: ServiceData, user: User, baseUrl: string|null }) => {
     const options = {
         interceptors: {
             request: async ({ options }: { options: any }) => {
@@ -34,7 +34,7 @@ const App = ({ serviceData, user }: { serviceData: ServiceData, user: User }) =>
     return (
         <Provider url={endpoint} options={options}>
             <HashRouter>
-                <ListProvider serviceData={serviceData} user={user}>
+                <ListProvider serviceData={serviceData} user={user} config={{ listManagerApiPrefix: `${baseUrl}/wp-json/list-manager` }}>
                     <Routes>
                         <Route path="/messages/*" element={<MessagesApp />} />
                         <Route path="/lists/*" element={<ListsApp />} />

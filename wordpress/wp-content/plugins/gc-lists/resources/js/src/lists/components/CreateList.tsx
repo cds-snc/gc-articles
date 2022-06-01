@@ -9,10 +9,9 @@ import { List } from "../../types";
 import { useService } from '../../util/useService';
 
 export const CreateList = () => {
-    const REST_URL = window?.CDS_VARS?.rest_url;
-    const { request, cache, response } = useFetch(`${REST_URL}list-manager`,{ data: [] })
     const [data, setData] = useState({ id: null })
-    const { dispatch } = useList();
+    const { dispatch, state: { config: { listManagerApiPrefix } } } = useList();
+    const { request, cache, response } = useFetch(listManagerApiPrefix, { data: [] })
     const { serviceId } = useService();
 
     const createList = useCallback(async (formData: List) => {
@@ -20,8 +19,8 @@ export const CreateList = () => {
 
         if (response.ok) {
             cache.clear();
-            const id = await response.json()
-            setData(await response.json());
+            const id = response.data
+            setData(id);
             dispatch({ type: "add", payload: id })
             return
         }

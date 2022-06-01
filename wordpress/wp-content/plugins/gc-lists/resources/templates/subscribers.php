@@ -19,7 +19,7 @@
     echo current_user_can('list_manager_bulk_send_sms');
     echo "-->";
     ?>
-    <div id="list-manager-app" data-user='<?php echo json_encode($user); ?>' data-ids='<?php echo json_encode($services); ?>'>
+    <div id="list-manager-app" data-user='<?php echo json_encode($user); ?>' data-ids='<?php echo json_encode($services); ?>' data-base-url='<?php echo get_site_url(); ?>'>
     </div>
 </div>
 

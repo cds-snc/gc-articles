@@ -10,6 +10,7 @@ import { useService } from '../../util/useService';
 
 // theme CSS for React CSV Importer
 import "react-csv-importer/dist/index.css";
+import { useList } from '../../store/ListContext';
 
 export const UploadList = () => {
     const [finished, setFinished] = useState<boolean>(false)
@@ -27,7 +28,8 @@ export const UploadList = () => {
             throw new Error("Invalid field type");
     }
 
-    const { request, cache, response } = useFetch({ data: [] })
+    const { state: { config: { listManagerApiPrefix } } } = useList();
+    const { request, cache, response } = useFetch(listManagerApiPrefix, { data: [] })
 
     if (finished) {
         return <Navigate to={`/lists`} replace={true} />
@@ -51,11 +53,11 @@ export const UploadList = () => {
                         });
 
                         const payload = { [uploadType]: data };
-                        await request.post(`/${listId}/import`, payload)
+                        await request.post(`/list/${listId}/import`, payload)
 
                         if (response.ok) {
                             cache.clear();
-                            console.log(await response.json());
+                            console.log(response.data);
                             resolve()
                         }
                     });

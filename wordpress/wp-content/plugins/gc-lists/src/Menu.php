@@ -61,6 +61,57 @@ class Menu
         );
     }
 
+    /**
+     * Extract ServiceID from API key
+     *
+     * @param $apiKey
+     * @return string
+     */
+    public function extractServiceIdFromApiKey($apiKey): string
+    {
+        return substr($apiKey, -73, 36);
+    }
+
+    /**
+     * Get ServiceId
+     *
+     * @return string
+     */
+    public function getServiceId(): string
+    {
+        return $this->extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
+    }
+
+    /**
+     * Get services array
+     *
+     * @return array
+     */
+    public function getServices(): array
+    {
+        return [
+            'name' => __('Your Lists', 'cds-snc'),
+            'service_id' => $this->getServiceId()
+        ];
+    }
+
+    /**
+     * Build up a user permissions object for the current user
+     *
+     * @return \stdClass
+     */
+    public function getUserPermissions(): \stdClass
+    {
+        $user = new \stdClass();
+        $user->hasEmail = current_user_can('list_manager_bulk_send');
+        $user->hasPhone = current_user_can('list_manager_bulk_send_sms');
+
+        return $user;
+    }
+
+    /**
+     * Render messages template
+     */
     public function renderMessages(): void
     {
         if (!get_option('NOTIFY_API_KEY')) {
@@ -68,13 +119,16 @@ class Menu
             exit;
         }
 
-        $messages = "Hello";
-
         $this->render('messages', [
-            'title' => 'Messages'
+            'title' => __('Messages', 'cds-snc'),
+            'services' => $this->getServices(),
+            'user' => $this->getUserPermissions(),
         ]);
     }
 
+    /**
+     * Render subscribers template
+     */
     public function renderSubscribers(): void
     {
         if (!get_option('NOTIFY_API_KEY')) {
@@ -83,13 +137,20 @@ class Menu
         }
 
         $this->render('subscribers', [
-            'title' => 'Subscribers'
+            'title' => __('Subscribers', 'cds-snc'),
+            'services' => $this->getServices(),
+            'user' => $this->getUserPermissions(),
         ]);
     }
 
+    /**
+     * Render NoApiKey error
+     */
     public function renderNoApiKey()
     {
-        $this->render('no_api_key');
+        $this->render('no_api_key', [
+            'title' => esc_html(get_admin_page_title())
+        ]);
     }
 
     public function enqueue($hook_suffix)

@@ -172,7 +172,7 @@ class Menu
                     true,
                 );
             } catch (\Exception $exception) {
-                echo $exception->getMessage();
+                error_log($exception->getMessage());
             }
         }
     }

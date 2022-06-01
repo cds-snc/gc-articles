@@ -27,7 +27,8 @@ export const UploadList = () => {
             throw new Error("Invalid field type");
     }
 
-    const { request, cache, response } = useFetch({ data: [] })
+    const REST_URL = window?.CDS_VARS?.rest_url;
+    const { request, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
 
     if (finished) {
         return <Navigate to={`/lists`} replace={true} />

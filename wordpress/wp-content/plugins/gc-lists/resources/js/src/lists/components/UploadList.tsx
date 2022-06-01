@@ -28,7 +28,7 @@ export const UploadList = () => {
     }
 
     const REST_URL = window?.CDS_VARS?.rest_url;
-    const { request, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
+    const { request, cache, response } = useFetch(`${REST_URL}list-manager`, { data: [] })
 
     if (finished) {
         return <Navigate to={`/lists`} replace={true} />

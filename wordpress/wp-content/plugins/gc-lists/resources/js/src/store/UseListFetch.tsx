@@ -8,6 +8,7 @@ import { useService } from '../util/useService';
 export const useListFetch = () => {
     const { dispatch, state: { user } } = useList();
     const { serviceId } = useService();
+    console.log("serviceId:", serviceId)
     const [status, setStatus] = useState('idle');
 
     const REST_URL = window?.CDS_VARS?.rest_url;

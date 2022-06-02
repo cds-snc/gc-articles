@@ -12,7 +12,7 @@ function useTemplateApi() {
     const { request, response } = useFetch({ data: [], cachePolicy: CachePolicies.NO_CACHE });
     const [templates, setTemplates] = useState([]);
     // @ts-ignore
-    const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: deserialize("") });
+    const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: deserialize(""), updated_at?: string });
     const [loading, setLoading] = useState(false);
     const [loadingTemplate, setLoadingTemplate] = useState(false);
 

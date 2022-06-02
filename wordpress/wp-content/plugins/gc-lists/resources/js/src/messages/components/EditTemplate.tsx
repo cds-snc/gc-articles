@@ -27,7 +27,6 @@ export const EditTemplate = () => {
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
 
     const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
-
     useEffect(() => {
         setValue("name", template?.name || "")
         setValue("subject", template?.subject || "");
@@ -100,7 +99,7 @@ export const EditTemplate = () => {
                         <tr>
                             <td>
                                 <label className="required" htmlFor="message"><strong>{__("Message", "cds-snc")}</strong></label>
-                                <p>{sprintf("Use the email formatting guide (Opens in a new tab) to craft your message.", "cds-snc")}</p>
+                                <p>{__("Use the", "cds-snc")} <a href="https://notification.canada.ca/formatting-guide">{__("email formatting guide", "cds-snc")}</a> {__("(Opens in a new tab) to craft your message.", "cds-snc")}</p>
                                 <div className={errors.hasTemplate ? "error-wrapper" : ""}>
                                     {errors.hasTemplate && <span className="validation-error">{errors.hasTemplate?.message || __("Message is required", "cds-snc")}</span>}
                                     {template.parsedContent ?
@@ -112,8 +111,8 @@ export const EditTemplate = () => {
                                         : null}
                                 </div>
                                 <StyledLastSaved>
-                                    Last saved { template?.updated_at }
-                                    { templateId && <Link to={`/messages/${templateId}/versions`}>{__('See previous versions')}</Link> }
+                                    {template?.updated_at ? <> {__('Last saved', "cds-snc")} {template.updated_at} </> : null}
+                                    {templateId && <Link to={`/messages/${templateId}/versions`}>{__('See previous versions')}</Link>}
                                 </StyledLastSaved>
                             </td>
                         </tr>

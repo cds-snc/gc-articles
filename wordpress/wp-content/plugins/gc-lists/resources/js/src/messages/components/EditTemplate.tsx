@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Editor } from "../editor/Editor";
 import useTemplateApi from '../../store/useTemplateApi';
-import { serialize, deserialize } from "../editor/utils";
+import { serialize } from "../editor/utils";
 import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
 import { Spinner } from '../../common/Spinner';

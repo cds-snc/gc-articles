@@ -12,12 +12,11 @@ function useTemplateApi() {
     const { request, response } = useFetch({ data: [], cachePolicy: CachePolicies.NO_CACHE });
     const [templates, setTemplates] = useState([]);
     // @ts-ignore
-    const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: deserialize("") });
+    const [template, setTemplate] = useState<TemplateType>({ name: "", subject: "", body: "", parsedContent: deserialize("") });
     const [loading, setLoading] = useState(false);
     const [loadingTemplate, setLoadingTemplate] = useState(false);
 
     const getTemplate = useCallback(async (templateId: string | undefined) => {
-        console.log("getTemplate");
         if (!templateId || templateId === 'new') return;
 
         setLoadingTemplate(true);
@@ -27,7 +26,7 @@ function useTemplateApi() {
             const template: TemplateType | null = response.data;
 
             if (!template || !template.body) {
-                setTemplate({ name: "", subject: "", body: "", parsedContent: deserialize("") })
+                setTemplate({ name: "", subject: "", body: "" })
             }
 
             let parsedContent;
@@ -47,7 +46,6 @@ function useTemplateApi() {
     }, [request, response])
 
     const getTemplates = async () => {
-        console.log("getTemplates");
         setLoading(true);
         let templates: any = [];
         await request.get("/messages");
@@ -67,7 +65,6 @@ function useTemplateApi() {
     };
 
     const saveTemplate = useCallback(async ({ templateId, name, subject, content }: { templateId: string | undefined, name: string, subject: string, content: Descendant[] | undefined }) => {
-        console.log("saveTemplate", templateId, subject)
         if (!content) return;
 
         if (templateId === 'new') {
@@ -102,8 +99,6 @@ function useTemplateApi() {
 
         await request.delete(`/messages/${templateId}`);
 
-        console.log(response);
-
         if (response.ok) {
             return response.data;
         }
@@ -128,7 +123,7 @@ function useTemplateApi() {
         });
 
         if (response.ok) {
-            return true;
+            return response.data;
         }
         return false;
     }, [request, response])

@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import { Table, StyledPaging, StyledLink } from "./Table";
 import { Next } from "./icons/Next";
 
+import { v4 as uuidv4 } from 'uuid';
+
 const StyledTableLink = styled(Link)`
     text-decoration:underline !important;
     :hover{
@@ -25,7 +27,8 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
     useEffect(() => {
         const getSentMessages = async () => {
             setLoading(true);
-            await request.get("/messages/sent");
+            await request.get(`/messages/sent?${uuidv4()}`);
+            console.log(response.data);
             if (response.ok) {
                 setData(response.data);
                 setLoading(false)
@@ -48,7 +51,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/${messageId}/versions`}
+                                to={`/messages/edit/${messageId}`}
                             >
                                 {name}
                             </StyledTableLink>
@@ -78,6 +81,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
 
     return data.length ?
         <>
+            <h2>{__("Sending history", "cds-snc")}</h2>
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
             <StyledPaging>
                 <StyledLink to={`/messages/history`} >

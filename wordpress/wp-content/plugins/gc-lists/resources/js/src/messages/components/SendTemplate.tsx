@@ -16,6 +16,10 @@ import useTemplateApi from '../../store/useTemplateApi';
 import { ConfirmSend } from "./ConfirmSend";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+// import { Warn } from "../components/Notice";
+
+// @todo -- add Warn if user has no lists
+// need to catch error lists.length = 0
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     return (
@@ -46,7 +50,7 @@ export const SendTemplate = () => {
     const [messageSent, setMessageSent] = useState<boolean>(false);
     const [messageSendingErrors, setMessageSendingErrors] = useState<string>("");
 
-    const { template, templateId, getTemplate, recordSent} = useTemplateApi();
+    const { template, templateId, getTemplate, recordSent } = useTemplateApi();
 
     const navigate = useNavigate();
 
@@ -92,7 +96,7 @@ export const SendTemplate = () => {
     }
 
     if (messageSent) {
-        return <MessageSent name={name} count={subscriberCount} />
+        return <MessageSent id={templateId} listName={listName} count={subscriberCount} />
     }
 
     return (
@@ -111,11 +115,13 @@ export const SendTemplate = () => {
                     <button
                         style={{ marginRight: "20px" }}
                         className="button button-primary"
+                        disabled={!content}
                         onClick={async () => {
                             const confirmed = await ConfirmSend({ count: subscriberCount });
                             if (confirmed) {
                                 const result = await recordSent(templateId, listId, listName, name, subject, content);
-                                if(result) {
+                                if (result) {
+                                    navigate(`/messages/send/${result?.id}`);
                                     setMessageSent(true);
                                 } else {
                                     // @TODO: get errors from api call

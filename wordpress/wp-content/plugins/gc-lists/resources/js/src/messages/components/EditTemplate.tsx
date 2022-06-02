@@ -2,7 +2,7 @@ import * as React from 'react';
 import { __, sprintf } from "@wordpress/i18n";
 import { useEffect, useState, useCallback } from 'react';
 import { Descendant } from "slate";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Editor } from "../editor/Editor";
 import useTemplateApi from '../../store/useTemplateApi';
@@ -10,8 +10,15 @@ import { serialize } from "../editor/utils";
 import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
 import { Spinner } from '../../common/Spinner';
+import styled from 'styled-components';
 
 const textWidth = { width: "25em" }
+
+export const StyledLastSaved = styled.div`
+   font-size:16px;
+   display:flex;
+   justify-content: flex-end;
+`;
 
 export const EditTemplate = () => {
     const navigate = useNavigate();
@@ -57,13 +64,13 @@ export const EditTemplate = () => {
     return (
         <>
             {heading}
-            <form>
+            <form style={{ maxWidth: '400px' }}>
                 <input type="hidden" {...register("hasTemplate", { validate: () => templateHasValue })} />
                 {
-                    /* 
+                    /*
                     ☝️☝️☝️☝️☝️☝️
-                    hasTemplate (hidden field) 
-                    this is for validation only 
+                    hasTemplate (hidden field)
+                    this is for validation only
                     ...we don't register the "editor / content " as part of the form
                     but we need to ensure it has content
                     */
@@ -104,6 +111,10 @@ export const EditTemplate = () => {
                                             handleChange={setCurrentTemplate} />
                                         : null}
                                 </div>
+                                <StyledLastSaved>
+                                    Last saved { template?.updated_at }
+                                    { templateId && <Link to={`/messages/${templateId}/versions`}>{__('See previous versions')}</Link> }
+                                </StyledLastSaved>
                             </td>
                         </tr>
                     </tbody>

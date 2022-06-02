@@ -100,4 +100,5 @@ export type TemplateType = {
   name: string;
   subject: string;
   body: string;
+  updated_at: string;
 };

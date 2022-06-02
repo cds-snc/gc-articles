@@ -48,7 +48,7 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/${messageId}/versions`}
+                                to={`/messages/edit/${messageId}`}
                             >
                                 {name}
                             </StyledTableLink>

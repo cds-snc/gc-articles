@@ -22,16 +22,16 @@ const StyledSuccess = styled.div`
     margin-bottom: 30px;
 `
 
-export const MessageSent = ({ name, count }: { name: string | undefined, count: number }) => {
+export const MessageSent = ({ id, listName, count }: { id: string | undefined, listName: string | undefined, count: number }) => {
     return (
         <>
             <StyledSuccess>
                 <div><h2>{__("Message sent", "cds-snc")}</h2></div>
             </StyledSuccess>
-            <SendToList sending={false} name={name} count={count} />
+            <SendToList sending={false} name={listName} count={count} />
             <StyledActionContainer>
                 <Link
-                    to={`/messages/edit/${uuidv4()}`}
+                    to={`/messages/edit/${id}`}
                     style={{ marginRight: "20px" }}
                     className="button button-primary"
                 >

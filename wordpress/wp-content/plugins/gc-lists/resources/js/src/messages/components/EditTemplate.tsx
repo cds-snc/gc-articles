@@ -6,11 +6,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { Editor } from "../editor/Editor";
 import useTemplateApi from '../../store/useTemplateApi';
-import { serialize } from "../editor/utils";
+import { deserialize, serialize } from '../editor/utils';
 import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
 import { Spinner } from '../../common/Spinner';
 import styled from 'styled-components';
+import formatRelative from 'date-fns/formatRelative';
 
 const textWidth = { width: "25em" }
 
@@ -38,22 +39,31 @@ export const EditTemplate = () => {
     }, [template, setValue]);
 
     useEffect(() => {
-        getTemplate(templateId);
+        const fetchTemplate = async () => {
+            const result = await getTemplate(templateId);
+        }
+
+        fetchTemplate();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleFormData = useCallback(async (formData: any) => {
+        let content = template?.body;
+
+        if (currentTemplate) {
+            content = serialize(currentTemplate)
+        }
+
         setSaved(false);
         const { name, subject } = formData;
-        const result = await saveTemplate({ templateId, name, subject, content: currentTemplate });
-        console.log(result);
-        navigate(`/messages/edit/${result?.id}`);
+        const result = await saveTemplate({ templateId, name, subject, content: deserialize(content) });
 
         if (result) {
+            navigate(`/messages/edit/${result?.id}`);
             setSaved(true);
         }
 
-    }, [saveTemplate, currentTemplate, templateId, navigate]);
+    }, [saveTemplate, currentTemplate, templateId, navigate, template]);
 
     const heading = <h1>{__("Edit email message", "cds-snc")}</h1>;
 
@@ -67,6 +77,12 @@ export const EditTemplate = () => {
     }
 
     const templateHasValue = currentTemplate && serialize(currentTemplate) !== '';
+
+    let content = template?.body;
+
+    if (currentTemplate) {
+        content = serialize(currentTemplate)
+    }
 
     return (
         <>
@@ -120,7 +136,7 @@ export const EditTemplate = () => {
                                 </div>
                                 <StyledLastSaved>
                                     {/* @todo use date-fns to show template date */}
-                                    {template?.updated_at ? <> {__('Last saved', "cds-snc")} {template.updated_at} </> : null}
+                                    {template?.updated_at ? <> {__('Last saved', "cds-snc")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}
                                     {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "cds-snc")}</StyledPreviousVersions></Link>}
                                 </StyledLastSaved>
                             </td>
@@ -135,7 +151,7 @@ export const EditTemplate = () => {
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
-                        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), template: currentTemplate && serialize(currentTemplate) } });
+                        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), template: content } });
                     }}
                     className="button button-primary">
                     {__('Send message to a list', 'cds-snc')}

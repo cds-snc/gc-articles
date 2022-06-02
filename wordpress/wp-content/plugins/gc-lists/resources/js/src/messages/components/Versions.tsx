@@ -35,12 +35,12 @@ const SentTag = ({ text }: { text: string }) => {
 
 
 const Status = ({ item }: { item: any }) => {
-    const { sent_at, created_at, updated_at } = item;
-    if (item.sent_at) {
+    const { original_message_id, sent_at, created_at, updated_at } = item;
+    if (sent_at) {
         return <><SentTag text={__("SENT", "cds-snc")} /><span>{__("Sent on", "cds-snc")} {sent_at}, </span></>
     }
 
-    if (updated_at !== created_at) {
+    if (original_message_id !== null) {
         return <><Tag text={__("EDITED", "cds-snc")} /><span>{__("Edited on", "cds-snc")} {updated_at}, </span></>
     }
 
@@ -69,8 +69,7 @@ export const Versions = () => {
             const messageId = params?.messageId;
             await request.get(`/messages/${messageId}/versions`);
             if (response.ok) {
-                console.log(await response.json())
-                setData(await response.json());
+                setData(response.data);
                 setLoading(false)
             }
         }

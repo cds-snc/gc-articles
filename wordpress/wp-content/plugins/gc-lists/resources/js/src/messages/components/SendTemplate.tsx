@@ -96,7 +96,7 @@ export const SendTemplate = () => {
     }
 
     if (messageSent) {
-        return <MessageSent name={name} count={subscriberCount} />
+        return <MessageSent id={templateId} listName={listName} count={subscriberCount} />
     }
 
     return (
@@ -115,11 +115,13 @@ export const SendTemplate = () => {
                     <button
                         style={{ marginRight: "20px" }}
                         className="button button-primary"
+                        disabled={!content}
                         onClick={async () => {
                             const confirmed = await ConfirmSend({ count: subscriberCount });
                             if (confirmed) {
                                 const result = await recordSent(templateId, listId, listName, name, subject, content);
                                 if (result) {
+                                    navigate(`/messages/send/${result?.id}`);
                                     setMessageSent(true);
                                 } else {
                                     // @TODO: get errors from api call

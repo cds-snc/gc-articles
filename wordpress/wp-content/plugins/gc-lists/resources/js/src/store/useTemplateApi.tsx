@@ -17,7 +17,6 @@ function useTemplateApi() {
     const [loadingTemplate, setLoadingTemplate] = useState(false);
 
     const getTemplate = useCallback(async (templateId: string | undefined) => {
-        console.log("getTemplate");
         if (!templateId || templateId === 'new') return;
 
         setLoadingTemplate(true);
@@ -47,7 +46,6 @@ function useTemplateApi() {
     }, [request, response])
 
     const getTemplates = async () => {
-        console.log("getTemplates");
         setLoading(true);
         let templates: any = [];
         await request.get("/messages");
@@ -67,7 +65,6 @@ function useTemplateApi() {
     };
 
     const saveTemplate = useCallback(async ({ templateId, name, subject, content }: { templateId: string | undefined, name: string, subject: string, content: Descendant[] | undefined }) => {
-        console.log("saveTemplate", templateId, subject)
         if (!content) return;
 
         if (templateId === 'new') {
@@ -102,8 +99,6 @@ function useTemplateApi() {
 
         await request.delete(`/messages/${templateId}`);
 
-        console.log(response);
-
         if (response.ok) {
             return response.data;
         }
@@ -128,7 +123,7 @@ function useTemplateApi() {
         });
 
         if (response.ok) {
-            return true;
+            return response.data;
         }
         return false;
     }, [request, response])

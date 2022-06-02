@@ -8,7 +8,6 @@ import { useService } from '../util/useService';
 export const useListFetch = () => {
     const { dispatch, state: { user, config: { listManagerApiPrefix } } } = useList();
     const { serviceId } = useService();
-    console.log("serviceId:", serviceId)
     const [status, setStatus] = useState('idle');
 
     const { request, response } = useFetch(listManagerApiPrefix, { data: [] })

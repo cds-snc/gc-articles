@@ -6,7 +6,6 @@ export const Home = () => {
     return (
         <>
             <ListTemplates />
-
             <h2>{__("Sending history", "cds-snc")}</h2>
             <SendingHistory />
         </>

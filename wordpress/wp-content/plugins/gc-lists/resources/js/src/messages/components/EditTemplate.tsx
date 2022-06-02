@@ -46,7 +46,8 @@ export const EditTemplate = () => {
         setSaved(false);
         const { name, subject } = formData;
         const result = await saveTemplate({ templateId, name, subject, content: currentTemplate });
-        navigate(`/messages/edit/${result.id}`);
+        console.log(result);
+        navigate(`/messages/edit/${result?.id}`);
 
         if (result) {
             setSaved(true);

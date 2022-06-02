@@ -106,8 +106,7 @@ export const EditTemplate = () => {
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
-                        //@todo handle validation
-                        navigate(`/messages/send/${templateId}`, { state: getValues() });
+                        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), template: currentTemplate && serialize(currentTemplate) } });
                     }}
                     className="button button-primary">
                     {__('Send message to a list', 'cds-snc')}

@@ -16,7 +16,7 @@ import useTemplateApi from '../../store/useTemplateApi';
 import { ConfirmSend } from "./ConfirmSend";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { Warn } from "../components/Notice";
+// import { Warn } from "../components/Notice";
 
 // @todo -- add Warn if user has no lists
 // need to catch error lists.length = 0

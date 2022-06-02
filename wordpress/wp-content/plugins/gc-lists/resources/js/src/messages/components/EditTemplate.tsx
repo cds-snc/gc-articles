@@ -111,6 +111,7 @@ export const EditTemplate = () => {
                                         : null}
                                 </div>
                                 <StyledLastSaved>
+                                    {/* @todo use date-fns to show template date */}
                                     {template?.updated_at ? <> {__('Last saved', "cds-snc")} {template.updated_at} </> : null}
                                     {templateId && <Link to={`/messages/${templateId}/versions`}>{__('See previous versions', "cds-snc")}</Link>}
                                 </StyledLastSaved>

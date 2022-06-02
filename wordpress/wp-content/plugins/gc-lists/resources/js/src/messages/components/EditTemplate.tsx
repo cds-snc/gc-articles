@@ -20,6 +20,11 @@ export const StyledLastSaved = styled.div`
    justify-content: flex-end;
 `;
 
+export const StyledPreviousVersions = styled.span`
+   display:inline-block;
+   margin-left:10px;
+`;
+
 export const EditTemplate = () => {
     const navigate = useNavigate();
     const [saved, setSaved] = useState(false);
@@ -41,11 +46,13 @@ export const EditTemplate = () => {
         setSaved(false);
         const { name, subject } = formData;
         const result = await saveTemplate({ templateId, name, subject, content: currentTemplate });
+        navigate(`/messages/edit/${result.id}`);
+
         if (result) {
             setSaved(true);
         }
 
-    }, [saveTemplate, currentTemplate, templateId]);
+    }, [saveTemplate, currentTemplate, templateId, navigate]);
 
     const heading = <h1>{__("Edit email message", "cds-snc")}</h1>;
 
@@ -89,7 +96,7 @@ export const EditTemplate = () => {
                         <tr>
                             <td>
                                 <label className="required" htmlFor="subject"><strong>{__("Subject line of the email", "cds-snc")}</strong></label>
-                                <p>{__("Tell recipients what the message is about. Try to keep it shorter than 10 words.", "cds-snc")}</p>
+                                <p style={{ marginBottom: "12px" }}>{__("Tell recipients what the message is about. Try to keep it shorter than 10 words.", "cds-snc")}</p>
                                 <div className={errors.subject ? "error-wrapper" : ""}>
                                     {errors.subject && <span className="validation-error">{errors.subject?.message || __("Subject is required", "cds-snc")}</span>}
                                     <input id="subject" style={textWidth} type="text" {...register("subject", { required: true })} />
@@ -113,7 +120,7 @@ export const EditTemplate = () => {
                                 <StyledLastSaved>
                                     {/* @todo use date-fns to show template date */}
                                     {template?.updated_at ? <> {__('Last saved', "cds-snc")} {template.updated_at} </> : null}
-                                    {templateId && <Link to={`/messages/${templateId}/versions`}>{__('See previous versions', "cds-snc")}</Link>}
+                                    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "cds-snc")}</StyledPreviousVersions></Link>}
                                 </StyledLastSaved>
                             </td>
                         </tr>

@@ -1,80 +1,86 @@
+import { Descendant } from 'slate';
+
 export type List = {
-  id: string;
-  name: string;
-  language: string;
-  service_id: string;
-  subscribe_email_template_id?: string;
-  unsubscribe_email_template_id?: string;
-  subscribe_phone_template_id?: string;
-  unsubscribe_phone_template_id?: string;
-  subscribe_redirect_url?: string;
-  confirm_redirect_url?: string;
-  unsubscribe_redirect_url?: string;
-  subscriber_count?: string;
-  active?: string;
+    id: string;
+    name: string;
+    language: string;
+    service_id: string;
+    subscribe_email_template_id?: string;
+    unsubscribe_email_template_id?: string;
+    subscribe_phone_template_id?: string;
+    unsubscribe_phone_template_id?: string;
+    subscribe_redirect_url?: string;
+    confirm_redirect_url?: string;
+    unsubscribe_redirect_url?: string;
+    subscriber_count?: string;
+    active?: string;
 };
 
 export type Dispatch = (action: Action) => void;
 
 export type ListId = {
-  id: string | null;
+    id: string | null;
 };
 
 export enum ListType {
-  EMAIL = 'email',
-  PHONE = 'phone',
+    EMAIL = 'email',
+    PHONE = 'phone',
 }
 
 export type Message = {
-  id: string;
-  type: string;
-  message: string;
+    id: string;
+    type: string;
+    message: string;
 };
 
-export type Service = { name: string; service_id: string; sendingTemplate: string };
+export type Service = {
+    name: string;
+    service_id: string;
+    sendingTemplate: string;
+};
 
 export type ServiceData = Service[] | null;
 
 export type User = {
-  hasPhone: boolean;
-  hasEmail: boolean;
+    hasPhone: boolean;
+    hasEmail: boolean;
 };
 
 export type State = {
-  loading: boolean;
-  lists: List[] | [];
-  messages: Message[] | [];
-  user: User;
-  serviceData: ServiceData;
-  config: Config;
+    loading: boolean;
+    lists: List[] | [];
+    messages: Message[] | [];
+    user: User;
+    serviceData: ServiceData;
+    config: Config;
 };
 
 export type Action =
-  | { type: 'add'; payload: { id: string } }
-  | { type: 'delete'; payload: { id: string } }
-  | { type: 'load'; payload: List[] }
-  | { type: 'reset'; payload: { id: string } };
+    | { type: 'add'; payload: { id: string } }
+    | { type: 'delete'; payload: { id: string } }
+    | { type: 'load'; payload: List[] }
+    | { type: 'reset'; payload: { id: string } };
 
 export type ErrorResponse = {
-  detail: [
-    {
-      loc: [string, keyof List];
-      msg: string;
-      type: string;
-      ctx?: {};
-    }
-  ];
+    detail: [
+        {
+            loc: [string, keyof List];
+            msg: string;
+            type: string;
+            ctx?: {};
+        }
+    ];
 };
 
 export type FieldError = {
-  name: keyof List;
-  msg: string;
+    name: keyof List;
+    msg: string;
 };
 
 export type ServerErrors = [] | FieldError[];
 
 export type CSVData = {
-  email: string;
+    email: string;
 };
 
 export type Config = {
@@ -82,23 +88,24 @@ export type Config = {
 };
 
 export type ListProviderProps = {
-  serviceData: ServiceData;
-  user: User;
-  children: React.ReactNode;
-  config: Config
+    serviceData: ServiceData;
+    user: User;
+    children: React.ReactNode;
+    config: Config;
 };
 
 export interface NotifyList {
-  id: string;
-  label: string;
-  subscriber_count?: number;
-  list_id?: string;
+    id: string;
+    label: string;
+    subscriber_count?: number;
+    list_id?: string;
 }
 
 export type TemplateType = {
-  id: string;
-  name: string;
-  subject: string;
-  body: string;
-  updated_at: string;
+    id?: string;
+    name: string;
+    subject: string;
+    body: string;
+    parsedContent?: Descendant[] | undefined | "";
+    updated_at?: string;
 };

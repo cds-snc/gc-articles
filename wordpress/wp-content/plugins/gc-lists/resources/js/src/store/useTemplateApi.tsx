@@ -12,7 +12,7 @@ function useTemplateApi() {
     const { request, response } = useFetch({ data: [], cachePolicy: CachePolicies.NO_CACHE });
     const [templates, setTemplates] = useState([]);
     // @ts-ignore
-    const [template, setTemplate] = useState({ name: "", subject: "", body: "", parsedContent: deserialize(""), updated_at?: string });
+    const [template, setTemplate] = useState<TemplateType>({ name: "", subject: "", body: "", parsedContent: deserialize("") });
     const [loading, setLoading] = useState(false);
     const [loadingTemplate, setLoadingTemplate] = useState(false);
 
@@ -27,7 +27,7 @@ function useTemplateApi() {
             const template: TemplateType | null = response.data;
 
             if (!template || !template.body) {
-                setTemplate({ name: "", subject: "", body: "", parsedContent: deserialize("") })
+                setTemplate({ name: "", subject: "", body: "" })
             }
 
             let parsedContent;

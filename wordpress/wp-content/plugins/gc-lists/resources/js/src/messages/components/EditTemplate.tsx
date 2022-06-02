@@ -19,7 +19,7 @@ export const EditTemplate = () => {
     const { template, loadingTemplate, templateId, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
 
-    const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", template: "" } });
+    const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
 
     useEffect(() => {
         setValue("name", template?.name || "")
@@ -52,11 +52,22 @@ export const EditTemplate = () => {
         )
     }
 
+    const templateHasValue = currentTemplate && serialize(currentTemplate) !== '';
+
     return (
         <>
             {heading}
             <form>
-                <input type="hidden" {...register("template", { required: true })} />
+                <input type="hidden" {...register("hasTemplate", { validate: () => templateHasValue })} />
+                {
+                    /* 
+                    ☝️☝️☝️☝️☝️☝️
+                    hasTemplate (hidden field) 
+                    this is for validation only 
+                    ...we don't register the "editor / content " as part of the form
+                    but we need to ensure it has content
+                    */
+                }
                 <table className="form-table">
                     <tbody>
                         <tr>
@@ -83,13 +94,12 @@ export const EditTemplate = () => {
                             <td>
                                 <label className="required" htmlFor="message"><strong>{__("Message", "cds-snc")}</strong></label>
                                 <p>{sprintf("Use the email formatting guide (Opens in a new tab) to craft your message.", "cds-snc")}</p>
-                                <div className={errors.template ? "error-wrapper" : ""}>
-                                    {errors.template && <span className="validation-error">{errors.template?.message || __("Message is required", "cds-snc")}</span>}
+                                <div className={errors.hasTemplate ? "error-wrapper" : ""}>
+                                    {errors.hasTemplate && <span className="validation-error">{errors.hasTemplate?.message || __("Message is required", "cds-snc")}</span>}
                                     {template.parsedContent ?
                                         <Editor template={template.parsedContent}
                                             handleValidate={(value: any) => {
-                                                setValue('template', serialize(value));
-                                                clearErrors("template");
+                                                clearErrors("hasTemplate");
                                             }}
                                             handleChange={setCurrentTemplate} />
                                         : null}

@@ -112,7 +112,7 @@ export const EditTemplate = () => {
                                 </div>
                                 <StyledLastSaved>
                                     {template?.updated_at ? <> {__('Last saved', "cds-snc")} {template.updated_at} </> : null}
-                                    {templateId && <Link to={`/messages/${templateId}/versions`}>{__('See previous versions')}</Link>}
+                                    {templateId && <Link to={`/messages/${templateId}/versions`}>{__('See previous versions', "cds-snc")}</Link>}
                                 </StyledLastSaved>
                             </td>
                         </tr>

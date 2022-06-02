@@ -40,7 +40,7 @@ export const EditTemplate = () => {
 
     useEffect(() => {
         const fetchTemplate = async () => {
-            const result = await getTemplate(templateId);
+            await getTemplate(templateId);
         }
 
         fetchTemplate();

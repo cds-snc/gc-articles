@@ -1,4 +1,3 @@
-import { __ } from "@wordpress/i18n";
 import { SendingHistory } from "./SendingHistory";
 
 export const AllSendingHistory = () => {

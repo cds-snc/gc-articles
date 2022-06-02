@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { __, sprintf } from "@wordpress/i18n";
+import { __ } from "@wordpress/i18n";
 import { useEffect, useState, useCallback } from 'react';
 import { Descendant } from "slate";
 import { Link, useNavigate } from 'react-router-dom';

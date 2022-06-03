@@ -1,5 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
+import Markdown from 'markdown-to-jsx';
 
 export const StyledSubject = styled.div`
     display:block;
@@ -26,6 +27,12 @@ export const StyledPreview = styled.div`
 export const StyledContent = styled.div`
     width:700px;
     margin: 0 auto;
+    ul {
+        list-style-type: disc;
+        li {
+            margin-left: 15px;
+        }
+    }
 `
 
 export const MessagePreview = ({ content, subject }: { content: string | undefined, subject: string | undefined }) => {
@@ -37,7 +44,9 @@ export const MessagePreview = ({ content, subject }: { content: string | undefin
             </StyledSubject>
             <StyledPreview>
                 <StyledContent>
-                    {content}
+                    <Markdown>
+                        {content || ''}
+                    </Markdown>
                 </StyledContent>
             </StyledPreview>
         </>

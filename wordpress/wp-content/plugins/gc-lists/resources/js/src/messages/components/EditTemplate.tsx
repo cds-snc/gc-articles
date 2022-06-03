@@ -123,7 +123,7 @@ export const EditTemplate = () => {
                         <tr>
                             <td>
                                 <label className="required" htmlFor="message"><strong>{__("Message", "cds-snc")}</strong></label>
-                                <p style={{ marginBottom: '10px' }}>{__("Use the", "cds-snc")} <a href="https://notification.canada.ca/formatting-guide">{__("email formatting guide", "cds-snc")}</a> {__("(Opens in a new tab) to craft your message.", "cds-snc")}</p>
+                                <p style={{ marginBottom: '10px' }}>{__("Use the", "cds-snc")} <a href="https://notification.canada.ca/formatting-guide" target="_blank" rel="noreferrer">{__("email formatting guide", "cds-snc")}</a> {__("(Opens in a new tab) to craft your message.", "cds-snc")}</p>
                                 <div className={errors.hasTemplate ? "error-wrapper" : ""}>
                                     {errors.hasTemplate && <span className="validation-error">{errors.hasTemplate?.message || __("Message is required", "cds-snc")}</span>}
                                     {template.parsedContent ?

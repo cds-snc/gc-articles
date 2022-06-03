@@ -24,5 +24,9 @@
 </div>
 
 <script>
-    window.location = "#/lists";
+    let params = new URLSearchParams(window.location.search);
+    let from = params.get("from");
+    if(from !== 'messages') {
+        window.location = "#/lists";
+    }
 </script>

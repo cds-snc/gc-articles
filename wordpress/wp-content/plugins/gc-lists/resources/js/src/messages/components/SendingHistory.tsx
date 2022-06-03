@@ -19,7 +19,7 @@ const StyledTableLink = styled(Link)`
     }
 `
 
-export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
+export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number, pageNav?: boolean, allLink?: boolean }) => {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
     const { request, response } = useFetch({ data: [] })
@@ -83,10 +83,10 @@ export const SendingHistory = ({ perPage, pageNav }: { perPage?: number, pageNav
         <>
             <h2>{__("Sending history", "cds-snc")}</h2>
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
-            <StyledPaging>
+            {allLink && <StyledPaging>
                 <StyledLink to={`/messages/history`} >
                     <span> {__("All sending history", "cds-snc")} </span><Next />
                 </StyledLink>
-            </StyledPaging>
+            </StyledPaging>}
         </> : null
 }

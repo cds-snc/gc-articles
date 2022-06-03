@@ -1,5 +1,4 @@
 import { __ } from "@wordpress/i18n";
-import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 const StyledMessage = styled.div`

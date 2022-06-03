@@ -17,7 +17,7 @@ require_once __DIR__ . '/inc/template-filters.php';
 // phpcs:disable
 if (!defined('_S_VERSION')) {
     // Replace the version number of the theme on each release.
-    define('_S_VERSION', '3.0.6');
+    define('_S_VERSION', '3.0.7');
 }
 
 if (!defined('THEME_NAMESPACE')) {

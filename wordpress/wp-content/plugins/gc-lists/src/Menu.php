@@ -162,7 +162,7 @@ class Menu
                 $data  = json_decode($json, true);
                 $files = $data['files'];
 
-                wp_enqueue_style('list-manager', $files['main.css'], null, '1.0.0');
+                wp_enqueue_style('gc-lists', $files['main.css'], null, '1.0.0');
 
                 wp_enqueue_script(
                     'gc-lists',

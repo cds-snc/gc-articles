@@ -24,10 +24,20 @@ const ListReducer = (state: State, action: Action): State => {
             const lists = state.lists.filter((item: List) => {
                 return item.id !== action.payload.id
             })
-            return { ...state, lists, messages: [{ id: uuidv4(), type: "delete", message: `Deleted  ${action.payload.id}` }] }
+
+            let hasLists = true;
+            if (lists?.length < 1) {
+                hasLists = false;
+            } else {
+
+            }
+            return { ...state, hasLists, lists, messages: [{ id: uuidv4(), type: "delete", message: `Deleted  ${action.payload.id}` }] }
         }
         case "load": {
-            return { ...state, lists: [...action.payload] };
+            return { ...state, lists: [...action.payload], hasLists: true };
+        }
+        case "no-lists": {
+            return { ...state, hasLists: false };
         }
         default:
             throw new Error(`Unhandled action type`);
@@ -35,7 +45,7 @@ const ListReducer = (state: State, action: Action): State => {
 };
 
 const ListProvider = ({ children, serviceData, user = { hasEmail: true, hasPhone: false }, config = { listManagerApiPrefix: '' } }: ListProviderProps) => {
-    const [state, dispatch] = useReducer(ListReducer, { loading: false, serviceData, lists: [], messages: [], user: user, config });
+    const [state, dispatch] = useReducer(ListReducer, { loading: false, serviceData, lists: [], hasLists: false, messages: [], user: user, config });
 
     const value = {
         state,

@@ -10,6 +10,7 @@ import { deserialize, serialize } from '../editor/utils';
 import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
 import { Spinner } from '../../common/Spinner';
+import { Next } from "../components/icons/Next"
 import styled from 'styled-components';
 import formatRelative from 'date-fns/formatRelative';
 
@@ -154,15 +155,14 @@ export const EditTemplate = () => {
                         navigate(`/messages/send/${templateId}`, { state: { ...getValues(), template: content } });
                     }}
                     className="button button-primary">
-                    {__('Send message to a list', 'cds-snc')}
+                    {__('Choose a list to send to', 'cds-snc')}
                 </button>
 
                 <button className="button" onClick={async () => {
                     handleSubmit(handleFormData, () => {
-                        console.log("oh no", handleFormData);
                         return false;
                     })();
-                }}>{__('Save template', 'cds-snc')}</button>
+                }}>{__('Save for later', 'cds-snc')}</button>
             </div>
         </>
     )

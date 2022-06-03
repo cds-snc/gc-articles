@@ -49,6 +49,7 @@ export type User = {
 export type State = {
     loading: boolean;
     lists: List[] | [];
+    hasLists: boolean;
     messages: Message[] | [];
     user: User;
     serviceData: ServiceData;
@@ -59,6 +60,7 @@ export type Action =
     | { type: 'add'; payload: { id: string } }
     | { type: 'delete'; payload: { id: string } }
     | { type: 'load'; payload: List[] }
+    | { type: 'no-lists'; payload: [] }
     | { type: 'reset'; payload: { id: string } };
 
 export type ErrorResponse = {
@@ -106,6 +108,6 @@ export type TemplateType = {
     name: string;
     subject: string;
     body: string;
-    parsedContent?: Descendant[] | undefined | "";
+    parsedContent?: Descendant[] | undefined | '';
     updated_at?: string;
 };

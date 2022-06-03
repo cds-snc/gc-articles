@@ -29,9 +29,15 @@ export const useListFetch = () => {
                         return true
                     }
                     return false
-                })
+                });
 
-                dispatch({ type: "load", payload: lists })
+                if (lists?.length === 0) {
+                    dispatch({ type: "no-lists", payload: [] });
+                    setStatus("idle");
+                    return;
+                }
+
+                dispatch({ type: "load", payload: lists });
                 setStatus("idle")
             } else {
                 setStatus("error")

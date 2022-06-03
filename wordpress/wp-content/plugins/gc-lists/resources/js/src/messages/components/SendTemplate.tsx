@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { __ } from "@wordpress/i18n";
-
+import styled from 'styled-components';
 import { MessagePreview } from "./MessagePreview";
 import { MessageSent } from "./MessageSent";
 import { SendToList } from './SendToList';
@@ -9,6 +9,7 @@ import { SendingError } from './SendingError';
 import { CreateNewList } from "./CreateNewList";
 import { Spinner } from '../../common/Spinner';
 import { useList } from "../../store/ListContext";
+import { Next } from "./icons/Next";
 import { List } from '../../types';
 import { useListFetch } from '../../store/UseListFetch';
 import { StyledSelect } from "../editor/Styles"
@@ -16,10 +17,15 @@ import useTemplateApi from '../../store/useTemplateApi';
 import { ConfirmSend } from "./ConfirmSend";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-// import { Warn } from "../components/Notice";
+import { Warn } from "../components/Notice";
 
-// @todo -- add Warn if user has no lists
-// need to catch error lists.length = 0
+
+const StyledNext = styled.span`
+    margin-left: 10px;
+    position: relative;
+    top: 3px;
+`;
+
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     return (
@@ -39,7 +45,7 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 export const SendTemplate = () => {
 
     const { status } = useListFetch();
-    const { state: { lists } } = useList();
+    const { state: { lists, hasLists } } = useList();
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
 
@@ -102,10 +108,15 @@ export const SendTemplate = () => {
     return (
         <>
             <h1>{__("Send message to a list", "cds-snc")}</h1>
-            <p><strong>{__("Subscriber list", "cds-snc")}</strong></p>
-            <p>{__("Choose a group to send this message to.", "cds-snc")}</p>
 
-            {lists.length >= 1 ?
+            {hasLists ?
+                <>
+                    <p><strong>{__("Subscriber list", "cds-snc")}</strong></p>
+                    <p>{__("Choose a group to send this message to.", "cds-snc")}</p>
+                </> :
+                <Warn message={__("You don’t have any subscriber list.", "cds-snc")} />}
+
+            {hasLists ?
                 <>
                     <ListSelect lists={lists} handleChange={(val: string) => {
                         setListId(val)
@@ -114,7 +125,7 @@ export const SendTemplate = () => {
 
                     <button
                         style={{ marginRight: "20px" }}
-                        className="button button-primary"
+                        className="button button-green"
                         disabled={!content}
                         onClick={async () => {
                             const confirmed = await ConfirmSend({ count: subscriberCount });
@@ -130,13 +141,14 @@ export const SendTemplate = () => {
                             }
                         }}>
                         {__("Send message", "cds-snc")}
+
+                        <StyledNext><Next color={"#fff"} /></StyledNext>
                     </button>
                     <button className="button" onClick={() => {
                         navigate(`/messages`);
                     }}>{__("Cancel")}</button>
                 </>
-                :
-                <Spinner />
+                : null
             }
             <CreateNewList />
             <h2>{__("Message preview", "cds-snc")}</h2>

@@ -72,3 +72,14 @@ body.swal2-toast-shown .swal2-container.swal2-top-right {
   box-shadow: none !important;
   outline: auto !important;
 }
+
+.button-green{
+  color: #fff !important;
+  position: relative;
+  background-color: #278400 !important;
+  border-color: #278400 !important;
+}
+
+.button-green:hover{
+  background-color: #006535 !important;
+}

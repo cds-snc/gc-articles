@@ -14,6 +14,8 @@ const StyledNotice = styled.div`
         display:inline-block;
         top:-3px;
         margin-left:20px;
+        font-weight: normal;
+        font-size: 1.2rem;
     }
     margin-top: 20px;
     margin-bottom: 20px;

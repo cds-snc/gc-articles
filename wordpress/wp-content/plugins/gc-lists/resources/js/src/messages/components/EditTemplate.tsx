@@ -10,7 +10,6 @@ import { deserialize, serialize } from '../editor/utils';
 import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
 import { Spinner } from '../../common/Spinner';
-import { Next } from "../components/icons/Next"
 import styled from 'styled-components';
 import formatRelative from 'date-fns/formatRelative';
 

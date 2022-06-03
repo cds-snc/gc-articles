@@ -95,7 +95,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                             <StyledTableLink
                                 to={`/messages/send/${tId}`}
                             >
-                                {__("Send Template", "cds-snc")}
+                                {__("Send to a list", "cds-snc")}
                             </StyledTableLink>
                         </>
                     )

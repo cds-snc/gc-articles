@@ -430,7 +430,7 @@ test('Saving a new version of a message does not copy the sent attributes', func
     $this->assertNull($message->sent_to_list_name);
     $this->assertNull($message->sent_by_id);
     $this->assertNull($message->sent_by_email);
-})->group('test');
+});
 
 test('Saving a version touches the original updated_at timestamp', function() {
     Carbon::setTestNow(Carbon::now());

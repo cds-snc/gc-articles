@@ -12,7 +12,7 @@
 <p>
     <?php
         echo sprintf(
-            __('You must configure your <a href="%s">Notify API Key</a>', 'cds-snc'),
+            __('You must configure your <a href="%s">Notify API Key</a>', 'gc-lists'),
             admin_url("options-general.php?page=notify-settings")
         );
         ?>

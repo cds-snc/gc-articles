@@ -146,7 +146,7 @@ export const EditTemplate = () => {
             </form>
 
 
-            {saved && <Success message={"Message saved"} />}
+            {saved && <Success message={__("Message saved", 'gc-lists')} />}
 
             <div>
                 <button style={{ marginRight: "20px" }}
@@ -154,14 +154,14 @@ export const EditTemplate = () => {
                         navigate(`/messages/send/${templateId}`, { state: { ...getValues(), template: content } });
                     }}
                     className="button button-primary">
-                    {__('Choose a list to send to', 'cds-snc')}
+                    {__('Choose a list to send to', 'gc-lists')}
                 </button>
 
                 <button className="button" onClick={async () => {
                     handleSubmit(handleFormData, () => {
                         return false;
                     })();
-                }}>{__('Save for later', 'cds-snc')}</button>
+                }}>{__('Save for later', 'gc-lists')}</button>
             </div>
         </>
     )

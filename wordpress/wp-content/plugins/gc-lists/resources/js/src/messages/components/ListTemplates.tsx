@@ -111,18 +111,18 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                 className="button button-primary"
                 to={`/messages/edit/new`}
             >
-                {__("Create new message", "cds-snc")}
+                {__("Create new message", "gc-lists")}
             </Link>
 
             {loading && <Spinner />}
             {
                 templates?.length ?
                     <>
-                        <h2>{__('Saved messages', 'cds-snc')}</h2>
+                        <h2>{__('Saved messages', 'gc-lists')}</h2>
                         <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
                         <StyledPaging>
                             <StyledLink to={`/messages/all-templates`} >
-                                <span>{__("All saved message", "cds-snc")}</span><Next />
+                                <span>{__("All saved message", "gc-lists")}</span><Next />
                             </StyledLink>
                         </StyledPaging>
                     </>

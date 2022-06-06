@@ -13,7 +13,8 @@
         "yoast/wp-test-utils": "^1.0",
         "pestphp/pest": "^1.21",
         "pestphp/pest-plugin-faker": "^1.0",
-        "mockery/mockery": "^1.5"
+        "mockery/mockery": "^1.5",
+        "10up/wp_mock": "^0.4.2"
     },
     "autoload": {
       "psr-4": {

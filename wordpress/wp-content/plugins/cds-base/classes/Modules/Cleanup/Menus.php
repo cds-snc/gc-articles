@@ -41,6 +41,7 @@ class Menus
             "Users",
             "Settings",
             "Bulk Send",
+            "GC Lists",
             "Lists",
             "Checklists",
 
@@ -51,6 +52,7 @@ class Menus
             "Utilisateurs",
             "Réglages",
             "Envoyer en masse",
+            "Listes GC",
         ];
 
         //  __('Settings'), __('Appearance')

@@ -75,7 +75,7 @@ test('Get all templates with limit', function() {
         ->each
         ->toBeArray()
         ->toHaveKeys($this->messageAttributes);
-})->group('test');
+});
 
 test('Get all templates with invalid limit returns default 5', function() {
     $this->factory->message->create_many(20);
@@ -93,7 +93,7 @@ test('Get all templates with invalid limit returns default 5', function() {
     expect($body)
         ->json()
         ->toHaveCount(5);
-})->group('test');
+});
 
 test('Get all sent messages', function() {
     // Create some templates and versions
@@ -226,7 +226,7 @@ test('Get versions of a message', function() {
         ->toHaveCount(5)
         ->each
         ->toHaveKeys($this->messageAttributes);
-})->group('test');
+});
 
 test('No versions available', function() {
     $message_id = $this->factory->message->create([

@@ -172,8 +172,10 @@ class Message extends Model
 
         $attributes = $this->getAttributes();
 
-        // Don't copy the id obvi
-        unset($attributes['id']);
+        // Some attributes shouldn't be copied to the new version
+        $unset = ['id', 'sent_at', 'sent_to_list_id', 'sent_to_list_name', 'sent_by_id', 'sent_by_email'];
+
+        $attributes = array_diff_key($attributes, array_flip($unset));
 
         $version->forceFill(array_merge($attributes, [
             'original_message_id' => $original->getAttribute('id'),

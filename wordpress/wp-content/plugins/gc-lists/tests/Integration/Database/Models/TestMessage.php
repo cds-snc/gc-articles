@@ -401,6 +401,37 @@ test('Save a new version of a message', function() {
     $this->assertSame('This is a another new body', $version->body);
 });
 
+test('Saving a new version of a message does not copy the sent attributes', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz',
+        'sent_at' => Carbon::now()->toDateTimeString(),
+        'sent_to_list_id' => faker()->uuid(),
+        'sent_to_list_name' => "ListName",
+        'sent_by_id' => 1,
+        'sent_by_email' => faker()->email(),
+    ]);
+
+    $original = Message::find($message_id);
+
+    $original->fill([
+        'name' => 'Foo2',
+        'subject' => 'Bar2',
+        'body' => 'Baz2',
+    ]);
+
+    $original->saveVersion();
+
+    $message = $original->latest();
+
+    $this->assertNull($message->sent_at);
+    $this->assertNull($message->sent_to_list_id);
+    $this->assertNull($message->sent_to_list_name);
+    $this->assertNull($message->sent_by_id);
+    $this->assertNull($message->sent_by_email);
+})->group('test');
+
 test('Saving a version touches the original updated_at timestamp', function() {
     Carbon::setTestNow(Carbon::now());
 

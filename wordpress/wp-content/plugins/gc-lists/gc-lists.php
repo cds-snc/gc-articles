@@ -9,7 +9,7 @@
  * Domain Path:     /languages
  * Version:         0.1.0
  *
- * @package         Gc_Lists
+ * @package         gc-lists
  */
 
 namespace GCLists;

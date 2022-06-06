@@ -122,7 +122,7 @@ export const SendTemplate = () => {
                     <ListSelect lists={lists} handleChange={(val: string) => {
                         setListId(val)
                     }} />
-                    <SendToList sending={true} name={name} count={subscriberCount} />
+                    <SendToList sending={true} name={listName} count={subscriberCount} />
 
                     <button
                         style={{ marginRight: "20px" }}

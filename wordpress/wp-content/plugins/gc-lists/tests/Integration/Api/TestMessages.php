@@ -223,7 +223,7 @@ test('Get versions of a message', function() {
     expect($body)
         ->json()
         ->toBeArray()
-        ->toHaveCount(5)
+        ->toHaveCount(6)
         ->each
         ->toHaveKeys($this->messageAttributes);
 });
@@ -243,7 +243,9 @@ test('No versions available', function() {
     expect($body)
         ->json()
         ->toBeArray()
-        ->toBeEmpty();
+        ->toHaveCount(1)
+        ->each
+        ->toHaveKey('original_message_id', null);
 });
 
 test('Get sent versions of a message', function() {

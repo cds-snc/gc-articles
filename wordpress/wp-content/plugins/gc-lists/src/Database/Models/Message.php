@@ -110,10 +110,12 @@ class Message extends Model
      */
     public function versions(array $options = []): ?Collection
     {
-        // @TODO: rewrite
         $original = $this->original();
 
-        return static::whereEquals(['original_message_id' => $original->getAttribute('id')], $options);
+        $versions = static::whereEquals(['original_message_id' => $original->getAttribute('id')], $options);
+        $versions->prepend($original);
+
+        return $versions;
     }
 
     /**

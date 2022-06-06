@@ -288,7 +288,7 @@ test('Retrieve versions of a Message', function() {
 
     $message = Message::find($message_id);
 
-    $this->assertEquals(5, count($message->versions()));
+    $this->assertEquals(6, count($message->versions()));
     $this->assertTrue($message->versions() instanceof Collection);
 
     foreach($message->versions() as $version) {
@@ -385,7 +385,7 @@ test('Save a new version of a message', function() {
 
     // Check the version
     $version = $message->latest();
-    $this->assertCount(1, $message->versions());
+    $this->assertCount(2, $message->versions());
     $this->assertSame('This is a new name', $version->name);
     $this->assertSame('This is a new body', $version->body);
 
@@ -396,7 +396,7 @@ test('Save a new version of a message', function() {
 
     // Check the new version
     $version = $message->latest();
-    $this->assertCount(2, $message->versions());
+    $this->assertCount(3, $message->versions());
     $this->assertSame('This is a another new name', $version->name);
     $this->assertSame('This is a another new body', $version->body);
 });
@@ -491,8 +491,8 @@ test('Save a new version from a version should create a revision of the original
     // New version original and version original should be the same
     $this->assertEquals($new_version->original(), $version->original());
 
-    // There should now be six versions of the original
-    $this->assertCount(6, $original->versions());
+    // There should now be seven versions including the original
+    $this->assertCount(7, $original->versions());
 });
 
 test('Saving a version with invalid attribute should throw exception', function() {

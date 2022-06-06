@@ -73,7 +73,8 @@ export const SendTemplate = () => {
 
     useEffect(() => {
         setContent(template?.body);
-        setSubject(template?.subject)
+        setSubject(template?.subject);
+        setName(template?.name);
     }, [template]);
 
     useEffect(() => {

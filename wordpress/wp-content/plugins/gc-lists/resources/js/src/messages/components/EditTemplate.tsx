@@ -65,7 +65,7 @@ export const EditTemplate = () => {
 
     }, [saveTemplate, currentTemplate, templateId, navigate, template]);
 
-    const heading = <h1>{__("Edit email message", "cds-snc")}</h1>;
+    const heading = <h1>{__("Edit email message", "gc-lists")}</h1>;
 
     if (loadingTemplate) {
         return (
@@ -102,30 +102,30 @@ export const EditTemplate = () => {
                     <tbody>
                         <tr>
                             <td>
-                                <label className="required" htmlFor="name"><strong>{__("Message name", "cds-snc")}</strong></label>
-                                <p>{__("Your recipients will not see this message name.", "cds-snc")}</p>
+                                <label className="required" htmlFor="name"><strong>{__("Message name", "gc-lists")}</strong></label>
+                                <p>{__("Your recipients will not see this message name.", "gc-lists")}</p>
                                 <div className={errors.name ? "error-wrapper" : ""}>
-                                    {errors.name && <span className="validation-error">{errors.name?.message || __("Name is required", "cds-snc")}</span>}
+                                    {errors.name && <span className="validation-error">{errors.name?.message || __("Name is required", "gc-lists")}</span>}
                                     <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label className="required" htmlFor="subject"><strong>{__("Subject line of the email", "cds-snc")}</strong></label>
-                                <p style={{ marginBottom: "12px" }}>{__("Tell recipients what the message is about. Try to keep it shorter than 10 words.", "cds-snc")}</p>
+                                <label className="required" htmlFor="subject"><strong>{__("Subject line of the email", "gc-lists")}</strong></label>
+                                <p style={{ marginBottom: "12px" }}>{__("Tell recipients what the message is about. Try to keep it shorter than 10 words.", "gc-lists")}</p>
                                 <div className={errors.subject ? "error-wrapper" : ""}>
-                                    {errors.subject && <span className="validation-error">{errors.subject?.message || __("Subject is required", "cds-snc")}</span>}
+                                    {errors.subject && <span className="validation-error">{errors.subject?.message || __("Subject is required", "gc-lists")}</span>}
                                     <input id="subject" style={textWidth} type="text" {...register("subject", { required: true })} />
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <label className="required" htmlFor="message"><strong>{__("Message", "cds-snc")}</strong></label>
-                                <p style={{ marginBottom: '10px' }}>{__("Use the", "cds-snc")} <a href="https://notification.canada.ca/formatting-guide" target="_blank" rel="noreferrer">{__("email formatting guide", "cds-snc")}</a> {__("(Opens in a new tab) to craft your message.", "cds-snc")}</p>
+                                <label className="required" htmlFor="message"><strong>{__("Message", "gc-lists")}</strong></label>
+                                <p style={{ marginBottom: '10px' }}>{__("Use the", "gc-lists")} <a href="https://notification.canada.ca/formatting-guide" target="_blank" rel="noreferrer">{__("email formatting guide", "gc-lists")}</a> {__("(Opens in a new tab) to craft your message.", "gc-lists")}</p>
                                 <div className={errors.hasTemplate ? "error-wrapper" : ""}>
-                                    {errors.hasTemplate && <span className="validation-error">{errors.hasTemplate?.message || __("Message is required", "cds-snc")}</span>}
+                                    {errors.hasTemplate && <span className="validation-error">{errors.hasTemplate?.message || __("Message is required", "gc-lists")}</span>}
                                     {template.parsedContent ?
                                         <Editor template={template.parsedContent}
                                             handleValidate={(value: any) => {
@@ -136,8 +136,8 @@ export const EditTemplate = () => {
                                 </div>
                                 <StyledLastSaved>
                                     {/* @todo use date-fns to show template date */}
-                                    {template?.updated_at ? <> {__('Last saved', "cds-snc")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}
-                                    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "cds-snc")}</StyledPreviousVersions></Link>}
+                                    {template?.updated_at ? <> {__('Last saved', "gc-lists")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}
+                                    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "gc-lists")}</StyledPreviousVersions></Link>}
                                 </StyledLastSaved>
                             </td>
                         </tr>

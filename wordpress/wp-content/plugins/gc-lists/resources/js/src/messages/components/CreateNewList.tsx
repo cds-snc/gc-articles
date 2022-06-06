@@ -11,8 +11,8 @@ export const CreateNewList = () => {
         <StyledMessage>
             <p>
                 <strong>
-                    <a href="?page=gc-lists_subscribers&from=messages#/lists/create">{__("Create a new list.", "cds-snc")}</a></strong> <br />
-                {__("A subscriber list allows you to collect a group of subscribers that you can send a message to.", "cds-snc")}
+                    <a href="?page=gc-lists_subscribers&from=messages#/lists/create">{__("Create a new list.", "gc-lists")}</a></strong> <br />
+                {__("A subscriber list allows you to collect a group of subscribers that you can send a message to.", "gc-lists")}
             </p>
         </StyledMessage>
     )

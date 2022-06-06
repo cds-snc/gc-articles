@@ -42,7 +42,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
     const columns = React.useMemo(
         () => [
             {
-                Header: __('Message Name', "cds-snc"),
+                Header: __('Message Name', "gc-lists"),
                 accessor: 'name',
                 Cell: ({ row }: { row: any }) => {
                     const name = row?.original?.name;
@@ -53,11 +53,11 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
 
             },
             {
-                Header: __('Message type', "cds-snc"),
+                Header: __('Message type', "gc-lists"),
                 accessor: 'type',
             },
             {
-                Header: __('Last modified', "cds-snc"),
+                Header: __('Last modified', "gc-lists"),
                 accessor: 'updated_at',
                 Cell: ({ row }: { row: any }) => {
                     const t = row?.original?.updated_at;
@@ -80,7 +80,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                             <StyledTableLink
                                 to={`/messages/edit/${tId}`}
                             >
-                                {__("Edit", "cds-snc")}
+                                {__("Edit", "gc-lists")}
                             </StyledTableLink>
                             <StyledDivider>|</StyledDivider>
                             <StyledDeleteButton data-tid={tId}
@@ -89,13 +89,13 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                                     getTemplates();
                                 }}
                             >
-                                {__("Delete", "cds-snc")}
+                                {__("Delete", "gc-lists")}
                             </StyledDeleteButton>
                             <StyledDivider>|</StyledDivider>
                             <StyledTableLink
                                 to={`/messages/send/${tId}`}
                             >
-                                {__("Send to a list", "cds-snc")}
+                                {__("Send to a list", "gc-lists")}
                             </StyledTableLink>
                         </>
                     )

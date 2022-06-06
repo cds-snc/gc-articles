@@ -25,7 +25,7 @@ export const MessageSent = ({ id, listName, count }: { id: string | undefined, l
     return (
         <>
             <StyledSuccess>
-                <div><h2>{__("Message sent", "cds-snc")}</h2></div>
+                <div><h2>{__("Message sent", "gc-lists")}</h2></div>
             </StyledSuccess>
             <SendToList sending={false} name={listName} count={count} />
             <StyledActionContainer>
@@ -34,13 +34,13 @@ export const MessageSent = ({ id, listName, count }: { id: string | undefined, l
                     style={{ marginRight: "20px" }}
                     className="button button-primary"
                 >
-                    {__("Send a new message", "cds-snc")}
+                    {__("Send a new message", "gc-lists")}
                 </Link>
                 <Link
                     to={`/messages`}
                     className="button"
                 >
-                    {__("Return to messages", "cds-snc")}
+                    {__("Return to messages", "gc-lists")}
                 </Link>
             </StyledActionContainer>
         </>

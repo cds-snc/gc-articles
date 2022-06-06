@@ -43,7 +43,7 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
         () => [
 
             {
-                Header: __('Message name', "cds-snc"),
+                Header: __('Message name', "gc-lists"),
                 accessor: 'name',
                 Cell: ({ row }: { row: any }) => {
                     const messageId = row?.original?.id;
@@ -60,15 +60,15 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
                 },
             },
             {
-                Header: __('Date sent', "cds-snc"),
+                Header: __('Date sent', "gc-lists"),
                 accessor: 'created_at',
             },
             {
-                Header: __('List name', "cds-snc"),
+                Header: __('List name', "gc-lists"),
                 accessor: 'sent_to_list_name',
             },
             {
-                Header: __('Sender', "cds-snc"),
+                Header: __('Sender', "gc-lists"),
                 accessor: 'sent_by_email',
             },
         ],
@@ -81,11 +81,11 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
 
     return data.length ?
         <>
-            <h2>{__("Sending history", "cds-snc")}</h2>
+            <h2>{__("Sending history", "gc-lists")}</h2>
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
             {allLink && <StyledPaging>
                 <StyledLink to={`/messages/history`} >
-                    <span> {__("All sending history", "cds-snc")} </span><Next />
+                    <span> {__("All sending history", "gc-lists")} </span><Next />
                 </StyledLink>
             </StyledPaging>}
         </> : null

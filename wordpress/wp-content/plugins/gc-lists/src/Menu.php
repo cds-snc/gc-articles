@@ -28,8 +28,8 @@ class Menu
     public function addMenu()
     {
         add_menu_page(
-            __('GC Lists', "cds-snc"),
-            __('GC Lists', "cds-snc"),
+            __('GC Lists', "gc-lists"),
+            __('GC Lists', "gc-lists"),
             $this->capability,
             $this->messagesPageSlug,
             [$this, 'renderMessages'],

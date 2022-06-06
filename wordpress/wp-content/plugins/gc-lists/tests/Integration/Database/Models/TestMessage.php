@@ -520,6 +520,25 @@ test('Retrieve all Message templates', function() {
     $this->assertCount(5, $templates);
 });
 
+test('Retrieve message templates includes latest name', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Original name',
+        'body' => 'Original body',
+    ]);
+
+    $original = Message::find($message_id);
+
+    $original->name = 'New name';
+    $original->saveVersion();
+
+    $original->name = 'Another name change';
+    $original->saveVersion();
+
+    $templates = Message::templates();
+    $template = $templates->first();
+    $this->assertEquals($template->name, 'Another name change');
+});
+
 test('Retrieve only Sent Messages', function() {
     // Create a Message template and some versions including sent messages
     $message_id = $this->factory->message->create();

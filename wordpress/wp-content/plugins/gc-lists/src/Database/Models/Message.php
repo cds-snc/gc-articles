@@ -222,7 +222,7 @@ class Message extends Model
     }
 
     /**
-     * Retrieve Message templates
+     * Retrieve Message templates. If a message has multiple versions, retrieve the most recent name.
      *
      * @param  array  $options
      *
@@ -230,7 +230,13 @@ class Message extends Model
      */
     public static function templates(array $options = []): ?Collection
     {
-        return static::whereNull('original_message_id', $options);
+        $messages = static::whereNull('original_message_id', $options);
+
+        $messages->map(function ($message) {
+            $message->name = $message->latest()->name;
+        });
+
+        return $messages;
     }
 
     /**

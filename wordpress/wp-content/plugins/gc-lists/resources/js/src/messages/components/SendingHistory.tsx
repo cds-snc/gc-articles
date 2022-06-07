@@ -28,7 +28,6 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
         const getSentMessages = async () => {
             setLoading(true);
             await request.get(`/messages/sent?${uuidv4()}`);
-            console.log(response.data);
             if (response.ok) {
                 setData(response.data);
                 setLoading(false)

@@ -456,7 +456,7 @@ class Model implements JsonSerializable
 
         $query = "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName}";
 
-        if (isset($options['limit'])) {
+        if (isset($options['limit']) && is_numeric($options['limit'])) {
             $query .= " LIMIT {$options['limit']}";
         }
 
@@ -486,7 +486,7 @@ class Model implements JsonSerializable
             $query .= $wpdb->prepare(" AND {$key} = %s", $value);
         }
 
-        if (isset($options['limit'])) {
+        if (isset($options['limit']) && is_numeric($options['limit'])) {
             $query .= " LIMIT {$options['limit']}";
         }
 
@@ -521,7 +521,7 @@ class Model implements JsonSerializable
             $query .= " AND {$column} IS NOT NULL";
         }
 
-        if (isset($options['limit'])) {
+        if (isset($options['limit']) && is_numeric($options['limit'])) {
             $query .= " LIMIT {$options['limit']}";
         }
 
@@ -556,7 +556,7 @@ class Model implements JsonSerializable
             $query .= " AND {$column} IS NULL";
         }
 
-        if (isset($options['limit'])) {
+        if (isset($options['limit']) && is_numeric($options['limit'])) {
             $query .= " LIMIT {$options['limit']}";
         }
 

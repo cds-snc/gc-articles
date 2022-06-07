@@ -538,6 +538,11 @@ class Messages extends BaseEndpoint
             $options['limit'] = (int)$params['limit'] ?: 5;
         }
 
+        // asc or desc will sortBy created_at
+        if (isset($params['sort']) && in_array($params['sort'], ['asc', 'desc'])) {
+            $options['sort'] = $params['sort'];
+        }
+
         return $options;
     }
 }

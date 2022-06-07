@@ -237,6 +237,34 @@ test('Retrieve using whereNull param and Limit', function() {
     $this->assertEquals(5, count($messages));
 });
 
+test('Retrieve using where', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Foo'
+    ]);
+
+    $message = Message::find($message_id);
+    $message->name = 'Bar';
+    $message->saveVersion();
+
+    $uuid = faker()->uuid();
+    $email = faker()->email;
+    $listName = 'This is a list name';
+
+    $message->send($uuid, $listName, 1, $email);
+
+    $sentOriginals = Message::andWhere(['sent_at IS NOT NULL', 'original_message_id IS NULL']);
+    $this->assertEquals(0, $sentOriginals->count());
+
+    $originals = Message::andWhere(['original_message_id IS NULL']);
+    $this->assertEquals(1, $originals->count());
+
+    $sent = Message::andWhere(['sent_at IS NOT NULL']);
+    $this->assertEquals(1, $sent->count());
+
+    $versions = Message::andWhere(["original_message_id = {$message_id}"]);
+    $this->assertEquals(2, $versions->count());
+});
+
 test('Create a model with invalid attribute throws InvalidAttributeException', function() {
     $this->expectException(InvalidAttributeException::class);
 

@@ -500,6 +500,45 @@ class Model implements JsonSerializable
     }
 
     /**
+     * Query filter accepts an array of where clauses and joins them with AND, ie:
+     * - "original_message_id IS NULL"
+     * - "id = 4"
+     * - "sent_at IS NOT NULL"
+     *
+     * @param  array  $whereClauses
+     * @param  array  $options
+     *
+     * @return Collection|null
+     */
+    public static function andWhere(array $whereClauses, array $options = []): ?Collection
+    {
+        global $wpdb;
+        $instance = new static();
+
+        $query = "SELECT {$instance->getVisibleColumns()} FROM {$instance->tableName} WHERE 1=1";
+
+        if (!is_array($whereClauses)) {
+            $whereClauses = [$whereClauses];
+        }
+
+        foreach ($whereClauses as $clause) {
+            $query .= " AND {$clause}";
+        }
+
+        if (isset($options['limit']) && is_numeric($options['limit'])) {
+            $query .= " LIMIT {$options['limit']}";
+        }
+
+        $data = $wpdb->get_results($query);
+
+        if (!$data) {
+            return collect();
+        }
+
+        return collect(self::loadModelsFromDbResults($data));
+    }
+
+    /**
      * Simple NOT NULL query accepts an array of attributes that must be NOT NULL
      *
      * @param $columns

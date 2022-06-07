@@ -230,11 +230,24 @@ class Message extends Model
      */
     public static function templates(array $options = []): ?Collection
     {
-        $messages = static::whereNull('original_message_id', $options);
+        $messages = static::whereNull('original_message_id');
 
+        // In case the name of the template has been changed, display latest
         $messages->map(function ($message) {
             $message->name = $message->latest()->name;
         });
+
+        // Apply sort if provided
+        if (isset($options['sort']) && $options['sort'] === 'desc') {
+            $messages = $messages->sortByDesc(function ($message) {
+                return strtotime($message->created_at);
+            })->values();
+        }
+
+        // Apply limit if provided
+        if (isset($options['limit'])) {
+            $messages = $messages->take((int)$options['limit']);
+        }
 
         return $messages;
     }
@@ -248,6 +261,20 @@ class Message extends Model
      */
     public static function sentMessages(array $options = []): ?Collection
     {
-        return static::whereNotNull(['sent_at'], $options);
+        $messages = static::whereNotNull(['sent_at']);
+
+        // Apply sort if provided
+        if (isset($options['sort']) && $options['sort'] === 'desc') {
+            $messages = $messages->sortByDesc(function ($message) {
+                return strtotime($message->created_at);
+            })->values();
+        }
+
+        // Apply limit if provided
+        if (isset($options['limit'])) {
+            $messages = $messages->take((int)$options['limit']);
+        }
+
+        return $messages;
     }
 }

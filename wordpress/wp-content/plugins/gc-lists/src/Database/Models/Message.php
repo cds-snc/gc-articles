@@ -230,7 +230,10 @@ class Message extends Model
      */
     public static function templates(array $options = []): ?Collection
     {
-        $messages = static::whereNull('original_message_id');
+        $messages = static::where([
+            'original_message_id IS NULL',
+            'sent_at IS NULL',
+        ]);
 
         // In case the name of the template has been changed, display latest
         $messages->map(function ($message) {

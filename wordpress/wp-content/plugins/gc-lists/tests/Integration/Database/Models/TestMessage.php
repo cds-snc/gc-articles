@@ -548,6 +548,38 @@ test('Retrieve all Message templates', function() {
     $this->assertCount(5, $templates);
 });
 
+test('Retrieve Message templates excludes sent messages', function() {
+    // These are just templates (drafts) by default
+    $this->factory->message->create_many(5);
+
+    // Mimics the "Create and send option" where a template is created and sent immediately
+    for($index = 1; $index <= 10; $index++) {
+        $message = new Message([
+            'name'         => 'Foo',
+            'subject'      => 'Bar',
+            'body'         => 'Baz',
+            'message_type' => 'email'
+        ]);
+
+        $uuid     = faker()->uuid();
+        $email    = faker()->email;
+        $listName = 'FooBar list';
+
+        $message->send(
+            $uuid,
+            $listName,
+            1,
+            $email
+        );
+    }
+
+    $templates = Message::templates();
+    $this->assertEquals(5, $templates->count());
+
+    $all = Message::all();
+    $this->assertEquals(15, $all->count());
+});
+
 test('Retrieve message templates includes latest name', function() {
     $message_id = $this->factory->message->create([
         'name' => 'Original name',

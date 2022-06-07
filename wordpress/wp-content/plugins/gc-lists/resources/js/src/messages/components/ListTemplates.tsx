@@ -120,11 +120,13 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                     <>
                         <h2>{__('Draft messages', 'gc-lists')}</h2>
                         <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
-                        <StyledPaging>
-                            <StyledLink to={`/messages/all-templates`} >
-                                <span>{__("All saved message", "gc-lists")}</span><Next />
-                            </StyledLink>
-                        </StyledPaging>
+                        {templates?.length > 6 &&
+                            <StyledPaging>
+                                <StyledLink to={`/messages/all-templates`}>
+                                    <span>{__("All drafts", "gc-lists")}</span><Next />
+                                </StyledLink>
+                            </StyledPaging>
+                        }
                     </>
                     : null
             }

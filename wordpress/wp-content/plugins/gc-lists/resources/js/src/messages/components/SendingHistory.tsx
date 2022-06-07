@@ -82,7 +82,7 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
         <>
             <h2>{__("Sending history", "gc-lists")}</h2>
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
-            {allLink && <StyledPaging>
+            {allLink && data.length > 6 && <StyledPaging>
                 <StyledLink to={`/messages/history`} >
                     <span> {__("All sending history", "gc-lists")} </span><Next />
                 </StyledLink>

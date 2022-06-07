@@ -510,7 +510,7 @@ class Model implements JsonSerializable
      *
      * @return Collection|null
      */
-    public static function andWhere(array $whereClauses, array $options = []): ?Collection
+    public static function where(array $whereClauses, array $options = []): ?Collection
     {
         global $wpdb;
         $instance = new static();

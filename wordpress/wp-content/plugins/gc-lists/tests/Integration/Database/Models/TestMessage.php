@@ -288,7 +288,7 @@ test('Retrieve versions of a Message', function() {
 
     $message = Message::find($message_id);
 
-    $this->assertEquals(5, count($message->versions()));
+    $this->assertEquals(6, count($message->versions()));
     $this->assertTrue($message->versions() instanceof Collection);
 
     foreach($message->versions() as $version) {
@@ -385,7 +385,7 @@ test('Save a new version of a message', function() {
 
     // Check the version
     $version = $message->latest();
-    $this->assertCount(1, $message->versions());
+    $this->assertCount(2, $message->versions());
     $this->assertSame('This is a new name', $version->name);
     $this->assertSame('This is a new body', $version->body);
 
@@ -396,9 +396,40 @@ test('Save a new version of a message', function() {
 
     // Check the new version
     $version = $message->latest();
-    $this->assertCount(2, $message->versions());
+    $this->assertCount(3, $message->versions());
     $this->assertSame('This is a another new name', $version->name);
     $this->assertSame('This is a another new body', $version->body);
+});
+
+test('Saving a new version of a message does not copy the sent attributes', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz',
+        'sent_at' => Carbon::now()->toDateTimeString(),
+        'sent_to_list_id' => faker()->uuid(),
+        'sent_to_list_name' => "ListName",
+        'sent_by_id' => 1,
+        'sent_by_email' => faker()->email(),
+    ]);
+
+    $original = Message::find($message_id);
+
+    $original->fill([
+        'name' => 'Foo2',
+        'subject' => 'Bar2',
+        'body' => 'Baz2',
+    ]);
+
+    $original->saveVersion();
+
+    $message = $original->latest();
+
+    $this->assertNull($message->sent_at);
+    $this->assertNull($message->sent_to_list_id);
+    $this->assertNull($message->sent_to_list_name);
+    $this->assertNull($message->sent_by_id);
+    $this->assertNull($message->sent_by_email);
 });
 
 test('Saving a version touches the original updated_at timestamp', function() {
@@ -460,8 +491,8 @@ test('Save a new version from a version should create a revision of the original
     // New version original and version original should be the same
     $this->assertEquals($new_version->original(), $version->original());
 
-    // There should now be six versions of the original
-    $this->assertCount(6, $original->versions());
+    // There should now be seven versions including the original
+    $this->assertCount(7, $original->versions());
 });
 
 test('Saving a version with invalid attribute should throw exception', function() {
@@ -487,6 +518,25 @@ test('Retrieve all Message templates', function() {
 
     $templates = Message::templates(['limit' => 5]);
     $this->assertCount(5, $templates);
+});
+
+test('Retrieve message templates includes latest name', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Original name',
+        'body' => 'Original body',
+    ]);
+
+    $original = Message::find($message_id);
+
+    $original->name = 'New name';
+    $original->saveVersion();
+
+    $original->name = 'Another name change';
+    $original->saveVersion();
+
+    $templates = Message::templates();
+    $template = $templates->first();
+    $this->assertEquals($template->name, 'Another name change');
 });
 
 test('Retrieve only Sent Messages', function() {

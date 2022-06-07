@@ -30,18 +30,30 @@ class Message extends Model
         'message_type',
     ];
 
+    protected array $excludeAttributesWhenCopying = [
+        'sent_at',
+        'sent_to_list_id',
+        'sent_to_list_name',
+        'sent_by_id',
+        'sent_by_email'
+    ];
+
     /**
      * Mark a message as sent
      *
-     * @param  string  $sent_to_list_id
-     * @param  string  $sent_to_list_name
-     * @param  int  $sent_by_id
-     * @param  string  $sent_by_email
+     * @param  string   $sent_to_list_id
+     * @param  string   $sent_to_list_name
+     * @param  int      $sent_by_id
+     * @param  string   $sent_by_email
      *
      * @return $this
      */
-    public function send(string $sent_to_list_id, string $sent_to_list_name, int $sent_by_id, string $sent_by_email): static
-    {
+    public function send(
+        string $sent_to_list_id,
+        string $sent_to_list_name,
+        int $sent_by_id,
+        string $sent_by_email
+    ): static {
         if ($this->exists) {
             $timestamp = $this->freshTimestamp();
 
@@ -55,7 +67,7 @@ class Message extends Model
                 'sent_by_email'     => $sent_by_email
             ]);
 
-            return $this->saveVersion();
+            return $this->saveSentVersion();
         }
 
         $this->forceFill([
@@ -73,6 +85,7 @@ class Message extends Model
      * Get sent versions of the current Message
      *
      * @param  array  $options
+     *
      * @return Collection
      */
     public function sent(array $options = []): Collection
@@ -92,13 +105,17 @@ class Message extends Model
      * Get all versions of the current Message
      *
      * @param  array  $options
+     *
      * @return Collection|null
      */
     public function versions(array $options = []): ?Collection
     {
-        // @TODO: rewrite
         $original = $this->original();
-        return static::whereEquals(['original_message_id' => $original->getAttribute('id')], $options);
+
+        $versions = static::whereEquals(['original_message_id' => $original->getAttribute('id')], $options);
+        $versions->prepend($original);
+
+        return $versions;
     }
 
     /**
@@ -108,7 +125,7 @@ class Message extends Model
      */
     public function original(): Message
     {
-        if (!$this->original_message_id) {
+        if (! $this->original_message_id) {
             return $this;
         }
 
@@ -172,12 +189,14 @@ class Message extends Model
 
         $attributes = $this->getAttributes();
 
-        // Don't copy the id obvi
-        unset($attributes['id']);
+        // Some attributes shouldn't be copied to the new version
+        $unset = array_merge(['id'], $this->excludeAttributesWhenCopying);
+
+        $attributes = array_diff_key($attributes, array_flip($unset));
 
         $version->forceFill(array_merge($attributes, [
             'original_message_id' => $original->getAttribute('id'),
-            'version_id' => $latest_version,
+            'version_id'          => $latest_version,
         ]));
 
         $version->performInsert();
@@ -190,20 +209,41 @@ class Message extends Model
     }
 
     /**
-     * Retrieve Message templates
+     * Save sent version of a message. Ensures sent attributes are saved.
+     *
+     * @return $this
+     */
+    public function saveSentVersion(): static
+    {
+        // Don't exclude the sent_at/by/to attributes
+        $this->excludeAttributesWhenCopying = [];
+
+        return $this->saveVersion();
+    }
+
+    /**
+     * Retrieve Message templates. If a message has multiple versions, retrieve the most recent name.
      *
      * @param  array  $options
+     *
      * @return Collection|null
      */
     public static function templates(array $options = []): ?Collection
     {
-        return static::whereNull('original_message_id', $options);
+        $messages = static::whereNull('original_message_id', $options);
+
+        $messages->map(function ($message) {
+            $message->name = $message->latest()->name;
+        });
+
+        return $messages;
     }
 
     /**
      * Retrieve sent messages
      *
      * @param  array  $options
+     *
      * @return Collection|null
      */
     public static function sentMessages(array $options = []): ?Collection

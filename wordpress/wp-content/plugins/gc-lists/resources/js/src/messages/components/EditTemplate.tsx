@@ -161,7 +161,7 @@ export const EditTemplate = () => {
                     handleSubmit(handleFormData, () => {
                         return false;
                     })();
-                }}>{__('Save for later', 'gc-lists')}</button>
+                }}>{__('Save draft', 'gc-lists')}</button>
             </div>
         </>
     )

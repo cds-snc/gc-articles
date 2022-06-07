@@ -118,7 +118,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
             {
                 templates?.length ?
                     <>
-                        <h2>{__('Saved messages', 'gc-lists')}</h2>
+                        <h2>{__('Draft messages', 'gc-lists')}</h2>
                         <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
                         <StyledPaging>
                             <StyledLink to={`/messages/all-templates`} >

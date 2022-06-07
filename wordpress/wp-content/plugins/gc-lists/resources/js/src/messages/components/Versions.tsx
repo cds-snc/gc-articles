@@ -37,14 +37,14 @@ const SentTag = ({ text }: { text: string }) => {
 const Status = ({ item }: { item: any }) => {
     const { original_message_id, sent_at, created_at, updated_at } = item;
     if (sent_at) {
-        return <><SentTag text={__("SENT", "cds-snc")} /><span>{__("Sent on", "cds-snc")} {sent_at}, </span></>
+        return <><SentTag text={__("SENT", "gc-lists")} /><span>{__("Sent on", "gc-lists")} {sent_at}, </span></>
     }
 
     if (original_message_id !== null) {
-        return <><Tag text={__("EDITED", "cds-snc")} /><span>{__("Edited on", "cds-snc")} {updated_at}, </span></>
+        return <><Tag text={__("EDITED", "gc-lists")} /><span>{__("Edited on", "gc-lists")} {updated_at}, </span></>
     }
 
-    return <><Tag text={__("CREATED", "cds-snc")} /><span>{__("Created on", "cds-snc")} {created_at}, </span></>
+    return <><Tag text={__("CREATED", "gc-lists")} /><span>{__("Created on", "gc-lists")} {created_at}, </span></>
 }
 
 const StyledDetails = styled.div`
@@ -79,7 +79,7 @@ export const Versions = () => {
 
     return (
         <div>
-            <StyledH1> {__("Previous versions", "cds-snc")} </StyledH1>
+            <StyledH1> {__("Previous versions", "gc-lists")} </StyledH1>
             <>
                 {data?.length > 0 ? data.map((item) => {
                     const { sent_by_email, id, body, subject } = item;
@@ -89,7 +89,7 @@ export const Versions = () => {
 
                             <StyledDetails>
                                 <StyledStatus item={item} />
-                                {sent_by_email && <>{__("by", "cds-snc")} <span>{sent_by_email}</span></>}
+                                {sent_by_email && <>{__("by", "gc-lists")} <span>{sent_by_email}</span></>}
                             </StyledDetails>
                             <MessagePreview content={body} subject={subject} />
                         </div>

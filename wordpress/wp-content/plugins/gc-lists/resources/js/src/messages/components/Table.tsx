@@ -121,18 +121,18 @@ export const Table = ({ columns, data, perPage = 6, pageNav = false }: { columns
             </table>
             <StyledPaging>
                 <StyledPageTotals>
-                    {__("Showing", "cds-snc")} {pageCurrent}{" - "}{pageTotal} {__("of", "cds-snc")} {data.length}
+                    {__("Showing", "gc-lists")} {pageCurrent}{" - "}{pageTotal} {__("of", "gc-lists")} {data.length}
                 </StyledPageTotals>
             </StyledPaging>
 
             {pageNav &&
                 <StyledPaging>
                     <StyledButton onClick={() => previousPage()} disabled={!canPreviousPage}>
-                        <Back /> <span>{__("previous", "cds-snc")}</span>
+                        <Back /> <span>{__("previous", "gc-lists")}</span>
                     </StyledButton>{' '}
 
                     <StyledButton onClick={() => nextPage()} disabled={!canNextPage}>
-                        <span>{__("next", "cds-snc")}</span><Next />
+                        <span>{__("next", "gc-lists")}</span><Next />
                     </StyledButton>
                 </StyledPaging>}
         </>

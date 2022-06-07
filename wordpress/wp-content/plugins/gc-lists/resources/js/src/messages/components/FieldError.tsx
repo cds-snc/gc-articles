@@ -21,7 +21,7 @@ export const ErrorSummary = ({ errors }) => {
     return (
         <div className="error-wrapper">
             <span className="validation-error">
-                <h2>{__("There is a problem", "cds-snc")}</h2>
+                <h2>{__("There is a problem", "gc-lists")}</h2>
                 <ul >
                     {errors.map((err, i) => {
                         return err.location ?

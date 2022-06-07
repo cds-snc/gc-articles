@@ -11,13 +11,13 @@ export const StyledStats = styled.div`
 `
 
 export const SendToList = ({ name, count, sending = true }: { name: string | undefined, count: number, sending: boolean }) => {
-    const sentText = __("The message was sent to the the subscribers in the list below.", "cds-snc");
-    const sendingText = <strong>{__("Sending to:", "cds-snc")}</strong>;
+    const sentText = __("The message was sent to the the subscribers in the list below.", "gc-lists");
+    const sendingText = <strong>{__("Sending to:", "gc-lists")}</strong>;
     return (
         <div>
             <div>{sending ? sendingText : sentText}</div>
-            <StyledStats><strong>{name}</strong> {sprintf("(%s subscribers)", count, "cds-snc")}</StyledStats>
-            <div><p>{sprintf("Subscriber list created on %s at %s.", "2022/04/20", "19:56", "cds-snc")}</p></div>
+            <StyledStats><strong>{name}</strong> {sprintf("(%s subscribers)", count, "gc-lists")}</StyledStats>
+            <div><p>{sprintf("Subscriber list created on %s at %s.", "2022/04/20", "19:56", "gc-lists")}</p></div>
         </div>
     )
 }

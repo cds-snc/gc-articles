@@ -28,8 +28,8 @@ class Menu
     public function addMenu()
     {
         add_menu_page(
-            __('GC Lists', "cds-snc"),
-            __('GC Lists', "cds-snc"),
+            __('GC Lists', "gc-lists"),
+            __('GC Lists', "gc-lists"),
             $this->capability,
             $this->messagesPageSlug,
             [$this, 'renderMessages'],
@@ -41,8 +41,8 @@ class Menu
     {
         add_submenu_page(
             $this->messagesPageSlug,
-            __('Messages', 'cds-snc'),
-            __('Messages', 'cds-snc'),
+            __('Messages', 'gc-lists'),
+            __('Messages', 'gc-lists'),
             $this->capability,
             $this->messagesPageSlug,
             [$this, 'renderMessages'],
@@ -53,8 +53,8 @@ class Menu
     {
         add_submenu_page(
             $this->messagesPageSlug,
-            __('Subscriber lists', 'cds-snc'),
-            __('Subscriber lists', 'cds-snc'),
+            __('Subscriber lists', 'gc-lists'),
+            __('Subscriber lists', 'gc-lists'),
             $this->capability,
             $this->subscribersPageSlug,
             [$this, 'renderSubscribers'],
@@ -90,7 +90,7 @@ class Menu
     public function getServices(): array
     {
         return [
-            'name' => __('Your Lists', 'cds-snc'),
+            'name' => __('Your Lists', 'gc-lists'),
             'service_id' => $this->getServiceId()
         ];
     }
@@ -120,7 +120,7 @@ class Menu
         }
 
         $this->render('messages', [
-            'title' => __('Messages', 'cds-snc'),
+            'title' => __('Messages', 'gc-lists'),
             'services' => $this->getServices(),
             'user' => $this->getUserPermissions(),
         ]);
@@ -137,7 +137,7 @@ class Menu
         }
 
         $this->render('subscribers', [
-            'title' => __('Subscribers', 'cds-snc'),
+            'title' => __('Subscribers', 'gc-lists'),
             'services' => $this->getServices(),
             'user' => $this->getUserPermissions(),
         ]);

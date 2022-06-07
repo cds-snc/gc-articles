@@ -108,14 +108,14 @@ export const SendTemplate = () => {
 
     return (
         <>
-            <h1>{__("Send message to a list", "cds-snc")}</h1>
+            <h1>{__("Send message to a list", "gc-lists")}</h1>
 
             {hasLists ?
                 <>
-                    <p><strong>{__("Subscriber list", "cds-snc")}</strong></p>
-                    <p>{__("Choose a group to send this message to.", "cds-snc")}</p>
+                    <p><strong>{__("Subscriber list", "gc-lists")}</strong></p>
+                    <p>{__("Choose a group to send this message to.", "gc-lists")}</p>
                 </> :
-                <Warn message={__("You don’t have any subscriber list.", "cds-snc")} />}
+                <Warn message={__("You don't have any subscriber list.", "gc-lists")} />}
 
             {hasLists ?
                 <>
@@ -141,7 +141,7 @@ export const SendTemplate = () => {
                                 }
                             }
                         }}>
-                        {__("Send message", "cds-snc")}
+                        {__("Send message", "gc-lists")}
 
                         <StyledNext><Next color={"#fff"} /></StyledNext>
                     </button>
@@ -152,7 +152,7 @@ export const SendTemplate = () => {
                 : null
             }
             <CreateNewList />
-            <h2>{__("Message preview", "cds-snc")}</h2>
+            <h2>{__("Message preview", "gc-lists")}</h2>
             <MessagePreview subject={subject} content={content} />
         </>)
 }

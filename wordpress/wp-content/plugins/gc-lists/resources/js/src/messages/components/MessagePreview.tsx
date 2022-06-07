@@ -39,7 +39,7 @@ export const MessagePreview = ({ content, subject }: { content: string | undefin
     return (
         <>
             <StyledSubject>
-                <strong>{__("Subject", "cds-snc")}</strong>
+                <strong>{__("Subject", "gc-lists")}</strong>
                 {subject}
             </StyledSubject>
             <StyledPreview>

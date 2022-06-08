@@ -134,11 +134,11 @@ export const EditTemplate = () => {
                                             handleChange={setCurrentTemplate} />
                                         : null}
                                 </div>
-                                <StyledLastSaved>
-                                    {/* @todo use date-fns to show template date */}
-                                    {template?.updated_at ? <> {__('Last saved', "gc-lists")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}
-                                    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "gc-lists")}</StyledPreviousVersions></Link>}
-                                </StyledLastSaved>
+                                {/*<StyledLastSaved>*/}
+                                {/*    /!* @todo use date-fns to show template date *!/*/}
+                                {/*    {template?.updated_at ? <> {__('Last saved', "gc-lists")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}*/}
+                                {/*    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "gc-lists")}</StyledPreviousVersions></Link>}*/}
+                                {/*</StyledLastSaved>*/}
                             </td>
                         </tr>
                     </tbody>

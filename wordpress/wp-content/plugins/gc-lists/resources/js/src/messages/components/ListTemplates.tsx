@@ -8,6 +8,7 @@ import { Spinner } from "../../common/Spinner";
 import { Table, StyledLink, StyledPaging } from "./Table";
 import { Next } from "./icons/Next";
 import useTemplateApi from '../../store/useTemplateApi';
+import { ConfirmDelete } from './ConfirmDelete';
 
 const StyledDivider = styled.span`
     margin-left: 10px;
@@ -85,8 +86,11 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                             <StyledDivider>|</StyledDivider>
                             <StyledDeleteButton data-tid={tId}
                                 onClick={async () => {
-                                    await deleteTemplate({ templateId: tId });
-                                    getTemplates();
+                                    const confirmed = await ConfirmDelete();
+                                    if (confirmed) {
+                                        await deleteTemplate({ templateId: tId });
+                                        getTemplates();
+                                    }
                                 }}
                             >
                                 {__("Delete", "gc-lists")}
@@ -113,11 +117,11 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
             >
                 {__("Create new message", "gc-lists")}
             </Link>
-
+            <h2>{__('Draft messages', 'gc-lists')}</h2>
+            {loading && <Spinner />}
             {
                 templates?.length ?
                     <>
-                        <h2>{__('Draft messages', 'gc-lists')}</h2>
                         <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
                         {templates?.length > 6 &&
                             <StyledPaging>
@@ -131,13 +135,11 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                     <>
                         {!loading &&
                             <>
-                                <h2>{__('Draft messages', 'gc-lists')}</h2>
                                 <p>{__("You have no draft messages", "gc-lists")}</p>
                             </>
                         }
                     </>
             }
-            {loading && <Spinner />}
         </>
     )
 }

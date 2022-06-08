@@ -280,10 +280,10 @@ test('Get sent versions of a message', function() {
         'name' => 'This is the message name'
     ]);
 
+    $timestamp = Carbon::now()->toDateTimeString();
+
     // Generate 5 versions, odd = sent (5)
     for($version_id = 1; $version_id <= 10; $version_id++) {
-        $timestamp = Carbon::now()->toDateTimeString();
-
         $this->factory->message->create([
             'original_message_id' => $message_id,
             'version_id' => $version_id,

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { __ } from "@wordpress/i18n";
 import { useEffect, useState, useCallback } from 'react';
 import { Descendant } from "slate";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Editor } from "../editor/Editor";
 import useTemplateApi from '../../store/useTemplateApi';
@@ -11,7 +11,6 @@ import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
 import { Spinner } from '../../common/Spinner';
 import styled from 'styled-components';
-import formatRelative from 'date-fns/formatRelative';
 
 const textWidth = { width: "25em" }
 

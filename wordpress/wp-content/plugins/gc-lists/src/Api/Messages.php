@@ -420,7 +420,7 @@ class Messages extends BaseEndpoint
                 'message_type' => $message->message_type
             ]);
 
-            $response = new WP_REST_Response($draft);
+            $response = new WP_REST_Response($draft->fresh());
 
             $response->set_status(200);
 
@@ -561,7 +561,7 @@ class Messages extends BaseEndpoint
      *
      * @return array
      */
-    protected function getOptions(WP_REST_Request $request): array
+    public function getOptions(WP_REST_Request $request): array
     {
         $options = [];
         $params  = $request->get_params();

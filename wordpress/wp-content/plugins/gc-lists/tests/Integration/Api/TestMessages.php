@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use GCLists\Api\Messages;
 use GCLists\Api\SendMessage;
+use GCLists\Database\Models\Message;
 use function Pest\Faker\faker;
 
 beforeEach(function() {
@@ -192,6 +193,32 @@ test('Get a message adding `original` query param returns the original version',
         ->json()
         ->toHaveKeys($this->messageAttributes)
         ->toHaveKey('id', $message_id);
+});
+
+test('Get a message adding `latest` query param returns the latest version', function() {
+    $message_id = $this->factory->message->create();
+
+    // Create some versions
+    $ids = $this->factory->message->create_many(5, [
+        'original_message_id' => $message_id
+    ]);
+
+    $request  = new WP_REST_Request( 'GET', "/gc-lists/messages/{$message_id}" );
+    $request->set_query_params([
+        'latest' => true,
+    ]);
+    $response = $this->server->dispatch( $request );
+
+    $this->assertEquals( 200, $response->get_status() );
+
+    $body = $response->get_data()->toJson();
+
+    $latest = Message::find(end($ids));
+
+    expect($body)
+        ->json()
+        ->toHaveKeys($this->messageAttributes)
+        ->toHaveKey('id', $latest->id);
 });
 
 test('Get versions of a message', function() {
@@ -396,6 +423,39 @@ test('Update a message draft updates in place and returns updated content', func
         ->toHaveKey('id', $message->id);
 });
 
+test('Update a sent message creates a new draft', function() {
+    $id = $this->factory->message->create([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz',
+        'sent_at' => Carbon::now()->toDateTimeString()
+    ]);
+
+    $request  = new WP_REST_Request( 'PUT', "/gc-lists/messages/{$id}" );
+    $request->set_query_params([
+        'id' => $id,
+        'name' => 'Name of the new draft message',
+        'subject' => 'Subject of the new draft message',
+        'body' => 'Body of the new draft message',
+    ]);
+
+    $response = $this->server->dispatch( $request );
+
+    $this->assertEquals( 200, $response->get_status() );
+
+    $body = $response->get_data()->toJson();
+
+    $this->assertCount(2, Message::all());
+
+    expect($body)
+        ->json()
+        ->toHaveKey('name', 'Name of the new draft message')
+        ->toHaveKey('subject', 'Subject of the new draft message')
+        ->toHaveKey('body', 'Body of the new draft message')
+        ->toHaveKey('original_message_id', null)
+        ->toHaveKey('sent_at', null);
+});
+
 test('Delete a message', function() {
 	$message_ids = $this->factory->message->create_many(5);
 
@@ -480,3 +540,30 @@ test('Send a message directly from input', function() {
         ->toHaveKey('body', 'Baz')
         ->toHaveKey('original_message_id', NULL);
 })->skip();
+
+test('getOptions', function() {
+    $request = new WP_REST_Request('GET', 'https://localhost');
+    $request->set_param('limit', 10);
+    $request->set_param('sort', 'asc');
+
+    $api = Messages::getInstance();
+    $options = $api->getOptions($request);
+
+    expect($options)
+        ->toBeArray()
+        ->toHaveKey('limit', 10)
+        ->toHaveKey('sort', 'asc');
+});
+
+test('getOptions bad params', function() {
+    $request = new WP_REST_Request('GET', 'https://localhost');
+    $request->set_param('limit', 'dd'); // invalid will default to 5
+    $request->set_param('sort', 'ascx'); // invalid will default to no sort
+
+    $api = Messages::getInstance();
+    $options = $api->getOptions($request);
+
+    expect($options)
+        ->toBeArray()
+        ->toHaveKey('limit', 5);
+});

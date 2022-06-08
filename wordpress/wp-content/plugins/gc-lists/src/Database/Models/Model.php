@@ -168,6 +168,7 @@ class Model implements JsonSerializable
 
     /**
      * Get fillable attributes from array
+     * @TODO: not used, should this be removed?
      *
      * @param  array  $attributes
      * @return array
@@ -178,7 +179,7 @@ class Model implements JsonSerializable
             return array_intersect_key($attributes, array_flip($this->fillable));
         }
 
-        return $attributes;
+        return [];
     }
 
     /**
@@ -370,9 +371,10 @@ class Model implements JsonSerializable
      * Update an existing model with provided attributes
      *
      * @param  array  $attributes
-     * @return $this
+     *
+     * @return Model|false
      */
-    public function update(array $attributes): static
+    public function update(array $attributes): static|false
     {
         if (!$this->exists) {
             return false;
@@ -505,12 +507,12 @@ class Model implements JsonSerializable
      * - "id = 4"
      * - "sent_at IS NOT NULL"
      *
-     * @param  array  $whereClauses
+     * @param  $whereClauses
      * @param  array  $options
      *
      * @return Collection|null
      */
-    public static function where(array $whereClauses, array $options = []): ?Collection
+    public static function where($whereClauses, array $options = []): ?Collection
     {
         global $wpdb;
         $instance = new static();

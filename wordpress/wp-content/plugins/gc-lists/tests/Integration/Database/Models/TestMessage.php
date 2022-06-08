@@ -201,6 +201,14 @@ test('Retrieve using whereNotNull param', function() {
     }
 });
 
+test('whereNotNull returns empty collection when no results', function() {
+    $this->factory->message->create_many(5);
+    $result = Message::whereNotNull('sent_at');
+    expect($result)
+        ->toBeInstanceOf(Collection::class)
+        ->toBeEmpty();
+});
+
 test('Retrieve using whereNotNull param and Limit', function() {
     $this->factory->message->create_many(20);
     $messages = Message::whereNotNull('created_at', ['limit' => 5]);
@@ -237,6 +245,14 @@ test('Retrieve using whereNull param and Limit', function() {
     $this->assertEquals(5, count($messages));
 });
 
+test('whereNull returns empty collection when no results', function() {
+    $this->factory->message->create_many(5);
+    $result = Message::whereNull('name');
+    expect($result)
+        ->toBeInstanceOf(Collection::class)
+        ->toBeEmpty();
+});
+
 test('Retrieve using where', function() {
     $message_id = $this->factory->message->create([
         'name' => 'Foo'
@@ -255,7 +271,7 @@ test('Retrieve using where', function() {
     $sentOriginals = Message::where(['sent_at IS NOT NULL', 'original_message_id IS NULL']);
     $this->assertEquals(1, $sentOriginals->count());
 
-    $originals = Message::where(['original_message_id IS NULL']);
+    $originals = Message::where('original_message_id IS NULL');
     $this->assertEquals(1, $originals->count());
 
     $sent = Message::where(['sent_at IS NOT NULL']);
@@ -263,6 +279,18 @@ test('Retrieve using where', function() {
 
     $versions = Message::where(["original_message_id = {$message_id}"]);
     $this->assertEquals(1, $versions->count());
+
+    $limited = Message::where('1 = 1', [
+        'limit' => 1
+    ]);
+    $this->assertEquals(1, $limited->count());
+});
+
+test('Retrieve using where returns empty collection when no data', function() {
+    $result = Message::where('id = 1');
+    expect($result)
+        ->toBeInstanceOf(Collection::class)
+        ->toBeEmpty();
 });
 
 test('Create a model with invalid attribute throws InvalidAttributeException', function() {
@@ -765,4 +793,31 @@ test('Send a new message', function() {
     expect($sent)
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(1);
+});
+
+test('fresh() retrieves latest from db', function() {
+    $message = Message::create([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz'
+    ]);
+
+    $message->name = 'Huzzah';
+    $this->assertEquals($message->name, 'Huzzah');
+
+    $fresh = $message->fresh();
+    $this->assertEquals($fresh->name, 'Foo');
+});
+
+test('Find a model that does not exist', function() {
+    $result = Message::find(1);
+    $this->assertNull($result);
+});
+
+test('Model::all() returns an empty collection when no data', function() {
+    $result = Message::all();
+
+    expect($result)
+        ->toBeInstanceOf(Collection::class)
+        ->toBeEmpty();
 });

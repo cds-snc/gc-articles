@@ -58,7 +58,7 @@ export const EditTemplate = () => {
         const result = await saveTemplate({ templateId, name, subject, content: deserialize(content) });
 
         if (result) {
-            navigate(`/messages/edit/${result?.id}`);
+            navigate(`/messages`);
             setSaved(true);
         }
 

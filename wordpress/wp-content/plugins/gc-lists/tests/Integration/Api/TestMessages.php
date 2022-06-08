@@ -369,7 +369,7 @@ test('Create a message with Validation errors', function() {
         ->toHaveKey('data.params.message_type');
 });
 
-test('Update a message creates a new version', function() {
+test('Update a message draft updates in place and returns updated content', function() {
 	$message = $this->factory->message->create_and_get([
 		'name' => 'This is the original message name'
 	]);
@@ -393,7 +393,7 @@ test('Update a message creates a new version', function() {
         ->toHaveKey('name', 'Name of the new version of the message')
         ->toHaveKey('subject', 'Subject of the new message')
         ->toHaveKey('body', 'Body of the new message')
-        ->toHaveKey('original_message_id', $message->id);
+        ->toHaveKey('id', $message->id);
 });
 
 test('Delete a message', function() {

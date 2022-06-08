@@ -87,5 +87,9 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
                     <span> {__("All sending history", "gc-lists")} </span><Next />
                 </StyledLink>
             </StyledPaging>}
-        </> : null
+        </> :
+        <>
+            <h2>{__("Sending history", "gc-lists")}</h2>
+            <p>{__("You have no sent messages", "gc-lists")}</p>
+        </>
 }

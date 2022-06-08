@@ -114,7 +114,6 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                 {__("Create new message", "gc-lists")}
             </Link>
 
-            {loading && <Spinner />}
             {
                 templates?.length ?
                     <>
@@ -128,8 +127,17 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                             </StyledPaging>
                         }
                     </>
-                    : null
+                    :
+                    <>
+                        {!loading &&
+                            <>
+                                <h2>{__('Draft messages', 'gc-lists')}</h2>
+                                <p>{__("You have no draft messages", "gc-lists")}</p>
+                            </>
+                        }
+                    </>
             }
+            {loading && <Spinner />}
         </>
     )
 }

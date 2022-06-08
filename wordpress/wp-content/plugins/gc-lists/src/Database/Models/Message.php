@@ -59,6 +59,8 @@ class Message extends Model
 
             $this->updateUpdatedTimestamp($timestamp);
 
+            $unsent = $this->sent_at === null;
+
             $this->forceFill([
                 'sent_at'           => $this->freshTimestamp(),
                 'sent_to_list_id'   => $sent_to_list_id,
@@ -67,6 +69,12 @@ class Message extends Model
                 'sent_by_email'     => $sent_by_email
             ]);
 
+            // If this is an unsent Draft just update in place
+            if ($this->isOriginal() && $unsent) {
+                return $this->save();
+            }
+
+            // If this is a previously sent message, create a new sent instance
             return $this->saveSentVersion();
         }
 

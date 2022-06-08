@@ -253,7 +253,7 @@ test('Retrieve using where', function() {
     $message->send($uuid, $listName, 1, $email);
 
     $sentOriginals = Message::where(['sent_at IS NOT NULL', 'original_message_id IS NULL']);
-    $this->assertEquals(0, $sentOriginals->count());
+    $this->assertEquals(1, $sentOriginals->count());
 
     $originals = Message::where(['original_message_id IS NULL']);
     $this->assertEquals(1, $originals->count());
@@ -262,7 +262,7 @@ test('Retrieve using where', function() {
     $this->assertEquals(1, $sent->count());
 
     $versions = Message::where(["original_message_id = {$message_id}"]);
-    $this->assertEquals(2, $versions->count());
+    $this->assertEquals(1, $versions->count());
 });
 
 test('Create a model with invalid attribute throws InvalidAttributeException', function() {
@@ -501,8 +501,8 @@ test('Save a new version from a version should create a revision of the original
         ]);
     }
 
-    // Select a version from random
-    $version = $original->versions()->random();
+    // Select the last version (could be any)
+    $version = $original->versions()->last();
 
     $version->name = 'This is a new name';
     $version->body = 'This is a new body';
@@ -646,7 +646,7 @@ test('isOriginal', function() {
     $this->assertFalse($version->isOriginal());
 });
 
-test('Message send - existing message', function() {
+test('Send an existing draft message', function() {
     $message_id = $this->factory->message->create();
     $message = Message::find($message_id);
 
@@ -661,18 +661,50 @@ test('Message send - existing message', function() {
 
     expect($message)
         ->toBeInstanceOf(Message::class)
-        ->toHaveKey('sent_at', NULL);
-
-    expect($message->sent())
-        ->toBeInstanceOf(Collection::class)
-        ->each
-        ->toBeInstanceOf(Message::class)
         ->toHaveKey('sent_at', $timestamp)
         ->toHaveKey('sent_by_email', $email)
         ->toHaveKey('sent_to_list_name', $listName);
 });
 
-test('Message create and send (new message)', function() {
+test('Edit and send a previously sent message', function() {
+    $timestamp = Carbon::now()->toDateTimeString();
+    Carbon::setTestNow($timestamp);
+
+    $uuid = faker()->uuid();
+    $email = faker()->email;
+    $listName = 'This is a list name';
+
+    $message_id = $this->factory->message->create([
+        'sent_to_list_id' => $uuid,
+        'sent_to_list_name' => $listName,
+        'sent_by_email' => $email,
+        'sent_by_id' => 1,
+        'sent_at' => $timestamp,
+    ]);
+
+    $message = Message::find($message_id);
+
+    $timestamp2 = Carbon::now()->toDateTimeString();
+    Carbon::setTestNow($timestamp2);
+
+    $uuid2 = faker()->uuid();
+    $email2 = faker()->email;
+    $listName2 = 'This is another list name';
+
+    $message = $message->send($uuid2, $listName2, 1, $email2);
+
+    // New message should be a new instance with a reference to the first
+    $message2 = Message::where(['original_message_id', $message->id])->first();
+
+    expect($message2)
+        ->toBeInstanceOf(Message::class)
+        ->toHaveKey('sent_at', $timestamp2)
+        ->toHaveKey('sent_by_email', $email2)
+        ->toHaveKey('sent_to_list_name', $listName2)
+        ->toHaveKey('original_message_id', $message->id);
+});
+
+test('Send a new message', function() {
     $message = new Message([
         'name' => 'Foo',
         'subject' => 'Bar',

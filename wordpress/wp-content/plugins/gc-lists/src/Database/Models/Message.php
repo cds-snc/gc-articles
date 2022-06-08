@@ -159,13 +159,7 @@ class Message extends Model
      */
     public function latest(): static
     {
-        $versions = $this->versions();
-
-        if ($versions->count()) {
-            return $versions->last();
-        }
-
-        return $this;
+        return $this->versions()->last();
     }
 
     /**

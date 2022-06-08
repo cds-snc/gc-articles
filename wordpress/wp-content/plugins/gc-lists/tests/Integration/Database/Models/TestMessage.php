@@ -342,6 +342,15 @@ test('Retrieve the most recent version of a Message', function() {
     $this->assertEquals(5, $latest->version_id);
 });
 
+test('latest() returns self if there are no versions', function() {
+    $message_id = $this->factory->message->create();
+
+    $message = Message::find($message_id);
+    $latest = $message->latest();
+
+    $this->assertEquals($message, $latest);
+});
+
 test('Retrieve the original of a Message version', function() {
     $message_id = $this->factory->message->create();
 
@@ -538,7 +547,7 @@ test('Saving a version with invalid attribute should throw exception', function(
     $original->saveVersion();
 });
 
-test('Retrieve all Message templates', function() {
+test('Retrieve all Message drafts', function() {
     $this->factory->message->create_many(20);
 
     $templates = Message::templates();
@@ -548,7 +557,18 @@ test('Retrieve all Message templates', function() {
     $this->assertCount(5, $templates);
 });
 
-test('Retrieve Message templates excludes sent messages', function() {
+test('Retrieve drafts with sort', function() {
+    $this->factory->message->create_many(5);
+
+    $drafts = Message::templates([
+        'sort' => 'desc'
+    ]);
+
+    $this->assertCount(5, $drafts);
+    // Not sure how to check if they were actually sorted?
+});
+
+test('Retrieve Message drafts excludes sent messages', function() {
     // These are just templates (drafts) by default
     $this->factory->message->create_many(5);
 
@@ -580,7 +600,7 @@ test('Retrieve Message templates excludes sent messages', function() {
     $this->assertEquals(15, $all->count());
 });
 
-test('Retrieve message templates includes latest name', function() {
+test('Retrieve message drafts includes latest name', function() {
     $message_id = $this->factory->message->create([
         'name' => 'Original name',
         'body' => 'Original body',
@@ -631,6 +651,19 @@ test('Retrieve only Sent Messages', function() {
     $this->assertCount(2, Message::templates());
     $this->assertCount(5, Message::sentMessages());
     $this->assertCount(3, Message::sentMessages(['limit' => 3]));
+});
+
+test('Retrieve sent messages with sort', function() {
+    $this->factory->message->create_many(5, [
+        'sent_at' => Carbon::now()->toDateTimeString()
+    ]);
+
+    $messages = Message::sentMessages([
+        'sort' => 'desc'
+    ]);
+
+    $this->assertCount(5, $messages);
+    // Not sure how to check if they were actually sorted?
 });
 
 test('isOriginal', function() {

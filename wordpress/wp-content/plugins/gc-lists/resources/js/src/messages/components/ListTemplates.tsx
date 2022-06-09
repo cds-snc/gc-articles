@@ -111,6 +111,9 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
 
     return (
         <>
+            {window.location.hash === '#/messages' &&
+                <h1>{__('Messages', 'gc-lists')}</h1>
+            }
             <Link
                 className="button button-primary"
                 to={`/messages/edit/new`}

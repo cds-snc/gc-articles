@@ -8,8 +8,6 @@
  */
 ?>
 
-<h1><?php echo $title ?></h1>
-
 <!-- app -->
 <div class="wrap">
     <?php

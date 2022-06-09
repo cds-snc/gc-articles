@@ -2,7 +2,7 @@ import * as React from 'react';
 import { __ } from "@wordpress/i18n";
 import { useEffect, useState, useCallback } from 'react';
 import { Descendant } from "slate";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Editor } from "../editor/Editor";
 import useTemplateApi from '../../store/useTemplateApi';
@@ -11,7 +11,8 @@ import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
 import { Spinner } from '../../common/Spinner';
 import styled from 'styled-components';
-import formatRelative from 'date-fns/formatRelative';
+import { Back } from './icons/Back';
+import { StyledLink } from './Table';
 
 const textWidth = { width: "25em" }
 
@@ -59,7 +60,7 @@ export const EditTemplate = () => {
         const result = await saveTemplate({ templateId, name, subject, content: deserialize(content) });
 
         if (result) {
-            navigate(`/messages/edit/${result?.id}`);
+            navigate(`/messages`);
             setSaved(true);
         }
 
@@ -86,6 +87,9 @@ export const EditTemplate = () => {
 
     return (
         <>
+            <StyledLink to={`/messages`}>
+                <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
+            </StyledLink>
             {heading}
             <form style={{ maxWidth: '400px' }}>
                 <input type="hidden" {...register("hasTemplate", { validate: () => templateHasValue })} />
@@ -134,11 +138,11 @@ export const EditTemplate = () => {
                                             handleChange={setCurrentTemplate} />
                                         : null}
                                 </div>
-                                <StyledLastSaved>
-                                    {/* @todo use date-fns to show template date */}
-                                    {template?.updated_at ? <> {__('Last saved', "gc-lists")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}
-                                    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "gc-lists")}</StyledPreviousVersions></Link>}
-                                </StyledLastSaved>
+                                {/*<StyledLastSaved>*/}
+                                {/*    /!* @todo use date-fns to show template date *!/*/}
+                                {/*    {template?.updated_at ? <> {__('Last saved', "gc-lists")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}*/}
+                                {/*    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "gc-lists")}</StyledPreviousVersions></Link>}*/}
+                                {/*</StyledLastSaved>*/}
                             </td>
                         </tr>
                     </tbody>
@@ -161,7 +165,7 @@ export const EditTemplate = () => {
                     handleSubmit(handleFormData, () => {
                         return false;
                     })();
-                }}>{__('Save for later', 'gc-lists')}</button>
+                }}>{__('Save draft', 'gc-lists')}</button>
             </div>
         </>
     )

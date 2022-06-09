@@ -34,12 +34,12 @@ class MessageFactory extends \WP_UnitTest_Factory_For_Thing
         return $message_id;
     }
 
-    public function update_object($id, $fields) // @codingStandardsIgnoreLine
+    public function update_object($object, $fields) // @codingStandardsIgnoreLine
     {
-        $fields['ID'] = $id;
-        $this->wpdb->update($this->tableName, $fields);
+        $fields['ID'] = $object->id;
+        $this->wpdb->update($this->tableName, $fields, ['ID' => $object->id]);
 
-        return $id;
+        return $object->id;
     }
 
     public function get_object_by_id($message_id) // @codingStandardsIgnoreLine

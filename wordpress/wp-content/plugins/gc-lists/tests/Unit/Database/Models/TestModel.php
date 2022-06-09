@@ -91,6 +91,19 @@ test('getFillableFromArray', function() {
         ->not()->toHaveKey('notvalid');
 });
 
+test('getFillableFromArray no fillable', function() {
+    $model = new ModelStubNoFillable();
+
+    $array = $model->getFillableFromArray([
+        'title' => 'Foo',
+        'message' => 'Bar',
+        'notvalid' => 'Baz',
+    ]);
+
+    expect($array)
+        ->toBeEmpty();
+});
+
 test('getAttribute', function() {
     $model = new ModelStub([
         'title' => 'Foo',
@@ -99,6 +112,27 @@ test('getAttribute', function() {
 
     $this->assertEquals('Foo', $model->getAttribute('title'));
     $this->assertEquals('Bar', $model->getAttribute('message'));
+
+    // returns null if empty attribute key
+    $this->assertEquals(null, $model->getAttribute(''));
+});
+
+test('fresh() returns self if model does not exist in db', function() {
+    $message = new ModelStub();
+
+    $fresh = $message->fresh();
+
+    $this->assertEquals($message, $fresh);
+});
+
+test('Updating a model that does not exist', function() {
+    $message = new ModelStub();
+
+    $result = $message->update([
+        'title' => 'Huzzah'
+    ]);
+
+    $this->assertFalse($result);
 });
 
 /**
@@ -116,4 +150,18 @@ class ModelStub extends Model {
         'title',
         'message',
     ];
+}
+
+/**
+ * Model stub for testing the base Model
+ */
+class ModelStubNoFillable extends Model {
+    protected string $tableSuffix = "tablenamesuffix";
+
+    protected array $visible = [
+        'title',
+        'message',
+    ];
+
+    protected array $fillable = [];
 }

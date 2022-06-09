@@ -15,6 +15,7 @@ class Messages extends BaseEndpoint
     public static function getInstance(): Messages
     {
         is_null(self::$instance) and self::$instance = new self();
+
         return self::$instance;
     }
 
@@ -76,35 +77,35 @@ class Messages extends BaseEndpoint
             'permission_callback' => function () {
                 return $this->hasPermission();
             },
-            'args' => [
-                'name' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Name of the Message',
+            'args'                => [
+                'name'         => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Name of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_text_field($value);
                     }
                 ],
-                'subject' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Subject of the Message',
+                'subject'      => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_text_field($value);
                     }
                 ],
-                'body' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Body of the Message',
+                'body'         => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Body of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_textarea_field($value);
                     }
                 ],
                 'message_type' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Type of message',
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Type of message',
                     'validate_callback' => function ($value, $request, $param) {
                         return in_array($value, ['email', 'phone']);
                     }
@@ -118,27 +119,27 @@ class Messages extends BaseEndpoint
             'permission_callback' => function () {
                 return $this->hasPermission();
             },
-            'args' => [
-                'name' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Name of the Message',
+            'args'                => [
+                'name'    => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Name of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_text_field($value);
                     }
                 ],
                 'subject' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Subject of the Message',
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_text_field($value);
                     }
                 ],
-                'body' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Body of the Message',
+                'body'    => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Body of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_textarea_field($value);
                     }
@@ -156,52 +157,52 @@ class Messages extends BaseEndpoint
 
         // create and send new message
         register_rest_route($this->namespace, '/messages/send', [
-            'methods' => 'POST',
-            'callback' => [$this, 'createAndSend'],
+            'methods'             => 'POST',
+            'callback'            => [$this, 'createAndSend'],
             'permission_callback' => function () {
                 return $this->hasPermission();
             },
-            'args' => [
-                'name' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Name of the Message',
+            'args'                => [
+                'name'              => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Name of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_text_field($value);
                     }
                 ],
-                'subject' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Subject of the Message',
+                'subject'           => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_text_field($value);
                     }
                 ],
-                'body' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Body of the Message',
+                'body'              => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Body of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_textarea_field($value);
                     }
                 ],
-                'message_type' => [
-                    'required' => true,
-                    'type' => 'string',
-                    'description' => 'Type of message',
+                'message_type'      => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Type of message',
                     'validate_callback' => function ($value, $request, $param) {
                         return in_array($value, ['email', 'phone']);
                     }
                 ],
-                'sent_to_list_id' => [
-                    'required' => true,
-                    'type' => 'string',
+                'sent_to_list_id'   => [
+                    'required'    => true,
+                    'type'        => 'string',
                     'description' => 'ID of the list'
                 ],
                 'sent_to_list_name' => [
-                    'required' => true,
-                    'type' => 'string',
+                    'required'    => true,
+                    'type'        => 'string',
                     'description' => 'Name of the list'
                 ],
             ]
@@ -209,44 +210,44 @@ class Messages extends BaseEndpoint
 
         // send existing message
         register_rest_route($this->namespace, '/messages/(?P<id>[\d]+)/send', [
-            'methods' => 'POST',
-            'callback' => [$this, 'send'],
+            'methods'             => 'POST',
+            'callback'            => [$this, 'send'],
             'permission_callback' => function () {
                 return $this->hasPermission();
             },
-            'args' => [
-                'name' => [
-                    'required' => false,
-                    'type' => 'string',
-                    'description' => 'Name of the Message',
+            'args'                => [
+                'name'              => [
+                    'required'          => false,
+                    'type'              => 'string',
+                    'description'       => 'Name of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_text_field($value);
                     }
                 ],
-                'subject' => [
-                    'required' => false,
-                    'type' => 'string',
-                    'description' => 'Subject of the Message',
+                'subject'           => [
+                    'required'          => false,
+                    'type'              => 'string',
+                    'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_text_field($value);
                     }
                 ],
-                'body' => [
-                    'required' => false,
-                    'type' => 'string',
-                    'description' => 'Body of the Message',
+                'body'              => [
+                    'required'          => false,
+                    'type'              => 'string',
+                    'description'       => 'Body of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_textarea_field($value);
                     }
                 ],
-                'sent_to_list_id' => [
-                    'required' => true,
-                    'type' => 'string',
+                'sent_to_list_id'   => [
+                    'required'    => true,
+                    'type'        => 'string',
                     'description' => 'ID of the list'
                 ],
                 'sent_to_list_name' => [
-                    'required' => true,
-                    'type' => 'string',
+                    'required'    => true,
+                    'type'        => 'string',
                     'description' => 'Name of the list'
                 ],
             ]
@@ -257,6 +258,7 @@ class Messages extends BaseEndpoint
      * Get all Message templates
      *
      * @param  WP_REST_Request  $request
+     *
      * @return WP_REST_Response
      */
     public function all(WP_REST_Request $request): WP_REST_Response
@@ -276,6 +278,7 @@ class Messages extends BaseEndpoint
      * Get sent Messages
      *
      * @param  WP_REST_Request  $request
+     *
      * @return WP_REST_Response
      */
     public function sent(WP_REST_Request $request): WP_REST_Response
@@ -300,7 +303,7 @@ class Messages extends BaseEndpoint
      */
     public function get(WP_REST_Request $request): WP_REST_Response
     {
-        $params  = $request->get_params();
+        $params = $request->get_params();
 
         if (isset($params['original'])) {
             $message = Message::find($request['id'])->original();
@@ -312,8 +315,17 @@ class Messages extends BaseEndpoint
             return rest_ensure_response($response);
         }
 
-        // Whether we have a version or the original, return the latest version
-        $message = Message::find($request['id'])->original()->latest();
+        if (isset($params['latest'])) {
+            $message = Message::find($request['id'])->original()->latest();
+
+            $response = new WP_REST_Response($message);
+
+            $response->set_status(200);
+
+            return rest_ensure_response($response);
+        }
+
+        $message = Message::find($request['id']);
 
         $response = new WP_REST_Response($message);
 
@@ -333,7 +345,7 @@ class Messages extends BaseEndpoint
     {
         $options = $this->getOptions($request);
 
-        $message = Message::find($request['id']);
+        $message  = Message::find($request['id']);
         $versions = $message->versions($options);
 
         $response = new WP_REST_Response($versions->toArray());
@@ -354,7 +366,7 @@ class Messages extends BaseEndpoint
     {
         $options = $this->getOptions($request);
 
-        $message = Message::find($request['id']);
+        $message  = Message::find($request['id']);
         $versions = $message->sent($options);
 
         $response = new WP_REST_Response($versions->toArray());
@@ -374,9 +386,9 @@ class Messages extends BaseEndpoint
     public function create(WP_REST_Request $request): WP_REST_Response
     {
         $message = Message::create([
-            'name' => $request['name'],
-            'subject' => $request['subject'],
-            'body' => $request['body'],
+            'name'         => $request['name'],
+            'subject'      => $request['subject'],
+            'body'         => $request['body'],
             'message_type' => $request['message_type']
         ]);
 
@@ -399,13 +411,30 @@ class Messages extends BaseEndpoint
     {
         $message = Message::find($request['id']);
 
+        // If this was a sent message, create a new draft
+        if ($message->sent_at) {
+            $draft = Message::create([
+                'name'         => $request['name'],
+                'subject'      => $request['subject'],
+                'body'         => $request['body'],
+                'message_type' => $message->message_type
+            ]);
+
+            $response = new WP_REST_Response($draft->fresh());
+
+            $response->set_status(200);
+
+            return rest_ensure_response($response);
+        }
+
+        // If it's a draft, just save over the original
         $message->fill([
-            'name' => $request['name'],
+            'name'    => $request['name'],
             'subject' => $request['subject'],
-            'body' => $request['body']
+            'body'    => $request['body']
         ]);
 
-        $message->saveVersion();
+        $message->save();
 
         $response = new WP_REST_Response($message->latest());
 
@@ -437,6 +466,7 @@ class Messages extends BaseEndpoint
      * Create and send a message immediately
      *
      * @param  WP_REST_Request  $request
+     *
      * @return WP_REST_Response
      */
     public function createAndSend(WP_REST_Request $request): WP_REST_Response
@@ -481,6 +511,7 @@ class Messages extends BaseEndpoint
      * Send an existing message
      *
      * @param  WP_REST_Request  $request
+     *
      * @return WP_REST_Response
      */
     public function send(WP_REST_Request $request): WP_REST_Response
@@ -514,7 +545,7 @@ class Messages extends BaseEndpoint
 
         // @TODO: should better handle errors coming back from list-manager api
         $response = new WP_REST_Response([
-            "error" => "There was an error sending the message",
+            "error"   => "There was an error sending the message",
             "details" => $response
         ]);
 
@@ -527,9 +558,10 @@ class Messages extends BaseEndpoint
      * Build up an array of valid $options from request params
      *
      * @param  WP_REST_Request  $request
+     *
      * @return array
      */
-    protected function getOptions(WP_REST_Request $request): array
+    public function getOptions(WP_REST_Request $request): array
     {
         $options = [];
         $params  = $request->get_params();

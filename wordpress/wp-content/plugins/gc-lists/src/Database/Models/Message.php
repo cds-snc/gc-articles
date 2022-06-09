@@ -59,6 +59,8 @@ class Message extends Model
 
             $this->updateUpdatedTimestamp($timestamp);
 
+            $unsent = $this->sent_at === null;
+
             $this->forceFill([
                 'sent_at'           => $this->freshTimestamp(),
                 'sent_to_list_id'   => $sent_to_list_id,
@@ -67,6 +69,12 @@ class Message extends Model
                 'sent_by_email'     => $sent_by_email
             ]);
 
+            // If this is an unsent Draft just update in place
+            if ($this->isOriginal() && $unsent) {
+                return $this->save();
+            }
+
+            // If this is a previously sent message, create a new sent instance
             return $this->saveSentVersion();
         }
 
@@ -151,13 +159,7 @@ class Message extends Model
      */
     public function latest(): static
     {
-        $versions = $this->versions();
-
-        if ($versions->count()) {
-            return $versions->last();
-        }
-
-        return $this;
+        return $this->versions()->last();
     }
 
     /**
@@ -230,7 +232,10 @@ class Message extends Model
      */
     public static function templates(array $options = []): ?Collection
     {
-        $messages = static::whereNull('original_message_id');
+        $messages = static::where([
+            'original_message_id IS NULL',
+            'sent_at IS NULL',
+        ]);
 
         // In case the name of the template has been changed, display latest
         $messages->map(function ($message) {

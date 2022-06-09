@@ -27,7 +27,7 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
     useEffect(() => {
         const getSentMessages = async () => {
             setLoading(true);
-            await request.get(`/messages/sent?${uuidv4()}`);
+            await request.get(`/messages/sent?${uuidv4()}&sort=desc`);
             if (response.ok) {
                 setData(response.data);
                 setLoading(false)
@@ -82,10 +82,14 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
         <>
             <h2>{__("Sending history", "gc-lists")}</h2>
             <Table columns={columns} data={data} perPage={perPage} pageNav={pageNav} />
-            {allLink && <StyledPaging>
+            {allLink && data.length > 6 && <StyledPaging>
                 <StyledLink to={`/messages/history`} >
                     <span> {__("All sending history", "gc-lists")} </span><Next />
                 </StyledLink>
             </StyledPaging>}
-        </> : null
+        </> :
+        <>
+            <h2>{__("Sending history", "gc-lists")}</h2>
+            <p>{__("You have no sent messages", "gc-lists")}</p>
+        </>
 }

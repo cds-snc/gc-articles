@@ -8,8 +8,6 @@
  */
 ?>
 
-<h1><?php echo $title ?></h1>
-
 <!-- app -->
 <div class="wrap">
     <?php
@@ -24,9 +22,8 @@
 </div>
 
 <script>
-    let params = new URLSearchParams(window.location.search);
-    let from = params.get("from");
-    if(from !== 'subscribers') {
+    let hash = window.location.hash;
+    if(!hash.startsWith('#/messages')) {
         window.location = "#/messages";
     }
 </script>

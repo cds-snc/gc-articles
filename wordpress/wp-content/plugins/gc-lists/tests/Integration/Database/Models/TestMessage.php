@@ -201,6 +201,14 @@ test('Retrieve using whereNotNull param', function() {
     }
 });
 
+test('whereNotNull returns empty collection when no results', function() {
+    $this->factory->message->create_many(5);
+    $result = Message::whereNotNull('sent_at');
+    expect($result)
+        ->toBeInstanceOf(Collection::class)
+        ->toBeEmpty();
+});
+
 test('Retrieve using whereNotNull param and Limit', function() {
     $this->factory->message->create_many(20);
     $messages = Message::whereNotNull('created_at', ['limit' => 5]);
@@ -237,6 +245,14 @@ test('Retrieve using whereNull param and Limit', function() {
     $this->assertEquals(5, count($messages));
 });
 
+test('whereNull returns empty collection when no results', function() {
+    $this->factory->message->create_many(5);
+    $result = Message::whereNull('name');
+    expect($result)
+        ->toBeInstanceOf(Collection::class)
+        ->toBeEmpty();
+});
+
 test('Retrieve using where', function() {
     $message_id = $this->factory->message->create([
         'name' => 'Foo'
@@ -253,16 +269,28 @@ test('Retrieve using where', function() {
     $message->send($uuid, $listName, 1, $email);
 
     $sentOriginals = Message::where(['sent_at IS NOT NULL', 'original_message_id IS NULL']);
-    $this->assertEquals(0, $sentOriginals->count());
+    $this->assertEquals(1, $sentOriginals->count());
 
-    $originals = Message::where(['original_message_id IS NULL']);
+    $originals = Message::where('original_message_id IS NULL');
     $this->assertEquals(1, $originals->count());
 
     $sent = Message::where(['sent_at IS NOT NULL']);
     $this->assertEquals(1, $sent->count());
 
     $versions = Message::where(["original_message_id = {$message_id}"]);
-    $this->assertEquals(2, $versions->count());
+    $this->assertEquals(1, $versions->count());
+
+    $limited = Message::where('1 = 1', [
+        'limit' => 1
+    ]);
+    $this->assertEquals(1, $limited->count());
+});
+
+test('Retrieve using where returns empty collection when no data', function() {
+    $result = Message::where('id = 1');
+    expect($result)
+        ->toBeInstanceOf(Collection::class)
+        ->toBeEmpty();
 });
 
 test('Create a model with invalid attribute throws InvalidAttributeException', function() {
@@ -340,6 +368,15 @@ test('Retrieve the most recent version of a Message', function() {
 
     $this->assertTrue($message instanceof Message);
     $this->assertEquals(5, $latest->version_id);
+});
+
+test('latest() returns self if there are no versions', function() {
+    $message_id = $this->factory->message->create();
+
+    $message = Message::find($message_id);
+    $latest = $message->latest();
+
+    $this->assertEquals($message, $latest);
 });
 
 test('Retrieve the original of a Message version', function() {
@@ -501,8 +538,8 @@ test('Save a new version from a version should create a revision of the original
         ]);
     }
 
-    // Select a version from random
-    $version = $original->versions()->random();
+    // Select the last version (could be any)
+    $version = $original->versions()->last();
 
     $version->name = 'This is a new name';
     $version->body = 'This is a new body';
@@ -538,7 +575,7 @@ test('Saving a version with invalid attribute should throw exception', function(
     $original->saveVersion();
 });
 
-test('Retrieve all Message templates', function() {
+test('Retrieve all Message drafts', function() {
     $this->factory->message->create_many(20);
 
     $templates = Message::templates();
@@ -548,7 +585,50 @@ test('Retrieve all Message templates', function() {
     $this->assertCount(5, $templates);
 });
 
-test('Retrieve message templates includes latest name', function() {
+test('Retrieve drafts with sort', function() {
+    $this->factory->message->create_many(5);
+
+    $drafts = Message::templates([
+        'sort' => 'desc'
+    ]);
+
+    $this->assertCount(5, $drafts);
+    // Not sure how to check if they were actually sorted?
+});
+
+test('Retrieve Message drafts excludes sent messages', function() {
+    // These are just templates (drafts) by default
+    $this->factory->message->create_many(5);
+
+    // Mimics the "Create and send option" where a template is created and sent immediately
+    for($index = 1; $index <= 10; $index++) {
+        $message = new Message([
+            'name'         => 'Foo',
+            'subject'      => 'Bar',
+            'body'         => 'Baz',
+            'message_type' => 'email'
+        ]);
+
+        $uuid     = faker()->uuid();
+        $email    = faker()->email;
+        $listName = 'FooBar list';
+
+        $message->send(
+            $uuid,
+            $listName,
+            1,
+            $email
+        );
+    }
+
+    $templates = Message::templates();
+    $this->assertEquals(5, $templates->count());
+
+    $all = Message::all();
+    $this->assertEquals(15, $all->count());
+});
+
+test('Retrieve message drafts includes latest name', function() {
     $message_id = $this->factory->message->create([
         'name' => 'Original name',
         'body' => 'Original body',
@@ -601,6 +681,19 @@ test('Retrieve only Sent Messages', function() {
     $this->assertCount(3, Message::sentMessages(['limit' => 3]));
 });
 
+test('Retrieve sent messages with sort', function() {
+    $this->factory->message->create_many(5, [
+        'sent_at' => Carbon::now()->toDateTimeString()
+    ]);
+
+    $messages = Message::sentMessages([
+        'sort' => 'desc'
+    ]);
+
+    $this->assertCount(5, $messages);
+    // Not sure how to check if they were actually sorted?
+});
+
 test('isOriginal', function() {
     $original_id = $this->factory->message->create();
     $version_id = $this->factory->message->create([
@@ -614,7 +707,7 @@ test('isOriginal', function() {
     $this->assertFalse($version->isOriginal());
 });
 
-test('Message send - existing message', function() {
+test('Send an existing draft message', function() {
     $message_id = $this->factory->message->create();
     $message = Message::find($message_id);
 
@@ -629,18 +722,50 @@ test('Message send - existing message', function() {
 
     expect($message)
         ->toBeInstanceOf(Message::class)
-        ->toHaveKey('sent_at', NULL);
-
-    expect($message->sent())
-        ->toBeInstanceOf(Collection::class)
-        ->each
-        ->toBeInstanceOf(Message::class)
         ->toHaveKey('sent_at', $timestamp)
         ->toHaveKey('sent_by_email', $email)
         ->toHaveKey('sent_to_list_name', $listName);
 });
 
-test('Message create and send (new message)', function() {
+test('Edit and send a previously sent message', function() {
+    $timestamp = Carbon::now()->toDateTimeString();
+    Carbon::setTestNow($timestamp);
+
+    $uuid = faker()->uuid();
+    $email = faker()->email;
+    $listName = 'This is a list name';
+
+    $message_id = $this->factory->message->create([
+        'sent_to_list_id' => $uuid,
+        'sent_to_list_name' => $listName,
+        'sent_by_email' => $email,
+        'sent_by_id' => 1,
+        'sent_at' => $timestamp,
+    ]);
+
+    $message = Message::find($message_id);
+
+    $timestamp2 = Carbon::now()->toDateTimeString();
+    Carbon::setTestNow($timestamp2);
+
+    $uuid2 = faker()->uuid();
+    $email2 = faker()->email;
+    $listName2 = 'This is another list name';
+
+    $message = $message->send($uuid2, $listName2, 1, $email2);
+
+    // New message should be a new instance with a reference to the first
+    $message2 = Message::where(['original_message_id', $message->id])->first();
+
+    expect($message2)
+        ->toBeInstanceOf(Message::class)
+        ->toHaveKey('sent_at', $timestamp2)
+        ->toHaveKey('sent_by_email', $email2)
+        ->toHaveKey('sent_to_list_name', $listName2)
+        ->toHaveKey('original_message_id', $message->id);
+});
+
+test('Send a new message', function() {
     $message = new Message([
         'name' => 'Foo',
         'subject' => 'Bar',
@@ -668,4 +793,31 @@ test('Message create and send (new message)', function() {
     expect($sent)
         ->toBeInstanceOf(Collection::class)
         ->toHaveCount(1);
+});
+
+test('fresh() retrieves latest from db', function() {
+    $message = Message::create([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz'
+    ]);
+
+    $message->name = 'Huzzah';
+    $this->assertEquals($message->name, 'Huzzah');
+
+    $fresh = $message->fresh();
+    $this->assertEquals($fresh->name, 'Foo');
+});
+
+test('Find a model that does not exist', function() {
+    $result = Message::find(1);
+    $this->assertNull($result);
+});
+
+test('Model::all() returns an empty collection when no data', function() {
+    $result = Message::all();
+
+    expect($result)
+        ->toBeInstanceOf(Collection::class)
+        ->toBeEmpty();
 });

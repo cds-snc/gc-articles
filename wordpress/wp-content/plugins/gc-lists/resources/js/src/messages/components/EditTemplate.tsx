@@ -11,6 +11,8 @@ import { useForm } from "react-hook-form";
 import { Success } from "./Notice";
 import { Spinner } from '../../common/Spinner';
 import styled from 'styled-components';
+import { Back } from './icons/Back';
+import { StyledLink } from './Table';
 
 const textWidth = { width: "25em" }
 
@@ -85,6 +87,9 @@ export const EditTemplate = () => {
 
     return (
         <>
+            <StyledLink to={`/messages`}>
+                <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
+            </StyledLink>
             {heading}
             <form style={{ maxWidth: '400px' }}>
                 <input type="hidden" {...register("hasTemplate", { validate: () => templateHasValue })} />

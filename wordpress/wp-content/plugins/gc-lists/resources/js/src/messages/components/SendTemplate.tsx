@@ -18,6 +18,8 @@ import { ConfirmSend } from "./ConfirmSend";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { Warn } from "../components/Notice";
+import { Back } from './icons/Back';
+import { StyledLink } from './Table';
 
 
 const StyledNext = styled.span`
@@ -108,6 +110,10 @@ export const SendTemplate = () => {
 
     return (
         <>
+            {templateId !== 'new' && <StyledLink to={`/messages/edit/${templateId}`}>
+                <Back /> <span>{__("Back to edit message ", "gc-lists")}</span>
+            </StyledLink>}
+
             <h1>{__("Send message to a list", "gc-lists")}</h1>
 
             {hasLists ?

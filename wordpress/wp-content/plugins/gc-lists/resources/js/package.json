@@ -38,7 +38,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "watch": "node ./scripts/watch.mjs"
   },
   "eslintConfig": {
     "extends": [
@@ -61,6 +62,9 @@
   "devDependencies": {
     "@types/react-table": "^7.7.11",
     "@types/styled-components": "^5.1.25",
-    "@types/uuid": "^8.3.4"
+    "@types/uuid": "^8.3.4",
+    "node-notifier": "^10.0.1",
+    "shelljs": "^0.8.5",
+    "watch": "^1.0.2"
   }
 }

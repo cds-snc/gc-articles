@@ -27,7 +27,7 @@ const MessagesApp = () => {
                     <SendTemplate />
                 </React.Suspense>
             } />
-            <Route path="all-templates" element={
+            <Route path="all-drafts" element={
                 <React.Suspense fallback={<Spinner />}>
                     <AllTemplates />
                 </React.Suspense>

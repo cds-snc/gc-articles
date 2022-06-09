@@ -128,7 +128,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                         <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
                         {templates?.length > 6 &&
                             <StyledPaging>
-                                <StyledLink to={`/messages/all-templates`}>
+                                <StyledLink to={`/messages/all-drafts`}>
                                     <span>{__("All drafts", "gc-lists")}</span><Next />
                                 </StyledLink>
                             </StyledPaging>

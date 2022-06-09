@@ -498,13 +498,15 @@ class Messages extends BaseEndpoint
         }
 
         // @TODO: should better handle errors coming back from list-manager api
-        $response = new WP_REST_Response([
-            "error" => "There was an error sending the message"
+        $newresponse = new WP_REST_Response([
+            "error" => "There was an error sending the message",
+            "details" => $response,
+            "status" => $response->status
         ]);
 
-        $response->set_status(500);
+        $newresponse->set_status(500);
 
-        return rest_ensure_response($response);
+        return rest_ensure_response($newresponse);
     }
 
     /**
@@ -544,14 +546,15 @@ class Messages extends BaseEndpoint
         }
 
         // @TODO: should better handle errors coming back from list-manager api
-        $response = new WP_REST_Response([
+        $newresponse = new WP_REST_Response([
             "error"   => "There was an error sending the message",
-            "details" => $response
+            "details" => $response,
+            "status" => $response->status
         ]);
 
-        $response->set_status(500);
+        $newresponse->set_status(500);
 
-        return rest_ensure_response($response);
+        return rest_ensure_response($newresponse);
     }
 
     /**

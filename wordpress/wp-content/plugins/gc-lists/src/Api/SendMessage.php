@@ -27,6 +27,7 @@ class SendMessage
                 ]),
                 'template_id' => get_option('NOTIFY_GENERIC_TEMPLATE_ID'),
                 'template_type' => "email",
+                'service_api_key' => get_option('NOTIFY_API_KEY'),
             ]),
         ];
 

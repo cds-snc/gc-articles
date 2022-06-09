@@ -9,7 +9,7 @@
     "deploy-production": "node ./scripts/prepare-release.js --production",
     "deploy-infrastructure": "node ./scripts/prepare-release.js --deployInfrastructure",
     "cli": "docker exec -it cli /bin/zsh",
-    "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && cd ../gc-lists && npm install",
+    "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && cd ../gc-lists && npm install --force",
     "import": "node ./import/import.js",
     "wp-env": "wp-env",
     "wp-env:init": "wp-env start",

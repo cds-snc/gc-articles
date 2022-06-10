@@ -15,14 +15,18 @@ try {
 
 const notifications = settings.notifications;
 
+const start = new Date().getTime();
+
 if (notifications) {
     notifier.notify({ title: 'GC Articles', message: 'Change detected' })
 }
 
 shell.exec('npm run build', function(code, stdout, stderr) {
-    if (code === 1) {
+    const end = new Date().getTime();
+    const time = Math.floor((end - start) / 1000);
+    if (code === 0) {
         if (notifications) {
-            notifier.notify({ title: 'GC Articles', message: stdout });
+            notifier.notify({ title: 'GC Articles', message: `Build completed in ${time} seconds` });
         }
     } else {
         if (notifications) {

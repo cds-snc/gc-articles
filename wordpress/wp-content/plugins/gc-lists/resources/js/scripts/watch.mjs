@@ -30,7 +30,7 @@ shell.exec('npm run build', function(code, stdout, stderr) {
         }
     } else {
         if (notifications) {
-            notifier.notify({ title: 'GC Articles', message: stdout });
+            notifier.notify({ title: 'GC Articles', message: `Failed to compile` });
         }
     }
 })

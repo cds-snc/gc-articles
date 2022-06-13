@@ -26,11 +26,17 @@ shell.exec('npm run build', function(code, stdout, stderr) {
     const time = Math.floor((end - start) / 1000);
     if (code === 0) {
         if (notifications) {
-            notifier.notify({ title: 'GC Articles', message: `Build completed in ${time} seconds` });
+            notifier.notify({
+                title: 'GC Articles',
+                message: `Build completed in ${time} seconds`
+            });
         }
     } else {
         if (notifications) {
-            notifier.notify({ title: 'GC Articles', message: `Failed to compile` });
+            notifier.notify({
+                title: 'GC Articles',
+                message: `Failed to compile in ${time} seconds`
+            });
         }
     }
 })

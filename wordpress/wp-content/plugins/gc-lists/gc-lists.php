@@ -29,6 +29,7 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
  * Basic Constants
  */
 define('GC_LISTS_PLUGIN_FILE_PATH', __FILE__);
+define('GC_LISTS_PLUGIN_BASE_PATH', __DIR__);
 
 $plugin = GCLists::getInstance();
 $plugin->setup();

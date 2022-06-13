@@ -51,7 +51,7 @@ class GCLists
     {
         if (str_contains($hook_suffix, 'gc-lists_')) {
             try {
-                $path  = plugin_dir_path(__FILE__) . '/../resources/js/build/asset-manifest.json';
+                $path  = GC_LISTS_PLUGIN_BASE_PATH . '/resources/js/build/asset-manifest.json';
                 $json  = file_get_contents($path);
                 $data  = json_decode($json, true);
                 $files = $data['files'];

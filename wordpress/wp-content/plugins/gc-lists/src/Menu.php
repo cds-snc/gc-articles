@@ -4,8 +4,12 @@ declare(strict_types=1);
 
 namespace GCLists;
 
+use GCLists\Concerns\RendersTemplates;
+
 class Menu
 {
+    use RendersTemplates;
+
     protected static $instance;
     protected string $messagesPageSlug = 'gc-lists_messages';
     protected string $subscribersPageSlug = 'gc-lists_subscribers';
@@ -143,21 +147,5 @@ class Menu
         $this->render('no_api_key', [
             'title' => esc_html(get_admin_page_title())
         ]);
-    }
-
-    /**
-     * Render a php template. Accepts the template name without extension.
-     * Template file must be in the resources folder, ie:
-     * /resources/templates/[template].php
-     *
-     * $args is an associative array of variables available to the template.
-     *
-     * @param  string  $template
-     * @param  array  $args
-     */
-    public function render(string $template, array $args = [])
-    {
-        extract($args);
-        require_once(__DIR__ . "/../resources/templates/{$template}.php");
     }
 }

@@ -21,6 +21,8 @@ class GCLists
         $this->registerHooks();
         $this->registerRestRoutes();
         $this->registerMenu();
+
+        add_action('init', [$this, 'loadTextdomain']);
     }
 
     public function registerHooks()
@@ -41,5 +43,10 @@ class GCLists
     {
         $menu = Menu::getInstance();
         $menu->register();
+    }
+
+    public function loadTextdomain()
+    {
+        return load_plugin_textdomain('gc-lists', false, 'gc-lists/resources/languages');
     }
 }

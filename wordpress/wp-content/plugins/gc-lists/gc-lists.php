@@ -6,7 +6,7 @@
  * Author:          Canadian Digital Service
  * Author URI:      https://digital.canada.ca
  * Text Domain:     gc-lists
- * Domain Path:     /languages
+ * Domain Path:     /resources/languages
  * Version:         0.1.0
  *
  * @package         gc-lists

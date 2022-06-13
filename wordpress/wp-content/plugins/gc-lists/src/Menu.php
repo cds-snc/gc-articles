@@ -171,6 +171,8 @@ class Menu
                     '1.0.0',
                     true,
                 );
+
+                wp_set_script_translations('gc-lists', 'gc-lists', plugin_dir_path(__FILE__) . '../resources/languages/');
             } catch (\Exception $exception) {
                 error_log($exception->getMessage());
             }

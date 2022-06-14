@@ -10,7 +10,7 @@ class GCLists
 {
     protected static $instance;
 
-    protected Messages $messages;
+    protected Messages $messagesApi;
     protected Install $installer;
     protected Menu $menu;
 
@@ -22,9 +22,9 @@ class GCLists
 
     public function setup()
     {
-        $this->installer = Install::getInstance();
-        $this->messages = Messages::getInstance();
-        $this->menu = Menu::getInstance();
+        $this->installer   = Install::getInstance();
+        $this->messagesApi = Messages::getInstance();
+        $this->menu        = Menu::getInstance();
 
         $this->addHooks();
     }
@@ -39,7 +39,7 @@ class GCLists
         add_action('admin_enqueue_scripts', [$this, 'enqueue']);
 
         // Register REST routes
-        add_action('rest_api_init', [$this->messages, 'registerRestRoutes']);
+        add_action('rest_api_init', [$this->messagesApi, 'registerRestRoutes']);
 
         // Register admin menu
         add_action('admin_menu', [$this->menu, 'addMenu']);

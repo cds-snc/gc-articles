@@ -58,54 +58,6 @@ class Menu
     }
 
     /**
-     * Extract ServiceID from API key
-     *
-     * @param $apiKey
-     * @return string
-     */
-    public function extractServiceIdFromApiKey($apiKey): string
-    {
-        return substr($apiKey, -73, 36);
-    }
-
-    /**
-     * Get ServiceId
-     *
-     * @return string
-     */
-    public function getServiceId(): string
-    {
-        return $this->extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
-    }
-
-    /**
-     * Get services array
-     *
-     * @return array
-     */
-    public function getServices(): array
-    {
-        return [
-            'name' => __('Your Lists', 'gc-lists'),
-            'service_id' => $this->getServiceId()
-        ];
-    }
-
-    /**
-     * Build up a user permissions object for the current user
-     *
-     * @return \stdClass
-     */
-    public function getUserPermissions(): \stdClass
-    {
-        $user = new \stdClass();
-        $user->hasEmail = current_user_can('list_manager_bulk_send');
-        $user->hasPhone = current_user_can('list_manager_bulk_send_sms');
-
-        return $user;
-    }
-
-    /**
      * Render messages template
      */
     public function renderMessages(): void
@@ -117,8 +69,8 @@ class Menu
 
         $this->render('messages', [
             'title' => __('Messages', 'gc-lists'),
-            'services' => $this->getServices(),
-            'user' => $this->getUserPermissions(),
+            'services' => Utils::getServices(),
+            'user' => Utils::getUserPermissions(),
         ]);
     }
 
@@ -134,8 +86,8 @@ class Menu
 
         $this->render('subscribers', [
             'title' => __('Subscribers', 'gc-lists'),
-            'services' => $this->getServices(),
-            'user' => $this->getUserPermissions(),
+            'services' => Utils::getServices(),
+            'user' => Utils::getUserPermissions(),
         ]);
     }
 

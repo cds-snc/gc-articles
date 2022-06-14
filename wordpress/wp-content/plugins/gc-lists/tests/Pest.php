@@ -11,14 +11,7 @@
 |
 */
 
-use GCLists\Install;
-use GCLists\Database\Factories\MessageFactory;
-
-/**
- * Note for future me: The WP_Mock library is incompatible with the wordpress core
- * test framework that we are using here, so don't even try:
- * https://github.com/10up/wp_mock/issues/125#issuecomment-414352645
- */
+use GCLists\Tests\TestCase;
 
 uses()->group('integration')->in('Integration');
 uses()->group('unit')->in('Unit');
@@ -31,24 +24,15 @@ uses()->group('unit')->in('Unit');
 require_once('bootstrap.php');
 
 /**
- * Because bootstrap.php loads the plugin in mu-plugins, activation hooks don't fire
- * and database tables don't get created, so we must manually trigger the install.
- */
-$installer = Install::getInstance();
-
-/**
  * This is where we setup or parent TestCase - in this case, we're extending from
  * WP_UnitTestCase which is provided by bootstrap.php. We also ensure the plugin
  * is installed, and we bind our Message factory to the TestCase.
  *
  */
-uses(\WP_UnitTestCase::class)
-	->beforeAll(fn () => $installer->install())
-	->beforeEach(fn () => $this->factory->message = new MessageFactory( $this->factory ))
+uses(TestCase::class)
 	->in('Integration');
 
-uses(\WP_UnitTestCase::class)
-    ->beforeEach(fn () => $this->factory->message = new MessageFactory( $this->factory ))
+uses(TestCase::class)
     ->in('Unit');
 
 /*

@@ -14,6 +14,12 @@
 use GCLists\Install;
 use GCLists\Database\Factories\MessageFactory;
 
+/**
+ * Note for future me: The WP_Mock library is incompatible with the wordpress core
+ * test framework that we are using here, so don't even try:
+ * https://github.com/10up/wp_mock/issues/125#issuecomment-414352645
+ */
+
 uses()->group('integration')->in('Integration');
 uses()->group('unit')->in('Unit');
 

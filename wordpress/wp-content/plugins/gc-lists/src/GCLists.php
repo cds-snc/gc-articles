@@ -10,6 +10,10 @@ class GCLists
 {
     protected static $instance;
 
+    protected Messages $messagesApi;
+    protected Install $installer;
+    protected Menu $menu;
+
     public static function getInstance(): GCLists
     {
         is_null(self::$instance) && self::$instance = new self();
@@ -18,28 +22,52 @@ class GCLists
 
     public function setup()
     {
-        $this->registerHooks();
-        $this->registerRestRoutes();
-        $this->registerMenu();
+        $this->installer   = Install::getInstance();
+        $this->messagesApi = Messages::getInstance();
+        $this->menu        = Menu::getInstance();
+
+        $this->addHooks();
     }
 
-    public function registerHooks()
+    public function addHooks()
     {
-        $installer = Install::getInstance();
+        // Activation hooks
+        register_activation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$this->installer, 'install']);
+        register_deactivation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$this->installer, 'uninstall']);
 
-        register_activation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$installer, 'install']);
-        register_deactivation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$installer, 'uninstall']);
+        // Enqueue scripts
+        add_action('admin_enqueue_scripts', [$this, 'enqueue']);
+
+        // Register REST routes
+        add_action('rest_api_init', [$this->messagesApi, 'registerRestRoutes']);
+
+        // Register admin menu
+        add_action('admin_menu', [$this->menu, 'addMenu']);
+        add_action('admin_menu', [$this->menu, 'addMessagesSubmenuItem']);
+        add_action('admin_menu', [$this->menu, 'addSubscriberListsSubmenuItem']);
     }
 
-    public function registerRestRoutes()
+    public function enqueue($hook_suffix)
     {
-        $messages = Messages::getInstance();
-        $messages->register();
-    }
+        if (str_contains($hook_suffix, 'gc-lists_')) {
+            try {
+                $path  = GC_LISTS_PLUGIN_BASE_PATH . '/resources/js/build/asset-manifest.json';
+                $json  = file_get_contents($path);
+                $data  = json_decode($json, true);
+                $files = $data['files'];
 
-    public function registerMenu()
-    {
-        $menu = Menu::getInstance();
-        $menu->register();
+                wp_enqueue_style('gc-lists', $files['main.css'], null, '1.0.0');
+
+                wp_enqueue_script(
+                    'gc-lists',
+                    $files['main.js'],
+                    null,
+                    '1.0.0',
+                    true,
+                );
+            } catch (\Exception $exception) {
+                error_log($exception->getMessage());
+            }
+        }
     }
 }

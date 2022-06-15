@@ -32,9 +32,11 @@ class SendMessage
         ];
 
         // Proxy request to list-manager
-        $proxy_response = wp_remote_retrieve_body(wp_remote_request($url, $args));
+        $proxy_response = wp_remote_request($url, $args);
 
-        $response = new WP_REST_Response(json_decode($proxy_response));
+        $response_body = wp_remote_retrieve_body($proxy_response);
+
+        $response = new WP_REST_Response(json_decode($response_body));
 
         return rest_ensure_response($response);
     }

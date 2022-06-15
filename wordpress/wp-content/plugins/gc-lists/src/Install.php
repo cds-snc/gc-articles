@@ -23,6 +23,11 @@ class Install
         return self::$instance;
     }
 
+    public function getTableName()
+    {
+        return $this->tableName;
+    }
+
     public function install()
     {
         $charsetCollate = $this->wpdb->get_charset_collate();

@@ -2,9 +2,9 @@
 
 use GCLists\Install;
 
-test('construct', function() {
+test('constructor', function() {
     $that = $this;
-    $installer = Install::getInstance();
+    $installer = new Install();
 
     $assertPropertyClosure = function() use ($that){
         global $wpdb;
@@ -47,7 +47,7 @@ test('install', function() {
 test('uninstall', function() {
     global $wpdb;
 
-    $installer = Install::getInstance();
+    $installer = new Install();
 
     $installer->install();
 
@@ -55,5 +55,9 @@ test('uninstall', function() {
 
     $result = $wpdb->get_var("SHOW TABLES LIKE '{$installer->getTableName()}'");
 
+    // For some reason this succeeds (ie, the database table is not dropped)
+    $this->assertEquals($result, $installer->getTableName());
+
+    // This is what should happen
     $this->assertEmpty($result);
-})->skip('Plugin table does not uninstall in test environment');
+})->skip('Table does not drop in the test environment');

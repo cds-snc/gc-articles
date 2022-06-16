@@ -480,8 +480,19 @@ test('Send an existing message', function() {
     ]);
     $list_id = faker()->uuid();
 
-//    $mock = Mockery::mock(SendMessage::class);
-//    $mock->shouldReceive('handle')->withArgs([$list_id, 'Bar', 'Baz'])->andReturn(json_decode('{ "status": "OK" }'));
+    // mock/intercept list-manager api request
+    $url = getenv('LIST_MANAGER_ENDPOINT') . '/send';
+    add_filter( 'pre_http_request', function() {
+        return [
+            'headers'     => [],
+            'cookies'     => [],
+            'filename'    => null,
+            'response'    => 200,
+            'status_code' => 200,
+            'success'     => 1,
+            'body'        => '{"status": "OK"}',
+        ];
+    }, $url);
 
     $user_id = $this->factory->user->create();
     wp_set_current_user( $user_id );
@@ -497,9 +508,6 @@ test('Send an existing message', function() {
 
     $response = $this->server->dispatch( $request );
 
-//    var_dump($response);
-//    $mock->shouldHaveBeenCalled();
-
     $this->assertEquals( 200, $response->get_status() );
 
     $body = $response->get_data()->toJson();
@@ -509,13 +517,72 @@ test('Send an existing message', function() {
         ->toHaveKey('name', 'Foo sent')
         ->toHaveKey('subject', 'Bar sent')
         ->toHaveKey('body', 'Baz sent')
-        ->toHaveKey('original_message_id', $message_id);
-})->skip();
+        ->toHaveKey('sent_to_list_name', 'The list')
+        ->toHaveKey('original_message_id', null);
+});
+
+test('Error while sending existing message', function() {
+    $message_id = $this->factory->message->create([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz'
+    ]);
+    $list_id = faker()->uuid();
+
+    // mock/intercept list-manager api request
+    $url = getenv('LIST_MANAGER_ENDPOINT') . '/send';
+    add_filter( 'pre_http_request', function() {
+        return [
+            'headers'     => [],
+            'cookies'     => [],
+            'filename'    => null,
+            'response'    => 200,
+            'status_code' => 200,
+            'success'     => 1,
+            'body'        => '',
+        ];
+    }, $url);
+
+    $user_id = $this->factory->user->create();
+    wp_set_current_user( $user_id );
+
+    $request  = new WP_REST_Request( 'POST', "/gc-lists/messages/{$message_id}/send" );
+    $request->set_query_params([
+        'name' => 'Foo sent',
+        'subject' => 'Bar sent',
+        'body' => 'Baz sent',
+        'sent_to_list_id' => $list_id,
+        'sent_to_list_name' => 'The list',
+    ]);
+
+    $response = $this->server->dispatch( $request );
+
+    $this->assertEquals( 500, $response->get_status() );
+
+    $body = $response->get_data();
+    expect($body)
+        ->toBeArray()
+        ->toHaveKey('error', 'There was an error sending the message');
+});
 
 test('Send a message directly from input', function() {
     $list_id = faker()->uuid();
     $user_id = $this->factory->user->create();
     wp_set_current_user( $user_id );
+
+    // mock/intercept list-manager api request
+    $url = getenv('LIST_MANAGER_ENDPOINT') . '/send';
+    add_filter( 'pre_http_request', function() {
+        return [
+            'headers'     => [],
+            'cookies'     => [],
+            'filename'    => null,
+            'response'    => 200,
+            'status_code' => 200,
+            'success'     => 1,
+            'body'        => '{"status": "OK"}',
+        ];
+    }, $url);
 
     $request  = new WP_REST_Request( 'POST', "/gc-lists/messages/send" );
     $request->set_query_params([
@@ -539,7 +606,46 @@ test('Send a message directly from input', function() {
         ->toHaveKey('subject', 'Bar')
         ->toHaveKey('body', 'Baz')
         ->toHaveKey('original_message_id', NULL);
-})->skip();
+});
+
+test('Error while sending from input', function() {
+    $list_id = faker()->uuid();
+    $user_id = $this->factory->user->create();
+    wp_set_current_user( $user_id );
+
+    // mock/intercept list-manager api request
+    $url = getenv('LIST_MANAGER_ENDPOINT') . '/send';
+    add_filter( 'pre_http_request', function() {
+        return [
+            'headers'     => [],
+            'cookies'     => [],
+            'filename'    => null,
+            'response'    => 200,
+            'status_code' => 200,
+            'success'     => 1,
+            'body'        => '{}',
+        ];
+    }, $url);
+
+    $request  = new WP_REST_Request( 'POST', "/gc-lists/messages/send" );
+    $request->set_query_params([
+        'name' => 'Foo',
+        'subject' => 'Bar',
+        'body' => 'Baz',
+        'message_type' => 'email',
+        'sent_to_list_id' => $list_id,
+        'sent_to_list_name' => 'The list',
+    ]);
+
+    $response = $this->server->dispatch( $request );
+
+    $this->assertEquals( 500, $response->get_status() );
+
+    $body = $response->get_data();
+    expect($body)
+        ->toBeArray()
+        ->toHaveKey('error', 'There was an error sending the message');
+});
 
 test('getOptions', function() {
     $request = new WP_REST_Request('GET', 'https://localhost');

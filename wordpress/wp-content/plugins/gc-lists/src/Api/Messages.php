@@ -19,11 +19,6 @@ class Messages extends BaseEndpoint
         return self::$instance;
     }
 
-    public function register()
-    {
-        add_action('rest_api_init', [$this, 'registerRestRoutes']);
-    }
-
     public function hasPermission(): bool
     {
         return true; // current_user_can('delete_posts');

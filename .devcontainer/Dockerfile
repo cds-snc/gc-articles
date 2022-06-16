@@ -1,4 +1,4 @@
-FROM wordpress:cli-php8.0
+FROM wordpress:cli-php8.1
 
 WORKDIR /usr/src/wordpress
 

@@ -32,6 +32,23 @@ const StyledDeleteButton = styled.button`
     }
 `;
 
+export const StyledPlaceholder = styled.div`
+    display:block;
+    border: 1px solid #CCCCCC;
+    min-width:250px;
+    padding:10px;
+
+    h3 {
+        display:inline-block;
+        font-size: 1.2em;
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+    }
+`
+
 export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     const { loading, templates, getTemplates, deleteTemplate } = useTemplateApi();
 
@@ -138,7 +155,10 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
                     <>
                         {!loading &&
                             <>
-                                <p>{__("You have no draft messages", "gc-lists")}</p>
+                                <StyledPlaceholder>
+                                    <h3>{__("You have no draft messages", "gc-lists")}</h3>
+                                    <p>{__("Saving a draft allows you to keep a message you aren't ready to send yet.", "gc-lists")}</p>
+                                </StyledPlaceholder>
                             </>
                         }
                     </>

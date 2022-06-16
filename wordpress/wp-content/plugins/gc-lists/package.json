@@ -1,9 +1,10 @@
-
 {
     "name": "gc-lists",
     "version": "1.0.0",
     "author": "Canadian Digital Service",
-    "scripts" : {
-      "postinstall": "cd resources/js && npm install && npm run build"
+    "scripts": {
+        "postinstall": "cd resources/js && npm install && npm run build",
+        "prepare-test-db": "echo y | ./bin/install-wp-tests.sh wordpress_testing root secret db",
+        "test": "./vendor/bin/pest --coverage"
     }
 }

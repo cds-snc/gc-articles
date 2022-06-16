@@ -33,6 +33,8 @@
     },
     "type": "wordpress-plugin",
     "scripts": {
+        "prepare-test-db": "echo y | ./bin/install-wp-tests.sh wordpress_testing root secret db",
+        "test": "pest --coverage",
         "make-pot": "wp i18n make-pot --domain=gc-lists . languages/gc-lists.pot",
         "merge-po": "msgmerge -U --no-wrap --backup none -N ./languages/gc-lists-fr_CA.po ./languages/gc-lists.pot",
         "compile-mo": "msgfmt -o ./languages/gc-lists-fr_CA.mo ./languages/gc-lists-fr_CA.po",

@@ -5,8 +5,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 /**
  * Internal dependencies

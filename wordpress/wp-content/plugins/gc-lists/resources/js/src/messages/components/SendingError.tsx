@@ -1,5 +1,7 @@
-
-import { ErrorSummary } from "./FieldError"
+/**
+ * Internal dependencies
+ */
+import { ErrorSummary } from "."
 
 export const SendingError = () => {
     const error = { location: "test", message: "something happened" };

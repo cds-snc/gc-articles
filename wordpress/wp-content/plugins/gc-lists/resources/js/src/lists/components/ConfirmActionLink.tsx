@@ -1,3 +1,6 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import Swal from "sweetalert2";
 

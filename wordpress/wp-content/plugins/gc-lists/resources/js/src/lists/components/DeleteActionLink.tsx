@@ -1,8 +1,14 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import useFetch from "use-http";
-import { ConfirmActionLink } from "./ConfirmActionLink";
-import { useList } from "../../store/ListContext";
 
+/**
+ * Internal dependencies
+ */
+import { ConfirmActionLink } from "./ConfirmActionLink";
+import { useList } from "../../store";
 
 export const DeleteActionLink = ({ id = '' }: { id: string }) => {
     const { dispatch, state: { config: { listManagerApiPrefix } } } = useList();

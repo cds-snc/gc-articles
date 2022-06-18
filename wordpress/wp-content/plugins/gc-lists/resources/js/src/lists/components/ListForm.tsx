@@ -1,10 +1,17 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { __ } from "@wordpress/i18n";
+
+/**
+ * Internal dependencies
+ */
 import { Back } from "./Back";
 import { List, FieldError } from "../../types";
-import { useList } from "../../store/ListContext";
+import { useList } from "../../store";
 
 const textWidth = { width: "25em" }
 

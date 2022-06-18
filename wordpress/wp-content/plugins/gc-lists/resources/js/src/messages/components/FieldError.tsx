@@ -1,5 +1,9 @@
 // @ts-nocheck
+/**
+ * External dependencies
+ */
 import { __ } from "@wordpress/i18n";
+
 export const findErrorId = (errors = [], id = '') => errors.find(err => err.location === id)
 
 export const FieldError = ({ errors = [], id = '', children }) => {
@@ -22,7 +26,7 @@ export const ErrorSummary = ({ errors }) => {
         <div className="error-wrapper">
             <span className="validation-error">
                 <h2>{__("There is a problem", "gc-lists")}</h2>
-                <ul >
+                <ul>
                     {errors.map((err, i) => {
                         return err.location ?
                             <li key={err.location}><a href={`#${err.location}`}>{err.message}</a></li> :

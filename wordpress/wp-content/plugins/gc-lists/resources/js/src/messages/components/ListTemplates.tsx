@@ -1,14 +1,17 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { useEffect } from 'react';
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
-import { Spinner } from "../../common/Spinner";
 
-import { Table, StyledLink, StyledPaging } from "./Table";
-import { Next } from "./icons/Next";
-import useTemplateApi from '../../store/useTemplateApi';
-import { ConfirmDelete } from './ConfirmDelete';
+/**
+ * Internal dependencies
+ */
+import { Table, StyledLink, StyledPaging, ConfirmDelete, Spinner, Next } from ".";
+import { useTemplateApi } from '../../store';
 
 const StyledDivider = styled.span`
     margin-left: 10px;

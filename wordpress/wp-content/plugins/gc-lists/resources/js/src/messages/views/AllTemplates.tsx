@@ -1,8 +1,13 @@
-import { ListTemplates } from "./ListTemplates";
-import { Back } from './icons/Back';
-import { __ } from '@wordpress/i18n';
-import { StyledLink } from './Table';
+/**
+ * External dependencies
+ */
 import * as React from 'react';
+import { __ } from '@wordpress/i18n';
+
+/**
+ * Internal dependencies
+ */
+import { ListTemplates, StyledLink, Back } from '../components';
 
 export const AllTemplates = () => {
     return (

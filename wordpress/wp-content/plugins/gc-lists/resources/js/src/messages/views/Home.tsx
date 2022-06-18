@@ -1,5 +1,4 @@
-import { ListTemplates } from "../components/ListTemplates";
-import { SendingHistory } from "../components/SendingHistory";
+import { SendingHistory, ListTemplates  } from "../components";
 
 export const Home = () => {
     return (

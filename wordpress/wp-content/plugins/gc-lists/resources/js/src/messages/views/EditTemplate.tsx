@@ -1,18 +1,20 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { __ } from "@wordpress/i18n";
 import { useEffect, useState, useCallback } from 'react';
 import { Descendant } from "slate";
 import { useNavigate } from 'react-router-dom';
-
-import { Editor } from "../editor/Editor";
-import useTemplateApi from '../../store/useTemplateApi';
-import { deserialize, serialize } from '../editor/utils';
 import { useForm } from "react-hook-form";
-import { Success } from "./Notice";
-import { Spinner } from '../../common/Spinner';
 import styled from 'styled-components';
-import { Back } from './icons/Back';
-import { StyledLink } from './Table';
+
+/**
+ * Internal dependencies
+ */
+import { Editor, deserialize, serialize } from '../editor/';
+import { useTemplateApi } from '../../store';
+import { Success, Spinner, StyledLink, Back } from "../components";
 
 const textWidth = { width: "25em" }
 
@@ -32,8 +34,8 @@ export const EditTemplate = () => {
     const [saved, setSaved] = useState(false);
     const { template, loadingTemplate, templateId, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
-
     const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
+    
     useEffect(() => {
         setValue("name", template?.name || "")
         setValue("subject", template?.subject || "");
@@ -43,7 +45,6 @@ export const EditTemplate = () => {
         const fetchTemplate = async () => {
             await getTemplate(templateId);
         }
-
         fetchTemplate();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -148,10 +149,7 @@ export const EditTemplate = () => {
                     </tbody>
                 </table>
             </form>
-
-
             {saved && <Success message={__("Message saved", 'gc-lists')} />}
-
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {

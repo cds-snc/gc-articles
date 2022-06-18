@@ -1,7 +1,12 @@
+/**
+ * External dependencies
+ */
 import styled from 'styled-components';
 
-import { Check as CheckIcon } from "./icons/Check";
-import { Warn as WarnIcon } from "./icons/Warn";
+/**
+ * Internal dependencies
+ */
+import { Check as CheckIcon, Warn as WarnIcon } from "./";
 
 const StyledNotice = styled.div`
     border-left: 5px solid #ccc;
@@ -43,6 +48,7 @@ export const Success = ({ message }: { message: string | undefined }) => {
 export const Warn = ({ message }: { message: string | undefined }) => {
     return (
         <StyledWarn>
+            { /* @ts-ignore */}
             <WarnIcon /> <h3>{message}</h3>
         </StyledWarn>
     )

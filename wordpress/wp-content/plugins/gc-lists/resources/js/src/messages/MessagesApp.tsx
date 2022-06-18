@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { Routes, Route } from "react-router-dom";
-import { Spinner } from '../common/Spinner';
-const Home = React.lazy(() => import("./main/Home"));
-const EditTemplate = React.lazy(() => import("./components/EditTemplate"));
-const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
-const AllTemplates = React.lazy(() => import("./components/AllTemplates"));
-const AllSendingHistory = React.lazy(() => import("./components/AllSendingHistory"));
-const Versions = React.lazy(() => import("./components/Versions"));
+import { Spinner } from './components';
+const Home = React.lazy(() => import("./views/Home"));
+const EditTemplate = React.lazy(() => import("./views/EditTemplate"));
+const SendTemplate = React.lazy(() => import("./views/SendTemplate"));
+const AllTemplates = React.lazy(() => import("./views/AllTemplates"));
+const AllSendingHistory = React.lazy(() => import("./views/AllSendingHistory"));
+const Versions = React.lazy(() => import("./views/Versions"));
 
 // route http://localhost:3000/#/messages/123/edit/123
 const MessagesApp = () => {

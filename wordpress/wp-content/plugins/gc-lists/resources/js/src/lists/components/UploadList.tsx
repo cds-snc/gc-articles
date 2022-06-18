@@ -1,16 +1,22 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { useState } from 'react'
 import { Importer, ImporterField } from "react-csv-importer";
 import useFetch from 'use-http';
 import { Navigate } from "react-router-dom";
-import { Back } from "./Back";
-import { ListType } from "../../types";
-import { capitalize } from "../../util/functions";
-import { useService } from '../../util/useService';
 
 // theme CSS for React CSV Importer
 import "react-csv-importer/dist/index.css";
-import { useList } from '../../store/ListContext';
+
+/**
+ * Internal dependencies
+ */
+import { useService, useList } from '../../store';
+import { ListType } from "../../types";
+import { Back } from "./Back";
+import { capitalize } from "../../util/functions";
 
 export const UploadList = () => {
     const [finished, setFinished] = useState<boolean>(false)

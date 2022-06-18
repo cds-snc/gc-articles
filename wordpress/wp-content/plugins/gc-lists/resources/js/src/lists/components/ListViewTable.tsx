@@ -1,14 +1,19 @@
 import * as React from 'react';
 
+/**
+ * External dependencies
+ */
 import styled from 'styled-components';
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 
+/**
+ * Internal dependencies
+ */
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
-import { useListFetch } from '../../store/UseListFetch';
 import { List, ListType } from "../../types"
-import { useList } from "../../store/ListContext";
+import { useList, useListFetch } from '../../store';
 import { capitalize, getListType } from "../../util/functions";
 
 const HeaderStyles = styled.div`

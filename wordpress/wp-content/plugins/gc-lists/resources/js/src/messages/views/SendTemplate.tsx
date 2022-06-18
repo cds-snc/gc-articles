@@ -1,33 +1,38 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { useState, useEffect } from 'react'
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
-import { MessagePreview } from "./MessagePreview";
-import { MessageSent } from "./MessageSent";
-import { SendToList } from './SendToList';
-import { SendingError } from './SendingError';
-import { CreateNewList } from "./CreateNewList";
-import { Spinner } from '../../common/Spinner';
-import { useList } from "../../store/ListContext";
-import { Next } from "./icons/Next";
-import { List } from '../../types';
-import { useListFetch } from '../../store/UseListFetch';
-import { StyledSelect } from "../editor/Styles"
-import useTemplateApi from '../../store/useTemplateApi';
-import { ConfirmSend } from "./ConfirmSend";
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { Warn } from "../components/Notice";
-import { Back } from './icons/Back';
-import { StyledLink } from './Table';
 
+/**
+ * Internal dependencies
+ */
+import {
+    MessagePreview,
+    MessageSent,
+    SendToList,
+    SendingError,
+    CreateNewList,
+    ConfirmSend,
+    StyledLink,
+    Spinner,
+    Warn,
+    Next,
+    Back
+} from "../components";
+import { List } from '../../types';
+import { StyledSelect } from "../editor"
+import { useList, useListFetch, useTemplateApi } from '../../store';
 
 const StyledNext = styled.span`
     margin-left: 10px;
     position: relative;
     top: 3px;
 `;
-
 
 const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => void, lists: List[] }) => {
     return (
@@ -45,19 +50,16 @@ const ListSelect = ({ lists, handleChange }: { handleChange: (val: string) => vo
 }
 
 export const SendTemplate = () => {
-
     const { status } = useListFetch();
     const { state: { lists, hasLists } } = useList();
     const [listId, setListId] = useState<string>();
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
-
     const [name, setName] = useState<string>("");
     const [listName, setListName] = useState<string>("");
     const [subject, setSubject] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [messageSent, setMessageSent] = useState<boolean>(false);
     const [messageSendingErrors, setMessageSendingErrors] = useState<string>("");
-
     const { template, templateId, getTemplate, recordSent } = useTemplateApi();
 
     const navigate = useNavigate();

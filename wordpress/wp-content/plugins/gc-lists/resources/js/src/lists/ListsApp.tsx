@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { Suspense } from 'react'
 import { Routes, Route } from "react-router-dom";
+
+
 import { Spinner } from '../common/Spinner';
 import './App.css';
+
+
 const Service = React.lazy(() => import("./components/Service"));
 const UpdateList = React.lazy(() => import("./components/UpdateList"));
 const CreateList = React.lazy(() => import("./components/CreateList"));

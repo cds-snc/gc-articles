@@ -1,6 +1,12 @@
+/**
+ * External dependencies
+ */
 import Swal from "sweetalert2";
 
-import { useList } from "../../store/ListContext";
+/**
+ * Internal dependencies
+ */
+import { useList } from "../../store";
 
 type Message = {
     id: string,

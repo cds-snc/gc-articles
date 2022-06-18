@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-import { Check as CheckIcon } from "./icons/Check";
-import { Warn as WarnIcon } from "./icons/Warn";
+import { Check as CheckIcon, Warn as WarnIcon } from "./icons";
 
 const StyledNotice = styled.div`
     border-left: 5px solid #ccc;

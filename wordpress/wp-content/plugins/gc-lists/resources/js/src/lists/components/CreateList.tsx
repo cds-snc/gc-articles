@@ -1,12 +1,18 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { useState, useCallback } from 'react'
 import { SubmitHandler } from "react-hook-form";
 import useFetch from 'use-http';
 import { Navigate } from "react-router-dom";
+
+/**
+ * Internal dependencies
+ */
 import { ListForm } from "./ListForm";
-import { useList } from "../../store/ListContext";
+import { useList, useService } from "../../store";
 import { List } from "../../types";
-import { useService } from '../../util/useService';
 
 export const CreateList = () => {
     const [data, setData] = useState({ id: null })

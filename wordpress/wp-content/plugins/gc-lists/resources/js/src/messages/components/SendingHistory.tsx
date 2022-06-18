@@ -1,17 +1,19 @@
 // @ts-nocheck
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-
 import { __ } from "@wordpress/i18n";
 import useFetch from 'use-http';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
-
-import { Table, StyledPaging, StyledLink } from "./Table";
-import { Next } from "./icons/Next";
-
 import { v4 as uuidv4 } from 'uuid';
-import { StyledPlaceholder } from './ListTemplates';
+
+/**
+ * Internal dependencies
+ */
+import { StyledPlaceholder, Table, StyledPaging, StyledLink, Next } from ".";
 
 const StyledTableLink = styled(Link)`
     text-decoration:underline !important;

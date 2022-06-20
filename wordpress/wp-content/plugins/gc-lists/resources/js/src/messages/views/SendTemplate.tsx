@@ -25,7 +25,7 @@ import {
 
 import { ListSelect } from "../components";
 
-import { useTemplateApi, useList } from '../../store';
+import { useTemplateApi } from '../../store';
 
 const StyledNext = styled.span`
     margin-left: 10px;

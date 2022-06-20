@@ -6,7 +6,7 @@ import { Descendant } from "slate";
 import { useNavigate } from "react-router-dom";
 
 import { Editor } from "../editor/Editor";
-import {useTemplateApi} from '../../store';
+import useTemplateApi from '../../store/useTemplateApi';
 import { deserialize, serialize } from "../editor/utils";
 import { useService } from '../../util/useService';
 import { useForm } from "react-hook-form";

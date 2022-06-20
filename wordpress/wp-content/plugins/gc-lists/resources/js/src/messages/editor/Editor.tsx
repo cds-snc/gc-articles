@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useCallback, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Slate, Editable, withReact } from "slate-react";
 import { createEditor } from "slate";
 import { withHistory } from "slate-history";

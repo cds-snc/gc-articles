@@ -8,7 +8,6 @@ const AllTemplates = React.lazy(() => import("./views/AllTemplates"));
 const AllSendingHistory = React.lazy(() => import("./views/AllSendingHistory"));
 const Versions = React.lazy(() => import("./views/Versions"));
 
-// route http://localhost:3000/#/messages/123/edit/123
 const MessagesApp = () => {
     return (
         <Routes>

@@ -2,8 +2,7 @@
 /**
  * External dependencies
  */
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { __ } from "@wordpress/i18n";
 import useFetch from 'use-http';
 import styled from 'styled-components';
@@ -41,7 +40,7 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
     }, []);
 
 
-    const columns = React.useMemo(
+    const columns = useMemo(
         () => [
 
             {

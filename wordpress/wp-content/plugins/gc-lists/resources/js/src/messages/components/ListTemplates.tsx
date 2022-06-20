@@ -1,8 +1,7 @@
 /**
  * External dependencies
  */
-import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
@@ -60,7 +59,7 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const columns = React.useMemo(
+    const columns = useMemo(
         () => [
             {
                 Header: __('Message Name', "gc-lists"),

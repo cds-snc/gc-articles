@@ -87,9 +87,7 @@ function cds_security_headers($headers)
         }
     }
 
-    $headers['X-XSS-Protection'] = '1; mode=block';
-    $headers['X-Content-Type-Options'] = 'nosniff';
-    $headers['X-Content-Security-Policy'] = $csp;
+    $headers['Content-Security-Policy'] = $csp;
 
     return $headers;
 }

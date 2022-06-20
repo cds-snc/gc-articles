@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import * as React from 'react';
-
-/**
  * Internal dependencies
  */
 import { ListViewTable } from "./ListViewTable";

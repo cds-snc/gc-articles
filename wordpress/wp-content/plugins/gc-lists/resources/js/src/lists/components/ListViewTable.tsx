@@ -1,8 +1,7 @@
-import * as React from 'react';
-
 /**
  * External dependencies
  */
+import { useMemo } from "react";
 import styled from 'styled-components';
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
@@ -79,7 +78,7 @@ const updateLink = (listId: string) => {
 export const ListViewTable = () => {
     const { state: { lists, user } } = useList();
     const { status } = useListFetch();
-    const columns = React.useMemo(
+    const columns = useMemo(
         () => [
             {
                 Header: () => { return <HeaderStyles><CreateListLink /></HeaderStyles> },

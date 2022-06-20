@@ -1,7 +1,6 @@
 /**
  * External dependencies
  */
-import * as React from 'react';
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { __ } from "@wordpress/i18n";

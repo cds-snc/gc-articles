@@ -10,6 +10,7 @@ export { Success, Warn } from "./Notice";
 export { SendingError } from "./SendingError";
 export { SendingHistory } from "./SendingHistory";
 export { SendToList } from "./SendToList";
+export { ListSelect } from "./ListSelect";
 export { Table, StyledH1, StyledLink, StyledPaging } from "./Table";
 export { Spinner } from "../../common/Spinner";
 export { Error } from "../../common/Error";

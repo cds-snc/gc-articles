@@ -148,8 +148,9 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
             </Link>
             <h2>{__('Draft messages', 'gc-lists')}</h2>
             {loading && <Spinner />}
+
             {
-                templates?.length ?
+                !loading && templates?.length ?
                     <>
                         <Table columns={columns} data={templates} perPage={perPage} pageNav={pageNav} />
                         {templates?.length > 6 &&

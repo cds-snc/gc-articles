@@ -4,13 +4,14 @@
 import { useEffect, useMemo } from 'react';
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 /**
  * Internal dependencies
  */
 import { Table, StyledLink, StyledPaging, ConfirmDelete, Spinner, Next } from ".";
 import { useTemplateApi } from '../../store';
+import { ToastMessage } from './ToastMessage';
 
 const StyledDivider = styled.span`
     margin-left: 10px;
@@ -51,13 +52,15 @@ export const StyledPlaceholder = styled.div`
     }
 `
 
-export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
+export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     const { loading, templates, getTemplates, deleteTemplate } = useTemplateApi();
 
     useEffect(() => {
         getTemplates();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const { state: flashMessage = {} } = useLocation();
 
     const columns = useMemo(
         () => [
@@ -133,6 +136,10 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
             {window.location.hash === '#/messages' &&
                 <h1>{__('Messages', 'gc-lists')}</h1>
             }
+
+            {/* @ts-ignore */}
+            {flashMessage && <ToastMessage state={{ messages: [{ id: flashMessage?.id, type: flashMessage.type, message: `Saved` }] }} />}
+
             <Link
                 className="button button-primary"
                 to={`/messages/edit/new`}
@@ -169,4 +176,4 @@ export const ListTemplates = ({ perPage, pageNav }: { perPage?: number, pageNav?
     )
 }
 
-export default ListTemplates;
+export default ListDrafts;

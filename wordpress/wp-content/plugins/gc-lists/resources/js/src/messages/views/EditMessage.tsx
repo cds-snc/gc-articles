@@ -11,7 +11,7 @@ import styled from 'styled-components';
 /**
  * Internal dependencies
  */
-import { Editor, deserialize, serialize } from '../editor/';
+import { Editor, deserialize, serialize } from '../editor';
 import { useTemplateApi } from '../../store';
 import { Success, Spinner, StyledLink, Back } from "../components";
 
@@ -28,13 +28,13 @@ export const StyledPreviousVersions = styled.span`
    margin-left:10px;
 `;
 
-export const EditTemplate = () => {
+export const EditMessage = () => {
     const navigate = useNavigate();
     const [saved, setSaved] = useState(false);
     const { template, loadingTemplate, templateId, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
     const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
-    
+
     useEffect(() => {
         setValue("name", template?.name || "")
         setValue("subject", template?.subject || "");
@@ -60,7 +60,7 @@ export const EditTemplate = () => {
         const result = await saveTemplate({ templateId, name, subject, content: deserialize(content) });
 
         if (result) {
-            navigate(`/messages`);
+            navigate(`/messages`, { state: { type: "saved", from: 'edit-template', ...result } });
             setSaved(true);
         }
 
@@ -168,4 +168,4 @@ export const EditTemplate = () => {
     )
 }
 
-export default EditTemplate;
+export default EditMessage;

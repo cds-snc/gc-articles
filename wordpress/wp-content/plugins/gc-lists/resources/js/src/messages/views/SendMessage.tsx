@@ -33,7 +33,7 @@ const StyledNext = styled.span`
 `;
 
 
-export const SendTemplate = () => {
+export const SendMessage = () => {
     const [name, setName] = useState<string>("");
     const [subject, setSubject] = useState<string>("");
     const [content, setContent] = useState<string>("");
@@ -131,4 +131,4 @@ export const SendTemplate = () => {
         </>)
 }
 
-export default SendTemplate;
+export default SendMessage;

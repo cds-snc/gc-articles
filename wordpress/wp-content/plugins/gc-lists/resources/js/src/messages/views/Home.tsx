@@ -1,9 +1,9 @@
-import { SendingHistory, ListTemplates  } from "../components";
+import { SendingHistory, ListDrafts  } from "../components";
 
 export const Home = () => {
     return (
         <>
-            <ListTemplates />
+            <ListDrafts />
             <SendingHistory allLink={true} />
         </>
     )

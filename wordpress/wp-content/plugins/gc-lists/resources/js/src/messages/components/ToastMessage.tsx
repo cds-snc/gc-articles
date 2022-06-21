@@ -33,9 +33,8 @@ export const ToastMessage = (state: any) => {
         }
 
         if (messages && messages.length >= 1) {
-            messages.map((item: Message) => {
+            messages.forEach((item: Message) => {
                 if (item.type === "add" || item.type === "saved" || item.type === "delete" || item.type === "reset") {
-                    console.log("message.current", message.current);
                     Toast.fire({
                         icon: "success",
                         title: item.message
@@ -45,7 +44,7 @@ export const ToastMessage = (state: any) => {
                 }
             })
         }
-    }, [state])
+    }, [state, messages])
 
     return null;
 }

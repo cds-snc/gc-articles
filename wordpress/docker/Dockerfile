@@ -32,7 +32,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
 WORKDIR /usr/src/wordpress
 
 # Copy PHP config
-COPY ./php/php.ini /usr/local/etc/php/php.ini
+RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 COPY ./php/conf.d/error_reporting.ini /usr/local/etc/php/conf.d/error_reporting.ini
 COPY ./php/conf.d/upload_max_filesize.ini /usr/local/etc/php/conf.d/upload_max_filesize.ini
 COPY ./php/conf.d/memory_limit.ini /usr/local/etc/php/conf.d/memory_limit.ini

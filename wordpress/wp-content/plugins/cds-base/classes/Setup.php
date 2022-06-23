@@ -81,7 +81,7 @@ class Setup
         new Media();
 
         add_action('shutdown', [$this, 'logSql']);
-        add_filter('wpml_save_post_trid_value', [$this, 'checkTrid']);
+        add_filter('wpml_save_post_trid_value', [$this, 'checkTrid'], 10, 2);
     }
 
     public function logSql()
@@ -96,8 +96,10 @@ class Setup
         }
     }
 
-    public function checkTrid()
+    public function checkTrid($trid, $post_status)
     {
+        error_log("[TRID]: " . $trid);
+        error_log("[POST_STATUS]: " . $post_status);
         error_log("[_GET]: " . serialize($_GET));
         error_log("[_SERVER]: " . serialize($_SERVER));
         error_log("[_POST]: " . serialize($_POST));

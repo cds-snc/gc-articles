@@ -105,6 +105,9 @@ class Setup
         error_log("[_GET]: " . serialize($_GET));
         error_log("[HTTP_REFERER]: " . $_SERVER["HTTP_REFERER"]);
 
+        error_log("[POST icl_trid]: " . $_POST["icl_trid"] ?? "n/a");
+        error_log("[GET trid]: " . $_GET["trid"] ?? "n/a");
+
         return $trid;
     }
 

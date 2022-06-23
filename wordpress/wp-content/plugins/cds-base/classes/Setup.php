@@ -79,6 +79,28 @@ class Setup
         new UserCollections();
         new Users();
         new Media();
+
+        add_action('shutdown', [$this, 'logSql']);
+        add_filter('wpml_save_post_trid_value', [$this, 'checkTrid']);
+    }
+
+    public function logSql()
+    {
+        global $wpdb;
+
+        foreach ($wpdb->queries as $q) {
+            if (str_contains($q[0], 'icl_translations') && str_contains($q[0], 'INSERT INTO')) {
+                error_log("[QUERY] " . str_replace('\n', "\n", $q[0]) . "\n\n");
+                error_log("[STACK] " . $q[2]);
+            }
+        }
+    }
+
+    public function checkTrid()
+    {
+        error_log("[_GET]: " . serialize($_GET));
+        error_log("[_SERVER]: " . serialize($_SERVER));
+        error_log("[_POST]: " . serialize($_POST));
     }
 
     /**

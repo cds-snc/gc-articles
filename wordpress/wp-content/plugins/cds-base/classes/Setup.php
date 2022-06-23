@@ -101,9 +101,14 @@ class Setup
     {
         error_log("[TRID]: " . $trid);
         error_log("[POST_STATUS]: " . $post_status);
-        error_log("[_GET]: " . serialize($_GET));
-        error_log("[_SERVER]: " . serialize($_SERVER));
         error_log("[_POST]: " . serialize($_POST));
+        error_log("[_GET]: " . serialize($_GET));
+        error_log("[HTTP_REFERER]: " . $_SERVER["HTTP_REFERER"]);
+
+        error_log("[POST icl_trid]: " . $_POST["icl_trid"] ?? "n/a");
+        error_log("[GET trid]: " . $_GET["trid"] ?? "n/a");
+
+        return $trid;
     }
 
     public function updateTranslation($array)

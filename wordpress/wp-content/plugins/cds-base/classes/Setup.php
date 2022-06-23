@@ -82,6 +82,7 @@ class Setup
 
         add_action('shutdown', [$this, 'logSql']);
         add_filter('wpml_save_post_trid_value', [$this, 'checkTrid'], 10, 2);
+        add_action('wpml_translation_update', [$this, 'updateTranslation'], 10, 1);
     }
 
     public function logSql()
@@ -103,6 +104,11 @@ class Setup
         error_log("[_GET]: " . serialize($_GET));
         error_log("[_SERVER]: " . serialize($_SERVER));
         error_log("[_POST]: " . serialize($_POST));
+    }
+
+    public function updateTranslation($array)
+    {
+        error_log("[UPDATE_TRANSLATION]: " . serialize($array));
     }
 
     /**

@@ -91,9 +91,23 @@ class Setup
     {
         if (isset($_GET['trid'])) {
             $trid = intval($_GET['trid']);
-            set_transient("wpml_trid", $trid, 1 * HOUR_IN_SECONDS);
-            error_log("[SAVED WPML TRID]: " . $trid . " " . $post_ID .  ' ' . $post->post_status);
+            add_post_meta($post_ID, 'wpml_trid', $trid);
+            error_log("[TRID SAVED TO POST META]: " . $trid . " " . $post_ID .  ' ' . $post->post_status);
         }
+    }
+
+    public function checkTrid($trid, $post_status)
+    {
+        error_log("[TRID]: " . $trid . "[POST_STATUS]: " . $post_status);
+
+        global $post;
+        if (isset($post) && isset($post->ID)) {
+            $trid = get_post_meta($post->ID, 'wpml_trid', true);
+            error_log("[GET POST META]: " . $trid);
+            return $trid;
+        }
+
+        return $trid;
     }
 
     public function logSql()
@@ -106,22 +120,6 @@ class Setup
                 error_log("[STACK] " . $q[2]);
             }
         }
-    }
-
-    public function checkTrid($trid, $post_status)
-    {
-        error_log("[TRID]: " . $trid);
-        error_log("[POST_STATUS]: " . $post_status);
-
-        $savedTransient = get_transient('wmpl_trid');
-
-        if ($savedTransient) {
-            error_log("[TRANSIENT trid]: " . $savedTransient);
-            delete_transient('wmpl_trid');
-            return $savedTransient;
-        }
-
-        return $trid;
     }
 
     public function updateTranslation($array)

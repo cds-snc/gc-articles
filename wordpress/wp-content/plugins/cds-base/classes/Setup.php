@@ -80,9 +80,20 @@ class Setup
         new Users();
         new Media();
 
-        add_action('shutdown', [$this, 'logSql']);
+        add_action('save_post', [$this, 'savePost'], 10, 2);
         add_filter('wpml_save_post_trid_value', [$this, 'checkTrid'], 10, 2);
-        add_action('wpml_translation_update', [$this, 'updateTranslation'], 10, 1);
+        // re-add for debug as needed 👇
+        // add_action('shutdown', [$this, 'logSql']);
+        // add_action('wpml_translation_update', [$this, 'updateTranslation'], 10, 1);
+    }
+
+    public function savePost($post_ID, $post)
+    {
+        if (isset($_GET['trid'])) {
+            $trid = intval($_GET['trid']);
+            set_transient("wpml_trid", $trid, 1 * HOUR_IN_SECONDS);
+            error_log("[SAVED WPML TRID]: " . $trid . " " . $post_ID .  ' ' . $post->post_status);
+        }
     }
 
     public function logSql()
@@ -101,12 +112,14 @@ class Setup
     {
         error_log("[TRID]: " . $trid);
         error_log("[POST_STATUS]: " . $post_status);
-        error_log("[_POST]: " . serialize($_POST));
-        error_log("[_GET]: " . serialize($_GET));
-        error_log("[HTTP_REFERER]: " . $_SERVER["HTTP_REFERER"]);
 
-        error_log("[POST icl_trid]: " . isset($_POST["icl_trid"]) ? $_POST["icl_trid"] : "n/a");
-        error_log("[GET trid]: " . isset($_GET["trid"]) ? $_GET["trid"] : "n/a");
+        $savedTransient = get_transient('wmpl_trid');
+
+        if ($savedTransient) {
+            error_log("[TRANSIENT trid]: " . $savedTransient);
+            delete_transient('wmpl_trid');
+            return $savedTransient;
+        }
 
         return $trid;
     }

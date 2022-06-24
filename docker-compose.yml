@@ -27,8 +27,7 @@ services:
     container_name: apache
     image: httpd:2.4-alpine
     logging:
-      driver:
-        ${LOCAL_APACHE_LOG_DRIVER:-local}
+      driver: none
     ports:
       - 80:80
     volumes:

@@ -83,17 +83,17 @@ class Setup
         add_action('save_post', [$this, 'savePost'], 10, 2);
         add_filter('wpml_save_post_trid_value', [$this, 'checkTrid'], 10, 2);
         // re-add for debug as needed 👇
-        
-        // add_action('shutdown', [$this, 'logSql']); 
+        // add_action('shutdown', [$this, 'logSql']);
         // add_action('wpml_translation_update', [$this, 'updateTranslation'], 10, 1);
     }
 
-    public function savePost($post_ID, $post){
-        
+    public function savePost($post_ID, $post)
+    {
+
         if (isset($_GET['trid'])) {
             $trid = intval($_GET['trid']);
             set_transient("wpml_trid", $trid, 1 * HOUR_IN_SECONDS);
-            error_log("[SAVED WPML TRID]: " . $trid." ". $post_ID.  ' ' . $post->post_status);
+            error_log("[SAVED WPML TRID]: " . $trid . " " . $post_ID .  ' ' . $post->post_status);
         }
     }
 
@@ -114,8 +114,8 @@ class Setup
         error_log("[TRID]: " . $trid);
         error_log("[POST_STATUS]: " . $post_status);
 
-        $savedTransient = get_transient( 'wmpl_trid' );
-        
+        $savedTransient = get_transient('wmpl_trid');
+
         if ($savedTransient) {
             error_log("[TRANSIENT trid]: " . $savedTransient);
             delete_transient('wmpl_trid');

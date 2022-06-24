@@ -87,6 +87,7 @@ class Setup
     }
 
     public function savePost($post_ID, $post){
+        
         if (isset($_GET['trid'])) {
             $trid = intval($_GET['trid']);
             set_transient("wpml_trid", $trid, 1 * HOUR_IN_SECONDS);

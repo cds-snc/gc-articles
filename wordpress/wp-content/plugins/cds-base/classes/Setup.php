@@ -81,7 +81,8 @@ class Setup
         new Media();
 
         add_action('save_post', [$this, 'savePost'], 10, 2);
-        add_action('shutdown', [$this, 'logSql']);
+        // re-add for debug as needed
+        // add_action('shutdown', [$this, 'logSql']); 
         add_filter('wpml_save_post_trid_value', [$this, 'checkTrid'], 10, 2);
         add_action('wpml_translation_update', [$this, 'updateTranslation'], 10, 1);
     }
@@ -125,7 +126,7 @@ class Setup
 
     public function updateTranslation($array)
     {
-        error_log("[UPDATE_TRANSLATION]: " . serialize($array));
+        // error_log("[UPDATE_TRANSLATION]: " . serialize($array));
     }
 
     /**

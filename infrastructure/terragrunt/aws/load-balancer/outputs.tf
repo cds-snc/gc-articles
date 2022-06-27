@@ -23,7 +23,7 @@ output "cloudfront_distribution_id" {
 }
 
 output "cloudfront_waf_web_acl_name" {
-  value = aws_wafv2_web_acl.wordpress_waf[0].name
+  value = var.enable_waf ? aws_wafv2_web_acl.wordpress_waf[0].name : "n/a"
 }
 
 output "domain_name" {

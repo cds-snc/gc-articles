@@ -31,7 +31,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
   enabled         = true
   is_ipv6_enabled = true
-  web_acl_id      = aws_wafv2_web_acl.wordpress_waf[0].arn
+  web_acl_id      = var.enable_waf ? aws_wafv2_web_acl.wordpress_waf[0].arn : null
 
   aliases = [var.domain_name]
 

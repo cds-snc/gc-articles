@@ -7,7 +7,6 @@ locals {
 # CloudFront access control
 #
 resource "aws_wafv2_web_acl" "wordpress_waf" {
-  count    = var.enable_waf ? 1 : 0
   provider = aws.us-east-1
 
   name        = "wordpress_waf"
@@ -23,7 +22,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 1
 
     override_action {
-      none {}
+      dynamic "none" {
+        for_each = var.enable_waf ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == False ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {
@@ -544,7 +553,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf_alb" {
 resource "aws_wafv2_web_acl_association" "wordpress_waf_alb" {
   count        = var.enable_waf ? 1 : 0
   resource_arn = aws_lb.wordpress.arn
-  web_acl_arn  = aws_wafv2_web_acl.wordpress_waf_alb[0].arn
+  web_acl_arn  = aws_wafv2_web_acl.wordpress_waf_alb.arn
 }
 
 #
@@ -555,11 +564,11 @@ resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_cloudfront
   provider = aws.us-east-1
 
   log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs_us_east.arn]
-  resource_arn            = aws_wafv2_web_acl.wordpress_waf[0].arn
+  resource_arn            = aws_wafv2_web_acl.wordpress_waf.arn
 }
 
 resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_alb" {
   count                   = var.enable_waf ? 1 : 0
   log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs.arn]
-  resource_arn            = aws_wafv2_web_acl.wordpress_waf_alb[0].arn
+  resource_arn            = aws_wafv2_web_acl.wordpress_waf_alb.arn
 }

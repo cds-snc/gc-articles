@@ -79,52 +79,6 @@ class Setup
         new UserCollections();
         new Users();
         new Media();
-
-        add_action('save_post', [$this, 'savePost'], 10, 2);
-        add_filter('wpml_save_post_trid_value', [$this, 'checkTrid'], 10, 2);
-        // re-add for debug as needed 👇
-        // add_action('shutdown', [$this, 'logSql']);
-        // add_action('wpml_translation_update', [$this, 'updateTranslation'], 10, 1);
-    }
-
-    public function savePost($post_ID, $post)
-    {
-        if (isset($_GET['trid'])) {
-            $trid = intval($_GET['trid']);
-            add_post_meta($post_ID, 'wpml_trid', $trid);
-            error_log("[TRID SAVED TO POST META]: " . $trid . " " . $post_ID .  ' ' . $post->post_status);
-        }
-    }
-
-    public function checkTrid($trid, $post_status)
-    {
-        error_log("[TRID]: " . $trid . "[POST_STATUS]: " . $post_status);
-
-        global $post;
-        if (isset($post) && isset($post->ID)) {
-            $trid = get_post_meta($post->ID, 'wpml_trid', true);
-            error_log("[GET POST META]: " . $trid);
-            return $trid;
-        }
-
-        return $trid;
-    }
-
-    public function logSql()
-    {
-        global $wpdb;
-
-        foreach ($wpdb->queries as $q) {
-            if (str_contains($q[0], 'icl_translations') && str_contains($q[0], 'INSERT INTO')) {
-                error_log("[QUERY] " . str_replace('\n', "\n", $q[0]) . "\n\n");
-                error_log("[STACK] " . $q[2]);
-            }
-        }
-    }
-
-    public function updateTranslation($array)
-    {
-        error_log("[UPDATE_TRANSLATION]: " . serialize($array));
     }
 
     /**

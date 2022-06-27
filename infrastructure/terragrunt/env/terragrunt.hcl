@@ -7,6 +7,7 @@ inputs = {
   billing_tag_key           = "${local.vars.inputs.billing_tag_key}"
   billing_tag_value         = "${local.vars.inputs.billing_tag_value}"
   enable_efs                = "${local.vars.inputs.enable_efs}"
+  enable_waf                = "${local.vars.inputs.enable_waf}"
   env                       = "${local.vars.inputs.env}"
   region                    = "ca-central-1"
   cbs_satellite_bucket_name = "cbs-satellite-${local.vars.inputs.account_id}"

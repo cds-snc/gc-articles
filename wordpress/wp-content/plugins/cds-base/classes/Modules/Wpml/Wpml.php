@@ -14,6 +14,49 @@ class Wpml
         $instance = new self();
 
         add_action('rest_api_init', [$instance, 'addTranslatedIDsToPages']);
+        add_action('save_post', [$instance, 'saveTridToPostMeta'], 10, 2);
+        add_filter('wpml_save_post_trid_value', [$instance, 'retrieveTridFromPostMeta'], 10, 2);
+    }
+
+    /**
+     * @param $post_ID
+     * @param $post
+     *
+     * On a new translation, grab TRID from $_GET and attach directly to the new Post meta
+     * on first save, usuallly an auto-draft save triggered by wp on load of post edit.
+     *
+     * This is due to an issue in WPML where trid was not making it through to
+     * the icl_translations table.
+     */
+    public function saveTridToPostMeta($post_ID, $post)
+    {
+        if (isset($_GET['trid'])) {
+            $trid = intval($_GET['trid']);
+            add_post_meta($post_ID, 'wpml_trid', $trid);
+        }
+    }
+
+    /**
+     * @param $trid
+     * @param $post_status
+     *
+     * @return mixed
+     *
+     * This hook is called from wpml-admin-post-actions.class.php->get_save_post_trid. It attempts to retrieve
+     * the TRID from GET/POST or Referer. For some reason it has been failing and not retrieving the id.
+     *
+     * In combination with the method above, we are now saving the TRID to the translated post meta and
+     * retrieving it here and forcing it at the hook.
+     */
+    public function retrieveTridFromPostMeta($trid, $post_status)
+    {
+        global $post;
+        if (isset($post) && isset($post->ID)) {
+            $trid = get_post_meta($post->ID, 'wpml_trid', true);
+            return $trid;
+        }
+
+        return $trid;
     }
 
     public function getTranslatedPost($post_id, $lang)

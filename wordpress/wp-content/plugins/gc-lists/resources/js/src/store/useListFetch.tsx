@@ -1,9 +1,16 @@
+/**
+ * External dependencies
+ */
 import { useEffect, useState } from 'react';
 import useFetch from 'use-http';
-import { useList } from "../store/ListContext";
+
+/**
+ * Internal dependencies
+ */
+import { useList } from "./listContext";
 import { List, ListType } from '../types';
 import { getListType } from "../util/functions";
-import { useService } from '../util/useService';
+import { useService } from './useService';
 
 export const useListFetch = () => {
     const { dispatch, state: { user, config: { listManagerApiPrefix } } } = useList();

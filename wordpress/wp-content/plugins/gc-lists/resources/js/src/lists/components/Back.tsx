@@ -1,4 +1,6 @@
-import * as React from 'react';
+/**
+ * External dependencies
+ */
 import { Link } from "react-router-dom";
 import { __ } from "@wordpress/i18n";
 

@@ -1,4 +1,6 @@
-import * as React from 'react';
+/**
+ * External dependencies
+ */
 import Swal from "sweetalert2";
 
 export const ConfirmActionLink = ({ text = '', isConfirmedHandler }: { text: string, isConfirmedHandler: () => void }) => {

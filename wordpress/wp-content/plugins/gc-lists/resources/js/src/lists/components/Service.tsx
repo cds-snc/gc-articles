@@ -1,8 +1,10 @@
-import * as React from 'react';
+/**
+ * Internal dependencies
+ */
 import { ListViewTable } from "./ListViewTable";
 import { Messages } from "./Messages";
 import { Error } from "./Error";
-import { useList } from "../../store/ListContext";
+import { useList } from "../../store";
 
 export const Service = () => {
     const { state: { serviceData } } = useList();

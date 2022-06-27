@@ -1,8 +1,12 @@
-import { SendingHistory } from "./SendingHistory";
+/**
+ * External dependencies
+ */
 import { __ } from '@wordpress/i18n';
-import { StyledLink } from './Table';
-import * as React from 'react';
-import { Back } from './icons/Back';
+
+/**
+ * Internal dependencies
+ */
+import { SendingHistory, StyledLink, Back } from "../components";
 
 export const AllSendingHistory = () => {
     return (
@@ -12,7 +16,6 @@ export const AllSendingHistory = () => {
             </StyledLink>
             <SendingHistory perPage={10} pageNav={true} allLink={false} />
         </>
-
     )
 }
 

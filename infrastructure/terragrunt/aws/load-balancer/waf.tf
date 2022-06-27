@@ -29,7 +29,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
       }
 
       dynamic "count" {
-        for_each = var.enable_waf == False ? [""] : []
+        for_each = var.enable_waf == false ? [""] : []
         content {
         }
       }
@@ -497,7 +497,6 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 # ALB access control: block if custom header not specified
 #
 resource "aws_wafv2_web_acl" "wordpress_waf_alb" {
-  count = var.enable_waf ? 1 : 0
   name  = "wordpress_waf_alb"
   scope = "REGIONAL"
 

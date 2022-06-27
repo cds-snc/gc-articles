@@ -26,7 +26,6 @@ variable "enable_efs" {
 variable "enable_waf" {
   description = "(Required) Enable the Web Application Firewall for the WordPress Load balancer"
   type        = bool
-  default     = true
 }
 
 variable "env" {

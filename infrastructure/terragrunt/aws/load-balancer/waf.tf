@@ -542,7 +542,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf_alb" {
 #
 resource "aws_wafv2_web_acl_association" "wordpress_waf_alb" {
   resource_arn = aws_lb.wordpress.arn
-  web_acl_arn  = aws_wafv2_web_acl.wordpress_waf_alb.arn
+  web_acl_arn  = aws_wafv2_web_acl.wordpress_waf_alb[0].arn
 }
 
 #
@@ -557,5 +557,5 @@ resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_cloudfront
 
 resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_alb" {
   log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs.arn]
-  resource_arn            = aws_wafv2_web_acl.wordpress_waf_alb.arn
+  resource_arn            = aws_wafv2_web_acl.wordpress_waf_alb[0].arn
 }

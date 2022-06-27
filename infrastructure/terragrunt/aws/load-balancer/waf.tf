@@ -488,6 +488,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 # ALB access control: block if custom header not specified
 #
 resource "aws_wafv2_web_acl" "wordpress_waf_alb" {
+  count = var.enable_waf ? 1 : 0
   name  = "wordpress_waf_alb"
   scope = "REGIONAL"
 
@@ -552,7 +553,7 @@ resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_cloudfront
   provider = aws.us-east-1
 
   log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs_us_east.arn]
-  resource_arn            = aws_wafv2_web_acl.wordpress_waf.arn
+  resource_arn            = aws_wafv2_web_acl.wordpress_waf[0].arn
 }
 
 resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_alb" {

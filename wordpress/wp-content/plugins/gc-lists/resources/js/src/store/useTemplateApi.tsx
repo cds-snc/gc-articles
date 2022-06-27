@@ -1,12 +1,18 @@
+/**
+ * External dependencies
+ */
 import { useParams } from "react-router-dom";
 import { useCallback, useState } from 'react';
 import { Descendant } from "slate";
 import useFetch, { CachePolicies } from 'use-http';
 
+/**
+ * Internal dependencies
+ */
 import { serialize, deserialize } from "../messages/editor/utils";
 import { TemplateType } from "../types";
 
-function useTemplateApi() {
+export function useTemplateApi() {
     const params = useParams();
     const templateId = params?.templateId;
     const { request, response } = useFetch({ data: [], cachePolicy: CachePolicies.NO_CACHE });

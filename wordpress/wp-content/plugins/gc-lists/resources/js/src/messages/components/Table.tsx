@@ -1,10 +1,15 @@
+/**
+ * External dependencies
+ */
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
 import { useTable, usePagination } from 'react-table';
 import { Link } from "react-router-dom";
 
-import { Back } from "./icons/Back";
-import { Next } from "./icons/Next";
+/**
+ * Internal dependencies
+ */
+import { Next, Back } from ".";
 
 export const StyledH1 = styled.h1`
    margin-bottom:30px !important;

@@ -1,7 +1,13 @@
-import * as React from 'react';
+/**
+ * External dependencies
+ */
 import useFetch from "use-http";
+
+/**
+ * Internal dependencies
+ */
 import { ConfirmActionLink } from "./ConfirmActionLink";
-import { useList } from "../../store/ListContext";
+import { useList } from "../../store";
 
 export const ResetActionLink = ({ id = '' }: { id: string }) => {
     const { dispatch, state: { config: { listManagerApiPrefix } } } = useList();

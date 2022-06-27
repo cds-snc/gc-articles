@@ -1,14 +1,18 @@
-import * as React from 'react';
-
+/**
+ * External dependencies
+ */
+import { useMemo } from "react";
 import styled from 'styled-components';
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
 
+/**
+ * Internal dependencies
+ */
 import { DeleteActionLink } from './DeleteActionLink';
 import { ResetActionLink } from './ResetActionLink';
-import { useListFetch } from '../../store/UseListFetch';
 import { List, ListType } from "../../types"
-import { useList } from "../../store/ListContext";
+import { useList, useListFetch } from '../../store';
 import { capitalize, getListType } from "../../util/functions";
 
 const HeaderStyles = styled.div`
@@ -74,7 +78,7 @@ const updateLink = (listId: string) => {
 export const ListViewTable = () => {
     const { state: { lists, user } } = useList();
     const { status } = useListFetch();
-    const columns = React.useMemo(
+    const columns = useMemo(
         () => [
             {
                 Header: () => { return <HeaderStyles><CreateListLink /></HeaderStyles> },

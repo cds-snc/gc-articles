@@ -1,13 +1,16 @@
-import * as React from 'react';
+/**
+ * External dependencies
+ */
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { __ } from "@wordpress/i18n";
 import { useParams } from "react-router-dom";
 import useFetch from 'use-http';
-import { MessagePreview } from './MessagePreview';
-import { StyledH1 } from "./Table";
-import { Spinner } from '../../common/Spinner';
 
+/**
+ * Internal dependencies
+ */
+import { StyledH1, Spinner, MessagePreview } from "../components";
 
 const StyledTag = styled.span`
     display: inline-block;
@@ -32,7 +35,6 @@ const Tag = ({ text }: { text: string }) => {
 const SentTag = ({ text }: { text: string }) => {
     return <SuccessTag>{text}</SuccessTag>
 }
-
 
 const Status = ({ item }: { item: any }) => {
     const { original_message_id, sent_at, created_at, updated_at } = item;
@@ -86,7 +88,6 @@ export const Versions = () => {
                     return (
                         <div key={id}>
                             <h2>{subject}</h2>
-
                             <StyledDetails>
                                 <StyledStatus item={item} />
                                 {sent_by_email && <>{__("by", "gc-lists")} <span>{sent_by_email}</span></>}

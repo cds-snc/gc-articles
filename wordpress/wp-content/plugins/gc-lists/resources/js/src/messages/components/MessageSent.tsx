@@ -1,7 +1,14 @@
+/**
+ * External dependencies
+ */
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
-import { SendToList } from "./SendToList";
 import { Link } from "react-router-dom";
+
+/**
+ * Internal dependencies
+ */
+import { SendToList } from ".";
 
 const StyledActionContainer = styled.div`
     margin-top:60px;

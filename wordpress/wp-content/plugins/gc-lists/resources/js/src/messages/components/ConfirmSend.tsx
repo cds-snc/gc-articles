@@ -1,3 +1,6 @@
+/**
+ * External dependencies
+ */
 import { __, sprintf } from "@wordpress/i18n";
 import Swal from "sweetalert2";
 

@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { Routes, Route } from "react-router-dom";
-import { Spinner } from '../common/Spinner';
-const Home = React.lazy(() => import("./main/Home"));
-const EditTemplate = React.lazy(() => import("./components/EditTemplate"));
-const SendTemplate = React.lazy(() => import("./components/SendTemplate"));
-const AllTemplates = React.lazy(() => import("./components/AllTemplates"));
-const AllSendingHistory = React.lazy(() => import("./components/AllSendingHistory"));
-const Versions = React.lazy(() => import("./components/Versions"));
+import { Spinner } from './components';
+const Home = React.lazy(() => import("./views/Home"));
+const EditMessage = React.lazy(() => import("./views/EditMessage"));
+const SendMessage = React.lazy(() => import("./views/SendMessage"));
+const AllDrafts = React.lazy(() => import("./views/AllDrafts"));
+const AllSendingHistory = React.lazy(() => import("./views/AllSendingHistory"));
+const Versions = React.lazy(() => import("./views/Versions"));
 
-// route http://localhost:3000/#/messages/123/edit/123
 const MessagesApp = () => {
     return (
         <Routes>
@@ -19,17 +18,17 @@ const MessagesApp = () => {
             } />
             <Route path="edit/:templateId" element={
                 <React.Suspense fallback={<Spinner />}>
-                    <EditTemplate />
+                    <EditMessage />
                 </React.Suspense>
             } />
             <Route path="send/:templateId" element={
                 <React.Suspense fallback={<Spinner />}>
-                    <SendTemplate />
+                    <SendMessage />
                 </React.Suspense>
             } />
             <Route path="all-drafts" element={
                 <React.Suspense fallback={<Spinner />}>
-                    <AllTemplates />
+                    <AllDrafts />
                 </React.Suspense>
             } />
             <Route path="history" element={

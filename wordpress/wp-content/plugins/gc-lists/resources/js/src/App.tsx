@@ -1,16 +1,23 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { HashRouter, Routes, Route } from "react-router-dom";
-import ListsApp from './lists/ListsApp';
-import MessagesApp from './messages/MessagesApp';
-import { ServiceData, User } from "./types"
-import { NotFound } from './lists/components/NotFound';
-import { ListProvider } from "./store/ListContext"
 import { Provider } from 'use-http';
+
+/**
+ * Internal dependencies
+ */
+import { ServiceData, User } from "./types"
+import { ListProvider } from "./store";
+import MessagesApp from './messages/MessagesApp';
+import { NotFound } from './lists/components/NotFound';
+import ListsApp from './lists/ListsApp';
 
 const REST_URL = window?.CDS_VARS?.rest_url;
 const endpoint = `${REST_URL}gc-lists`;
 
-const App = ({ serviceData, user, baseUrl }: { serviceData: ServiceData, user: User, baseUrl: string|null }) => {
+const App = ({ serviceData, user, baseUrl }: { serviceData: ServiceData, user: User, baseUrl: string | null }) => {
     const options = {
         interceptors: {
             request: async ({ options }: { options: any }) => {

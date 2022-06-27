@@ -1,4 +1,7 @@
-import * as React from 'react';
+/**
+ * External dependencies
+ */
+
 export const Error = () => {
     return (
         <div className="error-summary components-notice is-error">

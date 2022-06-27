@@ -31,6 +31,13 @@ RUN apk add --no-cache $PHPIZE_DEPS \
 
 WORKDIR /usr/src/wordpress
 
+# Copy PHP config
+RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
+COPY ./wordpress/docker/php/conf.d/error_reporting.ini /usr/local/etc/php/conf.d/error_reporting.ini
+COPY ./wordpress/docker/php/conf.d/upload_max_filesize.ini /usr/local/etc/php/conf.d/upload_max_filesize.ini
+COPY ./wordpress/docker/php/conf.d/memory_limit.ini /usr/local/etc/php/conf.d/memory_limit.ini
+COPY ./wordpress/docker/php/conf.d/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 # Copy wp-content (including installed plugins) and vendor folder from composer stage
 COPY --from=composer /app/wordpress/wp-content ./wp-content
 COPY --from=composer /app/wordpress/vendor ./vendor

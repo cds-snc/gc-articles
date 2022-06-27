@@ -1,5 +1,12 @@
+/**
+ * External dependencies
+ */
 import * as React from 'react';
 import { createRoot } from 'react-dom/client';
+
+/**
+ * Internal dependencies
+ */
 import './lists/index.css';
 import App from './App';
 import { ServiceData, User, NotifyList } from "./types";

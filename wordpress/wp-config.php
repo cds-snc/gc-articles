@@ -155,6 +155,8 @@ define('WP_AUTO_UPDATE_CORE', false);
 define('JWT_AUTH_SECRET_KEY', getenv_docker('JWT_AUTH_SECRET_KEY', 'tQ;XnD#UmY2A*O,LIm(:NL|4c=R|3t~QD/3p{7CBKRz^eepfib9q-PHr7ZMZG$uz'));
 
 define('WP_MEMORY_LIMIT', '256M');
+
+define('SAVEQUERIES', true);
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */

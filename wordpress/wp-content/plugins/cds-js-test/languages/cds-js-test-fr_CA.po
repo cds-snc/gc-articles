@@ -26,11 +26,11 @@ msgstr "Custom Menu (FR)"
 msgid "Admin Page"
 msgstr "Admin Page (FR)"
 
-#: sample-react-app/src/Home.js:5
-msgid "REACT APP"
-msgstr "REACT APP-FR"
+#: sample-react-app/src/Home.js:3
+msgid "REACT APP wp element"
+msgstr "REACT APP wp element"
 
-#: sample-react-app/src/Home.js:5
+#: sample-react-app/src/Home.js:3
 msgid "js-html-react"
 msgstr "js-html-react-fr"
 

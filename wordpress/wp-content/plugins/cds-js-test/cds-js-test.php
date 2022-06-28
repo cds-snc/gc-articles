@@ -23,7 +23,7 @@ function run()
     wp_register_script(
         'script',
         plugins_url('sample-react-app/dist/bundle.js', __FILE__),
-        array('wp-i18n'),
+        array('wp-element','wp-i18n'),
         false,
         true
     );

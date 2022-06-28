@@ -26,17 +26,25 @@ msgstr "Custom Menu (FR)"
 msgid "Admin Page"
 msgstr "Admin Page (FR)"
 
-#: sample-react-app/src/Home.js:3 script.js:13
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:3
+#: script.js:22
 msgid "REACT APP wp element"
 msgstr "REACT APP wp element FR"
 
-#: sample-react-app/src/Home.js:3 script.js:13
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:3
+#: script.js:22
 msgid "js-html-react"
 msgstr "js-html-react-fr"
 
-#: sample-react-app/src/Home.js:3 script.js:13
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:3
+#: script.js:22
 msgid "more"
 msgstr "more fr"
+
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:3
+#: script.js:22
+msgid "and more"
+msgstr "and more Fr terser"
 
 #: script.js:3
 msgid "js-alert"

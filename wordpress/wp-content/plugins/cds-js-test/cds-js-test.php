@@ -38,7 +38,7 @@ function run()
     wp_enqueue_script('script');
 
     wp_set_script_translations('script', 'test', plugin_dir_path(__FILE__) . 'languages/');
-    load_plugin_textdomain('test', false, plugin_dir_path(__FILE__) . 'languages/');
+    load_plugin_textdomain('cds-js-test', false, plugin_dir_path(__FILE__) . 'languages/');
 }
 add_action('init', 'run');
 

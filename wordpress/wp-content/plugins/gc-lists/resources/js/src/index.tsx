@@ -2,7 +2,8 @@
  * External dependencies
  */
 import * as React from 'react';
-import { createRoot } from 'react-dom/client';
+// import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
 
 /**
  * Internal dependencies
@@ -26,7 +27,7 @@ const renderApp = () => {
   if (document.getElementById("list-manager-app")) {
 
     const container = document.getElementById('list-manager-app')!;
-    const root = createRoot(container);
+    //const root = createRoot(container);
 
     if (container) {
       let data = container.getAttribute("data-ids");
@@ -40,11 +41,18 @@ const renderApp = () => {
         user = JSON.parse(user);
         const userData = user as unknown as User;
 
+        ReactDOM.render(
+          <React.StrictMode>
+            <App serviceData={serviceData} user={userData} baseUrl={baseUrl} />
+          </React.StrictMode>, container);
+
+        /*
         root.render(
           <React.StrictMode>
             <App serviceData={serviceData} user={userData} baseUrl={baseUrl} />
           </React.StrictMode>
         );
+        */
       }
     }
   }

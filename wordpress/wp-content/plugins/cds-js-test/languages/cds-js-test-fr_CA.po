@@ -18,19 +18,19 @@ msgstr ""
 msgid "YOUR SITE HERE"
 msgstr ""
 
-#: cds-js-test.php:43
+#: cds-js-test.php:45
 msgid "Custom Menu"
 msgstr "Custom Menu (FR)"
 
-#: cds-js-test.php:56
+#: cds-js-test.php:58
 msgid "Admin Page"
 msgstr "Admin Page (FR)"
 
-#: sample-react-app/src/Home.js:3
+#: sample-react-app/src/Home.js:3 script.js:13
 msgid "REACT APP wp element"
-msgstr "REACT APP wp element"
+msgstr "REACT APP wp element FR"
 
-#: sample-react-app/src/Home.js:3
+#: sample-react-app/src/Home.js:3 script.js:13
 msgid "js-html-react"
 msgstr "js-html-react-fr"
 

@@ -28,9 +28,10 @@ function loadTextdomain()
  */
 function run()
 {
+    //plugins_url('script.js', __FILE__),
     wp_register_script(
         'script',
-        plugins_url('script.js', __FILE__),
+        plugins_url('sample-react-app/dist/bundle.js', __FILE__),
         array('wp-i18n'),
         false,
         true
@@ -64,4 +65,5 @@ function callback()
 {
     esc_html_e('Admin Page', 'cds-js-test'); ?>
     <h1 id="h1"></h1>
+    <div id="app"></div>
 <?php }

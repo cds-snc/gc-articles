@@ -64,10 +64,12 @@ class GCLists
                 wp_enqueue_script(
                     'gc-lists',
                     $files['main.js'],
-                    null,
+                    array('wp-i18n'),
                     '1.0.0',
                     true,
                 );
+
+                wp_set_script_translations('gc-lists', 'gc-lists', GC_LISTS_PLUGIN_BASE_PATH . 'resources/languages/');
             } catch (\Exception $exception) {
                 error_log($exception->getMessage());
             }

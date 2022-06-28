@@ -621,17 +621,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf_alb" {
   scope = "REGIONAL"
 
   default_action {
-    dynamic "block" {
-      for_each = var.enable_waf ? [""] : []
-      content {
-      }
-    }
-
-    dynamic "allow" {
-      for_each = var.enable_waf == false ? [""] : []
-      content {
-      }
-    }
+    block {}
   }
 
   rule {

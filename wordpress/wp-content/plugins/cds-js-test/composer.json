@@ -1,0 +1,21 @@
+{
+  "type": "wordpress-plugin",
+  "scripts": {
+    "prepare-test-db": "echo y | ./bin/install-wp-tests.sh wordpress_testing root secret db",
+    "test": "pest --coverage",
+    "make-pot": "wp i18n make-pot --domain=cds-js-test . languages/cds-js-test.pot",
+    "merge-po": "msgmerge -U --no-wrap --backup none -N ./languages/cds-js-test-fr_CA.po ./languages/cds-js-test.pot",
+    "compile-mo": "msgfmt -o ./languages/cds-js-test-fr_CA.mo ./languages/cds-js-test-fr_CA.po",
+    "clean-json": "rm ./languages/*.json",
+    "compile-json": "wp i18n make-json ./languages/cds-js-test-fr_CA.po --no-purge",
+    "compile-translations": [
+      "@compile-mo",
+      "@clean-json",
+      "@compile-json"
+    ],
+    "prepare-translations": [
+      "@make-pot",
+      "@merge-po"
+    ]
+  }
+}

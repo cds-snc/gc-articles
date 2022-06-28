@@ -14,3 +14,28 @@
  */
 
 // Your code starts here.
+
+add_action('admin_menu', 'addMenu');
+add_action('init', 'loadTextdomain');
+
+function addMenu()
+{
+    add_menu_page(
+        __('Test', "cds-js-test"),
+        __('Test', "cds-js-test"),
+        'edit-post',
+        'test-js',
+        'render',
+        'dashicons-email'
+    );
+}
+
+function render()
+{
+    echo "<h1>" . __("Huzzah", "cds-js-test") . "</h1>";
+}
+
+function loadTextdomain()
+{
+    return load_plugin_textdomain('cds-js-test', false, 'cds-js-test/languages');
+}

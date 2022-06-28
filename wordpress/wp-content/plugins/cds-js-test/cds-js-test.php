@@ -13,21 +13,13 @@
  * @package         Cds_Js_Test
  */
 
-// Your code starts here.
-
-add_action('init', 'loadTextdomain');
-
-function loadTextdomain()
-{
-    return load_plugin_textdomain('cds-js-test', false, 'cds-js-test/languages');
-}
-
-
 /**
  * Init all
  */
 function run()
 {
+    load_plugin_textdomain('cds-js-test', false, 'cds-js-test/languages');
+
     wp_register_script(
         'script',
         plugins_url('script.js', __FILE__),
@@ -38,7 +30,6 @@ function run()
     wp_enqueue_script('script');
 
     wp_set_script_translations('script', 'cds-js-test', plugin_dir_path(__FILE__) . 'languages/');
-    load_plugin_textdomain('cds-js-test', false, plugin_dir_path(__FILE__) . 'languages/');
 }
 add_action('init', 'run');
 

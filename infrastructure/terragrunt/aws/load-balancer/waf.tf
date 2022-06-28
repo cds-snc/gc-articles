@@ -622,16 +622,16 @@ resource "aws_wafv2_web_acl" "wordpress_waf_alb" {
 
   default_action {
     dynamic "block" {
-        for_each = var.enable_waf ? [""] : []
-        content {
-        }
+      for_each = var.enable_waf ? [""] : []
+      content {
       }
+    }
 
-      dynamic "count" {
-        for_each = var.enable_waf == false ? [""] : []
-        content {
-        }
+    dynamic "count" {
+      for_each = var.enable_waf == false ? [""] : []
+      content {
       }
+    }
   }
 
   rule {

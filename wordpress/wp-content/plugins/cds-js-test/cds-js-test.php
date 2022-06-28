@@ -14,3 +14,46 @@
  */
 
 // Your code starts here.
+
+/**
+ * Init all
+ */
+function run()
+{
+    wp_register_script(
+        'script',
+        plugins_url('script.js', __FILE__),
+        array('wp-i18n'),
+        false,
+        true
+    );
+    wp_enqueue_script('script');
+
+    wp_set_script_translations('script', 'test', plugin_dir_path(__FILE__) . 'languages/');
+    load_plugin_textdomain('test', false, plugin_dir_path(__FILE__) . 'languages/');
+}
+add_action('init', 'run');
+
+/**
+ * Register a custom menu page.
+ */
+function register_my_custom_menu_page()
+{
+    add_menu_page(
+        'Custom Menu Title',
+        __('Custom Menu', 'test'),
+        'manage_options',
+        'my_custom',
+        'callback'
+    );
+}
+add_action('admin_menu', 'register_my_custom_menu_page');
+
+/**
+ * Display a custom menu page
+ */
+function callback()
+{
+    esc_html_e('Admin Page', 'test'); ?>
+    <h1 id="h1"></h1>
+<?php }

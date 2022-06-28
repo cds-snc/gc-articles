@@ -627,7 +627,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf_alb" {
       }
     }
 
-    dynamic "count" {
+    dynamic "allow" {
       for_each = var.enable_waf == false ? [""] : []
       content {
       }

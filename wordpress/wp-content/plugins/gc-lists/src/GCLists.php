@@ -61,13 +61,18 @@ class GCLists
 
                 wp_enqueue_style('gc-lists', $files['main.css'], null, '1.0.0');
 
-                wp_enqueue_script(
-                    'gc-lists',
+                $register = wp_register_script(
+                    'gc-lists-js',
                     $files['main.js'],
-                    null,
+                    array('wp-i18n'),
                     '1.0.0',
-                    true,
+                    true
                 );
+
+                wp_enqueue_script('gc-lists-js');
+
+                $languages = GC_LISTS_PLUGIN_BASE_PATH . '/resources/languages';
+                wp_set_script_translations('gc-lists-js', 'gc-lists', $languages);
             } catch (\Exception $exception) {
                 error_log($exception->getMessage());
             }

@@ -35,11 +35,11 @@
     "scripts": {
         "prepare-test-db": "echo y | ./bin/install-wp-tests.sh wordpress_testing root secret db",
         "test": "pest --coverage",
-        "make-pot": "wp i18n make-pot --domain=gc-lists . languages/gc-lists.pot",
-        "merge-po": "msgmerge -U --no-wrap --backup none -N ./languages/gc-lists-fr_CA.po ./languages/gc-lists.pot",
-        "compile-mo": "msgfmt -o ./languages/gc-lists-fr_CA.mo ./languages/gc-lists-fr_CA.po",
-        "clean-json": "rm ./languages/*.json",
-        "compile-json": "wp i18n make-json ./languages/gc-lists-fr_CA.po --no-purge",
+        "make-pot": "wp i18n make-pot --domain=gc-lists . resources/languages/gc-lists.pot",
+        "merge-po": "msgmerge -U --no-wrap --backup none -N ./resources/languages/gc-lists-fr_CA.po ./resources/languages/gc-lists.pot",
+        "compile-mo": "msgfmt -o ./resources/languages/gc-lists-fr_CA.mo ./resources/languages/gc-lists-fr_CA.po",
+        "clean-json": "rm ./resources/languages/*.json",
+        "compile-json": "wp i18n make-json ./resources/languages/gc-lists-fr_CA.po --no-purge",
         "compile-translations": [
             "@compile-mo",
             "@clean-json",

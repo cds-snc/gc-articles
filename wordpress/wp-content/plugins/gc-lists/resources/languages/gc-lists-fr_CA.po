@@ -9,15 +9,15 @@ msgstr "Le plugin pour Les lists GC"
 
 #. Author of the plugin
 msgid "Canadian Digital Service"
-msgstr ""
+msgstr "Canadian Digital Service (FR)"
 
 #. Author URI of the plugin
 msgid "https://digital.canada.ca"
-msgstr ""
+msgstr "https://numerique.canada.ca"
 
 #: resources/templates/no_api_key.php:15
 msgid "You must configure your <a href=\"%s\">Notify API Key</a>"
-msgstr ""
+msgstr "You must configure your <a href=\"%s\">Notify API Key</a> (FR)"
 
 #: src/Menu.php:44 src/Menu.php:45 src/Menu.php:123
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
@@ -31,11 +31,11 @@ msgstr "Subscriber lists (FR)"
 
 #: src/Menu.php:93
 msgid "Your Lists"
-msgstr ""
+msgstr "Your Lists (FR)"
 
 #: src/Menu.php:140
 msgid "Subscribers"
-msgstr ""
+msgstr "Subscribers (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
@@ -67,83 +67,83 @@ msgstr ""
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "Message Name"
-msgstr ""
+msgstr "Message Name (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "Message type"
-msgstr ""
+msgstr "Message type (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "Last modified"
-msgstr ""
+msgstr "Last modified (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "Edit"
-msgstr ""
+msgstr "Edit (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "Delete"
-msgstr ""
+msgstr "Delete (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "Send to a list"
-msgstr ""
+msgstr "Send to a list (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "Create new message"
-msgstr ""
+msgstr "Create new message (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "Draft messages"
-msgstr ""
+msgstr "Draft messages (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "All drafts"
-msgstr ""
+msgstr "All drafts (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/536.61594e9e.chunk.js:1
 msgid "You have no draft messages"
-msgstr ""
+msgstr "You have no draft messages (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/528.60667a6d.chunk.js:1
 #: resources/js/build/static/js/806.646b2ae2.chunk.js:1
 msgid "Message name"
-msgstr ""
+msgstr "Message name (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/528.60667a6d.chunk.js:1
 msgid "Date sent"
-msgstr ""
+msgstr "Date sent (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/528.60667a6d.chunk.js:1
 msgid "List name"
-msgstr ""
+msgstr "List name (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/528.60667a6d.chunk.js:1
 msgid "Sender"
-msgstr ""
+msgstr "Sender (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/528.60667a6d.chunk.js:1
 msgid "Sending history"
-msgstr ""
+msgstr "Sending history (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/528.60667a6d.chunk.js:1
 msgid "All sending history"
-msgstr ""
+msgstr "All sending history (FR)"
 
 #: resources/js/build/static/js/74.e8ff45b4.chunk.js:1
 #: resources/js/build/static/js/528.60667a6d.chunk.js:1

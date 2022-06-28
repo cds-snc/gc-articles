@@ -1,7 +1,8 @@
 import React from "react";
 
 const Home = () => {
-  return <div>React Application</div>;
+  const { __ } = wp.i18n;
+  return <div>REACT APP {__('js-html-react', 'cds-js-test')}!!</div>;
 };
 
 export default Home;

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-28T13:39:22+00:00\n"
+"POT-Creation-Date: 2022-06-28T13:50:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: cds-js-test\n"
@@ -34,11 +34,22 @@ msgstr ""
 msgid "YOUR SITE HERE"
 msgstr ""
 
-#: cds-js-test.php:23
-#: cds-js-test.php:24
-msgid "Test"
+#: cds-js-test.php:52
+msgid "Custom Menu"
 msgstr ""
 
-#: cds-js-test.php:34
-msgid "Huzzah"
+#: cds-js-test.php:65
+msgid "Admin Page"
+msgstr ""
+
+#: script.js:3
+msgid "js-alert"
+msgstr ""
+
+#: script.js:5
+msgid "js-log"
+msgstr ""
+
+#: script.js:8
+msgid "js-html"
 msgstr ""

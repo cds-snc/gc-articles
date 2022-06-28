@@ -15,6 +15,14 @@
 
 // Your code starts here.
 
+add_action('init', 'loadTextdomain');
+
+function loadTextdomain()
+{
+    return load_plugin_textdomain('cds-js-test', false, 'cds-js-test/languages');
+}
+
+
 /**
  * Init all
  */
@@ -41,7 +49,7 @@ function register_my_custom_menu_page()
 {
     add_menu_page(
         'Custom Menu Title',
-        __('Custom Menu', 'test'),
+        __('Custom Menu', 'cds-js-test'),
         'manage_options',
         'my_custom',
         'callback'
@@ -54,6 +62,6 @@ add_action('admin_menu', 'register_my_custom_menu_page');
  */
 function callback()
 {
-    esc_html_e('Admin Page', 'test'); ?>
+    esc_html_e('Admin Page', 'cds-js-test'); ?>
     <h1 id="h1"></h1>
 <?php }

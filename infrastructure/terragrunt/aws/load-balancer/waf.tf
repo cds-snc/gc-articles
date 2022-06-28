@@ -23,7 +23,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     override_action {
       dynamic "none" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -66,7 +66,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     override_action {
       dynamic "none" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -98,7 +98,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     override_action {
       dynamic "none" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -133,7 +133,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     action {
       dynamic "block" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -186,7 +186,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     override_action {
       dynamic "none" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -224,7 +224,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     action {
       dynamic "block" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -277,7 +277,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     action {
       dynamic "block" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -330,7 +330,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     override_action {
       dynamic "none" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -362,7 +362,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     override_action {
       dynamic "none" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -394,7 +394,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     override_action {
       dynamic "none" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -425,7 +425,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 11
     action {
       dynamic "block" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -501,7 +501,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 12
     action {
       dynamic "block" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }
@@ -576,7 +576,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     action {
       dynamic "block" {
-        for_each = var.enable_waf ? [""] : []
+        for_each = var.enable_waf == true ? [""] : []
         content {
         }
       }

@@ -19,7 +19,7 @@
 function run()
 {
     load_plugin_textdomain('cds-js-test', false, 'cds-js-test/languages');
-
+    // https://developer.wordpress.org/reference/classes/wp_scripts/set_translations/
     wp_register_script(
         'script',
         plugins_url('sample-react-app/dist/bundle.js', __FILE__),

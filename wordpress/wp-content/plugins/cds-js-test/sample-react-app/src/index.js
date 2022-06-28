@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+const { render } = wp.element;
+
 import Home from './Home';
 
-ReactDOM.render(
+render(
   <Home />,
   document.getElementById('app')
 );

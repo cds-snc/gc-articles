@@ -59,17 +59,20 @@ class GCLists
                 $data  = json_decode($json, true);
                 $files = $data['files'];
 
-                wp_enqueue_style('gc-lists', $files['main.css'], null, '1.0.0');
+                wp_enqueue_style('gc-lists-css', $files['main.css'], null, '1.0.0');
 
-                wp_enqueue_script(
-                    'gc-lists',
+                wp_register_script(
+                    'gc-lists-js',
                     $files['main.js'],
-                    array('wp-i18n'),
+                    ['wp-i18n'],
                     '1.0.0',
                     true,
                 );
+                $result = wp_enqueue_script(
+                    'gc-lists-js'
+                );
 
-                wp_set_script_translations('gc-lists', 'gc-lists', GC_LISTS_PLUGIN_BASE_PATH . 'resources/languages/');
+                $result = wp_set_script_translations('gc-lists-js', 'gc-lists', GC_LISTS_PLUGIN_BASE_PATH . 'resources/languages/');
             } catch (\Exception $exception) {
                 error_log($exception->getMessage());
             }

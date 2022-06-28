@@ -20,6 +20,7 @@ msgid "You must configure your <a href=\"%s\">Notify API Key</a>"
 msgstr ""
 
 #: src/Menu.php:40 src/Menu.php:41 src/Menu.php:71
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Messages"
 msgstr "Les messages"
 
@@ -111,7 +112,7 @@ msgid "Back to messages "
 msgstr ""
 
 #: resources/js/build/static/js/527.6b120c8c.chunk.js:1
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Message name"
 msgstr ""
 
@@ -207,123 +208,167 @@ msgstr ""
 msgid "by"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Are you sure?"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Are you sure you want to delete this message?"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "warning"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Yes delete it"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "No, cancel"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Send to list?"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Yes send it"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Create a new list."
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "A subscriber list allows you to collect a group of subscribers that you can send a message to."
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "There is a problem"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Message Name"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Message type"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Last modified"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Edit"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Delete"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Send to a list"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Create new message"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Draft messages"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "All drafts"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "You have no draft messages"
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
+msgid "Saving a draft allows you to keep a message you aren't ready to send yet."
+msgstr ""
+
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Subject"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Message sent"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Send a new message"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Return to messages"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Date sent"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "List name"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Sender"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Sending history"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "All sending history"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "You have not sent any message yet."
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "When you send a message, a copy is automatically saved in your sending history."
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "The message was sent to the the subscribers in the list below."
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Sending to:"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Subscriber list"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Choose a group to send this message to."
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "You don't have any subscriber list."
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "Showing"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "of"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "previous"
 msgstr ""
 
-#: resources/js/build/static/js/main.9a44f18f.js:2
+#: resources/js/build/static/js/main.5b4abc50.js:2
 msgid "next"
 msgstr ""
 

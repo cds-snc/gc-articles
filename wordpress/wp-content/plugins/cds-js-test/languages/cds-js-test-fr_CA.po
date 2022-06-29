@@ -18,43 +18,36 @@ msgstr ""
 msgid "YOUR SITE HERE"
 msgstr ""
 
-#: cds-js-test.php:75
+#: cds-js-test.php:46
 msgid "Custom Menu"
 msgstr "Custom Menu (FR)"
 
-#: cds-js-test.php:88
+#: cds-js-test.php:59
 msgid "Admin Page"
 msgstr "Admin Page (FR)"
 
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:6
-msgid "REACT APP wp element"
-msgstr "REACT APP wp element FR"
-
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:6
-msgid "js-html-react"
-msgstr "js-html-react-fr"
-
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:7
-msgid "more"
-msgstr "more fr"
-
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:7
-msgid "and more"
-msgstr "and more Fr terser"
-
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:8
-#: script.js:8 wp-react-app/build/index.js:1713
-#: wp-react-app/build/index.js:1455
+#: wp-react-app/build/index.js:1713 wp-react-app/build/index.js:1455
 msgid "Huzzah"
 msgstr "Huzzah FR"
 
-#: script.js:5
-msgid "js-log"
-msgstr "js-log-fr"
-
-#: wp-react-app/build/index.js:1714 wp-react-app/build/index.js:1456
+#: wp-react-app/build/index.js:1715 wp-react-app/build/index.js:1457
 msgid "Success message"
 msgstr "Success message in FR"
+
+#~ msgid "REACT APP wp element"
+#~ msgstr "REACT APP wp element FR"
+
+#~ msgid "js-html-react"
+#~ msgstr "js-html-react-fr"
+
+#~ msgid "more"
+#~ msgstr "more fr"
+
+#~ msgid "and more"
+#~ msgstr "and more Fr terser"
+
+#~ msgid "js-log"
+#~ msgstr "js-log-fr"
 
 #~ msgid "Something else again"
 #~ msgstr "Something else again (FR)"

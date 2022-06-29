@@ -27,7 +27,7 @@ const App = () => {
 
 
 
-	const container = document.getElementById('app1')!;
+	const container = document.getElementById('app')!;
 
 
 

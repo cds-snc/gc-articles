@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-29T17:45:02+00:00\n"
+"POT-Creation-Date: 2022-06-29T17:52:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: cds-js-test\n"
@@ -34,47 +34,20 @@ msgstr ""
 msgid "YOUR SITE HERE"
 msgstr ""
 
-#: cds-js-test.php:75
+#: cds-js-test.php:46
 msgid "Custom Menu"
 msgstr ""
 
-#: cds-js-test.php:88
+#: cds-js-test.php:59
 msgid "Admin Page"
 msgstr ""
 
-#: sample-react-app/dist/bundle.js:13
-#: sample-react-app/src/Home.js:6
-msgid "REACT APP wp element"
-msgstr ""
-
-#: sample-react-app/dist/bundle.js:13
-#: sample-react-app/src/Home.js:6
-msgid "js-html-react"
-msgstr ""
-
-#: sample-react-app/dist/bundle.js:13
-#: sample-react-app/src/Home.js:7
-msgid "more"
-msgstr ""
-
-#: sample-react-app/dist/bundle.js:13
-#: sample-react-app/src/Home.js:7
-msgid "and more"
-msgstr ""
-
-#: sample-react-app/dist/bundle.js:13
-#: sample-react-app/src/Home.js:8
-#: script.js:8
 #: wp-react-app/build/index.js:1713
 #: wp-react-app/build/index.js:1455
 msgid "Huzzah"
 msgstr ""
 
-#: script.js:5
-msgid "js-log"
-msgstr ""
-
-#: wp-react-app/build/index.js:1714
-#: wp-react-app/build/index.js:1456
+#: wp-react-app/build/index.js:1715
+#: wp-react-app/build/index.js:1457
 msgid "Success message"
 msgstr ""

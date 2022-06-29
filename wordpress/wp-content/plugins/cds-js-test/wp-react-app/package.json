@@ -1,0 +1,35 @@
+{
+    "name": "wp-react",
+    "version": "1.0.0",
+    "private": true,
+    "description": "WP React test",
+    "author": "CDS-SNC",
+    "license": "GPL-2.0-or-later",
+    "keywords": [
+      "WordPress"
+    ],
+    "homepage": "https://github.com/cds-snc/gc-articles",
+    "repository": "git+https://github.com/cds-snc/gc-articles",
+    "bugs": {
+      "url": "https://github.com/cds-snc/gc-articles/issues"
+    },
+    "main": "src/index.js",
+    "dependencies": {
+      "@wordpress/element": "^4.0.2",
+      "@wordpress/i18n": "^4.2.3"
+    },
+    "devDependencies": {
+      "@types/react": "^17.0.30",
+      "@types/react-dom": "^17.0.9",
+      "@types/wordpress__blocks": "^9.1.1",
+      "@wordpress/scripts": "^18.1.0",
+      "webpack": "^5.58.2",
+      "webpack-cli": "^4.9.1"
+    },
+    "scripts": {
+      "build": "webpack",
+      "start": "webpack --watch",
+      "postinstall": "npm run build"
+    }
+  }
+  

@@ -1,4 +1,5 @@
 // @ts-nocheck
+import * as React from 'react';
 import { useCallback } from "react";
 import { Text } from "slate";
 import Prism from "prismjs";

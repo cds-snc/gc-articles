@@ -1,4 +1,12 @@
+/**
+ * External dependencies
+ */
+import * as React from 'react';
 import { useParams } from "react-router-dom";
+
+/**
+ * Internal dependencies
+ */
 import { useList } from './listContext';
 
 export const useService = () => {

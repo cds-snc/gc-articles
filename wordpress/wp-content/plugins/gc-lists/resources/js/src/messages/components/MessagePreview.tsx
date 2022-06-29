@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
 import Markdown from 'markdown-to-jsx';

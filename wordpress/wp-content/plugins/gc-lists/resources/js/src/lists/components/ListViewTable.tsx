@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
 import { useMemo } from "react";
 import styled from 'styled-components';
 import { useTable } from 'react-table';

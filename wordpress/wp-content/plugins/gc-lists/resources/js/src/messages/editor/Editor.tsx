@@ -1,4 +1,9 @@
 // @ts-nocheck
+/**
+ * External dependencies
+ */
+import * as React from 'react';
+
 import { useCallback, useMemo } from "react";
 import { Slate, Editable, withReact } from "slate-react";
 import { createEditor } from "slate";

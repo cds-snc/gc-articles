@@ -2,6 +2,7 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { __ } from "@wordpress/i18n";
 import useFetch from 'use-http';

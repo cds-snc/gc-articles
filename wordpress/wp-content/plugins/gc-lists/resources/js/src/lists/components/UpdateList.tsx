@@ -1,6 +1,11 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
+
+/**
+ * External dependencies
+ */
 import { useState, useCallback } from 'react'
 import useFetch from 'use-http';
 import { SubmitHandler } from "react-hook-form";

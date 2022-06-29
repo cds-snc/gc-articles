@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
 import { useParams } from "react-router-dom";
 import { useCallback, useState } from 'react';
 import { Descendant } from "slate";

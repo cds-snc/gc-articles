@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
 import { useEffect, useRef } from "react";
 import Swal from "sweetalert2";
 

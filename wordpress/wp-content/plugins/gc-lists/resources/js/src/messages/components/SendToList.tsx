@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
 import { __, sprintf } from "@wordpress/i18n";
 import styled from 'styled-components';
 

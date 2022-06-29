@@ -1,6 +1,12 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
+
+
+/**
+ * External dependencies
+ */
 import { useState } from 'react'
 import { Importer, ImporterField } from "react-csv-importer";
 import useFetch from 'use-http';

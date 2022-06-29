@@ -1,6 +1,7 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
 
 export const Error = () => {
     return (

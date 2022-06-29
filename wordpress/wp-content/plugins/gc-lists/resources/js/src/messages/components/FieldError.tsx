@@ -2,6 +2,7 @@
 /**
  * External dependencies
  */
+import * as React from 'react';
 import { __ } from "@wordpress/i18n";
 
 export const findErrorId = (errors = [], id = '') => errors.find(err => err.location === id)

@@ -18,7 +18,7 @@ class EmailDomains
      * cds-snc.ca - could match bad.actor@badcds-snc.ca
      *
      * With subdomains, ensure you escape the leading . with a backslash \ character otherwise you could
-     * unintentionally match an invalid domain as the . is a wildcard that will match any character, id:
+     * unintentionally match an invalid domain as the . is a wildcard that will match any character, ie:
      *
      * .canada.ca - could match bad.actor@badcanada.ca
      */

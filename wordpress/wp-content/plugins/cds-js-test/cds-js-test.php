@@ -32,7 +32,7 @@ function run()
 
     wp_set_script_translations('script', 'cds-js-test', plugin_dir_path(__FILE__) . 'languages/');
 
-
+    //
     wp_register_script(
         'script1',
         plugins_url('sample-react-app/dist/bundle.js', __FILE__),
@@ -42,6 +42,18 @@ function run()
     );
 
     wp_enqueue_script('script1');
+
+    //
+
+    wp_register_script(
+        'script-wp',
+        plugins_url('wp-react-app/build/index.js', __FILE__),
+        array('wp-element','wp-i18n'),
+        false,
+        true
+    );
+
+    wp_enqueue_script('script-wp');
 }
 add_action('init', 'run');
 
@@ -70,4 +82,6 @@ function callback()
     <div id="app1"></div>
     <hr>
     <div id="app"></div>
+    <hr>
+    <div id="app-wp"></div>
 <?php }

@@ -22,6 +22,7 @@ test('badEmails', function($email) {
     "no @" => 'justin.trudeaucds-snc.ca',
     "no username" => '@cds-snc.ca',
     "onmicrosoft without domain" => 'justin.trudeau@onmicrosoft.com',
+    "any onmicrosoft" => 'justin.trudeau@something.onmicrosoft.com', // subdomain must be explicitly allowed
     'empty' => '',
     'similar domain cds-snc.ca' => 'justin.trudeau@badcds-snc.ca',
     'similar domain canada.ca' => 'justin.truedau@badcanada.ca'
@@ -37,6 +38,6 @@ test('Good emails', function($email) {
     'Canada domain' => 'justin.trudeau@canada.ca',
     'Service Canada domain' => 'justin.trudeau@servicecanada.ca',
     'random Canada domain' => 'justin.trudeau@hockey.night.in.canada.ca',
-    'pspc innovation domain' => 'justin.trudeau@pspcinnovation.onmicrosoft.com',
-    'esdc ‘innovation’ domain' => 'justin.trudeau@esdc-innovation.onmicrosoft.com',
+    'pspc innovation domain' => 'justin.trudeau@pspcinnovation.onmicrosoft.com', // subdomain must be explicitly allowed
+    'esdc ‘innovation’ domain' => 'justin.trudeau@esdc-innovation.onmicrosoft.com', // subdomain must be explicitly allowed
 ]);

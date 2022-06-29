@@ -1,6 +1,7 @@
+import { __ } from '@wordpress/i18n';
+
 const Home = () => {
-    const { __ } = wp.i18n;
-    return <><div>{__('WP REACT APP', 'cds-js-test')}</div></>;
+    return <><div>{__('Something else again', 'cds-js-test')}</div></>;
 };
 
 export default Home;

@@ -18,47 +18,52 @@ msgstr ""
 msgid "YOUR SITE HERE"
 msgstr ""
 
-#: cds-js-test.php:67
+#: cds-js-test.php:76
 msgid "Custom Menu"
 msgstr "Custom Menu (FR)"
 
-#: cds-js-test.php:80
+#: cds-js-test.php:89
 msgid "Admin Page"
 msgstr "Admin Page (FR)"
 
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:3
-#: script.js:22
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:6
 msgid "REACT APP wp element"
 msgstr "REACT APP wp element FR"
 
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:3
-#: script.js:22
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:6
 msgid "js-html-react"
 msgstr "js-html-react-fr"
 
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:3
-#: script.js:22
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:7
 msgid "more"
 msgstr "more fr"
 
-#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:3
-#: script.js:22
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:7
 msgid "and more"
 msgstr "and more Fr terser"
 
-#: script.js:3
-msgid "js-alert"
-msgstr "js-alert-fr"
+#: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:8
+#: script.js:8
+msgid "Huzzah"
+msgstr "Huzzah FR"
 
 #: script.js:5
 msgid "js-log"
 msgstr "js-log-fr"
 
-#: script.js:8
-msgid "js-html"
-msgstr "js-html-fr"
+#: wp-react-app/build/index.js:24 wp-react-app/src/Home.js:5
+#: wp-react-app/build/index.js:5
+msgid "Something else again"
+msgstr "Something else again (FR)"
 
-#: wp-react-app/build/index.js:23 wp-react-app/src/Home.js:3
-#: wp-react-app/build/index.js:3
-msgid "WP REACT APP"
-msgstr "WP REACT APP FR - just works ??"
+#~ msgid "Something else"
+#~ msgstr "Something else (FR)"
+
+#~ msgid "WP REACT APP"
+#~ msgstr "WP REACT APP FR - just works ??"
+
+#~ msgid "js-html"
+#~ msgstr "js-html-fr"
+
+#~ msgid "js-alert"
+#~ msgstr "js-alert-fr"

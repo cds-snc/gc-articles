@@ -21,27 +21,29 @@ function run()
     load_plugin_textdomain('cds-js-test', false, 'cds-js-test/languages/');
     // https://developer.wordpress.org/reference/classes/wp_scripts/set_translations/
 
-    wp_register_script(
-        'script',
-        plugins_url('script.js', __FILE__),
-        array('wp-element','wp-i18n'),
-        false,
-        true
-    );
-    wp_enqueue_script('script');
+//    wp_register_script(
+//        'script',
+//        plugins_url('script.js', __FILE__),
+//        array('wp-element','wp-i18n'),
+//        false,
+//        true
+//    );
+//    wp_enqueue_script('script');
+//
+//    wp_set_script_translations('script', 'cds-js-test', plugin_dir_path(__FILE__) . 'languages/');
 
-    wp_set_script_translations('script', 'cds-js-test', plugin_dir_path(__FILE__) . 'languages/');
 
-    //
-    wp_register_script(
-        'script1',
-        plugins_url('sample-react-app/dist/bundle.js', __FILE__),
-        array('wp-element','wp-i18n'),
-        false,
-        true
-    );
-
-    wp_enqueue_script('script1');
+//    wp_register_script(
+//        'script1',
+//        plugins_url('sample-react-app/dist/bundle.js', __FILE__),
+//        array('wp-element','wp-i18n'),
+//        false,
+//        true
+//    );
+//
+//    wp_enqueue_script('script1');
+//
+//  wp_set_script_translations('script1', 'cds-js-test', plugin_dir_path(__FILE__) . 'languages/');
 
     //
 
@@ -54,6 +56,12 @@ function run()
     );
 
     wp_enqueue_script('script-wp');
+
+    wp_set_script_translations('script-wp', 'cds-js-test', plugin_dir_path(__FILE__) . 'languages/');
+
+//    // global $wp_locale;
+//    $something = $GLOBALS["l10n"];
+//    error_log(serialize($something));
 }
 add_action('init', 'run');
 

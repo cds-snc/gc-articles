@@ -1,26 +1,47 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
-  },
-  "include": [
-    "src"
-  ]
+    "compilerOptions": {
+        "target": "es5",
+        "allowJs": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react",
+        "module": "commonjs",
+        "outDir": "./build/",
+        "noImplicitAny": false,
+        "baseUrl": "src",
+    },
+    "exclude": ["node_modules"],
+    "include": ["src/*/"]
 }
+
+//{
+//  "compilerOptions": {
+//    "target": "es5",
+//    "allowJs": true,
+//    "skipLibCheck": true,
+//    "allowSyntheticDefaultImports": true,
+//    "jsx": "react-jsx"
+//    "module": "esnext",
+
+//    "lib": [
+//      "dom",
+//      "dom.iterable",
+//      "esnext"
+//    ],
+
+//    "esModuleInterop": true,
+//
+//    "strict": true,
+//    "forceConsistentCasingInFileNames": true,
+//    "noFallthroughCasesInSwitch": true,
+
+//    "moduleResolution": "node",
+//    "resolveJsonModule": true,
+//    "isolatedModules": true,
+//    "noEmit": true,
+
+//  },
+//  "include": [
+//    "src"
+//  ]
+//}

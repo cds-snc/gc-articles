@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-29T15:59:17+00:00\n"
+"POT-Creation-Date: 2022-06-29T17:45:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: cds-js-test\n"
@@ -34,11 +34,11 @@ msgstr ""
 msgid "YOUR SITE HERE"
 msgstr ""
 
-#: cds-js-test.php:76
+#: cds-js-test.php:75
 msgid "Custom Menu"
 msgstr ""
 
-#: cds-js-test.php:89
+#: cds-js-test.php:88
 msgid "Admin Page"
 msgstr ""
 
@@ -65,6 +65,8 @@ msgstr ""
 #: sample-react-app/dist/bundle.js:13
 #: sample-react-app/src/Home.js:8
 #: script.js:8
+#: wp-react-app/build/index.js:1713
+#: wp-react-app/build/index.js:1455
 msgid "Huzzah"
 msgstr ""
 
@@ -72,8 +74,7 @@ msgstr ""
 msgid "js-log"
 msgstr ""
 
-#: wp-react-app/build/index.js:24
-#: wp-react-app/src/Home.js:5
-#: wp-react-app/build/index.js:5
-msgid "Something else again"
+#: wp-react-app/build/index.js:1714
+#: wp-react-app/build/index.js:1456
+msgid "Success message"
 msgstr ""

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- for dev load styles from localhost -->
+
+    <link
+      rel="stylesheet"
+      id="buttons-css"
+      href="https://articles.alpha.canada.ca/wp-includes/css/buttons.css?ver=5.9.2"
+      media="all"
+    />
+
+    <link
+      rel="stylesheet"
+      id="common-css"
+      href="https://articles.alpha.canada.ca/wp-admin/css/common.css?ver=5.9.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="forms-css"
+      href="https://articles.alpha.canada.ca/wp-admin/css/forms.css?ver=5.9.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="list-tables-css"
+      href="https://articles.alpha.canada.ca/wp-admin/css/list-tables.css?ver=5.9.2"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="cds-base-style-admin-css"
+      href="https://articles.alpha.canada.ca/wp-content/plugins/cds-base/classes/Modules/Cleanup/css/admin.css?ver=2.21.0"
+      media="all"
+    />
+    <link
+      rel="stylesheet"
+      id="cds-base-style-admin-wet-css"
+      href="https://articles.alpha.canada.ca/wp-content/plugins/cds-base/classes/Modules/Cleanup/css/admin-wet.css?ver=2.21.0"
+      media="all"
+    />
+    <title>GC Lists</title>
+  </head>
+  <body
+    class="
+      wp-admin wp-core-ui
+      js
+      bulk-send_page_lists
+      auto-fold
+      admin-bar admin-color-fresh
+      locale-en-ca
+      multisite
+      customize-support
+      svg
+    "
+  >
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="wpwrap">
+      <div id="wpcontent">
+        <div id="wpbody">
+          <div id="wpbody-content">
+            <div class="wrap">
+              <div
+                id="list-manager-app"
+                data-user='{"hasPhone":false,"hasEmail":true}'
+                data-ids='[{"name":"List One","service_id":"a7902fc7-37f0-419c-84c8-3ab499ee24c8", "sendingTemplate":"40454604-8702-4eeb-9b38-1ed3104fb960"}]'
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.CDS_VARS  = {rest_url: "http://localhost/wp-json/"}
+    </script>
+  </body>
+</html>

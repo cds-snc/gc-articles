@@ -18,11 +18,11 @@ msgstr ""
 msgid "YOUR SITE HERE"
 msgstr ""
 
-#: cds-js-test.php:76
+#: cds-js-test.php:75
 msgid "Custom Menu"
 msgstr "Custom Menu (FR)"
 
-#: cds-js-test.php:89
+#: cds-js-test.php:88
 msgid "Admin Page"
 msgstr "Admin Page (FR)"
 
@@ -43,7 +43,8 @@ msgid "and more"
 msgstr "and more Fr terser"
 
 #: sample-react-app/dist/bundle.js:13 sample-react-app/src/Home.js:8
-#: script.js:8
+#: script.js:8 wp-react-app/build/index.js:1713
+#: wp-react-app/build/index.js:1455
 msgid "Huzzah"
 msgstr "Huzzah FR"
 
@@ -51,10 +52,12 @@ msgstr "Huzzah FR"
 msgid "js-log"
 msgstr "js-log-fr"
 
-#: wp-react-app/build/index.js:24 wp-react-app/src/Home.js:5
-#: wp-react-app/build/index.js:5
-msgid "Something else again"
-msgstr "Something else again (FR)"
+#: wp-react-app/build/index.js:1714 wp-react-app/build/index.js:1456
+msgid "Success message"
+msgstr "Success message in FR"
+
+#~ msgid "Something else again"
+#~ msgstr "Something else again (FR)"
 
 #~ msgid "Something else"
 #~ msgstr "Something else (FR)"

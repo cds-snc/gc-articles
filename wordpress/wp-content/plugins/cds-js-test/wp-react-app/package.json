@@ -1,35 +1,73 @@
 {
-    "name": "wp-react",
-    "version": "1.0.0",
-    "private": true,
-    "description": "WP React test",
-    "author": "CDS-SNC",
-    "license": "GPL-2.0-or-later",
-    "keywords": [
-      "WordPress"
-    ],
-    "homepage": "https://github.com/cds-snc/gc-articles",
-    "repository": "git+https://github.com/cds-snc/gc-articles",
-    "bugs": {
-      "url": "https://github.com/cds-snc/gc-articles/issues"
-    },
-    "main": "src/index.js",
-    "dependencies": {
-      "@wordpress/i18n": "^4.2.3",
-      "react": "^17.0.2 ",
-      "react-dom": "^17.0.2"
-    },
-    "devDependencies": {
-      "@types/react": "^17.0.30",
-      "@types/react-dom": "^17.0.9",
-      "@types/wordpress__blocks": "^9.1.1",
-      "@wordpress/scripts": "^18.1.0",
-      "webpack": "^5.58.2",
-      "webpack-cli": "^4.9.1"
-    },
-    "scripts": {
-      "build": "webpack",
-      "start": "webpack --watch",
-      "postinstall": "npm run build"
+  "name": "gc-lists",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "/wp-content/plugins/gc-lists/resources/js/build",
+  "dependencies": {
+    "@types/jest": "^28.1.2",
+    "@types/node": "^18.0.0",
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5",
+    "@wordpress/i18n": "^4.11.0",
+    "@wordpress/scripts": "^18.1.0",
+    "date-fns": "^2.28.0",
+    "markdown-to-jsx": "^7.1.7",
+    "prismjs": "^1.28.0",
+    "react": "^17.0.2 ",
+    "react-csv-importer": "^0.7.1",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.30.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "5.0.1",
+    "react-table": "^7.7.0",
+    "slate": "^0.78.0",
+    "slate-history": "^0.66.0",
+    "slate-react": "^0.77.4",
+    "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.9",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.6.3",
+    "use-http": "^1.0.26",
+    "uuid": "^8.3.2",
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.0.0-rc.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "webpack",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "postinstall": "npm run build",
+    "watch": "npm-watch",
+    "buildjs": "node scripts/watch.mjs"
+  },
+  "watch": {
+    "buildjs": {
+      "patterns": [
+        "src"
+      ],
+      "extensions": "ts,tsx"
     }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-table": "^7.7.11",
+    "@types/styled-components": "^5.1.25",
+    "@types/uuid": "^8.3.4",
+    "node-notifier": "^10.0.1",
+    "npm-watch": "^0.11.0",
+    "shelljs": "^0.8.5",
+    "webpack-cli": "^4.10.0"
   }
+}

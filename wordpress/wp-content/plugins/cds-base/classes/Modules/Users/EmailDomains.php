@@ -12,24 +12,30 @@ class EmailDomains
      * Regex matching rules for valid email domains
      *
      * When specifying domains/subdomains, make sure you're not opening this up to unintended inclusions
-     * of domains not controlled by GoC. For example, if you leave off the leading ^ character on
-     * domains you could unintentionally match an invalid domain, ie:
+     * of domains not controlled by GoC. For example, if you leave off the leading ^ anchor character
+     * on domains you could unintentionally match an invalid domain, ie:
      *
-     * cds-snc.ca - could match bad.actor@badcds-snc.ca
+     * cds-snc.ca - could match bad.actor@badcds-snc.ca - use ^cds-snc.ca
      *
-     * With subdomains, ensure you escape the leading . with a backslash \ character otherwise you could
-     * unintentionally match an invalid domain as the . is a wildcard that will match any character, ie:
+     * For subdomains, ensure you escape the leading . with a backslash \ character otherwise you could
+     * unintentionally match an invalid domain as . is a wildcard that will match any character, ie:
      *
-     * .canada.ca - could match bad.actor@badcanada.ca
+     * .canada.ca - could match bad.actor@badcanada.ca - use \.canada.ca
+     *
+     * Finally, with adhoc domains that innovation teams sometimes use, they should be explicitly
+     * added when they come up, as there is a lot of potential for risky matching, ie:
+     *
+     * \.onmicrosoft.com - anyone in the world could register an email address that matches this.
+     *
+     * NOTE: the regex filter automatically adds the end of string $ anchor character to these
+     * rules when applied, as there should never be a trailing wildcard.
      */
     public const ALLOWED_EMAIL_DOMAINS = [
         '^cds-snc.ca',
-        '^gc.ca', // is this valid?
         '\.gc.ca',
         '^canada.ca',
         '\.canada.ca',
         '^pspcinnovation.onmicrosoft.com',
-        '^esdc-innovation.onmicrosoft.com', // is this one real?
         '^servicecanada.ca'
     ];
 
@@ -73,7 +79,7 @@ class EmailDomains
         [, $domain] = explode('@', trim($email));
 
         foreach ($allowed_email_domains as $allowed_domain) {
-            if (preg_match("/$allowed_domain/", $domain)) {
+            if (preg_match("/$allowed_domain$/", $domain)) {
                 return true;
             }
         }

@@ -373,3 +373,7 @@ th.column-disable_user_login {
   color: #26374a;
 }
 
+#icl_div {
+  display: none !important;
+}
+

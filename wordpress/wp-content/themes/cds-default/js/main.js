@@ -62,7 +62,11 @@ function createToc() {
       
     } else {
       // close other submenus
-      closeMenu($('li.menu-item-has-children').remove($itemWithSubmenu))
+      try {
+        closeMenu($('li.menu-item-has-children').remove($itemWithSubmenu))
+      } catch (e) {
+        console.log(e);
+      }
   
       openMenu($itemWithSubmenu, isMouseEnter)
     }

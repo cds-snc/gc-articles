@@ -8,6 +8,18 @@ module.exports = {
      * See: https://developer.wordpress.com/author/a8cuser/
      *
      * Overrides to fix wp.i18n in react/js layer.
+     * Notes: 
+     * WP stores the PHP version of the string on the global $l10n
+     * 
+     * $wp_scripts contains the handle for the code registered via PHP 
+     * you can check that to check the path the language files load from
+     * 
+     * WP writes an inline script tag see: (DAVE can you link to that code)
+     * to get the strings from PHP to the JS layer
+     * 
+     * The @wordpress/i18n should referance the wp.i18n (on the window object)
+     * you can use your browser console to verify the strings are loading
+     * wp.i18n.__('your string', 'your-domain');
      */
     webpack: function(config, env) {
         // CDS Added - force production mode (for wp.i18n functions)

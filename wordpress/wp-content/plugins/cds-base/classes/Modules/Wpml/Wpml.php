@@ -50,11 +50,9 @@ class Wpml
      */
     public function retrieveTridFromPostMeta($trid, $post_status)
     {
-        if (!$trid) {
-            global $post;
-            if (isset($post) && isset($post->ID)) {
-                $trid = get_post_meta($post->ID, 'wpml_trid', true);
-            }
+        global $post;
+        if (isset($post) && isset($post->ID)) {
+            $trid = get_post_meta($post->ID, 'wpml_trid', true);
         }
 
         return $trid;

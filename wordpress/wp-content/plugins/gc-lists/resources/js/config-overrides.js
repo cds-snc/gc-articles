@@ -4,10 +4,14 @@ const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extract
 
 module.exports = {
     /**
-     * CDS Changes (reference article):
-     * See: https://developer.wordpress.com/author/a8cuser/
-     *
+     * CDS Changes 
      * Overrides to fix wp.i18n in react/js layer.
+     *
+     * Webpack by default shortens varible names etc...
+     * we need to ensure function like __() don't get touched
+     * See: https://developer.wordpress.com/author/a8cuser
+     *
+    
      * Notes: 
      * WP stores the PHP version of the string on the global $l10n
      * 

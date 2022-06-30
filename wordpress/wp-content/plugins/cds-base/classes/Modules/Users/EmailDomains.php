@@ -8,11 +8,36 @@ use WP_Error;
 
 class EmailDomains
 {
-    public const ALLOWED_EMAIL_DOMAINS = ['cds-snc.ca', 'gc.ca', 'canada.ca', '.onmicrosoft.com'];
-
-    public function __construct()
-    {
-    }
+    /**
+     * Regex matching rules for valid email domains
+     *
+     * When specifying domains/subdomains, make sure you're not opening this up to unintended inclusions
+     * of domains not controlled by GoC. For example, if you leave off the leading ^ anchor character
+     * on domains you could unintentionally match an invalid domain, ie:
+     *
+     * cds-snc.ca - could match bad.actor@badcds-snc.ca - use ^cds-snc.ca
+     *
+     * For subdomains, ensure you escape the leading . with a backslash \ character otherwise you could
+     * unintentionally match an invalid domain as . is a wildcard that will match any character, ie:
+     *
+     * .canada.ca - could match bad.actor@badcanada.ca - use \.canada.ca
+     *
+     * Finally, with adhoc domains that innovation teams sometimes use, they should be explicitly
+     * added when they come up, as there is a lot of potential for risky matching, ie:
+     *
+     * \.onmicrosoft.com - anyone in the world could register an email address that matches this.
+     *
+     * NOTE: the regex filter automatically adds the end of string $ anchor character to these
+     * rules when applied, as there should never be a trailing wildcard.
+     */
+    public const ALLOWED_EMAIL_DOMAINS = [
+        '^cds-snc.ca',
+        '\.gc.ca',
+        '^canada.ca',
+        '\.canada.ca',
+        '^pspcinnovation.onmicrosoft.com',
+        '^servicecanada.ca'
+    ];
 
     public static function register()
     {
@@ -23,7 +48,6 @@ class EmailDomains
 
     public function addFilters()
     {
-
         $pageName = basename($_SERVER['PHP_SELF']);
 
         if ('profile.php' === $pageName || 'user-edit.php' === $pageName) {
@@ -46,38 +70,25 @@ class EmailDomains
 
     public static function isValidDomain($email): bool
     {
-        try {
-            if (!strpos($email, '@') > 0) {
-                return false;
-            }
-
-
-            $allowed_email_domains = apply_filters(
-                'cds_allowed_email_domains',
-                self::ALLOWED_EMAIL_DOMAINS,
-            );
-
-
-            $isAllowedDomain  = false;
-
-            [, $domain] = explode('@', trim($email));
-
-            foreach ($allowed_email_domains as $allowed_domain) {
-                if (str_ends_with($domain, $allowed_domain)) {
-                    $isAllowedDomain = true;
-                }
-            }
-
-            return  $isAllowedDomain;
-        } catch (\Exception $e) {
-            // no-op
+        if (!strpos($email, '@') > 0) {
             return false;
         }
+
+        $allowed_email_domains = self::ALLOWED_EMAIL_DOMAINS;
+
+        [, $domain] = explode('@', trim($email));
+
+        foreach ($allowed_email_domains as $allowed_domain) {
+            if (preg_match("/$allowed_domain$/", $domain)) {
+                return true;
+            }
+        }
+
+        return  false;
     }
 
     public static function validateEmailDomain($result)
     {
-
         $message =
             __(
                 'You can’t use this email domain for registration.',
@@ -93,11 +104,9 @@ class EmailDomains
 
     public static function isEmailFilter($is_email = false, $email = ""): bool
     {
-
         if (!$is_email) {
             return false;
         }
-
 
         $WP_Error = new WP_Error();
         $WP_Error->add('invalid_email', __('Bad domain'));

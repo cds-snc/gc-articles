@@ -59,8 +59,6 @@ class GCLists
                 $data  = json_decode($json, true);
                 $files = $data['files'];
 
-                load_textdomain('gc-lists', GC_LISTS_PLUGIN_BASE_PATH . 'resources/languages/gc-lists-fr_CA.mo');
-
                 wp_enqueue_style('gc-lists-css', $files['main.css'], null, '1.0.0');
 
                 wp_register_script(

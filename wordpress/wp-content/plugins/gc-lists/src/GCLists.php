@@ -35,6 +35,9 @@ class GCLists
         register_activation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$this->installer, 'install']);
         register_deactivation_hook(GC_LISTS_PLUGIN_FILE_PATH, [$this->installer, 'uninstall']);
 
+        // Load text domain
+        add_action('init', [$this, 'loadTextdomain']);
+
         // Enqueue scripts
         add_action('admin_enqueue_scripts', [$this, 'enqueue']);
 
@@ -56,18 +59,28 @@ class GCLists
                 $data  = json_decode($json, true);
                 $files = $data['files'];
 
-                wp_enqueue_style('gc-lists', $files['main.css'], null, '1.0.0');
+                wp_enqueue_style('gc-lists-css', $files['main.css'], null, '1.0.0');
 
-                wp_enqueue_script(
-                    'gc-lists',
+                wp_register_script(
+                    'gc-lists-js',
                     $files['main.js'],
-                    null,
+                    ['wp-i18n'],
                     '1.0.0',
                     true,
                 );
+                $result = wp_enqueue_script(
+                    'gc-lists-js'
+                );
+
+                $result = wp_set_script_translations('gc-lists-js', 'gc-lists', GC_LISTS_PLUGIN_BASE_PATH . 'resources/languages/');
             } catch (\Exception $exception) {
                 error_log($exception->getMessage());
             }
         }
+    }
+
+    public function loadTextdomain()
+    {
+        return load_plugin_textdomain('gc-lists', false, 'gc-lists/resources/languages');
     }
 }

@@ -20,7 +20,7 @@ msgid "You must configure your <a href=\"%s\">Notify API Key</a>"
 msgstr ""
 
 #: src/Menu.php:40 src/Menu.php:41 src/Menu.php:71
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Messages"
 msgstr "Les messages"
 
@@ -36,339 +36,339 @@ msgstr ""
 msgid "Your Lists"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/958.63f88b39.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
-#: resources/js/build/static/js/958.63f88b39.chunk.js:8
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/958.2ee9dfb1.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
+#: resources/js/build/static/js/958.2ee9dfb1.chunk.js:8
 msgid "Go back"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Required Field"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Name"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Name is required"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "List type"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Type is required"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Subscribe template id"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "See example template ID format."
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Unsubscribe template id"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Subscribe redirect url"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Unsubscribe redirect url"
 msgstr ""
 
-#: resources/js/build/static/js/50.f0ccac04.chunk.js:1
-#: resources/js/build/static/js/966.f8ebde59.chunk.js:1
+#: resources/js/build/static/js/50.051d6389.chunk.js:1
+#: resources/js/build/static/js/966.6390b747.chunk.js:1
 msgid "Confirm redirect url"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Edit email message"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
-#: resources/js/build/static/js/590.d8b88d09.chunk.js:1
-#: resources/js/build/static/js/818.b75e968d.chunk.js:1
-#: resources/js/build/static/js/590.d8b88d09.chunk.js:15
-#: resources/js/build/static/js/818.b75e968d.chunk.js:15
+#: resources/js/build/static/js/527.be756692.chunk.js:1
+#: resources/js/build/static/js/590.5c3b910b.chunk.js:1
+#: resources/js/build/static/js/818.3a607bea.chunk.js:1
+#: resources/js/build/static/js/590.5c3b910b.chunk.js:15
+#: resources/js/build/static/js/818.3a607bea.chunk.js:15
 msgid "Back to messages "
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/527.be756692.chunk.js:1
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Message name"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Your recipients will not see this message name."
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Subject line of the email"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Tell recipients what the message is about. Try to keep it shorter than 10 words."
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Subject is required"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Message"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Use the"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "email formatting guide"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "(Opens in a new tab) to craft your message."
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Message is required"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Message saved"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Choose a list to send to"
 msgstr ""
 
-#: resources/js/build/static/js/527.6b120c8c.chunk.js:1
+#: resources/js/build/static/js/527.be756692.chunk.js:1
 msgid "Save draft"
 msgstr ""
 
-#: resources/js/build/static/js/866.b7f32651.chunk.js:1
+#: resources/js/build/static/js/866.0b901d40.chunk.js:1
 msgid "Back to edit message "
 msgstr ""
 
-#: resources/js/build/static/js/866.b7f32651.chunk.js:1
+#: resources/js/build/static/js/866.0b901d40.chunk.js:1
 msgid "Send message"
 msgstr ""
 
-#: resources/js/build/static/js/866.b7f32651.chunk.js:1
+#: resources/js/build/static/js/866.0b901d40.chunk.js:1
 msgid "Message preview"
 msgstr ""
 
-#: resources/js/build/static/js/950.8044f3b1.chunk.js:1
+#: resources/js/build/static/js/950.4a6c7ef8.chunk.js:1
 msgid "SENT"
 msgstr ""
 
-#: resources/js/build/static/js/950.8044f3b1.chunk.js:1
+#: resources/js/build/static/js/950.4a6c7ef8.chunk.js:1
 msgid "Sent on"
 msgstr ""
 
-#: resources/js/build/static/js/950.8044f3b1.chunk.js:1
+#: resources/js/build/static/js/950.4a6c7ef8.chunk.js:1
 msgid "EDITED"
 msgstr ""
 
-#: resources/js/build/static/js/950.8044f3b1.chunk.js:1
+#: resources/js/build/static/js/950.4a6c7ef8.chunk.js:1
 msgid "Edited on"
 msgstr ""
 
-#: resources/js/build/static/js/950.8044f3b1.chunk.js:1
+#: resources/js/build/static/js/950.4a6c7ef8.chunk.js:1
 msgid "CREATED"
 msgstr ""
 
-#: resources/js/build/static/js/950.8044f3b1.chunk.js:1
+#: resources/js/build/static/js/950.4a6c7ef8.chunk.js:1
 msgid "Created on"
 msgstr ""
 
-#: resources/js/build/static/js/950.8044f3b1.chunk.js:1
+#: resources/js/build/static/js/950.4a6c7ef8.chunk.js:1
 msgid "Previous versions"
 msgstr ""
 
-#: resources/js/build/static/js/950.8044f3b1.chunk.js:1
+#: resources/js/build/static/js/950.4a6c7ef8.chunk.js:1
 msgid "by"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Are you sure?"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Are you sure you want to delete this message?"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "warning"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Yes delete it"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "No, cancel"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Send to list?"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Yes send it"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Create a new list."
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "A subscriber list allows you to collect a group of subscribers that you can send a message to."
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "There is a problem"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Message Name"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Message type"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Last modified"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Edit"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Delete"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Send to a list"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Create new message"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Draft messages"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "All drafts"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "You have no draft messages"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Saving a draft allows you to keep a message you aren't ready to send yet."
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Subject"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Message sent"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Send a new message"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Return to messages"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Date sent"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "List name"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Sender"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Sending history"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "All sending history"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "You have not sent any message yet."
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "When you send a message, a copy is automatically saved in your sending history."
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "The message was sent to the the subscribers in the list below."
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Sending to:"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Subscriber list"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Choose a group to send this message to."
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "You don't have any subscriber list."
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "Showing"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "of"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "previous"
 msgstr ""
 
-#: resources/js/build/static/js/main.325b0c30.js:2
+#: resources/js/build/static/js/main.b7c80bc0.js:2
 msgid "next"
 msgstr ""
 

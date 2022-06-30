@@ -47,7 +47,7 @@
             "@compile-json"
         ],
         "prepare-translations": [
-
+            "@build-js",
             "@make-pot",
             "@merge-po"
         ]

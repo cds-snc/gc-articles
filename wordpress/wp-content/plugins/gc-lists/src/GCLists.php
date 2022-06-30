@@ -64,15 +64,16 @@ class GCLists
                 wp_register_script(
                     'gc-lists-js',
                     $files['main.js'],
-                    ['wp-i18n'],
+                    ['wp-element', 'wp-i18n'],
                     '1.0.0',
                     true,
                 );
-                $result = wp_enqueue_script(
+
+                wp_enqueue_script(
                     'gc-lists-js'
                 );
 
-                $result = wp_set_script_translations('gc-lists-js', 'gc-lists', GC_LISTS_PLUGIN_BASE_PATH . 'resources/languages/');
+                wp_set_script_translations('gc-lists-js', 'gc-lists', GC_LISTS_PLUGIN_BASE_PATH . '/resources/languages/');
             } catch (\Exception $exception) {
                 error_log($exception->getMessage());
             }

@@ -22,7 +22,7 @@ const Select = ({ lists, handleChange }: { handleChange: (val: string) => void, 
         <StyledSelect name="lists" id="lists" onChange={(evt) => {
             handleChange(evt.target.value);
         }}>
-            <option key="none" value="">Select a list</option>
+            <option key="none" value="">{__("Select a list", "gc-lists")}</option>
             {
                 lists.map((list) => {
                     return <option key={list.id} value={list.id}>{list.name}</option>

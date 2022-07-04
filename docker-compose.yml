@@ -146,6 +146,7 @@ services:
       - ./:/home/default/project
       - ~/.ssh:/home/default/.ssh
       - ~/.gitconfig:/home/default/.gitconfig
+      - ./wordpress/docker/php/conf.d/memory_limit.ini:/usr/local/etc/php/conf.d/memory_limit.ini
     restart: unless-stopped
     networks:
       - app-network

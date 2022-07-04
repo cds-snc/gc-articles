@@ -4,6 +4,8 @@ WORKDIR /usr/src/wordpress
 
 USER root
 
+RUN mv $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
+
 RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     libmcrypt-dev && \
     # install dev utils

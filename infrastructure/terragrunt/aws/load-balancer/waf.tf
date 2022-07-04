@@ -22,7 +22,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 1
 
     override_action {
-      none {}
+      dynamic "none" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {
@@ -55,7 +65,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 2
 
     override_action {
-      none {}
+      dynamic "none" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {
@@ -77,7 +97,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 3
 
     override_action {
-      none {}
+      dynamic "none" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {
@@ -102,7 +132,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 4
 
     action {
-      block {}
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     visibility_config {
@@ -145,7 +185,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 5
 
     override_action {
-      none {}
+      dynamic "none" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {
@@ -173,7 +223,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 6
 
     action {
-      block {}
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     visibility_config {
@@ -216,7 +276,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 7
 
     action {
-      block {}
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     visibility_config {
@@ -259,7 +329,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 8
 
     override_action {
-      none {}
+      dynamic "none" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {
@@ -281,7 +361,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 9
 
     override_action {
-      none {}
+      dynamic "none" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {
@@ -303,7 +393,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 10
 
     override_action {
-      none {}
+      dynamic "none" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {
@@ -324,7 +424,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     name     = "Custom_SizeRestrictions_BODY"
     priority = 11
     action {
-      block {}
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     visibility_config {
@@ -390,7 +500,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     name     = "Custom_CrossSiteScripting_BODY"
     priority = 12
     action {
-      block {}
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     visibility_config {
@@ -455,7 +575,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 101
 
     action {
-      block {}
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
     }
 
     statement {

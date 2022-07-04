@@ -24,7 +24,7 @@ const getBlogPosts = async () => {
     let files = [];
     for (const p in data) {
         const content = extractData(data[p]);
-        await writeFile(`posts/${content.title}`, content.body);
+        await writeFile(`posts/${content.title}.md`, content.body);
     }
 
 

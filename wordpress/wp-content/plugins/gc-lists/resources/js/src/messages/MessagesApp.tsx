@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { Routes, Route } from "react-router-dom";
 import { Spinner } from './components';
-const Home = React.lazy(() => import("./views/Home"));
-const EditMessage = React.lazy(() => import("./views/EditMessage"));
-const SendMessage = React.lazy(() => import("./views/SendMessage"));
-const AllDrafts = React.lazy(() => import("./views/AllDrafts"));
-const AllSendingHistory = React.lazy(() => import("./views/AllSendingHistory"));
-const Versions = React.lazy(() => import("./views/Versions"));
+import Home from './views/Home';
+import EditMessage from './views/EditMessage';
+import SendMessage from './views/SendMessage';
+import AllDrafts from './views/AllDrafts';
+import AllSendingHistory from './views/AllSendingHistory';
+import Versions from './views/Versions';
+
 
 const MessagesApp = () => {
     return (

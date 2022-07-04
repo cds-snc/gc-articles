@@ -73,13 +73,13 @@ function createToc() {
   })
   
   // set a timer when we mouseleave
-  $('.sub-menu').on('mouseleave', function(e) {
+  $('li.menu-item-has-children').on('mouseleave', function(e) {
     $itemWithSubmenu = $(e.target).parents('li.menu-item-has-children');
     isOpenMouseenter = $itemWithSubmenu.find('ul.sub-menu.open.mouseenter').length > 0
 
     if(isOpenMouseenter) {
       clearTimeout(closeMenuTimeout)
-      closeMenuTimeout = setTimeout(() => closeMenu($itemWithSubmenu), 1000);
+      closeMenuTimeout = setTimeout(() => closeMenu($itemWithSubmenu), 500);
     }
   })
 

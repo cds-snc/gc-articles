@@ -274,7 +274,7 @@ msgstr "Vous n’avez aucune liste de diffusion."
 
 #: resources/js/build/static/js/main.a7f254a5.js:2
 msgid "Showing"
-msgstr "Gabarits"
+msgstr "Montrant"
 
 #: resources/js/build/static/js/main.a7f254a5.js:2
 msgid "of"

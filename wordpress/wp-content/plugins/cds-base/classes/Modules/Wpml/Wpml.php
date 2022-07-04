@@ -16,6 +16,7 @@ class Wpml
         add_action('rest_api_init', [$instance, 'addTranslatedIDsToPages']);
         add_action('save_post', [$instance, 'saveTridToPostMeta'], 10, 2);
         add_filter('wpml_save_post_trid_value', [$instance, 'retrieveTridFromPostMeta'], 10, 2);
+        add_filter('wpml_tm_lock_ui', [$instance, 'lock_tm'], 10);
     }
 
     /**
@@ -34,6 +35,11 @@ class Wpml
             $trid = intval($_GET['trid']);
             add_post_meta($post_ID, 'wpml_trid', $trid);
         }
+    }
+
+    public function lock_tm()
+    {
+       return true;
     }
 
     /**

@@ -39,7 +39,7 @@
         "make-pot": "wp i18n make-pot --domain=gc-lists . resources/languages/gc-lists.pot",
         "merge-po": "msgmerge -U --no-wrap --backup none -N ./resources/languages/gc-lists-fr_CA.po ./resources/languages/gc-lists.pot",
         "compile-mo": "msgfmt -o ./resources/languages/gc-lists-fr_CA.mo ./resources/languages/gc-lists-fr_CA.po",
-        "clean-json": "rm ./resources/languages/*.json",
+        "clean-json": "rm -f ./resources/languages/*.json || true",
         "compile-json": "wp i18n make-json ./resources/languages/gc-lists-fr_CA.po --no-purge",
         "compile-translations": [
             "@compile-mo",

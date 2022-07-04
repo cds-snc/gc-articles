@@ -88,7 +88,7 @@ export const SendMessage = () => {
     return (
         <>
             {templateId !== 'new' && <StyledLink to={`/messages/edit/${templateId}`}>
-                <Back /> <span>{__("Back to edit message ", "gc-lists")}</span>
+                <Back /> <span>{__("Edit message", "gc-lists")}</span>
             </StyledLink>}
             <ListSelect onChange={handleListUpdate} />
             {listId ?

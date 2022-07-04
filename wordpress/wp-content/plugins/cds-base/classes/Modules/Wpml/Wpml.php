@@ -16,7 +16,7 @@ class Wpml
         add_action('rest_api_init', [$instance, 'addTranslatedIDsToPages']);
         add_action('save_post', [$instance, 'saveTridToPostMeta'], 10, 2);
         add_filter('wpml_save_post_trid_value', [$instance, 'retrieveTridFromPostMeta'], 10, 2);
-        add_filter('wpml_tm_lock_ui', [$instance, 'lock_tm'], 10);
+        add_filter('wpml_tm_lock_ui', [$instance, 'lockTranslationManager'], 10);
         add_action('admin_menu', [$instance, 'removeMenuItems'], 2147483647);
 
         // WPML filter causing nav menu to always be returned in same language
@@ -41,7 +41,7 @@ class Wpml
         }
     }
 
-    public function lock_tm()
+    public function lockTranslationManager()
     {
         return true;
     }

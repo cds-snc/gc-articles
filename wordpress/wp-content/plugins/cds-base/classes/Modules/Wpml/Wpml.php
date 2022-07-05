@@ -22,15 +22,14 @@ class Wpml
         // WPML filter causing nav menu to always be returned in same language
         add_filter('wpml_disable_term_adjust_id', [$instance, 'disableAutomaticTranslationForNavMenus'], 10, 2);
 
-        add_filter( 'rest_endpoints', function( $endpoints ){
+        add_filter('rest_endpoints', function ($endpoints) {
 
-            foreach( $endpoints as $route => $endpoint ){
-                
-                if( 0 === stripos( $route, '/wpml/tm/v1' ) ){
-                   unset( $endpoints[ $route ] );
+            foreach ($endpoints as $route => $endpoint) {
+                if (0 === stripos($route, '/wpml/tm/v1')) {
+                    unset($endpoints[ $route ]);
                 }
             }
-           
+
             return $endpoints;
         });
     }

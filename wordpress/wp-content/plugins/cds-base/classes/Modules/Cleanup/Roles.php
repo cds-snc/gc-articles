@@ -8,7 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.1.8', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.1.10', function () {
             if (is_blog_installed()) {
                 $wp_roles = wp_roles();
                 $allRoles = array_keys($wp_roles->roles); // array_keys returns only the slug
@@ -31,6 +31,48 @@ class Roles
 
         // Add "unfiltered_html" role to GC Admins, GC Editors, GC Writers
         add_filter('map_meta_cap', [$this, 'addUnfilteredHTMLRole'], 1, 3);
+        add_filter('map_meta_cap', [$this, 'excludeDeleteSiteCap'], 1, 3);
+    }
+
+    public function excludeDeleteSiteCap($caps, $cap, $user_id)
+    {
+        if (!is_admin()) {
+            return $caps;
+        }
+
+        if (is_super_admin()) {
+            return $caps;
+        }
+
+        global $pagenow;
+        if ($pagenow === 'edit-comments.php' && $cap === 'edit_posts') {
+            $caps = ['do_not_allow'];
+        }
+
+        if ($pagenow === 'tools.php') {
+            $caps = ['do_not_allow'];
+        }
+
+        if (
+            in_array($cap, [
+            'delete_site',
+            'import',
+            'view_site_health_checks',
+            'export_others_personal_data',
+            'export',
+            'erase_others_personal_data',
+            'edit_themes',
+            'install_themes',
+            'update_core',
+            'update_themes',
+            'update_plugins',
+            'edit_theme_options',
+            ])
+        ) {
+            $caps = ['do_not_allow'];
+        }
+
+        return $caps;
     }
 
     public function addUnfilteredHTMLRole($caps, $cap, $user_id)
@@ -60,6 +102,7 @@ class Roles
                 'delete_users' => 1,
                 'create_users' => 1,
                 'remove_users' => 1,
+                'delete_site' => 0,
                 'add_users' => 1,
                 'promote_users' => 1,
                 'manage_network_users' => 1, // enables "edit_users" for GC Admins'
@@ -99,6 +142,7 @@ class Roles
                 'allow_unfiltered_html' => 0
             ],
             'editor' => [
+                'delete_site' => 0,
                 'moderate_comments' => 1,
                 'manage_categories' => 1,
                 'manage_links' => 1,
@@ -135,6 +179,7 @@ class Roles
                 'read_private_pages' => 1,
             ],
             'author' => [
+                'delete_site' => 0,
                 'upload_files' => 1,
                 'edit_posts' => 1,
                 'edit_published_posts' => 1,
@@ -147,6 +192,7 @@ class Roles
                 'delete_published_posts' => 1,
             ],
             'contributor' => [
+                'delete_site' => 0,
                 'edit_posts' => 1,
                 'read' => 1,
                 'level_1' => 1,
@@ -154,10 +200,12 @@ class Roles
                 'delete_posts' => 1,
             ],
             'subscriber' => [
+                'delete_site' => 0,
                 'read' => 1,
                 'level_0' => 1,
             ],
             'gceditor' => [
+                'delete_site' => 0,
                 'read' => 1,
                 'level_1' => 1,
                 'level_0' => 1,
@@ -188,6 +236,7 @@ class Roles
                 'allow_unfiltered_html' => 0
             ],
             'gcwriter' => [
+                'delete_site' => 0,
                 'read' => 1,
                 'level_1' => 1,
                 'level_0' => 1,

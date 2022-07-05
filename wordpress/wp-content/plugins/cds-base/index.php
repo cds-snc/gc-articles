@@ -84,79 +84,81 @@ function cds_admin_js(): void
 add_action('admin_enqueue_scripts', 'cds_admin_js');
 
 
-if ( ! function_exists( 'wp_verify_nonce' ) ) :
-	/**
+if (! function_exists('wp_verify_nonce')) :
+    /**
      * Modified for GC Articles to ensure the current user
      * is a member of the current blog
-     * 
-	 * Verifies that a correct security nonce was used with time limit.
-	 *
-	 * A nonce is valid for 24 hours (by default).
-	 *
-	 * @since 2.0.3
-	 *
-	 * @param string     $nonce  Nonce value that was used for verification, usually via a form field.
-	 * @param string|int $action Should give context to what is taking place and be the same when nonce was created.
-	 * @return int|false 1 if the nonce is valid and generated between 0-12 hours ago,
-	 *                   2 if the nonce is valid and generated between 12-24 hours ago.
-	 *                   False if the nonce is invalid.
-	 */
-	function wp_verify_nonce( $nonce, $action = -1 ) {
-		$nonce = (string) $nonce;
-		$user  = wp_get_current_user();
+     *
+     * Verifies that a correct security nonce was used with time limit.
+     *
+     * A nonce is valid for 24 hours (by default).
+     *
+     * @since 2.0.3
+     *
+     * @param string     $nonce  Nonce value that was used for verification, usually via a form field.
+     * @param string|int $action Should give context to what is taking place and be the same when nonce was created.
+     * @return int|false 1 if the nonce is valid and generated between 0-12 hours ago,
+     *                   2 if the nonce is valid and generated between 12-24 hours ago.
+     *                   False if the nonce is invalid.
+     */
+    function wp_verify_nonce($nonce, $action = -1)
+    {
+        $nonce = (string) $nonce;
+        $user  = wp_get_current_user();
 
         $uid   = (int) $user->ID;
-		if ( ! $uid ) {
-			/**
-			 * Filters whether the user who generated the nonce is logged out.
-			 *
-			 * @since 3.5.0
-			 *
-			 * @param int    $uid    ID of the nonce-owning user.
-			 * @param string $action The nonce action.
-			 */
-			$uid = apply_filters( 'nonce_user_logged_out', $uid, $action );
-		}
+        if (! $uid) {
+            /**
+             * Filters whether the user who generated the nonce is logged out.
+             *
+             * @since 3.5.0
+             *
+             * @param int    $uid    ID of the nonce-owning user.
+             * @param string $action The nonce action.
+             */
+            $uid = apply_filters('nonce_user_logged_out', $uid, $action);
+        }
 
-		if ( empty( $nonce ) ) {
-			return false;
-		}
-
-        $bid = get_current_blog_id();
-        if(!is_user_member_of_blog($uid, $bid)){
+        if (empty($nonce)) {
             return false;
         }
 
-		$token = wp_get_session_token();
-		$i     = wp_nonce_tick();
+        $bid = get_current_blog_id();
 
-		// Nonce generated 0-12 hours ago.
-		$expected = substr( wp_hash( $i . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
-		if ( hash_equals( $expected, $nonce ) ) {
-			return 1;
-		}
+        if (!is_user_member_of_blog($uid, $bid)) {
+            return false;
+        }
 
-		// Nonce generated 12-24 hours ago.
-		$expected = substr( wp_hash( ( $i - 1 ) . '|' . $action . '|' . $uid . '|' . $token, 'nonce' ), -12, 10 );
-		if ( hash_equals( $expected, $nonce ) ) {
-			return 2;
-		}
+        $token = wp_get_session_token();
+        $i     = wp_nonce_tick();
 
-		/**
-		 * Fires when nonce verification fails.
-		 *
-		 * @since 4.4.0
-		 *
-		 * @param string     $nonce  The invalid nonce.
-		 * @param string|int $action The nonce action.
-		 * @param WP_User    $user   The current user object.
-		 * @param string     $token  The user's session token.
-		 */
-		do_action( 'wp_verify_nonce_failed', $nonce, $action, $user, $token );
+        // Nonce generated 0-12 hours ago.
+        $expected = substr(wp_hash($i . '|' . $action . '|' . $uid . '|' . $token, 'nonce'), -12, 10);
+        if (hash_equals($expected, $nonce)) {
+            return 1;
+        }
 
-		// Invalid nonce.
-		return false;
-	}
+        // Nonce generated 12-24 hours ago.
+        $expected = substr(wp_hash(( $i - 1 ) . '|' . $action . '|' . $uid . '|' . $token, 'nonce'), -12, 10);
+        if (hash_equals($expected, $nonce)) {
+            return 2;
+        }
+
+        /**
+         * Fires when nonce verification fails.
+         *
+         * @since 4.4.0
+         *
+         * @param string     $nonce  The invalid nonce.
+         * @param string|int $action The nonce action.
+         * @param WP_User    $user   The current user object.
+         * @param string     $token  The user's session token.
+         */
+        do_action('wp_verify_nonce_failed', $nonce, $action, $user, $token);
+
+        // Invalid nonce.
+        return false;
+    }
 endif;
 
 $setupComponents = new Setup();

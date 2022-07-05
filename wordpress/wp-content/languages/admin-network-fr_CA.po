@@ -1,15 +1,23 @@
-# Translation of WordPress - 5.9.x - Development - Administration - Network Admin in French (Canada)
-# This file is distributed under the same license as the WordPress - 5.9.x - Development - Administration - Network Admin package.
+# Translation of WordPress - 6.0.x - Development - Administration - Network Admin in French (Canada)
+# This file is distributed under the same license as the WordPress - 6.0.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-01-16 22:10:20+0000\n"
+"PO-Revision-Date: 2022-05-25 17:17:48+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"X-Generator: GlotPress/4.0.0-alpha.1\n"
 "Language: fr_CA\n"
-"Project-Id-Version: WordPress - 5.9.x - Development - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 6.0.x - Development - Administration - Network Admin\n"
+
+#: wp-admin/network/upgrade.php:141
+msgid "WordPress has been updated! Next and final step is to individually upgrade the sites in your network."
+msgstr "WordPress a été mis à jour ! La prochaine étape pour finaliser est de mettre à niveau individuellement les sites de votre réseau."
+
+#: wp-admin/network/site-new.php:40
+msgid "Cannot create an empty site."
+msgstr "Impossible de créer un site vide."
 
 #. translators: %s: wp-config.php
 #: wp-admin/includes/network.php:463
@@ -723,10 +731,6 @@ msgstr "D'ici, vous pouvez :"
 msgid "Welcome to your Network Admin. This area of the Administration Screens is used for managing all aspects of your Multisite Network."
 msgstr "Bienvenue dans l'administration de votre réseau! Cette partie des écrans d'administration sert à gérer tous les aspects de votre réseau multisite."
 
-#: wp-admin/network/upgrade.php:141
-msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
-msgstr "WordPress a été mis à jour! Avant de vous laisser continuer, nous devons mettre à jour chaque site de votre réseau."
-
 #: wp-admin/network/upgrade.php:24
 msgid "Only use this screen once you have updated to a new version of WordPress through Updates/Available Updates (via the Network Administration navigation menu or the Toolbar). Clicking the Upgrade Network button will step through each site in the network, five at a time, and make sure any database updates are applied."
 msgstr "N'utilisez cet écran que quand vous avez mis à jour cette installation de WordPress (au moyen de la fonction de mise à jour automatique ou la barre d'outils). En cliquant sur \"Mettre à jour le réseau\", WordPress s'occupera de tous les sites du réseau, par groupes de cinq, et s'assurera que toutes les mises à jour de bases de données sont appliquées."
@@ -1112,7 +1116,7 @@ msgstr "Vous pouvez promouvoir un utilisateur existant en super-admin en allant 
 
 #: wp-admin/network/user-new.php:23
 msgid "Users who are signed up to the network without a site are added as subscribers to the main or primary dashboard site, giving them profile pages to manage their accounts. These users will only see Dashboard and My Sites in the main navigation until a site is created for them."
-msgstr "Les utilisateurs qui se sont inscrits sur le réseau sans créer de site deviennent abonnés du site d&rsquo;accueil. Celui-ci leur permet d&rsquo;accéder à leur compte. Ces utilisateurs ne voient dans la navigation principale que les options &laquo;&nbsp;Tableau de bord&nbsp;&raquo; et &laquo;&nbsp;Mes sites&nbsp;&raquo;, jusqu&rsquo;à ce qu&rsquo;un site leur soit créé."
+msgstr "Les utilisateurs qui se sont inscrits sur le réseau sans créer de site deviennent abonnés du site d’accueil. Celui-ci leur permet d’accéder à leur compte. Ces utilisateurs ne voient dans la navigation principale que les options « Tableau de bord » et « Mes sites », jusqu’à ce qu’un site leur soit créé."
 
 #: wp-admin/network/users.php:234
 msgid "You can sort the table by clicking on any of the table headings and switch between list and excerpt views by using the icons above the users list."
@@ -1127,8 +1131,8 @@ msgid "If this process fails for any reason, users logging in to their sites wil
 msgstr "Si ce processus échoue pour n&rsquo;importe quelles raisons, les utilisateurs se connectant à leurs sites déclencheront la même mise à jour."
 
 #: wp-admin/network/upgrade.php:25
-msgid "If a version update to core has not happened, clicking this button won&#8217;t affect anything."
-msgstr "S&rsquo;il n&rsquo;y a pas eu de mise à jour de l&rsquo;installation de WordPress récemment, cliquer sur ce bouton n&rsquo;aura aucun effet."
+msgid "If a version update to core has not happened, clicking this button will not affect anything."
+msgstr "S’il n’y a pas eu de mise à jour du cœur WordPress récemment, cliquer sur ce bouton n’aura aucun effet."
 
 #: wp-admin/network/themes.php:301
 msgid "If the network admin disables a theme that is in use, it can still remain selected on that site. If another theme is chosen, the disabled theme will not appear in the site&#8217;s Appearance > Themes screen."
@@ -1164,8 +1168,8 @@ msgid "The following words are reserved for use by WordPress functions and canno
 msgstr "Les mots suivants sont réservés pour l’usage de fonctions WordPress et ne peuvent pas être utilisés comme nom de site : %s"
 
 #: wp-admin/network/upgrade.php:125
-msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
-msgstr "Si votre navigateur ne lance pas automatiquement la page suivante, cliquez sur ce lien&nbsp;:"
+msgid "If your browser does not start loading the next page automatically, click this link:"
+msgstr "Si votre navigateur ne lance pas automatiquement la page suivante, cliquez sur ce lien :"
 
 #: wp-admin/network/settings.php:302
 msgid "If you want to ban domains from site registrations. One domain per line."
@@ -1174,10 +1178,6 @@ msgstr "Si vous souhaitez interdire la création de sites aux personnes dont l&r
 #: wp-admin/network/settings.php:282
 msgid "If you want to limit site registrations to certain domains. One domain per line."
 msgstr "Si vous souhaitez que les seules personnes habilitées à créer un site soient celles disposant d&rsquo;une adresse courriel liée à certains noms de domaines. Un domaine par ligne."
-
-#: wp-admin/network/site-new.php:40
-msgid "Can&#8217;t create an empty site."
-msgstr "Impossible de créer un site vide."
 
 #: wp-admin/network/users.php:268
 msgid "Users removed from spam."

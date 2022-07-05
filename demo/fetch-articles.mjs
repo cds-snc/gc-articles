@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import slugify from 'slugify';
 import { writeFile } from 'fs/promises';
 
-const ENDPOINT = "https://articles.alpha.canada.ca/articles-demo-darticles/wp-json/wp/v2/posts?markdown=true&_embed";
+const ENDPOINT = "https://articles.alpha.canada.ca/cds-snc/wp-json/wp/v2/posts?markdown=true&_embed";
 
 const extractData = (post) => {
     let out = "";
@@ -11,9 +11,12 @@ const extractData = (post) => {
     out += "layout: blog\n";
     out += "title: '" + title + "'\n";
     out += "description: >-\n";
-    out += "  " + post.markdown.content.rendered + "\n";
+    out +=  post.markdown.excerpt.rendered + "\n";
     out += "author: '" + post._embedded.author[0].name + "'\n";
     out += "date: '" + post.modified + "'\n";
+
+    out += "---\n";
+    out +=  post.markdown.content.rendered + "\n";
     return { title: slugify(title, { lower: true, strict: true }), body: out };
 }
 

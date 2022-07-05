@@ -8,7 +8,7 @@ class Roles
 {
     public function __construct()
     {
-        Utils::checkOptionCallback('cds_base_activated', '1.1.10', function () {
+        Utils::checkOptionCallback('cds_base_activated', '1.1.8', function () {
             if (is_blog_installed()) {
                 $wp_roles = wp_roles();
                 $allRoles = array_keys($wp_roles->roles); // array_keys returns only the slug

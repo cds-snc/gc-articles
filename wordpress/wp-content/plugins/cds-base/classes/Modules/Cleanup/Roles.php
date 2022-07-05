@@ -102,7 +102,6 @@ class Roles
                 'delete_users' => 1,
                 'create_users' => 1,
                 'remove_users' => 1,
-                'delete_site' => 0,
                 'add_users' => 1,
                 'promote_users' => 1,
                 'manage_network_users' => 1, // enables "edit_users" for GC Admins'
@@ -142,7 +141,6 @@ class Roles
                 'allow_unfiltered_html' => 0
             ],
             'editor' => [
-                'delete_site' => 0,
                 'moderate_comments' => 1,
                 'manage_categories' => 1,
                 'manage_links' => 1,
@@ -179,7 +177,6 @@ class Roles
                 'read_private_pages' => 1,
             ],
             'author' => [
-                'delete_site' => 0,
                 'upload_files' => 1,
                 'edit_posts' => 1,
                 'edit_published_posts' => 1,
@@ -192,7 +189,6 @@ class Roles
                 'delete_published_posts' => 1,
             ],
             'contributor' => [
-                'delete_site' => 0,
                 'edit_posts' => 1,
                 'read' => 1,
                 'level_1' => 1,
@@ -200,12 +196,10 @@ class Roles
                 'delete_posts' => 1,
             ],
             'subscriber' => [
-                'delete_site' => 0,
                 'read' => 1,
                 'level_0' => 1,
             ],
             'gceditor' => [
-                'delete_site' => 0,
                 'read' => 1,
                 'level_1' => 1,
                 'level_0' => 1,
@@ -236,7 +230,6 @@ class Roles
                 'allow_unfiltered_html' => 0
             ],
             'gcwriter' => [
-                'delete_site' => 0,
                 'read' => 1,
                 'level_1' => 1,
                 'level_0' => 1,

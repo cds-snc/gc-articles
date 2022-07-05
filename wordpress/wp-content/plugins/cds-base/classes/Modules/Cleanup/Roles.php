@@ -31,10 +31,10 @@ class Roles
 
         // Add "unfiltered_html" role to GC Admins, GC Editors, GC Writers
         add_filter('map_meta_cap', [$this, 'addUnfilteredHTMLRole'], 1, 3);
-        add_filter('map_meta_cap', [$this, 'excludeDeleteSiteCap'], 1, 3);
+        add_filter('map_meta_cap', [$this, 'forceExcludeCaps'], 1, 3);
     }
 
-    public function excludeDeleteSiteCap($caps, $cap, $user_id)
+    public function forceExcludeCaps($caps, $cap, $user_id)
     {
         if (!is_admin()) {
             return $caps;

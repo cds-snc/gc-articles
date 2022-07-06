@@ -39,10 +39,10 @@ class Roles
         if (!is_admin()) {
             return $caps;
         }
-//
-//        if (is_super_admin()) {
-//            return $caps;
-//        }
+
+        if (is_multisite() && is_super_admin()) {
+            return $caps;
+        }
 
 //        global $pagenow;
 //        if ($pagenow === 'edit-comments.php' && $cap === 'edit_posts') {

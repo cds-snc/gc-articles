@@ -31,6 +31,47 @@ class Roles
 
         // Add "unfiltered_html" role to GC Admins, GC Editors, GC Writers
         add_filter('map_meta_cap', [$this, 'addUnfilteredHTMLRole'], 1, 3);
+        add_filter('map_meta_cap', [$this, 'forceExcludeCaps'], 2, 3);
+    }
+
+    public function forceExcludeCaps($caps, $cap, $user_id)
+    {
+        if (!is_admin()) {
+            return $caps;
+        }
+
+        if (is_multisite() && is_super_admin()) {
+            return $caps;
+        }
+
+        global $pagenow;
+        if ($pagenow === 'edit-comments.php' && $cap === 'edit_posts') {
+            $caps = ['do_not_allow'];
+        }
+
+        if ($pagenow === 'tools.php') {
+            $caps = ['do_not_allow'];
+        }
+
+        if (
+            in_array($cap, [
+                'delete_site',
+                'import',
+                'view_site_health_checks',
+                'export_others_personal_data',
+                'export',
+                'erase_others_personal_data',
+                'edit_themes',
+                'install_themes',
+                'update_core',
+                'update_themes',
+                'update_plugins',
+            ])
+        ) {
+            $caps = ['do_not_allow'];
+        }
+
+        return $caps;
     }
 
     public function addUnfilteredHTMLRole($caps, $cap, $user_id)

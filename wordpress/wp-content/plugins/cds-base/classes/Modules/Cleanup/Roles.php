@@ -44,33 +44,33 @@ class Roles
             return $caps;
         }
 
-        global $pagenow;
-        if ($pagenow === 'edit-comments.php' && $cap === 'edit_posts') {
-            $caps = ['do_not_allow'];
-        }
-
-        if ($pagenow === 'tools.php') {
-            $caps = ['do_not_allow'];
-        }
-
-        if (
-            in_array($cap, [
-            'delete_site',
-            'import',
-            'view_site_health_checks',
-            'export_others_personal_data',
-            'export',
-            'erase_others_personal_data',
-            'edit_themes',
-            'install_themes',
-            'update_core',
-            'update_themes',
-            'update_plugins',
-            'edit_theme_options',
-            ])
-        ) {
-            $caps = ['do_not_allow'];
-        }
+//        global $pagenow;
+//        if ($pagenow === 'edit-comments.php' && $cap === 'edit_posts') {
+//            $caps = ['do_not_allow'];
+//        }
+//
+//        if ($pagenow === 'tools.php') {
+//            $caps = ['do_not_allow'];
+//        }
+//
+//        if (
+//            in_array($cap, [
+//            'delete_site',
+//            'import',
+//            'view_site_health_checks',
+//            'export_others_personal_data',
+//            'export',
+//            'erase_others_personal_data',
+//            'edit_themes',
+//            'install_themes',
+//            'update_core',
+//            'update_themes',
+//            'update_plugins',
+//            'edit_theme_options',
+//            ])
+//        ) {
+//            $caps = ['do_not_allow'];
+//        }
 
         return $caps;
     }

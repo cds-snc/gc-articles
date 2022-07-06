@@ -36,9 +36,9 @@ class Roles
 
     public function forceExcludeCaps($caps, $cap, $user_id)
     {
-//        if (!is_admin()) {
-//            return $caps;
-//        }
+        if (!is_admin()) {
+            return $caps;
+        }
 //
 //        if (is_super_admin()) {
 //            return $caps;

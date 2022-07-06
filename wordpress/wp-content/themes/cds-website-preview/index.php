@@ -42,6 +42,15 @@
   
 
   <body vocab="http://schema.org/" typeof="WebPage" class="page-blogpost">
+    <style>
+      .preview{
+        text-align:center;
+        padding:5px;
+        background-color:#ffcc33;
+        font-weight:bold;
+      }
+      </style>
+  <div class="preview">PREVIEW</div>
     <nav aria-label="Skip Navigation Links">
       <ul id="wb-tphp">
         <li class="wb-slc">

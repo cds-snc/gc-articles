@@ -161,4 +161,9 @@ if (! function_exists('wp_verify_nonce')) :
     }
 endif;
 
+/**
+ * Disable XMLRPC as authentication bypasses 2fa if configured.
+ */
+add_filter('xmlrpc_enabled', '__return_false');
+
 $setupComponents = new Setup();

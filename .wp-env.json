@@ -8,10 +8,10 @@
     "wp-content/plugins": "./wordpress/wp-content/plugins",
     "vendor": "./wordpress/vendor"
   },
-  "phpVersion": "8.0",
+  "phpVersion": "8.1",
   "config": {
     "WP_DEBUG": 1,
-    "WORDPRESS_DEBUG_DISPLAY": 1,
-    "WP_DEBUG_DISPLAY": 1
+    "WORDPRESS_DEBUG_DISPLAY": 0,
+    "WP_DEBUG_DISPLAY": 0
   }
 }

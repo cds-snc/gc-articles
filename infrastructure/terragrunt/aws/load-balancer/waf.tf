@@ -253,7 +253,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         statement {
           not_statement {
             statement {
-              and_statement {
+              or_statement {
                 statement {
                   byte_match_statement {
                     field_to_match {

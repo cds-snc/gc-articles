@@ -36,13 +36,13 @@ class Roles
 
     public function forceExcludeCaps($caps, $cap, $user_id)
     {
-        if (!is_admin()) {
-            return $caps;
-        }
-
-        if (is_super_admin()) {
-            return $caps;
-        }
+//        if (!is_admin()) {
+//            return $caps;
+//        }
+//
+//        if (is_super_admin()) {
+//            return $caps;
+//        }
 
 //        global $pagenow;
 //        if ($pagenow === 'edit-comments.php' && $cap === 'edit_posts') {

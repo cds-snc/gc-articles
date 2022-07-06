@@ -124,11 +124,9 @@
 
       <div class="page-banner" style="background-image: url('<?php echo $image; ?>');"></div>
     </header>
-    
  <?php if (have_posts()) :
         while (have_posts()) :
             the_post(); ?>
-
  <main role="main" property="mainContentOfPage">
       <section id="wb-cont">
         <section class="blog-single">
@@ -169,24 +167,13 @@
                 </div>
                 <div class="container">
                   <div class="post-content" itemprop="articleBody">
-
-
-
     <div class="entry">
             <?php the_content(); ?>
     </div>
-
         <?php endwhile;
  else : ?>
-    <!-- The very first "if" tested to see if there were any Posts to -->
-    <!-- display.  This "else" part tells what do if there weren't any. -->
     <p><?php esc_html_e('Sorry, no posts matched your criteria.'); ?></p>
-
-
-    <!-- REALLY stop The Loop. -->
  <?php endif; ?>
-
-
                   </div>
                 </div>
               </article>

@@ -116,7 +116,7 @@ export function useTemplateApi() {
         [request, response],
     );
 
-    const recordSent = useCallback(async (templateId: string | undefined, listId: string | undefined, listName: string | undefined, name: string | undefined, subject: string | undefined, body: string | undefined) => {
+    const recordSent = useCallback(async (templateId: string | undefined, listId: string | undefined, listName: string | undefined, listType: string | undefined, name: string | undefined, subject: string | undefined, body: string | undefined) => {
 
         const endpoint = templateId === 'new' ? '/messages/send' : `/messages/${templateId}/send`;
         await request.post(endpoint, {
@@ -125,7 +125,7 @@ export function useTemplateApi() {
             'name': name,
             'subject': subject,
             'body': body,
-            'message_type': 'email',
+            'message_type': listType,
         });
 
         if (response.ok) {

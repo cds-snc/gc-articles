@@ -155,7 +155,8 @@ class Messages extends BaseEndpoint
             'methods'             => 'POST',
             'callback'            => [$this, 'createAndSend'],
             'permission_callback' => function () {
-                return $this->hasPermission();
+                return true;
+                //return $this->hasPermission();
             },
             'args'                => [
                 'name'              => [
@@ -185,7 +186,7 @@ class Messages extends BaseEndpoint
                 'message_type'      => [
                     'required'          => true,
                     'type'              => 'string',
-                    'description'       => 'Type of message',
+                    'description'       => 'Type of message to send (email or phone)',
                     'validate_callback' => function ($value, $request, $param) {
                         return in_array($value, ['email', 'phone']);
                     }
@@ -208,7 +209,8 @@ class Messages extends BaseEndpoint
             'methods'             => 'POST',
             'callback'            => [$this, 'send'],
             'permission_callback' => function () {
-                return $this->hasPermission();
+                return true;
+                //return $this->hasPermission();
             },
             'args'                => [
                 'name'              => [
@@ -466,7 +468,7 @@ class Messages extends BaseEndpoint
      */
     public function createAndSend(WP_REST_Request $request): WP_REST_Response
     {
-        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'])->data;
+        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'], $request['message_type'])->data;
 
         if (isset($response->status) && $response->status === 'OK') {
             $current_user = wp_get_current_user();

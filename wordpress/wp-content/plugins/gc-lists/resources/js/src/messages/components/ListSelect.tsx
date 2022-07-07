@@ -71,7 +71,7 @@ export const ListSelect = ({ onChange }: { onChange: any }) => {
         if (lists) {
             const listData = lists.filter((list: any) => list.id === listId)[0];
             const subscriberCount = listData?.subscriber_count || 0;
-            onChange({ listId: listId, listName: listData?.name, count: Number(subscriberCount) })
+            onChange({ listId: listId, listName: listData?.name, count: Number(subscriberCount), listType: getListType(listData.language)})
         }
     }, [lists, onChange]);
 

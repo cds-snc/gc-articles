@@ -8,9 +8,10 @@ use WP_REST_Response;
 
 class SendMessage
 {
-    public static function handle($listId, $subject, $body)
+    public static function handle($listId, $subject, $body, $messageType)
     {
         $url = getenv('LIST_MANAGER_ENDPOINT') . '/send';
+        [$notify_api_key, $notify_template_id] = self::getNotifyIdsFromType($messageType);
 
         $args = [
             'method' => 'POST',
@@ -22,12 +23,12 @@ class SendMessage
                 'job_name' => "gc-lists",
                 'list_id' => $listId,
                 'personalisation' => json_encode([
-                    'subject' => $subject,
+                    'subject' => $subject, // don't need this for a phone message
                     'message' => $body,
                 ]),
-                'template_id' => get_option('NOTIFY_GENERIC_TEMPLATE_ID'),
-                'template_type' => "email",
-                'service_api_key' => get_option('NOTIFY_API_KEY'),
+                'template_type' => $messageType,
+                'service_api_key' => $notify_api_key,
+                'template_id' => $notify_template_id,
             ]),
         ];
 
@@ -39,5 +40,19 @@ class SendMessage
         $response = new WP_REST_Response(json_decode($response_body));
 
         return rest_ensure_response($response);
+    }
+
+    private static function getNotifyIdsFromType($messageType)
+    {
+        $notify_api_key = get_option('NOTIFY_API_KEY');
+        $notify_template_id = get_option('NOTIFY_GENERIC_TEMPLATE_ID');
+
+        if ($messageType === 'phone') {
+            // if an SMS message, use the generic GC Articles Notify service with our generic phone template
+            $notify_api_key = getenv('DEFAULT_NOTIFY_API_KEY');
+            $notify_template_id = getenv('DEFAULT_NOTIFY_PHONE_TEMPLATE');
+        }
+
+        return [$notify_api_key, $notify_template_id];
     }
 }

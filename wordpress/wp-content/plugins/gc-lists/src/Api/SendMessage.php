@@ -42,7 +42,7 @@ class SendMessage
         return rest_ensure_response($response);
     }
 
-    private static function getNotifyIdsFromType($messageType)
+    public static function getNotifyIdsFromType($messageType)
     {
         $notify_api_key = get_option('NOTIFY_API_KEY');
         $notify_template_id = get_option('NOTIFY_GENERIC_TEMPLATE_ID');

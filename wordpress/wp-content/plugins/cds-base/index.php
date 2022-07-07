@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 use CDS\Modules\Notify\NotifyTemplateSender;
 use CDS\Setup;
+use Illuminate\Support\Str;
 
 defined('ABSPATH') || exit();
 
@@ -103,6 +104,17 @@ if (! function_exists('wp_verify_nonce')) :
      */
     function wp_verify_nonce($nonce, $action = -1)
     {
+        /**
+         * Fail nonce check on all these actions
+         */
+        if (
+            Str::startsWith($action, 'WPML\TranslationRoles') ||
+            Str::startsWith($action, 'WPML\TM\ATE\AutoTranslate') ||
+            Str::startsWith($action, 'WPML\TM\ATE\TranslateEverything')
+        ) {
+            die("403 Unauthorized");
+        }
+
         $nonce = (string) $nonce;
         $user  = wp_get_current_user();
 

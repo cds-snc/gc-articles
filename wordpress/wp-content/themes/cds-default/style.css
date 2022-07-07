@@ -341,6 +341,7 @@ nav.nav--about li a:focus {
     }
     .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__content {
         flex: 5 !important;
+        margin-left: var(--wp--style--block-gap, 2em);
     }
 }
 

@@ -88,5 +88,5 @@ export const ListSelect = ({ onChange }: { onChange: any }) => {
                 handleChange(val)
             }} />
         </> :
-        <Warn message={__("You don't have any subscriber list.", "gc-lists")} />
+        <Warn message={__("You don’t have any subscriber list.", "gc-lists")} />
 }

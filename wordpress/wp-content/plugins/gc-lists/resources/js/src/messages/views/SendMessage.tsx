@@ -97,7 +97,7 @@ export const SendMessage = () => {
                 <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
             </StyledLink>}
 
-            <h1>{__("Send message", "gc-lists")}</h1>
+            <h1>{__("Send message to a list", "gc-lists")}</h1>
 
             <ListSelect onChange={handleListUpdate} />
             {listId ?

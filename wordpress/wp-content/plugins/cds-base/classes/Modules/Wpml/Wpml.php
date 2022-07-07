@@ -13,7 +13,7 @@ class Wpml
 
         $instance = new self();
 
-        add_action('rest_api_init', [$instance, 'addTranslatedIDsToPages']);
+        add_action('rest_api_init', [$instance, 'addTranslatedIDsToPagesAndPosts']);
         add_action('save_post', [$instance, 'saveTridToPostMeta'], 10, 2);
         add_filter('wpml_save_post_trid_value', [$instance, 'retrieveTridFromPostMeta'], 10, 2);
         add_filter('wpml_tm_lock_ui', [$instance, 'lockTranslationManager'], 10);
@@ -93,13 +93,13 @@ class Wpml
         return apply_filters('wpml_object_id', $post_id, 'post', false, $lang);
     }
 
-    public function addTranslatedIDsToPages()
+    public function addTranslatedIDsToPagesAndPosts()
     {
         /**
          * Add an 'slug_en' field to the REST response for a page
          * Returns a string, or 'null' if no translation provided
          */
-        register_rest_field('page', 'slug_en', array(
+        register_rest_field(['page', 'post'], 'slug_en', array(
             'get_callback' => function ($post, $field_name, $request) {
                 $translatedPostId = $this->getTranslatedPost($post['id'], 'en');
                 return is_null($translatedPostId) ? null : get_post_field('post_name', $translatedPostId);
@@ -115,7 +115,7 @@ class Wpml
          * Add an 'slug_fr' field to the REST response for a page
          * Returns an string, or 'null' if no translation provided
          */
-        register_rest_field('page', 'slug_fr', array(
+        register_rest_field(['page', 'post'], 'slug_fr', array(
             'get_callback' => function ($post, $field_name, $request) {
                 $translatedPostId = $this->getTranslatedPost($post['id'], 'fr');
                 return is_null($translatedPostId) ? null : get_post_field('post_name', $translatedPostId);
@@ -132,7 +132,7 @@ class Wpml
          * Add an 'id_en' field to the REST response for a page
          * Returns an integer id, or 'null' if no translation provided
          */
-        register_rest_field('page', 'id_en', array(
+        register_rest_field(['page', 'post'], 'id_en', array(
             'get_callback' => function ($post, $field_name, $request) {
                 return $this->getTranslatedPost($post['id'], 'en');
             },
@@ -147,7 +147,7 @@ class Wpml
          * Add an 'id_fr' field to the REST response for a page
          * Returns an integer id, or 'null' if no translation provided
          */
-        register_rest_field('page', 'id_fr', array(
+        register_rest_field(['page', 'post'], 'id_fr', array(
             'get_callback' => function ($post, $field_name, $request) {
                 return $this->getTranslatedPost($post['id'], 'fr');
             },
@@ -162,7 +162,7 @@ class Wpml
          * Add a 'lang' field to the REST response for a page
          * Returns a string locale, or 'null' if no language has been assigned
          */
-        register_rest_field('page', 'lang', array(
+        register_rest_field(['page', 'post'], 'lang', array(
             'get_callback' => function ($post, $field_name, $request) {
                 $locale_array = apply_filters('wpml_post_language_details', null, $post['id']);
                 return $locale_array['language_code'] ?? null;

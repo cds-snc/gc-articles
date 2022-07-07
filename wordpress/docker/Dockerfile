@@ -14,12 +14,12 @@ RUN cd wordpress && composer install --no-interaction --optimize-autoloader --no
 
 ## Install NPM dependencies
 
-FROM node:14-alpine AS buildjs
+FROM node:15-alpine AS buildjs
 WORKDIR /app
 COPY . .
 
 RUN apk add --no-cache git
-RUN npm --unsafe-perm install -f
+RUN npm --unsafe-perm install
 
 ## Release build
 

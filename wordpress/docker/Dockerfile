@@ -19,7 +19,7 @@ WORKDIR /app
 COPY . .
 
 RUN apk add --no-cache git
-RUN npm --unsafe-perm install
+RUN npm --unsafe-perm install -f
 
 ## Release build
 

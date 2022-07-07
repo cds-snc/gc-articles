@@ -341,7 +341,7 @@ nav.nav--about li a:focus {
     }
     .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__content {
         flex: 5 !important;
-        margin-left: var(--wp--style--block-gap, 2em);
+        margin-left: var(--wp--style--block-gap, 1.5em);
     }
 }
 
@@ -352,6 +352,7 @@ nav.nav--about li a:focus {
     }
     .wp-block-columns:not(.is-not-stacked-on-mobile)>.wp-block-column.page__content {
         flex: 6.5;
+        margin-left: var(--wp--style--block-gap, 2em);
     }
 }
 /* Side nav layout over 1200px */

@@ -23,7 +23,7 @@ class SendMessage
                 'job_name' => "gc-lists",
                 'list_id' => $listId,
                 'personalisation' => json_encode([
-                    'subject' => $subject, // don't need this for a phone message
+                    'subject' => $subject, // Unneeded for "phone" type, but it's okay to send extra parameters
                     'message' => $body,
                 ]),
                 'template_type' => $messageType,

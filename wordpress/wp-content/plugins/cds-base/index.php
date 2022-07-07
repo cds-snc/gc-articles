@@ -112,7 +112,7 @@ if (! function_exists('wp_verify_nonce')) :
             Str::startsWith($action, 'WPML\TM\ATE\AutoTranslate') ||
             Str::startsWith($action, 'WPML\TM\ATE\TranslateEverything')
         ) {
-            die("403 Unauthorized");
+            die("403 Forbidden");
         }
 
         $nonce = (string) $nonce;

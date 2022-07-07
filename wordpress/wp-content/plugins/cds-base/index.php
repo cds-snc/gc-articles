@@ -4,7 +4,7 @@
  * Plugin Name: CDS-SNC Base
  * Plugin URI: https://github.com/cds-snc/gc-articles
  * Description: Custom Block setup and other overrides
- * Version: 3.4.0
+ * Version: 3.4.1
  * Update URI: false
  * Author: CDS-SNC
  * Text Domain: cds-snc
@@ -25,7 +25,7 @@ if (!defined('BASE_PLUGIN_NAME')) {
 }
 
 if (!defined('BASE_PLUGIN_NAME_VERSION')) {
-    define('BASE_PLUGIN_NAME_VERSION', '3.4.0');
+    define('BASE_PLUGIN_NAME_VERSION', '3.4.1');
 }
 
 if (is_multisite()) {
@@ -82,5 +82,88 @@ function cds_admin_js(): void
 }
 
 add_action('admin_enqueue_scripts', 'cds_admin_js');
+
+
+if (! function_exists('wp_verify_nonce')) :
+    /**
+     * Modified for GC Articles to ensure the current user
+     * is a member of the current blog
+     *
+     * Verifies that a correct security nonce was used with time limit.
+     *
+     * A nonce is valid for 24 hours (by default).
+     *
+     * @since 2.0.3
+     *
+     * @param string     $nonce  Nonce value that was used for verification, usually via a form field.
+     * @param string|int $action Should give context to what is taking place and be the same when nonce was created.
+     * @return int|false 1 if the nonce is valid and generated between 0-12 hours ago,
+     *                   2 if the nonce is valid and generated between 12-24 hours ago.
+     *                   False if the nonce is invalid.
+     */
+    function wp_verify_nonce($nonce, $action = -1)
+    {
+        $nonce = (string) $nonce;
+        $user  = wp_get_current_user();
+
+        $uid   = (int) $user->ID;
+        if (! $uid) {
+            /**
+             * Filters whether the user who generated the nonce is logged out.
+             *
+             * @since 3.5.0
+             *
+             * @param int    $uid    ID of the nonce-owning user.
+             * @param string $action The nonce action.
+             */
+            $uid = apply_filters('nonce_user_logged_out', $uid, $action);
+        }
+
+        if (empty($nonce)) {
+            return false;
+        }
+
+        $bid = get_current_blog_id();
+
+        if (!is_user_member_of_blog($uid, $bid)) {
+            return false;
+        }
+
+        $token = wp_get_session_token();
+        $i     = wp_nonce_tick();
+
+        // Nonce generated 0-12 hours ago.
+        $expected = substr(wp_hash($i . '|' . $action . '|' . $uid . '|' . $token, 'nonce'), -12, 10);
+        if (hash_equals($expected, $nonce)) {
+            return 1;
+        }
+
+        // Nonce generated 12-24 hours ago.
+        $expected = substr(wp_hash(( $i - 1 ) . '|' . $action . '|' . $uid . '|' . $token, 'nonce'), -12, 10);
+        if (hash_equals($expected, $nonce)) {
+            return 2;
+        }
+
+        /**
+         * Fires when nonce verification fails.
+         *
+         * @since 4.4.0
+         *
+         * @param string     $nonce  The invalid nonce.
+         * @param string|int $action The nonce action.
+         * @param WP_User    $user   The current user object.
+         * @param string     $token  The user's session token.
+         */
+        do_action('wp_verify_nonce_failed', $nonce, $action, $user, $token);
+
+        // Invalid nonce.
+        return false;
+    }
+endif;
+
+/**
+ * Disable XMLRPC as authentication bypasses 2fa if configured.
+ */
+add_filter('xmlrpc_enabled', '__return_false');
 
 $setupComponents = new Setup();

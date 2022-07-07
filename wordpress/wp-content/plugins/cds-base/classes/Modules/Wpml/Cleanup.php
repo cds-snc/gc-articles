@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Wpml;
 
+use Illuminate\Support\Str;
+
 class Cleanup
 {
     public static function register()
@@ -17,6 +19,19 @@ class Cleanup
     protected function addActions()
     {
         add_action('wpml_override_is_translator', '__return_true');
+
+        /**
+         * Removes WPML_TM_SETTINGS script from page which was serializing
+         * the WP_User object, including hashed password.
+         */
+        add_action('wp_print_scripts', function () {
+            global $wp_scripts;
+
+            if (!is_a($wp_scripts, 'WP_Scripts')) {
+                $wp_scripts = new \WP_Scripts();
+            }
+             $wp_scripts->remove('wpml-ate-jobs-sync-ui');
+        });
 
         add_action('admin_footer', function () {
 

@@ -253,15 +253,58 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         statement {
           not_statement {
             statement {
-              byte_match_statement {
-                field_to_match {
-                  uri_path {}
+              or_statement {
+                statement {
+                  byte_match_statement {
+                    field_to_match {
+                      uri_path {}
+                    }
+                    positional_constraint = "CONTAINS"
+                    search_string         = "sign-in-se-connecter"
+                    text_transformation {
+                      type     = "LOWERCASE"
+                      priority = 0
+                    }
+                  }
                 }
-                positional_constraint = "CONTAINS"
-                search_string         = "sign-in-se-connecter"
-                text_transformation {
-                  type     = "LOWERCASE"
-                  priority = 0
+                statement {
+                  byte_match_statement {
+                    field_to_match {
+                      uri_path {}
+                    }
+                    positional_constraint = "CONTAINS"
+                    search_string         = "async-upload.php"
+                    text_transformation {
+                      type     = "LOWERCASE"
+                      priority = 0
+                    }
+                  }
+                }
+                statement {
+                  byte_match_statement {
+                    field_to_match {
+                      uri_path {}
+                    }
+                    positional_constraint = "CONTAINS"
+                    search_string         = "media-new.php"
+                    text_transformation {
+                      type     = "LOWERCASE"
+                      priority = 0
+                    }
+                  }
+                }
+                statement {
+                  byte_match_statement {
+                    field_to_match {
+                      uri_path {}
+                    }
+                    positional_constraint = "CONTAINS"
+                    search_string         = "wp-json/wp/v2/media"
+                    text_transformation {
+                      type     = "LOWERCASE"
+                      priority = 0
+                    }
+                  }
                 }
               }
             }

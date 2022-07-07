@@ -16,6 +16,22 @@ class Wpml
         add_action('rest_api_init', [$instance, 'addTranslatedIDsToPages']);
         add_action('save_post', [$instance, 'saveTridToPostMeta'], 10, 2);
         add_filter('wpml_save_post_trid_value', [$instance, 'retrieveTridFromPostMeta'], 10, 2);
+        add_filter('wpml_tm_lock_ui', [$instance, 'lockTranslationManager'], 10);
+        add_action('admin_menu', [$instance, 'removeMenuItems'], 2147483647);
+
+        // WPML filter causing nav menu to always be returned in same language
+        add_filter('wpml_disable_term_adjust_id', [$instance, 'disableAutomaticTranslationForNavMenus'], 10, 2);
+
+        add_filter('rest_endpoints', function ($endpoints) {
+
+            foreach ($endpoints as $route => $endpoint) {
+                if (0 === stripos($route, '/wpml/tm/v1')) {
+                    unset($endpoints[ $route ]);
+                }
+            }
+
+            return $endpoints;
+        });
     }
 
     /**
@@ -34,6 +50,20 @@ class Wpml
             $trid = intval($_GET['trid']);
             add_post_meta($post_ID, 'wpml_trid', $trid);
         }
+    }
+
+    public function lockTranslationManager()
+    {
+        return true;
+    }
+
+    public function removeMenuItems()
+    {
+        remove_submenu_page('tm/menu/main.php', 'tm/menu/main.php');
+        remove_submenu_page('tm/menu/main.php', 'sitepress-multilingual-cms/menu/theme-localization.php');
+        remove_submenu_page('tm/menu/main.php', 'tm/menu/translations-queue.php');
+        remove_submenu_page('tm/menu/main.php', 'sitepress-multilingual-cms/menu/menu-sync/menus-sync.php');
+        remove_submenu_page('tm/menu/main.php', 'tm/menu/settings');
     }
 
     /**
@@ -195,5 +225,16 @@ class Wpml
         } catch (\Exception $e) {
             return $e->getMessage();
         }
+    }
+
+    public function disableAutomaticTranslationForNavMenus($icl_adjust_id_url_filter_off, $term)
+    {
+        // If using the API
+        // AND the "taxonomy" is equal to "nav_menu"
+        if (defined('REST_REQUEST') && property_exists($term, 'taxonomy') && $term->taxonomy === 'nav_menu') {
+            return true;
+        }
+
+        // return nothing otherwise
     }
 }

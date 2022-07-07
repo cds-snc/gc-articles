@@ -17,9 +17,6 @@ class Menus
         add_action('admin_menu', [$this, 'addMenusLinkToAdmin'], 11);
         // BlockGC Admins and GC Editors from seeing "themes" or "customize" pages
         add_action('admin_init', [$this, 'blockAppearancePages']);
-
-        // WPML filter causing nav menu to always be returned in same language
-        add_filter('wpml_disable_term_adjust_id', [$this, 'disableAutomaticTranslationForNavMenus'], 10, 2);
     }
 
     public function removeMenuPages(): void
@@ -167,16 +164,5 @@ class Menus
         } catch (Exception $e) {
             // no-op
         }
-    }
-
-    public function disableAutomaticTranslationForNavMenus($icl_adjust_id_url_filter_off, $term)
-    {
-        // If using the API
-        // AND the "taxonomy" is equal to "nav_menu"
-        if (defined('REST_REQUEST') && property_exists($term, 'taxonomy') && $term->taxonomy === 'nav_menu') {
-            return true;
-        }
-
-        // return nothing otherwise
     }
 }

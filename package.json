@@ -1,7 +1,7 @@
 {
   "name": "platform-mvp",
   "type": "module",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "scripts": {
     "update-version": "node ./scripts/prepare-release.js --version_num",
     "tag-release": "node ./scripts/prepare-release.js --tag",
@@ -9,7 +9,7 @@
     "deploy-production": "node ./scripts/prepare-release.js --production",
     "deploy-infrastructure": "node ./scripts/prepare-release.js --deployInfrastructure",
     "cli": "docker exec -it cli /bin/zsh",
-    "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && cd ../gc-lists && npm install --force",
+    "postinstall": "cd wordpress/wp-content/plugins/cds-base && npm install && cd ../gc-lists && npm install --force && cd ../gc-post-meta && npm install",
     "import": "node ./import/import.js",
     "wp-env": "wp-env",
     "wp-env:init": "wp-env start",

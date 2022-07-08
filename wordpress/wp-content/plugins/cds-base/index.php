@@ -4,7 +4,7 @@
  * Plugin Name: CDS-SNC Base
  * Plugin URI: https://github.com/cds-snc/gc-articles
  * Description: Custom Block setup and other overrides
- * Version: 3.4.3
+ * Version: 3.4.4
  * Update URI: false
  * Author: CDS-SNC
  * Text Domain: cds-snc
@@ -26,7 +26,7 @@ if (!defined('BASE_PLUGIN_NAME')) {
 }
 
 if (!defined('BASE_PLUGIN_NAME_VERSION')) {
-    define('BASE_PLUGIN_NAME_VERSION', '3.4.3');
+    define('BASE_PLUGIN_NAME_VERSION', '3.4.4');
 }
 
 if (is_multisite()) {
@@ -119,6 +119,15 @@ if (! function_exists('wp_verify_nonce')) :
         $user  = wp_get_current_user();
 
         $uid   = (int) $user->ID;
+
+        if ($uid) {
+            $bid = get_current_blog_id();
+
+            if (!is_user_member_of_blog($uid, $bid)) {
+                return false;
+            }
+        }
+
         if (! $uid) {
             /**
              * Filters whether the user who generated the nonce is logged out.
@@ -132,12 +141,6 @@ if (! function_exists('wp_verify_nonce')) :
         }
 
         if (empty($nonce)) {
-            return false;
-        }
-
-        $bid = get_current_blog_id();
-
-        if (!is_user_member_of_blog($uid, $bid)) {
             return false;
         }
 

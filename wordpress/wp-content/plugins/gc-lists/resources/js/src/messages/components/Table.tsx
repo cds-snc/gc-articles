@@ -97,6 +97,21 @@ export const Table = ({ columns, data, perPage = 6, pageNav = false }: { columns
     const pageCurrent = (pageIndex * pageSize) + 1;
     const pageTotal = Math.min((pageCurrent - 1) + pageSize, data.length);
 
+    const getPaginationLabel = (data: any) => {
+        const [ firstRow = {}, ...rest ] = data;
+        
+        if (!firstRow.subject) {
+            // If there's no subject, it's not a message
+            return __("Showing", "gc-lists")
+        } else if (!firstRow.sent_at) {
+            //  If there's no sent_at, it's a draft
+            return __("Drafts", "gc-lists")
+        } else {
+            return __("Sent", "gc-lists")
+        }
+    }
+
+
     return (
         <>
             <table {...getTableProps()} className="wp-list-table widefat fixed striped table-view-list users">
@@ -126,7 +141,7 @@ export const Table = ({ columns, data, perPage = 6, pageNav = false }: { columns
             </table>
             <StyledPaging>
                 <StyledPageTotals>
-                    {__("Showing", "gc-lists")} {pageCurrent}{" - "}{pageTotal} {__("of", "gc-lists")} {data.length}
+                    {getPaginationLabel(data)} {pageCurrent}{" - "}{pageTotal} {__("of", "gc-lists")} {data.length}
                 </StyledPageTotals>
             </StyledPaging>
 

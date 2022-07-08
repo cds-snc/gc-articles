@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GCLists;
 
 use GCLists\Api\Messages;
+use GCLists\ListManager\Proxy;
 
 class GCLists
 {
@@ -13,6 +14,7 @@ class GCLists
     protected Messages $messagesApi;
     protected Install $installer;
     protected Menu $menu;
+    protected Proxy $listManagerProxy;
 
     public static function getInstance(): GCLists
     {
@@ -22,9 +24,10 @@ class GCLists
 
     public function setup()
     {
-        $this->installer   = Install::getInstance();
-        $this->messagesApi = Messages::getInstance();
-        $this->menu        = Menu::getInstance();
+        $this->installer        = Install::getInstance();
+        $this->messagesApi      = Messages::getInstance();
+        $this->menu             = Menu::getInstance();
+        $this->listManagerProxy = Proxy::getInstance();
 
         $this->addHooks();
     }
@@ -43,6 +46,7 @@ class GCLists
 
         // Register REST routes
         add_action('rest_api_init', [$this->messagesApi, 'registerRestRoutes']);
+        add_action('rest_api_init', [$this->listManagerProxy, 'registerRestRoutes']);
 
         // Register admin menu
         add_action('admin_menu', [$this->menu, 'addMenu']);

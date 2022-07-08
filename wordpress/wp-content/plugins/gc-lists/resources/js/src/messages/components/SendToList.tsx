@@ -22,7 +22,7 @@ export const SendToList = ({ name, count, sending = true }: { name: string | und
             <StyledStats><strong>{name}</strong> {sprintf("(%s subscribers)", count, "gc-lists")}</StyledStats>
             <div>
                 <p>{sprintf(
-                    __( "Subscriber list created on %s at %s.", "gc-lists"),
+                    __( "Subscriber list created on %1$s at %2$s.", "gc-lists"),
                     "2022/04/20", // TODO: get the actual values
                     "19:56"
                 )}</p>

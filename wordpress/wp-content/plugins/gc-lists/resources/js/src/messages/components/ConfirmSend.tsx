@@ -8,7 +8,6 @@ export const ConfirmSend = async ({ count }: { count: number }) => {
     let result = await Swal.fire({
         title: __("Send to list?", "gc-lists"),
         text: sprintf(
-            /* translators: %s: Number of subscribers */
             __( "This list has %s subscribers. It’s not possible to cancel a message after sending.", "gc-lists" ),
             count
         ),

@@ -119,6 +119,15 @@ if (! function_exists('wp_verify_nonce')) :
         $user  = wp_get_current_user();
 
         $uid   = (int) $user->ID;
+
+        if ($uid) {
+            $bid = get_current_blog_id();
+
+            if (!is_user_member_of_blog($uid, $bid)) {
+                return false;
+            }
+        }
+
         if (! $uid) {
             /**
              * Filters whether the user who generated the nonce is logged out.
@@ -132,12 +141,6 @@ if (! function_exists('wp_verify_nonce')) :
         }
 
         if (empty($nonce)) {
-            return false;
-        }
-
-        $bid = get_current_blog_id();
-
-        if (!is_user_member_of_blog($uid, $bid)) {
             return false;
         }
 

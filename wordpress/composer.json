@@ -77,6 +77,19 @@
     {
       "type": "vcs",
       "url": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "wp-premium/advanced-custom-fields-pro",
+        "type": "wordpress-plugin",
+        "version": "1.0",
+        "source": {
+          "url": "https://github.com/wp-premium/advanced-custom-fields-pro",
+          "type": "git",
+          "reference": "master"
+        }
+      }
     }
   ],
   "require": {
@@ -99,7 +112,8 @@
     "shawnhooper/delete-orphaned-multisite-tables": "1.0",
     "league/html-to-markdown": "^5.1",
     "wpackagist-plugin/publishpress-checklists": "^2.7",
-    "wpackagist-plugin/simple-history": "^3.2"
+    "wpackagist-plugin/simple-history": "^3.2",
+    "wp-premium/advanced-custom-fields-pro": "^1.0"
   },
   "require-dev": {
     "pestphp/pest": "^1.16",

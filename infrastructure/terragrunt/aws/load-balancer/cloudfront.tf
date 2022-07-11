@@ -42,7 +42,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
     forwarded_values {
       query_string = true
-      headers      = ["Host", "Options", "Referer", "Authorization"]
+      headers      = ["Host", "Options", "Referer", "Authorization", "strict-transport-security", "Content-Security-Policy", "X-XSS-Protection", "X-Frame-Options", "X-Content-Type-Options"]
       cookies {
         forward = "whitelist"
         whitelisted_names = [
@@ -60,8 +60,6 @@ resource "aws_cloudfront_distribution" "wordpress" {
     default_ttl            = 86400
     max_ttl                = 31536000
     compress               = true
-
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_frontend.id
   }
 
   #
@@ -86,8 +84,6 @@ resource "aws_cloudfront_distribution" "wordpress" {
     max_ttl                = 0
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
-
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_frontend.id
   }
 
   #
@@ -112,8 +108,6 @@ resource "aws_cloudfront_distribution" "wordpress" {
     max_ttl                = 0
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
-
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_frontend.id
   }
 
   #
@@ -138,8 +132,6 @@ resource "aws_cloudfront_distribution" "wordpress" {
     max_ttl                = 0
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
-
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_admin.id
   }
 
   #
@@ -164,8 +156,6 @@ resource "aws_cloudfront_distribution" "wordpress" {
     max_ttl                = 0
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
-
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_admin.id
   }
 
   #
@@ -204,7 +194,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
     forwarded_values {
       query_string = true
-      headers      = ["Host", "Origin", "User-Agent", "Authorization"]
+      headers      = ["Host", "Origin", "User-Agent", "Authorization", "strict-transport-security", "Content-Security-Policy", "X-XSS-Protection", "X-Frame-Options", "X-Content-Type-Options"]
       cookies {
         forward = "all"
       }
@@ -215,8 +205,6 @@ resource "aws_cloudfront_distribution" "wordpress" {
     max_ttl                = 0
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
-
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_api.id
   }
 
   #
@@ -230,7 +218,7 @@ resource "aws_cloudfront_distribution" "wordpress" {
 
     forwarded_values {
       query_string = true
-      headers      = ["Host", "Origin", "User-Agent", "Authorization"]
+      headers      = ["Host", "Origin", "User-Agent", "Authorization", "strict-transport-security", "Content-Security-Policy", "X-XSS-Protection", "X-Frame-Options", "X-Content-Type-Options"]
       cookies {
         forward = "all"
       }
@@ -241,8 +229,6 @@ resource "aws_cloudfront_distribution" "wordpress" {
     max_ttl                = 0
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
-
-    response_headers_policy_id = aws_cloudfront_response_headers_policy.security_headers_policy_api.id
   }
 
   price_class = "PriceClass_200"

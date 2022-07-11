@@ -569,6 +569,9 @@ test('Error while sending existing message', function() {
 });
 
 test('Send a message directly from input', function() {
+    /* Test fails without this constant defined */
+    define('DEFAULT_NOTIFY_PHONE_TEMPLATE', 'world-2-2');
+
     $list_id = faker()->uuid();
     $user_id = $this->factory->user->create();
     wp_set_current_user( $user_id );

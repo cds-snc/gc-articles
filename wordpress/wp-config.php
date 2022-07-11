@@ -135,6 +135,7 @@ define('BLOG_ID_CURRENT_SITE', 1);
 define('SCRIPT_DEBUG', getenv_docker('SCRIPT_DEBUG', false));
 define('DEFAULT_LIST_MANAGER_API_KEY', getenv_docker('DEFAULT_LIST_MANAGER_API_KEY', ''));
 define('LIST_MANAGER_ENDPOINT', getenv_docker('LIST_MANAGER_ENDPOINT', ''));
+define('DEFAULT_NOTIFY_PHONE_TEMPLATE', '6be1db24-618f-427f-9fe4-b93dc3b3e653');
 
 /* Config for S3 Uploads plugin */
 define('S3_UPLOADS_BUCKET', getenv_docker('S3_UPLOADS_BUCKET', ''));

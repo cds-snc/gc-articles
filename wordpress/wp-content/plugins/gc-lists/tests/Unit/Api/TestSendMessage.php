@@ -8,7 +8,10 @@ beforeAll(function () {
     add_option('NOTIFY_GENERIC_TEMPLATE_ID', 'world-1-1');
 
     putenv('DEFAULT_NOTIFY_API_KEY=the-luigi-key');
-    putenv('DEFAULT_NOTIFY_PHONE_TEMPLATE=world-2-2');
+
+    if (!defined('DEFAULT_NOTIFY_PHONE_TEMPLATE')) {
+        define('DEFAULT_NOTIFY_PHONE_TEMPLATE', 'world-2-2');
+    }
 });
 
 test('Send a message', function() {

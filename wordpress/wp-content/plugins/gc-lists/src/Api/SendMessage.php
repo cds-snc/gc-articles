@@ -50,7 +50,7 @@ class SendMessage
         if ($messageType === 'phone') {
             // if an SMS message, use the generic GC Articles Notify service with our generic phone template
             $notify_api_key = getenv('DEFAULT_NOTIFY_API_KEY');
-            $notify_template_id = getenv('DEFAULT_NOTIFY_PHONE_TEMPLATE');
+            $notify_template_id = DEFAULT_NOTIFY_PHONE_TEMPLATE;
         }
 
         return [$notify_api_key, $notify_template_id];

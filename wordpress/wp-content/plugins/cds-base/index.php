@@ -120,7 +120,7 @@ if (! function_exists('wp_verify_nonce')) :
 
         $uid   = (int) $user->ID;
 
-        if ($uid) {
+        if ($uid && !is_super_admin()) {
             $bid = get_current_blog_id();
 
             if (!is_user_member_of_blog($uid, $bid)) {

@@ -57,7 +57,6 @@ COPY ./wordpress/docker/security.txt ./.well-known/security.txt
 # Copy compiled js and css from the buildjs phase
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/build ./wp-content/plugins/cds-base/build
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/Styles/template/css ./wp-content/plugins/cds-base/classes/Modules/Styles/template/css
-COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/ListManager/app/build ./wp-content/plugins/cds-base/classes/Modules/ListManager/app/build
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/BlocksPHP/build ./wp-content/plugins/cds-base/classes/Modules/BlocksPHP/build
 COPY --from=buildjs /app/wordpress/wp-content/plugins/gc-lists/resources/js/build ./wp-content/plugins/gc-lists/resources/js/build
 COPY --from=buildjs /app/wordpress/wp-content/plugins/gc-post-meta/resources/js/build ./wp-content/plugins/gc-post-meta/resources/js/build

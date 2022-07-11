@@ -30,7 +30,15 @@ test('ListManager Proxy API endpoint is registered', function () {
         ->toHaveKey('/list-manager');
 })->group('proxy');
 
-test('ListManager proxy applies Authorization header to outgoing request', function() {
+test('ListManager proxy applies Authorization header and proxies request', function() {
+    // Prepare a user to make the request
+    $user_id = $this->factory->user->create();
+    wp_set_current_user( $user_id );
+    $user = wp_get_current_user();
+
+    // Make sure the user has permissions
+    $user->add_cap('list_manager_bulk_send');
+
     // intercept/mock the HTTP proxy request
     add_filter( 'pre_http_request', function($preempt, $parsed_args, $url) {
 
@@ -39,7 +47,8 @@ test('ListManager proxy applies Authorization header to outgoing request', funct
             ->toBeArray()
             ->toHaveKey('Authorization', 'abcxyz');
 
-        expect($url)->toContain('https://list-manager.cdssandbox.xyz');
+        // Proxy to list-manager url
+        expect($url)->toContain('https://list-manager.cdssandbox.xyz/lists');
 
         return [
             'headers'     => [],
@@ -54,11 +63,9 @@ test('ListManager proxy applies Authorization header to outgoing request', funct
         ];
     }, 10, 3 );
 
-    $proxy = Proxy::getInstance();
-
     $request = new WP_REST_Request( 'GET', '/list-manager/lists' );
 
-    $proxy->proxyRequest($request);
+    $this->server->dispatch( $request );
 })->group('proxy');
 
 test('ListManager proxy authenticates user permission (failure)', function() {

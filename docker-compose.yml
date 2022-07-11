@@ -65,6 +65,7 @@ services:
       - ./wordpress/docker/php/conf.d/memory_limit.ini:/usr/local/etc/php/conf.d/memory_limit.ini
       - ./wordpress/docker/php/conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./wordpress/docker/php/conf.d/max_execution_time.ini:/usr/local/etc/php/conf.d/max_execution_time.ini
+      - ./wordpress/docker/php/conf.d/expose_php.ini:/usr/local/etc/php/conf.d/expose_php.ini
     networks:
       - app-network
 

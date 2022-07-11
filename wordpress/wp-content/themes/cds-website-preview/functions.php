@@ -4,10 +4,6 @@ add_theme_support('post-thumbnails');
 
 # https://github.com/cds-snc/cds-website-cms/blob/main/api/webhooks/controllers/webhooks.js#L9-L39
 
-PATCH = $(curl - X POST - H "Accept: application/vnd.github+json" - H "Authorization: token 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" - d '{"event_type":"strapi_update","client_payload":{}' https://api.github.com/repos/cds-snc/cds-website-pr-bot/dispatches)
-
-
-
 function onSavePost($post_ID, $post)
 {
     // note this will fire for saves and updates

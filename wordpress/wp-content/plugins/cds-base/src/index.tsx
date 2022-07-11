@@ -10,7 +10,7 @@ import { DBInsightsPanel } from "../classes/Modules/DBInsights/src/DBInsights";
 import { DBActivityPanel } from "../classes/Modules/DBInsights/src/DBActivity";
 
 import { CollectionsPanel } from "../classes/Modules/UserCollections/src/CollectionsPanel";
-import { List } from "../classes/Modules/Notify/src/Types";
+import { List } from "./Types";
 import { UserForm } from "../classes/Modules/Users/src/UserForm";
 import { writeInterstitialMessage } from "util/preview";
 

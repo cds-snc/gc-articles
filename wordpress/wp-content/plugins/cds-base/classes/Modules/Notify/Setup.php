@@ -16,7 +16,6 @@ class Setup
     {
         ListManagerUserProfile::register();
         NotifySettings::register($encryptedOption);
-        ListManagerSettings::register();
 
         if ($this->isNotifyConfigured()) {
             include __DIR__ . '/includes/wp-mail-notify-api.php';

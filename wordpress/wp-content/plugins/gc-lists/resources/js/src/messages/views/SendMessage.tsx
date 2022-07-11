@@ -42,12 +42,14 @@ export const SendMessage = () => {
 
     const [listId, setListId] = useState<string>();
     const [listName, setListName] = useState<string>("");
+    const [listType, setListType] = useState<string>("");
     const [subscriberCount, setSubscriberCount] = useState<number>(0);
 
-    const handleListUpdate = useCallback(({ listId, listName, count }: { listId: string, listName: string, count: number }) => {
+    const handleListUpdate = useCallback(({ listId, listName, count, listType }: { listId: string, listName: string, count: number, listType: string }) => {
         setListId(listId);
         setListName(listName);
-        setSubscriberCount(count)
+        setSubscriberCount(count);
+        setListType(listType);
     }, [])
 
     const { template, templateId, getTemplate, recordSent } = useTemplateApi();
@@ -87,9 +89,16 @@ export const SendMessage = () => {
 
     return (
         <>
-            {templateId !== 'new' && <StyledLink to={`/messages/edit/${templateId}`}>
+            {content && templateId !== 'new' && <StyledLink to={`/messages/edit/${templateId}`}>
                 <Back /> <span>{__("Edit message", "gc-lists")}</span>
             </StyledLink>}
+            {/* TODO: If a new message, edit? */}
+            {!content && <StyledLink to={`/messages`}>
+                <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
+            </StyledLink>}
+
+            <h1>{__("Send message to a list", "gc-lists")}</h1>
+
             <ListSelect onChange={handleListUpdate} />
             {listId ?
                 <>
@@ -101,7 +110,7 @@ export const SendMessage = () => {
                         onClick={async () => {
                             const confirmed = await ConfirmSend({ count: subscriberCount });
                             if (confirmed) {
-                                const result = await recordSent(templateId, listId, listName, name, subject, content);
+                                const result = await recordSent(templateId, listId, listName, listType, name, subject, content);
                                 if (result) {
                                     navigate(`/messages/send/${result?.id}`);
                                     setMessageSent(true);

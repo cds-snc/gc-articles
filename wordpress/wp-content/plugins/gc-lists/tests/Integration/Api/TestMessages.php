@@ -502,8 +502,9 @@ test('Send an existing message', function() {
         'name' => 'Foo sent',
         'subject' => 'Bar sent',
         'body' => 'Baz sent',
+        'message_type' => 'email',
         'sent_to_list_id' => $list_id,
-        'sent_to_list_name' => 'The list',
+        'sent_to_list_name' => 'The list'
     ]);
 
     $response = $this->server->dispatch( $request );
@@ -518,7 +519,8 @@ test('Send an existing message', function() {
         ->toHaveKey('subject', 'Bar sent')
         ->toHaveKey('body', 'Baz sent')
         ->toHaveKey('sent_to_list_name', 'The list')
-        ->toHaveKey('original_message_id', null);
+        ->toHaveKey('original_message_id', null)
+        ->toHaveKey('message_type', 'email');
 });
 
 test('Error while sending existing message', function() {
@@ -551,6 +553,7 @@ test('Error while sending existing message', function() {
         'name' => 'Foo sent',
         'subject' => 'Bar sent',
         'body' => 'Baz sent',
+        'message_type' => 'email',
         'sent_to_list_id' => $list_id,
         'sent_to_list_name' => 'The list',
     ]);
@@ -566,6 +569,9 @@ test('Error while sending existing message', function() {
 });
 
 test('Send a message directly from input', function() {
+    /* Test fails without this constant defined */
+    define('DEFAULT_NOTIFY_PHONE_TEMPLATE', 'world-2-2');
+
     $list_id = faker()->uuid();
     $user_id = $this->factory->user->create();
     wp_set_current_user( $user_id );
@@ -589,7 +595,7 @@ test('Send a message directly from input', function() {
         'name' => 'Foo',
         'subject' => 'Bar',
         'body' => 'Baz',
-        'message_type' => 'email',
+        'message_type' => 'phone',
         'sent_to_list_id' => $list_id,
         'sent_to_list_name' => 'The list',
     ]);
@@ -605,6 +611,7 @@ test('Send a message directly from input', function() {
         ->toHaveKey('name', 'Foo')
         ->toHaveKey('subject', 'Bar')
         ->toHaveKey('body', 'Baz')
+        ->toHaveKey('message_type', 'phone')
         ->toHaveKey('original_message_id', NULL);
 });
 

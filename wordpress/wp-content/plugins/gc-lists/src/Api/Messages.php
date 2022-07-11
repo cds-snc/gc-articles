@@ -185,7 +185,7 @@ class Messages extends BaseEndpoint
                 'message_type'      => [
                     'required'          => true,
                     'type'              => 'string',
-                    'description'       => 'Type of message',
+                    'description'       => 'Type of message to send (email or phone)',
                     'validate_callback' => function ($value, $request, $param) {
                         return in_array($value, ['email', 'phone']);
                     }
@@ -233,6 +233,14 @@ class Messages extends BaseEndpoint
                     'description'       => 'Body of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
                         return sanitize_textarea_field($value);
+                    }
+                ],
+                'message_type'      => [
+                    'required'          => true,
+                    'type'              => 'string',
+                    'description'       => 'Type of message to send (email or phone)',
+                    'validate_callback' => function ($value, $request, $param) {
+                        return in_array($value, ['email', 'phone']);
                     }
                 ],
                 'sent_to_list_id'   => [
@@ -466,7 +474,7 @@ class Messages extends BaseEndpoint
      */
     public function createAndSend(WP_REST_Request $request): WP_REST_Response
     {
-        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'])->data;
+        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'], $request['message_type'])->data;
 
         if (isset($response->status) && $response->status === 'OK') {
             $current_user = wp_get_current_user();
@@ -511,7 +519,7 @@ class Messages extends BaseEndpoint
      */
     public function send(WP_REST_Request $request): WP_REST_Response
     {
-        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'])->data;
+        $response = SendMessage::handle($request['sent_to_list_id'], $request['subject'], $request['body'], $request['message_type'])->data;
 
         if (isset($response->status) && $response->status === 'OK') {
             $current_user = wp_get_current_user();
@@ -520,7 +528,7 @@ class Messages extends BaseEndpoint
             $message->fill([
                 'name'    => $request['name'] ?: $message->name,
                 'subject' => $request['subject'] ?: $message->subject,
-                'body'    => $request['body'] ?: $message->body,
+                'body'    => $request['body'] ?: $message->body
             ]);
 
             $message = $message->send(

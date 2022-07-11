@@ -114,7 +114,7 @@ class ListManagerSettings
     }
 
     /**
-     * Saves list value settinhs
+     * Saves list value settings
      * @param  WP_REST_Request  $request
      *
      * @return WP_REST_Response

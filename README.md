@@ -271,6 +271,29 @@ cd wordpress
 ./vendor/bin/pest
 ```
 
+#### Testing the GG-Lists plugin
+
+The Pest tests for the GC Lists plugin can only be run from inside the running devcontainer. Begin by opening 2 terminal windows: 1 to run the app, and 1 to SSH into the devcontainer.
+
+```
+# Terminal 1: start the app
+docker compose up
+
+# Terminal 2
+
+## SSH into the running container
+docker exec -it cli zsh
+
+## Shortcut to the gc-lists directory
+gclists
+
+## Seed a wordpress integration database
+composer prepare-test-db
+
+## Run tests
+composer test
+```
+
 ### PHP_CodeSniffer
 
 PHP_CodeSniffer (`phpcs`) lints our PHP code to enforce a consistent style across the codebase. To run `phpcs`, first install it globally ([instructions for installing with Homebrew](https://gist.github.com/pbrocks/ab8d8c7ce200ce6f718181cebfc57a1e)). Then, you can lint the codebase with

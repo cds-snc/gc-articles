@@ -156,7 +156,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
                         {templates?.length > 6 &&
                             <StyledPaging>
                                 <StyledLink to={`/messages/all-drafts`}>
-                                    <span>{__("All drafts", "gc-lists")}</span><Next />
+                                    <span>{__("All draft messages", "gc-lists")}</span><Next />
                                 </StyledLink>
                             </StyledPaging>
                         }

@@ -4,9 +4,9 @@
  */
 import { __ } from "@wordpress/i18n";
 
-export const findErrorId = (errors = [], id = '') => errors.find(err => err.location === id)
+export const findErrorId = (errors: any = [], id: string = '') => errors.find(err => err.location === id)
 
-export const FieldError = ({ errors = [], id = '', children }) => {
+export const FieldError = ({ errors = [], id = '', children }: { errors: any, id: string, children: any }) => {
     const error = findErrorId(errors, id)
 
     if (!id || !error) {

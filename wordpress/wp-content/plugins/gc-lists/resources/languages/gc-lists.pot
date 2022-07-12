@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-07-11T14:47:04+00:00\n"
+"POT-Creation-Date: 2022-07-12T15:15:24+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: gc-lists\n"
@@ -39,7 +39,7 @@ msgstr ""
 #: src/Menu.php:40
 #: src/Menu.php:41
 #: src/Menu.php:71
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Messages"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 
 #: resources/js/build/static/js/50.051d6389.chunk.js:1
 #: resources/js/build/static/js/966.6390b747.chunk.js:1
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Name is required"
 msgstr ""
 
@@ -119,298 +119,306 @@ msgstr ""
 msgid "Confirm redirect url"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Delete draft?"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "This will permanently discard the message draft."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "warning"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Yes delete it"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "No, keep it"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Send to list?"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "This list has %s subscribers. It’s not possible to cancel a message after sending."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Yes send it"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "No, cancel"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Create a new list."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "A subscriber list allows you to collect a group of subscribers that you can send a message to."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "There is a problem"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Message Name"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Message type"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Last modified"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Edit"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Delete"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Send to a list"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Create new message"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Draft messages"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "All draft messages"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "You have no draft messages"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Saving a draft allows you to keep a message you aren't ready to send yet."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Subject"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Message sent"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Send a new message"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Return to messages"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Message name"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Date sent"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "List name"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Sender"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Sending history"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "All sending history"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "You have not sent any message yet."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "When you send a message, a copy is automatically saved in your sending history."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "The message was sent to the the subscribers in the list below."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Sending to:"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
+msgid "(%s subscribers)"
+msgstr ""
+
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Subscriber list created on %1$s at %2$s."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Select a list"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Subscriber list"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Choose a group to send this message to."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "You don’t have any subscriber list."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Sent"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Drafts"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Showing"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "of"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "previous"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "next"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Edit email message"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Back to messages "
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Your recipients will not see this message name."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Subject line of the email"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Tell recipients what the message is about. Try to keep it shorter than 10 words."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Subject is required"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Message"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Use the"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "email formatting guide"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "(Opens in a new tab) to craft your message."
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Message is required"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Message saved"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Choose a list to send to"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Save draft"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
+msgid "Can’t send to an empty list"
+msgstr ""
+
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Edit message"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Send message to a list"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Send message"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Message preview"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "SENT"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Sent on"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "EDITED"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Edited on"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "CREATED"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Created on"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "Previous versions"
 msgstr ""
 
-#: resources/js/build/static/js/main.ee9e05e0.js:2
+#: resources/js/build/static/js/main.4f8e1376.js:2
 msgid "by"
 msgstr ""

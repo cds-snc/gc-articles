@@ -27,8 +27,8 @@ class RequestSiteForm
         <div class="gc-form-wrapper">
             <?php
 
-            $required_keys = ['site', 'usage', 'target', 'timeline'];
-            $all_keys = array_merge($required_keys, ['optional-usage-value', 'optional-target-value']);
+            $required_keys = ['site', 'timeline'];
+            $all_keys = array_merge($required_keys, ['optional-usage-value', 'optional-target-value', 'usage', 'target']);
             $all_values = [];
             $empty_values = [];
 

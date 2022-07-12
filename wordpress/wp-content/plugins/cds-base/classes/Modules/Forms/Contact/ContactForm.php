@@ -26,8 +26,8 @@ class ContactForm
         <div class="gc-form-wrapper">
         <?php
 
-            $required_keys = ['goal', 'usage', 'target', 'message'];
-            $all_keys = array_merge($required_keys, ['optional-usage-value', 'optional-target-value']);
+            $required_keys = ['goal', 'message'];
+            $all_keys = array_merge($required_keys, ['optional-usage-value', 'optional-target-value', 'usage', 'target']);
             $all_values = [];
             $empty_values = [];
 

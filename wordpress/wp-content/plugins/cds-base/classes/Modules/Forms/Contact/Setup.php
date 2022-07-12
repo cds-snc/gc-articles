@@ -72,7 +72,7 @@ class Setup
         $message .= 'Department:' . "\n";
         $message .= $department . "\n\n";
 
-        if (isset($_POST['usage'])) {
+        if (isset($_POST['usage']) && is_array($_POST['usage'])) {
             $message .=
                 'What are you thinking about using GC Articles for?' . "\n";
 
@@ -89,7 +89,7 @@ class Setup
                 "\n";
         }
 
-        if (isset($_POST['target'])) {
+        if (isset($_POST['target']) && is_array($_POST['target'])) {
             $message .=
                 "\n\n" .
                 'Who are the target audiences you’re thinking about?' .

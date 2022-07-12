@@ -2,8 +2,8 @@
 
 namespace CDS\Modules\Forms;
 
-use esc_html;
-use sanitize_text_field;
+use function esc_html;
+use function sanitize_text_field;
 
 class Utils
 {

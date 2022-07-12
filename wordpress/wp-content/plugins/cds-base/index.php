@@ -17,6 +17,7 @@ declare(strict_types=1);
 
 use CDS\Modules\Notify\NotifyTemplateSender;
 use CDS\Setup;
+use CDS\Utils;
 use Illuminate\Support\Str;
 
 defined('ABSPATH') || exit();
@@ -58,23 +59,15 @@ function extractServiceIdFromApiKey($apiKey): string
     return substr($apiKey, -73, 36);
 }
 
-function cds_admin_js(): void
+function getNotifyListIds()
 {
-    // automatically load dependencies and version
-    $asset_file = include plugin_dir_path(__FILE__) . 'build/index.asset.php';
-
-    wp_enqueue_script(
-        'cds-snc-admin-js',
-        plugins_url('build/index.js', __FILE__),
-        $asset_file['dependencies'],
-        $asset_file['version'],
-        true,
-    );
-
-    $notifyListIds = [];
+    if (Utils::isWpEnv()) {
+        return [];
+    }
 
     // @TODO: Refactor out to GC Lists and consider caching this data
     try {
+        define('LIST_MANAGER_ENDPOINT', getenv_docker('LIST_MANAGER_ENDPOINT', ''));
         $url = LIST_MANAGER_ENDPOINT . '/lists/' . extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
 
         $args = [
@@ -93,14 +86,31 @@ function cds_admin_js(): void
                 'id' => $item->id,
             ];
         }, $response);
+
+        return $notifyListIds;
     } catch (Exception $e) {
         error_log($e->getMessage());
+        return [];
     }
+}
+
+function cds_admin_js(): void
+{
+    // automatically load dependencies and version
+    $asset_file = include plugin_dir_path(__FILE__) . 'build/index.asset.php';
+
+    wp_enqueue_script(
+        'cds-snc-admin-js',
+        plugins_url('build/index.js', __FILE__),
+        $asset_file['dependencies'],
+        $asset_file['version'],
+        true,
+    );
 
     wp_localize_script('cds-snc-admin-js', 'CDS_VARS', [
         'rest_url' => esc_url_raw(rest_url()),
         'rest_nonce' => wp_create_nonce('wp_rest'),
-        'notify_list_ids' => $notifyListIds,
+        'notify_list_ids' => getNotifyListIds(),
     ]);
 }
 

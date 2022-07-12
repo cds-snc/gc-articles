@@ -8,6 +8,10 @@ beforeAll(function () {
     \WP_Mock::userFunction('sanitize_title', array(
         'return_arg' => 'myId'
     ));
+
+    \WP_Mock::userFunction('sanitize_text_field', array(
+        'return_arg' => 'text'
+    ));
 });
 
 afterAll(function () {

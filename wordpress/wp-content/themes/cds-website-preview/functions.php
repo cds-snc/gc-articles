@@ -51,44 +51,34 @@ function cds_web_register_post_type()
 
 add_action('init', 'cds_web_register_post_type');
 
-//
 
 function onSavePost($post_ID, $post)
 {
     // note this will fire for saves and updates
     if ($post->post_status === "publish") {
-        $hostname = "https://api.github.com";
-        $path = "repos/cds-snc/cds-website-pr-bot/dispatches";
+        $url = "https://api.github.com/repos/cds-snc/cds-website-pr-bot/dispatches";
 
-        //$path = "repos/cds-snc/cds-website-pr-bot/languages";
-
-        $url = $hostname . '/' . $path;
         $token = "";
 
         $args = [
             'headers' => [
                 'Accept' => 'application/vnd.github+json',
                 'Authorization' => 'token ' . $token,
+                'Content-Type' => 'application/json'
             ],
-            'body'        => [
-                'event_type' => 'strapi_update',
-                "client_payload" => json_encode(["test" => "true"])
-            ]
+            'body'        => json_encode(['event_type' => 'strapi_update'])
         ];
 
-        error_log(print_r($args, true));
-        /*
-        $response = wp_remote_post($url);
+        $response = wp_remote_post($url, $args);
 
-        if ( is_wp_error( $response ) ) {
+        if (is_wp_error($response)) {
             $error_message = $response->get_error_message();
-            error_log( "Something went wrong: $error_message");
+            error_log("Something went wrong: $error_message");
         } else {
             error_log('Response:');
             error_log($response['body']);
-            error_log(print_r( $response, true ));
+            // error_log(print_r( $response, true ));
         }
-        */
     }
 }
 

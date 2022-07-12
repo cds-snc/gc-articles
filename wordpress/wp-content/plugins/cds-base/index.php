@@ -67,7 +67,6 @@ function getNotifyListIds()
 
     // @TODO: Refactor out to GC Lists and consider caching this data
     try {
-        define('LIST_MANAGER_ENDPOINT', getenv_docker('LIST_MANAGER_ENDPOINT', ''));
         $url = LIST_MANAGER_ENDPOINT . '/lists/' . extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
 
         $args = [

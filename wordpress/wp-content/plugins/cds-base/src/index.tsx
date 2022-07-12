@@ -10,26 +10,13 @@ import { DBInsightsPanel } from "../classes/Modules/DBInsights/src/DBInsights";
 import { DBActivityPanel } from "../classes/Modules/DBInsights/src/DBActivity";
 
 import { CollectionsPanel } from "../classes/Modules/UserCollections/src/CollectionsPanel";
-import { NotifyPanel } from "../classes/Modules/Notify/src/NotifyPanel";
-import { List } from "../classes/Modules/Notify/src/Types";
+import { List } from "./Types";
 import { UserForm } from "../classes/Modules/Users/src/UserForm";
 import { writeInterstitialMessage } from "util/preview";
-import {
-  ListValuesRepeaterForm,
-  NotifyServicesRepeaterForm
-} from "./repeater/RepeaterForm";
+
 declare global {
   interface Window {
     CDS: {
-      Notify?: {
-        renderPanel: ({
-          sendTemplateLink,
-        }: {
-          sendTemplateLink: boolean;
-        }) => void;
-      };
-      renderListValuesRepeaterForm?: (values) => void,
-      renderNotifyServicesRepeaterForm?: (values) => void,
       renderLoginsPanel?: () => void;
       renderCollectionsPanel?: () => void;
       renderUserForm?: ({ isSuperAdmin }, { isSuperAdmin: boolean }) => void;
@@ -62,20 +49,6 @@ export const renderDBActivityPanel = () => {
   render(<DBActivityPanel />, document.getElementById("db-activity-panel"));
 };
 
-
-export const renderNotifyPanel = ({
-  sendTemplateLink,
-  serviceId
-}: {
-  sendTemplateLink: boolean
-  serviceId: string
-}) => {
-  render(
-    <NotifyPanel sendTemplateLink={sendTemplateLink} serviceId={serviceId} />,
-    document.getElementById("notify-panel")
-  );
-};
-
 export const renderUserForm = ({ isSuperAdmin }) => {
   render(
     <UserForm isSuperAdmin={isSuperAdmin} />,
@@ -83,26 +56,11 @@ export const renderUserForm = ({ isSuperAdmin }) => {
   );
 };
 
-export const renderListValuesRepeaterForm = (values) => {
-  render(<ListValuesRepeaterForm defaultState={values} />,
-    document.getElementById("list-values-repeater-form")
-  );
-}
-
-export const renderNotifyServicesRepeaterForm = (values) => {
-  render(<NotifyServicesRepeaterForm defaultState={values} />,
-    document.getElementById("notify-services-repeater-form")
-  );
-}
-
 window.CDS = window.CDS || {};
-window.CDS.Notify = { renderPanel: renderNotifyPanel };
 window.CDS.renderLoginsPanel = renderLoginsPanel;
 window.CDS.renderCollectionsPanel = renderCollectionsPanel;
 window.CDS.renderUserForm = renderUserForm;
 window.CDS.writeInterstitialMessage = writeInterstitialMessage;
-window.CDS.renderListValuesRepeaterForm = renderListValuesRepeaterForm;
-window.CDS.renderNotifyServicesRepeaterForm = renderNotifyServicesRepeaterForm;
 window.CDS.renderDBInsightsPanel = renderDBInsightsPanel;
 window.CDS.renderDBActivityPanel = renderDBActivityPanel;
 

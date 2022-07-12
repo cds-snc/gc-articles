@@ -6,16 +6,19 @@ use WP_User;
 
 class ListManagerUserProfile
 {
-    public function __construct()
-    {
-    }
-
     public static function register()
     {
         $instance = new self();
 
         add_action('edit_user_profile', [$instance, 'displayListManagerMeta']);
         add_action('edit_user_profile_update', [$instance,'updateListManagerMeta']);
+
+        add_filter(
+            'option_page_capability_list_manager_settings_option_group',
+            function ($capability) {
+                return 'manage_list_manager';
+            },
+        );
     }
 
     public function displayListManagerMeta($user)

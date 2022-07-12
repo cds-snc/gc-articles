@@ -14,9 +14,8 @@ class Setup
      */
     public function __construct(EncryptedOption $encryptedOption)
     {
-        NotifyTemplateSender::register();
+        ListManagerUserProfile::register();
         NotifySettings::register($encryptedOption);
-        ListManagerSettings::register($encryptedOption);
 
         if ($this->isNotifyConfigured()) {
             include __DIR__ . '/includes/wp-mail-notify-api.php';

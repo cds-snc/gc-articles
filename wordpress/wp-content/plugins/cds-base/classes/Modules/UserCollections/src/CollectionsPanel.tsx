@@ -2,12 +2,25 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { Spinner } from '../../Spinner/src/Spinner';
-import { getData } from '../../Notify/src/NotifyPanel';
 
 const CDS_VARS = window.CDS_VARS || {};
 
 const requestHeaders = new Headers();
 requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
+
+const getData = async (endpoint: string) => {
+  const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
+    method: 'GET',
+    headers: requestHeaders,
+    mode: 'cors',
+    cache: 'default',
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  return await response.json();
+};
 
 interface Collection {
   siteurl: string;

@@ -2,88 +2,31 @@
 
 use CDS\Modules\Notify\Utils;
 
-test('mergeListManagerServicesString: Update all existing', function() {
-    $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-    $incoming = 'LIST1~newapikey1,LIST2~newapikey2,LIST3~newapikey3';
-
-    $new = Utils::mergeListManagerServicesString($incoming, $existing);
-
-    $this->assertSame($incoming, $new);
+test('parseServiceIds', function () {
+    $serviceIdEnv = "serviceID1~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b47-ade1-64a9094d00f7,serviceID2~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a8-4b47-ade1-64a9094d00f7,serviceID3~mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b46-ade1-64a9094d00f7";
+    $serviceIds = Utils::deserializeServiceIds($serviceIdEnv);
+    expect($serviceIds)->toEqual(["serviceID1" => [
+        'service_id' => 'e609f6b0-0390-45b0-aaae-f4cc92c713e4',
+        'api_key' => 'mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b47-ade1-64a9094d00f7',
+        'name' => 'serviceID1'
+    ], "serviceID2" => [
+        'service_id' => 'e609f6b0-0390-45b0-aaae-f4cc92c713e4',
+        'api_key' => 'mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a8-4b47-ade1-64a9094d00f7',
+        'name' => 'serviceID2'
+    ], "serviceID3" => [
+        'service_id' => 'e609f6b0-0390-45b0-aaae-f4cc92c713e4',
+        'api_key' => 'mvp-e609f6b0-0390-45b0-aaae-f4cc92c713e4-1deede83-37a9-4b46-ade1-64a9094d00f7',
+        'name' => 'serviceID3'
+    ]]);
 });
 
-test('mergeListManagerServicesString: Update one existing', function() {
-    $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-    $incoming = 'LIST1~,LIST2~newapikey2modified,LIST3~';
-
-    $expected = 'LIST1~oldapikey1,LIST2~newapikey2modified,LIST3~oldapikey3';
-
-    $new = Utils::mergeListManagerServicesString($incoming, $existing);
-
-    $this->assertSame($new, $expected);
+test('parseServiceIdsBadInput', function () {
+    $serviceIdEnv = "serviceID1";
+    $result = Utils::deserializeServiceIds($serviceIdEnv);
+    expect($result)->toEqual(["serviceID1" => NULL]);
 });
 
-test('mergeListManagerServicesString: Remove one', function() {
-    $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-    $incoming = 'LIST1~,LIST3~';
-
-    $expected = 'LIST1~oldapikey1,LIST3~oldapikey3';
-
-    $new = Utils::mergeListManagerServicesString($incoming, $existing);
-
-    $this->assertSame($new, $expected);
-});
-
-test('mergeListManagerServicesString: Remove one and update another', function() {
-    $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-    $incoming = 'LIST1~,LIST3~newapikey3';
-
-    $expected = 'LIST1~oldapikey1,LIST3~newapikey3';
-
-    $new = Utils::mergeListManagerServicesString($incoming, $existing);
-
-    $this->assertSame($new, $expected);
-});
-
-test('mergeListManagerServicesString: Create (no existing)', function() {
-    $existing = false;
-    $incoming = 'LIST1~oldapikey1,LIST3~oldapikey3';
-
-    $expected = 'LIST1~oldapikey1,LIST3~oldapikey3';
-
-    $new = Utils::mergeListManagerServicesString($incoming, $existing);
-
-    $this->assertSame($new, $expected);
-});
-
-test('mergeListManagerServicesString: Update add new lists', function() {
-    $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-    $incoming = 'LIST1~,LIST2~,LIST3~,LIST4~apikey4,LIST5~apikey5';
-
-    $expected = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3,LIST4~apikey4,LIST5~apikey5';
-
-    $new = Utils::mergeListManagerServicesString($incoming, $existing);
-
-    $this->assertSame($new, $expected);
-});
-
-test('mergeListManagerServicesString: Update with new entries and modify existing', function() {
-    $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-    $incoming = 'LIST1~newapikey1,LIST2~,LIST3~,LIST4~apikey4,LIST5~apikey5';
-
-    $expected = 'LIST1~newapikey1,LIST2~oldapikey2,LIST3~oldapikey3,LIST4~apikey4,LIST5~apikey5';
-
-    $new = Utils::mergeListManagerServicesString($incoming, $existing);
-
-    $this->assertSame($new, $expected);
-});
-
-test('mergeListManagerServicesString: Pass empty new string', function() {
-    $existing = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-    $incoming = '';
-
-    $expected = 'LIST1~oldapikey1,LIST2~oldapikey2,LIST3~oldapikey3';
-
-    $new = Utils::mergeListManagerServicesString($incoming, $existing);
-
-    $this->assertSame($new, $expected);
+test('parseServiceIdsNoInput', function () {
+    $result = Utils::deserializeServiceIds(null);
+    expect($result)->toEqual([]);
 });

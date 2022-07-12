@@ -147,7 +147,6 @@ class Setup
      */
     public function setupNotifyTemplateSender()
     {
-        new SendTemplateDashboardPanel();
         new SetupNotify($this->encryptedOption);
     }
 

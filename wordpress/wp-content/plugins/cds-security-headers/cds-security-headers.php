@@ -44,6 +44,7 @@ function cds_security_headers($headers)
             "https://wet-boew.github.io",
             "https://www.canada.ca",
             "https://secure.gravatar.com",
+            "2.gravatar.com"
         ],
         "manifest-src" => [
             "'self'",
@@ -61,6 +62,7 @@ function cds_security_headers($headers)
             "'sha256-8//zSBdstORCAlBMo1/Cig3gKc7QlPCh9QfWbRu0OjU='",
             "'sha256-5/P+Wb5Puz2VZQuyT0B/H3kuum7v7A2XDV17K95mm2Q='",
             "'sha256-Ll9Pj6gzPpETya7YXsYglTFBzjPg0sc23VG6sms7FKE='",
+            "'sha256-9vpql/NLyCCe3HPEb2b/lcLKPbkRi48w2Lfn0AbTxsQ='",
             "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js",
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/wet-boew.min.js",
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/theme.min.js",
@@ -88,10 +90,12 @@ function cds_security_headers($headers)
     }
 
     $headers['Content-Security-Policy'] = $csp;
+    $headers['strict-transport-security'] = 'max-age=31536000; includeSubDomains; preload';
+    $headers['X-XSS-Protection'] = '1; mode=block';
+    $headers['X-Frame-Options'] = 'SAMEORIGIN';
+    $headers['X-Content-Type-Options'] = 'nosniff';
 
     return $headers;
 }
 
-if (! is_admin()) {
-    add_filter('wp_headers', 'cds_security_headers');
-}
+add_filter('wp_headers', 'cds_security_headers');

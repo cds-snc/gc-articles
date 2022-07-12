@@ -2,6 +2,9 @@
 
 namespace CDS\Modules\Forms;
 
+use esc_html;
+use sanitize_text_field;
+
 class Utils
 {
     public function __construct()

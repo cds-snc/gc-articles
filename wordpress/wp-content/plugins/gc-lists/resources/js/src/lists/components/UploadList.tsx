@@ -44,6 +44,7 @@ export const UploadList = () => {
         <>
             <h3>{capitalize(type)} upload</h3>
             <Importer
+                delimiter={" "}
                 chunkSize={10000} // optional, internal parsing chunk size in bytes
                 assumeNoHeaders={false} // optional, keeps "data has headers" checkbox off by default
                 restartable={false} // optional, lets user choose to upload another file when import is complete
@@ -54,7 +55,8 @@ export const UploadList = () => {
                 processChunk={async (rows) => {
                     return new Promise(async (resolve) => {
                         const data = rows.map((item) => {
-                            return item[uploadType];
+                            // @ts-ignore
+                            return item[uploadType].replace(/(^,)|(,$)/g, '');
                         });
 
                         const payload = { [uploadType]: data };

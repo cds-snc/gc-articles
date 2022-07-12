@@ -89,7 +89,9 @@ function cds_security_headers($headers)
         }
     }
 
-    $headers['Content-Security-Policy'] = $csp;
+    if (!is_admin()) {
+        $headers['Content-Security-Policy'] = $csp;
+    }
     $headers['strict-transport-security'] = 'max-age=31536000; includeSubDomains; preload';
     $headers['X-XSS-Protection'] = '1; mode=block';
     $headers['X-Frame-Options'] = 'SAMEORIGIN';

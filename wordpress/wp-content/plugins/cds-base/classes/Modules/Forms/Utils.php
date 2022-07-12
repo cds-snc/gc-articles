@@ -42,7 +42,7 @@ class Utils
                 }?>
                 id="<?php echo $id ?>"
                 name="<?php echo $id ?>"
-                value="<?php echo $value ?>"
+                value="<?php echo esc_html(sanitize_text_field($value)); ?>"
                 <?php if ($placeholder) {
                     echo 'placeholder="' . $placeholder . '"';
                 } ?>

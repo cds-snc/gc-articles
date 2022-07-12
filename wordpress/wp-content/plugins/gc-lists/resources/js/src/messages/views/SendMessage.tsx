@@ -20,6 +20,7 @@ import {
     StyledLink,
     Next,
     Back,
+    FieldError
 } from "../components";
 
 import { ListSelect } from "../components";
@@ -87,6 +88,8 @@ export const SendMessage = () => {
         return <MessageSent id={templateId} listName={listName} count={subscriberCount} />
     }
 
+    const errors = subscriberCount ? [] : [{location: 'send', message: __("Can’t send to an empty list", "gc-lists") }]
+
     return (
         <>
             {content && templateId !== 'new' && <StyledLink to={`/messages/edit/${templateId}`}>
@@ -103,30 +106,33 @@ export const SendMessage = () => {
             {listId ?
                 <>
                     <SendToList sending={true} name={listName} count={subscriberCount} />
-                    <button
-                        style={{ marginRight: "20px" }}
-                        className="button button-green"
-                        disabled={!content}
-                        onClick={async () => {
-                            const confirmed = await ConfirmSend({ count: subscriberCount });
-                            if (confirmed) {
-                                const result = await recordSent(templateId, listId, listName, listType, name, subject, content);
-                                if (result) {
-                                    navigate(`/messages/send/${result?.id}`);
-                                    setMessageSent(true);
-                                } else {
-                                    // @TODO: get errors from api call
-                                    setMessageSendingErrors("There was an error");
+                    <FieldError errors={errors} id={'send'}>
+                        <button
+                            style={{ marginRight: "20px" }}
+                            className="button button-green"
+                            disabled={!content || !subscriberCount}
+                            aria-describedby={errors.length ? 'validation-error--send' : ''}
+                            onClick={async () => {
+                                const confirmed = await ConfirmSend({ count: subscriberCount });
+                                if (confirmed) {
+                                    const result = await recordSent(templateId, listId, listName, listType, name, subject, content);
+                                    if (result) {
+                                        navigate(`/messages/send/${result?.id}`);
+                                        setMessageSent(true);
+                                    } else {
+                                        // @TODO: get errors from api call
+                                        setMessageSendingErrors("There was an error");
+                                    }
                                 }
-                            }
-                        }}>
-                        {__("Send message", "gc-lists")}
+                            }}>
+                            {__("Send message", "gc-lists")}
 
-                        <StyledNext><Next color={"#fff"} /></StyledNext>
-                    </button>
-                    <button className="button" onClick={() => {
-                        navigate(`/messages`);
-                    }}>{__("Cancel")}</button>
+                            <StyledNext><Next color={"#fff"} /></StyledNext>
+                        </button>
+                        <button className="button" onClick={() => {
+                            navigate(`/messages`);
+                        }}>{__("Cancel")}</button>
+                    </FieldError>
                 </>
                 : null
             }

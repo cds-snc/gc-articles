@@ -5,7 +5,7 @@ function onSavePost($post_ID, $post)
     if ($post->post_status === "publish") {
         try {
             $url = "https://api.github.com/repos/cds-snc/cds-website-pr-bot/dispatches";
-            $token = "";
+            $token = get_option('GITHUB_AUTH_TOKEN');
 
             if (empty($token)) {
                 return;
@@ -35,4 +35,4 @@ function onSavePost($post_ID, $post)
     }
 }
 
-// add_action('save_post', 'onSavePost', 10, 2);
+add_action('save_post', 'onSavePost', 10, 2);

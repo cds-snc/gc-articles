@@ -18,7 +18,6 @@ class EncryptedOption
      * @param $key
      * @param  string  $cipher
      *
-     * @throws \Exception
      */
     public function __construct($key, string $cipher = 'aes-256-cbc')
     {

@@ -92,7 +92,7 @@ export const SendMessage = () => {
 
     return (
         <>
-            {content && templateId !== 'new' && <StyledLink to={`/messages/edit/${templateId}`}>
+            {content && templateId !== 'new' && template.message_type && <StyledLink to={`/messages/edit/${template.message_type}/${templateId}`}>
                 <Back /> <span>{__("Edit message", "gc-lists")}</span>
             </StyledLink>}
             {/* TODO: If a new message, edit? */}

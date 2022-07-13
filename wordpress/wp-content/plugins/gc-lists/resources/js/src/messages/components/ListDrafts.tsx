@@ -98,10 +98,11 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
                 accessor: 'templateId',
                 Cell: ({ row }: { row: any }) => {
                     const tId = row?.original?.templateId;
+                    const message_type = row?.original?.message_type;
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/edit/${tId}`}
+                                to={`/messages/edit/${message_type}/${tId}`}
                             >
                                 {__("Edit", "gc-lists")}
                             </StyledTableLink>
@@ -142,7 +143,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
 
             <Link
                 className="button button-primary"
-                to={`/messages/edit/email/new`}
+                to={`/messages/choose`}
             >
                 {__("Create new message", "gc-lists")}
             </Link>

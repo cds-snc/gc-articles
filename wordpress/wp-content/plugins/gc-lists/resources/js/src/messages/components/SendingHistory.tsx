@@ -49,10 +49,11 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
                 Cell: ({ row }: { row: any }) => {
                     const messageId = row?.original?.id;
                     const name = row?.original?.name;
+                    const message_type = row?.original?.message_type;
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/edit/${messageId}`}
+                                to={`/messages/edit/${message_type}/${messageId}`}
                             >
                                 {name}
                             </StyledTableLink>

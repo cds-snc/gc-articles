@@ -10,7 +10,7 @@ import useFetch, { CachePolicies } from 'use-http';
  * Internal dependencies
  */
 import { serialize, deserialize } from "../messages/editor/utils";
-import { TemplateType } from "../types";
+import { TemplateType, ListType } from "../types";
 
 export function useTemplateApi() {
     const params = useParams();
@@ -19,7 +19,7 @@ export function useTemplateApi() {
     const { request, response } = useFetch({ data: [], cachePolicy: CachePolicies.NO_CACHE });
     const [templates, setTemplates] = useState([]);
     // @ts-ignore
-    const [template, setTemplate] = useState<TemplateType>({ name: "", subject: "", body: "", parsedContent: deserialize("") });
+    const [template, setTemplate] = useState<TemplateType>({ name: "", subject: "", body: "", message_type: ListType.EMAIL, parsedContent: deserialize("") });
     const [loading, setLoading] = useState(false);
     const [loadingTemplate, setLoadingTemplate] = useState(false);
 
@@ -33,7 +33,7 @@ export function useTemplateApi() {
             const template: TemplateType | null = response.data;
 
             if (!template || !template.body) {
-                setTemplate({ name: "", subject: "", body: "" })
+                setTemplate({ name: "", subject: "", body: "", message_type: ListType.EMAIL  })
             }
 
             let parsedContent;
@@ -44,11 +44,10 @@ export function useTemplateApi() {
                 setTemplate({ ...template, parsedContent })
             } catch (e) {
                 //console.log(e);
-                return { name: "", subject: "", body: "" }
+                return { name: "", subject: "", body: "", message_type: ListType.EMAIL }
             }
 
             setLoadingTemplate(false);
-
         }
     }, [request, response])
 

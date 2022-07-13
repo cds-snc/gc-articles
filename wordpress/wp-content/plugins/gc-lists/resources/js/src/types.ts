@@ -108,6 +108,7 @@ export type TemplateType = {
     name: string;
     subject: string;
     body: string;
+    message_type: ListType;
     parsedContent?: Descendant[] | undefined | '';
     updated_at?: string;
 };

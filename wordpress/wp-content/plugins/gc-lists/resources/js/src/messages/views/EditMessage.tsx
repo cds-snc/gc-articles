@@ -29,7 +29,7 @@ export const StyledPreviousVersions = styled.span`
 `;
 
 export const StyledCell = styled.td`
-    padding-left: 0;
+    padding-left: 0 !important;
 
     label {
         display: block;
@@ -78,7 +78,7 @@ export const EditMessage = () => {
             setSaved(true);
         }
 
-    }, [saveTemplate, currentTemplate, templateId, navigate, template]);
+    }, [saveTemplate, currentTemplate, templateId, navigate, template, messageType]);
 
     const heading = messageType === 'phone' ? __("Edit text message", "gc-lists") : __("Edit email message", "gc-lists");
 

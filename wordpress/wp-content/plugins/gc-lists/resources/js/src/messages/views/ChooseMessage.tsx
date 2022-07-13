@@ -1,0 +1,71 @@
+/**
+ * External dependencies
+ */
+ import { __ } from '@wordpress/i18n';
+ import { useForm } from "react-hook-form";
+ import { useNavigate } from 'react-router-dom';
+
+ /**
+  * Internal dependencies
+  */
+ import { FieldError, StyledLink, Back } from '../components';
+ 
+ export const ChooseMessage = () => {
+    const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors: formErrors } } = useForm();
+    const fieldId = 'message_type';
+
+    const onSubmit = (data: any) => {
+        const { message_type } = data
+        navigate(`/messages/edit/${message_type}/new`);
+    }
+
+    let errors = formErrors[fieldId] ? [{location: fieldId, message: __("Please select a message type", "gc-lists") }] : [];
+
+     return (
+         <>
+             <StyledLink to={`/messages`}>
+                 <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
+             </StyledLink>
+             <h1>{__("Create a new message", "gc-lists")}</h1>
+             
+             <form onSubmit={handleSubmit(onSubmit)}>
+                <table className="form-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label htmlFor="message_type">Choose message type</label>
+                            </th>
+                            <td>
+                                <FieldError errors={errors} id={fieldId}>
+                                    <div style={{ marginBottom: "5px" }}>
+                                        <input {...register(fieldId, { required: true })} type="radio" id="message_type_email" value="email" />
+                                        <label htmlFor="message_type_email">Email</label>
+                                    </div>
+                                    <div>
+                                        <input {...register(fieldId, { required: true })} type="radio" id="message_type_phone" value="phone" />
+                                        <label htmlFor="message_type_phone">Phone</label>
+                                    </div>
+                                </FieldError>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style={{ marginTop: "10px" }}>
+                    <button style={{ marginRight: "20px" }} type="submit" className="button button-primary">
+                        {__('Create message', 'gc-lists')}
+                    </button>
+                    <button className="button" type="button" onClick={async () => { navigate(`/messages/`); }}>
+                            {__('Cancel', 'gc-lists')}
+                    </button>
+                </div>
+
+                <input  />
+             </form>
+         </>
+     )
+ }
+ 
+ export default ChooseMessage;
+ 

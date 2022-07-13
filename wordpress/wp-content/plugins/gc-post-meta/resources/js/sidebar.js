@@ -1,23 +1,25 @@
-import TextControl from "./components/TextControl"
+
 
 // https://rudrastyh.com/gutenberg/plugin-sidebars.html
 const { registerPlugin } = wp.plugins;
 const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
 const { Fragment } = wp.element;
 const { __ } = wp.i18n;
-const { PanelBody } = wp.components;
+
+import { PostFields } from "./components/PostFields";
+import { JobFields } from "./components/JobFields";
 
 registerPlugin('gc-post-meta', {
 	render: () => {
+		const type = wp.data.select("core/editor").getCurrentPostType();
 		return (
 			<Fragment>
 				<PluginSidebarMoreMenuItem target="gc-post-meta" icon="insert">
 					{__("GC Post Meta", "gc-post-meta")}
 				</PluginSidebarMoreMenuItem>
 				<PluginSidebar name="gc-post-meta" title={__("Custom Fields", "gc-post-meta")} icon="insert">
-					<PanelBody title={__("Author information", "gc-post-meta")} initialOpen={true}>
-						<TextControl label={__("Name", "gc-post-meta")} metaKey="gc_author_name" />
-					</PanelBody>
+					{type === "post" && <PostFields />}
+					{type === "job" && <JobFields />}
 				</PluginSidebar>
 			</Fragment>
 		)

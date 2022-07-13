@@ -22,6 +22,7 @@ function cds_web_register_post_type()
             'singular_name'      => esc_html__('Job', 'cds-web'),
         ],
         'public'              => true,
+        'menu_icon' => 'dashicons-megaphone',
         'exclude_from_search' => false,
         'publicly_queryable'  => true,
         'show_ui'             => true,

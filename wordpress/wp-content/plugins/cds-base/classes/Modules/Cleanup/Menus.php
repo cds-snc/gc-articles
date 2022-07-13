@@ -41,6 +41,8 @@ class Menus
             "GC Lists",
             "Lists",
             "Checklists",
+            "Jobs",
+            "Projects",
 
             // French menu items
             "Tableau de bord",

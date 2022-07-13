@@ -36,7 +36,7 @@ function cds_web_register_post_type()
         'query_var'           => true,
         'can_export'          => true,
         'rewrite_no_front'    => false,
-        'show_in_menu'        => false,
+        'show_in_menu'        => true,
         'supports' => [
             'title',
             'editor',

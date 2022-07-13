@@ -11,7 +11,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
  * does not use the singleton pattern we use elsewhere. If we refactor that class, we could remove some of this
  * duplicate code and retrieve the initialized EncryptedOption from there.
  */
-function getEncryptionKey()
+function cds_web_get_encrypted_key()
 {
     /**
      * If we're in a wp-env dev, test, or cli environment, return a hard-coded key. This works because the
@@ -24,7 +24,7 @@ function getEncryptionKey()
     return getenv('ENCRYPTION_KEY');
 }
 
-$encryptedOption = new EncryptedOption(getEncryptionKey());
+$encryptedOption = new EncryptedOption(cds_web_get_encrypted_key());
 
 $encryptedOptions = [
     'GITHUB_AUTH_TOKEN',
@@ -74,7 +74,7 @@ function cds_web_settings_section_callback($args)
 {
 }
 
-function getObfuscatedOutputLabel($string, $labelId, $print = true)
+function cds_get_obfuscated_output_label($string, $labelId, $print = true)
 {
     $startsWith = substr($string, 0, 4);
     $endsWith = substr($string, -4);
@@ -98,7 +98,7 @@ function cds_web_auth_token_callback($args)
 {
     $github_auth_token = get_option('GITHUB_AUTH_TOKEN');
 
-    getObfuscatedOutputLabel($github_auth_token, 'github_auth_token_value');
+    cds_get_obfuscated_output_label($github_auth_token, 'github_auth_token_value');
 
     printf(
         '<input class="regular-text" type="text" name="GITHUB_AUTH_TOKEN" id="github_auth_token" aria-describedby="github_auth_token_value" value="">'

@@ -15,6 +15,7 @@ import { TemplateType } from "../types";
 export function useTemplateApi() {
     const params = useParams();
     const templateId = params?.templateId;
+    const messageType = params?.messageType;
     const { request, response } = useFetch({ data: [], cachePolicy: CachePolicies.NO_CACHE });
     const [templates, setTemplates] = useState([]);
     // @ts-ignore
@@ -70,26 +71,23 @@ export function useTemplateApi() {
         }
     };
 
-    const saveTemplate = useCallback(async ({ templateId, name, subject, content }: { templateId: string | undefined, name: string, subject: string, content: Descendant[] | undefined }) => {
+    const saveTemplate = useCallback(async ({ templateId, name, subject, content, message_type = 'email' }: { templateId: string | undefined, name: string, subject: string | undefined, content: Descendant[] | undefined, message_type: string | undefined }) => {
         if (!content) return;
 
+        const message = { 
+          name,
+          message_type, 
+          body: serialize(content),
+          ...(!!subject && {subject})
+        };
+
         if (templateId === 'new') {
-            await request.post('/messages', {
-                'name': name,
-                'subject': subject,
-                'body': serialize(content),
-                'message_type': 'email'
-            });
+            await request.post('/messages', message);
 
             return response.data;
         }
 
-        await request.put(`/messages/${templateId}`, {
-            'name': name,
-            'subject': subject,
-            'body': serialize(content),
-            'message_type': 'email'
-        });
+        await request.put(`/messages/${templateId}`, message);
 
         if (response.ok) {
             return response.data;
@@ -134,7 +132,7 @@ export function useTemplateApi() {
         return false;
     }, [request, response])
 
-    return { template, loadingTemplate, templates, loading, templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
+    return { template, loadingTemplate, templates, loading, templateId, messageType, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
 }
 
 export default useTemplateApi;

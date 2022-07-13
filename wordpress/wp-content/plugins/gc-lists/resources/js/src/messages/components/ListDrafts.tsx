@@ -142,7 +142,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
 
             <Link
                 className="button button-primary"
-                to={`/messages/edit/new`}
+                to={`/messages/edit/email/new`}
             >
                 {__("Create new message", "gc-lists")}
             </Link>

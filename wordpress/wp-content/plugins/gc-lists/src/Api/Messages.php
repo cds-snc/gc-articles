@@ -82,7 +82,7 @@ class Messages extends BaseEndpoint
                     }
                 ],
                 'subject'      => [
-                    'required'          => true,
+                    'required'          => false,
                     'type'              => 'string',
                     'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
@@ -124,7 +124,7 @@ class Messages extends BaseEndpoint
                     }
                 ],
                 'subject' => [
-                    'required'          => true,
+                    'required'          => false,
                     'type'              => 'string',
                     'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
@@ -167,7 +167,7 @@ class Messages extends BaseEndpoint
                     }
                 ],
                 'subject'           => [
-                    'required'          => true,
+                    'required'          => false,
                     'type'              => 'string',
                     'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {

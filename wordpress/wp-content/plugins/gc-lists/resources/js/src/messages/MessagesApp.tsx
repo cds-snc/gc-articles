@@ -17,7 +17,7 @@ const MessagesApp = () => {
                     <Home />
                 </React.Suspense>
             } />
-            <Route path="edit/:templateId" element={
+            <Route path="edit/:messageType/:templateId" element={
                 <React.Suspense fallback={<Spinner />}>
                     <EditMessage />
                 </React.Suspense>

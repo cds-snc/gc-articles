@@ -58,6 +58,16 @@ function get_asset_url()
             'show_in_rest'   => true,
         )
     );
+
+    register_meta(
+        'post',
+        'gc_job_archived', // meta key
+        array(
+            'type'           => 'boolean',
+            'single'         => true,
+            'show_in_rest'   => true,
+        )
+    );
  });
 
  add_action('enqueue_block_editor_assets', function () {

@@ -53,7 +53,7 @@ function cds_web_settings_init()
 
     add_settings_section(
         'cds_web_settings_setting_section', // id
-        __('Github ingegration', 'cds-snc'), // title
+        __('Github integration', 'cds-snc'), // title
         'cds_web_settings_section_callback', // callback
         'cds-web-settings-admin' // page
     );

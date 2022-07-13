@@ -15,6 +15,7 @@ class GCLists
     protected Install $installer;
     protected Menu $menu;
     protected Proxy $listManagerProxy;
+    protected Permissions $permissions;
 
     public static function getInstance(): GCLists
     {
@@ -28,6 +29,7 @@ class GCLists
         $this->messagesApi      = Messages::getInstance();
         $this->menu             = Menu::getInstance();
         $this->listManagerProxy = Proxy::getInstance();
+        $this->permissions      = Permissions::getInstance();
 
         $this->addHooks();
     }
@@ -52,6 +54,23 @@ class GCLists
         add_action('admin_menu', [$this->menu, 'addMenu']);
         add_action('admin_menu', [$this->menu, 'addMessagesSubmenuItem']);
         add_action('admin_menu', [$this->menu, 'addSubscriberListsSubmenuItem']);
+
+        // Register User profile permissions
+        add_action('edit_user_profile', [$this->permissions, 'displayListManagerMeta']);
+        add_action('edit_user_profile_update', [$this->permissions,'updateListManagerMeta']);
+
+        add_filter(
+            'option_page_capability_list_manager_settings_option_group',
+            function ($capability) {
+                return 'manage_list_manager';
+            },
+        );
+
+        if (!get_option('gc-lists_roles_cleanup')) {
+            add_action('init', [$this->permissions, 'cleanupCustomCapsForRoles'], 11);
+        }
+
+        add_action('set_user_role', [$this->permissions, 'addDefaultUserCapsForRole'], 10, 3);
     }
 
     public function enqueue($hook_suffix)

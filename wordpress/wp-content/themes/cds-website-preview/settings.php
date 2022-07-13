@@ -60,7 +60,7 @@ function cds_web_settings_init()
 
     add_settings_field(
         'github_auth_token', // id
-        __('Github Auth Token', 'cds-snc'), // title
+        __('Auth Token', 'cds-snc'), // title
         'cds_web_auth_token_callback', // callback
         'cds-web-settings-admin', // page
         'cds_web_settings_setting_section', // section

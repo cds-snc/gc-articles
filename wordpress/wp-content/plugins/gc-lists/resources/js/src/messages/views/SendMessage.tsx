@@ -102,7 +102,7 @@ export const SendMessage = () => {
 
             <h1>{__("Send message to a list", "gc-lists")}</h1>
 
-            <ListSelect onChange={handleListUpdate} />
+            <ListSelect onChange={handleListUpdate} messageType={template.name ? template.message_type : undefined} />
             {listId ?
                 <>
                     <SendToList sending={true} name={listName} count={subscriberCount} />

@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 /**
  * Setup EncryptedOption.
  * There is some duplicated code here from cds-base/classes/Setup.php because that class
- * does not use the singleton patter we use elsewhere. If we refactor that class, we could remove some of this
+ * does not use the singleton pattern we use elsewhere. If we refactor that class, we could remove some of this
  * duplicate code and retrieve the initialized EncryptedOption from there.
  */
 function getEncryptionKey()

@@ -30,7 +30,7 @@ $encryptedOptions = [
     'GITHUB_AUTH_TOKEN',
 ];
 
-if (!\CDS\Utils::isWpEnv()) {
+if (! Utils::isWpEnv()) {
     foreach ($encryptedOptions as $option) {
         add_filter("pre_update_option_{$option}", [$encryptedOption, 'encryptString']);
         add_filter("option_{$option}", [$encryptedOption, 'decryptString']);

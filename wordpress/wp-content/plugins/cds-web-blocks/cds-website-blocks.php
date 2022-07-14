@@ -30,7 +30,7 @@ class Blocks
 
     public function registerBlocks()
     {
-        register_block_type(__DIR__ . '/blocks/build/products/');
+        register_block_type(__DIR__ . '/blocks/build/team/');
     }
 }
 
@@ -49,11 +49,11 @@ function get_cds_web_asset_url()
 }
 
 // register custom meta tag field
-function myguten_register_post_meta()
+function cds_web_register_post_meta()
 {
     register_meta(
         'post',
-        'cds_web_product_name', // meta key
+        'cds_web_team_member_name', // meta key
         array(
             'type'           => 'string',
             'single'         => true,
@@ -63,7 +63,57 @@ function myguten_register_post_meta()
 
     register_meta(
         'post',
-        'cds_web_product_title', // meta key
+        'cds_web_team_member_title_en', // meta key
+        array(
+            'type'           => 'string',
+            'single'         => true,
+            'show_in_rest'   => true,
+        )
+    );
+
+    register_meta(
+        'post',
+        'cds_web_team_member_title_fr', // meta key
+        array(
+            'type'           => 'string',
+            'single'         => true,
+            'show_in_rest'   => true,
+        )
+    );
+
+    register_meta(
+        'post',
+        'cds_web_team_member_email', // meta key
+        array(
+            'type'           => 'string',
+            'single'         => true,
+            'show_in_rest'   => true,
+        )
+    );
+
+    register_meta(
+        'post',
+        'cds_web_team_member_twitter', // meta key
+        array(
+            'type'           => 'string',
+            'single'         => true,
+            'show_in_rest'   => true,
+        )
+    );
+
+    register_meta(
+        'post',
+        'cds_web_team_member_github', // meta key
+        array(
+            'type'           => 'string',
+            'single'         => true,
+            'show_in_rest'   => true,
+        )
+    );
+
+    register_meta(
+        'post',
+        'cds_web_team_member_linkedin', // meta key
         array(
             'type'           => 'string',
             'single'         => true,
@@ -71,6 +121,6 @@ function myguten_register_post_meta()
         )
     );
 }
-add_action('init', 'myguten_register_post_meta');
+add_action('init', 'cds_web_register_post_meta');
 
 $blocks = new Blocks();

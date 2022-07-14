@@ -18,6 +18,7 @@ export const CDSTextControl = compose(
 )((props) => {
     return (
         <TextControl
+            style={{padding: '10px'}}
             type="text"
             label={props.label}
             value={props.metaValue || ""}

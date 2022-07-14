@@ -21,19 +21,19 @@ msgstr "Team Member FR"
 
 #: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:10
 msgid "Name"
-msgstr ""
+msgstr "Name FR"
 
 #: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:11
 msgid "Title English"
-msgstr ""
+msgstr "Title English FR"
 
 #: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:12
 msgid "Title French"
-msgstr ""
+msgstr "Title French FR"
 
 #: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:13
 msgid "Contact Information"
-msgstr ""
+msgstr "Contact Information FR"
 
 #: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:14
 msgid "Email"

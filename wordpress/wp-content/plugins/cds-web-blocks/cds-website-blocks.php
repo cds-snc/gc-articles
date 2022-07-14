@@ -7,7 +7,7 @@
  * Author:          Canadian Digital Service
  * Author URI:      https://digital.canada.ca
  * Text Domain:     cds-web
- * Domain Path:     /languages
+ * Domain Path:     /resources/languages
  * Version:         0.1.0
  *
  * @package         cds-web
@@ -30,7 +30,7 @@ class Blocks
 
     public function registerBlocks()
     {
-        register_block_type(__DIR__ . '/blocks/build/team/');
+        register_block_type(__DIR__ . '/resources/js/build/team/');
     }
 }
 
@@ -120,6 +120,8 @@ function cds_web_register_post_meta()
             'show_in_rest'   => true,
         )
     );
+
+    wp_set_script_translations('cds-web', 'cds-web', CDS_WEBSITE_BLOCKS_PLUGIN_BASE_PATH . '/resources/languages/');
 }
 add_action('init', 'cds_web_register_post_meta');
 

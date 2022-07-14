@@ -6,7 +6,7 @@
 	"title": "Team Members",
 	"description": "Team Members",
 	"category": "widgets",
-	"icon": "embed-generic",
+	"icon": "smiley",
 	"textdomain": "cds-web",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

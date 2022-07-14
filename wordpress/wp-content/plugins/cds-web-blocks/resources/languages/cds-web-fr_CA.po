@@ -1,0 +1,62 @@
+#. Plugin Name of the plugin
+msgid "CDS Website Blocks"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Description of the plugin
+msgid "Adds custom blocks"
+msgstr ""
+
+#. Author of the plugin
+msgid "Canadian Digital Service"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://digital.canada.ca"
+msgstr ""
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:9
+msgid "Team Member"
+msgstr "Team Member FR"
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:10
+msgid "Name"
+msgstr ""
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:11
+msgid "Title English"
+msgstr ""
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:12
+msgid "Title French"
+msgstr ""
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:13
+msgid "Contact Information"
+msgstr ""
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:14
+msgid "Email"
+msgstr ""
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:15
+msgid "Twitter"
+msgstr ""
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:16
+msgid "Github"
+msgstr ""
+
+#: resources/js/build/team/index.js:1 resources/js/src/team/edit.js:17
+msgid "LinkedIn"
+msgstr ""
+
+#: resources/js/build/team/block.json resources/js/src/team/block.json
+msgctxt "block title"
+msgid "Team Members"
+msgstr ""
+
+#: resources/js/build/team/block.json resources/js/src/team/block.json
+msgctxt "block description"
+msgid "Team Members"
+msgstr ""

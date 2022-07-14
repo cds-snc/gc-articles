@@ -1,0 +1,49 @@
+{
+    "repositories": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/WordPress/wordpress-develop"
+        }
+    ],
+    "require-dev": {
+        "brain/monkey": "^2.6",
+        "php-stubs/wordpress-stubs": "^5.9",
+        "phpunit/phpunit": "^9.5",
+        "yoast/phpunit-polyfills": "^1.0",
+        "yoast/wp-test-utils": "^1.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-faker": "^1.0",
+        "mockery/mockery": "^1.5"
+    },
+    "autoload": {
+      "psr-4": {
+          "CDSWeb\\": "src/"
+      }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "composer/installers": true
+        }
+    },
+    "require": {},
+    "type": "wordpress-plugin",
+    "scripts": {
+        "build-js": "cd ./resources/js && npm run build",
+        "make-pot": "wp i18n make-pot --domain=cds-web . ./resources/languages/cds-web.pot",
+        "merge-po": "msgmerge -U --no-wrap --backup none -N ./resources/languages/cds-web-fr_CA.po ./resources/languages/cds-web.pot",
+        "compile-mo": "msgfmt -o ./resources/languages/cds-web-fr_CA.mo ./resources/languages/cds-web-fr_CA.po",
+        "clean-json": "rm -f ./resources/languages/*.json || true",
+        "compile-json": "wp i18n make-json ./resources/languages/cds-web-fr_CA.po --no-purge",
+        "compile-translations": [
+            "@compile-mo",
+            "@clean-json",
+            "@compile-json"
+        ],
+        "prepare-translations": [
+            "@build-js",
+            "@make-pot",
+            "@merge-po"
+        ]
+    }
+}

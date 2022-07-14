@@ -60,6 +60,7 @@ class Permissions
             $user->add_cap('manage_list_manager', true);
             $user->add_cap('list_manager_bulk_send', true);
         }
+
         if ($role === 'gceditor') {
             $user->add_cap('manage_list_manager', true);
             $user->add_cap('list_manager_bulk_send', true);

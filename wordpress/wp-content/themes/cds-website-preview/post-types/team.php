@@ -23,7 +23,7 @@ function cds_web_register_team_member_type()
             'singular_name'      => esc_html__('Team Member', 'cds-web'),
         ],
         'public'              => true,
-        'menu_icon' => 'dashicons-format-gallery',
+        'menu_icon' => 'dashicons-smiley',
         'exclude_from_search' => false,
         'publicly_queryable'  => true,
         'show_ui'             => true,

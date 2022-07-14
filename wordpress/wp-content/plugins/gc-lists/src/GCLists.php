@@ -67,7 +67,7 @@ class GCLists
         );
 
         if (!get_option('gc-lists_roles_cleanup')) {
-            add_action('plugins_loaded', [$this->permissions, 'cleanupCustomCapsForRoles'], 11);
+            add_action('init', [$this->permissions, 'cleanupCustomCapsForRoles'], 11);
         }
 
         add_action('set_user_role', [$this->permissions, 'addDefaultUserCapsForRole'], 10, 3);

@@ -48,7 +48,7 @@ export const EditMessage = () => {
     const { template, loadingTemplate, templateId, messageType, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
     const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
-    const { state: { user } } = useList();
+    const { state: { user, ...rest } } = useList();
 
     useEffect(() => {
         setValue("name", template?.name || "")
@@ -177,7 +177,7 @@ export const EditMessage = () => {
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
-                        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), template: content } });
+                        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), message_type: messageType, template: content } });
                     }}
                     className="button button-primary">
                     {__('Choose a list to send to', 'gc-lists')}

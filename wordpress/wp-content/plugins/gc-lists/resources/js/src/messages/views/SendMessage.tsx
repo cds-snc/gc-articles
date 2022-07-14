@@ -9,7 +9,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 /**
  * Internal dependencies
  */
-
 import {
     MessagePreview,
     MessageSent,
@@ -63,6 +62,8 @@ export const SendMessage = () => {
     const editorSubject = state?.subject || "";
     // @ts-ignore
     const editorTemplate = state?.template || "";
+    // @ts-ignore
+    const messageType = template.name ? template.message_type : state?.message_type || undefined;
 
     useEffect(() => {
         setContent(template?.body);
@@ -102,7 +103,7 @@ export const SendMessage = () => {
 
             <h1>{__("Send message to a list", "gc-lists")}</h1>
 
-            <ListSelect onChange={handleListUpdate} messageType={template.name ? template.message_type : undefined} />
+            <ListSelect onChange={handleListUpdate} messageType={messageType} />
             {listId ?
                 <>
                     <SendToList sending={true} name={listName} count={subscriberCount} />

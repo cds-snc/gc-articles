@@ -232,9 +232,19 @@ class Message extends Model
      */
     public static function templates(array $options = []): ?Collection
     {
+        $filter_message_type = "1=1";
+
+        // Apply "message_type" filter if provided
+        if (isset($options['message_type'])) {
+            $filter_message_type = ($options['message_type'] === "email") ?
+                'message_type = "email"' :
+                'message_type = "phone"';
+        }
+
         $messages = static::where([
             'original_message_id IS NULL',
             'sent_at IS NULL',
+             $filter_message_type
         ]);
 
         // In case the name of the template has been changed, display latest

@@ -51,10 +51,12 @@ export function useTemplateApi() {
         }
     }, [request, response])
 
-    const getTemplates = async () => {
+    const getTemplates = async (messageType?: string) => {
         setLoading(true);
         let templates: any = [];
-        await request.get("/messages?sort=desc");
+
+        const url = messageType ? `/messages?sort=desc&message_type=${messageType}` : "/messages?sort=desc";
+        await request.get(url);
 
         if (response.ok) {
             response.data.forEach((item: any) => {

@@ -10,7 +10,7 @@ import { Link, useLocation } from "react-router-dom";
  * Internal dependencies
  */
 import { Table, StyledLink, StyledPaging, ConfirmDelete, Spinner, Next } from ".";
-import { useTemplateApi } from '../../store';
+import { useList, useTemplateApi } from '../../store';
 import { ToastMessage } from './ToastMessage';
 
 const StyledDivider = styled.span`
@@ -54,9 +54,12 @@ export const StyledPlaceholder = styled.div`
 
 export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     const { loading, templates, getTemplates, deleteTemplate } = useTemplateApi();
+    const { state: { user } } = useList();
+
+    const messageType = !user.hasPhone ? 'email' : undefined;
 
     useEffect(() => {
-        getTemplates();
+        getTemplates(messageType);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -112,7 +115,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
                                     const confirmed = await ConfirmDelete();
                                     if (confirmed) {
                                         await deleteTemplate({ templateId: tId });
-                                        getTemplates();
+                                        getTemplates(messageType);
                                     }
                                 }}
                             >

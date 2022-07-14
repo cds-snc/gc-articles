@@ -4,6 +4,7 @@ function cds_web_register_project_type()
 {
     $args = [
         'label'  => esc_html__('Projects', 'text-domain'),
+        'template' => [['cds/products' ]],
         'labels' => [
             'menu_name'          => esc_html__('Projects', 'cds-web'),
             'name_admin_bar'     => esc_html__('Project', 'cds-web'),
@@ -42,7 +43,6 @@ function cds_web_register_project_type()
             'thumbnail',
             'custom-fields'
         ],
-
         'rewrite' => true
     ];
 

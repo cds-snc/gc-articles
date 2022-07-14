@@ -132,7 +132,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
                 },
             },
         ],
-        [getTemplates, deleteTemplate]
+        [getTemplates, deleteTemplate, messageType]
     );
 
     return (

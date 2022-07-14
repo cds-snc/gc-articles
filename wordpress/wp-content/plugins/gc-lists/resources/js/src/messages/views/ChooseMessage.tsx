@@ -22,7 +22,6 @@ export const ChooseMessage = () => {
         navigate(`/messages/edit/${message_type}/new`);
     }
 
-    //Désolé, vous n’avez pas l’autorisation d’accéder à cette page.
     if (!user.hasPhone) {
         // Return "not authorized" message if user is not able to send phone messages
         return <NotAuthorized />
@@ -42,17 +41,17 @@ export const ChooseMessage = () => {
                     <tbody>
                         <tr>
                             <th scope="row">
-                                <label htmlFor="message_type">Choose message type</label>
+                                <label htmlFor="message_type">{__('Choose message type', 'gc-lists')}</label>
                             </th>
                             <td>
                                 <FieldError errors={errors} id={fieldId}>
                                     <div style={{ marginBottom: "5px" }}>
                                         <input {...register(fieldId, { required: true })} type="radio" id="message_type_email" value="email" />
-                                        <label htmlFor="message_type_email">Email</label>
+                                        <label htmlFor="message_type_email">{__('Email', 'gc-lists')}</label>
                                     </div>
                                     <div>
                                         <input {...register(fieldId, { required: true })} type="radio" id="message_type_phone" value="phone" />
-                                        <label htmlFor="message_type_phone">Phone</label>
+                                        <label htmlFor="message_type_phone">{__('Text message', 'gc-lists')}</label>
                                     </div>
                                 </FieldError>
                             </td>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GCLists;
 
+use CDS\Utils;
 use GCLists\Api\Messages;
 use GCLists\ListManager\Proxy;
 
@@ -66,9 +67,9 @@ class GCLists
             },
         );
 
-        if (!get_option('gc-lists_roles_cleanup')) {
+        Utils::checkOptionCallback('gc-lists_roles_cleanup', '1', function () {
             add_action('init', [$this->permissions, 'cleanupCustomCapsForRoles'], 11);
-        }
+        });
 
         add_action('set_user_role', [$this->permissions, 'addDefaultUserCapsForRole'], 10, 3);
     }

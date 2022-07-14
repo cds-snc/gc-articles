@@ -42,6 +42,11 @@ export const StyledCell = styled.td`
     }
 `
 
+export const StyledCharacterCounter = styled.div`
+    margin-top: -15px;
+    margin-bottom: 10px;
+`;
+
 export const EditMessage = () => {
     const navigate = useNavigate();
     const [saved, setSaved] = useState(false);
@@ -156,11 +161,18 @@ export const EditMessage = () => {
                                 <div className={errors.hasTemplate ? "error-wrapper" : ""}>
                                     {errors.hasTemplate && <span className="validation-error">{errors.hasTemplate?.message || __("Message is required", "gc-lists")}</span>}
                                     {template.parsedContent ?
-                                        <Editor template={template.parsedContent}
-                                            handleValidate={(value: any) => {
-                                                clearErrors("hasTemplate");
-                                            }}
-                                            handleChange={setCurrentTemplate} />
+                                        <>
+                                            <Editor template={template.parsedContent}
+                                                handleValidate={(value: any) => {
+                                                    clearErrors("hasTemplate");
+                                                }}
+                                                handleChange={setCurrentTemplate} />
+                                            {messageType === 'phone' &&
+                                                <StyledCharacterCounter id="with-hint-info">
+                                                    {content.length} {__("characters", "gc-lists")}
+                                                </StyledCharacterCounter>
+                                            }
+                                        </>
                                         : null}
                                 </div>
                                 {/*<StyledLastSaved>*/}

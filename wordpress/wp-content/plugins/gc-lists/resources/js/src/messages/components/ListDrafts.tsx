@@ -146,7 +146,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
 
             <Link
                 className="button button-primary"
-                to={`/messages/choose`}
+                to={user.hasPhone ? `/messages/choose` : `/messages/edit/email/new`}
             >
                 {__("Create new message", "gc-lists")}
             </Link>

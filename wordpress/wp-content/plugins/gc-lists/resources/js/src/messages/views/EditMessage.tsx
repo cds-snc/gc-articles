@@ -12,8 +12,8 @@ import styled from 'styled-components';
  * Internal dependencies
  */
 import { Editor, deserialize, serialize } from '../editor';
-import { useTemplateApi } from '../../store';
-import { Success, Spinner, StyledLink, Back } from "../components";
+import { useList, useTemplateApi } from '../../store';
+import { Success, Spinner, StyledLink, Back, NotAuthorized } from "../components";
 
 const textWidth = { width: "25em" }
 
@@ -48,6 +48,7 @@ export const EditMessage = () => {
     const { template, loadingTemplate, templateId, messageType, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
     const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
+    const { state: { user } } = useList();
 
     useEffect(() => {
         setValue("name", template?.name || "")
@@ -81,6 +82,12 @@ export const EditMessage = () => {
     }, [saveTemplate, currentTemplate, templateId, navigate, template, messageType]);
 
     const heading = messageType === 'phone' ? __("Edit text message", "gc-lists") : __("Edit email message", "gc-lists");
+
+    //Désolé, vous n’avez pas l’autorisation d’accéder à cette page.
+    if (messageType === 'phone' && !user.hasPhone) {
+        // Return "not authorized" message if selecting a phone template but user is not able to send phone messages
+        return <NotAuthorized />
+    }
 
     if (loadingTemplate) {
         return (

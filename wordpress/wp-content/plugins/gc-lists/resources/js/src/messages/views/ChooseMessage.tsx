@@ -1,35 +1,43 @@
 /**
  * External dependencies
  */
- import { __ } from '@wordpress/i18n';
- import { useForm } from "react-hook-form";
- import { useNavigate } from 'react-router-dom';
+import { __ } from '@wordpress/i18n';
+import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 
  /**
   * Internal dependencies
   */
- import { FieldError, StyledLink, Back } from '../components';
- 
- export const ChooseMessage = () => {
+import { FieldError, StyledLink, Back, NotAuthorized } from '../components';
+import { useList } from '../../store';
+
+export const ChooseMessage = () => {
     const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors: formErrors } } = useForm();
     const fieldId = 'message_type';
+    const { state: { user } } = useList();
 
     const onSubmit = (data: any) => {
         const { message_type } = data
         navigate(`/messages/edit/${message_type}/new`);
     }
 
+    //Désolé, vous n’avez pas l’autorisation d’accéder à cette page.
+    if (!user.hasPhone) {
+        // Return "not authorized" message if user is not able to send phone messages
+        return <NotAuthorized />
+    }
+
     let errors = formErrors[fieldId] ? [{location: fieldId, message: __("Please select a message type", "gc-lists") }] : [];
 
-     return (
-         <>
-             <StyledLink to={`/messages`}>
-                 <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
-             </StyledLink>
-             <h1>{__("Create a new message", "gc-lists")}</h1>
+    return (
+        <>
+            <StyledLink to={`/messages`}>
+                <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
+            </StyledLink>
+            <h1>{__("Create a new message", "gc-lists")}</h1>
              
-             <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <table className="form-table" role="presentation">
                     <tbody>
                         <tr>
@@ -62,10 +70,9 @@
                 </div>
 
                 <input  />
-             </form>
-         </>
-     )
- }
- 
- export default ChooseMessage;
- 
+            </form>
+        </>
+    )
+}
+
+export default ChooseMessage;

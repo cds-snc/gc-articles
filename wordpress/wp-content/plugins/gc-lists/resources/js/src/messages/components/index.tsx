@@ -15,3 +15,4 @@ export { Table, StyledH1, StyledLink, StyledPaging } from "./Table";
 export { Spinner } from "../../common/Spinner";
 export { Error } from "../../common/Error";
 export { ToastMessage } from "./ToastMessage";
+export { NotAuthorized } from "./NotAuthorized";

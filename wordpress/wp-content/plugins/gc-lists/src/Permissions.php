@@ -23,24 +23,24 @@ class Permissions
     public function cleanupCustomCapsForRoles()
     {
         if ($role = get_role('administrator')) {
-            $role->add_cap('manage_notify', true);
-            $role->add_cap('manage_list_manager', true);
-            $role->add_cap('list_manager_bulk_send', true);
+            $role->add_cap('manage_notify', false);
+            $role->add_cap('manage_list_manager', false);
+            $role->add_cap('list_manager_bulk_send', false);
             $role->add_cap('list_manager_bulk_send_sms', false);
         }
 
         if ($role = get_role('gceditor')) {
-            $role->remove_cap('manage_notify');
-            $role->remove_cap('manage_list_manager');
-            $role->remove_cap('list_manager_bulk_send');
-            $role->remove_cap('list_manager_bulk_send_sms');
+            $role->add_cap('manage_notify', false);
+            $role->add_cap('manage_list_manager', false);
+            $role->add_cap('list_manager_bulk_send', false);
+            $role->add_cap('list_manager_bulk_send_sms', false);
         }
 
         if ($role = get_role('gcwriter')) {
-            $role->remove_cap('manage_notify');
-            $role->remove_cap('manage_list_manager');
-            $role->remove_cap('list_manager_bulk_send');
-            $role->remove_cap('list_manager_bulk_send_sms');
+            $role->add_cap('manage_notify', false);
+            $role->add_cap('manage_list_manager', false);
+            $role->add_cap('list_manager_bulk_send', false);
+            $role->add_cap('list_manager_bulk_send_sms', false);
         }
 
         add_option('gc-lists_roles_cleanup', true);

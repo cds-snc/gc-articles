@@ -105,10 +105,6 @@ class Roles
                 'promote_users' => 1,
                 'manage_network_users' => 1, // enables "edit_users" for GC Admins'
                 'manage_options' => 1,
-                'manage_notify' => 1,
-                'manage_list_manager' => 1,  // by default this is off
-                'list_manager_bulk_send' => 0, // this is managed per user (see user profile)
-                'list_manager_bulk_send_sms' => 0, // this is managed per user (see user profile)
                 'manage_categories' => 1,
                 'read' => 1,
                 'level_1' => 1,
@@ -137,7 +133,11 @@ class Roles
                 'upload_files' => 1,
                 'edit_theme_options' => 1, // allows editing the "menu" options
                 'unfiltered_html' => 0,
-                'allow_unfiltered_html' => 0
+                'allow_unfiltered_html' => 0,
+                'manage_notify' => 0,
+                'manage_list_manager' => 0,
+                'list_manager_bulk_send' => 0,
+                'list_manager_bulk_send_sms' => 0,
             ],
             'editor' => [
                 'moderate_comments' => 1,
@@ -226,7 +226,11 @@ class Roles
                 'upload_files' => 1,
                 'edit_theme_options' => 1, // allows editing the "menu" options
                 'unfiltered_html' => 0,
-                'allow_unfiltered_html' => 0
+                'allow_unfiltered_html' => 0,
+                'manage_notify' => 0,
+                'manage_list_manager' => 0,
+                'list_manager_bulk_send' => 0,
+                'list_manager_bulk_send_sms' => 0,
             ],
             'gcwriter' => [
                 'read' => 1,
@@ -256,7 +260,11 @@ class Roles
                 'upload_files' => 0,
                 'edit_theme_options' => 0, // allows editing the "menu" options
                 'unfiltered_html' => 0,
-                'allow_unfiltered_html' => 0
+                'allow_unfiltered_html' => 0,
+                'manage_notify' => 0,
+                'manage_list_manager' => 0,
+                'list_manager_bulk_send' => 0,
+                'list_manager_bulk_send_sms' => 0,
             ],
             'display_name' => [
                 'administrator' => 'GC Admin',

@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cds/products",
+	"version": "0.1.0",
+	"title": "Products",
+	"description": "Products",
+	"category": "widgets",
+	"icon": "embed-generic",
+	"textdomain": "cds-web",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

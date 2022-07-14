@@ -17,7 +17,9 @@ class Permissions
     }
 
     /**
-     * Setup default Role permisssions overriding what's in cds-base\classes\Modules\Cleanup\Roles.php
+     * Setup default Role capabilities
+     *
+     * Note: this overrides what's in cds-base\classes\Modules\Cleanup\Roles.php
      * which should be refactored and parts of it removed.
      */
     public function cleanupCustomCapsForRoles()
@@ -82,7 +84,7 @@ class Permissions
 
         /* MANAGE LISTS */
         print '<tr>';
-        $manage_list_manager = user_can($user, "manage_list_manager");
+        $manage_list_manager = $user->has_cap('manage_list_manager');
 
         if ($manage_list_manager) {
             $checked = 'checked';
@@ -104,7 +106,7 @@ class Permissions
 
         /* BULK EMAIL SEND */
         print '<tr>';
-        $list_manager_bulk_send = user_can($user, "list_manager_bulk_send");
+        $list_manager_bulk_send = $user->has_cap('list_manager_bulk_send');
 
         if ($list_manager_bulk_send) {
             $checked = 'checked';
@@ -124,7 +126,7 @@ class Permissions
         print '</tr>';
 
         /* BULK SMS SEND */
-        $list_manager_bulk_send_sms = user_can($user, "list_manager_bulk_send_sms");
+        $list_manager_bulk_send_sms = $user->has_cap('list_manager_bulk_send_sms');
 
         if ($list_manager_bulk_send_sms) {
             $sms_checked = 'checked';

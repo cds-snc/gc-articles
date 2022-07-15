@@ -32,12 +32,11 @@ const Select = ({ lists, handleChange }: { handleChange: (val: string) => void, 
     )
 }
 
-export const ListSelect = ({ onChange }: { onChange: any }) => {
+export const ListSelect = ({ onChange, messageType }: { onChange: any, messageType?: string | undefined }) => {
     const { serviceId } = useService();
     const { state: { user, config: { listManagerApiPrefix } } } = useList();
     const { request, response } = useFetch(listManagerApiPrefix, { data: [] })
     const [lists, setLists] = useState<List[]>([]);
-
 
     useEffect(() => {
         const getLists = async () => {
@@ -46,10 +45,13 @@ export const ListSelect = ({ onChange }: { onChange: any }) => {
             if (response.ok) {
                 let lists = response.data;
 
-
-
                 lists = lists.filter((list: List) => {
                     const listType = getListType(list.language)
+
+                    // on the "send message" screen, only show lists with the same type as the message
+                    if(messageType && listType !== messageType) {
+                        return false
+                    }
                     if (listType === ListType.EMAIL && user?.hasEmail) {
                         return true
                     }
@@ -65,7 +67,7 @@ export const ListSelect = ({ onChange }: { onChange: any }) => {
 
         getLists();
 
-    }, [request, response, serviceId, user?.hasEmail, user?.hasPhone])
+    }, [request, response, serviceId, user?.hasEmail, user?.hasPhone, messageType])
 
     const handleChange = useCallback((listId: string) => {
         if (lists) {

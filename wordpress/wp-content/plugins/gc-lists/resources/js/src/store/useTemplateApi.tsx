@@ -10,15 +10,16 @@ import useFetch, { CachePolicies } from 'use-http';
  * Internal dependencies
  */
 import { serialize, deserialize } from "../messages/editor/utils";
-import { TemplateType } from "../types";
+import { TemplateType, ListType } from "../types";
 
 export function useTemplateApi() {
     const params = useParams();
     const templateId = params?.templateId;
+    const messageType = params?.messageType;
     const { request, response } = useFetch({ data: [], cachePolicy: CachePolicies.NO_CACHE });
     const [templates, setTemplates] = useState([]);
     // @ts-ignore
-    const [template, setTemplate] = useState<TemplateType>({ name: "", subject: "", body: "", parsedContent: deserialize("") });
+    const [template, setTemplate] = useState<TemplateType>({ name: "", subject: "", body: "", message_type: ListType.EMAIL, parsedContent: deserialize("") });
     const [loading, setLoading] = useState(false);
     const [loadingTemplate, setLoadingTemplate] = useState(false);
 
@@ -32,7 +33,7 @@ export function useTemplateApi() {
             const template: TemplateType | null = response.data;
 
             if (!template || !template.body) {
-                setTemplate({ name: "", subject: "", body: "" })
+                setTemplate({ name: "", subject: "", body: "", message_type: ListType.EMAIL  })
             }
 
             let parsedContent;
@@ -43,18 +44,19 @@ export function useTemplateApi() {
                 setTemplate({ ...template, parsedContent })
             } catch (e) {
                 //console.log(e);
-                return { name: "", subject: "", body: "" }
+                return { name: "", subject: "", body: "", message_type: ListType.EMAIL }
             }
 
             setLoadingTemplate(false);
-
         }
     }, [request, response])
 
-    const getTemplates = async () => {
+    const getTemplates = async (messageType?: string) => {
         setLoading(true);
         let templates: any = [];
-        await request.get("/messages?sort=desc");
+
+        const url = messageType ? `/messages?sort=desc&message_type=${messageType}` : "/messages?sort=desc";
+        await request.get(url);
 
         if (response.ok) {
             response.data.forEach((item: any) => {
@@ -70,26 +72,23 @@ export function useTemplateApi() {
         }
     };
 
-    const saveTemplate = useCallback(async ({ templateId, name, subject, content }: { templateId: string | undefined, name: string, subject: string, content: Descendant[] | undefined }) => {
+    const saveTemplate = useCallback(async ({ templateId, name, subject, content, message_type = 'email' }: { templateId: string | undefined, name: string, subject: string | undefined, content: Descendant[] | undefined, message_type: string | undefined }) => {
         if (!content) return;
 
+        const message = { 
+          name,
+          message_type, 
+          body: serialize(content),
+          ...(!!subject && {subject})
+        };
+
         if (templateId === 'new') {
-            await request.post('/messages', {
-                'name': name,
-                'subject': subject,
-                'body': serialize(content),
-                'message_type': 'email'
-            });
+            await request.post('/messages', message);
 
             return response.data;
         }
 
-        await request.put(`/messages/${templateId}`, {
-            'name': name,
-            'subject': subject,
-            'body': serialize(content),
-            'message_type': 'email'
-        });
+        await request.put(`/messages/${templateId}`, message);
 
         if (response.ok) {
             return response.data;
@@ -134,7 +133,7 @@ export function useTemplateApi() {
         return false;
     }, [request, response])
 
-    return { template, loadingTemplate, templates, loading, templateId, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
+    return { template, loadingTemplate, templates, loading, templateId, messageType, getTemplate, getTemplates, saveTemplate, deleteTemplate, recordSent }
 }
 
 export default useTemplateApi;

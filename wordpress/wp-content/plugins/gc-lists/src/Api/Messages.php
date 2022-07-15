@@ -82,7 +82,7 @@ class Messages extends BaseEndpoint
                     }
                 ],
                 'subject'      => [
-                    'required'          => true,
+                    'required'          => false,
                     'type'              => 'string',
                     'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
@@ -124,7 +124,7 @@ class Messages extends BaseEndpoint
                     }
                 ],
                 'subject' => [
-                    'required'          => true,
+                    'required'          => false,
                     'type'              => 'string',
                     'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
@@ -167,7 +167,7 @@ class Messages extends BaseEndpoint
                     }
                 ],
                 'subject'           => [
-                    'required'          => true,
+                    'required'          => false,
                     'type'              => 'string',
                     'description'       => 'Subject of the Message',
                     'sanitize_callback' => function ($value, $request, $param) {
@@ -576,6 +576,11 @@ class Messages extends BaseEndpoint
         // asc or desc will sortBy created_at
         if (isset($params['sort']) && in_array($params['sort'], ['asc', 'desc'])) {
             $options['sort'] = $params['sort'];
+        }
+
+        // Add "message_type" option if provided
+        if (isset($params['message_type']) && in_array($params['message_type'], ['email', 'phone'])) {
+            $options['message_type'] = $params['message_type'];
         }
 
         return $options;

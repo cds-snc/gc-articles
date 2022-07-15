@@ -596,6 +596,60 @@ test('Retrieve drafts with sort', function() {
     // Not sure how to check if they were actually sorted?
 });
 
+test('Retrieve drafts with message_type "email"', function() {
+    // Create 20 "email" messages 
+    $this->factory->message->create_many(20);
+    // Create 1 "phone" message
+    $message = new Message([
+        'name' => 'This is the message name',
+        'body' => 'This is the message body',
+        'message_type' => 'phone'
+    ]);
+    $message->save();
+
+    $drafts = Message::templates([
+        'message_type' => 'email'
+    ]);
+
+    $this->assertCount(20, $drafts);
+});
+
+test('Retrieve drafts with message_type "phone"', function() {
+    // Create 20 "email" messages 
+    $this->factory->message->create_many(20);
+    // Create 1 "phone" message
+    $message = new Message([
+        'name' => 'This is the message name',
+        'body' => 'This is the message body',
+        'message_type' => 'phone'
+    ]);
+    $message->save();
+
+    $drafts = Message::templates([
+        'message_type' => 'phone'
+    ]);
+
+    $this->assertCount(1, $drafts);
+});
+
+test('Retrieve all drafts with invalid message_type', function() {
+    // Create 20 "email" messages 
+    $this->factory->message->create_many(20);
+    // Create 1 "phone" message
+    $message = new Message([
+        'name' => 'This is the message name',
+        'body' => 'This is the message body',
+        'message_type' => 'phone'
+    ]);
+    $message->save();
+
+    $drafts = Message::templates([
+        'message_type' => 'fax'
+    ]);
+
+    $this->assertCount(21, $drafts);
+});
+
 test('Retrieve Message drafts excludes sent messages', function() {
     // These are just templates (drafts) by default
     $this->factory->message->create_many(5);

@@ -49,10 +49,11 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
                 Cell: ({ row }: { row: any }) => {
                     const messageId = row?.original?.id;
                     const name = row?.original?.name;
+                    const message_type = row?.original?.message_type;
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/edit/${messageId}`}
+                                to={`/messages/edit/${message_type}/${messageId}`}
                             >
                                 {name}
                             </StyledTableLink>
@@ -93,7 +94,7 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
         <>
             <h2>{__("Sending history", "gc-lists")}</h2>
             <StyledPlaceholder>
-                <h3>{__("You have not sent any message yet.", "gc-lists")}</h3>
+                <h3>{__("You have not sent any messages yet.", "gc-lists")}</h3>
                 <p>{__("When you send a message, a copy is automatically saved in your sending history.", "gc-lists")}</p>
             </StyledPlaceholder>
         </>

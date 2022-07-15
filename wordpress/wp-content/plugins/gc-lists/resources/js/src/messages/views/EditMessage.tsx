@@ -12,28 +12,48 @@ import styled from 'styled-components';
  * Internal dependencies
  */
 import { Editor, deserialize, serialize } from '../editor';
-import { useTemplateApi } from '../../store';
-import { Success, Spinner, StyledLink, Back } from "../components";
+import { useList, useTemplateApi } from '../../store';
+import { Success, Spinner, StyledLink, Back, NotAuthorized } from "../components";
 
 const textWidth = { width: "25em" }
 
 export const StyledLastSaved = styled.div`
-   font-size:16px;
-   display:flex;
-   justify-content: flex-end;
+    font-size:16px;
+    display:flex;
+    justify-content: flex-end;
 `;
 
 export const StyledPreviousVersions = styled.span`
-   display:inline-block;
-   margin-left:10px;
+    display:inline-block;
+    margin-left:10px;
+`;
+
+export const StyledCell = styled.td`
+    padding-left: 0 !important;
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    label + p {
+        margin-top: -6px;
+        margin-bottom: 10px;
+    }
+`
+
+export const StyledCharacterCounter = styled.div`
+    margin-top: -15px;
+    margin-bottom: 10px;
 `;
 
 export const EditMessage = () => {
     const navigate = useNavigate();
     const [saved, setSaved] = useState(false);
-    const { template, loadingTemplate, templateId, getTemplate, saveTemplate } = useTemplateApi();
+    const { template, loadingTemplate, templateId, messageType, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
     const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
+    const { state: { user } } = useList();
 
     useEffect(() => {
         setValue("name", template?.name || "")
@@ -57,21 +77,26 @@ export const EditMessage = () => {
 
         setSaved(false);
         const { name, subject } = formData;
-        const result = await saveTemplate({ templateId, name, subject, content: deserialize(content) });
+        const result = await saveTemplate({ templateId, name, subject, content: deserialize(content), message_type: messageType });
 
         if (result) {
             navigate(`/messages`, { state: { type: "saved", from: 'edit-template', ...result } });
             setSaved(true);
         }
 
-    }, [saveTemplate, currentTemplate, templateId, navigate, template]);
+    }, [saveTemplate, currentTemplate, templateId, navigate, template, messageType]);
 
-    const heading = <h1>{__("Edit email message", "gc-lists")}</h1>;
+    const heading = messageType === 'phone' ? __("Edit text message", "gc-lists") : __("Edit email message", "gc-lists");
+
+    if (messageType === 'phone' && !user.hasPhone) {
+        // Return "not authorized" message if selecting a phone template but user is not able to send phone messages
+        return <NotAuthorized />
+    }
 
     if (loadingTemplate) {
         return (
             <>
-                {heading}
+                <h1>{heading}</h1>
                 <Spinner />
             </>
         )
@@ -90,7 +115,7 @@ export const EditMessage = () => {
             <StyledLink to={`/messages`}>
                 <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
             </StyledLink>
-            {heading}
+            <h1>{heading}</h1>
             <form style={{ maxWidth: '400px' }}>
                 <input type="hidden" {...register("hasTemplate", { validate: () => templateHasValue })} />
                 {
@@ -105,37 +130,48 @@ export const EditMessage = () => {
                 <table className="form-table">
                     <tbody>
                         <tr>
-                            <td>
+                            <StyledCell>
                                 <label className="required" htmlFor="name"><strong>{__("Message name", "gc-lists")}</strong></label>
                                 <p>{__("Your recipients will not see this message name.", "gc-lists")}</p>
                                 <div className={errors.name ? "error-wrapper" : ""}>
                                     {errors.name && <span className="validation-error">{errors.name?.message || __("Name is required", "gc-lists")}</span>}
                                     <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
                                 </div>
-                            </td>
+                            </StyledCell>
                         </tr>
-                        <tr>
-                            <td>
+                        {messageType !== 'phone' &&
+                            <tr>
+                            <StyledCell>
                                 <label className="required" htmlFor="subject"><strong>{__("Subject line of the email", "gc-lists")}</strong></label>
-                                <p style={{ marginBottom: "12px" }}>{__("Tell recipients what the message is about. Try to keep it shorter than 10 words.", "gc-lists")}</p>
+                                <p>{__("Tell recipients what the message is about. Try to keep it shorter than 10 words.", "gc-lists")}</p>
                                 <div className={errors.subject ? "error-wrapper" : ""}>
                                     {errors.subject && <span className="validation-error">{errors.subject?.message || __("Subject is required", "gc-lists")}</span>}
                                     <input id="subject" style={textWidth} type="text" {...register("subject", { required: true })} />
                                 </div>
-                            </td>
+                            </StyledCell>
                         </tr>
+                        }
                         <tr>
-                            <td>
+                            <StyledCell>
                                 <label className="required" htmlFor="message"><strong>{__("Message", "gc-lists")}</strong></label>
-                                <p style={{ marginBottom: '10px' }}>{__("Use the", "gc-lists")} <a href="https://notification.canada.ca/formatting-guide" target="_blank" rel="noreferrer">{__("email formatting guide", "gc-lists")}</a> {__("(Opens in a new tab) to craft your message.", "gc-lists")}</p>
+                                {messageType !== 'phone' &&
+                                    <p>{__("Use the", "gc-lists")} <a href="https://notification.canada.ca/formatting-guide" target="_blank" rel="noreferrer">{__("email formatting guide", "gc-lists")}</a> {__("(Opens in a new tab) to craft your message.", "gc-lists")}</p>
+                                }
                                 <div className={errors.hasTemplate ? "error-wrapper" : ""}>
                                     {errors.hasTemplate && <span className="validation-error">{errors.hasTemplate?.message || __("Message is required", "gc-lists")}</span>}
                                     {template.parsedContent ?
-                                        <Editor template={template.parsedContent}
-                                            handleValidate={(value: any) => {
-                                                clearErrors("hasTemplate");
-                                            }}
-                                            handleChange={setCurrentTemplate} />
+                                        <>
+                                            <Editor template={template.parsedContent}
+                                                handleValidate={(value: any) => {
+                                                    clearErrors("hasTemplate");
+                                                }}
+                                                handleChange={setCurrentTemplate} />
+                                            {messageType === 'phone' &&
+                                                <StyledCharacterCounter id="with-hint-info">
+                                                    {content.length} {__("characters", "gc-lists")}
+                                                </StyledCharacterCounter>
+                                            }
+                                        </>
                                         : null}
                                 </div>
                                 {/*<StyledLastSaved>*/}
@@ -143,7 +179,7 @@ export const EditMessage = () => {
                                 {/*    {template?.updated_at ? <> {__('Last saved', "gc-lists")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}*/}
                                 {/*    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "gc-lists")}</StyledPreviousVersions></Link>}*/}
                                 {/*</StyledLastSaved>*/}
-                            </td>
+                            </StyledCell>
                         </tr>
                     </tbody>
                 </table>
@@ -152,7 +188,7 @@ export const EditMessage = () => {
             <div>
                 <button style={{ marginRight: "20px" }}
                     onClick={async () => {
-                        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), template: content } });
+                        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), message_type: messageType, template: content } });
                     }}
                     className="button button-primary">
                     {__('Choose a list to send to', 'gc-lists')}

@@ -7,6 +7,7 @@ import SendMessage from './views/SendMessage';
 import AllDrafts from './views/AllDrafts';
 import AllSendingHistory from './views/AllSendingHistory';
 import Versions from './views/Versions';
+import ChooseMessage from './views/ChooseMessage';
 
 
 const MessagesApp = () => {
@@ -17,7 +18,12 @@ const MessagesApp = () => {
                     <Home />
                 </React.Suspense>
             } />
-            <Route path="edit/:templateId" element={
+            <Route path="choose" element={
+                <React.Suspense fallback={<Spinner />}>
+                    <ChooseMessage />
+                </React.Suspense>
+            } />
+            <Route path="edit/:messageType/:templateId" element={
                 <React.Suspense fallback={<Spinner />}>
                     <EditMessage />
                 </React.Suspense>

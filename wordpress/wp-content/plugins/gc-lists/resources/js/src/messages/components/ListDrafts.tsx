@@ -10,7 +10,7 @@ import { Link, useLocation } from "react-router-dom";
  * Internal dependencies
  */
 import { Table, StyledLink, StyledPaging, ConfirmDelete, Spinner, Next } from ".";
-import { useTemplateApi } from '../../store';
+import { useList, useTemplateApi } from '../../store';
 import { ToastMessage } from './ToastMessage';
 
 const StyledDivider = styled.span`
@@ -54,9 +54,12 @@ export const StyledPlaceholder = styled.div`
 
 export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: boolean }) => {
     const { loading, templates, getTemplates, deleteTemplate } = useTemplateApi();
+    const { state: { user } } = useList();
+
+    const messageType = !user.hasPhone ? 'email' : undefined;
 
     useEffect(() => {
-        getTemplates();
+        getTemplates(messageType);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -98,10 +101,11 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
                 accessor: 'templateId',
                 Cell: ({ row }: { row: any }) => {
                     const tId = row?.original?.templateId;
+                    const message_type = row?.original?.message_type;
                     return (
                         <>
                             <StyledTableLink
-                                to={`/messages/edit/${tId}`}
+                                to={`/messages/edit/${message_type}/${tId}`}
                             >
                                 {__("Edit", "gc-lists")}
                             </StyledTableLink>
@@ -111,7 +115,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
                                     const confirmed = await ConfirmDelete();
                                     if (confirmed) {
                                         await deleteTemplate({ templateId: tId });
-                                        getTemplates();
+                                        getTemplates(messageType);
                                     }
                                 }}
                             >
@@ -128,7 +132,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
                 },
             },
         ],
-        [getTemplates, deleteTemplate]
+        [getTemplates, deleteTemplate, messageType]
     );
 
     return (
@@ -142,7 +146,7 @@ export const ListDrafts = ({ perPage, pageNav }: { perPage?: number, pageNav?: b
 
             <Link
                 className="button button-primary"
-                to={`/messages/edit/new`}
+                to={user.hasPhone ? `/messages/choose` : `/messages/edit/email/new`}
             >
                 {__("Create new message", "gc-lists")}
             </Link>

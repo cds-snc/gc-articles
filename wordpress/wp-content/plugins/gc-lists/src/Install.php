@@ -53,6 +53,9 @@ class Install
         dbDelta($sql);
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function uninstall()
     {
         $this->wpdb->query("DROP TABLE IF EXISTS $this->tableName");

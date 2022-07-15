@@ -57,6 +57,8 @@ class Permissions
      * the defaults from our custom Roles to allow for more flexibility.
      *
      * @TODO: This code can be removed after it has executed
+     *
+     * @codeCoverageIgnore
      */
     public function cleanupCustomCapsForUsers()
     {
@@ -102,7 +104,7 @@ class Permissions
      * @param $role
      * @param $old_roles
      */
-    public function addDefaultUserCapsForRole($user_id, $role, $old_roles)
+    public function addDefaultUserCapsForRole($user_id, $role)
     {
         $user = get_user_by('ID', $user_id);
 
@@ -127,6 +129,9 @@ class Permissions
         }
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function displayListManagerMeta($user)
     {
         if (!is_super_admin()) {
@@ -203,6 +208,9 @@ class Permissions
         print '</table>';
     }
 
+    /**
+     * @codeCoverageIgnore
+     */
     public function updateListManagerMeta($userId)
     {
         if (!is_super_admin()) {

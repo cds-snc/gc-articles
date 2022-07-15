@@ -125,6 +125,6 @@ function cds_web_register_post_meta()
 
     wp_set_script_translations('cds-web', 'cds-web', CDS_WEBSITE_BLOCKS_PLUGIN_BASE_PATH . '/resources/languages/');
 }
-add_action('init', 'cds_web_register_post_meta');
+add_action('init', 'CDSWeb\cds_web_register_post_meta');
 
 $blocks = new Blocks();

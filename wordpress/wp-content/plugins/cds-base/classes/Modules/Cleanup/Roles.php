@@ -134,7 +134,7 @@ class Roles
                 'edit_theme_options' => 1, // allows editing the "menu" options
                 'unfiltered_html' => 0,
                 'allow_unfiltered_html' => 0,
-                'manage_notify' => 0,
+                'manage_notify' => 1,
                 'manage_list_manager' => 0,
                 'list_manager_bulk_send' => 0,
                 'list_manager_bulk_send_sms' => 0,

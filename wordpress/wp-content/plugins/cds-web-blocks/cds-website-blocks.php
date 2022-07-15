@@ -13,6 +13,8 @@
  * @package         cds-web
  */
 
+namespace CDSWeb;
+
 define('CDS_WEBSITE_BLOCKS_PLUGIN_FILE_PATH', __FILE__);
 define('CDS_WEBSITE_BLOCKS_PLUGIN_BASE_PATH', __DIR__);
 

@@ -102,7 +102,6 @@ class Permissions
      *
      * @param $user_id
      * @param $role
-     * @param $old_roles
      */
     public function addDefaultUserCapsForRole($user_id, $role)
     {

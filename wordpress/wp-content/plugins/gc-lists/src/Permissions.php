@@ -6,6 +6,8 @@ namespace GCLists;
 
 use WP_User;
 
+use function get_sites;
+
 class Permissions
 {
     protected static $instance;
@@ -58,32 +60,34 @@ class Permissions
      */
     public function cleanupCustomCapsForUsers()
     {
-        try {
-            $sites = get_sites();
+        if (is_multisite()) {
+            try {
+                $sites = get_sites();
 
-            foreach ($sites as $site) {
-                switch_to_blog($site->blog_id);
-                $users = get_users();
+                foreach ($sites as $site) {
+                    switch_to_blog($site->blog_id);
+                    $users = get_users();
 
-                foreach ($users as $user) {
-                    if (! is_super_admin($user->id)) {
-                        if (in_array('administrator', $user->roles)) {
-                            $user->add_cap('manage_notify', true);
-                            $user->add_cap('manage_list_manager', true);
-                            $user->add_cap('list_manager_bulk_send', true);
-                        }
+                    foreach ($users as $user) {
+                        if (! is_super_admin($user->id)) {
+                            if (in_array('administrator', $user->roles)) {
+                                $user->add_cap('manage_notify', true);
+                                $user->add_cap('manage_list_manager', true);
+                                $user->add_cap('list_manager_bulk_send', true);
+                            }
 
-                        if (in_array('gceditor', $user->roles)) {
-                            $user->add_cap('manage_list_manager', true);
-                            $user->add_cap('list_manager_bulk_send', true);
+                            if (in_array('gceditor', $user->roles)) {
+                                $user->add_cap('manage_list_manager', true);
+                                $user->add_cap('list_manager_bulk_send', true);
+                            }
                         }
                     }
                 }
+            } catch (\Exception $e) {
+                error_log("[GC-LISTS] There was a problem migrating caps for User " .
+                          ($user ? $user->id : '?') . " in Site " .
+                          ($site ? $site->blog_id : '?') . " : " . $e->getMessage());
             }
-        } catch (\Exception $e) {
-            error_log("[GC-LISTS] There was a problem migrating caps for User " .
-                      ($user ? $user->id : '?') . " in Site " .
-                      ($site ? $site->blog_id : '?') . " : " . $e->getMessage());
         }
     }
 

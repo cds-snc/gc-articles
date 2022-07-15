@@ -48,6 +48,56 @@ class Permissions
         add_option('gc-lists_roles_cleanup', true);
     }
 
+    /**
+     * Setup default capabilities for users (migrate existing)
+     *
+     * This should just run once to set existing users default capabilities since we've removed
+     * the defaults from our custom Roles to allow for more flexibility.
+     *
+     * @TODO: This code can be removed after it has executed
+     */
+    public function cleanupCustomCapsForUsers()
+    {
+        try {
+            $sites = get_sites();
+
+            foreach ($sites as $site) {
+                switch_to_blog($site->blog_id);
+                $users = get_users();
+
+                foreach ($users as $user) {
+                    if (! is_super_admin($user->id)) {
+                        if (in_array('administrator', $user->roles)) {
+                            $user->add_cap('manage_notify', true);
+                            $user->add_cap('manage_list_manager', true);
+                            $user->add_cap('list_manager_bulk_send', true);
+                        }
+
+                        if (in_array('gceditor', $user->roles)) {
+                            $user->add_cap('manage_list_manager', true);
+                            $user->add_cap('list_manager_bulk_send', true);
+                        }
+                    }
+                }
+            }
+        } catch (\Exception $e) {
+            error_log("[GC-LISTS] There was a problem migrating caps for User " .
+                      ($user ? $user->id : '?') . " in Site " .
+                      ($site ? $site->blog_id : '?') . " : " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Add default capabilities to a User according to their Role.
+     *
+     * When assigning a Role to a user, grant relevant capabilities to the User based on their assigned Role.
+     * Doing it this way vs having these caps on the Roles themselves, gives us more flexibility when
+     * fine-tuning these caps per user.
+     *
+     * @param $user_id
+     * @param $role
+     * @param $old_roles
+     */
     public function addDefaultUserCapsForRole($user_id, $role, $old_roles)
     {
         $user = get_user_by('ID', $user_id);

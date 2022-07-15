@@ -67,8 +67,12 @@ class GCLists
             },
         );
 
-        Utils::checkOptionCallback('gc-lists_roles_cleanup', '1', function () {
+        Utils::checkOptionCallback('gc-lists_role_caps_cleanup', '1', function () {
             add_action('init', [$this->permissions, 'cleanupCustomCapsForRoles'], 11);
+        });
+
+        Utils::checkOptionCallback('gc-lists_user_caps_cleanup', '1', function () {
+            add_action('init', [$this->permissions, 'cleanupCustomCapsForUsers'], 11);
         });
 
         add_action('set_user_role', [$this->permissions, 'addDefaultUserCapsForRole'], 10, 3);

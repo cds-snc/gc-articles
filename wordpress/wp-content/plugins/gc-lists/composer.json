@@ -18,7 +18,8 @@
     "autoload": {
       "psr-4": {
           "GCLists\\": "src/",
-          "GCLists\\Tests\\": "tests/"
+          "GCLists\\Tests\\": "tests/",
+          "CDS\\": "../cds-base/classes/"
       }
     },
     "config": {

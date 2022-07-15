@@ -14,7 +14,6 @@ class Setup
      */
     public function __construct(EncryptedOption $encryptedOption)
     {
-        ListManagerUserProfile::register();
         NotifySettings::register($encryptedOption);
 
         if ($this->isNotifyConfigured()) {

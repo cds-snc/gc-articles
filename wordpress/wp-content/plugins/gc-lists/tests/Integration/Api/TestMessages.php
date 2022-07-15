@@ -658,6 +658,7 @@ test('getOptions', function() {
     $request = new WP_REST_Request('GET', 'https://localhost');
     $request->set_param('limit', 10);
     $request->set_param('sort', 'asc');
+    $request->set_param('message_type', 'email');
 
     $api = Messages::getInstance();
     $options = $api->getOptions($request);
@@ -665,18 +666,21 @@ test('getOptions', function() {
     expect($options)
         ->toBeArray()
         ->toHaveKey('limit', 10)
-        ->toHaveKey('sort', 'asc');
+        ->toHaveKey('sort', 'asc')
+        ->toHaveKey('message_type', 'email');
 });
 
 test('getOptions bad params', function() {
     $request = new WP_REST_Request('GET', 'https://localhost');
     $request->set_param('limit', 'dd'); // invalid will default to 5
     $request->set_param('sort', 'ascx'); // invalid will default to no sort
+    $request->set_param('message_type', 'paper'); // invalid message_type
 
     $api = Messages::getInstance();
     $options = $api->getOptions($request);
 
     expect($options)
         ->toBeArray()
-        ->toHaveKey('limit', 5);
+        ->toHaveKey('limit', 5)
+        ->not->toHaveKey('message_type');
 });

@@ -235,7 +235,7 @@ class Message extends Model
         $filter_message_type = "1=1";
 
         // Apply "message_type" filter if provided
-        if (isset($options['message_type'])) {
+        if (isset($options['message_type']) && in_array($options['message_type'], ['email', 'phone'])) {
             $filter_message_type = ($options['message_type'] === "email") ?
                 'message_type = "email"' :
                 'message_type = "phone"';

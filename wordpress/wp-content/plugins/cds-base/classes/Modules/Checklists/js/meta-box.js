@@ -154,12 +154,15 @@ jQuery(document).ready(
 
         /* ====== Events ====== */
 
-        /* Observer that triggers whenever a checkbox's state changes */
-        const checkboxObserver = new MutationObserver((e) => ppc_checkbox_function());
-        checkboxObserver.observe($itemsContainer[0], {
-            subtree: true,
-            attributeFilter: ['class']}
-        );
+        /* Only set mutation observer if there are checkboxes */
+        if($items.length) {
+            /* Observer that triggers whenever a checkbox's state changes */
+            const checkboxObserver = new MutationObserver((e) => ppc_checkbox_function());
+            checkboxObserver.observe($itemsContainer[0], {
+                subtree: true,
+                attributeFilter: ['class']}
+            );
+        }
 
         // Trigger whenever the custom "publish" or "update" buttons are clicked
         $(document).on('click', "#ppc-update, #ppc-publish", function() {

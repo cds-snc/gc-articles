@@ -39,11 +39,21 @@ class Setup
             add_action('enqueue_block_editor_assets', [$this, 'enqueueGutenbergScripts']);
             add_action('admin_footer', [$this, 'ppcMarkup']);
 
+            add_filter('publishpress_checklists_supported_module_post_types_args', [$this, 'onlyPublicPostTypes']);
+
             // Keep until issue is solved: https://github.com/publishpress/PublishPress-Checklists/issues/369
             add_action('admin_init', [$this, 'defaultGETparam'], 99);
         }
     }
 
+    /* Only show public post types in the settings (we don't want Navigation Menus, for example)
+       https://github.com/publishpress/PublishPress-Checklists/blob/73b3a4b48de65f116b22671431f948fe0b527694/core/Legacy/Module.php#L96
+    */
+    public function onlyPublicPostTypes($postTypeArgs)
+    {
+        $postTypeArgs['public'] = true;
+        return $postTypeArgs;
+    }
 
     public function defaultGETparam()
     {

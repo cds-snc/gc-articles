@@ -2,32 +2,29 @@
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-
     <title></title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
-
     <link
       rel="preload"
-      href="https://digital.canada.ca/fonts/SourceSansPro-Bold.ttf"
+      href="<?php echo get_fonts_uri();?>SourceSansPro-Bold.ttf"
       as="font"
       type="font/ttf"
       crossorigin="anonymous"
     />
     <link
       rel="preload"
-      href="https://digital.canada.ca/fonts/SourceSansPro-SemiBold.ttf"
+      href="<?php echo get_fonts_uri();?>SourceSansPro-SemiBold.ttf"
       as="font"
       type="font/ttf"
       crossorigin="anonymous"
     />
     <link
       rel="preload"
-      href="https://digital.canada.ca/fonts/SourceSansPro-Regular.ttf"
+      href="<?php echo get_fonts_uri();?>SourceSansPro-Regular.ttf"
       as="font"
       type="font/ttf"
       crossorigin="anonymous"
     />
-
     <link
       rel="stylesheet"
       href="https://digital.canada.ca/lib-cds/gcweb-dist/GCWeb/css/theme.min.css"
@@ -35,7 +32,7 @@
 
     <link
       rel="stylesheet"
-      href="https://digital.canada.ca/sass/cds.css"
+      href="<?php echo get_stylesheet_directory_uri(); ?>/css/styles.css"
       media="screen"
     />
   </head>
@@ -50,7 +47,7 @@
         font-weight:bold;
       }
       </style>
-  <div class="preview">PREVIEW</div>
+  <div class="preview">PREVIEW <a style="font-size:1.0em;margin-left:20px;" href="<?php echo get_edit_post_link()?>">EDIT</a></div>
     <nav aria-label="Skip Navigation Links">
       <ul id="wb-tphp">
         <li class="wb-slc">
@@ -124,11 +121,11 @@
       </nav>
 
       <?php
-      global $post;
-      $image = "";
-      if ($post) {
-          $image = get_the_post_thumbnail_url($post, 'full');
-      }
+        global $post;
+        $image = "";
+        if ($post) {
+            $image = get_the_post_thumbnail_url($post, 'full');
+        }
         ?>
 
       <div class="page-banner" style="background-image: url('<?php echo $image; ?>');"></div>
@@ -225,7 +222,7 @@
               <ul>
                 <li>
                   <a
-                    href="https://us15.campaign-archive.com/home/?u=729a207773f7324e217a1d945&amp;id=eb357181d2"
+                    href="#"
                     >Newsletter</a
                   >
                 </li>
@@ -271,10 +268,5 @@
         </div>
       </div>
     </footer>
-
-    <script src="https://digital.canada.ca/lib-cds/gcweb-dist/wet-boew/js/wet-boew.min.js"></script>
-    <script src="https://digital.canada.ca/lib-cds/gcweb-dist/GCWeb/js/theme.min.js"></script>
-    <script src="https://digital.canada.ca/js/cds-app.js"></script>
-    <script src="https://digital.canada.ca/js/lazyload.js" async=""></script>
   </body>
 </html>

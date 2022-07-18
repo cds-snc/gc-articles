@@ -2,10 +2,8 @@
 <html class="no-js" lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-
     <title></title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
-
     <link
       rel="preload"
       href="<?php echo get_fonts_uri();?>SourceSansPro-Bold.ttf"

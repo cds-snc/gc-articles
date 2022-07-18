@@ -280,7 +280,7 @@ class RequestSiteForm
                         required
                         placeholder=""
                         name="timeline"
-                    ><?php echo $all_values['timeline']; ?></textarea>
+                    ><?php echo esc_html(sanitize_text_field($all_values['timeline'])); ?></textarea>
                 </div>
 
                 <?php Utils::submitButton(__('Next', 'cds-snc')); ?>

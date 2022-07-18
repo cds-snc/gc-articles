@@ -32,10 +32,12 @@ function cds_security_headers($headers)
             "https://fonts.gstatic.com",
             "https://use.fontawesome.com",
             "https://www.canada.ca",
+            "https://digital.canada.ca",
         ],
         "frame-src" => [
             "'self'",
             "https://docs.google.com",
+            "https://digital.canada.ca",
         ],
         "img-src" => [
             "'self'",
@@ -44,7 +46,8 @@ function cds_security_headers($headers)
             "https://wet-boew.github.io",
             "https://www.canada.ca",
             "https://secure.gravatar.com",
-            "2.gravatar.com"
+            "2.gravatar.com",
+            "https://digital.canada.ca",
         ],
         "manifest-src" => [
             "'self'",
@@ -53,7 +56,7 @@ function cds_security_headers($headers)
             "'self'",
         ],
         "object-src" => [
-            "'none'",
+            "https://digital.canada.ca",
         ],
         "script-src" => [
             "'self'",
@@ -68,12 +71,15 @@ function cds_security_headers($headers)
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/theme.min.js",
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/i18n/en.min.js",
             "https://www.googletagmanager.com/",
+            "https://digital.canada.ca",
         ],
         "style-src" => [
             "'self'",
             "'unsafe-inline'",
             "https://use.fontawesome.com",
             "https://www.canada.ca",
+            "https://digital.canada.ca",
+            "https://fonts.googleapis.com",
         ],
         "worker-src" => [
             "'none'"

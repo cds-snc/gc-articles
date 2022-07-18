@@ -179,7 +179,7 @@ class NotifySettings
     {
         printf(
             '<input class="regular-text" type="text" name="NOTIFY_GENERIC_TEMPLATE_ID" id="notify_generic_template_id" value="%s">',
-            $this->NOTIFY_GENERIC_TEMPLATE_ID ? $this->NOTIFY_GENERIC_TEMPLATE_ID : ''
+            $this->NOTIFY_GENERIC_TEMPLATE_ID ? esc_attr($this->NOTIFY_GENERIC_TEMPLATE_ID) : ''
         );
 
         $link = __('Read the <a href="https://notification.canada.ca/format" target="_blank">Email formatting guide</a> for details.', 'cds-snc');

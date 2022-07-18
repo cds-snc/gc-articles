@@ -25,7 +25,6 @@
       type="font/ttf"
       crossorigin="anonymous"
     />
-
     <link
       rel="stylesheet"
       href="https://digital.canada.ca/lib-cds/gcweb-dist/GCWeb/css/theme.min.css"
@@ -122,11 +121,11 @@
       </nav>
 
       <?php
-      global $post;
-      $image = "";
-      if ($post) {
-          $image = get_the_post_thumbnail_url($post, 'full');
-      }
+        global $post;
+        $image = "";
+        if ($post) {
+            $image = get_the_post_thumbnail_url($post, 'full');
+        }
         ?>
 
       <div class="page-banner" style="background-image: url('<?php echo $image; ?>');"></div>

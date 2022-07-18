@@ -39,22 +39,17 @@ class Setup
             add_action('enqueue_block_editor_assets', [$this, 'enqueueGutenbergScripts']);
             add_action('admin_footer', [$this, 'ppcMarkup']);
 
-            // Keep until issue is solved: https://github.com/publishpress/PublishPress-Checklists/issues/369
-            add_action('admin_init', [$this, 'defaultGETparam'], 99);
+            add_filter('publishpress_checklists_supported_module_post_types_args', [$this, 'onlyPublicPostTypes']);
         }
     }
 
-
-    public function defaultGETparam()
+    /* Only show public post types in the settings (we don't want Navigation Menus, for example)
+       https://github.com/publishpress/PublishPress-Checklists/blob/73b3a4b48de65f116b22671431f948fe0b527694/core/Legacy/Module.php#L96
+    */
+    public function onlyPublicPostTypes($postTypeArgs)
     {
-        if (!isset($_POST['action'], $_POST['_wpnonce'], $_POST['option_page'], $_POST['_wp_http_referer'], $_POST['submit']) || !is_admin()) {
-            return false;
-        }
-
-        if (!isset($_GET['page'])) {
-            // set a default GET['page'] param if none exists
-            $_GET = array_merge($_GET, array( 'page' => 'cds-default' ));
-        }
+        $postTypeArgs['public'] = true;
+        return $postTypeArgs;
     }
 
     public function addChecklistRole(): void

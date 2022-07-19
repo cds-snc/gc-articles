@@ -26,6 +26,6 @@ class Wpml
 
     public function addHooks()
     {
-        //
+        add_action('rest_api_init', [$this->endpoints, 'registerRestRoutes']);
     }
 }

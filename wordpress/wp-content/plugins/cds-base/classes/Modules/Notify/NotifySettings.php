@@ -190,7 +190,7 @@ class NotifySettings
             <summary>%s. (%s)</summary>
             <code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
         </details>
-        <p class="description">%s</p><img style=max-width:400px;"" src="%s"><button type="button" style="margin-top:20px;" class="button" id="copy-template">%s</button>', __('Enter your generic Email Template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link,$this->templateImage(), __('Copy template content to clipboard', 'cds-snc'));
+        <p class="description">%s</p><img style=max-width:400px;"" src="%s"><br><button type="button" style="margin-top:20px;" class="button" id="copy-template">%s</button>', __('Enter your generic Email Template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link,$this->templateImage(), __('Copy template content to clipboard', 'cds-snc'));
     }
 
     public function addStyles()

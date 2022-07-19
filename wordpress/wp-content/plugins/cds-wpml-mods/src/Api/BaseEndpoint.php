@@ -10,6 +10,6 @@ class BaseEndpoint
 
     public function __construct()
     {
-        $this->namespace = "gc-lists";
+        $this->namespace = "cds/wpml";
     }
 }

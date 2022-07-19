@@ -55,21 +55,20 @@ class SiteSettings
 
     public function collectionSettingsCreateAdminPage()
     {
-
         ?>
+        <div class="wrap">
+            <h1><?php _e('Site Settings', 'cds-snc') ?></h1>
 
-      <div class="wrap">
-        <h1><?php _e('Site Settings', 'cds-snc') ?></h1>
-
-        <form method="post" action="options.php" id="collection_settings_form" class="gc-form-wrapper">
-            <?php
-            settings_fields('site_settings_group');
-            do_settings_sections('collection-settings-admin');
-            submit_button();
-            ?>
-        </form>
-      </div>
-    <?php }
+            <form method="post" action="options.php" id="collection_settings_form" class="gc-form-wrapper">
+                <?php
+                settings_fields('site_settings_group');
+                do_settings_sections('collection-settings-admin');
+                submit_button();
+                ?>
+            </form>
+        </div>
+        <?php
+    }
 
     public function collectionSettingsPageInit()
     {

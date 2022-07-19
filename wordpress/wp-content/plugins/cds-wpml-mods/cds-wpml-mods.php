@@ -13,4 +13,24 @@
  * @package         Cds_Wpml_Mods
  */
 
-// Your code starts here.
+namespace CDS\Wpml;
+
+use Exception;
+
+/**
+ * Autoloader
+ */
+if (file_exists(__DIR__ . '/vendor/autoload.php')) {
+    require __DIR__ . '/vendor/autoload.php';
+} else {
+    throw new Exception('[CDS Wpml Mods] Autoload does not exist. You probably need to run composer install');
+}
+
+/**
+ * Basic Constants
+ */
+define('GC_LISTS_PLUGIN_FILE_PATH', __FILE__);
+define('GC_LISTS_PLUGIN_BASE_PATH', __DIR__);
+
+$plugin = Wpml::getInstance();
+$plugin->setup();

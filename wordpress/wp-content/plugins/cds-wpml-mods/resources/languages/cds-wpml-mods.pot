@@ -1,0 +1,35 @@
+# Copyright (C) 2022 YOUR NAME HERE
+# This file is distributed under the same license as the Cds Wpml Mods plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Cds Wpml Mods 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-wpml-mods\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-07-19T20:11:08+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: cds-wpml-mods\n"
+
+#. Plugin Name of the plugin
+msgid "Cds Wpml Mods"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "PLUGIN SITE HERE"
+msgstr ""
+
+#. Description of the plugin
+msgid "PLUGIN DESCRIPTION HERE"
+msgstr ""
+
+#. Author of the plugin
+msgid "YOUR NAME HERE"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "YOUR SITE HERE"
+msgstr ""

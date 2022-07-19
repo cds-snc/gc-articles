@@ -1,0 +1,19 @@
+#. Plugin Name of the plugin
+msgid "Cds Wpml Mods"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "PLUGIN SITE HERE"
+msgstr ""
+
+#. Description of the plugin
+msgid "PLUGIN DESCRIPTION HERE"
+msgstr ""
+
+#. Author of the plugin
+msgid "YOUR NAME HERE"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "YOUR SITE HERE"
+msgstr ""

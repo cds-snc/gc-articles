@@ -1,0 +1,56 @@
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/WordPress/wordpress-develop"
+    }
+  ],
+  "require-dev": {
+    "brain/monkey": "^2.6",
+    "php-stubs/wordpress-stubs": "^5.9",
+    "phpunit/phpunit": "^9.5",
+    "yoast/phpunit-polyfills": "^1.0",
+    "yoast/wp-test-utils": "^1.0",
+    "pestphp/pest": "^1.21",
+    "pestphp/pest-plugin-faker": "^1.0",
+    "mockery/mockery": "^1.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "WpmlMods\\": "src/",
+      "WpmlMods\\Tests\\": "tests/",
+      "CDS\\": "../cds-base/classes/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "composer/installers": true
+    }
+  },
+  "require": {
+    "nesbot/carbon": "^2.58",
+    "illuminate/collections": "^9.12"
+  },
+  "type": "wordpress-plugin",
+  "scripts": {
+    "prepare-test-db": "echo y | ./bin/install-wp-tests.sh wordpress_testing root secret db",
+    "test": "pest --coverage",
+    "build-js": "cd resources/js && npm run build",
+    "make-pot": "wp i18n make-pot --domain=gc-lists . resources/languages/gc-lists.pot",
+    "merge-po": "msgmerge -U --no-wrap --backup none -N ./resources/languages/gc-lists-fr_CA.po ./resources/languages/gc-lists.pot",
+    "compile-mo": "msgfmt -o ./resources/languages/gc-lists-fr_CA.mo ./resources/languages/gc-lists-fr_CA.po",
+    "clean-json": "rm -f ./resources/languages/*.json || true",
+    "compile-json": "wp i18n make-json ./resources/languages/gc-lists-fr_CA.po --no-purge",
+    "compile-translations": [
+      "@compile-mo",
+      "@clean-json",
+      "@compile-json"
+    ],
+    "prepare-translations": [
+      "@build-js",
+      "@make-pot",
+      "@merge-po"
+    ]
+  }
+}

@@ -100,11 +100,7 @@ class SiteSettings
             'site_settings_group', // option_group
             'collection_mode_maintenance_page',
             function ($input) {
-                if (is_int($input)) {
-                    return $input;
-                }
-
-                return 0;
+                return intval($input);
             }
         );
 
@@ -119,13 +115,21 @@ class SiteSettings
 
         register_setting(
             'site_settings_group', // option_group
-            'page_on_front',
+            'blog_public',
             function ($input) {
-                if (is_int($input)) {
-                    return $input;
+                if ($input === 0) {
+                    return 0;
                 }
 
-                return 0;
+                return 1;
+            }
+        );
+
+        register_setting(
+            'site_settings_group', // option_group
+            'page_on_front',
+            function ($input) {
+                return intval($input);
             }
         );
 

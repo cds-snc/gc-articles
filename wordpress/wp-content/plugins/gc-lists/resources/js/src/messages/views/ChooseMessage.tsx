@@ -67,8 +67,6 @@ export const ChooseMessage = () => {
                             {__('Cancel', 'gc-lists')}
                     </button>
                 </div>
-
-                <input  />
             </form>
         </>
     )

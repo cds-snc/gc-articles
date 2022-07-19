@@ -274,7 +274,7 @@ class ContactForm
                     required
                     placeholder=""
                     name="message"
-                ><?php echo $all_values['message']; ?></textarea>
+                ><?php echo esc_html(sanitize_text_field($all_values['message'])); ?></textarea>
 
                 <?php Utils::submitButton(__('Next', 'cds-snc')); ?>
             </form>

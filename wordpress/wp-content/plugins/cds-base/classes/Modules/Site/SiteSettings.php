@@ -23,7 +23,7 @@ class SiteSettings
     {
         $filterOptions = [
             'collection_mode',
-            'collection_mode_maintenance_page'.
+            'collection_mode_maintenance_page',
             'show_on_front',
             'page_on_front',
             'collection_mode',
@@ -481,10 +481,7 @@ class SiteSettings
     public function indexSiteCallback()
     {
         ?>
-        <input name="blog_public" type="checkbox" id="blog_public" value="0" <?php checked(
-            '0',
-            get_option('blog_public')
-        ); ?> />
+        <input name="blog_public" type="checkbox" id="blog_public" value="0" <?php checked('0', get_option('blog_public')); ?> />
         <?php _e('Discourage search engines from indexing this site'); ?>
         <p class="description"><?php _e('It is up to search engines to honor this request.'); ?></p>
         <?php

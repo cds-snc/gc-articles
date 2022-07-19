@@ -89,19 +89,21 @@ class Messenger
     ): array {
         try {
             $client = $this->getGuzzleClient();
-            $response = $client->request('POST', getenv('ZENDESK_API_URL') . '/api/v2/requests', [
+            $response = $client->request('POST', getenv('FRESH_DESK_API_URL') . '/api/v2/tickets', [
+                'auth' => [
+                    getenv('FRESH_DESK_API_KEY'),
+                    'X'
+                ],
                 'json' =>  [
-                    'request' => [
-                        'subject' => $goal,
-                        'description' => '',
-                        'email' => $email,
-                        'comment' => ['body' => $message],
-                        'requester' => ['name' => $fullname, 'email' => $email],
-                        'tags' => $this->mergeTags($goal),
-                        'is_public' => true,
-                        'recipient' => 'platform-mvp@cds-snc.ca',
-                        'type' => 'question'
-                    ]
+                    'product_id' => (int)getenv('FRESH_DESK_PRODUCT_ID'),
+                    'subject' => $goal,
+                    'description' => $message,
+                    'name' => $fullname,
+                    'email' => $email,
+                    'priority' => 1,
+                    'status' => 2,
+                    'tags' => $this->mergeTags($goal),
+                    'type' => 'Question'
                 ],
             ]);
 

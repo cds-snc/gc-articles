@@ -17,8 +17,8 @@
   },
   "autoload": {
     "psr-4": {
-      "WpmlMods\\": "src/",
-      "WpmlMods\\Tests\\": "tests/",
+      "CDS\\Wpml\\": "src/",
+      "CDS\\Wpml\\Tests\\": "tests/",
       "CDS\\": "../cds-base/classes/"
     }
   },

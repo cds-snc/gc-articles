@@ -29,8 +29,8 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 /**
  * Basic Constants
  */
-define('GC_LISTS_PLUGIN_FILE_PATH', __FILE__);
-define('GC_LISTS_PLUGIN_BASE_PATH', __DIR__);
+define('CDS_WPML_PLUGIN_FILE_PATH', __FILE__);
+define('CDS_WPML_PLUGIN_BASE_PATH', __DIR__);
 
 $plugin = Wpml::getInstance();
 $plugin->setup();

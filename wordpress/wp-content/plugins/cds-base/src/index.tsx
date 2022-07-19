@@ -13,6 +13,7 @@ import { CollectionsPanel } from "../classes/Modules/UserCollections/src/Collect
 import { List } from "./Types";
 import { UserForm } from "../classes/Modules/Users/src/UserForm";
 import { writeInterstitialMessage } from "util/preview";
+import "util/copyTemplate";
 
 declare global {
   interface Window {

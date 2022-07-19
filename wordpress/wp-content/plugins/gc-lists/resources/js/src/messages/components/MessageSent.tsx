@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
  * Internal dependencies
  */
 import { SendToList } from ".";
+import { useList } from '../../store';
 
 const StyledActionContainer = styled.div`
     margin-top:60px;
@@ -29,6 +30,8 @@ const StyledSuccess = styled.div`
 `
 
 export const MessageSent = ({ id, listName, count }: { id: string | undefined, listName: string | undefined, count: number }) => {
+    const { state: { user } } = useList();
+
     return (
         <>
             <StyledSuccess>
@@ -37,7 +40,7 @@ export const MessageSent = ({ id, listName, count }: { id: string | undefined, l
             <SendToList sending={false} name={listName} count={count} />
             <StyledActionContainer>
                 <Link
-                    to={`/messages/edit/${id}`}
+                    to={user.hasPhone ? `/messages/choose` : `/messages/edit/email/new`}
                     style={{ marginRight: "20px" }}
                     className="button button-primary"
                 >

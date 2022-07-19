@@ -419,7 +419,7 @@ class SiteSettings
         $value  = str_replace('http://', 'https://', $value);
 
         ?>
-      <input name="fip_href" type="text" id="fip_href" class="regular-text" value="<?php echo $value; ?>">
+        <input name="fip_href" type="text" id="fip_href" class="regular-text" value="<?php echo $value; ?>">
         <?php
     }
 
@@ -427,8 +427,8 @@ class SiteSettings
     {
         $analyticsId = get_option("analytics_id", "");
         ?>
-      <input name="analytics_id" type="text" id="analytics_id" class="regular-text"
-             value="<?php echo esc_attr($analyticsId); ?>">
+        <input name="analytics_id" type="text" id="analytics_id" class="regular-text"
+               value="<?php echo esc_attr($analyticsId); ?>">
         <?php
     }
 
@@ -465,7 +465,7 @@ class SiteSettings
     public function blogNameCallback()
     {
         ?>
-      <input name="blogname" type="text" id="blogname" class="regular-text"
+        <input name="blogname" type="text" id="blogname" class="regular-text"
              value="<?php echo esc_attr(get_option("blogname")); ?>">
         <?php
     }
@@ -473,7 +473,7 @@ class SiteSettings
     public function blogDescriptionCallback()
     {
         ?>
-      <input name="blogdescription" type="text" id="blogdescription" class="regular-text"
+        <input name="blogdescription" type="text" id="blogdescription" class="regular-text"
              value="<?php echo esc_attr(get_option("blogdescription")); ?>">
         <?php
     }
@@ -481,12 +481,12 @@ class SiteSettings
     public function indexSiteCallback()
     {
         ?>
-      <input name="blog_public" type="checkbox" id="blog_public" value="0" <?php checked(
-          '0',
-          get_option('blog_public')
-      ); ?> />
+        <input name="blog_public" type="checkbox" id="blog_public" value="0" <?php checked(
+            '0',
+            get_option('blog_public')
+        ); ?> />
         <?php _e('Discourage search engines from indexing this site'); ?>
-      <p class="description"><?php _e('It is up to search engines to honor this request.'); ?></p>
+        <p class="description"><?php _e('It is up to search engines to honor this request.'); ?></p>
         <?php
     }
 

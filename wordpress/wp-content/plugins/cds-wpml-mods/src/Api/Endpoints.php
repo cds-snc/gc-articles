@@ -54,6 +54,22 @@ class Endpoints extends BaseEndpoint
         ]);
     }
 
+    public function returnTwo(): int
+    {
+        return 2;
+    }
+
+    public function getPostTitle(WP_Post $post): string
+    {
+        return $post->post_title;
+    }
+
+    public function getPostLanguage(WP_Post $post): string
+    {
+        $language_code = $this->getLanguageCodeOfPostObject($post);
+        return $language_code;
+    }
+
     public function getLanguageCodeOfPostObject(WP_Post $post): string
     {
         $wpmlLanguageDetails = apply_filters('wpml_post_language_details', null, $post->ID);

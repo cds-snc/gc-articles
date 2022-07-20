@@ -27,5 +27,16 @@ class Wpml
     public function addHooks()
     {
         add_action('rest_api_init', [$this->endpoints, 'registerRestRoutes']);
+
+        add_action('enqueue_block_editor_assets', function () {
+            wp_enqueue_script(
+                'cds-wpml-mods',
+                plugin_dir_url(__FILE__) . '../resources/js/build/sidebar.js',
+                array( 'wp-edit-post', 'wp-element', 'wp-components', 'wp-plugins', 'wp-data' ),
+                filemtime(plugin_dir_path(__FILE__) . '../resources/js/build/sidebar.js')
+            );
+
+            wp_set_script_translations('cds-wpml-mods', 'cds-wpml-mods', CDS_WPML_PLUGIN_BASE_PATH . '/resources/languages/');
+        });
     }
 }

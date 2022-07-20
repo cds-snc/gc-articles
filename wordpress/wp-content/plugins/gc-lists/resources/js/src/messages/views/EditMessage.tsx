@@ -52,12 +52,12 @@ export const EditMessage = () => {
     const [saved, setSaved] = useState(false);
     const { template, loadingTemplate, templateId, messageType, getTemplate, saveTemplate } = useTemplateApi();
     const [currentTemplate, setCurrentTemplate] = useState<Descendant[]>();
-    const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors } } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
+    const { register, setValue, getValues, clearErrors, handleSubmit, formState: { errors }, watch } = useForm({ defaultValues: { name: "", subject: "", hasTemplate: "" } });
     const { state: { user } } = useList();
 
     useEffect(() => {
         setValue("name", template?.name || "")
-        setValue("subject", template?.subject || "");
+        setValue("subject", template?.subject || "")
     }, [template, setValue]);
 
     useEffect(() => {
@@ -68,7 +68,11 @@ export const EditMessage = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleFormData = useCallback(async (formData: any) => {
+    const sendToList = async () => {
+        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), message_type: messageType, template: content } });
+    }
+
+    const saveDraft = useCallback(async (formData: any) => {
         let content = template?.body;
 
         if (currentTemplate) {
@@ -77,6 +81,12 @@ export const EditMessage = () => {
 
         setSaved(false);
         const { name, subject } = formData;
+
+        if(!name) {
+            // require a name to save a draft 
+            return false;
+        }
+
         const result = await saveTemplate({ templateId, name, subject, content: deserialize(content), message_type: messageType });
 
         if (result) {
@@ -102,9 +112,7 @@ export const EditMessage = () => {
         )
     }
 
-    const templateHasValue = currentTemplate && serialize(currentTemplate) !== '';
-
-    let content = template?.body;
+    let content = template?.body; 
 
     if (currentTemplate) {
         content = serialize(currentTemplate)
@@ -116,18 +124,27 @@ export const EditMessage = () => {
                 <Back /> <span>{__("Back to messages ", "gc-lists")}</span>
             </StyledLink>
             <h1>{heading}</h1>
-            <form style={{ maxWidth: '400px' }}>
-                <input type="hidden" {...register("hasTemplate", { validate: () => templateHasValue })} />
-                {
-                    /*
-                    ☝️☝️☝️☝️☝️☝️
-                    hasTemplate (hidden field)
-                    this is for validation only
-                    ...we don't register the "editor / content " as part of the form
-                    but we need to ensure it has content
-                    */
-                }
+            <form 
+                style={{ maxWidth: '400px' }}
+                onSubmit={async (e) => {
+                    e.preventDefault();
+
+                    await handleSubmit(sendToList, () => {
+                        return false;
+                    })();
+                }}
+            >
                 <table className="form-table">
+                    <input type="hidden" {...register("hasTemplate", { validate: () => content.length > 0 })} />
+                    {
+                        /*
+                        ☝️☝️☝️☝️☝️☝️
+                        hasTemplate (hidden field)
+                        this is for validation only
+                        ...we don't register the "editor / content " as part of the form
+                        but we need to ensure it has content
+                        */
+                    }
                     <tbody>
                         <tr>
                             <StyledCell>
@@ -174,32 +191,29 @@ export const EditMessage = () => {
                                         </>
                                         : null}
                                 </div>
-                                {/*<StyledLastSaved>*/}
-                                {/*    /!* @todo use date-fns to show template date *!/*/}
-                                {/*    {template?.updated_at ? <> {__('Last saved', "gc-lists")} {formatRelative(new Date(template.updated_at), new Date())} </> : null}*/}
-                                {/*    {templateId && <Link to={`/messages/${templateId}/versions`}> <StyledPreviousVersions>{__('See previous versions', "gc-lists")}</StyledPreviousVersions></Link>}*/}
-                                {/*</StyledLastSaved>*/}
                             </StyledCell>
                         </tr>
                     </tbody>
                 </table>
-            </form>
-            {saved && <Success message={__("Message saved", 'gc-lists')} />}
-            <div>
-                <button style={{ marginRight: "20px" }}
-                    onClick={async () => {
-                        navigate(`/messages/send/${templateId}`, { state: { ...getValues(), message_type: messageType, template: content } });
-                    }}
-                    className="button button-primary">
-                    {__('Choose a list to send to', 'gc-lists')}
-                </button>
+                {saved && <Success message={__("Message saved", 'gc-lists')} />}
+                <div>
 
-                <button className="button" onClick={async () => {
-                    handleSubmit(handleFormData, () => {
-                        return false;
-                    })();
-                }}>{__('Save draft', 'gc-lists')}</button>
-            </div>
+                    <button style={{ marginRight: "20px" }} type="submit" className="button button-primary">
+                        {__('Choose a list to send to', 'gc-lists')}
+                    </button>
+
+                    <button 
+                        className="button" 
+                        type="button"
+                        disabled={!watch("name")} // Disable button if "name" is empty
+                        onClick={async () => {
+                            saveDraft(getValues());
+                        }}
+                    >
+                        {__('Save draft', 'gc-lists')}
+                    </button>
+                </div>
+            </form>
         </>
     )
 }

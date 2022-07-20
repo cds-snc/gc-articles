@@ -377,3 +377,13 @@ th.column-disable_user_login {
   display: none !important;
 }
 
+.gc-list-template-img{
+  max-width:400px;
+  margin-left:-5px;
+}
+
+.gc-list-template-btn{
+  margin-top:20px;
+  display:block;
+}
+

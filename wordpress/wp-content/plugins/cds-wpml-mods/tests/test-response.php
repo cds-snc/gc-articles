@@ -103,3 +103,25 @@ test('assert reponse object with no language provided', function () {
         'language_code' => 'en'
     ]);
 });
+
+$testCases = [
+    ['request_body' => ['post_id' => '10'], 'result' => 10],
+    ['request_body' => ['post_id' => 'ten'], 'result' => -1],
+    ['request_body' => [], 'result' => -1],
+    ['request_body' => ['post_id' => '10ten'], 'result' => -1],
+    ['request_body' => ['post_id' => '10.1'], 'result' => 10],
+    ['request_body' => ['post_id' => '10.99'], 'result' => 10],
+    ['request_body' => ['post_id' => false], 'result' => -1],
+    ['request_body' => ['post_id' => true], 'result' => -1],
+    ['request_body' => ['post_id' => '1'], 'result' => 1],
+    ['request_body' => ['post_id' => '0'], 'result' => 0],
+    ['request_body' => ['post_id' => '010'], 'result' => 10],
+    ['request_body' => ['post_id' => '0x10'], 'result' => -1],
+];
+
+foreach($testCases as $index => $case) {
+    test('assert get post ID from request number ' . $index, function () use ($case) {
+        $response = new FormatResponse();
+        expect($response->getPostIDFromRequestBody($case['request_body'], 'post_id'))->toEqual($case['result']);
+    });
+}

@@ -12,6 +12,17 @@ class FormatResponse
     {
     }
 
+    public function getPostIDFromRequestBody(array $request_body, string $key): int
+    {
+        $id = -1;
+
+        if (isset($request_body[$key]) && is_numeric($request_body[$key])) {
+            $id = intval($request_body[$key]); // can be zero or 1
+        }
+
+        return $id;
+    }
+
     public function getLanguageCodeOfPostObject(WP_Post $post): string
     {
         $wpmlLanguageDetails = apply_filters('wpml_post_language_details', null, $post->ID);

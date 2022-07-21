@@ -4,20 +4,26 @@ declare(strict_types=1);
 
 namespace CDS\Wpml\Api;
 
+use WP_Post;
+
 class FormatResponse
 {
     public function __construct()
     {
     }
 
-    public function getLanguageCodeOfPostObject(\WP_Post $post): string
+    public function getLanguageCodeOfPostObject(WP_Post $post): string
     {
         $wpmlLanguageDetails = apply_filters('wpml_post_language_details', null, $post->ID);
         return $wpmlLanguageDetails['language_code'];
     }
 
-    public function getTranslatedPostID(\WP_Post $post, string $altLanguage): int|null
+    public function getTranslatedPostID(WP_Post $post, ?string $altLanguage = null): int|null
     {
+        if (is_null($altLanguage)) {
+            $language_code = $this->getLanguageCodeOfPostObject($post);
+            $altLanguage = $language_code === 'en' ? 'fr' : 'en';
+        }
         // translated_post_id
         return apply_filters('wpml_object_id', $post->ID, 'post', false, $altLanguage);
     }
@@ -31,7 +37,7 @@ class FormatResponse
         });
     }
 
-    public function buildResponseObject(\WP_Post $post, string $language_code): array
+    public function buildResponseObject(WP_Post $post, ?string $language_code = null): array
     {
         $tempPostObj = [];
 
@@ -47,13 +53,16 @@ class FormatResponse
         // language_code
         $tempPostObj['language_code'] = $this->getLanguageCodeOfPostObject($post);
 
-        // translated_post_id
-        $altLanguage = $language_code === 'en' ? 'fr' : 'en';
-        $translatedPostID = $this->getTranslatedPostID($post, $altLanguage);
-        $tempPostObj['translated_post_id'] = $translatedPostID;
+        if (!is_null($language_code)) {
+            // translated_post_id
+            $altLanguage = $language_code === 'en' ? 'fr' : 'en';
+            $translatedPostID = $this->getTranslatedPostID($post, $altLanguage);
+            $tempPostObj['translated_post_id'] = $translatedPostID;
 
-        // is_translated
-        $tempPostObj['is_translated'] = !is_null($translatedPostID);
+            // is_translated
+            $tempPostObj['is_translated'] = !is_null($translatedPostID);
+        }
+
 
         return $tempPostObj;
     }

@@ -6,6 +6,7 @@ namespace CDS\Wpml\Api;
 
 use WP_REST_Request;
 use WP_Post;
+use WP_Error;
 
 class Endpoints extends BaseEndpoint
 {
@@ -45,7 +46,7 @@ class Endpoints extends BaseEndpoint
         ]);
 
         // Get a page's associated translation
-        register_rest_route($this->namespace, '/(?P<type>pages|posts)/(?P<id>[\d]+)', [
+        register_rest_route($this->namespace, '/translation/(?P<id>[\d]+)', [
             'methods'             => 'GET',
             'callback'            => [$this, 'getTranslation'],
             'permission_callback' => function () {
@@ -61,7 +62,7 @@ class Endpoints extends BaseEndpoint
      *
      * @return mixed
      */
-    public function getAvailablePages(WP_REST_Request $request)
+    public function getAvailablePages(WP_REST_Request $request): array
     {
         $response = [];
 
@@ -98,16 +99,28 @@ class Endpoints extends BaseEndpoint
 
     /**
      * Get the existing translation for a given page.
+     * Returns a WP_Error if no post is found for the id given, or if no translation is found.
      *
      * @param  WP_REST_Request  $request
      *
-     * @return array
+     * @return array | WP_Error
      */
     public function getTranslation(WP_REST_Request $request)
     {
-        return [
-            $request['language'],
-            $request['type'],
-        ];
+        $response = [];
+
+        $post = get_post($request['id']);
+        if (is_null($post)) {
+            return new WP_Error('post_not_found', __('No post you are looking for does not exist', 'cds-wp-mods'), array( 'status' => 404 ));
+        }
+
+        $translatedPostID = $this->formatResponse->getTranslatedPostID($post);
+        if (is_null($translatedPostID)) {
+            return new WP_Error('no_translation', __('No translation exists for this post.', 'cds-wp-mods'), array( 'status' => 404 ));
+        }
+
+        $translatedPost = get_post($translatedPostID);
+
+        return $this->formatResponse->buildResponseObject($translatedPost);
     }
 }

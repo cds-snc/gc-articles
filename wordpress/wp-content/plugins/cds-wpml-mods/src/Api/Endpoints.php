@@ -67,9 +67,12 @@ class Endpoints extends BaseEndpoint
         $response = [];
 
         $post_type = $request['type'] === 'pages' ? 'page' : 'post';
+
         $args = array(
+            'post_status' => 'any',
             'post_type' => $post_type
         );
+
         $posts = $this->formatResponse->filterPostsByLanguage(get_posts($args), $request['language']);
 
         foreach ($posts as $post) {

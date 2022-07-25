@@ -8,10 +8,6 @@ use WP_Post;
 
 class FormatResponse
 {
-    public function __construct()
-    {
-    }
-
     public function getPostIDFromRequestBody(array $request_body, string $key): int
     {
         $id = -1;
@@ -25,8 +21,8 @@ class FormatResponse
 
     public function getLanguageCodeOfPostObject(WP_Post $post): string
     {
-        $wpmlLanguageDetails = apply_filters('wpml_post_language_details', null, $post->ID);
-        return $wpmlLanguageDetails['language_code'];
+        global $sitepress;
+        return $sitepress->get_language_for_element($post->ID, 'post_' . $post->post_type);
     }
 
     public function getTranslatedPostID(WP_Post $post, ?string $altLanguage = null): int|null

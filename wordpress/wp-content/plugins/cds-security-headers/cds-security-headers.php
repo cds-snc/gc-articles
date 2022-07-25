@@ -38,6 +38,7 @@ function cds_security_headers($headers)
             "'self'",
             "https://docs.google.com",
             "https://digital.canada.ca",
+            "https://www.youtube.com",
         ],
         "img-src" => [
             "'self'",

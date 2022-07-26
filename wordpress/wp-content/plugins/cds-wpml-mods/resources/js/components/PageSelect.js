@@ -1,17 +1,21 @@
 const { SelectControl } = wp.components;
 const { useState, useEffect } = wp.element;
+const { select } = wp.data;
 const { __ } = wp.i18n;
 
 import { getData } from '../util/fetch.js';
 
 export const PageSelect = () => {
-    const emptyPage = { is_translated: null, value: 0, label: __("No translation", "cds-snc") };
+    const emptyPage = { is_translated: null, value: 0, label: __("None", "cds-snc") };
+
+    const type = select("core/editor").getCurrentPostType();
 
     const hintTexts = {
-        'empty': () => __("No translation assigned for this post.", "cds-wpml-mods"),
-        'untranslated': (label) => `“${label}” ${__('assigned French-language translation for this post.', "cds-wpml-mods")}`,
+        'empty': () => `${__('No translation assigned for this', "cds-wpml-mods")} ${type}.`,
+        'untranslated': (label) => `“${label}” ${__('assigned as translation for this', "cds-wpml-mods")} ${type}.`,
         'translated': (label) => `${__('⚠️ This will unlink the existing translation for', "cds-wpml-mods")} “${label}”.`,
     }
+
 
     const [isLoading, setIsLoading] = useState(true);
     const [pages, setPages] = useState([emptyPage]);
@@ -54,7 +58,7 @@ export const PageSelect = () => {
     return (
         <div>
             <SelectControl 
-                label={__("Options Select Name", "cds-wpml-mods")}
+                label={__('Assigned translation', "cds-wpml-mods")}
                 disabled={isLoading ? true : false}
                 value={page.value}
                 help={hintText}

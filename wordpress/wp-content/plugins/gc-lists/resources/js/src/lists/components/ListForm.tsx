@@ -66,7 +66,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <strong>{__("List name", "gc-lists")}</strong>
                 </label>
                 <div className={errors.name ? "error-wrapper" : ""}>
-                    {errors.name && <span className="validation-error">{errors.name?.message || __("Name is required", "gc-lists")}</span>}
+                    {errors.name && <span className="validation-error">{errors.name?.message || __("List name is required", "gc-lists")}</span>}
                     <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
                 </div>
             </div>
@@ -76,7 +76,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                         <strong>{__("List type", "gc-lists")}</strong>
                     </label>
                     <div className={errors.language ? "field error-wrapper" : "field"}>
-                        {errors.language && <span className="validation-error">{errors.language?.message || __("Type is required", "gc-lists")}</span>}
+                        {errors.language && <span className="validation-error">{errors.language?.message || __("List type is required", "gc-lists")}</span>}
                         <fieldset>
                             <label htmlFor="en">
                                 <input id="en" {...register("language", { required: true })} type="radio" value="en" />

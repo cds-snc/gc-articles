@@ -50,6 +50,7 @@ class Utils
         $user = new \stdClass();
         $user->hasEmail = current_user_can('list_manager_bulk_send');
         $user->hasPhone = current_user_can('list_manager_bulk_send_sms');
+        $user->isSuperAdmin = is_super_admin();
 
         return $user;
     }

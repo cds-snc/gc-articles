@@ -5,23 +5,29 @@ import { useMemo } from "react";
 import styled from 'styled-components';
 import { useTable } from 'react-table';
 import { Link } from "react-router-dom";
+import { __ } from "@wordpress/i18n";
 
 /**
  * Internal dependencies
  */
-import { DeleteActionLink } from './DeleteActionLink';
-import { ResetActionLink } from './ResetActionLink';
+import { DeleteLink } from './DeleteLink';
 import { List, ListType } from "../../types"
 import { useList, useListFetch } from '../../store';
-import { capitalize, getListType } from "../../util/functions";
+import { getListType } from "../../util/functions";
 
-const HeaderStyles = styled.div`
-    display: flex;
-    justify-content: space-between;
+const StyledCreateButton = styled(Link)`
+    margin-bottom: 20px !important;
 `
 
-const UploadButton = styled.div`
-    margin: 0px .5rem .5rem;
+const StyledActionLink = styled(Link)`
+    text-decoration:underline !important;
+    :hover{
+        text-decoration:none !important;
+    }
+`
+const StyledDivider = styled.span`
+    margin-left: 10px;
+    margin-right: 10px;
 `
 
 const Table = ({ columns, data }: { columns: any, data: List[] }) => {
@@ -63,92 +69,108 @@ const Table = ({ columns, data }: { columns: any, data: List[] }) => {
     )
 }
 
-const CreateListLink = () => {
-    return <Link className="button button-primary" to={{ pathname: `/lists/create` }}>Create new list</Link>
-}
-
-const UploadListLink = ({ name, listId, type }: { name: string, listId: string, type: ListType }) => {
-    return <UploadButton><Link aria-label={`${name} upload list`} className="button action" to={{ pathname: `/lists/${listId}/upload/${type}` }}>{capitalize(type)}</Link></UploadButton>
-}
-
 const updateLink = (listId: string) => {
     return `/lists/${listId}/update`;
 }
 
+const EditLink = ({ listId }: { listId: string }) => {
+    return (
+        <StyledActionLink to={{ pathname: updateLink(listId) }}>
+            {__('Edit', 'gc-lists')}
+        </StyledActionLink>
+    )
+}
+
+const UploadListLink = ({ name, listId, type }: { name: string, listId: string, type: ListType }) => {
+    return (
+        <StyledActionLink to={{ pathname: `/lists/${listId}/upload/${type}` }}>
+            {__('Add subscribers', 'gc-lists')}
+        </StyledActionLink>
+    )
+}
+
+const StyledNoLists = styled.div`
+    padding:10px;
+    border: 1px solid rgb(204, 204, 204);
+
+    p{
+        margin-top:0px;
+        margin-bottom:5px;
+    }
+`;
+
+const NoLists = () => {
+    return (
+        <StyledNoLists>
+            <p><strong>{__("You have no subscriber lists.", "gc-lists")}</strong></p>
+            <p>{__("A subscriber list allows you to collect a group of subscribers that you can send messages to.", "gc-lists")}</p>
+        </StyledNoLists>
+    )
+}
+
 export const ListViewTable = () => {
-    const { state: { lists, user } } = useList();
+    const { state: { lists, user, hasLists } } = useList();
     const { status } = useListFetch();
     const columns = useMemo(
-        () => [
-            {
-                Header: () => { return <HeaderStyles><CreateListLink /></HeaderStyles> },
-                accessor: 'lists',
-                columns: [
-                    {
-                        Header: 'Name',
-                        accessor: 'name',
-                        Cell: ({ row }: { row: any }) => {
-                            return (
-                                <strong>
-                                    <Link
-                                        className="row-title"
-                                        to={{
-                                            pathname: updateLink(row?.original?.id),
-                                        }}
-                                    >
-                                        {row?.values?.name}
-                                    </Link>
-                                </strong>
-                            )
-                        },
-                    },
-                    {
-                        Header: 'Subscribers',
-                        accessor: 'subscriber_count',
-                    },
-                    {
-                        Header: 'Delete',
-                        accessor: 'delete',
-                        Cell: ({ row }: { row: any }) => {
-                            return (<DeleteActionLink id={`${row?.original?.id}`} />)
-                        },
-                    },
-                    {
-                        Header: 'Reset',
-                        accessor: 'reset',
-                        Cell: ({ row }: { row: any }) => {
-                            return (<ResetActionLink id={`${row?.original?.id}`} />);
-                        },
-                    },
-
-                    {
-                        Header: 'Upload',
-                        accessor: 'active',
-                        Cell: ({ row }: { row: any }) => {
-                            return <>
-                                {getListType(row?.original?.language) === ListType.EMAIL && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} type={ListType.EMAIL} />}
-                                {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} type={ListType.PHONE} /> : null}
-                            </>
-                        },
-                    },
-                ],
+        () =>
+            [{
+                Header: __('List Name', "gc-lists"),
+                accessor: 'name',
+                Cell: ({ row }: { row: any }) => {
+                    return (
+                        <strong>
+                            <Link
+                                className="row-title"
+                                to={{
+                                    pathname: updateLink(row?.original?.id),
+                                }}
+                            >
+                                {row?.values?.name}
+                            </Link>
+                        </strong>
+                    )
+                },
             },
-        ],
-        [user?.hasPhone]);
+            {
+                Header: __('Subscribers', "gc-lists"),
+                accessor: 'subscriber_count',
+            },
+            {
+                accessor: 'active',
+                Cell: ({ row }: { row: any }) => {
+                    return <>
+                        <EditLink listId={`${row?.original?.id}`} />
+                        <StyledDivider>|</StyledDivider>
+                        {user?.isSuperAdmin && <><DeleteLink listId={`${row?.original?.id}`} /> <StyledDivider>|</StyledDivider> </>}
+                        {getListType(row?.original?.language) === ListType.EMAIL && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} type={ListType.EMAIL} />}
+                        {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} type={ListType.PHONE} /> : null}
+                    </>
+                },
+            },
+            ], [user?.hasPhone, user?.isSuperAdmin]);
 
 
     if (status === "error") {
         return (
             <div className="error-summary components-notice is-error">
                 <div className="components-notice__content">
-                    <h2>Error something went wrong</h2>
+                    <h2>{__('Error something went wrong', 'gc-lists')}</h2>
                 </div>
             </div>
         )
     }
 
     return (
-        <Table columns={columns} data={lists} />
+        <>
+            <StyledCreateButton
+                className="button button-primary"
+                to={{ pathname: `/lists/create` }}>
+                {__('Create new list', 'gc-lists')}
+            </StyledCreateButton>
+
+            {hasLists ? <Table columns={columns} data={lists} /> : <NoLists />}
+
+        </>
     )
 }
 

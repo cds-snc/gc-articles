@@ -47,8 +47,9 @@ class Post
             $language_code = $this->getLanguageCodeOfPostObject($post);
             $altLanguage = $language_code === 'en' ? 'fr' : 'en';
         }
-        // translated_post_id
-        return apply_filters('wpml_object_id', $post->ID, 'post', false, $altLanguage);
+
+        global $sitepress;
+        return $sitepress->get_object_id($post->ID, 'post', false, $altLanguage);
     }
 
     public function buildResponseObject(WP_Post $post, ?string $language_code = null): array

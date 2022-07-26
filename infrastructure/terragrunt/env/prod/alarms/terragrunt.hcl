@@ -64,8 +64,8 @@ inputs = {
   alb_target_5xx_maximum                   = 5
   alb_target_4xx_maximum                   = 100
 
-  canary_healthcheck_url_eng = "https://articles.alpha.canada.ca/"
-  canary_healthcheck_url_fra = "https://articles.alpha.canada.ca/"
+  canary_healthcheck_url_eng = "https://articles.canada.ca/"
+  canary_healthcheck_url_fra = "https://articles.canada.ca/"
 
   cloudfront_arn              = dependency.load-balancer.outputs.cloudfront_arn
   cloudfront_distribution_id  = dependency.load-balancer.outputs.cloudfront_distribution_id

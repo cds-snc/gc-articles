@@ -40,7 +40,7 @@ dependency "storage" {
 }
 
 inputs = {
-  domain_name                                  = "articles.alpha.canada.ca"
+  domain_name                                  = "articles.canada.ca"
   load_balancer_security_group_id              = dependency.network.outputs.load_balancer_security_group_id
   public_subnet_ids                            = dependency.network.outputs.public_subnet_ids
   vpc_id                                       = dependency.network.outputs.vpc_id

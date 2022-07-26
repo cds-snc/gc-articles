@@ -9,7 +9,6 @@ import styled from 'styled-components';
 /**
  * Internal dependencies
  */
-import { Back } from "./Back";
 import { List, FieldError } from "../../types";
 import { useList } from "../../store";
 
@@ -169,7 +168,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                 </div>
             </details>
             <div className="field submit">
-                <input className="button button-primary" type="submit" /><Back />
+                <input className="button button-primary" type="submit" value={__("Save list", "gc-lists")} />
             </div>
         </StyledForm>
     );

@@ -29,6 +29,39 @@ resource "aws_acm_certificate" "wordpress_cloudfront" {
   }
 }
 
+resource "aws_acm_certificate" "wordpress_new" {
+  count                     = var.env == "production" ? 1 : 0
+  domain_name               = "articles.canada.ca"
+  subject_alternative_names = ["*.articles.canada.ca"]
+  validation_method         = "DNS"
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# CloudFront certificate must be in us-east-1
+resource "aws_acm_certificate" "wordpress_new_cloudfront" {
+  provider = aws.us-east-1
+
+  count                     = var.env == "production" ? 1 : 0
+  domain_name               = "articles.canada.ca"
+  subject_alternative_names = ["*.articles.canada.ca"]
+  validation_method         = "DNS"
+
+  tags = {
+    (var.billing_tag_key) = var.billing_tag_value
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_route53_record" "wordpress_validation" {
   zone_id = var.zone_id
 

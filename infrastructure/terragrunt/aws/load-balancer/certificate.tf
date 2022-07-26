@@ -30,6 +30,7 @@ resource "aws_acm_certificate" "wordpress_cloudfront" {
 }
 
 resource "aws_acm_certificate" "wordpress_new" {
+  count                     = var.env == "production" ? 1 : 0
   domain_name               = "articles.canada.ca"
   subject_alternative_names = ["*.articles.canada.ca"]
   validation_method         = "DNS"
@@ -43,10 +44,16 @@ resource "aws_acm_certificate" "wordpress_new" {
   }
 }
 
+resource "aws_acm_certificate_validation" "wordpress_new" {
+  certificate_arn   = aws_acm_certificate.wordpress_new.arn
+  validation_method = "DNS"
+}
+
 # CloudFront certificate must be in us-east-1
 resource "aws_acm_certificate" "wordpress_new_cloudfront" {
   provider = aws.us-east-1
 
+  count                     = var.env == "production" ? 1 : 0
   domain_name               = "articles.canada.ca"
   subject_alternative_names = ["*.articles.canada.ca"]
   validation_method         = "DNS"

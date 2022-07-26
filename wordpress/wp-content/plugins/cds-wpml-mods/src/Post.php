@@ -2,21 +2,37 @@
 
 declare(strict_types=1);
 
-namespace CDS\Wpml\Api;
+namespace CDS\Wpml;
 
 use WP_Post;
 
-class FormatResponse
+class Post
 {
-    public function getPostIDFromRequestBody(array $request_body, string $key): int
+    /**
+     * Get available content by type and language
+     *
+     * @param  array  $args
+     * @param  mixed  $language_code
+     *
+     * @return array
+     */
+    public function getAvailable(string $post_type, string $language_code): array
     {
-        $id = -1;
+        $args = array(
+            'post_status' => 'any',
+            'post_type' => $post_type
+        );
 
-        if (isset($request_body[$key]) && is_numeric($request_body[$key])) {
-            $id = intval($request_body[$key]); // can be zero or 1
-        }
+        $posts = array_filter(get_posts($args), function ($post) use ($language_code) {
+            global $sitepress;
+            $postLanguage = $sitepress->get_language_for_element($post->ID, 'post_' . $post->post_type);
 
-        return $id;
+            return $postLanguage === $language_code;
+        });
+
+        return array_map(function ($post) use ($language_code) {
+            return $this->buildResponseObject($post, $language_code);
+        }, $posts);
     }
 
     public function getLanguageCodeOfPostObject(WP_Post $post): string

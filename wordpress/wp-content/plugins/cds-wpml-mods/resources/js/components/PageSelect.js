@@ -1,136 +1,8 @@
-const { SelectControl, SelectControlWithState, TreeSelect } = wp.components;
+const { SelectControl } = wp.components;
 const { useState, useEffect } = wp.element;
 const { __ } = wp.i18n;
 
-
-/* fetch.ts */
-
-/*
-
-'rest_url' => esc_url_raw(rest_url()),
-'rest_nonce' => wp_create_nonce('wp_rest'),
-'notify_list_ids' => getNotifyListIds(),
-
-// needs typescript
-export interface ErrorWithStatus extends Error {
-    status: number;
-}
-*/
-
-const CDS_VARS = {
-    'rest_url': 'http://localhost/wp-json/',
-   // 'rest_nonce': '123',
-}
-
-export const getData = async (endpoint) => {
-const requestHeaders = new Headers();
-// do we need this?
-//requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
-
-const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
-    method: 'GET',
-    headers: requestHeaders,
-    mode: 'cors',
-    cache: 'default',
-});
-
-if (!response.ok) {
-    console.log(response.body);
-    const err = new Error(`HTTP error`);
-    err.status = response.status;
-    throw err;
-}
-
-return await response.json();
-};
-
-export const sendData = async (endpoint, data) => {
-const requestHeaders = new Headers({
-    'Content-Type': 'application/json;charset=UTF-8',
-});
-//requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
-
-const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
-    method: 'POST',
-    headers: requestHeaders,
-    mode: 'cors',
-    cache: 'default',
-    body: JSON.stringify(data),
-});
-
-if (!response.ok) {
-    console.log(response.body);
-    const err = new Error(`HTTP error`);
-    err.status = response.status;
-    throw err;
-}
-
-return await response.json();
-};
-
-/* end of fetch.ts */
-
-const myPages = [
-    {
-        "ID": 49,
-        "post_title": "Post: 49 (FR)",
-        "post_type": "post",
-        "language_code": "fr",
-        "translated_post_id": 45,
-        "is_translated": true
-    },
-    {
-        "ID": 47,
-        "post_title": "Post: 47 (FR)",
-        "post_type": "post",
-        "language_code": "fr",
-        "translated_post_id": 53,
-        "is_translated": true
-    },
-    {
-        "ID": 32,
-        "post_title": "Post: Charles-Maurice de Talleyrand-Périgord (FR)",
-        "post_type": "post",
-        "language_code": "fr",
-        "translated_post_id": null,
-        "is_translated": false
-    },
-
-    {
-        "ID": 50,
-        "post_title": "XYZ Translated",
-        "post_type": "post",
-        "language_code": "fr",
-        "translated_post_id": 500,
-        "is_translated": true
-    },
-    {
-        "ID": 51,
-        "post_title": "ABC Translated",
-        "post_type": "post",
-        "language_code": "fr",
-        "translated_post_id": 510,
-        "is_translated": true
-    },
-    {
-        "ID": 52,
-        "post_title": "Joe Strummer",
-        "post_type": "post",
-        "language_code": "fr",
-        "translated_post_id": null,
-        "is_translated": false
-    },
-    {
-        "ID": 53,
-        "post_title": "Zelda Fitzgerald",
-        "post_type": "post",
-        "language_code": "fr",
-        "translated_post_id": null,
-        "is_translated": false
-    }
-]
-
-
+import { getData } from '../util/fetch.js';
 
 export const PageSelect = () => {
     const emptyPage = { is_translated: null, value: 0, label: __("No translation", "cds-snc") };
@@ -162,8 +34,7 @@ export const PageSelect = () => {
 
             if (response.length >= 1) {
 
-                // const _pages = sortPages(response).map(val => {
-                const _pages = sortPages(myPages).map(val => {
+                const _pages = sortPages(response).map(val => {
                         return {
                         is_translated: val.is_translated,
                         value: val.ID,
@@ -187,10 +58,9 @@ export const PageSelect = () => {
                 disabled={isLoading ? true : false}
                 value={page.value}
                 help={hintText}
-                onChange={(selectedPageID) => {
-                    // "value" of selected option is returned, as a string (our 'pages' array) contains integers
-
-                    const _selectedPage = pages.find(p => parseInt(selectedPageID) === p.value)
+                onChange={(value) => {
+                    // "value" of selected option is returned as a string (our 'pages' array contains integers)
+                    const _selectedPage = pages.find(p => parseInt(value) === p.value)
                     setPage(_selectedPage)
 
                     const hintTextIndex = _selectedPage.is_translated === null ? 'empty' : _selectedPage.is_translated === true ? 'translated' : 'untranslated';

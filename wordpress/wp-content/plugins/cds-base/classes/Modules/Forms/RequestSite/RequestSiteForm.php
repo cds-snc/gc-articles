@@ -161,7 +161,7 @@ class RequestSiteForm
                     />
                     <div id="url-typer" class="url-typer gc-description" aria-live="polite" aria-atomic="true">
                         <div class="url-typer--empty"><?php _e('Enter a title to preview your URL', 'cds-snc'); ?></div>
-                        <div class="url-typer--message displayNone"><?php _e('Your URL preview:', 'cds-snc'); ?> <strong>articles.alpha.canada.ca/<span id="url-typer__preview"></span></strong></div>
+                        <div class="url-typer--message displayNone"><?php _e('Your URL preview:', 'cds-snc'); ?> <strong>articles.canada.ca/<span id="url-typer__preview"></span></strong></div>
                     </div>
                 </div>
                 <!-- end site -->

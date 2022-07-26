@@ -36,9 +36,9 @@ export const CreateList = () => {
     const formData = {
         service_id: serviceId,
         language: "en",
-        subscribe_redirect_url: "https://articles.alpha.canada.ca/thanks-for-subscribing-merci-pour-votre-labonnement",
-        unsubscribe_redirect_url: "https://articles.alpha.canada.ca/unsubscribed-from-mailing-list-labonnement-supprime",
-        confirm_redirect_url: "https://articles.alpha.canada.ca/confirmation"
+        subscribe_redirect_url: "https://articles.canada.ca/thanks-for-subscribing-merci-pour-votre-labonnement",
+        unsubscribe_redirect_url: "https://articles.canada.ca/unsubscribed-from-mailing-list-labonnement-supprime",
+        confirm_redirect_url: "https://articles.canada.ca/confirmation"
     }
 
 

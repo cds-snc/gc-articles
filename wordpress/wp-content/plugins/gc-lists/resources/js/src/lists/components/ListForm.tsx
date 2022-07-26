@@ -94,7 +94,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
             }
             <details className="list-advanced">
                 <summary>
-                    <p>{__("Advanced list settings", "gc-lists")}</p>
+                    <span>{__("Advanced list settings", "gc-lists")}</span>
                 </summary>
                 <p>{__("Changing these settings is optional.", "gc-lists")}</p>
                 <div className="field">

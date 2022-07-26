@@ -45,7 +45,7 @@ resource "aws_acm_certificate" "wordpress_new" {
 }
 
 resource "aws_acm_certificate_validation" "wordpress_new" {
-  certificate_arn   = aws_acm_certificate.wordpress_new.arn
+  certificate_arn   = aws_acm_certificate.wordpress_new[0].arn
   validation_method = "DNS"
 }
 
@@ -65,6 +65,11 @@ resource "aws_acm_certificate" "wordpress_new_cloudfront" {
   lifecycle {
     create_before_destroy = true
   }
+}
+
+resource "aws_acm_certificate_validation" "wordpress_new_cloudfront" {
+  certificate_arn   = aws_acm_certificate.wordpress_new_cloudfront[0].arn
+  validation_method = "DNS"
 }
 
 resource "aws_route53_record" "wordpress_validation" {

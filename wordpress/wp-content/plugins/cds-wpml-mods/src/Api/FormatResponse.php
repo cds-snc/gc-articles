@@ -35,15 +35,6 @@ class FormatResponse
         return apply_filters('wpml_object_id', $post->ID, 'post', false, $altLanguage);
     }
 
-    public function filterPostsByLanguage(array $posts, string $language_code): array
-    {
-        return array_filter($posts, function ($post) use ($language_code) {
-            $postLanguage = $this->getLanguageCodeOfPostObject($post);
-
-            return $postLanguage === $language_code;
-        });
-    }
-
     public function buildResponseObject(WP_Post $post, ?string $language_code = null): array
     {
         $tempPostObj = [];

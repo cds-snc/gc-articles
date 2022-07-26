@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace CDS\Wpml\Api;
 
 use WP_REST_Request;
+use WP_REST_Response;
 use WP_Post;
 use WP_Error;
 
@@ -62,24 +63,19 @@ class Endpoints extends BaseEndpoint
      *
      * @return mixed
      */
-    public function getAvailablePages(WP_REST_Request $request): array
+    public function getAvailablePages(WP_REST_Request $request): WP_REST_Response
     {
-        $response = [];
-
         $post_type = $request['type'] === 'pages' ? 'page' : 'post';
 
-        $args = array(
-            'post_status' => 'any',
-            'post_type' => $post_type
-        );
+        $language_code = $request['language'];
 
-        $posts = $this->formatResponse->filterPostsByLanguage(get_posts($args), $request['language']);
+        $posts = $this->getPosts($post_type, $language_code);
 
-        foreach ($posts as $post) {
-            array_push($response, $this->formatResponse->buildResponseObject($post, $request['language']));
-        }
+        $response = new WP_REST_Response($posts);
 
-        return $response;
+        $response->set_status(200);
+
+        return rest_ensure_response($response);
     }
 
     /**
@@ -213,5 +209,30 @@ class Endpoints extends BaseEndpoint
         $translatedPost = get_post($translatedPostID);
 
         return $this->formatResponse->buildResponseObject($translatedPost);
+    }
+
+    /**
+     * @param  array  $args
+     * @param  mixed  $language_code
+     *
+     * @return array
+     */
+    protected function getPosts(string $post_type, string $language_code): array
+    {
+        $args = array(
+            'post_status' => 'any',
+            'post_type' => $post_type
+        );
+
+        $posts = array_filter(get_posts($args), function ($post) use ($language_code) {
+            global $sitepress;
+            $postLanguage = $sitepress->get_language_for_element($post->ID, 'post_' . $post->post_type);
+
+            return $postLanguage === $language_code;
+        });
+
+        return array_map(function ($post) use ($language_code) {
+            return $this->formatResponse->buildResponseObject($post, $language_code);
+        }, $posts);
     }
 }

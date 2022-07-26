@@ -44,10 +44,6 @@ resource "aws_acm_certificate" "wordpress_new" {
   }
 }
 
-resource "aws_acm_certificate_validation" "wordpress_new" {
-  certificate_arn = aws_acm_certificate.wordpress_new[0].arn
-}
-
 # CloudFront certificate must be in us-east-1
 resource "aws_acm_certificate" "wordpress_new_cloudfront" {
   provider = aws.us-east-1
@@ -64,10 +60,6 @@ resource "aws_acm_certificate" "wordpress_new_cloudfront" {
   lifecycle {
     create_before_destroy = true
   }
-}
-
-resource "aws_acm_certificate_validation" "wordpress_new_cloudfront" {
-  certificate_arn = aws_acm_certificate.wordpress_new_cloudfront[0].arn
 }
 
 resource "aws_route53_record" "wordpress_validation" {

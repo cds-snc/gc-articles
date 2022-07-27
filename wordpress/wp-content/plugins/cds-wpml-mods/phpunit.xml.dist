@@ -11,9 +11,6 @@
 		<testsuite name="Integration">
 			<directory prefix="Test" suffix=".php">./tests/Integration</directory>
 		</testsuite>
-		<testsuite name="Unit">
-			<directory prefix="Test" suffix=".php">./tests/Unit</directory>
-		</testsuite>
 	</testsuites>
 	<coverage processUncoveredFiles="true">
 		<include>

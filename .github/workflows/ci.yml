@@ -56,7 +56,7 @@ jobs:
       - name: Run the tests
         run: |
           cd wordpress/wp-content/plugins/gc-lists
-          ./vendor/bin/pest
+          ./vendor/bin/pest --coverage
   cds-wpml-mods-php-tests:
     runs-on: ubuntu-latest
     name: CDS Wpml Mods Plugin PHPUnit Tests
@@ -79,14 +79,14 @@ jobs:
       - name: Setup test environment
         run: |
           export PATH="$HOME/.composer/vendor/bin:$PATH"
-          cd wordpress/wp-content/plugins/gc-lists
+          cd wordpress/wp-content/plugins/cds-wpml-mods
           bash bin/install-wp-tests.sh wordpress_test root 'root' localhost $WP_VERSION
           composer install
 
       - name: Run the tests
         run: |
           cd wordpress/wp-content/plugins/cds-wpml-mods
-          ./vendor/bin/pest
+          ./vendor/bin/pest --coverage
 
   phpcs:
     runs-on: ubuntu-latest

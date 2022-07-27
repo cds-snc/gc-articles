@@ -29,10 +29,9 @@ class Endpoints extends BaseEndpoint
         return self::$instance;
     }
 
-    public function hasPermission($pageId = null): bool
+    public function hasPermission(): bool
     {
-        // if an optional page_id is provided, check that the user has permissions to it (ie same site)
-        return true; // current_user_can('delete_posts');
+        return true; // @TODO: determine permission
     }
 
     public function registerRestRoutes()

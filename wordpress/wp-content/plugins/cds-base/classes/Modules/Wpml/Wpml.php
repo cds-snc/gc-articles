@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 namespace CDS\Modules\Wpml;
+use CDS\Utils;
 
 class Wpml
 {

@@ -44,6 +44,7 @@ export type ServiceData = Service[] | null;
 export type User = {
     hasPhone: boolean;
     hasEmail: boolean;
+    isSuperAdmin: boolean;
 };
 
 export type State = {

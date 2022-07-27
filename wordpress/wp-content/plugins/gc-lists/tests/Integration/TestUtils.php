@@ -38,6 +38,7 @@ test('getUserPermissions', function() {
     $none = new stdClass();
     $none->hasEmail = false;
     $none->hasPhone = false;
+    $none->isSuperAdmin = false;
     $this->assertEquals($none, $permissions);
 
     $current_user->add_cap('list_manager_bulk_send', true);
@@ -47,5 +48,6 @@ test('getUserPermissions', function() {
     $hasBoth = new stdClass();
     $hasBoth->hasEmail = true;
     $hasBoth->hasPhone = true;
+    $hasBoth->isSuperAdmin = false;
     $this->assertEquals($hasBoth, $permissions);
 });

@@ -85,7 +85,7 @@ class Menu
         }
 
         $this->render('subscribers', [
-            'title' => __('Subscribers', 'gc-lists'),
+            'title' => __('Subscriber lists', 'gc-lists'),
             'services' => Utils::getServices(),
             'user' => Utils::getUserPermissions(),
         ]);

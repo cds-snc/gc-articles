@@ -61,10 +61,10 @@ class ContactForm
                 // if is array, iterate through each array value
                 if (is_array($_value)) {
                     foreach ($_value as $_v) {
-                        echo '<input type="hidden" name="' . sanitize_text_field($_key) . '[]" value="' . sanitize_text_field($_v) . '" />';
+                        echo '<input type="hidden" name="' .  esc_html(sanitize_text_field($_key)) . '[]" value="' .  esc_html(sanitize_text_field($_v)) . '" />';
                     }
                 } else {
-                    echo '<input type="hidden" name="' . sanitize_text_field($_key) . '" value="' . sanitize_text_field($_value) . '" />';
+                    echo '<input type="hidden" name="' .  esc_html(sanitize_text_field($_key)) . '" value="' .  esc_html(sanitize_text_field($_value)) . '" />';
                 }
             }
 

@@ -111,4 +111,13 @@ test('getTranslatedPostID', function() {
 	expect($id)->toEqual(2);
 });
 
+test('setTranslationForPost calls set_element_language_details_action', function() {
+	global $sitepress;
+	$sitepress = mock('\SitePress');
+	$sitepress->shouldReceive("set_element_language_details_action");
+
+	$postClass = new Post();
+	$postClass->setTranslationForPost(1, 'post', 'en');
+});
+
 

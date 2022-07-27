@@ -8,6 +8,8 @@ import { getData } from '../util/fetch.js';
 export const PageSelect = () => {
     const emptyPage = { is_translated: null, value: 0, label: __("None", "cds-snc") };
 
+    // get the current post id
+    const postID = select("core/editor").getCurrentPostId();
     const type = select("core/editor").getCurrentPostType();
 
     const hintTexts = {
@@ -16,7 +18,7 @@ export const PageSelect = () => {
         'translated': (label) => `${__('⚠️ This will unlink the existing translation for', "cds-wpml-mods")} “${label}”.`,
     }
 
-
+    const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [pages, setPages] = useState([emptyPage]);
     const [page, setPage] = useState(emptyPage);
@@ -33,8 +35,30 @@ export const PageSelect = () => {
     }
 
     useEffect(() => {
-        const getPages = async () => {
-            const response = await getData('cds/wpml/posts/fr');
+        const getPost = async (postID) => {
+            const response = await getData(`cds/wpml/posts/${postID}/translation`);
+
+            if (response.ID) {
+
+                // ID: 53
+                // is_translated: true
+                // language_code: "en"
+                // post_title: "Post: 53 (EN)"
+                // post_type: "post"
+                // translated_post_id: 47
+
+                setPost(response)
+            }
+        }
+
+        getPost(postID);
+        setIsLoading(true);
+    }, [postID]);
+
+    useEffect(() => {
+        const getPages = async (post) => {
+            const altLanguage = post.language_code === 'en' ? 'fr' : 'en';
+            const response = await getData(`cds/wpml/posts/${altLanguage}`);
 
             if (response.length >= 1) {
 
@@ -46,14 +70,20 @@ export const PageSelect = () => {
                     }
                 })
 
-                setPages([emptyPage, ..._pages]);
+                setPages([emptyPage, ..._pages])
 
-                setIsLoading(false);
+                // if post has a translated_post_id, set the page to that one
+                if(post.translated_post_id) {
+                    setPage(_pages.find(p => p.value === post.translated_post_id))
+                }
             }
         }
 
-        getPages();
-    });
+        if(post && post.language_code) {
+            getPages(post);
+            setIsLoading(false);
+        }
+    }, [post]);
 
     return (
         <div>
@@ -74,21 +104,27 @@ export const PageSelect = () => {
                 <option value={emptyPage.value}>
                     {emptyPage.label}
                 </option>
-                <optgroup label={__("Untranslated", "cds-wpml-mods")}>
-                    {pages.map(p => {
-                        // strictly check for false here because this is "null" on our empty value
-                        if(p.is_translated === false) {
-                            return <option key={p.value} value={p.value}>{p.label}</option>
-                        }
-                    })}
-                </optgroup>
-                <optgroup label={__("Has translation", "cds-wpml-mods")}>
-                    {pages.map(p => {
-                        if(p.is_translated) {
-                            return <option key={p.value} value={p.value}>{p.label}</option>
-                        }
+                {/* make sure there is at least one untranslated post */}
+                {pages.find(p => p.is_translated === false) &&
+                    <optgroup label={__("Untranslated", "cds-wpml-mods")}>
+                        {pages.map(p => {
+                            // strictly check for false here because this is "null" on our empty value
+                            if(p.is_translated === false) {
+                                return <option key={p.value} value={p.value}>{p.label}</option>
+                            }
                         })}
-                </optgroup>
+                    </optgroup>
+                }
+                {/* make sure there is at least one translated post */}
+                {pages.find(p => p.is_translated) &&
+                    <optgroup label={__("Has translation", "cds-wpml-mods")}>
+                        {pages.map(p => {
+                            if(p.is_translated) {
+                                return <option key={p.value} value={p.value}>{p.label}</option>
+                            }
+                            })}
+                    </optgroup>
+                }
 
             </SelectControl>
         </div>

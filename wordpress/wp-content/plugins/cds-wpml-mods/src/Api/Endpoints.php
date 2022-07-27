@@ -146,20 +146,20 @@ class Endpoints extends BaseEndpoint
 
         // Unset existing translation if exists
         if ($translatedPostID = $this->post->getTranslatedPostID($originalPost)) {
-            $this->setTranslationForPost($translatedPostID, $originalPost->post_type, $targetPostLanguage);
+            $this->post->setTranslationForPost($translatedPostID, $originalPost->post_type, $targetPostLanguage);
         }
 
         // Unset existing translation if exists
         if ($otherTranslatedPostID = $this->post->getTranslatedPostID($targetPost)) {
-            $this->setTranslationForPost($otherTranslatedPostID, $targetPost->post_type, $originalPostLanguage);
+            $this->post->setTranslationForPost($otherTranslatedPostID, $targetPost->post_type, $originalPostLanguage);
         }
 
         // Note that post_trid is a string (normal ids are integers)
         $postTrid = $sitepress->get_element_trid($originalPost->ID, 'post_' . $originalPost->post_type);
 
         // Set translations for each post
-        $this->setTranslationForPost($originalPost->ID, $originalPost->post_type, $originalPostLanguage, $postTrid);
-        $this->setTranslationForPost($targetPost->ID, $targetPost->post_type, $targetPostLanguage, $postTrid, $originalPostLanguage);
+        $this->post->setTranslationForPost($originalPost->ID, $originalPost->post_type, $originalPostLanguage, $postTrid);
+        $this->post->setTranslationForPost($targetPost->ID, $targetPost->post_type, $targetPostLanguage, $postTrid, $originalPostLanguage);
 
         // Return the details
         $response = new WP_REST_Response($this->post->buildResponseObject($originalPost, $originalPostLanguage));
@@ -167,26 +167,6 @@ class Endpoints extends BaseEndpoint
         $response->set_status(200);
 
         return rest_ensure_response($response);
-    }
-
-    /**
-     * @param $postId
-     * @param $postType
-     * @param $languageCode
-     * @param  false  $trid
-     * @param  null  $sourceLanguageCode
-     */
-    public function setTranslationForPost($postId, $postType, $languageCode, $trid = false, $sourceLanguageCode = null)
-    {
-        global $sitepress;
-
-        $sitepress->set_element_language_details_action([
-            'element_id'    => $postId,
-            'element_type'  => 'post_' . $postType,
-            'trid'          => $trid,
-            'language_code' => $languageCode,
-            'source_language_code' => $sourceLanguageCode
-        ]);
     }
 
     /**

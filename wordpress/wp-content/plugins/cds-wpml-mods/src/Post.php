@@ -61,6 +61,26 @@ class Post
         return $sitepress->get_object_id($post->ID, 'post', false, $altLanguage);
     }
 
+    /**
+     * @param $postId
+     * @param $postType
+     * @param $languageCode
+     * @param  false  $trid
+     * @param  null  $sourceLanguageCode
+     */
+    public function setTranslationForPost($postId, $postType, $languageCode, $trid = false, $sourceLanguageCode = null)
+    {
+        global $sitepress;
+
+        $sitepress->set_element_language_details_action([
+            'element_id'    => $postId,
+            'element_type'  => 'post_' . $postType,
+            'trid'          => $trid,
+            'language_code' => $languageCode,
+            'source_language_code' => $sourceLanguageCode
+        ]);
+    }
+
     public function buildResponseObject(WP_Post $post, ?string $language_code = null): array
     {
         $tempPostObj = [];

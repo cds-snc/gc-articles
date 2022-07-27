@@ -53,56 +53,7 @@ function getPosts() : array
 //    expect(count($posts))->toBe(0);
 //});
 //
-//test('assert reponse object with no translation', function () {
-//    $response = mock(FormatResponse::class)->makePartial();
-//    $response->shouldReceive("getLanguageCodeOfPostObject")->andReturn('en');
-//    $response->shouldReceive("getTranslatedPostID")->andReturn(null);
-//
-//    $post = getPost();
-//    $responseObj = $response->buildResponseObject($post, 'en');
-//
-//    expect($responseObj)->toMatchArray([
-//        'ID' => 1,
-//        'post_title' => 'Mock Post',
-//        'post_type' => 'post',
-//        'language_code' => 'en',
-//        'translated_post_id' => null,
-//        'is_translated' => false
-//    ]);
-//});
-//
-//test('assert reponse object with translation', function () {
-//    $response = mock(FormatResponse::class)->makePartial();
-//    $response->shouldReceive("getLanguageCodeOfPostObject")->andReturn('en');
-//    $response->shouldReceive("getTranslatedPostID")->andReturn(2);
-//
-//    $post = getPost();
-//    $responseObj = $response->buildResponseObject($post, 'en');
-//
-//    expect($responseObj)->toMatchArray([
-//        'ID' => 1,
-//        'post_title' => 'Mock Post',
-//        'post_type' => 'post',
-//        'language_code' => 'en',
-//        'translated_post_id' => 2,
-//        'is_translated' => true
-//    ]);
-//});
-//
-//test('assert reponse object with no language provided', function () {
-//    $response = mock(FormatResponse::class)->makePartial();
-//    $response->shouldReceive("getLanguageCodeOfPostObject")->andReturn('en');
-//
-//    $post = getPost();
-//    $responseObj = $response->buildResponseObject($post);
-//
-//    expect($responseObj)->toMatchArray([
-//        'ID' => 1,
-//        'post_title' => 'Mock Post',
-//        'post_type' => 'post',
-//        'language_code' => 'en'
-//    ]);
-//});
+
 //
 //$testCases = [
 //    ['request_body' => ['post_id' => '10'], 'result' => 10],

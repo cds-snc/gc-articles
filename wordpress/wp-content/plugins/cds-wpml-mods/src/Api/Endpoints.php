@@ -17,7 +17,7 @@ class Endpoints extends BaseEndpoint
 
     public function __construct()
     {
-        $this->post = new Post();
+        $this->post = Post::getInstance();
 
         parent::__construct();
     }
@@ -62,11 +62,13 @@ class Endpoints extends BaseEndpoint
                         if (!is_numeric($value)) {
                             return new WP_Error('not_numeric', __('Translation post ID must be numeric', 'cds-wp-mods'));
                         }
+
                         if ($value < 1) {
                             return new WP_Error('invalid_id', __('Translation post ID invalid', 'cds-wp-mods'));
                         }
-                        if ($value === $request['id']) {
-                            return new WP_Error('not_equals', __('Translation post ID cannot be the same as original Post ID', 'cds-wp-mods'));
+
+                        if ($value == $request['id']) {
+                            return new WP_Error('same_ids', __('Translation post ID cannot be the same as original Post ID', 'cds-wp-mods'));
                         }
 
                         $originalPost = get_post($request['id']);

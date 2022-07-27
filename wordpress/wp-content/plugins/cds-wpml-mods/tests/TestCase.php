@@ -17,7 +17,7 @@ class TestCase extends \WP_UnitTestCase
 	{
 		$plugin = Wpml::getInstance();
 		$plugin->setup();
-		
+
 		parent::set_up();
 	}
 

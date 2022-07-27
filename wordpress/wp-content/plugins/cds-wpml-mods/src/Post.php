@@ -8,6 +8,15 @@ use WP_Post;
 
 class Post
 {
+    protected static $instance;
+
+    public static function getInstance(): Post
+    {
+        is_null(self::$instance) and self::$instance = new self();
+
+        return self::$instance;
+    }
+
     /**
      * Get available content by type and language
      *

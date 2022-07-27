@@ -19,7 +19,7 @@ test('buildResponseObject assert response object with no translation', function 
 	$post_id = $this->factory()->post->create();
 	$post = get_post($post_id);
 
-	$responseObj = $postClass->buildResponseObject($post, 'en');
+	$responseObj = $postClass->buildResponseObject($post, withTranslations: true);
 
 	expect($responseObj)->toMatchArray([
 		'ID' => $post_id,
@@ -44,7 +44,7 @@ test('buildResponseObject assert response object with translation', function () 
 	$post_id = $this->factory()->post->create();
 	$post = get_post($post_id);
 
-	$responseObj = $postClass->buildResponseObject($post, 'en');
+	$responseObj = $postClass->buildResponseObject($post, withTranslations: true);
 
 	expect($responseObj)->toMatchArray([
 		'ID' => $post->ID,
@@ -67,7 +67,7 @@ test('buildResponseObject assert response object with no language provided', fun
 	$post_id = $this->factory()->post->create();
 	$post = get_post($post_id);
 
-	$responseObj = $postClass->buildResponseObject($post);
+	$responseObj = $postClass->buildResponseObject($post, withTranslations: false);
 
 	expect($responseObj)->toMatchArray([
 		'ID' => $post->ID,

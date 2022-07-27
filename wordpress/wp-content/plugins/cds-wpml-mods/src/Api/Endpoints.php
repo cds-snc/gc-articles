@@ -162,7 +162,7 @@ class Endpoints extends BaseEndpoint
         $this->post->setTranslationForPost($targetPost->ID, $targetPost->post_type, $targetPostLanguage, $postTrid, $originalPostLanguage);
 
         // Return the details
-        $response = new WP_REST_Response($this->post->buildResponseObject($originalPost, $originalPostLanguage));
+        $response = new WP_REST_Response($this->post->buildResponseObject(post: $originalPost, withTranslations: true));
 
         $response->set_status(200);
 
@@ -182,17 +182,10 @@ class Endpoints extends BaseEndpoint
         $post = get_post($request['id']);
 
         if (is_null($post)) {
-            return new WP_Error('post_not_found', __('No post you are looking for does not exist', 'cds-wp-mods'), array( 'status' => 404 ));
+            return new WP_Error('post_not_found', __('The post you are looking for does not exist', 'cds-wp-mods'), array( 'status' => 404 ));
         }
 
-        $translatedPostID = $this->post->getTranslatedPostID($post);
-        if (is_null($translatedPostID)) {
-            return new WP_Error('no_translation', __('No translation exists for this post.', 'cds-wp-mods'), array( 'status' => 404 ));
-        }
-
-        $translatedPost = get_post($translatedPostID);
-
-        $response = new WP_REST_Response($this->post->buildResponseObject($translatedPost));
+        $response = new WP_REST_Response($this->post->buildResponseObject(post: $post, withTranslations: true));
 
         $response->set_status(200);
 

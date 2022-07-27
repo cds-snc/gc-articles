@@ -39,8 +39,8 @@ class Post
             return $postLanguage === $language_code;
         });
 
-        return array_map(function ($post) use ($language_code) {
-            return $this->buildResponseObject($post, $language_code);
+        return array_map(function ($post) {
+            return $this->buildResponseObject($post, withTranslations: true);
         }, $posts, array_keys($posts));
     }
 
@@ -81,7 +81,7 @@ class Post
         ]);
     }
 
-    public function buildResponseObject(WP_Post $post, ?string $language_code = null): array
+    public function buildResponseObject(WP_Post $post, bool $withTranslations = false): array
     {
         $tempPostObj = [];
 
@@ -95,9 +95,10 @@ class Post
         $tempPostObj['post_type'] = $post->post_type;
 
         // language_code
-        $tempPostObj['language_code'] = $this->getLanguageCodeOfPostObject($post);
+        $language_code = $this->getLanguageCodeOfPostObject($post);
+        $tempPostObj['language_code'] = $language_code;
 
-        if (!is_null($language_code)) {
+        if ($withTranslations) {
             // translated_post_id
             $altLanguage = $language_code === 'en' ? 'fr' : 'en';
             $translatedPostID = $this->getTranslatedPostID($post, $altLanguage);

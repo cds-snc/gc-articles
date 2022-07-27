@@ -197,7 +197,7 @@ class Endpoints extends BaseEndpoint
      *
      * @return array | WP_Error
      */
-    public function getTranslation(WP_REST_Request $request): WP_REST_Response
+    public function getTranslation(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         $post = get_post($request['id']);
 
@@ -205,7 +205,7 @@ class Endpoints extends BaseEndpoint
             return new WP_Error('post_not_found', __('No post you are looking for does not exist', 'cds-wp-mods'), array( 'status' => 404 ));
         }
 
-        $translatedPostID = $this->formatResponse->getTranslatedPostID($post);
+        $translatedPostID = $this->post->getTranslatedPostID($post);
         if (is_null($translatedPostID)) {
             return new WP_Error('no_translation', __('No translation exists for this post.', 'cds-wp-mods'), array( 'status' => 404 ));
         }

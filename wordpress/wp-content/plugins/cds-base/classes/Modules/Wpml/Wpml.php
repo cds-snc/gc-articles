@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace CDS\Modules\Wpml;
 
+use CDS\Utils;
+
 class Wpml
 {
     public static function register()
@@ -61,6 +63,7 @@ class Wpml
 
     public function removeMenuItems()
     {
+        // allow super admin access
         if (!Utils::isWpEnv() && !is_super_admin()) {
             remove_submenu_page('tm/menu/main.php', 'tm/menu/main.php');
             remove_submenu_page('tm/menu/main.php', 'sitepress-multilingual-cms/menu/theme-localization.php');

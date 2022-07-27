@@ -54,16 +54,20 @@ class Wpml
 
     public function lockTranslationManager()
     {
-        return true;
+        if (!Utils::isWpEnv() && !is_super_admin()) {
+            return true;
+        }
     }
 
     public function removeMenuItems()
     {
-        remove_submenu_page('tm/menu/main.php', 'tm/menu/main.php');
-        remove_submenu_page('tm/menu/main.php', 'sitepress-multilingual-cms/menu/theme-localization.php');
-        remove_submenu_page('tm/menu/main.php', 'tm/menu/translations-queue.php');
-        remove_submenu_page('tm/menu/main.php', 'sitepress-multilingual-cms/menu/menu-sync/menus-sync.php');
-        remove_submenu_page('tm/menu/main.php', 'tm/menu/settings');
+        if (!Utils::isWpEnv() && !is_super_admin()) {
+            remove_submenu_page('tm/menu/main.php', 'tm/menu/main.php');
+            remove_submenu_page('tm/menu/main.php', 'sitepress-multilingual-cms/menu/theme-localization.php');
+            remove_submenu_page('tm/menu/main.php', 'tm/menu/translations-queue.php');
+            remove_submenu_page('tm/menu/main.php', 'sitepress-multilingual-cms/menu/menu-sync/menus-sync.php');
+            remove_submenu_page('tm/menu/main.php', 'tm/menu/settings');
+        }
     }
 
     /**

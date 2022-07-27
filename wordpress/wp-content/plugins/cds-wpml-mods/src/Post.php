@@ -32,7 +32,7 @@ class Post
 
         return array_map(function ($post) use ($language_code) {
             return $this->buildResponseObject($post, $language_code);
-        }, $posts);
+        }, $posts, array_keys($posts));
     }
 
     public function getLanguageCodeOfPostObject(WP_Post $post): string

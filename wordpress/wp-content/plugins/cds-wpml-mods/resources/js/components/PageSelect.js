@@ -14,8 +14,9 @@ export const PageSelect = () => {
 
     const hintTexts = {
         'empty': () => `${__('No translation assigned for this', "cds-wpml-mods")} ${type}.`,
-        'untranslated': (label) => `“${label}” ${__('assigned as translation for this', "cds-wpml-mods")} ${type}.`,
+        'untranslated': (label) => `“${label}” ${__('will be assigned as translation for this', "cds-wpml-mods")} ${type}.`,
         'translated': (label) => `${__('⚠️ This will unlink the existing translation for', "cds-wpml-mods")} “${label}”.`,
+        'translated_post_id': (label) => `“${label}” ${__('is the current translation for this', "cds-wpml-mods")} ${type}.`,
     }
 
     const [post, setPost] = useState();
@@ -85,6 +86,15 @@ export const PageSelect = () => {
         }
     }, [post]);
 
+    useEffect(() => {
+        let hintTextIndex = page.is_translated === null ? 'empty' : page.is_translated === true ? 'translated' : 'untranslated';
+        if(post && post.translated_post_id === page.value) {
+            hintTextIndex = 'translated_post_id'
+        }
+        setHintText(hintTexts[hintTextIndex](page.label))
+        // set hint text
+    }, [page, post, hintTexts]);
+
     return (
         <div>
             <SelectControl 
@@ -96,9 +106,6 @@ export const PageSelect = () => {
                     // "value" of selected option is returned as a string (our 'pages' array contains integers)
                     const _selectedPage = pages.find(p => parseInt(value) === p.value)
                     setPage(_selectedPage)
-
-                    const hintTextIndex = _selectedPage.is_translated === null ? 'empty' : _selectedPage.is_translated === true ? 'translated' : 'untranslated';
-                    setHintText(hintTexts[hintTextIndex](_selectedPage.label))
                 }}
             >
                 <option value={emptyPage.value}>

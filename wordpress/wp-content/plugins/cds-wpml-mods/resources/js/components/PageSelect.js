@@ -1,13 +1,14 @@
 const { SelectControl } = wp.components;
 const { useState, useEffect } = wp.element;
-const { select } = wp.data;
+const { select, subscribe } = wp.data;
 const { __ } = wp.i18n;
 
-import { getData } from '../util/fetch.js';
+import { getData, sendData } from '../util/fetch.js';
 
 export const PageSelect = () => {
-    const emptyPage = { is_translated: null, value: 0, label: __("None", "cds-snc") };
+    const { isSavingPost } = select( 'core/editor' );
 
+    const emptyPage = { is_translated: null, value: 0, label: __("None", "cds-wpml-mods") };
     // get the current post id
     const postID = select("core/editor").getCurrentPostId();
     const type = select("core/editor").getCurrentPostType();
@@ -19,11 +20,32 @@ export const PageSelect = () => {
         'translated_post_id': (label) => `“${label}” ${__('is the current translation for this', "cds-wpml-mods")} ${type}.`,
     }
 
-    const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(true);
+    const [post, setPost] = useState();
     const [pages, setPages] = useState([emptyPage]);
     const [page, setPage] = useState(emptyPage);
     const [hintText, setHintText] = useState(hintTexts['empty']());
+    const [isSavingProcess, setSavingProcess] = useState(false);
+
+    /* Triggers when the "publish" or "update" button is clicked */
+    /* https://github.com/WordPress/gutenberg/issues/17632#issuecomment-1153888435 */
+    subscribe(() => {
+        if (isSavingPost()) {
+            setSavingProcess(true);
+        } else {
+            setSavingProcess(false);
+        }
+    });
+
+    const updatePost = async () => {
+        setIsLoading(true)
+        const response = await sendData(`cds/wpml/posts/${postID}/translation`, {translationId: page.value})
+
+        if (response.ID) {
+            setPost(response)
+            setIsLoading(false)
+        }
+    };
 
     const sortPages = (pages) => {
         const sortByPostTitle = (p1, p2) => (p1.post_title > p2.post_title) ? 1 : -1;
@@ -40,20 +62,11 @@ export const PageSelect = () => {
             const response = await getData(`cds/wpml/posts/${postID}/translation`);
 
             if (response.ID) {
-
-                // ID: 53
-                // is_translated: true
-                // language_code: "en"
-                // post_title: "Post: 53 (EN)"
-                // post_type: "post"
-                // translated_post_id: 47
-
                 setPost(response)
             }
         }
 
         getPost(postID);
-        setIsLoading(true);
     }, [postID]);
 
     useEffect(() => {
@@ -94,6 +107,12 @@ export const PageSelect = () => {
         setHintText(hintTexts[hintTextIndex](page.label))
         // set hint text
     }, [page, post, hintTexts]);
+
+    useEffect(() => {
+        if (isSavingProcess) {
+            updatePost();
+        }
+    }, [isSavingProcess]);
 
     return (
         <div>

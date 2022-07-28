@@ -72,7 +72,7 @@ export const PageSelect = () => {
     useEffect(() => {
         const getPages = async (post) => {
             const altLanguage = post.language_code === 'en' ? 'fr' : 'en';
-            const response = await getData(`cds/wpml/posts/${altLanguage}`);
+            const response = await getData(`cds/wpml/${post.post_type}s/${altLanguage}`);
 
             if (response.length >= 1) {
 

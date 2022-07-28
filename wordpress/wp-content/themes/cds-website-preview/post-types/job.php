@@ -38,6 +38,7 @@ function cds_web_register_post_type()
         'show_in_menu'        => true,
         'supports' => [
             'title',
+            'excerpt',
             'editor',
             'thumbnail',
             'custom-fields'

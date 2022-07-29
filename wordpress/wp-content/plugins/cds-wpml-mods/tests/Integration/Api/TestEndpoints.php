@@ -33,6 +33,9 @@ test('getInstance', function() {
 test('getAvailablePages English', function() {
 	global $sitepress;
 
+	$user = wp_get_current_user();
+	$user->add_cap("edit_posts");
+
 	$sitepress = mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	$sitepress->shouldReceive("get_object_id")->andReturn(1);
@@ -41,8 +44,8 @@ test('getAvailablePages English', function() {
 		'post_type' => 'page'
 	]);
 
-	$request  = new WP_REST_Request( 'GET', '/cds/wpml/pages/en' );
-	$response = $this->server->dispatch( $request );
+	$request  = new WP_REST_Request('GET', '/cds/wpml/pages/en');
+	$response = $this->server->dispatch($request);
 
 	$body = $response->get_data();
 
@@ -57,6 +60,9 @@ test('getAvailablePages English', function() {
 test('getAvailablePages French', function() {
 	global $sitepress;
 
+	$user = wp_get_current_user();
+	$user->add_cap("edit_posts");
+
 	$sitepress = mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('fr');
 	$sitepress->shouldReceive("get_object_id")->andReturn(1);
@@ -65,8 +71,8 @@ test('getAvailablePages French', function() {
 		'post_type' => 'page'
 	]);
 
-	$request  = new WP_REST_Request( 'GET', '/cds/wpml/pages/fr' );
-	$response = $this->server->dispatch( $request );
+	$request  = new WP_REST_Request('GET', '/cds/wpml/pages/fr');
+	$response = $this->server->dispatch($request);
 
 	$body = $response->get_data();
 

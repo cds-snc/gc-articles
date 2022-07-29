@@ -31,7 +31,7 @@ class Endpoints extends BaseEndpoint
 
     public function hasPermission(): bool
     {
-        return true; // @TODO: determine permission
+        return current_user_can('edit_posts');
     }
 
     public function registerRestRoutes()

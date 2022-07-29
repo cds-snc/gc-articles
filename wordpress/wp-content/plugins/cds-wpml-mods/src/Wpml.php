@@ -38,6 +38,7 @@ class Wpml
 
             wp_localize_script('cds-wpml-mods', 'CDS_VARS', [
                 'rest_url' => esc_url_raw(rest_url()),
+                'rest_nonce' => wp_create_nonce('wp_rest'),
             ]);
 
             wp_set_script_translations('cds-wpml-mods', 'cds-wpml-mods', CDS_WPML_PLUGIN_BASE_PATH . '/resources/languages/');

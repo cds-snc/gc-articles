@@ -91,11 +91,12 @@ export const PageSelect = () => {
                     setPage(_pages.find(p => p.value === post.translated_post_id))
                 }
             }
+
+            setIsLoading(false);
         }
 
         if(post && post.language_code) {
             getPages(post);
-            setIsLoading(false);
         }
     }, [post]);
 

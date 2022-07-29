@@ -43,6 +43,7 @@ class Menus
             "Checklists",
             "Jobs",
             "Projects",
+            "Team Members",
 
             // French menu items
             "Tableau de bord",

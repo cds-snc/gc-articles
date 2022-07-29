@@ -28,8 +28,9 @@ class Post
     public function getAvailable(string $post_type, string $language_code): array
     {
         $args = array(
-            'post_status' => 'any',
-            'post_type' => $post_type
+            'post_status'   => 'any',
+            'post_type'     =>  $post_type,
+            'numberposts'   =>  100,
         );
 
         $posts = array_filter(get_posts($args), function ($post) use ($language_code) {

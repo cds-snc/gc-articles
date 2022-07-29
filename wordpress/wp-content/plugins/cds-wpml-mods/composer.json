@@ -43,13 +43,15 @@
     "compile-mo": "msgfmt -o ./resources/languages/cds-wpml-mods-fr_CA.mo ./resources/languages/cds-wpml-mods-fr_CA.po",
     "clean-json": "rm -f ./resources/languages/*.json || true",
     "compile-json": "wp i18n make-json ./resources/languages/cds-wpml-mods-fr_CA.po --no-purge",
+    "copy-json": "cp ./resources/languages/cds-wpml-mods-fr_CA-9031620405ce355309de05bdfdef3782.json ./resources/languages/cds-wpml-mods-fr_CA-cds-wpml-mods.json",
     "compile-translations": [
       "@compile-mo",
       "@clean-json",
-      "@compile-json"
+      "@compile-json",
+      "@copy-json"
     ],
     "prepare-translations": [
-
+      "@build-js",
       "@make-pot",
       "@merge-po"
     ]

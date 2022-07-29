@@ -36,6 +36,10 @@ class Wpml
                 filemtime(plugin_dir_path(__FILE__) . '../resources/js/build/sidebar.js')
             );
 
+            wp_localize_script('cds-wpml-mods', 'CDS_VARS', [
+                'rest_url' => esc_url_raw(rest_url()),
+            ]);
+
             wp_set_script_translations('cds-wpml-mods', 'cds-wpml-mods', CDS_WPML_PLUGIN_BASE_PATH . '/resources/languages/');
         });
     }

@@ -1,7 +1,7 @@
 {
     "name": "gc-post-meta",
     "version": "0.1.0",
-    "main": "Gruntfile.js",
+    "main": "sidebar.js",
     "author": "Canadian Digital Service",
     "scripts": {
       "webpack": "webpack --config webpack.config.js",

@@ -62,6 +62,7 @@ COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-base/classes/Modules/B
 COPY --from=buildjs /app/wordpress/wp-content/plugins/gc-lists/resources/js/build ./wp-content/plugins/gc-lists/resources/js/build
 COPY --from=buildjs /app/wordpress/wp-content/plugins/gc-post-meta/resources/js/build ./wp-content/plugins/gc-post-meta/resources/js/build
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-web-blocks/resources/js/build ./wp-content/plugins/cds-web-blocks/resources/js/build
+COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-wpml-mods/resources/js/build ./wp-content/plugins/cds-wpml-mods/resources/js/build
 
 VOLUME /usr/src/wordpress
 

@@ -1,0 +1,24 @@
+{
+  "translation-revision-date": "2022-07-29T14:50:57+00:00",
+  "generator": "WP-CLI/2.6.0",
+  "source": "resources/js/components/PageSelect.js",
+  "domain": "messages",
+  "locale_data": {
+    "messages": {
+      "": {
+        "domain": "messages",
+        "lang": "en",
+        "plural-forms": "nplurals=2; plural=(n != 1);"
+      },
+      "None": ["None FR"],
+      "Translations": ["Translations Fr"],
+      "No translation assigned for this": ["No translation assigned for this FR"],
+      "will be assigned as translation for this": ["will be assigned as translation for this FR"],
+      " This will unlink the existing translation for": ["This will unlink the existing translation for FR"],
+      "is the current translation for this": ["is the current translation for this FR"],
+      "Assigned translation": ["Assigned translation fr"],
+      "Untranslated": ["Untranslated FR"],
+      "Has translation": ["Has translation FR"]
+    }
+  }
+}

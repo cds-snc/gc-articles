@@ -2,13 +2,13 @@
 
 /**
  * Plugin Name:     Cds Wpml Mods
- * Plugin URI:      PLUGIN SITE HERE
- * Description:     PLUGIN DESCRIPTION HERE
- * Author:          YOUR NAME HERE
- * Author URI:      YOUR SITE HERE
+ * Plugin URI:      https://github.com/cds-snc/gc-articles
+ * Description:     Handles modifications to WPML required for GC Articles
+ * Author:          Canadian Digital Service
+ * Author URI:      https://digital.canada.ca
  * Text Domain:     cds-wpml-mods
- * Domain Path:     /languages
- * Version:         0.1.0
+ * Domain Path:     /resources/languages
+ * Version:         1.0.0
  *
  * @package         Cds_Wpml_Mods
  */

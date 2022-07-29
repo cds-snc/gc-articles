@@ -1,7 +1,5 @@
 const CDS_VARS = window.CDS_VARS
 
-console.log(CDS_VARS);
-
 export const getData = async (endpoint) => {
     const requestHeaders = new Headers();
     requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);

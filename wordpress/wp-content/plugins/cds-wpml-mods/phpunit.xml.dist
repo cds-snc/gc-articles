@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<phpunit
+	bootstrap="tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+>
+	<testsuites>
+		<testsuite name="Integration">
+			<directory prefix="Test" suffix=".php">./tests/Integration</directory>
+		</testsuite>
+	</testsuites>
+	<coverage processUncoveredFiles="true">
+		<include>
+			<directory suffix=".php">./src</directory>
+		</include>
+	</coverage>
+</phpunit>

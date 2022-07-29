@@ -1,0 +1,55 @@
+#. Plugin Name of the plugin
+msgid "Cds Wpml Mods"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/cds-snc/gc-articles"
+msgstr ""
+
+#. Description of the plugin
+msgid "Handles modifications to WPML required for GC Articles"
+msgstr ""
+
+#. Author of the plugin
+msgid "Canadian Digital Service"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://digital.canada.ca"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1 resources/js/components/PageSelect.js:11
+msgid "None"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1 resources/js/components/PageSelect.js:17
+msgid "No translation assigned for this"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1 resources/js/components/PageSelect.js:18
+msgid "will be assigned as translation for this"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1 resources/js/components/PageSelect.js:19
+msgid " This will unlink the existing translation for"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1 resources/js/components/PageSelect.js:20
+msgid "is the current translation for this"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1 resources/js/components/PageSelect.js:121
+msgid "Assigned translation"
+msgstr "Assigned translation fr"
+
+#: resources/js/build/sidebar.js:1 resources/js/components/PageSelect.js:136
+msgid "Untranslated"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1 resources/js/components/PageSelect.js:147
+msgid "Has translation"
+msgstr ""
+
+#: resources/js/sidebar.js:17
+msgid "Translations"
+msgstr "Translations Fr"

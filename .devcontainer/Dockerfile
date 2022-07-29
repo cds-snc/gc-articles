@@ -10,38 +10,38 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     libmcrypt-dev && \
     # install dev utils
     apk add sudo --no-cache \
-        nano \
-        openssh \
-        rsync \
-        git \
-        subversion \
-        composer \
-        nodejs \
-        npm \
-        zsh \
-        zsh-autosuggestions \
-        zsh-syntax-highlighting \
-        gettext \
-        php8-xmlwriter \
-        php8-simplexml \
-        php8-tokenizer \
-        php8-dom \
-        php8-xml
+    nano \
+    openssh \
+    rsync \
+    git \
+    subversion \
+    composer \
+    nodejs \
+    npm \
+    zsh \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+    gettext \
+    php8-xmlwriter \
+    php8-simplexml \
+    php8-tokenizer \
+    php8-dom \
+    php8-xml
 
 RUN pecl install pcov  \
     && docker-php-ext-enable pcov
 
 # clean up
 RUN apk del mod-deps && \
-  rm -rf /apk /tmp/* /var/cache/apk/*
+    rm -rf /apk /tmp/* /var/cache/apk/*
 
 # Create non-root default user
 ARG USER=default
 ENV HOME /home/$USER
 
 RUN adduser -D $USER \
-        && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
-        && chmod 0440 /etc/sudoers.d/$USER
+    && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
+    && chmod 0440 /etc/sudoers.d/$USER
 
 USER $USER
 WORKDIR $HOME
@@ -53,7 +53,8 @@ RUN echo "source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highl
     echo "PROMPT=\"(devcontainer) \$PROMPT\"" >> ~/.zshrc
 
 # A few helpful aliases
-RUN echo "alias gclists=\"cd ~/project/wordpress/wp-content/plugins/gc-lists\"" >> ~/.zshrc && \
+RUN echo "alias mods=\"cd ~/project/wordpress/wp-content/plugins/cds-wpml-mods\"" >> ~/.zshrc && \
+    echo "alias gclists=\"cd ~/project/wordpress/wp-content/plugins/gc-lists\"" >> ~/.zshrc && \
     echo "alias cds=\"cd ~/project/wordpress/wp-content/plugins/cds-base\"" >> ~/.zshrc && \
     echo "alias webroot=\"cd /usr/src/wordpress\"" >> ~/.zshrc && \
     echo "alias wordpress=\"cd ~/project/wordpress\"" >> ~/.zshrc

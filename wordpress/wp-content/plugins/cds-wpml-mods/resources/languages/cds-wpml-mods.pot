@@ -1,0 +1,79 @@
+# Copyright (C) 2022 Canadian Digital Service
+# This file is distributed under the same license as the Cds Wpml Mods plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Cds Wpml Mods 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-wpml-mods\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2022-07-29T18:24:45+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.6.0\n"
+"X-Domain: cds-wpml-mods\n"
+
+#. Plugin Name of the plugin
+msgid "Cds Wpml Mods"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/cds-snc/gc-articles"
+msgstr ""
+
+#. Description of the plugin
+msgid "Handles modifications to WPML required for GC Articles"
+msgstr ""
+
+#. Author of the plugin
+msgid "Canadian Digital Service"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://digital.canada.ca"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1
+#: resources/js/components/PageSelect.js:11
+msgid "None"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1
+#: resources/js/components/PageSelect.js:17
+msgid "No translation assigned for this"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1
+#: resources/js/components/PageSelect.js:18
+msgid "will be assigned as translation for this"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1
+#: resources/js/components/PageSelect.js:19
+msgid "⚠️ This will unlink the existing translation for"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1
+#: resources/js/components/PageSelect.js:20
+msgid "is the current translation for this"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1
+#: resources/js/components/PageSelect.js:121
+msgid "Assigned translation"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1
+#: resources/js/components/PageSelect.js:136
+msgid "Untranslated"
+msgstr ""
+
+#: resources/js/build/sidebar.js:1
+#: resources/js/components/PageSelect.js:147
+msgid "Has translation"
+msgstr ""
+
+#: resources/js/sidebar.js:17
+msgid "Translations"
+msgstr ""

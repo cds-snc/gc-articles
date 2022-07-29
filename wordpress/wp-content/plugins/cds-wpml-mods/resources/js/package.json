@@ -1,0 +1,24 @@
+{
+    "name": "cds-wpml-mods",
+    "version": "0.1.0",
+    "main": "sidebar.js",
+    "author": "Canadian Digital Service",
+    "scripts": {
+      "webpack": "webpack --config webpack.config.js",
+      "build": "BABEL_ENV=default NODE_ENV=production webpack",
+      "dev": "BABEL_ENV=default webpack --watch",
+      "postinstall": "npm run build"
+    },
+    "devDependencies": {
+      "@automattic/i18n-loader-webpack-plugin": "^2.0.13",
+      "@wordpress/dependency-extraction-webpack-plugin": "^3.6.0",
+      "babel-core": "^6.26.3",
+      "babel-loader": "^8.2.5",
+      "babel-plugin-transform-react-jsx": "^6.24.1",
+      "babel-preset-env": "^1.7.0",
+      "terser-webpack-plugin": "^5.3.3",
+      "webpack": "^5.73.0",
+      "webpack-cli": "^4.10.0"
+    }
+  }
+  

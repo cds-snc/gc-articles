@@ -1,7 +1,7 @@
 {
   "translation-revision-date": "2022-07-29T14:50:57+00:00",
   "generator": "WP-CLI/2.6.0",
-  "source": "resources/js/components/PageSelect.js",
+  "source": "resources/js/build/sidebar.js",
   "domain": "messages",
   "locale_data": {
     "messages": {

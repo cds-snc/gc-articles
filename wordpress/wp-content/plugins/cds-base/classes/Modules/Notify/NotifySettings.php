@@ -46,12 +46,13 @@ class NotifySettings
 
     public function notifyApiSettingsAddPluginPage()
     {
-        add_options_page(
-            __('Notify API Settings', 'cds-snc'), // page_title
-            __('Notify API Settings', 'cds-snc'), // menu_title
-            'manage_notify', // capability
-            'notify-settings', // menu_slug
-            array( $this, 'notifyApiSettingsCreateAdminPage' ) // function
+        add_submenu_page(
+            "gc-lists_messages",
+            __('Settings', 'cds-snc'), // page_title
+            __('Settings', 'cds-snc'), // menu_title
+            'manage_notify',
+            "settings",
+            [ $this, 'notifyApiSettingsCreateAdminPage' ] // function
         );
     }
 
@@ -62,10 +63,7 @@ class NotifySettings
         ?>
 
         <div class="wrap">
-            <h1><?php _e('Notify API Settings', 'cds-snc'); ?></h1>
-            <p></p>
             <?php settings_errors(); ?>
-
             <form method="post" action="options.php" id="notify_settings_form" class="gc-form-wrapper">
                 <?php
                 settings_fields('notify_api_settings_option_group');
@@ -104,14 +102,14 @@ class NotifySettings
 
         add_settings_section(
             'notify_api_settings_setting_section', // id
-            __('Notify', 'cds-snc'), // title
+            __('GC Lists Settings', 'cds-snc'), // title
             array( $this, 'notifyApiSettingsSectionInfo'), // callback
             'notify-api-settings-admin' // page
         );
 
         add_settings_field(
             'notify_api_key', // id
-            __('Notify API Key', 'cds-snc'), // title
+            __('API key', 'cds-snc'), // title
             array( $this, 'notifyApiKeyCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section', // section
@@ -122,7 +120,7 @@ class NotifySettings
 
         add_settings_field(
             'notify_generic_template_id', // id
-            __('Notify Generic<br />Template ID', 'cds-snc'), // title
+            __('Email integration template ID', 'cds-snc'), // title
             array( $this, 'notifyGenericTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section', // section

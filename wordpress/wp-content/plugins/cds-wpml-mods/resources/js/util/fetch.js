@@ -1,12 +1,10 @@
-const CDS_VARS = window.CDS_VARS || {
-    rest_url: 'http://localhost/wp-json/',
-    local: true
-};
+const CDS_VARS = window.CDS_VARS
+
+console.log(CDS_VARS);
 
 export const getData = async (endpoint) => {
     const requestHeaders = new Headers();
-    // do we need this?
-    //requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
+    requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
 
     const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
             method: 'GET',
@@ -29,7 +27,7 @@ export const sendData = async (endpoint, data) => {
     const requestHeaders = new Headers({
         'Content-Type': 'application/json;charset=UTF-8',
     });
-    //requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
+    requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
 
     const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
         method: 'POST',

@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file.
  *
- * @package Cds_Wpml_Mods
+ * @package CDS_WPML_Mods
  */
 
 $_tests_dir = getenv( 'WP_TESTS_DIR' );

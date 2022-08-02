@@ -134,3 +134,17 @@ add_filter('locale', 'define_locale', 10);
 add_filter('gutenberg_can_edit_post', '__return_true', 5);
 add_filter('use_block_editor_for_post', '__return_true', 5);
 add_filter('user_can_richedit', '__return_true', 50);
+
+function wpseo_breadcrumb_single_link_translate($link_output, $link)
+{
+    $lang = get_active_language();
+    if ($link['text'] === "Home" && $lang === "fr") {
+        $link_output = str_replace(">Home</a>", ">Accueil</a>", $link_output);
+        return $link_output;
+    }
+
+    return $link_output;
+}
+
+
+add_filter('wpseo_breadcrumb_single_link', 'wpseo_breadcrumb_single_link_translate', 10, 2);

@@ -139,7 +139,8 @@ function wpseo_breadcrumb_single_link_translate($link_output, $link)
 {
     $lang = get_active_language();
     if ($link['text'] === "Home" && $lang === "fr") {
-        $link_output = str_replace(">Home</a>", ">Accueil</a>", $link_output);
+        $text = 'Accueil';
+        $link_output = str_replace("Home", $text, $link_output);
         return $link_output;
     }
 

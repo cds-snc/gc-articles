@@ -259,3 +259,106 @@ test('saveTranslation validate same language', function() {
 		->toBeArray()
 		->toHaveKey('translationId', 'Can’t assign a post’s translation to another post in the same language');
 });
+
+test('getTranslation good ID with translated post', function() {
+	global $sitepress;
+
+	$user = wp_get_current_user();
+	$user->add_cap("edit_posts");
+
+	$sitepress = mock('\SitePress');
+	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
+	$sitepress->shouldReceive("get_object_id")->andReturn(100);
+
+	$post = $this->factory()->post->create_and_get();
+	$postID = $post->ID;
+
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${postID}/translation");
+	$response = $this->server->dispatch($request);
+
+	expect($response->get_status())->toBe(200);
+	expect($response)
+		->toBeInstanceOf('WP_REST_Response');
+
+	$body = $response->get_data();
+
+	expect($body)
+		->toBeArray()
+		->toHaveKeys(['ID', 'post_title', 'post_type', 'language_code', 'translated_post_id', 'is_translated'])
+		->toHaveKey('ID', $post->ID)
+		->toHaveKey('translated_post_id', 100)
+		->toHaveKey('is_translated', true);
+})->group('wpml');
+
+test('getTranslation good ID with NO translated post', function() {
+	global $sitepress;
+
+	$user = wp_get_current_user();
+	$user->add_cap("edit_posts");
+
+	$sitepress = mock('\SitePress');
+	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
+	// return null instead of ID for translated post
+	$sitepress->shouldReceive("get_object_id")->andReturn(null);
+
+	$post = $this->factory()->post->create_and_get();
+	$postID = $post->ID;
+
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${postID}/translation");
+	$response = $this->server->dispatch($request);
+
+	expect($response->get_status())->toBe(200);
+	expect($response)
+		->toBeInstanceOf('WP_REST_Response');
+
+	$body = $response->get_data();
+
+	expect($body)
+		->toBeArray()
+		->toHaveKeys(['ID', 'post_title', 'post_type', 'language_code', 'translated_post_id', 'is_translated'])
+		->toHaveKey('ID', $post->ID)
+		->toHaveKey('translated_post_id', null)
+		->toHaveKey('is_translated', false);
+})->group('wpml');
+
+test('getTranslation error on bad ID', function() {
+	$user = wp_get_current_user();
+	$user->add_cap("edit_posts");
+
+	$post = $this->factory()->post->create_and_get();
+	$badPostID = $post->ID + 1;
+
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${badPostID}/translation");
+	$response = $this->server->dispatch($request);
+
+	expect($response->get_status())->toBe(404);
+	expect($response)
+		->toBeInstanceOf('WP_REST_Response');
+
+	$body = $response->get_data();
+
+	expect($body)
+		->toBeArray()
+		->toHaveKey('code', 'post_not_found');
+});
+
+test('unsetTranslation error on bad ID', function() {
+	$user = wp_get_current_user();
+	$user->add_cap("edit_posts");
+
+	$post = $this->factory()->post->create_and_get();
+	$badPostID = $post->ID + 1;
+
+	$request  = new WP_REST_Request('DELETE', "/cds/wpml/posts/${badPostID}/translation");
+	$response = $this->server->dispatch($request);
+
+	expect($response->get_status())->toBe(404);
+	expect($response)
+		->toBeInstanceOf('WP_REST_Response');
+
+	$body = $response->get_data();
+
+	expect($body)
+		->toBeArray()
+		->toHaveKey('code', 'post_not_found');
+});

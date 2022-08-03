@@ -48,6 +48,7 @@ function cds_security_headers($headers)
             "https://www.canada.ca",
             "https://secure.gravatar.com",
             "2.gravatar.com",
+            "0.gravatar.com",
             "https://digital.canada.ca",
         ],
         "manifest-src" => [

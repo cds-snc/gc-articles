@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-05-18T15:18:06+00:00\n"
+"POT-Creation-Date: 2022-08-03T20:23:53+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -163,14 +163,22 @@ msgid "You are here:"
 msgstr "Vous êtes ici :"
 
 #: inc/template-functions.php:404
+msgid "Toggle submenu"
+msgstr "Basculer le sous-menu"
+
+#: inc/template-functions.php:407
 msgid "Top menu"
 msgstr "Menu supérieur"
 
-#: inc/template-functions.php:405
+#: inc/template-functions.php:408
 msgid "submenu"
 msgstr "Sous-menu"
 
-#: inc/template-functions.php:439
+#: inc/template-functions.php:429
+msgid "Toggle submenu for "
+msgstr "Basculer le sous-menu de "
+
+#: inc/template-functions.php:445
 msgid "Date modified:"
 msgstr "Date de modification :"
 

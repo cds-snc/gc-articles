@@ -145,6 +145,29 @@ if (!function_exists('cds_setup')) {
                 'color' => '#af3c43',
             ),
         ));
+
+        add_theme_support('editor-font-sizes', array(
+            array(
+                'name' => esc_attr__('Small', 'cds-snc'),
+                'size' => 12,
+                'slug' => 'small'
+            ),
+            array(
+                'name' => esc_attr__('Medium', 'cds-snc'),
+                'size' => 16,
+                'slug' => 'regular'
+            ),
+            array(
+                'name' => esc_attr__('Large', 'cds-snc'),
+                'size' => 20,
+                'slug' => 'large'
+            ),
+            array(
+                'name' => esc_attr__('X-Large', 'cds-snc'),
+                'size' => 24,
+                'slug' => 'x-large'
+            )
+        ));
     }
 }
 add_action('after_setup_theme', 'cds_setup');

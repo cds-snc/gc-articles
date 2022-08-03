@@ -548,3 +548,19 @@ nav.nav--about li a:focus {
 .wp-block-button__link.has-red-background-color:hover, .wp-block-button__link.has-red-background-color:focus {
     background-color: var(--hover-red) !important;
 }
+
+.has-small-font-size{
+    font-size: 12px !important;
+}
+  
+.has-medium-font-size{
+    font-size: 16px !important;
+}
+  
+.has-large-font-size{
+    font-size: 20px !important;
+}
+  
+.has-x-large-font-size{
+    font-size: 24px !important;
+}

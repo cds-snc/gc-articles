@@ -28,7 +28,7 @@ export const sendData = async ({ endpoint, data, method }) => {
     requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
 
     const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
-        method: method,
+        method: method === 'DELETE' ? 'DELETE' : 'POST',
         headers: requestHeaders,
         mode: 'cors',
         cache: 'default',

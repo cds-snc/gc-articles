@@ -166,6 +166,16 @@ if (!function_exists('cds_setup')) {
                 'name' => esc_attr__('X-Large', 'cds-snc'),
                 'size' => 24,
                 'slug' => 'x-large'
+            ),
+            array(
+                'name' => esc_attr__('XX-Large', 'cds-snc'),
+                'size' => 36,
+                'slug' => 'xx-large'
+            ),
+            array(
+                'name' => esc_attr__('XXX-Large', 'cds-snc'),
+                'size' => 42,
+                'slug' => 'xxx-large'
             )
         ));
     }

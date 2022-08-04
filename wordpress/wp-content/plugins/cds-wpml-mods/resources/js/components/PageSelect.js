@@ -5,6 +5,28 @@ const { __ } = wp.i18n;
 
 import { getData, sendData } from '../util/fetch.js';
 
+/**
+ * The WPML metabox panel is removed using "removeEditorPanel" in sidebar.js, but that
+ * just hides the metabox using CSS, it's not actually removed from the DOM.
+ *
+ * The WPML metabox loads with a pre-populated select box with the name of the post that is
+ * assigned as the translation when the page loads. This value is then submitted as part of
+ * a general "POST" request when the page/post is updated. WPML looks for this value and,
+ * when it finds it, it uses it as the translation.
+ *
+ * What this means is that on some posts, our new translation ID is sent, the translation is updated,
+ * but then half a second later the "icl_translation_of" value is received by WPML, which resets the translation to its prior value.
+ *
+ * Our solution to this is to remove the WPML metabox from the DOM if we find it.
+ * It would be better to remove the WPML panel completely using a WordPress API but this doesn't seem to be possible.
+ */
+const _removeWPMLPanel = () => {
+    const wpmlPanel = document.querySelector('#icl_div');
+    if(wpmlPanel) {
+        wpmlPanel.parentNode.removeChild(wpmlPanel);
+    }
+}
+
 export const PageSelect = () => {
     const { isSavingPost } = select( 'core/editor' );
 
@@ -118,7 +140,8 @@ export const PageSelect = () => {
             hintTextIndex = 'translated_post_id'
         }
         setHintText(hintTexts[hintTextIndex](page.label))
-        // set hint text
+
+        _removeWPMLPanel()
     }, [page, post, hintTexts]);
 
     useEffect(() => {

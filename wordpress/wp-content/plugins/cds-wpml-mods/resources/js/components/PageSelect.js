@@ -39,7 +39,19 @@ export const PageSelect = () => {
 
     const updatePost = async () => {
         setIsLoading(true)
-        const response = await sendData(`cds/wpml/posts/${postID}/translation`, {translationId: page.value})
+
+        let args = {
+            endpoint: `cds/wpml/posts/${postID}/translation`,
+            data: { translationId: page.value },
+            method: 'POST'
+        }
+
+        if(!page.value) {
+            delete args.data;
+            args.method = 'DELETE';
+        }
+
+        const response = await sendData(args)
 
         if (response.ID) {
             setPost(response)
@@ -59,7 +71,7 @@ export const PageSelect = () => {
 
     useEffect(() => {
         const getPost = async (postID) => {
-            const response = await getData(`cds/wpml/posts/${postID}/translation`);
+            const response = await getData({ endpoint: `cds/wpml/posts/${postID}/translation` });
 
             if (response.ID) {
                 setPost(response)
@@ -72,7 +84,7 @@ export const PageSelect = () => {
     useEffect(() => {
         const getPages = async (post) => {
             const altLanguage = post.language_code === 'en' ? 'fr' : 'en';
-            const response = await getData(`cds/wpml/${post.post_type}s/${altLanguage}`);
+            const response = await getData({ endpoint: `cds/wpml/${post.post_type}s/${altLanguage}` });
 
             if (response.length >= 1) {
 

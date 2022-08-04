@@ -70,7 +70,7 @@ class Endpoints extends BaseEndpoint
                             return new WP_Error('same_ids', __('Translation post ID cannot be the same as original Post ID', 'cds-wp-mods'));
                         }
 
-                        $originalPost = get_post($request['id']);
+                        $originalPost = get_post(intval($request['id']));
                         if (is_null($originalPost)) {
                             return new WP_Error('post_not_found', __('The post you are looking for does not exist', 'cds-wp-mods'));
                         }
@@ -103,6 +103,15 @@ class Endpoints extends BaseEndpoint
                 return $this->hasPermission();
             }
         ]);
+
+        // Unset a page's associated translation
+        register_rest_route($this->namespace, '/posts/(?P<id>[\d]+)/translation', [
+            'methods'             => 'DELETE',
+            'callback'            => [$this, 'unsetTranslation'],
+            'permission_callback' => function () {
+                return $this->hasPermission();
+            }
+        ]);
     }
 
     /**
@@ -112,13 +121,17 @@ class Endpoints extends BaseEndpoint
      *
      * @return mixed
      */
-    public function getAvailablePages(WP_REST_Request $request): WP_REST_Response
+    public function getAvailablePages(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
-        $post_type = $request['type'] === 'pages' ? 'page' : 'post';
+        $postType = $request['type'] === 'pages' ? 'page' : 'post';
 
         $language_code = $request['language'];
 
-        $posts = $this->post->getAvailable($post_type, $language_code);
+        try {
+            $posts = $this->post->getAvailable($postType, $language_code);
+        } catch (Exception $e) {
+            return new WP_Error('internal_server_error', __('Internal server error', 'cds-wp-mods'), array( 'status' => 500 ));
+        }
 
         $response = new WP_REST_Response($posts);
 
@@ -134,32 +147,37 @@ class Endpoints extends BaseEndpoint
      *
      * @return array
      */
-    public function saveTranslation(WP_REST_Request $request): WP_REST_Response
+    public function saveTranslation(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
         global $sitepress;
 
-        $originalPost = get_post($request['id']);
-        $targetPost = get_post($request['translationId']);
+        $originalPost = get_post(intval($request['id']));
+        $targetPost = get_post(intval($request['translationId']));
 
-        $originalPostLanguage = $this->post->getLanguageCodeOfPostObject($originalPost);
-        $targetPostLanguage = $this->post->getLanguageCodeOfPostObject($targetPost);
+        try {
+            $originalPostLanguage = $this->post->getLanguageCodeOfPostObject($originalPost);
+            $targetPostLanguage = $this->post->getLanguageCodeOfPostObject($targetPost);
+            $postType = 'post_' . $originalPost->post_type;
 
-        // Unset existing translation if exists
-        if ($translatedPostID = $this->post->getTranslatedPostID($originalPost)) {
-            $this->post->setTranslationForPost($translatedPostID, $originalPost->post_type, $targetPostLanguage);
+            // Unset existing translation if exists
+            if ($translatedPostID = $this->post->getTranslatedPostID($originalPost)) {
+                $this->post->setTranslationForPost($translatedPostID, $postType, $targetPostLanguage);
+            }
+
+            // Unset existing translation for the target post if exists
+            if ($otherTranslatedPostID = $this->post->getTranslatedPostID($targetPost)) {
+                $this->post->setTranslationForPost($otherTranslatedPostID, $postType, $originalPostLanguage);
+            }
+
+            // Note that post_trid is a string (normal ids are integers)
+            $postTrid = $sitepress->get_element_trid($originalPost->ID, $postType);
+
+            // Set translations for each post
+            $this->post->setTranslationForPost($originalPost->ID, $postType, $originalPostLanguage, $postTrid);
+            $this->post->setTranslationForPost($targetPost->ID, $postType, $targetPostLanguage, $postTrid, $originalPostLanguage);
+        } catch (Exception $e) {
+            return new WP_Error('internal_server_error', __('Internal server error', 'cds-wp-mods'), array( 'status' => 500 ));
         }
-
-        // Unset existing translation if exists
-        if ($otherTranslatedPostID = $this->post->getTranslatedPostID($targetPost)) {
-            $this->post->setTranslationForPost($otherTranslatedPostID, $targetPost->post_type, $originalPostLanguage);
-        }
-
-        // Note that post_trid is a string (normal ids are integers)
-        $postTrid = $sitepress->get_element_trid($originalPost->ID, 'post_' . $originalPost->post_type);
-
-        // Set translations for each post
-        $this->post->setTranslationForPost($originalPost->ID, $originalPost->post_type, $originalPostLanguage, $postTrid);
-        $this->post->setTranslationForPost($targetPost->ID, $targetPost->post_type, $targetPostLanguage, $postTrid, $originalPostLanguage);
 
         // Return the details
         $response = new WP_REST_Response($this->post->buildResponseObject(post: $originalPost, withTranslations: true));
@@ -179,10 +197,52 @@ class Endpoints extends BaseEndpoint
      */
     public function getTranslation(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
-        $post = get_post($request['id']);
+        $post = get_post(intval($request['id']));
 
         if (is_null($post)) {
             return new WP_Error('post_not_found', __('The post you are looking for does not exist', 'cds-wp-mods'), array( 'status' => 404 ));
+        }
+
+        try {
+            $response = new WP_REST_Response($this->post->buildResponseObject(post: $post, withTranslations: true));
+        } catch (Exception $e) {
+            return new WP_Error('internal_server_error', __('Internal server error', 'cds-wp-mods'), array( 'status' => 500 ));
+        }
+
+        $response->set_status(200);
+
+        return rest_ensure_response($response);
+    }
+
+    /**
+     * Get the existing translation for a given page.
+     * Returns a WP_Error if no post is found for the id given.
+     *
+     * @param  WP_REST_Request  $request
+     *
+     * @return array | WP_Error
+     */
+    public function unsetTranslation(WP_REST_Request $request): WP_REST_Response|WP_Error
+    {
+        $post = get_post(intval($request['id']));
+
+        if (is_null($post)) {
+            return new WP_Error('post_not_found', __('The post you are looking for does not exist', 'cds-wp-mods'), array( 'status' => 404 ));
+        }
+
+        try {
+            $postType = 'post_' . $post->post_type;
+            $language_code = $this->post->getLanguageCodeOfPostObject($post);
+
+            // Unset existing translation if exists
+            if ($translatedPostID = $this->post->getTranslatedPostID($post)) {
+                $altLanguage = $language_code === 'en' ? 'fr' : 'en';
+                $this->post->setTranslationForPost($translatedPostID, $postType, $altLanguage);
+            }
+
+            $this->post->setTranslationForPost($post->ID, $postType, $language_code);
+        } catch (Exception $e) {
+            return new WP_Error('internal_server_error', __('Internal server error', 'cds-wp-mods'), array( 'status' => 500 ));
         }
 
         $response = new WP_REST_Response($this->post->buildResponseObject(post: $post, withTranslations: true));

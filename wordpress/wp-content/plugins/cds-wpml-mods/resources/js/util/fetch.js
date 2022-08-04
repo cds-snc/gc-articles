@@ -1,6 +1,6 @@
 const CDS_VARS = window.CDS_VARS
 
-export const getData = async (endpoint) => {
+export const getData = async ({ endpoint }) => {
     const requestHeaders = new Headers();
     requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
 
@@ -21,14 +21,14 @@ export const getData = async (endpoint) => {
     return await response.json();
 };
 
-export const sendData = async (endpoint, data) => {
+export const sendData = async ({ endpoint, data, method }) => {
     const requestHeaders = new Headers({
         'Content-Type': 'application/json;charset=UTF-8',
     });
     requestHeaders.append('X-WP-Nonce', CDS_VARS.rest_nonce);
 
     const response = await fetch(`${CDS_VARS.rest_url}${endpoint}`, {
-        method: 'POST',
+        method: method === 'DELETE' ? 'DELETE' : 'POST',
         headers: requestHeaders,
         mode: 'cors',
         cache: 'default',

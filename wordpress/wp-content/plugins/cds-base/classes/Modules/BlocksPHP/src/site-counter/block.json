@@ -1,0 +1,14 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cds/site-counter",
+	"version": "0.1.0",
+	"title": "GC Articles Site Counter",
+	"category": "widgets",
+	"icon": "embed-generic",
+	"description": "Internal Site Counter for GC Articles",
+	"textdomain": "cds-snc",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

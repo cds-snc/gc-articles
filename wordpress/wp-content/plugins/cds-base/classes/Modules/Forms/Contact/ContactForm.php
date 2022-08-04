@@ -131,6 +131,12 @@ class ContactForm
                     <?php
                         Utils::radioField(
                             'goal',
+                            'Request a demo to learn more about GC Articles.',
+                            __('Request a demo to learn more about GC Articles.', 'cds-snc'),
+                            val: $all_values['goal']
+                        );
+                        Utils::radioField(
+                            'goal',
                             'Ask a question.',
                             __('Ask a question.', 'cds-snc'),
                             val: $all_values['goal']
@@ -145,12 +151,6 @@ class ContactForm
                             'goal',
                             'Give feedback.',
                             __('Give feedback.', 'cds-snc'),
-                            val: $all_values['goal']
-                        );
-                        Utils::radioField(
-                            'goal',
-                            'Schedule a demo to learn more about GC Articles.',
-                            __('Schedule a demo to learn more about GC Articles.', 'cds-snc'),
                             val: $all_values['goal']
                         );
                         Utils::radioField(

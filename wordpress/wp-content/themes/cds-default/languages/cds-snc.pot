@@ -2,16 +2,16 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS Default 2.26.0\n"
+"Project-Id-Version: CDS Default 3.6.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-05-18T15:18:06+00:00\n"
+"POT-Creation-Date: 2022-08-03T20:41:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.5.0\n"
+"X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: cds-snc\n"
 
 #. Theme Name of the theme
@@ -167,14 +167,22 @@ msgid "You are here:"
 msgstr ""
 
 #: inc/template-functions.php:404
+msgid "Toggle submenu"
+msgstr ""
+
+#: inc/template-functions.php:407
 msgid "Top menu"
 msgstr ""
 
-#: inc/template-functions.php:405
+#: inc/template-functions.php:408
 msgid "submenu"
 msgstr ""
 
-#: inc/template-functions.php:439
+#: inc/template-functions.php:429
+msgid "Toggle submenu for "
+msgstr ""
+
+#: inc/template-functions.php:445
 msgid "Date modified:"
 msgstr ""
 

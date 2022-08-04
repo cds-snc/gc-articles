@@ -374,6 +374,20 @@ th.column-disable_user_login {
 }
 
 /* generated styles via https://jsonformatter.org/sass-to-css + commented out sass above */
+:root {
+  --hover-white: #ccc;
+  --hover-black: #444444;
+  --hover-primary-blue: #444444;
+  --hover-dark-blue: #444444;
+  --hover-light-blue: #444444;
+  --hover-dark-grey: #444444;
+  --hover-grey: #333333;
+  --hover-orange: #a65500;
+  --hover-green: #003620;
+  --hover-red: #942826;
+}
+
+/* generated styles via https://jsonformatter.org/sass-to-css + commented out sass above */
 .has-black-color {
   color: #000 !important;
 }
@@ -447,10 +461,10 @@ th.column-disable_user_login {
   color: white !important;
 }
 .wp-block-button__link:not(.has-background) {
-  background-color: #000;
+  background-color: var(--hover-white);
 }
 .wp-block-button__link:not(.has-background):hover, .wp-block-button__link:not(.has-background):focus {
-  background-color: #000;
+  background-color: var(--hover-white);
 }
 .wp-block-button__link.has-black-color:hover, .wp-block-button__link.has-black-color:focus {
   color: #000 !important;

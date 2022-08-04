@@ -118,3 +118,9 @@ details[class^="wp-block"][open] {
   top: unset;
   line-height: unset;
 }
+
+/* Standardize button padding */
+.wp-block-button > .wp-block-button__link:not(.has-background),
+.wp-block-button > .wp-block-button__link.has-background {
+  padding: 12px 20px;
+}

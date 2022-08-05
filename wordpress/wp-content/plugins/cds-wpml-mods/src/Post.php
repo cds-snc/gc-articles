@@ -62,6 +62,12 @@ class Post
         return $sitepress->get_object_id($post->ID, 'post', false, $altLanguage);
     }
 
+    public function getTRID(int $postID, string $postType): string
+    {
+        global $sitepress;
+        return $sitepress->get_element_trid($postID, $postType);
+    }
+
     /**
      * @param int $postId  Use term_taxonomy_id for taxonomies, post_id for posts
      * @param string $postType The type of an element. Can be a post type: post_post, post_page, post_attachment, post_nav_menu_item, post_{custom post key} or taxonomy: tax_category, tax_post_tag, tax_nav_menu, tax_{custom taxonomy key}. Defaults to post_post if not set.
@@ -72,19 +78,27 @@ class Post
      * This function uses the sitepress method directly, but the args from the hook are all passed in.
      * Reference: https://wpml.org/wpml-hook/wpml_set_element_language_details/
      */
-    public function setTranslationForPost($postId, $postType, $languageCode, $trid = false, $sourceLanguageCode = null)
+    public function setTranslationForPost($postID, $postType, $languageCode, $trid = false, $sourceLanguageCode = null)
     {
         global $sitepress;
 
         $elementType = str_starts_with($postType, 'post_') ? $postType : 'post_' . $postType;
 
         $sitepress->set_element_language_details_action([
-            'element_id'    => $postId,
+            'element_id'    => $postID,
             'element_type'  => $elementType,
             'trid'          => $trid,
             'language_code' => $languageCode,
             'source_language_code' => $sourceLanguageCode
         ]);
+
+        if (get_post_meta($postID, 'wpml_trid', true)) {
+            // get the trid for the current post
+            $trid = $trid ?: $this->getTRID($postID, $elementType);
+
+            // update the "wpml_trid" post_meta field if it exists
+            update_post_meta($postID, 'wpml_trid', $trid);
+        }
     }
 
     public function buildResponseObject(WP_Post $post, bool $withTranslations = false): array

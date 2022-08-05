@@ -92,6 +92,21 @@ test('getLanguageCodeOfPostObject', function() {
 	expect($language)->toEqual('en');
 });
 
+test('getTRID', function() {
+	global $sitepress;
+	$sitepress = mock('\SitePress');
+	$sitepress->shouldReceive("get_element_trid")->andReturn('100');
+
+	$post_id = $this->factory()->post->create();
+	$post = get_post($post_id);
+
+	$postClass = new Post();
+
+	$trid = $postClass->getTRID($post->ID, 'post_post');
+
+	expect($trid)->toEqual('100');
+});
+
 test('getTranslatedPostID', function() {
 	global $sitepress;
 	$sitepress = mock('\SitePress');
@@ -114,6 +129,7 @@ test('getTranslatedPostID', function() {
 test('setTranslationForPost calls set_element_language_details_action', function() {
 	global $sitepress;
 	$sitepress = mock('\SitePress');
+	$sitepress->shouldReceive("get_element_trid")->andReturn('100');
 	$sitepress->shouldReceive("set_element_language_details_action");
 
 	$postClass = new Post();

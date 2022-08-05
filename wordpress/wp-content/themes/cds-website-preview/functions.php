@@ -3,6 +3,7 @@
 include get_theme_file_path('/inc/webhook.php');
 include get_theme_file_path('/post-types/job.php');
 include get_theme_file_path('/post-types/team.php');
+include get_theme_file_path('/post-types/product.php');
 
 function get_fonts_uri()
 {

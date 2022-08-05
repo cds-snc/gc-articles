@@ -179,6 +179,8 @@ if (!function_exists('cds_setup')) {
             )
         ));
     }
+
+    add_theme_support('custom-spacing');
 }
 add_action('after_setup_theme', 'cds_setup');
 

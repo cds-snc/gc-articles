@@ -126,7 +126,7 @@ function cds_web_register_post_meta()
 
     register_meta(
         'post',
-        'cds_product_name', // meta key
+        'cds_product', // meta key
         array(
             'type'           => 'string',
             'single'         => true,

@@ -45,13 +45,17 @@ export const ChooseMessage = () => {
                             </th>
                             <td>
                                 <FieldError errors={errors} id={fieldId}>
-                                    <div style={{ marginBottom: "5px" }}>
+                                    <div>
                                         <input {...register(fieldId, { required: true })} type="radio" id="message_type_email" value="email" />
-                                        <label htmlFor="message_type_email">{__('Email', 'gc-lists')}</label>
+                                        <label htmlFor="message_type_email" style={{display: 'inline-block', margin: '2px 0 5px 3px' }}>
+                                            {__('Email', 'gc-lists')}
+                                        </label>
                                     </div>
                                     <div>
                                         <input {...register(fieldId, { required: true })} type="radio" id="message_type_phone" value="phone" />
-                                        <label htmlFor="message_type_phone">{__('Text message', 'gc-lists')}</label>
+                                        <label htmlFor="message_type_phone" style={{display: 'inline-block', margin: '2px 0 5px 3px' }}>
+                                            {__('Text message', 'gc-lists')}
+                                        </label>
                                     </div>
                                 </FieldError>
                             </td>

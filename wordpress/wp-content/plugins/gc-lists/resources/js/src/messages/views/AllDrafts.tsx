@@ -6,7 +6,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { ListDrafts, StyledLink, Back } from '../components';
+import { Back, StyledLink } from '../../common';
+import { ListDrafts } from '../components';
 
 export const AllDrafts = () => {
     return (

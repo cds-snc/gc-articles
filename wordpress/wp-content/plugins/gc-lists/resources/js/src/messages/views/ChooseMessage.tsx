@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
  /**
   * Internal dependencies
   */
-import { FieldError, StyledLink, Back, NotAuthorized } from '../components';
+import { Back, StyledLink } from '../../common';
+import { FieldError, NotAuthorized } from '../components';
 import { useList } from '../../store';
 
 export const ChooseMessage = () => {

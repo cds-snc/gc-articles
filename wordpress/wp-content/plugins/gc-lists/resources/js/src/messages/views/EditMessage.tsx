@@ -11,9 +11,10 @@ import styled from 'styled-components';
 /**
  * Internal dependencies
  */
+import { Back, StyledLink } from '../../common';
 import { Editor, deserialize, serialize } from '../editor';
 import { useList, useTemplateApi } from '../../store';
-import { Success, Spinner, StyledLink, Back, NotAuthorized } from "../components";
+import { Success, Spinner, NotAuthorized } from "../components";
 
 const textWidth = { width: "25em" }
 

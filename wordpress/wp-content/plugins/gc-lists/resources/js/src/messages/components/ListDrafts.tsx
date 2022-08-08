@@ -9,7 +9,8 @@ import { Link, useLocation } from "react-router-dom";
 /**
  * Internal dependencies
  */
-import { Table, StyledLink, StyledPaging, ConfirmDelete, Spinner, Next } from ".";
+import { Table, StyledPaging, ConfirmDelete, Spinner, Next } from ".";
+import { StyledLink } from '../../common';
 import { useList, useTemplateApi } from '../../store';
 import { ToastMessage } from './ToastMessage';
 

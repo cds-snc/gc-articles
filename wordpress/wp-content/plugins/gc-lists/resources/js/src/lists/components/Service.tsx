@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { __ } from "@wordpress/i18n";
+
+/**
  * Internal dependencies
  */
 import { ListViewTable } from "./ListViewTable";
@@ -14,10 +19,11 @@ export const Service = () => {
     }
 
     return (
-        <div>
+        <>
+            <h1>{__("Mailing lists", "gc-lists")}</h1>
             <Messages />
             <ListViewTable />
-        </div>
+        </>
     )
 }
 

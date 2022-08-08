@@ -102,8 +102,8 @@ const StyledNoLists = styled.div`
 const NoLists = () => {
     return (
         <StyledNoLists>
-            <p><strong>{__("You have no subscriber lists.", "gc-lists")}</strong></p>
-            <p>{__("A subscriber list allows you to collect a group of subscribers that you can send messages to.", "gc-lists")}</p>
+            <p><strong>{__("You have no mailing lists.", "gc-lists")}</strong></p>
+            <p>{__("A mailing list allows you to collect a group of subscribers that you can send messages to.", "gc-lists")}</p>
         </StyledNoLists>
     )
 }
@@ -169,7 +169,6 @@ export const ListViewTable = () => {
             </StyledCreateButton>
 
             {hasLists ? <Table columns={columns} data={lists} /> : <NoLists />}
-
         </>
     )
 }

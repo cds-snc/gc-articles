@@ -49,8 +49,8 @@ class Menu
     {
         add_submenu_page(
             $this->messagesPageSlug,
-            __('Subscriber lists', 'gc-lists'),
-            __('Subscriber lists', 'gc-lists'),
+            __('Mailing lists', 'gc-lists'),
+            __('Mailing lists', 'gc-lists'),
             $this->capability,
             $this->subscribersPageSlug,
             [$this, 'renderSubscribers'],
@@ -85,7 +85,7 @@ class Menu
         }
 
         $this->render('subscribers', [
-            'title' => __('Subscriber lists', 'gc-lists'),
+            'title' => __('Mailing lists', 'gc-lists'),
             'services' => Utils::getServices(),
             'user' => Utils::getUserPermissions(),
         ]);

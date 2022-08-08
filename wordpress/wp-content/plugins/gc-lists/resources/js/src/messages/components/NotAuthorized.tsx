@@ -6,7 +6,7 @@
  /**
  * Internal dependencies
  */
-import { StyledLink, Back } from '../components';
+import { Back, StyledLink } from '../../common';
 
 export const NotAuthorized = () => {
     return (

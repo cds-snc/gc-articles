@@ -14,8 +14,7 @@ import { __ } from "@wordpress/i18n";
 import { ListForm } from "./ListForm";
 import { useList, useService } from "../../store";
 import { List } from "../../types";
-import { StyledLink } from "../../common/StyledLink";
-import { Back } from "../../common/Back";
+import { Back, StyledLink } from "../../common";
 
 export const CreateList = () => {
     const [data, setData] = useState({ id: null })
@@ -48,7 +47,7 @@ export const CreateList = () => {
 
     return data.id ? <Navigate to={`/lists`} replace={true} /> : (
         <>
-            <StyledLink to={`/`}>
+            <StyledLink to={`/lists`}>
                 <Back /> <span>{__("Back to mailing lists", "gc-lists")}</span>
             </StyledLink>
             <h1>Edit list{/* or new list */}</h1>

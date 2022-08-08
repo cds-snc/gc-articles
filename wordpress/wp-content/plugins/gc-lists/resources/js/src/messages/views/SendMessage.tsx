@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 /**
  * Internal dependencies
  */
+import { Back, StyledLink } from '../../common';
 import {
     MessagePreview,
     MessageSent,
@@ -16,9 +17,7 @@ import {
     SendingError,
     CreateNewList,
     ConfirmSend,
-    StyledLink,
     Next,
-    Back,
     FieldError
 } from "../components";
 

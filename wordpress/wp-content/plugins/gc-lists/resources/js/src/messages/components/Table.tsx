@@ -4,12 +4,12 @@
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
 import { useTable, usePagination } from 'react-table';
-import { Link } from "react-router-dom";
 
 /**
  * Internal dependencies
  */
-import { Next, Back } from ".";
+import { Next } from ".";
+import { Back } from "../../common";
 
 export const StyledH1 = styled.h1`
    margin-bottom:30px !important;
@@ -50,24 +50,6 @@ export const StyledButton = styled.button`
         top:-1px;
     }
 `;
-
-export const StyledLink = styled(Link)`
-    position:relative;
-    display:block;
-    margin-top:20px;
-    margin-bottom: 20px;
-    span{
-        display:inline-block;
-        text-decoration:underline !important;
-        position:relative;
-        top:-1px;
-        margin-right:10px;
-
-        :hover{
-            text-decoration:none !important;
-        }
-    }
-`
 
 export const Table = ({ columns, data, perPage = 6, pageNav = false }: { columns: any, data: any, perPage?: number, pageNav?: boolean }) => {
     const {

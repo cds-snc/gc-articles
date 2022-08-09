@@ -1,47 +1,26 @@
 import { TextControl } from '@wordpress/components';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
+import { parseMetaKey, updateValue, getValue } from "../../utils";
 
 export const CDSTextControl = compose(
     withDispatch((dispatch, props) => {
         return {
             setMetaValue: (value, content) => {
-                let metaKey = props.metaKey.split(":");
-                let key = "";
-                let prop = "";
-                if (metaKey.length === 2) {
-                    key = metaKey[0];
-                    prop = metaKey[1];
-                }
-
-                try {
-                    let data = {};
-                    data = JSON.parse(content);
-                    data[prop] = value;
-                    value = JSON.stringify(data)
-                } catch (err) {
-                    console.log(err.message);
-                }
-
-                dispatch('core/editor').editPost({ meta: { [key]: value } });
+                const { key } = parseMetaKey(props.metaKey);
+                const newValue = updateValue(props.metaKey, value, content);
+                dispatch('core/editor').editPost({ meta: { [key]: newValue } });
             }
         }
     }),
     withSelect((select, props) => {
-        let key = props.metaKey.split(":");
-        if (key.length === 2) {
-            key = key[0];
-        }
+        const { key } = parseMetaKey(props.metaKey);
         return {
             metaValue: select('core/editor').getEditedPostAttribute('meta')[key],
         }
     })
 )((props) => {
-    const key = props.metaKey.split(":");
-    let value = props.metaValue;
-    if (value && key.length === 2) {
-        value = JSON.parse(props.metaValue)[key[1]];
-    }
+    const value = getValue(props.metaKey, props.metaValue);
 
     return (
         <TextControl

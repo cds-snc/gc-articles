@@ -1,4 +1,4 @@
-import { getValue } from "../utils/util";
+import { getValue } from "../utils";
 
 test('parses value from saved', () => {
     const value = getValue("cds_product", 'saved value');

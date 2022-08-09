@@ -1,4 +1,4 @@
-import { updateValue } from "../utils/util";
+import { updateValue } from "../utils";
 
 test('updates non sub field content', () => {
     const value = updateValue("cds_product", "new value", "old value");

@@ -1,4 +1,4 @@
-import { parseMetaKey } from "../utils/util";
+import { parseMetaKey } from "../utils";
 
 test('empty', () => {
     const { key, prop } = parseMetaKey("");

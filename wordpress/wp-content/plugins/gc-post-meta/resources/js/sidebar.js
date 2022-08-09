@@ -8,6 +8,7 @@ const { __ } = wp.i18n;
 
 import { PostFields } from "./components/PostFields";
 import { JobFields } from "./components/JobFields";
+import { ProductFields } from "./components/ProductFields";
 import { TeamMemberFields } from "./components/TeamMemberFields";
 
 registerPlugin('gc-post-meta', {
@@ -20,6 +21,7 @@ registerPlugin('gc-post-meta', {
 				</PluginSidebarMoreMenuItem>
 				<PluginSidebar name="gc-post-meta" title={__("Custom Fields", "gc-post-meta")} icon="insert">
 					{type === "post" && <PostFields />}
+					{type === "product" && <ProductFields />}
 					{type === "job" && <JobFields />}
 					{type === "team" && <TeamMemberFields />}
 				</PluginSidebar>

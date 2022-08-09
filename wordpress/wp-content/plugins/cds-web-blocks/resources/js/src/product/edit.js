@@ -10,8 +10,15 @@ const Edit = ({ attributes, setAttributes }) => {
     return (
         <div {...blockProps}>
             <p>{__('Product', 'cds-web')}</p>
-            <TextControl label={__('Name', 'cds-web')} metaKey="cds_product:name" />
+            <TextControl label={__('Subtitle', 'cds-web')} metaKey="cds_product:subtitle" />
             <TextControl label={__('Description', 'cds-web')} metaKey="cds_product:description" />
+            <p>{__('Call to action', 'cds-web')}</p>
+            <TextControl label={__('Button Text', 'cds-web')} metaKey="cds_product:button-text" />
+            <TextControl label={__('Button Link', 'cds-web')} metaKey="cds_product:button-link" />
+            <TextControl label={__('Button Aria', 'cds-web')} metaKey="cds_product:button-aria" />
+            <p>{__('Other', 'cds-web')}</p>
+            <TextControl label={__('Weight', 'cds-web')} metaKey="cds_product:weight" />
+            <TextControl label={__('TagId', 'cds-web')} metaKey="cds_product:tag-id" />
         </div>
     );
 };

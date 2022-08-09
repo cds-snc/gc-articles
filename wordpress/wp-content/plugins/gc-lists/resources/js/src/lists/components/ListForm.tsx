@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Internal dependencies
@@ -34,6 +35,7 @@ const StyledDetails = styled.details`
 const textWidth = { width: "25em" }
 
 export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handler: (list: List) => void, formData: {} | List, serverErrors: ErrorType[] }) => {
+    const navigate = useNavigate();
     const { state: { user } } = useList();
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
 
@@ -57,7 +59,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                 <input id="service_id" type="hidden" {...register("service_id", { required: true })} />
 
                 {/* Optional hidden field, pulled from value entered on the settings panel if set */}
-                <input id="unsubscribe_email_template_id" type="hidden" {...register("unsubscribe_email_template_id")} />
+                <input id="subscribe_email_template_id" type="hidden" {...register("subscribe_email_template_id")} />
 
                 <tbody>
                     <tr>
@@ -87,7 +89,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                                         <label htmlFor="fr">{__('Text message', 'gc-lists')}</label>
                                     </div>
                                     <p className="description" id="language-description">
-                                        Choose the type of message this list will get.
+                                        {__('Choose the type of message this list will receive.', 'gc-lists')}
                                     </p>
                                 </FieldError>
                             </StyledCell>
@@ -98,22 +100,24 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
 
             <StyledDetails className="list-advanced">
                 <summary>
-                    <span>{__("Advanced list settings", "gc-lists")}</span>
+                    <span>{__("Confirmation page settings", "gc-lists")}</span>
                 </summary>
-                <p>{__("These settings are optional.", "gc-lists")} {__("They only apply if you setup a form to collect emails from subscribers.", "gc-lists")}</p>
+
+                <p>{__("Subscribers will see the default confirmation pages if you’ve set up a form to collect their email addresses.", "gc-lists")}</p>
+                <p>{__("Changing these pages is optional.", "gc-lists")}</p>
 
                 <table className="form-table" role="presentation">
                     <tbody>
                         <tr>
                             <th scope="row">
-                                <label htmlFor="subscribe_redirect_url">{__("Subscribe confirmation url", "gc-lists")}</label>
+                                <label htmlFor="subscribe_redirect_url">{__("Subscribe confirmation", "gc-lists")}</label>
                             </th>
                             <StyledCell>
                                 <div className={errors.name ? "error-wrapper" : ""}>
                                     {errors.subscribe_redirect_url && <span className="validation-error">{errors.subscribe_redirect_url?.message}</span>}
                                     <input id="subscribe_redirect_url" style={textWidth} type="text" {...register("subscribe_redirect_url")} />
                                     <p className="description" id="language-description">
-                                        {__("Subscribers are directed to this page when submitting the subscribe request form.", "gc-lists")}
+                                        {__("The page people see after they subscribe.", "gc-lists")}
                                     </p>
                                 </div>
                             </StyledCell>
@@ -121,29 +125,29 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
 
                         <tr>
                             <th scope="row">
-                                <label htmlFor="unsubscribe_redirect_url">{__("Unsubscribe redirect url", "gc-lists")}</label>
-                            </th>
-                            <StyledCell>
-                                <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
-                                    {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
-                                    <input id="unsubscribe_redirect_url" style={textWidth} type="text" {...register("unsubscribe_redirect_url")} />
-                                    <p className="description" id="language-description">
-                                        {__("Subscribers are directed to this page when submitting the unsubscribe request form.", "gc-lists")}
-                                    </p>
-                                </div>
-                            </StyledCell>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">
-                                <label htmlFor="confirm_redirect_url">{__("Verify email url", "gc-lists")}</label>
+                                <label htmlFor="confirm_redirect_url">{__("Verify email confirmation", "gc-lists")}</label>
                             </th>
                             <StyledCell>
                                 <div className={errors.confirm_redirect_url ? "error-wrapper" : ""}>
                                     {errors.confirm_redirect_url && <span className="validation-error">{errors.confirm_redirect_url?.message}</span>}
                                     <input id="confirm_redirect_url" style={textWidth} type="text" {...register("confirm_redirect_url")} />
                                     <p className="description" id="language-description">
-                                        {__("Subscribers are directed to this page when they confirm their subscription to a list.", "gc-lists")}
+                                        {__("The page people see after they verify their email address.", "gc-lists")}
+                                    </p>
+                                </div>
+                            </StyledCell>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label htmlFor="unsubscribe_redirect_url">{__("Unsubscribe confirmation", "gc-lists")}</label>
+                            </th>
+                            <StyledCell>
+                                <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
+                                    {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
+                                    <input id="unsubscribe_redirect_url" style={textWidth} type="text" {...register("unsubscribe_redirect_url")} />
+                                    <p className="description" id="language-description">
+                                        {__("The page people see after they unsubscribe.", "gc-lists")}
                                     </p>
                                 </div>
                             </StyledCell>
@@ -161,7 +165,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     className="button"
                     type="button"
                     onClick={() => {
-                        console.log('cancel!!');
+                        navigate('/lists/');
                     }}
                 >
                     {__('Cancel', 'gc-lists')}

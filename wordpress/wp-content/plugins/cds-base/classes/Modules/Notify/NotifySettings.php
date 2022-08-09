@@ -14,6 +14,7 @@ class NotifySettings
 
     private string $NOTIFY_API_KEY;
     private string $NOTIFY_GENERIC_TEMPLATE_ID;
+    private string $NOTIFY_SUBSCRIBE_TEMPLATE_ID;
 
     public function __construct(EncryptedOption $encryptedOption)
     {
@@ -60,6 +61,7 @@ class NotifySettings
     {
         $this->NOTIFY_API_KEY = get_option('NOTIFY_API_KEY') ?: '';
         $this->NOTIFY_GENERIC_TEMPLATE_ID = get_option('NOTIFY_GENERIC_TEMPLATE_ID') ?: '';
+        $this->NOTIFY_SUBSCRIBE_TEMPLATE_ID = get_option('NOTIFY_SUBSCRIBE_TEMPLATE_ID') ?: '';
         ?>
 
         <div class="wrap">
@@ -100,6 +102,19 @@ class NotifySettings
             }
         );
 
+
+        register_setting(
+            'notify_api_settings_option_group', // option_group
+            'NOTIFY_SUBSCRIBE_TEMPLATE_ID',
+            function ($input) {
+                if ($input == '') {
+                    return get_option('NOTIFY_SUBSCRIBE_TEMPLATE_ID');
+                }
+
+                return sanitize_text_field($input);
+            }
+        );
+
         add_settings_section(
             'notify_api_settings_setting_section', // id
             __('GC Lists Settings', 'cds-snc'), // title
@@ -115,6 +130,17 @@ class NotifySettings
             'notify_api_settings_setting_section', // section
             [
                 'label_for' => 'notify_api_key'
+            ]
+        );
+
+        add_settings_field(
+            'notify_subscribe_template', // id
+            __('Subscribe template id', 'cds-snc'), // title
+            array( $this, 'notifySubscribeTemplateIdCallback'), // callback
+            'notify-api-settings-admin', // page
+            'notify_api_settings_setting_section', // section
+            [
+                'label_for' => 'notify_subscribe_template'
             ]
         );
 
@@ -187,6 +213,21 @@ class NotifySettings
             <code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
         </details>
         <p class="description">%s</p>', __('Enter your generic Email Template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link);
+    }
+
+    public function notifySubscribeTemplateIdCallback()
+    {
+        printf(
+            '<input class="regular-text" type="text" name="NOTIFY_SUBSCRIBE_TEMPLATE_ID" id="notify_subscribe_template_id" value="%s">',
+            $this->NOTIFY_SUBSCRIBE_TEMPLATE_ID ? esc_attr($this->NOTIFY_SUBSCRIBE_TEMPLATE_ID) : ''
+        );
+
+        printf('<div class="role-desc description">
+        <details>
+            <summary>(%s)</summary>
+            <code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
+        </details>
+        ', __('See example template ID format.', 'cds-snc'));
     }
 
     public function addStyles()

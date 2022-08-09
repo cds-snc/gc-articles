@@ -41,9 +41,11 @@ function cds_web_register_product_type()
             'title',
             'editor',
             'thumbnail',
-            'custom-fields'
+            'custom-fields',
         ],
-        'rewrite' => true
+        'rewrite' => true,
+        'taxonomies'          => array('category' ),
+
     ];
 
     register_post_type('product', $args);

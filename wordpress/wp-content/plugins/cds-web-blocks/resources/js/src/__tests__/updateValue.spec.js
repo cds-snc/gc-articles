@@ -24,3 +24,10 @@ test('retains existing object properties', () => {
     const value = updateValue("cds_product:description", "new value!", '{"name":"test"}');
     expect(value).toBe('{\"name\":\"test\",\"description\":\"new value!\"}');
 });
+
+
+test('handles slashes', () => {
+    const data = JSON.stringify({name: "Mr. Jones's product"});
+    const value = updateValue("cds_product:name", "Mr. Jones's product", '{"name":"old value"}');
+    expect(value).toBe(data);
+});

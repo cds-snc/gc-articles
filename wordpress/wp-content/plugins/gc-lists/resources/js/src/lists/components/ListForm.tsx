@@ -60,28 +60,6 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                 <input id="unsubscribe_email_template_id" type="hidden" {...register("unsubscribe_email_template_id")} />
 
                 <tbody>
-                    {user?.hasPhone &&
-                        <tr>
-                            <th scope="row">
-                                <label htmlFor="language">{__("Subscribers", "gc-lists")}</label>
-                            </th>
-                            <StyledCell>
-                                <FieldError errors={[]} id="language">
-                                    <div>
-                                        <input {...register("language", { required: true })} type="radio" id="en" value="en" />
-                                        <label htmlFor="en">{__('Email subscribers', 'gc-lists')}</label>
-                                    </div>
-                                    <div>
-                                        <input {...register("language", { required: true })} type="radio" id="fr" value="fr" />
-                                        <label htmlFor="fr">{__('Text message subscribers', 'gc-lists')}</label>
-                                    </div>
-                                    <p className="description" id="language-description">
-                                        Choose the type of subscribers for this list.
-                                    </p>
-                                </FieldError>
-                            </StyledCell>
-                        </tr>
-                    }
                     <tr>
                         <th scope="row">
                             <label htmlFor="name">{__("List name", "gc-lists")}</label>
@@ -93,6 +71,28 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                             </div>
                         </StyledCell>
                     </tr>
+                    {user?.hasPhone &&
+                        <tr>
+                            <th scope="row">
+                                <label htmlFor="language">{__("Message type", "gc-lists")}</label>
+                            </th>
+                            <StyledCell>
+                                <FieldError errors={[]} id="language">
+                                    <div>
+                                        <input {...register("language", { required: true })} type="radio" id="en" value="en" />
+                                        <label htmlFor="en">{__('Email', 'gc-lists')}</label>
+                                    </div>
+                                    <div>
+                                        <input {...register("language", { required: true })} type="radio" id="fr" value="fr" />
+                                        <label htmlFor="fr">{__('Text message', 'gc-lists')}</label>
+                                    </div>
+                                    <p className="description" id="language-description">
+                                        Choose the type of message this list will get.
+                                    </p>
+                                </FieldError>
+                            </StyledCell>
+                        </tr>
+                    }
                 </tbody>
             </table>
 

@@ -50,7 +50,7 @@ export const CreateList = () => {
             <StyledLink to={`/lists`}>
                 <Back /> <span>{__("Back to mailing lists", "gc-lists")}</span>
             </StyledLink>
-            <h1>Edit list{/* or new list */}</h1>
+            <h1>{__("Create new list", "gc-lists")}</h1>
             <ListForm formData={formData} serverErrors={[]} handler={onSubmit} />
         </>)
 }

@@ -88,7 +88,6 @@ export const UploadList = () => {
                 <StyledLink to={`/lists`}>
                     <Back /> <span>{__("Go back", "gc-lists")}</span>
                 </StyledLink>
-                <Back />
             </div>
         </>)
 }

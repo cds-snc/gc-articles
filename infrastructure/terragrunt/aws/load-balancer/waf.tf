@@ -621,6 +621,13 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
       dynamic "block" {
         for_each = var.enable_waf == true ? [""] : []
         content {
+          custom_response {
+            response_code = 429
+            response_header {
+              name  = "waf-block"
+              value = "RateLimit"
+            }
+          }
         }
       }
 
@@ -633,7 +640,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     statement {
       rate_based_statement {
-        limit              = 10000
+        limit              = 2000
         aggregate_key_type = "IP"
       }
     }

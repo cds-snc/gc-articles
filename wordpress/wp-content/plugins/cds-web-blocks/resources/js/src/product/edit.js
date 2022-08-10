@@ -2,7 +2,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import TextControl from '../components/TextControl';
 import { __ } from '@wordpress/i18n';
 import GCPostMetaSlotFill from "../../../../../gc-post-meta/resources/js/slot";
-import { ProductFields } from './components/ProductFields';
+import { ProductFields } from './components/sidebar';
 
 const Edit = ({ attributes, setAttributes }) => {
 

@@ -1,8 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import TextControl from '../components/TextControl';
 import { __ } from '@wordpress/i18n';
-
-// http://localhost/cds/wp-json/wp/v2/product?_embed
+import GCPostMetaSlotFill from "../../../../../gc-post-meta/resources/js/slot";
 
 const Edit = ({ attributes, setAttributes }) => {
 
@@ -10,6 +9,7 @@ const Edit = ({ attributes, setAttributes }) => {
     return (
         <div {...blockProps}>
             <p>{__('Product', 'cds-web')}</p>
+            <GCPostMetaSlotFill>This is a test !!</GCPostMetaSlotFill>
             <TextControl label={__('Subtitle', 'cds-web')} metaKey="cds_product:subtitle" />
             <TextControl label={__('Description', 'cds-web')} metaKey="cds_product:description" />
             <p>{__('Call to action', 'cds-web')}</p>

@@ -10,6 +10,7 @@ import { PostFields } from "./components/PostFields";
 import { JobFields } from "./components/JobFields";
 import { ProductFields } from "./components/ProductFields";
 import { TeamMemberFields } from "./components/TeamMemberFields";
+import GCPostMetaSlotFill from "./slot";
 
 registerPlugin('gc-post-meta', {
 	render: () => {
@@ -20,12 +21,15 @@ registerPlugin('gc-post-meta', {
 					{__("GC Post Meta", "gc-post-meta")}
 				</PluginSidebarMoreMenuItem>
 				<PluginSidebar name="gc-post-meta" title={__("Custom Fields", "gc-post-meta")} icon="insert">
+					<GCPostMetaSlotFill.Slot />
 					{type === "post" && <PostFields />}
 					{type === "product" && <ProductFields />}
 					{type === "job" && <JobFields />}
 					{type === "team" && <TeamMemberFields />}
+					
 				</PluginSidebar>
 			</Fragment>
 		)
 	}
 });
+

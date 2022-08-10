@@ -1,5 +1,5 @@
 import { useBlockProps } from '@wordpress/block-editor';
-import TextControl from './components/TextControl';
+import TextControl from '../components/TextControl';
 import { __ } from '@wordpress/i18n';
 
 const Edit = ({ attributes, setAttributes }) => {

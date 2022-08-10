@@ -33,6 +33,7 @@ class Blocks
     public function registerBlocks()
     {
         register_block_type(__DIR__ . '/resources/js/build/team/');
+        register_block_type(__DIR__ . '/resources/js/build/product/');
     }
 }
 
@@ -116,6 +117,16 @@ function cds_web_register_post_meta()
     register_meta(
         'post',
         'cds_web_team_member_linkedin', // meta key
+        array(
+            'type'           => 'string',
+            'single'         => true,
+            'show_in_rest'   => true,
+        )
+    );
+
+    register_meta(
+        'post',
+        'cds_product', // meta key
         array(
             'type'           => 'string',
             'single'         => true,

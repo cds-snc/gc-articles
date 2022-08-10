@@ -44,6 +44,7 @@ class Menus
             "Jobs",
             "Projects",
             "Team Members",
+            "Products",
 
             // French menu items
             "Tableau de bord",

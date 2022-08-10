@@ -1,5 +1,4 @@
 
-
 // https://rudrastyh.com/gutenberg/plugin-sidebars.html
 const { registerPlugin } = wp.plugins;
 const { PluginSidebar, PluginSidebarMoreMenuItem } = wp.editPost;
@@ -9,6 +8,7 @@ const { __ } = wp.i18n;
 import { PostFields } from "./components/PostFields";
 import { JobFields } from "./components/JobFields";
 import { TeamMemberFields } from "./components/TeamMemberFields";
+import GCPostMetaSlotFill from "./slot";
 
 registerPlugin('gc-post-meta', {
 	render: () => {
@@ -19,6 +19,7 @@ registerPlugin('gc-post-meta', {
 					{__("GC Post Meta", "gc-post-meta")}
 				</PluginSidebarMoreMenuItem>
 				<PluginSidebar name="gc-post-meta" title={__("Custom Fields", "gc-post-meta")} icon="insert">
+					<GCPostMetaSlotFill.Slot />
 					{type === "post" && <PostFields />}
 					{type === "job" && <JobFields />}
 					{type === "team" && <TeamMemberFields />}
@@ -27,3 +28,4 @@ registerPlugin('gc-post-meta', {
 		)
 	}
 });
+

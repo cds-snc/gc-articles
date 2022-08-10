@@ -1,7 +1,7 @@
 import { TextControl } from '@wordpress/components';
 import { withDispatch, withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
-import { parseMetaKey, updateValue, getValue } from "../../utils";
+import { parseMetaKey, updateValue, getValue } from "../utils";
 
 export const CDSTextControl = compose(
     withDispatch((dispatch, props) => {

@@ -1,6 +1,5 @@
 const { PanelBody } = wp.components;
 const { __ } = wp.i18n;
-import TextControl from "./TextControl";
 import ToggleControl from "./ToggleControl";
 
 export const TeamMemberFields = () => {

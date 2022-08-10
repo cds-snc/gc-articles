@@ -10,6 +10,7 @@ export const ProductFields = () => {
                 <ToggleControl label={__("On Homepage", "cds-web")} metaKey="cds_product:on_home_page" />
                 <SelectControl
                     options={[
+                        { label: 'Select one', value: '' },
                         { label: 'Discovery', value: 'Discovery' },
                         { label: 'Alpha', value: 'alpha' },
                         { label: 'Beta', value: 'beta' },

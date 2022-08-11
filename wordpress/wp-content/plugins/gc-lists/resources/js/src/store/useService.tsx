@@ -4,9 +4,9 @@ import { useList } from './listContext';
 export const useService = () => {
     const { state: { serviceData } } = useList();
     const params = useParams();
-    // @ts-ignore
     const serviceId = serviceData?.service_id;
+    const subscribeTemplate = serviceData?.subscribeTemplate;
     const listId = params?.listId;
     const type = params?.type;
-    return { serviceId, listId, type };
+    return { serviceId, subscribeTemplate, listId, type };
 }

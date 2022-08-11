@@ -37,9 +37,10 @@ export type Service = {
     name: string;
     service_id: string;
     sendingTemplate: string;
+    subscribeTemplate: string;
 };
 
-export type ServiceData = Service[] | null;
+export type ServiceData = Service | null;
 
 export type User = {
     hasPhone: boolean;

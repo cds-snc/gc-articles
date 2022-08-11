@@ -36,7 +36,8 @@ class Utils
     {
         return [
             'name' => __('Your Lists', 'gc-lists'),
-            'service_id' => static::getServiceId()
+            'service_id' => static::getServiceId(),
+            'subscribeTemplate' => get_option('NOTIFY_SUBSCRIBE_TEMPLATE_ID'),
         ];
     }
 

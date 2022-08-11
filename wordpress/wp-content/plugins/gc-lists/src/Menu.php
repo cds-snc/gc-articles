@@ -21,6 +21,19 @@ class Menu
         return self::$instance;
     }
 
+    private function isNotifyConfigured(): bool
+    {
+        if (
+            get_option('NOTIFY_API_KEY') &&
+            get_option('NOTIFY_GENERIC_TEMPLATE_ID') &&
+            get_option('NOTIFY_SUBSCRIBE_TEMPLATE_ID')
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function addMenu()
     {
         add_menu_page(
@@ -62,7 +75,7 @@ class Menu
      */
     public function renderMessages(): void
     {
-        if (!get_option('NOTIFY_API_KEY')) {
+        if (!$this->isNotifyConfigured()) {
             $this->renderNoApiKey();
             exit;
         }
@@ -79,7 +92,7 @@ class Menu
      */
     public function renderSubscribers(): void
     {
-        if (!get_option('NOTIFY_API_KEY')) {
+        if (!$this->isNotifyConfigured()) {
             $this->renderNoApiKey();
             exit;
         }
@@ -96,8 +109,19 @@ class Menu
      */
     public function renderNoApiKey()
     {
+        $values = [
+            'NOTIFY_API_KEY' => get_option('NOTIFY_API_KEY'),
+            'NOTIFY_GENERIC_TEMPLATE_ID' => get_option('NOTIFY_GENERIC_TEMPLATE_ID'),
+            'NOTIFY_SUBSCRIBE_TEMPLATE_ID' => get_option('NOTIFY_SUBSCRIBE_TEMPLATE_ID')
+        ];
+
+        $missingValues = array_filter($values, function ($var) {
+            return !$var ? true : false; // return falsey values
+        });
+
         $this->render('no_api_key', [
-            'title' => esc_html(get_admin_page_title())
+            'title' => esc_html(get_admin_page_title()),
+            'missingValues' => array_keys($missingValues)
         ]);
     }
 }

@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
  * Internal dependencies
  */
 import { List, FieldError as ErrorType } from "../../types";
-import { useList } from "../../store";
+import { useList, useService } from "../../store";
 
 import { FieldError } from '../../messages/components';
 
@@ -38,6 +38,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
     const navigate = useNavigate();
     const { state: { user } } = useList();
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
+    const { subscribeTemplate } = useService();
 
     useEffect(() => {
         serverErrors && serverErrors.length >= 1 && serverErrors.forEach((item) => {
@@ -56,10 +57,12 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
 
                 {/* @todo np phone access use default language field will be replaced with "list_type" field */}
                 {!user?.hasPhone && <input type="hidden" name="language" value="en" />}
+
+                {/* TODO: do we need this?  */}
                 <input id="service_id" type="hidden" {...register("service_id", { required: true })} />
 
                 {/* Optional hidden field, pulled from value entered on the settings panel if set */}
-                <input id="subscribe_email_template_id" type="hidden" {...register("subscribe_email_template_id")} />
+                <input id="subscribe_email_template_id" type="hidden" value={ subscribeTemplate } {...register("subscribe_email_template_id")} />
 
                 <tbody>
                     <tr>

@@ -49,8 +49,8 @@ class NotifySettings
     {
         add_submenu_page(
             "gc-lists_messages",
-            __('Settings', 'cds-snc'), // page_title
-            __('Settings', 'cds-snc'), // menu_title
+            __('API Settings', 'cds-snc'), // page_title
+            __('API Settings', 'cds-snc'), // menu_title
             'manage_notify',
             "settings",
             [ $this, 'notifyApiSettingsCreateAdminPage' ] // function
@@ -102,7 +102,6 @@ class NotifySettings
             }
         );
 
-
         register_setting(
             'notify_api_settings_option_group', // option_group
             'NOTIFY_SUBSCRIBE_TEMPLATE_ID',
@@ -117,7 +116,7 @@ class NotifySettings
 
         add_settings_section(
             'notify_api_settings_setting_section', // id
-            __('GC Lists Settings', 'cds-snc'), // title
+            __('Notify API Settings', 'cds-snc'), // title
             array( $this, 'notifyApiSettingsSectionInfo'), // callback
             'notify-api-settings-admin' // page
         );

@@ -21,15 +21,10 @@ class SubscriptionForm
 
     public function render($attributes = []): string
     {
-        $placeholder = "";
         $listId = "";
         $emailLabel = __("Enter your email:", "cds-snc");
         $subscribeLabel = __("Subscribe", "cds-snc");
         $privacyLink = "";
-
-        if (!empty($attributes['placeholderValue'])) :
-            $placeholder = $attributes['placeholderValue'];
-        endif;
 
         if (!empty($attributes['listId'])) :
             $listId = $attributes['listId'];
@@ -50,17 +45,18 @@ class SubscriptionForm
         $apiEndpoint = site_url() . '/wp-json/subscribe/v1/process';
 
         $missingValuesText = [
-            'NOTIFY_API_KEY' => __('Notify API key', 'gc-lists'),
-            'NOTIFY_GENERIC_TEMPLATE_ID' => __('a list'),
-            'NOTIFY_SUBSCRIBE_TEMPLATE_ID' => __('Subscription template ID')
+            'NOTIFY_API_KEY' => __('Notify API key', 'cds-snc'),
+            'NOTIFY_SUBSCRIBE_TEMPLATE_ID' => __('Subscription template ID', 'cds-snc')
         ];
 
-        $settingsUrl = admin_url("/wp-admin/admin.php?page=settings");
-        $missingText = __('You must configure your %s visit <a href="%s">Notify API Settings</a>.', 'gc-lists');
+        $settingsUrl = admin_url("/admin.php?page=settings");
+        $listsUrl = admin_url("/admin.php?page=gc-lists_subscribers#/lists");
+
+        $missingText = __('You must configure your %s. Visit <a href="%s">%s</a>.', 'cds-snc');
 
         if (!$listId) {
             if (is_user_logged_in()) {
-                return __("No list selected", "cds-snc");
+                return __("You must select a list from '<strong>Block</strong>' settings 👉", "cds-snc" );
             }
             return "<!-- error no list selected -->";
         }
@@ -69,18 +65,18 @@ class SubscriptionForm
 
         if (!$apiKey) {
             if (is_user_logged_in()) {
-                return sprintf($missingText,$missingValuesText["NOTIFY_API_KEY"], $settingsUrl);
+                return sprintf($missingText,$missingValuesText["NOTIFY_API_KEY"], $settingsUrl,$settingsUrl);
             }
-            return "<!-- error api key -->";
+            return "<!-- error notify api key -->";
         }
 
-        $subscribeTemplate = get_option("NOTIFY_API_KEY");
+        $subscribeTemplate = get_option("NOTIFY_SUBSCRIBE_TEMPLATE_ID");
 
         if (!$subscribeTemplate) {
             if (is_user_logged_in()) {
-                return sprintf($missingText,$missingValuesText["NOTIFY_SUBSCRIBE_TEMPLATE_ID"], $settingsUrl);
+                return sprintf($missingText,$missingValuesText["NOTIFY_SUBSCRIBE_TEMPLATE_ID"],$settingsUrl,$settingsUrl);
             }
-            return "<!-- error subscribe template -->";
+            return "<!-- error subscribe template id -->";
         }
 
         ob_start();
@@ -95,7 +91,7 @@ class SubscriptionForm
                     'cds-form-nonce',
                 );
 
-                Utils::textField(id: 'email', label: $emailLabel, placeholder: $placeholder);
+                Utils::textField(id: 'email', label: $emailLabel);
                 Utils::submitButton($subscribeLabel);
             ?>
             </form>

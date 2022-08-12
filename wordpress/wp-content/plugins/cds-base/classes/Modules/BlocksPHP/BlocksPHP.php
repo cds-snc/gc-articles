@@ -69,6 +69,17 @@ class BlocksPHP
             ]
         ]);
 
+        register_block_type(__DIR__ . '/build/site-counter/', [
+            'render_callback' => function ($attributes, $content, $block): string {
+                try {
+                    return sprintf("<div class='site-counter'>%s</div>", wp_count_sites()["all"]);
+                } catch (e) {
+                    return "";
+                }
+            },
+            'attributes' => []
+        ]);
+
         register_block_type(__DIR__ . '/build/request/', [
             'render_callback' => function ($attributes, $content, $block): string {
                 $form = new RequestSiteForm();

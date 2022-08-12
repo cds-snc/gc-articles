@@ -4,7 +4,7 @@
  * Author: CDS
  * Text Domain: cds-snc
  * Domain Path: /languages
- * Version: 3.6.2
+ * Version: 3.6.3
 */
 
 /* Navs in general */
@@ -550,4 +550,12 @@ nav.nav--about li a:focus {
 
 .has-x-large-font-size {
   font-size: 24px !important;
+}
+
+.has-xx-large-font-size {
+  font-size: 36px !important;
+}
+
+.has-xxx-large-font-size {
+  font-size: 42px !important;
 }

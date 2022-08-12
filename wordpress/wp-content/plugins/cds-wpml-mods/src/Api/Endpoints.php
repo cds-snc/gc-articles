@@ -170,7 +170,7 @@ class Endpoints extends BaseEndpoint
             }
 
             // Note that post_trid is a string (normal ids are integers)
-            $postTrid = $sitepress->get_element_trid($originalPost->ID, $postType);
+            $postTrid = $this->post->getTRID($originalPost->ID, $postType);
 
             // Set translations for each post
             $this->post->setTranslationForPost($originalPost->ID, $postType, $originalPostLanguage, $postTrid);

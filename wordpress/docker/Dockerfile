@@ -10,7 +10,7 @@ COPY . .
 RUN echo "WPML_USER_ID=$WPML_USER_ID" > .env \
     && echo "WPML_KEY=$WPML_KEY" >> .env
 
-RUN cd wordpress && composer install --no-interaction --optimize-autoloader --no-dev
+RUN cd wordpress && composer install --no-interaction --optimize-autoloader --no-dev --check-platform-reqs
 
 ## Install NPM dependencies
 

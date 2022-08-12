@@ -120,8 +120,8 @@
     ],
     "generate-encryption-key": "CDS\\Modules\\Cli\\GenerateEncryptionKey::generateEncryptionKey",
     "post-install-cmd": [
-      "cd wp-content/plugins/gc-lists && composer install",
-      "cd wp-content/plugins/cds-wpml-mods && composer install"
+      "cd wp-content/plugins/gc-lists && composer install --check-platform-reqs",
+      "cd wp-content/plugins/cds-wpml-mods && composer install --check-platform-reqs"
     ]
   },
   "autoload": {
@@ -134,6 +134,9 @@
       "composer/installers": true,
       "ffraenz/private-composer-installer": true,
       "pestphp/pest-plugin": true
+    },
+    "platform": {
+      "php": "8.1"
     }
   }
 }

@@ -6,6 +6,7 @@ import { useState, useCallback } from 'react'
 import { SubmitHandler } from "react-hook-form";
 import useFetch from 'use-http';
 import { Navigate } from "react-router-dom";
+import { __ } from "@wordpress/i18n";
 
 /**
  * Internal dependencies
@@ -13,6 +14,7 @@ import { Navigate } from "react-router-dom";
 import { ListForm } from "./ListForm";
 import { useList, useService } from "../../store";
 import { List } from "../../types";
+import { Back, StyledLink } from "../../common";
 
 export const CreateList = () => {
     const [data, setData] = useState({ id: null })
@@ -43,7 +45,14 @@ export const CreateList = () => {
 
 
 
-    return data.id ? <Navigate to={`/lists`} replace={true} /> : <ListForm formData={formData} serverErrors={[]} handler={onSubmit} />
+    return data.id ? <Navigate to={`/lists`} replace={true} /> : (
+        <>
+            <StyledLink to={`/lists`}>
+                <Back /> <span>{__("Back to mailing lists", "gc-lists")}</span>
+            </StyledLink>
+            <h1>{__("Create new list", "gc-lists")}</h1>
+            <ListForm formData={formData} serverErrors={[]} handler={onSubmit} />
+        </>)
 }
 
 export default CreateList;

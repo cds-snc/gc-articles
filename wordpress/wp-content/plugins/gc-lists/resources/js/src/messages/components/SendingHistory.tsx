@@ -12,7 +12,9 @@ import { v4 as uuidv4 } from 'uuid';
 /**
  * Internal dependencies
  */
-import { StyledPlaceholder, Table, StyledPaging, StyledLink, Next } from ".";
+import { StyledPlaceholder, Table, StyledPaging, Next } from ".";
+import { StyledLink } from '../../common';
+
 
 const StyledTableLink = styled(Link)`
     text-decoration:underline !important;

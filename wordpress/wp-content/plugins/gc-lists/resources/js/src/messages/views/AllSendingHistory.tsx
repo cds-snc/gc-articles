@@ -6,7 +6,8 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
-import { SendingHistory, StyledLink, Back } from "../components";
+import { Back, StyledLink } from '../../common';
+import { SendingHistory } from "../components";
 
 export const AllSendingHistory = () => {
     return (

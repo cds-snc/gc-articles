@@ -5,6 +5,7 @@ import { useState, useCallback } from 'react'
 import useFetch from 'use-http';
 import { SubmitHandler } from "react-hook-form";
 import { Navigate } from "react-router-dom";
+import { __ } from "@wordpress/i18n";
 
 /**
  * Internal dependencies
@@ -12,6 +13,7 @@ import { Navigate } from "react-router-dom";
 import { ListForm } from "./ListForm";
 import { useService, useList, useListFetch } from '../../store';
 import { ErrorResponse, ServerErrors, FieldError, List, ListId } from "../../types";
+import { Back, StyledLink } from "../../common";
 
 const parseError = async (response: Response) => {
     try {
@@ -62,7 +64,27 @@ export const UpdateList = () => {
         return <Navigate to={`/lists`} replace={true} />
     }
 
-    return list ? <ListForm formData={list} handler={onSubmit} serverErrors={errors} /> : null
+    let subscriberMessage = '';
+    if(list && list.subscriber_count !== undefined) {
+        const subscriber_count = parseInt(list.subscriber_count)
+        subscriberMessage = subscriber_count > 1 ?
+            __(`This list has ${subscriber_count} subscribers.`, "gc-lists") :
+            subscriber_count === 1 ?
+            __("This list has 1 subscriber.", "gc-lists") :
+            __("This list has no subscribers.", "gc-lists");
+    }
+
+
+    return list ? (
+        <>
+            <StyledLink to={`/lists`}>
+                <Back /> <span>{__("Back to mailing lists", "gc-lists")}</span>
+            </StyledLink>
+            <h1>{__("Edit list", "gc-lists")}</h1>
+            {subscriberMessage && <p>{subscriberMessage}</p>}
+            <ListForm formData={list} handler={onSubmit} serverErrors={errors} />
+        </>)
+         : null
 }
 
 export default UpdateList;

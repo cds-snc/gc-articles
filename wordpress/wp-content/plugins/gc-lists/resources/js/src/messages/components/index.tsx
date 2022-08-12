@@ -11,7 +11,7 @@ export { SendingError } from "./SendingError";
 export { SendingHistory } from "./SendingHistory";
 export { SendToList } from "./SendToList";
 export { ListSelect } from "./ListSelect";
-export { Table, StyledH1, StyledLink, StyledPaging } from "./Table";
+export { Table, StyledH1, StyledPaging } from "./Table";
 export { Spinner } from "../../common/Spinner";
 export { Error } from "../../common/Error";
 export { ToastMessage } from "./ToastMessage";

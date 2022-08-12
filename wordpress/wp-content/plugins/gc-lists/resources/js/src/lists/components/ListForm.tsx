@@ -5,45 +5,40 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { __ } from "@wordpress/i18n";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * Internal dependencies
  */
-import { List, FieldError } from "../../types";
-import { useList } from "../../store";
+import { List, FieldError as ErrorType } from "../../types";
+import { useList, useService } from "../../store";
 
-const StyledForm = styled.form`
-    .field{
-        margin-bottom: 20px;
+import { FieldError } from '../../messages/components';
+
+const StyledCell = styled.td`
+    padding-left: 0 !important;
+
+    input[type="radio"] + label {
+        display: inline-block;
+        margin: 2px 0 5px 3px;
     }
+`
 
-    strong{
-        color:#1d2327;
-        font-size:16px;
-        font-weight:600;
-        display:inline-block;
-        margin-bottom: 5px;
-    }
+const StyledDetails = styled.details`
+    padding: 20px 10px 20px 0;
 
-    p{
-        margin-top:4px;
+    summary > span {
+        text-decoration: underline;
     }
 `
 
 const textWidth = { width: "25em" }
 
-const Asterisk = () => {
-    return (
-        <>
-            <span data-testid="asterisk" aria-hidden="true">* </span>
-            <i style={{ display: "none" }} className="visually-hidden">{__("Required Field", "gc-lists")}</i>
-        </>
-    )
-}
-
-export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handler: (list: List) => void, formData: {} | List, serverErrors: FieldError[] }) => {
+export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handler: (list: List) => void, formData: {} | List, serverErrors: ErrorType[] }) => {
+    const navigate = useNavigate();
     const { state: { user } } = useList();
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
+    const { subscribeTemplate } = useService();
 
     useEffect(() => {
         serverErrors && serverErrors.length >= 1 && serverErrors.forEach((item) => {
@@ -57,119 +52,126 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
     }, [setError, serverErrors]);
 
     return (
-        <StyledForm onSubmit={handleSubmit(handler)}>
-            <input id="service_id" type="hidden" {...register("service_id", { required: true })} />
+        <form style={{ maxWidth: '700px' }} onSubmit={handleSubmit(handler)}>
+
             {/* @todo np phone access use default language field will be replaced with "list_type" field */}
             {!user?.hasPhone && <input type="hidden" name="language" value="en" />}
-            <div className="field">
-                <label className="required" htmlFor="name"><Asterisk />
-                    <strong>{__("List name", "gc-lists")}</strong>
-                </label>
-                <div className={errors.name ? "error-wrapper" : ""}>
-                    {errors.name && <span className="validation-error">{errors.name?.message || __("List name is required", "gc-lists")}</span>}
-                    <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
-                </div>
-            </div>
-            {
-                user?.hasPhone && <div>
-                    <label className="required" htmlFor="language"><Asterisk />
-                        <strong>{__("List type", "gc-lists")}</strong>
-                    </label>
-                    <div className={errors.language ? "field error-wrapper" : "field"}>
-                        {errors.language && <span className="validation-error">{errors.language?.message || __("List type is required", "gc-lists")}</span>}
-                        <fieldset>
-                            <label htmlFor="en">
-                                <input id="en" {...register("language", { required: true })} type="radio" value="en" />
-                                {" "}<strong>{__("Email", "gc-lists")}</strong>
-                            </label>
-                            <br />
-                            <label htmlFor="fr">
-                                <input id="fr" {...register("language", { required: true })} type="radio" value="fr" />
-                                {" "}<strong>{__("Phone", "gc-lists")}</strong>
-                            </label>
-                        </fieldset>
-                    </div>
-                </div>
-            }
-            <details className="list-advanced">
+
+            {/* Optional hidden field, pulled from value entered on the settings panel if set */}
+            <input id="subscribe_email_template_id" type="hidden" value={ subscribeTemplate } {...register("subscribe_email_template_id")} />
+
+            <table className="form-table" role="presentation">
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            <label htmlFor="name">{__("List name", "gc-lists")}</label>
+                        </th>
+                        <StyledCell>
+                            <div className={errors.name ? "error-wrapper" : ""}>
+                                {errors.name && <span className="validation-error">{errors.name?.message || __("List name is required", "gc-lists")}</span>}
+                                <input id="name" style={textWidth} type="text" {...register("name", { required: true })} />
+                            </div>
+                        </StyledCell>
+                    </tr>
+                    {user?.hasPhone &&
+                        <tr>
+                            <th scope="row">
+                                <label htmlFor="language">{__("Message type", "gc-lists")}</label>
+                            </th>
+                            <StyledCell>
+                                <FieldError errors={[]} id="language">
+                                    <div>
+                                        <input {...register("language", { required: true })} type="radio" id="en" value="en" />
+                                        <label htmlFor="en">{__('Email', 'gc-lists')}</label>
+                                    </div>
+                                    <div>
+                                        <input {...register("language", { required: true })} type="radio" id="fr" value="fr" />
+                                        <label htmlFor="fr">{__('Text message', 'gc-lists')}</label>
+                                    </div>
+                                    <p className="description" id="language-description">
+                                        {__('Choose the type of message this list will receive.', 'gc-lists')}
+                                    </p>
+                                </FieldError>
+                            </StyledCell>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <StyledDetails className="list-advanced">
                 <summary>
-                    <span>{__("Advanced list settings", "gc-lists")}</span>
+                    <span>{__("Confirmation page settings", "gc-lists")}</span>
                 </summary>
-                <p>{__("Changing these settings is optional.", "gc-lists")}</p>
-                <div className="field">
-                    <label htmlFor="subscribe_email_template_id">
-                        <strong>
-                            {__("Subscribe template id", "gc-lists")}
-                        </strong>
-                    </label>
-                    <div className={errors.subscribe_email_template_id ? "error-wrapper" : ""}>
-                        {errors.subscribe_email_template_id && <span className="validation-error">{errors.subscribe_email_template_id?.message}</span>}
-                        <input id="subscribe_email_template_id" style={textWidth} type="text" {...register("subscribe_email_template_id")} />
-                        <div className="role-desc description">
-                            <details>
-                                <summary>{__("See example template ID format.", "gc-lists")}</summary><code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
-                            </details>
-                        </div>
-                    </div>
-                </div>
-                <div className="field">
-                    <label htmlFor="unsubscribe_email_template_id">
-                        <strong>
-                            {__("Unsubscribe template id", "gc-lists")}
-                        </strong>
-                    </label>
-                    <div className={errors.unsubscribe_email_template_id ? "error-wrapper" : ""}>
-                        {errors.unsubscribe_email_template_id && <span className="validation-error">{errors.unsubscribe_email_template_id?.message}</span>}
-                        <input id="unsubscribe_email_template_id" style={textWidth} type="text" {...register("unsubscribe_email_template_id")} />
-                        <div className="role-desc description">
-                            <details>
-                                <summary>{__("See example template ID format.", "gc-lists")}</summary><code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
-                            </details>
-                        </div>
-                    </div>
-                </div>
-                <div className="field">
-                    <label className="gc-label" htmlFor="subscribe_redirect_url">
-                        <strong>
-                            {__("Subscribe redirect url", "gc-lists")}
-                        </strong>
-                    </label>
-                    <p>
-                        {__("Subscribers are directed to this page when submitting the subscribe request form.", "gc-lists")}
-                    </p>
-                    <div className={errors.subscribe_redirect_url ? "error-wrapper" : ""}>
-                        {errors.subscribe_redirect_url && <span className="validation-error">{errors.subscribe_redirect_url?.message}</span>}
-                        <input id="subscribe_redirect_url" style={textWidth} type="text" {...register("subscribe_redirect_url")} />
-                    </div>
-                </div>
-                <div className="field">
-                    <label htmlFor="unsubscribe_redirect_url">
-                        <strong>
-                            {__("Unsubscribe redirect url", "gc-lists")}
-                        </strong>
-                    </label>
-                    <p>{__("Subscribers are directed to this page when submitting the unsubscribe request form.", "gc-lists")}</p>
-                    <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
-                        {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
-                        <input id="unsubscribe_redirect_url" style={textWidth} type="text" {...register("unsubscribe_redirect_url")} />
-                    </div>
-                </div>
-                <div className="field">
-                    <label htmlFor="confirm_redirect_url">
-                        <strong>
-                            {__("Confirm redirect url", "gc-lists")}
-                        </strong>
-                    </label>
-                    <p>{__("Subscribers are directed to this page when they confirm their subscription to a list.", "gc-lists")}</p>
-                    <div className={errors.confirm_redirect_url ? "error-wrapper" : ""}>
-                        {errors.confirm_redirect_url && <span className="validation-error">{errors.confirm_redirect_url?.message}</span>}
-                        <input id="confirm_redirect_url" style={textWidth} type="text" {...register("confirm_redirect_url")} />
-                    </div>
-                </div>
-            </details>
-            <div className="field submit">
-                <input className="button button-primary" type="submit" value={__("Save list", "gc-lists")} />
+
+                <p>{__("Subscribers will see the default confirmation pages if you’ve set up a form to collect their email addresses.", "gc-lists")}</p>
+                <p>{__("Changing these pages is optional.", "gc-lists")}</p>
+
+                <table className="form-table" role="presentation">
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <label htmlFor="subscribe_redirect_url">{__("Subscribe confirmation", "gc-lists")}</label>
+                            </th>
+                            <StyledCell>
+                                <div className={errors.name ? "error-wrapper" : ""}>
+                                    {errors.subscribe_redirect_url && <span className="validation-error">{errors.subscribe_redirect_url?.message}</span>}
+                                    <input id="subscribe_redirect_url" style={textWidth} type="text" {...register("subscribe_redirect_url")} />
+                                    <p className="description" id="language-description">
+                                        {__("The page people see after they subscribe.", "gc-lists")}
+                                    </p>
+                                </div>
+                            </StyledCell>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label htmlFor="confirm_redirect_url">{__("Verify email confirmation", "gc-lists")}</label>
+                            </th>
+                            <StyledCell>
+                                <div className={errors.confirm_redirect_url ? "error-wrapper" : ""}>
+                                    {errors.confirm_redirect_url && <span className="validation-error">{errors.confirm_redirect_url?.message}</span>}
+                                    <input id="confirm_redirect_url" style={textWidth} type="text" {...register("confirm_redirect_url")} />
+                                    <p className="description" id="language-description">
+                                        {__("The page people see after they verify their email address.", "gc-lists")}
+                                    </p>
+                                </div>
+                            </StyledCell>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">
+                                <label htmlFor="unsubscribe_redirect_url">{__("Unsubscribe confirmation", "gc-lists")}</label>
+                            </th>
+                            <StyledCell>
+                                <div className={errors.unsubscribe_redirect_url ? "error-wrapper" : ""}>
+                                    {errors.unsubscribe_redirect_url && <span className="validation-error">{errors.unsubscribe_redirect_url?.message}</span>}
+                                    <input id="unsubscribe_redirect_url" style={textWidth} type="text" {...register("unsubscribe_redirect_url")} />
+                                    <p className="description" id="language-description">
+                                        {__("The page people see after they unsubscribe.", "gc-lists")}
+                                    </p>
+                                </div>
+                            </StyledCell>
+                        </tr>
+                    </tbody>
+                </table>
+            </StyledDetails>
+
+            <div>
+                <button style={{ marginRight: "20px" }} type="submit" className="button button-primary">
+                    {__('Save and continue', 'gc-lists')}
+                </button>
+
+                <button
+                    className="button"
+                    type="button"
+                    onClick={() => {
+                        navigate('/lists/');
+                    }}
+                >
+                    {__('Cancel', 'gc-lists')}
+                </button>
             </div>
-        </StyledForm>
+
+        </form>
     );
 }

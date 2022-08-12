@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { Importer, ImporterField } from "react-csv-importer";
 import useFetch from 'use-http';
 import { Navigate } from "react-router-dom";
+import { __ } from "@wordpress/i18n";
 
 // theme CSS for React CSV Importer
 import "react-csv-importer/dist/index.css";
@@ -14,7 +15,7 @@ import "react-csv-importer/dist/index.css";
  */
 import { useService, useList } from '../../store';
 import { ListType } from "../../types";
-import { Back } from "./Back";
+import { Back, StyledLink } from '../../common';
 import { capitalize } from "../../util/functions";
 
 export const UploadList = () => {
@@ -84,7 +85,9 @@ export const UploadList = () => {
                 {uploadType === ListType.PHONE && <ImporterField name="phone" label="Phone" />}
             </Importer >
             <div style={{ marginTop: "0.5rem" }}>
-                <Back />
+                <StyledLink to={`/lists`}>
+                    <Back /> <span>{__("Go back", "gc-lists")}</span>
+                </StyledLink>
             </div>
         </>)
 }

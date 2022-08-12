@@ -40,7 +40,10 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Composer install
-        run: cd wordpress && composer install --prefer-dist --no-progress --check-platform-reqs
+        working-directory: wordpress
+        run: |
+          composer install --prefer-dist --no-progress
+          composer check-platform-reqs
 
       - name: Cache NPM
         uses: actions/cache@v2

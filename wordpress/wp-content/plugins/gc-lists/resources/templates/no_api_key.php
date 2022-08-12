@@ -9,7 +9,7 @@
 
 $missingValuesText = [
     'NOTIFY_API_KEY' => __('your Notify API key', 'gc-lists'),
-    'NOTIFY_GENERIC_TEMPLATE_ID' => __('a Notify email template ID'),
+    'NOTIFY_GENERIC_TEMPLATE_ID' => __('a Notify message template ID'),
     'NOTIFY_SUBSCRIBE_TEMPLATE_ID' => __('a Notify subscription template ID')
 ]
 ?>
@@ -19,8 +19,8 @@ $missingValuesText = [
 <p>
     <?php
         echo sprintf(
-            __('You must configure your <a href="%s">Notify API Settings</a>.', 'gc-lists'),
-            admin_url("/wp-admin/admin.php?page=settings")
+            __('You must configure your <a href="%s">API Settings</a>.', 'gc-lists'),
+            admin_url("admin.php?page=settings")
         );
         echo " ";
         _e('Please provide:', 'gc-lists');

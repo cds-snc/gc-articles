@@ -53,17 +53,14 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
 
     return (
         <form style={{ maxWidth: '700px' }} onSubmit={handleSubmit(handler)}>
+
+            {/* @todo np phone access use default language field will be replaced with "list_type" field */}
+            {!user?.hasPhone && <input type="hidden" name="language" value="en" />}
+
+            {/* Optional hidden field, pulled from value entered on the settings panel if set */}
+            <input id="subscribe_email_template_id" type="hidden" value={ subscribeTemplate } {...register("subscribe_email_template_id")} />
+
             <table className="form-table" role="presentation">
-
-                {/* @todo np phone access use default language field will be replaced with "list_type" field */}
-                {!user?.hasPhone && <input type="hidden" name="language" value="en" />}
-
-                {/* TODO: do we need this?  */}
-                <input id="service_id" type="hidden" {...register("service_id", { required: true })} />
-
-                {/* Optional hidden field, pulled from value entered on the settings panel if set */}
-                <input id="subscribe_email_template_id" type="hidden" value={ subscribeTemplate } {...register("subscribe_email_template_id")} />
-
                 <tbody>
                     <tr>
                         <th scope="row">

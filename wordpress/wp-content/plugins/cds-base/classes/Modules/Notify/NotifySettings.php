@@ -116,7 +116,7 @@ class NotifySettings
 
         add_settings_section(
             'notify_api_settings_setting_section', // id
-            __('Notify API Settings', 'cds-snc'), // title
+            __('API Settings', 'cds-snc'), // title
             array( $this, 'notifyApiSettingsSectionInfo'), // callback
             'notify-api-settings-admin' // page
         );
@@ -134,7 +134,7 @@ class NotifySettings
 
         add_settings_field(
             'notify_subscribe_template', // id
-            __('Subscribe template id', 'cds-snc'), // title
+            __('Subscribe template ID', 'cds-snc'), // title
             array( $this, 'notifySubscribeTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section', // section
@@ -145,7 +145,7 @@ class NotifySettings
 
         add_settings_field(
             'notify_generic_template_id', // id
-            __('Email integration template ID', 'cds-snc'), // title
+            __('Message template ID', 'cds-snc'), // title
             array( $this, 'notifyGenericTemplateIdCallback'), // callback
             'notify-api-settings-admin', // page
             'notify_api_settings_setting_section', // section
@@ -211,7 +211,7 @@ class NotifySettings
             <summary>%s. (%s)</summary>
             <code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
         </details>
-        <p class="description">%s</p>', __('Enter your generic Email Template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link);
+        <p class="description">%s</p>', __('Enter your message template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link);
     }
 
     public function notifySubscribeTemplateIdCallback()

@@ -10,7 +10,7 @@ describe('GC Lists Settings', () => {
     it('Displays settings screen', () => {
       cy.visit('/wp-admin/admin.php?page=settings');
   
-      cy.get('h2').should('have.text', 'Notify API Settings');
+      cy.get('h2').should('have.text', 'API Settings');
   
       cy.get('#notify_api_key').should('be.empty');
       cy.get('#notify_generic_template_id').should('be.empty');

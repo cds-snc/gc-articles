@@ -51,8 +51,6 @@ class SubscriptionForm
 
         $settingsUrl = admin_url("/admin.php?page=settings");
 
-        $listsUrl = admin_url("/admin.php?page=gc-lists_subscribers#/lists");
-
         $missingText = __('You must configure your %s. Visit <a href="%s">%s</a>.', 'cds-snc');
 
         if (!$listId) {

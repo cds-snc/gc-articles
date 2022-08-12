@@ -27,10 +27,6 @@ class BlocksPHP
                 return $form->render($attributes);
             },
             'attributes' => [
-                'placeholderValue' => [
-                    'type' => 'string',
-                    "default" => "preview@example.com"
-                ],
                 'listId' => [
                     'type' => 'string',
                     "default" => ""
@@ -61,12 +57,7 @@ class BlocksPHP
                 $form = new ContactForm();
                 return $form->render($attributes);
             },
-            'attributes' => [
-                'placeholderValue' => [
-                    'type' => 'string',
-                    "default" => "preview@example.com"
-                ]
-            ]
+            'attributes' => []
         ]);
 
         register_block_type(__DIR__ . '/build/site-counter/', [
@@ -85,12 +76,7 @@ class BlocksPHP
                 $form = new RequestSiteForm();
                 return $form->render($attributes);
             },
-            'attributes' => [
-                'placeholderValue' => [
-                    'type' => 'string',
-                    "default" => "preview@example.com"
-                ]
-            ]
+            'attributes' => []
         ]);
     }
 }

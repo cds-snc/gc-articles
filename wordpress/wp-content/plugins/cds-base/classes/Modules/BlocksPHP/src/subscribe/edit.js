@@ -6,7 +6,7 @@ import { name } from './block.json';
 
 const Edit = ({ attributes, setAttributes }) => {
 
-	const { placeholderValue, listId, emailLabel, subscribeLabel, privacyLink } = attributes;
+	const { listId, emailLabel, subscribeLabel, privacyLink } = attributes;
 
 	const blockProps = useBlockProps();
 
@@ -20,13 +20,6 @@ const Edit = ({ attributes, setAttributes }) => {
 		<>
 			<InspectorControls>
 				<PanelBody title={__('Subscribe form settings', "cds-snc")}>
-					<TextControl
-						label={__("Placeholder text", "cds-snc")}
-						value={placeholderValue}
-						onChange={(value) => setAttributes({
-							placeholderValue: value,
-						})}
-					/>
 					<TextControl
 						label={__("Email field label", "cds-snc")}
 						value={emailLabel}

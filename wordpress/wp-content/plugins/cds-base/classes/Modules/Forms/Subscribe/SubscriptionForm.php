@@ -49,12 +49,40 @@ class SubscriptionForm
 
         $apiEndpoint = site_url() . '/wp-json/subscribe/v1/process';
 
+        $missingValuesText = [
+            'NOTIFY_API_KEY' => __('Notify API key', 'gc-lists'),
+            'NOTIFY_GENERIC_TEMPLATE_ID' => __('a list'),
+            'NOTIFY_SUBSCRIBE_TEMPLATE_ID' => __('Subscription template ID')
+        ];
+
+        $settingsUrl = admin_url("/wp-admin/admin.php?page=settings");
+        $missingText = __('You must configure your %s visit <a href="%s">Notify API Settings</a>.', 'gc-lists');
+
         if (!$listId) {
             if (is_user_logged_in()) {
                 return __("No list selected", "cds-snc");
             }
             return "<!-- error no list selected -->";
         }
+
+        $apiKey = get_option("NOTIFY_API_KEY");
+
+        if (!$apiKey) {
+            if (is_user_logged_in()) {
+                return sprintf($missingText,$missingValuesText["NOTIFY_API_KEY"], $settingsUrl);
+            }
+            return "<!-- error api key -->";
+        }
+
+        $subscribeTemplate = get_option("NOTIFY_API_KEY");
+
+        if (!$subscribeTemplate) {
+            if (is_user_logged_in()) {
+                return sprintf($missingText,$missingValuesText["NOTIFY_SUBSCRIBE_TEMPLATE_ID"], $settingsUrl);
+            }
+            return "<!-- error subscribe template -->";
+        }
+
         ob_start();
         ?>
         <div class="gc-form-wrapper">

@@ -29,7 +29,7 @@ class BlocksPHP
             'attributes' => [
                 'placeholderValue' => [
                     'type' => 'string',
-                    "default" => "preview@example.com"
+                    "default" => ""
                 ],
                 'listId' => [
                     'type' => 'string',

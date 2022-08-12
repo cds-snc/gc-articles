@@ -21,10 +21,13 @@ test('getServiceId', function() {
 
 test('getServices', function() {
     add_option('NOTIFY_API_KEY', 'this-is-fake-a7902fc8-37f0-417c-54c8-9ab499ee54c8-8f43566b-e491-451h-99e7-4f604b5c8283');
+    add_option('NOTIFY_SUBSCRIBE_TEMPLATE_ID', 'ex4mp1e0-d248-4661-a3d6-0647167e3720');
+
     $services = Utils::getServices();
     $this->assertEquals($services, [
         'name' => 'Your Lists',
-        'service_id' => 'a7902fc8-37f0-417c-54c8-9ab499ee54c8'
+        'service_id' => 'a7902fc8-37f0-417c-54c8-9ab499ee54c8',
+        'subscribeTemplate' => 'ex4mp1e0-d248-4661-a3d6-0647167e3720'
     ]);
 });
 

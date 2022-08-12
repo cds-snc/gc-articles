@@ -100,7 +100,8 @@ class Setup
         $messenger = new Messenger();
         $response = $messenger->createTicket($goal, $fullname, $email, $message);
 
-        $messenger->sendMail('platform-mvp@cds-snc.ca', $message);
+        $platform_message = __('Requester:', 'cds-snc') . " " . $email . "\n\n" . $message;
+        $messenger->sendMail('platform-mvp@cds-snc.ca', $platform_message);
 
         $cc = $_POST['cc'] ?? '';
         if ($cc) {

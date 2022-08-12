@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-08-03T20:23:53+00:00\n"
+"POT-Creation-Date: 2022-08-12T18:48:05+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -82,15 +82,39 @@ msgstr "Vert"
 msgid "Red"
 msgstr "Rouge"
 
-#: functions.php:202
+#: functions.php:151
+msgid "Small"
+msgstr ""
+
+#: functions.php:156
+msgid "Medium"
+msgstr ""
+
+#: functions.php:161
+msgid "Large"
+msgstr ""
+
+#: functions.php:166
+msgid "X-Large"
+msgstr ""
+
+#: functions.php:171
+msgid "XX-Large"
+msgstr ""
+
+#: functions.php:176
+msgid "XXX-Large"
+msgstr ""
+
+#: functions.php:237
 msgid "GC Homepage"
 msgstr "Page d’accueil GC"
 
-#: functions.php:219
+#: functions.php:254
 msgid "Default homepage"
 msgstr "Page d’accueil par défaut"
 
-#: functions.php:224
+#: functions.php:259
 msgid "Table of contents"
 msgstr ""
 

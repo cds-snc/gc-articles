@@ -2,14 +2,14 @@
 # This file is distributed under the .
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS Default 3.6.1\n"
+"Project-Id-Version: CDS Default 3.6.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-03T20:41:38+00:00\n"
+"POT-Creation-Date: 2022-08-12T20:49:24+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: cds-snc\n"
@@ -82,15 +82,39 @@ msgstr ""
 msgid "Red"
 msgstr ""
 
-#: functions.php:202
+#: functions.php:151
+msgid "Small"
+msgstr ""
+
+#: functions.php:156
+msgid "Medium"
+msgstr ""
+
+#: functions.php:161
+msgid "Large"
+msgstr ""
+
+#: functions.php:166
+msgid "X-Large"
+msgstr ""
+
+#: functions.php:171
+msgid "XX-Large"
+msgstr ""
+
+#: functions.php:176
+msgid "XXX-Large"
+msgstr ""
+
+#: functions.php:237
 msgid "GC Homepage"
 msgstr ""
 
-#: functions.php:219
+#: functions.php:254
 msgid "Default homepage"
 msgstr ""
 
-#: functions.php:224
+#: functions.php:259
 msgid "Table of contents"
 msgstr ""
 

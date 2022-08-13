@@ -1,0 +1,43 @@
+name: Check PHP version
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  check-php-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set PHP target version from .wp-env.json
+        run: |
+          PHP_VERSION="$(cat .wp-env.json | jq -r .phpVersion)"
+          echo "PHP_VERSION=$PHP_VERSION" >> $GITHUB_ENV
+
+      - name: Check PHP version of WordPress composer.json files
+        run: |
+          find ./wordpress -name "composer.json" -print0 | while read -d $'\0' FILE; do
+            CURR_VERSION="$(cat $FILE | jq -r .config.platform.php)"
+            if [ "$CURR_VERSION" != "${{ env.PHP_VERSION }}" ]; then
+              echo "💩 PHP version does not match ${{ env.PHP_VERSION }} in $FILE ($CURR_VERSION)"
+              exit 1
+            fi
+          done
+
+      - name: Check PHP version in GitHub workflows
+        run: |
+          grep -r "php-version: " .github/workflows/*.yml | while read MATCH; do
+            CURR_VERSION="$(echo $MATCH | awk -F' ' '{ print $3 }')"
+            if [ "$CURR_VERSION" != "${{ env.PHP_VERSION }}" ]; then
+              echo "💩 PHP version does not match in $MATCH"
+              exit 1
+            fi
+          done
+
+      - name: Check PHP version in WordPress Dockerfile
+        run: |
+          cat ./wordpress/docker/Dockerfile | grep -E "FROM wordpress:[0-9\.]+-php${{ env.PHP_VERSION }}-fpm-alpine"

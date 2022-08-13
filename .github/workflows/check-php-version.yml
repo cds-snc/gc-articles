@@ -1,4 +1,4 @@
-name: Check PHP version
+name: Check PHP version match
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  check-php-version:
+  check-php-version-match:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,7 +30,7 @@ jobs:
 
       - name: Check PHP version in GitHub workflows
         run: |
-          grep -r "php-version: " .github/workflows/*.yml | while read MATCH; do
+          grep -r "php-version:" .github/workflows/*.yml | while read MATCH; do
             CURR_VERSION="$(echo $MATCH | awk -F' ' '{ print $3 }')"
             if [ "$CURR_VERSION" != "${{ env.PHP_VERSION }}" ]; then
               echo "💩 PHP version does not match in $MATCH"

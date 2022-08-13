@@ -21,10 +21,10 @@ jobs:
       - name: Check PHP version of WordPress composer.json files
         working-directory: wordpress
         run: |
-          find . -name "composer.json" -print0 | while read -d $'\0' FILE; do
-            CURR_VERSION="$(cat $FILE | jq -r .config.platform.php)"
+          find . -name "composer.json" -print0 | while read -d $'\0' COMPOSER; do
+            CURR_VERSION="$(cat $COMPOSER | jq -r .config.platform.php)"
             if [ "$CURR_VERSION" != "${{ env.PHP_VERSION }}" ]; then
-              echo "💩 PHP version does not match ${{ env.PHP_VERSION }} in $FILE ($CURR_VERSION)"
+              echo "💩 PHP version does not match ${{ env.PHP_VERSION }} in $COMPOSER: $CURR_VERSION"
               exit 1
             fi
           done
@@ -32,10 +32,10 @@ jobs:
       - name: Check PHP version in GitHub workflows
         working-directory: .github/workflows
         run: |
-          grep -r "php-version:" --exclude=check-php-version.yml *.yml | while read MATCH; do
-            CURR_VERSION="$(echo $MATCH | awk -F' ' '{ print $3 }')"
+          grep -r "php-version:" --exclude=check-php-version.yml *.yml | while read WORKFLOW; do
+            CURR_VERSION="$(echo $WORKFLOW | awk -F' ' '{ print $3 }')"
             if [ "$CURR_VERSION" != "${{ env.PHP_VERSION }}" ]; then
-              echo "💩 PHP version does not match in $MATCH"
+              echo "💩 PHP version does not match ${{ env.PHP_VERSION }} in $WORKFLOW"
               exit 1
             fi
           done

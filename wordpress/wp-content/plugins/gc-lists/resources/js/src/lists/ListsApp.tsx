@@ -7,6 +7,7 @@ import './App.css';
 import { Service } from "./components/Service";
 import { UpdateList } from "./components/UpdateList";
 import { CreateList } from "./components/CreateList";
+import { ChooseSubscribers } from "./components/ChooseSubscribers";
 import { UploadList } from "./components/UploadList";
 
 const ListsApp = () => {
@@ -24,6 +25,11 @@ const ListsApp = () => {
             <CreateList />
           </React.Suspense>
         } />
+        <Route path="/choose-subscribers" element={
+          <React.Suspense fallback={<Spinner />}>
+            <ChooseSubscribers />
+          </React.Suspense>
+        } />
         <Route path="/:listId/update" element={
           <React.Suspense fallback={<Spinner />}>
             <UpdateList />
@@ -35,9 +41,7 @@ const ListsApp = () => {
           </React.Suspense>
         } />
       </Routes>
-
     </Suspense>
-
   )
 }
 

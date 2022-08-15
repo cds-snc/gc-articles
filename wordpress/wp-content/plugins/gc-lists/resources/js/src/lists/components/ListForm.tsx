@@ -164,9 +164,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                 <button
                     className="button"
                     type="button"
-                    onClick={() => {
-                        navigate('/lists/');
-                    }}
+                    onClick={() => navigate('/lists/')}
                 >
                     {__('Cancel', 'gc-lists')}
                 </button>

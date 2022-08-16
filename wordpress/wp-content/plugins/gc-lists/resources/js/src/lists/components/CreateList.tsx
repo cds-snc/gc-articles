@@ -13,11 +13,11 @@ import { __ } from "@wordpress/i18n";
  */
 import { ListForm } from "./ListForm";
 import { useList, useService } from "../../store";
-import { List } from "../../types";
+import { List, ListType } from "../../types";
 import { Back, StyledLink } from "../../common";
 
 export const CreateList = () => {
-    const [data, setData] = useState({ id: null })
+    const [data, setData] = useState({ id: null, type: ListType.EMAIL })
     const { dispatch, state: { config: { listManagerApiPrefix } } } = useList();
     const { request, cache, response } = useFetch(listManagerApiPrefix, { data: [] })
     const { serviceId } = useService();
@@ -27,8 +27,9 @@ export const CreateList = () => {
 
         if (response.ok) {
             cache.clear();
-            const id = response.data
-            setData(id);
+            const id = response.data?.id
+            const type = formData.language === 'en' ? ListType.EMAIL : ListType.PHONE
+            setData({ id, type });
             dispatch({ type: "add", payload: id })
             return
         }
@@ -44,8 +45,7 @@ export const CreateList = () => {
     }
 
 
-
-    return data.id ? <Navigate to={`/lists`} replace={true} /> : (
+    return data.id ? <Navigate to={`/lists/${data.id}/choose-subscribers/${data.type}`} replace={true} /> : (
         <>
             <StyledLink to={`/lists`}>
                 <Back /> <span>{__("Back to mailing lists", "gc-lists")}</span>

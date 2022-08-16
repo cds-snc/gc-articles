@@ -27,6 +27,11 @@ export enum ListType {
     PHONE = 'phone',
 }
 
+export type ListIdAndType = {
+    id: string | null;
+    type: ListType;
+};
+
 export type Message = {
     id: string;
     type: string;

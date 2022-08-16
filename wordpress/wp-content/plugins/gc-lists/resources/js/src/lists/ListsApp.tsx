@@ -25,7 +25,7 @@ const ListsApp = () => {
             <CreateList />
           </React.Suspense>
         } />
-        <Route path="/choose-subscribers" element={
+        <Route path="/:listId/choose-subscribers/:type" element={
           <React.Suspense fallback={<Spinner />}>
             <ChooseSubscribers />
           </React.Suspense>

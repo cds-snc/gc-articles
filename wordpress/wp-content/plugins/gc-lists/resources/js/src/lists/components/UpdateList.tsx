@@ -12,7 +12,7 @@ import { __ } from "@wordpress/i18n";
  */
 import { ListForm } from "./ListForm";
 import { useService, useList, useListFetch } from '../../store';
-import { ErrorResponse, ServerErrors, FieldError, List, ListId } from "../../types";
+import { ErrorResponse, ServerErrors, FieldError, List, ListType, ListIdAndType } from "../../types";
 import { Back, StyledLink } from "../../common";
 
 const parseError = async (response: Response) => {
@@ -31,7 +31,7 @@ export const UpdateList = () => {
     const { state: { config: { listManagerApiPrefix } } } = useList();
     const { request, cache, response } = useFetch(listManagerApiPrefix, { data: [] })
 
-    const [responseData, setResponseData] = useState<ListId>({ id: null });
+    const [responseData, setResponseData] = useState<ListIdAndType>({ id: null, type: ListType.EMAIL });
     const [errors, setErrors] = useState<ServerErrors>([]);
     const { state: { lists } } = useList();
     const { listId } = useService()
@@ -40,15 +40,16 @@ export const UpdateList = () => {
     const onSubmit: SubmitHandler<List> = data => updateList(listId, data);
 
     const updateList = useCallback(async (listId: string | undefined, formData: List) => {
-    // remove extra fields from payload
-    const { id, subscriber_count, active, ...updateData } = formData;
+        // remove extra fields from payload
+        const { id, subscriber_count, active, language, ...updateData } = formData;
 
-    await request.put(`list/${listId}`, updateData)
+        await request.put(`list/${listId}`, updateData)
 
-    if (response.ok) {
-        cache.clear();
-        setResponseData({ id: id });
-        return;
+        if (response.ok) {
+            cache.clear();
+            const listType = language === 'en' ? ListType.EMAIL : ListType.PHONE
+            setResponseData({ id: id, type: listType });
+            return;
     }
 
     setErrors(await parseError(response));
@@ -61,7 +62,8 @@ export const UpdateList = () => {
     })[0];
 
     if (responseData.id) {
-        return <Navigate to={`/lists`} replace={true} />
+        // @ TODO: don't do this for editing lists
+        return <Navigate to={`/lists/${responseData.id}/choose-subscribers/${responseData.type}`} replace={true} />
     }
 
     let subscriberMessage = '';
@@ -73,7 +75,6 @@ export const UpdateList = () => {
             __("This list has 1 subscriber.", "gc-lists") :
             __("This list has no subscribers.", "gc-lists");
     }
-
 
     return list ? (
         <>

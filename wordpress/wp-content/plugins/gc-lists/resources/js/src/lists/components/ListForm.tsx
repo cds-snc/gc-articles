@@ -39,6 +39,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
     const { state: { user } } = useList();
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
     const { subscribeTemplate } = useService();
+    const saveButtonText = "name" in formData ? __("Save", "gc-lists") : __("Save and continue", "gc-lists");
 
     useEffect(() => {
         serverErrors && serverErrors.length >= 1 && serverErrors.forEach((item) => {
@@ -158,7 +159,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
 
             <div>
                 <button style={{ marginRight: "20px" }} type="submit" className="button button-primary">
-                    {__('Save and continue', 'gc-lists')}
+                    {saveButtonText}
                 </button>
 
                 <button

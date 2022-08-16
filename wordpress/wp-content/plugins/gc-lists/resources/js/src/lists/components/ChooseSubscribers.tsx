@@ -11,6 +11,7 @@ import { __ } from "@wordpress/i18n";
 import { Error } from "./Error";
 import { useService, useList } from "../../store";
 import { Back, StyledLink } from "../../common";
+import { ListType } from "../../types";
 
 const StyledDivider  = styled.div`
     border: 1px solid #cccccc;
@@ -36,6 +37,8 @@ const StyledDivider  = styled.div`
     const { state: { serviceData } } = useList();
     // Get the list ID and list type from the URL
     const { listId, type } = useService();
+    const titleType = type === ListType.PHONE ? 'text message' : 'email';
+    const importType = type === ListType.PHONE ? 'text messages' : 'email addresses';
 
     if (!serviceData) {
         return <Error />;
@@ -47,13 +50,13 @@ const StyledDivider  = styled.div`
                 {/* Put the name of the list here */}
                 <Back /> <span>{__("Edit list", "gc-lists")}</span>
             </StyledLink>
-            <h1>{__("Add email subscribers", "gc-lists")}</h1>
+            <h1>{__(`Add ${titleType} subscribers`, "gc-lists")}</h1>
             <p>{__("Choose an option to add subscribers to this list. You can come back at any time to add more subscribers.", "gc-lists")}</p>
 
             <StyledDivider>
                 <h2>{__("If you already have subscribers", "gc-lists")}</h2>
                 <p><strong>{__("Import existing subscribers", "gc-lists")}</strong></p>
-                <p>{__("Upload a spreadsheet of your subscribers in CSV format. It must have a column with the email addresses.", "gc-lists")}</p>
+                <p>{__("Upload a spreadsheet of your subscribers in CSV format. It must have a column with", "gc-lists")} {importType}.</p>
                 <button
                     className="button button-primary"
                     type="button"
@@ -64,11 +67,13 @@ const StyledDivider  = styled.div`
                     {__('Choose a file', 'gc-lists')}
                 </button>
             </StyledDivider>
-            <StyledDivider>
-                <h2>{__("If you don’t have subscribers yet", "gc-lists")}</h2>
-                <p><strong>{__("Start collecting subscriber emails", "gc-lists")}</strong></p>
-                <p>{__("Set up a form to collect email addresses from subscribers. This will create a content block you can add to your pages.", "gc-lists")}</p>
-            </StyledDivider>
+            {type === ListType.EMAIL &&
+                <StyledDivider>
+                    <h2>{__("If you don’t have subscribers yet", "gc-lists")}</h2>
+                    <p><strong>{__("Start collecting subscriber emails", "gc-lists")}</strong></p>
+                    <p>{__("Set up a form to collect email addresses from subscribers. This will create a content block you can add to your pages.", "gc-lists")}</p>
+                </StyledDivider>
+            }
 
             <br />
             <button

@@ -51,6 +51,7 @@ export const UploadList = () => {
     const navigate = useNavigate();
     const [finished, setFinished] = useState<boolean>(false)
     const { listId, type } = useService();
+    const titleType = type === ListType.PHONE ? 'text message' : 'email';
 
     let uploadType = '';
 
@@ -77,7 +78,7 @@ export const UploadList = () => {
             <StyledLink to={`/lists/${listId}/update`}>
                 <Back /> <span>{__("Edit list", "gc-lists")}</span>
             </StyledLink>
-            <h1>Import {type} subscribers</h1>
+            <h1>Import {titleType} subscribers</h1>
             <StyledDivider>
                 <Importer
                     delimiter={" "}
@@ -125,7 +126,7 @@ export const UploadList = () => {
                 type="button"
                 onClick={() => navigate('/lists/')}
             >
-                {__('Return to mailing lists', 'gc-lists')}
+                {__('Back to mailing lists', 'gc-lists')}
             </button>
         </>)
 }

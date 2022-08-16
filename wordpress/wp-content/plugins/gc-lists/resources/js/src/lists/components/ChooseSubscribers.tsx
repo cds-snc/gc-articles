@@ -2,16 +2,15 @@
  * External dependencies
  */
 import styled from 'styled-components';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { __ } from "@wordpress/i18n";
 
  /**
   * Internal dependencies
   */
 import { Error } from "./Error";
-import { useList } from "../../store";
+import { useService, useList } from "../../store";
 import { Back, StyledLink } from "../../common";
-
 
 const StyledDivider  = styled.div`
     border: 1px solid #cccccc;
@@ -36,7 +35,7 @@ const StyledDivider  = styled.div`
     const navigate = useNavigate();
     const { state: { serviceData } } = useList();
     // Get the list ID and list type from the URL
-    let { listId, type } = useParams();
+    const { listId, type } = useService();
 
     if (!serviceData) {
         return <Error />;

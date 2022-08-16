@@ -81,7 +81,7 @@ const EditLink = ({ listId }: { listId: string }) => {
     )
 }
 
-const UploadListLink = ({ name, listId, type }: { name: string, listId: string, type: ListType }) => {
+const UploadListLink = ({ listId, type }: { listId: string, type: ListType }) => {
     return (
         <StyledActionLink to={{ pathname: `/lists/${listId}/upload/${type}` }}>
             {__('Add subscribers', 'gc-lists')}
@@ -142,8 +142,8 @@ export const ListViewTable = () => {
                         <EditLink listId={`${row?.original?.id}`} />
                         <StyledDivider>|</StyledDivider>
                         {user?.isSuperAdmin && <><DeleteLink listId={`${row?.original?.id}`} /> <StyledDivider>|</StyledDivider> </>}
-                        {getListType(row?.original?.language) === ListType.EMAIL && <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} type={ListType.EMAIL} />}
-                        {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone ? <UploadListLink name={`${row?.values?.name}`} listId={`${row?.original?.id}`} type={ListType.PHONE} /> : null}
+                        {getListType(row?.original?.language) === ListType.EMAIL && <UploadListLink listId={`${row?.original?.id}`} type={ListType.EMAIL} />}
+                        {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone ? <UploadListLink listId={`${row?.original?.id}`} type={ListType.PHONE} /> : null}
                     </>
                 },
             },

@@ -2,7 +2,7 @@
  * External dependencies
  */
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { __ } from "@wordpress/i18n";
 
  /**
@@ -34,13 +34,9 @@ const StyledDivider  = styled.div`
 
  export const ChooseSubscribers = () => {
     const navigate = useNavigate();
-    const { state: { serviceData, lists } } = useList();
-
-    console.log('serviceData', serviceData)
-    console.log('lists', lists)
-
-    //const { state: { lists } } = useList();
-    // const { listId } = useService()
+    const { state: { serviceData } } = useList();
+    // Get the list ID and list type from the URL
+    let { listId, type } = useParams();
 
     if (!serviceData) {
         return <Error />;
@@ -56,23 +52,21 @@ const StyledDivider  = styled.div`
             <p>{__("Choose an option to add subscribers to this list. You can come back at any time to add more subscribers.", "gc-lists")}</p>
 
             <StyledDivider>
-                <h2>{__("If you have an existing list.", "gc-lists")}</h2>
-                <p><strong>{__("Import subscribers", "gc-lists")}</strong></p>
+                <h2>{__("If you already have subscribers", "gc-lists")}</h2>
+                <p><strong>{__("Import existing subscribers", "gc-lists")}</strong></p>
                 <p>{__("Upload a spreadsheet of your subscribers in CSV format. It must have a column with the email addresses.", "gc-lists")}</p>
-
-
                 <button
                     className="button button-primary"
                     type="button"
                     onClick={() => {
-                        console.log('clicked!')
+                        navigate(`/lists/${listId}/upload/${type}`, { replace: true });
                     }}
                 >
-                    {__('Import using a CSV file', 'gc-lists')}
+                    {__('Choose a file', 'gc-lists')}
                 </button>
             </StyledDivider>
             <StyledDivider>
-                <h2>{__("If you don’t have an existing list", "gc-lists")}</h2>
+                <h2>{__("If you don’t have subscribers yet", "gc-lists")}</h2>
                 <p><strong>{__("Start collecting subscriber emails", "gc-lists")}</strong></p>
                 <p>{__("Set up a form to collect email addresses from subscribers. This will create a content block you can add to your pages.", "gc-lists")}</p>
             </StyledDivider>

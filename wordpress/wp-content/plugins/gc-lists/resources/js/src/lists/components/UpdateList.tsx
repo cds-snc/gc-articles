@@ -79,7 +79,7 @@ export const UpdateList = () => {
     return list ? (
         <>
             <StyledLink to={`/lists`}>
-                <Back /> <span>{__("Back to mailing lists", "gc-lists")}</span>
+                <Back /> <span>{__("Mailing lists", "gc-lists")}</span>
             </StyledLink>
             <h1>{__("Edit list", "gc-lists")}</h1>
             {subscriberMessage && <p>{subscriberMessage}</p>}

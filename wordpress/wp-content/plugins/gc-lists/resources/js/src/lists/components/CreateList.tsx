@@ -48,7 +48,7 @@ export const CreateList = () => {
     return data.id ? <Navigate to={`/lists/${data.id}/choose-subscribers/${data.type}`} replace={true} /> : (
         <>
             <StyledLink to={`/lists`}>
-                <Back /> <span>{__("Back to mailing lists", "gc-lists")}</span>
+                <Back /> <span>{__("Mailing lists", "gc-lists")}</span>
             </StyledLink>
             <h1>{__("Create new list", "gc-lists")}</h1>
             <ListForm formData={formData} serverErrors={[]} handler={onSubmit} />

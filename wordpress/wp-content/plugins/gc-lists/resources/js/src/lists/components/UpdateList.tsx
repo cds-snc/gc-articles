@@ -12,7 +12,7 @@ import { __ } from "@wordpress/i18n";
  */
 import { ListForm } from "./ListForm";
 import { useService, useList, useListFetch } from '../../store';
-import { ErrorResponse, ServerErrors, FieldError, List, ListType, ListIdAndType } from "../../types";
+import { ErrorResponse, ServerErrors, FieldError, List, ListId } from "../../types";
 import { Back, StyledLink } from "../../common";
 
 const parseError = async (response: Response) => {
@@ -31,7 +31,7 @@ export const UpdateList = () => {
     const { state: { config: { listManagerApiPrefix } } } = useList();
     const { request, cache, response } = useFetch(listManagerApiPrefix, { data: [] })
 
-    const [responseData, setResponseData] = useState<ListIdAndType>({ id: null, type: ListType.EMAIL });
+    const [responseData, setResponseData] = useState<ListId>({ id: null });
     const [errors, setErrors] = useState<ServerErrors>([]);
     const { state: { lists } } = useList();
     const { listId } = useService()
@@ -47,8 +47,7 @@ export const UpdateList = () => {
 
         if (response.ok) {
             cache.clear();
-            const listType = language === 'en' ? ListType.EMAIL : ListType.PHONE
-            setResponseData({ id: id, type: listType });
+            setResponseData({ id: id });
             return;
     }
 
@@ -62,8 +61,7 @@ export const UpdateList = () => {
     })[0];
 
     if (responseData.id) {
-        // @ TODO: don't do this for editing lists
-        return <Navigate to={`/lists/${responseData.id}/choose-subscribers/${responseData.type}`} replace={true} />
+        return <Navigate to={'/lists'} replace={true} />
     }
 
     let subscriberMessage = '';

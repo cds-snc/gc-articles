@@ -8,8 +8,7 @@ import { __ } from "@wordpress/i18n";
  /**
   * Internal dependencies
   */
-import { Error } from "./Error";
-import { useService, useList } from "../../store";
+import { useService } from "../../store";
 import { Back, StyledLink } from "../../common";
 import { ListType } from "../../types";
 
@@ -34,15 +33,9 @@ const StyledDivider  = styled.div`
 
  export const ChooseSubscribers = () => {
     const navigate = useNavigate();
-    const { state: { serviceData } } = useList();
-    // Get the list ID and list type from the URL
     const { listId, type } = useService();
     const titleType = type === ListType.PHONE ? 'text message' : 'email';
     const importType = type === ListType.PHONE ? 'text messages' : 'email addresses';
-
-    if (!serviceData) {
-        return <Error />;
-    }
 
     return (
         <>

@@ -8,7 +8,7 @@ use CDS\Modules\TrackLogins\TrackLogins;
 
 class UserLockout
 {
-    public const USER_LOCKOUT_TIME = (60 * 60 * 24) * 90; // 90 days
+    public const USER_LOCKOUT_TIME = (60 * 60 * 24) * 365; // 365 days
 
     public $loginPlugin;
     public $trackLogins;

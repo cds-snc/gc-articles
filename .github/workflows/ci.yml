@@ -25,6 +25,7 @@ jobs:
           composer config http-basic.my.yoast.com token ${{ secrets.COMPOSER_YOAST_TOKEN }}
 
       - run: cd wordpress && composer install --prefer-dist --no-progress --no-suggest
+      - run: cd wordpress && composer check-platform-reqs
       - run: cd wordpress && ./vendor/bin/pest
 
   gc-lists-php-tests:
@@ -52,6 +53,7 @@ jobs:
           cd wordpress/wp-content/plugins/gc-lists
           bash bin/install-wp-tests.sh wordpress_test root 'root' localhost $WP_VERSION
           composer install
+          composer check-platform-reqs
 
       - name: Run the tests
         run: |
@@ -82,6 +84,7 @@ jobs:
           cd wordpress/wp-content/plugins/cds-wpml-mods
           bash bin/install-wp-tests.sh wordpress_test root 'root' localhost $WP_VERSION
           composer install
+          composer check-platform-reqs
 
       - name: Run the tests
         run: |

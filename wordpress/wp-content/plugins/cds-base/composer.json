@@ -5,6 +5,11 @@
       "CDS\\": "classes/"
     }
   },
+  "config": { 
+    "platform": {
+      "php": "8.1"
+    }
+  },
   "require": {
     "php": ">=5.6",
     "wa72/htmlpagedom": "^3.0",

@@ -27,6 +27,9 @@
     "allow-plugins": {
       "pestphp/pest-plugin": true,
       "composer/installers": true
+    },
+    "platform": {
+      "php": "8.1"
     }
   },
   "require": {

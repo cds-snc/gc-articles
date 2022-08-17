@@ -7,7 +7,7 @@ resource "aws_synthetics_canary" "wordpress" {
   execution_role_arn   = aws_iam_role.synthetic_canary_execution_role.arn
   zip_file             = data.archive_file.wordpress_canary.output_path
   handler              = "healthcheck.handler"
-  runtime_version      = "syn-nodejs-puppeteer-3.1"
+  runtime_version      = "syn-nodejs-puppeteer-3.6"
   start_canary         = true
 
   schedule {

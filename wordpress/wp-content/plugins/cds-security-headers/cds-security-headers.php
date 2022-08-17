@@ -58,6 +58,7 @@ function cds_security_headers($headers)
             "'self'",
         ],
         "object-src" => [
+            "'self'",
             "https://digital.canada.ca",
         ],
         "script-src" => [
@@ -68,10 +69,12 @@ function cds_security_headers($headers)
             "'sha256-5/P+Wb5Puz2VZQuyT0B/H3kuum7v7A2XDV17K95mm2Q='",
             "'sha256-Ll9Pj6gzPpETya7YXsYglTFBzjPg0sc23VG6sms7FKE='",
             "'sha256-9vpql/NLyCCe3HPEb2b/lcLKPbkRi48w2Lfn0AbTxsQ='",
+            "'sha256-+zAcjG07bIcQUdOJ4VdpR6NeUqSj+ijz0iNFSRtHtFU='",
             "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js",
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/wet-boew.min.js",
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/theme.min.js",
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/i18n/en.min.js",
+            "https://www.canada.ca/etc/designs/canada/wet-boew/js/i18n/fr.min.js",
             "https://www.googletagmanager.com/",
             "https://digital.canada.ca",
         ],

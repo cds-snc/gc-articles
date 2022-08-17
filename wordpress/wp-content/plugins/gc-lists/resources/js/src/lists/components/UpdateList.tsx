@@ -40,15 +40,15 @@ export const UpdateList = () => {
     const onSubmit: SubmitHandler<List> = data => updateList(listId, data);
 
     const updateList = useCallback(async (listId: string | undefined, formData: List) => {
-    // remove extra fields from payload
-    const { id, subscriber_count, active, ...updateData } = formData;
+        // remove extra fields from payload
+        const { id, subscriber_count, active, language, ...updateData } = formData;
 
-    await request.put(`list/${listId}`, updateData)
+        await request.put(`list/${listId}`, updateData)
 
-    if (response.ok) {
-        cache.clear();
-        setResponseData({ id: id });
-        return;
+        if (response.ok) {
+            cache.clear();
+            setResponseData({ id: id });
+            return;
     }
 
     setErrors(await parseError(response));
@@ -61,7 +61,7 @@ export const UpdateList = () => {
     })[0];
 
     if (responseData.id) {
-        return <Navigate to={`/lists`} replace={true} />
+        return <Navigate to={'/lists'} replace={true} />
     }
 
     let subscriberMessage = '';
@@ -74,11 +74,10 @@ export const UpdateList = () => {
             __("This list has no subscribers.", "gc-lists");
     }
 
-
     return list ? (
         <>
             <StyledLink to={`/lists`}>
-                <Back /> <span>{__("Back to mailing lists", "gc-lists")}</span>
+                <Back /> <span>{__("Mailing lists", "gc-lists")}</span>
             </StyledLink>
             <h1>{__("Edit list", "gc-lists")}</h1>
             {subscriberMessage && <p>{subscriberMessage}</p>}

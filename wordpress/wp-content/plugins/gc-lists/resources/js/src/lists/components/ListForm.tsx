@@ -39,6 +39,8 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
     const { state: { user } } = useList();
     const { register, handleSubmit, setError, formState: { errors } } = useForm<List>({ defaultValues: formData });
     const { subscribeTemplate } = useService();
+    const isNewList = !("name" in formData) // if the "name" exists, we are editing the list
+    const saveButtonText = isNewList ? __("Save and continue", "gc-lists") : __("Save", "gc-lists");
 
     useEffect(() => {
         serverErrors && serverErrors.length >= 1 && serverErrors.forEach((item) => {
@@ -73,7 +75,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                             </div>
                         </StyledCell>
                     </tr>
-                    {user?.hasPhone &&
+                    {user?.hasPhone && isNewList &&
                         <tr>
                             <th scope="row">
                                 <label htmlFor="language">{__("Message type", "gc-lists")}</label>
@@ -158,15 +160,13 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
 
             <div>
                 <button style={{ marginRight: "20px" }} type="submit" className="button button-primary">
-                    {__('Save and continue', 'gc-lists')}
+                    {saveButtonText}
                 </button>
 
                 <button
                     className="button"
                     type="button"
-                    onClick={() => {
-                        navigate('/lists/');
-                    }}
+                    onClick={() => navigate('/lists/')}
                 >
                     {__('Cancel', 'gc-lists')}
                 </button>

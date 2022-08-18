@@ -10,7 +10,7 @@ export const CDSRichText = compose(
                 const { key } = parseMetaKey(props.metaKey);
                 let newValue = updateValue(props.metaKey, value, content);
                 if (props.parser) {
-                    const parserKey = `parsed-${props.metaKey}`;
+                    const parserKey = `parsed-${props.metaKey}`.replace(":", "_");
                     let data = JSON.parse(newValue);
                     data[parserKey] = props.parser(value);
                     newValue = JSON.stringify(data);

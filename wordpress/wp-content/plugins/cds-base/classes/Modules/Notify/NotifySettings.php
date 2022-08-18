@@ -49,8 +49,8 @@ class NotifySettings
     {
         add_submenu_page(
             "gc-lists_messages",
-            __('API Settings', 'cds-snc'), // page_title
-            __('API Settings', 'cds-snc'), // menu_title
+            __('Set up GC Lists', 'cds-snc'), // page_title
+            __('Setup', 'cds-snc'), // menu_title
             'manage_notify',
             "settings",
             [ $this, 'notifyApiSettingsCreateAdminPage' ] // function
@@ -116,7 +116,7 @@ class NotifySettings
 
         add_settings_section(
             'notify_api_settings_setting_section', // id
-            __('API Settings', 'cds-snc'), // title
+            __('Set up GC Lists', 'cds-snc'), // title
             array( $this, 'notifyApiSettingsSectionInfo'), // callback
             'notify-api-settings-admin' // page
         );
@@ -133,17 +133,6 @@ class NotifySettings
         );
 
         add_settings_field(
-            'notify_subscribe_template', // id
-            __('Subscribe template ID', 'cds-snc'), // title
-            array( $this, 'notifySubscribeTemplateIdCallback'), // callback
-            'notify-api-settings-admin', // page
-            'notify_api_settings_setting_section', // section
-            [
-                'label_for' => 'notify_subscribe_template'
-            ]
-        );
-
-        add_settings_field(
             'notify_generic_template_id', // id
             __('Message template ID', 'cds-snc'), // title
             array( $this, 'notifyGenericTemplateIdCallback'), // callback
@@ -153,10 +142,29 @@ class NotifySettings
                 'label_for' => 'notify_generic_template_id'
             ]
         );
+
+        add_settings_field(
+            'notify_subscribe_template', // id
+            __('Subscribe template ID', 'cds-snc'), // title
+            array( $this, 'notifySubscribeTemplateIdCallback'), // callback
+            'notify-api-settings-admin', // page
+            'notify_api_settings_setting_section', // section
+            [
+                'label_for' => 'notify_subscribe_template'
+            ]
+        );
     }
 
     public function notifyApiSettingsSectionInfo()
     {
+        printf('<p>%s</p>', __('To start creating mailing lists and sending messages, you must connect a GC Notify service to GC Lists.', 'cds-snc'));
+        printf(
+            '<p>%s <a href="%s" target="_blank">%s</a> %s.</p>',
+            __('You can generate the required information below once you have a live', 'cds-snc'),
+            __('https://notification.canada.ca/', 'cds-snc'),
+            __('GC Notify', 'cds-snc'),
+            __('service', 'cds-snc'),
+        );
     }
 
     public function getObfuscatedOutputLabel($string, $labelId, $print = true)
@@ -190,12 +198,26 @@ class NotifySettings
         );
 
         $link = __('Read <a href="https://documentation.notification.canada.ca/en/keys.html" target="_blank">API keys</a> for details.', 'cds-snc');
-        printf('<div class="role-desc description">
-        <details>
-            <summary>%s. (%s)</summary>
-            <code>example_notify_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0</code>
-        </details>
-        <p class="description">%s</p>', __('Enter your API Key', 'cds-snc'), __('See example key format.', 'cds-snc'), $link);
+        printf(
+            '<div class="role-desc description">
+            <details>
+                <summary>%s</summary>
+                <ul>
+                    <li><a href="#" target="_blank">%s</a></li>
+                    <li>%s</li>
+                    <li>%s</li>
+                    <li>%s</li>
+                </ul>
+                <p class="description">%s</p>
+                <code>example_notify_key-26785a09-ab16-4eb0-8407-a37497a57506-3d844edf-8d35-48ac-975b-e847b4f122b0</code>
+            </details>',
+            __('How to get an API key', 'cds-snc'),
+            __('Sign in to GC Notify', 'cds-snc'),
+            __('Go to the API integration page', 'cds-snc'),
+            __('Select API keys', 'cds-snc'),
+            __('Select Create an API key', 'cds-snc'),
+            __('The API key should follow this format:', 'cds-snc')
+        );
     }
 
     public function notifyGenericTemplateIdCallback()
@@ -205,13 +227,46 @@ class NotifySettings
             $this->NOTIFY_GENERIC_TEMPLATE_ID ? esc_attr($this->NOTIFY_GENERIC_TEMPLATE_ID) : ''
         );
 
-        $link = __('Read the <a href="https://notification.canada.ca/format" target="_blank">Email formatting guide</a> for details.', 'cds-snc');
-        printf('<div class="role-desc description">
+        printf(
+            '<p class="description smaller">%s</p>',
+            __('The messages you send will follow this format. It includes a way for people to unsubscribe from the mailing list.', 'cds-snc'),
+        );
+
+        printf(
+            '<div class="role-desc description">
         <details>
-            <summary>%s. (%s)</summary>
-            <code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
-        </details>
-        <p class="description">%s</p>', __('Enter your message template ID', 'cds-snc'), __('See example template ID format.', 'cds-snc'), $link);
+            <summary>%s</summary>
+            <ul>
+                <li><a href="#" target="_blank">%s</a></li>
+                <li>%s</li>
+                <li>%s</li>
+                <li>%s</li>
+            </ul>
+            <p class="description">%s</p>
+            <p><strong>%s</strong></p>
+            <code>((subject))</code>
+            <button type="button" class="button button-secondary">%s</button>
+            <p><strong>%s</strong></p>
+            <code>
+            ((message))<br /><br />
+            You may unsubscribe by clicking this link:<br /><br />
+            ((unsubscribe_link))<br /><br />
+            Vous pouvez vous desabonner en cliquant ce lien:<br /><br />
+            ((unsubscribe_link))
+            </code>
+            <button type="button" class="button button-secondary">%s</button>
+        </details>',
+            __('How to get an message template ID', 'cds-snc'),
+            __('Sign in to GC Notify', 'cds-snc'),
+            __('Select Create a template', 'cds-snc'),
+            __('Choose the type of message', 'cds-snc'),
+            __('Pick a name for your list', 'cds-snc'),
+            __('Enter below text into the corresponding fields in GC Notify:', 'cds-snc'),
+            __('Subject line of the email:', 'cds-snc'),
+            __('Copy to clipboard', 'cds-snc'),
+            __('Message:', 'cds-snc'),
+            __('Copy to clipboard', 'cds-snc')
+        );
     }
 
     public function notifySubscribeTemplateIdCallback()
@@ -221,12 +276,46 @@ class NotifySettings
             $this->NOTIFY_SUBSCRIBE_TEMPLATE_ID ? esc_attr($this->NOTIFY_SUBSCRIBE_TEMPLATE_ID) : ''
         );
 
-        printf('<div class="role-desc description">
+        printf(
+            '<p class="description smaller">%s</p>',
+            __('People will receive this message to verify their email address after subscribing to your mailing list.', 'cds-snc'),
+        );
+
+        printf(
+            '<div class="role-desc description">
         <details>
-            <summary>(%s)</summary>
-            <code>ex4mp1e0-d248-4661-a3d6-0647167e3720</code>
-        </details>
-        ', __('See example template ID format.', 'cds-snc'));
+            <summary>%s</summary>
+            <ul>
+                <li><a href="#" target="_blank">%s</a></li>
+                <li>%s</li>
+                <li>%s</li>
+                <li>%s</li>
+            </ul>
+            <p class="description">%s</p>
+            <p><strong>%s</strong></p>
+            <code>((subject))</code>
+            <button type="button" class="button button-secondary">%s</button>
+            <p><strong>%s</strong></p>
+            <code>
+            Thank you for subscribing to updates about ((name)).<br /><br />
+
+            To verify your email and activate your subscription, use this link: ((confirm_link))<br /><br />
+
+            If you did not subscribe, please ignore this message.
+            </code>
+            <button type="button" class="button button-secondary">%s</button>
+        </details>',
+            __('How to get an message template ID', 'cds-snc'),
+            __('Sign in to GC Notify', 'cds-snc'),
+            __('Select Create a template', 'cds-snc'),
+            __('Choose the type of message', 'cds-snc'),
+            __('Pick a name for your list', 'cds-snc'),
+            __('Enter below text into the corresponding fields in GC Notify:', 'cds-snc'),
+            __('Subject line of the email:', 'cds-snc'),
+            __('Copy to clipboard', 'cds-snc'),
+            __('Message:', 'cds-snc'),
+            __('Copy to clipboard', 'cds-snc')
+        );
     }
 
     public function addStyles()

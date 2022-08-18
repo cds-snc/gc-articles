@@ -1,5 +1,6 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import TextControl from '../components/TextControl';
+import RichText from '../components/RichText';
 import { __ } from '@wordpress/i18n';
 import GCPostMetaSlotFill from "../../../../../gc-post-meta/resources/js/slot";
 import { ProductFields } from './components/sidebar';
@@ -22,6 +23,10 @@ const Edit = ({ attributes, setAttributes }) => {
             <p>{__('Other', 'cds-web')}</p>
             <TextControl label={__('Weight', 'cds-web')} metaKey="cds_product:weight" />
             <TextControl label={__('TagId', 'cds-web')} metaKey="cds_product:tag-id" />
+            <p>{__('Product Link(s)', 'cds-web')}</p>
+            <RichText allowedFormats={['core/link']} metaKey="cds_product:links" />
+            <p>{__('Related Link(s)', 'cds-web')}</p>
+            <RichText allowedFormats={['core/link']} metaKey="cds_product:links-related" />
         </div>
     );
 };

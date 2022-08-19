@@ -8,7 +8,13 @@ export const CDSRichText = compose(
         return {
             setMetaValue: (value, content) => {
                 const { key } = parseMetaKey(props.metaKey);
-                const newValue = updateValue(props.metaKey, value, content);
+                let newValue = updateValue(props.metaKey, value, content);
+                if (props.parser) {
+                    const parserKey = `parsed_${props.metaKey}`.replace(":", "_");
+                    let data = JSON.parse(newValue);
+                    data[parserKey] = props.parser(value);
+                    newValue = JSON.stringify(data);
+                }
                 dispatch('core/editor').editPost({ meta: { [key]: newValue } });
             }
         }

@@ -28,6 +28,7 @@ class NotifySettings
         add_action('admin_menu', [$instance, 'notifyApiSettingsAddPluginPage'], 100);
         add_action('admin_init', [$instance, 'notifyApiSettingsPageInit']);
         add_action('admin_head', [$instance, 'addStyles']);
+        add_action('admin_enqueue_scripts', [$instance, 'enqueue']);
 
         add_filter('option_page_capability_notify_api_settings_option_group', function ($capability) {
             return 'manage_notify';
@@ -43,6 +44,46 @@ class NotifySettings
                 add_filter("option_{$option}", [$instance, 'decryptOption']);
             }
         }
+    }
+
+    /* Copy to Clipboard */
+    public static function templateText($key)
+    {
+        switch ($key) {
+            case 'alertText':
+                return  __('Copied to clipboard', 'cds-snc');
+            ;
+                break;
+            case 'subject':
+                return "((subject))";
+                break;
+            case 'messageTemplate':
+                return "((message))\n
+You may unsubscribe by clicking this link:\n
+((unsubscribe_link))\n
+Vous pouvez vous desabonner en cliquant ce lien:\n
+((unsubscribe_link))";
+                break;
+            case 'subscribeTemplate':
+                return "Thank you for subscribing to updates about ((name)).\n
+To verify your email and activate your subscription, use this link: ((confirm_link))\n
+If you did not subscribe, please ignore this message.";
+                break;
+            default:
+                return "";
+        }
+    }
+
+    public function enqueue()
+    {
+        wp_enqueue_script('cds-copy-to-clipboard-js', plugin_dir_url(__FILE__) . './src/copy-to-clipboard.js', [], "1.0.0", true);
+
+        wp_localize_script('cds-copy-to-clipboard-js', 'CDS_VARS', [
+            'alertText' => self::templateText('alertText'),
+            'subject' => self::templateText('subject'),
+            'messageTemplate' => self::templateText('messageTemplate'),
+            'subscribeTemplate' => self::templateText('subscribeTemplate')
+        ]);
     }
 
     public function notifyApiSettingsAddPluginPage()
@@ -244,17 +285,13 @@ class NotifySettings
             </ul>
             <p class="description">%s</p>
             <p><strong>%s</strong></p>
-            <code>((subject))</code>
-            <button type="button" class="button button-secondary">%s</button>
+            <code>%s</code>
+            <button type="button" class="button button-secondary button--copy-to-clipboard" id="subject">%s</button>
             <p><strong>%s</strong></p>
             <code>
-            ((message))<br /><br />
-            You may unsubscribe by clicking this link:<br /><br />
-            ((unsubscribe_link))<br /><br />
-            Vous pouvez vous desabonner en cliquant ce lien:<br /><br />
-            ((unsubscribe_link))
+            %s
             </code>
-            <button type="button" class="button button-secondary">%s</button>
+            <button type="button" class="button button-secondary button--copy-to-clipboard" id="messageTemplate">%s</button>
         </details>',
             __('How to get an message template ID', 'cds-snc'),
             __('Sign in to GC Notify', 'cds-snc'),
@@ -263,8 +300,10 @@ class NotifySettings
             __('Pick a name for your list', 'cds-snc'),
             __('Enter below text into the corresponding fields in GC Notify:', 'cds-snc'),
             __('Subject line of the email:', 'cds-snc'),
+            self::templateText('subject'),
             __('Copy to clipboard', 'cds-snc'),
             __('Message:', 'cds-snc'),
+            nl2br(self::templateText('messageTemplate')),
             __('Copy to clipboard', 'cds-snc')
         );
     }
@@ -293,17 +332,13 @@ class NotifySettings
             </ul>
             <p class="description">%s</p>
             <p><strong>%s</strong></p>
-            <code>((subject))</code>
-            <button type="button" class="button button-secondary">%s</button>
+            <code>%s</code>
+            <button type="button" class="button button-secondary button--copy-to-clipboard" id="subject">%s</button>
             <p><strong>%s</strong></p>
             <code>
-            Thank you for subscribing to updates about ((name)).<br /><br />
-
-            To verify your email and activate your subscription, use this link: ((confirm_link))<br /><br />
-
-            If you did not subscribe, please ignore this message.
+            %s
             </code>
-            <button type="button" class="button button-secondary">%s</button>
+            <button type="button" class="button button-secondary button--copy-to-clipboard" id="subscribeTemplate">%s</button>
         </details>',
             __('How to get an message template ID', 'cds-snc'),
             __('Sign in to GC Notify', 'cds-snc'),
@@ -312,8 +347,10 @@ class NotifySettings
             __('Pick a name for your list', 'cds-snc'),
             __('Enter below text into the corresponding fields in GC Notify:', 'cds-snc'),
             __('Subject line of the email:', 'cds-snc'),
+            self::templateText('subject'),
             __('Copy to clipboard', 'cds-snc'),
             __('Message:', 'cds-snc'),
+            nl2br(self::templateText('subscribeTemplate')),
             __('Copy to clipboard', 'cds-snc')
         );
     }

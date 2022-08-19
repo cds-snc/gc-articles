@@ -127,7 +127,8 @@ details ul li, details ol li {
   margin-bottom: 0;
 }
 
-.description * {
+.description *,
+p.smaller {
   font-size: 14.5px;
   color: #646970;
 }
@@ -145,6 +146,47 @@ details ul li, details ol li {
 
 .description details[open] summary {
   margin-bottom: 8px;
+}
+
+.description details a[target="_blank"]::after {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+  margin: 0 3px 0 5px;
+}
+
+.description details a[target="_blank"]:hover::after {
+  color: #0535d2;
+}
+
+.description details p {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.description details summary {
+  text-decoration: underline;
+}
+
+.description details ul {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+
+.description details ul li {
+  margin-bottom: 3px;
+}
+
+.description details code {
+  display: inline-block;
+  color: #1d2327;
+  padding: 8px;
+  font-size: 14px;
+}
+
+.wp-core-ui .description details code + .button.button-secondary {
+  font-size: 14.5px;
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 15px;
 }
 
 /* screen reader shortcuts */

@@ -124,8 +124,13 @@ declare(strict_types=1);
   </div>
 
   <?php
+    // option is set in "cds-base" plugin
+    $showWetMenu = get_option('show_wet_menu');
+    // show header menu if option is not set at all or if "custom"
+    $ifShowWetMenu = (empty($showWetMenu) || $showWetMenu === 'custom') ? true : false;
+
     $headerMenu = get_top_nav();
-    if ($headerMenu && !cds_is_maintenance_mode()) :
+    if ($ifShowWetMenu && $headerMenu && !cds_is_maintenance_mode()) :
         echo $headerMenu;
     else :
         ?>

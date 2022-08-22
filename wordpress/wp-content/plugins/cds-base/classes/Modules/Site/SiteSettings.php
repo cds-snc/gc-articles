@@ -401,7 +401,7 @@ class SiteSettings
             checked("custom", $show_wet_menu, false),
             $customHeaderMenu ? "" : "disabled", // if no menu, disabled input
             __('Show custom menu', "cds-snc"),
-            ': “' . $customHeaderMenu . '”' // if menu, echo its name into the label
+            $customHeaderMenu ? ': “' . $customHeaderMenu . '”' : '' // if menu, echo its name into the label
         );
 
         if (!$customHeaderMenu) {

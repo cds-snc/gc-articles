@@ -27,8 +27,11 @@ class SettingsFunctions
     {
         $showWetMenu = get_option('show_wet_menu');
 
-        if ($showWetMenu === 'off') {
+        if ($showWetMenu !== 'canada') {
             $classes[] = 'hide-wet-menu';
+        }
+        if ($showWetMenu !== 'custom') {
+            $classes[] = 'hide-custom-menu';
         }
 
         $showSearch = get_option('show_search');
@@ -50,6 +53,9 @@ class SettingsFunctions
     {
         $showWetMenu = get_option('show_wet_menu');
         $locations = get_nav_menu_locations();
+
+        var_dump($showWetMenu);
+        var_dump($locations);
 
         if (
             $showWetMenu === 'off' &&                   // if we _don't_ want to show the "wet menu"

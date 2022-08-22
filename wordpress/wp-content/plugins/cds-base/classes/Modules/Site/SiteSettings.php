@@ -383,7 +383,11 @@ class SiteSettings
     {
         $show_wet_menu = get_option('show_wet_menu');
         $locations = get_nav_menu_locations();
-        $customHeaderMenuExists = array_key_exists('header', $locations) && is_int($locations['header']);
+        $customHeaderMenu = (array_key_exists('header', $locations) && is_int($locations['header'])) ? $locations['header'] : false;
+        if ($customHeaderMenu) {
+            // set it to the name of the menu
+            $customHeaderMenu = wp_get_nav_menu_object($customHeaderMenu)->name;
+        }
 
         echo('<fieldset>');
         printf('<legend class="screen-reader-text"><span>%s</span></legend>', $args['title']);
@@ -393,13 +397,14 @@ class SiteSettings
             __('Show Canada.ca menu', "cds-snc")
         );
         printf(
-            '<input type="radio" name="show_wet_menu" id="show_wet_menu_custom" value="custom" %s %s /> <label for="show_wet_menu_custom">%s</label><br />',
+            '<input type="radio" name="show_wet_menu" id="show_wet_menu_custom" value="custom" %s %s /> <label for="show_wet_menu_custom">%s%s</label><br />',
             checked("custom", $show_wet_menu, false),
-            $customHeaderMenuExists ? "" : "disabled", // if no menu, disabled
-            __('Show custom menu', "cds-snc")
+            $customHeaderMenu ? "" : "disabled", // if no menu, disabled input
+            __('Show custom menu', "cds-snc"),
+            ': “' . $customHeaderMenu . '”' // if menu, echo its name into the label
         );
 
-        if (!$customHeaderMenuExists) {
+        if (!$customHeaderMenu) {
             printf(
                 '<p class="description" style="margin-top: -5px; margin-bottom: 5px;">%s <a href="%s">%s</a>.</p>',
                 __("You can set a custom menu in", "cds-snc"),

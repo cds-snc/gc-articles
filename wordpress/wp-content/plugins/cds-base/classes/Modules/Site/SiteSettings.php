@@ -392,13 +392,22 @@ class SiteSettings
             checked("canada", $show_wet_menu, false),
             __('Show Canada.ca menu', "cds-snc")
         );
-
         printf(
             '<input type="radio" name="show_wet_menu" id="show_wet_menu_custom" value="custom" %s %s /> <label for="show_wet_menu_custom">%s</label><br />',
             checked("custom", $show_wet_menu, false),
             $customHeaderMenuExists ? "" : "disabled", // if no menu, disabled
             __('Show custom menu', "cds-snc")
         );
+
+        if (!$customHeaderMenuExists) {
+            printf(
+                '<p class="description" style="margin-top: -5px; margin-bottom: 5px;">%s <a href="%s">%s</a>.</p>',
+                __("You can set a custom menu in", "cds-snc"),
+                get_admin_url() . 'nav-menus.php',
+                __("Appearance > Menus", "cds-snc")
+            );
+        }
+
         printf(
             '<input type="radio" name="show_wet_menu" id="show_wet_menu_none" value="none" %s /> <label for="show_wet_menu_none">%s</label><br />',
             checked("none", $show_wet_menu, false),

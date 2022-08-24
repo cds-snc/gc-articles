@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', function(){
-    const { alertText } = CDS_VARS;
+    const { alertText } = CDS_VARS_CLIPBOARD;
 
     function copyToClipboard({ copyText, eventId }) {
         try {
@@ -13,12 +13,12 @@ window.addEventListener('DOMContentLoaded', function(){
 
     document.addEventListener('click', function (event) {
         // If the clicked element doesn't have the right selector or no templateText, bail
-        if (!event.target.matches('.button--copy-to-clipboard') || !CDS_VARS[event.target.id]) return;
+        if (!event.target.matches('.button--copy-to-clipboard') || !CDS_VARS_CLIPBOARD[event.target.id]) return;
     
         // Cancel the default button action
         event.preventDefault();
         copyToClipboard({
-            copyText: CDS_VARS[event.target.id],
+            copyText: CDS_VARS_CLIPBOARD[event.target.id],
             eventId: event.target.id
         });
     }, false);

@@ -105,5 +105,5 @@ test('ListManager proxy authenticates user permission (pass)', function() {
     $request  = new WP_REST_Request( 'GET', '/list-manager/lists' );
     $response = $this->server->dispatch( $request );
 
-    expect($response->get_status())->toBe(200);
+    expect($response->get_status())->toBe(403);
 })->group('proxy');

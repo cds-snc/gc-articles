@@ -27,7 +27,7 @@ class Proxy
             'methods'             => \WP_REST_Server::ALLMETHODS,
             'callback'            => [$this, 'proxyRequest'],
             'permission_callback' => function () {
-                return current_user_can('list_manager_bulk_send');
+                return current_user_can('edit_posts');
             }
         ]);
     }

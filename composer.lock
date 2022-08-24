@@ -8,7 +8,7 @@
     "packages": [
         {
             "name": "articles/cli",
-            "version": "dev-main",
+            "version": "dev-patch/list-manager",
             "dist": {
                 "type": "path",
                 "url": "./cli",

@@ -78,7 +78,7 @@ If you did not subscribe, please ignore this message.";
     {
         wp_enqueue_script('cds-copy-to-clipboard-js', plugin_dir_url(__FILE__) . './src/copy-to-clipboard.js', [], "1.0.0", true);
 
-        wp_localize_script('cds-copy-to-clipboard-js', 'CDS_VARS', [
+        wp_localize_script('cds-copy-to-clipboard-js', 'CDS_VARS_CLIPBOARD', [
             'alertText' => self::templateText('alertText'),
             'subject' => self::templateText('subject'),
             'messageTemplate' => self::templateText('messageTemplate'),

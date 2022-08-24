@@ -27,8 +27,7 @@ class Proxy
             'methods'             => \WP_REST_Server::ALLMETHODS,
             'callback'            => [$this, 'proxyRequest'],
             'permission_callback' => function () {
-                # @todo update this after debugging
-                return true;
+               return current_user_can( 'edit_posts' );
             }
         ]);
     }

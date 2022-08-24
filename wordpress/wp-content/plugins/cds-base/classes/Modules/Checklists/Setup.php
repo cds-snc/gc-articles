@@ -27,6 +27,22 @@ class Setup
         add_action('publishpress_checklists_modules_loaded', [$this, 'addChecklistRole']);
         // called when plugin is deactivated
         add_action('deactivate_publishpress-checklists/publishpress-checklists.php', [$this, 'removeChecklistRole']);
+
+        // Keep until issue is solved: https://github.com/publishpress/PublishPress-Checklists/issues/411
+        add_action('admin_init', [$this, 'defaultHttpReferer'], 5);
+    }
+
+    public function defaultHttpReferer()
+    {
+        $publishPressSlug = 'ppch-checklists';
+
+        if (!isset($_GET['page']) || $_GET['page'] !== $publishPressSlug) {
+            return;
+        }
+
+        if (!isset($_SERVER['HTTP_REFERER'])) {
+            $_SERVER['HTTP_REFERER'] = get_admin_url() . 'admin.php?page=' . urlencode($publishPressSlug);
+        }
     }
 
     public function addActions()

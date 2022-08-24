@@ -102,8 +102,12 @@ header #wb-srch .submit {
   display: none;
 }
 
-/* Hide menu (keeps the blue bar) */
-.hide-wet-menu .gcweb-menu .container {
+/* Hide Canada.ca menu (including the blue bar) */
+.hide-wet-menu .gcweb-menu {
+  display: none;
+}
+
+.hide-custom-menu .nav--primary__container {
   display: none;
 }
 

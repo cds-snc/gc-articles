@@ -165,11 +165,11 @@ class SiteSettings
             'site_settings_group', // option_group
             'show_wet_menu',
             function ($input) {
-                if (in_array($input, ['on', 'off'])) {
+                if (in_array($input, ['canada', 'custom', 'none'])) {
                     return $input;
                 }
 
-                return 'off';
+                return '';
             }
         );
 
@@ -248,14 +248,16 @@ class SiteSettings
         );
 
         // add fields MAINTENANCE
+        $maintenanceTitle = __('Activate maintenance mode', 'cds-snc');
         add_settings_field(
             'collection_mode', // id
-            __('Activate maintenance mode', 'cds-snc'), // title
+            $maintenanceTitle, // title
             array($this, 'collectionModeCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section_maintenance', // section
             [
-                'label_for' => 'collection_mode'
+                'label_for' => 'collection_mode',
+                'title'     => $maintenanceTitle
             ]
         );
 
@@ -282,25 +284,29 @@ class SiteSettings
         );
 
         // add fields MAINTENANCE
+        $menuTitle = __('Top menu', 'cds-snc');
         add_settings_field(
             'show_wet_menu', // id
-            __('Canada.ca top menu', 'cds-snc'), // title
+            $menuTitle, // title
             array($this, 'wetMenuCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section_config', // section
-            [
-                'label_for' => 'show_wet_menu'
-            ]
+            [ // args
+                'label_for' => 'show_wet_menu',
+                'title'     => $menuTitle
+            ],
         );
 
+        $searchTitle = __('Search bar', 'cds-snc');
         add_settings_field(
             'show_search', // id
-            __('Search bar', 'cds-snc'), // title
+            $searchTitle, // title
             array($this, 'showSearchCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section_config', // section
             [
-                'label_for' => 'show_search'
+                'label_for' => 'show_search',
+                'title'     => $searchTitle
             ]
         );
 
@@ -310,14 +316,16 @@ class SiteSettings
          *
          * Since the settings API doesn't let me write to that field easily, I am creating a new setting.
          */
+        $breadcrumbsTitle = __('Breadcrumbs', 'cds-snc');
         add_settings_field(
             'show_breadcrumbs', // id
-            __('Breadcrumbs', 'cds-snc'), // title
+            $breadcrumbsTitle, // title
             array($this, 'breadcrumbsCallback'), // callback
             'collection-settings-admin', // page
             'collection_settings_section_config', // section
             [
-                'label_for' => 'show_breadcrumbs'
+                'label_for' => 'show_breadcrumbs',
+                'title'     => $breadcrumbsTitle
             ]
         );
 
@@ -352,10 +360,12 @@ class SiteSettings
         );
     }
 
-    public function collectionModeCallback()
+    public function collectionModeCallback($args)
     {
         $collection_mode = get_option('collection_mode');
 
+        echo('<fieldset>');
+        printf('<legend class="screen-reader-text"><span>%s</span></legend>', $args['title']);
         printf(
             '<input type="radio" name="collection_mode" id="collection_maintenance" value="maintenance" %s /> <label for="collection_maintenance">%s</label><br />',
             checked('maintenance', $collection_mode, false),
@@ -366,28 +376,57 @@ class SiteSettings
             checked('live', $collection_mode, false),
             __('Turn off', "cds-snc")
         );
+        echo('</fieldset>');
     }
 
-    public function wetMenuCallback()
+    public function wetMenuCallback($args)
     {
         $show_wet_menu = get_option('show_wet_menu');
+        $locations = get_nav_menu_locations();
+        $customHeaderMenu = (array_key_exists('header', $locations) && is_int($locations['header'])) ? $locations['header'] : false;
+        if ($customHeaderMenu) {
+            // set it to the name of the menu
+            $customHeaderMenu = wp_get_nav_menu_object($customHeaderMenu)->name;
+        }
 
+        echo('<fieldset>');
+        printf('<legend class="screen-reader-text"><span>%s</span></legend>', $args['title']);
         printf(
-            '<input type="radio" name="show_wet_menu" id="show_wet_menu_on" value="on" %s /> <label for="show_wet_menu_on">%s</label><br />',
-            checked("on", $show_wet_menu, false),
+            '<input type="radio" name="show_wet_menu" id="show_wet_menu_canada" value="canada" %s /> <label for="show_wet_menu_canada">%s</label><br />',
+            checked("canada", $show_wet_menu, false),
             __('Show Canada.ca menu', "cds-snc")
         );
         printf(
-            '<input type="radio" name="show_wet_menu" id="show_wet_menu_off" value="off" %s /> <label for="show_wet_menu_off">%s</label><br />',
-            checked("off", $show_wet_menu, false),
-            __('Hide Canada.ca menu', "cds-snc")
+            '<input type="radio" name="show_wet_menu" id="show_wet_menu_custom" value="custom" %s %s /> <label for="show_wet_menu_custom">%s%s</label><br />',
+            checked("custom", $show_wet_menu, false),
+            $customHeaderMenu ? "" : "disabled", // if no menu, disabled input
+            __('Show custom menu', "cds-snc"),
+            $customHeaderMenu ? ': “' . $customHeaderMenu . '”' : '' // if menu, echo its name into the label
         );
+
+        if (!$customHeaderMenu) {
+            printf(
+                '<p class="description" style="margin-top: -5px; margin-bottom: 5px;">%s <a href="%s">%s</a>.</p>',
+                __("You can set a custom menu in", "cds-snc"),
+                get_admin_url() . 'nav-menus.php',
+                __("Appearance > Menus", "cds-snc")
+            );
+        }
+
+        printf(
+            '<input type="radio" name="show_wet_menu" id="show_wet_menu_none" value="none" %s /> <label for="show_wet_menu_none">%s</label><br />',
+            checked("none", $show_wet_menu, false),
+            __('Hide top menu', "cds-snc")
+        );
+        echo('</fieldset>');
     }
 
-    public function showSearchCallback()
+    public function showSearchCallback($args)
     {
         $show_search = get_option('show_search');
 
+        echo('<fieldset>');
+        printf('<legend class="screen-reader-text"><span>%s</span></legend>', $args['title']);
         printf(
             '<input type="radio" name="show_search" id="show_search_on" value="on" %s /> <label for="show_search_on">%s</label><br />',
             checked('on', $show_search, false),
@@ -398,12 +437,15 @@ class SiteSettings
             checked('off', $show_search, false),
             __('Hide the search bar', "cds-snc")
         );
+        echo('</fieldset>');
     }
 
-    public function breadcrumbsCallback()
+    public function breadcrumbsCallback($args)
     {
         $show_breadcrumbs = get_option('show_breadcrumbs');
 
+        echo('<fieldset>');
+        printf('<legend class="screen-reader-text"><span>%s</span></legend>', $args['title']);
         printf(
             '<input type="radio" name="show_breadcrumbs" id="show_breadcrumbs_on" value="on" %s /> <label for="show_breadcrumbs_on">%s</label><br />',
             checked("on", $show_breadcrumbs, false),
@@ -414,6 +456,7 @@ class SiteSettings
             checked("off", $show_breadcrumbs, false),
             __('Hide breadcrumbs', "cds-snc")
         );
+        echo('</fieldset>');
     }
 
     public function fipHrefCallback()
@@ -493,6 +536,7 @@ class SiteSettings
 
     public function maintenanceDescriptionCallback()
     {
+        echo '<p>';
         echo __(
             'In maintenance mode, pages and articles you publish will <strong>not</strong> be publicly visible.',
             'cds-snc'
@@ -502,5 +546,6 @@ class SiteSettings
             'Logged-in users will be able to create and view content, but all other visitors will be redirected to the maintenance page.',
             'cds-snc'
         );
+        echo '</p>';
     }
 }

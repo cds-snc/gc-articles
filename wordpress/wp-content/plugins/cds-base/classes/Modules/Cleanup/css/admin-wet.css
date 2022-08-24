@@ -292,6 +292,19 @@ p.smaller {
   text-shadow: none !important;
 }
 
+.wp-core-ui input[type="radio"][disabled],
+.wp-core-ui input[type="checkbox"][disabled] {
+  border-color: #dcdcde;
+  background-color: #f6f7f7;
+  cursor: not-allowed;
+}
+
+.wp-core-ui input[type="radio"][disabled] + label,
+.wp-core-ui input[type="checkbox"][disabled] + label {
+  color: #a7aaad;
+  cursor: not-allowed;
+}
+
 .wp-core-ui .button-group > .button.active {
   border-color: #26374a;
 }

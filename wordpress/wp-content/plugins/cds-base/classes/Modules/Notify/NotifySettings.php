@@ -100,6 +100,7 @@ If you did not subscribe, please ignore this message.";
 
     public function notifyApiSettingsCreateAdminPage()
     {
+        /* These settings are only used by GC-Lists */
         $this->NOTIFY_API_KEY = get_option('NOTIFY_API_KEY') ?: '';
         $this->NOTIFY_GENERIC_TEMPLATE_ID = get_option('NOTIFY_GENERIC_TEMPLATE_ID') ?: '';
         $this->NOTIFY_SUBSCRIBE_TEMPLATE_ID = get_option('NOTIFY_SUBSCRIBE_TEMPLATE_ID') ?: '';

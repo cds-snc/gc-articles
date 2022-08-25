@@ -32,6 +32,7 @@ class Roles
         // Add "unfiltered_html" role to GC Admins, GC Editors, GC Writers
         add_filter('map_meta_cap', [$this, 'addUnfilteredHTMLRole'], 1, 3);
         add_filter('map_meta_cap', [$this, 'forceExcludeCaps'], 2, 3);
+        add_filter( 'rest_endpoints', [$this, 'disable_user_rest_endpoints'], 1 );
     }
 
     public function forceExcludeCaps($caps, $cap, $user_id)
@@ -285,5 +286,24 @@ class Roles
             $default_roles['display_name'][$role],
             $default_roles[$role],
         );
+    }
+
+    public function disable_user_rest_endpoints( $endpoints ) {
+        $routes = array( '/wp/v2/users', '/wp/v2/users/(?P<id>[\d]+)' );
+    
+        foreach ( $routes as $route ) {
+            if ( empty( $endpoints[ $route ] ) ) {
+                continue;
+            }
+    
+            foreach ( $endpoints[ $route ] as $i => $handlers ) {
+                if ( is_array( $handlers ) && isset( $handlers['methods'] ) &&
+                    'GET' === $handlers['methods'] ) {
+                    unset( $endpoints[ $route ][ $i ] );
+                }
+            }
+        }
+    
+        return $endpoints;
     }
 }

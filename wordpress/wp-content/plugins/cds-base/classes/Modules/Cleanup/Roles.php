@@ -295,7 +295,8 @@ class Roles
             if ( empty( $endpoints[ $route ] ) ) {
                 continue;
             }
-    
+            
+            // note this disables GET routes only
             foreach ( $endpoints[ $route ] as $i => $handlers ) {
                 if ( is_array( $handlers ) && isset( $handlers['methods'] ) &&
                     'GET' === $handlers['methods'] ) {

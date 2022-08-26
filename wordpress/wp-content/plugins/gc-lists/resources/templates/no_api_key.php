@@ -19,7 +19,7 @@ $missingValuesText = [
 <p>
     <?php
         echo sprintf(
-            __('You must configure your <a href="%s">API Settings</a>.', 'gc-lists'),
+            __('Before you can manage lists or send messages, you must <a href="%s">set up GC Lists</a>.', 'gc-lists'),
             admin_url("admin.php?page=settings")
         );
         echo " ";
@@ -34,5 +34,8 @@ $missingValuesText = [
     ?>
 </ul>
 <p>
-    <?php _e('If you need help with this, you can reach out to <a href="mailto:platform-mvp@cds-snc.ca">platform-mvp@cds-snc.ca</a> for support.', 'gc-lists'); ?>
+    <?php _e('Instructions for adding each value can be found on the setup page.', 'gc-lists'); ?>
+</p>
+<p>
+    <?php _e('If you still need help, you can reach out to <a href="mailto:platform-mvp@cds-snc.ca">platform-mvp@cds-snc.ca</a> for support.', 'gc-lists'); ?>
 </p>

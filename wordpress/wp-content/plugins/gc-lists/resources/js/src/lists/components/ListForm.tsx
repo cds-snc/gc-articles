@@ -106,7 +106,7 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                 </summary>
 
                 <p>
-                    {__("Subscribers will see the default confirmation pages if you’ve", "gc-lists")} <a href={__("https://articles.alpha.canada.ca/knowledge-base-de-connaissances/setting-up-a-gc-notify-integration/", "gc-lists")} target="_blank">
+                    {__("Subscribers will see the default confirmation pages if you’ve", "gc-lists")} <a href={__("https://articles.alpha.canada.ca/knowledge-base-de-connaissances/setting-up-a-gc-notify-integration/", "gc-lists")} target="_blank" rel="noreferrer">
                         {__("set up a form", "gc-lists")}
                     </a> {__("to collect their email addresses.", "gc-lists")}
                 </p>

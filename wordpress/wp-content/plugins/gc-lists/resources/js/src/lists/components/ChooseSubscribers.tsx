@@ -102,14 +102,14 @@ const StyledDivider  = styled.div`
                         <h2>{__("If you don’t have subscribers yet", "gc-lists")}</h2>
                         <p><strong>{__("Start collecting subscriber emails", "gc-lists")}</strong></p>
                         <p>
-                            <a href={__("https://articles.alpha.canada.ca/knowledge-base-de-connaissances/setting-up-a-gc-notify-integration/", "gc-lists")} target="_blank">
+                            <a href={__("https://articles.alpha.canada.ca/knowledge-base-de-connaissances/setting-up-a-gc-notify-integration/", "gc-lists")} target="_blank" rel="noreferrer">
                                 {__("Set up a form", "gc-lists")}
                             </a> {__("to collect email addresses from subscribers. This will create a content block you can add to your pages.", "gc-lists")}
                         </p>
                     </div>
                     <div>
                         <figure>
-                            <img src={process.env.PUBLIC_URL + "/email-upload-2.svg"} />
+                            <img src={process.env.PUBLIC_URL + "/email-upload-2.svg"} alt="" />
                             <figcaption>{__("Example of a form that can be set up to collect emails.", "gc-lists")}</figcaption>
                         </figure>
                     </div>

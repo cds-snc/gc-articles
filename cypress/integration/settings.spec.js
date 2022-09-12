@@ -25,9 +25,10 @@ describe('Site Settings', () => {
     cy.get('#submit').click();
     cy.get('#setting-error-settings_updated').should('contain.text', 'Settings saved');
 
-    cy.visit('/');
-
-    cy.get('header .brand a').should("have.attr", "href", "https://canada.ca/en.html");
+    cy.get(".ab-top-menu #wp-admin-bar-cds-home > a").invoke('attr', 'href').then(href => {
+      cy.visit(href)
+      cy.get('header .brand a').should("have.attr", "href", "https://canada.ca/en.html");
+    });
   });
 
   it('Can save collection settings and show maintenance page', () => {

@@ -16,7 +16,7 @@ Docker-compose and VS Code Remote Container environment featuring:
 
 ## Requirements
 
-Including installation instructions on a Mac.
+Including installation instructions on a macOS.
 
 - NPM (install [Node](https://nodejs.org/en/download/))
 - Docker (install [Docker Desktop](https://www.docker.com/products/docker-desktop))

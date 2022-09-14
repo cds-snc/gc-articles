@@ -16,7 +16,7 @@ describe('Site Settings', () => {
     cy.get('#collection_live').should('be.empty');
   });
 
-  it('Changes FIP link', () => {
+  it.skip('Changes FIP link', () => {
     cy.visit('/wp-admin/options-general.php?page=collection-settings');
 
     cy.get('h1').should('have.text', 'Site Settings');
@@ -30,7 +30,7 @@ describe('Site Settings', () => {
     cy.get('header .brand a').should("have.attr", "href", "https://canada.ca/en.html");
   });
 
-  it('Can save collection settings and show maintenance page', () => {
+  it.skip('Can save collection settings and show maintenance page', () => {
     cy.visit('/wp-admin/options-general.php?page=collection-settings');
     cy.get('#collection_maintenance').check();
     cy.get('#submit').click();

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GC Lists 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gc-lists\n"
-"POT-Creation-Date: 2022-07-26T19:10:55+00:00\n"
+"POT-Creation-Date: 2022-08-26T20:03:57+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Domain: gc-lists\n"
 
 #. Plugin Name of the plugin
-#: src/Menu.php:27 src/Menu.php:28
+#: src/Menu.php:40 src/Menu.php:41
 msgid "GC Lists"
 msgstr "Listes GC"
 
@@ -32,486 +32,572 @@ msgstr "Service numérique canadien"
 msgid "https://digital.canada.ca"
 msgstr "https://numerique.canada.ca/"
 
-#: resources/templates/no_api_key.php:15
-msgid "You must configure your <a href=\"%s\">Notify API Key</a>"
-msgstr "Vous devez configurer votre <a href=\"%s\">Clé API de Notification GC</a>"
+#: resources/templates/no_api_key.php:11
+msgid "your Notify API key"
+msgstr ""
 
-#: src/Menu.php:40 src/Menu.php:41 src/Menu.php:71
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/templates/no_api_key.php:22
+msgid "Before you can manage lists or send messages, you must <a href=\"%s\">set up GC Lists</a>."
+msgstr ""
+
+#: resources/templates/no_api_key.php:26
+msgid "Please provide:"
+msgstr ""
+
+#: resources/templates/no_api_key.php:37
+msgid "Instructions for adding each value can be found on the setup page."
+msgstr ""
+
+#: resources/templates/no_api_key.php:40
+msgid "If you still need help, you can reach out to <a href=\"mailto:platform-mvp@cds-snc.ca\">platform-mvp@cds-snc.ca</a> for support."
+msgstr ""
+
+#: src/Menu.php:53 src/Menu.php:54 src/Menu.php:84
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Messages"
 msgstr "Messages"
 
-#: src/Menu.php:52 src/Menu.php:53 src/Menu.php:88
-msgid "Subscriber lists"
-msgstr "Listes de diffusion"
+#: src/Menu.php:65 src/Menu.php:66 src/Menu.php:101
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Mailing lists"
+msgstr ""
 
 #: src/Utils.php:38
 msgid "Your Lists"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Delete draft?"
 msgstr "Supprimer le brouillon?"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "This will permanently discard the message draft."
 msgstr "Cela supprimera définitivement le brouillon du message."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "warning"
 msgstr "attention"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Yes delete it"
 msgstr "Oui, supprimer-le"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "No, keep it"
 msgstr "Non, annuler"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Send to list?"
 msgstr "Confirmer l’envoi"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "This list has %s subscribers. It’s not possible to cancel a message after sending."
 msgstr "Cette liste compte %s personnes abonnées. Il n’est pas possible d’annuler un message après l’avoir envoyé."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Yes send it"
 msgstr "Oui, envoyer-le"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "No, cancel"
 msgstr "Non, annuler"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Create a new list."
 msgstr "Créer une nouvelle liste."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "A subscriber list allows you to collect a group of subscribers that you can send a message to."
 msgstr "Une liste de diffusion vous permet de regrouper des personnes abonnées afin de leur envoyer des messages."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "There is a problem"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Message Name"
 msgstr "Nom du message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Message type"
 msgstr "Type de message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Last modified"
 msgstr "Dernière modification"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Edit"
 msgstr "Modifier"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Delete"
 msgstr "Supprimer"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Send to a list"
 msgstr "Envoyer a une liste"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Create new message"
 msgstr "Créer un nouveau message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Draft messages"
 msgstr "Brouillons"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "All draft messages"
 msgstr "Tous les brouillons"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "You have no draft messages"
 msgstr "Vous n’avez aucun brouillon enregistré."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Saving a draft allows you to keep a message you aren't ready to send yet."
 msgstr "L’enregistrement d’un brouillon permet de conserver un message que vous n’êtes pas encore prêt à envoyer. "
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Subject"
 msgstr "Objet"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Message sent"
 msgstr "Message envoyé"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Send a new message"
 msgstr "Envoyer un nouveau message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Return to messages"
 msgstr "Retourner aux messages"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Message name"
 msgstr "Nom du message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Date sent"
 msgstr "Date d’envoi"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "List name"
 msgstr "Nom de la liste"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Sender"
 msgstr "Émetteur"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Sending history"
 msgstr "Historique d’envoi"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "All sending history"
 msgstr "Tout l’historique d’envoi"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "You have not sent any messages yet."
 msgstr "Vous n’avez pas encore envoyé des messages."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "When you send a message, a copy is automatically saved in your sending history."
 msgstr "Lorsque vous envoyez un message, une copie est automatiquement enregistrée dans votre historique d'envoi."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "The message was sent to the the subscribers in the list below."
 msgstr "Le message a été envoyé aux personnes abonnées à la liste ci-dessous."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Sending to:"
 msgstr "Envoi à :"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "(%s subscribers)"
 msgstr "(%s personnes abonnées)"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Subscriber list created on %1$s at %2$s."
 msgstr "Liste de distribution créée le %1$s à %2$s."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Select a list"
 msgstr "Sélectionner une liste"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Subscriber list"
 msgstr "Liste de diffusion"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Choose a group to send this message to."
 msgstr "Choisissez un groupe de personnes à qui envoyer ce message."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "You don’t have any subscriber list."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Sent"
 msgstr "Envois"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Drafts"
 msgstr "Brouillons"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Showing"
 msgstr "Montrant"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "of"
 msgstr "de"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "previous"
 msgstr "précédent"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "next"
 msgstr "suivant"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Back to messages "
 msgstr "Retourner aux messages"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Not authorized"
 msgstr "Non autorisé"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Sorry, you are not allowed to access this page."
 msgstr "Désolé, vous n’avez pas l’autorisation d’accéder à cette page."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Edit text message"
 msgstr "Modifier le message texte"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Edit email message"
 msgstr "Modifier le courriel"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Your recipients will not see this message name."
 msgstr "Vos destinataires ne verront pas le nom du message."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Name is required"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Subject line of the email"
 msgstr "Ligne d’objet du courriel"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Tell recipients what the message is about. Try to keep it shorter than 10 words."
 msgstr "Indiquez le sujet du courriel aux destinataires, de préférence en moins de 10 mots."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Subject is required"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Message"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Use the"
 msgstr "Utilisez le "
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "email formatting guide"
 msgstr "guide de mise en forme de courriels "
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "(Opens in a new tab) to craft your message."
 msgstr "(s’ouvre dans un nouvel onglet) pour rédiger votre message."
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Message is required"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "characters"
 msgstr "caractères"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Message saved"
 msgstr "Message enregistré"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Choose a list to send to"
 msgstr "Choisir une liste de diffusion"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Save draft"
 msgstr "Enregistrer le brouillon"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Can’t send to an empty list"
 msgstr "Impossible d’envoyer à une liste vide"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Edit message"
 msgstr "Modifier le message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Send message to a list"
 msgstr "Envoyer le message à une liste"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Send message"
 msgstr "Envoyer le message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Message preview"
 msgstr "Aperçu du message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "SENT"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Sent on"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "EDITED"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Edited on"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "CREATED"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Created on"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Previous versions"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "by"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Please select a message type"
 msgstr "Choisissez le type de message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Create a new message"
 msgstr "Créer un nouveau message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Choose message type"
 msgstr "Choisissez le type de message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Email"
 msgstr "Courriel"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Text message"
 msgstr "Message texte"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Create message"
 msgstr "Rédiger le message"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Cancel"
 msgstr "Abandonner"
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Warning!"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "This is a destructive action. Are you sure you want to continue?"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Yes I'm sure"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Add subscribers"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "You have no subscriber lists."
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "You have no mailing lists."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "A subscriber list allows you to collect a group of subscribers that you can send messages to."
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "A mailing list allows you to collect a group of subscribers that you can send messages to."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "List Name"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Subscribers"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Error something went wrong"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "Create new list"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Required Field"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Save and continue"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Save"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
 msgid "List name is required"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "List type"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Choose the type of message this list will receive."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "List type is required"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Confirmation page settings"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Phone"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Subscribers will see the default confirmation pages if you’ve"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Advanced list settings"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "https://articles.alpha.canada.ca/knowledge-base-de-connaissances/setting-up-a-gc-notify-integration/"
+msgstr "https://articles.alpha.canada.ca/knowledge-base-de-connaissances/fr/envoyer-du-contenu-aux-personnes-abonnees-2/"
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "set up a form"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Changing these settings is optional."
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "to collect their email addresses."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Subscribe template id"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Changing these pages is optional."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "See example template ID format."
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Subscribe confirmation"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Unsubscribe template id"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "The page people see after they subscribe."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Subscribe redirect url"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Verify email confirmation"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Subscribers are directed to this page when submitting the subscribe request form."
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "The page people see after they verify their email address."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Unsubscribe redirect url"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Unsubscribe confirmation"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Subscribers are directed to this page when submitting the unsubscribe request form."
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "The page people see after they unsubscribe."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Confirm redirect url"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "This list has 1 subscriber."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Subscribers are directed to this page when they confirm their subscription to a list."
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "This list has no subscribers."
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Save list"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Edit list"
 msgstr ""
 
-#: resources/js/build/static/js/main.642c7a09.js:2
-msgid "Go back"
-msgstr "Retourner"
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Choose an option to add subscribers to this list. You can come back at any time to add more subscribers."
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "If you already have subscribers"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Import existing subscribers"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Upload a spreadsheet of your subscribers in CSV format. It must have a column with"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Choose a file"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Example of a spreadsheet of subscribers in CSV format with a column for emails."
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Example of a spreadsheet of subscribers in CSV format with a column for phone numbers."
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "If you don’t have subscribers yet"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Start collecting subscriber emails"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Set up a form"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "to collect email addresses from subscribers. This will create a content block you can add to your pages."
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Example of a form that can be set up to collect emails."
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Return to mailing lists"
+msgstr ""
+
+#: resources/js/build/static/js/main.acde0307.js:2
+msgid "Back to mailing lists"
+msgstr ""
+
+#~ msgid "You must configure your <a href=\"%s\">Notify API Key</a>"
+#~ msgstr "Vous devez configurer votre <a href=\"%s\">Clé API de Notification GC</a>"
+
+#~ msgid "Subscriber lists"
+#~ msgstr "Listes de diffusion"
+
+#~ msgid "Go back"
+#~ msgstr "Retourner"
 
 #~ msgid "All drafts"
 #~ msgstr "Consulter tous les gabarits"

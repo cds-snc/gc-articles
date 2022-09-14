@@ -105,7 +105,11 @@ export const ListForm = ({ handler, formData = {}, serverErrors = [] }: { handle
                     <span>{__("Confirmation page settings", "gc-lists")}</span>
                 </summary>
 
-                <p>{__("Subscribers will see the default confirmation pages if you’ve set up a form to collect their email addresses.", "gc-lists")}</p>
+                <p>
+                    {__("Subscribers will see the default confirmation pages if you’ve", "gc-lists")} <a href={__("https://articles.alpha.canada.ca/knowledge-base-de-connaissances/setting-up-a-gc-notify-integration/", "gc-lists")} target="_blank" rel="noreferrer">
+                        {__("set up a form", "gc-lists")}
+                    </a> {__("to collect their email addresses.", "gc-lists")}
+                </p>
                 <p>{__("Changing these pages is optional.", "gc-lists")}</p>
 
                 <table className="form-table" role="presentation">

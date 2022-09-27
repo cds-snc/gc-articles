@@ -1,8 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "local>cds-snc/renovate-config",
-    "local>cds-snc/renovate-config-private//config/gc-articles"
+    "local>cds-snc/renovate-config"
   ],
   "dependencyDashboardApproval": true
 }

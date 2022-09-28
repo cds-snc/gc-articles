@@ -40,6 +40,7 @@ function cds_security_headers($headers)
             "https://digital.canada.ca",
             "https://www.youtube.com",
             "https://www.loom.com",
+			"https://034gc-my.sharepoint.com",
         ],
         "img-src" => [
             "'self'",

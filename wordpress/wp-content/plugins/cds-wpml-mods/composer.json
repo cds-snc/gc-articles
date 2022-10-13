@@ -34,7 +34,7 @@
   },
   "require": {
     "nesbot/carbon": "^2.58",
-    "illuminate/collections": "^9.12"
+    "illuminate/collections": "9.21.3"
   },
   "type": "wordpress-plugin",
   "scripts": {

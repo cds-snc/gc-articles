@@ -18,8 +18,8 @@
     "ramsey/uuid": "4.4.0",
     "ua-parser/uap-php": "^3.9",
     "nesbot/carbon": "2.61.0",
-    "illuminate/encryption": "^8.63",
-    "illuminate/support": "^8.63"
+    "illuminate/encryption": "8.83.0",
+    "illuminate/support": "8.83.0"
   },
   "require-dev": {
     "wp-cli/i18n-command": "^2.2.5"

@@ -15,7 +15,6 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     rsync \
     git \
     subversion \
-    composer \
     nodejs \
     npm \
     zsh \
@@ -27,6 +26,11 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     php8-tokenizer \
     php8-dom \
     php8-xml
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+     php composer-setup.php && \
+     php -r "unlink('composer-setup.php');" && \
+     mv composer.phar /usr/local/bin/composer;    
 
 RUN pecl install pcov  \
     && docker-php-ext-enable pcov

@@ -8,6 +8,7 @@ import useFetch from 'use-http';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
+import { format } from 'date-fns';
 
 /**
  * Internal dependencies
@@ -33,8 +34,15 @@ export const SendingHistory = ({ perPage, pageNav, allLink }: { perPage?: number
             setLoading(true);
             await request.get(`/messages/sent?${uuidv4()}&sort=desc`);
             if (response.ok) {
-                setData(response.data);
-                setLoading(false)
+
+                // the date is stored in UTC, so we need to convert it to the local timezone
+                const localData = response.data.map(message => { 
+                    message.created_at = format(new Date(message.created_at + " UTC"), 'yyyy-MM-dd HH:mm:ss');
+                    return message;
+                });
+
+                setData(localData);
+                setLoading(false);
             }
         }
         getSentMessages();

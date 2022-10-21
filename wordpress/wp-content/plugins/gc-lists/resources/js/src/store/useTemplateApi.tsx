@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { useCallback, useState } from 'react';
 import { Descendant } from "slate";
 import useFetch, { CachePolicies } from 'use-http';
+import { format } from "date-fns";
 
 /**
  * Internal dependencies
@@ -60,10 +61,12 @@ export function useTemplateApi() {
 
         if (response.ok) {
             response.data.forEach((item: any) => {
+                // the date is stored in UTC, so we need to convert it to the local timezone
                 templates.push({
                     templateId: item.id,
                     type: item.message_type,
-                    ...item
+                    ...item,
+                    updated_at: format(new Date(item.updated_at + " UTC"), 'yyyy-MM-dd HH:mm:ss'),
                 })
             });
 

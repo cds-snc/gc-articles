@@ -43,9 +43,8 @@ test('CleanupCustomCapsForRoles', function() {
 // the test is failing because the correct capabilities are not being added to the user
 test('addDefaultUserCapsForRole sets up administrator defaults', function() {
     $user_id = $this->factory->user->create();
-    wp_set_current_user( $user_id );
+    $user = wp_set_current_user( $user_id );
 
-    $user = wp_get_current_user();
     $user->add_role('administrator');
 
     $this->assertTrue($user->has_cap('manage_notify'));
@@ -58,9 +57,8 @@ test('addDefaultUserCapsForRole sets up administrator defaults', function() {
 // the test is failing because the correct capabilities are not being added to the user
 test('addDefaultUserCapsForRole sets up gceditor defaults', function() {
     $user_id = $this->factory->user->create();
-    wp_set_current_user( $user_id );
+    $user = wp_set_current_user( $user_id );
 
-    $user = wp_get_current_user();
     $user->add_role('gceditor');
 
     $this->assertFalse($user->has_cap('manage_notify'));

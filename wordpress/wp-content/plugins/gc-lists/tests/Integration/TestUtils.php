@@ -33,8 +33,7 @@ test('getServices', function() {
 
 test('getUserPermissions', function() {
     $user_id = $this->factory->user->create();
-    wp_set_current_user( $user_id );
-    $current_user = wp_get_current_user();
+    $current_user = wp_set_current_user( $user_id );
 
     $permissions = Utils::getUserPermissions();
 

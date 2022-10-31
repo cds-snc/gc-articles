@@ -33,8 +33,7 @@ test('ListManager Proxy API endpoint is registered', function () {
 test('ListManager proxy applies Authorization header and proxies request', function() {
     // Prepare a user to make the request
     $user_id = $this->factory->user->create();
-    wp_set_current_user( $user_id );
-    $user = wp_get_current_user();
+    $user = wp_set_current_user( $user_id );
 
     // Make sure the user has permissions
     $user->add_cap('list_manager_bulk_send');
@@ -97,8 +96,7 @@ test('ListManager proxy authenticates user permission (pass)', function() {
     }, 10, 3 );
 
     $user_id = $this->factory->user->create();
-    wp_set_current_user( $user_id );
-    $user = wp_get_current_user();
+    $user = wp_set_current_user( $user_id );
 
     $user->add_cap('list_manager_bulk_send');
 

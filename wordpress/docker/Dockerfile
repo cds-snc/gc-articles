@@ -1,5 +1,5 @@
 ## Install composer dependencies
-FROM composer:latest AS composer
+FROM composer:latest@sha256:70b95f76894063a4499a05505283272e13bb35aa16ad34bfa5b9791deb4dbcfa AS composer
 
 ARG WPML_USER_ID
 ARG WPML_KEY
@@ -16,7 +16,7 @@ RUN cd wordpress \
 
 ## Install NPM dependencies
 
-FROM node:15-alpine AS buildjs
+FROM node:15-alpine@sha256:6edd37368174c15d4cc59395ca2643be8e2a1c9846714bc92c5f5c5a92fb8929 AS buildjs
 WORKDIR /app
 COPY . .
 
@@ -25,7 +25,7 @@ RUN npm --unsafe-perm install
 
 ## Release build
 
-FROM wordpress:6.0.3-php8.1-fpm-alpine
+FROM wordpress:6.0.3-php8.1-fpm-alpine@sha256:b325e13d26dfed641743b3733ef0bb65be9162f4338b0d690bbb10e95ed88291
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install pcov \

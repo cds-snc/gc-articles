@@ -1,4 +1,4 @@
-FROM wordpress:6.0.3-php8.1-fpm-alpine
+FROM wordpress:6.0.3-php8.1-fpm-alpine@sha256:b325e13d26dfed641743b3733ef0bb65be9162f4338b0d690bbb10e95ed88291
 
 WORKDIR /usr/src/wordpress
 

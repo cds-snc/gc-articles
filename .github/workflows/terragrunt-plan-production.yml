@@ -57,14 +57,14 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@e2f20e631ae6d7dd3b768f56a5d2af784dd54791 # tag=v2
         with:
           ref: ${{ env.TARGET_VERSION }}
 
       - name: Setup terraform tools
         uses: cds-snc/terraform-tools-setup@v1
 
-      - uses: cds-snc/paths-filter@v2.10.3
+      - uses: cds-snc/paths-filter@87bb78bc509076907db04d7f616bd2533af0e7fe # tag=v2.10.3
         id: filter
         with:
           ref: ${{ env.TARGET_VERSION }}
@@ -103,7 +103,7 @@ jobs:
       # No dependencies
       - name: Terragrunt plan network
         if: ${{ steps.filter.outputs.network == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@v1
+        uses: cds-snc/terraform-plan@1519c0074bc5bee9e949c7d1d4d7636a75c2479e # tag=v1
         with:
           directory: "infrastructure/terragrunt/env/prod/network"
           comment-delete: "true"
@@ -113,7 +113,7 @@ jobs:
 
       - name: Terragrunt plan hosted-zone
         if: ${{ steps.filter.outputs.hosted-zone == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@v1
+        uses: cds-snc/terraform-plan@1519c0074bc5bee9e949c7d1d4d7636a75c2479e # tag=v1
         with:
           directory: "infrastructure/terragrunt/env/prod/hosted-zone"
           comment-delete: "true"
@@ -123,7 +123,7 @@ jobs:
 
       - name: Terragrunt plan ecr
         if: ${{ steps.filter.outputs.ecr == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@v1
+        uses: cds-snc/terraform-plan@1519c0074bc5bee9e949c7d1d4d7636a75c2479e # tag=v1
         with:
           directory: "infrastructure/terragrunt/env/prod/ecr"
           comment-delete: "true"
@@ -133,7 +133,7 @@ jobs:
 
       - name: Terragrunt plan storage
         if: ${{ steps.filter.outputs.storage == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@v1
+        uses: cds-snc/terraform-plan@1519c0074bc5bee9e949c7d1d4d7636a75c2479e # tag=v1
         with:
           directory: "infrastructure/terragrunt/env/prod/storage"
           comment-delete: "true"
@@ -144,7 +144,7 @@ jobs:
       # Network dependency
       - name: Terragrunt plan database
         if: ${{ steps.filter.outputs.database == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@v1
+        uses: cds-snc/terraform-plan@1519c0074bc5bee9e949c7d1d4d7636a75c2479e # tag=v1
         with:
           directory: "infrastructure/terragrunt/env/prod/database"
           comment-delete: "true"
@@ -154,7 +154,7 @@ jobs:
 
       - name: Terragrunt plan load-balancer
         if: ${{ steps.filter.outputs.load-balancer == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@v1
+        uses: cds-snc/terraform-plan@1519c0074bc5bee9e949c7d1d4d7636a75c2479e # tag=v1
         with:
           directory: "infrastructure/terragrunt/env/prod/load-balancer"
           comment-delete: "true"
@@ -165,7 +165,7 @@ jobs:
       # Load-balancer & database dependency
       - name: Terragrunt plan ecs
         if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@v1
+        uses: cds-snc/terraform-plan@1519c0074bc5bee9e949c7d1d4d7636a75c2479e # tag=v1
         with:
           directory: "infrastructure/terragrunt/env/prod/ecs"
           comment-delete: "true"
@@ -176,7 +176,7 @@ jobs:
       # Depends on everything
       - name: Terragrunt plan alarms
         if: ${{ steps.filter.outputs.alarms == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@v1
+        uses: cds-snc/terraform-plan@1519c0074bc5bee9e949c7d1d4d7636a75c2479e # tag=v1
         with:
           directory: "infrastructure/terragrunt/env/prod/alarms"
           comment-delete: "true"

@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: PHP Pest tests
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # tag=v2.3.4
       - uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
@@ -36,7 +36,7 @@ jobs:
       DB_USER: root
       DB_PASSWORD: root
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # tag=v2.3.4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -67,7 +67,7 @@ jobs:
       DB_USER: root
       DB_PASSWORD: root
     steps:
-      - uses: actions/checkout@v2.3.4
+      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # tag=v2.3.4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -96,7 +96,7 @@ jobs:
     name: Code quality
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@e2f20e631ae6d7dd3b768f56a5d2af784dd54791 # tag=v2
         with:
           fetch-depth: 0
       - uses: shivammathur/setup-php@v2

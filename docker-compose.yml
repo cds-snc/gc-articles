@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mariadb:10.5.8
+    image: mariadb:10.5.8@sha256:8040983db146f729749081c6b216a19d52e0973134e2e34c0b4fd87f48bc15b0
     container_name: db
     restart: unless-stopped
     logging:
@@ -25,7 +25,7 @@ services:
 
   apache:
     container_name: apache
-    image: httpd:2.4-alpine
+    image: httpd:2.4-alpine@sha256:7aef81ce83340ac4bae409dc88af4ec3dcaa56abc4a59ec14e6d18ee67f68a6c
     logging:
       driver: none
     ports:
@@ -72,7 +72,7 @@ services:
   phpmyadmin:
     depends_on:
       - db
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin/phpmyadmin@sha256:ae6dadd9cf3c158e42937788f7255fa820ea3daef0349226d8d43f32e76535e1
     restart: always
     logging:
       driver:
@@ -87,7 +87,7 @@ services:
 
   composer:
     restart: 'no'
-    image: composer/composer:latest
+    image: composer/composer:latest@sha256:0dd206d658c7eea8a55ad8df38f1477bd70893994b347125af3c939d9062928c
     env_file: .env
     command: >
       /bin/bash -c '
@@ -105,7 +105,7 @@ services:
     depends_on:
       - db
       - wordpress
-    image: wordpress:cli-php8.1
+    image: wordpress:cli-php8.1@sha256:0887a6d6b13b6146dcf28dc9fea9e33b2db51e80b08f0022b3ed101c546409e9
     profiles:
       - tools
     env_file: .env

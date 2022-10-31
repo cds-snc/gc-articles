@@ -44,7 +44,6 @@ env:
   TF_VAR_wordpress_nonce_salt: ${{ secrets.STAGING_WORDPRESS_NONCE_SALT }}
   TF_VAR_jwt_auth_secret_key: ${{ secrets.STAGING_JWT_AUTH_SECRET_KEY }}
   TF_VAR_wpml_site_key: ${{ secrets.STAGING_WPML_SITE_KEY }}
-  TF_VAR_zendesk_api_url: ${{ secrets.ZENDESK_API_URL }}
 
 jobs:
   environments-manifest:

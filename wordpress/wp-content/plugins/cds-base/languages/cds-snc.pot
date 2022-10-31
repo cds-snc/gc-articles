@@ -365,10 +365,6 @@ msgstr ""
 msgid "Error sending email"
 msgstr ""
 
-#: classes/Modules/Forms/Messenger.php:61
-msgid "ZenDesk client error"
-msgstr ""
-
 #: classes/Modules/Forms/Messenger.php:108
 #: build/index.js:80
 #: build/index.js:61
@@ -382,10 +378,6 @@ msgstr ""
 #: build/index.js:1006
 #: build/index.js:915
 msgid "Internal server error"
-msgstr ""
-
-#: classes/Modules/Forms/Messenger.php:113
-msgid "ZenDesk server error"
 msgstr ""
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:59

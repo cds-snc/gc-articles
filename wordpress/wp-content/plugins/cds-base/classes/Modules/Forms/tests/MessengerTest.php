@@ -34,33 +34,6 @@ test('asserts sendMail returns error message if NotifyClient throws an exception
     );
 });
 
-test('asserts createTicket returns success message for a successful call', function () {
-    $clientMock = mock('GuzzleClientMock')->expect(
-        request: fn () => true,
-    );
-
-    $messenger = mock(Messenger::class)->makePartial();
-    $messenger->shouldReceive("getGuzzleClient")->andReturn($clientMock);
-
-    expect($messenger->createTicket('Goal: Request a site', 'Paul Craig', 'paul@paul.ca', 'message'))->toMatchArray(
-        ['success' => 'Success']
-    );
-});
-
-test('asserts createTicket returns Zendesk server error generic exception', function () {
-    $clientMock = mock('GuzzleClientMock');
-    $clientMock->shouldReceive('request')->andThrow(new \Exception('Maybe we do need API auth after all'));
-
-    $messenger = mock(Messenger::class)->makePartial();
-    $messenger->shouldReceive("getGuzzleClient")->andReturn($clientMock);
-
-    expect($messenger->createTicket('Goal: Request a site', 'Paul Craig', 'paul@paul.ca', 'message'))->toMatchArray(
-        [
-            'error' => true,
-            'error_message' => 'ZenDesk server error']
-    );
-});
-
 test('asserts adds Demo tag for demo requests', function () {
     $messenger = new Messenger();
     $goal = "I'm looking for a demo of GC Articles";

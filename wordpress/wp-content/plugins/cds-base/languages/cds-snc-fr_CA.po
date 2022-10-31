@@ -363,10 +363,6 @@ msgstr "Merci pour le message"
 msgid "Error sending email"
 msgstr "Erreur d’envoi le courriel"
 
-#: classes/Modules/Forms/Messenger.php:61
-msgid "ZenDesk client error"
-msgstr "Erreur du client ZenDesk"
-
 #: classes/Modules/Forms/Messenger.php:108 build/index.js:80 build/index.js:61
 msgid "Success"
 msgstr "Opération réussie"
@@ -378,10 +374,6 @@ msgstr "Opération réussie"
 #: build/index.js:915
 msgid "Internal server error"
 msgstr "Erreur interne du serveur"
-
-#: classes/Modules/Forms/Messenger.php:113
-msgid "ZenDesk server error"
-msgstr "Erreur de serveur ZenDesk"
 
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:59
 msgid "Site administrator details."

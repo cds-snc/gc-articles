@@ -49,15 +49,6 @@ resource "aws_secretsmanager_secret_version" "wpml_site_key" {
   secret_string = var.wpml_site_key
 }
 
-resource "aws_secretsmanager_secret" "zendesk_api_url" {
-  name = "zendesk_api_url_${random_string.random.result}"
-}
-
-resource "aws_secretsmanager_secret_version" "zendesk_api_url" {
-  secret_id     = aws_secretsmanager_secret.zendesk_api_url.id
-  secret_string = var.zendesk_api_url
-}
-
 resource "aws_secretsmanager_secret" "s3_uploads_bucket" {
   name = "s3_uploads_bucket_${random_string.random.result}"
 }

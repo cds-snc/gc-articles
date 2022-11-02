@@ -58,7 +58,8 @@ jobs:
       - name: Run the tests
         run: |
           cd wordpress/wp-content/plugins/gc-lists
-          ./vendor/bin/pest --coverage
+          ./vendor/bin/pest --coverage --verbose
+
   cds-wpml-mods-php-tests:
     runs-on: ubuntu-latest
     name: CDS Wpml Mods Plugin PHPUnit Tests

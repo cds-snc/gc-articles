@@ -25,6 +25,9 @@ RUN npm --unsafe-perm install
 
 ## Release build
 
+# when updating the Wordpress version, update the version in the files:
+#     - ~/wordpress/docker/local.Dockerfile
+#     - ~/github/workflows/ci.yml
 FROM wordpress:6.0.3-php8.1-fpm-alpine
 
 RUN apk add --no-cache $PHPIZE_DEPS \

@@ -1,3 +1,4 @@
+# wordpress version needs to match the version found in ~/wordpress/docker/Dockerfile
 FROM wordpress:6.0.3-php8.1-fpm-alpine
 
 WORKDIR /usr/src/wordpress

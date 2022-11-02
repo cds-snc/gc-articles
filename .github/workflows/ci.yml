@@ -7,6 +7,7 @@ on:
 env:
   WPML_USER_ID: ${{ secrets.WPML_USER_ID }}
   WPML_KEY: ${{ secrets.WPML_KEY }}
+  # WP_VERSION needs to match the version found in ~/wordpress/docker/Dockerfile
   WP_VERSION: 6.0.3
 
 jobs:

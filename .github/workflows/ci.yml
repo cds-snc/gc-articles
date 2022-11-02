@@ -7,6 +7,7 @@ on:
 env:
   WPML_USER_ID: ${{ secrets.WPML_USER_ID }}
   WPML_KEY: ${{ secrets.WPML_KEY }}
+  WP_VERSION: 6.0.3
 
 jobs:
   php-tests:
@@ -35,7 +36,6 @@ jobs:
       DB_DATABASE: wordpress_test
       DB_USER: root
       DB_PASSWORD: root
-      WP_VERSION: 6.0.3
     steps:
       - uses: actions/checkout@v2.3.4
 

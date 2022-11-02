@@ -177,7 +177,7 @@ export const EditMessage = () => {
                                 }
                                 <div className={errors.hasTemplate ? "error-wrapper" : ""}>
                                     {errors.hasTemplate && <span className="validation-error">{errors.hasTemplate?.message || __("Message is required", "gc-lists")}</span>}
-                                    {template.parsedContent ?
+                                    {template.parsedContent &&
                                         <>
                                             <Editor template={template.parsedContent}
                                                 handleValidate={(value: any) => {
@@ -190,7 +190,7 @@ export const EditMessage = () => {
                                                 </StyledCharacterCounter>
                                             }
                                         </>
-                                        : null}
+                                        }
                                 </div>
                             </StyledCell>
                         </tr>

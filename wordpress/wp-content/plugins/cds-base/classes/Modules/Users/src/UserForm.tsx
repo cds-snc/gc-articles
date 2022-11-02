@@ -148,7 +148,7 @@ export const UserForm = ({ isSuperAdmin = false }) => {
                             <td>
                                 {/* The "id" needs to match the field ID attribute */}
                                 <FieldError errors={errors} id={"email"}>
-                                    <input type="text" id="email" aria-describedby={findErrorId(errors, "email") ? `validation-error--email` : null} {...bindEmail} />
+                                    <input type="text" id="email" aria-describedby={findErrorId(errors, "email") && `validation-error--email`} {...bindEmail} />
                                 </FieldError>
                             </td>
                         </tr>
@@ -164,7 +164,7 @@ export const UserForm = ({ isSuperAdmin = false }) => {
                                     <select
                                         disabled={isLoading ? true : false}
                                         name="role" id="role"
-                                        aria-describedby={findErrorId(errors, "role") ? `validation-error--role` : null}
+                                        aria-describedby={findErrorId(errors, "role") && `validation-error--role`}
                                         onChange={(event) => {
                                             const val = event.target.value;
 

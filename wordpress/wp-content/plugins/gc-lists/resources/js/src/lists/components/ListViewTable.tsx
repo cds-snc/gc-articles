@@ -143,7 +143,7 @@ export const ListViewTable = () => {
                         <StyledDivider>|</StyledDivider>
                         {user?.isSuperAdmin && <><DeleteLink listId={`${row?.original?.id}`} /> <StyledDivider>|</StyledDivider> </>}
                         {getListType(row?.original?.language) === ListType.EMAIL && <UploadListLink listId={`${row?.original?.id}`} type={ListType.EMAIL} />}
-                        {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone ? <UploadListLink listId={`${row?.original?.id}`} type={ListType.PHONE} /> : null}
+                        {getListType(row?.original?.language) === ListType.PHONE && user?.hasPhone && <UploadListLink listId={`${row?.original?.id}`} type={ListType.PHONE} />}
                     </>
                 },
             },

@@ -35,6 +35,7 @@ jobs:
       DB_DATABASE: wordpress_test
       DB_USER: root
       DB_PASSWORD: root
+      WP_VERSION: 6.0.3
     steps:
       - uses: actions/checkout@v2.3.4
 

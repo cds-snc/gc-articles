@@ -103,7 +103,7 @@ export const SendMessage = () => {
             <h1>{__("Send message to a list", "gc-lists")}</h1>
 
             <ListSelect onChange={handleListUpdate} messageType={messageType} />
-            {listId ?
+            {listId &&
                 <>
                     <SendToList sending={true} name={listName} count={subscriberCount} />
                     <FieldError errors={errors} id={'send'}>
@@ -134,7 +134,6 @@ export const SendMessage = () => {
                         }}>{__("Cancel")}</button>
                     </FieldError>
                 </>
-                : null
             }
             <CreateNewList />
             {content &&

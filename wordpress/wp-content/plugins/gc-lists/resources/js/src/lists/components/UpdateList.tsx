@@ -74,7 +74,7 @@ export const UpdateList = () => {
             __("This list has no subscribers.", "gc-lists");
     }
 
-    return list ? (
+    return list && (
         <>
             <StyledLink to={`/lists`}>
                 <Back /> <span>{__("Mailing lists", "gc-lists")}</span>
@@ -83,7 +83,6 @@ export const UpdateList = () => {
             {subscriberMessage && <p>{subscriberMessage}</p>}
             <ListForm formData={list} handler={onSubmit} serverErrors={errors} />
         </>)
-         : null
 }
 
 export default UpdateList;

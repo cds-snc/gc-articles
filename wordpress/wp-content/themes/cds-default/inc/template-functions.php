@@ -227,7 +227,7 @@ function language_switcher_output($languages)
         foreach ($languages as $language) {
             $text = get_language_text($language['translated_name']);
             if (!$language['active']) {
-                $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . $language['url'] . '">';
+                $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . check_translated_url($language['url'], $text['abbr']) . '">';
                 $link .= '<span class="hidden-xs">' . $text['full'] . '</span>';
                 $link .= '<abbr title="' . $text['full'] . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';
                 $link .= $text['abbr'];
@@ -245,6 +245,20 @@ function language_switcher_output($languages)
     return $langs;
 }
 
+function check_translated_url($url, $lang): string
+{
+    $link_url = $url;
+    $parsed_url = parse_url($link_url);
+    if (str_contains($parsed_url['path'], "/category/")) {
+        if (str_starts_with($parsed_url['path'], "/category/")) {
+            $link_url = str_replace("/category/", "/$lang/category/", $link_url);
+        } else {
+            $link_url = preg_replace("/(\/[a-z]{1,2})?\/category\//", "/category/", $link_url);
+        }
+    }
+    return $link_url;
+}
+
 function manual_language_switcher(): string
 {
     global $wp_query;
@@ -256,7 +270,6 @@ function manual_language_switcher(): string
     }
 
     $custom_language_switcher = get_post_meta($wp_query->post->ID, 'locale_switch_link', true);
-    error_log("language_switcher:" . $custom_language_switcher);
 
     // format: {"active":false,"translated_name":"English","url":"/"}
     if ($custom_language_switcher) {
@@ -284,7 +297,9 @@ function language_switcher(): string
     }
 
     if (function_exists('icl_get_languages')) {
-        $languages = apply_filters('wpml_active_languages', null, 'orderby=id&order=desc');
+        $languages = apply_filters('wpml_active_languages', null);
+        error_log("LANGUAGES: ......");
+        error_log(var_export($languages, true));
         if ($languages && 1 < count($languages)) {
             $langs = language_switcher_output($languages);
             return join(', ', $langs);

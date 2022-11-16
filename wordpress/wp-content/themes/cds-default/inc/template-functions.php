@@ -270,6 +270,7 @@ function manual_language_switcher(): string
     }
 
     $custom_language_switcher = get_post_meta($wp_query->post->ID, 'locale_switch_link', true);
+    error_log("language_switcher:" . $custom_language_switcher);
 
     // format: {"active":false,"translated_name":"English","url":"/"}
     if ($custom_language_switcher) {

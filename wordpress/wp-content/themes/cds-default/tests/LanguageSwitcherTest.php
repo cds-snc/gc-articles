@@ -133,4 +133,12 @@ class LanguageSwitcherTest extends \WP_Mock\Tools\TestCase
             $this->containsString($nav, 'English')
         )->toBeTrue();
     }
+
+    public function test_convert_url_hack()
+    {
+        expect([
+            ["http://test.com/category/test", "fr", "http://test.com/fr/category/test"],
+            ["http://test.com/fr/category/test", "en", "http://test.com/category/test"]
+            ])->each(fn ($args) => convert_url($args[0], $args[1])->toEqual($args[2]));
+    }
 }

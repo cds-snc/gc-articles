@@ -334,7 +334,6 @@ function language_switcher(): string
 
     if (function_exists('icl_get_languages')) {
         $languages = apply_filters('wpml_active_languages', null, 'orderby=id&order=desc');
-
         if ($languages && 1 < count($languages)) {
             $langs = language_switcher_output($languages);
             return join(', ', $langs);

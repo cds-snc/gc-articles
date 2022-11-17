@@ -136,9 +136,19 @@ class LanguageSwitcherTest extends \WP_Mock\Tools\TestCase
 
     public function test_convert_url_hack()
     {
-        expect([
-            ["http://test.com/category/test", "fr", "http://test.com/fr/category/test"],
-            ["http://test.com/fr/category/test", "en", "http://test.com/category/test"]
-            ])->each(fn ($args) => convert_url($args[0], $args[1])->toEqual($args[2]));
+        $url = "http://test.com/fr/category/french-slug";
+        $target_lang = "en";
+        $converted_url = convert_url($url, $target_lang);
+        expect($converted_url)->toEqual("http://test.com/category/french-slug");
+
+        $url = "http://test.com/category/english-slug";
+        $target_lang = "fr";
+        $converted_url = convert_url($url, $target_lang);
+        expect($converted_url)->toEqual("http://test.com/fr/category/english-slug");
+        
+        $url = "http://test.com/non-category-page";
+        $target_lang = "fr";
+        $converted_url = convert_url($url, $target_lang);
+        expect($converted_url)->toEqual("http://test.com/non-category-page");        
     }
 }

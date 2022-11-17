@@ -227,7 +227,7 @@ function language_switcher_output($languages)
         foreach ($languages as $language) {
             $text = get_language_text($language['translated_name']);
             if (!$language['active']) {
-                $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . check_translated_url($language['url'], $text['abbr']) . '">';
+                $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . convert_url($language['url'], $text['abbr']) . '">';
                 $link .= '<span class="hidden-xs">' . $text['full'] . '</span>';
                 $link .= '<abbr title="' . $text['full'] . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';
                 $link .= $text['abbr'];
@@ -244,19 +244,54 @@ function language_switcher_output($languages)
 
     return $langs;
 }
-
-function check_translated_url($url, $lang): string
+/*
+    TODO: Replace this hack function with a proper solution.
+*/
+/*
+    * This function is a total hack to fix a WPML bug.
+    * The `convert_url` function used by WPML does not work properly
+    * when the page is a `category` page. This function is a hack to
+    * fix that issue.
+    *
+    * WARNING: This function assumes only two languages: EN and FR.
+    *
+    * WARNING: `$category_path_name` is hardcoded, and will break if the category path
+    * is changed within the Wordpress dashboard for any of the sites.
+    *
+    * @param string $url - the original, incorrect, `translated_url` provided by the
+    *                      get_ls_languages() function, found within the
+    *                      `wpml_active_languages` apply_filter hook.
+    * @param string $lang - the language code for the target language
+    * @return string - the correct url for the target language
+    *                   the url will have the root path for the target language,
+    *                   and the category slug for the current category, in the
+    *                   current (non-target) language. When Wordpress detects the language
+    *                   in the category slug, it will redirect to the correct category slug
+    *                   in the target language, based on the root path.
+    *
+    *                   eg: On the EN page for a category called "test-en", the incorrect url
+    *                   for the language switcher will be:
+    *                       ~/category/test-en
+    *
+    *                   This function will convert that url to:
+    *                       ~/fr/category/test-en
+    *
+    *                   Wordpress will then redirect to the correct url for the target language:
+    *                       ~/fr/category/test-fr
+*/
+function convert_url($url, $lang): string
 {
-    $link_url = $url;
-    $parsed_url = parse_url($link_url);
-    if (str_contains($parsed_url['path'], "/category/")) {
-        if (str_starts_with($parsed_url['path'], "/category/")) {
-            $link_url = str_replace("/category/", "/$lang/category/", $link_url);
-        } else {
-            $link_url = preg_replace("/(\/[a-z]{1,2})?\/category\//", "/category/", $link_url);
+    $category_path_name = "category";
+    $return_url = $url;
+    $parsed_url = parse_url($return_url);
+    if (str_contains($parsed_url['path'], "/$category_path_name/")) { // only modify the url if it is a category page
+        if (str_starts_with($parsed_url['path'], "/$category_path_name/")) { // currently on the EN path
+            $return_url = str_replace("/$category_path_name/", "/$lang/$category_path_name/", $return_url);
+        } else { // otherwise it must be on the FR path
+            $return_url = str_replace("/fr/", "/", $return_url);
         }
     }
-    return $link_url;
+    return $return_url;
 }
 
 function manual_language_switcher(): string
@@ -299,6 +334,7 @@ function language_switcher(): string
 
     if (function_exists('icl_get_languages')) {
         $languages = apply_filters('wpml_active_languages', null, 'orderby=id&order=desc');
+
         if ($languages && 1 < count($languages)) {
             $langs = language_switcher_output($languages);
             return join(', ', $langs);

@@ -285,11 +285,12 @@ function convert_url($url, $lang): string
     $return_url = $url;
     $parsed_url = parse_url($return_url);
     if (str_contains($parsed_url['path'], "/$category_path_name/")) { // only modify the url if it is a category page
-        if (str_starts_with($parsed_url['path'], "/$category_path_name/")) { // currently on the EN path
-            $return_url = str_replace("/$category_path_name/", "/$lang/$category_path_name/", $return_url);
-        } else { // otherwise it must be on the FR path
-            $return_url = str_replace("/fr/", "/", $return_url);
+        if (str_starts_with($parsed_url['path'], "/$category_path_name/")) {
+            // currently on the EN path
+            return str_replace("/$category_path_name/", "/$lang/$category_path_name/", $return_url);
         }
+        // otherwise it must be on the FR path
+        return str_replace("/fr/", "/", $return_url);
     }
     return $return_url;
 }

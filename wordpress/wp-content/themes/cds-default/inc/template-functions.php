@@ -245,12 +245,12 @@ function language_switcher_output($languages)
     return $langs;
 }
 /*
-    TODO: Replace this hack function with a proper solution.
+    TODO: Replace this workaround function with a proper solution.
 */
 /*
-    * This function is a total hack to fix a WPML bug.
+    * This function is a workaround to fix a WPML bug.
     * The `convert_url` function used by WPML does not work properly
-    * when the page is a `category` page. This function is a hack to
+    * when the page is a `category` page. This function is a workaround to
     * fix that issue.
     *
     * WARNING: This function assumes only two languages: EN and FR.

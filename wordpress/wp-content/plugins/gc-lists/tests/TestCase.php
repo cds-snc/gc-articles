@@ -23,7 +23,9 @@ class TestCase extends \WP_UnitTestCase
         $installer = Install::getInstance();
 
         $installer->install();
-        $this->factory->message = new MessageFactory( $this->factory );
+        
+        $this->factory()->message = new MessageFactory( $this->factory() );
+        
         parent::set_up();
     }
 

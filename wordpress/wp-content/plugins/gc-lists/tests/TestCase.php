@@ -20,11 +20,13 @@ class TestCase extends \WP_UnitTestCase
          * Because bootstrap.php loads the plugin in mu-plugins, activation hooks don't fire
          * and database tables don't get created, so we must manually trigger the install.
          */
+
+        parent::set_up();
         $installer = Install::getInstance();
 
         $installer->install();
         $this->factory->message = new MessageFactory( $this->factory );
-        parent::set_up();
+        
     }
 
     public function tear_down()

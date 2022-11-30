@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9f042a8a27c3fbb7b56c24418d8c8b0",
+    "content-hash": "33115b3672958edfdb5eb287a2774a1d",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -111,16 +111,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.250.0",
+            "version": "3.251.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ea3b594a4fcc6a25caaaa7a9886c919ec7e4666d"
+                "reference": "ff9cc2d44675ebb74a5506b68e55c86b122fdf2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ea3b594a4fcc6a25caaaa7a9886c919ec7e4666d",
-                "reference": "ea3b594a4fcc6a25caaaa7a9886c919ec7e4666d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ff9cc2d44675ebb74a5506b68e55c86b122fdf2f",
+                "reference": "ff9cc2d44675ebb74a5506b68e55c86b122fdf2f",
                 "shasum": ""
             },
             "require": {
@@ -199,9 +199,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.250.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.251.0"
             },
-            "time": "2022-11-29T19:20:34+00:00"
+            "time": "2022-11-30T19:19:28+00:00"
         },
         {
             "name": "brick/math",
@@ -3937,15 +3937,15 @@
         },
         {
             "name": "wpackagist-plugin/disable-user-login",
-            "version": "1.3.2",
+            "version": "1.3.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/disable-user-login/",
-                "reference": "tags/1.3.2"
+                "reference": "tags/1.3.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/disable-user-login.1.3.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/disable-user-login.1.3.3.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -3991,15 +3991,15 @@
         },
         {
             "name": "wpackagist-plugin/login-lockdown",
-            "version": "1.8.1",
+            "version": "1.83",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/login-lockdown/",
-                "reference": "tags/1.8.1"
+                "reference": "tags/1.83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/login-lockdown.1.8.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/login-lockdown.1.83.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4063,15 +4063,15 @@
         },
         {
             "name": "wpackagist-plugin/wordpress-importer",
-            "version": "0.6.4",
+            "version": "0.8",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
-                "reference": "tags/0.6.4"
+                "reference": "tags/0.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.6.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.8.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4081,15 +4081,15 @@
         },
         {
             "name": "wpackagist-plugin/wp-rest-api-v2-menus",
-            "version": "0.10",
+            "version": "0.12.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wp-rest-api-v2-menus/",
-                "reference": "tags/0.10"
+                "reference": "tags/0.12.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wp-rest-api-v2-menus.0.10.zip"
+                "url": "https://downloads.wordpress.org/plugin/wp-rest-api-v2-menus.0.12.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

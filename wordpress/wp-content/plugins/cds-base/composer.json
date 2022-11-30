@@ -14,7 +14,7 @@
     "php": ">=5.6",
     "wa72/htmlpagedom": "^3.0",
     "php-http/guzzle6-adapter": "^2.0",
-    "alphagov/notifications-php-client": "^3.2",
+    "alphagov/notifications-php-client": "^4.2",
     "ramsey/uuid": "4.4.0",
     "ua-parser/uap-php": "^3.9",
     "nesbot/carbon": "2.61.0",

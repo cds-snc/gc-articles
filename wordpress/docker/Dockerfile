@@ -1,5 +1,5 @@
 ## Install composer dependencies
-FROM composer:latest@sha256:f9efbd0606c1d1a2d020b6fb4da7a662827e9ad83f3133f5ac9ff27be7fb8d33 AS composer
+FROM composer:latest@sha256:356d2db112a3e4c0fbcf4955668d3f64ee43f848baf4fd20f00cfcb6f98245ad AS composer
 
 ARG WPML_USER_ID
 ARG WPML_KEY

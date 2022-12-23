@@ -47,4 +47,9 @@ ignore:
           reason: None Given
           expires: 9999-12-30T00:00:00.000Z
           created: 2021-11-04T14:51:05.876Z
+  'snyk:lic:composer:yoast:whip:GPL-3.0':
+        - '*':
+          reason: None Given
+          expires: 9999-12-30T00:00:00.000Z
+          created: 2021-12-23T12:51:05.876Z
 patch: {}

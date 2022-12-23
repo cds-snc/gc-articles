@@ -1,4 +1,4 @@
-FROM wordpress:cli-php8.1@sha256:c7074bf35ed6cda8d2ee11b3cb1c80849ec9451b8eb9a8e6acc9bdbaf89d51e1
+FROM wordpress:cli-php8.1@sha256:43483ca97f5ad79328c234eca0883d705f7d0cdf8d6e824dbbf4535e079011b3
 
 WORKDIR /usr/src/wordpress
 

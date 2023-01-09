@@ -87,7 +87,7 @@ services:
 
   composer:
     restart: 'no'
-    image: composer/composer:latest@sha256:cd8f3bda43dc41b1ac91f6698626eeb46484be1ffc864bdce8439744c40ede31
+    image: composer/composer:latest@sha256:383e3bf2a76a684d56e9b7029970b66301e13b230dd793d04a1aa353309a39f8
     env_file: .env
     command: >
       /bin/bash -c '
@@ -105,7 +105,7 @@ services:
     depends_on:
       - db
       - wordpress
-    image: wordpress:cli-php8.1@sha256:43483ca97f5ad79328c234eca0883d705f7d0cdf8d6e824dbbf4535e079011b3
+    image: wordpress:cli-php8.1@sha256:125dc71b9a817d8ecbb9cebb1a3517e27794e8b93855d295cab7256abeada41e
     profiles:
       - tools
     env_file: .env

@@ -73,10 +73,10 @@ jobs:
           sleep 60
           curl -X GET -H 'X-API-KEY: ${{ secrets.SCAN_WEBSITES_KEY }}' -H 'X-TEMPLATE-TOKEN: ${{ secrets.SCAN_WEBSITES_TEMPLATE }}' https://scan-websites.alpha.canada.ca/scans/start
 
-      - name: Generate gc-articles/wordpress/docker SBOM
-        uses: cds-snc/security-tools/.github/actions/generate-sbom@4c6b386722985552f3f008d04279a3f01402cc35 # renovate: tag=v1
+      - name: Docker generate SBOM
+        uses: cds-snc/security-tools/.github/actions/generate-sbom@a38917b147dfc8f086abcf81529e3c12f26529b8 # v2.1.0
         with:
-          dependency_track_api_key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
-          docker_image: ${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
-          project_name: gc-articles/wordpress/docker
-          project_type: docker
+          docker_image: "${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}"
+          dockerfile_path: "wordpress/docker/Dockerfile"
+          sbom_name: "wordpress"
+          token: "${{ secrets.GITHUB_TOKEN }}"

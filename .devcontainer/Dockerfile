@@ -20,12 +20,14 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     zsh \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
-    gettext \
-    php8-xmlwriter \
-    php8-simplexml \
-    php8-tokenizer \
-    php8-dom \
-    php8-xml
+    gettext && \
+    # Install from testing/edge repository
+    apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+        php8-xmlwriter \
+        php8-simplexml \
+        php8-tokenizer \
+        php8-dom \
+        php8-xml
 
 # Install Composer with this method instead of using `apk add composer` because
 # the version of Composer in the Alpine package repository also installs a secondary version 

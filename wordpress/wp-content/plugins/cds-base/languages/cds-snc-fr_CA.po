@@ -239,10 +239,6 @@ msgstr "Objectif de votre message"
 msgid "Your answer helps us make sure your message gets to the right people."
 msgstr "Votre réponse nous aide à transmettre votre message au bon endroit"
 
-#: classes/Modules/Forms/Contact/ContactForm.php:135
-msgid "Request a demo to learn more about GC Articles."
-msgstr "Demander une démonstration pour en savoir plus sur Articles GC."
-
 #: classes/Modules/Forms/Contact/ContactForm.php:141
 msgid "Ask a question."
 msgstr "Posez-nous une question."

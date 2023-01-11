@@ -95,10 +95,10 @@ jobs:
         if: always()
         run: docker logout ${{ steps.login-ecr.outputs.registry }}
 
-      - name: Generate gc-articles/apache/docker SBOM
-        uses: cds-snc/security-tools/.github/actions/generate-sbom@4c6b386722985552f3f008d04279a3f01402cc35 # renovate: tag=v1
+      - name: Docker generate SBOM
+        uses: cds-snc/security-tools/.github/actions/generate-sbom@a38917b147dfc8f086abcf81529e3c12f26529b8 # v2.1.0
         with:
-          dependency_track_api_key: ${{ secrets.DEPENDENCY_TRACK_API_KEY }}
-          docker_image: ${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
-          project_name: gc-articles/apache/docker
-          project_type: docker        
+          docker_image: "${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}"
+          dockerfile_path: "wordpress/docker/apache/Dockerfile"
+          sbom_name: "apache"
+          token: "${{ secrets.GITHUB_TOKEN }}"

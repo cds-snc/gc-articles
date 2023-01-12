@@ -12,4 +12,5 @@ function get_fonts_uri()
 
 add_theme_support('post-thumbnails');
 
+require_once __DIR__ . '/filter-core-image.php';
 require_once(__DIR__ . '/settings.php');

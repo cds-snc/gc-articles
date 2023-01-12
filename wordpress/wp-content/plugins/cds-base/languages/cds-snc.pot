@@ -241,10 +241,6 @@ msgstr ""
 msgid "Your answer helps us make sure your message gets to the right people."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:135
-msgid "Request a demo to learn more about GC Articles."
-msgstr ""
-
 #: classes/Modules/Forms/Contact/ContactForm.php:141
 msgid "Ask a question."
 msgstr ""

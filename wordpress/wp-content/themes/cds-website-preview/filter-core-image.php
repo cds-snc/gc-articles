@@ -11,7 +11,7 @@ function cds_filter_core_image($block_content, $block)
             // add the following styles to prevent the image from being improperly sized
             $img_html->css('max-width', '100%');
             $img_html->css('height', 'auto');
-            return $block_html;
+            return $img_html;
         } catch (Exception $e) {
             //no-op
         }

@@ -61,7 +61,6 @@ inputs = {
 
   alb_target_group_arn_suffix              = dependency.load-balancer.outputs.alb_target_group_arn_suffix
   alb_target_response_time_average_maximum = 2
-  alb_target_5xx_maximum                   = 5
   alb_target_4xx_maximum                   = 100
 
   canary_healthcheck_url_eng = "https://articles.cdssandbox.xyz/sign-in-se-connecter/"

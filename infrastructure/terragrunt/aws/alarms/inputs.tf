@@ -18,11 +18,6 @@ variable "alb_target_response_time_average_maximum" {
   type        = number
 }
 
-variable "alb_target_5xx_maximum" {
-  description = "Maximum number of 5xx responses from the ALB target group in a 5 minute period"
-  type        = number
-}
-
 variable "alb_target_4xx_maximum" {
   description = "Maximum number of 4xx responses from the ALB target group in a 5 minute period"
   type        = number

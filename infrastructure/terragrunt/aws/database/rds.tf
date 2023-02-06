@@ -7,7 +7,7 @@ module "rds_cluster" {
 
   database_name  = var.database_name
   engine         = "aurora-mysql"
-  engine_version = "5.7.mysql_aurora.2.10.0"
+  engine_version = "5.7.mysql_aurora.2.10.3"
   instances      = var.database_instances_count
   instance_class = var.database_instance_class
   username       = var.database_username

@@ -63,6 +63,19 @@
       }
     },
     {
+      "type": "package",
+      "package": {
+        "name": "ironprogrammer/wp-hotfix-56970",
+        "type": "wordpress-plugin",
+        "version": "0.2",
+        "source": {
+          "url": "https://github.com/ironprogrammer/wp-hotfix-56970",
+          "type": "git",
+          "reference": "v0.2"
+        }
+      }
+    },    
+    {
       "type": "composer",
       "url": "https://my.yoast.com/packages/"
     },
@@ -97,6 +110,7 @@
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.2",
     "yoast/duplicate-post": "^4.4",
     "shawnhooper/delete-orphaned-multisite-tables": "1.0",
+    "ironprogrammer/wp-hotfix-56970": "0.2",
     "league/html-to-markdown": "^5.1",
     "wpackagist-plugin/publishpress-checklists": "^2.7",
     "wpackagist-plugin/simple-history": "^3.2",

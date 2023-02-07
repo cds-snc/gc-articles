@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33115b3672958edfdb5eb287a2774a1d",
+    "content-hash": "b4471665712e4ca8a3f061a6a31ad710",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -1571,6 +1571,16 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2022-09-21T21:30:03+00:00"
+        },
+        {
+            "name": "ironprogrammer/wp-hotfix-56970",
+            "version": "0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ironprogrammer/wp-hotfix-56970",
+                "reference": "v0.2"
+            },
+            "type": "wordpress-plugin"
         },
         {
             "name": "league/html-to-markdown",

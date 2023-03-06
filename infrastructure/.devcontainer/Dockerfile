@@ -24,10 +24,6 @@ RUN curl -Lo terragrunt https://github.com/gruntwork-io/terragrunt/releases/down
     && chmod +x terragrunt \
     && mv terragrunt /usr/local/bin/
 
-# Install Checkov
-RUN pip3 install --upgrade requests setuptools \
-    && pip3 install --upgrade botocore checkov
-
 # Setup aliases and autocomplete
 RUN echo "\n\
 complete -C /usr/bin/aws_completer aws\n\

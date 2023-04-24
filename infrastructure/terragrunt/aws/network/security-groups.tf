@@ -39,7 +39,7 @@ resource "aws_security_group_rule" "wordpress_ecs_egress_efs" {
   to_port                  = 2049
   protocol                 = "tcp"
   security_group_id        = aws_security_group.wordpress_ecs.id
-  source_security_group_id = aws_security_group.wordpress_efs.id
+  source_security_group_id = aws_security_group.wordpress_efs[0].id
 }
 
 data "aws_subnet" "wordpress_private_subnet" {
@@ -82,6 +82,8 @@ resource "aws_security_group" "wordpress_load_balancer" {
 }
 
 resource "aws_security_group" "wordpress_efs" {
+  count = var.enable_efs ? 1 : 0
+
   # checkov:skip=CKV2_AWS_5: False positive, attached in the "ecs" module.
   name        = "wordpress_efs"
   description = "Wordpress EFS access"
@@ -100,7 +102,7 @@ resource "aws_security_group_rule" "efs_ingress_wordpress_ecs" {
   from_port                = 2049
   to_port                  = 2049
   protocol                 = "tcp"
-  security_group_id        = aws_security_group.wordpress_efs.id
+  security_group_id        = aws_security_group.wordpress_efs[0].id
   source_security_group_id = aws_security_group.wordpress_ecs.id
 }
 

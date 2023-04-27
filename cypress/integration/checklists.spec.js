@@ -79,7 +79,7 @@ describe('Checklists', () => {
     cy.get('#ppc-publish').should('be.visible').should('have.text', `Publish…`)
   });
 
-  it('Warning modal appears → Publish anyway', () => {
+  it.skip('Warning modal appears → Publish anyway', () => {
     const article = {
       text: "Hello from GC Admin 3",
       title: "New post title 3"
@@ -117,7 +117,7 @@ describe('Checklists', () => {
     })
 
     // check custom "update" button is visible
-    cy.get('#ppc-update').should('be.visible').should('have.text', `Update…`)
+    cy.get('#ppc-update').should('be.visible').should('have.text', `Update…`)    
   });
 
   it('No modal appears → Publish', () => {

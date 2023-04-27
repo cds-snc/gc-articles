@@ -11,7 +11,7 @@ output "ecs_service_security_group_id" {
 }
 
 output "efs_security_group_id" {
-  value = aws_security_group.wordpress_efs.id
+  value = var.enable_efs ? aws_security_group.wordpress_efs[0].id : null
 }
 
 output "private_subnet_ids" {

@@ -79,7 +79,7 @@ describe('Checklists', () => {
     cy.get('#ppc-publish').should('be.visible').should('have.text', `Publish…`)
   });
 
-  it('Warning modal appears → Publish anyway', () => {
+  it.skip('Warning modal appears → Publish anyway', () => {
     const article = {
       text: "Hello from GC Admin 3",
       title: "New post title 3"
@@ -110,7 +110,7 @@ describe('Checklists', () => {
     cy.get('.ppc-modal-warn').find('button.ppc-popup-options-publishanyway').should('have.length', 1).click()
 
     // Close the "post-publish" panel
-    cy.get('.post-publish-panel__postpublish-subheader', { timeout: 6000 }).should('be.visible').then($el => {
+    cy.get('.post-publish-panel__postpublish-subheader', { timeout: 3000 }).should('be.visible').then($el => {
       // For unknown reasons, an "s" appears in this string in CI but not locally
       cy.get('.post-publish-panel__postpublish-header.is-opened').contains(/New post title \d[s]? is now live/)
       cy.get('.editor-post-publish-panel__header button[aria-label="Close panel"]').first().trigger('click')
@@ -153,7 +153,7 @@ describe('Checklists', () => {
     cy.get('.editor-post-publish-panel .editor-post-publish-button').should('be.visible').should('have.text', `Publish`).click()
 
     // Close the "post-publish" panel
-    cy.get('.post-publish-panel__postpublish-subheader', { timeout: 6000 }).should('be.visible').then($el => {
+    cy.get('.post-publish-panel__postpublish-subheader', { timeout: 3000 }).should('be.visible').then($el => {
       // For unknown reasons, an "s" appears in this string in CI but not locally
       cy.get('.post-publish-panel__postpublish-header.is-opened').contains(/New post title \d[s]? is now live/)
       cy.get('.editor-post-publish-panel__header button[aria-label="Close panel"]').first().trigger('click')

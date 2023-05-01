@@ -1,0 +1,216 @@
+# Translation of Plugins - Gutenberg Custom Fields - Stable (latest release) in English (Canada)
+# This file is distributed under the same license as the Plugins - Gutenberg Custom Fields - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-06-18 21:04:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: en_CA\n"
+"Project-Id-Version: Plugins - Gutenberg Custom Fields - Stable (latest release)\n"
+
+#: languages/gcf-translations.php:95
+msgid "Add Row"
+msgstr "Add Row"
+
+#: languages/gcf-translations.php:92
+msgid "Repeater"
+msgstr "Repeater"
+
+#: languages/gcf-translations.php:108
+msgid "Time"
+msgstr "Time"
+
+#: languages/gcf-translations.php:105
+msgid "Textarea"
+msgstr "Textarea"
+
+#: languages/gcf-translations.php:102
+msgid "Text"
+msgstr "Text"
+
+#: languages/gcf-translations.php:99
+msgid "Write"
+msgstr "Write"
+
+#: languages/gcf-translations.php:89
+msgid "Number"
+msgstr "Number"
+
+#: languages/gcf-translations.php:86
+msgid "Insert from Media Library"
+msgstr "Insert from Media Library"
+
+#: languages/gcf-translations.php:83
+msgid "Upload"
+msgstr "Upload"
+
+#: languages/gcf-translations.php:80
+msgid "Drag image here or insert from media library"
+msgstr "Drag image here or insert from media library"
+
+#: languages/gcf-translations.php:77
+msgid "Image"
+msgstr "Image"
+
+#: languages/gcf-translations.php:74
+msgid "Free HTML Area"
+msgstr "Free HTML Area"
+
+#: languages/gcf-translations.php:71
+msgid "Email"
+msgstr "Email"
+
+#: languages/gcf-translations.php:68
+msgid "Date and Time"
+msgstr "Date and Time"
+
+#: languages/gcf-translations.php:65
+msgid "Date"
+msgstr "Date"
+
+#: languages/gcf-translations.php:50
+msgid "Create a new template"
+msgstr "Create a new template"
+
+#: languages/gcf-translations.php:47
+msgid "Actions"
+msgstr "Actions"
+
+#: languages/gcf-translations.php:38
+msgid "Save"
+msgstr "Save"
+
+#: languages/gcf-translations.php:32
+msgid "Cancel"
+msgstr "Cancel"
+
+#: languages/gcf-translations.php:62
+msgid "Add Field"
+msgstr "Add Field"
+
+#: languages/gcf-translations.php:56
+msgid "Type"
+msgstr "Type"
+
+#: languages/gcf-translations.php:22
+msgid "Title"
+msgstr "Title"
+
+#: languages/gcf-translations.php:53
+msgid "Name"
+msgstr "Name"
+
+#: languages/gcf-translations.php:44
+msgid "Forbid adding/removing and moving blocks"
+msgstr "Forbid adding/removing and moving blocks"
+
+#: languages/gcf-translations.php:59
+msgid "Fields"
+msgstr "Fields"
+
+#: languages/gcf-translations.php:29
+msgid "Lock"
+msgstr "Lock"
+
+#: languages/gcf-translations.php:41
+msgid "Forbid adding/removing blocks"
+msgstr "Forbid adding/removing blocks"
+
+#: languages/gcf-translations.php:26
+msgid "Post Type"
+msgstr "Post Type"
+
+#: languages/gcf-translations.php:17
+msgid "Editing: %s"
+msgstr "Editing: %s"
+
+#: languages/gcf-translations.php:14
+msgid "Creating a new GCF template"
+msgstr "Creating a new GCF template"
+
+#: languages/gcf-translations.php:35
+msgid "None"
+msgstr "None"
+
+#: languages/gcf-translations.php:11
+msgid "Your GCF templates"
+msgstr "Your GCF templates"
+
+#: languages/gcf-translations.php:8
+msgid "Gutenberg Custom Fields allows you to control the content of the Gutenberg edit screen by creating pre-filled templates."
+msgstr "Gutenberg Custom Fields allows you to control the content of the Gutenberg edit screen by creating pre-filled templates."
+
+#: languages/gcf-translations.php:5
+msgid "Welcome to Gutenberg Custom Fields"
+msgstr "Welcome to Gutenberg Custom Fields"
+
+#: lib/endpoint.php:252
+msgid "Locking Config."
+msgstr "Locking Config."
+
+#: lib/endpoint.php:194
+msgid "Invalid template lock flag"
+msgstr "Invalid template lock flag"
+
+#. Author of the plugin/theme
+msgid "Riad Benguella"
+msgstr "Riad Benguella"
+
+#. Description of the plugin/theme
+msgid "Custom Fields, The Gutenberg way"
+msgstr "Custom Fields, The Gutenberg way"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/youknowriad/gcf"
+msgstr "https://github.com/youknowriad/gcf"
+
+#. Plugin Name of the plugin/theme
+msgid "Gutenberg Custom Fields"
+msgstr "Gutenberg Custom Fields"
+
+#: lib/endpoint.php:258
+msgid "The Fields."
+msgstr "The Fields."
+
+#: lib/endpoint.php:246
+msgid "The post type."
+msgstr "The post type."
+
+#: lib/endpoint.php:240
+msgid "Title of the template."
+msgstr "Title of the template."
+
+#: lib/endpoint.php:234
+msgid "ID that identifies this template."
+msgstr "ID that identifies this template."
+
+#: lib/endpoint.php:203
+msgid "Invalid template fields"
+msgstr "Invalid template fields"
+
+#: lib/endpoint.php:185
+msgid "Invalid template post type"
+msgstr "Invalid template post type"
+
+#: lib/endpoint.php:176
+msgid "Invalid template title"
+msgstr "Invalid template title"
+
+#: lib/endpoint.php:123
+msgid "Sorry, you are not allowed to delete templates."
+msgstr "Sorry, you are not allowed to delete templates."
+
+#: lib/endpoint.php:97 lib/endpoint.php:139
+msgid "Sorry, you are not allowed to create templates."
+msgstr "Sorry, you are not allowed to create templates."
+
+#: lib/endpoint.php:87
+msgid "No template with that ID found."
+msgstr "No template with that ID found."
+
+#: lib/endpoint.php:52 lib/endpoint.php:76
+msgid "Sorry, you are not allowed to view templates."
+msgstr "Sorry, you are not allowed to view templates."

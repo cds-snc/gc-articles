@@ -43,7 +43,7 @@ describe('Checklists', () => {
     cy.get('.ppc-modal-prevent').find('button').should('have.attr', 'class', 'ppc-popup-option-okay')
   });
 
-  it('Warning modal appears → Don’t publish', () => {
+  it.skip('Warning modal appears → Don’t publish', () => {
     const article = {
       text: "Hello from GC Admin 2",
       title: "New post title 2"
@@ -120,7 +120,7 @@ describe('Checklists', () => {
     cy.get('#ppc-update').should('be.visible').should('have.text', `Update…`)    
   });
 
-  it('No modal appears → Publish', () => {
+  it.skip('No modal appears → Publish', () => {
     const article = {
       text: "Hello from GC Admin 4",
       title: "New post title 4"

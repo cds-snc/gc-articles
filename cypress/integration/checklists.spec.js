@@ -63,7 +63,7 @@ describe('Checklists', () => {
       $el.find('input').trigger('click');
     })
 
-    cy.get('#ppc-publish').click()
+    cy.get('#ppc-publish').click({force: true})
 
     // check "warn" modal is visible
     cy.get('.ppc-modal-warn').should('be.visible')

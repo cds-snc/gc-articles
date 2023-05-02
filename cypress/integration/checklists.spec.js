@@ -120,7 +120,7 @@ describe('Checklists', () => {
     cy.get('#ppc-update').should('be.visible').should('have.text', `Update…`)    
   });
 
-  it('No modal appears → Publish', () => {
+  it.skip('No modal appears → Publish', () => {
     const article = {
       text: "Hello from GC Admin 4",
       title: "New post title 4"

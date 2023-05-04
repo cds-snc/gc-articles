@@ -15,17 +15,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # tag=v2.3.4
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
       - name: PHP Setup
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
-
-      - name: Chrome setup
-        uses: browser-actions/setup-chrome@v1
 
       - name: Add Composer auth credentials
         run: |
@@ -75,8 +68,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          browser: chrome           
-          install: false         
+          install: false
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

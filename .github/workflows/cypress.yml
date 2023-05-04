@@ -79,6 +79,9 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           # pass GitHub token to allow accurately detecting a build vs a re-run build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Suppress the expriemental warnings being caused by Cypress 12 running against a module
+          # https://github.com/cypress-io/cypress/issues/26583
+          NODE_NO_WARNINGS: 1
       - uses: actions/upload-artifact@3446296876d12d4e3a0f3145a3c87e67bf0a16b5 # tag=v1
         if: failure()
         with:

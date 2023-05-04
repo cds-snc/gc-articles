@@ -18,8 +18,8 @@
     "wp-env:debug": "wp-env start --debug",
     "wp-env:clean": "wp-env clean all",
     "wp-env:destroy": "wp-env destroy",
-    "cy:run": "cypress run",
-    "cy:open": "cypress open",
+    "cy:run": "NODE_NO_WARNINGS=1 cypress run",
+    "cy:open": "NODE_NO_WARNINGS=1 cypress open",
     "watch": "node ./cli/format.js",
     "prepare": "husky install"
   },

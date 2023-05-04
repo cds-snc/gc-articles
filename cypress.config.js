@@ -2,11 +2,12 @@ import { defineConfig } from 'cypress'
 
 export default defineConfig({
   video: false,
-  screenshotOnRunFailure: false,
+  screenshotOnRunFailure: true,
   retries: {
     runMode: 2,
     openMode: 0,
   },
+  defaultCommandTimeout: 10000,
   projectId: 'rv8iqi',
   chromeWebSecurity: false,
   e2e: {

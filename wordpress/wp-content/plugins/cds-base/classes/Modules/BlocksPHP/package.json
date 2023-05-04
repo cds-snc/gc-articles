@@ -16,11 +16,11 @@
 		"postinstall": "npm run build"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^22.1.0"
+		"@wordpress/scripts": "^26.3.0"
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^8.2.0",
-		"@wordpress/components": "^19.5.0",
-		"@wordpress/server-side-render": "^3.0.2"
+		"@wordpress/block-editor": "^12.0.0",
+		"@wordpress/components": "^23.9.0",
+		"@wordpress/server-side-render": "^4.9.0"
 	}
 }

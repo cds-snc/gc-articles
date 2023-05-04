@@ -36,7 +36,7 @@ registerBlockType("cds-snc/accordion", {
     return (
       <details>
         <summary>
-          {attributes.title}
+          {attributes.title as string}
         </summary>
         <InnerBlocks.Content />
       </details>

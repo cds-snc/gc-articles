@@ -1,4 +1,12 @@
+FROM node:16.20.0-alpine3.17 AS node
+
 FROM wordpress:cli-php8.1@sha256:4c249d19e7d9d404e5b2897bb9eb8b7ce1d910d62026638fd878d03c7a038539
+
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/share /usr/local/share
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
 
 WORKDIR /usr/src/wordpress
 
@@ -15,8 +23,6 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     rsync \
     git \
     subversion \
-    nodejs \
-    npm \
     zsh \
     zsh-autosuggestions \
     zsh-syntax-highlighting \

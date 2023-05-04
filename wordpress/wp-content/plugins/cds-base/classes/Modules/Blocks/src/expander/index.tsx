@@ -47,7 +47,7 @@ registerBlockType("cds-snc/expander", {
     return (
       <details>
         <summary>
-          <h3>{attributes.title}</h3>
+          <h3>{attributes.title as string}</h3>
         </summary>
         <RichText.Content
           {...blockProps}

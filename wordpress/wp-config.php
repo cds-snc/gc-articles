@@ -152,7 +152,7 @@ define('C3_DISTRIBUTION_ID', getenv_docker('C3_DISTRIBUTION_ID', ''));
 
 /* Disable core updates */
 define('WP_AUTO_UPDATE_CORE', false);
-define("OTGS_DISABLE_AUTO_UPDATES", true);
+define('OTGS_DISABLE_AUTO_UPDATES', true);
 
 define('JWT_AUTH_SECRET_KEY', getenv_docker('JWT_AUTH_SECRET_KEY', 'tQ;XnD#UmY2A*O,LIm(:NL|4c=R|3t~QD/3p{7CBKRz^eepfib9q-PHr7ZMZG$uz'));
 

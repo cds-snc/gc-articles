@@ -223,7 +223,7 @@ export const UserForm = ({ isSuperAdmin = false }) => {
                     </tbody>
                 </table>
                 <Button
-                    isPrimary
+                    variant="primary"
                     isBusy={isLoading}
                     disabled={isLoading}
                     type="submit" >

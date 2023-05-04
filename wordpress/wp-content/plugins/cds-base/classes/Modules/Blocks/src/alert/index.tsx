@@ -89,7 +89,7 @@ registerBlockType("cds-snc/alert", {
       <section>
         <details className={`alert ${attributes.alertType}`} open={true}>
           <summary className="h3">
-            <h3>{attributes.title}</h3>
+            <h3>{attributes.title as string}</h3>
           </summary>
           <RichText.Content
             {...blockProps}

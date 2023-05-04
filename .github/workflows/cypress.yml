@@ -24,6 +24,9 @@ jobs:
         with:
           php-version: 8.1
 
+      - name: Chrome setup
+        uses: browser-actions/setup-chrome@v1
+
       - name: Add Composer auth credentials
         run: |
           cd wordpress
@@ -72,7 +75,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
-          headed: true           
+          browser: chrome           
           install: false         
         env:
           # pass the Dashboard record key as an environment variable

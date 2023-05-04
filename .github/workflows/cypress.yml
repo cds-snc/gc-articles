@@ -60,7 +60,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Cypress and NPM install and build
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
           runTests: false
 
@@ -70,9 +70,10 @@ jobs:
           npm run wp-env:test:setup
 
       - name: Cypress run
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v5
         with:
-          install: false
+          headed: true           
+          install: false         
         env:
           # pass the Dashboard record key as an environment variable
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}

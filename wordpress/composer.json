@@ -8,7 +8,7 @@
       "type": "package",
       "package": {
         "name": "wpml/sitepress-multilingual-cms",
-        "version": "4.5.14",
+        "version": "4.6.3",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -23,7 +23,7 @@
       "type": "package",
       "package": {
         "name": "wpml/wpml-string-translation",
-        "version": "3.2.3",
+        "version": "3.2.5",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",

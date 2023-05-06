@@ -50,7 +50,9 @@ COPY --from=composer /app/wordpress/vendor ./vendor
 
 # Copy flags
 COPY ./assets/en.png /usr/src/wordpress/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png
+COPY ./assets/en.svg /usr/src/wordpress/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.svg
 COPY ./assets/fr.png /usr/src/wordpress/wp-content/plugins/sitepress-multilingual-cms/res/flags/fr.png
+COPY ./assets/fr.svg /usr/src/wordpress/wp-content/plugins/sitepress-multilingual-cms/res/flags/fr.svg
 
 # Deny all web access to the vendor folder contents
 RUN echo "Deny from all" > ./vendor/.htaccess

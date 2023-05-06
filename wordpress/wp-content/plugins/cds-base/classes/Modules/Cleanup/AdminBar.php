@@ -228,6 +228,7 @@ class AdminBar
     {
         $wp_admin_bar->remove_node('new-content');
         $wp_admin_bar->remove_node('site-name');
+        $wp_admin_bar->remove_node('ate-status-bar');
 
         if (is_super_admin()) {
             return;

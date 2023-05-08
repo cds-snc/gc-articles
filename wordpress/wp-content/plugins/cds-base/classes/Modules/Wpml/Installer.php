@@ -17,7 +17,6 @@ use WPML\Setup\Endpoint\LicenseStep;
 use WPML\Setup\Endpoint\SetOriginalLanguage;
 use WPML\Setup\Endpoint\SetSecondaryLanguages;
 use WPML\Setup\Endpoint\SetSupport;
-use WPML\TM\ATE\Sitekey\Endpoint;
 use WPML\TranslationMode\Endpoint\SetTranslateEverything;
 
 class Installer
@@ -81,10 +80,6 @@ class Installer
             [
                 "endpoint" => FinishStep::class,
                 "data" => ["finished" => true]
-            ],
-            [
-                "endpoint" => Endpoint::class,
-                "data" => []
             ],
             [
                 "endpoint" => PrepareSetup::class,

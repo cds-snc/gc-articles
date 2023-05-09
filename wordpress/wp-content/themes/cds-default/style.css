@@ -562,9 +562,6 @@ nav.nav--about li a:focus {
 
 body .is-layout-flex {
   display: flex;
-}
-
-body .is-layout-flex {
   gap: 24px;
 }
 

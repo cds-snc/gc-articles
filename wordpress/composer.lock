@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a9d30c4db7c1b582a561c95b4d75011",
+    "content-hash": "d114614486fd2cc1ea0e49e01b150acb",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.269.6",
+            "version": "3.269.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "343f7088f246d4667172e69d5f2bf440496bb708"
+                "reference": "18aec5f307bd95588ff5d1fa970eac5b0075a977"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/343f7088f246d4667172e69d5f2bf440496bb708",
-                "reference": "343f7088f246d4667172e69d5f2bf440496bb708",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/18aec5f307bd95588ff5d1fa970eac5b0075a977",
+                "reference": "18aec5f307bd95588ff5d1fa970eac5b0075a977",
                 "shasum": ""
             },
             "require": {
@@ -204,9 +204,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.6"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.9"
             },
-            "time": "2023-05-04T18:22:48+00:00"
+            "time": "2023-05-09T18:20:58+00:00"
         },
         {
             "name": "brick/math",
@@ -4214,17 +4214,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "20.6",
+            "version": "20.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "35f00c6879008f7acb457528ac21da9c84c1e1b4"
+                "reference": "d622c23fb04d7ad3cf03d497d6bf954406b139a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-35f00c6879008f7acb457528ac21da9c84c1e1b4-zip-66b8ee.zip",
-                "reference": "35f00c6879008f7acb457528ac21da9c84c1e1b4",
-                "shasum": "f62f6c805255f5c44755e04fa38bc6654d92b738"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-d622c23fb04d7ad3cf03d497d6bf954406b139a4-zip-a91ccc.zip",
+                "reference": "d622c23fb04d7ad3cf03d497d6bf954406b139a4",
+                "shasum": "07a8edaf62af89d9a712d608f337d503003d8d53"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4359,25 +4359,25 @@
                 "wiki": "https://github.com/Yoast/wordpress-seo/wiki",
                 "source": "https://github.com/Yoast/wordpress-seo"
             },
-            "time": "2023-04-26T08:05:30+00:00"
+            "time": "2023-05-09T08:04:33+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "20.6",
+            "version": "20.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "f05ea2508295201c7eee62240736b15bb7f3e4bc"
+                "reference": "0b180631d376a86f1c7905742ca7d32470179ce4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-f05ea2508295201c7eee62240736b15bb7f3e4bc-zip-4b1621.zip",
-                "reference": "f05ea2508295201c7eee62240736b15bb7f3e4bc",
-                "shasum": "82d9e56e2edd8080c41eb933b653a23096db1f7d"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-0b180631d376a86f1c7905742ca7d32470179ce4-zip-e1bd7d.zip",
+                "reference": "0b180631d376a86f1c7905742ca7d32470179ce4",
+                "shasum": "236aa3940c8862b44c04c78a7f1936807e83f8d1"
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^20.6"
+                "yoast/wordpress-seo": "^20.7"
             },
             "require-dev": {
                 "yoast/wp-test-utils": "^1.1.1",
@@ -4427,8 +4427,8 @@
                     "Yoast\\WP\\SEO\\Premium\\Config\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=61",
-                    "@putenv YOASTCS_THRESHOLD_WARNINGS=44",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=60",
+                    "@putenv YOASTCS_THRESHOLD_WARNINGS=43",
                     "Yoast\\WP\\SEO\\Premium\\Config\\Composer\\Actions::check_cs_thresholds"
                 ],
                 "lint": [
@@ -4487,7 +4487,7 @@
                 "issues": "https://github.com/Yoast/wordpress-seo-premium/issues",
                 "source": "https://github.com/Yoast/wordpress-seo-premium"
             },
-            "time": "2023-04-26T08:34:17+00:00"
+            "time": "2023-05-09T08:48:55+00:00"
         }
     ],
     "packages-dev": [
@@ -6171,16 +6171,16 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "4.0.4",
+            "version": "4.0.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "3461e3fccc7cfdfc2720be910d3bd73c69be590d"
+                "reference": "74be17022044ebaaecfdf0c5cd504fc9cd5a7131"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/3461e3fccc7cfdfc2720be910d3bd73c69be590d",
-                "reference": "3461e3fccc7cfdfc2720be910d3bd73c69be590d",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/74be17022044ebaaecfdf0c5cd504fc9cd5a7131",
+                "reference": "74be17022044ebaaecfdf0c5cd504fc9cd5a7131",
                 "shasum": ""
             },
             "require": {
@@ -6225,7 +6225,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/diff/issues",
-                "source": "https://github.com/sebastianbergmann/diff/tree/4.0.4"
+                "source": "https://github.com/sebastianbergmann/diff/tree/4.0.5"
             },
             "funding": [
                 {
@@ -6233,7 +6233,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T13:10:38+00:00"
+            "time": "2023-05-07T05:35:17+00:00"
         },
         {
             "name": "sebastian/environment",

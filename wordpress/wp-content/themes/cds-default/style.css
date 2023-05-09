@@ -559,3 +559,13 @@ nav.nav--about li a:focus {
 .has-xxx-large-font-size {
   font-size: 42px !important;
 }
+
+body .is-layout-flex {
+  display: flex;
+  gap: 24px;
+}
+
+body .is-layout-flow > * {
+  margin-block-start: 0.5em;
+  margin-block-end: 0.5em;
+}

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8071251547f25c32b0878bcb6939718a",
+    "content-hash": "9a9d30c4db7c1b582a561c95b4d75011",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -1573,16 +1573,6 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2022-09-21T21:30:03+00:00"
-        },
-        {
-            "name": "ironprogrammer/wp-hotfix-56970",
-            "version": "0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ironprogrammer/wp-hotfix-56970",
-                "reference": "v0.2"
-            },
-            "type": "wordpress-plugin"
         },
         {
             "name": "league/html-to-markdown",
@@ -4043,15 +4033,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "3.5.0",
+            "version": "3.5.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/3.5.0"
+                "reference": "tags/3.5.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.3.5.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.3.5.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

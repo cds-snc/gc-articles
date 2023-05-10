@@ -125,7 +125,6 @@ services:
       wp plugin activate jwt-authentication-for-wp-rest-api --network;
       wp plugin activate delete-orphaned-multisite-tables --network;
       wp plugin activate gc-lists --network;
-      wp plugin activate wp-hotfix-56970 --network;
       '
     volumes:
       - wordpress:/usr/src/wordpress

@@ -19,6 +19,6 @@ test('Use a factory to create a Message', function() {
 	$message = $this->factory->message->create_and_get();
 	$this->assertTrue(is_object($message));
 
-	$this->assertObjectHasAttribute('name', $message);
+	$this->assertTrue(property_exists($message, 'name'));
 	$this->assertEquals('This is a message', $message->name);
 });

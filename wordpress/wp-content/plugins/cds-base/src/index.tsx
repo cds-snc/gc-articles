@@ -19,7 +19,7 @@ declare global {
     CDS: {
       renderLoginsPanel?: () => void;
       renderCollectionsPanel?: () => void;
-      renderUserForm?: ({ isSuperAdmin }, { isSuperAdmin: boolean }) => void;
+      renderUserForm?: ({ isSuperAdmin }) => void;
       writeInterstitialMessage?: () => void;
       renderDBInsightsPanel?: () => void;
       renderDBActivityPanel?: () => void;

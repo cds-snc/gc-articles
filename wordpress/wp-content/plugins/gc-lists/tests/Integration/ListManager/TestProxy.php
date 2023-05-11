@@ -31,6 +31,9 @@ test('ListManager Proxy API endpoint is registered', function () {
 })->group('proxy');
 
 test('ListManager proxy applies Authorization header and proxies request', function() {
+    // PHPUnit is not properly detecting the `expect` calls in the `add_filter` block
+    $this->expectNotToPerformAssertions();
+
     // Prepare a user to make the request
     $user_id = $this->factory->user->create();
     $user = wp_set_current_user( $user_id );

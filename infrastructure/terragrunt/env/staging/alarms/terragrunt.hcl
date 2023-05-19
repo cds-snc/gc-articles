@@ -63,8 +63,8 @@ inputs = {
   alb_target_response_time_average_maximum = 2
   alb_target_4xx_maximum                   = 100
 
-  canary_healthcheck_url_eng = "https://articles.cdssandbox.xyz/sign-in-se-connecter/"
-  canary_healthcheck_url_fra = "https://articles.cdssandbox.xyz/fr/sign-in-se-connecter/"
+  healthcheck_domain = "articles.cdssandbox.xyz"
+  healthcheck_path   = "/sign-in-se-connecter/"
 
   cloudfront_arn              = dependency.load-balancer.outputs.cloudfront_arn
   cloudfront_distribution_id  = dependency.load-balancer.outputs.cloudfront_distribution_id

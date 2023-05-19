@@ -24,3 +24,8 @@ resource "aws_shield_protection" "route53_hosted_zone" {
     (var.billing_tag_key) = var.billing_tag_value
   }
 }
+
+resource "aws_shield_protection_health_check_association" "cloudfront" {
+  health_check_arn     = aws_route53_health_check.wordpress.arn
+  shield_protection_id = aws_shield_protection.cloudfront.id
+}

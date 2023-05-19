@@ -23,13 +23,13 @@ variable "alb_target_4xx_maximum" {
   type        = number
 }
 
-variable "canary_healthcheck_url_eng" {
-  description = "URL for the English synthetic canary healthcheck."
+variable "healthcheck_domain" {
+  description = "Domain name for the Route53 healthcheck."
   type        = string
 }
 
-variable "canary_healthcheck_url_fra" {
-  description = "URL for the English synthetic canary healthcheck."
+variable "healthcheck_path" {
+  description = "Request path for the Route53 healthcheck."
   type        = string
 }
 

@@ -9,6 +9,6 @@ resource "aws_route53_health_check" "wordpress" {
 
   tags = {
     "Name"       = "wordpress"
-    "CostCentre" = var.billing_code
+    (var.billing_tag_key) = var.billing_tag_value
   }
 }

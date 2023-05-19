@@ -8,7 +8,7 @@ resource "aws_route53_health_check" "wordpress" {
   regions           = ["us-east-1", "us-west-1", "us-west-2"]
 
   tags = {
-    "Name"       = "wordpress"
+    "Name"                = "wordpress"
     (var.billing_tag_key) = var.billing_tag_value
   }
 }

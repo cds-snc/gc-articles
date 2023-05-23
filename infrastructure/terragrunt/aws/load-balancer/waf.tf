@@ -496,7 +496,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
               }
             }
             comparison_operator = "GT"
-            size                = "8192"
+            size                = "16384"
             text_transformation {
               type     = "NONE"
               priority = 0

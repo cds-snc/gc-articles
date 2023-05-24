@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "87ff41817abb72c3f09dc36510f2da95",
+    "content-hash": "5339bf17b680f905bede0c419e34b6a3",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -3910,15 +3910,15 @@
         },
         {
             "name": "wpackagist-plugin/login-lockdown",
-            "version": "2.02",
+            "version": "2.06",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/login-lockdown/",
-                "reference": "tags/2.02"
+                "reference": "tags/2.06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/login-lockdown.2.02.zip"
+                "url": "https://downloads.wordpress.org/plugin/login-lockdown.2.06.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

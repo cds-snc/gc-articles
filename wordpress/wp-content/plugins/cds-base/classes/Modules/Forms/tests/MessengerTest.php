@@ -6,9 +6,10 @@ use GuzzleHttp\Exception\ClientException;
 
 test('asserts sendMail returns success message for a successful call', function () {
     /* Mocking a class within a class: https://docs.mockery.io/en/latest/cookbook/mocking_class_within_class.html */
-    $clientMock = mock('NotifyClientMock')->expect(
-        sendMail: fn () => true,
-    );
+    $clientMock = mock('NotifyClientMock');
+    $clientMock->allows([
+        'sendMail' => true,
+    ]);
 
     $messenger = mock(Messenger::class)->makePartial();
     $messenger->shouldReceive("getNotifyClient")->andReturn($clientMock);
@@ -35,9 +36,10 @@ test('asserts sendMail returns error message if NotifyClient throws an exception
 });
 
 test('asserts createTicket returns success message for a successful call', function () {
-    $clientMock = mock('GuzzleClientMock')->expect(
-        request: fn () => true,
-    );
+    $clientMock = mock('GuzzleClientMock');
+    $clientMock->allows([
+        'request' => true,
+    ]);
 
     $messenger = mock(Messenger::class)->makePartial();
     $messenger->shouldReceive("getGuzzleClient")->andReturn($clientMock);

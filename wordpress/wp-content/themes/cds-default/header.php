@@ -141,13 +141,10 @@ declare(strict_types=1);
         <span class="wb-inv"><?php _e('Main', 'cds-snc'); ?> </span>
           <?php _e('Menu', 'cds-snc'); ?> 
           <span class="expicon glyphicon glyphicon-chevron-down"></span></button>
-      <ul role="menu" aria-orientation="vertical">
-          <?php // pulls in menu items from Canada.ca endpoint
-            echo file_get_contents(
-                'https://www.canada.ca/content/dam/canada/sitemenu/sitemenu-v2-' .
-                get_active_language() .
-                '.html',
-            ); ?>
+      <ul 
+        role="menu" 
+        aria-orientation="vertical"
+        data-ajax-replace="https://www.canada.ca/content/dam/canada/sitemenu/sitemenu-v2-<?php echo get_active_language(); ?>.html">
       </ul>
     </div>
   </nav>

@@ -363,7 +363,17 @@ function cc_mime_types($mimes)
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
 }
-  add_filter('upload_mimes', 'cc_mime_types');
+add_filter('upload_mimes', 'cc_mime_types');
+
+// Override the default c3-cloudfront-clear-cache plugin behaviour to always
+// invalidate the entire site's content.  This is workaround for the current
+// bug in the plugin that is causing all invalidation requests to fail.
+function c3_invalidation_items($items)
+{
+    $site_root_path = parse_url(home_url(), PHP_URL_PATH);
+    return array($site_root_path . '/*');
+}
+add_filter('c3_invalidation_items', 'c3_invalidation_items');
 
 function fix_svg()
 {

@@ -21,6 +21,7 @@ function cds_security_headers($headers)
         ],
         "connect-src" => [
             "'self'",
+            "https://www.canada.ca",
             "https://www.google-analytics.com",
         ],
         "default-src" => [

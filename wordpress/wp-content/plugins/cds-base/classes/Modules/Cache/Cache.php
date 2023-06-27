@@ -33,17 +33,4 @@ class Cache
 
         return $site->path;
     }
-
-    protected function getLocalePrefixForPost($post): string
-    {
-        if ($language_information = apply_filters('wpml_post_language_details', null, $post->ID)) {
-            $locale = $language_information['locale'];
-
-            if ($locale === self::LOCALE_FR) {
-                return 'fr/';
-            }
-        }
-
-        return '';
-    }
 }

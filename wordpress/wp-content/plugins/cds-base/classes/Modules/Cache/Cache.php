@@ -17,15 +17,12 @@ class Cache
 
     protected function registerInvalidationPaths()
     {
+        // Invalidate the entire site's cache on change.  This is to deal with a bug
+        // in the plugin that is failing to provide the correct paths for some
+        // page update types.
         add_filter('c3_invalidation_items', function ($items, $post) {
-
             $sitePrefix = $this->getSitePrefixForPost();
-            $localePrefix = $this->getLocalePrefixForPost($post);
-
-            return array_merge($items, [
-                "{$sitePrefix}{$localePrefix}wp-json/wp/v2/{$post->post_type}s/?slug={$post->post_name}",
-                "{$sitePrefix}menus/v1/menus/*",
-            ]);
+            return array("{$sitePrefix}*");
         }, 10, 2);
     }
 

@@ -15,6 +15,10 @@
 
 declare(strict_types=1);
 
+if (!defined('ABSPATH')) {
+    exit; // Prevent direct access to WP theme files
+}
+
 get_header();
 ?>
 

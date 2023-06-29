@@ -20,3 +20,11 @@ module "sentinel_forwarder" {
 
   cloudwatch_log_arns = [aws_cloudwatch_log_group.wordpress_ecs_logs.arn]
 }
+
+resource "aws_cloudwatch_log_subscription_filter" "sentinel_forwarder" {
+  name            = "All ECS logs"
+  log_group_name  = aws_cloudwatch_log_group.wordpress_ecs_logs.name
+  filter_pattern  = "[w1=\"*\"]"
+  destination_arn = module.sentinel_forwarder.lambda_arn
+  distribution    = "Random"
+}

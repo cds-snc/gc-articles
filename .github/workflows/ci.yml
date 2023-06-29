@@ -2,7 +2,14 @@ name: CI
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    paths:
+      - "**"
+      - "!.devcontainer/**"
+      - "!.github/**"
+      - "!infrastructure/.devcontainer/**"
+      - "!infrastructure/terragrunt/**"
 
 env:
   WPML_USER_ID: ${{ secrets.WPML_USER_ID }}

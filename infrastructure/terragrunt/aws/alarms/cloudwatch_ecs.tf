@@ -74,7 +74,7 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_failed_login" {
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_errors" {
   name           = "WordPressErrors"
-  pattern        = "?Error ?error ?Fatal ?fatal ?Failed ?failed -\"slug=error\""
+  pattern        = "[(w1=\"*Failed*\" || w1=\"*failed*\" || w1=\"*Error*\" || w1=\"*error*\" || w1=\"*Fatal*\" || w1=\"*fatal*\" ) && w1!=\"*slug=error*\"]"
   log_group_name = var.wordpress_log_group_name
 
   metric_transformation {

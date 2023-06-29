@@ -103,7 +103,7 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_errors" {
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_warnings" {
   name           = "WordPressWarnings"
-  pattern        = "?Warning ?warning"
+  pattern        = "[(w1=\"*Warning*\" || w1=\"*warning*\") && w1!=\"*Undefined array key*c3-cloudfront-clear-cache*\"]"
   log_group_name = var.wordpress_log_group_name
 
   metric_transformation {

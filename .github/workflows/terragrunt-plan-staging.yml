@@ -30,6 +30,8 @@ env:
   TF_VAR_s3_uploads_secret: ${{ secrets.STAGING_S3_UPLOADS_SECRET }}
   TF_VAR_c3_aws_access_key_id: ${{ secrets.STAGING_C3_AWS_ACCESS_KEY_ID }}
   TF_VAR_c3_aws_secret_access_key: ${{ secrets.STAGING_C3_AWS_SECRET_ACCESS_KEY }}
+  TF_VAR_sentinel_customer_id: ${{ secrets.SENTINEL_CUSTOMER_ID }}
+  TF_VAR_sentinel_shared_key: ${{ secrets.SENTINEL_SHARED_KEY }}
   TF_VAR_slack_webhook_url: ${{ secrets.STAGING_SLACK_WEBHOOK_URL }}
   TF_VAR_wordpress_auth_key: ${{ secrets.STAGING_WORDPRESS_AUTH_KEY }}
   TF_VAR_wordpress_secure_auth_key: ${{ secrets.STAGING_WORDPRESS_SECURE_AUTH_KEY }}

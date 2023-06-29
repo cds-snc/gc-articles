@@ -209,3 +209,13 @@ variable "wordpress_logged_in_salt" {
 variable "wordpress_nonce_salt" {
   type = string
 }
+
+variable "sentinel_customer_id" {
+  type      = string
+  sensitive = true
+}
+
+variable "sentinel_shared_key" {
+  type      = string
+  sensitive = true
+}

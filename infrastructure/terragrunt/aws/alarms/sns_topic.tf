@@ -116,10 +116,10 @@ data "aws_iam_policy_document" "sns_cloudwatch" {
 # Lambda: post notifications to Slack
 #
 module "notify_slack" {
-  source = "github.com/cds-snc/terraform-modules?ref=v0.0.36//notify_slack"
+  source = "github.com/cds-snc/terraform-modules?ref=v6.10.0//notify_slack"
 
   function_name     = "notify_slack"
-  project_name      = "WordPress"
+  project_name      = "Articles: ${var.env}"
   slack_webhook_url = var.slack_webhook_url
 
   sns_topic_arns = [

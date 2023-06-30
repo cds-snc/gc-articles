@@ -223,10 +223,10 @@ export const UserForm = ({ isSuperAdmin = false }) => {
                     </tbody>
                 </table>
                 <Button
-                    isPrimary
                     isBusy={isLoading}
                     disabled={isLoading}
-                    type="submit" >
+                    type="submit"
+                    variant="primary" >
                     {__("Add user", "cds-snc")}
                 </Button>
             </form>

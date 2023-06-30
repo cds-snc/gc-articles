@@ -41,7 +41,7 @@ registerBlockType("cds-snc/expander", {
     );
   },
 
-  save({ attributes }) {
+  save({ attributes }: { attributes: { title, content } }) {
     const blockProps = useBlockProps.save();
 
     return (

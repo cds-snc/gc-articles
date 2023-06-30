@@ -16,25 +16,25 @@
   },
   "main": "src/index.js",
   "dependencies": {
-    "@wordpress/block-editor": "^7.0.4",
-    "@wordpress/blocks": "^11.1.2",
-    "@wordpress/components": "^18.0.0",
-    "@wordpress/element": "^4.0.2",
-    "@wordpress/i18n": "^4.2.3",
-    "@wordpress/icons": "^6.1.0",
-    "sweetalert2": "^11.1.9"
+    "@wordpress/block-editor": "^12.4.0",
+    "@wordpress/blocks": "^12.13.0",
+    "@wordpress/components": "^25.2.0",
+    "@wordpress/element": "^5.13.0",
+    "@wordpress/i18n": "^4.36.0",
+    "@wordpress/icons": "^9.27.0",
+    "sweetalert2": "^11.7.12"
   },
   "devDependencies": {
     "@types/classnames": "^2.3.1",
     "@types/node": "^16.11.1",
-    "@types/react": "^17.0.30",
-    "@types/react-dom": "^17.0.9",
-    "@types/wordpress__blocks": "^9.1.1",
-    "@wordpress/scripts": "^18.1.0",
-    "ts-loader": "^9.2.6",
-    "typescript": "~4.9.0",
-    "webpack": "^5.58.2",
-    "webpack-cli": "^4.9.1"
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/wordpress__blocks": "^12.5.0",
+    "@wordpress/scripts": "^26.7.0",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
   },
   "scripts": {
     "build": "webpack",

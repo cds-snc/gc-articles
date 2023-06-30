@@ -30,7 +30,7 @@ registerBlockType("cds-snc/accordion", {
     );
   },
 
-  save({ attributes }) {
+  save({ attributes }: { attributes: { title } }) {
     const blockProps = useBlockProps.save();
 
     return (

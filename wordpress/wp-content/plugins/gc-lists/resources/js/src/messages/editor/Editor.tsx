@@ -15,7 +15,7 @@ export const Editor = ({ template, handleChange, handleValidate }) => {
     return (
         <>
             <TextWrapper>
-                <Slate editor={editor} value={template} onChange={value => {
+                <Slate editor={editor} initialValue={template} onChange={value => {
                     handleChange(value)
                     handleValidate(value)
                 }}>

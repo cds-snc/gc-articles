@@ -1,5 +1,5 @@
 module "wordpress_storage" {
-  source                  = "github.com/cds-snc/terraform-modules?ref=v0.0.37//S3"
+  source                  = "github.com/cds-snc/terraform-modules//S3?ref=v0.0.37"
   bucket_name             = "platform-gc-articles-${var.env}-uploads"
   billing_tag_value       = var.billing_tag_value
   block_public_policy     = false

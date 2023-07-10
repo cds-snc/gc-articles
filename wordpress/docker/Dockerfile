@@ -44,6 +44,9 @@ COPY ./wordpress/docker/php/conf.d/memory_limit.ini /usr/local/etc/php/conf.d/me
 COPY ./wordpress/docker/php/conf.d/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 COPY ./wordpress/docker/php/conf.d/expose_php.ini /usr/local/etc/php/conf.d/expose_php.ini
 
+# Copy PHP-FPM config
+COPY ./wordpress/docker/php/conf.d/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+
 # Copy wp-content (including installed plugins) and vendor folder from composer stage
 COPY --from=composer /app/wordpress/wp-content ./wp-content
 COPY --from=composer /app/wordpress/vendor ./vendor

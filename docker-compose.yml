@@ -68,6 +68,7 @@ services:
       - ./wordpress/docker/php/conf.d/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./wordpress/docker/php/conf.d/max_execution_time.ini:/usr/local/etc/php/conf.d/max_execution_time.ini
       - ./wordpress/docker/php/conf.d/expose_php.ini:/usr/local/etc/php/conf.d/expose_php.ini
+      - ./wordpress/docker/php/conf.d/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf
     networks:
       - app-network
 

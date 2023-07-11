@@ -4,7 +4,7 @@
 		"dockerfile": "Dockerfile",
 		"context": "..",
 		"args": {
-			"TERRAFORM_VERSION": "1.5.0",
+			"TERRAFORM_VERSION": "1.5.2",
 			"TERRAGRUNT_VERSION": "0.35.6"
 		}
 	},

@@ -2,7 +2,7 @@
 # VPC: 3 public + 3 private subnets across 3 availability zones
 #
 module "wordpress_vpc" {
-  source = "github.com/cds-snc/terraform-modules//vpc?ref=v0.0.31"
+  source = "github.com/cds-snc/terraform-modules//vpc?ref=v0.0.49"
   name   = "wordpress"
 
   high_availability = true

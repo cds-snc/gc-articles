@@ -1,18 +1,12 @@
 {
 	"name": "Terraform",
-	"build": {
-		"dockerfile": "Dockerfile",
-		"context": "..",
-		"args": {
-			"TERRAFORM_VERSION": "1.5.2",
-			"TERRAGRUNT_VERSION": "0.35.6"
-		}
+	"image": "mcr.microsoft.com/vscode/devcontainers/python:0-3.11",
+	"remoteEnv": {
+		"PATH": "/home/vscode/.local/bin:${containerEnv:PATH}" // give our installed Python modules precedence
 	},
-
 	"containerEnv": {
 		"SHELL": "/bin/zsh"
 	},
-
 	"customizations": {
 		"vscode": {
 			"settings": {
@@ -27,7 +21,12 @@
 			]
 		}
 	},
-
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"features": {
+		"terraform": {
+			"version": "1.5.2",
+			"tflint": "latest",
+			"terragrunt": "0.35.6"
+		}
+	},
 	"remoteUser": "vscode"
 }

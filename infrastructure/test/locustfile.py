@@ -11,11 +11,10 @@ class AdminUser(HttpUser):
     def no_login(self):
         "No login - all handled by CloudFront"
         self.client.get(f"/")
-        self.client.get(f"/avis-de-confidentialite")
-        self.client.get(f"/confirmation-of-subscription")
+        self.client.get(f"/accessibility-statement")
 
-    @task
+    @task(5)
     def login(self):
         "Login flow - not cached"
-        response = self.client.post("/login/", {"log":USER, "pwd":PASSWORD, "testcookie": "1", "redirect_to": "https://ircc.digital.canada.ca/wp-admin/admin.php?page=cds_notify_send"})
-        self.client.get("/wp-admin/edit.php", cookies=response.cookies)
+        self.client.get(f"/sign-in-se-connecter")
+        self.client.post("/sign-in-se-connecter", {"log":USER, "pwd":PASSWORD, "testcookie": "1", "redirect_to": "https://articles.cdssandbox.xyz/wp-admin/index.php"})

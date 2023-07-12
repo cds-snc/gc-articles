@@ -6,8 +6,8 @@ pip install -r requirement.txt
 locust
 ```
 
-:warning: &nbsp; If you want to test the WordPress login flow, create the following user:
+:warning: If you want to test the WordPress login flow, export the username and password for the login:
 ```sh
-Username: locust
-Password: locust
+export USER=someuser
+export PASSWORD=somepassword
 ```

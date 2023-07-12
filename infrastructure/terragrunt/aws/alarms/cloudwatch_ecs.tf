@@ -74,7 +74,7 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_failed_login" {
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_errors" {
   name           = "WordPressErrors"
-  pattern        = "[(w1=\"*Failed*\" || w1=\"*failed*\" || w1=\"*Error*\" || w1=\"*error*\" || w1=\"*Fatal*\" || w1=\"*fatal*\" ) && w1!=\"*slug=error*\"]"
+  pattern        = local.wordpress_error_metric_pattern
   log_group_name = var.wordpress_log_group_name
 
   metric_transformation {
@@ -103,7 +103,7 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_errors" {
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_warnings" {
   name           = "WordPressWarnings"
-  pattern        = "[(w1=\"*Warning*\" || w1=\"*warning*\") && w1!=\"*Undefined array key*c3-cloudfront-clear-cache*\"]"
+  pattern        = local.wordpress_warning_metric_pattern
   log_group_name = var.wordpress_log_group_name
 
   metric_transformation {

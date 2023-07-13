@@ -11,8 +11,10 @@ locals {
     "fatal",
   ]
   wordpress_errors_skip = [
-    "slug=error",
+    "AH01276",
     "AH01630",
+    "error=invalidkey",
+    "slug=error",
   ]
   wordpress_warnings = [
     "Warning",

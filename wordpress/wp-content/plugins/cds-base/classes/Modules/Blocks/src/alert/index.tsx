@@ -82,7 +82,7 @@ registerBlockType("cds-snc/alert", {
     );
   },
 
-  save({ attributes }) {
+  save({ attributes }: { attributes: { alertType, title, content } }) {
     const blockProps = useBlockProps.save();
 
     return (

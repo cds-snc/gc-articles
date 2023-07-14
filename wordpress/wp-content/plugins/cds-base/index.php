@@ -4,7 +4,7 @@
  * Plugin Name: CDS-SNC Base
  * Plugin URI: https://github.com/cds-snc/gc-articles
  * Description: Custom Block setup and other overrides
- * Version: 3.10.10
+ * Version: 3.10.11
  * Update URI: false
  * Author: CDS-SNC
  * Text Domain: cds-snc
@@ -27,7 +27,7 @@ if (!defined('BASE_PLUGIN_NAME')) {
 }
 
 if (!defined('BASE_PLUGIN_NAME_VERSION')) {
-    define('BASE_PLUGIN_NAME_VERSION', '3.10.10');
+    define('BASE_PLUGIN_NAME_VERSION', '3.10.11');
 }
 
 if (is_multisite()) {

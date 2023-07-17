@@ -13,6 +13,7 @@ locals {
   wordpress_errors_skip = [
     "AH01276",
     "AH01630",
+    "action=lostpassword&error=invalidkey",
     "GET /notification-gc-notify/wp-json/wp/v2/pages",
   ]
   wordpress_warnings = [

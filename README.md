@@ -312,7 +312,7 @@ phpcs ./wordpress/wp-content/plugins/cds-base/classes/Modules/Cleanup/Articles.p
 
 **NOTE** You will need to have [GitHub CLI](https://cli.github.com) installed to complete the following steps
 
-1) Bump the version #
+### 1) Bump the version #
 
 ```bash
 npm run update-version
@@ -321,11 +321,9 @@ npm run update-version
 This script will automatically update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711) 
 and create a PR titled `Version bump [version number]`
 
-2) Visit Github and review/merge the Pull Request that was created.
+### 2) Visit Github and review/merge the Pull Request that was created.
 
-<hr>
-
-3) Create and tag a release
+### 3) Create and tag a release
 
 ```bash
 npm run tag-release
@@ -335,12 +333,12 @@ This step will prompt for release notes and will automatically update the [terra
 and create a PR titled `Release [version number]`.
 
 It will also create a tag and release on Github, as well as build and push Staging and Production containers tagged 
-with the version number to the container repositories.
+with the version number to the container repositories for each environment.
 
 **IMPORTANT**: The tagged (i.e. v1.x.x) container needs to finish building before the Release PR is merged.  
 You can check via the Github actions tab.
 
-4) Visit Github and check the Pull Request that was created
+### 4) Visit Github and check the Pull Request that was created
 
 The automated deployment will happen after your PR is merged.
 

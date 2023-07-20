@@ -312,30 +312,56 @@ phpcs ./wordpress/wp-content/plugins/cds-base/classes/Modules/Cleanup/Articles.p
 
 **NOTE** You will need to have [GitHub CLI](https://cli.github.com) installed to complete the following steps
 
-1) Bump the version #
+### 1) Bump the version #
 
 ```bash
 npm run update-version
 ```
 
-> This should automatically update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711)
+This script will automatically update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711) 
+and create a PR titled `Version bump [version number]`
 
-2) Visit Github and check the Pull Request that was created
+### 2) Visit Github and review/merge the Version bump Pull Request that was created.
 
-<hr>
-
-1) Create and tag a release
+### 3) Create and tag a release
 
 ```bash
 npm run tag-release
 ```
 
-> This should automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file
+This step will prompt for release notes and will automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file
+and create a PR titled `Release [version number]`.
 
-2) Visit Github and check the Pull Request that was created
+It will also create a tag and release on Github, and build and push Staging and Production containers tagged 
+with the version number to the container repositories for each environment.
 
-**NOTE** This step will run a github cli command to create a release and tag on Github
+**IMPORTANT**: The tagged (i.e. v1.x.x) container needs to finish building before the Release PR is merged.  
+You can check via the Github actions tab.
 
-The automated deployment will happen after your PR is merged.
+### 4) Visit Github and check the Release Pull Request that was created
 
-> Important the tagged i.e. v1.x.x container needs to finish building before the tag release PR is merged.  You can check via the Github actions tab
+The automated deployment will happen after this PR is merged.
+
+You can run the following script to poll the staging environment to see when the container has been deployed:
+
+```
+npm run check-version
+```
+
+### Production deployment
+
+You should always release to Staging first. The "tag-release" step above will build/tag/push both Staging and Production containers, so the Production deploy
+is a simple config change.
+
+When you're ready to deploy to Production, run the following command:
+
+```
+npm run deploy-production
+```
+
+This will first prompt you for the version you would like to deploy, and it will create a PR titled `Production release: [version number]` which simply
+updates the deployed versions manifest.
+
+Merging this PR will release the previously tagged container to Production.
+
+

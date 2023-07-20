@@ -318,26 +318,29 @@ phpcs ./wordpress/wp-content/plugins/cds-base/classes/Modules/Cleanup/Articles.p
 npm run update-version
 ```
 
-> This will automatically update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711) and create a PR titled `Version bump [version number]`
+This script will automatically update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711) 
+and create a PR titled `Version bump [version number]`
 
 2) Visit Github and review/merge the Pull Request that was created.
 
 <hr>
 
-1) Create and tag a release
+3) Create and tag a release
 
 ```bash
 npm run tag-release
 ```
 
-> This step will prompt you for release notes and will automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file,
-> as well as build/push staging and production containers tagged with the version number. 
+This step will prompt for release notes and will automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file
+and create a PR titled `Release [version number]`.
 
-**IMPORTANT**: Important the tagged i.e. v1.x.x container needs to finish building before the tag release PR is merged.  You can check via the Github actions tab.
+It will also create a tag and release on Github, as well as build and push Staging and Production containers tagged 
+with the version number to the container repositories.
 
-2) Visit Github and check the Pull Request that was created
+**IMPORTANT**: The tagged (i.e. v1.x.x) container needs to finish building before the Release PR is merged.  
+You can check via the Github actions tab.
 
-> Upon merging, this step will run a github cli command to create a release and tag on Github
+4) Visit Github and check the Pull Request that was created
 
 The automated deployment will happen after your PR is merged.
 

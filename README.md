@@ -321,7 +321,7 @@ npm run update-version
 This script will automatically update the [VERSION, theme and plugin files](https://github.com/cds-snc/platform-mvp-ircc/commit/d697a147499f36b2bff456d1be3d3a07e4e58711) 
 and create a PR titled `Version bump [version number]`
 
-### 2) Visit Github and review/merge the Pull Request that was created.
+### 2) Visit Github and review/merge the Version bump Pull Request that was created.
 
 ### 3) Create and tag a release
 
@@ -338,9 +338,9 @@ with the version number to the container repositories for each environment.
 **IMPORTANT**: The tagged (i.e. v1.x.x) container needs to finish building before the Release PR is merged.  
 You can check via the Github actions tab.
 
-### 4) Visit Github and check the Pull Request that was created
+### 4) Visit Github and check the Release Pull Request that was created
 
-The automated deployment will happen after your PR is merged.
+The automated deployment will happen after this PR is merged.
 
 You can run the following script to poll the staging environment to see when the container has been deployed:
 
@@ -353,7 +353,7 @@ npm run check-version
 You should always release to Staging first. The "tag-release" step above will build/tag/push both Staging and Production containers, so the Production deploy
 is a simple config change.
 
-When you're ready to deploy to Production, run the follwing command:
+When you're ready to deploy to Production, run the following command:
 
 ```
 npm run deploy-production

@@ -332,7 +332,7 @@ npm run tag-release
 This step will prompt for release notes and will automatically update the [terragrunt.hcl](https://github.com/cds-snc/platform-mvp-ircc/blob/a5ca0d5688ce2ce224cc846772c7fcdf2b615fdc/infrastructure/terragrunt/env/prod/ecs/terragrunt.hcl#L63) file
 and create a PR titled `Release [version number]`.
 
-It will also create a tag and release on Github, as well as build and push Staging and Production containers tagged 
+It will also create a tag and release on Github, and build and push Staging and Production containers tagged 
 with the version number to the container repositories for each environment.
 
 **IMPORTANT**: The tagged (i.e. v1.x.x) container needs to finish building before the Release PR is merged.  

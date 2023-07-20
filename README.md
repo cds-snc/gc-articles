@@ -360,7 +360,7 @@ npm run deploy-production
 ```
 
 This will first prompt you for the version you would like to deploy, and it will create a PR titled `Production release: [version number]` which simply
-updates the manifest of deployed versions.
+updates the deployed versions manifest.
 
 Merging this PR will release the previously tagged container to Production.
 

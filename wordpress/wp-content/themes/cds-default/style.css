@@ -569,3 +569,18 @@ body .is-layout-flow > * {
   margin-block-start: 0.5em;
   margin-block-end: 0.5em;
 }
+
+/* Fix for file upload button styles */
+.wp-block-file__button {
+  background-color: #284162;
+  color: #fff !important;
+  border-radius: 0.3em;
+  display: block;
+  text-align: center;
+}
+
+.wp-block-file__button:hover {
+  color: #fff !important;
+  background-color: #1c578a;
+  text-decoration: none;
+}

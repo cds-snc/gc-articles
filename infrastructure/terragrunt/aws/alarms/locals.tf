@@ -15,6 +15,7 @@ locals {
     "AH01630",
     "action=lostpassword&error",
     "GET /notification-gc-notify/wp-json/wp/v2/pages",
+    "HTTP/1.1\\\" 404",
   ]
   wordpress_warnings = [
     "Warning",

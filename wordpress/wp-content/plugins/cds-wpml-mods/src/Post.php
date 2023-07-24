@@ -48,7 +48,8 @@ class Post
     public function getLanguageCodeOfPostObject(WP_Post $post): string
     {
         global $sitepress;
-        return $sitepress->get_language_for_element($post->ID, 'post_' . $post->post_type);
+        $language_code = $sitepress->get_language_for_element($post->ID, 'post_' . $post->post_type);
+        return is_null($language_code) ? 'en' : $language_code;
     }
 
     public function getTranslatedPostID(WP_Post $post, ?string $altLanguage = null): int|null

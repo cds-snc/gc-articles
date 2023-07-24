@@ -80,7 +80,22 @@ test('buildResponseObject assert response object with no language provided', fun
 test('getLanguageCodeOfPostObject', function() {
 	global $sitepress;
 	$sitepress = mock('\SitePress');
-	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
+	$sitepress->shouldReceive("get_language_for_element")->andReturn('fr');
+
+	$post_id = $this->factory()->post->create();
+	$post = get_post($post_id);
+
+	$postClass = new Post();
+
+	$language = $postClass->getLanguageCodeOfPostObject($post);
+
+	expect($language)->toEqual('fr');
+});
+
+test('getLanguageCodeOfPostObjectDefault', function() {
+	global $sitepress;
+	$sitepress = mock('\SitePress');
+	$sitepress->shouldReceive("get_language_for_element")->andReturn(null);
 
 	$post_id = $this->factory()->post->create();
 	$post = get_post($post_id);

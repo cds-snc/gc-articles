@@ -13,6 +13,7 @@ locals {
   wordpress_errors_skip = [
     "AH01276",
     "AH01630",
+    "AH01797",
     "action=lostpassword&error",
     "GET /notification-gc-notify/wp-json/wp/v2/pages",
     "HTTP/1.1\\\" 404",

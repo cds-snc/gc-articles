@@ -40,6 +40,10 @@ class LatestPosts
     {
         global $post;
 
+        // Protect against a null $post object
+        if (is_null($post)) {
+            return $more;
+        }
         return sprintf(
             '… <a class="read-more" href="%s">%s<span class="wb-sl"> of %s</span></a>',
             get_permalink($post->ID),

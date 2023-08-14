@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.277.9",
+            "version": "3.278.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f2437a755b70756425bf8f1bd588a7c583891900"
+                "reference": "ed7cba5c8888421b89cdb3561dcd5e40e4bd4395"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f2437a755b70756425bf8f1bd588a7c583891900",
-                "reference": "f2437a755b70756425bf8f1bd588a7c583891900",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ed7cba5c8888421b89cdb3561dcd5e40e4bd4395",
+                "reference": "ed7cba5c8888421b89cdb3561dcd5e40e4bd4395",
                 "shasum": ""
             },
             "require": {
@@ -204,9 +204,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.277.9"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.278.1"
             },
-            "time": "2023-08-04T18:16:19+00:00"
+            "time": "2023-08-11T18:07:09+00:00"
         },
         {
             "name": "brick/math",
@@ -3986,15 +3986,15 @@
         },
         {
             "name": "wpackagist-plugin/publishpress-checklists",
-            "version": "2.8.0",
+            "version": "2.9.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
-                "reference": "tags/2.8.0"
+                "reference": "tags/2.9.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.8.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.9.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4185,17 +4185,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "20.12",
+            "version": "20.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "4426257669589440422fa361f39a353ed66ea8b0"
+                "reference": "721956362ebbf823d2608dbc62a3fa76e11ca763"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-4426257669589440422fa361f39a353ed66ea8b0-zip-87b545.zip",
-                "reference": "4426257669589440422fa361f39a353ed66ea8b0",
-                "shasum": "6cf60da65766de27dc8d26a136bbd3b066a4326d"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-721956362ebbf823d2608dbc62a3fa76e11ca763-zip-844bdf.zip",
+                "reference": "721956362ebbf823d2608dbc62a3fa76e11ca763",
+                "shasum": "8ee3ec32e3789bdc24f1c83bb322e3c2324e22f7"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4336,25 +4336,25 @@
                 "wiki": "https://github.com/Yoast/wordpress-seo/wiki",
                 "source": "https://github.com/Yoast/wordpress-seo"
             },
-            "time": "2023-07-25T08:07:46+00:00"
+            "time": "2023-08-08T08:11:09+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "20.12",
+            "version": "20.13",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "679ddc0de2caeeaeb39435246790338b21f18839"
+                "reference": "e77d03283d5b121a94c1945e06f55422446c66f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-679ddc0de2caeeaeb39435246790338b21f18839-zip-fccb46.zip",
-                "reference": "679ddc0de2caeeaeb39435246790338b21f18839",
-                "shasum": "17a05bd3e6b25ab9808ce2b86701de52a7356602"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-e77d03283d5b121a94c1945e06f55422446c66f6-zip-7ef5a7.zip",
+                "reference": "e77d03283d5b121a94c1945e06f55422446c66f6",
+                "shasum": "79581bed8fd94d8aaf75ddd51fc9fc307981b981"
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^20.12"
+                "yoast/wordpress-seo": "^20.13"
             },
             "require-dev": {
                 "yoast/wp-test-utils": "^1.1.1",
@@ -4470,7 +4470,7 @@
                 "issues": "https://github.com/Yoast/wordpress-seo-premium/issues",
                 "source": "https://github.com/Yoast/wordpress-seo-premium"
             },
-            "time": "2023-07-25T08:50:27+00:00"
+            "time": "2023-08-08T08:42:58+00:00"
         }
     ],
     "packages-dev": [
@@ -4762,16 +4762,16 @@
         },
         {
             "name": "mockery/mockery",
-            "version": "1.6.5",
+            "version": "1.6.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "68782e943f9ffcbc72bda08aedabe73fecb50041"
+                "reference": "b8e0bb7d8c604046539c1115994632c74dcb361e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/68782e943f9ffcbc72bda08aedabe73fecb50041",
-                "reference": "68782e943f9ffcbc72bda08aedabe73fecb50041",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/b8e0bb7d8c604046539c1115994632c74dcb361e",
+                "reference": "b8e0bb7d8c604046539c1115994632c74dcb361e",
                 "shasum": ""
             },
             "require": {
@@ -4843,7 +4843,7 @@
                 "security": "https://github.com/mockery/mockery/security/advisories",
                 "source": "https://github.com/mockery/mockery"
             },
-            "time": "2023-08-06T00:30:34+00:00"
+            "time": "2023-08-09T00:03:52+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4906,16 +4906,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.16.0",
+            "version": "v4.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "19526a33fb561ef417e822e85f08a00db4059c17"
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/19526a33fb561ef417e822e85f08a00db4059c17",
-                "reference": "19526a33fb561ef417e822e85f08a00db4059c17",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
                 "shasum": ""
             },
             "require": {
@@ -4956,9 +4956,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.16.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.17.1"
             },
-            "time": "2023-06-25T14:52:30+00:00"
+            "time": "2023-08-13T19:53:39+00:00"
         },
         {
             "name": "nunomaduro/collision",

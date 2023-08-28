@@ -70,6 +70,7 @@
     },
     "devDependencies": {
         "@automattic/i18n-loader-webpack-plugin": "^2.0.12",
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "@types/react-table": "^7.7.11",
         "@types/styled-components": "^5.1.25",
         "@types/uuid": "^9.0.2",

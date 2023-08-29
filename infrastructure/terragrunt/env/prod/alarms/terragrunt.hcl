@@ -61,7 +61,6 @@ inputs = {
 
   alb_target_group_arn_suffix              = dependency.load-balancer.outputs.alb_target_group_arn_suffix
   alb_target_response_time_average_maximum = 2
-  alb_target_4xx_maximum                   = 100
 
   healthcheck_domain = "articles.alpha.canada.ca"
   healthcheck_path   = "/sign-in-se-connecter/"

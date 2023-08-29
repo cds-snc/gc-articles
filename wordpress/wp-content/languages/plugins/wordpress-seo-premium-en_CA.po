@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Yoast - Yoast SEO Premium (for WordPress) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-05-16 07:40:26+0000\n"
+"PO-Revision-Date: 2023-08-09 09:56:05+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,10 +11,28 @@ msgstr ""
 "Language: en_CA\n"
 "Project-Id-Version: Yoast - Yoast SEO Premium (for WordPress)\n"
 
+#. translators: 1: Yoast SEO Premium
+#: src/integrations/admin/update-premium-notification.php:125
+msgid "Update to the latest version of %1$s!"
+msgstr "Update to the latest version of %1$s!"
+
+#. translators: 1: Yoast SEO Premium, 2 and 3: opening and closing anchor tag.
+#: src/integrations/admin/update-premium-notification.php:117
+msgid "Please %2$supdate %1$s to the latest version%3$s to ensure you can fully use all Premium settings and features."
+msgstr "Please %2$supdate %1$s to the latest version%3$s to ensure you can fully use all Premium settings and features."
+
 #: src/integrations/admin/cornerstone-column-integration.php:135
-#: src/integrations/admin/cornerstone-taxonomy-column-integration.php:99
+#: src/integrations/admin/cornerstone-taxonomy-column-integration.php:103
 msgid "Cornerstone content"
 msgstr "Cornerstone content"
+
+#: src/deprecated/integrations/admin/crawl-settings-integration.php:312
+msgid "Disable"
+msgstr "Disable"
+
+#: src/deprecated/integrations/admin/crawl-settings-integration.php:310
+msgid "Allow Control"
+msgstr "Allow Control"
 
 #. translators: 1: Zapier, 2: Link start tag, 3: Zapier, 4: Link closing tag.
 #: src/deprecated/integrations/third-party/zapier-classic-editor.php:98
@@ -64,7 +82,6 @@ msgid "<strong>New in Yoast SEO Premium 19.2:</strong> Did you know that you can
 msgstr "<strong>New in Yoast SEO Premium 19.2:</strong> Did you know that you can now get feedback on using inclusive language? This feature is disabled by default. Please contact your Network admin if you want to enable it. %2$sLearn more about this feature%3$s."
 
 #: src/integrations/frontend-inspector.php:71
-#: assets/js/src/frontend-inspector/components/frontend-inspector.js:28
 msgid "Front-end SEO inspector"
 msgstr "Front-end SEO inspector"
 
@@ -305,7 +322,6 @@ msgid "%1$sCornerstone content%2$s is the content on your site that’s most imp
 msgstr "%1$sCornerstone content%2$s is the content on your site that’s most important. You want to rank highest in Google with these articles. Make sure your internal linking structure reflects what pages are most important. Want to know how?"
 
 #: classes/views/thank-you.php:17
-#: assets/js/src/workouts/components/CornerstoneWorkout.js:106
 msgid "Rank with articles you want to rank with"
 msgstr "Rank with articles with which you want to rank"
 
@@ -483,16 +499,15 @@ msgstr "Please contact a network administrator to install %1$s %2$s."
 msgid "Please contact an administrator to install %1$s %2$s."
 msgstr "Please contact an administrator to install %1$s %2$s."
 
+#: src/integrations/admin/plugin-links-integration.php:74
+msgid "Activate your subscription"
+msgstr "Activate your subscription"
+
 #: src/integrations/blocks/estimated-reading-time-block.php:57
-#: assets/js/src/blocks/estimated-reading-time/block.js:179
 msgid "Estimated reading time:"
 msgstr "Estimated reading time:"
 
 #: src/integrations/blocks/estimated-reading-time-block.php:84
-#: assets/js/src/blocks/estimated-reading-time/block.js:64
-#: assets/js/src/blocks/estimated-reading-time/legacy/15.6.js:58
-#: assets/js/src/blocks/estimated-reading-time/legacy/15.6.non-admin.js:28
-#: assets/js/src/blocks/estimated-reading-time/legacy/15.8.js:22
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minute"
@@ -512,9 +527,6 @@ msgid "Edit"
 msgstr "Edit"
 
 #: classes/premium-javascript-strings.php:53
-#: assets/js/src/components/RedirectNotification.js:122
-#: assets/js/src/elementor/components/RedirectNotification.js:127
-#: assets/js/src/frontend-inspector/components/frontend-inspector.js:61
 msgid "OK"
 msgstr "OK"
 
@@ -590,12 +602,11 @@ msgstr "As you're on Nginx, you should add the following include to the NGINX co
 msgid "As you're on Apache, you should add the following include to the website httpd config file:"
 msgstr "As you're on Apache, you should add the following include to the website httpd config file:"
 
-#. Description of the plugin
+#. Description of the plugin/theme
 msgid "The first true all-in-one SEO solution for WordPress, including on-page content analysis, XML sitemaps and much more."
 msgstr "The first true all-in-one SEO solution for WordPress, including on-page content analysis, XML sitemaps and much more."
 
 #: classes/redirect/exporters/redirect-csv-exporter.php:76
-#: assets/js/src/workouts/components/CornerstoneWorkout/MostLinked.js:98
 msgid "Type"
 msgstr "Type"
 
@@ -632,7 +643,7 @@ msgstr "Error while saving this redirect"
 msgid "New type can't be empty."
 msgstr "New type can't be empty."
 
-#. Author of the plugin
+#. Author of the plugin/theme
 msgid "Team Yoast"
 msgstr "Team Yoast"
 
@@ -1006,7 +1017,6 @@ msgid "'Orphaned content' refers to %1$s that have no inbound links, consider ad
 msgstr "'Orphaned content' refers to %1$s that have no inbound links, consider adding links towards these %1$s. %2$s"
 
 #: classes/premium-orphaned-post-filter.php:140
-#: assets/js/src/workouts/components/OrphanedWorkout.js:88
 msgid "Orphaned content"
 msgstr "Orphaned content"
 
@@ -1113,11 +1123,11 @@ msgstr "Export keyphrases"
 msgid "Export keyphrase scores"
 msgstr "Export keyphrase scores"
 
-#. Plugin URI of the plugin
+#. Plugin URI of the plugin/theme
 msgid "https://yoa.st/2jc"
 msgstr "https://yoa.st/2jc"
 
-#. Plugin Name of the plugin
+#. Plugin Name of the plugin/theme
 msgid "Yoast SEO Premium"
 msgstr "Yoast SEO Premium"
 
@@ -1164,8 +1174,8 @@ msgstr "Redirect import failed: we can't recognize this type of import."
 msgid "Stale cornerstone content"
 msgstr "Stale cornerstone content"
 
-#. translators: %s expands to the posttype label, %2$s expands anchor to blog
-#. post about cornerstone content, %3$s expands to </a>
+#. translators: %1$s expands to dynamic post type label, %2$s expands anchor to
+#. blog post about cornerstone content, %3$s expands to </a>
 #: classes/premium-stale-cornerstone-content-filter.php:68
 msgid "Stale cornerstone content refers to cornerstone content that hasn’t been updated in the last 6 months. Make sure to keep these %1$s up-to-date. %2$sLearn more about cornerstone content%3$s."
 msgstr "Stale cornerstone content refers to cornerstone content that hasn’t been updated in the last 6 months. Make sure to keep these %1$s up-to-date. %2$sLearn more about cornerstone content%3$s."
@@ -1174,8 +1184,7 @@ msgstr "Stale cornerstone content refers to cornerstone content that hasn’t be
 msgid "Choose a CSV file from your computer:"
 msgstr "Choose a CSV file from your computer:"
 
-#: classes/watcher.php:247 assets/js/src/components/RedirectNotification.js:132
-#: assets/js/src/elementor/components/RedirectNotification.js:133
+#: classes/watcher.php:247
 msgid "Undo"
 msgstr "Undo"
 
@@ -1210,8 +1219,6 @@ msgid "Ok"
 msgstr "Ok"
 
 #: src/deprecated/integrations/admin/crawl-settings-integration.php:301
-#: assets/js/src/components/semrush/SEMrushRemoveRelatedKeyphraseLink.js:19
-#: assets/js/src/workouts/components/OrphanedWorkout/RedirectModal.js:87
 msgid "Remove"
 msgstr "Remove"
 
@@ -1261,8 +1268,6 @@ msgid "Please note that you can only create 1 Zap with a trigger event from %1$s
 msgstr "Please note that you can only create one Zap with a trigger event from %1$s. Within this Zap you can choose one or more actions."
 
 #. translators: %s: Zapier.
-#. translators: 1: Zapier
 #: src/deprecated/integrations/third-party/zapier.php:215
-#: assets/js/src/components/ZapierModal.js:231
 msgid "Create a Zap in %s"
 msgstr "Create a Zap in %s"

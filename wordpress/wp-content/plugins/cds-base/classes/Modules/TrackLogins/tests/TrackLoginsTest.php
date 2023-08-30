@@ -38,6 +38,7 @@ test('TrackLogins logUserLogins', function () {
     $user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36';
     $this->user = (object)[
         'ID' => 1,
+        'user_email' => 'admin@canada.ca',
     ];
     $current_time = '2021-09-16 20:46:06';
     $data = [

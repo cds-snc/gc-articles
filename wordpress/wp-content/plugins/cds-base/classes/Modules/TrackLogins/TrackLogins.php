@@ -89,6 +89,10 @@ class TrackLogins
 
     public function logUserLogin($user_login, $user): void
     {
+        // Detect email addresses that do not end with @cds-snc.ca, gc.ca or canada.ca
+        if (!preg_match('/(@cds-snc|@canada|\.gc)\.ca$/', $user->user_email)) {
+            error_log("SUSPICIOUS: non-GC email login: {$user->user_email}");
+        }
         $this->insertUserLogin($user, $user_agent = $this->getUserAgent());
     }
 

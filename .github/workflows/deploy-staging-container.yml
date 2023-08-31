@@ -86,6 +86,10 @@ jobs:
       github.event_name == 'push' &&
       needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'staging'
 
+    env:
+      APACHE_VERSION: ${{ needs.environments-manifest.outputs.STAG_APACHE }}
+      WORDPRESS_VERSION: ${{ needs.environments-manifest.outputs.STAG_WORDPRESS }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
@@ -96,3 +100,12 @@ jobs:
       - name: Terragrunt apply ecs
         working-directory: infrastructure/terragrunt/env/staging/ecs
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Report deployment to Sentinel
+        if: always()
+        uses: cds-snc/sentinel-forward-data-action@main
+        with:
+          input_data: '{"product": "articles", "sha": "${{ github.sha }}", "version": "Apache ${{ env.APACHE_VERSION }}, Wordpress ${{ env.WORDPRESS_VERSION }}", "repository": "${{ github.repository }}", "environment": "staging", "status": "${{ job.status }}"}'
+          log_type: CDS_Product_Deployment_Data
+          log_analytics_workspace_id: ${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}
+          log_analytics_workspace_key: ${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}        

@@ -42,3 +42,18 @@ resource "aws_cloudwatch_query_definition" "wordpress_failed_logins" {
     | limit 100
   QUERY
 }
+
+resource "aws_cloudwatch_query_definition" "wordpress_suspicious_activity" {
+  name = "Wordpress - suspicious activity"
+
+  log_group_names = [
+    var.wordpress_log_group_name
+  ]
+
+  query_string = <<-QUERY
+    fields @timestamp, @message, @logStream
+    | filter @message like /SUSPICIOUS/
+    | sort @timestamp desc
+    | limit 100
+  QUERY
+}

@@ -130,6 +130,35 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_warnings" {
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 }
 
+resource "aws_cloudwatch_log_metric_filter" "wordpress_suspicious_login" {
+  name           = "WordPressSuspiciousLogin"
+  pattern        = "\"non-GC email login\""
+  log_group_name = var.wordpress_log_group_name
+
+  metric_transformation {
+    name          = "WordPressSuspiciousLogin"
+    namespace     = "WordPress"
+    value         = "1"
+    default_value = "0"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "wordpress_suspicious_login" {
+  alarm_name          = "WordPressSuspiciousLogin"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.wordpress_suspicious_login.metric_transformation[0].name
+  namespace           = aws_cloudwatch_log_metric_filter.wordpress_suspicious_login.metric_transformation[0].namespace
+  period              = "60"
+  statistic           = "Sum"
+  threshold           = "0"
+  treat_missing_data  = "notBreaching"
+
+  alarm_description = "WordPress login from a non-Government of Canada email address"
+  alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
+}
+
 resource "aws_cloudwatch_log_metric_filter" "wordpress_ecs_warn_error_event" {
   name           = "WordPressEcsWarningEvent"
   pattern        = "?Warn ?Error"

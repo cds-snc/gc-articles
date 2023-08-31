@@ -93,7 +93,9 @@ jobs:
       needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production'
 
     env:
+      APACHE_VERSION: ${{ needs.environments-manifest.outputs.PROD_APACHE }}
       TARGET_VERSION: ${{ needs.environments-manifest.outputs.PROD_INFRASTRUCTURE }}
+      WORDPRESS_VERSION: ${{ needs.environments-manifest.outputs.PROD_WORDPRESS }}
 
     steps:
       - name: Checkout
@@ -105,3 +107,12 @@ jobs:
       - name: Terragrunt apply ecs
         working-directory: infrastructure/terragrunt/env/prod/ecs
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Report deployment to Sentinel
+        if: always()
+        uses: cds-snc/sentinel-forward-data-action@main
+        with:
+          input_data: '{"product": "articles", "sha": "${{ github.sha }}", "version": "Apache ${{ env.APACHE_VERSION }}, Wordpress ${{ env.WORDPRESS_VERSION }}", "repository": "${{ github.repository }}", "environment": "production", "status": "${{ job.status }}"}'
+          log_type: CDS_Product_Deployment_Data
+          log_analytics_workspace_id: ${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}
+          log_analytics_workspace_key: ${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}

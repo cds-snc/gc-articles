@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "51dff487012710f2e15630f77225fcda",
+    "content-hash": "71f453aeb37dbcd8635cc5df834e28e1",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -4237,17 +4237,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "20.13",
+            "version": "21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "721956362ebbf823d2608dbc62a3fa76e11ca763"
+                "reference": "16e37b55e0795b6c71c80dac08784a98eb05fc3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-721956362ebbf823d2608dbc62a3fa76e11ca763-zip-844bdf.zip",
-                "reference": "721956362ebbf823d2608dbc62a3fa76e11ca763",
-                "shasum": "8ee3ec32e3789bdc24f1c83bb322e3c2324e22f7"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-16e37b55e0795b6c71c80dac08784a98eb05fc3e-zip-f18e33.zip",
+                "reference": "16e37b55e0795b6c71c80dac08784a98eb05fc3e",
+                "shasum": "f8a26f1237e43231c511c93a29d31ccd6feef6ac"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4388,25 +4388,25 @@
                 "wiki": "https://github.com/Yoast/wordpress-seo/wiki",
                 "source": "https://github.com/Yoast/wordpress-seo"
             },
-            "time": "2023-08-08T08:11:09+00:00"
+            "time": "2023-08-22T07:51:06+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "20.13",
+            "version": "21.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "e77d03283d5b121a94c1945e06f55422446c66f6"
+                "reference": "13fff7ba0cb41b13ebafd3829a57ef2792624b65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-e77d03283d5b121a94c1945e06f55422446c66f6-zip-7ef5a7.zip",
-                "reference": "e77d03283d5b121a94c1945e06f55422446c66f6",
-                "shasum": "79581bed8fd94d8aaf75ddd51fc9fc307981b981"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-13fff7ba0cb41b13ebafd3829a57ef2792624b65-zip-3cc6b6.zip",
+                "reference": "13fff7ba0cb41b13ebafd3829a57ef2792624b65",
+                "shasum": "49a7e92e2e73ed082270a8606aa598d8c076e3ad"
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^20.13"
+                "yoast/wordpress-seo": "^21.0"
             },
             "require-dev": {
                 "yoast/wp-test-utils": "^1.1.1",
@@ -4522,7 +4522,7 @@
                 "issues": "https://github.com/Yoast/wordpress-seo-premium/issues",
                 "source": "https://github.com/Yoast/wordpress-seo-premium"
             },
-            "time": "2023-08-08T08:42:58+00:00"
+            "time": "2023-08-22T08:27:16+00:00"
         }
     ],
     "packages-dev": [

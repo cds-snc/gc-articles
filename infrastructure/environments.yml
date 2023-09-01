@@ -4,4 +4,4 @@ production:
   infrastructure: 1.2.32
 staging:
   apache: 1.1.0
-  wordpress: 3.11.1
+  wordpress: 3.11.2

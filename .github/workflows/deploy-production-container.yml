@@ -75,7 +75,7 @@ jobs:
       # Load-balancer & database dependency
       - name: Terragrunt plan ecs
         if: ${{ needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'production' }}
-        uses: cds-snc/terraform-plan@7f4ce4a4bdffaba639d32a45272804e37a569408 # v3.0.6
+        uses: cds-snc/terraform-plan@28d2efe5155573489fa5b5816fad20d44d1f274b # v3.0.7
         with:
           directory: "infrastructure/terragrunt/env/prod/ecs"
           comment-delete: "true"

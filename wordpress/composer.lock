@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.281.0",
+            "version": "3.281.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "e64af36b7951550ff3073cea260a641963ebcd8d"
+                "reference": "a3cfb20dbfb11117b7174b2594fc597745252e0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/e64af36b7951550ff3073cea260a641963ebcd8d",
-                "reference": "e64af36b7951550ff3073cea260a641963ebcd8d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a3cfb20dbfb11117b7174b2594fc597745252e0c",
+                "reference": "a3cfb20dbfb11117b7174b2594fc597745252e0c",
                 "shasum": ""
             },
             "require": {
@@ -204,9 +204,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.281.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.281.3"
             },
-            "time": "2023-09-05T18:07:25+00:00"
+            "time": "2023-09-08T18:06:26+00:00"
         },
         {
             "name": "brick/math",
@@ -4242,17 +4242,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "21.0",
+            "version": "21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "16e37b55e0795b6c71c80dac08784a98eb05fc3e"
+                "reference": "c1d5cd347886bce2f92b60fa741d144df3866e8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-16e37b55e0795b6c71c80dac08784a98eb05fc3e-zip-f18e33.zip",
-                "reference": "16e37b55e0795b6c71c80dac08784a98eb05fc3e",
-                "shasum": "f8a26f1237e43231c511c93a29d31ccd6feef6ac"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-c1d5cd347886bce2f92b60fa741d144df3866e8b-zip-20c5dd.zip",
+                "reference": "c1d5cd347886bce2f92b60fa741d144df3866e8b",
+                "shasum": "ddefe890a4b8ae86f1edc0f525b74b6058f0af26"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4393,25 +4393,25 @@
                 "wiki": "https://github.com/Yoast/wordpress-seo/wiki",
                 "source": "https://github.com/Yoast/wordpress-seo"
             },
-            "time": "2023-08-22T07:51:06+00:00"
+            "time": "2023-09-06T18:39:03+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "21.0",
+            "version": "21.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "13fff7ba0cb41b13ebafd3829a57ef2792624b65"
+                "reference": "51c66d321e34d32dd380dd3f459edf3548a5b4e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-13fff7ba0cb41b13ebafd3829a57ef2792624b65-zip-3cc6b6.zip",
-                "reference": "13fff7ba0cb41b13ebafd3829a57ef2792624b65",
-                "shasum": "49a7e92e2e73ed082270a8606aa598d8c076e3ad"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-51c66d321e34d32dd380dd3f459edf3548a5b4e4-zip-02761c.zip",
+                "reference": "51c66d321e34d32dd380dd3f459edf3548a5b4e4",
+                "shasum": "6aab4995ca3e0124305828fe93d47a487ea53645"
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^21.0"
+                "yoast/wordpress-seo": "^21.1"
             },
             "require-dev": {
                 "yoast/wp-test-utils": "^1.1.1",
@@ -4527,7 +4527,7 @@
                 "issues": "https://github.com/Yoast/wordpress-seo-premium/issues",
                 "source": "https://github.com/Yoast/wordpress-seo-premium"
             },
-            "time": "2023-08-22T08:27:16+00:00"
+            "time": "2023-09-05T09:24:32+00:00"
         }
     ],
     "packages-dev": [

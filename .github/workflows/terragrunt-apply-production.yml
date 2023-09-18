@@ -9,8 +9,6 @@ on:
 
 env:
   AWS_REGION: ca-central-1
-  AWS_ACCESS_KEY_ID: ${{ secrets.PRODUCTION_AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.PRODUCTION_AWS_SECRET_ACCESS_KEY }}
   CONFTEST_VERSION: 0.27.0
   TERRAFORM_VERSION: 1.5.7
   TERRAGRUNT_VERSION: 0.35.6
@@ -43,6 +41,10 @@ env:
   TF_VAR_jwt_auth_secret_key: ${{ secrets.PRODUCTION_JWT_AUTH_SECRET_KEY }}
   TF_VAR_wpml_site_key: ${{ secrets.PRODUCTION_WPML_SITE_KEY }}
   TF_VAR_zendesk_api_url: ${{ secrets.ZENDESK_API_URL }}
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   environments-manifest:
@@ -101,6 +103,13 @@ jobs:
             storage:
               - 'infrastructure/terragrunt/aws/storage/**'
               - 'infrastructure/terragrunt/env/prod/storage/**'
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@8c3f20df09ac63af7b3ae3d7c91f105f857d8497 # v4.0.0
+        with:
+          role-to-assume: arn:aws:iam::472286471787:role/gc-articles-apply
+          role-session-name: TFApply
+          aws-region: ${{ env.AWS_REGION }}
 
       # No dependencies
       - name: Terragrunt apply network

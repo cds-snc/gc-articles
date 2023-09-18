@@ -14,8 +14,6 @@ on:
 
 env:
   AWS_REGION: ca-central-1
-  AWS_ACCESS_KEY_ID: ${{ secrets.STAGING_AWS_ACCESS_KEY_ID }}
-  AWS_SECRET_ACCESS_KEY: ${{ secrets.STAGING_AWS_SECRET_ACCESS_KEY }}
   TERRAFORM_VERSION: 1.5.7
   TERRAGRUNT_VERSION: 0.35.6
   TF_INPUT: false
@@ -48,6 +46,11 @@ env:
   TF_VAR_wpml_site_key: ${{ secrets.STAGING_WPML_SITE_KEY }}
   TF_VAR_zendesk_api_url: ${{ secrets.ZENDESK_API_URL }}
 
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
 jobs:
   environments-manifest:
     uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
@@ -67,6 +70,13 @@ jobs:
 
       - name: Setup terraform tools
         uses: cds-snc/terraform-tools-setup@v1
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@8c3f20df09ac63af7b3ae3d7c91f105f857d8497 # v4.0.0
+        with:
+          role-to-assume: arn:aws:iam::729164266357:role/gc-articles-plan
+          role-session-name: TFPlanECS
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Terragrunt plan ecs
         uses: cds-snc/terraform-plan@28d2efe5155573489fa5b5816fad20d44d1f274b # v3.0.7
@@ -96,6 +106,13 @@ jobs:
 
       - name: Setup terraform tools
         uses: cds-snc/terraform-tools-setup@v1
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@8c3f20df09ac63af7b3ae3d7c91f105f857d8497 # v4.0.0
+        with:
+          role-to-assume: arn:aws:iam::729164266357:role/gc-articles-apply
+          role-session-name: TFApplyECS
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Terragrunt apply ecs
         working-directory: infrastructure/terragrunt/env/staging/ecs

@@ -15,8 +15,12 @@ locals {
     "AH01630",
     "AH01797",
     "action=lostpassword&error",
+    "database error",
     "GET /notification-gc-notify/wp-json/wp/v2/pages",
     "HTTP/1.1\\\" 404",
+  ]
+  wordpress_database_errors = [
+    "database error",
   ]
   wordpress_warnings = [
     "Warning",
@@ -26,5 +30,6 @@ locals {
     "Undefined array key*c3-cloudfront-clear-cache",
   ]
   wordpress_error_metric_pattern   = "[(w1=\"*${join("*\" || w1=\"*", local.wordpress_errors)}*\") && w1!=\"*${join("*\" && w1!=\"*", local.wordpress_errors_skip)}*\"]"
+  wordpress_database_error_metric_pattern   = "[(w1=\"*${join("*\" || w1=\"*", local.wordpress_database_errors)}*\")]"
   wordpress_warning_metric_pattern = "[(w1=\"*${join("*\" || w1=\"*", local.wordpress_warnings)}*\") && w1!=\"*${join("*\" && w1!=\"*", local.wordpress_warnings_skip)}*\"]"
 }

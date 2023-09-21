@@ -101,6 +101,35 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_errors" {
   ok_actions        = [aws_sns_topic.alert_warning.arn]
 }
 
+resource "aws_cloudwatch_log_metric_filter" "wordpress_database_errors" {
+  name           = "WordPressDatabaseErrors"
+  pattern        = local.wordpress_database_error_metric_pattern
+  log_group_name = var.wordpress_log_group_name
+
+  metric_transformation {
+    name          = "WordPressDatabaseErrors"
+    namespace     = "WordPress"
+    value         = "1"
+    default_value = "0"
+  }
+}
+
+resource "aws_cloudwatch_metric_alarm" "wordpress_database_errors" {
+  alarm_name          = "WordPressDatabaseErrors"
+  comparison_operator = "GreaterThanThreshold"
+  evaluation_periods  = "1"
+  metric_name         = aws_cloudwatch_log_metric_filter.wordpress_database_errors.metric_transformation[0].name
+  namespace           = aws_cloudwatch_log_metric_filter.wordpress_database_errors.metric_transformation[0].namespace
+  period              = "300"
+  statistic           = "Sum"
+  threshold           = "5"
+  treat_missing_data  = "notBreaching"
+
+  alarm_description = "WordPress database errors detected in a 5 minute period"
+  alarm_actions     = [aws_sns_topic.alert_warning.arn]
+  ok_actions        = [aws_sns_topic.alert_warning.arn]
+}
+
 resource "aws_cloudwatch_log_metric_filter" "wordpress_warnings" {
   name           = "WordPressWarnings"
   pattern        = local.wordpress_warning_metric_pattern

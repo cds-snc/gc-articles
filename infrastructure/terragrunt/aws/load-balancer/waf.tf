@@ -40,15 +40,21 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         name        = "AWSManagedRulesCommonRuleSet"
         vendor_name = "AWS"
 
-        dynamic "excluded_rule" {
+        dynamic "rule_action_override" {
           for_each = local.common_excluded_rules
           content {
-            name = excluded_rule.value
+            name = rule_action_override.value
+            action_to_use {
+              count {}
+            }
           }
         }
 
-        excluded_rule {
+        rule_action_override {
           name = "SizeRestrictions_BODY"
+          action_to_use {
+            count {}
+          }
         }
       }
     }
@@ -114,8 +120,11 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
       managed_rule_group_statement {
         name        = "AWSManagedRulesLinuxRuleSet"
         vendor_name = "AWS"
-        excluded_rule {
+        rule_action_override {
           name = "LFI_QUERYSTRING"
+          action_to_use {
+            count {}
+          }
         }
       }
     }
@@ -202,11 +211,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
       managed_rule_group_statement {
         name        = "AWSManagedRulesSQLiRuleSet"
         vendor_name = "AWS"
-        excluded_rule {
+        rule_action_override {
           name = "SQLi_BODY"
+          action_to_use {
+            count {}
+          }
         }
-        excluded_rule {
+        rule_action_override {
           name = "SQLiExtendedPatterns_Body"
+          action_to_use {
+            count {}
+          }
         }
       }
     }

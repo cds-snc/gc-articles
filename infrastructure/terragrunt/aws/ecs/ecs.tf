@@ -19,7 +19,7 @@ resource "aws_ecs_cluster" "wordpress" {
 }
 
 resource "aws_ecs_cluster_capacity_providers" "wordpress" {
-  cluster_name = aws_ecs_cluster.examwordpressple.name
+  cluster_name = aws_ecs_cluster.wordpress.name
 
   capacity_providers = ["FARGATE"]
 

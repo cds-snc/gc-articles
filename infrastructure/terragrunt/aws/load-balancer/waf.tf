@@ -1,6 +1,6 @@
 locals {
   # Rules that must be excluded from the AWSManagedRulesCommonRuleSet for WordPress to work
-  common_excluded_rules = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH", "CrossSiteScripting_BODY"]
+  common_excluded_rules = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH", "CrossSiteScripting_BODY", "SizeRestrictions_BODY"]
 }
 
 #
@@ -47,13 +47,6 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
             action_to_use {
               count {}
             }
-          }
-        }
-
-        rule_action_override {
-          name = "SizeRestrictions_BODY"
-          action_to_use {
-            count {}
           }
         }
       }

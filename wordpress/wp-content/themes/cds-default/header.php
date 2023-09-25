@@ -59,15 +59,25 @@ declare(strict_types=1);
       <section id="wb-lng" class="col-xs-3 col-sm-12 pull-right text-right">
         <h2 class="wb-inv"><?php _e('Language selection'); ?></h2>
         <ul class="list-inline mrgn-bttm-0">
-          <li class="mrgn-rght-md">
-              <?php if (is_main_site()) { ?>
-                    <?php if (is_user_logged_in()) { ?>
-                    <a href="<?php echo wp_logout_url(); ?>"><?php _e('Sign out', 'cds-snc')?></a>
-                    <?php } else { ?>
-                    <a href="<?php echo wp_login_url();  ?>"><?php _e('Sign in', 'cds-snc')?></a>
-                    <?php } ?>
-              <?php } ?>
-          </li>
+          <?php
+            if (has_nav_menu('topbar')) {
+                wp_nav_menu(array(
+                    'container' => false,
+                    'depth' => 1,
+                    'items_wrap' => '%3$s',
+                    'theme_location' => 'topbar'
+                ));
+            }
+            ?>
+          <?php if (is_main_site()) { ?>
+            <li class="mrgn-rght-md">
+                <?php if (is_user_logged_in()) { ?>
+                <a href="<?php echo wp_logout_url(); ?>"><?php _e('Sign out', 'cds-snc')?></a>
+                <?php } else { ?>
+                <a href="<?php echo wp_login_url();  ?>"><?php _e('Sign in', 'cds-snc')?></a>
+                <?php } ?>
+            </li>
+          <?php } ?>
           <li>
               <?php echo language_switcher(); ?>
           </li>

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2022-08-12T18:48:05+00:00\n"
+"POT-Creation-Date: 2023-09-25T18:01:22+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,79 +42,83 @@ msgstr "Primaire"
 msgid "Footer"
 msgstr "Pied de page"
 
-#: functions.php:98
+#: functions.php:80
+msgid "Top bar"
+msgstr "Barre supérieure"
+
+#: functions.php:99
 msgid "Black"
 msgstr "Noir"
 
-#: functions.php:103
+#: functions.php:104
 msgid "White"
 msgstr "Blanc"
 
-#: functions.php:108
+#: functions.php:109
 msgid "Primary Blue"
 msgstr "Bleu primaire"
 
-#: functions.php:113
+#: functions.php:114
 msgid "Dark Blue"
 msgstr "Bleu foncé"
 
-#: functions.php:118
+#: functions.php:119
 msgid "Light Blue"
 msgstr "Bleu clair"
 
-#: functions.php:123
+#: functions.php:124
 msgid "Dark Grey"
 msgstr "Gris foncé"
 
-#: functions.php:128
+#: functions.php:129
 msgid "Grey"
 msgstr "Gris"
 
-#: functions.php:133
+#: functions.php:134
 msgid "Orange"
 msgstr "Orange"
 
-#: functions.php:138
+#: functions.php:139
 msgid "Green"
 msgstr "Vert"
 
-#: functions.php:143
+#: functions.php:144
 msgid "Red"
 msgstr "Rouge"
 
-#: functions.php:151
+#: functions.php:152
 msgid "Small"
 msgstr ""
 
-#: functions.php:156
+#: functions.php:157
 msgid "Medium"
 msgstr ""
 
-#: functions.php:161
+#: functions.php:162
 msgid "Large"
 msgstr ""
 
-#: functions.php:166
+#: functions.php:167
 msgid "X-Large"
 msgstr ""
 
-#: functions.php:171
+#: functions.php:172
 msgid "XX-Large"
 msgstr ""
 
-#: functions.php:176
+#: functions.php:177
 msgid "XXX-Large"
 msgstr ""
 
-#: functions.php:237
+#: functions.php:238
 msgid "GC Homepage"
 msgstr "Page d’accueil GC"
 
-#: functions.php:254
+#: functions.php:255
 msgid "Default homepage"
 msgstr "Page d’accueil par défaut"
 
-#: functions.php:259
+#: functions.php:260
 msgid "Table of contents"
 msgstr ""
 
@@ -142,11 +146,11 @@ msgstr "Se Connecter"
 msgid "Search"
 msgstr "Rechercher"
 
-#: header.php:134 header.php:137
+#: header.php:139 header.php:142
 msgid "Menu"
 msgstr "Menu"
 
-#: header.php:136
+#: header.php:141
 msgid "Main"
 msgstr "Principal"
 
@@ -186,23 +190,23 @@ msgstr "Fil d’Ariane"
 msgid "You are here:"
 msgstr "Vous êtes ici :"
 
-#: inc/template-functions.php:404
+#: inc/template-functions.php:454
 msgid "Toggle submenu"
 msgstr "Basculer le sous-menu"
 
-#: inc/template-functions.php:407
+#: inc/template-functions.php:457
 msgid "Top menu"
 msgstr "Menu supérieur"
 
-#: inc/template-functions.php:408
+#: inc/template-functions.php:458
 msgid "submenu"
 msgstr "Sous-menu"
 
-#: inc/template-functions.php:429
+#: inc/template-functions.php:479
 msgid "Toggle submenu for "
 msgstr "Basculer le sous-menu de "
 
-#: inc/template-functions.php:445
+#: inc/template-functions.php:495
 msgid "Date modified:"
 msgstr "Date de modification :"
 

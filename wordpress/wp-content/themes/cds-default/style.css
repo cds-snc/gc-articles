@@ -584,3 +584,7 @@ body .is-layout-flow > * {
   background-color: #1c578a;
   text-decoration: none;
 }
+
+#wb-bnr .menu-item {
+  margin-right: 15px;
+}

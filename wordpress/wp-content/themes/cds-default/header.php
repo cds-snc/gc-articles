@@ -70,7 +70,7 @@ declare(strict_types=1);
             }
             ?>
           <?php if (is_main_site()) { ?>
-            <li class="mrgn-rght-md">
+            <li class="mrgn-lft-md">
                 <?php if (is_user_logged_in()) { ?>
                 <a href="<?php echo wp_logout_url(); ?>"><?php _e('Sign out', 'cds-snc')?></a>
                 <?php } else { ?>
@@ -78,7 +78,7 @@ declare(strict_types=1);
                 <?php } ?>
             </li>
           <?php } ?>
-          <li>
+          <li class="mrgn-lft-md">
               <?php echo language_switcher(); ?>
           </li>
         </ul>

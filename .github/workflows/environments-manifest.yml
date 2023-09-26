@@ -76,11 +76,11 @@ jobs:
           STAG_APACHE=v$(yq '.staging.apache' < ./infrastructure/environments.yml)
           PROD_INFRASTRUCTURE=v$(yq '.production.infrastructure' < ./infrastructure/environments.yml)
           echo "$(cat ./infrastructure/environments.yml)"
-          echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
-          echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
-          echo "::set-output name=PROD_APACHE::${PROD_APACHE}"
-          echo "::set-output name=STAG_APACHE::${STAG_APACHE}"
-          echo "::set-output name=PROD_INFRASTRUCTURE::infrastructure/${PROD_INFRASTRUCTURE}"
+          echo "PROD_WORDPRESS=${PROD_WORDPRESS}" >> "$GITHUB_OUTPUT"
+          echo "STAG_WORDPRESS=${STAG_WORDPRESS}" >> "$GITHUB_OUTPUT"
+          echo "PROD_APACHE=${PROD_APACHE}" >> "$GITHUB_OUTPUT"
+          echo "STAG_APACHE=${STAG_APACHE}" >> "$GITHUB_OUTPUT"
+          echo "PROD_INFRASTRUCTURE=infrastructure/${PROD_INFRASTRUCTURE}" >> "$GITHUB_OUTPUT"
 
       - name: Checkout
         uses: actions/checkout@3df4ab11eba7bda6032a0b82a6bb43b11571feac # v4.0.0
@@ -103,28 +103,28 @@ jobs:
           PROD_APACHE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.apache' -)
           STAG_APACHE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.staging.apache' -)
           PROD_INFRASTRUCTURE=v$(echo "$PREV_ENVIRONMENTS_YML" | yq '.production.infrastructure' -)
-          echo "::set-output name=PROD_WORDPRESS::${PROD_WORDPRESS}"
-          echo "::set-output name=STAG_WORDPRESS::${STAG_WORDPRESS}"
-          echo "::set-output name=PROD_APACHE::${PROD_APACHE}"
-          echo "::set-output name=STAG_APACHE::${STAG_APACHE}"
-          echo "::set-output name=PROD_INFRASTRUCTURE::infrastructure/${PROD_INFRASTRUCTURE}"
+          echo "PROD_WORDPRESS=${PROD_WORDPRESS}" >> "$GITHUB_OUTPUT"
+          echo "STAG_WORDPRESS=${STAG_WORDPRESS}" >> "$GITHUB_OUTPUT"
+          echo "PROD_APACHE=${PROD_APACHE}" >> "$GITHUB_OUTPUT"
+          echo "STAG_APACHE=${STAG_APACHE}" >> "$GITHUB_OUTPUT"
+          echo "PROD_INFRASTRUCTURE=infrastructure/${PROD_INFRASTRUCTURE}" >> "$GITHUB_OUTPUT"
           
       - name: Container deploy environment
         id: environment
         run: |
           if [ ${{ steps.previous.outputs.PROD_WORDPRESS }} != ${{ steps.versions.outputs.PROD_WORDPRESS }} ]; then
             echo "CONTAINER_DEPLOYMENT=production"
-            echo "::set-output name=CONTAINER_DEPLOYMENT::production"
+            echo "CONTAINER_DEPLOYMENT=production" >> "$GITHUB_OUTPUT"
           elif [ ${{ steps.previous.outputs.STAG_WORDPRESS }} != ${{ steps.versions.outputs.STAG_WORDPRESS }} ]; then
             echo "CONTAINER_DEPLOYMENT=staging"
-            echo "::set-output name=CONTAINER_DEPLOYMENT::staging"
+            echo "CONTAINER_DEPLOYMENT=staging" >> "$GITHUB_OUTPUT"
           elif [ ${{ steps.previous.outputs.PROD_APACHE }} != ${{ steps.versions.outputs.PROD_APACHE }} ]; then
             echo "CONTAINER_DEPLOYMENT=production"
-            echo "::set-output name=CONTAINER_DEPLOYMENT::production"
+            echo "CONTAINER_DEPLOYMENT=production" >> "$GITHUB_OUTPUT"
           elif [ ${{ steps.previous.outputs.STAG_APACHE }} != ${{ steps.versions.outputs.STAG_APACHE }} ]; then
             echo "CONTAINER_DEPLOYMENT=staging"
-            echo "::set-output name=CONTAINER_DEPLOYMENT::staging"
+            echo "CONTAINER_DEPLOYMENT=staging" >> "$GITHUB_OUTPUT"
           else
             echo "CONTAINER_DEPLOYMENT=false"
-            echo "::set-output name=CONTAINER_DEPLOYMENT::false"
+            echo "CONTAINER_DEPLOYMENT=false" >> "$GITHUB_OUTPUT"
           fi

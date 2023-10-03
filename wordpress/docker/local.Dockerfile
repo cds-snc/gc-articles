@@ -1,5 +1,5 @@
 # wordpress version needs to match the version found in ~/wordpress/docker/Dockerfile
-FROM wordpress:6.3.1-php8.1-fpm-alpine@sha256:02a1a52a067fa416311d3093069b4f2184ec01b37c2399d40e58864c30ffd276
+FROM wordpress:6.3.1-php8.1-fpm-alpine@sha256:8f227c350b78a556c0e1080ed4fe3505a1d6418538faf4374e478c92143147a9
 
 WORKDIR /usr/src/wordpress
 

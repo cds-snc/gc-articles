@@ -213,6 +213,14 @@ class SiteSettings
             }
         );
 
+        register_setting(
+            'site_settings_group', // option_group
+            'google_tag_manager_id',
+            function ($input) {
+                return sanitize_text_field($input);
+            }
+        );
+
         // add fields GENERAL
         add_settings_field(
             'blogname', // id
@@ -358,6 +366,17 @@ class SiteSettings
                 'label_for' => 'analytics_id'
             ]
         );
+
+        add_settings_field(
+            'google_tag_manager_id', // id
+            __('Google Tag Manager id', 'cds-snc'), // title
+            array($this, 'googleTagManagerCallback'), // callback
+            'collection-settings-admin', // page
+            'collection_settings_section_analytics', // section
+            [
+                'label_for' => 'google_tag_manager_id'
+            ]
+        );
     }
 
     public function collectionModeCallback($args)
@@ -476,6 +495,15 @@ class SiteSettings
         ?>
         <input name="analytics_id" type="text" id="analytics_id" class="regular-text"
                value="<?php echo esc_attr($analyticsId); ?>">
+        <?php
+    }
+
+    public function googleTagManagerCallback()
+    {
+        $googleTagManagerId = get_option("google_tag_manager_id", "");
+        ?>
+        <input name="google_tag_manager_id" type="text" id="google_tag_manager_id" class="regular-text"
+               value="<?php echo esc_attr($googleTagManagerId); ?>">
         <?php
     }
 

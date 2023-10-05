@@ -1,17 +1,17 @@
-# Copyright (C) 2022 CDS-SNC
+# Copyright (C) 2023 CDS-SNC
 # This file is distributed under the same license as the CDS-SNC Base plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS-SNC Base 3.6.3\n"
+"Project-Id-Version: CDS-SNC Base 3.11.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-08-12T20:49:25+00:00\n"
+"POT-Creation-Date: 2023-10-05T19:50:33+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
+"X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: cds-snc\n"
 
 #. Plugin Name of the plugin
@@ -30,7 +30,7 @@ msgstr ""
 msgid "CDS-SNC"
 msgstr ""
 
-#: classes/Modules/Blocks/src/latestPosts/LatestPosts.php:46
+#: classes/Modules/Blocks/src/latestPosts/LatestPosts.php:50
 msgid "Read more"
 msgstr ""
 
@@ -43,39 +43,39 @@ msgstr ""
 msgid "Subscribe:"
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:131
+#: classes/Modules/Checklists/Setup.php:147
 msgid "Are you sure you want to publish?"
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:132
+#: classes/Modules/Checklists/Setup.php:148
 msgid "There are still recommended items remaining on your checklist. What would you like to do?"
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:134
+#: classes/Modules/Checklists/Setup.php:150
 msgid "Don’t publish"
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:135
+#: classes/Modules/Checklists/Setup.php:151
 msgid "Publish anyway"
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:141
+#: classes/Modules/Checklists/Setup.php:157
 msgid "Publishing not allowed"
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:142
+#: classes/Modules/Checklists/Setup.php:158
 msgid "Please complete all the required checklist items before publishing."
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:144
+#: classes/Modules/Checklists/Setup.php:160
 msgid "Okay, take me to the list."
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:149
+#: classes/Modules/Checklists/Setup.php:165
 msgid "Publish…"
 msgstr ""
 
-#: classes/Modules/Checklists/Setup.php:150
+#: classes/Modules/Checklists/Setup.php:166
 msgid "Update…"
 msgstr ""
 
@@ -102,13 +102,13 @@ msgid " (current)"
 msgstr ""
 
 #: classes/Modules/Cleanup/AdminBar.php:205
-#: build/index.js:763
+#: build/index.js:1230
 #: build/index.js:681
 msgid "Dashboard"
 msgstr ""
 
 #: classes/Modules/Cleanup/AdminBar.php:214
-#: build/index.js:764
+#: build/index.js:1231
 #: build/index.js:682
 msgid "Visit"
 msgstr ""
@@ -210,7 +210,7 @@ msgstr ""
 
 #: classes/Modules/Forms/Contact/ContactForm.php:84
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:88
-#: build/index.js:1025
+#: build/index.js:1668
 #: build/index.js:934
 msgid "Email"
 msgstr ""
@@ -241,102 +241,98 @@ msgstr ""
 msgid "Your answer helps us make sure your message gets to the right people."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:141
+#: classes/Modules/Forms/Contact/ContactForm.php:135
 msgid "Ask a question."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:147
+#: classes/Modules/Forms/Contact/ContactForm.php:141
 msgid "Get technical support."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:153
+#: classes/Modules/Forms/Contact/ContactForm.php:147
 msgid "Give feedback."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:159
-msgid "Other"
-msgstr ""
-
-#: classes/Modules/Forms/Contact/ContactForm.php:170
+#: classes/Modules/Forms/Contact/ContactForm.php:158
 msgid "What are you thinking about using GC Articles for? (optional)"
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:173
-#: classes/Modules/Forms/Contact/ContactForm.php:224
+#: classes/Modules/Forms/Contact/ContactForm.php:161
+#: classes/Modules/Forms/Contact/ContactForm.php:212
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:175
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:225
 msgid "We use this information to improve GC Articles."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:181
+#: classes/Modules/Forms/Contact/ContactForm.php:169
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:183
 msgid "Blog."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:187
+#: classes/Modules/Forms/Contact/ContactForm.php:175
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:189
 msgid "Newsletter archive with emailing to a subscriber list."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:193
+#: classes/Modules/Forms/Contact/ContactForm.php:181
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:195
 msgid "Website."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:199
+#: classes/Modules/Forms/Contact/ContactForm.php:187
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:201
 msgid "Internal website."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:205
+#: classes/Modules/Forms/Contact/ContactForm.php:193
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:207
 msgid "Something else."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:213
+#: classes/Modules/Forms/Contact/ContactForm.php:201
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:214
 msgid "Other usage"
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:221
+#: classes/Modules/Forms/Contact/ContactForm.php:209
 msgid "Who are the target audiences you’re thinking about? (optional)"
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:232
+#: classes/Modules/Forms/Contact/ContactForm.php:220
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:233
 msgid "People who use your programs and services."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:238
+#: classes/Modules/Forms/Contact/ContactForm.php:226
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:239
 msgid "General public."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:244
+#: classes/Modules/Forms/Contact/ContactForm.php:232
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:245
 msgid "Subscribers."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:250
+#: classes/Modules/Forms/Contact/ContactForm.php:238
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:251
 msgid "Internal employees and/or community volunteers."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:256
+#: classes/Modules/Forms/Contact/ContactForm.php:244
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:257
 msgid "Other people."
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:263
+#: classes/Modules/Forms/Contact/ContactForm.php:251
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:264
 msgid "Other target audience"
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:268
+#: classes/Modules/Forms/Contact/ContactForm.php:256
 msgid "Your message"
 msgstr ""
 
-#: classes/Modules/Forms/Contact/ContactForm.php:279
+#: classes/Modules/Forms/Contact/ContactForm.php:267
 #: classes/Modules/Forms/RequestSite/RequestSiteForm.php:286
 msgid "Next"
 msgstr ""
@@ -348,8 +344,8 @@ msgstr ""
 msgid "Please complete the required field(s) to continue"
 msgstr ""
 
-#: classes/Modules/Forms/Contact/Setup.php:124
-#: classes/Modules/Forms/RequestSite/Setup.php:103
+#: classes/Modules/Forms/Contact/Setup.php:126
+#: classes/Modules/Forms/RequestSite/Setup.php:105
 msgid "Requester:"
 msgstr ""
 
@@ -366,7 +362,7 @@ msgid "ZenDesk client error"
 msgstr ""
 
 #: classes/Modules/Forms/Messenger.php:108
-#: build/index.js:80
+#: build/index.js:98
 #: build/index.js:61
 msgid "Success"
 msgstr ""
@@ -375,7 +371,7 @@ msgstr ""
 #: classes/Modules/Forms/Subscribe/Subscribe.php:46
 #: classes/Modules/Forms/Subscribe/Subscribe.php:50
 #: classes/Modules/Forms/Subscribe/Subscribe.php:86
-#: build/index.js:1006
+#: build/index.js:1634
 #: build/index.js:915
 msgid "Internal server error"
 msgstr ""
@@ -465,7 +461,6 @@ msgid "Unknown subscription"
 msgstr ""
 
 #: classes/Modules/Forms/Subscribe/SubscriptionForm.php:26
-#: classes/Modules/Forms/Subscribe/js/dist/index.js:1
 msgid "Subscribe"
 msgstr ""
 
@@ -501,53 +496,133 @@ msgstr ""
 msgid "Post content as markdown"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:52
-#: classes/Modules/Notify/NotifySettings.php:53
-#: classes/Modules/Notify/NotifySettings.php:119
-msgid "API Settings"
+#: classes/Modules/Notify/NotifySettings.php:54
+msgid "Copied to clipboard"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:126
-msgid "API key"
+#: classes/Modules/Notify/NotifySettings.php:93
+#: classes/Modules/Notify/NotifySettings.php:161
+msgid "Set up GC Lists"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:137
-msgid "Subscribe template ID"
-msgstr ""
-
-#: classes/Modules/Notify/NotifySettings.php:148
-msgid "Message template ID"
+#: classes/Modules/Notify/NotifySettings.php:94
+msgid "Setup"
 msgstr ""
 
 #: classes/Modules/Notify/NotifySettings.php:168
-msgid "<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-only\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span class=\"sr-only\"> and ends with</span>%3$s</span>"
+msgid "API key"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:192
-msgid "Read <a href=\"https://documentation.notification.canada.ca/en/keys.html\" target=\"_blank\">API keys</a> for details."
+#: classes/Modules/Notify/NotifySettings.php:179
+msgid "Message template ID"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:198
-msgid "Enter your API Key"
+#: classes/Modules/Notify/NotifySettings.php:190
+msgid "Subscribe template ID"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:198
-msgid "See example key format."
+#: classes/Modules/Notify/NotifySettings.php:202
+msgid "To start creating mailing lists and sending messages, you must connect a GC Notify service to GC Lists."
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:205
+msgid "You can generate the required information below once you have a live"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:206
+msgid "https://notification.canada.ca/"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:207
+msgid "GC Notify"
 msgstr ""
 
 #: classes/Modules/Notify/NotifySettings.php:208
-msgid "Read the <a href=\"https://notification.canada.ca/format\" target=\"_blank\">Email formatting guide</a> for details."
+msgid "service"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:214
-msgid "Enter your message template ID"
+#: classes/Modules/Notify/NotifySettings.php:218
+msgid "<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-only\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span class=\"sr-only\"> and ends with</span>%3$s</span>"
 msgstr ""
 
-#: classes/Modules/Notify/NotifySettings.php:214
-#: classes/Modules/Notify/NotifySettings.php:229
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
-#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
-msgid "See example template ID format."
+#: classes/Modules/Notify/NotifySettings.php:242
+msgid "Read <a href=\"https://documentation.notification.canada.ca/en/keys.html\" target=\"_blank\">API keys</a> for details."
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:256
+msgid "How to get an API key"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:257
+#: classes/Modules/Notify/NotifySettings.php:298
+#: classes/Modules/Notify/NotifySettings.php:345
+msgid "Sign in to GC Notify"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:258
+msgid "Go to the API integration page"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:259
+msgid "Select API keys"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:260
+msgid "Select Create an API key"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:261
+msgid "The API key should follow this format:"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:274
+msgid "The messages you send will follow this format. It includes a way for people to unsubscribe from the mailing list."
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:297
+#: classes/Modules/Notify/NotifySettings.php:344
+msgid "How to get an message template ID"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:299
+#: classes/Modules/Notify/NotifySettings.php:346
+msgid "Select Create a template"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:300
+#: classes/Modules/Notify/NotifySettings.php:347
+msgid "Choose the type of message"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:301
+#: classes/Modules/Notify/NotifySettings.php:348
+msgid "Pick a name for your list"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:302
+#: classes/Modules/Notify/NotifySettings.php:349
+msgid "Enter below text into the corresponding fields in GC Notify:"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:303
+#: classes/Modules/Notify/NotifySettings.php:350
+msgid "Subject line of the email:"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:305
+#: classes/Modules/Notify/NotifySettings.php:308
+#: classes/Modules/Notify/NotifySettings.php:352
+#: classes/Modules/Notify/NotifySettings.php:355
+msgid "Copy to clipboard"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:306
+#: classes/Modules/Notify/NotifySettings.php:353
+msgid "Message:"
+msgstr ""
+
+#: classes/Modules/Notify/NotifySettings.php:321
+msgid "People will receive this message to verify their email address after subscribing to your mailing list."
 msgstr ""
 
 #: classes/Modules/Releases/Releases.php:59
@@ -562,87 +637,103 @@ msgstr ""
 msgid "Site configuration"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:219
+#: classes/Modules/Site/SiteSettings.php:227
 msgid "Site Name"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:230
+#: classes/Modules/Site/SiteSettings.php:238
 msgid "Site Description"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:241
+#: classes/Modules/Site/SiteSettings.php:249
 msgid "Home Page"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:253
+#: classes/Modules/Site/SiteSettings.php:259
 msgid "Activate maintenance mode"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:264
+#: classes/Modules/Site/SiteSettings.php:274
 msgid "Maintenance Page"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:275
+#: classes/Modules/Site/SiteSettings.php:285
 msgid "Search engine visibility"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:287
-msgid "Canada.ca top menu"
+#: classes/Modules/Site/SiteSettings.php:295
+msgid "Top menu"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:298
+#: classes/Modules/Site/SiteSettings.php:308
 msgid "Search bar"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:315
+#: classes/Modules/Site/SiteSettings.php:327
 msgid "Breadcrumbs"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:326
+#: classes/Modules/Site/SiteSettings.php:342
 msgid "Where should the Canada.ca header link to?"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:345
+#: classes/Modules/Site/SiteSettings.php:361
 msgid "Analytics id"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:362
+#: classes/Modules/Site/SiteSettings.php:372
+msgid "Google Tag Manager id"
+msgstr ""
+
+#: classes/Modules/Site/SiteSettings.php:391
 msgid "Turn on"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:367
+#: classes/Modules/Site/SiteSettings.php:396
 msgid "Turn off"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:378
+#: classes/Modules/Site/SiteSettings.php:416
 msgid "Show Canada.ca menu"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:383
-msgid "Hide Canada.ca menu"
+#: classes/Modules/Site/SiteSettings.php:422
+msgid "Show custom menu"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:394
+#: classes/Modules/Site/SiteSettings.php:429
+msgid "You can set a custom menu in"
+msgstr ""
+
+#: classes/Modules/Site/SiteSettings.php:431
+msgid "Appearance > Menus"
+msgstr ""
+
+#: classes/Modules/Site/SiteSettings.php:438
+msgid "Hide top menu"
+msgstr ""
+
+#: classes/Modules/Site/SiteSettings.php:452
 msgid "Show the search bar"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:399
+#: classes/Modules/Site/SiteSettings.php:457
 msgid "Hide the search bar"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:410
+#: classes/Modules/Site/SiteSettings.php:471
 msgid "Show breadcrumbs"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:415
+#: classes/Modules/Site/SiteSettings.php:476
 msgid "Hide breadcrumbs"
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:496
+#: classes/Modules/Site/SiteSettings.php:568
 msgid "In maintenance mode, pages and articles you publish will <strong>not</strong> be publicly visible."
 msgstr ""
 
-#: classes/Modules/Site/SiteSettings.php:501
+#: classes/Modules/Site/SiteSettings.php:573
 msgid "Logged-in users will be able to create and view content, but all other visitors will be redirected to the maintenance page."
 msgstr ""
 
@@ -687,7 +778,7 @@ msgid "Two factor authentication"
 msgstr ""
 
 #: classes/Modules/TwoFactor/TwoFactor.php:53
-#: build/index.js:81
+#: build/index.js:101
 #: build/index.js:62
 msgid "Warning"
 msgstr ""
@@ -738,7 +829,7 @@ msgid "To get started log in here: "
 msgstr ""
 
 #: classes/Modules/Users/Users.php:337
-#: build/index.js:1061
+#: build/index.js:1736
 #: build/index.js:970
 msgid "Add user"
 msgstr ""
@@ -767,165 +858,162 @@ msgstr ""
 msgid "Language of page"
 msgstr ""
 
-#: build/index.js:18
+#: build/index.js:21
 #: build/index.js:8
 msgid "Accordion"
 msgstr ""
 
-#: build/index.js:32
-#: build/index.js:112
-#: build/index.js:175
+#: build/index.js:46
+#: build/index.js:152
+#: build/index.js:237
 #: build/index.js:22
 #: build/index.js:93
 #: build/index.js:147
 msgid "Title"
 msgstr ""
 
-#: build/index.js:75
+#: build/index.js:89
 #: build/index.js:56
 msgid "Settings"
 msgstr ""
 
-#: build/index.js:78
+#: build/index.js:92
 #: build/index.js:59
 msgid "Alert Type"
 msgstr ""
 
-#: build/index.js:79
+#: build/index.js:95
 #: build/index.js:60
 msgid "Info"
 msgstr ""
 
-#: build/index.js:82
+#: build/index.js:104
 #: build/index.js:63
 msgid "Danger"
 msgstr ""
 
-#: build/index.js:86
+#: build/index.js:115
 #: build/index.js:67
 msgid "Alert"
 msgstr ""
 
-#: build/index.js:116
-#: build/index.js:179
+#: build/index.js:163
+#: build/index.js:248
 #: build/index.js:97
 #: build/index.js:151
 msgid "Summary"
 msgstr ""
 
-#: build/index.js:156
+#: build/index.js:209
 #: build/index.js:128
 msgid "Expander"
 msgstr ""
 
-#: build/index.js:243
+#: build/index.js:319
 #: build/index.js:206
 msgid "Show “Read More”"
 msgstr ""
 
-#: build/index.js:353
+#: build/index.js:518
 #: build/index.js:307
 msgid "Latest Page"
 msgstr ""
 
-#: build/index.js:355
+#: build/index.js:518
 #: build/index.js:309
 msgid "Latest Article"
 msgstr ""
 
-#: build/index.js:464
+#: build/index.js:729
 #: build/index.js:409
 msgid " Tables exist from deleted sites"
 msgstr ""
 
-#: build/index.js:641
+#: build/index.js:1013
 #: build/index.js:568
 msgid "Date"
 msgstr ""
 
-#: build/index.js:643
+#: build/index.js:1015
 #: build/index.js:570
 msgid "User agent"
 msgstr ""
 
-#: build/index.js:772
+#: build/index.js:1238
 #: build/index.js:690
 msgid "current"
 msgstr ""
 
-#: build/index.js:788
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: build/index.js:1263
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 #: build/index.js:706
 msgid "Name"
 msgstr ""
 
-#: build/index.js:790
+#: build/index.js:1265
 #: build/index.js:708
 msgid "Website"
 msgstr ""
 
-#: build/index.js:792
+#: build/index.js:1267
 #: build/index.js:710
 msgid "Admin"
 msgstr ""
 
-#: build/index.js:913
+#: build/index.js:1484
 #: build/index.js:822
 msgid "Success!"
 msgstr ""
 
-#: build/index.js:919
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: build/index.js:1493
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 #: build/index.js:828
 msgid "There is a problem"
 msgstr ""
 
-#: build/index.js:944
+#: build/index.js:1536
 #: build/index.js:853
 msgid "Select one"
 msgstr ""
 
-#: build/index.js:1019
+#: build/index.js:1659
 #: build/index.js:928
 msgid "Invite a user to collaborate on your GC Articles collection."
 msgstr ""
 
-#: build/index.js:1031
+#: build/index.js:1677
 #: build/index.js:940
 msgid "Role"
 msgstr ""
 
-#: build/index.js:1053
+#: build/index.js:1707
 #: build/index.js:962
 msgid "Confirmation type"
 msgstr ""
 
-#: build/index.js:1057
+#: build/index.js:1719
 #: build/index.js:966
 msgid "Welcome"
 msgstr ""
 
-#: build/index.js:1060
+#: build/index.js:1727
 #: build/index.js:969
 msgid "Default"
 msgstr ""
 
 #: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:22
-#: classes/Modules/Forms/Subscribe/js/dist/index.js:1
 msgid "Subscribe form settings"
 msgstr ""
 
 #: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:24
-#: classes/Modules/Forms/Subscribe/js/dist/index.js:1
 msgid "Email field label"
 msgstr ""
 
 #: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:31
-#: classes/Modules/Forms/Subscribe/js/dist/index.js:1
 msgid "Subscribe button label"
 msgstr ""
 
@@ -937,38 +1025,6 @@ msgstr ""
 #: classes/Modules/BlocksPHP/build/subscribe/index.js:1
 #: classes/Modules/BlocksPHP/src/subscribe/edit.js:46
 msgid "Privacy policy link"
-msgstr ""
-
-#: classes/Modules/Forms/Contact/js/dist/index.js:205
-#: classes/Modules/Forms/Contact/js/dist/index.js:83
-msgid "Contact"
-msgstr ""
-
-#: classes/Modules/Forms/Contact/js/dist/index.js:206
-#: classes/Modules/Forms/Contact/js/dist/index.js:84
-msgid "Platform team contact form"
-msgstr ""
-
-#: classes/Modules/Forms/RequestSite/js/dist/index.js:201
-#: classes/Modules/Forms/RequestSite/js/dist/index.js:82
-msgid "Request a site"
-msgstr ""
-
-#: classes/Modules/Forms/RequestSite/js/dist/index.js:202
-#: classes/Modules/Forms/RequestSite/js/dist/index.js:83
-msgid "GC Articles team request a site form"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/js/dist/index.js:1
-msgid "List Mananger subscription"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/js/dist/index.js:1
-msgid "Placeholder text"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/js/dist/index.js:1
-msgid "List ID"
 msgstr ""
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
@@ -1074,72 +1130,72 @@ msgstr ""
 msgid "All sending history"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Message preview"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Subject"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "The message was sent to the the subscribers in the list below."
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Sending to:"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Message sent"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Send a new message"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Return to messages"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Create a new list."
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "A subscriber list allows you to collect a group of subscribers that you can send a message to."
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Send to list?"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "warning"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Yes send it"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "No, cancel"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
 msgid "Send message to a list"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Subscriber list"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Choose a group to send this message to."
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/431.db31195f.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Send message"
 msgstr ""
 
@@ -1147,54 +1203,59 @@ msgstr ""
 msgid "Sending history"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/958.f540b6f4.chunk.js:1
 msgid "Go back"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "Required Field"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
 msgid "Name is required"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "List type"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "Type is required"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "Subscribe template id"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
+msgid "See example template ID format."
+msgstr ""
+
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "Unsubscribe template id"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "Subscribe redirect url"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "Unsubscribe redirect url"
 msgstr ""
 
-#: classes/Modules/ListManager/app/build/static/js/569.8dbb719d.chunk.js:1
+#: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "Confirm redirect url"
 msgstr ""

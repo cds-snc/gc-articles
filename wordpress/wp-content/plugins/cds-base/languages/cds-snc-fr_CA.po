@@ -991,27 +991,27 @@ msgstr "Lien de confidentialité"
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Message Name"
-msgstr ""
+msgstr "Nom du message"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Message type"
-msgstr ""
+msgstr "Type de message"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Last modified"
-msgstr ""
+msgstr "Dernière modification"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Edit"
-msgstr ""
+msgstr "Modifier"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
@@ -1021,148 +1021,148 @@ msgstr "Envoyer le modèle"
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Create Template"
-msgstr ""
+msgstr "Créer un modèle"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Message templates"
-msgstr ""
+msgstr "Modèles de messages"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
 msgid "Message name"
-msgstr ""
+msgstr "Nom du message"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 msgid "Date sent"
-msgstr ""
+msgstr "Date d'envoi"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 msgid "List name"
-msgstr ""
+msgstr "Nom de la liste"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 msgid "Sender"
-msgstr ""
+msgstr "Envoyeur"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 msgid "Sending History"
-msgstr ""
+msgstr "Historique des envois"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "Showing"
-msgstr ""
+msgstr "Montrer"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "of"
-msgstr ""
+msgstr "de"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "previous"
-msgstr ""
+msgstr "précédent"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/536.014c49cb.chunk.js:1
 msgid "next"
-msgstr ""
+msgstr "suivant"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 msgid "All message templates"
-msgstr ""
+msgstr "Tous les modèles de messages"
 
 #: classes/Modules/ListManager/app/build/static/js/74.543d198a.chunk.js:1
 msgid "All sending history"
-msgstr ""
+msgstr "Tous les historiques d'envoi"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Message preview"
-msgstr ""
+msgstr "Aperçu du message"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Subject"
-msgstr ""
+msgstr "Sujet"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "The message was sent to the the subscribers in the list below."
-msgstr ""
+msgstr "Le message a été envoyé aux abonnés de la liste ci-dessous."
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Sending to:"
-msgstr ""
+msgstr "Envoi à :"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Message sent"
-msgstr ""
+msgstr "Message envoyé"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Send a new message"
-msgstr ""
+msgstr "Envoyer un nouveau message"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Return to messages"
-msgstr ""
+msgstr "Retour aux messages"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Create a new list."
-msgstr ""
+msgstr "Créer une nouvelle liste."
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "A subscriber list allows you to collect a group of subscribers that you can send a message to."
-msgstr ""
+msgstr "Une liste d'abonnés vous permet de rassembler un groupe d'abonnés auxquels vous pouvez envoyer un message."
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Send to list?"
-msgstr ""
+msgstr "Envoyer à la liste ?"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "warning"
-msgstr ""
+msgstr "alerte"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Yes send it"
-msgstr ""
+msgstr "Oui, envoyez-le"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "No, cancel"
-msgstr ""
+msgstr "Non, annuler"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/806.213ea476.chunk.js:1
 msgid "Send message to a list"
-msgstr ""
+msgstr "Envoyer un message à une liste"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Subscriber list"
-msgstr ""
+msgstr "Liste des abonnés"
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Choose a group to send this message to."
-msgstr ""
+msgstr "Choisissez un groupe auquel envoyer ce message."
 
 #: classes/Modules/ListManager/app/build/static/js/431.99d242f4.chunk.js:1
 msgid "Send message"
-msgstr ""
+msgstr "Envoyer un message"
 
 #: classes/Modules/ListManager/app/build/static/js/528.1e3e09a5.chunk.js:1
 msgid "Sending history"
-msgstr ""
+msgstr "Historique des envois"
 
 #: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
@@ -1184,12 +1184,12 @@ msgstr "Le nom est requis"
 #: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "List type"
-msgstr ""
+msgstr "Type de liste"
 
 #: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1
 msgid "Type is required"
-msgstr ""
+msgstr "Le type est requis"
 
 #: classes/Modules/ListManager/app/build/static/js/569.4568d616.chunk.js:1
 #: classes/Modules/ListManager/app/build/static/js/710.109d2578.chunk.js:1

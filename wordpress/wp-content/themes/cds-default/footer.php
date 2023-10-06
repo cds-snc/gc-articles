@@ -63,8 +63,27 @@ $footerMenu = '';
 
 <?php
 $analyticsId = get_option('analytics_id');
+$googleTagManagerId = get_option('google_tag_manager_id');
 
-if ($analyticsId) {
+// If we have a Google Tag Manager ID, use that. Otherwise, use Google Analytics.
+if ($googleTagManagerId) {
+    $gtm_code_id = sanitize_text_field($googleTagManagerId);
+
+    if ($gtm_code_id) {
+        ob_start(); ?>
+        <!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','<?php echo $gtm_code_id; ?>');</script>
+        <!-- End Google Tag Manager -->
+        <?php
+        $gtm_code = ob_get_contents();
+        ob_end_clean();
+        echo $gtm_code;
+    }
+} else if ($analyticsId) {
     $ga_code_id = sanitize_text_field($analyticsId);
 
     if ($ga_code_id) {

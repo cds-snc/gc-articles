@@ -1,6 +1,6 @@
 production:
   apache: 1.1.1
-  wordpress: 3.11.8
+  wordpress: 3.11.10
   infrastructure: 1.2.36
 staging:
   apache: 1.1.1

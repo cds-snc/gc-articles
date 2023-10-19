@@ -13,6 +13,7 @@ module "rds_cluster" {
   username       = var.database_username
   password       = var.database_password
 
+  backtrack_window             = 0 # Backtracking cannot be enabled on existing clusters :(
   backup_retention_period      = 14
   preferred_backup_window      = "02:00-04:00"
   performance_insights_enabled = var.database_performance_insights_enabled

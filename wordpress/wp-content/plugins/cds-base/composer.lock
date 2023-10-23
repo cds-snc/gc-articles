@@ -2437,16 +2437,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v6.3.3",
+            "version": "v6.3.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "3ed078c54bc98bbe4414e1e9b2d5e85ed5a5c8bd"
+                "reference": "869b26c7a9d4b8a48afdd77ab36031909c87e3a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/3ed078c54bc98bbe4414e1e9b2d5e85ed5a5c8bd",
-                "reference": "3ed078c54bc98bbe4414e1e9b2d5e85ed5a5c8bd",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/869b26c7a9d4b8a48afdd77ab36031909c87e3a2",
+                "reference": "869b26c7a9d4b8a48afdd77ab36031909c87e3a2",
                 "shasum": ""
             },
             "require": {
@@ -2512,7 +2512,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v6.3.3"
+                "source": "https://github.com/symfony/translation/tree/v6.3.6"
             },
             "funding": [
                 {
@@ -2528,7 +2528,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-31T07:08:24+00:00"
+            "time": "2023-10-17T11:32:53+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -2747,16 +2747,16 @@
         },
         {
             "name": "wa72/htmlpagedom",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wasinger/htmlpagedom.git",
-                "reference": "568a7379e66c3a8cf973885b7811900487f11fbb"
+                "reference": "e8de7cde1a99a72e9d9bb54de54ae7343826315b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wasinger/htmlpagedom/zipball/568a7379e66c3a8cf973885b7811900487f11fbb",
-                "reference": "568a7379e66c3a8cf973885b7811900487f11fbb",
+                "url": "https://api.github.com/repos/wasinger/htmlpagedom/zipball/e8de7cde1a99a72e9d9bb54de54ae7343826315b",
+                "reference": "e8de7cde1a99a72e9d9bb54de54ae7343826315b",
                 "shasum": ""
             },
             "require": {
@@ -2768,6 +2768,7 @@
                 "symfony/dom-crawler": "^6"
             },
             "require-dev": {
+                "clean/phpdoc-md": "^0.19.3",
                 "mikey179/vfsstream": "^1.6.10",
                 "phpunit/phpunit": "^9",
                 "scrutinizer/ocular": "^1.9",
@@ -2807,9 +2808,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wasinger/htmlpagedom/issues",
-                "source": "https://github.com/wasinger/htmlpagedom/tree/v3.0.0"
+                "source": "https://github.com/wasinger/htmlpagedom/tree/v3.0.1"
             },
-            "time": "2022-04-13T15:28:55+00:00"
+            "time": "2023-10-13T16:13:45+00:00"
         }
     ],
     "packages-dev": [

@@ -1,9 +1,7 @@
 module "wordpress_storage" {
-  source                  = "github.com/cds-snc/terraform-modules//S3?ref=v7.0.2"
-  bucket_name             = "platform-gc-articles-${var.env}-uploads"
-  billing_tag_value       = var.billing_tag_value
-  block_public_policy     = false
-  restrict_public_buckets = false
+  source            = "github.com/cds-snc/terraform-modules//S3?ref=v7.0.2"
+  bucket_name       = "platform-gc-articles-${var.env}-uploads"
+  billing_tag_value = var.billing_tag_value
 }
 
 resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {

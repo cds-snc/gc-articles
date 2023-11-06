@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.283.14",
+            "version": "3.284.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "331894cd4751a06a4e5b3e4e2918a9233c9568dc"
+                "reference": "1b7e926acc990509e3d13fa708cdede686b40d90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/331894cd4751a06a4e5b3e4e2918a9233c9568dc",
-                "reference": "331894cd4751a06a4e5b3e4e2918a9233c9568dc",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1b7e926acc990509e3d13fa708cdede686b40d90",
+                "reference": "1b7e926acc990509e3d13fa708cdede686b40d90",
                 "shasum": ""
             },
             "require": {
@@ -204,9 +204,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.283.14"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.284.0"
             },
-            "time": "2023-10-27T18:06:59+00:00"
+            "time": "2023-11-03T18:13:48+00:00"
         },
         {
             "name": "brick/math",
@@ -4238,17 +4238,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "21.4",
+            "version": "21.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "aebcf691bd165363faab216fab8de048b10facc2"
+                "reference": "d5ac648a05d08f247ffe19e704bbf31d73130934"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-aebcf691bd165363faab216fab8de048b10facc2-zip-d0873e.zip",
-                "reference": "aebcf691bd165363faab216fab8de048b10facc2",
-                "shasum": "6bb24493d588ff159564fe5eca8ad5df7e121f52"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-d5ac648a05d08f247ffe19e704bbf31d73130934-zip-8412cf.zip",
+                "reference": "d5ac648a05d08f247ffe19e704bbf31d73130934",
+                "shasum": "8dc53b0ec5e88eb5ceecd5b4e0c7c45f438e4f3c"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4390,25 +4390,25 @@
                 "wiki": "https://github.com/Yoast/wordpress-seo/wiki",
                 "source": "https://github.com/Yoast/wordpress-seo"
             },
-            "time": "2023-10-17T07:56:51+00:00"
+            "time": "2023-10-31T09:27:40+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "21.4",
+            "version": "21.5",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "c69e631bdf54f5ab922a3a213efd42a678b0d49e"
+                "reference": "84323696d3e90cd61dd29ecbd61da90b26099fd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-c69e631bdf54f5ab922a3a213efd42a678b0d49e-zip-5f3aa3.zip",
-                "reference": "c69e631bdf54f5ab922a3a213efd42a678b0d49e",
-                "shasum": "3f41166dfe57b20661aefefdaf219c7821bf97f4"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-84323696d3e90cd61dd29ecbd61da90b26099fd0-zip-fc4ed3.zip",
+                "reference": "84323696d3e90cd61dd29ecbd61da90b26099fd0",
+                "shasum": "20dd96a7bd3d04b81ba5fae0b6fac5aace74e3d9"
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^21.4"
+                "yoast/wordpress-seo": "^21.5"
             },
             "require-dev": {
                 "yoast/wp-test-utils": "^1.2",
@@ -4524,7 +4524,7 @@
                 "issues": "https://github.com/Yoast/wordpress-seo-premium/issues",
                 "source": "https://github.com/Yoast/wordpress-seo-premium"
             },
-            "time": "2023-10-17T08:29:25+00:00"
+            "time": "2023-10-31T10:08:13+00:00"
         }
     ],
     "packages-dev": [
@@ -4694,16 +4694,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.15.3",
+            "version": "2.15.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "c83e88a30524f9360b11f585f71e6b17313b7187"
+                "reference": "a139776fa3f5985a50b509f2a02ff0f709d2a546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/c83e88a30524f9360b11f585f71e6b17313b7187",
-                "reference": "c83e88a30524f9360b11f585f71e6b17313b7187",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/a139776fa3f5985a50b509f2a02ff0f709d2a546",
+                "reference": "a139776fa3f5985a50b509f2a02ff0f709d2a546",
                 "shasum": ""
             },
             "require": {
@@ -4753,7 +4753,7 @@
             ],
             "support": {
                 "issues": "https://github.com/filp/whoops/issues",
-                "source": "https://github.com/filp/whoops/tree/2.15.3"
+                "source": "https://github.com/filp/whoops/tree/2.15.4"
             },
             "funding": [
                 {
@@ -4761,7 +4761,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-13T12:00:00+00:00"
+            "time": "2023-11-03T12:00:00+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",

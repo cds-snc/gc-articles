@@ -1,0 +1,13 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: gc-articles
+  description: >-
+    This repo is for GC Articles web publishing product undertaken by CDS
+    platform August 2021
+  labels:
+    license: GPL-2.0
+spec:
+  type: website
+  lifecycle: experimental
+  owner: gc-articles

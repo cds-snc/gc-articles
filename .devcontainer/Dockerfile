@@ -29,8 +29,8 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
     gettext && \
-    # Install from testing/edge repository
-    apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+    # Install from v3.16 alpine community repo
+    apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/v3.16/community/ \
         php8-xmlwriter \
         php8-simplexml \
         php8-tokenizer \

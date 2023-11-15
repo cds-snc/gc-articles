@@ -1,6 +1,6 @@
 FROM node:16-alpine@sha256:a1f9d027912b58a7c75be7716c97cfbc6d3099f3a97ed84aa490be9dee20e787 AS node
 
-FROM wordpress:cli-php8.1@sha256:b1337a4c5edda084f29943eff67adaa97b22311f62de86d71c612da37ea53d45
+FROM wordpress:cli-php8.2@sha256:dc34e8ba4aef66ea545ccfb80f10c287890d26b2443eb32a9b0bf512de9d00a1
 
 COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/share /usr/local/share
@@ -29,8 +29,8 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
     gettext && \
-    # Install from testing/edge repository
-    apk add --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ \
+    # Install from v3.16 alpine community repo
+    apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/v3.16/community/ \
         php8-xmlwriter \
         php8-simplexml \
         php8-tokenizer \

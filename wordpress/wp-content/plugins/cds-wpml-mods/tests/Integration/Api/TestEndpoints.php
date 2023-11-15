@@ -273,7 +273,7 @@ test('getTranslation good ID with translated post', function() {
 	$post = $this->factory()->post->create_and_get();
 	$postID = $post->ID;
 
-	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${postID}/translation");
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/{$postID}/translation");
 	$response = $this->server->dispatch($request);
 
 	expect($response->get_status())->toBe(200);
@@ -304,7 +304,7 @@ test('getTranslation good ID with NO translated post', function() {
 	$post = $this->factory()->post->create_and_get();
 	$postID = $post->ID;
 
-	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${postID}/translation");
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/{$postID}/translation");
 	$response = $this->server->dispatch($request);
 
 	expect($response->get_status())->toBe(200);
@@ -328,7 +328,7 @@ test('getTranslation error on bad ID', function() {
 	$post = $this->factory()->post->create_and_get();
 	$badPostID = $post->ID + 1;
 
-	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${badPostID}/translation");
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/{$badPostID}/translation");
 	$response = $this->server->dispatch($request);
 
 	expect($response->get_status())->toBe(404);
@@ -349,7 +349,7 @@ test('unsetTranslation error on bad ID', function() {
 	$post = $this->factory()->post->create_and_get();
 	$badPostID = $post->ID + 1;
 
-	$request  = new WP_REST_Request('DELETE', "/cds/wpml/posts/${badPostID}/translation");
+	$request  = new WP_REST_Request('DELETE', "/cds/wpml/posts/{$badPostID}/translation");
 	$response = $this->server->dispatch($request);
 
 	expect($response->get_status())->toBe(404);

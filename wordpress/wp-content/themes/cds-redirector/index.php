@@ -46,8 +46,8 @@ if (
 
 if (!$redirectHost) {
     $link = site_url() . "/wp-admin/admin.php?page=theme-settings";
-    wp_die("You have the Redirector theme enabled, but have not <a href='${link}'>configured a redirect.</a>");
+    wp_die("You have the Redirector theme enabled, but have not <a href='{$link}'>configured a redirect.</a>");
 }
 
 $redirectUrl = Utils::addHttp($redirectHost) . $pageName;
-header("Location: ${redirectUrl}");
+header("Location: {$redirectUrl}");

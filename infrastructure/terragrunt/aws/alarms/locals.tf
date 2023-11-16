@@ -20,6 +20,7 @@ locals {
     "HTTP/1.1\\\" 403",
     "HTTP/1.1\\\" 404",
     "Undefined constant",
+    "fr_FR.po",
   ]
   wordpress_database_errors = [
     "database error",
@@ -30,6 +31,8 @@ locals {
   ]
   wordpress_warnings_skip = [
     "Undefined array key*c3-cloudfront-clear-cache",
+    "fr_FR.po",
+    "chmod()",
   ]
   wordpress_error_metric_pattern          = "[(w1=\"*${join("*\" || w1=\"*", local.wordpress_errors)}*\") && w1!=\"*${join("*\" && w1!=\"*", local.wordpress_errors_skip)}*\"]"
   wordpress_database_error_metric_pattern = "[(w1=\"*${join("*\" || w1=\"*", local.wordpress_database_errors)}*\")]"

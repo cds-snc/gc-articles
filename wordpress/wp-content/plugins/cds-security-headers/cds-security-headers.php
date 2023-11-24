@@ -94,6 +94,8 @@ function cds_security_headers($headers)
             "'sha256-zR0p2KmH+27/29a/Au4gPdgseccjj6bQ1s//IxzxJW4='",
             "'sha256-2SmtX8FleooXSbJX4JL6SeaaNY70u0nxCQvR/Gg2EHA='",
             "'sha256-oZcz0w2RWHkYSMQ8YVYNBR9cguVgzGE9AQFBA8cl0Ic='",
+            "'sha256-Bs0uWww5CxWnf/7or8We/tRBQtfACJzPsj9WFg4UEPM='",
+            "'sha256-8E/Gjs/wB5HLNdxu7gY99fxxjYvurvtM/9yNcrs9q5c='",
             "https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js",
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/wet-boew.min.js",
             "https://www.canada.ca/etc/designs/canada/wet-boew/js/theme.min.js",

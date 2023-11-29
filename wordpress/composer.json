@@ -107,7 +107,7 @@
     "10up/wp_mock": "0.5.0",
     "mockery/mockery": "^1.4",
     "squizlabs/php_codesniffer": "^3.6",
-    "pestphp/pest-plugin-mock": "^1.0"
+    "pestphp/pest-plugin-mock": "^2.0"
   },
   "scripts": {
     "prepare-translations": [

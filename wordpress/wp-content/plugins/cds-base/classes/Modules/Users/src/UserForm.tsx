@@ -180,7 +180,7 @@ export const UserForm = ({ isSuperAdmin = false }) => {
 
                                             bindRole.onChange(event);
                                         }}
-                                        value={...role.value}>
+                                        value={role.value}>
                                         {roles.map((role, i) => {
                                             return <option key={role.id || i} value={role.id} disabled={role.disabled}>{role.name}</option>
                                         })}

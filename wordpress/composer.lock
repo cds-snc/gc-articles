@@ -61,16 +61,16 @@
         },
         {
             "name": "aws/aws-crt-php",
-            "version": "v1.2.3",
+            "version": "v1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/awslabs/aws-crt-php.git",
-                "reference": "5545a4fa310aec39f54279fdacebcce33b3ff382"
+                "reference": "eb0c6e4e142224a10b08f49ebf87f32611d162b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/awslabs/aws-crt-php/zipball/5545a4fa310aec39f54279fdacebcce33b3ff382",
-                "reference": "5545a4fa310aec39f54279fdacebcce33b3ff382",
+                "url": "https://api.github.com/repos/awslabs/aws-crt-php/zipball/eb0c6e4e142224a10b08f49ebf87f32611d162b2",
+                "reference": "eb0c6e4e142224a10b08f49ebf87f32611d162b2",
                 "shasum": ""
             },
             "require": {
@@ -109,22 +109,22 @@
             ],
             "support": {
                 "issues": "https://github.com/awslabs/aws-crt-php/issues",
-                "source": "https://github.com/awslabs/aws-crt-php/tree/v1.2.3"
+                "source": "https://github.com/awslabs/aws-crt-php/tree/v1.2.4"
             },
-            "time": "2023-10-16T20:10:06+00:00"
+            "time": "2023-11-08T00:42:13+00:00"
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.287.0",
+            "version": "3.290.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "06978bfc63111fccd78b364238bf214b4ade8d18"
+                "reference": "7726a0dc30a70f2ccf0e2fae3836d6ca6edb2881"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/06978bfc63111fccd78b364238bf214b4ade8d18",
-                "reference": "06978bfc63111fccd78b364238bf214b4ade8d18",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7726a0dc30a70f2ccf0e2fae3836d6ca6edb2881",
+                "reference": "7726a0dc30a70f2ccf0e2fae3836d6ca6edb2881",
                 "shasum": ""
             },
             "require": {
@@ -204,9 +204,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.287.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.290.0"
             },
-            "time": "2023-11-17T20:03:36+00:00"
+            "time": "2023-11-27T20:01:41+00:00"
         },
         {
             "name": "brick/math",
@@ -269,7 +269,7 @@
             "dist": {
                 "type": "path",
                 "url": "wp-content/plugins/cds-base",
-                "reference": "9b0cbe485f21706e400528325b9235015b97862d"
+                "reference": "fd67926cdf1fb97147d1929a133e03335e53130b"
             },
             "require": {
                 "alphagov/notifications-php-client": "^4.2",
@@ -278,7 +278,7 @@
                 "nesbot/carbon": "2.71.0",
                 "php": ">=5.6",
                 "php-http/guzzle6-adapter": "^2.0",
-                "ramsey/uuid": "4.7.4",
+                "ramsey/uuid": "4.7.5",
                 "ua-parser/uap-php": "^3.9",
                 "wa72/htmlpagedom": "^3.0"
             },
@@ -2710,16 +2710,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.7.4",
+            "version": "4.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "60a4c63ab724854332900504274f6150ff26d286"
+                "reference": "5f0df49ae5ad6efb7afa69e6bfab4e5b1e080d8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/60a4c63ab724854332900504274f6150ff26d286",
-                "reference": "60a4c63ab724854332900504274f6150ff26d286",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/5f0df49ae5ad6efb7afa69e6bfab4e5b1e080d8e",
+                "reference": "5f0df49ae5ad6efb7afa69e6bfab4e5b1e080d8e",
                 "shasum": ""
             },
             "require": {
@@ -2786,7 +2786,7 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.7.4"
+                "source": "https://github.com/ramsey/uuid/tree/4.7.5"
             },
             "funding": [
                 {
@@ -2798,7 +2798,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-15T23:01:58+00:00"
+            "time": "2023-11-08T05:53:05+00:00"
         },
         {
             "name": "shawnhooper/delete-orphaned-multisite-tables",

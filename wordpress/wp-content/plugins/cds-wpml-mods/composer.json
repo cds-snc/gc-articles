@@ -12,7 +12,7 @@
     "yoast/phpunit-polyfills": "^1.0",
     "yoast/wp-test-utils": "^1.0",
     "pestphp/pest": "^1.21",
-    "pestphp/pest-plugin-faker": "^1.0",
+    "pestphp/pest-plugin-faker": "^2.0",
     "mockery/mockery": "^1.5",
     "pestphp/pest-plugin-mock": "^1.0"
   },

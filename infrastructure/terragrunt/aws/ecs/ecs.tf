@@ -166,7 +166,7 @@ resource "aws_ecs_service" "wordpress_service" {
 }
 
 #
-# ECS service scaling
+# ECS service CPU/memory scaling targets
 #
 resource "aws_appautoscaling_target" "wordpress" {
   service_namespace  = "ecs"

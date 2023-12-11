@@ -2812,25 +2812,25 @@
         },
         {
             "name": "wa72/htmlpagedom",
-            "version": "v3.0.1",
+            "version": "v3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wasinger/htmlpagedom.git",
-                "reference": "e8de7cde1a99a72e9d9bb54de54ae7343826315b"
+                "reference": "9fa7dfea493e913e81a2b0f8d61f7a94324a04ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wasinger/htmlpagedom/zipball/e8de7cde1a99a72e9d9bb54de54ae7343826315b",
-                "reference": "e8de7cde1a99a72e9d9bb54de54ae7343826315b",
+                "url": "https://api.github.com/repos/wasinger/htmlpagedom/zipball/9fa7dfea493e913e81a2b0f8d61f7a94324a04ea",
+                "reference": "9fa7dfea493e913e81a2b0f8d61f7a94324a04ea",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "ext-libxml": "*",
-                "ext-mbstring": "*",
                 "php": "^8.0",
-                "symfony/css-selector": "^6",
-                "symfony/dom-crawler": "^6"
+                "symfony/css-selector": "^6.0 || ^7.0",
+                "symfony/dom-crawler": "^6.0 || ^7.0",
+                "symfony/polyfill-mbstring": "~1.0"
             },
             "require-dev": {
                 "clean/phpdoc-md": "^0.19.3",
@@ -2873,9 +2873,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wasinger/htmlpagedom/issues",
-                "source": "https://github.com/wasinger/htmlpagedom/tree/v3.0.1"
+                "source": "https://github.com/wasinger/htmlpagedom/tree/v3.0.2"
             },
-            "time": "2023-10-13T16:13:45+00:00"
+            "time": "2023-12-05T20:36:58+00:00"
         }
     ],
     "packages-dev": [

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "488e608d1b285eeca95df1d2a27aa956",
+    "content-hash": "7312cb8b7fbaf767b803563e8e8eadd1",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -113,6 +113,75 @@
                 }
             ],
             "time": "2023-01-15T23:15:59+00:00"
+        },
+        {
+            "name": "carbonphp/carbon-doctrine-types",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CarbonPHP/carbon-doctrine-types.git",
+                "reference": "a31d3358a2a5d6ae947df1691d1f321418a5f3d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon-doctrine-types/zipball/a31d3358a2a5d6ae947df1691d1f321418a5f3d5",
+                "reference": "a31d3358a2a5d6ae947df1691d1f321418a5f3d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "conflict": {
+                "doctrine/dbal": "<4.0.0 || >=5.0.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^4.0.0",
+                "nesbot/carbon": "^2.71.0 || ^3.0.0",
+                "phpunit/phpunit": "^10.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Carbon\\Doctrine\\": "src/Carbon/Doctrine/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KyleKatarn",
+                    "email": "kylekatarnls@gmail.com"
+                }
+            ],
+            "description": "Types to use Carbon in Doctrine",
+            "keywords": [
+                "carbon",
+                "date",
+                "datetime",
+                "doctrine",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/CarbonPHP/carbon-doctrine-types/issues",
+                "source": "https://github.com/CarbonPHP/carbon-doctrine-types/tree/3.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kylekatarnls",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/Carbon",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/nesbot/carbon",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-12-10T15:33:53+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -979,19 +1048,20 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.71.0",
+            "version": "2.72.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "98276233188583f2ff845a0f992a235472d9466a"
+                "reference": "a6885fcbad2ec4360b0e200ee0da7d9b7c90786b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/98276233188583f2ff845a0f992a235472d9466a",
-                "reference": "98276233188583f2ff845a0f992a235472d9466a",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a6885fcbad2ec4360b0e200ee0da7d9b7c90786b",
+                "reference": "a6885fcbad2ec4360b0e200ee0da7d9b7c90786b",
                 "shasum": ""
             },
             "require": {
+                "carbonphp/carbon-doctrine-types": "*",
                 "ext-json": "*",
                 "php": "^7.1.8 || ^8.0",
                 "psr/clock": "^1.0",
@@ -1003,8 +1073,8 @@
                 "psr/clock-implementation": "1.0"
             },
             "require-dev": {
-                "doctrine/dbal": "^2.0 || ^3.1.4",
-                "doctrine/orm": "^2.7",
+                "doctrine/dbal": "^2.0 || ^3.1.4 || ^4.0",
+                "doctrine/orm": "^2.7 || ^3.0",
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "kylekatarnls/multi-tester": "^2.0",
                 "ondrejmirtes/better-reflection": "*",
@@ -1081,7 +1151,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-09-25T11:31:05+00:00"
+            "time": "2023-11-28T10:13:25+00:00"
         },
         {
             "name": "php-http/guzzle6-adapter",
@@ -3187,16 +3257,16 @@
         },
         {
             "name": "wp-cli/i18n-command",
-            "version": "v2.4.4",
+            "version": "v2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/i18n-command.git",
-                "reference": "7d82e675f271359b1af614e6325d8eeaeb7d7474"
+                "reference": "9cf9b40f6bad64ade8660cc26bf1f28f2d223268"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/i18n-command/zipball/7d82e675f271359b1af614e6325d8eeaeb7d7474",
-                "reference": "7d82e675f271359b1af614e6325d8eeaeb7d7474",
+                "url": "https://api.github.com/repos/wp-cli/i18n-command/zipball/9cf9b40f6bad64ade8660cc26bf1f28f2d223268",
+                "reference": "9cf9b40f6bad64ade8660cc26bf1f28f2d223268",
                 "shasum": ""
             },
             "require": {
@@ -3249,9 +3319,9 @@
             "homepage": "https://github.com/wp-cli/i18n-command",
             "support": {
                 "issues": "https://github.com/wp-cli/i18n-command/issues",
-                "source": "https://github.com/wp-cli/i18n-command/tree/v2.4.4"
+                "source": "https://github.com/wp-cli/i18n-command/tree/v2.5.0"
             },
-            "time": "2023-08-30T18:00:10+00:00"
+            "time": "2023-11-16T17:09:37+00:00"
         },
         {
             "name": "wp-cli/mustangostang-spyc",
@@ -3306,16 +3376,16 @@
         },
         {
             "name": "wp-cli/php-cli-tools",
-            "version": "v0.11.21",
+            "version": "v0.11.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/php-cli-tools.git",
-                "reference": "b3457a8d60cd0b1c48cab76ad95df136d266f0b6"
+                "reference": "a6bb94664ca36d0962f9c2ff25591c315a550c51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/b3457a8d60cd0b1c48cab76ad95df136d266f0b6",
-                "reference": "b3457a8d60cd0b1c48cab76ad95df136d266f0b6",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/a6bb94664ca36d0962f9c2ff25591c315a550c51",
+                "reference": "a6bb94664ca36d0962f9c2ff25591c315a550c51",
                 "shasum": ""
             },
             "require": {
@@ -3363,9 +3433,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wp-cli/php-cli-tools/issues",
-                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.11.21"
+                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.11.22"
             },
-            "time": "2023-09-29T15:28:10+00:00"
+            "time": "2023-12-03T19:25:05+00:00"
         },
         {
             "name": "wp-cli/wp-cli",

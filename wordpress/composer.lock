@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.293.7",
+            "version": "3.294.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3bf86ba8b9bbea2b298f89e6f5edc58de276690b"
+                "reference": "63c720229a9c9cdedff6bac98d6e72be8cc241f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3bf86ba8b9bbea2b298f89e6f5edc58de276690b",
-                "reference": "3bf86ba8b9bbea2b298f89e6f5edc58de276690b",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/63c720229a9c9cdedff6bac98d6e72be8cc241f1",
+                "reference": "63c720229a9c9cdedff6bac98d6e72be8cc241f1",
                 "shasum": ""
             },
             "require": {
@@ -204,9 +204,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.293.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.294.1"
             },
-            "time": "2023-12-08T19:11:21+00:00"
+            "time": "2023-12-15T19:25:52+00:00"
         },
         {
             "name": "brick/math",
@@ -264,18 +264,87 @@
             "time": "2023-01-15T23:15:59+00:00"
         },
         {
+            "name": "carbonphp/carbon-doctrine-types",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/CarbonPHP/carbon-doctrine-types.git",
+                "reference": "a31d3358a2a5d6ae947df1691d1f321418a5f3d5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon-doctrine-types/zipball/a31d3358a2a5d6ae947df1691d1f321418a5f3d5",
+                "reference": "a31d3358a2a5d6ae947df1691d1f321418a5f3d5",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "conflict": {
+                "doctrine/dbal": "<4.0.0 || >=5.0.0"
+            },
+            "require-dev": {
+                "doctrine/dbal": "^4.0.0",
+                "nesbot/carbon": "^2.71.0 || ^3.0.0",
+                "phpunit/phpunit": "^10.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Carbon\\Doctrine\\": "src/Carbon/Doctrine/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KyleKatarn",
+                    "email": "kylekatarnls@gmail.com"
+                }
+            ],
+            "description": "Types to use Carbon in Doctrine",
+            "keywords": [
+                "carbon",
+                "date",
+                "datetime",
+                "doctrine",
+                "time"
+            ],
+            "support": {
+                "issues": "https://github.com/CarbonPHP/carbon-doctrine-types/issues",
+                "source": "https://github.com/CarbonPHP/carbon-doctrine-types/tree/3.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kylekatarnls",
+                    "type": "github"
+                },
+                {
+                    "url": "https://opencollective.com/Carbon",
+                    "type": "open_collective"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/nesbot/carbon",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-12-10T15:33:53+00:00"
+        },
+        {
             "name": "cds-snc/cds-base",
             "version": "dev-main",
             "dist": {
                 "type": "path",
                 "url": "wp-content/plugins/cds-base",
-                "reference": "fd67926cdf1fb97147d1929a133e03335e53130b"
+                "reference": "ee436e2093dbaeb51bbe0ecb6a60f6c7ccf63115"
             },
             "require": {
                 "alphagov/notifications-php-client": "^4.2",
                 "illuminate/encryption": "^8.63",
                 "illuminate/support": "^8.63",
-                "nesbot/carbon": "2.71.0",
+                "nesbot/carbon": "2.72.0",
                 "php": ">=5.6",
                 "php-http/guzzle6-adapter": "^2.0",
                 "ramsey/uuid": "4.7.5",
@@ -1855,19 +1924,20 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.71.0",
+            "version": "2.72.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "98276233188583f2ff845a0f992a235472d9466a"
+                "reference": "a6885fcbad2ec4360b0e200ee0da7d9b7c90786b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/98276233188583f2ff845a0f992a235472d9466a",
-                "reference": "98276233188583f2ff845a0f992a235472d9466a",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/a6885fcbad2ec4360b0e200ee0da7d9b7c90786b",
+                "reference": "a6885fcbad2ec4360b0e200ee0da7d9b7c90786b",
                 "shasum": ""
             },
             "require": {
+                "carbonphp/carbon-doctrine-types": "*",
                 "ext-json": "*",
                 "php": "^7.1.8 || ^8.0",
                 "psr/clock": "^1.0",
@@ -1879,8 +1949,8 @@
                 "psr/clock-implementation": "1.0"
             },
             "require-dev": {
-                "doctrine/dbal": "^2.0 || ^3.1.4",
-                "doctrine/orm": "^2.7",
+                "doctrine/dbal": "^2.0 || ^3.1.4 || ^4.0",
+                "doctrine/orm": "^2.7 || ^3.0",
                 "friendsofphp/php-cs-fixer": "^3.0",
                 "kylekatarnls/multi-tester": "^2.0",
                 "ondrejmirtes/better-reflection": "*",
@@ -1957,7 +2027,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-09-25T11:31:05+00:00"
+            "time": "2023-11-28T10:13:25+00:00"
         },
         {
             "name": "paquettg/php-html-parser",
@@ -4238,17 +4308,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "21.6",
+            "version": "21.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "9062f84e3c5b0c5be80a6eb78a76d24c40760eb6"
+                "reference": "4fd59a9627f24ed7c1165d2599fbfdb605a79003"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-9062f84e3c5b0c5be80a6eb78a76d24c40760eb6-zip-bf210d.zip",
-                "reference": "9062f84e3c5b0c5be80a6eb78a76d24c40760eb6",
-                "shasum": "b878a5b211d2021d55cf48ad985dd79ce201fb60"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-4fd59a9627f24ed7c1165d2599fbfdb605a79003-zip-c09f33.zip",
+                "reference": "4fd59a9627f24ed7c1165d2599fbfdb605a79003",
+                "shasum": "f32e21f6717dc39469ae04536554d054a8616e83"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4278,9 +4348,11 @@
             },
             "autoload-dev": {
                 "classmap": [
-                    "tests/",
                     "config/"
-                ]
+                ],
+                "psr-4": {
+                    "Yoast\\WP\\SEO\\Tests\\": "tests/"
+                }
             },
             "scripts": {
                 "lint": [
@@ -4299,7 +4371,7 @@
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=129",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=127",
                     "@putenv YOASTCS_THRESHOLD_WARNINGS=202",
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_cs_thresholds"
                 ],
@@ -4328,11 +4400,17 @@
                 "coverage": [
                     "@php ./vendor/phpunit/phpunit/phpunit"
                 ],
+                "test-wp": [
+                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist --no-coverage"
+                ],
+                "coverage-wp": [
+                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist"
+                ],
                 "integration-test": [
-                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-integration.xml.dist --no-coverage"
+                    "@test-wp"
                 ],
                 "integration-coverage": [
-                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-integration.xml.dist"
+                    "@coverage-wp"
                 ],
                 "prefix-dependencies": [
                     "composer prefix-oauth2-client",
@@ -4388,27 +4466,28 @@
                 "issues": "https://github.com/Yoast/wordpress-seo/issues",
                 "forum": "https://wordpress.org/support/plugin/wordpress-seo",
                 "wiki": "https://github.com/Yoast/wordpress-seo/wiki",
-                "source": "https://github.com/Yoast/wordpress-seo"
+                "source": "https://github.com/Yoast/wordpress-seo",
+                "security": "https://yoast.com/security-program/"
             },
-            "time": "2023-11-28T10:01:21+00:00"
+            "time": "2023-12-12T09:06:45+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "21.6",
+            "version": "21.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "210574229975be77f1081911091be23ae551ee36"
+                "reference": "df07355fd3fe9384874eb94a04ce4a9185d0b255"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-210574229975be77f1081911091be23ae551ee36-zip-c60c90.zip",
-                "reference": "210574229975be77f1081911091be23ae551ee36",
-                "shasum": "80f5114dfc8c7a62559a0ed3eb3fd24c798aa004"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-df07355fd3fe9384874eb94a04ce4a9185d0b255-zip-794540.zip",
+                "reference": "df07355fd3fe9384874eb94a04ce4a9185d0b255",
+                "shasum": "bc4f63817b5b7e99a5310c3154bd75f435c35428"
             },
             "require": {
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^21.6"
+                "yoast/wordpress-seo": "^21.7"
             },
             "require-dev": {
                 "yoast/wp-test-utils": "^1.2",
@@ -4437,9 +4516,11 @@
             },
             "autoload-dev": {
                 "classmap": [
-                    "config/",
-                    "tests/"
-                ]
+                    "config/"
+                ],
+                "psr-4": {
+                    "Yoast\\WP\\SEO\\Premium\\Tests\\": "tests/"
+                }
             },
             "scripts": {
                 "lint": [
@@ -4487,11 +4568,17 @@
                 "coverage": [
                     "@php ./vendor/phpunit/phpunit/phpunit"
                 ],
+                "test-wp": [
+                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist --no-coverage"
+                ],
+                "coverage-wp": [
+                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-wp.xml.dist"
+                ],
                 "integration-test": [
-                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-integration.xml.dist --no-coverage"
+                    "@test-wp"
                 ],
                 "integration-coverage": [
-                    "@php ./vendor/phpunit/phpunit/phpunit -c phpunit-integration.xml.dist"
+                    "@coverage-wp"
                 ],
                 "compile-di": [
                     "rm -f ./src/generated/container.php",
@@ -4522,9 +4609,10 @@
             ],
             "support": {
                 "issues": "https://github.com/Yoast/wordpress-seo-premium/issues",
-                "source": "https://github.com/Yoast/wordpress-seo-premium"
+                "source": "https://github.com/Yoast/wordpress-seo-premium",
+                "security": "https://yoast.com/security-program/"
             },
-            "time": "2023-11-28T10:38:42+00:00"
+            "time": "2023-12-12T09:52:52+00:00"
         }
     ],
     "packages-dev": [

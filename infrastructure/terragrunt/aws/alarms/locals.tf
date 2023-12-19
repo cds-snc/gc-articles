@@ -17,6 +17,7 @@ locals {
     "action=lostpassword&error",
     "database error",
     "GET /notification-gc-notify/wp-json/wp/v2/pages",
+    "HTTP/1.1\\\" 400",
     "HTTP/1.1\\\" 403",
     "HTTP/1.1\\\" 404",
     "Undefined constant",

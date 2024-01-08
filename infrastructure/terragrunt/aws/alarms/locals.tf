@@ -21,6 +21,7 @@ locals {
     "HTTP/1.1\\\" 403",
     "HTTP/1.1\\\" 404",
     "Undefined constant",
+    "value_error.email",
     "/usr/src/wordpress/wp-content/languages",
   ]
   wordpress_database_errors = [

@@ -1,5 +1,5 @@
 ## Install composer dependencies
-FROM composer:latest@sha256:7f42b1495c62246a92c8271dcc9352afe58440b518225366e44563892fba122c AS composer
+FROM composer:latest@sha256:1f88162f6d30fe394990edd298f181f66e8a4ba36d3e102213c2d4a8eb8654a5 AS composer
 
 ARG WPML_USER_ID
 ARG WPML_KEY
@@ -28,7 +28,7 @@ RUN npm --unsafe-perm install
 # when updating the Wordpress version, update the version in the files:
 #     - ~/wordpress/docker/local.Dockerfile
 #     - ~/github/workflows/ci.yml
-FROM wordpress:6.4.2-php8.1-fpm-alpine@sha256:4a23b71f97a465b5a4ae22afa2257627dd92f3cc92f9113e3f6595453dd02c45
+FROM wordpress:6.4.2-php8.1-fpm-alpine@sha256:78e698dc45fcdfb2c4bafdb73bf612fdfe5f4f998892606619b1aa399f4878df
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install pcov \

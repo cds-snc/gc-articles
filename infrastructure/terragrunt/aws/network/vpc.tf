@@ -5,8 +5,9 @@ module "wordpress_vpc" {
   source = "github.com/cds-snc/terraform-modules//vpc?ref=v9.0.4"
   name   = "wordpress"
 
-  high_availability = true
-  enable_flow_log   = true
+  cidrsubnet_newbits = 8
+  availability_zones = 3
+  enable_flow_log    = true
 
   allow_https_request_out          = true
   allow_https_request_out_response = true

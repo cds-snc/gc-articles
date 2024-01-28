@@ -25,7 +25,7 @@ services:
 
   apache:
     container_name: apache
-    image: httpd:2.4-alpine@sha256:932a6f05a28363545bd09fa6d8e58d28a9dd93ba146fa2482a6f4804f971ffdb
+    image: httpd:2.4-alpine@sha256:b0ff9343041f892be29f0c9fbdaa3e4bb4dc6460222c5cbae13738b0aac46ca2
     logging:
       driver: none
     ports:
@@ -108,7 +108,7 @@ services:
     depends_on:
       - db
       - wordpress
-    image: wordpress:cli-php8.1@sha256:54662c19dd38a9d5e603b7944a2cdbede1f07638a980db346bb2875ebd538c09
+    image: wordpress:cli-php8.1@sha256:801d25a91be05505260dd653aa54138c387f9b315f9dba9f631cef699e83a4f4
     profiles:
       - tools
     env_file: .env

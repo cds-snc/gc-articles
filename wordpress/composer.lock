@@ -4110,15 +4110,15 @@
         },
         {
             "name": "wpackagist-plugin/publishpress-checklists",
-            "version": "2.10.2",
+            "version": "2.10.3",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
-                "reference": "tags/2.10.2"
+                "reference": "tags/2.10.3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.10.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.10.3.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

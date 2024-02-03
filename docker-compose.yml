@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mariadb:10.11.6@sha256:692856b1f36a6e824ff8b8e78929643c90faa5f0931d74425eed52b09e8ac37b
+    image: mariadb:10.11.6@sha256:e2772bc4ef602b41ea44192be6a6ea46b56f4dbe6d2fe70e2d33ff8a01b4915b
     container_name: db
     restart: unless-stopped
     logging:
@@ -25,7 +25,7 @@ services:
 
   apache:
     container_name: apache
-    image: httpd:2.4-alpine@sha256:b0ff9343041f892be29f0c9fbdaa3e4bb4dc6460222c5cbae13738b0aac46ca2
+    image: httpd:2.4-alpine@sha256:5f3c87973b3e76601b2f4d8832d6075e272868815e4966d2e57823591f8da29f
     logging:
       driver: none
     ports:
@@ -108,7 +108,7 @@ services:
     depends_on:
       - db
       - wordpress
-    image: wordpress:cli-php8.1@sha256:1fee2ecde34e213eb38539e4da7b2386cbf64e163c7c4f2ac9a6bf5589b515c6
+    image: wordpress:cli-php8.1@sha256:1db26e2684ed3ffa22afcdce208764e9c3b1862a77fdd4cecee783c786366bdc
     profiles:
       - tools
     env_file: .env

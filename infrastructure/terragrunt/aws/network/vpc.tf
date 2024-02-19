@@ -2,7 +2,7 @@
 # VPC: 3 public + 3 private subnets across 3 availability zones
 #
 module "wordpress_vpc" {
-  source = "github.com/cds-snc/terraform-modules//vpc?ref=v9.0.6"
+  source = "github.com/cds-snc/terraform-modules//vpc?ref=v9.1.0"
   name   = "wordpress"
 
   cidrsubnet_newbits = 8

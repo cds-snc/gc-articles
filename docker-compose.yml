@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mariadb:10.11.7@sha256:cf46b602b2e306ae10b9e86f1c6e46ab9789e9c5aaa7937caed16efc43853c22
+    image: mariadb:10.11.7@sha256:3ce2396ee5e3139374f3be7d6af0398ae16277d22ab57906c3a766977d156325
     container_name: db
     restart: unless-stopped
     logging:
@@ -90,7 +90,7 @@ services:
 
   composer:
     restart: 'no'
-    image: composer/composer:latest@sha256:33cb0087008069adb4de4bf04eed0dbe8f18116cf1d355b0ee3d0d11817c8bf1
+    image: composer/composer:latest@sha256:ee9c054760402c28a80d6679743bf7ca4e091c7fd2f1e758036bd25810ab8e94
     env_file: .env
     command: >
       /bin/bash -c '

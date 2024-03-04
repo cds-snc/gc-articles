@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mariadb:10.11.7@sha256:3ce2396ee5e3139374f3be7d6af0398ae16277d22ab57906c3a766977d156325
+    image: mariadb:10.11.7@sha256:f94bd863dc16bf7b44957586d0c325462d4a65598d04ab952a9b73120a259b21
     container_name: db
     restart: unless-stopped
     logging:

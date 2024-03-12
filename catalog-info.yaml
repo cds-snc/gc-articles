@@ -10,4 +10,4 @@ metadata:
 spec:
   type: website
   lifecycle: experimental
-  owner: gc-articles
+  owner: group:cds-snc/gc-articles

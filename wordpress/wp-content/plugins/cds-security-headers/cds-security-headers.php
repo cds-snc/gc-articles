@@ -23,6 +23,7 @@ function cds_security_headers($headers)
             "'self'",
             "https://www.canada.ca",
             "https://www.google-analytics.com",
+            "https://analytics.google.com",
         ],
         "default-src" => [
             "'self'",

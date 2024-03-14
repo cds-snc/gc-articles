@@ -2,7 +2,7 @@ version: '3'
 
 services:
   db:
-    image: mariadb:10.11.7@sha256:f94bd863dc16bf7b44957586d0c325462d4a65598d04ab952a9b73120a259b21
+    image: mariadb:10.11.7@sha256:e98337d5c18adc1a33d974eb1f3417f4c1064d3f690934f3b849ca195325f487
     container_name: db
     restart: unless-stopped
     logging:
@@ -90,7 +90,7 @@ services:
 
   composer:
     restart: 'no'
-    image: composer/composer:latest@sha256:ee9c054760402c28a80d6679743bf7ca4e091c7fd2f1e758036bd25810ab8e94
+    image: composer/composer:latest@sha256:dae8e796821feb38c6169e21cdbcd83db0f0e879042c3951b4bffbc7f07df434
     env_file: .env
     command: >
       /bin/bash -c '
@@ -108,7 +108,7 @@ services:
     depends_on:
       - db
       - wordpress
-    image: wordpress:cli-php8.1@sha256:8c68a24b667f1114bd6722ef5ccebb13e823c80b802c0748e29c306c017485d5
+    image: wordpress:cli-php8.1@sha256:017465a594aa4e373bdc8c2d5ad956a76983cb0127674f4e1578ec0214802a25
     profiles:
       - tools
     env_file: .env

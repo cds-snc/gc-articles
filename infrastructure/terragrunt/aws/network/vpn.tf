@@ -5,9 +5,12 @@ module "vpn" {
   access_group_id     = var.client_vpn_access_group_id
   self_service_portal = "disabled"
 
-  vpc_id                            = module.wordpress_vpc.vpc_id
-  vpc_cidr_block                    = module.wordpress_vpc.cidr_block
-  acm_certificate_arn               = aws_acm_certificate.client_vpn.arn
+  vpc_id               = module.wordpress_vpc.vpc_id
+  vpc_cidr_block       = module.wordpress_vpc.cidr_block
+  subnet_cidr_blocks   = module.wordpress_vpc.private_subnet_cidr_blocks
+  subnet_ids           = []
+  acm_certificate_arn  = aws_acm_certificate.client_vpn.arn
+
   client_vpn_saml_metadata_document = var.client_vpn_saml_metadata
 
   billing_tag_value = var.billing_tag_value

@@ -1,3 +1,7 @@
+variable "client_vpn_security_group_id" {
+  type = string
+}
+
 variable "database_instances_count" {
   type = number
 }

@@ -15,6 +15,7 @@ locals {
     "AH01630",
     "AH01797",
     "action=lostpassword&error",
+    "Cron unschedule event error for hook",
     "database error",
     "GET /notification-gc-notify/wp-json/wp/v2/pages",
     "HTTP/1.1\\\" 301",
@@ -29,6 +30,7 @@ locals {
     "database error",
   ]
   wordpress_warnings = [
+    "Cron unschedule event error for hook",
     "Warning",
     "warning",
   ]

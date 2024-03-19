@@ -49,8 +49,8 @@ resource "aws_rds_cluster_parameter_group" "enable_audit_logging" {
 resource "aws_security_group_rule" "client_vpn_ingress_database" {
   description              = "Client VPN ingress to the database"
   type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
+  from_port                = 3306
+  to_port                  = 3306
   protocol                 = "tcp"
   source_security_group_id = var.client_vpn_security_group_id
   security_group_id        = module.rds_cluster.proxy_security_group_id

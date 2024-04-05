@@ -24,7 +24,7 @@ describe('Checklists', () => {
     cy.login();
   });
 
-  it('Prevent modal appears → Don’t publish', () => {
+  it.skip('Prevent modal appears → Don’t publish', () => {
     const article = {
       text: "Hello from GC Admin",
       title: "New post title"

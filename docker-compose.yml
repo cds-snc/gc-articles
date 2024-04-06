@@ -25,7 +25,7 @@ services:
 
   apache:
     container_name: apache
-    image: httpd:2.4-alpine@sha256:92535cf7f151901ba91b04186292c3bd5bf82aa6ffa6eb7bc405fefbffedd480
+    image: httpd:2.4-alpine@sha256:6b242338c5c497fef59963d961e1f224262fc313482943cdf16b1875da26836f
     logging:
       driver: none
     ports:

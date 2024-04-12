@@ -112,6 +112,7 @@ dist
 .terragrunt-cache
 .terraform
 *.tfstate
+*.tfvars
 
 # Python
 __pycache__/

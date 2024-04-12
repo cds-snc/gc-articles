@@ -9,11 +9,11 @@ resource "aws_cloudwatch_log_group" "ecs_events" {
 }
 
 module "sentinel_forwarder" {
-  source            = "github.com/cds-snc/terraform-modules//sentinel_forwarder?ref=v9.2.7"
+  source            = "github.com/cds-snc/terraform-modules//sentinel_forwarder?ref=v9.3.8"
   function_name     = "sentinel-forwarder"
   billing_tag_value = var.billing_tag_value
 
-  layer_arn = "arn:aws:lambda:ca-central-1:283582579564:layer:aws-sentinel-connector-layer:71"
+  layer_arn = "arn:aws:lambda:ca-central-1:283582579564:layer:aws-sentinel-connector-layer:125"
 
   customer_id = var.sentinel_customer_id
   shared_key  = var.sentinel_shared_key

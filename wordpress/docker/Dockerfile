@@ -74,6 +74,11 @@ COPY --from=buildjs /app/wordpress/wp-content/plugins/gc-post-meta/resources/js/
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-web-blocks/resources/js/build ./wp-content/plugins/cds-web-blocks/resources/js/build
 COPY --from=buildjs /app/wordpress/wp-content/plugins/cds-wpml-mods/resources/js/build ./wp-content/plugins/cds-wpml-mods/resources/js/build
 
+# Create a writable debug.log
+RUN touch ./wp-content/debug.log \
+    && chmod 660 ./wp-content/debug.log \
+    && chown www-data:www-data ./wp-content/debug.log
+
 VOLUME /usr/src/wordpress
 
 USER www-data

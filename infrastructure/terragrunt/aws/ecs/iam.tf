@@ -17,6 +17,12 @@ resource "aws_iam_policy" "wordpress_ecs_task_get_ecr_image" {
   policy = data.aws_iam_policy_document.wordpress_ecs_task_get_ecr_image.json
 }
 
+resource "aws_iam_policy" "wordpress_ecs_task_create_tunnel" {
+  name   = "WordpressEcsTaskCreateTunnel"
+  path   = "/"
+  policy = data.aws_iam_policy_document.wordpress_ecs_task_create_tunnel.json
+}
+
 resource "aws_iam_policy" "wordpress_ecs_task_efs" {
   count = var.enable_efs ? 1 : 0
 
@@ -43,6 +49,11 @@ resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_get_secret_value_p
 resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_get_ecr_image_policy_attach" {
   role       = aws_iam_role.wordpress_ecs_task.name
   policy_arn = aws_iam_policy.wordpress_ecs_task_get_ecr_image.arn
+}
+
+resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_get_create_tunnel_policy_attach" {
+  role       = aws_iam_role.wordpress_ecs_task.name
+  policy_arn = aws_iam_policy.wordpress_ecs_task_create_tunnel.arn
 }
 
 resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_efs_policy_attach" {
@@ -112,6 +123,20 @@ data "aws_iam_policy_document" "wordpress_ecs_task_get_ecr_image" {
       var.wordpress_repository_arn,
       var.apache_repository_arn
     ]
+  }
+}
+
+data "aws_iam_policy_document" "wordpress_ecs_task_create_tunnel" {
+  statement {
+    sid    = "CreateSSMTunnel"
+    effect = "Allow"
+    actions = [
+      "ssmmessages:CreateControlChannel",
+      "ssmmessages:CreateDataChannel",
+      "ssmmessages:OpenControlChannel",
+      "ssmmessages:OpenDataChannel"
+    ]
+    resources = ["*"]
   }
 }
 

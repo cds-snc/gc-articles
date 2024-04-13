@@ -108,7 +108,7 @@ define('WP_DEFAULT_THEME', getenv_docker('WP_DEFAULT_THEME', 'cds-default'));
 
 define('WP_DEBUG', !!getenv_docker('WORDPRESS_DEBUG', ''));
 define('WP_DEBUG_DISPLAY', !!getenv_docker('WORDPRESS_DEBUG_DISPLAY', 0));
-define('WP_DEBUG_LOG', !!getenv_docker('WORDPRESS_DEBUG_LOG', 'wp-content/debug.log'));
+define('WP_DEBUG_LOG', getenv_docker('WORDPRESS_DEBUG_LOG', 'wp-content/debug.log'));
 @ini_set('display_errors', WP_DEBUG_DISPLAY);
 /* Add any custom values between this line and the "stop editing" line. */
 

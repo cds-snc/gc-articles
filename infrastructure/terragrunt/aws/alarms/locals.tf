@@ -35,6 +35,7 @@ locals {
     "warning",
   ]
   wordpress_warnings_skip = [
+    "Attempt to read property*class-wp-rest-templates-controller.php",
     "Undefined array key*c3-cloudfront-clear-cache",
     "/usr/src/wordpress/wp-content/languages",
     "chmod()",

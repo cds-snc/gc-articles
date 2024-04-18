@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2cbf31aa33d00371bc40176db854590f",
+    "content-hash": "6bb9ffa72a266d937de1e99c9e6668bd",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -4200,7 +4200,7 @@
         },
         {
             "name": "wpml/sitepress-multilingual-cms",
-            "version": "4.6.3",
+            "version": "4.6.10",
             "dist": {
                 "type": "zip",
                 "url": "https://wpml.org/?download=6088&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
@@ -4224,7 +4224,7 @@
         },
         {
             "name": "wpml/wpml-string-translation",
-            "version": "3.2.5",
+            "version": "3.2.11",
             "dist": {
                 "type": "zip",
                 "url": "https://wpml.org/?download=6092&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
@@ -4291,17 +4291,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "22.4",
+            "version": "22.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "2eacbad0f0f89987bc66ff10ee3ba4b525120bd5"
+                "reference": "f095cc94e9685e835cb36a3fbd56d26a9684d131"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-2eacbad0f0f89987bc66ff10ee3ba4b525120bd5-zip-61d959.zip",
-                "reference": "2eacbad0f0f89987bc66ff10ee3ba4b525120bd5",
-                "shasum": "2a12dafd7bf293c923f8f208c3338230c2cca568"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-f095cc94e9685e835cb36a3fbd56d26a9684d131-zip-d76e69.zip",
+                "reference": "f095cc94e9685e835cb36a3fbd56d26a9684d131",
+                "shasum": "33bafe59d58820a45098065362cc824fa2a8aba2"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4361,7 +4361,7 @@
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=2569",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=2564",
                     "@putenv YOASTCS_THRESHOLD_WARNINGS=267",
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_cs_thresholds"
                 ],
@@ -4459,28 +4459,29 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-04-03T08:07:39+00:00"
+            "time": "2024-04-16T08:06:55+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "22.4",
+            "version": "22.5",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "ce2ee53ec30bb486ca480cc38579f818ea0a9472"
+                "reference": "61ec0e7050609d9093e4df55afe5046e61479070"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-ce2ee53ec30bb486ca480cc38579f818ea0a9472-zip-143798.zip",
-                "reference": "ce2ee53ec30bb486ca480cc38579f818ea0a9472",
-                "shasum": "7a9f8ef97ebfc1a7f5fe0ef92c60d05d752586f9"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-61ec0e7050609d9093e4df55afe5046e61479070-zip-f83d64.zip",
+                "reference": "61ec0e7050609d9093e4df55afe5046e61479070",
+                "shasum": "c5695de799f67163f7b8ba201df84cc3e40f3da6"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^22.4"
+                "yoast/wordpress-seo": "^22.5"
             },
             "require-dev": {
+                "wp-cli/i18n-command": "^2.6",
                 "yoast/wp-test-utils": "^1.2",
                 "yoast/yoastcs": "^3.0"
             },
@@ -4580,6 +4581,18 @@
                 "post-install-cmd": [
                     "cd vendor/yoast/wordpress-seo && composer install --no-interaction && cd ../..",
                     "composer compile-di"
+                ],
+                "i18n-free-js": [
+                    "wp i18n make-pot . languages/yoastseo.pot --include=\"node_modules/yoastseo/src\" --allow-root",
+                    "wp i18n make-pot . languages/free-js.pot --include=\"node_modules/@yoast/social-metadata-previews/src\" --domain=\"wordpress-seo\" --merge=\"languages/yoastseo.pot\" --allow-root",
+                    "rm languages/yoastseo.pot"
+                ],
+                "i18n-js": [
+                    "wp i18n make-pot . languages/wordpress-seo-premiumjs.pot --skip-php --exclude=\"assets/js/dist\" --merge=\"languages/free-js.pot\" --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/yoast/wordpress-seo-premium/issues\"}' --allow-root",
+                    "rm languages/free-js.pot"
+                ],
+                "i18n-php": [
+                    "wp i18n make-pot . languages/wordpress-seo-premium.pot --skip-js --merge=\"languages/wordpress-seo-premiumjs.pot\" --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/yoast/wordpress-seo-premium/issues\"}' --allow-root"
                 ]
             },
             "license": [
@@ -4603,7 +4616,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-04-03T08:37:19+00:00"
+            "time": "2024-04-16T08:25:28+00:00"
         }
     ],
     "packages-dev": [

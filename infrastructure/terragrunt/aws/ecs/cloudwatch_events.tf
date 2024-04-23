@@ -11,7 +11,7 @@ resource "aws_lambda_function" "ecs_events" {
 
   filename    = data.archive_file.ecs_events.output_path
   handler     = "ecs_events.lambda_handler"
-  runtime     = "python3.8"
+  runtime     = "python3.12"
   timeout     = 30
   memory_size = 512
 

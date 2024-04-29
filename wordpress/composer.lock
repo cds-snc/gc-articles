@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6bb9ffa72a266d937de1e99c9e6668bd",
+    "content-hash": "734a5efbbfc0430557e589cf874cbd36",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -4110,15 +4110,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "4.14.0",
+            "version": "4.15.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/4.14.0"
+                "reference": "tags/4.15.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.4.14.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.4.15.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4128,15 +4128,15 @@
         },
         {
             "name": "wpackagist-plugin/two-factor",
-            "version": "0.8.2",
+            "version": "0.9.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/two-factor/",
-                "reference": "tags/0.8.2"
+                "reference": "tags/0.9.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/two-factor.0.8.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/two-factor.0.9.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

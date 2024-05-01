@@ -20,7 +20,7 @@ dependency "network" {
 
 inputs = {
   database_instances_count              = 3
-  database_instance_class               = "db.r4.large"
+  database_instance_class               = "db.r5.large"
   database_performance_insights_enabled = true
   client_vpn_security_group_id          = dependency.network.outputs.client_vpn_security_group_id
   private_subnet_ids                    = dependency.network.outputs.private_subnet_ids

@@ -32,7 +32,7 @@ module "rds_cluster" {
 resource "aws_rds_cluster_parameter_group" "enable_audit_logging" {
   name        = "wordpress-aurora-mysql57"
   family      = "aurora-mysql5.7"
-  description = "RDS cluster parameter group with audit logging enabled for MySQL 5.7"
+  description = "RDS cluster parameter group with audit logging enabled"
 
   parameter {
     name         = "binlog_format"

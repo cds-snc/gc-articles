@@ -35,6 +35,11 @@ resource "aws_rds_cluster_parameter_group" "enable_audit_logging" {
   description = "RDS cluster parameter group with audit logging enabled for MySQL 5.7"
 
   parameter {
+    name  = "binlog_format"
+    value = "ROW"
+  }
+
+  parameter {
     name  = "server_audit_logging"
     value = "1"
   }
@@ -50,6 +55,11 @@ resource "aws_rds_cluster_parameter_group" "enable_audit_logging_v8" {
   name        = "wordpress-aurora-mysql8"
   family      = "aurora-mysql8.0"
   description = "RDS cluster parameter group with audit logging enabled for MySQL 8.0"
+
+  parameter {
+    name  = "binlog_format"
+    value = "ROW"
+  }
 
   parameter {
     name  = "server_audit_logging"

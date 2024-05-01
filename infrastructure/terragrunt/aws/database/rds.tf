@@ -35,19 +35,21 @@ resource "aws_rds_cluster_parameter_group" "enable_audit_logging" {
   description = "RDS cluster parameter group with audit logging enabled for MySQL 5.7"
 
   parameter {
-    name  = "binlog_format"
-    value = "ROW"
+    name         = "binlog_format"
+    value        = "ROW"
+    apply_method = "pending-reboot"
   }
 
   parameter {
-    name  = "server_audit_logging"
-    value = "1"
+    name         = "server_audit_logging"
+    value        = "1"
+    apply_method = "pending-reboot"
   }
 
-  # Available events: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Auditing.html#AuroraMySQL.Auditing.Enable.server_audit_events
   parameter {
-    name  = "server_audit_events"
-    value = "CONNECT,QUERY_DCL,QUERY_DDL,QUERY_DML"
+    name         = "server_audit_events"
+    value        = "CONNECT,QUERY_DCL,QUERY_DDL,QUERY_DML"
+    apply_method = "pending-reboot"
   }
 }
 
@@ -57,18 +59,21 @@ resource "aws_rds_cluster_parameter_group" "enable_audit_logging_v8" {
   description = "RDS cluster parameter group with audit logging enabled for MySQL 8.0"
 
   parameter {
-    name  = "binlog_format"
-    value = "ROW"
+    name         = "binlog_format"
+    value        = "ROW"
+    apply_method = "pending-reboot"
   }
 
   parameter {
-    name  = "server_audit_logging"
-    value = "1"
+    name         = "server_audit_logging"
+    value        = "1"
+    apply_method = "pending-reboot"
   }
 
   parameter {
-    name  = "server_audit_events"
-    value = "CONNECT,QUERY_DCL,QUERY_DDL,QUERY_DML"
+    name         = "server_audit_events"
+    value        = "CONNECT,QUERY_DCL,QUERY_DDL,QUERY_DML"
+    apply_method = "pending-reboot"
   }
 }
 

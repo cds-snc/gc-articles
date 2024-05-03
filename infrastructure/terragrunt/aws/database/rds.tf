@@ -7,14 +7,14 @@ module "rds_cluster" {
 
   database_name  = var.database_name
   engine         = "aurora-mysql"
-  engine_version = "5.7.mysql_aurora.2.11.5"
+  engine_version = "8.0.mysql_aurora.3.06.0"
   instances      = var.database_instances_count
   instance_class = var.database_instance_class
   username       = var.database_username
   password       = var.database_password
 
   # Enable audit logging
-  db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.enable_audit_logging.name
+  db_cluster_parameter_group_name = aws_rds_cluster_parameter_group.enable_audit_logging_v8.name
   enabled_cloudwatch_logs_exports = ["audit"]
 
   backtrack_window             = 0 # Backtracking cannot be enabled on existing clusters :(
@@ -67,13 +67,13 @@ resource "aws_rds_cluster_parameter_group" "enable_audit_logging_v8" {
   parameter {
     name         = "server_audit_logging"
     value        = "1"
-    apply_method = "immediate"
+    apply_method = "pending-reboot"
   }
 
   parameter {
     name         = "server_audit_events"
     value        = "CONNECT,QUERY_DCL,QUERY_DDL,QUERY_DML"
-    apply_method = "immediate"
+    apply_method = "pending-reboot"
   }
 }
 

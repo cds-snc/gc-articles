@@ -29,30 +29,6 @@ module "rds_cluster" {
   billing_tag_value = var.billing_tag_value
 }
 
-resource "aws_rds_cluster_parameter_group" "enable_audit_logging" {
-  name        = "wordpress-aurora-mysql57"
-  family      = "aurora-mysql5.7"
-  description = "RDS cluster parameter group with audit logging enabled"
-
-  parameter {
-    name         = "binlog_format"
-    value        = "ROW"
-    apply_method = "pending-reboot"
-  }
-
-  parameter {
-    name         = "server_audit_logging"
-    value        = "1"
-    apply_method = "immediate"
-  }
-
-  parameter {
-    name         = "server_audit_events"
-    value        = "CONNECT,QUERY_DCL,QUERY_DDL,QUERY_DML"
-    apply_method = "immediate"
-  }
-}
-
 resource "aws_rds_cluster_parameter_group" "enable_audit_logging_v8" {
   name        = "wordpress-aurora-mysql8"
   family      = "aurora-mysql8.0"

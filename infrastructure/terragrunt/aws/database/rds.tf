@@ -43,13 +43,13 @@ resource "aws_rds_cluster_parameter_group" "enable_audit_logging_v8" {
   parameter {
     name         = "server_audit_logging"
     value        = "1"
-    apply_method = "pending-reboot"
+    apply_method = "immediate"
   }
 
   parameter {
     name         = "server_audit_events"
     value        = "CONNECT,QUERY_DCL,QUERY_DDL,QUERY_DML"
-    apply_method = "pending-reboot"
+    apply_method = "immediate"
   }
 }
 

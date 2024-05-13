@@ -364,4 +364,14 @@ updates the deployed versions manifest.
 
 Merging this PR will release the previously tagged container to Production.
 
+### Production infrastructure deployment
 
+When infrastructure changes are merged to `main`, they are automatically deployed to Staging.  To release these changes to Production, run the following:
+
+```
+npm run deploy-infrastructure
+```
+
+As with the other release commands, this will ask for a version number.  This will create a new git `infrastructure/vX.Y.Z` tag with `X.Y.Z` replaced by the version number.  Additionally a new PR will be created.  
+
+Once this release PR is merged, the infrastructure changes will be applied to Production.

@@ -4389,17 +4389,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "22.6",
+            "version": "22.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "a800ab7c084c1caab9624a62c06e44b3a9bcdb83"
+                "reference": "8142ea93d0d554f6a9d87a0e87a75f79d7ec15aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-a800ab7c084c1caab9624a62c06e44b3a9bcdb83-zip-c8988a.zip",
-                "reference": "a800ab7c084c1caab9624a62c06e44b3a9bcdb83",
-                "shasum": "b7cf1d3f61b2ed5642c4a00ddf57442dc935bd11"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-8142ea93d0d554f6a9d87a0e87a75f79d7ec15aa-zip-95f85a.zip",
+                "reference": "8142ea93d0d554f6a9d87a0e87a75f79d7ec15aa",
+                "shasum": "3da8060ae726588ac51c556f942f9baf44b110d3"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4460,7 +4460,7 @@
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=2555",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=2549",
                     "@putenv YOASTCS_THRESHOLD_WARNINGS=267",
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_cs_thresholds"
                 ],
@@ -4558,26 +4558,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-04-30T07:59:16+00:00"
+            "time": "2024-05-14T08:12:34+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "22.6",
+            "version": "22.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "1d1e5e9671052037b9053eac035aa4dcba1bca21"
+                "reference": "a8f5587fa9cb31d03c896df3b090b537244f7119"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-1d1e5e9671052037b9053eac035aa4dcba1bca21-zip-a6588c.zip",
-                "reference": "1d1e5e9671052037b9053eac035aa4dcba1bca21",
-                "shasum": "362429a48ab0100ae1e687a61db7e51fc287228f"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-a8f5587fa9cb31d03c896df3b090b537244f7119-zip-ab444b.zip",
+                "reference": "a8f5587fa9cb31d03c896df3b090b537244f7119",
+                "shasum": "8d5e75d22b4d117dd3637537f8964f7661cd4117"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^22.6"
+                "yoast/wordpress-seo": "^22.7"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4691,7 +4691,7 @@
                     "rm languages/free-js.pot"
                 ],
                 "i18n-php": [
-                    "wp i18n make-pot . languages/wordpress-seo-premium.pot --skip-js --merge=\"languages/wordpress-seo-premiumjs.pot\" --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/yoast/wordpress-seo-premium/issues\"}' --allow-root"
+                    "wp i18n make-pot . languages/wordpress-seo-premium.pot --skip-js --exclude=\"artifact/*\" --merge=\"languages/wordpress-seo-premiumjs.pot\" --headers='{\"Report-Msgid-Bugs-To\":\"https://github.com/yoast/wordpress-seo-premium/issues\"}' --allow-root"
                 ]
             },
             "license": [
@@ -4715,7 +4715,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-04-30T08:20:16+00:00"
+            "time": "2024-05-14T08:40:02+00:00"
         }
     ],
     "packages-dev": [

@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b # v4.1.5
+        uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
 
       - name: Checkov security scan
         uses: bridgecrewio/checkov-action@f621ecfe2d83b0e2028c7e93f082812eb56d3743 # latest as of Sept 9, 2021

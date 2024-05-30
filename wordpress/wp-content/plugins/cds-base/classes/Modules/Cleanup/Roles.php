@@ -57,10 +57,8 @@ class Roles
         if (
             in_array($cap, [
                 'delete_site',
-                'import',
                 'view_site_health_checks',
                 'export_others_personal_data',
-                'export',
                 'erase_others_personal_data',
                 'edit_themes',
                 'install_themes',
@@ -139,6 +137,8 @@ class Roles
                 'manage_list_manager' => 0,
                 'list_manager_bulk_send' => 0,
                 'list_manager_bulk_send_sms' => 0,
+                'import' => 1,
+                'export' => 1,
             ],
             'editor' => [
                 'moderate_comments' => 1,

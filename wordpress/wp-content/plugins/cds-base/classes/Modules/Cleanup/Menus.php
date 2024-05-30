@@ -56,6 +56,12 @@ class Menus
             "Listes GC",
         ];
 
+        if (Utils::isWPEnvGCAdmin()) {
+            // Add items to the admin array
+            $allowed[] = "Tools";
+            $allowed[] = "Outils";
+        }
+
         //  __('Settings'), __('Appearance')
         // http://localhost/wp-admin/options-reading.php
         end($menu);

@@ -60,6 +60,19 @@ class Utils
         return false;
     }
 
+    public static function isWPEnvGCAdmin(): bool
+    {
+        $current_user = wp_get_current_user();
+
+        if ($current_user) {
+            if (in_array("administrator", $current_user->roles)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static function addHttp($url, $protocol = "https")
     {
 

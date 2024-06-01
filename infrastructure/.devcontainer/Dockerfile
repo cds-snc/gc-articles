@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:buster@sha256:4b387cf957f5d3a15e048a5cfcc51c2c409dccc06f0a82813bd648e0cb22749c
+FROM mcr.microsoft.com/vscode/devcontainers/base:buster@sha256:f164c696cac616c6559a214962e0178319172655e0fcb52251577247753c0248
 
 ARG USERNAME=vscode
 

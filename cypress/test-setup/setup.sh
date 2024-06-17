@@ -20,6 +20,6 @@ wp-env run tests-cli wp plugin activate publishpress-checklists;
 # wp-env run tests-cli wp plugin activate jwt-authentication-for-wp-rest-api;
 
 wp-env run tests-cli wp rewrite structure "/%postname%/";
-wp-env run tests-cli "wp option add LIST_MANAGER_NOTIFY_SERVICES 'Les Articles GC Articles~gc-articles-fb26a6b5-57aa-4cc2-85fe-3053ed344fe8-30569ea9-362b-41c4-a811-842ccf3db3dc'"
+wp-env run tests-cli wp option add LIST_MANAGER_NOTIFY_SERVICES 'Les Articles GC Articles~gc-articles-fb26a6b5-57aa-4cc2-85fe-3053ed344fe8-30569ea9-362b-41c4-a811-842ccf3db3dc'
 
 # wp-env run tests-cli wp db export "$DB_BACKUP"

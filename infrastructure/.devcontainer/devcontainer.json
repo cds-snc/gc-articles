@@ -23,7 +23,7 @@
 	},
 	"features": {
 		"terraform": {
-			"version": "1.8.5",
+			"version": "1.9.1",
 			"tflint": "latest",
 			"terragrunt": "0.57.5"
 		}

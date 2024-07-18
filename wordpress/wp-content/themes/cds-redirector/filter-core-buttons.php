@@ -23,7 +23,7 @@ function cds_filter_core_buttons($block_content, $block)
                 $links .= $link;
             }
 
-            return $links;
+            return $links->outerHtml();
         } catch (Exception $e) {
             //no-op
         }

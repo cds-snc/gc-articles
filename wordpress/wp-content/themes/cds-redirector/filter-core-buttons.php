@@ -20,10 +20,10 @@ function cds_filter_core_buttons($block_content, $block)
                 $crawler = @new HtmlPage($html);
                 $link = $crawler->filter('a');
                 $link->addClass($className);
-                $links .= $link;
+                $links .= $link->outerHtml();
             }
 
-            return $links->outerHtml();
+            return $links;
         } catch (Exception $e) {
             //no-op
         }

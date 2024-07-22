@@ -4097,15 +4097,15 @@
         },
         {
             "name": "wpackagist-plugin/publishpress-checklists",
-            "version": "2.10.4",
+            "version": "2.11.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
-                "reference": "tags/2.10.4"
+                "reference": "tags/2.11.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.10.4.zip"
+                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.11.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4115,15 +4115,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "4.15.1",
+            "version": "4.16.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/4.15.1"
+                "reference": "tags/4.16.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.4.15.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.4.16.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

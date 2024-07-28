@@ -18,6 +18,9 @@ RewriteRule ^se\-connecter\-sign\-in$ /sign-in-se-connecter? [R=301,L]
 # add a trailing slash to /wp-admin
 RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
 
+# Sub-site redirects
+RewriteRule ^pspc-innovation-network(.*)$ https://gcxgce.sharepoint.com/teams/10002125/ [R=301,L]
+
 RewriteCond %{REQUEST_URI} wp-login.php
 RewriteRule ^ /404 [L]
 

@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.316.8",
+            "version": "3.317.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9aff2e655c3f0139f5abe20195ee235b19fff603"
+                "reference": "dc1e3031c2721a25beb2e8fbb175b576e3d60ab9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9aff2e655c3f0139f5abe20195ee235b19fff603",
-                "reference": "9aff2e655c3f0139f5abe20195ee235b19fff603",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dc1e3031c2721a25beb2e8fbb175b576e3d60ab9",
+                "reference": "dc1e3031c2721a25beb2e8fbb175b576e3d60ab9",
                 "shasum": ""
             },
             "require": {
@@ -132,9 +132,9 @@
                 "ext-json": "*",
                 "ext-pcre": "*",
                 "ext-simplexml": "*",
-                "guzzlehttp/guzzle": "^6.5.8 || ^7.4.5 <7.9.0",
+                "guzzlehttp/guzzle": "^6.5.8 || ^7.4.5",
                 "guzzlehttp/promises": "^1.4.0 || ^2.0",
-                "guzzlehttp/psr7": "^1.9.1 || ^2.4.5 <2.7.0",
+                "guzzlehttp/psr7": "^1.9.1 || ^2.4.5",
                 "mtdowling/jmespath.php": "^2.6",
                 "php": ">=7.2.5",
                 "psr/http-message": "^1.0 || ^2.0"
@@ -204,9 +204,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.316.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.317.1"
             },
-            "time": "2024-07-25T19:29:46+00:00"
+            "time": "2024-08-02T18:09:42+00:00"
         },
         {
             "name": "brick/math",
@@ -4097,15 +4097,15 @@
         },
         {
             "name": "wpackagist-plugin/publishpress-checklists",
-            "version": "2.11.1",
+            "version": "2.12.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
-                "reference": "tags/2.11.1"
+                "reference": "tags/2.12.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.11.1.zip"
+                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.12.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4115,15 +4115,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "4.16.0",
+            "version": "4.17.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/4.16.0"
+                "reference": "tags/4.17.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.4.16.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.4.17.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

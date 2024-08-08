@@ -125,6 +125,12 @@ jobs:
         working-directory: infrastructure/terragrunt/env/prod/ecs
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 
+      - name: Post to slack
+        if: success()
+        run: |
+          json='{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":":lapage: New GC Articles <https://github.com/cds-snc/gc-articles/commit/${{ github.sha }}|release has been deployed>!"}}]}'
+          curl -X POST -H 'Content-type: application/json' --data "$json" ${{ secrets.SLACK_WEBHOOK_WEBSITE_INFINITE }}
+
       - name: Report deployment to Sentinel
         if: always()
         uses: cds-snc/sentinel-forward-data-action@main

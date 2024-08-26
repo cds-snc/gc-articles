@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.317.1",
+            "version": "3.320.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "dc1e3031c2721a25beb2e8fbb175b576e3d60ab9"
+                "reference": "dbae075b861316237d63418715f8bf4bfdd9d33d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dc1e3031c2721a25beb2e8fbb175b576e3d60ab9",
-                "reference": "dc1e3031c2721a25beb2e8fbb175b576e3d60ab9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dbae075b861316237d63418715f8bf4bfdd9d33d",
+                "reference": "dbae075b861316237d63418715f8bf4bfdd9d33d",
                 "shasum": ""
             },
             "require": {
@@ -177,7 +177,10 @@
                 ],
                 "psr-4": {
                     "Aws\\": "src/"
-                }
+                },
+                "exclude-from-classmap": [
+                    "src/data/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -204,9 +207,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.317.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.320.2"
             },
-            "time": "2024-08-02T18:09:42+00:00"
+            "time": "2024-08-16T18:06:17+00:00"
         },
         {
             "name": "brick/math",
@@ -4389,17 +4392,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "23.1",
+            "version": "23.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "a8ec3243200a40200764dcf5db8346cfb300f8cc"
+                "reference": "d73806cc19a6e8eab914615b07ca7ed1fbcdf00a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-a8ec3243200a40200764dcf5db8346cfb300f8cc-zip-9e0220.zip",
-                "reference": "a8ec3243200a40200764dcf5db8346cfb300f8cc",
-                "shasum": "c37739be825da4c7d27fa17ed24260d92c5ca843"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-d73806cc19a6e8eab914615b07ca7ed1fbcdf00a-zip-bd467f.zip",
+                "reference": "d73806cc19a6e8eab914615b07ca7ed1fbcdf00a",
+                "shasum": "ed7c661aadc970ccd6e8986158aff17a07ab4b0f"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4459,7 +4462,7 @@
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=2493",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=2491",
                     "@putenv YOASTCS_THRESHOLD_WARNINGS=253",
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_cs_thresholds"
                 ],
@@ -4553,26 +4556,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-07-23T08:04:52+00:00"
+            "time": "2024-08-06T08:08:36+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "23.1",
+            "version": "23.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "c8ddbbf32248f3ef344ddc7c66d7bb838baa9375"
+                "reference": "4bedfdd1f62f8bce24761ad8df836014cb70d905"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-c8ddbbf32248f3ef344ddc7c66d7bb838baa9375-zip-c1c971.zip",
-                "reference": "c8ddbbf32248f3ef344ddc7c66d7bb838baa9375",
-                "shasum": "3aab38f8169eff0a63bfab330335445be87572fe"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-4bedfdd1f62f8bce24761ad8df836014cb70d905-zip-5e9da1.zip",
+                "reference": "4bedfdd1f62f8bce24761ad8df836014cb70d905",
+                "shasum": "5eec8a58d8019002f8bd65621ec2c0402e074c27"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^23.1"
+                "yoast/wordpress-seo": "^23.2"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4625,7 +4628,7 @@
                     "Yoast\\WP\\SEO\\Premium\\Config\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=663",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=648",
                     "@putenv YOASTCS_THRESHOLD_WARNINGS=74",
                     "Yoast\\WP\\SEO\\Premium\\Config\\Composer\\Actions::check_cs_thresholds"
                 ],
@@ -4710,7 +4713,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-07-23T08:44:57+00:00"
+            "time": "2024-08-06T09:40:49+00:00"
         }
     ],
     "packages-dev": [

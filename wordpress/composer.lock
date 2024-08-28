@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e7341e5c61017c754b2b19c31a18fb3",
+    "content-hash": "36dcb257d132e6da3087ee975d18843d",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -4208,7 +4208,7 @@
         },
         {
             "name": "wpml/sitepress-multilingual-cms",
-            "version": "4.6.10",
+            "version": "4.6.13",
             "dist": {
                 "type": "zip",
                 "url": "https://wpml.org/?download=6088&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"
@@ -4232,7 +4232,7 @@
         },
         {
             "name": "wpml/wpml-string-translation",
-            "version": "3.2.11",
+            "version": "3.2.14",
             "dist": {
                 "type": "zip",
                 "url": "https://wpml.org/?download=6092&user_id={%WPML_USER_ID}&subscription_key={%WPML_KEY}&version={%VERSION}"

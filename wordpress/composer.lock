@@ -4100,15 +4100,15 @@
         },
         {
             "name": "wpackagist-plugin/publishpress-checklists",
-            "version": "2.12.0",
+            "version": "2.13.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
-                "reference": "tags/2.12.0"
+                "reference": "tags/2.13.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.12.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.13.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4392,17 +4392,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "23.2",
+            "version": "23.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "d73806cc19a6e8eab914615b07ca7ed1fbcdf00a"
+                "reference": "0c83fc04a001166eadcc9abe03707fe1ff43b86c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-d73806cc19a6e8eab914615b07ca7ed1fbcdf00a-zip-bd467f.zip",
-                "reference": "d73806cc19a6e8eab914615b07ca7ed1fbcdf00a",
-                "shasum": "ed7c661aadc970ccd6e8986158aff17a07ab4b0f"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-0c83fc04a001166eadcc9abe03707fe1ff43b86c-zip-011f3b.zip",
+                "reference": "0c83fc04a001166eadcc9abe03707fe1ff43b86c",
+                "shasum": "4f8f2b1fab5dd0026e866dd5b395391322f4b52e"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4556,26 +4556,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-08-06T08:08:36+00:00"
+            "time": "2024-08-20T07:46:11+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "23.2",
+            "version": "23.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "4bedfdd1f62f8bce24761ad8df836014cb70d905"
+                "reference": "a168f4f85eee240bb90c4e54f118acbea69c88c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-4bedfdd1f62f8bce24761ad8df836014cb70d905-zip-5e9da1.zip",
-                "reference": "4bedfdd1f62f8bce24761ad8df836014cb70d905",
-                "shasum": "5eec8a58d8019002f8bd65621ec2c0402e074c27"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-a168f4f85eee240bb90c4e54f118acbea69c88c7-zip-0e8b56.zip",
+                "reference": "a168f4f85eee240bb90c4e54f118acbea69c88c7",
+                "shasum": "ce25efd2e0d7a418c6e072dd074f1bc0e1b927bc"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^23.2"
+                "yoast/wordpress-seo": "^23.3"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4713,7 +4713,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-08-06T09:40:49+00:00"
+            "time": "2024-08-20T08:30:20+00:00"
         }
     ],
     "packages-dev": [

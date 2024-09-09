@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.321.2",
+            "version": "3.321.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "c04f8f30891cee8480c132778cd4cc486467e77a"
+                "reference": "3dc53a79677dd1f0e682dfc05f9815901ec7bf58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c04f8f30891cee8480c132778cd4cc486467e77a",
-                "reference": "c04f8f30891cee8480c132778cd4cc486467e77a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3dc53a79677dd1f0e682dfc05f9815901ec7bf58",
+                "reference": "3dc53a79677dd1f0e682dfc05f9815901ec7bf58",
                 "shasum": ""
             },
             "require": {
@@ -207,9 +207,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.321.6"
             },
-            "time": "2024-08-30T18:14:40+00:00"
+            "time": "2024-09-06T18:06:38+00:00"
         },
         {
             "name": "brick/math",
@@ -1803,16 +1803,16 @@
         },
         {
             "name": "mtdowling/jmespath.php",
-            "version": "2.7.0",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jmespath/jmespath.php.git",
-                "reference": "bbb69a935c2cbb0c03d7f481a238027430f6440b"
+                "reference": "a2a865e05d5f420b50cc2f85bb78d565db12a6bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jmespath/jmespath.php/zipball/bbb69a935c2cbb0c03d7f481a238027430f6440b",
-                "reference": "bbb69a935c2cbb0c03d7f481a238027430f6440b",
+                "url": "https://api.github.com/repos/jmespath/jmespath.php/zipball/a2a865e05d5f420b50cc2f85bb78d565db12a6bc",
+                "reference": "a2a865e05d5f420b50cc2f85bb78d565db12a6bc",
                 "shasum": ""
             },
             "require": {
@@ -1829,7 +1829,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.7-dev"
+                    "dev-master": "2.8-dev"
                 }
             },
             "autoload": {
@@ -1863,9 +1863,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jmespath/jmespath.php/issues",
-                "source": "https://github.com/jmespath/jmespath.php/tree/2.7.0"
+                "source": "https://github.com/jmespath/jmespath.php/tree/2.8.0"
             },
-            "time": "2023-08-25T10:54:48+00:00"
+            "time": "2024-09-04T18:46:31+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -4392,17 +4392,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "23.3",
+            "version": "23.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "0c83fc04a001166eadcc9abe03707fe1ff43b86c"
+                "reference": "029ac158572bfc2676284399685d0e4a18e104a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-0c83fc04a001166eadcc9abe03707fe1ff43b86c-zip-011f3b.zip",
-                "reference": "0c83fc04a001166eadcc9abe03707fe1ff43b86c",
-                "shasum": "4f8f2b1fab5dd0026e866dd5b395391322f4b52e"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-029ac158572bfc2676284399685d0e4a18e104a0-zip-fbf459.zip",
+                "reference": "029ac158572bfc2676284399685d0e4a18e104a0",
+                "shasum": "190dc130340ed259cdb6d0e1a7371dffcb7ef71e"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4462,8 +4462,8 @@
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=2491",
-                    "@putenv YOASTCS_THRESHOLD_WARNINGS=253",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=2482",
+                    "@putenv YOASTCS_THRESHOLD_WARNINGS=252",
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_cs_thresholds"
                 ],
                 "check-cs": [
@@ -4556,26 +4556,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-08-20T07:46:11+00:00"
+            "time": "2024-09-03T07:57:46+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "23.3",
+            "version": "23.4",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "a168f4f85eee240bb90c4e54f118acbea69c88c7"
+                "reference": "3916b571b9a30027ee7850cd0a9753949dec50de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-a168f4f85eee240bb90c4e54f118acbea69c88c7-zip-0e8b56.zip",
-                "reference": "a168f4f85eee240bb90c4e54f118acbea69c88c7",
-                "shasum": "ce25efd2e0d7a418c6e072dd074f1bc0e1b927bc"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-3916b571b9a30027ee7850cd0a9753949dec50de-zip-c27e63.zip",
+                "reference": "3916b571b9a30027ee7850cd0a9753949dec50de",
+                "shasum": "a1e020d3ffa9d8f76421bfbe3362fa85727eb271"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^23.3"
+                "yoast/wordpress-seo": "^23.4"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4713,7 +4713,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-08-20T08:30:20+00:00"
+            "time": "2024-09-03T08:18:40+00:00"
         }
     ],
     "packages-dev": [

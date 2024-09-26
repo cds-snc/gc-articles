@@ -627,7 +627,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "BlockComments"
-    priority = 13
+    priority = 100
 
     action {
       dynamic "block" {
@@ -684,7 +684,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "WordpressRateLimit"
-    priority = 101
+    priority = 110
 
     action {
       dynamic "block" {

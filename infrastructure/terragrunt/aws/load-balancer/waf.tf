@@ -626,6 +626,63 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
+    name     = "BlockComments"
+    priority = 13
+
+    action {
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
+    }
+
+    statement {
+      and_statement {
+        statement {
+          byte_match_statement {
+            positional_constraint = "CONTAINS"
+            search_string         = "wp-comments-post.php"
+            field_to_match {
+              uri_path {}
+            }
+            text_transformation {
+              priority = 0
+              type     = "LOWERCASE"
+            }
+          }
+        }
+
+        statement {
+          byte_match_statement {
+            positional_constraint = "EXACTLY"
+            search_string         = "post"
+            field_to_match {
+              method {}
+            }
+            text_transformation {
+              priority = 0
+              type     = "LOWERCASE"
+            }
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "BlockComments"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
     name     = "WordpressRateLimit"
     priority = 101
 

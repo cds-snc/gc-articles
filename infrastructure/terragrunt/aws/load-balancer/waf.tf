@@ -648,11 +648,11 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         statement {
           byte_match_statement {
             positional_constraint = "CONTAINS"
-            search_string = "wp-comments-post.php"
+            search_string         = "wp-comments-post.php"
             field_to_match {
               uri_path {}
             }
-            text_transformations {
+            text_transformation {
               priority = 0
               type     = "LOWERCASE"
             }
@@ -662,11 +662,11 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         statement {
           byte_match_statement {
             positional_constraint = "EXACTLY"
-            search_string = "post"
+            search_string         = "post"
             field_to_match {
               method {}
             }
-            text_transformations {
+            text_transformation {
               priority = 0
               type     = "LOWERCASE"
             }

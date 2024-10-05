@@ -90,7 +90,7 @@ services:
 
   composer:
     restart: 'no'
-    image: composer/composer:latest@sha256:d5e9183303ed7a70fd9cbce5a672f90a7f20a7ce8ca701de21a8f6b79ccbc29c
+    image: composer/composer:latest@sha256:d28e2299c0fec501817c2298df5c747a351e9cc81cf67d1ac637e9bb2b433207
     env_file: .env
     command: >
       /bin/bash -c '

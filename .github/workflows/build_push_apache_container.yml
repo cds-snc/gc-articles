@@ -95,7 +95,9 @@ jobs:
           docker push ${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
 
       - name: Docker generate SBOM
-        uses: cds-snc/security-tools/.github/actions/generate-sbom@598deeaed48ab3bb0df85f0ed124ba53f0ade385 # v3.1.0
+        uses: cds-snc/security-tools/.github/actions/generate-sbom@34794baf2af592913bb5b51d8df4f8d0acc49b6f # v3.2.0
+        env:
+          TRIVY_DB_REPOSITORY: ${{ vars.TRIVY_DB_REPOSITORY }}
         with:
           docker_image: "${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}"
           dockerfile_path: "wordpress/docker/apache/Dockerfile"

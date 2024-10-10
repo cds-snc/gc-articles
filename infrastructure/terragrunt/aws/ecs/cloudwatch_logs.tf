@@ -9,7 +9,7 @@ resource "aws_cloudwatch_log_group" "ecs_events" {
 }
 
 module "sentinel_forwarder" {
-  source            = "github.com/cds-snc/terraform-modules//sentinel_forwarder?ref=v9.6.6"
+  source            = "github.com/cds-snc/terraform-modules//sentinel_forwarder?ref=v9.6.7"
   function_name     = "sentinel-forwarder"
   billing_tag_value = var.billing_tag_value
 

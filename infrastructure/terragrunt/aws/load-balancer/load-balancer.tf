@@ -61,6 +61,7 @@ resource "aws_lb_target_group" "wordpress" {
 }
 
 resource "aws_lb_listener" "wordpress" {
+  # checkov:skip=CKV_AWS_103: false-positive, SSL policy is TLS1.2+
   load_balancer_arn = aws_lb.wordpress.arn
   port              = "443"
   protocol          = "HTTPS"

@@ -115,16 +115,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.323.1",
+            "version": "3.324.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1b393c41a73e1ef4c493c60c5eee0bb4b0632264"
+                "reference": "5b824a9b8015a38f18c53b023975c0f63c7bd3dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1b393c41a73e1ef4c493c60c5eee0bb4b0632264",
-                "reference": "1b393c41a73e1ef4c493c60c5eee0bb4b0632264",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/5b824a9b8015a38f18c53b023975c0f63c7bd3dc",
+                "reference": "5b824a9b8015a38f18c53b023975c0f63c7bd3dc",
                 "shasum": ""
             },
             "require": {
@@ -207,9 +207,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.323.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.324.1"
             },
-            "time": "2024-10-04T18:07:17+00:00"
+            "time": "2024-10-11T18:22:01+00:00"
         },
         {
             "name": "brick/math",
@@ -4116,15 +4116,15 @@
         },
         {
             "name": "wpackagist-plugin/wps-hide-login",
-            "version": "1.9.16.7",
+            "version": "1.9.17.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/wps-hide-login/",
-                "reference": "tags/1.9.16.7"
+                "reference": "tags/1.9.17.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.9.16.7.zip"
+                "url": "https://downloads.wordpress.org/plugin/wps-hide-login.1.9.17.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4318,17 +4318,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "23.5",
+            "version": "23.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "6c6a4a4f993cdc5ceb0b5ada8dd3c30773e01324"
+                "reference": "f2baf6b3ee1ef6f1a9c2383cc7ab0c1add2aee53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-6c6a4a4f993cdc5ceb0b5ada8dd3c30773e01324-zip-e47def.zip",
-                "reference": "6c6a4a4f993cdc5ceb0b5ada8dd3c30773e01324",
-                "shasum": "72f19e9c2775d945da84f4769992780058cd23f5"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-f2baf6b3ee1ef6f1a9c2383cc7ab0c1add2aee53-zip-76eea2.zip",
+                "reference": "f2baf6b3ee1ef6f1a9c2383cc7ab0c1add2aee53",
+                "shasum": "f0eae5c8de6430931f3e00c433135638ab816dca"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4388,7 +4388,7 @@
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=2482",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=2480",
                     "@putenv YOASTCS_THRESHOLD_WARNINGS=252",
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_cs_thresholds"
                 ],
@@ -4482,26 +4482,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-09-24T07:49:29+00:00"
+            "time": "2024-10-08T09:46:19+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "23.5",
+            "version": "23.6",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "fc995f46fb0451011d744240f8ecf5d8fe25c552"
+                "reference": "c9f73c9000f2af062b6aa60b80a6cc28b71d55b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-fc995f46fb0451011d744240f8ecf5d8fe25c552-zip-030553.zip",
-                "reference": "fc995f46fb0451011d744240f8ecf5d8fe25c552",
-                "shasum": "9e8d1568a8e9b4ce4020fa3ccbbd560637a7e345"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-c9f73c9000f2af062b6aa60b80a6cc28b71d55b7-zip-66abc8.zip",
+                "reference": "c9f73c9000f2af062b6aa60b80a6cc28b71d55b7",
+                "shasum": "3ca0a2eb6c7e723f54a691c499654ca92a7f666d"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^23.5"
+                "yoast/wordpress-seo": "^23.6"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4639,7 +4639,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2024-09-24T08:32:29+00:00"
+            "time": "2024-10-08T10:11:47+00:00"
         }
     ],
     "packages-dev": [
@@ -5074,16 +5074,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "3abf7425cd284141dc5d8d14a9ee444de3345d1a"
+                "reference": "8eea230464783aa9671db8eea6f8c6ac5285794b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/3abf7425cd284141dc5d8d14a9ee444de3345d1a",
-                "reference": "3abf7425cd284141dc5d8d14a9ee444de3345d1a",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/8eea230464783aa9671db8eea6f8c6ac5285794b",
+                "reference": "8eea230464783aa9671db8eea6f8c6ac5285794b",
                 "shasum": ""
             },
             "require": {
@@ -5126,9 +5126,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.3.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.3.1"
             },
-            "time": "2024-09-29T13:56:26+00:00"
+            "time": "2024-10-08T18:51:32+00:00"
         },
         {
             "name": "nunomaduro/collision",

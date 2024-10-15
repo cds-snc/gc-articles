@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "cloudfront_logs" {
 
     expiration {
       days                         = 30
-      expired_object_delete_marker = true
+      expired_object_delete_marker = false
     }
 
     noncurrent_version_expiration {

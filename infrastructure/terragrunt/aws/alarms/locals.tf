@@ -18,6 +18,7 @@ locals {
     "Cron unschedule event error for hook",
     "database error",
     "GET /notification-gc-notify/wp-json/wp/v2/pages",
+    "getaddrinfo for*proxy*failed",
     "HTTP/1.1\\\" 301",
     "HTTP/1.1\\\" 400",
     "HTTP/1.1\\\" 403",
@@ -29,6 +30,7 @@ locals {
   ]
   wordpress_database_errors = [
     "database error",
+    "getaddrinfo for*proxy*failed",
   ]
   wordpress_warnings = [
     "Cron unschedule event error for hook",

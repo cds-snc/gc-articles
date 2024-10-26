@@ -87,7 +87,7 @@
     "wpml/wp-seo-multilingual": "*",
     "wpackagist-plugin/login-lockdown":"2.06",
     "wpackagist-plugin/disable-user-login":"1.3.10",
-    "wpackagist-plugin/wordpress-importer":"0.8.2",
+    "wpackagist-plugin/wordpress-importer":"0.8.3",
     "humanmade/s3-uploads": "^3.0",
     "cds-snc/cds-base": "dev-main",
     "cds-snc/cds-default": "dev-main",

@@ -28,7 +28,7 @@ RUN npm --unsafe-perm install
 # when updating the Wordpress version, update the version in the files:
 #     - ~/wordpress/docker/local.Dockerfile
 #     - ~/github/workflows/ci.yml
-FROM wordpress:6.6.2-php8.1-fpm-alpine@sha256:1d2de28f48f1ed40be8cc00ffab327a817139d72eaa6f70bed86bfe776e10cda
+FROM wordpress:6.6.2-php8.1-fpm-alpine@sha256:081fceb75dcb6c2a869fdb45928644ec25f79ccf3ca01df8e246170ba1a8b2be
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     && pecl install pcov \

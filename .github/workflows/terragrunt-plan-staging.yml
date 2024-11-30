@@ -105,7 +105,7 @@ jobs:
       # No dependencies
       - name: Terragrunt plan network
         if: ${{ steps.filter.outputs.network == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@25afd759b2ada46a94b011fab7a81963c4f3a61a # v3.3.0
+        uses: cds-snc/terraform-plan@d79bcf0eccf632a0ad9e9193072b42c970766c5b # v3.3.1
         with:
           directory: "infrastructure/terragrunt/env/staging/network"
           comment-delete: "true"
@@ -115,7 +115,7 @@ jobs:
 
       - name: Terragrunt plan hosted-zone
         if: ${{ steps.filter.outputs.hosted-zone == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@25afd759b2ada46a94b011fab7a81963c4f3a61a # v3.3.0
+        uses: cds-snc/terraform-plan@d79bcf0eccf632a0ad9e9193072b42c970766c5b # v3.3.1
         with:
           directory: "infrastructure/terragrunt/env/staging/hosted-zone"
           comment-delete: "true"
@@ -125,7 +125,7 @@ jobs:
 
       - name: Terragrunt plan ecr
         if: ${{ steps.filter.outputs.ecr == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@25afd759b2ada46a94b011fab7a81963c4f3a61a # v3.3.0
+        uses: cds-snc/terraform-plan@d79bcf0eccf632a0ad9e9193072b42c970766c5b # v3.3.1
         with:
           directory: "infrastructure/terragrunt/env/staging/ecr"
           comment-delete: "true"
@@ -135,7 +135,7 @@ jobs:
 
       - name: Terragrunt plan storage
         if: ${{ steps.filter.outputs.storage == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@25afd759b2ada46a94b011fab7a81963c4f3a61a # v3.3.0
+        uses: cds-snc/terraform-plan@d79bcf0eccf632a0ad9e9193072b42c970766c5b # v3.3.1
         with:
           directory: "infrastructure/terragrunt/env/staging/storage"
           comment-delete: "true"
@@ -146,7 +146,7 @@ jobs:
       # Network dependency
       - name: Terragrunt plan database
         if: ${{ steps.filter.outputs.database == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@25afd759b2ada46a94b011fab7a81963c4f3a61a # v3.3.0
+        uses: cds-snc/terraform-plan@d79bcf0eccf632a0ad9e9193072b42c970766c5b # v3.3.1
         with:
           directory: "infrastructure/terragrunt/env/staging/database"
           comment-delete: "true"
@@ -156,7 +156,7 @@ jobs:
 
       - name: Terragrunt plan load-balancer
         if: ${{ steps.filter.outputs.load-balancer == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@25afd759b2ada46a94b011fab7a81963c4f3a61a # v3.3.0
+        uses: cds-snc/terraform-plan@d79bcf0eccf632a0ad9e9193072b42c970766c5b # v3.3.1
         with:
           directory: "infrastructure/terragrunt/env/staging/load-balancer"
           comment-delete: "true"
@@ -167,7 +167,7 @@ jobs:
       # Load-balancer & database dependency
       - name: Terragrunt plan ecs
         if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@25afd759b2ada46a94b011fab7a81963c4f3a61a # v3.3.0
+        uses: cds-snc/terraform-plan@d79bcf0eccf632a0ad9e9193072b42c970766c5b # v3.3.1
         with:
           directory: "infrastructure/terragrunt/env/staging/ecs"
           comment-delete: "true"
@@ -178,7 +178,7 @@ jobs:
       # Depends on everything
       - name: Terragrunt plan alarms
         if: ${{ steps.filter.outputs.alarms == 'true' || steps.filter.outputs.common == 'true' }}
-        uses: cds-snc/terraform-plan@25afd759b2ada46a94b011fab7a81963c4f3a61a # v3.3.0
+        uses: cds-snc/terraform-plan@d79bcf0eccf632a0ad9e9193072b42c970766c5b # v3.3.1
         with:
           directory: "infrastructure/terragrunt/env/staging/alarms"
           comment-delete: "true"

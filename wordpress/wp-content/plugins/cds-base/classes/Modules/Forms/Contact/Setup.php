@@ -124,7 +124,7 @@ class Setup
         // $response = $messenger->createTicket($goal, $fullname, $email, $message);
 
         $platform_message = __('Requester:', 'cds-snc') . " " . $email . "\n\n" . $message;
-        $response = $messenger->sendMail('platform-mvp@cds-snc.ca', $platform_message);
+        $response = $messenger->sendMail('platform-core-services@cds-snc.ca', $platform_message);
 
         if (isset($_POST['cc']) && $_POST['cc'] !== "") {
             $messenger->sendMail($email, $message);

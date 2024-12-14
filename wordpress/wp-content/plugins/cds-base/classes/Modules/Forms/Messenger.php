@@ -99,7 +99,7 @@ class Messenger
                         'requester' => ['name' => $fullname, 'email' => $email],
                         'tags' => $this->mergeTags($goal),
                         'is_public' => true,
-                        'recipient' => 'platform-mvp@cds-snc.ca',
+                        'recipient' => 'platform-core-services@cds-snc.ca',
                         'type' => 'question'
                     ]
                 ],

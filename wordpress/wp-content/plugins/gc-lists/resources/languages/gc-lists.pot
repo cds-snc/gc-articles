@@ -49,7 +49,7 @@ msgid "Instructions for adding each value can be found on the setup page."
 msgstr ""
 
 #: resources/templates/no_api_key.php:40
-msgid "If you still need help, you can reach out to <a href=\"mailto:platform-mvp@cds-snc.ca\">platform-mvp@cds-snc.ca</a> for support."
+msgid "If you still need help, you can reach out to <a href=\"mailto:platform-core-services@cds-snc.ca\">platform-core-services@cds-snc.ca</a> for support."
 msgstr ""
 
 #: src/Menu.php:53

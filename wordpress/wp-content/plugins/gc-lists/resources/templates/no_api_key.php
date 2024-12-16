@@ -37,5 +37,5 @@ $missingValuesText = [
     <?php _e('Instructions for adding each value can be found on the setup page.', 'gc-lists'); ?>
 </p>
 <p>
-    <?php _e('If you still need help, you can reach out to <a href="mailto:platform-mvp@cds-snc.ca">platform-mvp@cds-snc.ca</a> for support.', 'gc-lists'); ?>
+    <?php _e('If you still need help, you can reach out to <a href="mailto:platform-core-services@cds-snc.ca">platform-core-services@cds-snc.ca</a> for support.', 'gc-lists'); ?>
 </p>

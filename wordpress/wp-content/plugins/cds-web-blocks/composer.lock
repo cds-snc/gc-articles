@@ -9,16 +9,16 @@
     "packages-dev": [
         {
             "name": "antecedent/patchwork",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/antecedent/patchwork.git",
-                "reference": "b07d4fb37c3c723c8755122160c089e077d5de65"
+                "reference": "1bf183a3e1bd094f231a2128b9ecc5363c269245"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/b07d4fb37c3c723c8755122160c089e077d5de65",
-                "reference": "b07d4fb37c3c723c8755122160c089e077d5de65",
+                "url": "https://api.github.com/repos/antecedent/patchwork/zipball/1bf183a3e1bd094f231a2128b9ecc5363c269245",
+                "reference": "1bf183a3e1bd094f231a2128b9ecc5363c269245",
                 "shasum": ""
             },
             "require": {
@@ -51,9 +51,9 @@
             ],
             "support": {
                 "issues": "https://github.com/antecedent/patchwork/issues",
-                "source": "https://github.com/antecedent/patchwork/tree/2.2.0"
+                "source": "https://github.com/antecedent/patchwork/tree/2.2.1"
             },
-            "time": "2024-09-27T16:59:55+00:00"
+            "time": "2024-12-11T10:19:54+00:00"
         },
         {
             "name": "brain/monkey",
@@ -612,13 +612,13 @@
             },
             "type": "library",
             "extra": {
-                "branch-alias": {
-                    "dev-develop": "6.x-dev"
-                },
                 "laravel": {
                     "providers": [
                         "NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider"
                     ]
+                },
+                "branch-alias": {
+                    "dev-develop": "6.x-dev"
                 }
             },
             "autoload": {
@@ -790,10 +790,10 @@
             },
             "type": "composer-plugin",
             "extra": {
+                "class": "Pest\\Plugin\\Manager",
                 "branch-alias": {
                     "dev-master": "1.x-dev"
-                },
-                "class": "Pest\\Plugin\\Manager"
+                }
             },
             "autoload": {
                 "psr-4": {
@@ -2744,8 +2744,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -2820,8 +2820,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -2898,8 +2898,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -2982,8 +2982,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {

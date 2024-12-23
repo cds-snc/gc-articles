@@ -20,6 +20,7 @@ RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
 
 # Sub-site redirects
 RewriteRule ^pspc-innovation-network(.*)$ https://gcxgce.sharepoint.com/teams/10002125/ [R=301,L]
+RewriteRule ^gc-data-conference(.*)$ https://www.csps-efpc.gc.ca/events/data-conference2024/about-eng.aspx [R=301,L]
 
 RewriteCond %{REQUEST_URI} wp-login.php
 RewriteRule ^ /404 [L]

@@ -2,7 +2,7 @@
 # RDS MySQL cluster across 3 subnets
 #
 module "rds_cluster" {
-  source = "github.com/cds-snc/terraform-modules//rds?ref=v10.2.0"
+  source = "github.com/cds-snc/terraform-modules//rds?ref=v10.2.1"
   name   = "wordpress"
 
   database_name  = var.database_name

@@ -47,6 +47,11 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
+      - name: Setup SVN
+        run: |
+          sudo apt-get update
+          sudo apt-get install subversion
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -78,6 +83,11 @@ jobs:
       DB_PASSWORD: root
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup SVN
+        run: |
+          sudo apt-get update
+          sudo apt-get install subversion
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

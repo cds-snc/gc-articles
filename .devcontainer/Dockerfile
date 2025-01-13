@@ -2,7 +2,6 @@ FROM node:16-alpine@sha256:a1f9d027912b58a7c75be7716c97cfbc6d3099f3a97ed84aa490b
 
 FROM wordpress:cli-php8.1@sha256:bc89cd33d5213dda0f0628f50c61f049300b2a33d8cbc94f735c5501844d0fc6
 
-COPY --from=node /usr/lib /usr/lib
 COPY --from=node /usr/local/share /usr/local/share
 COPY --from=node /usr/local/lib /usr/local/lib
 COPY --from=node /usr/local/include /usr/local/include
@@ -18,17 +17,17 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
     libmcrypt-dev && \
     # install dev utils
     apk add sudo --no-cache \
-    nano \
-    openssh \
-    rsync \
-    git \
-    subversion \
-    nodejs \
-    npm \
-    zsh \
-    zsh-autosuggestions \
-    zsh-syntax-highlighting \
-    gettext && \
+        nano \
+        openssh \
+        rsync \
+        git \
+        subversion \
+        nodejs \
+        npm \
+        zsh \
+        zsh-autosuggestions \
+        zsh-syntax-highlighting \
+        gettext && \
     # Install from v3.16 alpine community repo
     apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/v3.16/community/ \
         php8-xmlwriter \
@@ -54,7 +53,7 @@ RUN apk del mod-deps && \
 
 # Create non-root default user
 ARG USER=default
-ENV HOME /home/$USER
+ENV HOME=/home/$USER
 
 RUN adduser -D $USER \
     && echo "$USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/$USER \
@@ -76,6 +75,6 @@ RUN echo "alias mods=\"cd ~/project/wordpress/wp-content/plugins/cds-wpml-mods\"
     echo "alias webroot=\"cd /usr/src/wordpress\"" >> ~/.zshrc && \
     echo "alias wordpress=\"cd ~/project/wordpress\"" >> ~/.zshrc
 
-ENV SHELL /bin/zsh
+ENV SHELL=/bin/zsh
 
 CMD ["sleep", "infinity"]

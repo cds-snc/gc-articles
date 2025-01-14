@@ -40,5 +40,7 @@
       "@make-pot",
       "@merge-po"
     ]
-  }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }

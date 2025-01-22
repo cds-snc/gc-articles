@@ -8,7 +8,7 @@ on:
       - "infrastructure/terragrunt/aws/**"
       - "infrastructure/terragrunt/env/staging/**"
       - "infrastructure/terragrunt/env/common/**"
-      - "infrastructure/terragrunt/env/terragrunt.hcl"
+      - "infrastructure/terragrunt/env/root.hcl"
       - ".github/workflows/terragrunt-apply-staging.yml"
 
 env:
@@ -73,7 +73,7 @@ jobs:
             common:
               - '.github/workflows/terragrunt-apply-staging.yml'
               - 'infrastructure/terragrunt/env/common/**'
-              - 'infrastructure/terragrunt/env/terragrunt.hcl'
+              - 'infrastructure/terragrunt/env/root.hcl'
               - 'infrastructure/terragrunt/env/staging/env_vars.hcl'
             alarms:
               - 'infrastructure/terragrunt/aws/alarms/**'

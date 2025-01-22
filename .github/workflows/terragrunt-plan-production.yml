@@ -80,7 +80,7 @@ jobs:
             common:
               - '.github/workflows/terragrunt-plan-production.yml'
               - 'infrastructure/terragrunt/env/common/**'
-              - 'infrastructure/terragrunt/env/terragrunt.hcl'
+              - 'infrastructure/terragrunt/env/root.hcl'
               - 'infrastructure/terragrunt/env/prod/env_vars.hcl'
             alarms:
               - 'infrastructure/terragrunt/aws/alarms/**'

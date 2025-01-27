@@ -75,7 +75,7 @@ services:
   phpmyadmin:
     depends_on:
       - db
-    image: phpmyadmin/phpmyadmin@sha256:44328e7738eb732bed34fa2dd10c0e4683cbf0b87c23be2f660ea8ccfc271942
+    image: phpmyadmin/phpmyadmin@sha256:95e01f723b5e55fabf16d0473f1df2354c4c6352b35902b51d6a6245e074aee4
     restart: always
     logging:
       driver:

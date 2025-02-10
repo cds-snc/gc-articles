@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "affc2c287beecdb85a48516f666d3337",
+    "content-hash": "c03a9af814edf0a403e3d3ad02d619b7",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -4044,15 +4044,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "4.17.0",
+            "version": "5.6.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/4.17.0"
+                "reference": "tags/5.6.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.4.17.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.5.6.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

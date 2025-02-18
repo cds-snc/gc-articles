@@ -4318,17 +4318,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "24.4",
+            "version": "24.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "80ad94283a7eed199747b8df8c90134dccdd8926"
+                "reference": "74ac5d95490c7a229292b09c4299259a7fc0bbef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-80ad94283a7eed199747b8df8c90134dccdd8926-zip-c39bc8.zip",
-                "reference": "80ad94283a7eed199747b8df8c90134dccdd8926",
-                "shasum": "24ec34c8b3961ab224348d8347a24c893b081be9"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-74ac5d95490c7a229292b09c4299259a7fc0bbef-zip-1cf213.zip",
+                "reference": "74ac5d95490c7a229292b09c4299259a7fc0bbef",
+                "shasum": "0f2c71b4c2e74ac882d5861e11d11569113d4e9c"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4482,26 +4482,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2025-02-04T08:49:32+00:00"
+            "time": "2025-02-18T09:18:37+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "24.4",
+            "version": "24.5",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "67b8b7b74d94eb9e57d60a53ac7b68046d0a8ffc"
+                "reference": "80d9de10a9bc777aed8b711dce7fcc06739a5f71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-67b8b7b74d94eb9e57d60a53ac7b68046d0a8ffc-zip-6ebb18.zip",
-                "reference": "67b8b7b74d94eb9e57d60a53ac7b68046d0a8ffc",
-                "shasum": "70b33ea8a36c78674256e805d67fee1cd1853175"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-80d9de10a9bc777aed8b711dce7fcc06739a5f71-zip-18d723.zip",
+                "reference": "80d9de10a9bc777aed8b711dce7fcc06739a5f71",
+                "shasum": "8b205692347cb668a954a13fb025a26d6756f7bf"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^24.4"
+                "yoast/wordpress-seo": "^24.5"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4639,7 +4639,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2025-02-04T09:37:36+00:00"
+            "time": "2025-02-18T09:57:10+00:00"
         }
     ],
     "packages-dev": [
@@ -5014,16 +5014,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.12.1",
+            "version": "1.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "123267b2c49fbf30d78a7b2d333f6be754b94845"
+                "reference": "024473a478be9df5fdaca2c793f2232fe788e414"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/123267b2c49fbf30d78a7b2d333f6be754b94845",
-                "reference": "123267b2c49fbf30d78a7b2d333f6be754b94845",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/024473a478be9df5fdaca2c793f2232fe788e414",
+                "reference": "024473a478be9df5fdaca2c793f2232fe788e414",
                 "shasum": ""
             },
             "require": {
@@ -5062,7 +5062,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.12.1"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.0"
             },
             "funding": [
                 {
@@ -5070,7 +5070,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-08T17:47:46+00:00"
+            "time": "2025-02-12T12:17:51+00:00"
         },
         {
             "name": "nikic/php-parser",

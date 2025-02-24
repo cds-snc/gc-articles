@@ -16,7 +16,7 @@ RUN cd wordpress \
 
 ## Install NPM dependencies
 
-FROM node:18-alpine@sha256:974afb6cbc0314dc6502b14243b8a39fbb2d04d975e9059dd066be3e274fbb25 AS buildjs
+FROM node:18-alpine@sha256:e0340f26173b41066d68e3fe9bfbdb6571ab3cad0a4272919a52e36f4ae56925 AS buildjs
 WORKDIR /app
 COPY . .
 

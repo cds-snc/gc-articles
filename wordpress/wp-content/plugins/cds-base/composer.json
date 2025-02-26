@@ -17,7 +17,7 @@
     "alphagov/notifications-php-client": "^4.2",
     "ramsey/uuid": "4.7.6",
     "ua-parser/uap-php": "^3.9",
-    "nesbot/carbon": "2.72.6",
+    "nesbot/carbon": "2.73.0",
     "illuminate/encryption": "^8.63",
     "illuminate/support": "^8.63"
   },

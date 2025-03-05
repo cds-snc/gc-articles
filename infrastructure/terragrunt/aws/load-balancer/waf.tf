@@ -1,6 +1,7 @@
 locals {
   # Rules that must be excluded from the AWSManagedRulesCommonRuleSet for WordPress to work
   common_excluded_rules = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH", "CrossSiteScripting_BODY", "SizeRestrictions_BODY"]
+  php_excluded_rules    = ["PHPHighRiskMethodsVariables_BODY"]
 }
 
 #
@@ -397,6 +398,16 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
       managed_rule_group_statement {
         name        = "AWSManagedRulesPHPRuleSet"
         vendor_name = "AWS"
+
+        dynamic "rule_action_override" {
+          for_each = local.php_excluded_rules
+          content {
+            name = rule_action_override.value
+            action_to_use {
+              count {}
+            }
+          }
+        }
       }
     }
 
@@ -616,6 +627,75 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
                 text_transformation {
                   type     = "NONE"
                   priority = 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  rule {
+    name     = "Custom_PHPHighRiskMethodsVariables_BODY"
+    priority = 13
+    action {
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
+    }
+
+    visibility_config {
+      sampled_requests_enabled   = true
+      cloudwatch_metrics_enabled = true
+      metric_name                = "Custom_PHPHighRiskMethodsVariables_BODY"
+    }
+
+    statement {
+      and_statement {
+        statement {
+          label_match_statement {
+            scope = "LABEL"
+            key   = "awswaf:managed:aws:sql-database:PHPHighRiskMethodsVariables_Body"
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              and_statement {
+                statement {
+                  byte_match_statement {
+                    positional_constraint = "EXACTLY"
+                    search_string         = "post"
+                    field_to_match {
+                      method {}
+                    }
+                    text_transformation {
+                      priority = 0
+                      type     = "LOWERCASE"
+                    }
+                  }
+                }
+                statement {
+                  byte_match_statement {
+                    field_to_match {
+                      uri_path {}
+                    }
+                    positional_constraint = "CONTAINS"
+                    search_string         = "/wp-json/"
+                    text_transformation {
+                      type     = "LOWERCASE"
+                      priority = 0
+                    }
+                  }
                 }
               }
             }

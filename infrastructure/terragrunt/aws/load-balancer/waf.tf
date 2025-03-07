@@ -638,7 +638,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_PHPHighRiskMethodsVariables_BODY"
-    priority = 13
+    priority = 90
     action {
       dynamic "block" {
         for_each = var.enable_waf == true ? [""] : []

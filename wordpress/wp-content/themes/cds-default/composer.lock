@@ -1263,16 +1263,16 @@
         },
         {
             "name": "mck89/peast",
-            "version": "v1.16.3",
+            "version": "v1.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mck89/peast.git",
-                "reference": "645ec21b650bc2aced18285c85f220d22afc1430"
+                "reference": "3a752d39bd7d8dc1e19bcf424f3d5ac1a1ca6ad5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mck89/peast/zipball/645ec21b650bc2aced18285c85f220d22afc1430",
-                "reference": "645ec21b650bc2aced18285c85f220d22afc1430",
+                "url": "https://api.github.com/repos/mck89/peast/zipball/3a752d39bd7d8dc1e19bcf424f3d5ac1a1ca6ad5",
+                "reference": "3a752d39bd7d8dc1e19bcf424f3d5ac1a1ca6ad5",
                 "shasum": ""
             },
             "require": {
@@ -1285,7 +1285,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.16.3-dev"
+                    "dev-master": "1.17.0-dev"
                 }
             },
             "autoload": {
@@ -1306,9 +1306,9 @@
             "description": "Peast is PHP library that generates AST for JavaScript code",
             "support": {
                 "issues": "https://github.com/mck89/peast/issues",
-                "source": "https://github.com/mck89/peast/tree/v1.16.3"
+                "source": "https://github.com/mck89/peast/tree/v1.17.0"
             },
-            "time": "2024-07-23T14:00:32+00:00"
+            "time": "2025-03-07T19:44:14+00:00"
         },
         {
             "name": "mustache/mustache",
@@ -1895,16 +1895,16 @@
         },
         {
             "name": "wp-cli/php-cli-tools",
-            "version": "v0.12.1",
+            "version": "v0.12.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/php-cli-tools.git",
-                "reference": "d1fe500378f53fb5ae1072c0daa77095c384a082"
+                "reference": "fbb9c6eb83c04ee99b0c01454b47f47ab0e432bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/d1fe500378f53fb5ae1072c0daa77095c384a082",
-                "reference": "d1fe500378f53fb5ae1072c0daa77095c384a082",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/fbb9c6eb83c04ee99b0c01454b47f47ab0e432bc",
+                "reference": "fbb9c6eb83c04ee99b0c01454b47f47ab0e432bc",
                 "shasum": ""
             },
             "require": {
@@ -1952,9 +1952,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wp-cli/php-cli-tools/issues",
-                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.12.1"
+                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.12.4"
             },
-            "time": "2024-10-01T11:13:49+00:00"
+            "time": "2025-03-05T14:35:01+00:00"
         },
         {
             "name": "wp-cli/wp-cli",
@@ -1962,12 +1962,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "90c9a75f1145b389582f3922c604cd551ae680a8"
+                "reference": "279794bce3f5b92d7fd92e4559061921f433bf64"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/90c9a75f1145b389582f3922c604cd551ae680a8",
-                "reference": "90c9a75f1145b389582f3922c604cd551ae680a8",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/279794bce3f5b92d7fd92e4559061921f433bf64",
+                "reference": "279794bce3f5b92d7fd92e4559061921f433bf64",
                 "shasum": ""
             },
             "require": {
@@ -1976,15 +1976,14 @@
                 "php": "^5.6 || ^7.0 || ^8.0",
                 "symfony/finder": ">2.7",
                 "wp-cli/mustangostang-spyc": "^0.6.3",
-                "wp-cli/php-cli-tools": "~0.12.1"
+                "wp-cli/php-cli-tools": "~0.12.4"
             },
             "require-dev": {
-                "roave/security-advisories": "dev-latest",
                 "wp-cli/db-command": "^1.3 || ^2",
                 "wp-cli/entity-command": "^1.2 || ^2",
                 "wp-cli/extension-command": "^1.1 || ^2",
                 "wp-cli/package-command": "^1 || ^2",
-                "wp-cli/wp-cli-tests": "^4.0.1"
+                "wp-cli/wp-cli-tests": "^4.3.7"
             },
             "suggest": {
                 "ext-readline": "Include for a better --prompt implementation",
@@ -2025,7 +2024,7 @@
                 "issues": "https://github.com/wp-cli/wp-cli/issues",
                 "source": "https://github.com/wp-cli/wp-cli"
             },
-            "time": "2025-02-28T15:55:52+00:00"
+            "time": "2025-03-06T16:17:47+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",

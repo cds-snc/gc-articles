@@ -464,16 +464,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.5.5",
+            "version": "1.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "08c50d5ec4c6ced7d0271d2862dec8c1033283e6"
+                "reference": "f65c239c970e7f072f067ab78646e9f0b2935175"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/08c50d5ec4c6ced7d0271d2862dec8c1033283e6",
-                "reference": "08c50d5ec4c6ced7d0271d2862dec8c1033283e6",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/f65c239c970e7f072f067ab78646e9f0b2935175",
+                "reference": "f65c239c970e7f072f067ab78646e9f0b2935175",
                 "shasum": ""
             },
             "require": {
@@ -520,7 +520,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/ca-bundle/issues",
-                "source": "https://github.com/composer/ca-bundle/tree/1.5.5"
+                "source": "https://github.com/composer/ca-bundle/tree/1.5.6"
             },
             "funding": [
                 {
@@ -536,7 +536,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-08T16:17:16+00:00"
+            "time": "2025-03-06T14:30:56+00:00"
         },
         {
             "name": "composer/installers",
@@ -4031,15 +4031,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "5.7.0",
+            "version": "5.8.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/5.7.0"
+                "reference": "tags/5.8.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.5.7.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.5.8.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4305,17 +4305,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "24.5",
+            "version": "24.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "74ac5d95490c7a229292b09c4299259a7fc0bbef"
+                "reference": "dffd410917a151178e99371719cc3ce6f587e00e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-74ac5d95490c7a229292b09c4299259a7fc0bbef-zip-1cf213.zip",
-                "reference": "74ac5d95490c7a229292b09c4299259a7fc0bbef",
-                "shasum": "0f2c71b4c2e74ac882d5861e11d11569113d4e9c"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-dffd410917a151178e99371719cc3ce6f587e00e-zip-60ea37.zip",
+                "reference": "dffd410917a151178e99371719cc3ce6f587e00e",
+                "shasum": "e947f683cde791d62c913e89861abc114672f21d"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4469,26 +4469,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2025-02-18T09:18:37+00:00"
+            "time": "2025-03-04T08:53:23+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "24.5",
+            "version": "24.6",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "80d9de10a9bc777aed8b711dce7fcc06739a5f71"
+                "reference": "bb9644bc199a08dea003bbfcb61b8758a7f526b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-80d9de10a9bc777aed8b711dce7fcc06739a5f71-zip-18d723.zip",
-                "reference": "80d9de10a9bc777aed8b711dce7fcc06739a5f71",
-                "shasum": "8b205692347cb668a954a13fb025a26d6756f7bf"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-bb9644bc199a08dea003bbfcb61b8758a7f526b3-zip-05b51e.zip",
+                "reference": "bb9644bc199a08dea003bbfcb61b8758a7f526b3",
+                "shasum": "c9827b7594b06fb27e827140c6f3e35976638021"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^24.5"
+                "yoast/wordpress-seo": "^24.6"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4626,7 +4626,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2025-02-18T09:57:10+00:00"
+            "time": "2025-03-04T09:59:53+00:00"
         }
     ],
     "packages-dev": [

@@ -3345,12 +3345,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "279794bce3f5b92d7fd92e4559061921f433bf64"
+                "reference": "a39513b720ff9f17da6339d2a0f1579035dda193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/279794bce3f5b92d7fd92e4559061921f433bf64",
-                "reference": "279794bce3f5b92d7fd92e4559061921f433bf64",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/a39513b720ff9f17da6339d2a0f1579035dda193",
+                "reference": "a39513b720ff9f17da6339d2a0f1579035dda193",
                 "shasum": ""
             },
             "require": {
@@ -3366,7 +3366,7 @@
                 "wp-cli/entity-command": "^1.2 || ^2",
                 "wp-cli/extension-command": "^1.1 || ^2",
                 "wp-cli/package-command": "^1 || ^2",
-                "wp-cli/wp-cli-tests": "^4.3.7"
+                "wp-cli/wp-cli-tests": "^4.3.10"
             },
             "suggest": {
                 "ext-readline": "Include for a better --prompt implementation",
@@ -3407,7 +3407,7 @@
                 "issues": "https://github.com/wp-cli/wp-cli/issues",
                 "source": "https://github.com/wp-cli/wp-cli"
             },
-            "time": "2025-03-06T16:17:47+00:00"
+            "time": "2025-03-14T17:51:30+00:00"
         }
     ],
     "aliases": [],

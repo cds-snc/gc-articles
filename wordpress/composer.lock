@@ -2700,16 +2700,16 @@
         },
         {
             "name": "ramsey/collection",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/collection.git",
-                "reference": "3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109"
+                "reference": "344572933ad0181accbf4ba763e85a0306a8c5e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/collection/zipball/3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109",
-                "reference": "3c5990b8a5e0b79cd1cf11c2dc1229e58e93f109",
+                "url": "https://api.github.com/repos/ramsey/collection/zipball/344572933ad0181accbf4ba763e85a0306a8c5e2",
+                "reference": "344572933ad0181accbf4ba763e85a0306a8c5e2",
                 "shasum": ""
             },
             "require": {
@@ -2770,9 +2770,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/collection/issues",
-                "source": "https://github.com/ramsey/collection/tree/2.1.0"
+                "source": "https://github.com/ramsey/collection/tree/2.1.1"
             },
-            "time": "2025-03-02T04:48:29+00:00"
+            "time": "2025-03-22T05:38:12+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -4305,17 +4305,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "24.6",
+            "version": "24.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "dffd410917a151178e99371719cc3ce6f587e00e"
+                "reference": "e41836371cede36c4151c1f67f72cb192c1a4170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-dffd410917a151178e99371719cc3ce6f587e00e-zip-60ea37.zip",
-                "reference": "dffd410917a151178e99371719cc3ce6f587e00e",
-                "shasum": "e947f683cde791d62c913e89861abc114672f21d"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-e41836371cede36c4151c1f67f72cb192c1a4170-zip-ac0c48.zip",
+                "reference": "e41836371cede36c4151c1f67f72cb192c1a4170",
+                "shasum": "2dcf274be5a44b14359146a658859a1827f32b13"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4469,26 +4469,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2025-03-04T08:53:23+00:00"
+            "time": "2025-03-18T09:09:13+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "24.6",
+            "version": "24.7",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "bb9644bc199a08dea003bbfcb61b8758a7f526b3"
+                "reference": "9583eeb780bbfac35580a39edd9a32079e4f1ad8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-bb9644bc199a08dea003bbfcb61b8758a7f526b3-zip-05b51e.zip",
-                "reference": "bb9644bc199a08dea003bbfcb61b8758a7f526b3",
-                "shasum": "c9827b7594b06fb27e827140c6f3e35976638021"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-9583eeb780bbfac35580a39edd9a32079e4f1ad8-zip-404d7f.zip",
+                "reference": "9583eeb780bbfac35580a39edd9a32079e4f1ad8",
+                "shasum": "a1b838ffb9f1277beee7a18ef2fa0b6abff27e5c"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^24.6"
+                "yoast/wordpress-seo": "^24.7"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4626,7 +4626,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2025-03-04T09:59:53+00:00"
+            "time": "2025-03-18T09:46:17+00:00"
         }
     ],
     "packages-dev": [
@@ -6999,16 +6999,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.11.3",
+            "version": "3.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "ba05f990e79cbe69b9f35c8c1ac8dca7eecc3a10"
+                "reference": "2d1b63db139c3c6ea0c927698e5160f8b3b8d630"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/ba05f990e79cbe69b9f35c8c1ac8dca7eecc3a10",
-                "reference": "ba05f990e79cbe69b9f35c8c1ac8dca7eecc3a10",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/2d1b63db139c3c6ea0c927698e5160f8b3b8d630",
+                "reference": "2d1b63db139c3c6ea0c927698e5160f8b3b8d630",
                 "shasum": ""
             },
             "require": {
@@ -7075,11 +7075,11 @@
                     "type": "open_collective"
                 },
                 {
-                    "url": "https://thanks.dev/phpcsstandards",
+                    "url": "https://thanks.dev/u/gh/phpcsstandards",
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-01-23T17:04:15+00:00"
+            "time": "2025-03-18T05:04:51+00:00"
         },
         {
             "name": "symfony/console",

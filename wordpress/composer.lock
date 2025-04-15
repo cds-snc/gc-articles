@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d25f4fa8c7c771dc8b38fd4d83beee30",
+    "content-hash": "81b4ffca6cafe71c366be9cc0e3a1b95",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -4013,15 +4013,15 @@
         },
         {
             "name": "wpackagist-plugin/publishpress-checklists",
-            "version": "2.17.0",
+            "version": "2.18.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/publishpress-checklists/",
-                "reference": "tags/2.17.0"
+                "reference": "tags/2.18.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.17.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/publishpress-checklists.2.18.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4049,15 +4049,15 @@
         },
         {
             "name": "wpackagist-plugin/two-factor",
-            "version": "0.12.0",
+            "version": "0.13.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/two-factor/",
-                "reference": "tags/0.12.0"
+                "reference": "tags/0.13.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/two-factor.0.12.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/two-factor.0.13.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -4305,17 +4305,17 @@
         },
         {
             "name": "yoast/wordpress-seo",
-            "version": "24.7",
+            "version": "24.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yoast-dist/wordpress-seo.git",
-                "reference": "e41836371cede36c4151c1f67f72cb192c1a4170"
+                "reference": "f62cf475954092df2a2f4f2b3010dee853b3f456"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-e41836371cede36c4151c1f67f72cb192c1a4170-zip-ac0c48.zip",
-                "reference": "e41836371cede36c4151c1f67f72cb192c1a4170",
-                "shasum": "2dcf274be5a44b14359146a658859a1827f32b13"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo/yoast-wordpress-seo-f62cf475954092df2a2f4f2b3010dee853b3f456-zip-67f2cd.zip",
+                "reference": "f62cf475954092df2a2f4f2b3010dee853b3f456",
+                "shasum": "1059f68b8f1a4a4d6dec8051f5b16478917a284b"
             },
             "require": {
                 "composer/installers": "^1.12 || ^2.0",
@@ -4331,8 +4331,9 @@
                 "psr/log": "^1.0",
                 "symfony/config": "^3.4",
                 "symfony/dependency-injection": "^3.4",
+                "wpackagist-plugin/google-site-kit": "dev-trunk",
                 "yoast/wp-test-utils": "^1.2",
-                "yoast/yoastcs": "^3.1.0"
+                "yoast/yoastcs": "^3.2.0"
             },
             "suggest": {
                 "ext-bcmath": "For more accurate calculations",
@@ -4341,6 +4342,13 @@
                 "ext-mbstring": "For cyrillic support"
             },
             "type": "wordpress-plugin",
+            "extra": {
+                "installer-paths": {
+                    "vendor/{$name}": [
+                        "wpackagist-plugin/google-site-kit"
+                    ]
+                }
+            },
             "autoload": {
                 "classmap": [
                     "admin/",
@@ -4375,7 +4383,7 @@
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_coding_standards"
                 ],
                 "check-cs-thresholds": [
-                    "@putenv YOASTCS_THRESHOLD_ERRORS=2474",
+                    "@putenv YOASTCS_THRESHOLD_ERRORS=2415",
                     "@putenv YOASTCS_THRESHOLD_WARNINGS=252",
                     "Yoast\\WP\\SEO\\Composer\\Actions::check_cs_thresholds"
                 ],
@@ -4469,26 +4477,26 @@
                 "source": "https://github.com/Yoast/wordpress-seo",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2025-03-18T09:09:13+00:00"
+            "time": "2025-04-15T08:15:26+00:00"
         },
         {
             "name": "yoast/wordpress-seo-premium",
-            "version": "24.7",
+            "version": "24.8",
             "source": {
                 "type": "git",
                 "url": "git@github.com:Yoast-dist/wordpress-seo-premium.git",
-                "reference": "9583eeb780bbfac35580a39edd9a32079e4f1ad8"
+                "reference": "f079289bc26d4ef6c2c45d87bce9a6a0066db103"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-9583eeb780bbfac35580a39edd9a32079e4f1ad8-zip-404d7f.zip",
-                "reference": "9583eeb780bbfac35580a39edd9a32079e4f1ad8",
-                "shasum": "a1b838ffb9f1277beee7a18ef2fa0b6abff27e5c"
+                "url": "https://my.yoast.com/packages/dist/yoast/wordpress-seo-premium/yoast-wordpress-seo-premium-f079289bc26d4ef6c2c45d87bce9a6a0066db103-zip-bbb43a.zip",
+                "reference": "f079289bc26d4ef6c2c45d87bce9a6a0066db103",
+                "shasum": "8d698a38e5beac9033274a2556b6e838cb19754e"
             },
             "require": {
                 "ext-filter": "*",
                 "php": "^7.2.5 || ^8.0",
-                "yoast/wordpress-seo": "^24.7"
+                "yoast/wordpress-seo": "^24.8"
             },
             "require-dev": {
                 "wp-cli/i18n-command": "^2.6",
@@ -4626,7 +4634,7 @@
                 "source": "https://github.com/Yoast/wordpress-seo-premium",
                 "security": "https://yoast.com/security-program/"
             },
-            "time": "2025-03-18T09:46:17+00:00"
+            "time": "2025-04-01T08:54:39+00:00"
         }
     ],
     "packages-dev": [

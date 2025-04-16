@@ -57,7 +57,7 @@ describe('Add user', () => {
     cy.contains('Users').click();
     cy.get('h1').contains("Users"); // get to the "users page"
 
-    cy.get('#wpbody .page-title-action').contains('Add New').click();
+    cy.get('#wpbody .page-title-action').contains('Add User').click();
     cy.get('h1').contains("Add user");
 
     // Get the roles
@@ -142,7 +142,7 @@ describe('As GC Admin', () => {
     cy.visit("wp-admin/users.php");
     cy.get('h1').contains("Users");
 
-    cy.get('#wpbody .page-title-action').contains('Add New').click();
+    cy.get('#wpbody .page-title-action').contains('Add User').click();
     cy.get('h1').contains("Add user");
 
     cy.get('input#email').type("editor+2@cds-snc.ca");
@@ -161,7 +161,7 @@ describe('As GC Admin', () => {
     cy.visit("wp-admin/users.php");
     cy.get('h1').contains("Users");
 
-    cy.get('#wpbody .page-title-action').contains('Add New').click();
+    cy.get('#wpbody .page-title-action').contains('Add User').click();
     cy.get('h1').contains("Add user");
 
     cy.get('input#email').type("writer+2@cds-snc.ca");

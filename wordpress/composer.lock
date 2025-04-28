@@ -4030,15 +4030,15 @@
         },
         {
             "name": "wpackagist-plugin/simple-history",
-            "version": "5.8.2",
+            "version": "5.9.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/simple-history/",
-                "reference": "tags/5.8.2"
+                "reference": "tags/5.9.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/simple-history.5.8.2.zip"
+                "url": "https://downloads.wordpress.org/plugin/simple-history.5.9.0.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

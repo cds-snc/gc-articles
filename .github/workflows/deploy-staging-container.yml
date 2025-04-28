@@ -79,7 +79,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Terragrunt plan ecs
-        uses: cds-snc/terraform-plan@7d4ab0010e76b09dfc1d8a343d2c7ddaa2b4df4f # v3.3.2
+        uses: cds-snc/terraform-plan@28de868605a2499187505c82b4f199abd8877b26 # v3.4.2
         with:
           directory: "infrastructure/terragrunt/env/staging/ecs"
           comment-delete: "true"

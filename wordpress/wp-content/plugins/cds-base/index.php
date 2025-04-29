@@ -62,44 +62,6 @@ function extractServiceIdFromApiKey($apiKey): string
     return substr($apiKey, -73, 36);
 }
 
-function getNotifyListIds()
-{
-    if (Utils::isWpEnv()) {
-        return [];
-    }
-
-    // @TODO: Refactor out to GC Lists and consider caching this data
-    try {
-        if (get_option('NOTIFY_API_KEY')) {
-            $url = LIST_MANAGER_ENDPOINT . '/lists/' . extractServiceIdFromApiKey(get_option('NOTIFY_API_KEY'));
-
-            $args = [
-                'method'  => 'GET',
-                'headers' => [
-                    'Authorization' => DEFAULT_LIST_MANAGER_API_KEY,
-                    'Content-Type'  => 'application/json'
-                ],
-            ];
-
-            // Proxy request to list-manager
-            $response      = json_decode(wp_remote_retrieve_body(wp_remote_request($url, $args)));
-            $notifyListIds = array_map(function ($item) {
-                return [
-                    'label' => $item->name,
-                    'id'    => $item->id,
-                ];
-            }, $response);
-
-            return $notifyListIds;
-        }
-
-        return [];
-    } catch (Exception $e) {
-        error_log($e->getMessage());
-        return [];
-    }
-}
-
 function cds_admin_js(): void
 {
     // automatically load dependencies and version
@@ -116,7 +78,6 @@ function cds_admin_js(): void
     wp_localize_script('cds-snc-admin-js', 'CDS_VARS', [
         'rest_url' => esc_url_raw(rest_url()),
         'rest_nonce' => wp_create_nonce('wp_rest'),
-        'notify_list_ids' => getNotifyListIds(),
     ]);
 }
 

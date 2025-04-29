@@ -118,10 +118,8 @@ password: `secret`
 
 - [two-factor](https://wordpress.org/plugins/two-factor/)
 - [wp-bootstrap-blocks](https://wordpress.org/plugins/wp-bootstrap-blocks/)
-- [wp-native-php-sessions](https://en-ca.wordpress.org/plugins/wp-native-php-sessions/)
 - [wps-hide-login](https://en-ca.wordpress.org/plugins/wps-hide-login/)
 - [wpml](https://wpml.org/)
-- [yoast](https://yoast.com/wordpress/plugins/seo/)
 - [login-lockdown](https://en-ca.wordpress.org/plugins/login-lockdown/)
 - [disable-user-login](https://en-ca.wordpress.org/plugins/disable-user-login/)
 
@@ -269,29 +267,6 @@ Pest is used for unit-testing PHP. Pest is a wrapper around PHPUnit that abstrac
 ```
 cd wordpress
 ./vendor/bin/pest
-```
-
-#### Testing the GG-Lists plugin
-
-The Pest tests for the GC Lists plugin can only be run from inside the running devcontainer. Begin by opening 2 terminal windows: 1 to run the app, and 1 to SSH into the devcontainer.
-
-```
-# Terminal 1: start the app
-docker compose up
-
-# Terminal 2
-
-## SSH into the running container
-docker exec -it cli zsh
-
-## Shortcut to the gc-lists directory
-gclists
-
-## Seed a wordpress integration database
-composer prepare-test-db
-
-## Run tests
-composer test
 ```
 
 ### PHP_CodeSniffer

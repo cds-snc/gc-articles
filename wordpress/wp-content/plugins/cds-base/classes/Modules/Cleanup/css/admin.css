@@ -311,24 +311,9 @@ th.column-disable_user_login {
   outline-offset: -1px;
 }
 
-/* hide yoast profile fields */
-
-#yoast-seo-schema,
-#yoast-seo-schema + p {
-  display: none;
-}
-
-#yoast-configuration-workout-notice {
-  display: none;
-}
-
 /* hide focus-keyword-input-metabox div */
 
 #focus-keyword-input-metabox {
-  display: none;
-}
-
-#yoast-get-related-keyphrases-metabox {
   display: none;
 }
 
@@ -340,10 +325,6 @@ th.column-disable_user_login {
 /* focus-keyword-input-metabox */
 
 .sc-dcgxYM {
-  display: none;
-}
-
-.yoast-settings {
   display: none;
 }
 

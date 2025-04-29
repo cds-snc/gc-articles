@@ -70,7 +70,6 @@ RUN echo "source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highl
 
 # A few helpful aliases
 RUN echo "alias mods=\"cd ~/project/wordpress/wp-content/plugins/cds-wpml-mods\"" >> ~/.zshrc && \
-    echo "alias gclists=\"cd ~/project/wordpress/wp-content/plugins/gc-lists\"" >> ~/.zshrc && \
     echo "alias cds=\"cd ~/project/wordpress/wp-content/plugins/cds-base\"" >> ~/.zshrc && \
     echo "alias webroot=\"cd /usr/src/wordpress\"" >> ~/.zshrc && \
     echo "alias wordpress=\"cd ~/project/wordpress\"" >> ~/.zshrc

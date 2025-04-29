@@ -13,7 +13,6 @@ class Profile
         add_action('personal_options', [$this, 'start']);
         add_filter('additional_capabilities_display', [$this, 'removeAdditionalCapabilitiesFunc']);
         add_action('wpml_user_profile_options', [$this, 'wpmlOptions']);
-        add_action('additional_capabilities_display', [$this, 'yoastOptions']);
 
         add_action('edit_user_profile', [$this, 'displayUnfilteredHTMLMeta']);
         add_action('edit_user_profile_update', [$this,'updateUnfilteredHTMLMeta']);
@@ -38,7 +37,7 @@ class Profile
         // add IDs to headings
         $headings = $crawler->filter('h2')->reduce(
             static function ($node, $j) {
-                $remove = ['Personal Options', 'Name', 'Contact Info', 'About Yourself', 'Yoast SEO settings'];
+                $remove = ['Personal Options', 'Name', 'Contact Info', 'About Yourself'];
                 $id     = strtolower(str_replace(' ', '_', $node->html()));
 
                 if (in_array($node->html(), $remove)) {
@@ -94,13 +93,6 @@ class Profile
         }
 
         /*--------------------------------------------*
-         * Remove Yoast Settings
-         *--------------------------------------------*/
-        $crawler->filter('.yoast-settings')->remove();
-        $crawler->filter('#yoast-seo-schema ~ p')->remove();
-        $crawler->filter('#yoast-seo-schema')->remove();
-
-        /*--------------------------------------------*
          * Remove Application Passwords Fields
          *--------------------------------------------*/
         $crawler->filter('.application-passwords')->remove();
@@ -129,26 +121,6 @@ class Profile
     public function removeAdditionalCapabilitiesFunc(): bool
     {
         return false;
-    }
-
-    public function yoastOptions(): void
-    {
-        // re-add via hidden fields -- with no values
-        // :( we need these values in order to submit without yoast errors
-
-        $fields = ["honorificPrefix",
-        "honorificSuffix",
-        "birthDate",
-        "gender",
-        "award",
-        "knowsAbout",
-        "knowsLanguage",
-        "jobTitle",
-        "worksFor"];
-
-        foreach ($fields as $field) {
-            printf('<input type="hidden" name="wpseo_user_schema[%s]">', $field);
-        }
     }
 
     public function wpmlOptions($userId): void

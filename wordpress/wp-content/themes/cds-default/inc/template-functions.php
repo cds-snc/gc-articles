@@ -151,38 +151,23 @@ function cds_breadcrumb($sep = ''): string
         return $breadcrumb;
     }
 
-    // if breadcrumbs are disabled, yoast_breadcrumb returns null
-    if (!function_exists('yoast_breadcrumb') || is_null(yoast_breadcrumb('', '', null))) {
-        return '';
-    }
-
     try {
-        $crumbs = yoast_breadcrumb('<div class="breadcrumbs">', '</div>', false);
-        $dom = new Dom();
-        $dom->loadStr($crumbs);
-        $node = $dom->find('.breadcrumbs');
-        $child = $node->firstChild();
-        $html = $child->firstChild()->innerHtml;
-        $parts = explode('|', $html);
-
+        $lang = get_active_language();
         $output = '<nav id="wb-bc" property="breadcrumb" aria-label="' .  __("Breadcrumbs", 'cds-snc') . '">';
         $output .= '<div class="container">';
         $output .= '<h2>' . __("You are here:", 'cds-snc') . '</h2>';
         $output .= '<ol class="breadcrumb">';
-        // note this will need to point to the correct language
-        $output .= '<li><a href="https://www.canada.ca/en.html">Canada.ca</a></li>';
-        foreach ($parts as $part) {
-            $output .= '<li>';
-            $output .= $part;
-            $output .= '</li>';
+        $output .= '<li><a href="https://www.canada.ca/' . $lang . '">Canada.ca</a></li>';
+        if (is_single() || is_page()) {
+            $title = get_the_title();
+            $output .= '<li>' . ($title === "Home" && $lang === "fr" ? "Accueil" : $title) . '</li>';
         }
-
         $output .= '</ol>';
         $output .= '</div>';
         $output .= '</nav>';
         return $output;
     } catch (Exception $e) {
-        return yoast_breadcrumb('<div class="breadcrumbs">', '</div>', false);
+        return '<div class="breadcrumbs"><ol class="breadcrumb"><li><a href="https://www.canada.ca/">Canada.ca</a></li></ol></div>';
     }
 }
 

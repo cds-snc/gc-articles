@@ -9,7 +9,6 @@ use CDS\Modules\Cli\EncryptedOptionCLI;
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Modules\Blocks\Blocks;
 use CDS\Modules\BlocksPHP\BlocksPHP;
-use CDS\Modules\Checklists\Setup as SetupChecklists;
 use CDS\Modules\Cleanup\AdminBar as CleanupAdminBar;
 use CDS\Modules\Cleanup\AdminStyles as CleanupAdminStyles;
 use CDS\Modules\Cleanup\Dashboard as CleanupDashboard;
@@ -72,7 +71,6 @@ class Setup
         Wpml::register();
         EmailDomains::register();
         Markdown::register();
-        SetupChecklists::register();
 
         new SetupForms();
         new Styles();

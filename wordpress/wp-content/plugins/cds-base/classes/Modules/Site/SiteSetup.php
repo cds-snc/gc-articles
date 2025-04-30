@@ -111,28 +111,5 @@ class SiteSetup
         if (\CDS\Utils::isWpEnv()) {
             return;
         }
-
-        $screen = get_current_screen();
-
-        if (!is_super_admin() || $screen->id != "dashboard") {
-            return;
-        } ?>
-        <div class="wrap">
-            <div class="finish-setup-content">
-                <span id="finish-setup-dismiss" class="notice-dismiss"><span class="screen-reader-text"><?php _e("Dismiss", 'cds'); ?></span></span>
-                <h3><?php _e('Finish Site Setup', 'cds-snc'); ?></h3>
-                <p><?php _e("You’re almost done.  Let’s create some pages and default settings.", 'cds-snc'); ?></p>
-                <div class="actions">
-                    <a class="button" id="add-pages" href="#"><?php _e("Let's go!", 'cds'); ?></a>
-                </div>
-                <div class="status">
-                    <div class="text-status hidden">Initializing</div>
-                    <div class="loader-container hidden">
-                        <div class="loader"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php
     }
 }

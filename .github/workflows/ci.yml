@@ -31,48 +31,10 @@ jobs:
         run: |
           cd wordpress
           composer config github-oauth.github.com ${{ secrets.COMPOSER_GITHUB_TOKEN }}
-          composer config http-basic.my.yoast.com token ${{ secrets.COMPOSER_YOAST_TOKEN }}
 
       - run: cd wordpress && composer install --prefer-dist --no-progress --no-suggest
       - run: cd wordpress && composer check-platform-reqs
       - run: cd wordpress && ./vendor/bin/pest
-
-  gc-lists-php-tests:
-    runs-on: ubuntu-latest
-    name: GC Lists PHPUnit Tests
-    env:
-      DB_DATABASE: wordpress_test
-      DB_USER: root
-      DB_PASSWORD: root
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
-
-      - name: Setup SVN
-        run: |
-          sudo apt-get update
-          sudo apt-get install subversion
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: 8.1
-
-      - name: Set up MySQL
-        run: |
-          sudo /etc/init.d/mysql start
-
-      - name: Setup test environment
-        run: |
-          export PATH="$HOME/.composer/vendor/bin:$PATH"
-          cd wordpress/wp-content/plugins/gc-lists
-          bash bin/install-wp-tests.sh wordpress_test root 'root' localhost $WP_VERSION
-          composer install
-          composer check-platform-reqs
-
-      - name: Run the tests
-        run: |
-          cd wordpress/wp-content/plugins/gc-lists
-          ./vendor/bin/pest --coverage
 
   cds-wpml-mods-php-tests:
     runs-on: ubuntu-latest

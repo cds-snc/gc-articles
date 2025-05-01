@@ -319,10 +319,7 @@ class SiteSettings
         );
 
         /**
-         * Note that there is also a Yoast (WPSEO) setting for this, but it's nested in an array.
-         * -> get_option('wpseo_titles')['breadcrumbs-enable']
-         *
-         * Since the settings API doesn't let me write to that field easily, I am creating a new setting.
+         * Setting to control the display of breadcrumbs
          */
         $breadcrumbsTitle = __('Breadcrumbs', 'cds-snc');
         add_settings_field(

@@ -38,9 +38,7 @@ class Menus
             "Users",
             "Settings",
             "Bulk Send",
-            "GC Lists",
             "Lists",
-            "Checklists",
             "Jobs",
             "Projects",
             "Team Members",
@@ -53,7 +51,6 @@ class Menus
             "Utilisateurs",
             "Réglages",
             "Envoyer en masse",
-            "Listes GC",
         ];
 
         if (Utils::isWPEnvGCAdmin()) {

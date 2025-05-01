@@ -27,8 +27,6 @@ class Roles
             }
         });
 
-        add_action('wpseo_activate', [$this, 'removeSEORoles'], 99);
-
         // Add "unfiltered_html" role to GC Admins, GC Editors, GC Writers
         add_filter('map_meta_cap', [$this, 'addUnfilteredHTMLRole'], 1, 3);
         add_filter('map_meta_cap', [$this, 'forceExcludeCaps'], 2, 3);
@@ -82,13 +80,6 @@ class Roles
             }
         }
         return $caps;
-    }
-
-    public function removeSEORoles()
-    {
-        /* Installed by Yoast when plugin is activated */
-        remove_role('wpseo_manager');
-        remove_role('wpseo_editor');
     }
 
     protected function cleanupRoles($role)

@@ -241,7 +241,6 @@ class AdminBar
 
         /* plugins */
         $wp_admin_bar->remove_menu('wp-mail-smtp-menu');
-        $wp_admin_bar->remove_menu('wpseo-menu');
 
         /* remove "Howdy" and "Salutations" from admin bar */
         $my_account = $wp_admin_bar->get_node('my-account');

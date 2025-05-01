@@ -64,14 +64,6 @@ window.CDS.writeInterstitialMessage = writeInterstitialMessage;
 window.CDS.renderDBInsightsPanel = renderDBInsightsPanel;
 window.CDS.renderDBActivityPanel = renderDBActivityPanel;
 
-const hiddenBlocks = ['yoast-seo/table-of-contents'];
-
-window.wp.blocks.getBlockTypes().forEach(function (block) {
-  if (block.name && hiddenBlocks.includes(block.name)) {
-    window.wp.blocks.unregisterBlockType(block.name);
-  }
-});
-
 window.wp.hooks.addFilter(
   'editor.PostPreview.interstitialMarkup',
   'my-plugin/custom-preview-message',

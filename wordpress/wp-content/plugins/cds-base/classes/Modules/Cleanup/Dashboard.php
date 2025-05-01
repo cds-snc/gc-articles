@@ -26,7 +26,6 @@ class Dashboard
         remove_meta_box('task_dashboard', 'dashboard', 'normal');
 
         /* plugins */
-        remove_meta_box('wpseo-dashboard-overview', 'dashboard', 'normal');
         remove_meta_box('wp_mail_smtp_reports_widget_lite', 'dashboard', 'normal');
     }
 }

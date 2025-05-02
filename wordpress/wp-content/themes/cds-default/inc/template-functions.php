@@ -158,9 +158,13 @@ function cds_breadcrumb($sep = ''): string
         $output .= '<h2>' . __("You are here:", 'cds-snc') . '</h2>';
         $output .= '<ol class="breadcrumb">';
         $output .= '<li><a href="https://www.canada.ca/' . $lang . '">Canada.ca</a></li>';
-        if (is_single() || is_page()) {
-            $title = get_the_title();
-            $output .= '<li>' . ($title === "Home" && $lang === "fr" ? "Accueil" : $title) . '</li>';
+        if (!is_home() && !is_front_page()) {
+            $output .= '<li><a href="' . get_site_url() . ($lang === "fr" ? "/fr" : "/") . '">' . __('Home') . '</a></li>';
+            $parents = get_post_ancestors(get_the_ID());
+            $parents = array_reverse($parents);
+            foreach ($parents as $parent) {
+                $output .= '<li><a href="' . get_permalink($parent) . '">' . get_the_title($parent) . '</a></li>';
+            }
         }
         $output .= '</ol>';
         $output .= '</div>';

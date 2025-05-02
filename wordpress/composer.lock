@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "70c001b0088062beb9ad92693b64332e",
+    "content-hash": "9b3693002fbf160c85ff497cc0801d09",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -4022,6 +4022,24 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/two-factor/"
+        },
+        {
+            "name": "wpackagist-plugin/wordpress-importer",
+            "version": "0.8.4",
+            "source": {
+                "type": "svn",
+                "url": "https://plugins.svn.wordpress.org/wordpress-importer/",
+                "reference": "tags/0.8.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://downloads.wordpress.org/plugin/wordpress-importer.0.8.4.zip"
+            },
+            "require": {
+                "composer/installers": "^1.0 || ^2.0"
+            },
+            "type": "wordpress-plugin",
+            "homepage": "https://wordpress.org/plugins/wordpress-importer/"
         },
         {
             "name": "wpackagist-plugin/wp-rest-api-v2-menus",

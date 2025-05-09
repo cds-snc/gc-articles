@@ -916,6 +916,12 @@ resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_alb" {
 module "waf_ip_blocklist" {
   source = "github.com/cds-snc/terraform-modules//waf_ip_blocklist?ref=v10.4.2"
 
+  # IP blocklist must be in us-east-1 as the CloudFront WAF
+  # requires it to work with the IP set
+  providers = {
+    aws = aws.us-east-1
+  }
+
   service_name                = "gc-articles"
   athena_database_name        = "access_logs"
   athena_query_results_bucket = module.athena_bucket.s3_bucket_id

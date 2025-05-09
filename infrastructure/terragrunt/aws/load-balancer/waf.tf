@@ -924,5 +924,8 @@ module "waf_ip_blocklist" {
   athena_waf_table_name       = "waf_logs"
   athena_workgroup_name       = "logs"
 
+  waf_scope                        = "CLOUDFRONT"
+  waf_ip_blocklist_update_schedule = "rate(1 hour)"
+
   billing_tag_value = var.billing_tag_value
 }

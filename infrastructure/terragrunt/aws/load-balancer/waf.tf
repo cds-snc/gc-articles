@@ -914,7 +914,7 @@ resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_alb" {
 # that crosses a block threshold will be added to the blocklist.
 #
 module "waf_ip_blocklist" {
-  source = "github.com/cds-snc/terraform-modules//waf_ip_blocklist?ref=v10.4.2"
+  source = "github.com/cds-snc/terraform-modules//waf_ip_blocklist?ref=v10.4.5"
 
   # IP blocklist must be in us-east-1 as the CloudFront WAF
   # requires it to work with the IP set
@@ -929,6 +929,7 @@ module "waf_ip_blocklist" {
   athena_lb_table_name        = "lb_logs"
   athena_waf_table_name       = "waf_logs"
   athena_workgroup_name       = "logs"
+  athena_region               = var.region
 
   waf_scope                        = "CLOUDFRONT"
   waf_ip_blocklist_update_schedule = "rate(1 hour)"

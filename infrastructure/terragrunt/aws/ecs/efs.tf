@@ -70,7 +70,7 @@ resource "aws_efs_backup_policy" "wordpress" {
 }
 
 resource "aws_efs_mount_target" "wordpress" {
-  count = var.enable_efs ? 3 : 0
+  count = var.enable_efs ? 2 : 0
 
   file_system_id = aws_efs_file_system.wordpress[0].id
   subnet_id      = tolist(var.private_subnet_ids)[count.index]

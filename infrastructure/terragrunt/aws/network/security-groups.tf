@@ -43,7 +43,7 @@ resource "aws_security_group_rule" "wordpress_ecs_egress_efs" {
 }
 
 data "aws_subnet" "wordpress_private_subnet" {
-  count = 3
+  count = 2
   id    = tolist(module.wordpress_vpc.private_subnet_ids)[count.index]
 }
 

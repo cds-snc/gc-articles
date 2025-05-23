@@ -1,13 +1,14 @@
 #
-# VPC: 2 public + 2 private subnets across 2 availability zones
+# VPC: 3 public + 3 private subnets across 3 availability zones
 #
 module "wordpress_vpc" {
   source = "github.com/cds-snc/terraform-modules//vpc?ref=v10.4.4"
   name   = "wordpress"
 
   cidrsubnet_newbits = 8
-  availability_zones = 2
+  availability_zones = 3
   enable_flow_log    = true
+  single_nat_gateway = true
 
   allow_https_request_out          = true
   allow_https_request_out_response = true

@@ -8,6 +8,7 @@ module "wordpress_vpc" {
   cidrsubnet_newbits = 8
   availability_zones = 3
   enable_flow_log    = true
+  single_nat_gateway = true
 
   allow_https_request_out          = true
   allow_https_request_out_response = true

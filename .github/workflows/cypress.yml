@@ -66,7 +66,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Cypress and NPM install and build
-        uses: cypress-io/github-action@0ee1130f05f69098ab5c560bd198fecf5a14d75b # v6.9.0
+        uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af # v6.9.2
         with:
           runTests: false
 
@@ -76,7 +76,7 @@ jobs:
           npm run wp-env:test:setup
 
       - name: Cypress run
-        uses: cypress-io/github-action@0ee1130f05f69098ab5c560bd198fecf5a14d75b # v6.9.0
+        uses: cypress-io/github-action@be1bab96b388bbd9ce3887e397d373c8557e15af # v6.9.2
         with:
           install: false
         env:

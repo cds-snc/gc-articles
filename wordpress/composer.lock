@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46eef453f1bcc1d4ee88693dca9a2550",
+    "content-hash": "562990ddc41531982974d2d5e8ccb611",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -686,16 +686,16 @@
         },
         {
             "name": "digitalcube/c3-cloudfront-clear-cache",
-            "version": "dev-php8/unit-test",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache.git",
-                "reference": "6ecb7b38686c32163991c09873e3ef4ecde7a4aa"
+                "reference": "d91b2dd3c2f165d59781abceae20f04ced39534f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/amimoto-ami/c3-cloudfront-clear-cache/zipball/6ecb7b38686c32163991c09873e3ef4ecde7a4aa",
-                "reference": "6ecb7b38686c32163991c09873e3ef4ecde7a4aa",
+                "url": "https://api.github.com/repos/amimoto-ami/c3-cloudfront-clear-cache/zipball/d91b2dd3c2f165d59781abceae20f04ced39534f",
+                "reference": "d91b2dd3c2f165d59781abceae20f04ced39534f",
                 "shasum": ""
             },
             "require": {
@@ -711,6 +711,7 @@
                 "wp-phpunit/wp-phpunit": "*",
                 "yoast/phpunit-polyfills": "^1.0.1"
             },
+            "default-branch": true,
             "type": "wordpress-plugin",
             "autoload": {
                 "psr-4": {
@@ -734,10 +735,10 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache/tree/php8/unit-test",
+                "source": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache/tree/master",
                 "issues": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache/issues"
             },
-            "time": "2025-04-18T14:48:32+00:00"
+            "time": "2025-05-23T02:52:57+00:00"
         },
         {
             "name": "doctrine/inflector",

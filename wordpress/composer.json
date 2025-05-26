@@ -71,7 +71,7 @@
     "cds-snc/cds-base": "dev-main",
     "cds-snc/cds-default": "dev-main",
     "wpackagist-plugin/wp-rest-api-v2-menus":"0.12.1",
-    "digitalcube/c3-cloudfront-clear-cache": "dev-php8/unit-test",
+    "digitalcube/c3-cloudfront-clear-cache": "dev-master",
     "shawnhooper/delete-orphaned-multisite-tables": "1.0",
     "league/html-to-markdown": "^5.1",
     "wpackagist-plugin/gutenberg-custom-fields":"1.5.6",

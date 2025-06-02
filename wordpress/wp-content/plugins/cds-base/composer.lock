@@ -190,16 +190,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.5.6",
+            "version": "1.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "f65c239c970e7f072f067ab78646e9f0b2935175"
+                "reference": "d665d22c417056996c59019579f1967dfe5c1e82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/f65c239c970e7f072f067ab78646e9f0b2935175",
-                "reference": "f65c239c970e7f072f067ab78646e9f0b2935175",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/d665d22c417056996c59019579f1967dfe5c1e82",
+                "reference": "d665d22c417056996c59019579f1967dfe5c1e82",
                 "shasum": ""
             },
             "require": {
@@ -246,7 +246,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/ca-bundle/issues",
-                "source": "https://github.com/composer/ca-bundle/tree/1.5.6"
+                "source": "https://github.com/composer/ca-bundle/tree/1.5.7"
             },
             "funding": [
                 {
@@ -262,7 +262,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-03-06T14:30:56+00:00"
+            "time": "2025-05-26T15:08:54+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -2404,16 +2404,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v6.4.21",
+            "version": "v6.4.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "bb92ea5588396b319ba43283a5a3087a034cb29c"
+                "reference": "7e3b3b7146c6fab36ddff304a8041174bf6e17ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/bb92ea5588396b319ba43283a5a3087a034cb29c",
-                "reference": "bb92ea5588396b319ba43283a5a3087a034cb29c",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/7e3b3b7146c6fab36ddff304a8041174bf6e17ad",
+                "reference": "7e3b3b7146c6fab36ddff304a8041174bf6e17ad",
                 "shasum": ""
             },
             "require": {
@@ -2479,7 +2479,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v6.4.21"
+                "source": "https://github.com/symfony/translation/tree/v6.4.22"
             },
             "funding": [
                 {
@@ -2495,7 +2495,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-04-07T19:02:30+00:00"
+            "time": "2025-05-29T07:06:44+00:00"
         },
         {
             "name": "symfony/translation-contracts",

@@ -10,7 +10,7 @@ resource "aws_secretsmanager_secret" "database_host" {
 
 resource "aws_secretsmanager_secret_version" "database_host" {
   secret_id     = aws_secretsmanager_secret.database_host.id
-  secret_string = module.rds_cluster.proxy_endpoint
+  secret_string = module.rds_cluster.rds_cluster_endpoint
 }
 
 resource "aws_secretsmanager_secret" "database_name" {

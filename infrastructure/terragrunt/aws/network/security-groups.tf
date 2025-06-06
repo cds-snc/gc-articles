@@ -106,48 +106,6 @@ resource "aws_security_group_rule" "efs_ingress_wordpress_ecs" {
   source_security_group_id = aws_security_group.wordpress_ecs.id
 }
 
-resource "aws_security_group" "vpc_endpoint" {
-  name        = "vpc_endpoints"
-  description = "PrivateLink VPC endpoints"
-  vpc_id      = module.wordpress_vpc.vpc_id
-
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
-}
-
-resource "aws_security_group_rule" "vpc_endpoint_wordpress_ecs_ingress" {
-  description              = "Security group rule WordPress ECS ingress to VPC endpoints"
-  type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.vpc_endpoint.id
-  source_security_group_id = aws_security_group.wordpress_ecs.id
-}
-
-resource "aws_security_group_rule" "vpc_endpoint_wordpress_ecs_egress" {
-  description              = "Security group rule WordPress ECS egress to VPC endpoints"
-  type                     = "egress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.wordpress_ecs.id
-  source_security_group_id = aws_security_group.vpc_endpoint.id
-}
-
-resource "aws_security_group_rule" "s3_gateway_wordpress_ecs_egress" {
-  description       = "Security group rule for Wordpress ECS S3 egress through VPC endpoints"
-  type              = "egress"
-  from_port         = 443
-  to_port           = 443
-  protocol          = "tcp"
-  security_group_id = aws_security_group.wordpress_ecs.id
-  prefix_list_ids = [
-    aws_vpc_endpoint.s3.prefix_list_id
-  ]
-}
-
 resource "aws_security_group" "ecs_events_lambda" {
   # checkov:skip=CKV2_AWS_5: False positive, attached in the "ecs" module.
   name        = "ecs_events_lambda"
@@ -157,24 +115,4 @@ resource "aws_security_group" "ecs_events_lambda" {
   tags = {
     (var.billing_tag_key) = var.billing_tag_value
   }
-}
-
-resource "aws_security_group_rule" "ecs_events_lambda_vpc_endpoint_ingress" {
-  description              = "Security group rule for ECS Events Lambda ingress from VPC endpoints"
-  type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.ecs_events_lambda.id
-  source_security_group_id = aws_security_group.vpc_endpoint.id
-}
-
-resource "aws_security_group_rule" "ecs_events_lambda_vpc_endpoint_egress" {
-  description              = "Security group rule for ECS Events Lambda egress to VPC endpoints"
-  type                     = "egress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.vpc_endpoint.id
-  source_security_group_id = aws_security_group.ecs_events_lambda.id
 }

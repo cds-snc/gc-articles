@@ -209,7 +209,6 @@ add_filter('gutenberg_can_edit_post', '__return_true', 5);
 add_filter('use_block_editor_for_post', '__return_true', 5);
 add_filter('user_can_richedit', '__return_true', 50);
 
-
 // Allow SVG
 add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mimes) {
 
@@ -227,21 +226,17 @@ add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mime
     ];
 }, 10, 4);
 
-function cc_mime_types($mimes)
-{
+add_filter('upload_mimes', function ($mimes) {
     $mimes['json'] = 'application/json';
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;
-}
-add_filter('upload_mimes', 'cc_mime_types');
+});
 
-function fix_svg()
-{
+add_action('admin_head', function () {
     echo '<style type="text/css">
           .attachment-266x266, .thumbnail img {
                width: 100% !important;
                height: auto !important;
           }
           </style>';
-}
-add_action('admin_head', 'fix_svg');
+});

@@ -210,22 +210,6 @@ add_filter('use_block_editor_for_post', '__return_true', 5);
 add_filter('user_can_richedit', '__return_true', 50);
 
 // Allow SVG
-add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mimes) {
-
-    global $wp_version;
-    if ($wp_version !== '4.7.1') {
-        return $data;
-    }
-
-    $filetype = wp_check_filetype($filename, $mimes);
-
-    return [
-        'ext'             => $filetype['ext'],
-        'type'            => $filetype['type'],
-        'proper_filename' => $data['proper_filename']
-    ];
-}, 10, 4);
-
 add_filter('upload_mimes', function ($mimes) {
     $mimes['json'] = 'application/json';
     $mimes['svg'] = 'image/svg+xml';

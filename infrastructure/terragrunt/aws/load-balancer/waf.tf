@@ -763,61 +763,106 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
-    name     = "WordpressRateLimit"
+    name     = "RateLimitAllRequests"
     priority = 110
 
     action {
       dynamic "block" {
         for_each = var.enable_waf == true ? [""] : []
-        content {
-          custom_response {
-            response_code = 429
-            response_header {
-              name  = "waf-block"
-              value = "RateLimit"
-            }
-          }
-        }
+        content {}
       }
 
       dynamic "count" {
         for_each = var.enable_waf == false ? [""] : []
-        content {
-        }
+        content {}
       }
     }
 
     statement {
       rate_based_statement {
-        limit              = 2000
+        limit              = 1500
         aggregate_key_type = "IP"
       }
     }
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "WordpressRateLimit"
+      metric_name                = "RateLimitAllRequests"
       sampled_requests_enabled   = true
     }
   }
 
   rule {
-    name     = "BlockedIPv4"
+    name     = "RateLimitMutatingRequests"
     priority = 120
 
     action {
-      count {}
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {}
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {}
+      }
     }
 
     statement {
-      ip_set_reference_statement {
-        arn = module.waf_ip_blocklist.ipv4_blocklist_arn
+      rate_based_statement {
+        limit              = 100
+        aggregate_key_type = "IP"
+        scope_down_statement {
+          regex_match_statement {
+            field_to_match {
+              method {}
+            }
+            regex_string = "^(delete|patch|post|put)$"
+            text_transformation {
+              priority = 1
+              type     = "LOWERCASE"
+            }
+          }
+        }
       }
     }
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "BlockedIPv4"
+      metric_name                = "RateLimitMutatingRequests"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "GeoRestriction"
+    priority = 130
+
+    action {
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {}
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {}
+      }
+    }
+
+    statement {
+      not_statement {
+        statement {
+          geo_match_statement {
+            country_codes = ["CA", "US"]
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "GeoRestriction"
       sampled_requests_enabled   = true
     }
   }
@@ -907,32 +952,4 @@ resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_cloudfront
 resource "aws_wafv2_web_acl_logging_configuration" "firehose_waf_logs_alb" {
   log_destination_configs = [aws_kinesis_firehose_delivery_stream.firehose_waf_logs.arn]
   resource_arn            = aws_wafv2_web_acl.wordpress_waf_alb.arn
-}
-
-#
-# IPv4 blocklist that is automatically managed by a Lambda function.  Any IP address in the WAF logs
-# that crosses a block threshold will be added to the blocklist.
-#
-module "waf_ip_blocklist" {
-  source = "github.com/cds-snc/terraform-modules//waf_ip_blocklist?ref=v10.5.0"
-
-  # IP blocklist must be in us-east-1 as the CloudFront WAF
-  # requires it to work with the IP set
-  providers = {
-    aws = aws.us-east-1
-  }
-
-  service_name                = "gc-articles"
-  athena_database_name        = "access_logs"
-  athena_query_results_bucket = module.athena_bucket.s3_bucket_id
-  athena_query_source_bucket  = var.cbs_satellite_bucket_name
-  athena_lb_table_name        = "lb_logs"
-  athena_waf_table_name       = "waf_logs"
-  athena_workgroup_name       = "logs"
-  athena_region               = var.region
-
-  waf_scope                        = "CLOUDFRONT"
-  waf_ip_blocklist_update_schedule = "rate(1 hour)"
-
-  billing_tag_value = var.billing_tag_value
 }

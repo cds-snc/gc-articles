@@ -346,7 +346,7 @@
             "dist": {
                 "type": "path",
                 "url": "wp-content/plugins/cds-base",
-                "reference": "526eb0ec0ba0232225bf2680f051d464ca4dd81e"
+                "reference": "60fb9afb1e3738e0170b567c8d441a11d66841c8"
             },
             "require": {
                 "alphagov/notifications-php-client": "^4.2",
@@ -355,7 +355,7 @@
                 "nesbot/carbon": "2.73.0",
                 "php": ">=5.6",
                 "php-http/guzzle6-adapter": "^2.0",
-                "ramsey/uuid": "4.8.0",
+                "ramsey/uuid": "4.8.1",
                 "ua-parser/uap-php": "^3.9",
                 "wa72/htmlpagedom": "^3.0"
             },
@@ -2771,16 +2771,16 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.8.0",
+            "version": "4.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "6700833915c00f890615fbcb653faed513836836"
+                "reference": "fdf4dd4e2ff1813111bd0ad58d7a1ddbb5b56c28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/6700833915c00f890615fbcb653faed513836836",
-                "reference": "6700833915c00f890615fbcb653faed513836836",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/fdf4dd4e2ff1813111bd0ad58d7a1ddbb5b56c28",
+                "reference": "fdf4dd4e2ff1813111bd0ad58d7a1ddbb5b56c28",
                 "shasum": ""
             },
             "require": {
@@ -2844,9 +2844,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.8.0"
+                "source": "https://github.com/ramsey/uuid/tree/4.8.1"
             },
-            "time": "2025-06-01T02:32:15+00:00"
+            "time": "2025-06-01T06:28:46+00:00"
         },
         {
             "name": "shawnhooper/delete-orphaned-multisite-tables",
@@ -6469,16 +6469,16 @@
         },
         {
             "name": "squizlabs/php_codesniffer",
-            "version": "3.13.1",
+            "version": "3.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "1b71b4dd7e7ef651ac749cea67e513c0c832f4bd"
+                "reference": "5b5e3821314f947dd040c70f7992a64eac89025c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/1b71b4dd7e7ef651ac749cea67e513c0c832f4bd",
-                "reference": "1b71b4dd7e7ef651ac749cea67e513c0c832f4bd",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/5b5e3821314f947dd040c70f7992a64eac89025c",
+                "reference": "5b5e3821314f947dd040c70f7992a64eac89025c",
                 "shasum": ""
             },
             "require": {
@@ -6549,7 +6549,7 @@
                     "type": "thanks_dev"
                 }
             ],
-            "time": "2025-06-12T15:04:34+00:00"
+            "time": "2025-06-17T22:17:01+00:00"
         },
         {
             "name": "symfony/console",

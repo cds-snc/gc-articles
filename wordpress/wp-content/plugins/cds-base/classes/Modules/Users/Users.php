@@ -33,6 +33,11 @@ class Users
             new UserLockout();
         }, 12); // relies on "Disable User Login" plugin, which activates itself at priority 11
 
+        add_action('granted_super_admin', function ($user_id) {
+            $userInfo = get_userdata($user_id);
+            error_log("[Users] granted $userInfo->user_email super admin to network");
+        });
+
         UserSessions::getInstance();
     }
 
@@ -169,6 +174,11 @@ class Users
     public function addToBlog($uId, $role)
     {
         $result = add_user_to_blog(get_current_blog_id(), $uId, $role);
+
+        // Log the new user addition
+        $userInfo = get_userdata($uId);
+        $site_url = get_site_url(get_current_blog_id());
+        error_log("[Users] Added $userInfo->user_email to $site_url with role $role");
 
         if (is_wp_error($result)) {
             throw new \Exception($result->get_error_message());

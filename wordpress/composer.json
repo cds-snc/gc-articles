@@ -61,7 +61,7 @@
     }
   ],
   "require": {
-    "wpackagist-plugin/two-factor": "^0.13.0",
+    "wpackagist-plugin/two-factor": "^0.14.0",
     "wpackagist-plugin/wps-hide-login": "^1.9",
     "wpml/sitepress-multilingual-cms": "*",
     "wpml/wpml-string-translation": "*",

@@ -1,4 +1,4 @@
-FROM httpd:2.4.64-alpine@sha256:1ee608ebad20bda2b29939297c04ab41794bee647fb6d0ccb489f4a6171f25b5
+FROM httpd:2.4.65-alpine@sha256:dad81abbbcfeb58602b5ac4e11c4336d04db48ea1d69b038185191fb363012be
 
 WORKDIR /usr/src/wordpress
 

@@ -21,6 +21,7 @@ env:
   TF_VAR_database_password: ${{ secrets.STAGING_DATABASE_PASSWORD }}
   TF_VAR_cloudfront_custom_header_name: ${{ secrets.STAGING_CLOUDFRONT_CUSTOM_HEADER_NAME }}
   TF_VAR_cloudfront_custom_header_value: ${{ secrets.STAGING_CLOUDFRONT_CUSTOM_HEADER_VALUE }}
+  TF_VAR_cloudfront_waf_geo_match_secret: ${{ secrets.STAGING_CLOUDFRONT_WAF_GEO_MATCH_SECRET }}
   TF_VAR_list_manager_endpoint: ${{ secrets.STAGING_LIST_MANAGER_ENDPOINT }}
   TF_VAR_default_list_manager_api_key: ${{ secrets.STAGING_DEFAULT_LIST_MANAGER_API_KEY }}
   TF_VAR_default_notify_api_key: ${{ secrets.STAGING_DEFAULT_NOTIFY_API_KEY }}

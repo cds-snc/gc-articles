@@ -853,8 +853,27 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     statement {
       not_statement {
         statement {
-          geo_match_statement {
-            country_codes = ["CA", "US"]
+          or_statement {
+            statement {
+              geo_match_statement {
+                country_codes = ["CA", "US"]
+              }
+            }
+            statement {
+              byte_match_statement {
+                positional_constraint = "EXACTLY"
+                field_to_match {
+                  single_header {
+                    name = "waf-secret"
+                  }
+                }
+                search_string = var.cloudfront_waf_geo_match_secret
+                text_transformation {
+                  priority = 1
+                  type     = "NONE"
+                }
+              }
+            }
           }
         }
       }

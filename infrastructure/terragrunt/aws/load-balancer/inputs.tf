@@ -10,6 +10,12 @@ variable "cloudfront_custom_header_value" {
   sensitive   = true
 }
 
+variable "cloudfront_waf_geo_match_secret" {
+  description = "Custom header value to check to determine if the geo match statement should allow a country outside of the allowed set."
+  type        = string
+  sensitive   = true
+}
+
 variable "domain_name" {
   description = "Domain name for the load balancer, certificate and CloudFront"
   type        = string

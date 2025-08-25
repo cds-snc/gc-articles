@@ -10,7 +10,7 @@ $footerMenu = '';
 
 <div class="hidden" id="version"><?php echo _S_VERSION; ?></div>
 <footer id="wb-info">
-    <div class="landscape">
+    <div class="gc-main-footer">
         <nav class="container wb-navcurr" aria-labelledby="footerNavAboutGovernment">
             <h2 class="wb-inv" id="footerNavAboutGovernment"><?php echo $footerText['aboutGovernmentTitle']; ?></h2>
             <ul class="list-unstyled colcount-sm-2 colcount-md-3">
@@ -18,7 +18,7 @@ $footerMenu = '';
             </ul>
         </nav>
     </div>
-    <div class="brand">
+    <div class="gc-sub-footer">
         <div class="container">
             <div class="row">
                 <nav class="col-md-9 col-lg-10 ftr-urlt-lnk" aria-labelledby="footerNavAbout">

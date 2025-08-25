@@ -1325,16 +1325,16 @@
         },
         {
             "name": "humanmade/s3-uploads",
-            "version": "3.0.9",
+            "version": "3.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/humanmade/S3-Uploads.git",
-                "reference": "f5e9a7773afd8c78030e1b6a13580e83e521ba63"
+                "reference": "e84c535c3eeba3a28c8e37bc804abdaf4c9b0985"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/f5e9a7773afd8c78030e1b6a13580e83e521ba63",
-                "reference": "f5e9a7773afd8c78030e1b6a13580e83e521ba63",
+                "url": "https://api.github.com/repos/humanmade/S3-Uploads/zipball/e84c535c3eeba3a28c8e37bc804abdaf4c9b0985",
+                "reference": "e84c535c3eeba3a28c8e37bc804abdaf4c9b0985",
                 "shasum": ""
             },
             "require": {
@@ -1344,7 +1344,8 @@
             "require-dev": {
                 "humanmade/psalm-plugin-wordpress": "^1.0",
                 "pcov/clobber": "^2.0",
-                "phpunit/phpunit": "7.5"
+                "phpunit/phpunit": "7.5",
+                "yoast/phpunit-polyfills": "^4.0"
             },
             "type": "wordpress-plugin",
             "autoload": {
@@ -1372,7 +1373,7 @@
                 "issues": "https://github.com/humanmade/s3-uploads/issues",
                 "source": "https://github.com/humanmade/s3-uploads"
             },
-            "time": "2025-06-06T14:06:49+00:00"
+            "time": "2025-08-07T19:49:16+00:00"
         },
         {
             "name": "illuminate/collections",

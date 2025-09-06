@@ -4024,15 +4024,15 @@
         },
         {
             "name": "wpackagist-plugin/two-factor",
-            "version": "0.14.0",
+            "version": "0.14.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/two-factor/",
-                "reference": "tags/0.14.0"
+                "reference": "tags/0.14.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/two-factor.0.14.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/two-factor.0.14.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

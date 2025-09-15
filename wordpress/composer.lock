@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0ebcf117df08b3ffba69b8348cfc0950",
+    "content-hash": "ad1b00315a6c2bb7c77bd2f9fe4cdb1e",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -346,7 +346,7 @@
             "dist": {
                 "type": "path",
                 "url": "wp-content/plugins/cds-base",
-                "reference": "40dc2d06fbd658df64b3cc9b641ee0cd5a858800"
+                "reference": "27d46c57431d65b5d66914aed62ea7db175f6492"
             },
             "require": {
                 "alphagov/notifications-php-client": "^4.2",
@@ -355,7 +355,7 @@
                 "nesbot/carbon": "2.73.0",
                 "php": ">=5.6",
                 "php-http/guzzle6-adapter": "^2.0",
-                "ramsey/uuid": "4.9.0",
+                "ramsey/uuid": "4.9.1",
                 "ua-parser/uap-php": "^3.9",
                 "wa72/htmlpagedom": "^3.0"
             },
@@ -2768,20 +2768,20 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.9.0",
+            "version": "4.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "4e0e23cc785f0724a0e838279a9eb03f28b092a0"
+                "reference": "81f941f6f729b1e3ceea61d9d014f8b6c6800440"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/4e0e23cc785f0724a0e838279a9eb03f28b092a0",
-                "reference": "4e0e23cc785f0724a0e838279a9eb03f28b092a0",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/81f941f6f729b1e3ceea61d9d014f8b6c6800440",
+                "reference": "81f941f6f729b1e3ceea61d9d014f8b6c6800440",
                 "shasum": ""
             },
             "require": {
-                "brick/math": "^0.8.8 || ^0.9 || ^0.10 || ^0.11 || ^0.12 || ^0.13",
+                "brick/math": "^0.8.8 || ^0.9 || ^0.10 || ^0.11 || ^0.12 || ^0.13 || ^0.14",
                 "php": "^8.0",
                 "ramsey/collection": "^1.2 || ^2.0"
             },
@@ -2840,9 +2840,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.9.0"
+                "source": "https://github.com/ramsey/uuid/tree/4.9.1"
             },
-            "time": "2025-06-25T14:20:11+00:00"
+            "time": "2025-09-04T20:59:21+00:00"
         },
         {
             "name": "shawnhooper/delete-orphaned-multisite-tables",
@@ -3952,15 +3952,15 @@
         },
         {
             "name": "wpackagist-plugin/disable-user-login",
-            "version": "1.3.10",
+            "version": "1.3.12",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/disable-user-login/",
-                "reference": "tags/1.3.10"
+                "reference": "tags/1.3.12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/disable-user-login.1.3.10.zip"
+                "url": "https://downloads.wordpress.org/plugin/disable-user-login.1.3.12.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

@@ -2,7 +2,7 @@
 # Create Athena queries to view the WAF and load balancer access logs
 #
 module "athena_access_logs" {
-  source = "github.com/cds-snc/terraform-modules//athena_access_logs?ref=v10.7.0"
+  source = "github.com/cds-snc/terraform-modules//athena_access_logs?ref=v10.7.1"
 
   athena_bucket_name = module.athena_bucket.s3_bucket_id
 
@@ -18,7 +18,7 @@ module "athena_access_logs" {
 # Hold the Athena result data
 #
 module "athena_bucket" {
-  source            = "github.com/cds-snc/terraform-modules//S3?ref=v10.7.0"
+  source            = "github.com/cds-snc/terraform-modules//S3?ref=v10.7.1"
   bucket_name       = "gc-articles-${var.env}-athena"
   billing_tag_value = var.billing_tag_value
 

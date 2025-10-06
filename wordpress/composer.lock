@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ad1b00315a6c2bb7c77bd2f9fe4cdb1e",
+    "content-hash": "a7dade45daf0f6be2ed3d1884540cc44",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -3988,15 +3988,15 @@
         },
         {
             "name": "wpackagist-plugin/jwt-authentication-for-wp-rest-api",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/jwt-authentication-for-wp-rest-api/",
-                "reference": "tags/1.4.0"
+                "reference": "tags/1.4.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/jwt-authentication-for-wp-rest-api.1.4.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/jwt-authentication-for-wp-rest-api.1.4.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"

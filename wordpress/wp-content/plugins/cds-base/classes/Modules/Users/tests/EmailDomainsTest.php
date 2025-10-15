@@ -2,16 +2,22 @@
 
 use CDS\Modules\Users\EmailDomains;
 
-beforeAll(function () {
-    WP_Mock::setUp();
+// Global variables to store mocked function returns
+$GLOBALS['wp_test_mocks'] = [];
 
-    WP_Mock::userFunction('is_email', array(
-        'return' => true,
-    ));
+// Mock WordPress functions
+if (!function_exists('is_email')) {
+    function is_email($email) {
+        return $GLOBALS['wp_test_mocks']['is_email'] ?? true;
+    }
+}
+
+beforeAll(function () {
+    $GLOBALS['wp_test_mocks']['is_email'] = true;
 });
 
 afterAll(function () {
-    WP_Mock::tearDown();
+    $GLOBALS['wp_test_mocks'] = [];
 });
 
 test('badEmails', function($email) {

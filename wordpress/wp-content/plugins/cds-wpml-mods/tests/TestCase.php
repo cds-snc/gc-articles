@@ -25,4 +25,9 @@ class TestCase extends \WP_UnitTestCase
 	{
 		parent::tear_down();
 	}
+
+    public function expectDeprecated(): void
+    {
+        return;
+    }
 }

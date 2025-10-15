@@ -2,12 +2,24 @@
 
 use CDS\Modules\DBInsights\DBInsights;
 
-beforeAll(function () {
-    WP_Mock::setUp();
-});
+// Global variables to store mocked action expectations
+$GLOBALS['wp_test_action_expectations'] = [];
+
+// Mock WordPress function to register actions
+if (!function_exists('add_action')) {
+    function add_action($hook, $callback, $priority = 10, $accepted_args = 1) {
+        $GLOBALS['wp_test_action_expectations'][] = [
+            'hook' => $hook,
+            'callback' => $callback,
+            'priority' => $priority,
+            'accepted_args' => $accepted_args
+        ];
+    }
+}
 
 afterAll(function () {
-    WP_Mock::tearDown();
+    // Reset action expectations
+    $GLOBALS['wp_test_action_expectations'] = [];
 });
 
 test('DBInsights addActions', function () {
@@ -16,9 +28,24 @@ test('DBInsights addActions', function () {
     $wpdb = mock('\WPDB');
     $wpdb->prefix = 'wp_';
 
+    // Reset action expectations
+    $GLOBALS['wp_test_action_expectations'] = [];
+
     $maintenance = new DBInsights();
-    WP_Mock::expectActionAdded('rest_api_init', [$maintenance, 'registerRestRoutes']);
     $maintenance->addActions();
+
+    // Verify that the expected action was added
+    $found = false;
+    foreach ($GLOBALS['wp_test_action_expectations'] as $action) {
+        if ($action['hook'] === 'rest_api_init' && 
+            $action['callback'][0] instanceof DBInsights && 
+            $action['callback'][1] === 'registerRestRoutes') {
+            $found = true;
+            break;
+        }
+    }
+    
+    expect($found)->toBeTrue();
 });
 
 test('parses BlogId(s) from string', function () {

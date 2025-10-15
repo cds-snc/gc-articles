@@ -13,8 +13,6 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-WP_Mock::bootstrap();
-
 // uses(Tests\TestCase::class)->in('Feature');
 
 /*

@@ -83,7 +83,8 @@
     "10up/wp_mock": "0.4.2",
     "mockery/mockery": "^1.4",
     "squizlabs/php_codesniffer": "^3.6",
-    "pestphp/pest-plugin-mock": "^2.0"
+    "pestphp/pest-plugin-mock": "^2.0",
+    "dg/bypass-finals": "^1.9"
   },
   "scripts": {
     "prepare-translations": [

@@ -306,18 +306,11 @@ function manual_language_switcher(): string
         $custom_language_switcher = json_decode($custom_language_switcher);
         $custom_language_switcher = (array)$custom_language_switcher;
 
-        // Validate that required keys exist
-        if (isset($custom_language_switcher['translated_name']) && isset($custom_language_switcher['url']) && isset($custom_language_switcher['active'])) {
-            $output = language_switcher_output([$custom_language_switcher]);
-
-            if (count($output) >= 1 && $output[0]) {
-                return (string)$output[0];
-            } else {
-                error_log("language_switcher: failed to parse");
-                $output = "";
-            }
+        $output = language_switcher_output([$custom_language_switcher]);
+        if (count($output) >= 1 && $output[0]) {
+            return (string)$output[0];
         } else {
-            error_log("language_switcher: missing required keys");
+            error_log("language_switcher: failed to parse");
             $output = "";
         }
     }

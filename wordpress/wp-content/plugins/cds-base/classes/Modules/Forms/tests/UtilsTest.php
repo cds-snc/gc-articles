@@ -24,10 +24,6 @@ if (!function_exists('esc_html')) {
     }
 }
 
-beforeAll(function () {
-    // No specific setup needed
-});
-
 afterAll(function () {
     $GLOBALS['wp_test_mocks'] = [];
 });

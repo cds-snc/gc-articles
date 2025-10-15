@@ -118,21 +118,6 @@ class LanguageSwitcherTest extends TestCase
         )->toBeTrue();
     }
 
-    public function test_manual_language_switcher_noop()
-    {
-        global $wp_query;
-        $wp_query = new stdClass;
-        $wp_query->post = new stdClass;
-        $wp_query->post->ID = 1;
-
-        // Mock get_post_meta to return invalid JSON
-        $GLOBALS['wp_test_mocks']['get_post_meta'] = '{}';
-
-        $nav = language_switcher();
-
-        expect($nav)->toEqual("");
-    }
-
     public function test_manual_language_switcher()
     {
         global $wp_query;

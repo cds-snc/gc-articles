@@ -17,10 +17,6 @@ if (!function_exists('add_action')) {
     }
 }
 
-beforeAll(function () {
-    // No WP_Mock setup needed
-});
-
 afterAll(function () {
     // Reset action expectations
     $GLOBALS['wp_test_action_expectations'] = [];

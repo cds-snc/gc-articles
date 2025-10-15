@@ -3,24 +3,54 @@
 use CDS\Modules\Users\Users;
 use CDS\Modules\Users\ValidationException;
 
+// Global variables to store mocked function returns
+$GLOBALS['wp_test_mocks'] = [];
+
+// Mock WordPress functions
+if (!function_exists('sanitize_email')) {
+    function sanitize_email($email) {
+        return $email;  // return_arg => 0 means return the first argument unchanged
+    }
+}
+
+if (!function_exists('sanitize_text_field')) {
+    function sanitize_text_field($str) {
+        return $str;  // return_arg => 0 means return the first argument unchanged
+    }
+}
+
+if (!function_exists('is_email')) {
+    function is_email($email) {
+        return $GLOBALS['wp_test_mocks']['is_email'] ?? true;
+    }
+}
+
+if (!function_exists('add_filter')) {
+    function add_filter($hook, $callback, $priority = 10, $accepted_args = 1) {
+        // Mock function - just store the filter registration
+        return true;
+    }
+}
+
+if (!function_exists('add_action')) {
+    function add_action($hook, $callback, $priority = 10, $accepted_args = 1) {
+        // Mock function - just store the action registration
+        return true;
+    }
+}
+
+if (!function_exists('__')) {
+    function __($text, $domain = 'default') {
+        return $text;  // Return the text unchanged for testing
+    }
+}
+
 beforeAll(function () {
-    WP_Mock::setUp();
-
-    \WP_Mock::userFunction('sanitize_email', array(
-        'return_arg' => 0
-    ));
-
-    \WP_Mock::userFunction('sanitize_text_field', array(
-        'return_arg' => 0
-    ));
-
-    WP_Mock::userFunction('is_email', array(
-        'return' => true,
-    ));
+    $GLOBALS['wp_test_mocks']['is_email'] = true;
 });
 
 afterAll(function () {
-    WP_Mock::tearDown();
+    $GLOBALS['wp_test_mocks'] = [];
 });
 
 test('too few args', function () {

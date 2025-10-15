@@ -2,21 +2,52 @@
 
 require __DIR__ . '/../../../../vendor/autoload.php';
 
-// Now call the bootstrap method of WP Mock
-WP_Mock::bootstrap();
-
 require_once __DIR__ . '/../inc/template-functions.php';
 
-class PrevNextLinksTest extends \WP_Mock\Tools\TestCase
+use PHPUnit\Framework\TestCase;
+
+// Global variables to store mocked function returns
+$GLOBALS['wp_test_mocks'] = [];
+
+// Mock WordPress functions that are used in the tests
+if (!function_exists('get_permalink')) {
+    function get_permalink($id = 0, $leavename = false) {
+        return $GLOBALS['wp_test_mocks']['get_permalink'][$id] ?? '';
+    }
+}
+
+if (!function_exists('get_previous_post')) {
+    function get_previous_post($in_same_term = false, $excluded_terms = '', $taxonomy = 'category') {
+        return $GLOBALS['wp_test_mocks']['get_previous_post'] ?? null;
+    }
+}
+
+if (!function_exists('get_next_post')) {
+    function get_next_post($in_same_term = false, $excluded_terms = '', $taxonomy = 'category') {
+        return $GLOBALS['wp_test_mocks']['get_next_post'] ?? null;
+    }
+}
+
+if (!function_exists('_e')) {
+    function _e($text, $domain = 'default') {
+        echo $text;  // Just echo the text for testing
+    }
+}
+
+class PrevNextLinksTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
-        \WP_Mock::setUp();
+        parent::setUp();
+        // Reset mock data
+        $GLOBALS['wp_test_mocks'] = [];
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
-        \WP_Mock::tearDown();
+        parent::tearDown();
+        // Reset mock data
+        $GLOBALS['wp_test_mocks'] = [];
     }
 
     public function containsString($haystack, $needle)
@@ -46,16 +77,16 @@ class PrevNextLinksTest extends \WP_Mock\Tools\TestCase
         $next_post->post_title = "Post 3";
         $next_post->guid = "https://example.com/page2";
 
-        \WP_Mock::userFunction('get_permalink')->with(42)->andReturn($prev_post->guid);
-        \WP_Mock::userFunction('get_permalink')->with(43)->andReturn($next_post->guid);
-
-        \WP_Mock::userFunction('get_previous_post')->with()->andReturn($prev_post);
-        \WP_Mock::userFunction('get_next_post')->with()->andReturn($next_post);
+        // Mock the WordPress functions
+        $GLOBALS['wp_test_mocks']['get_permalink'][42] = $prev_post->guid;
+        $GLOBALS['wp_test_mocks']['get_permalink'][43] = $next_post->guid;
+        $GLOBALS['wp_test_mocks']['get_previous_post'] = $prev_post;
+        $GLOBALS['wp_test_mocks']['get_next_post'] = $next_post;
 
         ob_start();
         cds_prev_next_links();
         $links = ob_get_contents();
-        ob_end_flush();
+        ob_end_clean();
 
         expect($this->containsString($links, $prev_post->guid))->toBeTrue();
         expect($this->containsString($links, $next_post->guid))->toBeTrue();

@@ -177,7 +177,7 @@ function cds_breadcrumb($sep = ''): string
 
 function get_language_text($lang = ''): array
 {
-    if (strtolower($lang) === 'french' || strtolower($lang) === 'fr') {
+    if ($lang && (strtolower($lang) === 'french' || strtolower($lang) === 'fr')) {
         return ['full' => 'Français', 'abbr' => 'fr'];
     }
 
@@ -270,6 +270,10 @@ function language_switcher_output($languages)
 */
 function convert_url($url, $lang): string
 {
+    if (!$url) {
+        return '';
+    }
+
     $category_path_name = "category";
     $return_url = $url;
     $parsed_url = parse_url($return_url);
@@ -301,12 +305,19 @@ function manual_language_switcher(): string
     if ($custom_language_switcher) {
         $custom_language_switcher = json_decode($custom_language_switcher);
         $custom_language_switcher = (array)$custom_language_switcher;
-        $output = language_switcher_output([$custom_language_switcher]);
 
-        if (count($output) >= 1 && $output[0]) {
-            return (string)$output[0];
+        // Validate that required keys exist
+        if (isset($custom_language_switcher['translated_name']) && isset($custom_language_switcher['url']) && isset($custom_language_switcher['active'])) {
+            $output = language_switcher_output([$custom_language_switcher]);
+
+            if (count($output) >= 1 && $output[0]) {
+                return (string)$output[0];
+            } else {
+                error_log("language_switcher: failed to parse");
+                $output = "";
+            }
         } else {
-            error_log("language_switcher: failed to parse");
+            error_log("language_switcher: missing required keys");
             $output = "";
         }
     }

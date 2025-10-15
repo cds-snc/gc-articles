@@ -2,20 +2,34 @@
 
 use CDS\Modules\Forms\Utils;
 
+// Global variables to store mocked function returns
+$GLOBALS['wp_test_mocks'] = [];
+
+// Mock WordPress functions
+if (!function_exists('sanitize_title')) {
+    function sanitize_title($title, $fallback_title = '', $context = 'save') {
+        return 'myId';  // return_arg => 'myId' means return 'myId'
+    }
+}
+
+if (!function_exists('sanitize_text_field')) {
+    function sanitize_text_field($str) {
+        return $str;  // Return the input unchanged (return_arg => 0 behavior)
+    }
+}
+
+if (!function_exists('esc_html')) {
+    function esc_html($text) {
+        return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    }
+}
+
 beforeAll(function () {
-    \WP_Mock::setUp();
-
-    \WP_Mock::userFunction('sanitize_title', array(
-        'return_arg' => 'myId'
-    ));
-
-    \WP_Mock::userFunction('sanitize_text_field', array(
-        'return_arg' => 'text'
-    ));
+    // No specific setup needed
 });
 
 afterAll(function () {
-    \WP_Mock::tearDown();
+    $GLOBALS['wp_test_mocks'] = [];
 });
 
 test('asserts textField returns a text input with expected values', function () {

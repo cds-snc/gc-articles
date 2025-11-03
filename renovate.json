@@ -6,5 +6,11 @@
   "ignoreDeps": [
     "@wordpress/env", 
     "paquettg/php-html-parser"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": ["phpunit/phpunit"],
+      "allowedVersions": "<=10.5.36"
+    }
   ]
 }

@@ -67,6 +67,7 @@
     "wpml/wpml-string-translation": "*",
     "wpackagist-plugin/login-lockdown":"2.06",
     "wpackagist-plugin/disable-user-login":"1.3.12",
+    "aws/aws-sdk-php": "~3.18 <3.338",
     "humanmade/s3-uploads": "^3.0",
     "cds-snc/cds-base": "dev-main",
     "cds-snc/cds-default": "dev-main",
@@ -111,6 +112,9 @@
     },
     "platform": {
       "php": "8.4"
+    },
+    "audit": {
+      "ignore": ["PKSA-dxyf-6n16-t87m"]
     }
   },
   "minimum-stability": "dev",

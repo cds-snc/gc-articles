@@ -7,6 +7,7 @@ on:
     paths:
       - ".dockerignore"
       - "wordpress/**"
+      - ".github/workflows/build_container.yml"
 
 env:
   DOCKER_BUILDKIT: 1

@@ -66,6 +66,7 @@ inputs = {
   alb_target_group_arn = dependency.load-balancer.outputs.alb_target_group_arn
   domain_name          = dependency.load-balancer.outputs.domain_name
 
+    ecs_cluster_capacity_provider     = "FARGATE_SPOT"
   ecs_events_lambda_security_group_id = dependency.network.outputs.ecs_events_lambda_security_group_id
   ecs_service_security_group_id = dependency.network.outputs.ecs_service_security_group_id
   efs_security_group_id         = dependency.network.outputs.efs_security_group_id
@@ -89,7 +90,7 @@ inputs = {
 
   cluster_name           = "wordpress"
   cpu_units              = "1024"
-  memory                 = "3072"
+  memory                 = "2048"
   min_capacity           = 1
   max_capacity           = 2
   scale_in_cooldown      = 60

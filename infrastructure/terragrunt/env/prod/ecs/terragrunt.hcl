@@ -66,6 +66,7 @@ inputs = {
   alb_target_group_arn = dependency.load-balancer.outputs.alb_target_group_arn
   domain_name          = dependency.load-balancer.outputs.domain_name
 
+  ecs_cluster_capacity_provider       = "FARGATE"
   ecs_events_lambda_security_group_id = dependency.network.outputs.ecs_events_lambda_security_group_id
   ecs_service_security_group_id       = dependency.network.outputs.ecs_service_security_group_id
   efs_security_group_id               = dependency.network.outputs.efs_security_group_id

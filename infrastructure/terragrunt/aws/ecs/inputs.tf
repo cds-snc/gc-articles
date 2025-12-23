@@ -34,6 +34,10 @@ variable "domain_name" {
   type = string
 }
 
+variable "ecs_cluster_capacity_provider" {
+  type = string
+}
+
 variable "ecs_events_lambda_security_group_id" {
   type = string
 }

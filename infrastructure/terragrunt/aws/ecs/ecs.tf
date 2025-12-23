@@ -21,10 +21,10 @@ resource "aws_ecs_cluster" "wordpress" {
 resource "aws_ecs_cluster_capacity_providers" "wordpress" {
   cluster_name = aws_ecs_cluster.wordpress.name
 
-  capacity_providers = ["FARGATE"]
+  capacity_providers = [var.ecs_cluster_capacity_provider]
 
   default_capacity_provider_strategy {
-    capacity_provider = "FARGATE"
+    capacity_provider = var.ecs_cluster_capacity_provider
     weight            = 1
     base              = 1
   }

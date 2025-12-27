@@ -1,6 +1,6 @@
 FROM node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e AS node
 
-FROM wordpress:cli-php8.4@sha256:279a826539fbd33761d8980c86499036bbbda883a1573b444605476a94dbfcf1
+FROM wordpress:cli-php8.4@sha256:75e129e07101684989e0309bc5defe283949bf61f2aaf1fb780a9b28c991b891
 
 COPY --from=node /usr/local/share /usr/local/share
 COPY --from=node /usr/local/lib /usr/local/lib

@@ -65,10 +65,6 @@ jobs:
           -t "${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
           -f ./wordpress/docker/Dockerfile .
 
-      - name: Push containers to ECR
-        run: |
-          docker push ${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}
-
       - name: Logout of ECR
         if: always()
         run: docker logout ${{ steps.login-ecr.outputs.registry }}

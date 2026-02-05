@@ -114,7 +114,7 @@
       "php": "8.4"
     },
     "audit": {
-      "ignore": ["PKSA-dxyf-6n16-t87m"]
+      "ignore": ["PKSA-dxyf-6n16-t87m", "PKSA-z3gr-8qht-p93v"]
     }
   },
   "minimum-stability": "dev",

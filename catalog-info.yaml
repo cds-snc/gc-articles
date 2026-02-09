@@ -2,12 +2,13 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: gc-articles
-  description: >-
-    This repo is for GC Articles web publishing product undertaken by CDS
-    platform August 2021
-  labels:
-    license: GPL-2.0
+  title: GC Articles
+  description: Content management system run for CDS products.  It uses Wordpress as the underlying service.
+  annotations:
+    github.com/project-slug: cds-snc/gc-articles
 spec:
-  type: website
-  lifecycle: experimental
-  owner: group:cds-snc/gc-articles
+  type: service
+  lifecycle: production
+  owner: group:cds-snc/platform-core
+  system: websites
+

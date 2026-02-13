@@ -1,5 +1,9 @@
 name: "Terragrunt plan STAGING"
 
+concurrency:
+  group: terraform-staging
+  cancel-in-progress: false
+
 on:
   pull_request:
     paths:

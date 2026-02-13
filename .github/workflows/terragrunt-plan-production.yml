@@ -1,5 +1,9 @@
 name: "Terragrunt plan PRODUCTION"
 
+concurrency:
+  group: terraform-production
+  cancel-in-progress: false
+
 on:
   pull_request:
     branches:

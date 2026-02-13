@@ -1,5 +1,9 @@
 name: "Terragrunt apply PRODUCTION"
 
+concurrency:
+  group: terraform-production
+  cancel-in-progress: false
+
 on:
   push:
     branches:

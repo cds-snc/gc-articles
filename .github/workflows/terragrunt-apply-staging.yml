@@ -1,5 +1,9 @@
 name: "Terragrunt apply STAGING"
 
+concurrency:
+  group: terraform-staging
+  cancel-in-progress: false
+
 on:
   push:
     branches:

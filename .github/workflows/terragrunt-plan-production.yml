@@ -1,5 +1,9 @@
 name: "Terragrunt plan PRODUCTION"
 
+concurrency:
+  group: terraform-production
+  cancel-in-progress: false
+
 on:
   pull_request:
     branches:
@@ -30,6 +34,7 @@ env:
   TF_VAR_s3_uploads_secret: ${{ secrets.PRODUCTION_S3_UPLOADS_SECRET }}
   TF_VAR_c3_aws_access_key_id: ${{ secrets.PRODUCTION_C3_AWS_ACCESS_KEY_ID }}
   TF_VAR_c3_aws_secret_access_key: ${{ secrets.PRODUCTION_C3_AWS_SECRET_ACCESS_KEY }}
+  TF_VAR_security_txt_content: ${{ vars.SECURITY_TXT_ALPHA_CANADA_CA }}
   TF_VAR_sentinel_customer_id: ${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}
   TF_VAR_sentinel_shared_key: ${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}
   TF_VAR_slack_webhook_url: ${{ secrets.PRODUCTION_SLACK_WEBHOOK_URL }}

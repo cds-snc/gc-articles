@@ -55,3 +55,8 @@ variable "s3_cloudfront_origin_access_identity_path" {
   description = "Path for the origin access identity"
   type        = string
 }
+
+variable "security_txt_content" {
+  description = "The content of the /.well-known/security.txt response."
+  type        = string
+}

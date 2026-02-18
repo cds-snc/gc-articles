@@ -10,7 +10,7 @@ test('getInstance', function() {
 test('buildResponseObject assert response object with no translation', function () {
 	global $sitepress;
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	$sitepress->shouldReceive("get_object_id")->andReturn(null);
 
@@ -35,7 +35,7 @@ test('buildResponseObject assert response object with no translation', function 
 test('buildResponseObject assert response object with translation', function () {
 	global $sitepress;
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	$sitepress->shouldReceive("get_object_id")->andReturn(2);
 
@@ -59,7 +59,7 @@ test('buildResponseObject assert response object with translation', function () 
 test('buildResponseObject assert response object with no language provided', function () {
 	global $sitepress;
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 
 	$postClass = new Post();
@@ -79,7 +79,7 @@ test('buildResponseObject assert response object with no language provided', fun
 
 test('getLanguageCodeOfPostObject', function() {
 	global $sitepress;
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('fr');
 
 	$post_id = $this->factory()->post->create();
@@ -94,7 +94,7 @@ test('getLanguageCodeOfPostObject', function() {
 
 test('getLanguageCodeOfPostObjectDefault', function() {
 	global $sitepress;
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn(null);
 
 	$post_id = $this->factory()->post->create();
@@ -109,7 +109,7 @@ test('getLanguageCodeOfPostObjectDefault', function() {
 
 test('getTRID', function() {
 	global $sitepress;
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_element_trid")->andReturn('100');
 
 	$post_id = $this->factory()->post->create();
@@ -124,7 +124,7 @@ test('getTRID', function() {
 
 test('getTranslatedPostID', function() {
 	global $sitepress;
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	$sitepress->shouldReceive("get_object_id")->andReturn(2);
 
@@ -143,7 +143,7 @@ test('getTranslatedPostID', function() {
 
 test('setTranslationForPost calls set_element_language_details_action', function() {
 	global $sitepress;
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_element_trid")->andReturn('100');
 	$sitepress->shouldReceive("set_element_language_details_action");
 

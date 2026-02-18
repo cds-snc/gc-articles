@@ -36,7 +36,7 @@ test('getAvailablePages English', function() {
 	$user = wp_get_current_user();
 	$user->add_cap("edit_posts");
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	$sitepress->shouldReceive("get_object_id")->andReturn(1);
 
@@ -63,7 +63,7 @@ test('getAvailablePages French', function() {
 	$user = wp_get_current_user();
 	$user->add_cap("edit_posts");
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('fr');
 	$sitepress->shouldReceive("get_object_id")->andReturn(1);
 
@@ -138,7 +138,7 @@ test('saveTranslation validate translationId sameId', function() {
 
 	global $sitepress;
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('fr');
 
 
@@ -266,7 +266,7 @@ test('getTranslation good ID with translated post', function() {
 	$user = wp_get_current_user();
 	$user->add_cap("edit_posts");
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	$sitepress->shouldReceive("get_object_id")->andReturn(100);
 
@@ -296,7 +296,7 @@ test('getTranslation good ID with NO translated post', function() {
 	$user = wp_get_current_user();
 	$user->add_cap("edit_posts");
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	// return null instead of ID for translated post
 	$sitepress->shouldReceive("get_object_id")->andReturn(null);

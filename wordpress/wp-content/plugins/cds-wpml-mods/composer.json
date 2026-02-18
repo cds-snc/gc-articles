@@ -13,8 +13,7 @@
     "yoast/wp-test-utils": "dev-JRF/update-for-polyfills-2.0",
     "pestphp/pest": "^2.0",
     "pestphp/pest-plugin-faker": "^2.0",
-    "mockery/mockery": "^1.5",
-    "pestphp/pest-plugin-mock": "^2.0"
+    "mockery/mockery": "^1.5"
   },
   "autoload": {
     "psr-4": {

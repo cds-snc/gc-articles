@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c13b6ebf630cee7f31ca7d00ab9f397b",
+    "content-hash": "8798eedb886610d246a55a2837277752",
     "packages": [],
     "packages-dev": [
         {
@@ -872,31 +872,31 @@
         },
         {
             "name": "nunomaduro/termwind",
-            "version": "v2.3.3",
+            "version": "v2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/termwind.git",
-                "reference": "6fb2a640ff502caace8e05fd7be3b503a7e1c017"
+                "reference": "712a31b768f5daea284c2169a7d227031001b9a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/6fb2a640ff502caace8e05fd7be3b503a7e1c017",
-                "reference": "6fb2a640ff502caace8e05fd7be3b503a7e1c017",
+                "url": "https://api.github.com/repos/nunomaduro/termwind/zipball/712a31b768f5daea284c2169a7d227031001b9a8",
+                "reference": "712a31b768f5daea284c2169a7d227031001b9a8",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
                 "php": "^8.2",
-                "symfony/console": "^7.3.6"
+                "symfony/console": "^7.4.4 || ^8.0.4"
             },
             "require-dev": {
-                "illuminate/console": "^11.46.1",
-                "laravel/pint": "^1.25.1",
+                "illuminate/console": "^11.47.0",
+                "laravel/pint": "^1.27.1",
                 "mockery/mockery": "^1.6.12",
-                "pestphp/pest": "^2.36.0 || ^3.8.4 || ^4.1.3",
+                "pestphp/pest": "^2.36.0 || ^3.8.4 || ^4.3.2",
                 "phpstan/phpstan": "^1.12.32",
                 "phpstan/phpstan-strict-rules": "^1.6.2",
-                "symfony/var-dumper": "^7.3.5",
+                "symfony/var-dumper": "^7.3.5 || ^8.0.4",
                 "thecodingmachine/phpstan-strict-rules": "^1.0.0"
             },
             "type": "library",
@@ -928,7 +928,7 @@
                     "email": "enunomaduro@gmail.com"
                 }
             ],
-            "description": "Its like Tailwind CSS, but for the console.",
+            "description": "It's like Tailwind CSS, but for the console.",
             "keywords": [
                 "cli",
                 "console",
@@ -939,7 +939,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/termwind/issues",
-                "source": "https://github.com/nunomaduro/termwind/tree/v2.3.3"
+                "source": "https://github.com/nunomaduro/termwind/tree/v2.4.0"
             },
             "funding": [
                 {
@@ -955,7 +955,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-11-20T02:34:59+00:00"
+            "time": "2026-02-16T23:10:27+00:00"
         },
         {
             "name": "pestphp/pest",
@@ -3950,23 +3950,23 @@
         },
         {
             "name": "ta-tikoma/phpunit-architecture-test",
-            "version": "0.8.6",
+            "version": "0.8.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ta-tikoma/phpunit-architecture-test.git",
-                "reference": "ad48430b92901fd7d003fdaf2d7b139f96c0906e"
+                "reference": "1248f3f506ca9641d4f68cebcd538fa489754db8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ta-tikoma/phpunit-architecture-test/zipball/ad48430b92901fd7d003fdaf2d7b139f96c0906e",
-                "reference": "ad48430b92901fd7d003fdaf2d7b139f96c0906e",
+                "url": "https://api.github.com/repos/ta-tikoma/phpunit-architecture-test/zipball/1248f3f506ca9641d4f68cebcd538fa489754db8",
+                "reference": "1248f3f506ca9641d4f68cebcd538fa489754db8",
                 "shasum": ""
             },
             "require": {
                 "nikic/php-parser": "^4.18.0 || ^5.0.0",
                 "php": "^8.1.0",
                 "phpdocumentor/reflection-docblock": "^5.3.0 || ^6.0.0",
-                "phpunit/phpunit": "^10.5.5 || ^11.0.0 || ^12.0.0",
+                "phpunit/phpunit": "^10.5.5 || ^11.0.0 || ^12.0.0 || ^13.0.0",
                 "symfony/finder": "^6.4.0 || ^7.0.0 || ^8.0.0"
             },
             "require-dev": {
@@ -4003,9 +4003,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ta-tikoma/phpunit-architecture-test/issues",
-                "source": "https://github.com/ta-tikoma/phpunit-architecture-test/tree/0.8.6"
+                "source": "https://github.com/ta-tikoma/phpunit-architecture-test/tree/0.8.7"
             },
-            "time": "2026-01-30T07:16:00+00:00"
+            "time": "2026-02-17T17:25:14+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -4059,16 +4059,16 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "2.1.3",
+            "version": "2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozarts/assert.git",
-                "reference": "6976757ba8dd70bf8cbaea0914ad84d8b51a9f46"
+                "reference": "79155f94852fa27e2f73b459f6503f5e87e2c188"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozarts/assert/zipball/6976757ba8dd70bf8cbaea0914ad84d8b51a9f46",
-                "reference": "6976757ba8dd70bf8cbaea0914ad84d8b51a9f46",
+                "url": "https://api.github.com/repos/webmozarts/assert/zipball/79155f94852fa27e2f73b459f6503f5e87e2c188",
+                "reference": "79155f94852fa27e2f73b459f6503f5e87e2c188",
                 "shasum": ""
             },
             "require": {
@@ -4115,148 +4115,14 @@
             ],
             "support": {
                 "issues": "https://github.com/webmozarts/assert/issues",
-                "source": "https://github.com/webmozarts/assert/tree/2.1.3"
+                "source": "https://github.com/webmozarts/assert/tree/2.1.5"
             },
-            "time": "2026-02-13T21:01:40+00:00"
-        },
-        {
-            "name": "yoast/phpunit-polyfills",
-            "version": "2.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Yoast/PHPUnit-Polyfills.git",
-                "reference": "1a6aecc9ebe4a9cea4e1047d0e6c496e52314c27"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Yoast/PHPUnit-Polyfills/zipball/1a6aecc9ebe4a9cea4e1047d0e6c496e52314c27",
-                "reference": "1a6aecc9ebe4a9cea4e1047d0e6c496e52314c27",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6",
-                "phpunit/phpunit": "^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0"
-            },
-            "require-dev": {
-                "php-parallel-lint/php-console-highlighter": "^1.0.0",
-                "php-parallel-lint/php-parallel-lint": "^1.4.0",
-                "yoast/yoastcs": "^3.2.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "4.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "phpunitpolyfills-autoload.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Team Yoast",
-                    "email": "support@yoast.com",
-                    "homepage": "https://yoast.com"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/Yoast/PHPUnit-Polyfills/graphs/contributors"
-                }
-            ],
-            "description": "Set of polyfills for changed PHPUnit functionality to allow for creating PHPUnit cross-version compatible tests",
-            "homepage": "https://github.com/Yoast/PHPUnit-Polyfills",
-            "keywords": [
-                "phpunit",
-                "polyfill",
-                "testing"
-            ],
-            "support": {
-                "issues": "https://github.com/Yoast/PHPUnit-Polyfills/issues",
-                "security": "https://github.com/Yoast/PHPUnit-Polyfills/security/policy",
-                "source": "https://github.com/Yoast/PHPUnit-Polyfills"
-            },
-            "time": "2025-08-10T05:13:49+00:00"
-        },
-        {
-            "name": "yoast/wp-test-utils",
-            "version": "dev-JRF/update-for-polyfills-2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Yoast/wp-test-utils.git",
-                "reference": "04d0e29b0373da159deeafb1c30764da2e1318cd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Yoast/wp-test-utils/zipball/04d0e29b0373da159deeafb1c30764da2e1318cd",
-                "reference": "04d0e29b0373da159deeafb1c30764da2e1318cd",
-                "shasum": ""
-            },
-            "require": {
-                "brain/monkey": "^2.6.1",
-                "php": ">=5.6",
-                "yoast/phpunit-polyfills": "^1.1.0 || ^2.0.0"
-            },
-            "require-dev": {
-                "yoast/yoastcs": "^2.3.1"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "1.x-dev",
-                    "dev-develop": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "classmap": [
-                    "src/"
-                ],
-                "exclude-from-classmap": [
-                    "/src/WPIntegration/TestCase.php",
-                    "/src/WPIntegration/TestCaseNoPolyfills.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Team Yoast",
-                    "email": "support@yoast.com",
-                    "homepage": "https://yoast.com"
-                },
-                {
-                    "name": "Contributors",
-                    "homepage": "https://github.com/Yoast/wp-test-utils/graphs/contributors"
-                }
-            ],
-            "description": "PHPUnit cross-version compatibility layer for testing plugins and themes build for WordPress",
-            "homepage": "https://github.com/Yoast/wp-test-utils/",
-            "keywords": [
-                "brainmonkey",
-                "integration-testing",
-                "phpunit",
-                "testing",
-                "unit-testing",
-                "wordpress"
-            ],
-            "support": {
-                "issues": "https://github.com/Yoast/wp-test-utils/issues",
-                "source": "https://github.com/Yoast/wp-test-utils"
-            },
-            "time": "2023-09-27T10:30:09+00:00"
+            "time": "2026-02-18T14:09:36+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "yoast/wp-test-utils": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},

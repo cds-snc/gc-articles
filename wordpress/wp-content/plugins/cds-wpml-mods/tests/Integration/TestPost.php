@@ -145,10 +145,13 @@ test('setTranslationForPost calls set_element_language_details_action', function
 	global $sitepress;
 	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_element_trid")->andReturn('100');
-	$sitepress->shouldReceive("set_element_language_details_action");
+	$sitepress->shouldReceive("set_element_language_details_action")->once();
 
 	$postClass = new Post();
 	$postClass->setTranslationForPost(1, 'post', 'en');
+	
+	// Assert that the method completed without throwing an exception
+	$this->assertTrue(true);
 });
 
 

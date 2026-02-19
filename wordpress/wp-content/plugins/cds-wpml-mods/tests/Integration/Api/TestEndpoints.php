@@ -36,7 +36,7 @@ test('getAvailablePages English', function() {
 	$user = wp_get_current_user();
 	$user->add_cap("edit_posts");
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	$sitepress->shouldReceive("get_object_id")->andReturn(1);
 
@@ -63,7 +63,7 @@ test('getAvailablePages French', function() {
 	$user = wp_get_current_user();
 	$user->add_cap("edit_posts");
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('fr');
 	$sitepress->shouldReceive("get_object_id")->andReturn(1);
 
@@ -138,7 +138,7 @@ test('saveTranslation validate translationId sameId', function() {
 
 	global $sitepress;
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('fr');
 
 
@@ -266,14 +266,14 @@ test('getTranslation good ID with translated post', function() {
 	$user = wp_get_current_user();
 	$user->add_cap("edit_posts");
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	$sitepress->shouldReceive("get_object_id")->andReturn(100);
 
 	$post = $this->factory()->post->create_and_get();
 	$postID = $post->ID;
 
-	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${postID}/translation");
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/{$postID}/translation");
 	$response = $this->server->dispatch($request);
 
 	expect($response->get_status())->toBe(200);
@@ -296,7 +296,7 @@ test('getTranslation good ID with NO translated post', function() {
 	$user = wp_get_current_user();
 	$user->add_cap("edit_posts");
 
-	$sitepress = mock('\SitePress');
+	$sitepress = Mockery::mock('\SitePress');
 	$sitepress->shouldReceive("get_language_for_element")->andReturn('en');
 	// return null instead of ID for translated post
 	$sitepress->shouldReceive("get_object_id")->andReturn(null);
@@ -304,7 +304,7 @@ test('getTranslation good ID with NO translated post', function() {
 	$post = $this->factory()->post->create_and_get();
 	$postID = $post->ID;
 
-	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${postID}/translation");
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/{$postID}/translation");
 	$response = $this->server->dispatch($request);
 
 	expect($response->get_status())->toBe(200);
@@ -328,7 +328,7 @@ test('getTranslation error on bad ID', function() {
 	$post = $this->factory()->post->create_and_get();
 	$badPostID = $post->ID + 1;
 
-	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/${badPostID}/translation");
+	$request  = new WP_REST_Request('GET', "/cds/wpml/posts/{$badPostID}/translation");
 	$response = $this->server->dispatch($request);
 
 	expect($response->get_status())->toBe(404);
@@ -349,7 +349,7 @@ test('unsetTranslation error on bad ID', function() {
 	$post = $this->factory()->post->create_and_get();
 	$badPostID = $post->ID + 1;
 
-	$request  = new WP_REST_Request('DELETE', "/cds/wpml/posts/${badPostID}/translation");
+	$request  = new WP_REST_Request('DELETE', "/cds/wpml/posts/{$badPostID}/translation");
 	$response = $this->server->dispatch($request);
 
 	expect($response->get_status())->toBe(404);

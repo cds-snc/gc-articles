@@ -1,20 +1,29 @@
 <?xml version="1.0"?>
-<phpunit
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/12.0/phpunit.xsd"
 	bootstrap="tests/bootstrap.php"
+	cacheDirectory=".phpunit.cache"
 	backupGlobals="false"
 	colors="true"
-	convertErrorsToExceptions="true"
-	convertNoticesToExceptions="true"
-	convertWarningsToExceptions="true"
+	displayDetailsOnTestsThatTriggerDeprecations="true"
+	displayDetailsOnTestsThatTriggerErrors="true"
+	displayDetailsOnTestsThatTriggerNotices="true"
+	displayDetailsOnTestsThatTriggerWarnings="true"
+	failOnDeprecation="false"
+	failOnEmptyTestSuite="true"
+	failOnIncomplete="true"
+	failOnRisky="true"
+	failOnSkipped="false"
+	failOnWarning="true"
 >
 	<testsuites>
 		<testsuite name="Integration">
 			<directory prefix="Test" suffix=".php">./tests/Integration</directory>
 		</testsuite>
 	</testsuites>
-	<coverage processUncoveredFiles="true">
+	<source>
 		<include>
 			<directory suffix=".php">./src</directory>
 		</include>
-	</coverage>
+	</source>
 </phpunit>

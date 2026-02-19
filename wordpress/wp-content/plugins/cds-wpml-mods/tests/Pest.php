@@ -37,6 +37,20 @@ uses(TestCase::class)
 
 /*
 |--------------------------------------------------------------------------
+| Mockery Teardown
+|--------------------------------------------------------------------------
+|
+| Ensure Mockery mocks are properly cleaned up after each test to prevent memory leaks
+| and ensure test isolation.
+|
+*/
+
+afterEach(function() {
+	Mockery::close();
+});
+
+/*
+|--------------------------------------------------------------------------
 | Expectations
 |--------------------------------------------------------------------------
 |

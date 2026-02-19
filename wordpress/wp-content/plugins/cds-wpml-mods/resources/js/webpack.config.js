@@ -55,9 +55,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new I18nLoaderWebpackPlugin({
-            textdomain: 'gc-post-meta'
-        }),
         new DependencyExtractionWebpackPlugin(),
     ],
 };

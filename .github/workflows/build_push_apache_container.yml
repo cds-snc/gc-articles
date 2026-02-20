@@ -97,7 +97,7 @@ jobs:
           -f ./wordpress/docker/apache/Dockerfile .
 
       - name: Docker generate SBOM
-        uses: cds-snc/security-tools/.github/actions/generate-sbom@5a93d1deec72d4cb2737cb8418364fedba1c695c # v3.2.1
+        uses: cds-snc/security-tools/.github/actions/generate-sbom@e91688994f2ee19c5cf3dca7193dffe4bb52ae17 # v4.0.0
         env:
           TRIVY_DB_REPOSITORY: ${{ vars.TRIVY_DB_REPOSITORY }}
         with:

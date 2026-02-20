@@ -3,9 +3,9 @@ const I18nLoaderWebpackPlugin = require('@automattic/i18n-loader-webpack-plugin'
 const DependencyExtractionWebpackPlugin = require('@wordpress/dependency-extraction-webpack-plugin');
 module.exports = {
     mode: "production",
-    entry: './sidebar.js',
+    entry: './resources/js/sidebar.js',
     output: {
-        path: __dirname + "/build/",
+        path: __dirname + "/resources/js/build/",
         filename: 'sidebar.js',
     },
     module: {

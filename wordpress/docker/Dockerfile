@@ -20,7 +20,12 @@ FROM node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9b
 WORKDIR /app
 COPY . .
 
-RUN apk add --no-cache git
+RUN apk add --no-cache \
+    g++ \
+    git \
+    make \
+    python3 \
+    py3-pip
 RUN npm --unsafe-perm install
 
 ## Release build

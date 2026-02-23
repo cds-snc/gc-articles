@@ -13,6 +13,9 @@ on:
       - "infrastructure/**"
       - ".github/workflows/terraform-security-scan.yml"
 
+permissions:
+  contents: read
+
 jobs:
   terraform-security-scan:
     runs-on: ubuntu-latest

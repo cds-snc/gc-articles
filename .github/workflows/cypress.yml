@@ -15,6 +15,10 @@ env:
   WPML_USER_ID: ${{ secrets.WPML_USER_ID }}
   WPML_KEY: ${{ secrets.WPML_KEY }}
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   test:
     runs-on: ubuntu-latest

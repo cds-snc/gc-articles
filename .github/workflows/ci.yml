@@ -17,6 +17,9 @@ env:
   # WP_VERSION needs to match the version found in ~/wordpress/docker/Dockerfile
   WP_VERSION: 6.9.1
 
+permissions:
+  contents: read
+
 jobs:
   php-tests:
     runs-on: ubuntu-latest

@@ -14,6 +14,9 @@ env:
   REPO_NAME: platform/wordpress
   STAGING_ECR_REGISTRY: 729164266357.dkr.ecr.ca-central-1.amazonaws.com
 
+permissions:
+  contents: read
+
 jobs:
   build-container:
     runs-on: ubuntu-24.04-arm

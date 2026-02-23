@@ -72,7 +72,7 @@ jobs:
         uses: cds-snc/terraform-tools-setup@5a19984bcb888600ad646e0caf5c6f4d0a54c165 # v1.2.0
 
       - name: Configure AWS credentials using OIDC
-        uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
+        uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 # v6.0.0
         with:
           role-to-assume: arn:aws:iam::729164266357:role/gc-articles-plan
           role-session-name: TFPlanECS
@@ -108,7 +108,7 @@ jobs:
         uses: cds-snc/terraform-tools-setup@5a19984bcb888600ad646e0caf5c6f4d0a54c165 # v1.2.0
 
       - name: Configure AWS credentials using OIDC
-        uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
+        uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 # v6.0.0
         with:
           role-to-assume: arn:aws:iam::729164266357:role/gc-articles-apply
           role-session-name: TFApplyECS

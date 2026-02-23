@@ -24,6 +24,10 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
         subversion \
         nodejs \
         npm \
+        python3 \
+        py3-pip \
+        make \
+        g++ \
         zsh \
         zsh-autosuggestions \
         zsh-syntax-highlighting \

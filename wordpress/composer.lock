@@ -732,7 +732,7 @@
                 ]
             },
             "support": {
-                "source": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache/tree/master",
+                "source": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache/tree/v7.3.1.1",
                 "issues": "https://github.com/amimoto-ami/c3-cloudfront-clear-cache/issues"
             },
             "time": "2026-02-13T06:15:27+00:00"

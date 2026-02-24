@@ -10,14 +10,14 @@
     "postinstall": "npm run build"
   },
   "devDependencies": {
-    "@automattic/i18n-loader-webpack-plugin": "^2.0.13",
-    "@wordpress/dependency-extraction-webpack-plugin": "^4.20.0",
-    "babel-core": "^6.26.3",
+    "@automattic/i18n-loader-webpack-plugin": "^2.0.92",
+    "@babel/core": "^7.29.0",
+    "@babel/plugin-transform-react-jsx": "^7.28.6",
+    "@babel/preset-env": "^7.29.0",
+    "@wordpress/dependency-extraction-webpack-plugin": "^6.40.0",
     "babel-loader": "^9.1.3",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "terser-webpack-plugin": "^5.3.3",
-    "webpack": "^5.73.0",
-    "webpack-cli": "^5.1.4"
+    "terser-webpack-plugin": "^5.3.16",
+    "webpack": "^5.105.2",
+    "webpack-cli": "^6.0.1"
   }
 }

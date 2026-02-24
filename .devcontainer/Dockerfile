@@ -31,7 +31,9 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
         zsh \
         zsh-autosuggestions \
         zsh-syntax-highlighting \
-        gettext && \
+        gettext \
+        xvfb \
+        xvfb-run && \
     # Install from v3.16 alpine community repo
     apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/v3.16/community/ \
         php8-xmlwriter \

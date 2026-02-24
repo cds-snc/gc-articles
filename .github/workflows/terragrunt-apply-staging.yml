@@ -18,7 +18,7 @@ on:
 env:
   AWS_REGION: ca-central-1
   TERRAFORM_VERSION: 1.14.5
-  TERRAGRUNT_VERSION: 0.57.5
+  TERRAGRUNT_VERSION: 0.99.2
   TF_INPUT: false
   TF_VAR_client_vpn_access_group_id: ${{ secrets.STAGING_CLIENT_VPN_ACCESS_GROUP_ID }}
   TF_VAR_client_vpn_saml_metadata: ${{ secrets.STAGING_CLIENT_VPN_SAML_METADATA }}  
@@ -117,45 +117,45 @@ jobs:
       - name: Terragrunt apply network
         if: ${{ steps.filter.outputs.network == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/network
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       - name: Terragrunt apply hosted-zone
         if: ${{ steps.filter.outputs.hosted-zone == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/hosted-zone
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       - name: Terragrunt apply ecr
         if: ${{ steps.filter.outputs.ecr == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/ecr
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       - name: Terragrunt apply storage
         if: ${{ steps.filter.outputs.storage == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/storage
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       # Network dependency
       - name: Terragrunt apply database
         if: ${{ steps.filter.outputs.database == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/database
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       - name: Terragrunt apply load-balancer
         if: ${{ steps.filter.outputs.load-balancer == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/load-balancer
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       # Load-balancer & database dependency
       - name: Terragrunt apply ecs
         if: ${{ steps.filter.outputs.ecs == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/ecs
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       # Depends on everything
       - name: Terragrunt apply alarms
         if: ${{ steps.filter.outputs.alarms == 'true' || steps.filter.outputs.common == 'true' }}
         working-directory: infrastructure/terragrunt/env/staging/alarms
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       - name: Report deployment to Sentinel
         if: always()

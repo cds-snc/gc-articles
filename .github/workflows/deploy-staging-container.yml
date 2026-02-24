@@ -15,7 +15,7 @@ on:
 env:
   AWS_REGION: ca-central-1
   TERRAFORM_VERSION: 1.14.5
-  TERRAGRUNT_VERSION: 0.57.5
+  TERRAGRUNT_VERSION: 0.99.2
   TF_INPUT: false
   TF_VAR_database_name: ${{ secrets.STAGING_DATABASE_NAME }}
   TF_VAR_database_username: ${{ secrets.STAGING_DATABASE_USERNAME }}
@@ -79,7 +79,7 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Terragrunt plan ecs
-        uses: cds-snc/terraform-plan@39b0058bcf977fbd8b067b84d5a9f6165e356c32 # v3.7.0
+        uses: cds-snc/terraform-plan@7e4f9169732f9503a909006409d9b1de5d21e208 # v4.1.0
         with:
           directory: "infrastructure/terragrunt/env/staging/ecs"
           comment-delete: "true"
@@ -116,7 +116,7 @@ jobs:
 
       - name: Terragrunt apply ecs
         working-directory: infrastructure/terragrunt/env/staging/ecs
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       - name: Report deployment to Sentinel
         if: always()

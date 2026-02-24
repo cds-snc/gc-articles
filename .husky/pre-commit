@@ -1,3 +1,4 @@
+#!/bin/bash
 # Only staged/changed files
 files=$(git diff --name-only --cached)
 

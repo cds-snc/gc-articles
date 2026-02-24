@@ -1,4 +1,4 @@
-FROM node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e AS node
+FROM node:24-alpine@sha256:4f696fbf39f383c1e486030ba6b289a5d9af541642fc78ab197e584a113b9c03 AS node
 
 FROM wordpress:cli-php8.4@sha256:3dbf899b87712859255e8d5d622ce3ddf5d0d59989cfa500a66e138ec0ba303c
 
@@ -31,7 +31,9 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
         zsh \
         zsh-autosuggestions \
         zsh-syntax-highlighting \
-        gettext && \
+        gettext \
+        xvfb \
+        xvfb-run && \
     # Install from v3.16 alpine community repo
     apk add --no-cache --repository=https://dl-cdn.alpinelinux.org/alpine/v3.16/community/ \
         php8-xmlwriter \

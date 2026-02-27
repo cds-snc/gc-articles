@@ -2,7 +2,7 @@
 
 namespace CDS\Modules\Notify;
 
-use Http\Adapter\Guzzle6\Client;
+use Http\Adapter\Guzzle7\Client;
 use Http\Client\Exception;
 
 class NotifyClient

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import replace from 'replace-in-file';
+import { replaceInFile as replace } from 'replace-in-file';
 import YAML from 'yaml';
 import fs from 'fs'
 

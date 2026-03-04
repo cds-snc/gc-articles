@@ -7,7 +7,7 @@
     ],
     "require-dev": {
         "brain/monkey": "^2.6",
-        "php-stubs/wordpress-stubs": "^5.9",
+        "php-stubs/wordpress-stubs": "^6.7",
         "phpunit/phpunit": "^12.0",
         "pestphp/pest": "^4.0",
         "pestphp/pest-plugin-faker": "^4.0",

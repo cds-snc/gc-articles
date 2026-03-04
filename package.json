@@ -21,26 +21,26 @@
     "cy:run": "cypress run",
     "cy:open": "cypress open",
     "watch": "node ./cli/format.js",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@cypress/snapshot": "^2.1.7",
     "@prettier/plugin-php": "^0.24.0",
-    "@wordpress/env": "^10.1.0",
-    "cheerio": "^1.0.0-rc.10",
-    "cypress": "^9.5.0",
+    "@wordpress/env": "^11.0.0",
+    "cheerio": "^1.2.0",
+    "cypress": "^12.17.4",
     "cypress-wp-test-utils": "^1.0.0",
-    "cypress-xpath": "^2.0.0",
-    "husky": "8.0.3",
-    "inquirer": "^8.1.2",
+    "cypress-xpath": "^2.0.1",
+    "husky": "^9.1.7",
+    "inquirer": "^13.3.0",
     "node-notifier": "^10.0.1",
-    "prettier": "^3.0.0",
-    "replace-in-file": "^6.2.0",
-    "request-promise": "^0.4.1",
+    "prettier": "^3.8.1",
+    "replace-in-file": "^8.4.0",
+    "request-promise": "^4.2.6",
     "shelljs": "^0.10.0",
-    "showdown": "^1.9.1",
+    "showdown": "^2.1.0",
     "watch": "^1.0.2",
-    "yaml": "^1.10.2",
-    "yargs": "^17.1.1"
+    "yaml": "^2.8.2",
+    "yargs": "^18.0.0"
   }
 }

@@ -1,6 +1,4 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
+#!/bin/bash
 # Only staged/changed files
 files=$(git diff --name-only --cached)
 

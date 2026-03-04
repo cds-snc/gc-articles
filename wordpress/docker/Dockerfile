@@ -36,6 +36,7 @@ RUN npm --unsafe-perm install
 FROM wordpress:6.9.1-php8.4-fpm-alpine@sha256:c634150d39bb4ca4293bc0075c93efd0a96003b1029c94fa9ca210e64f4ca918
 
 RUN apk add --no-cache $PHPIZE_DEPS \
+    && apk upgrade --no-cache imagemagick imagemagick-webp \
     && pecl install pcov \
     && docker-php-ext-enable pcov
 

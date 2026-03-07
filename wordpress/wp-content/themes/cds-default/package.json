@@ -20,7 +20,7 @@
     "@wordpress/scripts": "^12.1.0",
     "dir-archiver": "^1.1.1",
     "node-sass": "^4.14.1",
-    "rtlcss": "^2.5.0"
+    "rtlcss": "^4.0.0"
   },
   "rtlcssConfig": {
     "options": {

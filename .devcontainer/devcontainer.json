@@ -19,5 +19,7 @@
 				"wordpresstoolbox.wordpress-toolbox"
 			]
 		}
-	}
+	},
+
+	"postCreateCommand": "npm install && cd wordpress && composer install"
 }

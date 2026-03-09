@@ -82,7 +82,7 @@
   "require-dev": {
     "pestphp/pest": "^4.0",
     "mockery/mockery": "^1.6",
-    "squizlabs/php_codesniffer": "^3.6"
+    "squizlabs/php_codesniffer": "^4.0"
   },
   "scripts": {
     "prepare-translations": [

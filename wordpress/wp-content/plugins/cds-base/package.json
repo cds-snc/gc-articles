@@ -27,8 +27,8 @@
   "devDependencies": {
     "@types/classnames": "^2.3.4",
     "@types/node": "^24.0.0",
-    "@types/react": "^18.3.28",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
     "@types/wordpress__blocks": "^15.10.0",
     "@wordpress/scripts": "^31.5.0",
     "ts-loader": "^9.5.4",

@@ -2,7 +2,7 @@
 
 Host the GC Articles WordPress site in an Amazon Elastic Container Service (ECS) Fargate cluster with the following architecture:
 
-![AWS infrastructure diagram.  Full text description follows.](docs/architecture-aws-wordpress-fargate.png)
+![AWS infrastructure diagram.  Full text description follows.](docs/architecture-aws-wordpress-fargate.svg)
 
 1. Virtual Private Cloud (VPC) with three public and three private subnets.
 1. Internet Gateway (IGW) to allow inbound/outbound communication.

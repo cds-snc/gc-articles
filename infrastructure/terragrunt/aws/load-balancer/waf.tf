@@ -1,7 +1,9 @@
 locals {
   # Rules that must be excluded from the AWSManagedRulesCommonRuleSet for WordPress to work
-  common_excluded_rules = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH", "CrossSiteScripting_BODY", "SizeRestrictions_BODY"]
-  php_excluded_rules    = ["PHPHighRiskMethodsVariables_BODY"]
+  common_excluded_rules        = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH", "CrossSiteScripting_BODY", "SizeRestrictions_BODY"]
+  php_excluded_rules           = ["PHPHighRiskMethodsVariables_BODY"]
+  rate_limit_all_requests      = 1000
+  rate_limit_mutating_requests = 100
 }
 
 #
@@ -19,8 +21,60 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
-    name     = "AWSManagedRulesCommonRuleSet"
+    name     = "GeoRestriction"
     priority = 1
+
+    action {
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {}
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {}
+      }
+    }
+
+    statement {
+      not_statement {
+        statement {
+          or_statement {
+            statement {
+              geo_match_statement {
+                country_codes = ["CA"]
+              }
+            }
+            statement {
+              byte_match_statement {
+                positional_constraint = "EXACTLY"
+                field_to_match {
+                  single_header {
+                    name = "waf-secret"
+                  }
+                }
+                search_string = var.cloudfront_waf_geo_match_secret
+                text_transformation {
+                  priority = 1
+                  type     = "NONE"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "GeoRestriction"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "AWSManagedRulesCommonRuleSet"
+    priority = 5
 
     override_action {
       dynamic "none" {
@@ -62,7 +116,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesKnownBadInputsRuleSet"
-    priority = 2
+    priority = 10
 
     override_action {
       dynamic "none" {
@@ -94,7 +148,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesLinuxRuleSet"
-    priority = 3
+    priority = 15
 
     override_action {
       dynamic "none" {
@@ -132,7 +186,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_LFI_QueryString"
-    priority = 4
+    priority = 20
 
     action {
       dynamic "block" {
@@ -185,7 +239,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesSQLiRuleSet"
-    priority = 5
+    priority = 25
 
     override_action {
       dynamic "none" {
@@ -229,7 +283,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SQLi_BODY"
-    priority = 6
+    priority = 30
 
     action {
       dynamic "block" {
@@ -325,7 +379,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SQLiExtendedPatterns_BODY"
-    priority = 7
+    priority = 35
 
     action {
       dynamic "block" {
@@ -378,7 +432,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesPHPRuleSet"
-    priority = 8
+    priority = 40
 
     override_action {
       dynamic "none" {
@@ -420,7 +474,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesWordPressRuleSet"
-    priority = 9
+    priority = 45
 
     override_action {
       dynamic "none" {
@@ -452,7 +506,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesAmazonIpReputationList"
-    priority = 10
+    priority = 50
 
     override_action {
       dynamic "none" {
@@ -484,7 +538,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SizeRestrictions_BODY"
-    priority = 11
+    priority = 55
     action {
       dynamic "block" {
         for_each = var.enable_waf == true ? [""] : []
@@ -562,7 +616,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_CrossSiteScripting_BODY"
-    priority = 12
+    priority = 60
     action {
       dynamic "block" {
         for_each = var.enable_waf == true ? [""] : []
@@ -763,7 +817,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
-    name     = "RateLimitAllRequests"
+    name     = "RateLimitAllRequestsIp"
     priority = 110
 
     action {
@@ -780,20 +834,56 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     statement {
       rate_based_statement {
-        limit              = 1500
+        limit              = local.rate_limit_all_requests
         aggregate_key_type = "IP"
       }
     }
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "RateLimitAllRequests"
+      metric_name                = "RateLimitAllRequestsIp"
       sampled_requests_enabled   = true
     }
   }
 
   rule {
-    name     = "RateLimitMutatingRequests"
+    name     = "RateLimitAllRequestsJA4"
+    priority = 115
+
+    action {
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {}
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {}
+      }
+    }
+
+    statement {
+      rate_based_statement {
+        limit              = local.rate_limit_all_requests
+        aggregate_key_type = "CUSTOM_KEYS"
+
+        custom_key {
+          ja4_fingerprint {
+            fallback_behavior = "MATCH"
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "RateLimitAllRequestsJA4"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
+    name     = "RateLimitMutatingRequestsIp"
     priority = 120
 
     action {
@@ -810,7 +900,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     statement {
       rate_based_statement {
-        limit              = 100
+        limit              = local.rate_limit_mutating_requests
         aggregate_key_type = "IP"
         scope_down_statement {
           regex_match_statement {
@@ -829,14 +919,14 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "RateLimitMutatingRequests"
+      metric_name                = "RateLimitMutatingRequestsIp"
       sampled_requests_enabled   = true
     }
   }
 
   rule {
-    name     = "GeoRestriction"
-    priority = 130
+    name     = "RateLimitMutatingRequestsJA4"
+    priority = 125
 
     action {
       dynamic "block" {
@@ -851,28 +941,25 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
 
     statement {
-      not_statement {
-        statement {
-          or_statement {
-            statement {
-              geo_match_statement {
-                country_codes = ["CA", "US"]
-              }
+      rate_based_statement {
+        limit              = local.rate_limit_mutating_requests
+        aggregate_key_type = "CUSTOM_KEYS"
+
+        custom_key {
+          ja4_fingerprint {
+            fallback_behavior = "MATCH"
+          }
+        }
+
+        scope_down_statement {
+          regex_match_statement {
+            field_to_match {
+              method {}
             }
-            statement {
-              byte_match_statement {
-                positional_constraint = "EXACTLY"
-                field_to_match {
-                  single_header {
-                    name = "waf-secret"
-                  }
-                }
-                search_string = var.cloudfront_waf_geo_match_secret
-                text_transformation {
-                  priority = 1
-                  type     = "NONE"
-                }
-              }
+            regex_string = "^(delete|patch|post|put)$"
+            text_transformation {
+              priority = 1
+              type     = "LOWERCASE"
             }
           }
         }
@@ -881,7 +968,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
     visibility_config {
       cloudwatch_metrics_enabled = true
-      metric_name                = "GeoRestriction"
+      metric_name                = "RateLimitMutatingRequestsJA4"
       sampled_requests_enabled   = true
     }
   }

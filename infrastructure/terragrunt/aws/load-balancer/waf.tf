@@ -42,7 +42,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
           or_statement {
             statement {
               geo_match_statement {
-                country_codes = ["CA"]
+                country_codes = ["CA", "US"]
               }
             }
             statement {

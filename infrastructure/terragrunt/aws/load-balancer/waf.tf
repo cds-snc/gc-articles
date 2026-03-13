@@ -978,7 +978,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 130
 
     override_action {
-      dynamic "none" {
+      dynamic "count" {
         for_each = var.enable_waf == true ? [""] : []
         content {
         }
@@ -1012,41 +1012,6 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         managed_rule_group_configs {
           aws_managed_rules_bot_control_rule_set {
             inspection_level = "COMMON"
-          }
-        }
-
-        rule_action_override {
-          name = "CategoryVerifiedScraping"
-          action_to_use {
-            block {}
-          }
-        }
-
-        rule_action_override {
-          name = "CategoryHttpLibrary"
-          action_to_use {
-            count {}
-          }
-        }
-
-        rule_action_override {
-          name = "CategoryAdvertising"
-          action_to_use {
-            block {}
-          }
-        }
-
-        rule_action_override {
-          name = "CategorySecurity"
-          action_to_use {
-            block {}
-          }
-        }
-
-        rule_action_override {
-          name = "CategorySeo"
-          action_to_use {
-            block {}
           }
         }
       }

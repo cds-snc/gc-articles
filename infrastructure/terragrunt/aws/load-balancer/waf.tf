@@ -973,6 +973,92 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
   }
 
+  rule {
+    name     = "BotControl"
+    priority = 130
+
+    override_action {
+      dynamic "none" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {
+        }
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {
+        }
+      }
+    }
+
+    statement {
+      managed_rule_group_statement {
+        name        = "AWSManagedRulesBotControlRuleSet"
+        vendor_name = "AWS"
+
+        scope_down_statement {
+          regex_match_statement {
+            field_to_match {
+              method {}
+            }
+            regex_string = "^.*/(sign-in-se-connecter|wp-admin|wp-json|wp-content).*$"
+            text_transformation {
+              priority = 1
+              type     = "LOWERCASE"
+            }
+          }
+        }
+
+        managed_rule_group_configs {
+          aws_managed_rules_bot_control_rule_set {
+            inspection_level = "COMMON"
+          }
+        }
+
+        rule_action_override {
+          name = "CategoryVerifiedScraping"
+          action_to_use {
+            block {}
+          }
+        }
+
+        rule_action_override {
+          name = "CategoryHttpLibrary"
+          action_to_use {
+            count {}
+          }
+        }
+
+        rule_action_override {
+          name = "CategoryAdvertising"
+          action_to_use {
+            block {}
+          }
+        }
+
+        rule_action_override {
+          name = "CategorySecurity"
+          action_to_use {
+            block {}
+          }
+        }
+
+        rule_action_override {
+          name = "CategorySeo"
+          action_to_use {
+            block {}
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "BotControl"
+      sampled_requests_enabled   = true
+    }
+  }
+
   visibility_config {
     cloudwatch_metrics_enabled = true
     metric_name                = "wordpress"

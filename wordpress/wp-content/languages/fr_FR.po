@@ -3856,12 +3856,12 @@ msgstr "<strong>Erreur :</strong> identifiant inconnu. Vérifiez à nouveau ou 
 
 #: wp-includes/user.php:365
 msgid "<strong>Error:</strong> Unknown email address. Check again or try your username."
-msgstr "<strong>Erreur :</strong> adresse e-mail inconnue. Vérifiez à nouveau ou essayez avec votre identifiant."
+msgstr "Nous n'avons pas pu vous connecter avec ces identifiants."
 
 #. translators: %s: User name.
 #: wp-includes/user.php:165
 msgid "<strong>Error:</strong> The username <strong>%s</strong> is not registered on this site. If you are unsure of your username, try your email address instead."
-msgstr "<strong>Erreur :</strong> l’identifiant <strong>%s</strong> n’est pas inscrit sur ce site. Si vous doutez de votre identifiant, essayez plutôt votre adresse e-mail."
+msgstr "<strong>Erreur :</strong> Nous n'avons pas pu vous connecter avec ces identifiants."
 
 #: wp-includes/class-wp-taxonomy.php:646
 msgctxt "navigation link block description"
@@ -6536,7 +6536,7 @@ msgstr "Listes des tailles d’image manquantes pour le fichier joint."
 
 #: wp-includes/user.php:246
 msgid "Unknown email address. Check again or try your username."
-msgstr "Adresse e-mail inconnue. Vérifiez l’orthographe ou essayez avec votre identifiant."
+msgstr "<strong>Erreur :</strong> Nous n'avons pas pu vous connecter avec ces identifiants."
 
 #: wp-includes/media.php:4886
 msgid "Media list"
@@ -11895,7 +11895,7 @@ msgstr "%1$s (%2$s)"
 #. translators: %s: Email address.
 #: wp-includes/user.php:262
 msgid "<strong>Error:</strong> The password you entered for the email address %s is incorrect."
-msgstr "<strong>Erreur :</strong> le mot de passe que vous avez saisi pour l’adresse e-mail %s est incorrect."
+msgstr "<strong>Erreur :</strong> Nous n'avons pas pu vous connecter avec ces identifiants."
 
 #: wp-includes/user.php:227
 msgid "<strong>Error:</strong> The email field is empty."
@@ -12350,7 +12350,7 @@ msgstr "L’identifiant normalisé (nicename) ne devrait pas dépasser les 50 ca
 #. translators: %s: User name.
 #: wp-includes/user.php:190
 msgid "<strong>Error:</strong> The password you entered for the username %s is incorrect."
-msgstr "<strong>Erreur :</strong> ce mot de passe ne correspond pas à l’identifiant %s."
+msgstr "<strong>Erreur :</strong> Nous n'avons pas pu vous connecter avec ces identifiants."
 
 #: wp-includes/class-wp-taxonomy.php:636
 msgid "Categories list"

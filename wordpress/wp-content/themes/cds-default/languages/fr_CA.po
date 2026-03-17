@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
-"POT-Creation-Date: 2023-09-25T18:01:22+00:00\n"
+"POT-Creation-Date: 2026-03-17T17:34:57+00:00\n"
 "PO-Revision-Date: 2021-09-09 12:02-0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,14 +15,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Theme Name of the theme
+#: style.css
 msgid "CDS Default"
 msgstr "Thème par défaut du SNC"
 
 #. Description of the theme
+#: style.css
 msgid "WET styled Starter Theme"
 msgstr "Thème de démarrage du style BOEW"
 
 #. Author of the theme
+#: style.css
 msgid "CDS"
 msgstr "SNC"
 
@@ -127,6 +130,7 @@ msgid "Your site is currently in maintenance mode. Only logged in users will be 
 msgstr "Votre site est en mode maintenance. Seuls les utilisateurs connectés pourront voir cette page."
 
 #: header.php:43
+#, php-format
 msgid "To make your site live <a href=\"%s\">update your site settings</a>."
 msgstr "Pour activer votre site <a href=\"%s\">modifier les paramètres de votre site</a>."
 
@@ -134,23 +138,23 @@ msgstr "Pour activer votre site <a href=\"%s\">modifier les paramètres de votre
 msgid "Skip to content"
 msgstr "Aller au contenu"
 
-#: header.php:65
+#: header.php:75
 msgid "Sign out"
 msgstr "Se déconnecter"
 
-#: header.php:67
+#: header.php:77
 msgid "Sign in"
 msgstr "Se Connecter"
 
-#: header.php:94 header.php:101 header.php:106 header.php:115
+#: header.php:104 header.php:111 header.php:116 header.php:125
 msgid "Search"
 msgstr "Rechercher"
 
-#: header.php:139 header.php:142
+#: header.php:149 header.php:152
 msgid "Menu"
 msgstr "Menu"
 
-#: header.php:141
+#: header.php:151
 msgid "Main"
 msgstr "Principal"
 
@@ -182,36 +186,37 @@ msgstr "Navigation dans les articles"
 msgid "Posts"
 msgstr "Articles"
 
-#: inc/template-functions.php:168
+#: inc/template-functions.php:156
 msgid "Breadcrumbs"
 msgstr "Fil d’Ariane"
 
-#: inc/template-functions.php:170
+#: inc/template-functions.php:158
 msgid "You are here:"
 msgstr "Vous êtes ici :"
 
-#: inc/template-functions.php:454
+#: inc/template-functions.php:447
 msgid "Toggle submenu"
 msgstr "Basculer le sous-menu"
 
-#: inc/template-functions.php:457
+#: inc/template-functions.php:450
 msgid "Top menu"
 msgstr "Menu supérieur"
 
-#: inc/template-functions.php:458
+#: inc/template-functions.php:451
 msgid "submenu"
 msgstr "Sous-menu"
 
-#: inc/template-functions.php:479
+#: inc/template-functions.php:472
 msgid "Toggle submenu for "
 msgstr "Basculer le sous-menu de "
 
-#: inc/template-functions.php:495
+#: inc/template-functions.php:488
 msgid "Date modified:"
 msgstr "Date de modification :"
 
 #. translators: %s: post author.
 #: inc/template-tags.php:44
+#, php-format
 msgctxt "post author"
 msgid "by %s"
 msgstr "par %s"
@@ -222,6 +227,7 @@ msgstr "En construction"
 
 #. translators: %s: search query.
 #: search.php:23
+#, php-format
 msgid "Search Results for: %s"
 msgstr "Résultats de la recherche : %s"
 
@@ -231,6 +237,7 @@ msgstr "Aucun résultat"
 
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content-none.php:26
+#, php-format
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr "Êtes-vous prêt à publier votre premier article? <a href=\"%1$s\">Commencez ici</a>."
 
@@ -248,10 +255,12 @@ msgstr "Pages:"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content-page.php:40
+#, php-format
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr "Modifier <span class=\"screen-reader-text\">%s</span>"
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content.php:35
+#, php-format
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr "Continuer à lire <span class=\"screen-reader-text\"> \"%s\"</span>"

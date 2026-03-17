@@ -3856,13 +3856,12 @@ msgstr "<strong>Error</strong>: Unknown username. Check again or try your email 
 
 #: wp-includes/user.php:365
 msgid "<strong>Error:</strong> Unknown email address. Check again or try your username."
-msgstr "<strong>Error</strong>: Unknown email address. Check again or try your username."
+msgstr "<strong>Error:</strong> Could not log you in with those details."
 
 #. translators: %s: User name.
 #: wp-includes/user.php:165
 msgid "<strong>Error:</strong> The username <strong>%s</strong> is not registered on this site. If you are unsure of your username, try your email address instead."
-msgstr "<strong>Error</strong>: The username <strong>%s</strong> is not registered on this site. If you are unsure of your username, try your email address instead."
-
+msgstr "<strong>Error:</strong> Could not log you in with those details."
 #: wp-includes/class-wp-taxonomy.php:646
 msgctxt "navigation link block description"
 msgid "A link to a category."
@@ -6536,7 +6535,7 @@ msgstr "List of the missing image sizes of the attachment."
 
 #: wp-includes/user.php:246
 msgid "Unknown email address. Check again or try your username."
-msgstr "Unknown email address. Check again or try your username."
+msgstr "<strong>Error:</strong> Could not log you in with those details."
 
 #: wp-includes/media.php:4886
 msgid "Media list"
@@ -11898,7 +11897,7 @@ msgstr "%1$s (%2$s)"
 #. translators: %s: Email address.
 #: wp-includes/user.php:262
 msgid "<strong>Error:</strong> The password you entered for the email address %s is incorrect."
-msgstr "<strong>Error</strong>: The password you entered for the email address %s is incorrect."
+msgstr "<strong>Error:</strong> Could not log you in with those details."
 
 #: wp-includes/user.php:227
 msgid "<strong>Error:</strong> The email field is empty."
@@ -12353,7 +12352,7 @@ msgstr "Nicename may not be longer than 50 characters."
 #. translators: %s: User name.
 #: wp-includes/user.php:190
 msgid "<strong>Error:</strong> The password you entered for the username %s is incorrect."
-msgstr "<strong>Error</strong>: The password you entered for the username %s is incorrect."
+msgstr "<strong>Error:</strong> Could not log you in with those details."
 
 #: wp-includes/class-wp-taxonomy.php:636
 msgid "Categories list"

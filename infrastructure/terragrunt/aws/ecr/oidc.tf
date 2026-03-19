@@ -1,5 +1,6 @@
 locals {
   ecr_tag_release = "gc-articles-ecr-tag-release"
+  docker_deploy   = "gc-articles-docker-deploy"
 }
 
 module "ecr_tag_release" {
@@ -8,8 +9,20 @@ module "ecr_tag_release" {
   roles = [
     {
       name      = local.ecr_tag_release
-      repo_name = "gc-articles"
+      repo_name = "cds-snc/gc-articles"
       claim     = "ref:refs/tags/v*"
+    }
+  ]
+}
+
+module "docker_deploy" {
+  source            = "github.com/cds-snc/terraform-modules//gh_oidc_role?ref=v10.11.0"
+  billing_tag_value = var.billing_tag_value
+  roles = [
+    {
+      name      = local.docker_deploy
+      repo_name = "cds-snc/gc-articles"
+      claim     = "ref:refs/heads/main"
     }
   ]
 }
@@ -22,10 +35,32 @@ resource "aws_iam_role_policy_attachment" "ecr_tag_release" {
   ]
 }
 
+resource "aws_iam_role_policy_attachment" "docker_deploy_ecr" {
+  role       = local.docker_deploy
+  policy_arn = aws_iam_policy.ecr_push.arn
+  depends_on = [
+    module.docker_deploy
+  ]
+}
+
+resource "aws_iam_role_policy_attachment" "docker_deploy_ecs" {
+  role       = local.docker_deploy
+  policy_arn = aws_iam_policy.ecs_deploy.arn
+  depends_on = [
+    module.docker_deploy
+  ]
+}
+
 resource "aws_iam_policy" "ecr_push" {
-  name   = "wordpress-ecr-push"
+  name   = "gc-articles-ecr-push"
   path   = "/"
   policy = data.aws_iam_policy_document.ecr_push.json
+}
+
+resource "aws_iam_policy" "ecs_deploy" {
+  name   = "gc-articles-ecs-deploy"
+  path   = "/"
+  policy = data.aws_iam_policy_document.ecs_deploy.json
 }
 
 data "aws_iam_policy_document" "ecr_push" {
@@ -33,14 +68,8 @@ data "aws_iam_policy_document" "ecr_push" {
     effect = "Allow"
     actions = [
       "ecr:BatchCheckLayerAvailability",
-      "ecr:BatchGetImage",
       "ecr:CompleteLayerUpload",
-      "ecr:DescribeImages",
-      "ecr:DescribeRepositories",
-      "ecr:GetDownloadUrlForLayer",
-      "ecr:GetRepositoryPolicy",
       "ecr:InitiateLayerUpload",
-      "ecr:ListImages",
       "ecr:PutImage",
       "ecr:UploadLayerPart"
     ]
@@ -55,5 +84,56 @@ data "aws_iam_policy_document" "ecr_push" {
       "ecr:GetAuthorizationToken"
     ]
     resources = ["*"]
+  }
+}
+
+data "aws_iam_policy_document" "ecs_deploy" {
+  # Task Definition Management
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecs:RegisterTaskDefinition",
+      "ecs:DescribeTaskDefinition"
+    ]
+    resources = ["*"]
+  }
+
+  # Service Update Permissions
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecs:UpdateService",
+      "ecs:DescribeServices"
+    ]
+    resources = [
+      "arn:aws:ecs:*:*:service/*/wordpress-*"
+    ]
+  }
+
+  # Cluster Read Access (required for service operations)
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecs:DescribeClusters"
+    ]
+    resources = [
+      "arn:aws:ecs:*:*:cluster/*"
+    ]
+  }
+
+  # IAM PassRole for task definitions (scoped to ECS task roles only)
+  statement {
+    effect = "Allow"
+    actions = [
+      "iam:PassRole"
+    ]
+    resources = [
+      "arn:aws:iam::*:role/*-ecs-task"
+    ]
+    condition {
+      test     = "StringEquals"
+      variable = "iam:PassedToService"
+      values   = ["ecs-tasks.amazonaws.com"]
+    }
   }
 }

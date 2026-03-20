@@ -125,7 +125,7 @@ data "aws_iam_policy_document" "ecs_deploy" {
       "iam:PassRole"
     ]
     resources = [
-      "arn:aws:iam::${var.account_id}:role/*-ecs-task"   
+      "arn:aws:iam::${var.account_id}:role/*-ecs-task"
     ]
     condition {
       test     = "StringEquals"

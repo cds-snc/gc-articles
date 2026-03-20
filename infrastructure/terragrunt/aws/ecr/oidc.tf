@@ -88,7 +88,6 @@ data "aws_iam_policy_document" "ecr_push" {
 }
 
 data "aws_iam_policy_document" "ecs_deploy" {
-  # Task Definition Management
   statement {
     effect = "Allow"
     actions = [
@@ -98,7 +97,6 @@ data "aws_iam_policy_document" "ecs_deploy" {
     resources = ["*"]
   }
 
-  # Service Update Permissions
   statement {
     effect = "Allow"
     actions = [
@@ -106,29 +104,28 @@ data "aws_iam_policy_document" "ecs_deploy" {
       "ecs:DescribeServices"
     ]
     resources = [
-      "arn:aws:ecs:*:*:service/*/wordpress-*"
+      "arn:aws:ecs:${var.region}:${var.account_id}:service/${var.ecs_cluster_name}/${var.ecs_service_name}"
     ]
   }
 
-  # Cluster Read Access (required for service operations)
   statement {
     effect = "Allow"
     actions = [
       "ecs:DescribeClusters"
     ]
     resources = [
-      "arn:aws:ecs:*:*:cluster/*"
+      # "arn:aws:ecs:${var.region}:472286471787:${var.ecs_cluster_name}/${var.ecs_service_name}"
+      "arn:aws:ecs:${var.region}:${var.account_id}:cluster/${var.ecs_cluster_name}"
     ]
   }
 
-  # IAM PassRole for task definitions (scoped to ECS task roles only)
   statement {
     effect = "Allow"
     actions = [
       "iam:PassRole"
     ]
     resources = [
-      "arn:aws:iam::*:role/*-ecs-task"
+      "arn:aws:iam::${var.account_id}:role/*-ecs-task"   
     ]
     condition {
       test     = "StringEquals"

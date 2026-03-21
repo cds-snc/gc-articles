@@ -48,8 +48,6 @@ data "template_file" "wordpress_container_definition" {
   vars = {
     ENABLE_EFS = var.enable_efs
 
-    LIST_MANAGER_ENDPOINT        = aws_secretsmanager_secret_version.list_manager_endpoint.arn
-    DEFAULT_LIST_MANAGER_API_KEY = aws_secretsmanager_secret_version.default_list_manager_api_key.arn
     DEFAULT_NOTIFY_API_KEY       = aws_secretsmanager_secret_version.default_notify_api_key.arn
     ENCRYPTION_KEY               = aws_secretsmanager_secret_version.encryption_key.arn
     S3_UPLOADS_BUCKET            = aws_secretsmanager_secret_version.s3_uploads_bucket.arn

@@ -4,7 +4,6 @@ namespace CDS\Modules\Forms;
 
 use CDS\Modules\Forms\RequestSite\Setup as SetupRequestSiteForm;
 use CDS\Modules\Forms\Contact\Setup as SetupContactForm;
-use CDS\Modules\Forms\Subscribe\Setup as SetupSubscribeForm;
 
 class Setup
 {
@@ -17,7 +16,6 @@ class Setup
     {
         new SetupRequestSiteForm();
         new SetupContactForm();
-        SetupSubscribeForm::register();
 
         add_action('wp_enqueue_scripts', [$this, 'enqueue']);
     }

@@ -894,7 +894,7 @@
         },
         {
             "name": "illuminate/encryption",
-            "version": "v12.54.1",
+            "version": "v12.55.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/encryption.git",

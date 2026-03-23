@@ -7,6 +7,34 @@
     {
       "type": "package",
       "package": {
+        "name": "paquettg/php-html-parser",
+        "version": "3.1.1",
+        "dist": {
+          "type": "zip",
+          "url": "https://api.github.com/repos/paquettg/php-html-parser/zipball/4e01a438ad5961cc2d7427eb9798d213c8a12629",
+          "reference": "4e01a438ad5961cc2d7427eb9798d213c8a12629"
+        },
+        "autoload": {
+          "psr-4": {
+            "PHPHtmlParser\\": "src/PHPHtmlParser"
+          }
+        },
+        "require": {
+          "php": ">=7.2",
+          "ext-mbstring": "*",
+          "ext-zlib": "*",
+          "ext-curl": "*",
+          "paquettg/string-encode": "~1.0.0",
+          "php-http/httplug": "^2.1",
+          "guzzlehttp/guzzle": "^7.0",
+          "guzzlehttp/psr7": "^1.6 || ^2.0",
+          "myclabs/php-enum": "^1.7"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
         "name": "wpml/sitepress-multilingual-cms",
         "version": "4.6.13",
         "type": "wordpress-plugin",
@@ -74,6 +102,7 @@
     "wpackagist-plugin/wp-rest-api-v2-menus": "^0.12",
     "digitalcube/c3-cloudfront-clear-cache": "dev-master",
     "shawnhooper/delete-orphaned-multisite-tables": "1.0",
+    "guzzlehttp/psr7": "^2.4.5",
     "league/html-to-markdown": "^5.1",
     "wpackagist-plugin/gutenberg-custom-fields": "^1.5",
     "wpackagist-plugin/jwt-authentication-for-wp-rest-api": "^1.4",

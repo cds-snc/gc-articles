@@ -1,28 +1,31 @@
-# Copyright (C) 2023 CDS
-# This file is distributed under the .
+# Copyright (C) 2026 CDS
+# This file is distributed under the same license as the CDS Default theme.
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS Default 3.11.5\n"
+"Project-Id-Version: CDS Default 4.6.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-default\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-09-25T18:01:22+00:00\n"
+"POT-Creation-Date: 2026-03-17T17:48:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: cds-snc\n"
 
 #. Theme Name of the theme
+#: style.css
 msgid "CDS Default"
 msgstr ""
 
 #. Description of the theme
+#: style.css
 msgid "WET styled Starter Theme"
 msgstr ""
 
 #. Author of the theme
+#: style.css
 msgid "CDS"
 msgstr ""
 
@@ -127,6 +130,7 @@ msgid "Your site is currently in maintenance mode. Only logged in users will be 
 msgstr ""
 
 #: header.php:43
+#, php-format
 msgid "To make your site live <a href=\"%s\">update your site settings</a>."
 msgstr ""
 
@@ -134,27 +138,27 @@ msgstr ""
 msgid "Skip to content"
 msgstr ""
 
-#: header.php:65
+#: header.php:75
 msgid "Sign out"
 msgstr ""
 
-#: header.php:67
+#: header.php:77
 msgid "Sign in"
 msgstr ""
 
-#: header.php:94
-#: header.php:101
-#: header.php:106
-#: header.php:115
+#: header.php:104
+#: header.php:111
+#: header.php:116
+#: header.php:125
 msgid "Search"
 msgstr ""
 
-#: header.php:139
-#: header.php:142
+#: header.php:149
+#: header.php:152
 msgid "Menu"
 msgstr ""
 
-#: header.php:141
+#: header.php:151
 msgid "Main"
 msgstr ""
 
@@ -186,36 +190,37 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: inc/template-functions.php:168
+#: inc/template-functions.php:156
 msgid "Breadcrumbs"
 msgstr ""
 
-#: inc/template-functions.php:170
+#: inc/template-functions.php:158
 msgid "You are here:"
 msgstr ""
 
-#: inc/template-functions.php:454
+#: inc/template-functions.php:447
 msgid "Toggle submenu"
 msgstr ""
 
-#: inc/template-functions.php:457
+#: inc/template-functions.php:450
 msgid "Top menu"
 msgstr ""
 
-#: inc/template-functions.php:458
+#: inc/template-functions.php:451
 msgid "submenu"
 msgstr ""
 
-#: inc/template-functions.php:479
+#: inc/template-functions.php:472
 msgid "Toggle submenu for "
 msgstr ""
 
-#: inc/template-functions.php:495
+#: inc/template-functions.php:488
 msgid "Date modified:"
 msgstr ""
 
 #. translators: %s: post author.
 #: inc/template-tags.php:44
+#, php-format
 msgctxt "post author"
 msgid "by %s"
 msgstr ""
@@ -226,6 +231,7 @@ msgstr ""
 
 #. translators: %s: search query.
 #: search.php:23
+#, php-format
 msgid "Search Results for: %s"
 msgstr ""
 
@@ -235,6 +241,7 @@ msgstr ""
 
 #. translators: 1: link to WP admin new post page.
 #: template-parts/content-none.php:26
+#, php-format
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
 msgstr ""
 
@@ -252,10 +259,12 @@ msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content-page.php:40
+#, php-format
 msgid "Edit <span class=\"screen-reader-text\">%s</span>"
 msgstr ""
 
 #. translators: %s: Name of current post. Only visible to screen readers
 #: template-parts/content.php:35
+#, php-format
 msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
 msgstr ""

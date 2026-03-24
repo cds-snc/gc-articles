@@ -50,18 +50,6 @@ variable "efs_security_group_id" {
   type = string
 }
 
-variable "list_manager_endpoint" {
-  description = "Platform ListManager API endpoint"
-  type        = string
-  sensitive   = true
-}
-
-variable "default_list_manager_api_key" {
-  description = "API key used for Platform ListManager request authentication"
-  type        = string
-  sensitive   = true
-}
-
 variable "default_notify_api_key" {
   description = "Default Notify API key used before a site has one configured"
   type        = string

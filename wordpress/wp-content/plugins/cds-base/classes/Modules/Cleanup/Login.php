@@ -20,6 +20,7 @@ class Login
         add_action('admin_page_access_denied', [$this, 'redirectToNewestBlog'], 98);
 
         add_filter('login_url', [$this, 'loginUrl'], 15, 3);
+        add_filter('login_errors', [$this, 'loginErrorMessage']);
     }
 
     public function redirectToNewestBlog(): void
@@ -158,6 +159,11 @@ class Login
     public function loginFailed($username): void
     {
         error_log("LOGIN FAILED: user $username: authentication failure for \"" . admin_url() . "\"");
+    }
+
+    public function loginErrorMessage(): string
+    {
+        return __('<strong>Error:</strong> Could not log you in with those details.', 'cds-snc');
     }
 
     public function customLoginTitle($login_title)

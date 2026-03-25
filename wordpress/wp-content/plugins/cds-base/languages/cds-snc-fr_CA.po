@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CDS-SNC Base 1.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
-"POT-Creation-Date: 2026-03-17T17:34:57+00:00\n"
+"POT-Creation-Date: 2026-03-25T00:05:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,17 +39,8 @@ msgstr "SNC-CDS"
 msgid "Read more"
 msgstr "En savoir plus"
 
-#: classes/Modules/BlocksPHP/BlocksPHP.php:36
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:25
-msgid "Enter your email:"
-msgstr "Entrer une adresse courriel :"
-
-#: classes/Modules/BlocksPHP/BlocksPHP.php:40
-msgid "Subscribe:"
-msgstr "S'abonner:"
-
 #: classes/Modules/Cleanup/AdminBar.php:46
-#: classes/Modules/Cleanup/Login.php:165
+#: classes/Modules/Cleanup/Login.php:171
 #: classes/Modules/Releases/Releases.php:83
 msgid "GC Articles"
 msgstr "Articles GC"
@@ -89,9 +80,13 @@ msgstr "L’adresse courriel de l’administrateur <strong>doit correspondre</st
 msgid "or else a new Site won’t be created"
 msgstr "sinon le site ne peut être créé."
 
-#: classes/Modules/Cleanup/Login.php:144
+#: classes/Modules/Cleanup/Login.php:145
 msgid "Canadian Digital Service"
 msgstr "Service numérique canadien"
+
+#: classes/Modules/Cleanup/Login.php:166
+msgid "<strong>Error:</strong> Could not log you in with those details."
+msgstr "<strong>Erreur :</strong> Nous n'avons pas pu vous connecter avec ces identifiants."
 
 #: classes/Modules/Cleanup/Menus.php:158
 msgid "Notify API Settings"
@@ -230,7 +225,6 @@ msgstr "Suivant"
 
 #: classes/Modules/Forms/Contact/Setup.php:51
 #: classes/Modules/Forms/RequestSite/Setup.php:64
-#: classes/Modules/Forms/Subscribe/Subscribe.php:100
 #: classes/Modules/Forms/Utils.php:161
 msgid "Please complete the required field(s) to continue"
 msgstr "Veuillez remplir le champ obligatoire pour continuer"
@@ -256,10 +250,7 @@ msgstr "Erreur du client ZenDesk"
 msgid "Success"
 msgstr "Opération réussie"
 
-#: classes/Modules/Forms/Messenger.php:110
-#: classes/Modules/Forms/Subscribe/Subscribe.php:46
-#: classes/Modules/Forms/Subscribe/Subscribe.php:50
-#: classes/Modules/Forms/Subscribe/Subscribe.php:86 build/index.js:1609
+#: classes/Modules/Forms/Messenger.php:110 build/index.js:1609
 #: build/index.js:915
 msgid "Internal server error"
 msgstr "Erreur interne du serveur"
@@ -392,39 +383,6 @@ msgstr "Aucun nom spécifié"
 #: classes/Modules/Forms/RequestSite/Setup.php:96
 msgid "Request a site:"
 msgstr "Demander un site:"
-
-#: classes/Modules/Forms/Subscribe/Subscribe.php:81
-msgid "Thanks for subscribing"
-msgstr "Merci de vous abonner"
-
-#: classes/Modules/Forms/Subscribe/Subscribe.php:111
-msgid "Unknown subscription"
-msgstr "Abonnement inconnu"
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:26
-msgid "Subscribe"
-msgstr "S’abonner"
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:48
-msgid "Notify API key"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:49
-msgid "Subscription template ID"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:54
-#, php-format
-msgid "You must configure your %s. Visit <a href=\"%s\">%s</a>."
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:58
-msgid "You must select a list from '<strong>Block</strong>' settings 👉"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:100
-msgid "Privacy Policy"
-msgstr "Confidentialité"
 
 #: classes/Modules/Forms/Utils.php:13
 msgid "400 Bad Request"
@@ -900,31 +858,6 @@ msgstr "Bienvenue"
 msgid "Default"
 msgstr "par défaut"
 
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:22
-msgid "Subscribe form settings"
-msgstr "Paramètres du formulaire d’abonnement"
-
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:24
-msgid "Email field label"
-msgstr "Étiquette du champ adresse courriel"
-
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:31
-msgid "Subscribe button label"
-msgstr "Étiquette du bouton S’abonner"
-
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:38
-msgid "List"
-msgstr "Liste"
-
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:46
-msgid "Privacy policy link"
-msgstr "Lien de confidentialité"
-
 #: classes/Modules/BlocksPHP/build/contact/block.json
 #: classes/Modules/BlocksPHP/src/contact/block.json
 msgctxt "block title"
@@ -957,17 +890,46 @@ msgctxt "block description"
 msgid "Internal Site Counter for GC Articles"
 msgstr ""
 
-#: classes/Modules/BlocksPHP/build/subscribe/block.json
-#: classes/Modules/BlocksPHP/src/subscribe/block.json
-msgctxt "block title"
-msgid "Subscribe"
-msgstr "S’abonner"
+#~ msgid "Enter your email:"
+#~ msgstr "Entrer une adresse courriel :"
 
-#: classes/Modules/BlocksPHP/build/subscribe/block.json
-#: classes/Modules/BlocksPHP/src/subscribe/block.json
-msgctxt "block description"
-msgid "List Mananger subscription"
-msgstr "Abonnement au gestionnaire de liste"
+#~ msgid "Subscribe:"
+#~ msgstr "S'abonner:"
+
+#~ msgid "Thanks for subscribing"
+#~ msgstr "Merci de vous abonner"
+
+#~ msgid "Unknown subscription"
+#~ msgstr "Abonnement inconnu"
+
+#~ msgid "Subscribe"
+#~ msgstr "S’abonner"
+
+#~ msgid "Privacy Policy"
+#~ msgstr "Confidentialité"
+
+#~ msgid "Subscribe form settings"
+#~ msgstr "Paramètres du formulaire d’abonnement"
+
+#~ msgid "Email field label"
+#~ msgstr "Étiquette du champ adresse courriel"
+
+#~ msgid "Subscribe button label"
+#~ msgstr "Étiquette du bouton S’abonner"
+
+#~ msgid "List"
+#~ msgstr "Liste"
+
+#~ msgid "Privacy policy link"
+#~ msgstr "Lien de confidentialité"
+
+#~ msgctxt "block title"
+#~ msgid "Subscribe"
+#~ msgstr "S’abonner"
+
+#~ msgctxt "block description"
+#~ msgid "List Mananger subscription"
+#~ msgstr "Abonnement au gestionnaire de liste"
 
 #~ msgid "Are you sure you want to publish?"
 #~ msgstr "Êtes-vous sûr de vouloir publier"

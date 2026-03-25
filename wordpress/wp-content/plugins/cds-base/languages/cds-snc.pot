@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the CDS-SNC Base plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: CDS-SNC Base 4.6.2\n"
+"Project-Id-Version: CDS-SNC Base 4.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/cds-base\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-17T17:48:02+00:00\n"
+"POT-Creation-Date: 2026-03-25T00:05:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: cds-snc\n"
@@ -38,17 +38,8 @@ msgstr ""
 msgid "Read more"
 msgstr ""
 
-#: classes/Modules/BlocksPHP/BlocksPHP.php:36
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:25
-msgid "Enter your email:"
-msgstr ""
-
-#: classes/Modules/BlocksPHP/BlocksPHP.php:40
-msgid "Subscribe:"
-msgstr ""
-
 #: classes/Modules/Cleanup/AdminBar.php:46
-#: classes/Modules/Cleanup/Login.php:165
+#: classes/Modules/Cleanup/Login.php:171
 #: classes/Modules/Releases/Releases.php:83
 msgid "GC Articles"
 msgstr ""
@@ -90,8 +81,12 @@ msgstr ""
 msgid "or else a new Site won’t be created"
 msgstr ""
 
-#: classes/Modules/Cleanup/Login.php:144
+#: classes/Modules/Cleanup/Login.php:145
 msgid "Canadian Digital Service"
+msgstr ""
+
+#: classes/Modules/Cleanup/Login.php:166
+msgid "<strong>Error:</strong> Could not log you in with those details."
 msgstr ""
 
 #: classes/Modules/Cleanup/Menus.php:158
@@ -232,7 +227,6 @@ msgstr ""
 
 #: classes/Modules/Forms/Contact/Setup.php:51
 #: classes/Modules/Forms/RequestSite/Setup.php:64
-#: classes/Modules/Forms/Subscribe/Subscribe.php:100
 #: classes/Modules/Forms/Utils.php:161
 msgid "Please complete the required field(s) to continue"
 msgstr ""
@@ -261,9 +255,6 @@ msgid "Success"
 msgstr ""
 
 #: classes/Modules/Forms/Messenger.php:110
-#: classes/Modules/Forms/Subscribe/Subscribe.php:46
-#: classes/Modules/Forms/Subscribe/Subscribe.php:50
-#: classes/Modules/Forms/Subscribe/Subscribe.php:86
 #: build/index.js:1609
 #: build/index.js:915
 msgid "Internal server error"
@@ -396,39 +387,6 @@ msgstr ""
 
 #: classes/Modules/Forms/RequestSite/Setup.php:96
 msgid "Request a site:"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/Subscribe.php:81
-msgid "Thanks for subscribing"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/Subscribe.php:111
-msgid "Unknown subscription"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:26
-msgid "Subscribe"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:48
-msgid "Notify API key"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:49
-msgid "Subscription template ID"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:54
-#, php-format
-msgid "You must configure your %s. Visit <a href=\"%s\">%s</a>."
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:58
-msgid "You must select a list from '<strong>Block</strong>' settings 👉"
-msgstr ""
-
-#: classes/Modules/Forms/Subscribe/SubscriptionForm.php:100
-msgid "Privacy Policy"
 msgstr ""
 
 #: classes/Modules/Forms/Utils.php:13
@@ -941,31 +899,6 @@ msgstr ""
 msgid "Default"
 msgstr ""
 
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:22
-msgid "Subscribe form settings"
-msgstr ""
-
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:24
-msgid "Email field label"
-msgstr ""
-
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:31
-msgid "Subscribe button label"
-msgstr ""
-
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:38
-msgid "List"
-msgstr ""
-
-#: classes/Modules/BlocksPHP/build/subscribe/index.js:1
-#: classes/Modules/BlocksPHP/src/subscribe/edit.js:46
-msgid "Privacy policy link"
-msgstr ""
-
 #: classes/Modules/BlocksPHP/build/contact/block.json
 #: classes/Modules/BlocksPHP/src/contact/block.json
 msgctxt "block title"
@@ -996,16 +929,4 @@ msgstr ""
 #: classes/Modules/BlocksPHP/src/site-counter/block.json
 msgctxt "block description"
 msgid "Internal Site Counter for GC Articles"
-msgstr ""
-
-#: classes/Modules/BlocksPHP/build/subscribe/block.json
-#: classes/Modules/BlocksPHP/src/subscribe/block.json
-msgctxt "block title"
-msgid "Subscribe"
-msgstr ""
-
-#: classes/Modules/BlocksPHP/build/subscribe/block.json
-#: classes/Modules/BlocksPHP/src/subscribe/block.json
-msgctxt "block description"
-msgid "List Mananger subscription"
 msgstr ""

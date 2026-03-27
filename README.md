@@ -226,7 +226,7 @@ All of these files should be committed along with the rest of your PR.
 
 ## Tests
 
-We are using Cypress to test workflows, [Pest](https://pestphp.com/) for PHP-language unit tests, and [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) for PHP-language linting.
+We are using Cypress to test workflows, [Pest](https://pestphp.com/) for PHP-language unit tests, and [PHP_CodeSniffer](https://github.com/PHPCSStandards/PHP_CodeSniffer) for PHP-language linting.
 
 ### Cypress
 

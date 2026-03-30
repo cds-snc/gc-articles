@@ -46,7 +46,7 @@ jobs:
           echo "dir=$(composer config cache-files-dir)" >> "$GITHUB_OUTPUT"
 
       - name: Cache Composer
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
@@ -60,7 +60,7 @@ jobs:
           composer check-platform-reqs
 
       - name: Cache NPM
-        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
+        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
         with:
           path: |
             ~/.npm
@@ -70,7 +70,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Cypress and NPM install and build
-        uses: cypress-io/github-action@bc22e01685c56e89e7813fd8e26f33dc47f87e15 # v7.1.5
+        uses: cypress-io/github-action@4c06c48f3ffea349b7189aa06dfcda47a9fa7b92 # v7.1.8
         with:
           runTests: false
 
@@ -80,7 +80,7 @@ jobs:
           npm run wp-env:test:setup
 
       - name: Cypress run
-        uses: cypress-io/github-action@bc22e01685c56e89e7813fd8e26f33dc47f87e15 # v7.1.5
+        uses: cypress-io/github-action@4c06c48f3ffea349b7189aa06dfcda47a9fa7b92 # v7.1.8
         with:
           install: false
         env:

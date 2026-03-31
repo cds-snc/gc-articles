@@ -75,8 +75,7 @@ jobs:
           TERRAGRUNT_CHECKSUM: f474eb10af0251465987c4af1824acd60776511fff755577d4a17ffeae6497d5
           TF_SUMMARIZE_VERSION: 0.3.5
           TF_SUMMARIZE_CHECKSUM: e0ea7b514f7a57a85e5e4594acdccbf2dce3af7e00fe90580b2ad9cc1288d317
-          TRUFFLEHOG_VERSION: 3.90.12
-          TRUFFLEHOG_CHECKSUM: 318fd1e8af68b54f4465437208582003a5948293ea401c5c67bb55f17e4e2102
+          TRUFFLEHOG_VERSION: NONE
 
       - name: Configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 # v6.0.0

@@ -20,7 +20,7 @@ env:
 
 permissions:
   id-token: write
-  contents: read
+  contents: write
 
 jobs:
   build-push-container:

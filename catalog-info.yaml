@@ -9,6 +9,5 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: group:cds-snc/platform-core
-  system: websites
+  owner: group:cds-snc/platform-core-services
 

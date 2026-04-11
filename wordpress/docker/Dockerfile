@@ -33,7 +33,7 @@ RUN npm --unsafe-perm install
 # when updating the Wordpress version, update the version in the files:
 #     - ~/wordpress/docker/local.Dockerfile
 #     - ~/github/workflows/ci.yml
-FROM wordpress:6.9.4-php8.4-fpm-alpine@sha256:c423d249644d7b08de73491737e4fabd3d4df57a99c7b4c873586a195e09844a
+FROM wordpress:6.9.4-php8.4-fpm-alpine@sha256:6211719b19ca23236db0b6d4f10fea83aa5d8d65dc45c61cac1739b5e878c212
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     && apk upgrade --no-cache imagemagick imagemagick-webp \

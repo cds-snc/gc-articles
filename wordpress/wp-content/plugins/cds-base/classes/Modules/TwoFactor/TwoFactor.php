@@ -15,6 +15,9 @@ class TwoFactor
         add_filter('two_factor_providers', [$this, 'configureProviders']);
         add_action('plugins_loaded', [$this, 'loadTwoFactorCore']);
         add_action('wp_dashboard_setup', [$this, 'dashboardWidget']);
+        add_action('wp_login', [$this, 'redirectIfNo2FA'], 10, 2);
+        add_action('admin_init', [$this, 'enforce2FA']);
+        add_action('admin_notices', [$this, 'twoFactorRequiredNotice']);
     }
 
     public function loadTwoFactorCore(): void
@@ -58,5 +61,71 @@ class TwoFactor
         $panel .= '</div>';
 
         echo $panel;
+    }
+
+    /**
+     * Redirect the user to their profile page immediately after login if they
+     * have not configured two-factor authentication.
+     * Excludes super admins from this requirement.
+     */
+    public function redirectIfNo2FA(string $username, \WP_User $user): void
+    {
+        if (!class_exists('Two_Factor_Core_Alias')) {
+            return;
+        }
+
+        if (!Two_Factor_Core_Alias::is_user_using_two_factor($user)) {
+            wp_safe_redirect(admin_url('profile.php?2fa_required=1') . '#two-factor-options');
+            exit;
+        }
+    }
+
+    /**
+     * On every admin page load, redirect users who have not yet configured
+     * two-factor authentication back to their profile page.
+     * Skipped for AJAX, cron requests, and super admins.
+     */
+    public function enforce2FA(): void
+    {
+        if (wp_doing_ajax() || wp_doing_cron()) {
+            return;
+        }
+
+        if (!class_exists('Two_Factor_Core_Alias')) {
+            return;
+        }
+
+        $user = wp_get_current_user();
+        if (!$user->exists()) {
+            return;
+        }
+
+        if (Two_Factor_Core_Alias::is_user_using_two_factor($user)) {
+            return;
+        }
+
+        // Allow profile.php so the user can actually configure 2FA.
+        $page = $GLOBALS['pagenow'] ?? '';
+        if ($page === 'profile.php') {
+            return;
+        }
+
+        wp_safe_redirect(admin_url('profile.php?2fa_required=1') . '#two-factor-options');
+        exit;
+    }
+
+    /**
+     * Display an admin notice on the profile page explaining that two-factor
+     * authentication must be configured before accessing the site.
+     */
+    public function twoFactorRequiredNotice(): void
+    {
+        if (!isset($_GET['2fa_required'])) {
+            return;
+        }
+
+        echo '<div class="notice notice-error"><p>';
+        echo esc_html__('You must configure two-factor authentication before you can access GC Articles.', 'cds-snc');
+        echo '</p></div>';
     }
 }

@@ -16,12 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Audit DNS requests
-        uses: cds-snc/dns-proxy-action@2aee21aebfddefac5839497648a36a9f84342d8b
+        uses: cds-snc/dns-proxy-action@9ad793100229573be3f5ba78cc69ec523f2c8b7e # v1.1.0
         env:
           DNS_PROXY_FORWARDTOSENTINEL: "true"
-          DNS_PROXY_LOGANALYTICSWORKSPACEID: ${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}
-          DNS_PROXY_LOGANALYTICSSHAREDKEY: ${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}
+          DNS_PROXY_LOGANALYTICSWORKSPACEID: "${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}"
+          DNS_PROXY_LOGANALYTICSSHAREDKEY: "${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}"
+          DNS_PROXY_SAFELIST: "${{ vars.DNS_PROXY_SAFELIST }}"
+          DNS_PROXY_WILDCARDGREEDY: "true"
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
       - name: Configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
         with:

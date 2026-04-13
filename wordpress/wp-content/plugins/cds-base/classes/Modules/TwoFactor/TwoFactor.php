@@ -63,11 +63,6 @@ class TwoFactor
         echo $panel;
     }
 
-    /**
-     * Redirect the user to their profile page immediately after login if they
-     * have not configured two-factor authentication.
-     * Excludes super admins from this requirement.
-     */
     public function redirectIfNo2FA(string $username, \WP_User $user): void
     {
         if (!class_exists('Two_Factor_Core_Alias')) {
@@ -80,11 +75,6 @@ class TwoFactor
         }
     }
 
-    /**
-     * On every admin page load, redirect users who have not yet configured
-     * two-factor authentication back to their profile page.
-     * Skipped for AJAX, cron requests, and super admins.
-     */
     public function enforce2FA(): void
     {
         if (wp_doing_ajax() || wp_doing_cron()) {
@@ -104,7 +94,7 @@ class TwoFactor
             return;
         }
 
-        // Allow profile.php so the user can actually configure 2FA.
+        // Allow profile.php, user is directed to configure 2FA.
         $page = $GLOBALS['pagenow'] ?? '';
         if ($page === 'profile.php') {
             return;
@@ -114,10 +104,6 @@ class TwoFactor
         exit;
     }
 
-    /**
-     * Display an admin notice on the profile page explaining that two-factor
-     * authentication must be configured before accessing the site.
-     */
     public function twoFactorRequiredNotice(): void
     {
         if (!isset($_GET['2fa_required'])) {

@@ -46,7 +46,7 @@ jobs:
       - name: Configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@8df5847569e6427dd6c4fb1cf565c83acfa8afa7 # v6.0.0
         env:
-          ROLE_NAME: ${{ github.ref == 'refs/heads/main' && 'gc-articles-apply' || 'gc-articles-ecr-tag-release' }}
+          ROLE_NAME: ${{ github.ref == 'refs/heads/main' && 'gc-articles-docker-deploy' || 'gc-articles-ecr-tag-release' }}
         with:
           role-to-assume: arn:aws:iam::729164266357:role/${{ env.ROLE_NAME }}
           role-session-name: ECRPush

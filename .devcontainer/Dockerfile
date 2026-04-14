@@ -45,10 +45,13 @@ RUN apk add --update --virtual mod-deps autoconf alpine-sdk \
 # Install Composer with this method instead of using `apk add composer` because
 # the version of Composer in the Alpine package repository also installs a secondary version 
 # of PHP that is not compatible with the version of PHP installed in the container.
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
-     php composer-setup.php && \
-     php -r "unlink('composer-setup.php');" && \
-     mv composer.phar /usr/local/bin/composer;    
+RUN for i in $(seq 1 5); do \
+        php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+        break || sleep 10; \
+    done && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');" && \
+    mv composer.phar /usr/local/bin/composer;    
 
 RUN pecl install pcov  \
     && docker-php-ext-enable pcov

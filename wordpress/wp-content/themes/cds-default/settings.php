@@ -43,9 +43,6 @@ function cds_default_settings_init()
         'cds_default_github_option_group',
         'GITHUB_REPOSITORY_URL',
         function ($input) {
-            if ($input == '') {
-                return get_option('GITHUB_REPOSITORY_URL');
-            }
             return sanitize_text_field($input);
         }
     );

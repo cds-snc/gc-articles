@@ -5,6 +5,8 @@ declare(strict_types=1);
 require_once __DIR__ . '/../../../vendor/autoload.php';
 require_once __DIR__ . '/inc/template-functions.php';
 require_once __DIR__ . '/inc/template-filters.php';
+require_once __DIR__ . '/inc/webhook.php';
+require_once __DIR__ . '/settings.php';
 
 /**
  * cds-default functions and definitions

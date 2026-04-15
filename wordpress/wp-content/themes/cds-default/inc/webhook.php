@@ -1,6 +1,6 @@
 <?php
 
-function onSavePost($post_ID, $post)
+function cds_default_onSavePost($post_ID, $post)
 {
     if ($post->post_status === "publish") {
         try {
@@ -43,4 +43,4 @@ function onSavePost($post_ID, $post)
     }
 }
 
-add_action('save_post', 'onSavePost', 10, 2);
+add_action('save_post', 'cds_default_onSavePost', 10, 2);

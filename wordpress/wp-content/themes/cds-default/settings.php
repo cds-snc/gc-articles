@@ -3,11 +3,6 @@
 use CDS\Modules\EncryptedOption\EncryptedOption;
 use CDS\Utils;
 
-require_once __DIR__ . '/../../../vendor/autoload.php';
-
-/**
- * Setup EncryptedOption for cds-default theme.
- */
 function cds_default_get_encrypted_key()
 {
     if ((Utils::isWpEnv()) || (defined('WP_CLI') && WP_CLI)) {
@@ -32,7 +27,6 @@ if (! Utils::isWpEnv()) {
 
 function cds_default_settings_init()
 {
-    // Register GitHub Auth Token setting
     register_setting(
         'cds_default_github_option_group',
         'GITHUB_AUTH_TOKEN',
@@ -59,7 +53,7 @@ function cds_default_settings_init()
     // Add settings section
     add_settings_section(
         'cds_default_github_section',
-        __('GitHub Webhook Integration', 'cds-snc'),
+        __('GitHub integration', 'cds-snc'),
         'cds_default_settings_section_callback',
         'cds-default-settings-admin'
     );

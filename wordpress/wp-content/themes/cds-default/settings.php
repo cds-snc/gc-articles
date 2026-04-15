@@ -50,7 +50,6 @@ function cds_default_settings_init()
         }
     );
 
-    // Add settings section
     add_settings_section(
         'cds_default_github_section',
         __('GitHub integration', 'cds-snc'),
@@ -58,7 +57,6 @@ function cds_default_settings_init()
         'cds-default-settings-admin'
     );
 
-    // Add GitHub Token field
     add_settings_field(
         'github_auth_token',
         __('GitHub Auth Token', 'cds-snc'),
@@ -68,7 +66,7 @@ function cds_default_settings_init()
         ['label_for' => 'github_auth_token']
     );
 
-    // Add Repository URL field
+    // Repository URL field
     add_settings_field(
         'github_repository_url',
         __('GitHub Repository', 'cds-snc'),

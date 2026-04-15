@@ -121,7 +121,6 @@ function cds_default_auth_token_callback($args)
 function cds_default_repository_callback($args)
 {
     $current_repo = get_option('GITHUB_REPOSITORY_URL', 'cds-snc/cds-website-pr-bot');
-    
     printf(
         '<input class="regular-text" type="text" name="GITHUB_REPOSITORY_URL" id="github_repository_url" value="%s" placeholder="owner/repository-name">',
         esc_attr($current_repo)

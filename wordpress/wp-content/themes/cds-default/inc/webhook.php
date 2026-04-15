@@ -7,7 +7,6 @@ function onSavePost($post_ID, $post)
             // Get configurable repository URL
             $repo_url = get_option('GITHUB_REPOSITORY_URL', 'cds-snc/cds-website-pr-bot');
             $url = "https://api.github.com/repos/{$repo_url}/dispatches";
-            
             $token = get_option('GITHUB_AUTH_TOKEN');
 
             if (empty($token)) {

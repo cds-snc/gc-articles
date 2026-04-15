@@ -44,7 +44,7 @@ function cds_default_settings_init()
         'GITHUB_REPOSITORY_URL',
         function ($input) {
             if ($input == '') {
-                return get_option('GITHUB_REPOSITORY_URL', 'cds-snc/cds-website-pr-bot');
+                return get_option('GITHUB_REPOSITORY_URL');
             }
             return sanitize_text_field($input);
         }

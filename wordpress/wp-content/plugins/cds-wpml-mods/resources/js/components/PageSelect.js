@@ -122,7 +122,7 @@ export const PageSelect = () => {
 
                 // if post has a translated_post_id, set the page to that one
                 if(post.translated_post_id) {
-                    setPage(_pages.find(p => p.value === post.translated_post_id))
+                    setPage(_pages.find(p => p.value === post.translated_post_id) || emptyPage)
                 }
             }
 

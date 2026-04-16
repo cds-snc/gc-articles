@@ -15,9 +15,12 @@ class TwoFactor
         add_filter('two_factor_providers', [$this, 'configureProviders']);
         add_action('plugins_loaded', [$this, 'loadTwoFactorCore']);
         add_action('wp_dashboard_setup', [$this, 'dashboardWidget']);
-        add_action('wp_login', [$this, 'redirectIfNo2FA'], 10, 2);
-        add_action('admin_init', [$this, 'enforce2FA']);
-        add_action('admin_notices', [$this, 'twoFactorRequiredNotice']);
+
+        if (wp_get_environment_type() === 'production' || wp_get_environment_type() === 'staging') {
+            add_action('wp_login', [$this, 'redirectIfNo2FA'], 10, 2);
+            add_action('admin_init', [$this, 'enforce2FA']);
+            add_action('admin_notices', [$this, 'twoFactorRequiredNotice']);
+        }
     }
 
     public function loadTwoFactorCore(): void

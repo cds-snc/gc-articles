@@ -14,7 +14,11 @@
     "WORDPRESS_DEBUG_DISPLAY": 0,
     "WP_DEBUG_DISPLAY": 0
   },
-  "testsConfig": {
-    "DISABLE_2FA_ENFORCEMENT": true
+  "env": {
+    "tests": {
+      "config": {
+        "DISABLE_2FA_ENFORCEMENT": true
+      }
+    }
   }
 }

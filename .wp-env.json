@@ -13,5 +13,8 @@
     "WP_DEBUG": 1,
     "WORDPRESS_DEBUG_DISPLAY": 0,
     "WP_DEBUG_DISPLAY": 0
+  },
+  "testsConfig": {
+    "DISABLE_2FA_ENFORCEMENT": true
   }
 }

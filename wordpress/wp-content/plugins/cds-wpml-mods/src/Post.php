@@ -37,6 +37,9 @@ class Post
             global $sitepress;
             $postLanguage = $sitepress->get_language_for_element($post->ID, 'post_' . $post->post_type);
 
+            // Log the post ID and its language for debugging purposes
+            error_log("cds-wpml-mods->getAvailable: ID: {$post->ID}, Language: {$postLanguage}, Filter: {$language_code}");
+
             return $postLanguage === $language_code;
         });
 

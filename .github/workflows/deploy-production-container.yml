@@ -18,8 +18,6 @@ env:
   TF_VAR_database_name: ${{ secrets.PRODUCTION_DATABASE_NAME }}
   TF_VAR_database_username: ${{ secrets.PRODUCTION_DATABASE_USERNAME }}
   TF_VAR_database_password: ${{ secrets.PRODUCTION_DATABASE_PASSWORD }}
-  TF_VAR_cloudfront_custom_header_name: ${{ secrets.PRODUCTION_CLOUDFRONT_CUSTOM_HEADER_NAME }}
-  TF_VAR_cloudfront_custom_header_value: ${{ secrets.PRODUCTION_CLOUDFRONT_CUSTOM_HEADER_VALUE }}
   TF_VAR_default_notify_api_key: ${{ secrets.PRODUCTION_DEFAULT_NOTIFY_API_KEY }}
   TF_VAR_encryption_key: ${{ secrets.PRODUCTION_ENCRYPTION_KEY }}
   TF_VAR_s3_uploads_bucket: ${{ secrets.PRODUCTION_S3_UPLOADS_BUCKET }}

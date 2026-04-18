@@ -7,11 +7,6 @@ resource "aws_cloudfront_distribution" "wordpress" {
     domain_name = aws_lb.wordpress.dns_name
     origin_id   = aws_lb.wordpress.name
 
-    custom_header {
-      name  = var.cloudfront_custom_header_name
-      value = var.cloudfront_custom_header_value
-    }
-
     custom_origin_config {
       http_port              = 80
       https_port             = 443

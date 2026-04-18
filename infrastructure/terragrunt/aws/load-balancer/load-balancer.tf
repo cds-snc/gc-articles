@@ -1,3 +1,4 @@
+# checkov:skip=CKV2_AWS_28: ALB only allows ingress from CloudFront which has a WAF
 resource "aws_lb" "wordpress" {
   name               = "wordpress"
   internal           = false

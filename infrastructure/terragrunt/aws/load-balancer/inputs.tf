@@ -1,9 +1,3 @@
-variable "cloudfront_custom_header_name" {
-  description = "Custom header name added by CloudFront.  Used to block direct user requests to the ALB."
-  type        = string
-  sensitive   = true
-}
-
 variable "cloudfront_waf_geo_match_secret" {
   description = "Custom header value to check to determine if the geo match statement should allow a country outside of the allowed set."
   type        = string

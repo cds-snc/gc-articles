@@ -1,4 +1,5 @@
 resource "aws_lb" "wordpress" {
+  # checkov:skip=CKV2_AWS_28: ALB only allows ingress from CloudFront which has a WAF
   name               = "wordpress"
   internal           = false
   load_balancer_type = "application"

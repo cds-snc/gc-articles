@@ -17,8 +17,6 @@ Host the GC Articles WordPress site in an Amazon Elastic Container Service (ECS)
 ## Environment variables
 
 The following Terraform variables are required:
-* `cloudfront_custom_header_name`: Header name added by CloudFront. Prevents direct requests to ALB.
-* `cloudfront_custom_header_value`: Header value added by CloudFront.  Prevents direct requests to ALB.
 * `database_name`: Name of the database to create in the RDS cluster
 * `database_username`: Root database user
 * `database_password`: Root database user's password

@@ -998,12 +998,6 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
   }
 
-  visibility_config {
-    cloudwatch_metrics_enabled = true
-    metric_name                = "wordpress"
-    sampled_requests_enabled   = true
-  }
-
   rule {
     name     = "BlockComments"
     priority = 200

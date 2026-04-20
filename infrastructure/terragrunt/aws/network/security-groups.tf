@@ -42,6 +42,10 @@ resource "aws_security_group_rule" "wordpress_ecs_egress_efs" {
   source_security_group_id = aws_security_group.wordpress_efs[0].id
 }
 
+data "aws_ec2_managed_prefix_list" "cloudfront" {
+  name = "com.amazonaws.global.cloudfront.origin-facing"
+}
+
 data "aws_subnet" "wordpress_private_subnet" {
   count = 3
   id    = tolist(module.wordpress_vpc.private_subnet_ids)[count.index]
@@ -54,11 +58,11 @@ resource "aws_security_group" "wordpress_load_balancer" {
   vpc_id      = module.wordpress_vpc.vpc_id
 
   ingress {
-    protocol    = "tcp"
-    from_port   = 443
-    to_port     = 443
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Requests from users"
+    protocol        = "tcp"
+    from_port       = 443
+    to_port         = 443
+    prefix_list_ids = [data.aws_ec2_managed_prefix_list.cloudfront.id]
+    description     = "Requests from users via CloudFront"
   }
 
   dynamic "egress" {

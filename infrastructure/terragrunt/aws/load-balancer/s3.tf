@@ -1,6 +1,8 @@
 #
 # CloudFront logs
 # TODO: switch to the cds-snc S3 module
+data "aws_canonical_user_id" "current" {}
+
 resource "aws_s3_bucket" "cloudfront_logs" {
   # checkov:skip=CKV_AWS_18:access logging not required for ephemeral data
   # checkov:skip=CKV_AWS_21:verioning not needed for ephemeral data
@@ -16,12 +18,22 @@ resource "aws_s3_bucket" "cloudfront_logs" {
     }
   }
 
-  # awslogsdelivery account needs full control for cloudfront logging
-  # https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
-  grant {
-    id          = "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0"
-    type        = "CanonicalUser"
-    permissions = ["FULL_CONTROL"]
+}
+resource "aws_s3_bucket_acl" "cloudfront_logs" {
+  bucket = aws_s3_bucket.cloudfront_logs.id
+
+  access_control_policy {
+    grant {
+      grantee {
+        id   = "c4c1ede66af53448b93c283ce9448c4ba468c9432aa01d700d3878632f77d2d0"
+        type = "CanonicalUser"
+      }
+      permission = "FULL_CONTROL"
+    }
+
+    owner {
+      id = data.aws_canonical_user_id.current.id
+    }
   }
 }
 
@@ -42,8 +54,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "cloudfront_logs" {
     status = "Enabled"
 
     expiration {
-      days                         = 30
-      expired_object_delete_marker = false
+      days = 30
     }
 
     noncurrent_version_expiration {

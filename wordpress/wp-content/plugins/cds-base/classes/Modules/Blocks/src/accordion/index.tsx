@@ -5,7 +5,7 @@ import { useBlockProps, RichText, InnerBlocks } from "@wordpress/block-editor";
 
 registerBlockType("cds-snc/accordion", {
   title: __("Accordion", "cds-snc"),
-  icon: "plus-alt",
+  icon: { src: "plus-alt" },
   category: "layout",
   attributes: {
     title: {
@@ -30,7 +30,7 @@ registerBlockType("cds-snc/accordion", {
     );
   },
 
-  save({ attributes }: { attributes: { title } }) {
+  save({ attributes }: { attributes: Record<string, any> }) {
     const blockProps = useBlockProps.save();
 
     return (

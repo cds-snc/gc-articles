@@ -15,18 +15,6 @@ resource "aws_s3_bucket" "cloudfront_logs" {
       }
     }
   }
-  lifecycle_rule {
-    enabled = true
-
-    expiration {
-      days                         = 30
-      expired_object_delete_marker = false
-    }
-
-    noncurrent_version_expiration {
-      days = 30
-    }
-  }
 
   # awslogsdelivery account needs full control for cloudfront logging
   # https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
@@ -44,4 +32,22 @@ resource "aws_s3_bucket_public_access_block" "cloudfront_logs" {
   block_public_policy     = true
   ignore_public_acls      = true
   restrict_public_buckets = true
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "cloudfront_logs" {
+  bucket = aws_s3_bucket.cloudfront_logs.id
+
+  rule {
+    id     = "expire-objects"
+    status = "Enabled"
+
+    expiration {
+      days                         = 30
+      expired_object_delete_marker = false
+    }
+
+    noncurrent_version_expiration {
+      noncurrent_days = 30
+    }
+  }
 }

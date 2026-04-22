@@ -34,7 +34,7 @@ const AlertSettings = ({ alertType, setAttributes }) => (
 
 registerBlockType("cds-snc/alert", {
   title: __("Alert", "cds-snc"),
-  icon: "info-outline",
+  icon: { src: "info-outline" },
   category: "layout",
   attributes: {
     content: {
@@ -82,7 +82,7 @@ registerBlockType("cds-snc/alert", {
     );
   },
 
-  save({ attributes }: { attributes: { alertType, title, content } }) {
+  save({ attributes }: { attributes: Record<string, any> }) {
     const blockProps = useBlockProps.save();
 
     return (

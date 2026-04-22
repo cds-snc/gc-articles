@@ -5,7 +5,7 @@ import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 registerBlockType("cds-snc/expander", {
   title: __("Expander", "cds-snc"),
-  icon: "megaphone",
+  icon: { src: "megaphone" },
   category: "layout",
   attributes: {
     content: {
@@ -41,7 +41,7 @@ registerBlockType("cds-snc/expander", {
     );
   },
 
-  save({ attributes }: { attributes: { title, content } }) {
+  save({ attributes }: { attributes: Record<string, any> }) {
     const blockProps = useBlockProps.save();
 
     return (

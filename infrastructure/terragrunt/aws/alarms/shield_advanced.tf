@@ -30,11 +30,6 @@ resource "aws_shield_protection_health_check_association" "cloudfront" {
   shield_protection_id = aws_shield_protection.cloudfront.id
 }
 
-resource "aws_shield_application_layer_automatic_response" "alb" {
-  resource_arn = var.alb_arn
-  action       = "BLOCK"
-}
-
 resource "aws_shield_application_layer_automatic_response" "cloudfront" {
   resource_arn = var.cloudfront_arn
   action       = "BLOCK"

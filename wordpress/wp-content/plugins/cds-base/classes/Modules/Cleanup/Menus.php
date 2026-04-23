@@ -157,6 +157,7 @@ class Menus
         $allowed = [
             __('Notify API Settings', 'cds-snc'),
             __('Site Settings', 'cds-snc'),
+            __('CDS Default Settings', 'cds-snc'),
         ];
 
         try {

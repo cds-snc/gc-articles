@@ -47,7 +47,6 @@ function cds_default_settings_init()
         }
     );
 
-    // Register GitHub Event Type setting
     register_setting(
         'cds_default_github_option_group',
         'GITHUB_EVENT_TYPE',

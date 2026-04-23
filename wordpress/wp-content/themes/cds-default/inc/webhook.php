@@ -33,7 +33,6 @@ function onSavePost($post_ID, $post)
                 return;
             }
 
-            // Use the configurable event type, defaulting to 'gc-articles-update'
             $event_type = get_option('GITHUB_EVENT_TYPE');
             if (empty($event_type)) {
                 $event_type = 'gc-articles-update';

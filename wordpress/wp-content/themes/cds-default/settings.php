@@ -47,6 +47,15 @@ function cds_default_settings_init()
         }
     );
 
+    // Register GitHub Event Type setting
+    register_setting(
+        'cds_default_github_option_group',
+        'GITHUB_EVENT_TYPE',
+        function ($input) {
+            return sanitize_text_field($input);
+        }
+    );
+
     add_settings_section(
         'cds_default_github_section',
         __('GitHub integration', 'cds-snc'),
@@ -71,6 +80,15 @@ function cds_default_settings_init()
         'cds-default-settings-admin',
         'cds_default_github_section',
         ['label_for' => 'github_repository_url']
+    );
+
+    add_settings_field(
+        'github_event_type',
+        __('GitHub Event Type', 'cds-snc'),
+        'cds_default_event_type_callback',
+        'cds-default-settings-admin',
+        'cds_default_github_section',
+        ['label_for' => 'github_event_type']
     );
 }
 
@@ -123,6 +141,16 @@ function cds_default_repository_callback($args)
         esc_attr($current_repo)
     );
     echo '<p class="description">' . __('Format: owner/repository-name (e.g., cds-snc/my-project)', 'cds-snc') . '</p>';
+}
+
+function cds_default_event_type_callback($args)
+{
+    $current_event_type = get_option('GITHUB_EVENT_TYPE');
+    printf(
+        '<input class="regular-text" type="text" name="GITHUB_EVENT_TYPE" id="github_event_type" value="%s" placeholder="gc-articles-update">',
+        esc_attr($current_event_type)
+    );
+    echo '<p class="description">' . __('The event_type sent in the repository dispatch payload. Defaults to <code>gc-articles-update</code> if left empty.', 'cds-snc') . '</p>';
 }
 
 function cds_default_add_styles()

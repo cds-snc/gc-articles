@@ -2,7 +2,21 @@
 
 function onSavePost($post_ID, $post)
 {
+    if (wp_is_post_revision($post_ID) || wp_is_post_autosave($post_ID)) {
+        return;
+    }
+
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
     if ($post->post_status === "publish") {
+        $transient_key = 'github_dispatch_' . $post_ID;
+        if (get_transient($transient_key)) {
+            return;
+        }
+        set_transient($transient_key, true, 5);
+
         try {
             // Get configurable repository URL
             $repo_url = get_option('GITHUB_REPOSITORY_URL');
@@ -19,13 +33,18 @@ function onSavePost($post_ID, $post)
                 return;
             }
 
+            $event_type = get_option('GITHUB_EVENT_TYPE');
+            if (empty($event_type)) {
+                $event_type = 'gc-articles-update';
+            }
+
             $args = [
                 'headers' => [
                     'Accept' => 'application/vnd.github+json',
                     'Authorization' => 'token ' . $token,
                     'Content-Type' => 'application/json'
                 ],
-                'body' => json_encode(['event_type' => 'strapi_update'])
+                'body' => json_encode(['event_type' => $event_type])
             ];
 
             $response = wp_remote_post($url, $args);

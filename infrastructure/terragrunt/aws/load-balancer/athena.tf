@@ -18,7 +18,7 @@ module "athena_access_logs" {
 # Hold the Athena result data
 #
 module "athena_bucket" {
-  source            = "github.com/cds-snc/terraform-modules//S3?ref=v10.11.3"
+  source            = "github.com/cds-snc/terraform-modules//S3?ref=v10.11.4"
   bucket_name       = "gc-articles-${var.env}-athena"
   billing_tag_value = var.billing_tag_value
 

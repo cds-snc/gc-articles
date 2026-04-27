@@ -67,10 +67,6 @@ jobs:
           -t "${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
           -f ./wordpress/docker/apache/Dockerfile .
 
-      - name: Logout of ECR
-        if: always()
-        run: docker logout ${{ steps.login-ecr.outputs.registry }}
-
   build-push-production-container:
     runs-on: ubuntu-24.04-arm
     steps:
@@ -118,17 +114,3 @@ jobs:
           -t "${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
           -f ./wordpress/docker/apache/Dockerfile .
 
-      - name: Docker generate SBOM
-        uses: cds-snc/security-tools/.github/actions/generate-sbom@837a88b6337d4842543184c8eac97a8adac8f302 # v4.0.3
-        env:
-          TRIVY_DB_REPOSITORY: ${{ vars.TRIVY_DB_REPOSITORY }}
-        with:
-          docker_image: "${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}"
-          dockerfile_path: "wordpress/docker/apache/Dockerfile"
-          sbom_name: "apache"
-          token: "${{ secrets.GITHUB_TOKEN }}"
-          platform: "linux/arm64"
-
-      - name: Logout of ECR
-        if: always()
-        run: docker logout ${{ steps.login-ecr.outputs.registry }}

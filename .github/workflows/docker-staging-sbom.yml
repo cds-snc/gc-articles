@@ -1,0 +1,65 @@
+name: Docker SBOM Staging
+
+on:
+  workflow_run:
+    workflows:
+    - "Build and push container"
+    - "Build and push Apache sidecar container"
+    types:
+    - completed
+
+permissions:
+  contents: write
+  
+jobs:
+  docker-sbom:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-24.04-arm
+    strategy:
+      matrix:
+        include:
+          - image: "wordpress"
+            path: "wordpress/docker/Dockerfile"
+            build_args: '--build-arg WPML_USER_ID="WPML_USER_ID" --build-arg WPML_KEY="WPML_KEY"'
+          - image: "apache"
+            path: "wordpress/docker/apache/Dockerfile"
+            build_args: '--build-arg APACHE_KEY="APACHE_KEY" --build-arg APACHE_CERT="APACHE_CERT"'
+
+    steps:
+    - name: Audit DNS requests
+      uses: cds-snc/dns-proxy-action@9ad793100229573be3f5ba78cc69ec523f2c8b7e # v1.1.0
+      env:
+        DNS_PROXY_FORWARDTOSENTINEL: "true"
+        DNS_PROXY_LOGANALYTICSWORKSPACEID: "${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}"
+        DNS_PROXY_LOGANALYTICSSHAREDKEY: "${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}"
+        DNS_PROXY_SAFELIST: "${{ vars.DNS_PROXY_SAFELIST }}"
+        DNS_PROXY_WILDCARDGREEDY: "true"
+
+    - name: Checkout
+      uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5.0.1
+      with:
+        persist-credentials: false
+
+    - name: Add Composer auth credentials
+      run: |
+        cd wordpress
+        composer config github-oauth.github.com ${{ secrets.COMPOSER_GITHUB_TOKEN }}
+
+    - name: Build image
+      run: |
+        docker build \
+        --platform linux/arm64 \
+        --build-arg git_sha="$GITHUB_SHA" \
+        ${{ matrix.build_args }} \
+        -t "${{ matrix.image }}" \
+        -f "${{ matrix.path }}" .
+
+    - name: Docker generate SBOM
+      uses: cds-snc/security-tools/.github/actions/generate-sbom@837a88b6337d4842543184c8eac97a8adac8f302 # v4.0.3
+      env:
+        TRIVY_DB_REPOSITORY: ${{ vars.TRIVY_DB_REPOSITORY }}
+      with:
+        docker_image: "${{matrix.image}}"
+        dockerfile_path: "${{ matrix.path }}"
+        platform: "linux/arm64"
+        token: "${{ secrets.GITHUB_TOKEN }}"

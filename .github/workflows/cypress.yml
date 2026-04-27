@@ -42,7 +42,9 @@ jobs:
           node-version: 24
 
       - name: PHP Setup
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@accd6127cb78bee3e8082180cb391013d204ef9f # v2.37.0
+        env:
+          NO_TOOLS_CACHE: 'true'
         with:
           php-version: 8.4
 

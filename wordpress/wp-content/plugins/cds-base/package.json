@@ -29,7 +29,6 @@
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
-    "@types/wordpress__blocks": "^15.10.0",
     "@wordpress/scripts": "^31.5.0",
     "ts-loader": "^9.5.4",
     "typescript": "^5.9.3",

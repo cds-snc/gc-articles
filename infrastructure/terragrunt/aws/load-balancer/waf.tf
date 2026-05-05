@@ -311,7 +311,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesCommonRuleSet"
-    priority = 70
+    priority = 170
 
     override_action {
       dynamic "none" {
@@ -353,7 +353,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesKnownBadInputsRuleSet"
-    priority = 80
+    priority = 110
 
     override_action {
       dynamic "none" {
@@ -385,7 +385,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesLinuxRuleSet"
-    priority = 90
+    priority = 120
 
     override_action {
       dynamic "none" {
@@ -423,7 +423,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_LFI_QueryString"
-    priority = 100
+    priority = 125
 
     action {
       dynamic "block" {
@@ -476,7 +476,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesSQLiRuleSet"
-    priority = 110
+    priority = 130
 
     override_action {
       dynamic "none" {
@@ -520,7 +520,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SQLi_BODY"
-    priority = 120
+    priority = 135
 
     action {
       dynamic "block" {
@@ -616,7 +616,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SQLiExtendedPatterns_BODY"
-    priority = 130
+    priority = 140
 
     action {
       dynamic "block" {
@@ -669,7 +669,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesPHPRuleSet"
-    priority = 140
+    priority = 100
 
     override_action {
       dynamic "none" {
@@ -711,7 +711,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesWordPressRuleSet"
-    priority = 150
+    priority = 90
 
     override_action {
       dynamic "none" {
@@ -743,7 +743,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_SizeRestrictions_BODY"
-    priority = 160
+    priority = 150
     action {
       dynamic "block" {
         for_each = var.enable_waf == true ? [""] : []
@@ -821,7 +821,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_CrossSiteScripting_BODY"
-    priority = 170
+    priority = 160
     action {
       dynamic "block" {
         for_each = var.enable_waf == true ? [""] : []
@@ -897,7 +897,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "Custom_PHPHighRiskMethodsVariables_BODY"
-    priority = 180
+    priority = 105
     action {
       dynamic "block" {
         for_each = var.enable_waf == true ? [""] : []
@@ -966,7 +966,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "AWSManagedRulesAntiDDoSRuleSet"
-    priority = 190
+    priority = 80
     override_action {
       none {}
     }
@@ -1000,7 +1000,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "BlockComments"
-    priority = 200
+    priority = 55
 
     action {
       dynamic "block" {
@@ -1057,7 +1057,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
   rule {
     name     = "BotControl"
-    priority = 210
+    priority = 70
 
     override_action {
       dynamic "none" {

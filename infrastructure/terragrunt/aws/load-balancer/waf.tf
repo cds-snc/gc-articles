@@ -137,14 +137,11 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
 
     statement {
-      and_statement {
-        statement {
-          rate_based_statement {
-            limit              = local.rate_limit_all_requests
-            aggregate_key_type = "IP"
-          }
-        }
-        statement {
+      rate_based_statement {
+        limit              = local.rate_limit_all_requests
+        aggregate_key_type = "IP"
+
+        scope_down_statement {
           not_statement {
             statement {
               byte_match_statement {
@@ -190,20 +187,17 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
 
     statement {
-      and_statement {
-        statement {
-          rate_based_statement {
-            limit              = local.rate_limit_all_requests
-            aggregate_key_type = "CUSTOM_KEYS"
+      rate_based_statement {
+        limit              = local.rate_limit_all_requests
+        aggregate_key_type = "CUSTOM_KEYS"
 
-            custom_key {
-              ja4_fingerprint {
-                fallback_behavior = "MATCH"
-              }
-            }
+        custom_key {
+          ja4_fingerprint {
+            fallback_behavior = "MATCH"
           }
         }
-        statement {
+
+        scope_down_statement {
           not_statement {
             statement {
               byte_match_statement {

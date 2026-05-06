@@ -3,7 +3,7 @@ locals {
   bot_control_excluded_rules   = ["CategoryHttpLibrary", "SignalNonBrowserUserAgent"]
   common_excluded_rules        = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH", "CrossSiteScripting_BODY", "SizeRestrictions_BODY"]
   php_excluded_rules           = ["PHPHighRiskMethodsVariables_BODY"]
-  rate_limit_all_requests      = 1000
+  rate_limit_all_requests      = 2000
   rate_limit_mutating_requests = 200
 }
 

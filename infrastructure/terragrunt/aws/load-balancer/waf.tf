@@ -137,9 +137,32 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
 
     statement {
-      rate_based_statement {
-        limit              = local.rate_limit_all_requests
-        aggregate_key_type = "IP"
+      and_statement {
+        statement {
+          rate_based_statement {
+            limit              = local.rate_limit_all_requests
+            aggregate_key_type = "IP"
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                positional_constraint = "EXACTLY"
+                field_to_match {
+                  single_header {
+                    name = "waf-rate-bypass"
+                  }
+                }
+                search_string = var.cloudfront_waf_rate_secret
+                text_transformation {
+                  priority = 1
+                  type     = "NONE"
+                }
+              }
+            }
+          }
+        }
       }
     }
 
@@ -167,13 +190,36 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     }
 
     statement {
-      rate_based_statement {
-        limit              = local.rate_limit_all_requests
-        aggregate_key_type = "CUSTOM_KEYS"
+      and_statement {
+        statement {
+          rate_based_statement {
+            limit              = local.rate_limit_all_requests
+            aggregate_key_type = "CUSTOM_KEYS"
 
-        custom_key {
-          ja4_fingerprint {
-            fallback_behavior = "MATCH"
+            custom_key {
+              ja4_fingerprint {
+                fallback_behavior = "MATCH"
+              }
+            }
+          }
+        }
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                positional_constraint = "EXACTLY"
+                field_to_match {
+                  single_header {
+                    name = "waf-rate-bypass"
+                  }
+                }
+                search_string = var.cloudfront_waf_rate_secret
+                text_transformation {
+                  priority = 1
+                  type     = "NONE"
+                }
+              }
+            }
           }
         }
       }

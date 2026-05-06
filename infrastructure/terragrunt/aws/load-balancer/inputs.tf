@@ -4,6 +4,12 @@ variable "cloudfront_waf_geo_match_secret" {
   sensitive   = true
 }
 
+variable "cloudfront_waf_rate_secret" {
+  description = "Custom header value to check to determine if the rate limit statement should allow a request to bypass the rate limit."
+  type        = string
+  sensitive   = true
+}
+
 variable "domain_name" {
   description = "Domain name for the load balancer, certificate and CloudFront"
   type        = string

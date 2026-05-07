@@ -3,7 +3,7 @@ locals {
   bot_control_excluded_rules   = ["CategoryHttpLibrary", "SignalNonBrowserUserAgent"]
   common_excluded_rules        = ["GenericRFI_QUERYARGUMENTS", "GenericRFI_BODY", "GenericRFI_URIPATH", "CrossSiteScripting_BODY", "SizeRestrictions_BODY"]
   php_excluded_rules           = ["PHPHighRiskMethodsVariables_BODY"]
-  rate_limit_all_requests      = 1000
+  rate_limit_all_requests      = 2000
   rate_limit_mutating_requests = 200
 }
 
@@ -140,6 +140,26 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
       rate_based_statement {
         limit              = local.rate_limit_all_requests
         aggregate_key_type = "IP"
+
+        scope_down_statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                positional_constraint = "EXACTLY"
+                field_to_match {
+                  single_header {
+                    name = "waf-rate-bypass"
+                  }
+                }
+                search_string = var.cloudfront_waf_rate_secret
+                text_transformation {
+                  priority = 1
+                  type     = "NONE"
+                }
+              }
+            }
+          }
+        }
       }
     }
 
@@ -174,6 +194,26 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         custom_key {
           ja4_fingerprint {
             fallback_behavior = "MATCH"
+          }
+        }
+
+        scope_down_statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                positional_constraint = "EXACTLY"
+                field_to_match {
+                  single_header {
+                    name = "waf-rate-bypass"
+                  }
+                }
+                search_string = var.cloudfront_waf_rate_secret
+                text_transformation {
+                  priority = 1
+                  type     = "NONE"
+                }
+              }
+            }
           }
         }
       }

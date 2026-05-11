@@ -24,7 +24,7 @@
 		},
 		"ghcr.io/devcontainers/features/terraform:1": {
 			"version": "1.15.1",
-			"terragrunt": "0.99.2"
+			"terragrunt": "1.0.4"
 		}
 	},
 	"remoteUser": "vscode"

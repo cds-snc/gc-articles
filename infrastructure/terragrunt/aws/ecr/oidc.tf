@@ -11,15 +11,7 @@ module "ecr_tag_release" {
       name      = local.ecr_tag_release
       repo_name = "gc-articles"
       claim     = "ref:refs/tags/v*"
-    }
-  ]
-}
-
-module "docker_push" {
-  source            = "github.com/cds-snc/terraform-modules//gh_oidc_role?ref=v10.11.4"
-  billing_tag_value = var.billing_tag_value
-  oidc_exists       = true
-  roles = [
+    },
     {
       name      = local.docker_push
       repo_name = "gc-articles"
@@ -40,7 +32,7 @@ resource "aws_iam_role_policy_attachment" "docker_push" {
   role       = local.docker_push
   policy_arn = aws_iam_policy.docker_push.arn
   depends_on = [
-    module.docker_push
+    module.ecr_tag_release
   ]
 }
 

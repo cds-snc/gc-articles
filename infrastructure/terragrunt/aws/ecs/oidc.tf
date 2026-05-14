@@ -29,21 +29,25 @@ resource "aws_iam_policy" "docker_deploy" {
   policy = data.aws_iam_policy_document.docker_deploy.json
 }
 
-#trivy:ignore:AVD-AWS-0342
 data "aws_iam_policy_document" "docker_deploy" {
-  # ECS task definition management
   statement {
-    sid    = "ECSTaskDefinition"
+    sid    = "ECSTaskDefinitionGlobal"
     effect = "Allow"
     actions = [
       "ecs:DescribeTaskDefinition",
       "ecs:RegisterTaskDefinition",
-      "ecs:TagResource",
     ]
     resources = ["*"]
   }
 
-  # ECS service update
+  statement {
+    sid    = "ECSTagTaskDefinition"
+    effect = "Allow"
+    actions = [
+      "ecs:TagResource",
+    ]
+    resources = ["arn:aws:ecs:${var.region}:${var.account_id}:task-definition/${var.cluster_name}:*"]
+  }
   statement {
     sid    = "ECSService"
     effect = "Allow"
@@ -52,7 +56,10 @@ data "aws_iam_policy_document" "docker_deploy" {
       "ecs:DescribeServices",
       "ecs:UpdateService",
     ]
-    resources = ["*"]
+    resources = [
+      "arn:aws:ecs:${var.region}:${var.account_id}:cluster/${var.cluster_name}",
+      "arn:aws:ecs:${var.region}:${var.account_id}:service/${var.cluster_name}/${var.cluster_name}",
+    ]
   }
 
   # Pass the ECS task execution role when registering new task definitions
@@ -64,8 +71,6 @@ data "aws_iam_policy_document" "docker_deploy" {
     ]
     resources = ["arn:aws:iam::${var.account_id}:role/${var.cluster_name}-ecs-task"]
   }
-
-  # Terraform state backend — read/write state and locking
   statement {
     sid    = "TerraformStateReadWrite"
     effect = "Allow"

@@ -61,8 +61,6 @@ data "aws_iam_policy_document" "docker_deploy" {
       "arn:aws:ecs:${var.region}:${var.account_id}:service/${var.cluster_name}/${var.cluster_name}",
     ]
   }
-
-  # Pass the ECS task execution role when registering new task definitions
   statement {
     sid    = "IAMPassRole"
     effect = "Allow"
@@ -83,9 +81,9 @@ data "aws_iam_policy_document" "docker_deploy" {
   }
 
   statement {
-    sid    = "TerraformStateBucketList"
-    effect = "Allow"
-    actions = ["s3:ListBucket"]
+    sid       = "TerraformStateBucketList"
+    effect    = "Allow"
+    actions   = ["s3:ListBucket"]
     resources = ["arn:aws:s3:::platform-mvp-articles-${var.env}-tfstate"]
   }
 

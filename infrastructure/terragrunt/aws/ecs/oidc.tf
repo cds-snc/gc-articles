@@ -70,7 +70,7 @@ data "aws_iam_policy_document" "docker_deploy" {
   }
 
   statement {
-    effect = "Allow"
+    effect    = "Allow"
     actions   = ["s3:ListBucket"]
     resources = ["arn:aws:s3:::platform-mvp-articles-${var.env}-tfstate"]
   }

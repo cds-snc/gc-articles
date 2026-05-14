@@ -156,7 +156,7 @@ jobs:
 
       - name: Terragrunt apply ecs
         working-directory: infrastructure/terragrunt/env/prod/ecs
-        run: terragrunt run -non-interactive -- apply -auto-approve -refresh=false
+        run: terragrunt run -non-interactive -- apply -auto-approve
 
       - name: Post to slack
         if: success()

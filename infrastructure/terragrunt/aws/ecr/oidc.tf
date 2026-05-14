@@ -1,5 +1,6 @@
 locals {
-  ecr_tag_release = "gc-articles-ecr-tag-release"
+  ecr_tag_release  = "gc-articles-ecr-tag-release"
+  docker_push_role = "gc-articles-docker-push"
 }
 
 module "ecr_tag_release" {
@@ -10,12 +11,25 @@ module "ecr_tag_release" {
       name      = local.ecr_tag_release
       repo_name = "gc-articles"
       claim     = "ref:refs/tags/v*"
+    },
+    {
+      name      = local.docker_push_role
+      repo_name = "gc-articles"
+      claim     = "ref:refs/heads/main"
     }
   ]
 }
 
 resource "aws_iam_role_policy_attachment" "ecr_tag_release" {
   role       = local.ecr_tag_release
+  policy_arn = aws_iam_policy.ecr_push.arn
+  depends_on = [
+    module.ecr_tag_release
+  ]
+}
+
+resource "aws_iam_role_policy_attachment" "docker_push" {
+  role       = local.docker_push_role
   policy_arn = aws_iam_policy.ecr_push.arn
   depends_on = [
     module.ecr_tag_release

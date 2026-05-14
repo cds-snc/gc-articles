@@ -144,13 +144,13 @@ jobs:
       - name: Configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@ec61189d14ec14c8efccab744f656cffd0e33f37 # v6.1.0
         with:
-          role-to-assume: arn:aws:iam::729164266357:role/gc-articles-apply
+          role-to-assume: arn:aws:iam::729164266357:role/gc-articles-docker-deploy
           role-session-name: TFApplyECS
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Terragrunt apply ecs
         working-directory: infrastructure/terragrunt/env/staging/ecs
-        run: terragrunt run -non-interactive -- apply -auto-approve
+        run: terragrunt run -non-interactive -- apply -auto-approve -refresh=false
 
       - name: Report deployment to Sentinel
         if: always()

@@ -31,25 +31,16 @@ resource "aws_iam_policy" "docker_deploy" {
 
 data "aws_iam_policy_document" "docker_deploy" {
   statement {
-    sid    = "ECSTaskDefinitionGlobal"
+
     effect = "Allow"
     actions = [
       "ecs:DescribeTaskDefinition",
       "ecs:RegisterTaskDefinition",
+      "ecs:TagResource",
     ]
     resources = ["*"]
   }
-
   statement {
-    sid    = "ECSTagTaskDefinition"
-    effect = "Allow"
-    actions = [
-      "ecs:TagResource",
-    ]
-    resources = ["arn:aws:ecs:${var.region}:${var.account_id}:task-definition/${var.cluster_name}:*"]
-  }
-  statement {
-    sid    = "ECSService"
     effect = "Allow"
     actions = [
       "ecs:DescribeClusters",
@@ -62,7 +53,6 @@ data "aws_iam_policy_document" "docker_deploy" {
     ]
   }
   statement {
-    sid    = "IAMPassRole"
     effect = "Allow"
     actions = [
       "iam:PassRole",
@@ -70,7 +60,6 @@ data "aws_iam_policy_document" "docker_deploy" {
     resources = ["arn:aws:iam::${var.account_id}:role/${var.cluster_name}-ecs-task"]
   }
   statement {
-    sid    = "TerraformStateReadWrite"
     effect = "Allow"
     actions = [
       "s3:GetObject",
@@ -81,14 +70,12 @@ data "aws_iam_policy_document" "docker_deploy" {
   }
 
   statement {
-    sid       = "TerraformStateBucketList"
-    effect    = "Allow"
+    effect = "Allow"
     actions   = ["s3:ListBucket"]
     resources = ["arn:aws:s3:::platform-mvp-articles-${var.env}-tfstate"]
   }
 
   statement {
-    sid    = "TerraformStateLock"
     effect = "Allow"
     actions = [
       "dynamodb:GetItem",

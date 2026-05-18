@@ -742,7 +742,7 @@
         },
         {
             "name": "illuminate/collections",
-            "version": "v12.58.0",
+            "version": "v12.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/collections.git",
@@ -802,7 +802,7 @@
         },
         {
             "name": "illuminate/conditionable",
-            "version": "v12.58.0",
+            "version": "v12.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/conditionable.git",
@@ -848,7 +848,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v12.58.0",
+            "version": "v12.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -896,7 +896,7 @@
         },
         {
             "name": "illuminate/encryption",
-            "version": "v12.58.0",
+            "version": "v12.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/encryption.git",
@@ -947,7 +947,7 @@
         },
         {
             "name": "illuminate/macroable",
-            "version": "v12.58.0",
+            "version": "v12.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/macroable.git",
@@ -993,7 +993,7 @@
         },
         {
             "name": "illuminate/reflection",
-            "version": "v12.58.0",
+            "version": "v12.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/reflection.git",
@@ -1044,16 +1044,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v12.58.0",
+            "version": "v12.59.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "783fbbdc81837fcea6bac897bb817f6234cf1989"
+                "reference": "85dc4dd5eb6657823748a550f042b563c9586a3f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/783fbbdc81837fcea6bac897bb817f6234cf1989",
-                "reference": "783fbbdc81837fcea6bac897bb817f6234cf1989",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/85dc4dd5eb6657823748a550f042b563c9586a3f",
+                "reference": "85dc4dd5eb6657823748a550f042b563c9586a3f",
                 "shasum": ""
             },
             "require": {
@@ -1120,7 +1120,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2026-04-18T13:27:49+00:00"
+            "time": "2026-05-07T18:39:12+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -3487,12 +3487,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "dd0c55b323d05d5c4e4c19aaff40bc3177b9a25d"
+                "reference": "230ed78555e8a978a2da93633fbd6abb36cf34ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/dd0c55b323d05d5c4e4c19aaff40bc3177b9a25d",
-                "reference": "dd0c55b323d05d5c4e4c19aaff40bc3177b9a25d",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/230ed78555e8a978a2da93633fbd6abb36cf34ab",
+                "reference": "230ed78555e8a978a2da93633fbd6abb36cf34ab",
                 "shasum": ""
             },
             "require": {
@@ -3563,7 +3563,7 @@
                 "issues": "https://github.com/wp-cli/wp-cli/issues",
                 "source": "https://github.com/wp-cli/wp-cli"
             },
-            "time": "2026-05-04T05:20:39+00:00"
+            "time": "2026-05-14T12:40:55+00:00"
         }
     ],
     "aliases": [],

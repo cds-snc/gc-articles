@@ -175,7 +175,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 40
 
     action {
-      dynamic "block" {
+      dynamic "challenge" {
         for_each = var.enable_waf == true ? [""] : []
         content {}
       }
@@ -193,7 +193,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
         custom_key {
           ja4_fingerprint {
-            fallback_behavior = "MATCH"
+            fallback_behavior = "NO_MATCH"
           }
         }
 
@@ -273,7 +273,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     priority = 60
 
     action {
-      dynamic "block" {
+      dynamic "challenge" {
         for_each = var.enable_waf == true ? [""] : []
         content {}
       }
@@ -291,7 +291,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
         custom_key {
           ja4_fingerprint {
-            fallback_behavior = "MATCH"
+            fallback_behavior = "NO_MATCH"
           }
         }
 
@@ -1121,7 +1121,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
         scope_down_statement {
           regex_match_statement {
             field_to_match {
-              method {}
+              uri_path {}
             }
             regex_string = "^.*/(sign-in-se-connecter|wp-admin|wp-json|wp-content).*$"
             text_transformation {

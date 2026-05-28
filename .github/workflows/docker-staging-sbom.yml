@@ -16,7 +16,7 @@ on:
 
 permissions:
   contents: write
-  
+
 jobs:
   docker-sbom:
     runs-on: ubuntu-24.04-arm

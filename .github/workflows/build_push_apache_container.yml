@@ -114,3 +114,15 @@ jobs:
           -t "${{ env.PRODUCTION_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
           -f ./wordpress/docker/apache/Dockerfile .
 
+  docker-sbom:
+    needs:
+      - build-push-staging-container
+      - build-push-production-container
+    uses: ./.github/workflows/docker-staging-sbom.yml
+    secrets:
+      LOG_ANALYTICS_WORKSPACE_ID: ${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}
+      LOG_ANALYTICS_WORKSPACE_KEY: ${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}
+      COMPOSER_GITHUB_TOKEN: ${{ secrets.COMPOSER_GITHUB_TOKEN }}
+      WPML_USER_ID: ${{ secrets.WPML_USER_ID }}
+      WPML_KEY: ${{ secrets.WPML_KEY }}
+

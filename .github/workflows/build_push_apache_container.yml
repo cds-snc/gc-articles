@@ -115,9 +115,7 @@ jobs:
           -f ./wordpress/docker/apache/Dockerfile .
 
   docker-sbom:
-    needs:
-      - build-push-staging-container
-      - build-push-production-container
+    needs: build-push-staging-container
     uses: ./.github/workflows/docker-staging-sbom.yml
     secrets:
       LOG_ANALYTICS_WORKSPACE_ID: ${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}

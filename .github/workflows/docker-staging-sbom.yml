@@ -1,19 +1,24 @@
 name: Docker SBOM Staging
 
 on:
-  workflow_run:
-    workflows:
-    - "Build and push container"
-    - "Build and push Apache sidecar container"
-    types:
-    - completed
+  workflow_call:
+    secrets:
+      LOG_ANALYTICS_WORKSPACE_ID:
+        required: true
+      LOG_ANALYTICS_WORKSPACE_KEY:
+        required: true
+      COMPOSER_GITHUB_TOKEN:
+        required: true
+      WPML_USER_ID:
+        required: true
+      WPML_KEY:
+        required: true
 
 permissions:
   contents: write
-  
+
 jobs:
   docker-sbom:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-24.04-arm
     strategy:
       matrix:

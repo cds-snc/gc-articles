@@ -24,7 +24,7 @@ jobs:
           persist-credentials: false
 
       - name: Run zizmor workflow security scan
-        uses: zizmorcore/zizmor-action@v0
+        uses: zizmorcore/zizmor-action@v1
         with:
           directory: .github/workflows
           format: sarif
@@ -32,7 +32,7 @@ jobs:
           advanced-security: true
 
       - name: Upload SARIF results to code scanning
-        uses: github/codeql-action/upload-sarif@eb055d739abdc0e8de2b29435145c5d4caff8d1b # v3.26.0
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: sarif-results.sarif

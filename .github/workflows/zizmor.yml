@@ -3,11 +3,9 @@ name: GitHub Actions security analysis
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: ["main"]
   pull_request:
-    branches:
-      - "**"
+    branches: ["**"]
 
 permissions: {}
 

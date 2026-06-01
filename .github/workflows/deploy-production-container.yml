@@ -170,7 +170,7 @@ jobs:
 
       - name: Report deployment to Sentinel
         if: always()
-        uses: cds-snc/sentinel-forward-data-action@main
+        uses: cds-snc/sentinel-forward-data-action@52ea856d686360100a680e38c40134d4e010b94d
         with:
           input_data: '{"product": "articles", "sha": "${{ github.sha }}", "version": "Apache ${{ env.APACHE_VERSION }}, Wordpress ${{ env.WORDPRESS_VERSION }}", "repository": "${{ github.repository }}", "environment": "production", "status": "${{ job.status }}"}'
           log_type: CDS_Product_Deployment_Data

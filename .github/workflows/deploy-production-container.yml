@@ -40,10 +40,7 @@ env:
   TF_VAR_wpml_site_key: ${{ secrets.PRODUCTION_WPML_SITE_KEY }}
   TF_VAR_zendesk_api_url: ${{ secrets.ZENDESK_API_URL }}
 
-permissions:
-  id-token: write
-  contents: read
-  pull-requests: write
+permissions: {}
 
 jobs:
   environments-manifest:
@@ -52,6 +49,10 @@ jobs:
   terragrunt-plan-production:
     needs: environments-manifest
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
 
     if: |
       github.ref != 'refs/heads/main' &&
@@ -110,6 +111,9 @@ jobs:
   terragrunt-apply-production:
     needs: environments-manifest
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     if: |
       github.ref == 'refs/heads/main' &&

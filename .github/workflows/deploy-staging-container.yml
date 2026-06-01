@@ -40,10 +40,7 @@ env:
   TF_VAR_wpml_site_key: ${{ secrets.STAGING_WPML_SITE_KEY }}
   TF_VAR_zendesk_api_url: ${{ secrets.ZENDESK_API_URL }}
 
-permissions:
-  id-token: write
-  contents: read
-  pull-requests: write
+permissions: {}
 
 jobs:
   environments-manifest:
@@ -52,6 +49,10 @@ jobs:
   terragrunt-plan-staging:
     needs: environments-manifest
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
 
     if: |
       github.ref != 'refs/heads/main' &&
@@ -101,6 +102,9 @@ jobs:
           comment-title: "Staging: ecs"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
+    permissions:
+      id-token: write
+      contents: read
 
   terragrunt-apply-staging:
     needs: environments-manifest

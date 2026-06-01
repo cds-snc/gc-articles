@@ -15,13 +15,14 @@ env:
   STAGING_ECR_REGISTRY: 729164266357.dkr.ecr.ca-central-1.amazonaws.com
   PRODUCTION_ECR_REGISTRY: 472286471787.dkr.ecr.ca-central-1.amazonaws.com
 
-permissions:
-  id-token: write
-  contents: write
+permissions: {}
 
 jobs:
   build-push-staging-container:
     runs-on: ubuntu-24.04-arm
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Audit DNS requests
         uses: cds-snc/dns-proxy-action@9ad793100229573be3f5ba78cc69ec523f2c8b7e # v1.1.0
@@ -66,7 +67,10 @@ jobs:
           --build-arg APACHE_CERT="${{ secrets.STAGING_WORDPRESS_APACHE_CERT }}" \
           -t "${{ env.STAGING_ECR_REGISTRY }}/${{ env.REPO_NAME }}:${{ env.IMAGE_TAG }}" \
           -f ./wordpress/docker/apache/Dockerfile .
-
+permissions:
+      id-token: write
+      contents: read
+    
   build-push-production-container:
     runs-on: ubuntu-24.04-arm
     steps:

@@ -48,7 +48,7 @@ permissions: {}
 
 jobs:
   environments-manifest:
-    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
+    uses: .github/workflows/environments-manifest.yml
 
   terragrunt-plan-production:
     needs: environments-manifest

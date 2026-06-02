@@ -40,18 +40,19 @@ env:
   TF_VAR_wpml_site_key: ${{ secrets.PRODUCTION_WPML_SITE_KEY }}
   TF_VAR_zendesk_api_url: ${{ secrets.ZENDESK_API_URL }}
 
-permissions:
-  id-token: write
-  contents: read
-  pull-requests: write
+permissions: {}
 
 jobs:
   environments-manifest:
-    uses: cds-snc/gc-articles/.github/workflows/environments-manifest.yml@main
+    uses: ./.github/workflows/environments-manifest.yml
 
   terragrunt-plan-production:
     needs: environments-manifest
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
 
     if: |
       github.ref != 'refs/heads/main' &&
@@ -110,6 +111,9 @@ jobs:
   terragrunt-apply-production:
     needs: environments-manifest
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
 
     if: |
       github.ref == 'refs/heads/main' &&
@@ -166,7 +170,7 @@ jobs:
 
       - name: Report deployment to Sentinel
         if: always()
-        uses: cds-snc/sentinel-forward-data-action@main
+        uses: cds-snc/sentinel-forward-data-action@52ea856d686360100a680e38c40134d4e010b94d
         with:
           input_data: '{"product": "articles", "sha": "${{ github.sha }}", "version": "Apache ${{ env.APACHE_VERSION }}, Wordpress ${{ env.WORDPRESS_VERSION }}", "repository": "${{ github.repository }}", "environment": "production", "status": "${{ job.status }}"}'
           log_type: CDS_Product_Deployment_Data

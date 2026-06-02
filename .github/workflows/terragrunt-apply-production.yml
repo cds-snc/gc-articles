@@ -53,11 +53,11 @@ jobs:
   terragrunt-apply-production:
     needs: environments-manifest
     runs-on: ubuntu-latest
-    env:
-      TARGET_VERSION: ${{ needs.environments-manifest.outputs.PROD_INFRASTRUCTURE }}
     permissions:
       id-token: write
       contents: read
+    env:
+      TARGET_VERSION: ${{ needs.environments-manifest.outputs.PROD_INFRASTRUCTURE }}
       PREVIOUS_VERSION: ${{ needs.environments-manifest.outputs.PREV_PROD_INFRASTRUCTURE }}
 
     if: needs.environments-manifest.outputs.CONTAINER_DEPLOYMENT == 'false'

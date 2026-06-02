@@ -102,14 +102,13 @@ jobs:
           comment-title: "Staging: ecs"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
-    permissions:
-      id-token: write
-      contents: read
 
   terragrunt-apply-staging:
     needs: environments-manifest
     runs-on: ubuntu-latest
-
+    permissions:
+      id-token: write
+      contents: read
     if: |
       github.ref == 'refs/heads/main' &&
       github.event_name == 'push' &&

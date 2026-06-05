@@ -349,7 +349,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
                     field_to_match {
                       uri_path {}
                     }
-                    regex_string = "^[^/]*/wp-json/wp/v2/(pages|posts)$"
+                    regex_string = "^(/[^/]+)?/wp-json/wp/v2/(pages|posts)/?$"
                     text_transformation {
                       priority = 1
                       type     = "LOWERCASE"

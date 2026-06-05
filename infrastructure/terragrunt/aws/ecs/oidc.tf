@@ -3,7 +3,7 @@ locals {
 }
 
 module "docker_deploy" {
-  source            = "github.com/cds-snc/terraform-modules//gh_oidc_role?ref=v10.11.4"
+  source            = "github.com/cds-snc/terraform-modules//gh_oidc_role?ref=v11.3.5"
   billing_tag_value = var.billing_tag_value
   oidc_exists       = true
   roles = [

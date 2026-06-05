@@ -339,6 +339,23 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
       managed_rule_group_statement {
         name        = "AWSManagedRulesAmazonIpReputationList"
         vendor_name = "AWS"
+
+        scope_down_statement {
+          not_statement {
+            statement {
+              regex_match_statement {
+                field_to_match {
+                  uri_path {}
+                }
+                regex_string = "^[^/]*/wp-json/wp/v2/(pages|posts)$"
+                text_transformation {
+                  priority = 1
+                  type     = "LOWERCASE"
+                }
+              }
+            }
+          }
+        }
       }
     }
 

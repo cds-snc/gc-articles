@@ -1,26 +1,27 @@
 resource "aws_iam_role" "wordpress_ecs_task" {
   name               = "${var.cluster_name}-ecs-task"
   assume_role_policy = data.aws_iam_policy_document.ecs_task_assume.json
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags               = var.core_tags
 }
 resource "aws_iam_policy" "wordpress_ecs_task_get_secret_value" {
   name   = "WordpressEcsTaskGetSecretValue"
   path   = "/"
   policy = data.aws_iam_policy_document.wordpress_ecs_task_get_secret_value.json
+  tags   = var.core_tags
 }
 
 resource "aws_iam_policy" "wordpress_ecs_task_get_ecr_image" {
   name   = "WordpressEcsTaskGetEcrImage"
   path   = "/"
   policy = data.aws_iam_policy_document.wordpress_ecs_task_get_ecr_image.json
+  tags   = var.core_tags
 }
 
 resource "aws_iam_policy" "wordpress_ecs_task_create_tunnel" {
   name   = "WordpressEcsTaskCreateTunnel"
   path   = "/"
   policy = data.aws_iam_policy_document.wordpress_ecs_task_create_tunnel.json
+  tags   = var.core_tags
 }
 
 resource "aws_iam_policy" "wordpress_ecs_task_efs" {
@@ -29,6 +30,7 @@ resource "aws_iam_policy" "wordpress_ecs_task_efs" {
   name   = "WordpressEcsTaskEfs"
   path   = "/"
   policy = data.aws_iam_policy_document.wordpress_ecs_task_efs[0].json
+  tags   = var.core_tags
 }
 
 resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_policy_attach" {

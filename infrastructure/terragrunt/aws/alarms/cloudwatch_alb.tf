@@ -20,6 +20,8 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_response_time_average" {
     "TargetGroup"  = var.alb_target_group_arn_suffix
     "LoadBalancer" = var.alb_arn_suffix
   }
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_metric_alarm" "alb_target_unhealthy_host" {
@@ -41,4 +43,6 @@ resource "aws_cloudwatch_metric_alarm" "alb_target_unhealthy_host" {
     "TargetGroup"  = var.alb_target_group_arn_suffix
     "LoadBalancer" = var.alb_arn_suffix
   }
+
+  tags = var.core_tags
 }

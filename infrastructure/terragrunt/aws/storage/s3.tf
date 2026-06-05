@@ -33,6 +33,7 @@ POLICY
 
 resource "aws_iam_user" "wordpress_storage" {
   name = "wordpress_storage"
+  tags = var.core_tags
 }
 
 resource "aws_iam_user_policy" "wordpress_storage" {

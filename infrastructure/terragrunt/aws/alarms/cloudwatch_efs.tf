@@ -20,6 +20,8 @@ resource "aws_cloudwatch_metric_alarm" "burst_credit_balance" {
   dimensions = {
     FileSystemId = var.efs_id
   }
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_metric_alarm" "percent_io_limit" {
@@ -41,4 +43,6 @@ resource "aws_cloudwatch_metric_alarm" "percent_io_limit" {
   dimensions = {
     FileSystemId = var.efs_id
   }
+
+  tags = var.core_tags
 }

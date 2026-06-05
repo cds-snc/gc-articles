@@ -27,6 +27,7 @@ resource "aws_iam_policy" "docker_deploy" {
   name   = local.docker_deploy
   path   = "/"
   policy = data.aws_iam_policy_document.docker_deploy.json
+  tags   = var.core_tags
 }
 
 data "aws_iam_policy_document" "docker_deploy" {

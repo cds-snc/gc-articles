@@ -18,10 +18,7 @@ resource "aws_lb" "wordpress" {
     enabled = true
   }
 
-  tags = {
-    Name                  = "wordpress"
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 resource "aws_lb_target_group" "wordpress" {
@@ -48,10 +45,7 @@ resource "aws_lb_target_group" "wordpress" {
     type = "lb_cookie"
   }
 
-  tags = {
-    Name                  = "wordpress"
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 
   lifecycle {
     create_before_destroy = true
@@ -73,6 +67,8 @@ resource "aws_lb_listener" "wordpress" {
     type             = "forward"
     target_group_arn = aws_lb_target_group.wordpress.arn
   }
+
+  tags = var.core_tags
 
   depends_on = [
     aws_acm_certificate.wordpress,
@@ -102,8 +98,5 @@ resource "aws_alb_listener_rule" "security_txt" {
     }
   }
 
-  tags = {
-    Name                  = "wordpress"
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }

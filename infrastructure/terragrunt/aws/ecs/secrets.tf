@@ -6,6 +6,7 @@ resource "random_string" "random" {
 
 resource "aws_secretsmanager_secret" "default_notify_api_key" {
   name = "default_notify_api_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "default_notify_api_key" {
@@ -15,6 +16,7 @@ resource "aws_secretsmanager_secret_version" "default_notify_api_key" {
 
 resource "aws_secretsmanager_secret" "encryption_key" {
   name = "encryption_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "encryption_key" {
@@ -24,6 +26,7 @@ resource "aws_secretsmanager_secret_version" "encryption_key" {
 
 resource "aws_secretsmanager_secret" "wpml_site_key" {
   name = "wpml_site_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "wpml_site_key" {
@@ -33,6 +36,7 @@ resource "aws_secretsmanager_secret_version" "wpml_site_key" {
 
 resource "aws_secretsmanager_secret" "zendesk_api_url" {
   name = "zendesk_api_url_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "zendesk_api_url" {
@@ -42,6 +46,7 @@ resource "aws_secretsmanager_secret_version" "zendesk_api_url" {
 
 resource "aws_secretsmanager_secret" "s3_uploads_bucket" {
   name = "s3_uploads_bucket_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "s3_uploads_bucket" {
@@ -51,6 +56,7 @@ resource "aws_secretsmanager_secret_version" "s3_uploads_bucket" {
 
 resource "aws_secretsmanager_secret" "s3_uploads_key" {
   name = "s3_uploads_key_${random_string.random.result}"
+
 }
 
 resource "aws_secretsmanager_secret_version" "s3_uploads_key" {
@@ -60,6 +66,7 @@ resource "aws_secretsmanager_secret_version" "s3_uploads_key" {
 
 resource "aws_secretsmanager_secret" "s3_uploads_secret" {
   name = "s3_uploads_secret_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "s3_uploads_secret" {
@@ -69,6 +76,7 @@ resource "aws_secretsmanager_secret_version" "s3_uploads_secret" {
 
 resource "aws_secretsmanager_secret" "c3_aws_access_key_id" {
   name = "c3_aws_access_key_id_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "c3_aws_access_key_id" {
@@ -78,6 +86,7 @@ resource "aws_secretsmanager_secret_version" "c3_aws_access_key_id" {
 
 resource "aws_secretsmanager_secret" "c3_aws_secret_access_key" {
   name = "c3_aws_secret_access_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "c3_aws_secret_access_key" {
@@ -87,6 +96,7 @@ resource "aws_secretsmanager_secret_version" "c3_aws_secret_access_key" {
 
 resource "aws_secretsmanager_secret" "jwt_auth_secret_key" {
   name = "jwt_auth_secret_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "jwt_auth_secret_key" {
@@ -96,6 +106,7 @@ resource "aws_secretsmanager_secret_version" "jwt_auth_secret_key" {
 
 resource "aws_secretsmanager_secret" "wordpress_auth_key" {
   name = "wordpress_auth_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "wordpress_auth_key" {
@@ -105,6 +116,7 @@ resource "aws_secretsmanager_secret_version" "wordpress_auth_key" {
 
 resource "aws_secretsmanager_secret" "wordpress_secure_auth_key" {
   name = "wordpress_secure_auth_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "wordpress_secure_auth_key" {
@@ -114,6 +126,7 @@ resource "aws_secretsmanager_secret_version" "wordpress_secure_auth_key" {
 
 resource "aws_secretsmanager_secret" "wordpress_logged_in_key" {
   name = "wordpress_logged_in_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "wordpress_logged_in_key" {
@@ -123,6 +136,7 @@ resource "aws_secretsmanager_secret_version" "wordpress_logged_in_key" {
 
 resource "aws_secretsmanager_secret" "wordpress_nonce_key" {
   name = "wordpress_nonce_key_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "wordpress_nonce_key" {
@@ -141,6 +155,7 @@ resource "aws_secretsmanager_secret_version" "wordpress_auth_salt" {
 
 resource "aws_secretsmanager_secret" "wordpress_secure_auth_salt" {
   name = "wordpress_secure_auth_salt_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "wordpress_secure_auth_salt" {
@@ -150,6 +165,7 @@ resource "aws_secretsmanager_secret_version" "wordpress_secure_auth_salt" {
 
 resource "aws_secretsmanager_secret" "wordpress_logged_in_salt" {
   name = "wordpress_logged_in_salt_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "wordpress_logged_in_salt" {
@@ -159,6 +175,7 @@ resource "aws_secretsmanager_secret_version" "wordpress_logged_in_salt" {
 
 resource "aws_secretsmanager_secret" "wordpress_nonce_salt" {
   name = "wordpress_nonce_salt_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "wordpress_nonce_salt" {

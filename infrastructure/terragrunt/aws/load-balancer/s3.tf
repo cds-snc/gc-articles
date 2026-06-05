@@ -35,6 +35,8 @@ resource "aws_s3_bucket" "cloudfront_logs" {
     type        = "CanonicalUser"
     permissions = ["FULL_CONTROL"]
   }
+
+  tags = var.core_tags
 }
 
 resource "aws_s3_bucket_public_access_block" "cloudfront_logs" {

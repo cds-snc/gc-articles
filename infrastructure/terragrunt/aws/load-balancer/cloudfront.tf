@@ -246,13 +246,12 @@ resource "aws_cloudfront_distribution" "wordpress" {
     prefix          = "cloudfront"
   }
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 }
 
 resource "aws_iam_user" "cache_buster" {
   name = "cache_buster"
+  tags = var.core_tags
 }
 
 data "aws_iam_policy_document" "cache_buster" {
@@ -274,6 +273,7 @@ data "aws_iam_policy_document" "cache_buster" {
 resource "aws_iam_policy" "cache_buster" {
   name   = "cache_buster"
   policy = data.aws_iam_policy_document.cache_buster.json
+  tags   = var.core_tags
 }
 
 resource "aws_iam_user_policy_attachment" "cache_buster" {

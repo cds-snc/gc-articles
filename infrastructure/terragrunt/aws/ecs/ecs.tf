@@ -13,9 +13,7 @@ resource "aws_ecs_cluster" "wordpress" {
     ignore_changes = [setting]
   }
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 }
 
 resource "aws_ecs_cluster_capacity_providers" "wordpress" {
@@ -117,9 +115,7 @@ resource "aws_ecs_task_definition" "wordpress_task" {
     }
   }
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 }
 
 #
@@ -164,9 +160,7 @@ resource "aws_ecs_service" "wordpress_service" {
     ]
   }
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 }
 
 #

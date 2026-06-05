@@ -6,6 +6,7 @@ resource "random_string" "random" {
 
 resource "aws_secretsmanager_secret" "database_host" {
   name = "wordpress_database_host_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "database_host" {
@@ -15,6 +16,7 @@ resource "aws_secretsmanager_secret_version" "database_host" {
 
 resource "aws_secretsmanager_secret" "database_name" {
   name = "wordpress_database_name_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "database_name" {
@@ -24,6 +26,7 @@ resource "aws_secretsmanager_secret_version" "database_name" {
 
 resource "aws_secretsmanager_secret" "database_username" {
   name = "wordpress_database_username_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "database_username" {
@@ -33,6 +36,7 @@ resource "aws_secretsmanager_secret_version" "database_username" {
 
 resource "aws_secretsmanager_secret" "database_password" {
   name = "wordpress_database_password_${random_string.random.result}"
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "database_password" {

@@ -20,6 +20,8 @@ resource "aws_cloudwatch_metric_alarm" "ecs_cpu_utilization" {
     ClusterName = var.ecs_cluster_name
     ServiceName = var.ecs_service_name
   }
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_metric_alarm" "ecs_memory_utilization" {
@@ -41,6 +43,8 @@ resource "aws_cloudwatch_metric_alarm" "ecs_memory_utilization" {
     ClusterName = var.ecs_cluster_name
     ServiceName = var.ecs_service_name
   }
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_failed_login" {
@@ -70,6 +74,8 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_failed_login" {
   alarm_description = "High number of failed Wordpress login attempts in a 1 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_errors" {
@@ -99,6 +105,8 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_errors" {
   alarm_description = "WordPress errors detected in a 1 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_database_errors" {
@@ -128,6 +136,8 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_database_errors" {
   alarm_description = "WordPress database errors detected in a 5 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_warnings" {
@@ -157,6 +167,8 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_warnings" {
   alarm_description = "WordPress warnings detected in a 1 minute period"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_suspicious_login" {
@@ -186,6 +198,8 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_suspicious_login" {
   alarm_description = "WordPress login from a non-Government of Canada email address"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_log_metric_filter" "wordpress_ecs_warn_error_event" {
@@ -215,4 +229,6 @@ resource "aws_cloudwatch_metric_alarm" "wordpress_ecs_warn_error_event" {
   alarm_description = "WordPress ECS warning or error event detected"
   alarm_actions     = [aws_sns_topic.alert_warning.arn]
   ok_actions        = [aws_sns_topic.alert_warning.arn]
+
+  tags = var.core_tags
 }

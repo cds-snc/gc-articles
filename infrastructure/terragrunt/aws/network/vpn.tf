@@ -48,10 +48,7 @@ resource "aws_acm_certificate" "client_vpn" {
   private_key      = tls_private_key.client_vpn.private_key_pem
   certificate_body = tls_self_signed_cert.client_vpn.cert_pem
 
-  tags = {
-    Terraform             = true
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 
   lifecycle {
     create_before_destroy = true

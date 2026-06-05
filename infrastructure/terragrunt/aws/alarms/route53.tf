@@ -7,8 +7,5 @@ resource "aws_route53_health_check" "wordpress" {
   request_interval  = "30"
   regions           = ["us-east-1", "us-west-1", "us-west-2"]
 
-  tags = {
-    "Name"                = "wordpress"
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 }

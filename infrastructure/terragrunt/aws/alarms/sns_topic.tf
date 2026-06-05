@@ -5,9 +5,7 @@ resource "aws_sns_topic" "alert_warning" {
   name              = "alert-warning"
   kms_master_key_id = aws_kms_key.sns_cloudwatch.id
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 resource "aws_sns_topic" "alert_warning_us_east" {
@@ -16,18 +14,14 @@ resource "aws_sns_topic" "alert_warning_us_east" {
   name              = "alert-warning"
   kms_master_key_id = aws_kms_key.sns_cloudwatch_us_east.id
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 resource "aws_sns_topic" "alert_observe" {
   name              = "alert-observe"
   kms_master_key_id = aws_kms_key.sns_cloudwatch.id
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 resource "aws_sns_topic" "alert_observe_us_east" {
@@ -36,9 +30,7 @@ resource "aws_sns_topic" "alert_observe_us_east" {
   name              = "alert-observe"
   kms_master_key_id = aws_kms_key.sns_cloudwatch_us_east.id
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 #
@@ -66,9 +58,7 @@ resource "aws_kms_key" "sns_cloudwatch" {
   description = "KMS key for CloudWatch SNS topic"
   policy      = data.aws_iam_policy_document.sns_cloudwatch.json
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 resource "aws_kms_key" "sns_cloudwatch_us_east" {
@@ -78,9 +68,7 @@ resource "aws_kms_key" "sns_cloudwatch_us_east" {
   description = "KMS key for CloudWatch SNS topic in US east"
   policy      = data.aws_iam_policy_document.sns_cloudwatch.json
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 data "aws_iam_policy_document" "sns_cloudwatch" {

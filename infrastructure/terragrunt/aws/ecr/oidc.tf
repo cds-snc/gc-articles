@@ -40,12 +40,14 @@ resource "aws_iam_policy" "ecr_push" {
   name   = "wordpress-ecr-push"
   path   = "/"
   policy = data.aws_iam_policy_document.ecr_push.json
+  tags   = var.core_tags
 }
 
 resource "aws_iam_policy" "docker_push" {
   name   = local.docker_push
   path   = "/"
   policy = data.aws_iam_policy_document.docker_push.json
+  tags   = var.core_tags
 }
 
 data "aws_iam_policy_document" "ecr_push" {

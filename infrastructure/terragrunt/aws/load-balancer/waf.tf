@@ -342,15 +342,30 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
 
         scope_down_statement {
           not_statement {
-            statement {
-              regex_match_statement {
-                field_to_match {
-                  uri_path {}
+            and_statement {
+              statement {
+                regex_match_statement {
+                  field_to_match {
+                    uri_path {}
+                  }
+                  regex_string = "^[^/]*/wp-json/wp/v2/(pages|posts)$"
+                  text_transformation {
+                    priority = 1
+                    type     = "LOWERCASE"
+                  }
                 }
-                regex_string = "^[^/]*/wp-json/wp/v2/(pages|posts)$"
-                text_transformation {
-                  priority = 1
-                  type     = "LOWERCASE"
+              }
+              statement {
+                byte_match_statement {
+                  field_to_match {
+                    method {}
+                  }
+                  search_string         = "get"
+                  positional_constraint = "EXACTLY"
+                  text_transformation {
+                    priority = 0
+                    type     = "LOWERCASE"
+                  }
                 }
               }
             }

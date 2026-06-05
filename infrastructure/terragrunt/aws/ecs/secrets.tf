@@ -56,7 +56,7 @@ resource "aws_secretsmanager_secret_version" "s3_uploads_bucket" {
 
 resource "aws_secretsmanager_secret" "s3_uploads_key" {
   name = "s3_uploads_key_${random_string.random.result}"
-
+  tags = var.core_tags
 }
 
 resource "aws_secretsmanager_secret_version" "s3_uploads_key" {

@@ -48,6 +48,8 @@ permissions: {}
 
 jobs:
   environments-manifest:
+    permissions:
+      contents: read
     uses: ./.github/workflows/environments-manifest.yml
 
   terragrunt-apply-production:

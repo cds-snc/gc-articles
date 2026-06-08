@@ -1,5 +1,5 @@
 module "vpn" {
-  source = "github.com/cds-snc/terraform-modules//client_vpn?ref=v10.11.4"
+  source = "github.com/cds-snc/terraform-modules//client_vpn?ref=v11.3.5"
 
   endpoint_name       = "private_subnets"
   access_group_id     = var.client_vpn_access_group_id
@@ -48,10 +48,7 @@ resource "aws_acm_certificate" "client_vpn" {
   private_key      = tls_private_key.client_vpn.private_key_pem
   certificate_body = tls_self_signed_cert.client_vpn.cert_pem
 
-  tags = {
-    Terraform             = true
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 
   lifecycle {
     create_before_destroy = true

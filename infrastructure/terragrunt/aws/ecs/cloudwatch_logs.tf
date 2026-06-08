@@ -1,15 +1,17 @@
 resource "aws_cloudwatch_log_group" "wordpress_ecs_logs" {
   name              = "/aws/ecs/${var.cluster_name}"
   retention_in_days = 14
+  tags              = var.core_tags
 }
 
 resource "aws_cloudwatch_log_group" "ecs_events" {
   name              = "/aws/lambda/${aws_lambda_function.ecs_events.function_name}"
   retention_in_days = 14
+  tags              = var.core_tags
 }
 
 module "sentinel_forwarder" {
-  source            = "github.com/cds-snc/terraform-modules//sentinel_forwarder?ref=v10.11.4"
+  source            = "github.com/cds-snc/terraform-modules//sentinel_forwarder?ref=v11.3.5"
   function_name     = "sentinel-forwarder"
   billing_tag_value = var.billing_tag_value
 

@@ -2,7 +2,7 @@
 # VPC: 3 public + 3 private subnets across 3 availability zones
 #
 module "wordpress_vpc" {
-  source = "github.com/cds-snc/terraform-modules//vpc?ref=v10.11.4"
+  source = "github.com/cds-snc/terraform-modules//vpc?ref=v11.3.5"
   name   = "wordpress"
 
   cidrsubnet_newbits = 8
@@ -26,8 +26,5 @@ resource "aws_flow_log" "cloud_based_sensor" {
   vpc_id               = module.wordpress_vpc.vpc_id
   log_format           = "$${vpc-id} $${version} $${account-id} $${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport} $${protocol} $${packets} $${bytes} $${start} $${end} $${action} $${log-status} $${subnet-id} $${instance-id}"
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-    Terraform             = true
-  }
+  tags = var.core_tags
 }

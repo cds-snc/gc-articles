@@ -1,5 +1,5 @@
 module "wordpress_storage" {
-  source            = "github.com/cds-snc/terraform-modules//S3?ref=v10.11.4"
+  source            = "github.com/cds-snc/terraform-modules//S3?ref=v11.3.5"
   bucket_name       = "platform-gc-articles-${var.env}-uploads"
   billing_tag_value = var.billing_tag_value
 }
@@ -33,6 +33,7 @@ POLICY
 
 resource "aws_iam_user" "wordpress_storage" {
   name = "wordpress_storage"
+  tags = var.core_tags
 }
 
 resource "aws_iam_user_policy" "wordpress_storage" {

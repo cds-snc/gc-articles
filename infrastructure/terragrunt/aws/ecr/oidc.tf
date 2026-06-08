@@ -4,7 +4,7 @@ locals {
 }
 
 module "ecr_tag_release" {
-  source            = "github.com/cds-snc/terraform-modules//gh_oidc_role?ref=v10.11.4"
+  source            = "github.com/cds-snc/terraform-modules//gh_oidc_role?ref=v11.3.5"
   billing_tag_value = var.billing_tag_value
   roles = [
     {
@@ -40,12 +40,14 @@ resource "aws_iam_policy" "ecr_push" {
   name   = "wordpress-ecr-push"
   path   = "/"
   policy = data.aws_iam_policy_document.ecr_push.json
+  tags   = var.core_tags
 }
 
 resource "aws_iam_policy" "docker_push" {
   name   = local.docker_push
   path   = "/"
   policy = data.aws_iam_policy_document.docker_push.json
+  tags   = var.core_tags
 }
 
 data "aws_iam_policy_document" "ecr_push" {

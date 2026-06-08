@@ -21,4 +21,6 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_4xx_response" {
     DistributionId = var.cloudfront_distribution_id
     Region         = "Global"
   }
+
+  tags = var.core_tags
 }

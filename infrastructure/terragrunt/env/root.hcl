@@ -11,6 +11,16 @@ inputs = {
   env                       = "${local.vars.inputs.env}"
   region                    = "ca-central-1"
   cbs_satellite_bucket_name = "cbs-satellite-${local.vars.inputs.account_id}"
+  common_tags = {
+    Terraform                           = "true"
+    (local.vars.inputs.billing_tag_key) = local.vars.inputs.billing_tag_value
+    ssc_cbrid                           = "22DI"
+  }
+  core_tags = {
+    Terraform                           = "true"
+    (local.vars.inputs.billing_tag_key) = local.vars.inputs.billing_tag_value
+    ssc_cbrid                           = "22DH"      
+  }
 }
 
 remote_state {

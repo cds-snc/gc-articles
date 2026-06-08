@@ -1197,9 +1197,7 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     sampled_requests_enabled   = false
   }
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 #

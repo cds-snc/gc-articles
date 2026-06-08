@@ -1,7 +1,7 @@
 module "schedule_shutdown" {
   count = var.env == "staging" ? 1 : 0
 
-  source = "github.com/cds-snc/terraform-modules//schedule_shutdown?ref=v10.11.4"
+  source = "github.com/cds-snc/terraform-modules//schedule_shutdown?ref=v11.3.5"
 
   cloudwatch_alarm_arns = [
     aws_cloudwatch_metric_alarm.wordpress_errors.arn,

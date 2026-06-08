@@ -3,9 +3,7 @@ resource "aws_acm_certificate" "wordpress" {
   subject_alternative_names = ["*.${var.domain_name}"]
   validation_method         = "DNS"
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 
   lifecycle {
     create_before_destroy = true
@@ -20,9 +18,7 @@ resource "aws_acm_certificate" "wordpress_cloudfront" {
   subject_alternative_names = ["*.${var.domain_name}"]
   validation_method         = "DNS"
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 
   lifecycle {
     create_before_destroy = true
@@ -35,9 +31,7 @@ resource "aws_acm_certificate" "wordpress_new" {
   subject_alternative_names = ["*.articles.canada.ca"]
   validation_method         = "DNS"
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 
   lifecycle {
     create_before_destroy = true
@@ -53,9 +47,7 @@ resource "aws_acm_certificate" "wordpress_new_cloudfront" {
   subject_alternative_names = ["*.articles.canada.ca"]
   validation_method         = "DNS"
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 
   lifecycle {
     create_before_destroy = true

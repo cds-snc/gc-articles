@@ -21,10 +21,7 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs" {
     compression_format = "GZIP"
   }
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-    Terraform             = true
-  }
+  tags = var.common_tags
 }
 
 resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_us_east" {
@@ -44,10 +41,7 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_us_east" {
     compression_format = "GZIP"
   }
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-    Terraform             = true
-  }
+  tags = var.common_tags
 }
 
 #
@@ -56,12 +50,14 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs_us_east" {
 resource "aws_iam_role" "firehose_waf_logs" {
   name               = "FirehoseWafLogs"
   assume_role_policy = data.aws_iam_policy_document.firehose_assume.json
+  tags               = var.core_tags
 }
 
 resource "aws_iam_policy" "firehose_waf_logs" {
   name   = "FirehoseWafLogsPolicy"
   path   = "/"
   policy = data.aws_iam_policy_document.firehose_waf_logs.json
+  tags   = var.core_tags
 }
 
 resource "aws_iam_role_policy_attachment" "firehose_waf_logs" {

@@ -19,6 +19,8 @@ resource "aws_cloudwatch_metric_alarm" "rds_cpu_utilization_writer" {
     DBClusterIdentifier = var.rds_cluster_id
     Role                = "WRITER"
   }
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_metric_alarm" "rds_freeable_memory_writer" {
@@ -39,4 +41,6 @@ resource "aws_cloudwatch_metric_alarm" "rds_freeable_memory_writer" {
     DBClusterIdentifier = var.rds_cluster_id
     Role                = "WRITER"
   }
+
+  tags = var.core_tags
 }

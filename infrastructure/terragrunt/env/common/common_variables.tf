@@ -18,6 +18,16 @@ variable "cbs_satellite_bucket_name" {
   type        = string
 }
 
+variable "common_tags" {
+  description = "(Required) Common tags to apply to all resources"
+  type        = map(string)
+}
+
+variable "core_tags" {
+  description = "(Required) Core tags to apply to all resources"
+  type        = map(string)
+}
+
 variable "enable_efs" {
   description = "(Required) Enable the shared Elastic File System for the WordPress ECS tasks"
   type        = string

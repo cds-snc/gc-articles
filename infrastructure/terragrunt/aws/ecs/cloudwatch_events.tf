@@ -28,9 +28,7 @@ resource "aws_lambda_function" "ecs_events" {
     aws_iam_role_policy_attachment.ecs_events_lambda_vpc
   ]
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.common_tags
 }
 
 data "archive_file" "ecs_events" {
@@ -53,6 +51,7 @@ resource "aws_lambda_permission" "ecs_events" {
 resource "aws_iam_role" "ecs_events_lambda" {
   name               = "EcsEventsLambda"
   assume_role_policy = data.aws_iam_policy_document.lambda_assume_policy.json
+  tags               = var.core_tags
 }
 
 resource "aws_iam_role_policy_attachment" "ecs_events_lambda_basic_execution" {

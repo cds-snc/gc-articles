@@ -19,6 +19,8 @@ resource "aws_cloudwatch_metric_alarm" "alb_ddos" {
   dimensions = {
     ResourceArn = var.alb_arn
   }
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_metric_alarm" "cloudfront_ddos" {
@@ -40,6 +42,8 @@ resource "aws_cloudwatch_metric_alarm" "cloudfront_ddos" {
   dimensions = {
     ResourceArn = var.cloudfront_arn
   }
+
+  tags = var.core_tags
 }
 
 resource "aws_cloudwatch_metric_alarm" "route53_ddos" {
@@ -61,4 +65,6 @@ resource "aws_cloudwatch_metric_alarm" "route53_ddos" {
   dimensions = {
     ResourceArn = "arn:aws:route53:::hostedzone/${var.hosted_zone_id}"
   }
+
+  tags = var.core_tags
 }

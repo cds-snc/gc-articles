@@ -4,9 +4,7 @@ resource "aws_security_group" "wordpress_ecs" {
   description = "WordPress ECS - ingress from load balancer, egress to database"
   vpc_id      = module.wordpress_vpc.vpc_id
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 resource "aws_security_group_rule" "wordpress_ecs_ingress_lb" {
@@ -80,9 +78,7 @@ resource "aws_security_group" "wordpress_load_balancer" {
     }
   }
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 resource "aws_security_group" "wordpress_efs" {
@@ -93,9 +89,7 @@ resource "aws_security_group" "wordpress_efs" {
   description = "Wordpress EFS access"
   vpc_id      = module.wordpress_vpc.vpc_id
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }
 
 resource "aws_security_group_rule" "efs_ingress_wordpress_ecs" {
@@ -116,7 +110,5 @@ resource "aws_security_group" "ecs_events_lambda" {
   description = "ECS Lambda - ingress/egress for VPC endpoints"
   vpc_id      = module.wordpress_vpc.vpc_id
 
-  tags = {
-    (var.billing_tag_key) = var.billing_tag_value
-  }
+  tags = var.core_tags
 }

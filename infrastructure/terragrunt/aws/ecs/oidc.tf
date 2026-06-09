@@ -85,4 +85,65 @@ data "aws_iam_policy_document" "docker_deploy" {
     ]
     resources = ["arn:aws:dynamodb:${var.region}:${var.account_id}:table/terraform-state-lock-dynamo"]
   }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "iam:GetRole",
+      "iam:GetRolePolicy",
+      "iam:ListRolePolicies",
+      "iam:ListAttachedRolePolicies",
+    ]
+    resources = ["arn:aws:iam::${var.account_id}:role/*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "iam:GetPolicy",
+      "iam:GetPolicyVersion",
+      "iam:ListPolicyVersions",
+    ]
+    resources = ["arn:aws:iam::${var.account_id}:policy/*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "secretsmanager:DescribeSecret",
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:GetResourcePolicy",
+    ]
+    resources = ["arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "logs:DescribeLogGroups",
+      "logs:ListTagsLogGroup",
+      "logs:ListTagsForResource",
+    ]
+    resources = [
+      "arn:aws:logs:${var.region}:${var.account_id}:log-group:*",
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "events:DescribeRule",
+      "events:ListTargetsByRule",
+    ]
+    resources = ["arn:aws:events:${var.region}:${var.account_id}:rule/*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "ssm:GetParameter",
+      "ssm:DescribeParameters",
+    ]
+    resources = ["arn:aws:ssm:${var.region}:${var.account_id}:parameter/*"]
+  }
 }

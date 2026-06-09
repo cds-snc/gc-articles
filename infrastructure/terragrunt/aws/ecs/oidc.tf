@@ -126,7 +126,6 @@ data "aws_iam_policy_document" "docker_deploy" {
     ]
     resources = [
       "arn:aws:logs:${var.region}:${var.account_id}:log-group:*",
-      "arn:aws:logs:${var.region}:${var.account_id}:log-group::log-stream:",
     ]
   }
 

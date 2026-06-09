@@ -90,18 +90,9 @@ data "aws_iam_policy_document" "docker_deploy" {
     effect = "Allow"
     actions = [
       "iam:GetRole",
-      "iam:CreateRole",
-      "iam:UpdateRole",
-      "iam:DeleteRole",
-      "iam:TagRole",
-      "iam:UntagRole",
       "iam:GetRolePolicy",
-      "iam:PutRolePolicy",
-      "iam:DeleteRolePolicy",
       "iam:ListRolePolicies",
       "iam:ListAttachedRolePolicies",
-      "iam:AttachRolePolicy",
-      "iam:DetachRolePolicy",
     ]
     resources = ["arn:aws:iam::${var.account_id}:role/*"]
   }
@@ -110,12 +101,7 @@ data "aws_iam_policy_document" "docker_deploy" {
     effect = "Allow"
     actions = [
       "iam:GetPolicy",
-      "iam:CreatePolicy",
-      "iam:DeletePolicy",
-      "iam:TagPolicy",
       "iam:GetPolicyVersion",
-      "iam:CreatePolicyVersion",
-      "iam:DeletePolicyVersion",
       "iam:ListPolicyVersions",
     ]
     resources = ["arn:aws:iam::${var.account_id}:policy/*"]
@@ -125,14 +111,8 @@ data "aws_iam_policy_document" "docker_deploy" {
     effect = "Allow"
     actions = [
       "secretsmanager:DescribeSecret",
-      "secretsmanager:CreateSecret",
-      "secretsmanager:DeleteSecret",
       "secretsmanager:GetSecretValue",
-      "secretsmanager:PutSecretValue",
-      "secretsmanager:UpdateSecret",
-      "secretsmanager:TagResource",
       "secretsmanager:GetResourcePolicy",
-      "secretsmanager:PutResourcePolicy",
     ]
     resources = ["arn:aws:secretsmanager:${var.region}:${var.account_id}:secret:*"]
   }
@@ -141,11 +121,6 @@ data "aws_iam_policy_document" "docker_deploy" {
     effect = "Allow"
     actions = [
       "logs:DescribeLogGroups",
-      "logs:CreateLogGroup",
-      "logs:DeleteLogGroup",
-      "logs:PutRetentionPolicy",
-      "logs:DeleteRetentionPolicy",
-      "logs:TagLogGroup",
       "logs:ListTagsLogGroup",
       "logs:ListTagsForResource",
     ]
@@ -159,12 +134,7 @@ data "aws_iam_policy_document" "docker_deploy" {
     effect = "Allow"
     actions = [
       "events:DescribeRule",
-      "events:PutRule",
-      "events:DeleteRule",
-      "events:PutTargets",
-      "events:RemoveTargets",
       "events:ListTargetsByRule",
-      "events:TagResource",
     ]
     resources = ["arn:aws:events:${var.region}:${var.account_id}:rule/*"]
   }
@@ -173,10 +143,7 @@ data "aws_iam_policy_document" "docker_deploy" {
     effect = "Allow"
     actions = [
       "ssm:GetParameter",
-      "ssm:PutParameter",
-      "ssm:DeleteParameter",
       "ssm:DescribeParameters",
-      "ssm:AddTagsToResource",
     ]
     resources = ["arn:aws:ssm:${var.region}:${var.account_id}:parameter/*"]
   }

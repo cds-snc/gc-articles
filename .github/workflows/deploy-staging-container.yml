@@ -149,7 +149,7 @@ jobs:
       - name: Configure AWS credentials using OIDC
         uses: aws-actions/configure-aws-credentials@99214aa6889fcddfa57764031d71add364327e59 # v6.1.3
         with:
-          role-to-assume: arn:aws:iam::729164266357:role/gc-articles-docker-deploy
+          role-to-assume: arn:aws:iam::729164266357:role/gc-articles-apply
           role-session-name: TFApplyECS
           aws-region: ${{ env.AWS_REGION }}
 

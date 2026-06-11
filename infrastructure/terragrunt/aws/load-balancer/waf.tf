@@ -121,6 +121,79 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
+    name     = "BlockExternalApiWriteRequests"
+    priority = 25
+
+    action {
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {}
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {}
+      }
+    }
+
+    statement {
+      and_statement {
+        statement {
+          byte_match_statement {
+            field_to_match {
+              uri_path {}
+            }
+            positional_constraint = "CONTAINS"
+            search_string         = "/wp-json/"
+            text_transformation {
+              priority = 0
+              type     = "LOWERCASE"
+            }
+          }
+        }
+        statement {
+          regex_match_statement {
+            field_to_match {
+              method {}
+            }
+            regex_string = "^(delete|patch|post|put)$"
+            text_transformation {
+              priority = 1
+              type     = "LOWERCASE"
+            }
+          }
+        }
+
+        statement {
+          not_statement {
+            statement {
+              byte_match_statement {
+                field_to_match {
+                  single_header {
+                    name = "referer"
+                  }
+                }
+                positional_constraint = "STARTS_WITH"
+                search_string         = "https://${var.domain_name}"
+                text_transformation {
+                  priority = 0
+                  type     = "NONE"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "BlockExternalApiWriteRequests"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
     name     = "RateLimitAllRequestsIp"
     priority = 30
 

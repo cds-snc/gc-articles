@@ -92,8 +92,6 @@ if (!function_exists('cds_setup')) {
             'comment-list',
             'gallery',
             'caption',
-            'style',
-            'script',
         ]);
 
         add_theme_support('editor-color-palette', array(

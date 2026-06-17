@@ -72,21 +72,7 @@ services:
     networks:
       - app-network
 
-  phpmyadmin:
-    depends_on:
-      - db
-    image: phpmyadmin/phpmyadmin@sha256:42a200db07b4e70fbf32c594ad4521cf16399b8e54bbb5adceae98e7566dfbeb
-    restart: always
-    logging:
-      driver:
-        ${LOCAL_PHPMYADMIN_LOG_DRIVER:-local}
-    ports:
-      - 8080:80
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: secret
-    networks:
-      - app-network
+  
 
   composer:
     restart: 'no'

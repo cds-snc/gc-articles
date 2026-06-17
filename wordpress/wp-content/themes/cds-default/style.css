@@ -273,6 +273,11 @@ nav.nav--about li a:focus {
 
 /* Side nav layout between 600px and 768px */
 @media screen and (min-width: 600px) and (max-width: 768px) {
+  .wp-block-columns:not(.is-not-stacked-on-mobile):has(
+      > .wp-block-column.page__side-nav
+    ) {
+    display: flex;
+  }
   .wp-block-columns:not(.is-not-stacked-on-mobile)
     > .wp-block-column.page__side-nav {
     flex: 3 !important;
@@ -286,6 +291,11 @@ nav.nav--about li a:focus {
 
 /* Side nav layout over 768px */
 @media screen and (min-width: 768px) {
+  .wp-block-columns:not(.is-not-stacked-on-mobile):has(
+      > .wp-block-column.page__side-nav
+    ) {
+    display: flex;
+  }
   .wp-block-columns:not(.is-not-stacked-on-mobile)
     > .wp-block-column.page__side-nav {
     flex: 3.5;

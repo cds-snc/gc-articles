@@ -434,6 +434,7 @@ nav.nav--about li a:focus {
 }
 .wp-block-button__link {
   border-radius: 0;
+  display: inline-block;
 }
 .wp-block-button__link:hover {
   text-decoration: none !important;
@@ -545,6 +546,11 @@ nav.nav--about li a:focus {
 .wp-block-button__link.has-red-background-color:focus {
   background-color: var(--hover-red);
 }
+/* .wp-block-button__link.is-style-outline {
+  border: 2px solid;
+  padding: .667em 1.333em;
+  color: currentColor;
+} */
 
 .has-small-font-size {
   font-size: 12px !important;

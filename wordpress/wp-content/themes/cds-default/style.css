@@ -470,6 +470,9 @@ nav.nav--about li a:focus {
   border: 2px solid rgba(17, 24, 39, 0.2);
   border-bottom-width: 4px;
 }
+.wp-block-buttons.is-content-justification-center {
+  justify-content: center;
+}
 .wp-block-button__link.has-black-color:hover,
 .wp-block-button__link.has-black-color:focus {
   color: #000 !important;

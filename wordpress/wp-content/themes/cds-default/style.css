@@ -466,6 +466,10 @@ nav.nav--about li a:focus {
   --bg-opacity: 1;
   background-color: rgba(40, 65, 98, var(--bg-opacity));
 }
+.wp-block-button.is-style-outline > .wp-block-button__link {
+  border: 2px solid rgba(17, 24, 39, 0.2);
+  border-bottom-width: 4px;
+}
 .wp-block-button__link.has-black-color:hover,
 .wp-block-button__link.has-black-color:focus {
   color: #000 !important;

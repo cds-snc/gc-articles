@@ -21,3 +21,18 @@ function cds_filter_core_image($block_content, $block)
 }
 
 add_filter('render_block', 'cds_filter_core_image', 10, 3);
+
+function cds_remove_wp_block_paragraph_class($content)
+{
+    return preg_replace_callback(
+        '/<p\b([^>]*)>/i',
+        function ($matches) {
+            $attrs = preg_replace('/\bwp-block-paragraph\b\s*/', '', $matches[1]);
+            $attrs = preg_replace('/\s*class="\s*"/', '', $attrs);
+            return '<p' . $attrs . '>';
+        },
+        $content
+    );
+}
+
+add_filter('the_content', 'cds_remove_wp_block_paragraph_class', 11);

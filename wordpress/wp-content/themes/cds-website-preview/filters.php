@@ -27,7 +27,7 @@ function cds_remove_wp_block_paragraph_class($content)
     return preg_replace_callback(
         '/<p\b([^>]*)>/i',
         function ($matches) {
-            $attrs = preg_replace('/\bwp-block-paragraph\b\s*/', '', $matches[1]);
+            $attrs = preg_replace('/\s*\bwp-block-paragraph\b\s*/', '', $matches[1]);
             $attrs = preg_replace('/\s*class="\s*"/', '', $attrs);
             return '<p' . $attrs . '>';
         },

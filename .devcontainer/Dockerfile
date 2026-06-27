@@ -1,4 +1,4 @@
-FROM node:24-alpine@sha256:156b55f92e98ccd5ef49578a8cea0df4679826564bad1c9d4ef04462b9f0ded6 AS node
+FROM node:24-alpine@sha256:a0b9bf06e4e6193cf7a0f58816cc935ff8c2a908f81e6f1a95432d679c54fbfd AS node
 
 FROM wordpress:cli-php8.4@sha256:cf9bc455c850667e7e99d28ff334794b985bb199818fa601127ebd2cc2798c48
 

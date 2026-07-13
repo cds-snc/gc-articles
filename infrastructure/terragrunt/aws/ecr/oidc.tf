@@ -4,7 +4,7 @@ locals {
 }
 
 module "ecr_tag_release" {
-  source            = "github.com/cds-snc/terraform-modules//gh_oidc_role?ref=v11.3.6"
+  source            = "github.com/cds-snc/terraform-modules//gh_oidc_role?ref=v11.4.1"
   billing_tag_value = var.billing_tag_value
   roles = [
     {

@@ -367,7 +367,9 @@ nav.nav--about li a:focus {
   --tw-border-opacity: 0.2;
   border-bottom-width: 4px;
   border-color: rgba(17, 24, 39, var(--tw-border-opacity));
+  font-size: 20px;
   font-weight: 700;
+  line-height: 28px;
   margin: 0 0.5rem 0 0;
   padding: 0.75rem 1.25rem;
 }
@@ -435,6 +437,7 @@ nav.nav--about li a:focus {
 .wp-block-button__link {
   border-radius: 0;
   display: inline-block;
+  min-width: 10.5rem;
 }
 .wp-block-button__link:hover {
   text-decoration: none !important;

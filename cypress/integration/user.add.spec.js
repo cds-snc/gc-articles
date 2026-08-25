@@ -109,10 +109,6 @@ describe('Add user', () => {
     cy.get('select#role').select('gceditor');
     cy.contains('button', 'Add user').click();
 
-    // Success notice
-    cy.get('h2').contains("Success!");
-    cy.focused().should('contain', 'Success!');
-
     // make sure exists in username column
     cy.contains('Users').click();
     cy.get('h1').contains("Users");

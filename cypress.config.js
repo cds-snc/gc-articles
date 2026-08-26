@@ -3,8 +3,8 @@ import { defineConfig } from 'cypress';
 export default defineConfig({
   projectId: 'rv8iqi',
   chromeWebSecurity: false,
-  video: false,
-  screenshotOnRunFailure: false,
+  video: true,
+  screenshotOnRunFailure: true,
   retries: {
     runMode: 2,
     openMode: 0,

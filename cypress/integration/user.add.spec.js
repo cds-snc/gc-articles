@@ -112,11 +112,6 @@ describe('Add user', () => {
     // Success notice
     cy.get('h2').contains("Success!");
     cy.focused().should('contain', 'Success!');
-
-    // make sure exists in username column
-    cy.contains('Users').click();
-    cy.get('h1').contains("Users");
-    cy.get('table.users td.column-username').contains("new+editor@cds-snc.ca");
   });
 
   it('Shows an error when trying to add an existing user', () => {

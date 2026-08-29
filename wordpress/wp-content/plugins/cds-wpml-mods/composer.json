@@ -1,18 +1,7 @@
 {
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/WordPress/wordpress-develop"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/Yoast/PHPUnit-Polyfills"
-    }
-  ],
   "require-dev": {
     "brain/monkey": "^2.6",
     "php-stubs/wordpress-stubs": "^7.0",
-    "phpunit/phpunit": "^12.0",
     "pestphp/pest": "^4.0",
     "pestphp/pest-plugin-faker": "^4.0",
     "mockery/mockery": "^1.5",

@@ -11,9 +11,9 @@
   },
   "devDependencies": {
     "@automattic/i18n-loader-webpack-plugin": "^2.0.92",
-    "@babel/core": "^7.29.0",
-    "@babel/plugin-transform-react-jsx": "^7.28.6",
-    "@babel/preset-env": "^7.29.0",
+    "@babel/core": "^8.0.0",
+    "@babel/plugin-transform-react-jsx": "^8.0.0",
+    "@babel/preset-env": "^8.0.0",
     "@wordpress/dependency-extraction-webpack-plugin": "^6.40.0",
     "babel-loader": "^10.0.0",
     "terser-webpack-plugin": "^5.3.16",

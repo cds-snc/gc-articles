@@ -46,6 +46,16 @@
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
+        "policy": {
+            "advisories": {
+                "ignore-id": {
+                    "PKSA-mh9b-91zm-m1gy": {
+                        "on-audit": false,
+                        "reason": "wptrt/wpthemereview requires WPCS 2.x and has no compatible release for patched WPCS versions."
+                    }
+                }
+            }
+        },
         "platform": {
             "php": "8.4"
         }

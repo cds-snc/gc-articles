@@ -15,7 +15,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      ssc_cbrid  = "22DI"
+      ssc_cbrid = "22DI"
     }
   }
 }
@@ -27,7 +27,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      ssc_cbrid  = "22DI"
+      ssc_cbrid = "22DI"
     }
   }
 }

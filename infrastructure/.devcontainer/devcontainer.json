@@ -1,6 +1,6 @@
 {
 	"name": "gc-articles-infrastructure",
-	"image": "mcr.microsoft.com/devcontainers/base:bullseye@sha256:fb17cc95abb5489d81d129c8e5f58c7c1985d009397f2718a7d1d4c26f94b302",
+	"image": "mcr.microsoft.com/devcontainers/base:bookworm@sha256:3aacff4130e6cf04709f9cab1d7a6d3e1cc4bff6202bc61611831a18d3755673",
 	"containerEnv": {
 		"SHELL": "/bin/zsh"
 	},
@@ -23,7 +23,7 @@
 			"version": "latest"
 		},
 		"ghcr.io/devcontainers/features/terraform:1": {
-			"version": "1.16.0",
+			"version": "1.16.1",
 			"terragrunt": "1.0.4"
 		}
 	},

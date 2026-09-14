@@ -1,6 +1,6 @@
 
 terraform {
-  required_version = "1.16.0"
+  required_version = "1.16.1"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -15,7 +15,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      ssc_cbrid  = "22DI"
+      ssc_cbrid = "22DI"
     }
   }
 }
@@ -27,7 +27,7 @@ provider "aws" {
 
   default_tags {
     tags = {
-      ssc_cbrid  = "22DI"
+      ssc_cbrid = "22DI"
     }
   }
 }

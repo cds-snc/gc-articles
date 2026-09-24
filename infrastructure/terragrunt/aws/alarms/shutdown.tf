@@ -12,9 +12,6 @@ module "schedule_shutdown" {
   ecs_service_arns = [
     "arn:aws:ecs:${var.region}:${var.account_id}:service/${var.ecs_cluster_name}/${var.ecs_service_name}",
   ]
-  rds_cluster_arns = [
-    "arn:aws:rds:${var.region}:${var.account_id}:cluster:${var.rds_cluster_id}",
-  ]
 
   schedule_shutdown = "cron(0 23 * * ? *)"       # 11pm UTC, every day
   schedule_startup  = "cron(0 11 ? * MON-FRI *)" # 11am UTC, Monday-Friday

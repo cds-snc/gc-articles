@@ -2,7 +2,7 @@ FROM httpd:2.4.69-alpine@sha256:3440c39d8d6f54fa9ad2549e5a60c19ddd435faadc29c1ad
 
 WORKDIR /usr/src/wordpress
 
-# Setup self-signed cert/ssl
+# Setup self-signed certs
 ARG APACHE_CERT
 ARG APACHE_KEY
 

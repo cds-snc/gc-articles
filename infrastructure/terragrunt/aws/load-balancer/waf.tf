@@ -69,6 +69,45 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
   }
 
   rule {
+    name     = "BlockMultipartFormData"
+    priority = 15
+
+    action {
+      dynamic "block" {
+        for_each = var.enable_waf == true ? [""] : []
+        content {}
+      }
+
+      dynamic "count" {
+        for_each = var.enable_waf == false ? [""] : []
+        content {}
+      }
+    }
+
+    statement {
+      byte_match_statement {
+        search_string         = "multipart/form-data"
+        positional_constraint = "CONTAINS"
+        text_transformation {
+          priority = 0
+          type     = "LOWERCASE"
+        }
+        field_to_match {
+          single_header {
+            name = "content-type"
+          }
+        }
+      }
+    }
+
+    visibility_config {
+      cloudwatch_metrics_enabled = true
+      metric_name                = "BlockMultipartFormData"
+      sampled_requests_enabled   = true
+    }
+  }
+
+  rule {
     name     = "GeoRestriction"
     priority = 20
 

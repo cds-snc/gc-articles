@@ -87,10 +87,10 @@ resource "aws_wafv2_web_acl" "wordpress_waf" {
     statement {
       byte_match_statement {
         search_string         = "multipart/form-data"
-        position_constraint   = "CONTAINS"
+        positional_constraint = "CONTAINS"
         text_transformation {
-          priority     = 0
-          type         = "LOWERCASE"
+          priority = 0
+          type     = "LOWERCASE"
         }
         field_to_match {
           single_header {

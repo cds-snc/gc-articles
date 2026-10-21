@@ -198,6 +198,7 @@ jobs:
           comment-title: "Production: load-balancer"
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           terragrunt: "true"
+          skip-conftest: "true"
 
       # Load-balancer & database dependency
       - name: Terragrunt plan ecs

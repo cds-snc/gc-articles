@@ -1,5 +1,5 @@
 ## Install composer dependencies
-FROM composer:latest@sha256:af98f42dfff7c68ba8d53c2164fd9fde1087b7d449514baa38c418b1f6bc4bac AS composer
+FROM composer:latest@sha256:d0c32820c62cc860fddd22adceed4eeda7698b093a7a88d503414172ce400626 AS composer
 
 ARG WPML_USER_ID
 ARG WPML_KEY
@@ -16,7 +16,7 @@ RUN cd wordpress \
 
 ## Install NPM dependencies
 
-FROM node:24-alpine@sha256:44fce696f38ba8c987c4db89954051000bbd05ffd8d8659ba15ed4a8602e937f AS buildjs
+FROM node:24-alpine@sha256:6a1c190e17215d844926b0677f4bf87273ff7d5e54db06d3b5b5863ab0b09a3d AS buildjs
 WORKDIR /app
 COPY . .
 
@@ -33,7 +33,7 @@ RUN npm --unsafe-perm install
 # when updating the Wordpress version, update the version in the files:
 #     - ~/wordpress/docker/local.Dockerfile
 #     - ~/github/workflows/ci.yml
-FROM wordpress:7.1.3-php8.4-fpm-alpine@sha256:2fb3c5710d619fce58e7561d8d976fbc01ff9e1f5de0a70f393c39de583044c9
+FROM wordpress:7.1.3-php8.4-fpm-alpine@sha256:e6c1d1f10b3eefcf3d67cc83249ec906fbb6a30e396567e5da19db36f70771df
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     && apk upgrade --no-cache imagemagick imagemagick-webp \

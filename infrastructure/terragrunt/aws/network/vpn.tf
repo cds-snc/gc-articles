@@ -1,5 +1,5 @@
 module "vpn" {
-  source = "github.com/cds-snc/terraform-modules//client_vpn?ref=v12.1.2"
+  source = "github.com/cds-snc/terraform-modules//client_vpn?ref=v13.2.0"
 
   endpoint_name       = "private_subnets"
   access_group_id     = var.client_vpn_access_group_id

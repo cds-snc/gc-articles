@@ -178,4 +178,5 @@ jobs:
           input_data: '{"product": "articles", "sha": "${{ github.sha }}", "version": "Infrastructure ${{ github.sha }}", "repository": "${{ github.repository }}", "environment": "staging", "status": "${{ job.status }}"}'
           log_type: CDS_Product_Deployment_Data
           log_analytics_workspace_id: ${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}
-          log_analytics_workspace_key: ${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}  
+          log_analytics_workspace_key: ${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}
+  

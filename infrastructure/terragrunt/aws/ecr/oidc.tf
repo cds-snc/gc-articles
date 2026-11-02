@@ -117,7 +117,7 @@ resource "aws_iam_role_policy_attachment" "docker_pull" {
   role       = local.docker_pull
   policy_arn = aws_iam_policy.docker_pull.arn
 
-  depends_on = [module.github_deploy_workflow_roles]
+  depends_on = [module.ecr_tag_release]
 }
 
 resource "aws_iam_policy" "docker_pull" {

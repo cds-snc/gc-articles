@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
-            "version": "7.1.0",
+            "version": "7.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alphagov/notifications-php-client.git",
-                "reference": "09608eb9d5a8638b25f1725ff037378cf40508c4"
+                "reference": "9cd665ac3af1a92a9192f32b875b30c885d13596"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alphagov/notifications-php-client/zipball/09608eb9d5a8638b25f1725ff037378cf40508c4",
-                "reference": "09608eb9d5a8638b25f1725ff037378cf40508c4",
+                "url": "https://api.github.com/repos/alphagov/notifications-php-client/zipball/9cd665ac3af1a92a9192f32b875b30c885d13596",
+                "reference": "9cd665ac3af1a92a9192f32b875b30c885d13596",
                 "shasum": ""
             },
             "require": {
@@ -55,9 +55,9 @@
             "description": "PHP client for GOV.UK Notifications",
             "support": {
                 "issues": "https://github.com/alphagov/notifications-php-client/issues",
-                "source": "https://github.com/alphagov/notifications-php-client/tree/7.1.0"
+                "source": "https://github.com/alphagov/notifications-php-client/tree/7.1.1"
             },
-            "time": "2026-06-09T07:53:34+00:00"
+            "time": "2026-10-22T08:33:16+00:00"
         },
         {
             "name": "brick/math",

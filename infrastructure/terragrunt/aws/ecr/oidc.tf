@@ -1,6 +1,7 @@
 locals {
   ecr_tag_release = "gc-articles-ecr-tag-release"
   docker_push     = "gc-articles-docker-push"
+  docker_pull     = "gc-articles-docker-pull"
 }
 
 module "ecr_tag_release" {
@@ -14,6 +15,11 @@ module "ecr_tag_release" {
     },
     {
       name      = local.docker_push
+      repo_name = "gc-articles"
+      claim     = "ref:refs/heads/main"
+    },
+    {
+      name      = local.docker_pull
       repo_name = "gc-articles"
       claim     = "ref:refs/heads/main"
     }
@@ -102,6 +108,43 @@ data "aws_iam_policy_document" "docker_push" {
     effect = "Allow"
     actions = [
       "ecr:GetAuthorizationToken"
+    ]
+    resources = ["*"]
+  }
+}
+
+resource "aws_iam_role_policy_attachment" "docker_pull" {
+  role       = local.docker_pull
+  policy_arn = aws_iam_policy.docker_pull.arn
+
+  depends_on = [module.ecr_tag_release]
+}
+
+resource "aws_iam_policy" "docker_pull" {
+  name   = local.docker_pull
+  path   = "/"
+  policy = data.aws_iam_policy_document.docker_pull.json
+  tags   = var.core_tags
+}
+
+data "aws_iam_policy_document" "docker_pull" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
+      "ecr:BatchImportUpstreamImage",
+      "ecr:GetDownloadUrlForLayer"
+    ]
+    resources = [
+      "arn:aws:ecr:${var.region}:${var.account_id}:repository/*"
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "ecr:GetAuthorizationToken",
     ]
     resources = ["*"]
   }

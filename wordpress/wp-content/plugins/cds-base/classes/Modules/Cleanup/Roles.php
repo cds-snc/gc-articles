@@ -93,7 +93,6 @@ class Roles
                 'remove_users' => 1,
                 'add_users' => 1,
                 'promote_users' => 1,
-                'manage_network_users' => 1, // enables "edit_users" for GC Admins'
                 'manage_options' => 1,
                 'manage_categories' => 1,
                 'read' => 1,

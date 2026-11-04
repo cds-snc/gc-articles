@@ -3,8 +3,6 @@
 namespace CDS\Modules\BlocksPHP;
 
 use CDS\Utils;
-use CDS\Modules\Forms\Contact\ContactForm;
-use CDS\Modules\Forms\RequestSite\RequestSiteForm;
 
 class BlocksPHP
 {
@@ -25,15 +23,6 @@ class BlocksPHP
             return;
         }
 
-        // internal blocks
-        register_block_type(__DIR__ . '/build/contact/', [
-            'render_callback' => function ($attributes, $content, $block): string {
-                $form = new ContactForm();
-                return $form->render($attributes);
-            },
-            'attributes' => []
-        ]);
-
         register_block_type(__DIR__ . '/build/site-counter/', [
             'render_callback' => function ($attributes, $content, $block): string {
                 try {
@@ -41,14 +30,6 @@ class BlocksPHP
                 } catch (e) {
                     return "";
                 }
-            },
-            'attributes' => []
-        ]);
-
-        register_block_type(__DIR__ . '/build/request/', [
-            'render_callback' => function ($attributes, $content, $block): string {
-                $form = new RequestSiteForm();
-                return $form->render($attributes);
             },
             'attributes' => []
         ]);

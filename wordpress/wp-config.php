@@ -146,6 +146,10 @@ define('S3_UPLOADS_KEY', getenv_docker('S3_UPLOADS_KEY', ''));
 define('S3_UPLOADS_SECRET', getenv_docker('S3_UPLOADS_SECRET', ''));
 define('S3_UPLOADS_OBJECT_ACL', 'private');
 define('S3_UPLOADS_BUCKET_URL', getenv_docker('S3_UPLOADS_BUCKET_URL', 'https://articles.cdssandbox.xyz'));
+define('S3_UPLOADS_USE_LOCAL', filter_var(
+    getenv_docker('S3_UPLOADS_USE_LOCAL', WP_ENVIRONMENT_TYPE === 'local'),
+    FILTER_VALIDATE_BOOLEAN
+));
 
 /* Config for C3 Cloudfront Clear Cache plugin */
 define('AWS_ACCESS_KEY_ID', getenv_docker('C3_AWS_ACCESS_KEY_ID', ''));

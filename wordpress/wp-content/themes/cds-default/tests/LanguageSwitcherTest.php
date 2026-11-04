@@ -28,6 +28,29 @@ if (!function_exists('icl_get_languages')) {
     }
 }
 
+if (!function_exists('esc_url')) {
+    function esc_url($url) {
+        return $GLOBALS['wp_test_mocks']['esc_url']($url);
+    }
+}
+
+if (!function_exists('esc_attr')) {
+    function esc_attr($text) {
+        return $GLOBALS['wp_test_mocks']['esc_attr']($text);
+    }
+}
+
+if (!function_exists('wp_kses')) {
+    function wp_kses($html, $allowed_html) {
+        return $GLOBALS['wp_test_mocks']['wp_kses']($html, $allowed_html);
+    }
+}
+
+if (!function_exists('wp_reset_query')) {
+    function wp_reset_query() {
+    }
+}
+
 class LanguageSwitcherTest extends TestCase
 {
     protected function setUp(): void
@@ -35,6 +58,8 @@ class LanguageSwitcherTest extends TestCase
         parent::setUp();
         // Reset mock data
         $GLOBALS['wp_test_mocks'] = [];
+        $GLOBALS['wp_test_mocks']['esc_url'] = fn($url) => $url;
+        $GLOBALS['wp_test_mocks']['esc_attr'] = fn($text) => $text;
     }
 
     protected function tearDown(): void
@@ -126,11 +151,11 @@ class LanguageSwitcherTest extends TestCase
         $wp_query->post->ID = 1;
 
         // Mock get_post_meta to return valid JSON
-        $GLOBALS['wp_test_mocks']['get_post_meta'] = '{"active":false,"translated_name":"English","url":"http//:test.com"}';
+        $GLOBALS['wp_test_mocks']['get_post_meta'] = '{"active":false,"translated_name":"English","url":"https://test.com/en/"}';
 
         $nav = language_switcher();
 
-        expect($this->containsString($nav, "http//:test.com"))->toBeTrue();
+        expect($this->containsString($nav, "https://test.com/en/"))->toBeTrue();
         expect(
             $this->containsString($nav, 'English')
         )->toBeTrue();
@@ -152,5 +177,90 @@ class LanguageSwitcherTest extends TestCase
         $target_lang = "fr";
         $converted_url = convert_url($url, $target_lang);
         expect($converted_url)->toEqual("http://test.com/non-category-page");        
+    }
+
+    public function test_language_url_is_escaped_after_category_conversion()
+    {
+        $raw_url = '/category/test" onmouseover="alert(1)';
+        $escaped_url = '/fr/category/test%20onmouseover=alert(1)';
+        $GLOBALS['wp_test_mocks']['esc_url'] = function ($url) use ($escaped_url) {
+            $this->assertSame('/fr/category/test" onmouseover="alert(1)', $url);
+            return $escaped_url;
+        };
+
+        $links = language_switcher_output([
+            ['active' => false, 'translated_name' => 'French', 'url' => $raw_url],
+        ]);
+
+        $this->assertCount(1, $links);
+        $this->assertStringContainsString('href="' . $escaped_url . '"', $links[0]);
+        $this->assertStringNotContainsString('onmouseover="', $links[0]);
+    }
+
+    public function test_manual_language_switcher_uses_escaped_url()
+    {
+        global $wp_query;
+        $wp_query = (object)['post' => (object)['ID' => 1]];
+        $GLOBALS['wp_test_mocks']['get_post_meta'] =
+            '{"active":false,"translated_name":"English","url":"javascript:alert(1)"}';
+        $GLOBALS['wp_test_mocks']['esc_url'] = function ($url) {
+            $this->assertSame('javascript:alert(1)', $url);
+            return '';
+        };
+
+        $link = manual_language_switcher();
+
+        $this->assertStringContainsString('href=""', $link);
+        $this->assertStringNotContainsString('javascript:', $link);
+    }
+
+    public function test_language_attributes_are_escaped()
+    {
+        $attributes = [];
+        $GLOBALS['wp_test_mocks']['esc_attr'] = function ($text) use (&$attributes) {
+            $attributes[] = $text;
+            return 'escaped-' . $text;
+        };
+
+        $links = language_switcher_output([
+            ['active' => false, 'translated_name' => 'English', 'url' => '/en/'],
+        ]);
+
+        $this->assertSame(['en', 'en', 'English'], $attributes);
+        $this->assertStringContainsString('lang="escaped-en"', $links[0]);
+        $this->assertStringContainsString('hreflang="escaped-en"', $links[0]);
+        $this->assertStringContainsString('title="escaped-English"', $links[0]);
+    }
+
+    public function test_custom_breadcrumb_uses_restricted_html_allowlist()
+    {
+        global $wp_query;
+        $wp_query = (object)['post' => (object)['ID' => 1]];
+        $raw_html = '<li><a href="/" onclick="alert(1)">Home</a></li><img src=x onerror=alert(1)>';
+        $safe_html = '<li><a href="/">Home</a></li>';
+        $GLOBALS['wp_test_mocks']['get_post_meta'] = $raw_html;
+        $GLOBALS['wp_test_mocks']['wp_kses'] = function ($html, $allowed_html) use ($raw_html, $safe_html) {
+            $this->assertSame($raw_html, $html);
+            $this->assertSame([
+                'li' => [],
+                'a' => ['href' => true, 'title' => true, 'aria-current' => true],
+            ], $allowed_html);
+            return $safe_html;
+        };
+
+        $breadcrumb = custom_field_breadcrumb();
+
+        $this->assertStringContainsString('<ol class="breadcrumb">' . $safe_html . '</ol>', $breadcrumb);
+        $this->assertStringNotContainsString('onclick', $breadcrumb);
+        $this->assertStringNotContainsString('<img', $breadcrumb);
+    }
+
+    public function test_missing_custom_breadcrumb_remains_empty()
+    {
+        global $wp_query;
+        $wp_query = (object)['post' => (object)['ID' => 1]];
+        $GLOBALS['wp_test_mocks']['get_post_meta'] = '';
+
+        $this->assertSame('', custom_field_breadcrumb());
     }
 }

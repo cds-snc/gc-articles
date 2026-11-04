@@ -21,6 +21,7 @@ use CDS\Modules\Cleanup\Profile as CleanupProfile;
 use CDS\Modules\Cleanup\Roles as CleanupRoles;
 use CDS\Modules\Cleanup\CreateSites;
 use CDS\Modules\Cleanup\Media;
+use CDS\Modules\Cleanup\SvgSanitizer;
 use CDS\Modules\Cli\GenerateEncryptionKey;
 use CDS\Modules\Meta\Favicon;
 use CDS\Modules\Meta\MetaTags;
@@ -75,6 +76,7 @@ class Setup
         new UserCollections();
         new Users();
         new Media();
+        new SvgSanitizer();
     }
 
     /**

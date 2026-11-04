@@ -6,6 +6,52 @@ namespace CDS\Modules\Site;
 
 class SiteSettings
 {
+    public static function canManageTrackingIds(): bool
+    {
+        return current_user_can('manage_options') && current_user_can('unfiltered_html');
+    }
+
+    public static function isValidTrackingId(string $option, $value): bool
+    {
+        $patterns = [
+            'analytics_id' => '/\A(?:G-[A-Z0-9]+|UA-[0-9]+-[0-9]+)\z/',
+            'google_tag_manager_id' => '/\AGTM-[A-Z0-9]+\z/',
+        ];
+
+        return is_string($value)
+            && isset($patterns[$option])
+            && preg_match($patterns[$option], $value) === 1;
+    }
+
+    public function sanitizeTrackingId($input, string $option)
+    {
+        $previous = get_option($option, '');
+
+        if (!self::canManageTrackingIds()) {
+            if ($input !== null && $input !== $previous) {
+                add_settings_error(
+                    $option,
+                    $option . '_forbidden',
+                    __('Changing tracking IDs requires permission to manage options and use unfiltered HTML.', 'cds-snc')
+                );
+            }
+
+            return $previous;
+        }
+
+        if ($input === '' || self::isValidTrackingId($option, $input)) {
+            return $input;
+        }
+
+        add_settings_error(
+            $option,
+            $option . '_invalid',
+            __('Enter a valid G- or UA- Analytics ID, or a GTM- Tag Manager ID in the corresponding field.', 'cds-snc')
+        );
+
+        return $previous;
+    }
+
     public static function register()
     {
         $instance = new self();
@@ -209,7 +255,7 @@ class SiteSettings
             'site_settings_group', // option_group
             'analytics_id',
             function ($input) {
-                return sanitize_text_field($input);
+                return $this->sanitizeTrackingId($input, 'analytics_id');
             }
         );
 
@@ -217,7 +263,7 @@ class SiteSettings
             'site_settings_group', // option_group
             'google_tag_manager_id',
             function ($input) {
-                return sanitize_text_field($input);
+                return $this->sanitizeTrackingId($input, 'google_tag_manager_id');
             }
         );
 
@@ -349,7 +395,7 @@ class SiteSettings
         add_settings_section(
             'collection_settings_section_analytics', // id
             __("Analytics"), // title
-            null, // callback
+            array($this, 'analyticsDescriptionCallback'), // callback
             'collection-settings-admin' // page
         );
 
@@ -486,12 +532,24 @@ class SiteSettings
         <?php
     }
 
+    public function analyticsDescriptionCallback()
+    {
+        if (!self::canManageTrackingIds()) {
+            echo '<p>';
+            echo esc_html__(
+                'Changing tracking IDs requires permission to manage options and use unfiltered HTML. Contact a network administrator.',
+                'cds-snc'
+            );
+            echo '</p>';
+        }
+    }
+
     public function analyticsCallback()
     {
         $analyticsId = get_option("analytics_id", "");
         ?>
         <input name="analytics_id" type="text" id="analytics_id" class="regular-text"
-               value="<?php echo esc_attr($analyticsId); ?>">
+               value="<?php echo esc_attr($analyticsId); ?>" <?php echo self::canManageTrackingIds() ? '' : 'readonly'; ?>>
         <?php
     }
 
@@ -500,7 +558,7 @@ class SiteSettings
         $googleTagManagerId = get_option("google_tag_manager_id", "");
         ?>
         <input name="google_tag_manager_id" type="text" id="google_tag_manager_id" class="regular-text"
-               value="<?php echo esc_attr($googleTagManagerId); ?>">
+               value="<?php echo esc_attr($googleTagManagerId); ?>" <?php echo self::canManageTrackingIds() ? '' : 'readonly'; ?>>
         <?php
     }
 

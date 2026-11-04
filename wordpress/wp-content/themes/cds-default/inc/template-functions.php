@@ -136,7 +136,14 @@ function custom_field_breadcrumb(): string
     $output .= '<div class="container">';
     $output .= '<h2><?php _e("You are here:"); ?></h2>';
     $output .= '<ol class="breadcrumb">';
-    $output .= $list_items;
+    $output .= wp_kses($list_items, [
+        'li' => [],
+        'a' => [
+            'href' => true,
+            'title' => true,
+            'aria-current' => true,
+        ],
+    ]);
     $output .= '</ol>';
     $output .= '</div>';
     $output .= '</nav>';
@@ -216,9 +223,9 @@ function language_switcher_output($languages)
         foreach ($languages as $language) {
             $text = get_language_text($language['translated_name']);
             if (!$language['active']) {
-                $link = '<a lang="' . $text['abbr'] . '" hreflang="' . $text['abbr'] . '" href="' . convert_url($language['url'], $text['abbr']) . '">';
+                $link = '<a lang="' . esc_attr($text['abbr']) . '" hreflang="' . esc_attr($text['abbr']) . '" href="' . esc_url(convert_url($language['url'], $text['abbr'])) . '">';
                 $link .= '<span class="hidden-xs">' . $text['full'] . '</span>';
-                $link .= '<abbr title="' . $text['full'] . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';
+                $link .= '<abbr title="' . esc_attr($text['full']) . '" class="visible-xs h3 mrgn-tp-sm mrgn-bttm-0 text-uppercase">';
                 $link .= $text['abbr'];
                 $link .= '</abbr>';
                 $link .= '</a>';

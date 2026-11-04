@@ -53,8 +53,7 @@ class Releases
         $result = json_decode($responseBody);
         if (is_array($result) && $result && ! is_wp_error($result)) {
             $content = $result[0]->content->rendered;
-            $content = apply_filters('the_content', $content);
-            return $content;
+            return wp_kses_post($content);
         } else {
             return __('Something went wrong', 'cds-snc');
         }

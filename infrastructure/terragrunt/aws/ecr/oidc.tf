@@ -19,9 +19,17 @@ module "ecr_tag_release" {
       claim     = "ref:refs/heads/main"
     },
     {
-      name      = local.docker_pull
-      repo_name = "gc-articles"
-      claim     = "ref:refs/heads/main"
+      name = local.docker_pull
+      claims = [
+        {
+          repo_name = "gc-articles"
+          claim     = "ref:refs/heads/main"
+        },
+        {
+          repo_name = "gc-articles"
+          claim     = "ref:refs/tags/v*"
+        }
+      ]
     }
   ]
 }

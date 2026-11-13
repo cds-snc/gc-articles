@@ -1,5 +1,5 @@
 production:
-  apache: 1.5.1
+  apache: 1.5.2
   wordpress: 5.7.1
   infrastructure: 1.8.11
 staging:

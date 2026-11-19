@@ -88,7 +88,7 @@ resource "aws_ecs_task_definition" "wordpress_task" {
   network_mode = "awsvpc"
 
   requires_compatibilities = ["FARGATE"]
-  execution_role_arn       = aws_iam_role.wordpress_ecs_task.arn
+  execution_role_arn       = aws_iam_role.wordpress_ecs_task_execution.arn
   task_role_arn            = aws_iam_role.wordpress_ecs_task.arn
   container_definitions    = data.template_file.wordpress_container_definition.rendered
 
@@ -133,7 +133,7 @@ resource "aws_ecs_service" "wordpress_service" {
   deployment_minimum_healthy_percent = 50
   deployment_maximum_percent         = 200
   health_check_grace_period_seconds  = 60
-  enable_execute_command             = true
+  enable_execute_command             = false
 
   deployment_controller {
     type = "ECS"

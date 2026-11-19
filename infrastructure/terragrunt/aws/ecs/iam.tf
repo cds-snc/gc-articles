@@ -3,6 +3,13 @@ resource "aws_iam_role" "wordpress_ecs_task" {
   assume_role_policy = data.aws_iam_policy_document.ecs_task_assume.json
   tags               = var.core_tags
 }
+
+resource "aws_iam_role" "wordpress_ecs_task_execution" {
+  name               = "${var.cluster_name}-ecs-task-execution"
+  assume_role_policy = data.aws_iam_policy_document.ecs_task_assume.json
+  tags               = var.core_tags
+}
+
 resource "aws_iam_policy" "wordpress_ecs_task_get_secret_value" {
   name   = "WordpressEcsTaskGetSecretValue"
   path   = "/"
@@ -17,61 +24,31 @@ resource "aws_iam_policy" "wordpress_ecs_task_get_ecr_image" {
   tags   = var.core_tags
 }
 
-resource "aws_iam_policy" "wordpress_ecs_task_create_tunnel" {
-  name   = "WordpressEcsTaskCreateTunnel"
+resource "aws_iam_policy" "wordpress_ecs_task_execution_logs" {
+  name   = "WordpressEcsTaskExecutionLogs"
   path   = "/"
-  policy = data.aws_iam_policy_document.wordpress_ecs_task_create_tunnel.json
+  policy = data.aws_iam_policy_document.wordpress_ecs_task_execution_logs.json
   tags   = var.core_tags
 }
 
-resource "aws_iam_policy" "wordpress_ecs_task_efs" {
-  count = var.enable_efs ? 1 : 0
-
-  name   = "WordpressEcsTaskEfs"
-  path   = "/"
-  policy = data.aws_iam_policy_document.wordpress_ecs_task_efs[0].json
-  tags   = var.core_tags
-}
-
-resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_policy_attach" {
-  role       = aws_iam_role.wordpress_ecs_task.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
-}
-
-resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_ec2_policy_attach" {
-  role       = aws_iam_role.wordpress_ecs_task.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
+resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_execution_logs_policy_attach" {
+  role       = aws_iam_role.wordpress_ecs_task_execution.name
+  policy_arn = aws_iam_policy.wordpress_ecs_task_execution_logs.arn
 }
 
 resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_get_secret_value_policy_attach" {
-  role       = aws_iam_role.wordpress_ecs_task.name
+  role       = aws_iam_role.wordpress_ecs_task_execution.name
   policy_arn = aws_iam_policy.wordpress_ecs_task_get_secret_value.arn
 }
 
 resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_get_ecr_image_policy_attach" {
-  role       = aws_iam_role.wordpress_ecs_task.name
+  role       = aws_iam_role.wordpress_ecs_task_execution.name
   policy_arn = aws_iam_policy.wordpress_ecs_task_get_ecr_image.arn
-}
-
-resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_get_create_tunnel_policy_attach" {
-  role       = aws_iam_role.wordpress_ecs_task.name
-  policy_arn = aws_iam_policy.wordpress_ecs_task_create_tunnel.arn
-}
-
-resource "aws_iam_role_policy_attachment" "wordpress_ecs_task_efs_policy_attach" {
-  count = var.enable_efs ? 1 : 0
-
-  role       = aws_iam_role.wordpress_ecs_task.name
-  policy_arn = aws_iam_policy.wordpress_ecs_task_efs[0].arn
 }
 
 data "aws_iam_policy_document" "ecs_task_assume" {
   statement {
     actions = ["sts:AssumeRole"]
-    principals {
-      type        = "Service"
-      identifiers = ["ec2.amazonaws.com"]
-    }
     principals {
       type        = "Service"
       identifiers = ["ecs-tasks.amazonaws.com"]
@@ -114,9 +91,16 @@ data "aws_iam_policy_document" "wordpress_ecs_task_get_secret_value" {
 
 data "aws_iam_policy_document" "wordpress_ecs_task_get_ecr_image" {
   statement {
+    effect    = "Allow"
+    actions   = ["ecr:GetAuthorizationToken"]
+    resources = ["*"]
+  }
+
+  statement {
     effect = "Allow"
     actions = [
-      "ecr:GetDownloadUrlForlayer",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:GetDownloadUrlForLayer",
       "ecr:BatchGetImage"
     ]
     resources = [
@@ -126,32 +110,15 @@ data "aws_iam_policy_document" "wordpress_ecs_task_get_ecr_image" {
   }
 }
 
-data "aws_iam_policy_document" "wordpress_ecs_task_create_tunnel" {
-  statement {
-    sid    = "CreateSSMTunnel"
-    effect = "Allow"
-    actions = [
-      "ssmmessages:CreateControlChannel",
-      "ssmmessages:CreateDataChannel",
-      "ssmmessages:OpenControlChannel",
-      "ssmmessages:OpenDataChannel"
-    ]
-    resources = ["*"]
-  }
-}
-
-data "aws_iam_policy_document" "wordpress_ecs_task_efs" {
-  count = var.enable_efs ? 1 : 0
-
+data "aws_iam_policy_document" "wordpress_ecs_task_execution_logs" {
   statement {
     effect = "Allow"
     actions = [
-      "elasticfilesystem:ClientWrite",
-      "elasticfilesystem:ClientMount",
-      "elasticfilesystem:DescribeMountTargets",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
     ]
     resources = [
-      aws_efs_file_system.wordpress[0].arn
+      "${aws_cloudwatch_log_group.wordpress_ecs_logs.arn}:log-stream:${var.cluster_name}-task/*"
     ]
   }
 }

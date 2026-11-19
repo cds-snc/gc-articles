@@ -78,7 +78,7 @@ jobs:
 
       - name: Set up MySQL
         run: |
-          sudo /etc/init.d/mysql start
+          sudo systemctl start mysql.service
 
       - name: Setup test environment
         run: |

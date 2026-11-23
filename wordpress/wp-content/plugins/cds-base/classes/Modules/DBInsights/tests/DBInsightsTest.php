@@ -4,6 +4,8 @@ use CDS\Modules\DBInsights\DBInsights;
 
 // Global variables to store mocked action expectations
 $GLOBALS['wp_test_action_expectations'] = [];
+$GLOBALS['wp_test_rest_routes'] = [];
+$GLOBALS['wp_test_is_super_admin'] = false;
 
 // Mock WordPress function to register actions
 if (!function_exists('add_action')) {
@@ -17,9 +19,22 @@ if (!function_exists('add_action')) {
     }
 }
 
+if (!function_exists('register_rest_route')) {
+    function register_rest_route($namespace, $route, $args) {
+        $GLOBALS['wp_test_rest_routes'][$namespace . $route] = $args;
+    }
+}
+
+if (!function_exists('is_super_admin')) {
+    function is_super_admin() {
+        return $GLOBALS['wp_test_is_super_admin'];
+    }
+}
+
 afterAll(function () {
     // Reset action expectations
     $GLOBALS['wp_test_action_expectations'] = [];
+    $GLOBALS['wp_test_rest_routes'] = [];
 });
 
 test('DBInsights addActions', function () {
@@ -46,6 +61,31 @@ test('DBInsights addActions', function () {
     }
     
     expect($found)->toBeTrue();
+});
+
+test('maintenance REST routes require super-admin privileges', function () {
+    global $wpdb;
+
+    $wpdb = mock('\WPDB');
+    $wpdb->prefix = 'wp_';
+
+    $GLOBALS['wp_test_rest_routes'] = [];
+    $GLOBALS['wp_test_is_super_admin'] = false;
+
+    $insights = new DBInsights();
+    $insights->registerRestRoutes();
+
+    foreach (['/deleted-site-tables', '/site-activity'] as $route) {
+        $permissionCallback = $GLOBALS['wp_test_rest_routes']['maintenance/v1' . $route]['permission_callback'];
+        expect($permissionCallback())->toBeFalse();
+    }
+
+    $GLOBALS['wp_test_is_super_admin'] = true;
+
+    foreach (['/deleted-site-tables', '/site-activity'] as $route) {
+        $permissionCallback = $GLOBALS['wp_test_rest_routes']['maintenance/v1' . $route]['permission_callback'];
+        expect($permissionCallback())->toBeTrue();
+    }
 });
 
 test('parses BlogId(s) from string', function () {

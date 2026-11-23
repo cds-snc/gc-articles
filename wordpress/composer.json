@@ -68,10 +68,15 @@
         "name": "shawnhooper/delete-orphaned-multisite-tables",
         "type": "wordpress-plugin",
         "version": "1.0",
+        "dist": {
+          "url": "https://api.github.com/repos/shawnhooper/delete-orphaned-multisite-tables/zipball/a8509aa9af0d3b6aa05a17dd2bc4cd3bcea5dc7f",
+          "type": "zip",
+          "reference": "a8509aa9af0d3b6aa05a17dd2bc4cd3bcea5dc7f"
+        },
         "source": {
           "url": "https://github.com/shawnhooper/delete-orphaned-multisite-tables",
           "type": "git",
-          "reference": "main"
+          "reference": "a8509aa9af0d3b6aa05a17dd2bc4cd3bcea5dc7f"
         }
       }
     },
@@ -101,7 +106,6 @@
     "cds-snc/cds-default": "dev-main",
     "wpackagist-plugin/wp-rest-api-v2-menus": "^0.12",
     "digitalcube/c3-cloudfront-clear-cache": "dev-master",
-    "shawnhooper/delete-orphaned-multisite-tables": "1.0",
     "guzzlehttp/psr7": "^2.4.5",
     "league/html-to-markdown": "^5.1",
     "wpackagist-plugin/gutenberg-custom-fields": "^1.5",
@@ -111,7 +115,8 @@
   "require-dev": {
     "pestphp/pest": "^4.0",
     "mockery/mockery": "^1.6",
-    "squizlabs/php_codesniffer": "^4.0"
+    "squizlabs/php_codesniffer": "^4.0",
+    "shawnhooper/delete-orphaned-multisite-tables": "1.0"
   },
   "scripts": {
     "prepare-translations": [

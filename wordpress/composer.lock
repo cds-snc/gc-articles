@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53de0e85994bb5475feec523d3b30298",
+    "content-hash": "945f92af3c4e22610c55102b1e991c39",
     "packages": [
         {
             "name": "alphagov/notifications-php-client",
@@ -3000,16 +3000,6 @@
                 "source": "https://github.com/ramsey/uuid/tree/4.9.4"
             },
             "time": "2026-09-16T11:39:30+00:00"
-        },
-        {
-            "name": "shawnhooper/delete-orphaned-multisite-tables",
-            "version": "1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/shawnhooper/delete-orphaned-multisite-tables",
-                "reference": "main"
-            },
-            "type": "wordpress-plugin"
         },
         {
             "name": "symfony/clock",
@@ -7656,6 +7646,21 @@
             "time": "2026-10-04T05:50:08+00:00"
         },
         {
+            "name": "shawnhooper/delete-orphaned-multisite-tables",
+            "version": "1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/shawnhooper/delete-orphaned-multisite-tables",
+                "reference": "a8509aa9af0d3b6aa05a17dd2bc4cd3bcea5dc7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/shawnhooper/delete-orphaned-multisite-tables/zipball/a8509aa9af0d3b6aa05a17dd2bc4cd3bcea5dc7f",
+                "reference": "a8509aa9af0d3b6aa05a17dd2bc4cd3bcea5dc7f"
+            },
+            "type": "wordpress-plugin"
+        },
+        {
             "name": "squizlabs/php_codesniffer",
             "version": "4.0.4",
             "source": {
@@ -8556,5 +8561,5 @@
     "platform-overrides": {
         "php": "8.4"
     },
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }

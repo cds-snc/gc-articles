@@ -38,7 +38,7 @@ class DBInsights
             'methods' => 'GET',
             'callback' => [$this, 'cleanupDbTables'],
             'permission_callback' => function () {
-                return current_user_can('administrator');
+                return is_super_admin();
             }
         ]);
 
@@ -46,7 +46,7 @@ class DBInsights
             'methods' => 'GET',
             'callback' => [$this, 'siteActivity'],
             'permission_callback' => function () {
-                return current_user_can('administrator');
+                return is_super_admin();
             }
         ]);
     }

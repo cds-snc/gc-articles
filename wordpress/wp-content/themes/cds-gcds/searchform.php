@@ -1,0 +1,1 @@
+<gcds-search search-id="content-search" action="<?php echo esc_url(home_url('/')); ?>" method="get" name="s" placeholder="<?php echo esc_attr(get_bloginfo('name')); ?>" value="<?php echo esc_attr(get_search_query(false)); ?>"></gcds-search>

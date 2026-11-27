@@ -1,0 +1,576 @@
+# Copyright (C) 2026 Canadian Digital Service
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: CDS GCDS 5.8.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-gcds\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-25T21:55:52+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: cds-snc\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "CDS GCDS"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "GC Articles content and behaviour with GC Design System components."
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "Canadian Digital Service"
+msgstr ""
+
+#: 404.php:6
+msgid "Page not found."
+msgstr ""
+
+#: 404.php:7
+msgid "It looks like nothing was found at this location."
+msgstr ""
+
+#: functions.php:80
+msgid "Primary"
+msgstr ""
+
+#: functions.php:81
+msgid "Footer"
+msgstr ""
+
+#: functions.php:82
+msgid "Top bar"
+msgstr ""
+
+#: functions.php:99
+msgid "Black"
+msgstr ""
+
+#: functions.php:104
+msgid "White"
+msgstr ""
+
+#: functions.php:109
+msgid "Primary Blue"
+msgstr ""
+
+#: functions.php:114
+msgid "Dark Blue"
+msgstr ""
+
+#: functions.php:119
+msgid "Light Blue"
+msgstr ""
+
+#: functions.php:124
+msgid "Dark Grey"
+msgstr ""
+
+#: functions.php:129
+msgid "Grey"
+msgstr ""
+
+#: functions.php:134
+msgid "Orange"
+msgstr ""
+
+#: functions.php:139
+msgid "Green"
+msgstr ""
+
+#: functions.php:144
+msgid "Red"
+msgstr ""
+
+#: functions.php:152
+msgid "Small"
+msgstr ""
+
+#: functions.php:157
+msgid "Medium"
+msgstr ""
+
+#: functions.php:162
+msgid "Large"
+msgstr ""
+
+#: functions.php:167
+msgid "X-Large"
+msgstr ""
+
+#: functions.php:172
+msgid "XX-Large"
+msgstr ""
+
+#: functions.php:177
+msgid "XXX-Large"
+msgstr ""
+
+#: functions.php:276
+msgid "GC Homepage"
+msgstr ""
+
+#: functions.php:293
+msgid "Default homepage"
+msgstr ""
+
+#: functions.php:298
+msgid "Table of contents"
+msgstr ""
+
+#: header.php:22
+msgid "Your site is currently in maintenance mode. Only logged in users will be able to see this page."
+msgstr ""
+
+#: header.php:23
+msgid "Site settings"
+msgstr ""
+
+#: header.php:35
+msgid "Sign out"
+msgstr ""
+
+#: header.php:35
+msgid "Sign in"
+msgstr ""
+
+#: inc/block-rendering.php:229
+#: inc/block-rendering.php:254
+msgid "Table"
+msgstr ""
+
+#: inc/block-rendering.php:278
+msgid "Filtering and sorting require a single header row and body with no merged cells. All table content is shown."
+msgstr ""
+
+#: inc/block-rendering.php:284
+msgid "Table controls"
+msgstr ""
+
+#: inc/block-rendering.php:285
+msgid "Filter table"
+msgstr ""
+
+#: inc/block-rendering.php:286
+msgid "Rows per page"
+msgstr ""
+
+#: inc/block-rendering.php:287
+msgid "All rows"
+msgstr ""
+
+#: inc/block-rendering.php:288
+msgid "Previous page"
+msgstr ""
+
+#: inc/block-rendering.php:289
+msgid "Next page"
+msgstr ""
+
+#: inc/block-rendering.php:290
+msgid "Rows"
+msgstr ""
+
+#: inc/block-rendering.php:297
+#, php-format
+msgid "Sort by %s"
+msgstr ""
+
+#: inc/blocks.php:9
+msgid "GCDS Heading"
+msgstr ""
+
+#: inc/blocks.php:14
+msgid "GCDS Text"
+msgstr ""
+
+#: inc/blocks.php:22
+msgid "GCDS Link"
+msgstr ""
+
+#: inc/blocks.php:30
+msgid "GCDS Button link"
+msgstr ""
+
+#: inc/blocks.php:40
+msgid "GCDS Card"
+msgstr ""
+
+#: inc/blocks.php:52
+msgid "GCDS Container"
+msgstr ""
+
+#: inc/blocks.php:61
+msgid "GCDS Grid"
+msgstr ""
+
+#: inc/blocks.php:68
+msgid "GCDS Grid column"
+msgstr ""
+
+#: inc/blocks.php:77
+msgid "GCDS Details"
+msgstr ""
+
+#: inc/blocks.php:85
+msgid "GCDS Notice"
+msgstr ""
+
+#: inc/blocks.php:94
+msgid "GCDS Table"
+msgstr ""
+
+#: inc/blocks.php:105
+msgid "GCDS Screenreader-only text"
+msgstr ""
+
+#: inc/blocks.php:110
+msgid "GCDS Icon"
+msgstr ""
+
+#: inc/blocks.php:117
+msgid "GCDS Pagination"
+msgstr ""
+
+#: inc/blocks.php:128
+msgid "GCDS Side navigation"
+msgstr ""
+
+#: inc/blocks.php:134
+msgid "GCDS Navigation group"
+msgstr ""
+
+#: inc/blocks.php:145
+msgid "GCDS Navigation link"
+msgstr ""
+
+#: inc/blocks.php:155
+msgid "Heading or element level"
+msgstr ""
+
+#: inc/blocks.php:156
+msgid "Size"
+msgstr ""
+
+#: inc/blocks.php:157
+msgid "Text colour"
+msgstr ""
+
+#: inc/blocks.php:158
+msgid "Link URL"
+msgstr ""
+
+#: inc/blocks.php:159
+msgid "Link target"
+msgstr ""
+
+#: inc/blocks.php:160
+msgid "Button style"
+msgstr ""
+
+#: inc/blocks.php:161
+msgid "Card title"
+msgstr ""
+
+#: inc/blocks.php:162
+msgid "Card heading level"
+msgstr ""
+
+#: inc/blocks.php:163
+msgid "Image URL"
+msgstr ""
+
+#: inc/blocks.php:164
+msgid "Image alternative text"
+msgstr ""
+
+#: inc/blocks.php:165
+msgid "Badge"
+msgstr ""
+
+#: inc/blocks.php:166
+msgid "Padding"
+msgstr ""
+
+#: inc/blocks.php:167
+msgid "Border"
+msgstr ""
+
+#: inc/blocks.php:168
+msgid "Column gap"
+msgstr ""
+
+#: inc/blocks.php:169
+msgid "Tablet column span"
+msgstr ""
+
+#: inc/blocks.php:170
+msgid "Desktop column span"
+msgstr ""
+
+#: inc/blocks.php:171
+msgid "Details title"
+msgstr ""
+
+#: inc/blocks.php:172
+msgid "Initially expanded"
+msgstr ""
+
+#: inc/blocks.php:173
+msgid "Notice title"
+msgstr ""
+
+#: inc/blocks.php:174
+msgid "Notice type"
+msgstr ""
+
+#: inc/blocks.php:175
+msgid "Notice heading level"
+msgstr ""
+
+#: inc/blocks.php:176
+msgid "Table caption"
+msgstr ""
+
+#: inc/blocks.php:177
+msgid "Columns (JSON array)"
+msgstr ""
+
+#: inc/blocks.php:178
+msgid "Rows (JSON array)"
+msgstr ""
+
+#: inc/blocks.php:179
+msgid "Enable sorting"
+msgstr ""
+
+#: inc/blocks.php:180
+msgid "Enable filtering"
+msgstr ""
+
+#: inc/blocks.php:181
+msgid "Enable pagination"
+msgstr ""
+
+#: inc/blocks.php:182
+msgid "Icon"
+msgstr ""
+
+#: inc/blocks.php:183
+msgid "Accessible label"
+msgstr ""
+
+#: inc/blocks.php:184
+msgid "Previous page URL"
+msgstr ""
+
+#: inc/blocks.php:185
+msgid "Previous page label"
+msgstr ""
+
+#: inc/blocks.php:186
+msgid "Next page URL"
+msgstr ""
+
+#: inc/blocks.php:187
+msgid "Next page label"
+msgstr ""
+
+#: inc/blocks.php:188
+msgid "Submenu label"
+msgstr ""
+
+#: inc/blocks.php:189
+msgid "Submenu button text"
+msgstr ""
+
+#: inc/blocks.php:190
+#: inc/template-functions.php:81
+msgid "Current page"
+msgstr ""
+
+#: inc/blocks.php:214
+#, php-format
+msgid "Invalid or missing attribute: %s"
+msgstr ""
+
+#: inc/blocks.php:219
+#, php-format
+msgid "Invalid JSON array: %s"
+msgstr ""
+
+#: inc/blocks.php:223
+#, php-format
+msgid "Expected objects in JSON array: %s"
+msgstr ""
+
+#: inc/blocks.php:233
+msgid "Each column needs a unique field and a header. Custom cell templates are not supported in this block."
+msgstr ""
+
+#: inc/blocks.php:238
+msgid "Add at least one table column."
+msgstr ""
+
+#: inc/blocks.php:245
+#, php-format
+msgid "Invalid URL: %s"
+msgstr ""
+
+#: inc/blocks.php:258
+#: js/blocks.js:221
+msgid "Enter content"
+msgstr ""
+
+#: inc/blocks.php:311
+msgid "GC Design System"
+msgstr ""
+
+#: inc/template-functions.php:103
+#: inc/template-functions.php:106
+msgid "Top menu"
+msgstr ""
+
+#: inc/template-functions.php:174
+msgid "Posts navigation"
+msgstr ""
+
+#: inc/template-functions.php:174
+msgid "Newer posts"
+msgstr ""
+
+#: inc/template-functions.php:174
+msgid "Older posts"
+msgstr ""
+
+#: inc/template-functions.php:183
+msgid "Document navigation"
+msgstr ""
+
+#: inc/template-functions.php:183
+msgid "Previous blog post"
+msgstr ""
+
+#: inc/template-functions.php:183
+msgid "Next blog post"
+msgstr ""
+
+#: inc/template-tags.php:11
+msgctxt "post author"
+msgid "by"
+msgstr ""
+
+#: maintenance.php:4
+msgid "We’re currently working on this"
+msgstr ""
+
+#: search.php:8
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: settings.php:60
+msgid "GitHub integration"
+msgstr ""
+
+#: settings.php:67
+msgid "GitHub Auth Token"
+msgstr ""
+
+#: settings.php:77
+msgid "GitHub Repository"
+msgstr ""
+
+#: settings.php:86
+msgid "GitHub Event Type"
+msgstr ""
+
+#: settings.php:96
+msgid "Configure GitHub webhook settings for triggering workflows when content is published."
+msgstr ""
+
+#: settings.php:109
+#, php-format
+msgid "<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-only\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span class=\"sr-only\"> and ends with</span>%3$s</span>"
+msgstr ""
+
+#: settings.php:132
+msgid "GitHub personal access token with repo permissions."
+msgstr ""
+
+#: settings.php:142
+msgid "Format: owner/repository-name (e.g., cds-snc/my-project)"
+msgstr ""
+
+#: settings.php:152
+msgid "The event_type sent in the repository dispatch payload. Defaults to <code>gc-articles-update</code> if left empty."
+msgstr ""
+
+#: settings.php:171
+#: settings.php:172
+msgid "CDS GCDS Settings"
+msgstr ""
+
+#: settings.php:188
+msgid "Save Changes"
+msgstr ""
+
+#: template-parts/content-none.php:2
+msgid "Nothing Found"
+msgstr ""
+
+#: template-parts/content-none.php:4
+msgid "Ready to publish your first post?"
+msgstr ""
+
+#: template-parts/content-none.php:5
+msgid "Get started here"
+msgstr ""
+
+#: template-parts/content-none.php:7
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr ""
+
+#: template-parts/content-none.php:10
+msgid "Nothing found! Perhaps searching can help."
+msgstr ""
+
+#: template-parts/content-page.php:11
+msgid "Edit"
+msgstr ""
+
+#: js/blocks.js:31
+#: js/blocks.js:179
+msgid "Settings"
+msgstr ""
+
+#: js/blocks.js:33
+msgid "Alert Type"
+msgstr ""
+
+#: js/blocks.js:57
+msgid "Title"
+msgstr ""
+
+#: js/blocks.js:67
+msgid "Summary"
+msgstr ""
+
+#: js/blocks.js:118
+msgid "This field is required."
+msgstr ""
+
+#: js/blocks.js:128
+msgid "Enter a JSON array."
+msgstr ""
+
+#: js/blocks.js:136
+msgid "Enter valid JSON."
+msgstr ""

@@ -1,0 +1,433 @@
+<?php
+
+declare(strict_types=1);
+
+require_once __DIR__ . '/../../../vendor/autoload.php';
+require_once __DIR__ . '/inc/template-functions.php';
+require_once __DIR__ . '/inc/template-filters.php';
+require_once __DIR__ . '/inc/webhook.php';
+require_once __DIR__ . '/settings.php';
+require_once __DIR__ . '/inc/blocks.php';
+
+/**
+ * cds-gcds functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package cds-gcds
+ */
+
+// phpcs:disable
+if (!defined('_S_VERSION')) {
+    // Replace the version number of the theme on each release.
+    define('_S_VERSION', '5.8.0');
+}
+
+if (!defined('THEME_NAMESPACE')) {
+    // Replace the version number of the theme on each release.
+    define('THEME_NAMESPACE', 'cds-snc');
+}
+// phpcs:enable
+
+if (!function_exists('cds_setup')) {
+    /**
+     * Sets up theme defaults and registers support for various WordPress features.
+     *
+     * Note that this function is hooked into the after_setup_theme hook, which
+     * runs before the init hook. The init hook is too late for some features, such
+     * as indicating support for post thumbnails.
+     */
+
+    // phpcs:disable
+     function load_translations(): void
+    {
+        load_theme_textdomain(
+        'cds-snc',
+        get_template_directory() . '/languages',
+       );
+    }
+    // phpcs:enable
+
+    function cds_setup(): void
+    {
+        /*
+         * Make theme available for translation.
+         * Translations can be filed in the /languages/ directory.
+         * Keep the cds-snc domain for the shared GC Articles translations.
+         */
+        load_translations();
+
+        // Add default posts and comments RSS feed links to head.
+        add_theme_support('automatic-feed-links');
+
+        /*
+         * Let WordPress manage the document title.
+         * By adding theme support, we declare that this theme does not use a
+         * hard-coded <title> tag in the document head, and expect WordPress to
+         * provide it for us.
+         */
+        add_theme_support('title-tag');
+
+        /*
+         * Enable support for Post Thumbnails on posts and pages.
+         *
+         * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+         */
+        add_theme_support('post-thumbnails');
+
+        // This theme uses wp_nav_menu() in several locations.
+        register_nav_menus([
+            'header' => esc_html__('Primary', 'cds-snc'),
+            'footer' => esc_html__('Footer', 'cds-snc'),
+            'topbar' => esc_html__('Top bar', 'cds-snc'),
+        ]);
+
+        /*
+         * Switch default core markup for search form, comment form, and comments
+         * to output valid HTML5.
+         */
+        add_theme_support('html5', [
+            'search-form',
+            'comment-form',
+            'comment-list',
+            'gallery',
+            'caption',
+        ]);
+
+        add_theme_support('editor-color-palette', array(
+            array(
+                'name'  => __('Black', 'cds-snc'),
+                'slug'  => 'black',
+                'color' => 'var(--gcds-text-primary)',
+            ),
+            array(
+                'name'  => __('White', 'cds-snc'),
+                'slug'  => 'white',
+                'color' => 'var(--gcds-text-light)',
+            ),
+            array(
+                'name'  => __('Primary Blue', 'cds-snc'),
+                'slug'  => 'primary-blue',
+                'color' => 'var(--gcds-bg-primary)',
+            ),
+            array(
+                'name'  => __('Dark Blue', 'cds-snc'),
+                'slug'  => 'dark-blue',
+                'color' => 'var(--gcds-bg-dark)',
+            ),
+            array(
+                'name'  => __('Light Blue', 'cds-snc'),
+                'slug'  => 'light-blue',
+                'color' => 'var(--gcds-bg-light)',
+            ),
+            array(
+                'name'  => __('Dark Grey', 'cds-snc'),
+                'slug'  => 'dark-grey',
+                'color' => 'var(--gcds-text-secondary)',
+            ),
+            array(
+                'name'  => __('Grey', 'cds-snc'),
+                'slug'  => 'grey',
+                'color' => 'var(--gcds-border-default)',
+            ),
+            array(
+                'name'  => __('Orange', 'cds-snc'),
+                'slug'  => 'orange',
+                'color' => 'var(--gcds-color-yellow-300)',
+            ),
+            array(
+                'name'  => __('Green', 'cds-snc'),
+                'slug'  => 'green',
+                'color' => 'var(--gcds-color-green-700)',
+            ),
+            array(
+                'name'  => __('Red', 'cds-snc'),
+                'slug'  => 'red',
+                'color' => 'var(--gcds-danger-text)',
+            ),
+        ));
+
+        add_theme_support('editor-font-sizes', array(
+            array(
+                'name' => esc_attr__('Small', 'cds-snc'),
+                'size' => 12,
+                'slug' => 'small'
+            ),
+            array(
+                'name' => esc_attr__('Medium', 'cds-snc'),
+                'size' => 16,
+                'slug' => 'regular'
+            ),
+            array(
+                'name' => esc_attr__('Large', 'cds-snc'),
+                'size' => 20,
+                'slug' => 'large'
+            ),
+            array(
+                'name' => esc_attr__('X-Large', 'cds-snc'),
+                'size' => 24,
+                'slug' => 'x-large'
+            ),
+            array(
+                'name' => esc_attr__('XX-Large', 'cds-snc'),
+                'size' => 36,
+                'slug' => 'xx-large'
+            ),
+            array(
+                'name' => esc_attr__('XXX-Large', 'cds-snc'),
+                'size' => 42,
+                'slug' => 'xxx-large'
+            )
+        ));
+    }
+
+    add_theme_support('custom-spacing');
+}
+add_action('after_setup_theme', 'cds_setup');
+
+/**
+ * Enqueue scripts and styles.
+ */
+function cds_scripts(): void
+{
+    wp_enqueue_style('cds-style', get_stylesheet_uri(), [], _S_VERSION);
+
+    wp_enqueue_style(
+        'cds-gcds-components',
+        'https://cdn.design-system.canada.ca/@gcds-core/components@1.7.1/dist/gcds/gcds.css',
+        [],
+        '1.7.1'
+    );
+    wp_enqueue_style(
+        'cds-gcds-shortcuts',
+        'https://cdn.design-system.canada.ca/@gcds-core/css-shortcuts@1.2.0/dist/gcds-css-shortcuts.min.css',
+        [],
+        '1.2.0'
+    );
+    wp_enqueue_script(
+        'cds-gcds-components',
+        'https://cdn.design-system.canada.ca/@gcds-core/components@1.7.1/dist/gcds/gcds.esm.js',
+        [],
+        '1.7.1',
+        true
+    );
+    if (!is_admin()) {
+        wp_enqueue_script('cds-gcds-tables', get_template_directory_uri() . '/js/tables.js', [], _S_VERSION, true);
+    }
+}
+
+add_action('wp_enqueue_scripts', 'cds_scripts');
+add_action('enqueue_block_assets', 'cds_gcds_editor_assets');
+add_filter('script_loader_tag', function ($tag, $handle) {
+    if ($handle === 'cds-gcds-components') {
+        $processor = new WP_HTML_Tag_Processor($tag);
+        $processor->next_tag('script');
+        $processor->set_attribute('type', 'module');
+        return $processor->get_updated_html();
+    }
+    return $tag;
+}, 10, 2);
+
+/**
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/inc/template-tags.php';
+add_action('wp_enqueue_scripts', 'cds_gcds_remove_legacy_styles', 1000);
+add_action('admin_enqueue_scripts', 'cds_gcds_remove_legacy_styles', 20001);
+
+function cds_gcds_remove_legacy_styles(): void
+{
+    if (is_admin() && (!get_current_screen() || !get_current_screen()->is_block_editor())) {
+        return;
+    }
+    foreach (['cds-base-css', 'cds-base-blocks-public', 'cds-base-blocks-editor-public', 'cds-base-blocks-editor'] as $handle) {
+        wp_dequeue_style($handle);
+    }
+}
+
+function cds_gcds_editor_assets(): void
+{
+    if (is_admin()) {
+        cds_scripts();
+    }
+}
+
+add_action('init', function () {
+    remove_theme_support('core-block-patterns');
+    unregister_block_pattern_category('buttons');
+    unregister_block_pattern_category('columns');
+    unregister_block_pattern_category('gallery');
+    unregister_block_pattern_category('header');
+    unregister_block_pattern_category('text');
+    unregister_block_pattern_category('query');
+});
+
+if (! function_exists('cds_register_block_patterns')) :
+    function cds_register_block_patterns()
+    {
+
+        if (! ( function_exists('register_block_pattern_category') && function_exists('register_block_pattern') )) {
+            return;
+        }
+
+        // The block pattern categories
+        $cds_block_pattern_categories = apply_filters('cds_block_pattern_categories', array(
+            'homepage' => array(
+                'label'         => esc_html__('GC Homepage', 'cds-snc'),
+            )
+        ));
+
+        // Sort the block pattern categories alphabetically based on the label value, to ensure alphabetized order when the strings are localized.
+        uasort($cds_block_pattern_categories, function ($a, $b) {
+            return strcmp($a["label"], $b["label"]);
+        });
+
+        // Register block pattern categories.
+        foreach ($cds_block_pattern_categories as $slug => $settings) {
+            register_block_pattern_category($slug, $settings);
+        }
+
+        // patterns
+        $cds_block_patterns = apply_filters('cds_block_patterns', array(
+            'cds/homepage' => array(
+                'title'         => esc_html__('Default homepage', 'cds-snc'),
+                'categories'    => array( 'homepage' ),
+                'content'       => cds_get_block_pattern_markup('homepage/landing'),
+            ),
+            'cds/toc' => array(
+                'title'         => esc_html__('Table of contents', 'cds-snc'),
+                'categories'    => array( 'homepage' ),
+                'content'       => cds_get_block_pattern_markup('homepage/toc'),
+            ),
+        ));
+
+        // Register block patterns.
+        foreach ($cds_block_patterns as $slug => $settings) {
+            register_block_pattern($slug, $settings);
+        }
+    }
+    add_action('after_setup_theme', 'cds_register_block_patterns');
+endif;
+
+if (! function_exists('cds_get_block_pattern_markup')) :
+    function cds_get_block_pattern_markup($pattern_name)
+    {
+
+        $path = 'inc/block-patterns/' . $pattern_name . '.php';
+
+        if (! locate_template($path)) {
+            return;
+        }
+
+        ob_start();
+        include(locate_template($path));
+        return ob_get_clean();
+    }
+endif;
+
+if (! function_exists('cds_is_maintenance_mode')) :
+    function cds_is_maintenance_mode()
+    {
+        $collection_mode = get_option('collection_mode');
+
+        if ($collection_mode === "maintenance" && !is_user_logged_in()) {
+            return true;
+        }
+
+        return false;
+    }
+endif;
+
+
+if (! function_exists('cds_is_maintenance_mode_admin_user')) :
+    function cds_is_maintenance_mode_admin_user()
+    {
+        $collection_mode = get_option('collection_mode');
+
+        if ($collection_mode === "maintenance" && is_user_logged_in()) {
+            return true;
+        }
+
+        return false;
+    }
+endif;
+
+add_filter('auto_update_plugin', '__return_false');
+add_filter('auto_update_theme', '__return_false');
+add_filter('template_include', 'maintenance_mode');
+
+function isWpEnv()
+{
+    if (isset($_SERVER) && isset($_SERVER['SERVER_PORT'])) {
+        $port = $_SERVER['SERVER_PORT'];
+
+        if ($port == 8888 || $port == 8889) {
+            return true;
+        }
+    }
+        return false;
+}
+
+function maintenance_mode($original_template)
+{
+    if (cds_is_maintenance_mode()) {
+        if (!isWpEnv()) {
+            status_header(503);
+        }
+        return __DIR__ . '/maintenance.php';
+    } else {
+        return $original_template;
+    }
+}
+
+// Allow SVG
+add_filter('wp_check_filetype_and_ext', function ($data, $file, $filename, $mimes) {
+
+    global $wp_version;
+    if ($wp_version !== '4.7.1') {
+        return $data;
+    }
+
+    $filetype = wp_check_filetype($filename, $mimes);
+
+    return [
+        'ext'             => $filetype['ext'],
+        'type'            => $filetype['type'],
+        'proper_filename' => $data['proper_filename']
+    ];
+}, 10, 4);
+
+function cc_mime_types($mimes)
+{
+    $mimes['json'] = 'application/json';
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
+function fix_svg()
+{
+    echo '<style type="text/css">
+          .attachment-266x266, .thumbnail img {
+               width: 100% !important;
+               height: auto !important;
+          }
+          </style>';
+}
+
+add_action('admin_head', 'fix_svg');
+
+/**
+ * Remove global-styles-inline-css and Gutenberg/duotone svg
+ */
+remove_action('wp_enqueue_scripts', 'wp_enqueue_global_styles');
+remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
+
+/**
+ * Remove WP EMOJI
+ */
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+
+remove_action('admin_print_scripts', 'print_emoji_detection_script');
+remove_action('admin_print_styles', 'print_emoji_styles');

@@ -1,6 +1,7 @@
 {
   "themes": [
     "./wordpress/wp-content/themes/cds-default",
+    "./wordpress/wp-content/themes/cds-gcds",
     "./wordpress/wp-content/themes/cds-redirector"
   ],
   "mappings": {

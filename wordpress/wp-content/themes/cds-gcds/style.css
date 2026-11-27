@@ -1,0 +1,164 @@
+/*
+Theme Name: CDS GCDS
+Description: GC Articles content and behaviour with GC Design System components.
+Version: 5.8.0
+Author: Canadian Digital Service
+Text Domain: cds-snc
+License: GNU General Public License v2 or later
+*/
+
+body {
+	margin: 0;
+	color: var(--gcds-text-primary);
+	background: var(--gcds-bg-white);
+	font: var(--gcds-font-text);
+}
+
+img,
+video,
+iframe {
+	max-width: 100%;
+}
+
+img {
+	height: auto;
+}
+
+gcds-container,
+gcds-grid,
+gcds-grid-col,
+gcds-details,
+gcds-notice {
+	display: block;
+	min-width: 0;
+}
+
+.entry-content,
+.entry-summary {
+	overflow-wrap: anywhere;
+}
+
+.entry-content ul,
+.entry-content ol {
+	margin-block: var(--gcds-spacing-300);
+}
+
+/* Lists without a CSS Shortcut list class (block-generated lists) keep an explicit indent. */
+.entry-content ul:not([class*="list-"]),
+.entry-content ol:not([class*="list-"]) {
+	padding-inline-start: var(--gcds-spacing-400);
+}
+
+.entry-content li + li {
+	margin-top: var(--gcds-spacing-100);
+}
+
+.entry-meta,
+figcaption {
+	font: var(--gcds-font-text-small);
+	color: var(--gcds-text-secondary);
+}
+
+article {
+	margin-block-end: var(--gcds-spacing-400);
+}
+
+blockquote {
+	border-inline-start: var(--gcds-border-width-sm) solid var(--gcds-border-default);
+}
+
+pre,
+code {
+	font: var(--gcds-font-text-mono);
+}
+
+pre {
+	overflow-x: auto;
+}
+
+hr:not(.is-style-dots) {
+	border: 0;
+	border-block-start: var(--gcds-border-width-sm) solid var(--gcds-border-default);
+}
+
+.list-inline {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--gcds-spacing-150);
+	padding: 0;
+	list-style: none;
+}
+
+.read-more--hidden .read-more {
+	display: none;
+}
+
+.cds-gcds-native-table {
+	overflow-x: auto;
+}
+
+.cds-gcds-table-controls {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: end;
+	gap: var(--gcds-spacing-200);
+	margin-block: var(--gcds-spacing-300);
+}
+
+.cds-gcds-native-table tr[hidden] {
+	display: none;
+}
+
+.cds-gcds-native-table th gcds-button {
+	display: block;
+	margin-block-start: var(--gcds-spacing-100);
+}
+
+.cds-gcds-native-table table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.cds-gcds-native-table th,
+.cds-gcds-native-table td {
+	border: var(--gcds-border-width-sm) solid var(--gcds-border-default);
+	padding: var(--gcds-spacing-150);
+	text-align: start;
+}
+
+.has-white-color,
+.has-light-blue-color {
+	color: var(--gcds-text-light);
+}
+
+.has-primary-blue-background-color,
+.has-dark-blue-background-color {
+	background: var(--gcds-bg-primary);
+	padding: var(--gcds-spacing-300);
+}
+
+.has-grey-background-color,
+.has-light-blue-background-color {
+	background: var(--gcds-bg-light);
+	padding: var(--gcds-spacing-300);
+}
+
+.screen-reader-text {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+	outline: var(--gcds-border-width-md) solid var(--gcds-focus-border);
+	outline-offset: var(--gcds-spacing-50);
+}
+
+@media (width < 48em) {
+
+	body {
+		font: var(--gcds-font-text-mobile);
+	}
+}

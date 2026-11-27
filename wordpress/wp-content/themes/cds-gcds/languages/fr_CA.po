@@ -1,0 +1,649 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/cds-gcds\n"
+"POT-Creation-Date: 2026-11-25T21:55:52+00:00\n"
+"PO-Revision-Date: 2026-11-25 21:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_CA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Domain: cds-snc\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "CDS GCDS"
+msgstr "SNC SGDC"
+
+#. Description of the theme
+#: style.css
+msgid "GC Articles content and behaviour with GC Design System components."
+msgstr ""
+"Contenu et fonctionnalités d’Articles GC avec les composants du Système de "
+"design GC."
+
+#. Author of the theme
+#: style.css
+msgid "Canadian Digital Service"
+msgstr "Service numérique canadien"
+
+#: 404.php:6
+msgid "Page not found."
+msgstr "Page introuvable"
+
+#: 404.php:7
+msgid "It looks like nothing was found at this location."
+msgstr "Rien n’a été trouvé à cet emplacement."
+
+#: functions.php:80
+msgid "Primary"
+msgstr "Primaire"
+
+#: functions.php:81
+msgid "Footer"
+msgstr "Pied de page"
+
+#: functions.php:82
+msgid "Top bar"
+msgstr "Barre supérieure"
+
+#: functions.php:99
+msgid "Black"
+msgstr "Noir"
+
+#: functions.php:104
+msgid "White"
+msgstr "Blanc"
+
+#: functions.php:109
+msgid "Primary Blue"
+msgstr "Bleu primaire"
+
+#: functions.php:114
+msgid "Dark Blue"
+msgstr "Bleu foncé"
+
+#: functions.php:119
+msgid "Light Blue"
+msgstr "Bleu clair"
+
+#: functions.php:124
+msgid "Dark Grey"
+msgstr "Gris foncé"
+
+#: functions.php:129
+msgid "Grey"
+msgstr "Gris"
+
+#: functions.php:134
+msgid "Orange"
+msgstr "Orange"
+
+#: functions.php:139
+msgid "Green"
+msgstr "Vert"
+
+#: functions.php:144
+msgid "Red"
+msgstr "Rouge"
+
+#: functions.php:152
+msgid "Small"
+msgstr "Petit"
+
+#: functions.php:157
+msgid "Medium"
+msgstr "Moyen"
+
+#: functions.php:162
+msgid "Large"
+msgstr "Grand"
+
+#: functions.php:167
+msgid "X-Large"
+msgstr "Très grand"
+
+#: functions.php:172
+msgid "XX-Large"
+msgstr "Encore plus grand"
+
+#: functions.php:177
+msgid "XXX-Large"
+msgstr "Le plus grand"
+
+#: functions.php:276
+msgid "GC Homepage"
+msgstr "Page d’accueil GC"
+
+#: functions.php:293
+msgid "Default homepage"
+msgstr "Page d’accueil par défaut"
+
+#: functions.php:298
+msgid "Table of contents"
+msgstr "Table des matières"
+
+#: header.php:22
+msgid ""
+"Your site is currently in maintenance mode. Only logged in users will be "
+"able to see this page."
+msgstr ""
+"Votre site est en mode maintenance. Seuls les utilisateurs connectés "
+"pourront voir cette page."
+
+#: header.php:23
+msgid "Site settings"
+msgstr "Paramètres du site"
+
+#: header.php:35
+msgid "Sign out"
+msgstr "Se déconnecter"
+
+#: header.php:35
+msgid "Sign in"
+msgstr "Se Connecter"
+
+#: inc/block-rendering.php:229 inc/block-rendering.php:254
+msgid "Table"
+msgstr "Tableau"
+
+#: inc/block-rendering.php:278
+msgid ""
+"Filtering and sorting require a single header row and body with no merged "
+"cells. All table content is shown."
+msgstr ""
+"Le filtrage et le tri exigent une seule ligne d’en-tête et un corps sans "
+"cellules fusionnées. Tout le contenu du tableau est affiché."
+
+#: inc/block-rendering.php:284
+msgid "Table controls"
+msgstr "Commandes du tableau"
+
+#: inc/block-rendering.php:285
+msgid "Filter table"
+msgstr "Filtrer le tableau"
+
+#: inc/block-rendering.php:286
+msgid "Rows per page"
+msgstr "Lignes par page"
+
+#: inc/block-rendering.php:287
+msgid "All rows"
+msgstr "Toutes les lignes"
+
+#: inc/block-rendering.php:288
+msgid "Previous page"
+msgstr "Page précédente"
+
+#: inc/block-rendering.php:289
+msgid "Next page"
+msgstr "Page suivante"
+
+#: inc/block-rendering.php:290
+msgid "Rows"
+msgstr "Lignes"
+
+#: inc/block-rendering.php:297
+#, php-format
+msgid "Sort by %s"
+msgstr "Trier par %s"
+
+#: inc/blocks.php:9
+msgid "GCDS Heading"
+msgstr "Titre SGDC"
+
+#: inc/blocks.php:14
+msgid "GCDS Text"
+msgstr "Texte SGDC"
+
+#: inc/blocks.php:22
+msgid "GCDS Link"
+msgstr "Lien SGDC"
+
+#: inc/blocks.php:30
+msgid "GCDS Button link"
+msgstr "Lien bouton SGDC"
+
+#: inc/blocks.php:40
+msgid "GCDS Card"
+msgstr "Carte SGDC"
+
+#: inc/blocks.php:52
+msgid "GCDS Container"
+msgstr "Conteneur SGDC"
+
+#: inc/blocks.php:61
+msgid "GCDS Grid"
+msgstr "Grille SGDC"
+
+#: inc/blocks.php:68
+msgid "GCDS Grid column"
+msgstr "Colonne de grille SGDC"
+
+#: inc/blocks.php:77
+msgid "GCDS Details"
+msgstr "Détails SGDC"
+
+#: inc/blocks.php:85
+msgid "GCDS Notice"
+msgstr "Avis SGDC"
+
+#: inc/blocks.php:94
+msgid "GCDS Table"
+msgstr "Tableau SGDC"
+
+#: inc/blocks.php:105
+msgid "GCDS Screenreader-only text"
+msgstr "Texte réservé aux lecteurs d’écran SGDC"
+
+#: inc/blocks.php:110
+msgid "GCDS Icon"
+msgstr "Icône SGDC"
+
+#: inc/blocks.php:117
+msgid "GCDS Pagination"
+msgstr "Pagination SGDC"
+
+#: inc/blocks.php:128
+msgid "GCDS Side navigation"
+msgstr "Navigation latérale SGDC"
+
+#: inc/blocks.php:134
+msgid "GCDS Navigation group"
+msgstr "Groupe de navigation SGDC"
+
+#: inc/blocks.php:145
+msgid "GCDS Navigation link"
+msgstr "Lien de navigation SGDC"
+
+#: inc/blocks.php:155
+msgid "Heading or element level"
+msgstr "Niveau du titre ou de l’élément"
+
+#: inc/blocks.php:156
+msgid "Size"
+msgstr "Taille"
+
+#: inc/blocks.php:157
+msgid "Text colour"
+msgstr "Couleur du texte"
+
+#: inc/blocks.php:158
+msgid "Link URL"
+msgstr "URL du lien"
+
+#: inc/blocks.php:159
+msgid "Link target"
+msgstr "Cible du lien"
+
+#: inc/blocks.php:160
+msgid "Button style"
+msgstr "Style du bouton"
+
+#: inc/blocks.php:161
+msgid "Card title"
+msgstr "Titre de la carte"
+
+#: inc/blocks.php:162
+msgid "Card heading level"
+msgstr "Niveau du titre de la carte"
+
+#: inc/blocks.php:163
+msgid "Image URL"
+msgstr "URL de l’image"
+
+#: inc/blocks.php:164
+msgid "Image alternative text"
+msgstr "Texte de remplacement de l’image"
+
+#: inc/blocks.php:165
+msgid "Badge"
+msgstr "Insigne"
+
+#: inc/blocks.php:166
+msgid "Padding"
+msgstr "Marge intérieure"
+
+#: inc/blocks.php:167
+msgid "Border"
+msgstr "Bordure"
+
+#: inc/blocks.php:168
+msgid "Column gap"
+msgstr "Espacement des colonnes"
+
+#: inc/blocks.php:169
+msgid "Tablet column span"
+msgstr "Nombre de colonnes sur tablette"
+
+#: inc/blocks.php:170
+msgid "Desktop column span"
+msgstr "Nombre de colonnes sur ordinateur"
+
+#: inc/blocks.php:171
+msgid "Details title"
+msgstr "Titre des détails"
+
+#: inc/blocks.php:172
+msgid "Initially expanded"
+msgstr "Développé au chargement"
+
+#: inc/blocks.php:173
+msgid "Notice title"
+msgstr "Titre de l’avis"
+
+#: inc/blocks.php:174
+msgid "Notice type"
+msgstr "Type d’avis"
+
+#: inc/blocks.php:175
+msgid "Notice heading level"
+msgstr "Niveau du titre de l’avis"
+
+#: inc/blocks.php:176
+msgid "Table caption"
+msgstr "Légende du tableau"
+
+#: inc/blocks.php:177
+msgid "Columns (JSON array)"
+msgstr "Colonnes (tableau JSON)"
+
+#: inc/blocks.php:178
+msgid "Rows (JSON array)"
+msgstr "Lignes (tableau JSON)"
+
+#: inc/blocks.php:179
+msgid "Enable sorting"
+msgstr "Activer le tri"
+
+#: inc/blocks.php:180
+msgid "Enable filtering"
+msgstr "Activer le filtrage"
+
+#: inc/blocks.php:181
+msgid "Enable pagination"
+msgstr "Activer la pagination"
+
+#: inc/blocks.php:182
+msgid "Icon"
+msgstr "Icône"
+
+#: inc/blocks.php:183
+msgid "Accessible label"
+msgstr "Libellé accessible"
+
+#: inc/blocks.php:184
+msgid "Previous page URL"
+msgstr "URL de la page précédente"
+
+#: inc/blocks.php:185
+msgid "Previous page label"
+msgstr "Libellé de la page précédente"
+
+#: inc/blocks.php:186
+msgid "Next page URL"
+msgstr "URL de la page suivante"
+
+#: inc/blocks.php:187
+msgid "Next page label"
+msgstr "Libellé de la page suivante"
+
+#: inc/blocks.php:188
+msgid "Submenu label"
+msgstr "Libellé du sous-menu"
+
+#: inc/blocks.php:189
+msgid "Submenu button text"
+msgstr "Texte du bouton du sous-menu"
+
+#: inc/blocks.php:190 inc/template-functions.php:81
+msgid "Current page"
+msgstr "Page actuelle"
+
+#: inc/blocks.php:214
+#, php-format
+msgid "Invalid or missing attribute: %s"
+msgstr "Attribut non valide ou manquant : %s"
+
+#: inc/blocks.php:219
+#, php-format
+msgid "Invalid JSON array: %s"
+msgstr "Tableau JSON non valide : %s"
+
+#: inc/blocks.php:223
+#, php-format
+msgid "Expected objects in JSON array: %s"
+msgstr "Le tableau JSON doit contenir des objets : %s"
+
+#: inc/blocks.php:233
+msgid ""
+"Each column needs a unique field and a header. Custom cell templates are not "
+"supported in this block."
+msgstr ""
+"Chaque colonne doit avoir un champ unique et un en-tête. Ce bloc ne prend "
+"pas en charge les modèles de cellules personnalisés."
+
+#: inc/blocks.php:238
+msgid "Add at least one table column."
+msgstr "Ajoutez au moins une colonne au tableau."
+
+#: inc/blocks.php:245
+#, php-format
+msgid "Invalid URL: %s"
+msgstr "URL non valide : %s"
+
+#: inc/blocks.php:258 js/blocks.js:221
+msgid "Enter content"
+msgstr "Saisissez du contenu"
+
+#: inc/blocks.php:311
+msgid "GC Design System"
+msgstr "Système de design GC"
+
+#: inc/template-functions.php:103 inc/template-functions.php:106
+msgid "Top menu"
+msgstr "Menu supérieur"
+
+#: inc/template-functions.php:174
+msgid "Posts navigation"
+msgstr "Navigation dans les articles"
+
+#: inc/template-functions.php:174
+msgid "Newer posts"
+msgstr "Articles suivants"
+
+#: inc/template-functions.php:174
+msgid "Older posts"
+msgstr "Articles précédents"
+
+#: inc/template-functions.php:183
+msgid "Document navigation"
+msgstr "Navigation dans les documents"
+
+#: inc/template-functions.php:183
+msgid "Previous blog post"
+msgstr "Article de blogue précédent"
+
+#: inc/template-functions.php:183
+msgid "Next blog post"
+msgstr "Prochain article de blogue"
+
+#: inc/template-tags.php:11
+msgctxt "post author"
+msgid "by"
+msgstr "par"
+
+#: maintenance.php:4
+msgid "We’re currently working on this"
+msgstr "En construction"
+
+#: search.php:8
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Résultats de la recherche : %s"
+
+#: settings.php:60
+msgid "GitHub integration"
+msgstr "Intégration GitHub"
+
+#: settings.php:67
+msgid "GitHub Auth Token"
+msgstr "Jeton d’authentification GitHub"
+
+#: settings.php:77
+msgid "GitHub Repository"
+msgstr "Dépôt GitHub"
+
+#: settings.php:86
+msgid "GitHub Event Type"
+msgstr "Type d’événement GitHub"
+
+#: settings.php:96
+msgid ""
+"Configure GitHub webhook settings for triggering workflows when content is "
+"published."
+msgstr ""
+"Configurez le webhook GitHub pour déclencher des flux de travail lors de la "
+"publication de contenu."
+
+#: settings.php:109
+#, php-format
+msgid ""
+"<span class=\"hidden_keys\" id=\"%1$s\">Current value: <span class=\"sr-"
+"only\">Starts with </span>%2$s<span aria-hidden=\"true\"> … </span><span "
+"class=\"sr-only\"> and ends with</span>%3$s</span>"
+msgstr ""
+"<span class=\"hidden_keys\" id=\"%1$s\">Valeur actuelle : <span class=\"sr-"
+"only\">Commence par </span>%2$s<span aria-hidden=\"true\"> … </span><span "
+"class=\"sr-only\"> et se termine par</span>%3$s</span>"
+
+#: settings.php:132
+msgid "GitHub personal access token with repo permissions."
+msgstr "Jeton d’accès personnel GitHub avec les autorisations du dépôt."
+
+#: settings.php:142
+msgid "Format: owner/repository-name (e.g., cds-snc/my-project)"
+msgstr "Format : propriétaire/nom-du-dépôt (par exemple, cds-snc/my-project)"
+
+#: settings.php:152
+msgid ""
+"The event_type sent in the repository dispatch payload. Defaults to <code>gc-"
+"articles-update</code> if left empty."
+msgstr ""
+"Valeur event_type envoyée dans la charge utile repository dispatch. La "
+"valeur par défaut est <code>gc-articles-update</code> si le champ est vide."
+
+#: settings.php:171 settings.php:172
+msgid "CDS GCDS Settings"
+msgstr "Paramètres SNC SGDC"
+
+#: settings.php:188
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+#: template-parts/content-none.php:2
+msgid "Nothing Found"
+msgstr "Aucun résultat"
+
+#: template-parts/content-none.php:4
+msgid "Ready to publish your first post?"
+msgstr "Êtes-vous prêt à publier votre premier article?"
+
+#: template-parts/content-none.php:5
+msgid "Get started here"
+msgstr "Commencez ici"
+
+#: template-parts/content-none.php:7
+msgid ""
+"Sorry, but nothing matched your search terms. Please try again with some "
+"different keywords."
+msgstr ""
+"Désolé, aucun résultat ne correspond à votre recherche. Veuillez réessayer "
+"avec d’autres mots-clés."
+
+#: template-parts/content-none.php:10
+msgid "Nothing found! Perhaps searching can help."
+msgstr "Aucun résultat! Veuillez lancer une recherche."
+
+#: template-parts/content-page.php:11
+msgid "Edit"
+msgstr "Modifier"
+
+#: js/blocks.js:31 js/blocks.js:179
+msgid "Settings"
+msgstr "Paramètres"
+
+#: js/blocks.js:33
+msgid "Alert Type"
+msgstr "Type d’alerte"
+
+#: js/blocks.js:57
+msgid "Title"
+msgstr "Titre"
+
+#: js/blocks.js:67
+msgid "Summary"
+msgstr "Résumé"
+
+#: js/blocks.js:118
+msgid "This field is required."
+msgstr "Ce champ est obligatoire."
+
+#: js/blocks.js:128
+msgid "Enter a JSON array."
+msgstr "Saisissez un tableau JSON."
+
+#: js/blocks.js:136
+msgid "Enter valid JSON."
+msgstr "Saisissez du JSON valide."
+
+#~ msgid "WET styled Starter Theme"
+#~ msgstr "Thème de démarrage du style BOEW"
+
+#~ msgid "CDS"
+#~ msgstr "SNC"
+
+#, php-format
+#~ msgid "To make your site live <a href=\"%s\">update your site settings</a>."
+#~ msgstr ""
+#~ "Pour activer votre site <a href=\"%s\">modifier les paramètres de votre "
+#~ "site</a>."
+
+#~ msgid "Search"
+#~ msgstr "Rechercher"
+
+#~ msgid "Menu"
+#~ msgstr "Menu"
+
+#~ msgid "Main"
+#~ msgstr "Principal"
+
+#~ msgid "Posts"
+#~ msgstr "Articles"
+
+#~ msgid "Breadcrumbs"
+#~ msgstr "Fil d’Ariane"
+
+#~ msgid "Toggle submenu"
+#~ msgstr "Basculer le sous-menu"
+
+#~ msgid "Toggle submenu for "
+#~ msgstr "Basculer le sous-menu de "
+
+#~ msgid "Date modified:"
+#~ msgstr "Date de modification :"
+
+#~ msgid "Pages:"
+#~ msgstr "Pages:"
+
+#, php-format
+#~ msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+#~ msgstr "Modifier <span class=\"screen-reader-text\">%s</span>"
+
+#, php-format
+#~ msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+#~ msgstr "Continuer à lire <span class=\"screen-reader-text\"> \"%s\"</span>"

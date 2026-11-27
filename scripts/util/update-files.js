@@ -18,13 +18,19 @@ const writeVersionFile = async (version) => {
 
 const updateWordPressThemeVersion = async (version) => {
   await replaceContent({
-    files: 'wordpress/wp-content/themes/cds-default/functions.php',
+    files: [
+      'wordpress/wp-content/themes/cds-default/functions.php',
+      'wordpress/wp-content/themes/cds-gcds/functions.php',
+    ],
     from: new RegExp("_S_VERSION',.*", 'i'),
     to: `_S_VERSION', '${version}');`,
   });
 
   await replaceContent({
-    files: 'wordpress/wp-content/themes/cds-default/style.css',
+    files: [
+      'wordpress/wp-content/themes/cds-default/style.css',
+      'wordpress/wp-content/themes/cds-gcds/style.css',
+    ],
     from: new RegExp("Version:.*", 'i'),
     to: `Version: ${version}`,
   });

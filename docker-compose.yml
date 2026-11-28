@@ -93,7 +93,7 @@ services:
     depends_on:
       - db
       - wordpress
-    image: wordpress:cli-php8.4@sha256:10719513e86fe417166a315cc9421bd9cfedaaaef728ea25af1e20f3d9a09c68
+    image: wordpress:cli-php8.4@sha256:df224f633697444bbd1d2ca54b357b4f86834f82a74881b3e1acfbcc761025bb
     profiles:
       - tools
     env_file: .env
